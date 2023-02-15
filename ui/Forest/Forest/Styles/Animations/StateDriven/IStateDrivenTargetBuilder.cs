@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     /// <summary>
     /// <see cref="IStateDrivenTargetBuilder"/> 接口表示一个目标构造器。
     /// </summary>
-    public interface IStateDrivenTargetBuilder
+    public interface IStateDrivenTargetBuilder : IDisposable
     {
         /// <summary>
         /// 获取一个属性动画构造器。

@@ -5,6 +5,7 @@ using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
 using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
+// ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
@@ -49,7 +50,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// 开始构建状态驱动的动画
         /// </summary>
         /// <returns>返回一个动画构建器。</returns>
-        protected static IStateDrivenAnimatorBuilder StateDrivenAnimation() => new AnimatorBuilder();
+        protected IStateDrivenAnimatorBuilder StateDrivenAnimation() => new AnimatorBuilder();
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {

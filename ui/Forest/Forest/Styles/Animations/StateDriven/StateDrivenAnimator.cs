@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
@@ -11,6 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         public StateDrivenAnimator()
         {
             Animations = new List<StateDrivenAnimation>(16);
+            FirstState = new List<FirstStateAnimation>(16);
         }
 
         /// <summary>
@@ -18,14 +20,10 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         public sealed override void NextState()
         {
-            var animation = Animations.FirstOrDefault();
-
-            if (animation is not StateDrivenDefaultAnimation)
+            foreach (var animation in FirstState)
             {
-                return;
+                animation.NextState();
             }
-
-            animation.NextState();
         }
 
         /// <summary>
@@ -34,26 +32,20 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <param name="visualState">下一个状态</param>
         public sealed override void NextState(VisualState visualState)
         {
-            if (Animations.Count == 0)
-            {
-                return;
-            }
-
-            var hasFirstState = Animations[0] is StateDrivenDefaultAnimation;
-
-            if (Animations.Count == 1 && hasFirstState)
-            {
-                return;
-            }
-
-            var iterator = hasFirstState ? Animations.Skip(1) : Animations;
-            
-            foreach (var animation in iterator)
+            foreach (var animation in Animations)
             {
                 animation.NextState(visualState);
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<FirstStateAnimation> FirstState { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<StateDrivenAnimation> Animations { get; }
     }
 }

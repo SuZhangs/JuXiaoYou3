@@ -3,7 +3,7 @@
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
-    /// <see cref="IStateDrivenAnimationBuilder"/> 接口表示一个动画构建器。
+    /// <see cref="IStateDrivenAnimatorBuilder"/> 接口表示一个动画构建器。
     /// </summary>
     public interface IStateDrivenAnimatorBuilder
     {
@@ -19,5 +19,11 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         /// <returns>返回一个新的目标构造器。</returns>
         IStateDrivenTargetBuilder Target(UIElement element);
+
+        /// <summary>
+        /// 构造动画引擎
+        /// </summary>
+        /// <returns>返回动画引擎。</returns>
+        StateDrivenAnimator Finish();
     }
 }

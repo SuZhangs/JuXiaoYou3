@@ -34,6 +34,9 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回一个新的目标构造器。</returns>
         public static IStateDrivenTargetBuilder NextElement(this IStateDrivenPropertyAnimationBuilder builder, UIElement element)
         {
+            var tc = builder.TargetContext;
+            tc.Dispose();
+            
             return builder.AnimatorContext.Target(element);
         }
 
