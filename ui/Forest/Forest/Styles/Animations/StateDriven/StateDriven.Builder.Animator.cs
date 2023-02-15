@@ -6,13 +6,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     class AnimatorBuilder : IStateDrivenAnimatorBuilder
     {
-        private int _hashCode;
-
-        public AnimatorBuilder()
-        {
-            Animator = new StateDrivenAnimator();
-        }
-
+        private int _hashCode = -1;
+        
         /// <summary>
         /// 获取目标默认值构造器。
         /// </summary>
@@ -44,7 +39,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             
             void DeleteExpr(FirstStateAnimation animation)
             {
-                _hashCode = -1;
+                _hashCode            = -1;
+                DefaultTargetContext = null;
                 Animator.FirstState.Add(animation);
                 DefaultTargetContext = null;
             }
@@ -88,9 +84,9 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             
             void DeleteExpr(StateDrivenAnimation animation)
             {
-                _hashCode = -1;
+                _hashCode     = -1;
+                TargetContext = null;
                 Animator.Animations.Add(animation);
-                DefaultTargetContext = null;
             }
             
             TargetContext = new TargetBuilder(DeleteExpr)
@@ -137,6 +133,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <summary>
         /// 
         /// </summary>
-        public StateDrivenAnimator Animator { get; }
+        public StateDrivenAnimator Animator { get; init; }
+
+        public void Reset() => _hashCode = -1;
     }
 }

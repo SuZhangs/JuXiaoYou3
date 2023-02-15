@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Enums;
@@ -31,6 +32,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
+            Debug.WriteLine($"init:{init}, State:{{{last}->{now}}}");
             if (!init)
             {
                 Animator.NextState();
@@ -50,7 +52,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// 开始构建状态驱动的动画
         /// </summary>
         /// <returns>返回一个动画构建器。</returns>
-        protected IStateDrivenAnimatorBuilder StateDrivenAnimation() => new AnimatorBuilder();
+        protected IStateDrivenAnimatorBuilder StateDrivenAnimation()
+        {
+            var animator = new StateDrivenAnimator();
+            Animator = animator;
+            return new AnimatorBuilder { Animator = animator };
+        }
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -87,29 +94,40 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
+            
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
-            StateMachine.NextState(VisualStateTrigger.Next);
+            if (StateMachine.CurrentState != VisualState.Highlight2)
+            {
+                StateMachine.NextState(VisualStateTrigger.Next);
+            }
             base.OnMouseDown(e);
         }
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
-            StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
+            if (StateMachine.CurrentState is not VisualState.Highlight1 or VisualState.Normal)
+            {
+                StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
+            }
             base.OnMouseUp(e);
         }
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            StateMachine.NextState(VisualStateTrigger.Next);
+            if (StateMachine.CurrentState != VisualState.Highlight1)
+            {
+                StateMachine.NextState(VisualStateTrigger.Next);
+            }
             base.OnMouseEnter(e);
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            StateMachine.NextState(VisualStateTrigger.Next);
+            ReleaseMouseCapture();
+            StateMachine.ResetState();
             base.OnMouseLeave(e);
         }
 
@@ -121,7 +139,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// <summary>
         /// 动画工具
         /// </summary>
-        protected Animator Animator { get; init; }
+        protected Animator Animator { get; private set; }
 
         /// <summary>
         /// 当前的主题

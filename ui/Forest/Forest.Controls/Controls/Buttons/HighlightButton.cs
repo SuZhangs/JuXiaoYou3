@@ -27,9 +27,9 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             //
             _finder = GetTemplateChild()
                       .Find<Border>(PART_BdName, x => _bd                     = x)
-                      .Find<ContentPresenter>(PART_ContentName, x => _content = x);
-
-            BuildAnimation();
+                      .Find<ContentPresenter>(PART_ContentName, x => _content = x)
+                      .Done(BuildAnimation);
+            
             BuildState();
         }
 
@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         {
             StateMachine.AddState(VisualState.Normal, VisualState.Highlight1, VisualStateTrigger.Next);
             StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight2, VisualStateTrigger.Next);
-            StateMachine.AddState(VisualState.Highlight2, VisualState.Normal, VisualStateTrigger.Next);
+            StateMachine.AddState(VisualState.Highlight2, VisualState.Normal, VisualStateTrigger.Next, false);
             StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight1, VisualStateTrigger.Disabled);
             StateMachine.AddState(VisualState.Highlight2, VisualState.Highlight1, VisualStateTrigger.Disabled);
             StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
@@ -45,18 +45,20 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         private void BuildAnimation()
         {
-            var nsColor = Theme.Colors[(int)ForestTheme.HighlightA3];
-            var h1Color = Theme.Colors[(int)ForestTheme.HighlightA1];
-            var h2Color = Theme.Colors[(int)ForestTheme.HighlightA5];
-            var nfColor = Theme.Colors[(int)ForestTheme.Foreground];
-            var nhColor = Theme.Colors[(int)ForestTheme.ForegroundInHighlight];
+            var theme = Theme ??= ThemeSystem.Instance.Theme;
+            
+            var nsColor = theme.Colors[(int)ForestTheme.HighlightA3];
+            var h1Color = theme.Colors[(int)ForestTheme.HighlightA1];
+            var h2Color = theme.Colors[(int)ForestTheme.HighlightA5];
+            var nfColor = theme.Colors[(int)ForestTheme.Foreground];
+            var nhColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 
             // 状态驱动的动画
             base.StateDrivenAnimation()
                 .TargetAndDefault(_bd) // 构造默认视觉效果
-                .Set(BackgroundProperty, nsColor)
+                .Set(BackgroundProperty, nsColor.ToSolidColorBrush())
                 .Continue(_content)
-                .Set(TextElement.ForegroundProperty, nfColor)
+                .Set(TextElement.ForegroundProperty, nfColor.ToSolidColorBrush())
                 .Target(_bd) // 构造Border视觉效果
                 .Color(new Duration(TimeSpan.FromMilliseconds(200)), BackgroundProperty, SolidColorBrush.ColorProperty)
                 .Next(VisualState.Normal, nsColor)

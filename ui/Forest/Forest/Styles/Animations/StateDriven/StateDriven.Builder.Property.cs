@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows;
 using System.Windows.Media;
 using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
@@ -23,7 +24,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         public IStateDrivenPropertyAnimationBuilder<Thickness?> NextThickness(Duration duration, params object[] property)=> TargetContext.Thickness(duration, property);
 
 
-        public abstract StateDrivenAnimation Finish();
+        public abstract StateDrivenAnimation.AnimationArgument Finish();
         
         public abstract void Dispose();
         
@@ -48,33 +49,39 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         public Duration Duration { get; init; }
     }
 
+    [SuppressMessage("Usage", "CA1816:Dispose 方法应调用 SuppressFinalize")]
     public abstract class PropertyBuilder<TValue> : PropertyBuilder, IStateDrivenPropertyAnimationBuilder<TValue>
     {
-        protected PropertyBuilder(Action<StateDrivenAnimation> expr)
+        protected PropertyBuilder(Action<StateDrivenAnimation.AnimationArgument> expr)
         {
-            
+            DisposeAction = expr;
         }
-
-        protected abstract StateDrivenAnimation.AnimationArgument CreateArgument(VisualState state, TValue value);
+        
+        protected abstract StateDrivenAnimation.AnimationArgument CreateArgument();
         
         public IStateDrivenPropertyAnimationBuilder<TValue> Next(VisualState state, TValue value)
         {
-            Arguments.Add(CreateArgument(state, value));
+            Mapper.TryAdd(state, value);
             return this;
         }
 
 
-
-        public override StateDrivenAnimation Finish()
+        public override StateDrivenAnimation.AnimationArgument Finish()
         {
-            
+            return CreateArgument();
         }
 
         public sealed override void Dispose()
         {
-            
+            DisposeAction(Finish());
         }
 
-        public IList<StateDrivenAnimation.AnimationArgument> Arguments { get; } = new List<StateDrivenAnimation.AnimationArgument>(8);
+        /// <summary>
+        /// 
+        /// </summary>
+        public Action<StateDrivenAnimation.AnimationArgument> DisposeAction { get; }
+        
+
+        public Dictionary<VisualState, TValue> Mapper { get; protected init; }
     }
 }

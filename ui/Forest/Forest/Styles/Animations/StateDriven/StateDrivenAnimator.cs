@@ -20,12 +20,12 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         public sealed override void NextState()
         {
-            foreach (var animation in FirstState)
+            foreach (var animation in Animations)
             {
                 animation.NextState();
             }
             
-            foreach (var animation in Animations)
+            foreach (var animation in FirstState)
             {
                 animation.NextState();
             }

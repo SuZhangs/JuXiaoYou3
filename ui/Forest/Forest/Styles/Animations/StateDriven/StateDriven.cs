@@ -14,6 +14,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回目标默认值构造器。</returns>
         public static IStateDrivenTargetAndDefaultBuilder Continue(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
+            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
+            builder.Dispose();
             return builder.AnimatorContext.TargetAndDefault(element);
         }
 
@@ -23,6 +25,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回目标构造器。</returns>
         public static IStateDrivenTargetBuilder Target(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
+            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
+            builder.Dispose();
             return builder.AnimatorContext.Target(element);
         }
 
@@ -34,6 +38,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回一个新的目标构造器。</returns>
         public static IStateDrivenTargetBuilder NextElement(this IStateDrivenPropertyAnimationBuilder builder, FrameworkElement element)
         {
+            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
+            builder.Dispose();
             var tc = builder.TargetContext;
             tc.Dispose();
             
@@ -53,6 +59,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
 
             var ac = pb.AnimatorContext;
             var tc = pb.TargetContext;
+            tc.Dispose();
+            ac.Finish();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             Arguments     = new List<StateDrivenAnimation.AnimationArgument>(8);
         }
 
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(DependencyProperty property, Duration duration) => new PropertyBuilder<Color?>
+        public IStateDrivenPropertyAnimationBuilder<Color?> Color(DependencyProperty property, Duration duration) => new ColorPropertyBuilder(AddExpr)
         {
             Duration = duration,
             TargetContext   = this,
@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(Duration duration,params object[] property) => new PropertyBuilder<Color?>
+        public IStateDrivenPropertyAnimationBuilder<Color?> Color(Duration duration,params object[] property) => new ColorPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new PropertyBuilder<double?>
+        public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new DoublePropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(Duration duration,params object[] property)=> new PropertyBuilder<double?>
+        public IStateDrivenPropertyAnimationBuilder<double?> Double(Duration duration,params object[] property)=> new DoublePropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<object> Object(DependencyProperty property, Duration duration)=> new PropertyBuilder<object>
+        public IStateDrivenPropertyAnimationBuilder<object> Object(DependencyProperty property, Duration duration)=> new ObjectPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<object> Object(Duration duration,params object[] property)=> new PropertyBuilder<object>
+        public IStateDrivenPropertyAnimationBuilder<object> Object(Duration duration,params object[] property)=> new ObjectPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -60,7 +60,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(DependencyProperty property, Duration duration)=> new PropertyBuilder<Thickness?>
+        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(DependencyProperty property, Duration duration)=> new ThicknessPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -68,18 +68,23 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(Duration duration, params object[] property)=> new PropertyBuilder<Thickness?>
+        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(Duration duration, params object[] property)=> new ThicknessPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
             AnimatorContext = AnimatorContext,
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
+
+        private void AddExpr(StateDrivenAnimation.AnimationArgument argument)
+        {
+            Arguments.Add(argument);
+        }
         
         /// <summary>
         /// 
         /// </summary>
-        public IList<StateDrivenAnimation.AnimationArgument> Arguments { get; }
+        public List<StateDrivenAnimation.AnimationArgument> Arguments { get; }
 
         /// <summary>
         /// 完成并添加
@@ -101,9 +106,17 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         public FrameworkElement TargetElement { get; init; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public StateDrivenAnimation Finish()
         {
-            throw new NotImplementedException();
+            return new StateDrivenAnimation
+            {
+                TargetElement = TargetElement,
+                Arguments     = Arguments,
+            };
         }
     }
 
@@ -111,7 +124,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     {
         public TargetAndDefaultBuilder(Action<FirstStateAnimation> disposeExpr) => DisposeAction = disposeExpr;
         
-        public IStateDrivenTargetAndDefaultBuilder Set(DependencyProperty property, Duration duration, object value)
+        public IStateDrivenTargetAndDefaultBuilder Set(DependencyProperty property, object value)
         {
             Animations.Add(new FirstStateAnimation.Setter
             {
@@ -121,8 +134,18 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             return this;
         }
 
-
-        public IList<FirstStateAnimation.Setter> Animations { get; } = new List<FirstStateAnimation.Setter>(8);
+        /// <summary>
+        /// 完成
+        /// </summary>
+        /// <returns></returns>
+        public FirstStateAnimation Finish()
+        {
+            return new FirstStateAnimation
+            {
+                TargetElement = TargetElement,
+                Setters       = Animations
+            };
+        }
 
         /// <summary>
         /// 完成并添加
@@ -144,17 +167,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         public FrameworkElement TargetElement { get; init; }
 
-        /// <summary>
-        /// 完成
-        /// </summary>
-        /// <returns></returns>
-        public FirstStateAnimation Finish()
-        {
-            return new FirstStateAnimation
-            {
-                TargetElement = TargetElement,
-                Setters       = Animations
-            };
-        }
+
+        public IList<FirstStateAnimation.Setter> Animations { get; } = new List<FirstStateAnimation.Setter>(8);
     }
 }

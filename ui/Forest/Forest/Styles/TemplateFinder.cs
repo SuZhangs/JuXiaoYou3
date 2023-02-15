@@ -24,6 +24,8 @@ namespace Acorisoft.FutureGL.Forest.Styles
             {
                 expression();
             }
+            
+            Expression?.Invoke();
         }
 
         /// <summary>
@@ -35,6 +37,11 @@ namespace Acorisoft.FutureGL.Forest.Styles
         /// 
         /// </summary>
         public List<Action> Expressions { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Action Expression { get; set; }
     }
     
     public static class TemplatePartFinder
@@ -52,6 +59,15 @@ namespace Acorisoft.FutureGL.Forest.Styles
             impl.Expressions.Add((Action)FindExpr);
 
             return finder;
+        }
+
+        public static ITemplatePartFinder Done(this ITemplatePartFinder finder, Action expr)
+        {
+            var impl = (Finder)finder;
+
+            impl.Expression = expr;
+
+            return impl;
         }
     }
 }

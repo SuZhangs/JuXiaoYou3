@@ -48,7 +48,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 {
                     transition = new Transition
                     {
-                        FromState = now,
+                        FromState = next,
                         Transitions = new Dictionary<VisualStateTrigger, VisualState>
                         {
                             { VisualStateTrigger.Back, now }
@@ -76,7 +76,6 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 
                 return _transitions.TryAdd(now, transition);
             }
-
 
             return transition.Transitions.TryAdd(function, next);
         }
@@ -134,11 +133,6 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 return false;
             }
 
-            if (transition.FromState != _now)
-            {
-                return false;
-            }
-
             if (!transition.Transitions.TryGetValue(trigger, out var nextState))
             {
                 return false;
@@ -156,9 +150,9 @@ namespace Acorisoft.FutureGL.Forest.Styles
         /// <returns>返回操作的结果，成功返回true，否则返回false。</returns>
         public void ResetState()
         {
-            _init = true;
-            _last = _now = VisualState.Normal;
-            StateChangedHandler?.Invoke(false, VisualState.Normal, VisualState.Normal, VisualStateTrigger.Next);
+            _last = _now;
+            _now  = VisualState.Normal;
+            StateChangedHandler?.Invoke(_init, _last, _now, VisualStateTrigger.Next);
         }
         
         /// <summary>

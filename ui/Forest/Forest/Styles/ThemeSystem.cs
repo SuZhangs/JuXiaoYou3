@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
         /// <summary>
         /// 当前的主题系统。
         /// </summary>
-        public static ThemeSystem Instance => new ThemeSystem();
+        public static ThemeSystem Instance { get; } = new ThemeSystem();
         
         /// <summary>
         /// 当前的主题。
