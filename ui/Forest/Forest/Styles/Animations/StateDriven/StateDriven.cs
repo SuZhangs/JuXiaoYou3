@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <param name="builder">构造器。</param>
         /// <param name="element">目标元素。</param>
         /// <returns>返回目标默认值构造器。</returns>
-        public static IStateDrivenTargetAndDefaultBuilder Continue(this IStateDrivenTargetAndDefaultBuilder builder, UIElement element)
+        public static IStateDrivenTargetAndDefaultBuilder Continue(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
             return builder.AnimatorContext.TargetAndDefault(element);
         }
@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 获取目标构造器。
         /// </summary>
         /// <returns>返回目标构造器。</returns>
-        public static IStateDrivenTargetBuilder Target(this IStateDrivenTargetAndDefaultBuilder builder, UIElement element)
+        public static IStateDrivenTargetBuilder Target(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
             return builder.AnimatorContext.Target(element);
         }
@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <param name="builder">构造器。</param>
         /// <param name="element">目标元素。</param>
         /// <returns>返回一个新的目标构造器。</returns>
-        public static IStateDrivenTargetBuilder NextElement(this IStateDrivenPropertyAnimationBuilder builder, UIElement element)
+        public static IStateDrivenTargetBuilder NextElement(this IStateDrivenPropertyAnimationBuilder builder, FrameworkElement element)
         {
             var tc = builder.TargetContext;
             tc.Dispose();

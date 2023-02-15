@@ -17,67 +17,75 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 获取一个属性动画构造器。
         /// </summary>
         /// <param name="property">指定的属性</param>
+        /// <param name="duration">动画时长</param>
         /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<Color?> NextColor(DependencyProperty property);
-        
+        IStateDrivenPropertyAnimationBuilder<Color?> NextColor(DependencyProperty property, Duration duration);
+
         /// <summary>
         /// 获取一个属性动画构造器。
         /// </summary>
+        /// <param name="duration">动画时长</param>
         /// <param name="property">指定的属性</param>
         /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<Color?> NextColor(params object[] property);
-        
-        /// <summary>
-        /// 获取一个属性动画构造器。
-        /// </summary>
-        /// <param name="property">指定的属性</param>
-        /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<double?> NextDouble(DependencyProperty property);
-        
-        /// <summary>
-        /// 获取一个属性动画构造器。
-        /// </summary>
-        /// <param name="property">指定的属性</param>
-        /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<double?> NextDouble(params object[] property);
-        
-        /// <summary>
-        /// 获取一个属性动画构造器。
-        /// </summary>
-        /// <param name="property">指定的属性</param>
-        /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<object> NextObject(DependencyProperty property);
-        
-        /// <summary>
-        /// 获取一个属性动画构造器。
-        /// </summary>
-        /// <param name="property">指定的属性</param>
-        /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<object> NextObject(params object[] property);
+        IStateDrivenPropertyAnimationBuilder<Color?> NextColor(Duration duration, params object[] property);
 
         /// <summary>
         /// 获取一个属性动画构造器。
         /// </summary>
         /// <param name="property">指定的属性</param>
+        /// <param name="duration">动画时长</param>
         /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<Thickness?> NextThickness(DependencyProperty property);
-        
+        IStateDrivenPropertyAnimationBuilder<double?> NextDouble(DependencyProperty property, Duration duration);
+
+        /// <summary>
+        /// 获取一个属性动画构造器。
+        /// </summary>
+        /// <param name="duration">动画时长</param>
+        /// <param name="property">指定的属性</param>
+        /// <returns>返回一个属性动画构造器。</returns>
+        IStateDrivenPropertyAnimationBuilder<double?> NextDouble(Duration duration, params object[] property);
+
         /// <summary>
         /// 获取一个属性动画构造器。
         /// </summary>
         /// <param name="property">指定的属性</param>
+        /// <param name="duration">动画时长</param>
         /// <returns>返回一个属性动画构造器。</returns>
-        IStateDrivenPropertyAnimationBuilder<Thickness?> NextThickness(params object[] property);
-        
+        IStateDrivenPropertyAnimationBuilder<object> NextObject(DependencyProperty property, Duration duration);
+
+        /// <summary>
+        /// 获取一个属性动画构造器。
+        /// </summary>
+        /// <param name="duration">动画时长</param>
+        /// <param name="property">指定的属性</param>
+        /// <returns>返回一个属性动画构造器。</returns>
+        IStateDrivenPropertyAnimationBuilder<object> NextObject(Duration duration, params object[] property);
+
+        /// <summary>
+        /// 获取一个属性动画构造器。
+        /// </summary>
+        /// <param name="property">指定的属性</param>
+        /// <param name="duration">动画时长</param>
+        /// <returns>返回一个属性动画构造器。</returns>
+        IStateDrivenPropertyAnimationBuilder<Thickness?> NextThickness(DependencyProperty property, Duration duration);
+
+        /// <summary>
+        /// 获取一个属性动画构造器。
+        /// </summary>
+        /// <param name="duration">动画时长</param>
+        /// <param name="property">指定的属性</param>
+        /// <returns>返回一个属性动画构造器。</returns>
+        IStateDrivenPropertyAnimationBuilder<Thickness?> NextThickness(Duration duration, params object[] property);
+
         /// <summary>
         /// 目标构造器上下文。
         /// </summary>
         IStateDrivenTargetBuilder TargetContext { get; init; }
-        
+
         /// <summary>
         /// 动画构造器上下文。
         /// </summary>
-        IStateDrivenAnimatorBuilder AnimatorContext { get;init; }
+        IStateDrivenAnimatorBuilder AnimatorContext { get; init; }
     }
 
     /// <summary>

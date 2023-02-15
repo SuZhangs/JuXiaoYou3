@@ -12,13 +12,13 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         /// <param name="element">目标元素。</param>
         /// <returns>返回目标默认值构造器。</returns>
-        IStateDrivenTargetAndDefaultBuilder TargetAndDefault(UIElement element);
+        IStateDrivenTargetAndDefaultBuilder TargetAndDefault(FrameworkElement element);
         
         /// <summary>
         /// 获取一个新的目标构造器。
         /// </summary>
         /// <returns>返回一个新的目标构造器。</returns>
-        IStateDrivenTargetBuilder Target(UIElement element);
+        IStateDrivenTargetBuilder Target(FrameworkElement element);
 
         /// <summary>
         /// 构造动画引擎

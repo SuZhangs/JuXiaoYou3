@@ -24,6 +24,11 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             {
                 animation.NextState();
             }
+            
+            foreach (var animation in Animations)
+            {
+                animation.NextState();
+            }
         }
 
         /// <summary>

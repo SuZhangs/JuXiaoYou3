@@ -18,7 +18,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// </summary>
         /// <param name="element">目标元素。</param>
         /// <returns>返回目标默认值构造器。</returns>
-        public IStateDrivenTargetAndDefaultBuilder TargetAndDefault(UIElement element)
+        public IStateDrivenTargetAndDefaultBuilder TargetAndDefault(FrameworkElement element)
         {
             if (element is null)
             {
@@ -51,7 +51,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             
             DefaultTargetContext = new TargetAndDefaultBuilder(DeleteExpr)
             {
-                AnimatorContext = this
+                AnimatorContext = this,
+                TargetElement = element
             };
             
             return DefaultTargetContext;
@@ -61,7 +62,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 获取一个新的目标构造器。
         /// </summary>
         /// <returns>返回一个新的目标构造器。</returns>
-        public IStateDrivenTargetBuilder Target(UIElement element)
+        public IStateDrivenTargetBuilder Target(FrameworkElement element)
         {
             if (element is null)
             {
@@ -94,7 +95,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             
             TargetContext = new TargetBuilder(DeleteExpr)
             {
-                AnimatorContext = this
+                AnimatorContext = this,
+                TargetElement = element
             };
             
             return TargetContext;

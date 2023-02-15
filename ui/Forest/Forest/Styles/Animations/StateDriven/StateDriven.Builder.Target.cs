@@ -6,64 +6,80 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     internal class TargetBuilder : IStateDrivenTargetBuilder
     {
-        public TargetBuilder(Action<StateDrivenAnimation> disposeExpr) => DisposeAction = disposeExpr;
+        public TargetBuilder(Action<StateDrivenAnimation> disposeExpr)
+        {
+            DisposeAction = disposeExpr;
+            Arguments     = new List<StateDrivenAnimation.AnimationArgument>(8);
+        }
+
+        public IStateDrivenPropertyAnimationBuilder<Color?> Color(DependencyProperty property, Duration duration) => new PropertyBuilder<Color?>
+        {
+            Duration = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<Color?> Color(Duration duration,params object[] property) => new PropertyBuilder<Color?>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0).(1)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new PropertyBuilder<double?>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<double?> Double(Duration duration,params object[] property)=> new PropertyBuilder<double?>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0).(1)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<object> Object(DependencyProperty property, Duration duration)=> new PropertyBuilder<object>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<object> Object(Duration duration,params object[] property)=> new PropertyBuilder<object>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0).(1)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(DependencyProperty property, Duration duration)=> new PropertyBuilder<Thickness?>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0)", property)
+        };
+
+        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(Duration duration, params object[] property)=> new PropertyBuilder<Thickness?>
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(0).(1)", property)
+        };
         
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(DependencyProperty property) => new PropertyBuilder<Color?>
-        {
-            TargetContext = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath = new PropertyPath("(0)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(params object[] property) => new PropertyBuilder<Color?>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0).(1)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property)=> new PropertyBuilder<double?>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(params object[] property)=> new PropertyBuilder<double?>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0).(1)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<object> Object(DependencyProperty property)=> new PropertyBuilder<object>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<object> Object(params object[] property)=> new PropertyBuilder<object>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0).(1)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(DependencyProperty property)=> new PropertyBuilder<Thickness?>
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0)", property)
-        };
-
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(params object[] property)=> new PropertyBuilder<Thickness?>
-        
-        {
-            TargetContext   = this,
-            AnimatorContext = AnimatorContext,
-            PropertyPath    = new PropertyPath("(0).(1)", property)
-        };
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<StateDrivenAnimation.AnimationArgument> Arguments { get; }
 
         /// <summary>
         /// 完成并添加
@@ -79,6 +95,11 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 
         /// </summary>
         public Action<StateDrivenAnimation> DisposeAction { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public FrameworkElement TargetElement { get; init; }
 
         public StateDrivenAnimation Finish()
         {
@@ -90,11 +111,18 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     {
         public TargetAndDefaultBuilder(Action<FirstStateAnimation> disposeExpr) => DisposeAction = disposeExpr;
         
-        public IStateDrivenTargetAndDefaultBuilder Set(DependencyProperty property, object value)
+        public IStateDrivenTargetAndDefaultBuilder Set(DependencyProperty property, Duration duration, object value)
         {
-            throw new NotImplementedException();
+            Animations.Add(new FirstStateAnimation.Setter
+            {
+                Value = value,
+                Property = property
+            });
+            return this;
         }
 
+
+        public IList<FirstStateAnimation.Setter> Animations { get; } = new List<FirstStateAnimation.Setter>(8);
 
         /// <summary>
         /// 完成并添加
@@ -110,10 +138,23 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 
         /// </summary>
         public Action<FirstStateAnimation> DisposeAction { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public FrameworkElement TargetElement { get; init; }
 
+        /// <summary>
+        /// 完成
+        /// </summary>
+        /// <returns></returns>
         public FirstStateAnimation Finish()
         {
-            throw new NotImplementedException();
+            return new FirstStateAnimation
+            {
+                TargetElement = TargetElement,
+                Setters       = Animations
+            };
         }
     }
 }
