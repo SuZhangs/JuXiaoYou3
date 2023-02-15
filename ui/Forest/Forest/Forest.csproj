@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Forest.Controls\Forest.Controls.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="DryIoc.dll" Version="4.8.2" />
     </ItemGroup>
 

@@ -8,7 +8,7 @@
         /// <summary>
         /// 所有控件的初始状态
         /// </summary>
-        Normal,
+        Normal = 0,
         
         /// <summary>
         /// 高亮的视觉状态

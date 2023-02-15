@@ -8,4 +8,10 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Forest.Controls\Forest.Controls.csproj" />
+      <ProjectReference Include="..\Forest.Shell\Forest.Shell.csproj" />
+      <ProjectReference Include="..\Forest\Forest.csproj" />
+    </ItemGroup>
+
 </Project>
