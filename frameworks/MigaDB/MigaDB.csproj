@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DryIoc.dll" Version="4.8.2" />
+      <PackageReference Include="DynamicData" Version="7.12.11" />
+      <PackageReference Include="LiteDB" Version="5.0.15" />
+      <PackageReference Include="MediatR" Version="11.1.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+      <PackageReference Include="NLog" Version="5.1.1" />
+      <PackageReference Include="System.Reactive" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MigaDB.Share\MigaDB.Share.csproj" />
+      <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
+    </ItemGroup>
+
+</Project>

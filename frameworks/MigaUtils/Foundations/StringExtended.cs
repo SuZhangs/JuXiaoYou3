@@ -1,0 +1,139 @@
+namespace Acorisoft.FutureGL.MigaUtils.Foundation
+{
+    using System.Text;
+
+    public static class StringExtended
+    {
+        public static bool EqualsWithIgnoreCase(this string src, string dst)
+        {
+            return !string.IsNullOrEmpty(dst) && string.Equals(src, dst, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static string RemoveCharacters(this string src, params char[] removedCharacters)
+        {
+            if (string.IsNullOrEmpty(src)) return src;
+            var length = src.Length;
+            var hash = new HashSet<char>(removedCharacters);
+            var sb = new StringBuilder();
+
+            for (var i = 0; i < length; i++)
+            {
+                if (hash.Contains(src[i])) continue;
+                sb.Append(src[i]);
+            }
+
+            return sb.ToString();
+        }
+
+        public static bool StartWithEx(this string src, char character)
+        {
+            if (string.IsNullOrEmpty(src)) return false;
+            var length = src.Length;
+
+            for (var i = 0; i < length; i++)
+            {
+                switch (src[i])
+                {
+                    case '\r':
+                    case '\n':
+                    case '\t':
+                    case '\x20':
+                        continue;
+                }
+
+                return src[i] == character;
+            }
+
+            return false;
+        }
+
+        public static int GetRepeatCount(this string src, char character, out int startIndex)
+        {
+            startIndex = -1;
+
+            if (string.IsNullOrEmpty(src))
+            {
+                return 0;
+            }
+
+            var length = src.Length;
+            var count = 0;
+
+            for (var i = 0; i < length; i++)
+            {
+                switch (src[i])
+                {
+                    case '\r':
+                    case '\n':
+                    case '\t':
+                    case '\x20':
+                        continue;
+                }
+
+                if (src[i] == character)
+                {
+                    if (startIndex == -1)
+                    {
+                        startIndex = i;
+                    }
+
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return count;
+        }
+
+        public static string Repeat(this string src, int count)
+        {
+            count = count == 0 ? 1 : count;
+            var sb = new StringBuilder();
+            for (var i = 0; i < count; i++)
+            {
+                sb.Append(src);
+            }
+
+            return sb.ToString();
+        }
+
+        public static bool ToBoolean(this string text, bool defaultValue)
+        {
+            return string.IsNullOrEmpty(text) ? 
+                defaultValue :
+                bool.TryParse(text, out var state) ?
+                    state :
+                    defaultValue;
+        }
+        
+        public static double ToDouble(this string text, double defaultValue)
+        {
+            return string.IsNullOrEmpty(text) ? 
+                defaultValue :
+                double.TryParse(text, out var state) ?
+                    state :
+                    defaultValue;
+        }
+        
+        public static float ToFloat(this string text, float defaultValue)
+        {
+            return string.IsNullOrEmpty(text) ? 
+                defaultValue :
+                float.TryParse(text, out var state) ?
+                    state :
+                    defaultValue;
+        }
+        
+        public static int ToInt(this string text, int defaultValue)
+        {
+            return string.IsNullOrEmpty(text) ? 
+                defaultValue :
+                int.TryParse(text, out var state) ?
+                    state :
+                    defaultValue;
+        }
+    }
+}
