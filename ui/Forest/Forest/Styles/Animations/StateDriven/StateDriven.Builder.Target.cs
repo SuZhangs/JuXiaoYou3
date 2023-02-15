@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
@@ -26,6 +27,14 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             TargetContext   = this,
             AnimatorContext = AnimatorContext,
             PropertyPath    = new PropertyPath("(0).(1)", property)
+        };
+        
+        public IStateDrivenPropertyAnimationBuilder<Color?> Foreground(Duration duration) => new ColorPropertyBuilder(AddExpr)
+        {
+            Duration        = duration,
+            TargetContext   = this,
+            AnimatorContext = AnimatorContext,
+            PropertyPath    = new PropertyPath("(TextElement.Foreground).(SolidColorBrush.Color)")
         };
 
         public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new DoublePropertyBuilder(AddExpr)
@@ -80,6 +89,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         {
             Arguments.Add(argument);
         }
+        
+        
         
         /// <summary>
         /// 

@@ -32,6 +32,13 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <summary>
         /// 获取一个属性动画构造器。
         /// </summary>
+        /// <param name="duration">动画时长</param>
+        /// <returns>返回一个属性动画构造器。</returns>
+        IStateDrivenPropertyAnimationBuilder<Color?> Foreground(Duration duration);
+
+        /// <summary>
+        /// 获取一个属性动画构造器。
+        /// </summary>
         /// <param name="property">指定的属性</param>
         /// <param name="duration">动画时长</param>
         /// <returns>返回一个属性动画构造器。</returns>

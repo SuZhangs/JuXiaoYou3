@@ -108,7 +108,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
-            if (StateMachine.CurrentState is not VisualState.Highlight1 or VisualState.Normal)
+            if (StateMachine.CurrentState is VisualState.Highlight2 && IsPressed)
             {
                 StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
             }

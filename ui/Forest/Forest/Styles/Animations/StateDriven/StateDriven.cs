@@ -59,6 +59,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
 
             var ac = pb.AnimatorContext;
             var tc = pb.TargetContext;
+            pb.Dispose();
             tc.Dispose();
             ac.Finish();
         }

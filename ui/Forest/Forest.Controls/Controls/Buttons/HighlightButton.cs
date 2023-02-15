@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                 .Next(VisualState.Highlight2, h2Color)
                 .Next(VisualState.Inactive, nsColor)
                 .NextElement(_content) // 构造ContentPresenter视觉效果
-                .Color(new Duration(TimeSpan.FromMilliseconds(200)), TextElement.ForegroundProperty, SolidColorBrush.ColorProperty)
+                .Foreground(new Duration(TimeSpan.FromMilliseconds(200)))
                 .Next(VisualState.Normal, nfColor)
                 .Next(VisualState.Highlight1, nhColor)
                 .Next(VisualState.Highlight2, nhColor)
