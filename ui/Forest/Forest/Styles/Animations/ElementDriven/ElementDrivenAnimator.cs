@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             throw new NotImplementedException();
         }
 
-        public override void NextState(VisualState visualState)
+        public override void NextState(VisualState state)
         {
             throw new NotImplementedException();
         }

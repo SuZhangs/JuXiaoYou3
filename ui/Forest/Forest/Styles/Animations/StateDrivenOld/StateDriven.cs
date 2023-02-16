@@ -14,8 +14,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回目标默认值构造器。</returns>
         public static IStateDrivenTargetAndDefaultBuilder Continue(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
-            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
-            builder.Dispose();
+            builder.Finish();
             return builder.AnimatorContext.TargetAndDefault(element);
         }
 
@@ -25,8 +24,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <returns>返回目标构造器。</returns>
         public static IStateDrivenTargetBuilder Target(this IStateDrivenTargetAndDefaultBuilder builder, FrameworkElement element)
         {
-            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
-            builder.Dispose();
+            builder.Finish();
             return builder.AnimatorContext.Target(element);
         }
 
@@ -36,32 +34,19 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <param name="builder">构造器。</param>
         /// <param name="element">目标元素。</param>
         /// <returns>返回一个新的目标构造器。</returns>
-        public static IStateDrivenTargetBuilder NextElement(this IStateDrivenPropertyAnimationBuilder builder, FrameworkElement element)
+        public static IStateDrivenTargetBuilder NextElement(this IStateDrivenAnimationBuilder builder, FrameworkElement element)
         {
-            (builder.AnimatorContext as AnimatorBuilder)?.Reset();
-            builder.Dispose();
-            var tc = builder.TargetContext;
-            tc.Dispose();
-            
-            return builder.AnimatorContext.Target(element);
+            builder.Finish();
+            return builder.Context.AnimatorContext.Target(element);
         }
 
         /// <summary>
         /// 完成构造。
         /// </summary>
         /// <param name="builder">构造器。</param>
-        public static void Finish(this IStateDrivenPropertyAnimationBuilder builder)
+        public static void Finish(this IStateDrivenAnimationBuilder builder)
         {
-            if (builder is not PropertyBuilder pb)
-            {
-                return;
-            }
-
-            var ac = pb.AnimatorContext;
-            var tc = pb.TargetContext;
-            pb.Dispose();
-            tc.Dispose();
-            ac.Finish();
+            builder.Build();
         }
     }
 }

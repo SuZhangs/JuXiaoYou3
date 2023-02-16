@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             Arguments     = new List<StateDrivenAnimation.AnimationArgument>(8);
         }
 
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(DependencyProperty property, Duration duration) => new ColorPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<Color?> Color(DependencyProperty property, Duration duration) => new ColorPropertyBuilder(AddExpr)
         {
             Duration = duration,
             TargetContext   = this,
@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Color?> Color(Duration duration,params object[] property) => new ColorPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<Color?> Color(Duration duration,params object[] property) => new ColorPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
         
-        public IStateDrivenPropertyAnimationBuilder<Color?> Foreground(Duration duration) => new ColorPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<Color?> Foreground(Duration duration) => new ColorPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(TextElement.Foreground).(SolidColorBrush.Color)")
         };
 
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new DoublePropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<double?> Double(DependencyProperty property, Duration duration)=> new DoublePropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<double?> Double(Duration duration,params object[] property)=> new DoublePropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<double?> Double(Duration duration,params object[] property)=> new DoublePropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<object> Object(DependencyProperty property, Duration duration)=> new ObjectPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<object> Object(DependencyProperty property, Duration duration)=> new ObjectPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -61,7 +61,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<object> Object(Duration duration,params object[] property)=> new ObjectPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<object> Object(Duration duration,params object[] property)=> new ObjectPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -69,7 +69,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0).(1)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(DependencyProperty property, Duration duration)=> new ThicknessPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<Thickness?> Thickness(DependencyProperty property, Duration duration)=> new ThicknessPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,
@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PropertyPath    = new PropertyPath("(0)", property)
         };
 
-        public IStateDrivenPropertyAnimationBuilder<Thickness?> Thickness(Duration duration, params object[] property)=> new ThicknessPropertyBuilder(AddExpr)
+        public IStateDrivenAnimationBuilder<Thickness?> Thickness(Duration duration, params object[] property)=> new ThicknessPropertyBuilder(AddExpr)
         {
             Duration        = duration,
             TargetContext   = this,

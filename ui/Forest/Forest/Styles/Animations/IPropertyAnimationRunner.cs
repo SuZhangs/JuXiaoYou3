@@ -1,21 +1,20 @@
-﻿using Acorisoft.FutureGL.Forest.Enums;
+﻿using System.Windows.Media.Animation;
+using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
-    /// <summary>
-    /// 表示一个动画引擎。
-    /// </summary>
-    public abstract class Animator : IStateDrivenAnimator
+    public interface IPropertyAnimationRunner
     {
         /// <summary>
         /// 进入初始状态
         /// </summary>
-        public abstract void NextState();
+        void NextState();
         
         /// <summary>
         /// 进入下一个状态
         /// </summary>
         /// <param name="state">下一个状态</param>
-        public abstract void NextState(VisualState state);
+        AnimationTimeline NextState(VisualState state);
+        
     }
 }

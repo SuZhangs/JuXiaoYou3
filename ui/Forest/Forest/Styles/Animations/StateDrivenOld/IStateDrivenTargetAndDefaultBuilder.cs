@@ -5,7 +5,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     /// <summary>
     /// <see cref="IStateDrivenTargetAndDefaultBuilder"/> 接口表示一个目标默认值构建器。
     /// </summary>
-    public interface IStateDrivenTargetAndDefaultBuilder : IDisposable
+    public interface IStateDrivenTargetAndDefaultBuilder : ICompletedSource<IStateDrivenTargetBuilder, StateDrivenAnimation>
     {
         /// <summary>
         /// 设置属性。
@@ -19,5 +19,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 动画构造器上下文。
         /// </summary>
         public IStateDrivenAnimatorBuilder AnimatorContext { get;init; }
+
+        void Finish();
     }
 }

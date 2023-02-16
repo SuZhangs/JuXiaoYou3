@@ -7,14 +7,8 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     /// <summary>
     /// <see cref="StateDrivenAnimator"/> 基于状态的动画引擎。
     /// </summary>
-    public class StateDrivenAnimator : Animator
+    public class StateDrivenAnimator : Animator, IStateDrivenAnimator
     {
-        public StateDrivenAnimator()
-        {
-            Animations = new List<StateDrivenAnimation>(16);
-            FirstState = new List<FirstStateAnimation>(16);
-        }
-
         /// <summary>
         /// 进入初始状态
         /// </summary>
@@ -34,23 +28,23 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <summary>
         /// 进入下一个状态
         /// </summary>
-        /// <param name="visualState">下一个状态</param>
-        public sealed override void NextState(VisualState visualState)
+        /// <param name="state">下一个状态</param>
+        public sealed override void NextState(VisualState state)
         {
             foreach (var animation in Animations)
             {
-                animation.NextState(visualState);
+                animation.NextState(state);
             }
         }
         
         /// <summary>
         /// 
         /// </summary>
-        public IList<FirstStateAnimation> FirstState { get; }
+        public IList<StateDrivenAnimation> FirstState { get;init; }
         
         /// <summary>
         /// 
         /// </summary>
-        public IList<StateDrivenAnimation> Animations { get; }
+        public IList<StateDrivenAnimation> Animations { get; init; }
     }
 }

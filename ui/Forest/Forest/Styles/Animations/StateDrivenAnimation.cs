@@ -3,9 +3,9 @@
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
-    /// 表示一个动画引擎。
+    /// <see cref="Acorisoft.FutureGL.Forest.Styles.Animations.StateDrivenAnimation"/> 表示一个基于状态的动画。
     /// </summary>
-    public abstract class Animator : IStateDrivenAnimator
+    public abstract class StateDrivenAnimation  : IStateDrivenAnimator
     {
         /// <summary>
         /// 进入初始状态

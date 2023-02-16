@@ -54,6 +54,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             var nhColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 
             // 状态驱动的动画
+            //
+            // 应该避免这种写法
             base.StateDrivenAnimation()
                 .TargetAndDefault(_bd) // 构造默认视觉效果
                 .Set(BackgroundProperty, nsColor.ToSolidColorBrush())

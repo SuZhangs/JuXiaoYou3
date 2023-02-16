@@ -4,7 +4,7 @@ using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
-    class AnimatorBuilder : IStateDrivenAnimatorBuilder
+    class _AnimatorBuilder : IStateDrivenAnimatorBuilder
     {
         private int _hashCode = -1;
         
