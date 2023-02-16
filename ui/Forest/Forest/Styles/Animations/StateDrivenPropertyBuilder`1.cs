@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             return this;
         }
 
-        public IStateDrivenTargetBuilder Build()
+        public IStateDrivenTargetBuilder Finish()
         {
             Completed?.Invoke(this, Mapper.Count > 0 ? CreateAnimation() : null);
             return Context;

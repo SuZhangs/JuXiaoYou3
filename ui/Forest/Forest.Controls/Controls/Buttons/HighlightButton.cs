@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                       .Find<Border>(PART_BdName, x => _bd                     = x)
                       .Find<ContentPresenter>(PART_ContentName, x => _content = x)
                       .Done(BuildAnimation);
-            
+
             BuildState();
         }
 
@@ -46,7 +46,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private void BuildAnimation()
         {
             var theme = Theme ??= ThemeSystem.Instance.Theme;
-            
+
             var nsColor = theme.Colors[(int)ForestTheme.HighlightA3];
             var h1Color = theme.Colors[(int)ForestTheme.HighlightA1];
             var h2Color = theme.Colors[(int)ForestTheme.HighlightA5];
@@ -56,24 +56,30 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // 状态驱动的动画
             //
             // 应该避免这种写法
-            base.StateDrivenAnimation()
-                .TargetAndDefault(_bd) // 构造默认视觉效果
-                .Set(BackgroundProperty, nsColor.ToSolidColorBrush())
-                .Continue(_content)
-                .Set(TextElement.ForegroundProperty, nfColor.ToSolidColorBrush())
-                .Target(_bd) // 构造Border视觉效果
-                .Color(new Duration(TimeSpan.FromMilliseconds(200)), BackgroundProperty, SolidColorBrush.ColorProperty)
-                .Next(VisualState.Normal, nsColor)
-                .Next(VisualState.Highlight1, h1Color)
-                .Next(VisualState.Highlight2, h2Color)
-                .Next(VisualState.Inactive, nsColor)
-                .NextElement(_content) // 构造ContentPresenter视觉效果
-                .Foreground(new Duration(TimeSpan.FromMilliseconds(200)))
-                .Next(VisualState.Normal, nfColor)
-                .Next(VisualState.Highlight1, nhColor)
-                .Next(VisualState.Highlight2, nhColor)
-                .Next(VisualState.Inactive, Colors.Gray)
-                .Finish();
+            var animatorBuilder = base.StateDrivenAnimation();
+
+            animatorBuilder.TargetAndDefault(_bd) // 构造默认视觉效果
+                           .Set(BackgroundProperty, nsColor.ToSolidColorBrush())
+                           .Finish();
+
+            animatorBuilder.TargetAndDefault(_content)
+                           .Set(TextElement.ForegroundProperty, nfColor.ToSolidColorBrush())
+                           .Finish();
+
+            animatorBuilder.Target(_bd) // 构造Border视觉效果
+                           .Color(new Duration(TimeSpan.FromMilliseconds(200)), BackgroundProperty, SolidColorBrush.ColorProperty)
+                           .Next(VisualState.Normal, nsColor)
+                           .Next(VisualState.Highlight1, h1Color)
+                           .Next(VisualState.Highlight2, h2Color)
+                           .Next(VisualState.Inactive, nsColor).Finish();
+
+            Animator = animatorBuilder.Target(_content) // 构造ContentPresenter视觉效果
+                                      .Foreground(new Duration(TimeSpan.FromMilliseconds(200)))
+                                      .Next(VisualState.Normal, nfColor)
+                                      .Next(VisualState.Highlight1, nhColor)
+                                      .Next(VisualState.Highlight2, nhColor)
+                                      .Next(VisualState.Inactive, Colors.Gray)
+                                      .FinalFinish();
 
             // IStateDrivenAnimationBuilder
             // IStateDrivenTargetBuilder

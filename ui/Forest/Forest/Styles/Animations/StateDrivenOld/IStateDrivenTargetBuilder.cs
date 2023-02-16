@@ -91,6 +91,6 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// <summary>
         /// 强制完成
         /// </summary>
-        void Finish();
+        Animator Finish();
     }
 }

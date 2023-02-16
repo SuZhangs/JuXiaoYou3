@@ -8,7 +8,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 构建完整的状态。
         /// </summary>
         /// <returns>返回一个目标构建器。</returns>
-        IStateDrivenTargetBuilder Build();
+        IStateDrivenTargetBuilder Finish();
 
         /// <summary>
         /// 

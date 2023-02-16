@@ -32,14 +32,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
-            Debug.WriteLine($"init:{init}, State:{{{last}->{now}}}");
             if (!init)
             {
                 Animator.NextState();
-                return;
             }
-
-            Animator.NextState(now);
+            else
+            {
+                Animator.NextState(now);
+            }
         }
 
         /// <summary>
@@ -52,12 +52,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// 开始构建状态驱动的动画
         /// </summary>
         /// <returns>返回一个动画构建器。</returns>
-        protected IStateDrivenAnimatorBuilder StateDrivenAnimation()
-        {
-            var animator = new StateDrivenAnimator();
-            Animator = animator;
-            return new AnimatorBuilder { Animator = animator };
-        }
+        protected IStateDrivenAnimatorBuilder StateDrivenAnimation() => new StateDrivenAnimatorBuilder();
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -139,7 +134,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// <summary>
         /// 动画工具
         /// </summary>
-        protected Animator Animator { get; private set; }
+        public Animator Animator { get; protected set; }
 
         /// <summary>
         /// 当前的主题

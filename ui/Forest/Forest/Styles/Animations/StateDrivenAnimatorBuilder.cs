@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+// ReSharper disable ForCanBeConvertedToForeach
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
@@ -55,8 +56,9 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
 
         public StateDrivenAnimator Finish()
         {
-            foreach (var pending in PendingList)
+            for (var i = 0; i < PendingList.Count; i++)
             {
+                var pending = PendingList[i];
                 pending.Finish();
             }
             

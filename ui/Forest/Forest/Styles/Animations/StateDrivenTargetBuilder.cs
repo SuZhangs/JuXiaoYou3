@@ -125,15 +125,17 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             PendingList.Remove(sender);
         }
 
-        public void Finish()
+        public Animator Finish()
         {
             if (ResultCollection is not null)
             {
                 if (PendingList.Count > 0)
                 {
-                    foreach (var pending in PendingList)
+                    // ReSharper disable once ForCanBeConvertedToForeach
+                    for (var i = 0; i < PendingList.Count; i++)
                     {
-                        pending.Build();
+                        var pending = PendingList[i];
+                        pending.Finish();
                     }
                 }
 
@@ -154,7 +156,11 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
                     Setters = new List<Setter>(SetterCollection),
                 });
             }
+
+            return AnimatorContext.Finish();
         }
+
+        void IStateDrivenTargetAndDefaultBuilder.Finish() => Finish();
         
         public IList<IStateDrivenAnimationBuilder> PendingList { get; init; }
 
@@ -172,7 +178,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         /// 
         /// </summary>
         public IStateDrivenAnimatorBuilder AnimatorContext { get; init; }
-        
+
         /// <summary>
         /// 
         /// </summary>
