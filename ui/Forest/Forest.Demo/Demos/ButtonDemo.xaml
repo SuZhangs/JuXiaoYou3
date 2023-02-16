@@ -12,7 +12,7 @@
             <Border Background="White" Padding="8">
                 <StackPanel>
                     <fui:HighlightButton Content="Test" Margin="4"/>
-                    <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
+                    <fui:HighlightButton Content="Disabled" IsEnabled="True" Margin="4"/>
                 </StackPanel>
             </Border>
             <Border Background="Black" Padding="8">

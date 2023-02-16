@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
         {
             Transition transition;
             
-            if (canBackward && function == VisualStateTrigger.Next)
+            if (canBackward)
             {
                 if (!_transitions.TryGetValue(next, out transition))
                 {
@@ -144,11 +144,16 @@ namespace Acorisoft.FutureGL.Forest.Styles
             return true;
         }
 
-        public void NextState(VisualState state)
+        public void NextState(VisualState state, bool force = true)
         {
+            _init = true;
             _last = _now;
             _now  = state;
-            StateChangedHandler?.Invoke(_init, _last, _now, VisualStateTrigger.Next);
+
+            if (force)
+            {
+                StateChangedHandler?.Invoke(_init, _last, _now, VisualStateTrigger.Next);
+            }
         }
 
         /// <summary>

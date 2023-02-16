@@ -47,6 +47,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
             if (!init)
             {
                 Animator.NextState();
+
+                if (!IsEnabled)
+                {
+                    Animator.NextState(VisualState.Inactive);
+                    StateMachine.NextState(VisualState.Inactive, false);
+                }
             }
             else
             {
@@ -71,7 +77,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Next);
+                StateMachine.NextState(VisualStateTrigger.Back);
             }
         }
 
@@ -93,8 +99,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             StateMachine.AddState(VisualState.Highlight2, VisualState.Normal, VisualStateTrigger.Next, false);
             StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight1, VisualStateTrigger.Disabled);
             StateMachine.AddState(VisualState.Highlight2, VisualState.Highlight1, VisualStateTrigger.Disabled);
-            StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled, false);
-            StateMachine.AddState(VisualState.Inactive, VisualState.Normal, VisualStateTrigger.Next, false);
+            StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
         }
 
         protected virtual void BuildAnimation()
