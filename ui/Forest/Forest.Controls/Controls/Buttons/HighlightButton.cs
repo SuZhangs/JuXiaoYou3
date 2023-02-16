@@ -15,37 +15,22 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HighlightButton), new FrameworkPropertyMetadata(typeof(HighlightButton)));
         }
 
-        private readonly ITemplatePartFinder _finder;
-        private const    string              PART_BdName      = "PART_Bd";
-        private const    string              PART_ContentName = "PART_Content";
+        private const string PART_BdName      = "PART_Bd";
+        private const string PART_ContentName = "PART_Content";
 
         private Border           _bd;
         private ContentPresenter _content;
 
-        public HighlightButton()
+        protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
-            //
-            _finder = GetTemplateChild()
-                      .Find<Border>(PART_BdName, x => _bd                     = x)
-                      .Find<ContentPresenter>(PART_ContentName, x => _content = x)
-                      .Done(BuildAnimation);
-
-            BuildState();
+            finder.Find<Border>(PART_BdName, x => _bd                     = x)
+                  .Find<ContentPresenter>(PART_ContentName, x => _content = x)
+                  .Done(BuildAnimation);
         }
 
-        private void BuildState()
+        protected override void BuildAnimation()
         {
-            StateMachine.AddState(VisualState.Normal, VisualState.Highlight1, VisualStateTrigger.Next);
-            StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight2, VisualStateTrigger.Next);
-            StateMachine.AddState(VisualState.Highlight2, VisualState.Normal, VisualStateTrigger.Next, false);
-            StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight1, VisualStateTrigger.Disabled);
-            StateMachine.AddState(VisualState.Highlight2, VisualState.Highlight1, VisualStateTrigger.Disabled);
-            StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
-        }
-
-        private void BuildAnimation()
-        {
-            var theme = Theme ??= ThemeSystem.Instance.Theme;
+            var theme = ThemeSystem.Instance.Theme;
 
             var nsColor = theme.Colors[(int)ForestTheme.HighlightA3];
             var h1Color = theme.Colors[(int)ForestTheme.HighlightA1];
@@ -56,7 +41,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // 状态驱动的动画
             //
             // 应该避免这种写法
-            var animatorBuilder = base.StateDrivenAnimation();
+            var animatorBuilder = StateDrivenAnimation();
 
             animatorBuilder.TargetAndDefault(_bd) // 构造默认视觉效果
                            .Set(BackgroundProperty, nsColor.ToSolidColorBrush())
@@ -71,7 +56,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                            .Next(VisualState.Normal, nsColor)
                            .Next(VisualState.Highlight1, h1Color)
                            .Next(VisualState.Highlight2, h2Color)
-                           .Next(VisualState.Inactive, nsColor).Finish();
+                           .Next(VisualState.Inactive, nsColor)
+                           .Finish();
 
             Animator = animatorBuilder.Target(_content) // 构造ContentPresenter视觉效果
                                       .Foreground(new Duration(TimeSpan.FromMilliseconds(200)))
@@ -80,18 +66,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                                       .Next(VisualState.Highlight2, nhColor)
                                       .Next(VisualState.Inactive, Colors.Gray)
                                       .FinalFinish();
-
-            // IStateDrivenAnimationBuilder
-            // IStateDrivenTargetBuilder
-            // IStateDrivenPropertyAnimationBuilder
-        }
-
-
-        public override void OnApplyTemplate()
-        {
-            _finder.Dispose();
-            StateMachine.NextState();
-            base.OnApplyTemplate();
         }
     }
 }

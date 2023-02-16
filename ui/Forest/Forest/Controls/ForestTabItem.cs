@@ -4,19 +4,48 @@ using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
 using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
-// ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
     /// <summary>
-    /// <see cref="ForestButton"/> 类型表示一个支持VisualDFA的按钮。
+    /// <see cref="ForestTabItem"/> 类型表示一个支持VisualDFA的TabItem。
     /// </summary>
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public abstract class ForestButton : Button
+    public class ForestTabItem : TabItem
     {
-        protected ForestButton()
+        static ForestTabItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestTabItem), new FrameworkPropertyMetadata(typeof(ForestTabItem)));
+        }
+
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            nameof(Icon),
+            typeof(Geometry),
+            typeof(ForestTabItem),
+            new PropertyMetadata(default(Geometry)));
+
+        public static readonly DependencyProperty IsFilledProperty = DependencyProperty.Register(
+            nameof(IsFilled),
+            typeof(bool),
+            typeof(ForestTabItem),
+            new PropertyMetadata(Boxing.False));
+
+        public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
+            nameof(Placement),
+            typeof(Dock),
+            typeof(ForestTabItem),
+            new PropertyMetadata(Dock.Left));
+
+
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+            nameof(IconSize),
+            typeof(double),
+            typeof(ForestTabItem),
+            new PropertyMetadata(17d));
+
+        public ForestTabItem()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
@@ -25,13 +54,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             IsEnabledChanged                 += OnEnableChanged;
             StateMachine.StateChangedHandler =  HandleStateChanged;
             Initialize();
-        }
-
-        private void Initialize()
-        {
-            GetTemplateChildOverride(Finder);
-            BuildState();
-            BuildAnimation();
         }
 
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
@@ -45,6 +67,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 Animator.NextState(now);
             }
         }
+        
+        /// <summary>
+        /// 构建状态
+        /// </summary>
+        
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -62,17 +89,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
         }
 
-        private void OnUnloadedIntern(object sender, RoutedEventArgs e)
+        private void Initialize()
         {
-            Loaded           -= OnLoadedIntern;
-            Unloaded         -= OnUnloadedIntern;
-            IsEnabledChanged -= OnEnableChanged;
-            OnUnloaded(sender, e);
+            BuildState();
+            BuildAnimation();
         }
-
-        /// <summary>
-        /// 构建状态
-        /// </summary>
+        
         protected virtual void BuildState()
         {
             StateMachine.AddState(VisualState.Normal, VisualState.Highlight1, VisualStateTrigger.Next);
@@ -88,9 +110,19 @@ namespace Acorisoft.FutureGL.Forest.Controls
             
         }
 
+        protected virtual void GetTemplateChildOverride(ITemplatePartFinder finder)
+        {
+            
+        }
+        
+        public override void OnApplyTemplate()
+        {
+            Finder.Find();
+            StateMachine.NextState();
+            base.OnApplyTemplate();
+        }
 
-        protected abstract void GetTemplateChildOverride(ITemplatePartFinder finder);
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -102,6 +134,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// </summary>
         /// <returns>返回一个动画构建器。</returns>
         protected IStateDrivenAnimatorBuilder StateDrivenAnimation() => new StateDrivenAnimatorBuilder();
+
+        private void OnUnloadedIntern(object sender, RoutedEventArgs e)
+        {
+            Loaded           -= OnLoadedIntern;
+            Unloaded         -= OnUnloadedIntern;
+            IsEnabledChanged -= OnEnableChanged;
+            OnUnloaded(sender, e);
+        }
 
         private void OnLoadedIntern(object sender, RoutedEventArgs e)
         {
@@ -117,27 +157,21 @@ namespace Acorisoft.FutureGL.Forest.Controls
             
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
+        protected override void OnSelected(RoutedEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight2)
-            {
-                StateMachine.NextState(VisualStateTrigger.Next);
-            }
-            base.OnMouseDown(e);
+            StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
+            base.OnSelected(e);
         }
 
-        protected override void OnMouseUp(MouseButtonEventArgs e)
+        protected override void OnUnselected(RoutedEventArgs e)
         {
-            if (StateMachine.CurrentState is VisualState.Highlight2 && IsPressed)
-            {
-                StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
-            }
-            base.OnMouseUp(e);
+            StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
+            base.OnUnselected(e);
         }
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight1)
+            if (StateMachine.CurrentState != VisualState.Highlight1 && !IsSelected)
             {
                 StateMachine.NextState(VisualStateTrigger.Next);
             }
@@ -150,19 +184,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             StateMachine.ResetState();
             base.OnMouseLeave(e);
         }
-        
-
-        public override void OnApplyTemplate()
-        {
-            Finder.Find();
-            StateMachine.NextState();
-            base.OnApplyTemplate();
-        }
-        
-        /// <summary>
-        /// 模板查找器
-        /// </summary>
-        protected ITemplatePartFinder Finder { get; }
 
         /// <summary>
         /// 视觉状态机。
@@ -170,8 +191,37 @@ namespace Acorisoft.FutureGL.Forest.Controls
         protected VisualDFA StateMachine { get; }
         
         /// <summary>
+        /// 模板查找器
+        /// </summary>
+        protected ITemplatePartFinder Finder { get; }
+        
+        /// <summary>
         /// 动画工具
         /// </summary>
         public Animator Animator { get; protected set; }
+
+        public double IconSize
+        {
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
+        }
+
+        public Dock Placement
+        {
+            get => (Dock)GetValue(PlacementProperty);
+            set => SetValue(PlacementProperty, value);
+        }
+
+        public bool IsFilled
+        {
+            get => (bool)GetValue(IsFilledProperty);
+            set => SetValue(IsFilledProperty, Boxing.Box(value));
+        }
+
+        public Geometry Icon
+        {
+            get => (Geometry)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
     }
 }

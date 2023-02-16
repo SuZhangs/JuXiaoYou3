@@ -7,10 +7,12 @@
         xmlns:fui="urn:acorisoft/forest/ui"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <fui:HighlightButton Content="Test"
-                             Margin="4"/>
-        <fui:HighlightButton Content="Test"
-                             Margin="4"/>
-    </StackPanel>
+    <Border Background="Black"
+            Padding="48">
+        <Border Background="White" CornerRadius="12">
+            <Grid>
+                
+            </Grid>
+        </Border>
+    </Border>
 </Window>

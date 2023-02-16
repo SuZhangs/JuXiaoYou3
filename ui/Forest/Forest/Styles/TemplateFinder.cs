@@ -2,8 +2,13 @@
 
 namespace Acorisoft.FutureGL.Forest.Styles
 {
-    public interface ITemplatePartFinder : IDisposable
+    public interface ITemplatePartFinder
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        void Find();
+        
         /// <summary>
         /// 
         /// </summary>
@@ -18,7 +23,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
             Expressions     = new List<Action>();
         }
 
-        public void Dispose()
+        public void Find()
         {
             foreach (var expression in Expressions)
             {
