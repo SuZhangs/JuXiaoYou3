@@ -52,8 +52,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                 HighlightColorPalette.HighlightPalette3 => theme.Colors[(int)ForestTheme.HighlightC5],
                 _ => theme.Colors[(int)ForestTheme.HighlightA5],
             };
-            var nfColor = theme.Colors[(int)ForestTheme.Foreground];
-            var nhColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
+            var nfColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 
             // 状态驱动的动画
             //
@@ -73,14 +72,12 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                            .Next(VisualState.Normal, nsColor)
                            .Next(VisualState.Highlight1, h1Color)
                            .Next(VisualState.Highlight2, h2Color)
-                           .Next(VisualState.Inactive, nsColor)
+                           .Next(VisualState.Inactive, theme.Colors[(int)ForestTheme.Background])
                            .Finish();
 
             Animator = animatorBuilder.Target(_content) // 构造ContentPresenter视觉效果
-                                      .Foreground(theme.Duration.Medium)
+                                      .Foreground(theme.Duration.Samll)
                                       .Next(VisualState.Normal, nfColor)
-                                      .Next(VisualState.Highlight1, nhColor)
-                                      .Next(VisualState.Highlight2, nhColor)
                                       .Next(VisualState.Inactive, Colors.Gray)
                                       .FinalFinish();
         }

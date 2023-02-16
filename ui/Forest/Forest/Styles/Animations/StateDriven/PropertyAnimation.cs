@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
                 }
             }
 
-            TargetElement.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            TargetElement.BeginStoryboard(_storyboard);
         }
 
         /// <summary>

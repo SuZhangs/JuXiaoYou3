@@ -7,18 +7,20 @@
              xmlns:fui="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <Border x:Key="ButtonDemo">
-            <StackPanel>
-                <fui:HighlightButton Content="Test"
-                                 Margin="4"/>
-                <fui:HighlightButton Content="Test"
-                                 Margin="4"/>
-            </StackPanel>
-        </Border>
-    </UserControl.Resources>
-    <UniformGrid Columns="2">
-        <ContentControl Background="White" Content="{StaticResource ButtonDemo}"/>
-        <ContentControl Background="Black" Content="{StaticResource ButtonDemo}"/>
-    </UniformGrid>
+    <ScrollViewer>
+        <UniformGrid Columns="2">
+            <Border Background="White" Padding="8">
+                <StackPanel>
+                    <fui:HighlightButton Content="Test" Margin="4"/>
+                    <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
+                </StackPanel>
+            </Border>
+            <Border Background="Black" Padding="8">
+                <StackPanel>
+                    <fui:HighlightButton Content="Test" Margin="4"/>
+                    <fui:HighlightButton Content="Disabled" IsEnabled="True" Margin="4"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+    </ScrollViewer>
 </UserControl>

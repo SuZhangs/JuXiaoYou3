@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
             nameof(Palette),
             typeof(HighlightColorPalette),
-            typeof(ForestButton),
+            typeof(ForestTabItem),
             new PropertyMetadata(default(HighlightColorPalette)));
 
         private const string PART_BdName      = "PART_Bd";
@@ -160,7 +160,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
         }
 
-        private void HandleNormalState(ref Color background, ref Color disabledForeground, ref Color foreground, ref Color highlightBackground, ref Color highlightForeground)
+        private void HandleNormalState(ref Color background, ref Color disabledForeground, ref Color foreground,
+            ref Color highlightBackground, ref Color highlightForeground)
         {
             if (!IsEnabled)
             {
@@ -223,11 +224,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             //
             // Opacity 动画
-            var opacityAnimation = new DoubleAnimation
+            var OpacityAnimation = new DoubleAnimation()
             {
                 Duration = duration,
-                From     = 0.5d,
-                To       = 1d,
+                From     = 0.8,
+                To       = 1,
             };
 
             var backgroundAnimation = new ColorAnimation
@@ -237,14 +238,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 To       = highlightBackground,
             };
 
-            Storyboard.SetTarget(opacityAnimation, _bd);
+            Storyboard.SetTarget(OpacityAnimation, _bd);
             Storyboard.SetTarget(backgroundAnimation, _bd);
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(OpacityProperty));
+            Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection { opacityAnimation, backgroundAnimation }
+                Children = new TimelineCollection { OpacityAnimation, backgroundAnimation }
             };
 
             //
