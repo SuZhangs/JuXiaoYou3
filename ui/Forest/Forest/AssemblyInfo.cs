@@ -16,3 +16,4 @@ using System.Windows.Markup;
     // app, or any theme specific resource dictionaries)
 )]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Styles")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls")]

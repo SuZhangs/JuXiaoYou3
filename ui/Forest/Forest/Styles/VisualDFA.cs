@@ -144,6 +144,13 @@ namespace Acorisoft.FutureGL.Forest.Styles
             return true;
         }
 
+        public void NextState(VisualState state)
+        {
+            _last = _now;
+            _now  = state;
+            StateChangedHandler?.Invoke(_init, _last, _now, VisualStateTrigger.Next);
+        }
+
         /// <summary>
         /// 重置状态
         /// </summary>

@@ -24,17 +24,34 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
             finder.Find<Border>(PART_BdName, x => _bd                     = x)
-                  .Find<ContentPresenter>(PART_ContentName, x => _content = x)
-                  .Done(BuildAnimation);
+                  .Find<ContentPresenter>(PART_ContentName, x => _content = x);
         }
 
         protected override void BuildAnimation()
         {
             var theme = ThemeSystem.Instance.Theme;
+            var palette = Palette;
 
-            var nsColor = theme.Colors[(int)ForestTheme.HighlightA3];
-            var h1Color = theme.Colors[(int)ForestTheme.HighlightA1];
-            var h2Color = theme.Colors[(int)ForestTheme.HighlightA5];
+            var nsColor = palette switch
+            {
+                HighlightColorPalette.HighlightPalette2 => theme.Colors[(int)ForestTheme.HighlightB3],
+                HighlightColorPalette.HighlightPalette3 => theme.Colors[(int)ForestTheme.HighlightC3],
+                _ => theme.Colors[(int)ForestTheme.HighlightA3],
+            };
+            
+            var h1Color = palette switch
+            {
+                HighlightColorPalette.HighlightPalette2 => theme.Colors[(int)ForestTheme.HighlightB4],
+                HighlightColorPalette.HighlightPalette3 => theme.Colors[(int)ForestTheme.HighlightC4],
+                _ => theme.Colors[(int)ForestTheme.HighlightA4],
+            };
+            
+            var h2Color = palette switch
+            {
+                HighlightColorPalette.HighlightPalette2 => theme.Colors[(int)ForestTheme.HighlightB5],
+                HighlightColorPalette.HighlightPalette3 => theme.Colors[(int)ForestTheme.HighlightC5],
+                _ => theme.Colors[(int)ForestTheme.HighlightA5],
+            };
             var nfColor = theme.Colors[(int)ForestTheme.Foreground];
             var nhColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 
@@ -52,7 +69,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                            .Finish();
 
             animatorBuilder.Target(_bd) // 构造Border视觉效果
-                           .Color(new Duration(TimeSpan.FromMilliseconds(200)), BackgroundProperty, SolidColorBrush.ColorProperty)
+                           .Color(theme.Duration.Medium, BackgroundProperty, SolidColorBrush.ColorProperty)
                            .Next(VisualState.Normal, nsColor)
                            .Next(VisualState.Highlight1, h1Color)
                            .Next(VisualState.Highlight2, h2Color)
@@ -60,7 +77,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                            .Finish();
 
             Animator = animatorBuilder.Target(_content) // 构造ContentPresenter视觉效果
-                                      .Foreground(new Duration(TimeSpan.FromMilliseconds(200)))
+                                      .Foreground(theme.Duration.Medium)
                                       .Next(VisualState.Normal, nfColor)
                                       .Next(VisualState.Highlight1, nhColor)
                                       .Next(VisualState.Highlight2, nhColor)

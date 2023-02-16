@@ -23,6 +23,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(HighlightColorPalette),
             typeof(ForestButton),
             new PropertyMetadata(default(HighlightColorPalette)));
+        
         protected ForestButton()
         {
             Finder                           =  GetTemplateChild();
@@ -161,7 +162,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         public override void OnApplyTemplate()
         {
-            Finder.Find();
+            Finder.Done(BuildAnimation).Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
         }

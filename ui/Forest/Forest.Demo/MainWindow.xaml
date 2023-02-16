@@ -7,12 +7,12 @@
         xmlns:fui="urn:acorisoft/forest/ui"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Border Background="Black"
-            Padding="48">
-        <Border Background="White" CornerRadius="12">
-            <Grid>
-                
-            </Grid>
-        </Border>
-    </Border>
+    <Window.Resources>
+        <Geometry x:Key="Icon">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
+    </Window.Resources>
+    <fui:ForestTabControl>
+        <fui:ForestTabItem Header="Test" Icon="{StaticResource Icon}"/>
+        <fui:ForestTabItem Header="Test1" IsEnabled="True" Icon="{StaticResource Icon}"/>
+        <fui:ForestTabItem Header="Test3" Icon="{StaticResource Icon}"/>
+    </fui:ForestTabControl>
 </Window>

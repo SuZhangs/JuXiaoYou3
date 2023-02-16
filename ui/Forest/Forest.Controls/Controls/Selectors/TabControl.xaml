@@ -159,7 +159,6 @@
     </Style>
 
     <Style x:Key="TabItemCapsule" TargetType="{x:Type c:ForestTabItem}">
-        <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="MinHeight" Value="48" />
         <Setter Property="MinWidth" Value="64" />
         <Setter Property="Padding" Value="0" />
@@ -171,8 +170,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:ForestTabItem}">
-                    <Border x:Name="bd"
-                            Background="{DynamicResource Brushes.Background}"
+                    <Border x:Name="PART_Bd"
                             CornerRadius="16"
                             Margin="6"
                             Padding="16"
@@ -183,7 +181,7 @@
                                    LastChildFill="True"
                                    VerticalAlignment="Center">
 
-                            <Path x:Name="Icon"
+                            <Path x:Name="PART_Icon"
                                   DockPanel.Dock="Left"
                                   Data="{TemplateBinding Icon}"
                                   HorizontalAlignment="Center"
@@ -194,7 +192,7 @@
                                   Width="{TemplateBinding IconSize}"
                                   VerticalAlignment="Center" />
 
-                            <ContentPresenter x:Name="contentPresenter"
+                            <ContentPresenter x:Name="PART_Content"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               Content="{TemplateBinding Header}"
@@ -210,16 +208,16 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Placement" Value="Top">
-                            <Setter Property="DockPanel.Dock" Value="Top" TargetName="Icon" />
-                            <Setter Property="Margin" Value="0 8 0 0" TargetName="contentPresenter" />
+                            <Setter Property="DockPanel.Dock" Value="Top" TargetName="PART_Icon" />
+                            <Setter Property="Margin" Value="0 8 0 0" TargetName="PART_Content" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Right">
-                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="Icon" />
-                            <Setter Property="Margin" Value="0 0 8 0" TargetName="contentPresenter" />
+                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Icon" />
+                            <Setter Property="Margin" Value="0 0 8 0" TargetName="PART_Content" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Bottom">
-                            <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="Icon" />
-                            <Setter Property="Margin" Value="0 0 0 8" TargetName="contentPresenter" />
+                            <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="PART_Icon" />
+                            <Setter Property="Margin" Value="0 0 0 8" TargetName="PART_Content" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
