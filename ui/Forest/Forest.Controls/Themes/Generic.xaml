@@ -2,5 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Buttons/Buttons.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/TabControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

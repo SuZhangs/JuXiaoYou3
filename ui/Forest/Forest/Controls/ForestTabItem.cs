@@ -44,6 +44,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(double),
             typeof(ForestTabItem),
             new PropertyMetadata(17d));
+        
+        public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
+            nameof(Palette),
+            typeof(HighlightColorPalette),
+            typeof(ForestButton),
+            new PropertyMetadata(default(HighlightColorPalette)));
 
         public ForestTabItem()
         {
@@ -222,6 +228,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             get => (Geometry)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
+        }
+
+        public HighlightColorPalette Palette
+        {
+            get => (HighlightColorPalette)GetValue(PaletteProperty);
+            set => SetValue(PaletteProperty, value);
         }
     }
 }

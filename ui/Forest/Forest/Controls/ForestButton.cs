@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
 using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
@@ -14,8 +15,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public abstract class ForestButton : Button
+    public abstract class ForestButton : Button, IHighlightColorPalette
     {
+
+        public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
+            nameof(Palette),
+            typeof(HighlightColorPalette),
+            typeof(ForestButton),
+            new PropertyMetadata(default(HighlightColorPalette)));
         protected ForestButton()
         {
             Finder                           =  GetTemplateChild();
@@ -173,5 +180,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// 动画工具
         /// </summary>
         public Animator Animator { get; protected set; }
+
+        public HighlightColorPalette Palette
+        {
+            get => (HighlightColorPalette)GetValue(PaletteProperty);
+            set => SetValue(PaletteProperty, value);
+        }
     }
 }

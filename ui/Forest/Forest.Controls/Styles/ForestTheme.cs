@@ -73,15 +73,13 @@
         /// 背景色
         /// </summary>
         Background,
+        BackgroundInHighlight,
+        
         
         /// <summary>
         /// 前景色
         /// </summary>
         Foreground,
-        
-        /// <summary>
-        /// 
-        /// </summary>
         ForegroundInHighlight,
         
         
