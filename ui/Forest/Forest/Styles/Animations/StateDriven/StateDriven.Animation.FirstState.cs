@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
-    public class FirstStateAnimation
+    public class FirstStateAnimation : StateDrivenAnimation
     {
         public class Setter
         {
