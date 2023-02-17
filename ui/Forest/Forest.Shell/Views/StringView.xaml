@@ -74,13 +74,13 @@
             </Border>
 
             <!-- TODO: 完善文本输入框 -->
-            <mg:TextBoxEx Grid.Row="2"
-                          ScrollViewer.CanContentScroll="True"
-                         VerticalScrollBarVisibility="Auto"
-                         Margin="16"
-                         Padding="8"
-                         Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         TextWrapping="Wrap"/>
+            <!-- <mg:TextBoxEx Grid.Row="2" -->
+            <!--               ScrollViewer.CanContentScroll="True" -->
+            <!--              VerticalScrollBarVisibility="Auto" -->
+            <!--              Margin="16" -->
+            <!--              Padding="8" -->
+            <!--              Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" -->
+            <!--              TextWrapping="Wrap"/> -->
 
             <!-- 按钮 -->
             <UniformGrid Grid.Row="3"
@@ -89,14 +89,14 @@
                          Margin="16"
                          Rows="1">
                 
-                <Button IsDefault="True"
-                        Content="{Binding Source={x:Static app:Translate.Instance},Path=OkButtonText,Mode=OneWay}"
-                        Command="{Binding CompletedCommand}"
-                        Style="{StaticResource CancelButton4}" />
-                
-                <Button Content="{Binding Source={x:Static app:Translate.Instance},Path=CancelButtonText,Mode=OneWay}"
-                        Command="{Binding CancelCommand}"
-                        Style="{StaticResource CancelButton3}" />
+                <!-- <Button IsDefault="True" -->
+                <!--         Content="{Binding Source={x:Static app:Translate.Instance},Path=OkButtonText,Mode=OneWay}" -->
+                <!--         Command="{Binding CompletedCommand}" -->
+                <!--         Style="{StaticResource CancelButton4}" /> -->
+                <!-- -->
+                <!-- <Button Content="{Binding Source={x:Static app:Translate.Instance},Path=CancelButtonText,Mode=OneWay}" -->
+                <!--         Command="{Binding CancelCommand}" -->
+                <!--         Style="{StaticResource CancelButton3}" /> -->
             </UniformGrid>
         </Grid>
     </Border>

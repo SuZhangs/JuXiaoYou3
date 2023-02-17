@@ -16,11 +16,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         void SetEventSource(Window window);
     }
 
-    public class WindowKeyEventArgs : EventArgs
-    {
-        public KeyEventArgs Args { get; init; }
-        public bool IsDown { get; init; }
-    }
+
 
     public class WindowEventBroadcast : IWindowEventBroadcast, IWindowEventBroadcastAmbient
     {

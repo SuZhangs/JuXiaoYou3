@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Contracts;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
@@ -78,7 +78,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             var web = Xaml.Get<IWindowEventBroadcast>();
             _disposable = web.Keys.Subscribe(this);
             StartOverride();
-            base.Start();
+            return base.Start();
         }
 
         public sealed override void Resume()
