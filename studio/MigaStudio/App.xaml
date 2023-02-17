@@ -1,9 +1,10 @@
-﻿<Application x:Class="MigaStudio.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MigaStudio"
-             StartupUri="MainWindow.xaml">
+﻿<shell:ForestApp x:Class="Acorisoft.FutureGL.MigaStudio.App"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
+                 xmlns:shell="urn:acorisoft/forest/shell"
+                 StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
-</Application>
+</shell:ForestApp>

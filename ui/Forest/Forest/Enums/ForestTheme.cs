@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.Forest.Styles
+﻿namespace Acorisoft.FutureGL.Forest.Enums
 {
     public enum ForestTheme : int
     {

@@ -3,7 +3,7 @@ global using System.Runtime.CompilerServices;
 global using System.Windows;
 global using System.Windows.Controls;
 global using System.Windows.Media;
-global using Acorisoft.FutureGL.MigaUI;
+global using Acorisoft.FutureGL.Forest;
 global using Acorisoft.FutureGL.MigaUtils;
 using System.Windows.Markup;
 

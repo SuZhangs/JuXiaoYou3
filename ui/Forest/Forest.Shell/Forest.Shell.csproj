@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Forest\Forest.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="System.Reactive" Version="5.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
 </Project>
