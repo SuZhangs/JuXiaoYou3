@@ -77,12 +77,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
+            var palette = Palette;
             var theme = ThemeSystem.Instance.Theme;
 
             // 正常的背景颜色
             var background = theme.Colors[(int)ForestTheme.Background];
             var foreground = theme.Colors[(int)ForestTheme.Foreground];
-            var highlightBackground = theme.GetHighlightColor(Palette, 3);
+            var highlightBackground = theme.GetHighlightColor(palette, 3);
+            var activeBackground = theme.GetHighlightColor(palette, 1);
             var highlightForeground = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
             var disabledForeground = theme.Colors[(int)ForestTheme.ForegroundInActive];
 
@@ -105,14 +107,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
                     HandleHighlight1State(
                         theme.Duration.Medium, 
                         ref background,
-                        ref highlightBackground,
+                        ref activeBackground,
                         ref highlightForeground);
                 }
                 else if (now == VisualState.Highlight2)
                 {
                     HandleHighlight2State(
                         theme.Duration.Medium, 
-                        ref background,
+                        ref activeBackground,
                         ref highlightBackground,
                         ref highlightForeground);
                 }
@@ -216,19 +218,19 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(ref highlightForeground);
+            // SetForeground(ref highlightForeground);
         }
 
         private void HandleHighlight2State(Duration duration, ref Color background, ref Color highlightBackground, ref Color highlightForeground)
         {
             //
             // Opacity 动画
-            var OpacityAnimation = new DoubleAnimation()
-            {
-                Duration = duration,
-                From     = 0.8,
-                To       = 1,
-            };
+            // var OpacityAnimation = new DoubleAnimation()
+            // {
+            //     Duration = duration,
+            //     From     = 0.5,
+            //     To       = 1,
+            // };
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -237,14 +239,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 To       = highlightBackground,
             };
 
-            Storyboard.SetTarget(OpacityAnimation, _bd);
+            // Storyboard.SetTarget(OpacityAnimation, _bd);
             Storyboard.SetTarget(backgroundAnimation, _bd);
-            Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
+            // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection { OpacityAnimation, backgroundAnimation }
+                Children = new TimelineCollection { /*OpacityAnimation,*/ backgroundAnimation }
             };
 
             //

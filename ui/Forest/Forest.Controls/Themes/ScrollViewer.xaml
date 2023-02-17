@@ -257,7 +257,7 @@
                           Style="{StaticResource Base.ScrollBarLineButton}">
                 <Viewbox Width="12" Height="12" Margin="2,3,2,1">
                     <Canvas Width="24" Height="24">
-                        <Path Name="ArrowBottom"
+                        <Path Name="ArrowLeft"
                               Data="M20,11 L20,13 L8,13 L13.5,18.5 L12.08,19.92 L4.16,12 L12.08,4.08 L13.5,5.5 L8,11 L20,11"
                               Fill="{TemplateBinding Foreground}"
                               Stretch="Uniform" />
@@ -290,7 +290,7 @@
                           Style="{StaticResource Base.ScrollBarLineButton}">
                 <Viewbox Width="12" Height="12" Margin="2,3,2,1">
                     <Canvas Width="24" Height="24">
-                        <Path Name="ArrowBottom"
+                        <Path Name="ArrowRight"
                               Data="M4,11 L4,13 L16,13 L10.5,18.5 L11.92,19.92 L19.84,12 L11.92,4.08 L10.5,5.5 L16,11 L4,11"
                               Fill="{TemplateBinding Foreground}"
                               Stretch="Uniform" />
