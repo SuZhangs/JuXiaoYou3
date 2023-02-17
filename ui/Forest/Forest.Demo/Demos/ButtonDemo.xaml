@@ -8,19 +8,13 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer>
-        <UniformGrid Columns="2">
-            <Border Background="White" Padding="8">
-                <StackPanel>
-                    <fui:HighlightButton Content="Test" Margin="4"/>
-                    <fui:HighlightButton Content="Disabled" IsEnabled="True" Margin="4"/>
-                </StackPanel>
-            </Border>
-            <Border Background="Black" Padding="8">
-                <StackPanel>
-                    <fui:HighlightButton Content="Test" Margin="4"/>
-                    <fui:HighlightButton Content="Disabled" IsEnabled="True" Margin="4"/>
-                </StackPanel>
-            </Border>
-        </UniformGrid>
+        <StackPanel>
+            <UniformGrid Columns="4">
+                <fui:HighlightButton Content="Highlight1" Margin="4"/>
+                <fui:HighlightButton Content="Highlight2" Margin="4" Palette="HighlightPalette2"/>
+                <fui:HighlightButton Content="Highlight3" Margin="4" Palette="HighlightPalette3"/>
+                <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
+            </UniformGrid>
+        </StackPanel>
     </ScrollViewer>
 </UserControl>

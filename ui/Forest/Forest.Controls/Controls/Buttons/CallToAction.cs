@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Documents;
+﻿using System.Windows.Documents;
 using System.Windows.Media;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
@@ -8,18 +7,17 @@ using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {
-    public class HighlightButton : ForestButton
+    public class CallToAction : ForestButton
     {
-        static HighlightButton()
+        static CallToAction()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HighlightButton), new FrameworkPropertyMetadata(typeof(HighlightButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CallToAction), new FrameworkPropertyMetadata(typeof(CallToAction)));
         }
 
-        private const string PART_BdName      = "PART_Bd";
-        private const string PART_ContentName = "PART_Content";
-
-        private Border           _bd;
-        private ContentPresenter _content;
+        private const string           PART_BdName      = "PART_Bd";
+        private const string           PART_ContentName = "PART_Content";
+        private       Border           _bd;
+        private       ContentPresenter _content;
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
