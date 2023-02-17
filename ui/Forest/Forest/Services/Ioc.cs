@@ -5,6 +5,9 @@ namespace Acorisoft.FutureGL.Forest
 {
     public static partial class Xaml
     {
+        #region Use
+
+        
         /// <summary>
         /// 注册实例。
         /// </summary>
@@ -488,6 +491,9 @@ namespace Acorisoft.FutureGL.Forest
 
             return instance;
         }
+
+        #endregion
+        
         /// <summary>
         /// 判断是否已经注册。
         /// </summary>
@@ -501,6 +507,21 @@ namespace Acorisoft.FutureGL.Forest
         /// <typeparam name="T">指定要判断的类型。</typeparam>
         /// <returns>已经注册将会返回true，否则返回false。</returns>
         public static bool IsRegistered<T>() => Container.IsRegistered<T>();
+        
+        /// <summary>
+        /// 获得指定服务
+        /// </summary>
+        /// <typeparam name="T">指定的服务类型</typeparam>
+        /// <returns>返回指定的服务</returns>
+        public static T Get<T>() => Container.Resolve<T>();
+        
+        /// <summary>
+        /// 获得指定服务
+        /// </summary>
+        /// <typeparam name="T">指定的服务类型</typeparam>
+        /// <param name="type">指定要获得的类型。</param>
+        /// <returns>返回指定的服务</returns>
+        public static T Get<T>(Type type) => (T)Container.Resolve(type);
         
         /// <summary>
         /// 表示一个Ioc容器

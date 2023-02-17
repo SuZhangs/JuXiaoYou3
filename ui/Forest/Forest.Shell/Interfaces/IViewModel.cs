@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reactive.Concurrency;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Models;
 
 namespace Acorisoft.FutureGL.Forest.Interfaces
@@ -38,5 +39,15 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// </summary>
         /// <param name="arg">视图参数</param>
         void Start(ViewParam arg);
+        
+        /// <summary>
+        /// 获得调度器
+        /// </summary>
+        IScheduler Scheduler { get; }
+        
+        /// <summary>
+        /// 获得垃圾回收器
+        /// </summary>
+        DisposableCollector Collector { get; }
     }
 }

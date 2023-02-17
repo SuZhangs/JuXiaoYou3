@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reactive.Concurrency;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 
@@ -9,19 +10,24 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel
     {
+        protected ViewModelBase()
+        {
+            Collector = new DisposableCollector(8);
+        }
+        
         /// <summary>
         /// 首次启动
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
-        public virtual async Task Start()
+        public virtual Task Start()
         {
-            
+            return Task.Run(() => { });
         }
 
         /// <summary>
         /// 表示参数传递。
         /// </summary>
-        /// <param name="arg">视图参数</param>
+        /// <param name="param">视图参数</param>
         public virtual void Start(ViewParam param)
         {
             
@@ -52,5 +58,16 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
             
         }
+
+        /// <summary>
+        /// 获得调度器
+        /// </summary>
+        public IScheduler Scheduler => Xaml.Get<IScheduler>();
+        
+
+        /// <summary>
+        /// 获得垃圾回收器
+        /// </summary>
+        public DisposableCollector Collector { get; }
     }
 }

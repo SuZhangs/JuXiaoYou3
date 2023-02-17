@@ -12,6 +12,11 @@ namespace Acorisoft.FutureGL.Forest.Models
         /// <summary>
         /// 来源视图模型
         /// </summary>
-        public IViewModel ViewModelSource { get; init; }
+        internal IViewModel ViewModelSource { get; set; }
+
+        /// <summary>
+        /// 关闭对话框处理器
+        /// </summary>
+        internal Action CloseHandler { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 global using System;
 global using System.Collections.Generic;
 global using System.Windows;
+global using System.Windows.Media;
 
 using System.Windows;
 using System.Windows.Markup;

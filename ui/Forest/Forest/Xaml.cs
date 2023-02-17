@@ -1,5 +1,10 @@
 ﻿using System.Globalization;
+using System.Reflection;
+using System.Windows;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using DryIoc;
+
 // ReSharper disable ForCanBeConvertedToForeach
 
 namespace Acorisoft.FutureGL.Forest
@@ -9,11 +14,24 @@ namespace Acorisoft.FutureGL.Forest
     /// </summary>
     public static partial class Xaml
     {
+        static readonly Dictionary<Type, BindingInfo>   ViewInfoMapper;
+        static readonly Dictionary<Type, BindingInfo>   ViewModelInfoMapper;
+        static readonly Dictionary<Type, object>        InstanceScope;
+        static readonly Dictionary<string, Geometry>    FastGeometryMapper;
+        static readonly Dictionary<string, ImageSource> FastImageMapper;
+        static readonly Dictionary<string, ImageBrush>  FastImageBrushMapper;
+
         static Xaml()
         {
-            Container = new Container(Rules.Default.WithTrackingDisposableTransients());
+            Container            = new Container(Rules.Default.WithTrackingDisposableTransients());
+            ViewInfoMapper       = new Dictionary<Type, BindingInfo>();
+            ViewModelInfoMapper  = new Dictionary<Type, BindingInfo>();
+            InstanceScope        = new Dictionary<Type, object>();
+            FastGeometryMapper   = new Dictionary<string, Geometry>();
+            FastImageMapper      = new Dictionary<string, ImageSource>();
+            FastImageBrushMapper = new Dictionary<string, ImageBrush>();
         }
-        
+
         #region Color
 
         /// <summary>
@@ -90,6 +108,192 @@ namespace Acorisoft.FutureGL.Forest
             }
 
             return Colors.White;
+        }
+
+        #endregion
+
+
+        /// <summary>
+        /// 连接视图或者视图模型。
+        /// </summary>
+        /// <param name="instance">当前实例（仅限于视图或者视图模型）</param>
+        /// <returns>返回一个值</returns>
+        public static object Connect(object instance)
+        {
+            if (instance is null)
+            {
+                return null;
+            }
+
+            var key = instance.GetType();
+
+            //
+            // instance是一个ViewModel
+            // 返回 View
+            if (ViewModelInfoMapper.TryGetValue(key, out var info))
+            {
+                var view = (FrameworkElement)Activator.CreateInstance(info.View);
+
+                //
+                //
+                if (view is not null)
+                {
+                    view.DataContext = instance;
+                }
+
+                return view;
+            }
+
+            //
+            // instance是一个View
+            // 返回 ViewModel
+            // ReSharper disable once InvertIf
+            if (ViewInfoMapper.TryGetValue(key, out info) && instance is FrameworkElement fe)
+            {
+                if (info.IsSingleton)
+                {
+                    fe.DataContext = InstanceScope.TryGetValue(key, out var dc) ? dc : null;
+                }
+                else
+                {
+                    fe.DataContext = Activator.CreateInstance(info.ViewModel);
+                }
+
+
+                return instance;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 关联指定的视图与视图模型
+        /// </summary>
+        /// <param name="bindingInfo">绑定信息。</param>
+        public static void InstallView(BindingInfo bindingInfo)
+        {
+            if (bindingInfo is null)
+            {
+                return;
+            }
+
+            if (bindingInfo.IsSingleton)
+            {
+                // ReSharper disable once InvertIf
+                if (!InstanceScope.ContainsKey(bindingInfo.ViewModel))
+                {
+                    InstanceScope.TryAdd(bindingInfo.ViewModel, Activator.CreateInstance(bindingInfo.ViewModel));
+                    ViewInfoMapper.TryAdd(bindingInfo.View, bindingInfo);
+                    ViewModelInfoMapper.TryAdd(bindingInfo.ViewModel, bindingInfo);
+                }
+
+                return;
+            }
+
+            ViewInfoMapper.TryAdd(bindingInfo.View, bindingInfo);
+            ViewModelInfoMapper.TryAdd(bindingInfo.ViewModel, bindingInfo);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void InstallViewFromSourceGenerator()
+        {
+            var implType = Classes.FindInterfaceImplementation<IViewModelRegister>(Assembly.GetEntryAssembly());
+
+            if (implType is null)
+            {
+                return;
+            }
+
+            var impl = (IViewModelRegister)Activator.CreateInstance(implType);
+            impl?.Register(new Installer());
+        }
+
+        public static void InstallViewManually(IBindingInfoProvider provider)
+        {
+            if (provider is null)
+            {
+                return;
+            }
+
+            foreach (var info in provider.GetBindingInfo())
+            {
+                InstallView(info);
+            }
+        }
+
+        /// <summary>
+        /// 手动安装视图。
+        /// </summary>
+        /// <param name="providers"></param>
+        public static void InstallViewManually(IEnumerable<IBindingInfoProvider> providers)
+        {
+            if (providers is null)
+            {
+                return;
+            }
+
+            foreach (var provider in providers)
+            {
+                if (provider is null)
+                {
+                    continue;
+                }
+
+                foreach (var info in provider.GetBindingInfo())
+                {
+                    InstallView(info);
+                }
+            }
+        }
+        
+        #region GetResource
+
+        public static Geometry GetGeometry(string key)
+        {
+            if (!FastGeometryMapper.TryGetValue(key, out var geometry))
+            {
+                geometry = Application.Current.Resources[key] as Geometry;
+
+                if (geometry is not null)
+                {
+                    FastGeometryMapper.TryAdd(key, geometry);
+                }
+            }
+
+            return geometry;
+        }
+
+        public static ImageSource GetImageSource(string key)
+        {
+            if (!FastImageMapper.TryGetValue(key, out var imageSource))
+            {
+                imageSource = Application.Current.Resources[key] as ImageSource;
+
+                if (imageSource is not null)
+                {
+                    FastImageMapper.TryAdd(key, imageSource);
+                }
+            }
+
+            return imageSource;
+        }
+
+
+        public static ImageBrush GetImageBrush(string key)
+        {
+            if (!FastImageBrushMapper.TryGetValue(key, out var imageBrush))
+            {
+                imageBrush = Application.Current.Resources[key] as ImageBrush;
+
+                if (imageBrush is not null)
+                {
+                    FastImageBrushMapper.TryAdd(key, imageBrush);
+                }
+            }
+
+            return imageBrush;
         }
 
         #endregion
