@@ -4,14 +4,14 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 {
     public abstract class DataEngine :
         IDataEngine, 
-        INotificationHandler<DatabaseOpenOperation> ,
-        INotificationHandler<DatabaseCloseOperation>
+        INotificationHandler<DatabaseOpenNotification> ,
+        INotificationHandler<DatabaseCloseNotification>
     {
-        private DatabaseOpenOperation _notification;
+        private DatabaseOpenNotification _notification;
         
         #region Handler
 
-        public Task Handle(DatabaseOpenOperation notification, CancellationToken cancellationToken)
+        public Task Handle(DatabaseOpenNotification notification, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             }, cancellationToken);
         }
 
-        public Task Handle(DatabaseCloseOperation notification, CancellationToken cancellationToken)
+        public Task Handle(DatabaseCloseNotification notification, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {

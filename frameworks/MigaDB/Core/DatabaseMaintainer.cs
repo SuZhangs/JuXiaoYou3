@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Contracts;
+﻿using Acorisoft.FutureGL.MigaDB.Interfaces;
 using LiteDB;
 
 namespace Acorisoft.FutureGL.MigaDB.Core

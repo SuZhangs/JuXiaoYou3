@@ -1,6 +1,6 @@
 ﻿using LiteDB;
 
-namespace Acorisoft.FutureGL.MigaDB.Contracts
+namespace Acorisoft.FutureGL.MigaDB.Interfaces
 {
     public interface IObjectCollection
     {

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using Acorisoft.FutureGL.MigaDB.Contracts;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaUtils;
 using LiteDB;

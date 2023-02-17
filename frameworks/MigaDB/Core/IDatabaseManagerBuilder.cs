@@ -17,8 +17,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         IDatabaseManagerBuilder Setup<TEngine>(bool lazyMode = true) where TEngine :
             class,
             IDataEngine,
-            INotificationHandler<DatabaseOpenOperation>,
-            INotificationHandler<DatabaseCloseOperation>;
+            INotificationHandler<DatabaseOpenNotification>,
+            INotificationHandler<DatabaseCloseNotification>;
 
         /// <summary>
         /// 注册升级器。

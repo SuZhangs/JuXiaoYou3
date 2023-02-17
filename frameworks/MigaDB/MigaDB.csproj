@@ -22,4 +22,9 @@
       <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Templates" />
+      <Folder Include="IO" />
+    </ItemGroup>
+
 </Project>
