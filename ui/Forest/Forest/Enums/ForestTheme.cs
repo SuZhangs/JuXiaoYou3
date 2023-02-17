@@ -81,11 +81,6 @@
         /// </summary>
         Foreground,
         ForegroundInHighlight,
-        
-        
-        /// <summary>
-        /// 
-        /// </summary>
         ForegroundInActive,
         
         ColorPalette_Metro_,
