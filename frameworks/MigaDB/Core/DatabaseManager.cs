@@ -14,11 +14,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
         public DatabaseManager()
         {
-            _database = new ObservableProperty<IDatabase>();
-            _property = new ObservableProperty<DatabaseProperty>();
-            _isOpen   = new ObservableState();
-            Container = new Container();
-            Mediator  = new Mediator(Container.Resolve);
+            _database  = new ObservableProperty<IDatabase>();
+            _property  = new ObservableProperty<DatabaseProperty>();
+            _isOpen    = new ObservableState();
+            Container  = new Container();
+            Mediator   = new Mediator(Container.Resolve);
         }
         
         public Task<DatabaseResult> LoadAsync(string directory)
