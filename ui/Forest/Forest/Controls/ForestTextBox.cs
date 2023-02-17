@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
@@ -13,6 +15,16 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(HighlightColorPalette),
             typeof(ForestTextBox),
             new PropertyMetadata(default(HighlightColorPalette)));
+         
+         private const string PART_BdName      = "PART_Bd";
+         private const string PART_ContentName = "PART_ContentHost";
+         private const string PART_IconName    = "PART_Icon";
+
+
+         private Border       _bd;
+         private ScrollViewer _content;
+         private Path         _icon;
+         private Storyboard   _storyboard;
         
         public ForestTextBox()
         {
@@ -129,22 +141,22 @@ namespace Acorisoft.FutureGL.Forest.Controls
             
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
+        protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             if (StateMachine.CurrentState != VisualState.Highlight2)
             {
                 StateMachine.NextState(VisualStateTrigger.Next);
             }
-            base.OnMouseDown(e);
+            base.OnGotKeyboardFocus(e);
         }
 
-        protected override void OnMouseUp(MouseButtonEventArgs e)
+        protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            if (StateMachine.CurrentState is VisualState.Highlight2 && IsPressed)
+            if (StateMachine.CurrentState == VisualState.Highlight2)
             {
                 StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
             }
-            base.OnMouseUp(e);
+            base.OnLostKeyboardFocus(e);
         }
 
         protected override void OnMouseEnter(MouseEventArgs e)
@@ -186,6 +198,9 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// </summary>
         public Animator Animator { get; protected set; }
 
+        /// <summary>
+        /// 动画工具
+        /// </summary>
         public HighlightColorPalette Palette
         {
             get => (HighlightColorPalette)GetValue(PaletteProperty);
