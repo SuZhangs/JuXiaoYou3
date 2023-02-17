@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {

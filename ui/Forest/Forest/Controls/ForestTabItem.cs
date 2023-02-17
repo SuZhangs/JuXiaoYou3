@@ -7,7 +7,6 @@ using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
-using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {

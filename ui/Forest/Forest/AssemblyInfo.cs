@@ -2,7 +2,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.Windows.Controls;
 global using System.Windows.Media;
-
+global using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 using System.Windows;
 using System.Windows.Markup;

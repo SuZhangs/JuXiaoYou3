@@ -1,29 +1,20 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Enums;
-using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
-// ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
-    /// <summary>
-    /// <see cref="ForestButton"/> 类型表示一个支持VisualDFA的按钮。
-    /// </summary>
-    /// <remarks>
-    /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
-    /// </remarks>
-    public abstract class ForestButton : Button, IHighlightColorPalette
+    public class ForestTextBox : TextBox
     {
-
-        public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
+         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
             nameof(Palette),
             typeof(HighlightColorPalette),
-            typeof(ForestButton),
+            typeof(ForestTextBox),
             new PropertyMetadata(default(HighlightColorPalette)));
         
-        protected ForestButton()
+        public ForestTextBox()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
@@ -107,7 +98,10 @@ namespace Acorisoft.FutureGL.Forest.Controls
         }
 
 
-        protected abstract void GetTemplateChildOverride(ITemplatePartFinder finder);
+        protected virtual void GetTemplateChildOverride(ITemplatePartFinder finder)
+        {
+            
+        }
 
         /// <summary>
         /// 
