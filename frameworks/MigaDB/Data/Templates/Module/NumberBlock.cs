@@ -3,18 +3,8 @@
     /// <summary>
     /// 表示数字内容块。
     /// </summary>
-    public interface INumberBlock : IModuleBlock, IModuleBlock<int>
+    public interface INumberBlock : ICounterBlock
     {
-        /// <summary>
-        /// 最大值
-        /// </summary>
-        int Maximum { get; }
-
-        /// <summary>
-        /// 最小值
-        /// </summary>
-        int Minimum { get; }
-
         /// <summary>
         /// 后缀
         /// </summary>
@@ -31,22 +21,12 @@
     /// <summary>
     /// 表示数字内容块。
     /// </summary>
-    public interface INumberBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<int>
+    public interface INumberBlockEditUI : ICounterBlockEditUI
     {
         /// <summary>
         /// 后缀
         /// </summary>
         string Suffix { get; set; }
-
-        /// <summary>
-        /// 最大值
-        /// </summary>
-        int Maximum { get; set; }
-
-        /// <summary>
-        /// 最小值
-        /// </summary>
-        int Minimum { get; set; }
     }
 
     /// <summary>
