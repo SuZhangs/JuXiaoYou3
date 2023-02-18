@@ -1,5 +1,8 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
 {
+    /// <summary>
+    /// 表示滑块内容块。
+    /// </summary>
     public class SliderBlock : ModuleBlock, INumberBlock
     {
         /// <summary>

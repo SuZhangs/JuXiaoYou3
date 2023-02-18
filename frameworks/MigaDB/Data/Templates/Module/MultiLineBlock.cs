@@ -1,7 +1,7 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
 {
     /// <summary>
-    /// 表示单行内容块。
+    /// 表示多行内容块。
     /// </summary>
     public interface IMultiLineBlock : IModuleBlock, IModuleBlock<string>
     {
@@ -17,14 +17,14 @@
     }
 
     /// <summary>
-    /// 表示单行内容块。
+    /// 表示多行内容块。
     /// </summary>
     public interface IMultiLineBlockDataUI : IMultiLineBlock, IModuleBlockDataUI
     {
     }
 
     /// <summary>
-    /// 表示单行内容块。
+    /// 表示多行内容块。
     /// </summary>
     public interface IMultiLineBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<string>
     {
@@ -40,6 +40,9 @@
     }
 
 
+    /// <summary>
+    /// 表示多行内容块。
+    /// </summary>
     public class MultiLineBlock : ModuleBlock, IMultiLineBlock
     {
         /// <summary>

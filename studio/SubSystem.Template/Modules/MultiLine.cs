@@ -45,8 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
                 ToolTips         = ToolTips,
             };
         }
-
-
+        
         /// <summary>
         /// 开启表达式
         /// </summary>
