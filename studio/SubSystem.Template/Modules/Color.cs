@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
         }
 
-        protected override ColorBlock CreateInstance()
+        protected override ColorBlock CreateInstanceOverride()
         {
             return new ColorBlock
             {

@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Minimum = block.Minimum;
         }
 
-        protected override NumberBlock CreateInstance()
+        protected override NumberBlock CreateInstanceOverride()
         {
             return new NumberBlock
             {

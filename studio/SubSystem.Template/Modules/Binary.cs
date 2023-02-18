@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         private string _negative;
         private string _positive;
 
-        protected override BinaryBlock CreateInstance()
+        protected override BinaryBlock CreateInstanceOverride()
         {
             return new BinaryBlock
             {

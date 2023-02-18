@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         private string _negative;
         private string _positive;
 
-        protected override DegreeBlock CreateInstance()
+        protected override DegreeBlock CreateInstanceOverride()
         {
             return new DegreeBlock
             {

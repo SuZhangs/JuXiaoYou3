@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Suffix = block.Suffix;
         }
 
-        protected override SingleLineBlock CreateInstance()
+        protected override SingleLineBlock CreateInstanceOverride()
         {
             return new SingleLineBlock
             {

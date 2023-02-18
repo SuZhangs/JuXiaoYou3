@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             CharacterLimited = block.CharacterLimited;
         }
 
-        protected override MultiLineBlock CreateInstance()
+        protected override MultiLineBlock CreateInstanceOverride()
         {
             return new MultiLineBlock
             {

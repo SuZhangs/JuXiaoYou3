@@ -90,23 +90,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         protected ChartBlockDataUI(TBlock block) : base(block)
         {
         }
+
+        public abstract ModuleBlock CreateInstance();
     }
 
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
-    public abstract class ModuleBlocEditUI : ObservableObject, IModuleBlockEditUI
+    public abstract class ModuleBlockEditUI : ObservableObject, IModuleBlockEditUI
     {
         private string _name;
         private string _toolTips;
         private string _metadata;
         
-        protected ModuleBlocEditUI(IModuleBlock block)
+        protected ModuleBlockEditUI(IModuleBlock block)
         {
             Name     = block.Name;
             ToolTips = block.ToolTips;
             Metadata = block.Metadata;
         }
+        public abstract ModuleBlock CreateInstance();
 
         /// <summary>
         /// 唯一标识符
@@ -145,21 +148,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
-    public abstract class ModuleBlockEditUI<TBlock, TValue> : ModuleBlocEditUI, IModuleBlockEditUI<TValue> 
+    public abstract class ModuleBlockEditUI<TBlock, TValue> : ModuleBlockEditUI, IModuleBlockEditUI<TValue> 
         where TBlock : ModuleBlock, IModuleBlock, IModuleBlock<TValue>
     {
         private TValue _fallback;
 
         protected ModuleBlockEditUI(TBlock block) : base(block)
         {
-            Fallback = block.Fallback;
+            Fallback    = block.Fallback;
+            TargetBlock = block;
+        }
+
+        public sealed override ModuleBlock CreateInstance()
+        {
+            return CreateInstanceOverride();
         }
 
         /// <summary>
         /// 创建实例
         /// </summary>
         /// <returns></returns>
-        protected abstract TBlock CreateInstance();
+        protected abstract TBlock CreateInstanceOverride();
+        
+        /// <summary>
+        /// 目标内容块
+        /// </summary>
+        protected TBlock TargetBlock { get; }
         
         /// <summary>
         /// 默认值

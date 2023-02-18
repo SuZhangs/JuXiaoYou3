@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
         }
 
-        protected override HeartBlock CreateInstance()
+        protected override HeartBlock CreateInstanceOverride()
         {
             return new HeartBlock
             {
@@ -55,7 +55,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
         }
 
-        protected override SwitchBlock CreateInstance()
+        protected override SwitchBlock CreateInstanceOverride()
         {
             return new SwitchBlock
             {
@@ -74,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
         }
 
-        protected override StarBlock CreateInstance()
+        protected override StarBlock CreateInstanceOverride()
         {
             return new StarBlock
             {
