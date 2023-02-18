@@ -18,7 +18,18 @@
         <fui:ForestTabItem Header="按钮展示" Icon="{StaticResource Icon}">
             <demo:ButtonDemo/>
         </fui:ForestTabItem>
-        <fui:ForestTabItem Header="Test1" IsEnabled="True" Icon="{StaticResource Icon}"/>
+        <fui:ForestTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
+            <Border Background="#30000000"
+                        Padding="32">
+                <Viewbox>
+                    <Border Background="White" 
+                            CornerRadius="24"
+                            Height="1080" Width="1920">
+
+                    </Border>
+                </Viewbox>
+            </Border>
+        </fui:ForestTabItem>
         <fui:ForestTabItem Header="Test3" Icon="{StaticResource Icon}"/>
     </fui:ForestTabControl>
 </Window>

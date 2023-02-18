@@ -90,9 +90,9 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         protected abstract void OnDatabaseClosing();
 
         /// <summary>
-        /// 
+        /// 手动计划数据引擎
         /// </summary>
-        /// <returns></returns>
+        /// <returns>按返回操作的结果。</returns>
         public bool Activate()
         {
             if (!Activated)
