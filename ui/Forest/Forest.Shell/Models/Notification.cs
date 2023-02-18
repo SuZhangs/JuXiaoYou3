@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Models
 {
-    public abstract class WindowMessage : ForestObject
+    public abstract class Notification : ForestObject
     {
         private string _title;
         private string _color;
@@ -32,7 +32,7 @@
         }
     }
 
-    public sealed class IconMessage : WindowMessage
+    public sealed class IconNotification : Notification
     {
         private Geometry _geometry;
         private bool _isFilled;
@@ -56,7 +56,7 @@
         }
     }
     
-    public sealed class ImageMessage : WindowMessage
+    public sealed class ImageNotification : Notification
     {
         private Geometry _imageSource;
 

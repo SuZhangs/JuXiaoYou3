@@ -18,53 +18,53 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <summary>
         /// 通知
         /// </summary>
-        /// <param name="message">消息</param>
-        public void Notify(IconMessage message)
+        /// <param name="notification">消息</param>
+        public void Notify(IconNotification notification)
         {
-            if (message is null)
+            if (notification is null)
             {
                 return;
             }
 
-            if (string.IsNullOrEmpty(message.Color))
+            if (string.IsNullOrEmpty(notification.Color))
             {
-                message.Color = Color;
+                notification.Color = Color;
             }
 
-            if (message.Delay.TotalMilliseconds < 1000)
+            if (notification.Delay.TotalMilliseconds < 1000)
             {
                 //
                 //
-                message.Initialize();
+                notification.Initialize();
             }
             
-            _host.Messaging(message);
+            _host.Messaging(notification);
         }
 
         /// <summary>
         /// 通知
         /// </summary>
-        /// <param name="message">消息</param>
-        public void Notify(ImageMessage message)
+        /// <param name="notification">消息</param>
+        public void Notify(ImageNotification notification)
         {
-            if (message is null)
+            if (notification is null)
             {
                 return;
             }
 
-            if (string.IsNullOrEmpty(message.Color))
+            if (string.IsNullOrEmpty(notification.Color))
             {
-                message.Color = Color;
+                notification.Color = Color;
             }
 
-            if (message.Delay.TotalMilliseconds < 1000)
+            if (notification.Delay.TotalMilliseconds < 1000)
             {
                 //
                 //
-                message.Initialize();
+                notification.Initialize();
             }
             
-            _host.Messaging(message);
+            _host.Messaging(notification);
         }
     }
 }

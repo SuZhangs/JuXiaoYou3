@@ -2,8 +2,12 @@
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ViewHost : ContentControl
+    public class ViewHost : Control
     {
+        static ViewHost()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ViewHost), new FrameworkPropertyMetadata(typeof(ViewHost)));
+        }
         
     }
 }

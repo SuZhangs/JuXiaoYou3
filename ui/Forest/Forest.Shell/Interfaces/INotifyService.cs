@@ -8,14 +8,14 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <summary>
         /// 通知
         /// </summary>
-        /// <param name="message">消息</param>
-        void Notify(IconMessage message);
+        /// <param name="notification">消息</param>
+        void Notify(IconNotification notification);
         
         /// <summary>
         /// 通知
         /// </summary>
-        /// <param name="message">消息</param>
-        void Notify(ImageMessage message);
+        /// <param name="notification">消息</param>
+        void Notify(ImageNotification notification);
     }
     
     

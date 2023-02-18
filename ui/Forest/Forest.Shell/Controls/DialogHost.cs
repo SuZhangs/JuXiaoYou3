@@ -27,8 +27,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
         public static readonly DependencyProperty IsOpenedProperty;
         public static readonly DependencyProperty IsBusyProperty;
         public static readonly DependencyProperty BusyTextProperty;
-        public static readonly RoutedEvent MessageOpeningEvent;
-        public static readonly RoutedEvent MessageClosingEvent;
+        public static readonly RoutedEvent NotificationOpeningEvent;
+        public static readonly RoutedEvent NotificationClosingEvent;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 new PropertyMetadata(Boxing.False));
 
             MessageProperty = DependencyProperty.Register(nameof(Message),
-                typeof(WindowMessage),
+                typeof(Notification),
                 typeof(DialogHost),
                 new PropertyMetadata(null));
 
@@ -69,11 +69,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 typeof(DialogHost),
                 new PropertyMetadata(default(object)));
             
-            MessageOpeningEvent = EventManager.RegisterRoutedEvent(nameof(MessageOpening), RoutingStrategy.Bubble,
+            NotificationOpeningEvent = EventManager.RegisterRoutedEvent(nameof(NotificationOpening), RoutingStrategy.Bubble,
                 typeof(RoutedEventHandler),
                 typeof(DialogHost));
             
-            MessageClosingEvent = EventManager.RegisterRoutedEvent(nameof(MessageClosing), RoutingStrategy.Bubble,
+            NotificationClosingEvent = EventManager.RegisterRoutedEvent(nameof(NotificationClosing), RoutingStrategy.Bubble,
                 typeof(RoutedEventHandler),
                 typeof(DialogHost)); 
         }
@@ -115,6 +115,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 return;
             }
+            
             fe.Loaded -= OnDialogContentLoaded;
 
             if (fe.DataContext is IViewModel vm)
@@ -126,7 +127,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private int Milliseconds = 10;
 
         private readonly DialogStack _stack;
-        private readonly ConcurrentQueue<WindowMessage> _queue;
+        private readonly ConcurrentQueue<Notification> _queue;
         private readonly DispatcherTimer _timer;
         private int _messageCounting;
         private int _messageDelay;
@@ -136,7 +137,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         public DialogHost()
         {
             _stack = new DialogStack();
-            _queue = new ConcurrentQueue<WindowMessage>();
+            _queue = new ConcurrentQueue<Notification>();
             _timer = new DispatcherTimer(TimeSpan.FromMilliseconds(Milliseconds), DispatcherPriority.Normal, OnDispatchMessage, Dispatcher);
             this.Unloaded += OnUnloaded;
             
@@ -151,7 +152,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _queue.Clear();
         }
 
-        private void HandlingMessagePending()
+        private void HandlingNotificationPending()
         {
             _messageCounting += Milliseconds;
                 
@@ -166,7 +167,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             // 满足时
             RaiseEvent(new RoutedEventArgs
             {
-                RoutedEvent = MessageClosingEvent,
+                RoutedEvent = NotificationClosingEvent,
             });
                 
             _messageCounting   = 0;
@@ -178,7 +179,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             if (_hasMessagePending)
             {
-                HandlingMessagePending();
+                HandlingNotificationPending();
                 return;
             }
             
@@ -215,7 +216,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _timer.Interval    = TimeSpan.FromMilliseconds(Milliseconds);
             RaiseEvent(new RoutedEventArgs
             {
-                RoutedEvent = MessageOpeningEvent,
+                RoutedEvent = NotificationOpeningEvent,
             });
         }
 
@@ -285,7 +286,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
         }
 
-        public void Messaging(WindowMessage message)
+        public void Messaging(Notification message)
         {
             if (message is null)
             {
@@ -391,22 +392,22 @@ namespace Acorisoft.FutureGL.Forest.Controls
             set => SetValue(BusyTextProperty, value);
         }
         
-        public WindowMessage Message
+        public Notification Message
         {
-            get => (WindowMessage)GetValue(MessageProperty);
+            get => (Notification)GetValue(MessageProperty);
             set => SetValue(MessageProperty, value);
         }
         
-        public event RoutedEventHandler MessageOpening
+        public event RoutedEventHandler NotificationOpening
         {
-            add => AddHandler(MessageOpeningEvent, value);
-            remove => RemoveHandler(MessageOpeningEvent, value);
+            add => AddHandler(NotificationOpeningEvent, value);
+            remove => RemoveHandler(NotificationOpeningEvent, value);
         }
         
-        public event RoutedEventHandler MessageClosing
+        public event RoutedEventHandler NotificationClosing
         {
-            add => AddHandler(MessageClosingEvent, value);
-            remove => RemoveHandler(MessageClosingEvent, value);
+            add => AddHandler(NotificationClosingEvent, value);
+            remove => RemoveHandler(NotificationClosingEvent, value);
         }
         
         public class DialogStack
