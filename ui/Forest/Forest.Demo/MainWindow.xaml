@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest"
         xmlns:demo="clr-namespace:Acorisoft.FutureGL.Forest.Demos"
         xmlns:fui="urn:acorisoft/forest/ui"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowState="Maximized"
@@ -30,6 +31,52 @@
                 </Viewbox>
             </Border>
         </fui:ForestTabItem>
-        <fui:ForestTabItem Header="Test3" Icon="{StaticResource Icon}"/>
+        <fui:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
+            <WrapPanel Background="#F1F1F1">
+                <Border Background="White"
+                        Margin="8"
+                        MinWidth="280"
+                        MinHeight="64"
+                        Padding="14 16 16 16">
+                    <DockPanel>
+                        <fui:HighlightButton DockPanel.Dock="Top"
+                                             Content="添加"/>
+                        <UniformGrid Columns="4"
+                                     Margin="0 8 0 0">
+                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </Border>
+
+                <Border Background="White"
+                        Margin="8"
+                        MinWidth="280"
+                        MinHeight="64"
+                        Padding="14 16 16 16">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <ui:Button DockPanel.Dock="Right"
+                                       Icon="Edit16" 
+                                       HorizontalAlignment="Stretch" 
+                                       Margin="8 0 0 0"
+                                       VerticalAlignment="Stretch"/>
+                            
+                            <fui:HighlightButton Content="添加"/>
+                        </DockPanel>
+                        
+                        <UniformGrid Columns="4"
+                                     Margin="0 8 0 0">
+                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch" Margin="2 0 2 0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </Border>
+            </WrapPanel>
+        </fui:ForestTabItem>
     </fui:ForestTabControl>
 </Window>

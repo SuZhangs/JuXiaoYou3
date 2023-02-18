@@ -16,4 +16,14 @@
       <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages" />
+      <Folder Include="Reosurces\Behaviors" />
+      <Folder Include="Reosurces\ContentTemplates" />
+      <Folder Include="Reosurces\Converters" />
+      <Folder Include="Styles" />
+      <Folder Include="ViewModels" />
+      <Folder Include="Views" />
+    </ItemGroup>
+
 </Project>
