@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+﻿using System;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules
 {
@@ -8,6 +9,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
             EnableExpression = block.EnableExpression;
             CharacterLimited = block.CharacterLimited;
+        }
+
+        protected override string OnValueChanged(string oldValue, string newValue)
+        {
+            newValue = string.IsNullOrEmpty(newValue) ? string.Empty : newValue;
+            
+            if (CharacterLimited > -1 && newValue.Length > 0)
+            {
+                TargetBlock.Value = newValue[..Math.Clamp(newValue.Length, 1, CharacterLimited)];
+            }
+            else
+            {
+                TargetBlock.Value = newValue;
+            }
+
+            return newValue;
         }
 
         /// <summary>

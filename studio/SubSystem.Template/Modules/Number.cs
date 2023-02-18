@@ -1,5 +1,7 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+﻿using System;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
 using Acorisoft.FutureGL.MigaUtils;
+using NLog.Targets;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules
 {
@@ -13,6 +15,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Maximum = block.Maximum;
             Minimum = block.Minimum;
             Suffix  = block.Suffix;
+        }
+
+        protected override int OnValueChanged(int oldValue, int newValue)
+        {
+            newValue          = Math.Clamp(newValue, Minimum, Maximum);
+            TargetBlock.Value = newValue;
+            return newValue;
         }
 
         /// <summary>

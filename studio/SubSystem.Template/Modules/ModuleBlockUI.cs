@@ -47,14 +47,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
         protected ModuleBlockDataUI(TBlock block) : base(block)
         {
-            Fallback = block.Fallback;
-            Value    = block.Value;
+            TargetBlock = block;
+            Fallback    = block.Fallback;
+            Value       = block.Value;
         }
 
-        protected virtual void OnValueChanged(TValue oldValue, TValue newValue)
-        {
-            
-        }
+        protected abstract TValue OnValueChanged(TValue oldValue, TValue newValue);
+        
+        protected TBlock TargetBlock { get; }
 
         /// <summary>
         /// 默认值
@@ -75,7 +75,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
                 {
                     OnValueChanged(old, value);
                 }
-                
             }
         }
     }

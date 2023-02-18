@@ -14,11 +14,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Negative   = block.Negative;
         }
 
-        protected override void OnValueChanged(int oldValue, int newValue)
+        protected override int OnValueChanged(int oldValue, int newValue)
         {
             var value = Math.Clamp(newValue, Minimum, Maximum);
-            DisplayValue = value >= DivideLine ? Positive : Negative;
+            TargetBlock.Value = value;
+            DisplayValue      = value >= DivideLine ? Positive : Negative;
             RaiseUpdated(nameof(DisplayValue));
+            return value;
         }
 
         public int DivideLine { get; }

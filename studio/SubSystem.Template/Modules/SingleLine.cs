@@ -9,6 +9,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Suffix = block.Suffix;
         }
 
+        protected override string OnValueChanged(string oldValue, string newValue)
+        {
+            newValue          = string.IsNullOrEmpty(newValue) ? Fallback : newValue;
+            TargetBlock.Value = newValue;
+            return newValue;
+        }
+
         /// <summary>
         /// 后缀
         /// </summary>

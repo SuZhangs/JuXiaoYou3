@@ -10,10 +10,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Positive = block.Positive;
         }
         
-        protected override void OnValueChanged(bool oldValue, bool newValue)
+        protected override bool OnValueChanged(bool oldValue, bool newValue)
         {
-            DisplayValue = newValue ? Positive : Negative;
+            TargetBlock.Value = newValue;
+            DisplayValue      = newValue ? Positive : Negative;
             RaiseUpdated(nameof(DisplayValue));
+            return newValue;
         }
         
         /// <summary>

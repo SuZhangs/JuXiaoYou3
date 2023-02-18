@@ -29,7 +29,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetThumbnail
         {
             get => _targetThumbnail;
-            set => SetValue(ref _targetThumbnail, value);
+            set
+            {
+                SetValue(ref _targetThumbnail, value);
+                TargetBlock.TargetThumbnail = value;
+            }
         }
 
         /// <summary>
@@ -38,7 +42,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetSource
         {
             get => _targetSource;
-            set => SetValue(ref _targetSource, value);
+            set
+            {
+                
+                TargetBlock.TargetSource = value;
+                SetValue(ref _targetSource, value);
+            }
         }
 
         /// <summary>
@@ -47,7 +56,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetName
         {
             get => _targetName;
-            set => SetValue(ref _targetName, value);
+            set
+            {
+                TargetBlock.TargetName = value;
+                SetValue(ref _targetName, value);
+            }
         }
     }
 
@@ -90,16 +103,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         public ReferenceBlockDataUI(ReferenceBlock block) : base(block)
         {
+            TargetBlock     = block;
             TargetName      = block.TargetName;
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
             DataSource      = block.DataSource;
         }
 
-        private ReferenceSource _dataSource;
         private string          _targetName;
         private string          _targetSource;
         private string          _targetThumbnail;
+
+        /// <summary>
+        /// 目标内容块
+        /// </summary>
+        protected ReferenceBlock TargetBlock { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="TargetThumbnail"/> 属性。
@@ -107,7 +125,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetThumbnail
         {
             get => _targetThumbnail;
-            set => SetValue(ref _targetThumbnail, value);
+            set
+            {
+                SetValue(ref _targetThumbnail, value);
+                TargetBlock.TargetThumbnail = value;
+            }
         }
 
         /// <summary>
@@ -116,7 +138,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetSource
         {
             get => _targetSource;
-            set => SetValue(ref _targetSource, value);
+            set
+            {
+                
+                TargetBlock.TargetSource = value;
+                SetValue(ref _targetSource, value);
+            }
         }
 
         /// <summary>
@@ -125,17 +152,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public string TargetName
         {
             get => _targetName;
-            set => SetValue(ref _targetName, value);
+            set
+            {
+                TargetBlock.TargetName = value;
+                SetValue(ref _targetName, value);
+            }
         }
 
         /// <summary>
         /// 获取或设置 <see cref="DataSource"/> 属性。
         /// </summary>
-        public ReferenceSource DataSource
-        {
-            get => _dataSource;
-            set => SetValue(ref _dataSource, value);
-        }
+        public ReferenceSource DataSource { get; }
     }
 
     public class AudioBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
