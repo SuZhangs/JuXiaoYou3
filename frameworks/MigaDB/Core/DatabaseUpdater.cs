@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Acorisoft.FutureGL.MigaDB.Exceptions;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {
@@ -16,16 +17,16 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <param name="database">指定要升级的数据库。</param>
         /// <returns>返回新的版本</returns>
         /// <exception cref="InvalidOperationException">当前升级器作出修改之后未提升版本。</exception>
-        public int Update(IDatabase database)
+        public bool Update(IDatabase database)
         {
             //
             // 确保代码不会出现空引用。
-            if (database is null) return Constants.MinVersion;
+            if (database is null) return false;
             var oldVersion = database.Version;
             
             //
             // 判断当前版本是否符合当前升级器的目标
-            if (oldVersion != TargetVersion) return oldVersion;
+            if (oldVersion != TargetVersion) return false;
 
             try
             {
@@ -34,12 +35,12 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 Execute(database);
                 database.UpdateVersion(ResultVersion);
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new UpdaterException(ex.Message, ex);
             }
             
-            return ResultVersion;
+            return true;
         }
 
         /// <summary>

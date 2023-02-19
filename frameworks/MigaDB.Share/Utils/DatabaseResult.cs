@@ -7,14 +7,44 @@
         /// </summary>
         Occupied,
         
+        /// <summary>
+        /// 无权限
+        /// </summary>
+        UnauthorizedAccess,
+        
+        /// <summary>
+        /// 不存在目录
+        /// </summary>
         DirectoryNotExists,
         
+        /// <summary>
+        /// 不存在数据库
+        /// </summary>
         DatabaseNotExists,
         
+        /// <summary>
+        /// 数据库已经存在
+        /// </summary>
+        DatabaseAlreadyExists,
+        
+        /// <summary>
+        /// 数据损坏
+        /// </summary>
         DataBroken,
         
+        /// <summary>
+        /// 缺少参数
+        /// </summary>
+        MissingParameter,
+        
+        /// <summary>
+        /// 缺少索引
+        /// </summary>
         MissingFileName,
         
+        /// <summary>
+        /// 未知的错误
+        /// </summary>
         Unexpected,
     }
     

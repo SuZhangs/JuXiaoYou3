@@ -27,6 +27,12 @@ namespace Acorisoft.FutureGL.MigaDB.Utils
             ValueChanged?.Invoke(value);
         }
 
+        protected override void ReleaseManagedResources()
+        {
+            // 释放
+            (_value as IDisposable)?.Dispose();
+        }
+
         /// <summary>
         /// 当前值
         /// </summary>
