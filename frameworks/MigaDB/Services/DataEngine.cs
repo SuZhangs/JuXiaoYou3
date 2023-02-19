@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DryIoc;
+using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {

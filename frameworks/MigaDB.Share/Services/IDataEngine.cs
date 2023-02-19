@@ -8,18 +8,6 @@ namespace Acorisoft.FutureGL.MigaDB.Services
     public interface IDataEngine
     {
         /// <summary>
-        /// 安装
-        /// </summary>
-        /// <param name="container">服务容器</param>
-        void Install(IContainer container);
-
-        /// <summary>
-        /// 取消安装
-        /// </summary>
-        /// <param name="container">服务容器</param>
-        void Uninstall(IContainer container);
-        
-        /// <summary>
         /// 激活
         /// </summary>
         /// <returns></returns>
