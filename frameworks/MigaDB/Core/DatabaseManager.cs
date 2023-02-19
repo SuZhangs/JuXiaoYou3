@@ -20,10 +20,46 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             Container  = new Container();
             Mediator   = new Mediator(Container.Resolve);
         }
-        
-        public Task<DatabaseResult> LoadAsync(string directory)
+
+        private async Task<DatabaseResult> LoadImplAsync(string fileName, string indexFileName, bool load = true)
         {
-            throw new NotImplementedException();
+            
+        }
+        
+        public async Task<DatabaseResult> LoadAsync(string directory)
+        {
+            if (!Directory.Exists(directory))
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.DirectoryNotExists);
+            }
+
+            
+            //
+            // 构建文件名
+            var databaseCacheFileName = Path.Combine(directory, Constants.DatabaseIndexFileName);
+            var databaseFileName = Path.Combine(directory, Constants.DatabaseFileName);
+
+            //
+            // 缺失数据库缓存
+            if (!File.Exists(databaseCacheFileName))
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.MissingFileName);
+            }
+//
+            // 缺失数据库
+            if (!File.Exists(databaseFileName))
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.DatabaseNotExists);
+            }
+
+            try
+            {
+                return await LoadImplAsync(databaseCacheFileName, databaseFileName);
+            }
+            catch
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.Unexpected);
+            }
         }
 
         public Task<DatabaseResult> CreateAsync(string directory, DatabaseProperty property)
