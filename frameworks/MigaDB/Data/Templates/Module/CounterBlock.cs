@@ -41,6 +41,19 @@
     
     public abstract class CounterBlock : ModuleBlock, ICounterBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (CounterBlock)block;
+            return Fallback == bb.Fallback &&
+                   Maximum == bb.Maximum && 
+                   Minimum == bb.Minimum;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (CounterBlock)block;
+            return bb.Value == Value;
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

@@ -45,6 +45,20 @@
     /// </summary>
     public class BinaryBlock : ModuleBlock, IBinaryBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (BinaryBlock)block;
+            return Fallback == bb.Fallback &&
+                   Negative == bb.Negative &&
+                   Positive == bb.Positive;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (BinaryBlock)block;
+            return bb.Value == Value;
+        }
+
         /// <summary>
         /// 清除当前值。
         /// </summary>

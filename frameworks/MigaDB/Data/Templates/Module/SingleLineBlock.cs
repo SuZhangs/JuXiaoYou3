@@ -35,6 +35,19 @@
     /// </summary>
     public class SingleLineBlock : ModuleBlock, ISingleLineBlock
     {
+        
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (SingleLineBlock)block;
+            return Fallback == bb.Fallback &&
+                   Suffix == bb.Suffix;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (SingleLineBlock)block;
+            return bb.Value == Value;
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

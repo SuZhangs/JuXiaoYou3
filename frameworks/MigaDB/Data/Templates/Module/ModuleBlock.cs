@@ -5,7 +5,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
-    public interface IModuleBlock
+    public interface IModuleBlock : ITemplateEquatable , IValueEquatable
     {
         /// <summary>
         /// 唯一标识符
@@ -93,6 +93,34 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// </summary>
     public abstract class ModuleBlock : StorageObject
     {
+        public bool CompareTemplate(ModuleBlock block)
+        {
+            return block is not null &&
+                   Id == block.Id &&
+                   Name == block.Name &&
+                   IsEmptyOrEquals(Metadata, block.Metadata) &&
+                   CompareTemplateOverride(block);
+
+        }
+
+
+        protected abstract bool CompareTemplateOverride(ModuleBlock block);
+        protected abstract bool CompareValueOverride(ModuleBlock block);
+
+        protected static bool IsEmptyOrEquals(string AValue, string BValue)
+        {
+            if (string.IsNullOrEmpty(AValue))
+            {
+                return true;
+            }
+
+            return AValue == BValue;
+        }
+
+        public bool CompareValue(ModuleBlock block)
+        {
+            return CompareTemplate(block) && CompareValueOverride(block);
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

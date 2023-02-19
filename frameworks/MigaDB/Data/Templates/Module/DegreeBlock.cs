@@ -74,6 +74,22 @@
     /// </summary>
     public class DegreeBlock : ModuleBlock, IDegreeBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (DegreeBlock)block;
+            return Fallback == bb.Fallback &&
+                   Negative == bb.Negative &&
+                   Positive == bb.Positive && 
+                   DivideLine == bb.DivideLine &&
+                   Maximum == bb.Maximum && 
+                   Minimum == bb.Minimum;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (DegreeBlock)block;
+            return bb.Value == Value;
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

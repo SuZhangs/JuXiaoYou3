@@ -34,6 +34,22 @@
     /// </summary>
     public class NumberBlock : ModuleBlock, INumberBlock
     {
+                
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (NumberBlock)block;
+            return Fallback == bb.Fallback &&
+                   Suffix == bb.Suffix &&
+                   Maximum == bb.Maximum && 
+                   Minimum == bb.Minimum;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (NumberBlock)block;
+            return bb.Value == Value;
+        }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>

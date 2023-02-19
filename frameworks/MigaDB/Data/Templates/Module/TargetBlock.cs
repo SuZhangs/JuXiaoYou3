@@ -66,6 +66,16 @@
 
     public abstract class TargetBlock : ModuleBlock, ITargetBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block) => true;
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var tb = (TargetBlock)block;
+            return TargetName == tb.TargetName &&
+                   TargetSource == tb.TargetSource &&
+                   TargetThumbnail == tb.TargetThumbnail;
+        }
+
         public override void ClearValue()
         {
             TargetName      = string.Empty;
@@ -116,6 +126,19 @@
     
     public sealed class ReferenceBlock : TargetBlock, IReferenceBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var rb = (ReferenceBlock)block;
+            return DataSource == rb.DataSource;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var tb = (TargetBlock)block;
+            return TargetName == tb.TargetName &&
+                   TargetSource == tb.TargetSource &&
+                   TargetThumbnail == tb.TargetThumbnail;
+        }
         /// <summary>
         /// 数据来源
         /// </summary>

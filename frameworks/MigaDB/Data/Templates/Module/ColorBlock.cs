@@ -29,6 +29,17 @@
     /// </summary>
     public class ColorBlock : ModuleBlock, IColorBlock, IModuleBlock<string>
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (ColorBlock)block;
+            return Fallback == bb.Fallback;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (ColorBlock)block;
+            return bb.Value == Value;
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

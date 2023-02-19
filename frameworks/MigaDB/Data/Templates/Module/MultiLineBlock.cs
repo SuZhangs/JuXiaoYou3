@@ -45,6 +45,20 @@
     /// </summary>
     public class MultiLineBlock : ModuleBlock, IMultiLineBlock
     {
+        
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (MultiLineBlock)block;
+            return Fallback == bb.Fallback &&
+                   EnableExpression == bb.EnableExpression &&
+                   CharacterLimited == bb.CharacterLimited;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (MultiLineBlock)block;
+            return bb.Value == Value;
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>

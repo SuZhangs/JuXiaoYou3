@@ -66,6 +66,22 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// </summary>
     public abstract class ChartBlock : ModuleBlock, IChartBlock
     {
+        protected override bool CompareTemplateOverride(ModuleBlock block)
+        {
+            var bb = (ChartBlock)block;
+            return Fallback == bb.Fallback &&
+                   Axis.SequenceEqual(bb.Axis) &&
+                   Fallback.SequenceEqual(bb.Fallback)&& 
+                   Color == bb.Color &&
+                   Maximum == bb.Maximum && 
+                   Minimum == bb.Minimum;
+        }
+
+        protected override bool CompareValueOverride(ModuleBlock block)
+        {
+            var bb = (ChartBlock)block;
+            return Value.SequenceEqual(bb.Value);
+        }
         /// <summary>
         /// 清除当前值。
         /// </summary>
