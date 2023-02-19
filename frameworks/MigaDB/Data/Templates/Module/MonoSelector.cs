@@ -26,6 +26,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     public interface IMonoSelectorBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<string>
     {
         /// <summary>
+        /// 允许值和选项不一样
+        /// </summary>
+        bool AllowDiffValue { get; set; }
+        
+        /// <summary>
         /// 选项
         /// </summary>
         ObservableCollection<OptionItem> Items { get; }

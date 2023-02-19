@@ -11,12 +11,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         private Color  _value;
         private string _hex;
-        
+
         public ColorBlockDataUI(ColorBlock block) : base(block)
         {
             TargetBlock = block;
             Fallback    = Xaml.FromHex(block.Fallback);
             Value       = string.IsNullOrEmpty(block.Value) ? Fallback : Xaml.FromHex(block.Value);
+        }
+
+        public override bool CompareTemplate(ModuleBlock block)
+        {
+            return TargetBlock.CompareTemplate(block);
+        }
+
+        public override bool CompareValue(ModuleBlock block)
+        {
+            return TargetBlock.CompareValue(block);
         }
         
         /// <summary>

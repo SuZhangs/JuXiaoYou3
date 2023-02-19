@@ -17,6 +17,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             ToolTips = block.ToolTips;
         }
 
+        public abstract bool CompareTemplate(ModuleBlock block);
+        public abstract bool CompareValue(ModuleBlock block);
+
         /// <summary>
         /// 唯一标识符
         /// </summary>
@@ -52,6 +55,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Value       = block.Value;
         }
 
+        public override bool CompareTemplate(ModuleBlock block)
+        {
+            return TargetBlock.CompareTemplate(block);
+        }
+
+        public override bool CompareValue(ModuleBlock block)
+        {
+            return TargetBlock.CompareValue(block);
+        }
+
         protected abstract TValue OnValueChanged(TValue oldValue, TValue newValue);
         
         protected TBlock TargetBlock { get; }
@@ -79,20 +92,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         }
     }
 
-    // TODO:
-    /// <summary>
-    /// 表示一个模组内容块。
-    /// </summary>
-    public abstract class ChartBlockDataUI<TBlock, TValue> : ModuleBlockDataUI
-        where TBlock : ModuleBlock, IModuleBlock<TValue>
-    {
-        protected ChartBlockDataUI(TBlock block) : base(block)
-        {
-        }
-
-        public abstract ModuleBlock CreateInstance();
-    }
-
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
@@ -108,6 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             ToolTips = block.ToolTips;
             Metadata = block.Metadata;
         }
+        
         public abstract ModuleBlock CreateInstance();
 
         /// <summary>

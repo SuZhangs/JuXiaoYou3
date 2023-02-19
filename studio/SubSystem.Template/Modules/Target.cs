@@ -13,6 +13,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
         }
+        
+        public override bool CompareTemplate(ModuleBlock block)
+        {
+            return TargetBlock.CompareTemplate(block);
+        }
+
+        public override bool CompareValue(ModuleBlock block)
+        {
+            return TargetBlock.CompareValue(block);
+        }
 
         private string _targetName;
         private string _targetSource;
@@ -108,6 +118,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
             DataSource      = block.DataSource;
+        }
+        
+        public override bool CompareTemplate(ModuleBlock block)
+        {
+            return TargetBlock.CompareTemplate(block);
+        }
+
+        public override bool CompareValue(ModuleBlock block)
+        {
+            return TargetBlock.CompareValue(block);
         }
 
         private string          _targetName;
@@ -255,7 +275,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         }
     }
 
-    public class ReferenceBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI, IReferenceBlock
+    public class ReferenceBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
     {
         public ReferenceBlockEditUI(IReferenceBlock block) : base(block)
         {
