@@ -1,7 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-
-namespace Acorisoft.FutureGL.MigaDB.Documents
+﻿namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     /// <summary>
     /// 表示一个文档
