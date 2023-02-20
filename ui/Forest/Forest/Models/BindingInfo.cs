@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Acorisoft.FutureGL.Forest.Models
+﻿namespace Acorisoft.FutureGL.Forest.Models
 {
     public class BindingInfo
     {

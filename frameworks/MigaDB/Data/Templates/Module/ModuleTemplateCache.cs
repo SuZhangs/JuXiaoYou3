@@ -1,5 +1,4 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Models;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
 {

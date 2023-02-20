@@ -1,7 +1,5 @@
 ﻿using System;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
-using Acorisoft.FutureGL.MigaUtils;
-using NLog.Targets;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules
 {

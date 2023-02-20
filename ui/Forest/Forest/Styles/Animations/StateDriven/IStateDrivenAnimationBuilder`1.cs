@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Enums;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     public interface IStateDrivenAnimationBuilder : ICompletedSource<IStateDrivenAnimationBuilder, IPropertyAnimationRunner>
     {

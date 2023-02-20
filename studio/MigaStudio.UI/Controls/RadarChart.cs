@@ -1,9 +1,5 @@
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls

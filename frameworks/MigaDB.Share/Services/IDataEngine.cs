@@ -1,6 +1,4 @@
-﻿using DryIoc;
-
-namespace Acorisoft.FutureGL.MigaDB.Services
+﻿namespace Acorisoft.FutureGL.MigaDB.Services
 {
     /// <summary>
     /// 取消安装

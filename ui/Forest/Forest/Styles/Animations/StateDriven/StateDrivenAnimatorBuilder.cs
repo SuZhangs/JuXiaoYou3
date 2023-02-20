@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Media;
+
 // ReSharper disable ForCanBeConvertedToForeach
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations

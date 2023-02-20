@@ -2,8 +2,6 @@ global using System;
 global using System.Collections.Generic;
 global using System.Windows;
 global using System.Windows.Controls;
-
-using System.Windows;
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]

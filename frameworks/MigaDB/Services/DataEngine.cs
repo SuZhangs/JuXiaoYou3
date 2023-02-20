@@ -1,5 +1,4 @@
-﻿using DryIoc;
-using MediatR;
+﻿using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {
@@ -58,15 +57,15 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         #endregion
 
-        /// <summary>
-        /// 刷新
-        /// </summary>
-        public virtual void Refresh(){}
-        
-        /// <summary>
-        /// 清空
-        /// </summary>
-        public virtual void Clear(){}
+        // /// <summary>
+        // /// 刷新
+        // /// </summary>
+        // public virtual void Refresh(){}
+        //
+        // /// <summary>
+        // /// 清空
+        // /// </summary>
+        // public virtual void Clear(){}
 
         /// <summary>
         /// 测试开启

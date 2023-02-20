@@ -1,9 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-
 namespace  Acorisoft.FutureGL.MigaStudio.Controls
 {
     public abstract class PolarControl : ChartBase

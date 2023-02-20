@@ -1,5 +1,4 @@
 ﻿using System.Windows.Media.Animation;
-using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {

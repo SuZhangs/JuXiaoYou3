@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Acorisoft.FutureGL.MigaUtils
+﻿namespace Acorisoft.FutureGL.MigaUtils
 {
     /// <summary>
     /// 可观测的状态

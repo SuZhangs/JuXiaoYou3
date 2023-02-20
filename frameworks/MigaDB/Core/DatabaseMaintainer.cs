@@ -1,7 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Interfaces;
-using LiteDB;
-
-namespace Acorisoft.FutureGL.MigaDB.Core
+﻿namespace Acorisoft.FutureGL.MigaDB.Core
 {
     public abstract class DatabaseMaintainer<T> : IDatabaseMaintainer where T : class
     {

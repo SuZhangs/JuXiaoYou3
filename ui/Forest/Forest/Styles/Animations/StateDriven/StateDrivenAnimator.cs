@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using Acorisoft.FutureGL.Forest.Controls;
-using Acorisoft.FutureGL.Forest.Enums;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// <see cref="StateDrivenAnimator"/> 基于状态的动画引擎。

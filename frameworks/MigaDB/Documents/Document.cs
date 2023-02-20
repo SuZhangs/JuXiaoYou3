@@ -1,6 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Models;
 
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {

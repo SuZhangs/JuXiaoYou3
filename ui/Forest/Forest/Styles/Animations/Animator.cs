@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Enums;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// 表示一个动画引擎。

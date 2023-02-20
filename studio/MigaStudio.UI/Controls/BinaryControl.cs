@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Windows.Controls.Primitives;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls

@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
-
-namespace Acorisoft.FutureGL.MigaDB.Interfaces
+﻿namespace Acorisoft.FutureGL.MigaDB.Interfaces
 {
     public interface IValueEquatable
     {

@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Controls;
-using Acorisoft.FutureGL.Forest.Models;
-using Acorisoft.FutureGL.Forest.ViewModels;
 
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {

@@ -1,5 +1,3 @@
-using System.Windows;
-
 namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     public class Histogram : Control

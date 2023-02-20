@@ -1,6 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Media;
-using Acorisoft.FutureGL.Forest;
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {

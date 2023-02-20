@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Enums;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// <see cref="Acorisoft.FutureGL.Forest.Styles.Animations.StateDrivenAnimation"/> 表示一个基于状态的动画。

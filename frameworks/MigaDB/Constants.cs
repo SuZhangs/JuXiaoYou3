@@ -24,9 +24,13 @@
          * 数据库引擎字段
          */
         internal const string PropertyCollectionName    = "_props";
-        internal const string Name_ModuleTemplate       = "cn_module";
-        internal const string Name_Cache_ModuleTemplate = "cn_cache_module";
-        internal const string Name_Cache_Metadata       = "cn_cache_meta";
+        internal const string Name_ModuleTemplate       = "module";
+        internal const string Name_Cache_ModuleTemplate = "cache_module";
+        internal const string Name_Cache_Metadata       = "cache_meta";
+        internal const string Name_Cache_Document       = "cache_doc";
+        internal const string Name_Cache_Compose        = "cache_compose";
+        internal const string Name_Document             = "doc";
+        internal const string Name_Compose              = "compose";
 
 
         /*

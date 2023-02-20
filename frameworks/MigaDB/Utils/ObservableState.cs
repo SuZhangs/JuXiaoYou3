@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaUtils;
-
-namespace Acorisoft.FutureGL.MigaDB.Utils
+﻿namespace Acorisoft.FutureGL.MigaDB.Utils
 {
     public class ObservableState : ObservableProperty<bool>, IObservableState
     {

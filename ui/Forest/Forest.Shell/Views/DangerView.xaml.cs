@@ -1,5 +1,4 @@
-﻿using System.Timers;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Acorisoft.FutureGL.Forest.Views

@@ -1,5 +1,6 @@
 ﻿
 
+using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Newtonsoft.Json;
 
@@ -67,11 +68,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             AddMetadata(outSideTemplate);
         }
         
-        protected void ModuleOpening(DatabaseSession session)
+        protected void ModuleOpening(IDatabase database)
         {
-            TemplateDB      = session.Database.GetCollection<ModuleTemplate>(Constants.Name_ModuleTemplate);
-            TemplateCacheDB = session.Database.GetCollection<ModuleTemplateCache>(Constants.Name_Cache_ModuleTemplate);
-            MetadataCacheDB = session.Database.GetCollection<MetadataCache>(Constants.Name_Cache_Metadata);
+            TemplateDB      = database.GetCollection<ModuleTemplate>(Constants.Name_ModuleTemplate);
+            TemplateCacheDB = database.GetCollection<ModuleTemplateCache>(Constants.Name_Cache_ModuleTemplate);
+            MetadataCacheDB = database.GetCollection<MetadataCache>(Constants.Name_Cache_Metadata);
         }
 
         protected void ModuleClosing()

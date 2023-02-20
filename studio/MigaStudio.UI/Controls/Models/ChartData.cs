@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Acorisoft.FutureGL.MigaUtils;
 
 namespace  Acorisoft.FutureGL.MigaStudio.Controls.Models
 {

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
 using Acorisoft.FutureGL.MigaDB.Documents;
-using LiteDB;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 {

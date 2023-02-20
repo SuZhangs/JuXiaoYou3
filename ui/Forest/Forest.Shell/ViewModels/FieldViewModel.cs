@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Acorisoft.FutureGL.Forest.ViewModels
+﻿namespace Acorisoft.FutureGL.Forest.ViewModels
 {
     // TODO: add logic for FieldViewModel
     public abstract class FieldViewModel : InputViewModel

@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Services;
-
-namespace Acorisoft.FutureGL.MigaDB.UnitTests
+﻿namespace Acorisoft.FutureGL.MigaDB.UnitTests
 {
     public class DataEngineAdapter
     {
