@@ -14,15 +14,11 @@
     [Flags]
     public enum ResourceProperty
     {
-        Padding               = 0x1,
-        Image                 = 0x00100,
-        Image_Square          = Image + 0x010,
-        Image_Horizontal_240P = Image + 0x020,
-
-        /// <summary>
-        /// 不满足240P的要求
-        /// </summary>
-        Image_Horizontal_240P_Padding = Image + 0x021,
+        Padding                        = 0x1,
+        Image                          = 0x00100,
+        Image_Square                   = Image + 0x010,
+        Image_Horizontal_240P          = Image + 0x020,
+        Image_Horizontal_240P_Padding  = Image + 0x021,
         Image_Horizontal_720P          = Image + 0x040,
         Image_Horizontal_720P_Padding  = Image + 0x041,
         Image_Horizontal_1080P         = Image + 0x080,
@@ -124,7 +120,7 @@
                 RelativePath = val
             };
         }
-        
+
         public string RelativePath { get; init; }
 
         /// <summary>

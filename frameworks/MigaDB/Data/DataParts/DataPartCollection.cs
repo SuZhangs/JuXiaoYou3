@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class DataPartCollection
+    public class DataPartCollection : List<DataPart>
     {
         
     }

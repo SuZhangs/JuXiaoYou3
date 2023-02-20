@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Models;
+﻿using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Models;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
 {
@@ -7,7 +8,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
         /// <summary>
         /// 获取或设置 <see cref="ForType"/> 属性。
         /// </summary>
-        public int ForType { get; set; }
+        public DocumentType ForType { get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。
@@ -17,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
         /// <summary>
         /// 获取或设置 <see cref="MetadataList"/> 属性。
         /// </summary>
-        public string MetadataList { get; set; }
+        public List<MetadataCache> MetadataList { get; init; }
         
         /// <summary>
         /// 获取或设置 <see cref="Version"/> 属性。

@@ -1,5 +1,8 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
 {
+    /// <summary>
+    /// 元数据
+    /// </summary>
     public class Metadata
     {
         /// <summary>

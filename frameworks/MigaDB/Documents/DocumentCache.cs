@@ -1,14 +1,18 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Models;
 
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     /// <summary>
-    /// 表示一个文档
+    /// 文档缓存
     /// </summary>
-    public class Document : StorageObject
+    public class DocumentCache : StorageObject
     {
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string Avatar { get; set; }
+        
         /// <summary>
         /// 名字
         /// </summary>
@@ -20,18 +24,13 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         public string Intro { get; set; }
         
         /// <summary>
+        /// 关键字
+        /// </summary>
+        public ObservableCollection<string> Keywords { get; init; }
+
+        /// <summary>
         /// 类型
         /// </summary>
         public DocumentType Type { get; init; }
-        
-        /// <summary>
-        /// 部件
-        /// </summary>
-        public DataPartCollection Parts { get; init; }
-        
-        /// <summary>
-        /// 元数据
-        /// </summary>
-        public MetadataCollection Metas { get; init; }
     }
 }

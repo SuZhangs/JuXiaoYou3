@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaDB.Utils
             await File.WriteAllBytesAsync(fileName, buffer);
         }
 
-        public static async Task<string> ReadData(string fileName)
+        public static async Task<string> ReadDataAsync(string fileName)
         {
             var dataPackets = await File.ReadAllBytesAsync(fileName);
             var chunks = PngReader.ReadBytes(dataPackets);
