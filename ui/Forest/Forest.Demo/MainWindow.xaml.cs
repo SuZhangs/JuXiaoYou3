@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.Forest.Views;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -46,6 +47,18 @@ namespace Acorisoft.FutureGL.Forest
             }
             
             await DialogHost.ShowDialog(dialog, null);
+        }
+
+        private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)
+        {
+            var dialog = new DangerViewModel
+            {
+
+                CompleteButtonText = Forest.Language.ConfirmText,
+                CancelButtonText   = Forest.Language.CancelText,
+            };
+            
+            ViewHost.ViewModel = ViewHost.ViewModel is null ? dialog : null;
         }
     }
 }

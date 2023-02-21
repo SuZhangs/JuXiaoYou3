@@ -47,6 +47,38 @@
                 <fs:DialogHost x:Name="DialogHost" />
             </DockPanel>
         </f:ForestTabItem>
+        <f:ForestTabItem Header="ContentHost" Icon="{StaticResource Icon}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right"
+                            Width="320">
+                    <Button Content="Danger"
+                            Click="ButtonBase_OnClick2"
+                            Tag="{x:Type fs:DangerViewModel}" />
+                    <Button Content="Warning"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:WarningViewModel}" />
+                    <Button Content="Info"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:InfoViewModel}" />
+                    <Button Content="Success"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:SuccessViewModel}" />
+                    <Button Content="Obsolete"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:ObsoleteViewModel}" />
+                </StackPanel>
+                <fs:EmptyContentHost x:Name="ViewHost">
+                    <fs:EmptyContentHost.EmptyState>
+                        <Grid>
+                            <TextBlock Text="空"
+                                       FontSize="48"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </fs:EmptyContentHost.EmptyState>
+                </fs:EmptyContentHost>
+            </DockPanel>
+        </f:ForestTabItem>
         <f:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
             <WrapPanel Background="#F1F1F1">
                 <Border Background="White"

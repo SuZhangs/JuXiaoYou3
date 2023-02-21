@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
             if (CloseAction is null)
             {
-                throw new ArgumentNullException(nameof(CloseAction));
+                return;
             }
 
             //
