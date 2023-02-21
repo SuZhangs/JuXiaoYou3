@@ -16,11 +16,30 @@
                 <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
             </UniformGrid>
             
-            <UniformGrid>
+            <UniformGrid Rows="4"
+                         Height="640">
                 <fui:ForestTextBox AcceptsReturn="True"
                                    AcceptsTab="True"
                                    Margin="8"
                                    Height="144"/>
+                
+                <fui:HighlightTextBox AcceptsReturn="True"
+                                   AcceptsTab="True"
+                                   Margin="8"
+                                   Height="144"/>
+                
+                
+                <fui:ForestTextBox AcceptsReturn="True"
+                                   AcceptsTab="True"
+                                   Margin="8"
+                                   Height="144"
+                                   IsEnabled="False"/>
+                
+                <fui:HighlightTextBox AcceptsReturn="True"
+                                      AcceptsTab="True"
+                                      Margin="8"
+                                      Height="144"
+                                      IsEnabled="False"/>
             </UniformGrid>
         </StackPanel>
     </ScrollViewer>

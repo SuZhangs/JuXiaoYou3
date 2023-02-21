@@ -12,7 +12,6 @@ namespace Acorisoft.FutureGL.Forest.Styles
 
         private void InitializeColors()
         {
-            Colors.TryAdd((int)ForestTheme.Mask, Color.FromArgb(0x20, 0x00, 0x00, 0x00));
             
             Colors.TryAdd((int)ForestTheme.HighlightA1, Color.FromRgb(0xff, 0xda, 0x96));
             Colors.TryAdd((int)ForestTheme.HighlightA2, Color.FromRgb(0xff, 0xc2, 0x54));
@@ -54,8 +53,10 @@ namespace Acorisoft.FutureGL.Forest.Styles
             Colors.TryAdd((int)ForestTheme.Obsolete100, Color.FromRgb(0xb2, 0x48, 0x00));
             
             
+            Colors.TryAdd((int)ForestTheme.Mask, Color.FromArgb(0x20, 0x00, 0x00, 0x00));
             Colors.TryAdd((int)ForestTheme.Background, System.Windows.Media.Colors.White);
             Colors.TryAdd((int)ForestTheme.BackgroundInHighlight, System.Windows.Media.Colors.White);
+            Colors.TryAdd((int)ForestTheme.BackgroundInactive, Color.FromRgb(0xf1, 0xf1, 0xf1));
             Colors.TryAdd((int)ForestTheme.Foreground, System.Windows.Media.Colors.Black);
             Colors.TryAdd((int)ForestTheme.ForegroundInHighlight, System.Windows.Media.Colors.White);
             Colors.TryAdd((int)ForestTheme.ForegroundInActive, System.Windows.Media.Colors.Gray);

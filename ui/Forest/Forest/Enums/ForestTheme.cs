@@ -74,6 +74,7 @@
         /// </summary>
         Background,
         BackgroundInHighlight,
+        BackgroundInactive,
         
         
         /// <summary>
@@ -88,5 +89,7 @@
         ColorPalette_Bootstrap_,
         
         Mask,
+        MaskInactive,
+        MaskDarken,
     }
 }

@@ -3,11 +3,10 @@ using System.Windows.Media;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
-using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {
-    public class CallToAction : ForestButton
+    public class CallToAction : ForestButtonBase
     {
         static CallToAction()
         {

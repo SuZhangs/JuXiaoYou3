@@ -9,21 +9,21 @@ using Acorisoft.FutureGL.Forest.Styles.Animations;
 namespace Acorisoft.FutureGL.Forest.Controls
 {
     /// <summary>
-    /// <see cref="ForestButton"/> 类型表示一个支持VisualDFA的按钮。
+    /// <see cref="ForestButtonBase"/> 类型表示一个支持VisualDFA的按钮。
     /// </summary>
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public abstract class ForestButton : Button, IHighlightColorPalette, ITextResourceAdapter
+    public abstract class ForestButtonBase : Button, IHighlightColorPalette, ITextResourceAdapter
     {
 
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
             nameof(Palette),
             typeof(HighlightColorPalette),
-            typeof(ForestButton),
+            typeof(ForestButtonBase),
             new PropertyMetadata(default(HighlightColorPalette)));
         
-        protected ForestButton()
+        protected ForestButtonBase()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();

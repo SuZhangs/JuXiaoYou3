@@ -36,4 +36,20 @@ namespace Acorisoft.FutureGL.Forest.Markup
             return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
         }
     }
+    
+    public class DisabledExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundInactive];
+        }
+    }
+
+    public class DisabledBrushExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundInactive].ToSolidColorBrush();
+        }
+    }
 }
