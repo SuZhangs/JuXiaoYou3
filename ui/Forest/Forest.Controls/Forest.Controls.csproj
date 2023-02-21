@@ -10,4 +10,13 @@
     <ItemGroup>
       <ProjectReference Include="..\Forest\Forest.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="ColorPicker\Images\CircularHueGradient.png" />
+      <Resource Include="ColorPicker\Images\transparentbg_mini.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    </ItemGroup>
 </Project>
