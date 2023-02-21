@@ -33,6 +33,46 @@ namespace Acorisoft.FutureGL.Forest.Styles
             };
         }
 
+        public Color GetCallToActionColor(HighlightColorPalette palette, int level)
+        {
+            return level switch
+            {
+                2 => palette switch
+                {
+                    HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB2],
+                    HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC2],
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.Danger200],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.Warning200],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info200],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success200],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete200],
+                    _                                       => Colors[(int)ForestTheme.HighlightA2],
+                },
+                3 => palette switch
+                {
+                    HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB3],
+                    HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC3],
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.Danger300],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.Warning300],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info300],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success300],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete300],
+                    _                                       => Colors[(int)ForestTheme.HighlightA3],
+                },
+                _ => palette switch
+                {
+                    HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB1],
+                    HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC1],
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.Danger100],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.Warning100],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info100],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success100],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete100],
+                    _                                       => Colors[(int)ForestTheme.HighlightA1],
+                }
+            };
+        }
+
         public Color GetHighlightColor(HighlightColorPalette palette, int level)
         {
             return level switch
@@ -41,35 +81,35 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB2],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC2],
-                    _ => Colors[(int)ForestTheme.HighlightA2],
+                    _                                       => Colors[(int)ForestTheme.HighlightA2],
                 },
                 3 => palette switch
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB3],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC3],
-                    _ => Colors[(int)ForestTheme.HighlightA3],
+                    _                                       => Colors[(int)ForestTheme.HighlightA3],
                 },
                 4 => palette switch
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB4],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC4],
-                    _ => Colors[(int)ForestTheme.HighlightA4],
+                    _                                       => Colors[(int)ForestTheme.HighlightA4],
                 },
                 5 => palette switch
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB5],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC5],
-                    _ => Colors[(int)ForestTheme.HighlightA5],
+                    _                                       => Colors[(int)ForestTheme.HighlightA5],
                 },
                 _ => palette switch
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB1],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC1],
-                    _ => Colors[(int)ForestTheme.HighlightA1],
+                    _                                       => Colors[(int)ForestTheme.HighlightA1],
                 }
             };
         }
-        
+
         public Bag<Duration> Duration { get; }
 
         /// <summary>

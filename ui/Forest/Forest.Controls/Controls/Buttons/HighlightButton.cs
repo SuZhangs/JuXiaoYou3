@@ -37,8 +37,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             var nfColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 
             // 状态驱动的动画
-            //
-            // 应该避免这种写法
             var animatorBuilder = StateDrivenAnimation();
 
             animatorBuilder.TargetAndDefault(_bd) // 构造默认视觉效果
@@ -60,7 +58,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             Animator = animatorBuilder.Target(_content) // 构造ContentPresenter视觉效果
                                       .Foreground(theme.Duration.Samll)
                                       .Next(VisualState.Normal, nfColor)
-                                      .Next(VisualState.Inactive, Colors.Gray)
+                                      .Next(VisualState.Inactive, theme.Colors[(int)ForestTheme.ForegroundInActive])
                                       .FinalFinish();
         }
     }

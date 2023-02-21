@@ -15,6 +15,13 @@
                 <fui:HighlightButton Content="Highlight3" Margin="4" Palette="HighlightPalette3"/>
                 <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
             </UniformGrid>
+            
+            <UniformGrid>
+                <fui:ForestTextBox AcceptsReturn="True"
+                                   AcceptsTab="True"
+                                   Margin="8"
+                                   Height="144"/>
+            </UniformGrid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
