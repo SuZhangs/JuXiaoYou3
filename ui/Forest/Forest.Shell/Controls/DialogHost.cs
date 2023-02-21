@@ -267,6 +267,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 //
                 Dispatcher.Invoke(() => ViewModel = dialog);
 
+                Focus();
                 //
                 // 等待
                 return await dialog2.WaitHandle.Task;

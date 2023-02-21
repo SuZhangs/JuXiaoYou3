@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.Forest
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            if (sender is not FrameworkElement { Tag: Type type })
+            if (sender is not FrameworkElement { Tag: Type type } fe)
             {
                 return;
             }
