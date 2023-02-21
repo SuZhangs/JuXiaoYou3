@@ -9,6 +9,8 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// 键盘事件
         /// </summary>
         IObservable<WindowKeyEventArgs> Keys { get; }
+        
+        IObservable<WindowDragDropArgs> Drags { get; }
     }
 
     public interface IWindowEventBroadcastAmbient
@@ -20,7 +22,8 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
 
     public class WindowEventBroadcast : IWindowEventBroadcast, IWindowEventBroadcastAmbient
     {
-        private readonly Subject<WindowKeyEventArgs> _keys = new Subject<WindowKeyEventArgs>();
+        private readonly Subject<WindowKeyEventArgs> _keys  = new Subject<WindowKeyEventArgs>();
+        private readonly Subject<WindowDragDropArgs> _drags = new Subject<WindowDragDropArgs>();
 
         private Window _eventSource;
 
@@ -33,13 +36,46 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
             
             if (_eventSource is not null)
             {
-                _eventSource.KeyUp -= OnKeyDown;
-                _eventSource.KeyUp -= OnKeyUp;
+                _eventSource.KeyUp     -= OnKeyDown;
+                _eventSource.KeyUp     -= OnKeyUp;
+                _eventSource.DragEnter -= OnDragEnter;
+                _eventSource.DragOver  -= OnDragOver;
+                _eventSource.DragLeave -= OnDragLeave;
             }
 
             _eventSource       =  window;
             _eventSource.KeyUp += OnKeyDown;
             _eventSource.KeyUp += OnKeyUp;
+            _eventSource.DragEnter += OnDragEnter;
+            _eventSource.DragOver += OnDragOver;
+            _eventSource.DragLeave += OnDragLeave;
+        }
+
+        private void OnDragLeave(object sender, DragEventArgs e)
+        {
+            _drags.OnNext(new WindowDragDropArgs
+            {
+                State = DragDropState.Dropped,
+                Args = e
+            });
+        }
+
+        private void OnDragOver(object sender, DragEventArgs e)
+        {
+            _drags.OnNext(new WindowDragDropArgs
+            {
+                State = DragDropState.Dragging,
+                Args  = e
+            });
+        }
+
+        private void OnDragEnter(object sender, DragEventArgs e)
+        {
+            _drags.OnNext(new WindowDragDropArgs
+            {
+                State = DragDropState.DragStart,
+                Args  = e
+            });
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -61,5 +97,6 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         }
         
         public IObservable<WindowKeyEventArgs> Keys => _keys;
+        public IObservable<WindowDragDropArgs> Drags => _drags;
     }
 }

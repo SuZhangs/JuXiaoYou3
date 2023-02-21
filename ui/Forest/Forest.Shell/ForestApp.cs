@@ -135,6 +135,7 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<BasicAppSettingViewModel>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
             container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
+            container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
             container.Use<DialogService,
                 IDialogService,
                 IDialogServiceAmbient,

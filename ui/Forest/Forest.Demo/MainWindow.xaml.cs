@@ -26,9 +26,7 @@ namespace Acorisoft.FutureGL.Forest
         {
             DataContext = new AppViewModel();
             InitializeComponent();
-            var web = new WindowEventBroadcast();
-            web.SetEventSource(this);
-            Xaml.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(web);
+            Xaml.Get<IWindowEventBroadcastAmbient>().SetEventSource(this);
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
