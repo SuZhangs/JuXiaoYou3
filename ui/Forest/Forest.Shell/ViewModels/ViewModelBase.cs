@@ -77,11 +77,5 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             get => _rootName;
             set => _rootName = value;
         }
-
-        Dictionary<string, ILanguageNode> IViewModelLanguageService.ElementBag
-        {
-            get => _elements;
-            set => _elements = value;
-        }
     }
 }

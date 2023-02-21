@@ -29,28 +29,6 @@ namespace Acorisoft.FutureGL.Forest
             typeof(Language),
             new PropertyMetadata(default(string)));
 
-        public static readonly DependencyProperty ElementsProperty = DependencyProperty.RegisterAttached(
-            "ElementsOverride",
-            typeof(Dictionary<string, ILanguageNode>), 
-            typeof(Language), 
-            new PropertyMetadata(default(Dictionary<string, ILanguageNode>)));
-
-        #region Elements
-        
-
-        private static void SetElements(DependencyObject element, Dictionary<string, ILanguageNode> value)
-        {
-            value ??= new Dictionary<string, ILanguageNode>();
-            element.SetValue(ElementsProperty, value);
-        }
-
-        private static Dictionary<string, ILanguageNode> GetElements(DependencyObject element)
-        {
-            return (Dictionary<string, ILanguageNode>)element.GetValue(ElementsProperty);
-        }
-
-        #endregion
-
         #region Id
 
         /// <summary>
@@ -64,13 +42,23 @@ namespace Acorisoft.FutureGL.Forest
         /// </remarks>
         public static void SetId(FrameworkElement element, string id)
         {
-            if (element.DataContext is IViewModelLanguageService vmls)
-            {
-                var resolver = Xaml.Get<ILanguageNodeResolver>();
+            var    resolver = Xaml.Get<ILanguageNodeResolver>();
+            var    node     = resolver.GetNode(element);
+            var    textKey  = $"{id}.Text";
+            var    toolKey  = $"{id}.ToolTips";
+            string text;
 
-                vmls.ElementBag.Add(id, resolver.GetNode(element));
-                element.SetValue(IdProperty, id);
-            } 
+            if (GlobalStrings.TryGetValue(textKey, out text))
+            {
+                node.SetText(text);
+            }
+                
+            if (GlobalStrings.TryGetValue(toolKey, out text))
+            {
+                node.SetToolTips(text);
+            }
+                
+            element.SetValue(IdProperty, id);
         }
 
         /// <summary>
@@ -96,44 +84,10 @@ namespace Acorisoft.FutureGL.Forest
                 Debug.WriteLine($"根元素:{value}已经应用本地化翻译服务");
                 #endif
                 
-                vmls.ElementBag  =  new Dictionary<string, ILanguageNode>(StringComparer.OrdinalIgnoreCase);
                 vmls.RootName    =  value;
-                element.Loaded   += StartTranslate;
-                element.Unloaded -= StartTranslate;
             }
 
             element.SetValue(RootProperty, value);
-        }
-
-        private static void StartTranslate(object sender, RoutedEventArgs e)
-        {
-            var root     = (FrameworkElement)sender;
-            var rootName = GetRoot(root);
-            var elements = GetElements(root);
-
-            if (elements is null)
-            {
-                return;
-            }
-            
-            Debug.WriteLine($"根元素：{rootName} 开始本地化文本，总元素个数:{elements.Count}");
-
-            foreach (var (key, resolver) in elements)
-            {
-                var    textKey = $"{key}.Text";
-                var    toolKey = $"{key}.ToolTips";
-                string text;
-
-                if (GlobalStrings.TryGetValue(textKey, out text))
-                {
-                    resolver.SetText(text);
-                }
-                
-                if (GlobalStrings.TryGetValue(toolKey, out text))
-                {
-                    resolver.SetToolTips(text);
-                }
-            }
         }
 
         public static string GetRoot(FrameworkElement element)
@@ -162,9 +116,23 @@ namespace Acorisoft.FutureGL.Forest
             //
             if (element.DataContext is IViewModelLanguageService vmls)
             {
-                var id       = $"{value}.{vmls.RootName}";
-                var resolver = Xaml.Get<ILanguageNodeResolver>();
-                vmls.ElementBag.Add(id, resolver.GetNode(element));
+                var    id       = $"{vmls.RootName}.{value}";
+                var    resolver = Xaml.Get<ILanguageNodeResolver>();
+                var    node     = resolver.GetNode(element);
+                var    textKey  = $"{id}.Text";
+                var    toolKey  = $"{id}.ToolTips";
+                string text;
+
+                if (GlobalStrings.TryGetValue(textKey, out text))
+                {
+                    node.SetText(text);
+                }
+                
+                if (GlobalStrings.TryGetValue(toolKey, out text))
+                {
+                    node.SetToolTips(text);
+                }
+                
                 element.SetValue(IdProperty, id);
             } 
             
@@ -197,10 +165,9 @@ namespace Acorisoft.FutureGL.Forest
 
                 foreach (var line in lines)
                 {
-                    var line2 = line.Trim();
-                    var separator = line2.IndexOf('=');
-                    var id = line2[..separator];
-                    var value = line2[separator..];
+                    var separator = line.IndexOf('=');
+                    var id = line[..separator].Trim();
+                    var value = line[(separator + 1)..].Trim();
 
                     temp.TryAdd(id, value);
                 }
@@ -209,7 +176,6 @@ namespace Acorisoft.FutureGL.Forest
                 
                 foreach (var kv in temp)
                 {
-                    
                     _stringDictionary.Add(kv.Key, kv.Value);
                 }
             }

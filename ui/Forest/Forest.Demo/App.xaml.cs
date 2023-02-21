@@ -22,8 +22,23 @@ namespace Acorisoft.FutureGL.Forest
         {
             Xaml.Use<ForestResolver, ILanguageNodeResolver>(new ForestResolver());
             ThemeSystem.Instance.Theme = new ForestLightTheme();
-            Language.Culture           = CultureArea.Chinese;
-            Language.SetLanguage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"));
+            Language.Culture           = CultureArea.English;
+            Language.SetLanguage(GetLanguageFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages")));
+        }
+        
+        protected static string GetLanguageFile(string appModel)
+        {
+            var fileName = Language.Culture switch
+            {
+                CultureArea.English  => "en.ini",
+                CultureArea.French   => "fr.ini",
+                CultureArea.Japanese => "jp.ini",
+                CultureArea.Korean   => "kr.ini",
+                CultureArea.Russian  => "ru.ini",
+                _                    => "cn.ini",
+            };
+            
+            return Path.Combine(appModel, fileName);
         }
     }
 }
