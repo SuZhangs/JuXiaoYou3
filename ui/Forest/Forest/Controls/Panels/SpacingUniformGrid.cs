@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             var skip    = gap <= 0 && rows == 0 && columns == 0;
             var index   = 0;
             
-            if (skip)
+            if (!skip)
             {
                 if (rows > 0 && columns == 0)
                 {
@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             nameof(Gap),
             typeof(int),
             typeof(SpacingUniformGrid),
-            new PropertyMetadata(Boxing.IntValues[0]));
+            new FrameworkPropertyMetadata(Boxing.IntValues[0], FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public int Gap
         {

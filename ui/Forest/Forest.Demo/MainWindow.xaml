@@ -86,8 +86,8 @@
         <f:ForestTabItem Header="ColorPicker" Icon="{StaticResource Icon}">
            <ScrollViewer>
                <WrapPanel>
-                   <cp:PortableColorPicker/>
-                   <cp:StandardColorPicker/>
+                   <cp:PortableColorPicker Height="64" Width="64"/>
+                   <cp:StandardColorPicker Margin="16" Height="418" Width="220"/>
                </WrapPanel>
            </ScrollViewer>
         </f:ForestTabItem>
@@ -101,13 +101,14 @@
                     <DockPanel>
                         <f:HighlightButton DockPanel.Dock="Top"
                                            Content="添加" />
-                        <UniformGrid Columns="4"
+                        <f:SpacingUniformGrid Columns="4"
+                                              Gap="2"
                                      Margin="0 8 0 0">
-                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                        </UniformGrid>
+                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch"/>
+                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch"/>
+                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch"/>
+                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch"/>
+                        </f:SpacingUniformGrid>
                     </DockPanel>
                 </Border>
 
