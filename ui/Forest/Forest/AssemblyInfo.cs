@@ -10,5 +10,6 @@ using System.Windows.Markup;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Panels")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Markup")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Styles")]

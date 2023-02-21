@@ -4,38 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Demos"
-             xmlns:fui="urn:acorisoft/forest/ui"
+             xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer>
         <StackPanel>
-            <UniformGrid Columns="4">
-                <fui:HighlightButton Content="Highlight1" Margin="4"/>
-                <fui:HighlightButton Content="Highlight2" Margin="4" Palette="HighlightPalette2"/>
-                <fui:HighlightButton Content="Highlight3" Margin="4" Palette="HighlightPalette3"/>
-                <fui:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
-            </UniformGrid>
+            <f:SpacingUniformGrid Gap="4">
+                <f:HighlightButton Content="Highlight1" Margin="4"/>
+                <f:HighlightButton Content="Highlight2" Margin="4" Palette="HighlightPalette2"/>
+                <f:HighlightButton Content="Highlight3" Margin="4" Palette="HighlightPalette3"/>
+                <f:HighlightButton Content="Disabled" IsEnabled="False" Margin="4"/>
+            </f:SpacingUniformGrid>
             
             <UniformGrid Rows="4"
                          Height="640">
-                <fui:ForestTextBox AcceptsReturn="True"
+                <f:ForestTextBox AcceptsReturn="True"
                                    AcceptsTab="True"
                                    Margin="8"
                                    Height="144"/>
                 
-                <fui:HighlightTextBox AcceptsReturn="True"
+                <f:HighlightTextBox AcceptsReturn="True"
                                    AcceptsTab="True"
                                    Margin="8"
                                    Height="144"/>
                 
                 
-                <fui:ForestTextBox AcceptsReturn="True"
+                <f:ForestTextBox AcceptsReturn="True"
                                    AcceptsTab="True"
                                    Margin="8"
                                    Height="144"
                                    IsEnabled="False"/>
                 
-                <fui:HighlightTextBox AcceptsReturn="True"
+                <f:HighlightTextBox AcceptsReturn="True"
                                       AcceptsTab="True"
                                       Margin="8"
                                       Height="144"

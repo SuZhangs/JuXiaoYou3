@@ -6,11 +6,14 @@ namespace Acorisoft.FutureGL.Forest
 {
     public abstract class ForestWindow : Window
     {
+        private AppViewModelBase _internalViewModel;
+        
         protected ForestWindow()
         {
             Loaded   += OnLoadedIntern;
             Unloaded += OnUnloadedIntern;
-            
+            SizeChanged += OnSizeChanged;
+
             //
             //
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnWindowClose));
@@ -20,8 +23,18 @@ namespace Acorisoft.FutureGL.Forest
             
             Style ??= Application.Current.Resources[nameof(ForestWindow)] as Style;
         }
-        
-        
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (_internalViewModel is not null ||
+                Xaml.IsRegistered<AppViewModelBase>())
+            {
+                _internalViewModel             = Xaml.Get<AppViewModelBase>();
+                _internalViewModel.WindowState = WindowState;
+            }
+        }
+
+
         #region SystemCommands
 
         private void OnWindowClose(object sender, ExecutedRoutedEventArgs e)
@@ -170,6 +183,7 @@ namespace Acorisoft.FutureGL.Forest
             get => (bool)GetValue(ExtendToTitleBarProperty);
             set => SetValue(ExtendToTitleBarProperty, Boxing.Box(value));
         }
+        
         public object ShellContent
         {
             get => (object)GetValue(ShellContentProperty);

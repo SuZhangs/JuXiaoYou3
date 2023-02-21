@@ -112,6 +112,53 @@ namespace Acorisoft.FutureGL.Forest
 
         #endregion
 
+        public static object Connect(Type key)
+        {
+            if (key is null)
+            {
+                return null;
+            }
+
+            //
+            // instance是一个ViewModel
+            // 返回 View
+            if (ViewModelInfoMapper.TryGetValue(key, out var info))
+            {
+                var view      = (FrameworkElement)Activator.CreateInstance(info.View);
+                var viewModel = Activator.CreateInstance(info.ViewModel);
+
+                //
+                //
+                if (view is not null)
+                {
+                    view.DataContext = viewModel;
+                }
+
+                return view;
+            }
+
+            //
+            // instance是一个View
+            // 返回 ViewModel
+            // ReSharper disable once InvertIf
+            if (ViewInfoMapper.TryGetValue(key, out info))
+            {
+                var view      = (FrameworkElement)Activator.CreateInstance(info.View);
+                var viewModel = Activator.CreateInstance(info.ViewModel);
+
+                //
+                //
+                if (view is not null)
+                {
+                    view.DataContext = viewModel;
+                }
+
+                return view;
+            }
+
+            return null;
+        }
+
 
         /// <summary>
         /// 连接视图或者视图模型。

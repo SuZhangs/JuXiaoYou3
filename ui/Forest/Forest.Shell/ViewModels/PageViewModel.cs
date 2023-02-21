@@ -4,6 +4,17 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 {
     public abstract class PageViewModel : ViewModelBase, IViewModelLanguageService
     {
-        private readonly Dictionary<string, FrameworkElement> _elements;
+        protected PageViewModel()
+        {
+            
+            Xaml.Get<IWindowEventBroadcast>()
+                .Keys
+                .Subscribe(OnKeyboardInput)
+                .DisposeWith(Collector);
+        }
+
+        protected virtual void OnKeyboardInput(WindowKeyEventArgs e)
+        {
+        }
     }
 }

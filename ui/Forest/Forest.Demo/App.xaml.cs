@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
+using Acorisoft.FutureGL.Forest.ViewModels;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.Forest

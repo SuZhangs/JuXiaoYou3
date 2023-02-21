@@ -9,14 +9,23 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class DialogViewModel : ViewModelBase, IDialogViewModel, __IDialogViewModel
     {
-        protected readonly DialogTaskSource                     Wait;
-        protected          Action                               CloseAction;
-        private            string                               _title;
+        protected readonly DialogTaskSource Wait;
+        protected          Action           CloseAction;
+        private            string           _title;
 
         protected DialogViewModel()
         {
+            Xaml.Get<IWindowEventBroadcast>()
+                .Keys
+                .Subscribe(OnKeyboardInput)
+                .DisposeWith(Collector);
+
             CancelCommand = new RelayCommand(Cancel);
             Wait          = new DialogTaskSource();
+        }
+
+        protected virtual void OnKeyboardInput(WindowKeyEventArgs e)
+        {
         }
 
         /// <summary>
@@ -37,7 +46,9 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
-        protected virtual void OnStart(ViewParam parameter) { }
+        protected virtual void OnStart(ViewParam parameter)
+        {
+        }
 
         /// <summary>
         /// 取消当前操作。

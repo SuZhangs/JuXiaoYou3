@@ -446,6 +446,34 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style TargetType="{x:Type c:TitleBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:TitleBar}">
+                    <StackPanel Orientation="Horizontal"
+                                WindowChrome.IsHitTestVisibleInChrome="True"
+                                VerticalAlignment="Top">
+                        <p:PrimitiveButton Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                                           Height="29"
+                                           Width="48"
+                                           Mode="Minimum" />
+
+                        <p:PrimitiveButton Height="29"
+                                           Width="48"
+                                           Mode="Maximum"
+                                           Command="{x:Static SystemCommands.MaximizeWindowCommand}"
+                                           WindowState="{TemplateBinding WindowState}" />
+
+                        <p:PrimitiveButton Height="29"
+                                           Width="48"
+                                           Mode="Close"
+                                           Command="{x:Static SystemCommands.CloseWindowCommand}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="ForestWindow" TargetType="{x:Type w:ForestWindow}">
         <Setter Property="WindowStyle" Value="None" />
@@ -550,6 +578,58 @@
                             <Setter Property="WindowChrome.GlassFrameThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type c:EmptyContentHost}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:EmptyContentHost}">
+                    <Border VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <Grid>
+                            <ContentPresenter x:Name="Content" 
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              Visibility="Collapsed"/>
+                            <ContentPresenter x:Name="EmptyState"
+                                              Content="{TemplateBinding EmptyState}"
+                                              ContentTemplate="{TemplateBinding EmptyStateTemplate}"
+                                              ContentStringFormat="{TemplateBinding EmptyStateStringFormat}"
+                                              ContentTemplateSelector="{TemplateBinding EmptyStateTemplateSelector}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEmptyState" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="EmptyState"/>
+                        </Trigger>
+                        <Trigger Property="IsEmptyState" Value="False">
+                            <Setter Property="Visibility" Value="Visible" TargetName="Content"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style TargetType="{x:Type c:ViewHost}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:ViewHost}">
+                    <Border VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

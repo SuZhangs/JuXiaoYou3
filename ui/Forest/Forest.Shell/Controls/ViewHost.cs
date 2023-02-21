@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ViewHost : Control
+    public class ViewHost : ViewHostBase
     {
         static ViewHost()
         {
