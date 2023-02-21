@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Reactive.Concurrency;
+using System.Threading;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -177,8 +179,11 @@ namespace Acorisoft.FutureGL.Forest
         /// 注册上下文依赖的服务。
         /// </summary>
         /// <param name="container">服务容器。</param>
-        protected virtual void RegisterContextServices(IContainer container)
+        protected internal virtual void RegisterContextServices(IContainer container)
         {
+            container.Use<SynchronizationContextScheduler, IScheduler>(
+                new SynchronizationContextScheduler(
+                    SynchronizationContext.Current!));
         }
 
         /// <summary>
