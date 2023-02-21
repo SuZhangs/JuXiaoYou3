@@ -36,7 +36,16 @@ namespace Acorisoft.FutureGL.Forest
                 return;
             }
 
-            await DialogHost.ShowDialog((IDialogViewModel)Activator.CreateInstance(type), null);
+            var dialog = (IDialogViewModel)Activator.CreateInstance(type)!;
+            dialog.Title = type.Name;
+
+            if (dialog is OperationViewModel dialog2)
+            {
+                dialog2.CompleteButtonText = Forest.Language.ConfirmText;
+                dialog2.CancelButtonText = Forest.Language.CancelText;
+            }
+            
+            await DialogHost.ShowDialog(dialog, null);
         }
     }
 }
