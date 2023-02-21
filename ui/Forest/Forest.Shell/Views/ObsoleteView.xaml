@@ -1,10 +1,11 @@
 ﻿<UserControl x:Class="Acorisoft.FutureGL.Forest.Views.ObsoleteView"
-xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
              xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
+             xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="384"
              d:DesignWidth="480"
@@ -14,11 +15,11 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MigaUI.Windows;component/Views/BuiltinViewStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Views/BuiltinViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border Background="{DynamicResource Brushes.Background}"
+    <Border Background="{f:BackgroundBrush}"
             CornerRadius="10"
             BorderThickness="0 4 0 0"
             BorderBrush="#CA5100"
@@ -33,13 +34,13 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
             <!-- 图标 -->
             <Path Grid.Row="0"
-                      Data="{StaticResource Trash}"
-                    Margin="8"
-                    Width="41"
-                    Height="41"
-                      Stroke="#CA5100"
-                      StrokeThickness="3"
-                      Stretch="Uniform"/>
+                  Data="{StaticResource Trash}"
+                  Margin="8"
+                  Width="41"
+                  Height="41"
+                  Stroke="#CA5100"
+                  StrokeThickness="3"
+                  Stretch="Uniform" />
 
             <!-- 标题 -->
             <TextBlock Grid.Row="1"

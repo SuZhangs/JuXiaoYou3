@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.ViewModels;
 
 namespace Acorisoft.FutureGL.Forest
@@ -25,6 +26,19 @@ namespace Acorisoft.FutureGL.Forest
         {
             DataContext = new AppViewModel();
             InitializeComponent();
+            var web = new WindowEventBroadcast();
+            web.SetEventSource(this);
+            Xaml.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(web);
+        }
+
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement { Tag: Type type })
+            {
+                return;
+            }
+
+            await DialogHost.ShowDialog((IDialogViewModel)Activator.CreateInstance(type), null);
         }
     }
 }

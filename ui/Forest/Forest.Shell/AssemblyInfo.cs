@@ -9,3 +9,6 @@ using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/shell", "Acorisoft.FutureGL.Forest")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/shell", "Acorisoft.FutureGL.Forest.Controls")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/shell", "Acorisoft.FutureGL.Forest.Views")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/shell", "Acorisoft.FutureGL.Forest.ViewModels")]

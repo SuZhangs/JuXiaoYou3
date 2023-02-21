@@ -86,5 +86,7 @@
         ColorPalette_Metro_,
         
         ColorPalette_Bootstrap_,
+        
+        Mask,
     }
 }

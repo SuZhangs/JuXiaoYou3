@@ -1,0 +1,252 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:f="urn:acorisoft/forest/ui"
+                    xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls"
+                    xmlns:m="clr-namespace:Acorisoft.FutureGL.Forest.Models">
+
+    <!-- Dialog Host -->
+    <Style x:Key="Indicator"
+           TargetType="{x:Type ProgressBar}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid Name="TemplateRoot">
+                        <Border Background="Transparent"
+                                BorderBrush="#D0D0D0"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Margin="1" />
+                        <Rectangle Name="PART_Track" Margin="1,1,1,1" />
+                        <Decorator Name="PART_Indicator"
+                                   Margin="1,1,1,1"
+                                   HorizontalAlignment="Left">
+                            <Grid Name="Animation"
+                                  ClipToBounds="True">
+                                <Border Name="PART_GlowRect"
+                                        Width="72"
+                                        Margin="0,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        Background="{TemplateBinding Foreground}"
+                                        CornerRadius="4" />
+                            </Grid>
+                        </Decorator>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type c:DialogHost}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:DialogHost}">
+                    <Grid>
+                        <Grid.Resources>
+                            <DataTemplate DataType="{x:Type m:IconNotification}">
+                                <c:GeometryMessageBar Header="{Binding Title,Mode=OneWay}"
+                                                      Highlight="{Binding Color,Mode=OneWay}"
+                                                      IsFilled="{Binding IsFilled,Mode=OneWay}"
+                                                      Geometry="{Binding Geometry,Mode=OneWay}" />
+                            </DataTemplate>
+
+                            <DataTemplate DataType="{x:Type m:ImageNotification}">
+                                <c:ImageMessageBar Header="{Binding Title,Mode=OneWay}"
+                                                   Highlight="{Binding Color,Mode=OneWay}"
+                                                   Image="{Binding ImageSource,Mode=OneWay}" />
+                            </DataTemplate>
+                        </Grid.Resources>
+                        
+                        <ContentPresenter ContentSource="Content"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch" />
+
+
+                        <!-- 消息部分 -->
+                        <Border x:Name="PART_MsgMask"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Stretch"
+                                Visibility="Collapsed"
+                                KeyboardNavigation.ControlTabNavigation="Cycle"
+                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                KeyboardNavigation.TabNavigation="Cycle">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
+                            </Border.Effect>
+                            <ContentPresenter x:Name="MSG" Content="{TemplateBinding Message}" />
+                        </Border>
+
+                        
+                        <!-- 进度条 -->
+                        <Border x:Name="PART_IndicatorMask"
+                                Background="{f:MaskBrush}"
+                                Visibility="Collapsed"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                KeyboardNavigation.ControlTabNavigation="Cycle"
+                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                KeyboardNavigation.TabNavigation="Cycle">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
+                            </Border.Effect>
+
+                            <Border x:Name="Indicator"
+                                    Background="{f:BackgroundBrush}"
+                                    CornerRadius="10"
+                                    BorderThickness="0 4 0 0"
+                                    BorderBrush="#6FA240"
+                                    Padding="24"
+                                    Width="256"
+                                    Height="128"
+                                    Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <ProgressBar x:Name="ProgressBar"
+                                                 Grid.Row="1"
+                                                 Foreground="#6FA240"
+                                                 Height="10"
+                                                 IsIndeterminate="False"
+                                                 Style="{StaticResource Indicator}" />
+
+
+                                    <TextBlock Grid.Row="0"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               HorizontalAlignment="Center"
+                                               Margin="0 16"
+                                               Text="{TemplateBinding BusyText}"
+                                               TextWrapping="Wrap" />
+                                </Grid>
+                            </Border>
+                        </Border>
+                        
+                        <!-- 对话框 -->
+                        <Border x:Name="PART_DialogMask"
+                                Background="{f:MaskBrush}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Visibility="Collapsed"
+                                KeyboardNavigation.ControlTabNavigation="Cycle"
+                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                KeyboardNavigation.TabNavigation="Cycle"
+                                FocusManager.FocusedElement="{Binding ElementName=PART_Dialog}">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
+                            </Border.Effect>
+                            <Border x:Name="PART_Dialog"
+                                    Background="Transparent"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Padding="8"
+                                    Visibility="Collapsed">
+
+                                <ContentPresenter Content="{TemplateBinding Dialog}"
+                                                  Margin="8" />
+                            </Border>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- 消息部分 -->
+                        <EventTrigger RoutedEvent="NotificationOpening">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MsgMask"
+                                                                   Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Visible</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="MSG"
+                                                                      Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                                        <EasingThicknessKeyFrame Value="0 48 0 0 " KeyTime="0:0:0.2" />
+                                    </ThicknessAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="NotificationClosing">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MsgMask"
+                                                                   Storyboard.TargetProperty="(FrameworkElement.Visibility)">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.15">
+                                            <DiscreteObjectKeyFrame.Value>
+                                                <Visibility>Collapsed</Visibility>
+                                            </DiscreteObjectKeyFrame.Value>
+                                        </DiscreteObjectKeyFrame>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="MSG"
+                                                                      Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                                        <EasingThicknessKeyFrame Value="0" KeyTime="0:0:0.15" />
+                                    </ThicknessAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <!-- 对话框部分 -->
+                        <Trigger Property="IsOpened" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_DialogMask" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Dialog" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Dialog"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Dialog"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+                        <!-- 加载条部分 -->
+                        <Trigger Property="IsBusy" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_IndicatorMask" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="Indicator" />
+                            <Setter Property="IsIndeterminate" Value="True" TargetName="ProgressBar" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Indicator"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Indicator"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.00" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -5,8 +5,54 @@ using Acorisoft.FutureGL.Forest.Views;
 
 namespace Acorisoft.FutureGL.Forest.Services
 {
-    public class DialogService : IDialogService, IDialogServiceAmbient
+    public class DialogService : IDialogService, IDialogServiceAmbient,  IBusyService, IBusyServiceAmbient, INotifyService, INotifyServiceAmbient
     {
+        
+        class Session : IBusySession
+        {
+            public void Dispose()
+            {
+                if (Host is null)
+                {
+                    return;
+                }
+                
+                Host.Dispatcher.Invoke(() =>
+                {
+                    Host.IsBusy = false;
+                });
+
+                Clean();
+            }
+
+            public void Update(string text)
+            {
+                if (Host is null)
+                {
+                    return;
+                }
+
+                Host.Dispatcher.Invoke(() =>
+                {
+
+                    //
+                    // 更新
+                    Host.BusyText = text;
+
+                    if (!Host.IsBusy)
+                    {
+                        Host.IsBusy = true;
+                    }
+                });
+            }
+            
+            public DialogHost Host { get; init; }
+            public Action Clean { get; init; }
+        }
+        
+        private const string Color = "#6F0240";
+
+        private Session    _session;
         private DialogHost _host;
 
         /// <summary>
@@ -14,6 +60,70 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// </summary>
         /// <param name="host"></param>
         public void SetServiceProvider(DialogHost host) => _host = host;
+
+        /// <summary>
+        /// 通知
+        /// </summary>
+        /// <param name="notification">消息</param>
+        public void Notify(IconNotification notification)
+        {
+            if (notification is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(notification.Color))
+            {
+                notification.Color = Color;
+            }
+
+            if (notification.Delay.TotalMilliseconds < 1000)
+            {
+                //
+                //
+                notification.Initialize();
+            }
+            
+            _host.Messaging(notification);
+        }
+
+        /// <summary>
+        /// 通知
+        /// </summary>
+        /// <param name="notification">消息</param>
+        public void Notify(ImageNotification notification)
+        {
+            if (notification is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(notification.Color))
+            {
+                notification.Color = Color;
+            }
+
+            if (notification.Delay.TotalMilliseconds < 1000)
+            {
+                //
+                //
+                notification.Initialize();
+            }
+            
+            _host.Messaging(notification);
+        }
+        
+        public IBusySession CreateSession()
+        {
+            _session ??= new Session
+            {
+                Host  = _host,
+                Clean = () => _session = null,
+            };
+
+
+            return _session;
+        }
 
         #region IAmbientService
 
@@ -197,10 +307,10 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <typeparam name="T">返回类型</typeparam>
         /// <typeparam name="TViewModel">视图模型类型</typeparam>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<T>> Dialog<T, TViewModel>() where TViewModel : IDialogViewModel
+        public Task<Result<T>> Dialog<T, TViewModel>() where TViewModel : IDialogViewModel
             => _host.ShowDialog<T>(Classes.CreateInstance<TViewModel>(), new ViewParam());
 
-        public Task<Operation<T>> Dialog<T, TViewModel>(TViewModel viewModel) where TViewModel : IDialogViewModel
+        public Task<Result<T>> Dialog<T, TViewModel>(TViewModel viewModel) where TViewModel : IDialogViewModel
             => _host.ShowDialog<T>(viewModel, new ViewParam());
 
         /// <summary>
@@ -211,7 +321,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<T>> Dialog<T, TViewModel>(TViewModel viewModel, ViewParam parameter) where TViewModel : IDialogViewModel
+        public Task<Result<T>> Dialog<T, TViewModel>(TViewModel viewModel, ViewParam parameter) where TViewModel : IDialogViewModel
             => _host.ShowDialog<T>(viewModel, parameter);
 
         /// <summary>
@@ -220,7 +330,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <typeparam name="T">返回类型</typeparam>
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<T>> Dialog<T>(IDialogViewModel viewModel)
+        public Task<Result<T>> Dialog<T>(IDialogViewModel viewModel)
             => _host.ShowDialog<T>(viewModel, new ViewParam());
 
         /// <summary>
@@ -230,7 +340,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<T>> Dialog<T>(IDialogViewModel viewModel, ViewParam parameter)
+        public Task<Result<T>> Dialog<T>(IDialogViewModel viewModel, ViewParam parameter)
             => _host.ShowDialog<T>(viewModel, parameter);
 
         /// <summary>
@@ -238,7 +348,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// </summary>
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<object>> Dialog(IDialogViewModel viewModel)
+        public Task<Result<object>> Dialog(IDialogViewModel viewModel)
             => _host.ShowDialog(viewModel, new ViewParam());
 
         /// <summary>
@@ -247,7 +357,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Operation<object>> Dialog(IDialogViewModel viewModel, ViewParam parameter)
+        public Task<Result<object>> Dialog(IDialogViewModel viewModel, ViewParam parameter)
             => _host.ShowDialog(viewModel, parameter);
 
         #endregion

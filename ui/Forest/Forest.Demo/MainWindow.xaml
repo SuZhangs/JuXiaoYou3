@@ -7,6 +7,7 @@
         xmlns:demo="clr-namespace:Acorisoft.FutureGL.Forest.Demos"
         xmlns:vm="clr-namespace:Acorisoft.FutureGL.Forest.ViewModels"
         xmlns:f="urn:acorisoft/forest/ui"
+        xmlns:fs="urn:acorisoft/forest/shell"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         f:Language.Root="Home"
@@ -24,16 +25,27 @@
             <demo:ButtonDemo/>
         </f:ForestTabItem>
         <f:ForestTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
-            <Border Background="#30000000"
-                        Padding="32">
-                <Viewbox>
-                    <Border Background="White" 
-                            CornerRadius="24"
-                            Height="1080" Width="1920">
-
-                    </Border>
-                </Viewbox>
-            </Border>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right"
+                            Width="320">
+                    <Button Content="Danger"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:DangerViewModel}"/>
+                    <Button Content="Warning"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:WarningViewModel}"/>
+                    <Button Content="Info"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:InfoViewModel}"/>
+                    <Button Content="Success"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:SuccessViewModel}"/>
+                    <Button Content="Obsolete"
+                            Click="ButtonBase_OnClick"
+                            Tag="{x:Type fs:ObsoleteViewModel}"/>
+                </StackPanel>
+                <fs:DialogHost x:Name="DialogHost"/>
+            </DockPanel>
         </f:ForestTabItem>
         <f:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
             <WrapPanel Background="#F1F1F1">

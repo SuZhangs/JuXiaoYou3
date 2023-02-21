@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:f="urn:acorisoft/forest/ui">
 
     <GeometryGroup x:Key="Trash">
         <GeometryGroup.Children>
@@ -89,7 +90,7 @@
                                RadiusY="24"
                                StrokeDashArray="4 4"
                                StrokeThickness="1   "
-                               Stroke="{DynamicResource Brushes.ForegroundInAccent}" />
+                               Stroke="{f:ForegroundInHighlightBrush}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -103,7 +104,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="bd"
-                            Background="{DynamicResource Brushes.Background}"
+                            Background="{f:BackgroundBrush}"
                             CornerRadius="24"
                             Padding="16 0">
                         <VisualStateManager.VisualStateGroups>
@@ -113,7 +114,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -122,7 +123,7 @@
 
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="ContentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{DynamicResource Foreground}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{f:Foreground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -130,11 +131,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="ContentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.1" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -218,14 +219,14 @@
                         <DockPanel HorizontalAlignment="Center">
                             <Path x:Name="icon"
                                   Data="{StaticResource Close}"
-                                  Stroke="{DynamicResource Brushes.Foreground}"
+                                  Stroke="{f:ForegroundBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="17"
                                   Height="17" />
                             <ContentPresenter x:Name="contentPresenter"
                                               TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.Foreground}"
+                                              TextElement.Foreground="{f:ForegroundBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -246,7 +247,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="bd"
-                            Background="{DynamicResource Brushes.Background}"
+                            Background="{f:BackgroundBrush}"
                             CornerRadius="24"
                             Padding="16 0">
                         <VisualStateManager.VisualStateGroups>
@@ -256,11 +257,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -272,11 +273,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -288,7 +289,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
@@ -333,7 +334,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="bd"
-                            Background="{DynamicResource Brushes.Background}"
+                            Background="{f:BackgroundBrush}"
                             CornerRadius="24"
                             Padding="16 0">
                         <VisualStateManager.VisualStateGroups>
@@ -343,11 +344,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -359,11 +360,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -375,7 +376,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource Foreground}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:Foreground}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
@@ -431,11 +432,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -447,11 +448,11 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
@@ -463,7 +464,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource ForegroundInAccent}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:ForegroundInHighlight}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="icon">
@@ -480,14 +481,14 @@
                         <DockPanel HorizontalAlignment="Center">
                             <Path x:Name="icon"
                                   Data="{StaticResource Checked}"
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="29"
                                   Height="29" />
                             <ContentPresenter x:Name="contentPresenter"
                                               TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -542,13 +543,13 @@
                         </VisualStateManager.VisualStateGroups>
                         <DockPanel HorizontalAlignment="Center">
                             <Path Data="{StaticResource Checked}"
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="29"
                                   Height="29" />
                             <ContentPresenter TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -599,7 +600,7 @@
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="contentPresenter">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{DynamicResource Foreground}" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="{f:Foreground}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -607,7 +608,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <DockPanel HorizontalAlignment="Center">
                             <Path Data="{StaticResource Close}"                                  
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="17"
@@ -615,7 +616,7 @@
                                   VerticalAlignment="Center"/>
                             <ContentPresenter x:Name="contentPresenter" 
                                               TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -670,13 +671,13 @@
                         </VisualStateManager.VisualStateGroups>
                         <DockPanel HorizontalAlignment="Center">
                             <Path Data="{StaticResource Checked}"
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="29"
                                   Height="29" />
                             <ContentPresenter TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -731,13 +732,13 @@
                         </VisualStateManager.VisualStateGroups>
                         <DockPanel HorizontalAlignment="Center">
                             <Path Data="{StaticResource Checked}"
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="29"
                                   Height="29" />
                             <ContentPresenter TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -792,13 +793,13 @@
                         </VisualStateManager.VisualStateGroups>
                         <DockPanel HorizontalAlignment="Center">
                             <Path Data="{StaticResource Checked}"
-                                  Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                  Stroke="{f:ForegroundInHighlightBrush}"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Width="29"
                                   Height="29" />
                             <ContentPresenter TextElement.FontSize="16"
-                                              TextElement.Foreground="{DynamicResource Brushes.ForegroundInAccent}"
+                                              TextElement.Foreground="{f:ForegroundInHighlightBrush}"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"

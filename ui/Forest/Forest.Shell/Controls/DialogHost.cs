@@ -20,55 +20,55 @@ namespace Acorisoft.FutureGL.Forest.Controls
         public static readonly DependencyProperty IsOpenedProperty;
         public static readonly DependencyProperty IsBusyProperty;
         public static readonly DependencyProperty BusyTextProperty;
-        public static readonly RoutedEvent NotificationOpeningEvent;
-        public static readonly RoutedEvent NotificationClosingEvent;
+        public static readonly RoutedEvent        NotificationOpeningEvent;
+        public static readonly RoutedEvent        NotificationClosingEvent;
 
         #endregion
 
         static DialogHost()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogHost),
-                new FrameworkPropertyMetadata(typeof(DialogHost)));
-            
+                                                     new FrameworkPropertyMetadata(typeof(DialogHost)));
+
             IsBusyProperty = DependencyProperty.Register(nameof(IsBusy),
-                typeof(bool),
-                typeof(DialogHost),
-                new PropertyMetadata(Boxing.False));
+                                                         typeof(bool),
+                                                         typeof(DialogHost),
+                                                         new PropertyMetadata(Boxing.False));
 
             MessageProperty = DependencyProperty.Register(nameof(Message),
-                typeof(Notification),
-                typeof(DialogHost),
-                new PropertyMetadata(null));
+                                                          typeof(Notification),
+                                                          typeof(DialogHost),
+                                                          new PropertyMetadata(null));
 
             BusyTextProperty = DependencyProperty.Register(nameof(BusyText),
-                typeof(string),
-                typeof(DialogHost),
-                new PropertyMetadata("正在加载..."));
-            
+                                                           typeof(string),
+                                                           typeof(DialogHost),
+                                                           new PropertyMetadata("正在加载..."));
+
             IsOpenedProperty = DependencyProperty.Register(nameof(IsOpened),
-                typeof(bool),
-                typeof(DialogHost),
-                new PropertyMetadata(Boxing.False));
+                                                           typeof(bool),
+                                                           typeof(DialogHost),
+                                                           new PropertyMetadata(Boxing.False));
 
 
             ViewModelProperty = DependencyProperty.Register(nameof(ViewModel),
-                typeof(IViewModel),
-                typeof(DialogHost),
-                new PropertyMetadata(default(IViewModel),
-                    OnViewModelChanged));
+                                                            typeof(IViewModel),
+                                                            typeof(DialogHost),
+                                                            new PropertyMetadata(default(IViewModel),
+                                                                                 OnViewModelChanged));
 
             DialogProperty = DependencyProperty.Register(nameof(Dialog),
-                typeof(object),
-                typeof(DialogHost),
-                new PropertyMetadata(default(object)));
-            
+                                                         typeof(object),
+                                                         typeof(DialogHost),
+                                                         new PropertyMetadata(default(object)));
+
             NotificationOpeningEvent = EventManager.RegisterRoutedEvent(nameof(NotificationOpening), RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler),
-                typeof(DialogHost));
-            
+                                                                        typeof(RoutedEventHandler),
+                                                                        typeof(DialogHost));
+
             NotificationClosingEvent = EventManager.RegisterRoutedEvent(nameof(NotificationClosing), RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler),
-                typeof(DialogHost)); 
+                                                                        typeof(RoutedEventHandler),
+                                                                        typeof(DialogHost));
         }
 
         private static void OnViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -81,14 +81,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 if (view is not FrameworkElement fe)
                 {
-                    if( host._stack.CanCompletedOrCancel())
+                    if (host._stack.CanCompletedOrCancel())
                         host._stack.CompletedOrCancel();
                     return;
                 }
-                else 
-                {
-                    fe.Loaded += OnDialogContentLoaded;
-                }
+
+                fe.Loaded += OnDialogContentLoaded;
 
                 //
                 // 设置视图
@@ -108,7 +106,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 return;
             }
-            
+
             fe.Loaded -= OnDialogContentLoaded;
 
             if (fe.DataContext is IViewModel vm)
@@ -117,23 +115,25 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
         }
 
-        private int Milliseconds = 10;
-
-        private readonly DialogStack _stack;
+        private readonly DialogStack                   _stack;
         private readonly ConcurrentQueue<Notification> _queue;
-        private readonly DispatcherTimer _timer;
-        private int _messageCounting;
-        private int _messageDelay;
-        private int _animationCounting;
+        private readonly DispatcherTimer               _timer;
+
+        private int  _messageCounting;
+        private int  _messageDelay;
+        private int  _animationCounting;
         private bool _hasMessagePending;
+        private int  Milliseconds;
+
 
         public DialogHost()
         {
-            _stack = new DialogStack();
-            _queue = new ConcurrentQueue<Notification>();
-            _timer = new DispatcherTimer(TimeSpan.FromMilliseconds(Milliseconds), DispatcherPriority.Normal, OnDispatchMessage, Dispatcher);
-            this.Unloaded += OnUnloaded;
-            
+            Milliseconds  =  10;
+            _stack        =  new DialogStack();
+            _queue        =  new ConcurrentQueue<Notification>();
+            _timer        =  new DispatcherTimer(TimeSpan.FromMilliseconds(Milliseconds), DispatcherPriority.Normal, OnDispatchMessage, Dispatcher);
+            Unloaded += OnUnloaded;
+
             Xaml.Get<IDialogServiceAmbient>().SetServiceProvider(this);
             Xaml.Get<IBusyServiceAmbient>().SetServiceProvider(this);
             Xaml.Get<INotifyServiceAmbient>().SetServiceProvider(this);
@@ -148,26 +148,26 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private void HandlingNotificationPending()
         {
             _messageCounting += Milliseconds;
-                
+
             //
             // 不满足时。
             if (_messageCounting - Milliseconds < _messageDelay)
             {
                 return;
             }
-                
+
             //
             // 满足时
             RaiseEvent(new RoutedEventArgs
             {
                 RoutedEvent = NotificationClosingEvent,
             });
-                
+
             _messageCounting   = 0;
             _animationCounting = 300 / Milliseconds;
             _hasMessagePending = false;
         }
-        
+
         private void OnDispatchMessage(object sender, EventArgs e)
         {
             if (_hasMessagePending)
@@ -175,7 +175,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 HandlingNotificationPending();
                 return;
             }
-            
+
             //
             // 已经空了就退出
             if (_queue.IsEmpty)
@@ -213,25 +213,23 @@ namespace Acorisoft.FutureGL.Forest.Controls
             });
         }
 
-        public async Task<Operation<T>> ShowDialog<T>(IDialogViewModel dialog, ViewParam param)
+        public async Task<Result<T>> ShowDialog<T>(IDialogViewModel dialog, ViewParam param)
         {
             var result = await ShowDialog(dialog, param);
 
             if (result is null)
             {
-                return Operation<T>.Failed("参数返回空");
+                return Result<T>.Failed("参数返回空");
             }
 
-            return result.IsFinished ?
-                       Operation<T>.Success((T)result.Value) :
-                       Operation<T>.Failed(result.Reason);
+            return result.IsFinished ? Result<T>.Success((T)result.Value) : Result<T>.Failed(result.Reason);
         }
 
-        public async Task<Operation<object>> ShowDialog(IDialogViewModel dialog, ViewParam param)
+        public async Task<Result<object>> ShowDialog(IDialogViewModel dialog, ViewParam param)
         {
             if (dialog is null)
             {
-                return Operation<object>.Failed("视图模型为空");
+                return Result<object>.Failed("视图模型为空");
             }
 
             try
@@ -242,7 +240,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 if (dialog is not __IDialogViewModel dialog2)
                 {
-                    return Operation<object>.Failed("这不是一个可等待的对话框");
+                    return Result<object>.Failed("这不是一个可等待的对话框");
                 }
 
                 //
@@ -255,10 +253,10 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 // 设置参数。
-                param                ??= new ViewParam();
-                param.ViewModelSource       =   previous;
-                param.CloseHandler   =   CloseDialog;
-                dialog2.CloseHandler =   CloseDialog;
+                param                 ??= new ViewParam();
+                param.ViewModelSource =   previous;
+                param.CloseHandler    =   CloseDialog;
+                dialog2.CloseHandler  =   CloseDialog;
 
                 //
                 //
@@ -275,7 +273,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
             catch (DuplicateDataException)
             {
-                return Operation<object>.Failed("对话框重复打开！");
+                return Result<object>.Failed("对话框重复打开！");
             }
         }
 
@@ -290,7 +288,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 message.Color = "#6FA240";
             }
-            
+
             _queue.Enqueue(message);
             _timer.Start();
         }
@@ -372,7 +370,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             get => (bool)GetValue(IsOpenedProperty);
             set => SetValue(IsOpenedProperty, Boxing.Box(value));
         }
-        
+
         public bool IsBusy
         {
             get => (bool)GetValue(IsBusyProperty);
@@ -384,29 +382,29 @@ namespace Acorisoft.FutureGL.Forest.Controls
             get => (string)GetValue(BusyTextProperty);
             set => SetValue(BusyTextProperty, value);
         }
-        
+
         public Notification Message
         {
             get => (Notification)GetValue(MessageProperty);
             set => SetValue(MessageProperty, value);
         }
-        
+
         public event RoutedEventHandler NotificationOpening
         {
             add => AddHandler(NotificationOpeningEvent, value);
             remove => RemoveHandler(NotificationOpeningEvent, value);
         }
-        
+
         public event RoutedEventHandler NotificationClosing
         {
             add => AddHandler(NotificationClosingEvent, value);
             remove => RemoveHandler(NotificationClosingEvent, value);
         }
-        
+
         public class DialogStack
         {
             private readonly Stack<IDialogViewModel> _waitingStack = new Stack<IDialogViewModel>(16);
-            private readonly HashSet<int> _duplication = new HashSet<int>();
+            private readonly HashSet<int>            _duplication  = new HashSet<int>();
 
             private IDialogViewModel _current;
             private IDialogViewModel _previous;

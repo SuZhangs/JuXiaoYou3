@@ -1,6 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
-using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Operation<object>>;
+using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Result<object>>;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
 {
@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                 return;
             }
 
-            if (Wait.TrySetResult(Operation<object>.Failed("手动取消")))
+            if (Wait.TrySetResult(Result<object>.Failed("手动取消")))
             {
                 //
                 // 清理现场

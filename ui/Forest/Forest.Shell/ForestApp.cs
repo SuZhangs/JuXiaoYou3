@@ -5,13 +5,54 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Utils;
+using Acorisoft.FutureGL.Forest.Views;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.Forest
 {
     public abstract class ForestApp : Application
     {
-        protected const string BasicSettingFileName = "theme.";
+        internal class BuiltinViews : IBindingInfoProvider
+        {
+            public IEnumerable<BindingInfo> GetBindingInfo()
+            {
+                return new[]
+                {
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(DangerViewModel),
+                        View      = typeof(DangerView)
+                    },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(WarningViewModel),
+                        View      = typeof(WarningView)
+                    },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(SuccessViewModel),
+                        View      = typeof(SuccessView)
+                    },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(InfoViewModel),
+                        View      = typeof(InfoView)
+                    },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(ObsoleteViewModel),
+                        View      = typeof(ObsoleteView)
+                    },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(StringViewModel),
+                        View      = typeof(StringView)
+                    },
+                };
+            }
+        }
+
+        protected const string BasicSettingFileName = "main.json";
 
         /*
          * 生命周期:
@@ -73,7 +114,7 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 构建基本的属性
             var basicAppSetting = JSON.OpenSetting<BasicAppSettingViewModel>(
-                Path.Combine(appModel.Settings, "main.json"),
+                Path.Combine(appModel.Settings, BasicSettingFileName),
                 () => new BasicAppSettingViewModel
                 {
                     Language = CultureArea.Chinese,
@@ -94,6 +135,14 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<BasicAppSettingViewModel>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
             container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
+            container.Use<DialogService,
+                IDialogService,
+                IDialogServiceAmbient,
+                IBusyService,
+                IBusyServiceAmbient,
+                INotifyServiceAmbient,
+                INotifyService>(new DialogService());
+            Xaml.InstallViewManually(new BuiltinViews());
         }
 
         protected virtual ApplicationModel ConfigureDirectory()

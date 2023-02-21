@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
+             xmlns:f="urn:acorisoft/forest/ui"
              xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
              mc:Ignorable="d"
              d:DesignHeight="384"
@@ -14,11 +15,11 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MigaUI.Windows;component/Views/BuiltinViewStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Views/BuiltinViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border Background="{DynamicResource Brushes.Background}"
+    <Border Background="{f:BackgroundBrush}"
             CornerRadius="10"
             BorderThickness="0 4 0 0"
             BorderBrush="#e3a21a"
