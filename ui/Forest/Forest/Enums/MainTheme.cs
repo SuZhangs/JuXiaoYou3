@@ -3,6 +3,7 @@
     public enum MainTheme
     {
         Dark,
-        Light
+        Light,
+        Custom
     }
 }

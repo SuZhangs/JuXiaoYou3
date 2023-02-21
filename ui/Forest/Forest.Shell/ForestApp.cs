@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.Forest
             RegisterViews(Xaml.Container);
         }
 
-        protected virtual string GetLanguageFile(ApplicationModel appModel)
+        protected virtual string GetLanguageFile()
         {
             var fileName = Language.Culture switch
             {
@@ -59,7 +59,7 @@ namespace Acorisoft.FutureGL.Forest
                 _ => "cn.ini",
             };
             
-            return Path.Combine(appModel.Languages, fileName);
+            return Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"), fileName);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 设置语言。
             Language.Culture = basicAppSetting.Language;
-            Language.SetLanguage(GetLanguageFile(appModel));
+            Language.SetLanguage(GetLanguageFile());
 
             //
             // 注册服务
