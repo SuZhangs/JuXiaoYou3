@@ -29,12 +29,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             return base.MeasureOverride(constraint);
         }
 
-
         public static readonly DependencyProperty GapProperty = DependencyProperty.Register(
             nameof(Gap),
             typeof(int),
             typeof(SpacingStackPanel),
-            new PropertyMetadata(Boxing.IntValues[0]));
+            new FrameworkPropertyMetadata(Boxing.IntValues[0], FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public int Gap
         {
