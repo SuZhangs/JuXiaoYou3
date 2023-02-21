@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {
-    public interface ILanguageNode
+    public interface ITextResourceAdapter
     {
         /// <summary>
         /// 

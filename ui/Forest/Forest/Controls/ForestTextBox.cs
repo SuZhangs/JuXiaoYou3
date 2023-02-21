@@ -3,29 +3,30 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ForestTextBox : TextBox
+    public class ForestTextBox : TextBox, ITextResourceAdapter
     {
-         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
-            nameof(Palette),
-            typeof(HighlightColorPalette),
-            typeof(ForestTextBox),
-            new PropertyMetadata(default(HighlightColorPalette)));
-         
-         private const string PART_BdName      = "PART_Bd";
-         private const string PART_ContentName = "PART_ContentHost";
-         private const string PART_IconName    = "PART_Icon";
+        public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
+                                                                                                nameof(Palette),
+                                                                                                typeof(HighlightColorPalette),
+                                                                                                typeof(ForestTextBox),
+                                                                                                new PropertyMetadata(default(HighlightColorPalette)));
+
+        private const string PART_BdName      = "PART_Bd";
+        private const string PART_ContentName = "PART_ContentHost";
+        private const string PART_IconName    = "PART_Icon";
 
 
-         private Border       _bd;
-         private ScrollViewer _content;
-         private Path         _icon;
-         private Storyboard   _storyboard;
-        
+        private Border       _bd;
+        private ScrollViewer _content;
+        private Path         _icon;
+        private Storyboard   _storyboard;
+
         public ForestTextBox()
         {
             Finder                           =  GetTemplateChild();
@@ -106,13 +107,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected virtual void BuildAnimation()
         {
-            
         }
 
 
         protected virtual void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
-            
         }
 
         /// <summary>
@@ -138,7 +137,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-            
         }
 
         protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
@@ -147,6 +145,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 StateMachine.NextState(VisualStateTrigger.Next);
             }
+
             base.OnGotKeyboardFocus(e);
         }
 
@@ -156,6 +155,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
             }
+
             base.OnLostKeyboardFocus(e);
         }
 
@@ -165,6 +165,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             {
                 StateMachine.NextState(VisualStateTrigger.Next);
             }
+
             base.OnMouseEnter(e);
         }
 
@@ -174,7 +175,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             StateMachine.ResetState();
             base.OnMouseLeave(e);
         }
-        
+
 
         public override void OnApplyTemplate()
         {
@@ -182,7 +183,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             StateMachine.NextState();
             base.OnApplyTemplate();
         }
-        
+
         /// <summary>
         /// 模板查找器
         /// </summary>
@@ -192,7 +193,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// 视觉状态机。
         /// </summary>
         protected VisualDFA StateMachine { get; }
-        
+
         /// <summary>
         /// 动画工具
         /// </summary>
@@ -205,6 +206,15 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             get => (HighlightColorPalette)GetValue(PaletteProperty);
             set => SetValue(PaletteProperty, value);
+        }
+
+        public void SetText(string text)
+        {
+        }
+
+        public void SetToolTips(string text)
+        {
+            ToolTip = text;
         }
     }
 }

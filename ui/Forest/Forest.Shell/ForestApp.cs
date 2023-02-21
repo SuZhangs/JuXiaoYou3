@@ -93,7 +93,7 @@ namespace Acorisoft.FutureGL.Forest
             // 注册服务
             container.Use<BasicAppSettingViewModel>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
-            container.Use<ForestResolver, ILanguageNodeResolver>(new ForestResolver());
+            container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
         }
 
         protected virtual ApplicationModel ConfigureDirectory()

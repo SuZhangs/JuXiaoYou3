@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.Forest
     {
         public App()
         {
-            Xaml.Use<ForestResolver, ILanguageNodeResolver>(new ForestResolver());
+            Xaml.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
             ThemeSystem.Instance.Theme = new ForestLightTheme();
             Language.Culture           = CultureArea.English;
             Language.SetLanguage(GetLanguageFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages")));

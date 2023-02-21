@@ -3,7 +3,9 @@ using System.IO;
 using System.Windows;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Interfaces;
+
 // ReSharper disable InlineOutVariableDeclaration
+// ReSharper disable SuspiciousTypeConversion.Global
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -13,14 +15,14 @@ namespace Acorisoft.FutureGL.Forest
 
         public static readonly DependencyProperty NameProperty = DependencyProperty.RegisterAttached(
             "NameOverride",
-            typeof(string), 
-            typeof(Language), 
+            typeof(string),
+            typeof(Language),
             new PropertyMetadata(default(string)));
 
         public static readonly DependencyProperty RootProperty = DependencyProperty.RegisterAttached(
-            "RootOverride", 
-            typeof(string), 
-            typeof(Language), 
+            "RootOverride",
+            typeof(string),
+            typeof(Language),
             new PropertyMetadata(default(string)));
 
         public static readonly DependencyProperty IdProperty = DependencyProperty.RegisterAttached(
@@ -42,22 +44,21 @@ namespace Acorisoft.FutureGL.Forest
         /// </remarks>
         public static void SetId(FrameworkElement element, string id)
         {
-            var    resolver = Xaml.Get<ILanguageNodeResolver>();
-            var    node     = resolver.GetNode(element);
-            var    textKey  = $"{id}.Text";
-            var    toolKey  = $"{id}.ToolTips";
+            var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
+            var    textKey = $"{id}.Text";
+            var    toolKey = $"{id}.ToolTips";
             string text;
 
             if (GlobalStrings.TryGetValue(textKey, out text))
             {
-                node.SetText(text);
+                adapter.SetText(text);
             }
-                
+
             if (GlobalStrings.TryGetValue(toolKey, out text))
             {
-                node.SetToolTips(text);
+                adapter.SetToolTips(text);
             }
-                
+
             element.SetValue(IdProperty, id);
         }
 
@@ -75,16 +76,11 @@ namespace Acorisoft.FutureGL.Forest
 
         #region Root
 
-        
         public static void SetRoot(FrameworkElement element, string value)
         {
             if (element.DataContext is IViewModelLanguageService vmls)
             {
-                #if DEBUG
-                Debug.WriteLine($"根元素:{value}已经应用本地化翻译服务");
-                #endif
-                
-                vmls.RootName    =  value;
+                vmls.RootName = value;
             }
 
             element.SetValue(RootProperty, value);
@@ -94,7 +90,6 @@ namespace Acorisoft.FutureGL.Forest
         {
             return (string)element.GetValue(RootProperty);
         }
-        
 
         #endregion
 
@@ -116,26 +111,25 @@ namespace Acorisoft.FutureGL.Forest
             //
             if (element.DataContext is IViewModelLanguageService vmls)
             {
-                var    id       = $"{vmls.RootName}.{value}";
-                var    resolver = Xaml.Get<ILanguageNodeResolver>();
-                var    node     = resolver.GetNode(element);
-                var    textKey  = $"{id}.Text";
-                var    toolKey  = $"{id}.ToolTips";
+                var    id      = $"{vmls.RootName}.{value}";
+                var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
+                var    textKey = $"{id}.Text";
+                var    toolKey = $"{id}.ToolTips";
                 string text;
 
                 if (GlobalStrings.TryGetValue(textKey, out text))
                 {
-                    node.SetText(text);
+                    adapter.SetText(text);
                 }
-                
+
                 if (GlobalStrings.TryGetValue(toolKey, out text))
                 {
-                    node.SetToolTips(text);
+                    adapter.SetToolTips(text);
                 }
-                
+
                 element.SetValue(IdProperty, id);
-            } 
-            
+            }
+
             element.SetValue(NameProperty, value);
         }
 
@@ -152,28 +146,28 @@ namespace Acorisoft.FutureGL.Forest
         #endregion
 
         /// <summary>
-        /// 
+        /// 设置语言
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">文件名</param>
         public static void SetLanguage(string fileName)
         {
             // pageRoot.Id.Function
             try
             {
                 var lines = File.ReadAllLines(fileName);
-                var temp = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                var temp  = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                 foreach (var line in lines)
                 {
                     var separator = line.IndexOf('=');
-                    var id = line[..separator].Trim();
-                    var value = line[(separator + 1)..].Trim();
+                    var id        = line[..separator].Trim();
+                    var value     = line[(separator + 1)..].Trim();
 
                     temp.TryAdd(id, value);
                 }
-                
+
                 _stringDictionary.Clear();
-                
+
                 foreach (var kv in temp)
                 {
                     _stringDictionary.Add(kv.Key, kv.Value);

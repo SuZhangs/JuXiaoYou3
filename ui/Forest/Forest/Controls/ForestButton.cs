@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public abstract class ForestButton : Button, IHighlightColorPalette
+    public abstract class ForestButton : Button, IHighlightColorPalette, ITextResourceAdapter
     {
 
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
@@ -175,6 +175,17 @@ namespace Acorisoft.FutureGL.Forest.Controls
             Finder.Done(BuildAnimation).Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
+        }
+        
+
+        public void SetText(string text)
+        {
+            Content = text;
+        }
+
+        public void SetToolTips(string text)
+        {
+            ToolTip = text;
         }
         
         /// <summary>

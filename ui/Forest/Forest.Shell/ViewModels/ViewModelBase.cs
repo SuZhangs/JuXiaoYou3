@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
-        private Dictionary<string, ILanguageNode> _elements;
+        private Dictionary<string, ITextResourceAdapter> _elements;
         private string                            _rootName;
         
         protected ViewModelBase()

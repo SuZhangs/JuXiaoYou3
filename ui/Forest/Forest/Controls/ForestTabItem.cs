@@ -5,6 +5,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Styles.Animations;
 
@@ -16,7 +17,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public class ForestTabItem : TabItem
+    public class ForestTabItem : TabItem, ITextResourceAdapter
     {
         static ForestTabItem()
         {
@@ -404,6 +405,16 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
 
             base.OnMouseLeave(e);
+        }
+
+        public void SetText(string text)
+        {
+            Header = text;
+        }
+
+        public void SetToolTips(string text)
+        {
+            ToolTip = text;
         }
 
         /// <summary>
