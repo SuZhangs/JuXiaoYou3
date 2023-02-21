@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -45,6 +46,10 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 注册上下文依赖的服务
             (Application.Current as ForestApp)?.RegisterContextServices(Xaml.Container);
+            
+            //
+            // 安装事件广播
+            Xaml.Get<IWindowEventBroadcastAmbient>().SetEventSource(this);
             OnLoaded(sender, e);
         }
         

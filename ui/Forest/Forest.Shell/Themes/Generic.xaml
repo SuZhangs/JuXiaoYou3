@@ -265,7 +265,7 @@
 
     <Style TargetType="{x:Type p:PrimitiveButton}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{f:Foreground}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Style.Triggers>
             <Trigger Property="Mode" Value="GoBack">
                 <Setter Property="MinHeight" Value="32" />
@@ -449,27 +449,16 @@
 
     <Style x:Key="ForestWindow" TargetType="{x:Type w:ForestWindow}">
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="Background" Value="#F1F1F1" />
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Color" Value="Transparent" />
+        <Setter Property="ExtendToTitleBar" Value="False"/>
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="Height" Value="64" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome ResizeBorderThickness="7"
                               CornerRadius="0"
-                              NonClientFrameEdges="Bottom" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="TitleBarTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <TextBlock WindowChrome.IsHitTestVisibleInChrome="False"
-                               FontSize="14"
-                               HorizontalAlignment="Right"
-                               Padding="0 4 64 4"
-                               Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},Path=Title, Mode=OneWay}"
-                               VerticalAlignment="Center" />
-                </DataTemplate>
+                              GlassFrameThickness="-1" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">

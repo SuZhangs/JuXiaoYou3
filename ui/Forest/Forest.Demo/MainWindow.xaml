@@ -10,6 +10,7 @@
                  xmlns:fs="urn:acorisoft/forest/shell"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  mc:Ignorable="d"
+                 Background="Crimson"
                  f:Language.Root="Home"
                  Title="MainWindow"
                  WindowState="Maximized"

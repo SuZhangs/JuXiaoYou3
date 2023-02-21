@@ -9,6 +9,7 @@
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml"/>
+                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
                  <ui:ThemesDictionary Theme="Light"/>
                  <ui:ControlsDictionary/>
              </ResourceDictionary.MergedDictionaries>
