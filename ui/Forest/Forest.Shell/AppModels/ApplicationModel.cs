@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.Forest.AppModels
         {
             CheckDirectory(Logs);
             CheckDirectory(Settings);
+            CheckDirectory(Languages);
             return this;
         }
         
@@ -32,5 +33,10 @@ namespace Acorisoft.FutureGL.Forest.AppModels
         /// 设置目录
         /// </summary>
         public string Settings { get; init; }
+        
+        /// <summary>
+        /// 语言目录
+        /// </summary>
+        public string Languages { get; init; }
     }
 }

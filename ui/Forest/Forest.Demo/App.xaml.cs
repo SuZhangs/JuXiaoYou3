@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Forest
@@ -16,7 +20,10 @@ namespace Acorisoft.FutureGL.Forest
     {
         public App()
         {
+            Xaml.Use<ForestResolver, ILanguageNodeResolver>(new ForestResolver());
             ThemeSystem.Instance.Theme = new ForestLightTheme();
+            Language.Culture           = CultureArea.Chinese;
+            Language.SetLanguage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"));
         }
     }
 }

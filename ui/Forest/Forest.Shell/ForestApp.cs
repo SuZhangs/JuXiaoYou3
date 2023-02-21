@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Utils;
 using DryIoc;
@@ -45,6 +47,21 @@ namespace Acorisoft.FutureGL.Forest
             RegisterViews(Xaml.Container);
         }
 
+        protected virtual string GetLanguageFile(ApplicationModel appModel)
+        {
+            var fileName = Language.Culture switch
+            {
+                CultureArea.English => "en.ini",
+                CultureArea.French => "fr.ini",
+                CultureArea.Japanese => "jp.ini",
+                CultureArea.Korean => "kr.ini",
+                CultureArea.Russian => "ru.ini",
+                _ => "cn.ini",
+            };
+            
+            return Path.Combine(appModel.Languages, fileName);
+        }
+
         /// <summary>
         /// 注册框架服务。
         /// </summary>
@@ -59,7 +76,7 @@ namespace Acorisoft.FutureGL.Forest
                 Path.Combine(appModel.Settings, "main.json"),
                 () => new BasicAppSettingViewModel
                 {
-                    Language = CultureArea.SimplifiedChinese,
+                    Language = CultureArea.Chinese,
                     Theme    = MainTheme.Light
                 });
 
@@ -70,11 +87,13 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 设置语言。
             Language.Culture = basicAppSetting.Language;
+            Language.SetLanguage(GetLanguageFile(appModel));
 
             //
             // 注册服务
             container.Use<BasicAppSettingViewModel>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
+            container.Use<ForestResolver, ILanguageNodeResolver>(new ForestResolver());
         }
 
         protected virtual ApplicationModel ConfigureDirectory()
@@ -86,8 +105,9 @@ namespace Acorisoft.FutureGL.Forest
 
             return new ApplicationModel
             {
-                Logs     = Path.Combine(domain, "Logs"),
-                Settings = Path.Combine(domain, "UserData")
+                Logs      = Path.Combine(domain, "Logs"),
+                Settings  = Path.Combine(domain, "UserData"),
+                Languages = Path.Combine(domain, "Languages")
             }.Initialize();
         }
 

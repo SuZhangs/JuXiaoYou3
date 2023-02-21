@@ -9,9 +9,9 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class DialogViewModel : ViewModelBase, IDialogViewModel, __IDialogViewModel
     {
-        protected readonly DialogTaskSource Wait;
-        protected          Action           CloseAction;
-        private            string           _title;
+        protected readonly DialogTaskSource                     Wait;
+        protected          Action                               CloseAction;
+        private            string                               _title;
 
         protected DialogViewModel()
         {

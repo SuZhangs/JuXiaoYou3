@@ -7,8 +7,11 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// <summary>
     /// <see cref="ViewModelBase"/> 表示一个视图模型基类。
     /// </summary>
-    public abstract class ViewModelBase : ForestObject, IViewModel
+    public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
+        private Dictionary<string, ILanguageNode> _elements;
+        private string                            _rootName;
+        
         protected ViewModelBase()
         {
             Collector = new DisposableCollector(8);
@@ -68,5 +71,17 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 获得垃圾回收器
         /// </summary>
         public DisposableCollector Collector { get; }
+        
+        string IViewModelLanguageService.RootName
+        {
+            get => _rootName;
+            set => _rootName = value;
+        }
+
+        Dictionary<string, ILanguageNode> IViewModelLanguageService.ElementBag
+        {
+            get => _elements;
+            set => _elements = value;
+        }
     }
 }

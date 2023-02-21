@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest.ViewModels;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -22,6 +23,7 @@ namespace Acorisoft.FutureGL.Forest
     {
         public MainWindow()
         {
+            DataContext = new AppViewModel();
             InitializeComponent();
         }
     }

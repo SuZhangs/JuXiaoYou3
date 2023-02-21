@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest"
         xmlns:demo="clr-namespace:Acorisoft.FutureGL.Forest.Demos"
-        xmlns:fui="urn:acorisoft/forest/ui"
+        xmlns:vm="clr-namespace:Acorisoft.FutureGL.Forest.ViewModels"
+        xmlns:f="urn:acorisoft/forest/ui"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
+        f:Language.Root="Home"
         Title="MainWindow" 
         WindowState="Maximized"
         MinWidth="1280"
@@ -15,11 +17,13 @@
     <Window.Resources>
         <Geometry x:Key="Icon">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
     </Window.Resources>
-    <fui:ForestTabControl TabStripPlacement="Left">
-        <fui:ForestTabItem Header="按钮展示" Icon="{StaticResource Icon}">
+    <f:ForestTabControl TabStripPlacement="Left">
+        <f:ForestTabItem f:Language.Id="Test"
+                         Header="按钮展示" 
+                         Icon="{StaticResource Icon}">
             <demo:ButtonDemo/>
-        </fui:ForestTabItem>
-        <fui:ForestTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
+        </f:ForestTabItem>
+        <f:ForestTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
             <Border Background="#30000000"
                         Padding="32">
                 <Viewbox>
@@ -30,8 +34,8 @@
                     </Border>
                 </Viewbox>
             </Border>
-        </fui:ForestTabItem>
-        <fui:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
+        </f:ForestTabItem>
+        <f:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
             <WrapPanel Background="#F1F1F1">
                 <Border Background="White"
                         Margin="8"
@@ -39,7 +43,7 @@
                         MinHeight="64"
                         Padding="14 16 16 16">
                     <DockPanel>
-                        <fui:HighlightButton DockPanel.Dock="Top"
+                        <f:HighlightButton DockPanel.Dock="Top"
                                              Content="添加"/>
                         <UniformGrid Columns="4"
                                      Margin="0 8 0 0">
@@ -64,7 +68,7 @@
                                        Margin="8 0 0 0"
                                        VerticalAlignment="Stretch"/>
                             
-                            <fui:HighlightButton Content="添加"/>
+                            <f:HighlightButton Content="添加"/>
                         </DockPanel>
                         
                         <UniformGrid Columns="4"
@@ -77,6 +81,6 @@
                     </DockPanel>
                 </Border>
             </WrapPanel>
-        </fui:ForestTabItem>
-    </fui:ForestTabControl>
+        </f:ForestTabItem>
+    </f:ForestTabControl>
 </Window>

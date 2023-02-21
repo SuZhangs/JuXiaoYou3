@@ -5,12 +5,7 @@
         /// <summary>
         /// 简中
         /// </summary>
-        SimplifiedChinese,
-        
-        /// <summary>
-        /// 繁中
-        /// </summary>
-        TraditionalChinese,
+        Chinese,
         
         /// <summary>
         /// 韩语
