@@ -5,7 +5,7 @@ namespace Acorisoft.FutureGL.Forest.Models
     /// <summary>
     /// 表示一个程序基本的应用设置。
     /// </summary>
-    public class BasicAppSettingViewModel : ForestObject
+    public class BasicAppSetting : ForestObject
     {
         private CultureArea _language;
         private MainTheme   _theme;

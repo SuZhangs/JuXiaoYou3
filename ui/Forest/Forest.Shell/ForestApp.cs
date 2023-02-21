@@ -113,9 +113,9 @@ namespace Acorisoft.FutureGL.Forest
 
             //
             // 构建基本的属性
-            var basicAppSetting = JSON.OpenSetting<BasicAppSettingViewModel>(
+            var basicAppSetting = JSON.OpenSetting<BasicAppSetting>(
                 Path.Combine(appModel.Settings, BasicSettingFileName),
-                () => new BasicAppSettingViewModel
+                () => new BasicAppSetting
                 {
                     Language = CultureArea.Chinese,
                     Theme    = MainTheme.Light
@@ -132,7 +132,7 @@ namespace Acorisoft.FutureGL.Forest
 
             //
             // 注册服务
-            container.Use<BasicAppSettingViewModel>(basicAppSetting);
+            container.Use<BasicAppSetting>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
             container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
             container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
@@ -186,7 +186,7 @@ namespace Acorisoft.FutureGL.Forest
         /// </summary>
         /// <returns>返回主题。</returns>
         /// <remarks>必须在启动前完成。</remarks>
-        protected virtual ForestThemeSystem GetThemeSystem(BasicAppSettingViewModel basicAppSetting)
+        protected virtual ForestThemeSystem GetThemeSystem(BasicAppSetting basicAppSetting)
         {
             return basicAppSetting.Theme == MainTheme.Light ? new ForestLightTheme() : new ForestDarkTheme();
         }
