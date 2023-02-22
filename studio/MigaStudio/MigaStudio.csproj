@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages" />
       <Folder Include="Reosurces\Behaviors" />
       <Folder Include="Reosurces\ContentTemplates" />
       <Folder Include="Reosurces\Converters" />

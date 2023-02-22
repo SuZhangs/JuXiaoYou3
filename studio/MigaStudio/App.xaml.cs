@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.MigaDB.Core;
 using DryIoc;
 using NLog;
 
@@ -31,10 +32,13 @@ namespace Acorisoft.FutureGL.MigaStudio
                 Settings = Path.Combine(domain, "UserData")
             }.Initialize();
         }
+        
+        
 
         protected override void RegisterServices(ILogger logger, IContainer container)
         {
-            container.Use<>()
+            container.Use<DatabaseManager, IDatabaseManager>(
+                DatabaseManager.GetDefaultDatabaseManager(logger));
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)
