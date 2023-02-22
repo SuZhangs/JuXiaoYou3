@@ -4,6 +4,7 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>disable</Nullable>
         <RootNamespace>Acorisoft.FutureGL.Forest</RootNamespace>
+        <OutDir>../../../Builds/Forest</OutDir>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 

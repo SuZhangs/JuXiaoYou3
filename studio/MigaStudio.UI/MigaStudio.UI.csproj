@@ -5,6 +5,7 @@
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
+        <OutDir>../../Builds/Studio</OutDir>
     </PropertyGroup>
 
     <ItemGroup>

@@ -9,14 +9,13 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
-        private Dictionary<string, ITextResourceAdapter> _elements;
-        private string                            _rootName;
-        
+        private string _rootName;
+
         protected ViewModelBase()
         {
             Collector = new DisposableCollector(8);
         }
-        
+
         /// <summary>
         /// 首次启动
         /// </summary>
@@ -32,15 +31,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// <param name="param">视图参数</param>
         public virtual void Start(ViewParam param)
         {
-            
         }
+
         /// <summary>
         /// 表示关闭
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
         public virtual void Stop()
         {
-            
         }
 
         /// <summary>
@@ -49,29 +47,27 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// <returns>返回一个可等待的任务。</returns>
         public virtual void Suspend()
         {
-            
         }
-        
+
         /// <summary>
         /// 表示恢复
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
         public virtual void Resume()
         {
-            
         }
 
         /// <summary>
         /// 获得调度器
         /// </summary>
         public IScheduler Scheduler => Xaml.Get<IScheduler>();
-        
+
 
         /// <summary>
         /// 获得垃圾回收器
         /// </summary>
         public DisposableCollector Collector { get; }
-        
+
         string IViewModelLanguageService.RootName
         {
             get => _rootName;
