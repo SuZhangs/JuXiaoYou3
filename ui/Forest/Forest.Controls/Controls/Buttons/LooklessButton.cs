@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.Forest.Controls
+﻿namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {
     public class LooklessButton : Button
     {

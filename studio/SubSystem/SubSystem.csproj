@@ -9,13 +9,29 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\frameworks\MigaUtils\MigaUtils.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest.Controls\Forest.Controls.csproj" />
+      <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="NAudio" Version="2.1.0" />
       <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Resources\Icon\MusicIconPack.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Wpf.Ui">
+        <HintPath>F:\.nuget\wpf-ui\3.0.0-preview.1\lib\net7.0-windows7.0\Wpf.Ui.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -5,13 +5,22 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DryIoc;
 
 namespace Acorisoft.FutureGL.MigaStudio.SubSystem
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
+        protected override void RegisterServices(IContainer container)
+        {
+            
+        }
+
+        protected override void RegisterViews(IContainer container)
+        {
+        }
     }
 }
