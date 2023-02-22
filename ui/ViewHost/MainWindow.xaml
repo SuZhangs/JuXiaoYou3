@@ -4,13 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewHost"
+        xmlns:mgp="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages;assembly=MigaStudio"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DockPanel Margin="16 36 16 16">
-            <TextBlock FontFamily="华康勘亭流W9(P)"
-                       FontSize="24"
-                       Text="设置"/>
-        </DockPanel>
-    </Grid>
+        MinWidth="1280"
+        MinHeight="720">
+    <mgp:LaunchPage/>
 </Window>

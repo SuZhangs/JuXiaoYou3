@@ -47,7 +47,6 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Xaml.Get<ILogger>().Warn("启动");
             base.OnStartup(e);
         }
     }
