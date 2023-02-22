@@ -88,12 +88,12 @@ namespace Acorisoft.FutureGL.Forest
 
         private void Initialize()
         {
-            RegisterFrameworkServices(Xaml.Container);
-            RegisterServices(Xaml.Container);
-            RegisterViews(Xaml.Container);
+            var logger = RegisterFrameworkServices(Xaml.Container);
+            RegisterServices(logger, Xaml.Container);
+            RegisterViews(logger, Xaml.Container);
         }
 
-        protected virtual string GetLanguageFile()
+        protected virtual string ConfigureLanguageFile()
         {
             var fileName = Language.Culture switch
             {
@@ -112,9 +112,10 @@ namespace Acorisoft.FutureGL.Forest
         /// 注册框架服务。
         /// </summary>
         /// <param name="container">服务容器。</param>
-        protected virtual void RegisterFrameworkServices(IContainer container)
+        protected virtual ILogger RegisterFrameworkServices(IContainer container)
         {
             var appModel = ConfigureDirectory();
+            var logger = ConfigureLogger(appModel);
 
             //
             // 构建基本的属性
@@ -133,7 +134,7 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 设置语言。
             Language.Culture = basicAppSetting.Language;
-            Language.SetLanguage(GetLanguageFile());
+            Language.SetLanguage(ConfigureLanguageFile());
 
             //
             // 注册服务
@@ -149,10 +150,17 @@ namespace Acorisoft.FutureGL.Forest
                 IBusyServiceAmbient,
                 INotifyServiceAmbient,
                 INotifyService>(new DialogService());
-            container.Use<ILogger>(ConfigureLogger(appModel));
+            container.Use<ILogger>(logger);
             Xaml.InstallViewManually(new BuiltinViews());
+
+            return logger;
         }
 
+        /// <summary>
+        /// 配置日志工具
+        /// </summary>
+        /// <param name="appModel">app模型</param>
+        /// <returns>返回日志工具</returns>
         protected virtual ILogger ConfigureLogger(ApplicationModel appModel)
         {
             var config = new LoggingConfiguration();
@@ -174,6 +182,9 @@ namespace Acorisoft.FutureGL.Forest
             return LogManager.GetLogger("App");
         }
 
+        /// <summary>
+        /// 配置目录
+        /// </summary>
         protected virtual ApplicationModel ConfigureDirectory()
         {
             var domain = ApplicationModel.CheckDirectory(
@@ -192,14 +203,16 @@ namespace Acorisoft.FutureGL.Forest
         /// <summary>
         /// 注册服务。
         /// </summary>
+        /// <param name="logger">日志工具。</param>
         /// <param name="container">服务容器。</param>
-        protected abstract void RegisterServices(IContainer container);
+        protected abstract void RegisterServices(ILogger logger, IContainer container);
 
         /// <summary>
         /// 注册视图
         /// </summary>
+        /// <param name="logger">日志工具。</param>
         /// <param name="container">服务容器。</param>
-        protected abstract void RegisterViews(IContainer container);
+        protected abstract void RegisterViews(ILogger logger, IContainer container);
 
         /// <summary>
         /// 注册上下文依赖的服务。

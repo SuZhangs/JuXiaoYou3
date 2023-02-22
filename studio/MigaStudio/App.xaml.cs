@@ -32,12 +32,12 @@ namespace Acorisoft.FutureGL.MigaStudio
             }.Initialize();
         }
 
-        protected override void RegisterServices(IContainer container)
+        protected override void RegisterServices(ILogger logger, IContainer container)
         {
-            
+            container.Use<>()
         }
 
-        protected override void RegisterViews(IContainer container)
+        protected override void RegisterViews(ILogger logger, IContainer container)
         {
         }
 
