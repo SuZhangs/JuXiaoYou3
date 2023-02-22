@@ -9,6 +9,9 @@ using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.Views;
 using DryIoc;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -23,32 +26,32 @@ namespace Acorisoft.FutureGL.Forest
                     new BindingInfo
                     {
                         ViewModel = typeof(DangerViewModel),
-                        View      = typeof(DangerView)
+                        View = typeof(DangerView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(WarningViewModel),
-                        View      = typeof(WarningView)
+                        View = typeof(WarningView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(SuccessViewModel),
-                        View      = typeof(SuccessView)
+                        View = typeof(SuccessView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(InfoViewModel),
-                        View      = typeof(InfoView)
+                        View = typeof(InfoView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(ObsoleteViewModel),
-                        View      = typeof(ObsoleteView)
+                        View = typeof(ObsoleteView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(StringViewModel),
-                        View      = typeof(StringView)
+                        View = typeof(StringView)
                     },
                 };
             }
@@ -101,7 +104,7 @@ namespace Acorisoft.FutureGL.Forest
                 CultureArea.Russian => "ru.ini",
                 _ => "cn.ini",
             };
-            
+
             return Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"), fileName);
         }
 
@@ -120,7 +123,7 @@ namespace Acorisoft.FutureGL.Forest
                 () => new BasicAppSetting
                 {
                     Language = CultureArea.Chinese,
-                    Theme    = MainTheme.Light
+                    Theme = MainTheme.Light
                 });
 
             //
@@ -137,7 +140,8 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<BasicAppSetting>(basicAppSetting);
             container.Use<ApplicationModel>(appModel);
             container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
-            container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
+            container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(
+                new WindowEventBroadcast());
             container.Use<DialogService,
                 IDialogService,
                 IDialogServiceAmbient,
@@ -145,7 +149,29 @@ namespace Acorisoft.FutureGL.Forest
                 IBusyServiceAmbient,
                 INotifyServiceAmbient,
                 INotifyService>(new DialogService());
+            container.Use<ILogger>(ConfigureLogger(appModel));
             Xaml.InstallViewManually(new BuiltinViews());
+        }
+
+        protected virtual ILogger ConfigureLogger(ApplicationModel appModel)
+        {
+            var config = new LoggingConfiguration();
+            var debugFileTarget = new DebuggerTarget
+            {
+                Layout = "【${level}】 ${date:HH:mm:ss} ${message}"
+            };
+            
+            var logfile = new FileTarget("logfile")
+            {
+                FileName = appModel.Logs + "/${shortdate}.log",
+                Layout   = "${level} ${shortdate} | ${message}  ${exception} ${event-properties:myProperty}"
+            };
+
+            config.AddRule(LogLevel.Warn, LogLevel.Fatal, logfile);
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, debugFileTarget);
+
+            LogManager.Configuration = config;
+            return LogManager.GetLogger("App");
         }
 
         protected virtual ApplicationModel ConfigureDirectory()
@@ -157,8 +183,8 @@ namespace Acorisoft.FutureGL.Forest
 
             return new ApplicationModel
             {
-                Logs      = Path.Combine(domain, "Logs"),
-                Settings  = Path.Combine(domain, "UserData"),
+                Logs = Path.Combine(domain, "Logs"),
+                Settings = Path.Combine(domain, "UserData"),
                 Languages = Path.Combine(domain, "Languages")
             }.Initialize();
         }

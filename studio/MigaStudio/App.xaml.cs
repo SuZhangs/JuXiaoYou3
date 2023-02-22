@@ -9,6 +9,7 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using DryIoc;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {
@@ -38,6 +39,12 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         protected override void RegisterViews(IContainer container)
         {
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Xaml.Get<ILogger>().Warn("启动");
+            base.OnStartup(e);
         }
     }
 }
