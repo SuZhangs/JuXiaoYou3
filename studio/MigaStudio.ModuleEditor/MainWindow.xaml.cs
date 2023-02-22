@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MigaStudio.ModuleEditor
+namespace Acorisoft.FutureGL.MigaStudio.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
