@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils;
 using Microsoft.Win32;
@@ -18,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utils
         {
             var opendlg = new OpenFileDialog
             {
-                Filter      = GetImageFilter(),
+                Filter = GetImageFilter(),
             };
 
             if (opendlg.ShowDialog() != true)
@@ -32,24 +33,47 @@ namespace Acorisoft.FutureGL.MigaStudio.Utils
                 var buffer = await File.ReadAllBytesAsync(fileName);
                 var ms = new MemoryStream(buffer);
                 var image = Image.Load<Rgba32>(ms);
+                var w = image.Width;
+                var h = image.Height;
+                var horizontalOrientation = w > h;
+                var square = w == h;
 
                 //
                 // 要求图片处理器进行处理
-                if (requireSizeConstraint && image.Width != image.Height)
+                if (requireSizeConstraint && !square)
                 {
-                    var processTask = ImageHandler?.Invoke(image);
+                }
 
-                    if (processTask is null)
-                    {
-                        callback?.Invoke(Result<string>.Failed(AppReason.MissingService));
-                        return;
-                    }
-                    
-                    var finalResultStream = processTask.
+                // 240p 320x240
+                // 720p 1280x720
+                // 1080p 1920x1080
+                var property = ResourceProperty.Image;
+
+                if (horizontalOrientation)
+                {
+                    var largeThan240 = w >= 320;
+                    var largeThan720 = w >= 1280;
+                    var largeThan1080 = w >= 1920;
+
+                    property =
+                        largeThan240
+                            ? largeThan720
+                                ? largeThan1080 ? ResourceProperty.Image_Horizontal_1080P : ResourceProperty.Image_Horizontal_720P
+                                : ResourceProperty.Image_Horizontal_240P
+                            : ResourceProperty.Image_Horizontal_MinSize;
                 }
                 else
                 {
-                    
+                    var largeThan240 = h >= 240;
+                    var largeThan720 = h >= 720;
+                    var largeThan1080 = h >= 1080;
+
+                    property =
+                        largeThan240
+                            ? largeThan720
+                                ? largeThan1080 ? ResourceProperty.Image_Horizontal_1080P : ResourceProperty.Image_Horizontal_720P
+                                : ResourceProperty.Image_Horizontal_240P
+                            : ResourceProperty.Image_Horizontal_MinSize;
                 }
             }
             catch (IOException)
@@ -71,10 +95,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utils
                 _ => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
             };
         }
-        
+
         /// <summary>
         /// 图片处理程序
         /// </summary>
-        public static Func<Image<Rgba32>, Task<Result<Stream>>> ImageHandler { get; set; }
+        public static Func<Image<Rgba32>, Task<Result<Stream>>> ImageProcessHandler { get; set; }
     }
 }
