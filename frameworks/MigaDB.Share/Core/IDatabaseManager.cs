@@ -24,6 +24,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回一个操作结果</returns>
         Task<DatabaseResult> CreateAsync(string directory, DatabaseProperty property);
 
+        Task<DatabaseResult> CacheAsync();
+
         /// <summary>
         /// 关闭世界观。
         /// </summary>

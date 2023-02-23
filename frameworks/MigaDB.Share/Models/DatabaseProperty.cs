@@ -2,8 +2,11 @@
 {
     public class DatabaseProperty : StorageObject
     {
-        // TODO: add
-        public static bool IsValid(DatabaseProperty property) => property is not null;
+        public static bool IsValid(DatabaseProperty property) => 
+            property is not null &&
+            !string.IsNullOrEmpty(property.Author) &&
+            !string.IsNullOrEmpty(property.Name) &&
+            !string.IsNullOrEmpty(property.ForeignName);
         
         /// <summary>
         /// 世界观名称
@@ -21,13 +24,18 @@
         public string Author { get; set; }
         
         /// <summary>
-        /// 协作者名称
+        /// 介绍
         /// </summary>
-        public string Partner { get; set; }
+        public string Intro { get; set; }
         
         /// <summary>
-        /// 头像
+        /// 封面
         /// </summary>
-        public string Avatar { get; set; }
+        public string Cover { get; set; }
+        
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             var palette = Palette;
 
             var nsColor = theme.GetHighlightColor(palette, 3);
-            var h1Color = theme.GetHighlightColor(palette, 2);
+            var h1Color = theme.GetHighlightColor(palette, 4);
             var h2Color = theme.GetHighlightColor(palette, 5);
             var nfColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using DryIoc;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.SubSystem
 {
@@ -14,13 +15,13 @@ namespace Acorisoft.FutureGL.MigaStudio.SubSystem
     /// </summary>
     public partial class App
     {
-        protected override void RegisterServices(IContainer container)
+        protected override void RegisterServices(ILogger logger, IContainer container)
         {
-            
         }
 
-        protected override void RegisterViews(IContainer container)
+        protected override void RegisterViews(ILogger logger, IContainer container)
         {
         }
+
     }
 }

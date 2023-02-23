@@ -542,7 +542,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <summary>
         /// 关闭世界观。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>返回一个操作结果</returns>
         public async Task<DatabaseResult> CloseAsync()
         {
             if (!_isOpen.CurrentValue)
@@ -578,6 +578,32 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return DatabaseResult.Successful;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>返回一个操作结果</returns>
+        public async Task<DatabaseResult> CacheAsync()
+        {
+            if (!_isOpen.CurrentValue)
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.DatabaseNotOpen);
+            }
+
+            var database = _database.CurrentValue;
+            var indexFile = database.DatabaseIndexFileName;
+            var property = database.Get<DatabaseProperty>();
+
+            try
+            {
+                await JSON.ToFileAsync(property, indexFile);
+                return DatabaseResult.Successful;
+            }
+            catch
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.Unexpected);
+            }
+        }
+ 
         /// <summary>
         /// 获取引擎。
         /// </summary>

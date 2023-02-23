@@ -12,6 +12,7 @@ using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using DryIoc;
+using NLog;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -20,14 +21,13 @@ namespace Acorisoft.FutureGL.Forest
     /// </summary>
     public partial class App
     {
-        protected override void RegisterServices(IContainer container)
+        protected override void RegisterServices(ILogger logger, IContainer container)
         {
+            
         }
 
-        protected override void RegisterViews(IContainer container)
+        protected override void RegisterViews(ILogger logger, IContainer container)
         {
         }
-        
-        
     }
 }

@@ -46,6 +46,11 @@
         /// 未知的错误
         /// </summary>
         Unexpected,
+        
+        /// <summary>
+        /// 未打开数据库
+        /// </summary>
+        DatabaseNotOpen,
     }
     
     public class DatabaseResult

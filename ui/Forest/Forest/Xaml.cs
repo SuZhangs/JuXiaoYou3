@@ -23,7 +23,8 @@ namespace Acorisoft.FutureGL.Forest
 
         static Xaml()
         {
-            Container            = new Container(Rules.Default.WithTrackingDisposableTransients());
+            Container            = new Container(x => x.With(FactoryMethod.ConstructorWithResolvableArguments)
+                                                       .WithTrackingDisposableTransients());
             ViewInfoMapper       = new Dictionary<Type, BindingInfo>();
             ViewModelInfoMapper  = new Dictionary<Type, BindingInfo>();
             InstanceScope        = new Dictionary<Type, object>();

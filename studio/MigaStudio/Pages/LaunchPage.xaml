@@ -45,6 +45,7 @@
                   Width="420">
 
                 <StackPanel Grid.Column="1">
+                    
                     <ui:TextBox Margin="0 0 0 8"
                                 PlaceholderText="世界观名称"
                                 PlaceholderEnabled="True"/>
