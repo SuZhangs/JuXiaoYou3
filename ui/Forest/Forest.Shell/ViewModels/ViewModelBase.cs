@@ -25,22 +25,31 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         protected AsyncRelayCommand AsyncCommand(Func<Task> execute) => new AsyncRelayCommand(execute);
 
-        protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute) => Associate( new AsyncRelayCommand(execute, canExecute));
+        protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute, bool updateWhenViewModelChanged = false)
+        {
+            return updateWhenViewModelChanged ? Associate(new AsyncRelayCommand(execute, canExecute)) : new AsyncRelayCommand(execute, canExecute);
+        }
 
         protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute) => new AsyncRelayCommand<T>(execute);
 
-        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute) => Associate(new AsyncRelayCommand<T>(execute, canExecute));
+        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute, bool updateWhenViewModelChanged = false)
+        {
+            return updateWhenViewModelChanged ? Associate(new AsyncRelayCommand<T>(execute, canExecute)) : new AsyncRelayCommand<T>(execute, canExecute);
+        }
 
         protected RelayCommand Command(Action execute) => new RelayCommand(execute);
 
-        protected RelayCommand Command(Action execute, Func<bool> canExecute) => Associate(new RelayCommand(execute, canExecute));
+        protected RelayCommand Command(Action execute, Func<bool> canExecute, bool updateWhenViewModelChanged = false)
+        {
+            return updateWhenViewModelChanged ? Associate(new RelayCommand(execute, canExecute)) : new RelayCommand(execute, canExecute);
+        }
 
         private TCommand Associate<TCommand>(TCommand command) where TCommand : IRelayCommand
         {
             _commandMapping.Add(command);
             return command;
         }
-        
+
         #endregion
 
         protected override void OnPropertyChanged(string propertyName)

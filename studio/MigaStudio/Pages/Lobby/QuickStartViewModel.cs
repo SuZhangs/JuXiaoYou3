@@ -4,6 +4,8 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
+using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Models;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
@@ -20,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
 
         public QuickStartViewModel()
         {
-            CreateCommand      = AsyncCommand(CreateImpl, CanCreate);
+            CreateCommand      = AsyncCommand(CreateImpl, CanCreate, true);
             OpenCommand        = AsyncCommand(OpenImpl);
             SelectIconCommand  = AsyncCommand(SelectIconImpl);
             SelectCoverCommand = AsyncCommand(SelectCoverImpl);
@@ -42,14 +44,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
 
             var folder = opendlg.SelectedPath;
             var dbMgr = Xaml.Get<IDatabaseManager>();
-            var result = await dbMgr.CreateAsync(folder, new DatabaseProperty
+            var property = new DatabaseProperty
             {
+                Id          = ID.Get(),
                 Name        = Name,
                 ForeignName = ForeignName,
                 Author      = Author,
                 Icon        = Icon,
                 Cover       = Cover,
-            });
+            };
+            
+            var result = await dbMgr.CreateAsync(folder, property);
+
+            if (result.IsFinished)
+            {
+                var cache = new RepositoryCache
+                {
+                    Id     = property.Id,
+                    Name   = Name,
+                    Author = Author,
+                    Intro = property.Intro,
+                    Path = folder,
+                    OpenCount = 1
+                };
+
+                await Xaml.Get<ISystemSetting>().AddRepository(cache);
+            }
+            else
+            {
+                var reason = result.Reason;
+            }
         }
 
         private async Task OpenImpl()

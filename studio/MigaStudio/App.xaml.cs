@@ -49,8 +49,8 @@ namespace Acorisoft.FutureGL.MigaStudio
             
             //
             // Repository Setting
-            var repositorySetting = JSON.OpenSetting<RepositorySetting>(
-                Path.Combine(appModel.Settings, RepositorySettingFileName),
+            var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
+            var repositorySetting = JSON.OpenSetting<RepositorySetting>(repositorySettingFileName,
                 () => new RepositorySetting
                 {
                     LastRepository = null,
@@ -59,7 +59,11 @@ namespace Acorisoft.FutureGL.MigaStudio
 
             //
             // 注册设置
-            Xaml.Use<RepositorySetting>(repositorySetting);
+            Xaml.Use<ISystemSetting>(new SystemSetting
+            {
+                RepositorySetting = repositorySetting,
+                RepositorySettingFileName = repositorySettingFileName
+            });
 
             return data;
         }
