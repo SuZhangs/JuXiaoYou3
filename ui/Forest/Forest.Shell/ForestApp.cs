@@ -56,6 +56,7 @@ namespace Acorisoft.FutureGL.Forest
                 };
             }
         }
+        
 
         protected const string BasicSettingFileName = "main.json";
 
@@ -143,6 +144,7 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
             container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(
                 new WindowEventBroadcast());
+            container.Use<IViewInstaller>(new Xaml.Installer());
             container.Use<DialogService,
                 IDialogService,
                 IDialogServiceAmbient,

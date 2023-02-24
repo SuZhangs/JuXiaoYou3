@@ -1,4 +1,6 @@
-﻿using DryIoc;
+﻿using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
+using DryIoc;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -526,5 +528,50 @@ namespace Acorisoft.FutureGL.Forest
         /// 表示一个Ioc容器
         /// </summary>
         public static IContainer Container { get; }
+        
+        
+        public class Installer : IViewInstaller
+        {
+            public void Install(BindingInfo info)
+            {
+                InstallView(info);
+            }
+
+            public void Install(IEnumerable<BindingInfo> bindingInfos)
+            {
+                if (bindingInfos is null)
+                {
+                    return;
+                }
+                
+                foreach (var info in bindingInfos)
+                {
+                    InstallView(info);
+                }
+            }
+
+            public void Install(IBindingInfoProvider provider)
+            {
+                if (provider is null)
+                {
+                    return;
+                }
+                Install(provider.GetBindingInfo());
+            }
+
+            public void Install(IEnumerable<IBindingInfoProvider> providers)
+            {
+                
+                if (providers is null)
+                {
+                    return;
+                }
+                
+                foreach (var info in providers)
+                {
+                    Install(info);
+                }
+            }
+        }
     }
 }

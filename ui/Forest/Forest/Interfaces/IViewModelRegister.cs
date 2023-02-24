@@ -3,8 +3,8 @@ using Acorisoft.FutureGL.Forest.Models;
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {
     public interface IViewModelRegister
-    {
-        void Register(IViewInstaller container);
+    { 
+        void Register();
     }
 
     public interface IViewInstaller

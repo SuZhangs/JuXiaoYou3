@@ -14,32 +14,33 @@ namespace Acorisoft.MigaGen.App
     public class UIGen : ISourceGenerator
     {
         private const string Template = @"  
-            using Acorisoft.MigaUI;
-            using Acorisoft.MigaUI.Controls.Windows;
-            {0}
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
+{0}
 
-            namespace N506885bf54c6413d99e0b54a5f0f5475{{
-                public partial class NClass: IViewModelRegister
-                {{
-                    public void Register(ClassicApp container)
-                    {{
-                        var collection = ClassicApp.Get<IPageInfoCollection>();
-                        AddViewModels(container);
-                        AddProperty(collection);
-                    }}
-                    
-                    public void AddViewModels(ClassicApp collection)
-                    {{
-                        {1}
-                    }}
+namespace N506885bf54c6413d99e0b54a5f0f5475
+{{
+    public partial class NClass: IViewModelRegister
+    {{
+        public void Register()
+        {{
+            var collection = Xaml.Get<IViewInstaller>();
+            AddViewModels(collection);
+            AddProperty(collection);
+        }}
+                        
+        public void AddViewModels(IViewInstaller collection)
+        {{
+            {1}
+        }}
 
-                    public void AddProperty(IPageInfoCollection collection)
-                    {{
-                        {2}
-                    }}
-                }}
-            }}
-        ";
+        public void AddProperty(IViewInstaller collection)
+        {{
+            {2}
+        }}
+    }}
+}}";
         
         public void Initialize(GeneratorInitializationContext context)
         {
@@ -161,10 +162,10 @@ namespace Acorisoft.MigaGen.App
         private readonly List<string> _tokenInfo;
         private readonly List<string> _metadata;
 
-        private const string add_view = "ClassicApp.SetView(typeof({0}),typeof({1}));\n";
+        private const string add_view = "collection.Install(new BindingInfo(typeof({0}),typeof({1})));\n";
 
         private const string add_property =
-            "collection.Add(new PageInfo{{ Id = {0}, Group = {1}, Name = {2}, UseResourceKey = {3} }});\n";
+            "collection.Add(new BindingInfo{{ Id = {0}, Group = {1}, Name = {2}, UseResourceKey = {3} }});\n";
 
         public PageTokenDetector()
         {
