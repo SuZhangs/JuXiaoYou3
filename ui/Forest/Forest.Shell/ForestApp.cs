@@ -91,6 +91,7 @@ namespace Acorisoft.FutureGL.Forest
         {
             var (logger, appModel) = RegisterFrameworkServices(Xaml.Container);
             RegisterServices(logger, Xaml.Container);
+            Xaml.InstallViewFromSourceGenerator();
             RegisterViews(logger, Xaml.Container);
         }
 
