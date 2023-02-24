@@ -88,7 +88,7 @@ namespace Acorisoft.FutureGL.Forest
 
         private void Initialize()
         {
-            var logger = RegisterFrameworkServices(Xaml.Container);
+            var (logger, appModel) = RegisterFrameworkServices(Xaml.Container);
             RegisterServices(logger, Xaml.Container);
             RegisterViews(logger, Xaml.Container);
         }
@@ -112,7 +112,7 @@ namespace Acorisoft.FutureGL.Forest
         /// 注册框架服务。
         /// </summary>
         /// <param name="container">服务容器。</param>
-        protected virtual ILogger RegisterFrameworkServices(IContainer container)
+        protected virtual (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
         {
             var appModel = ConfigureDirectory();
             var logger = ConfigureLogger(appModel);
@@ -153,7 +153,7 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<ILogger>(logger);
             Xaml.InstallViewManually(new BuiltinViews());
 
-            return logger;
+            return new ValueTuple<ILogger, ApplicationModel>(logger, appModel);
         }
 
         /// <summary>

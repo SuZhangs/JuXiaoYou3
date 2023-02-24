@@ -495,7 +495,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             try
             {
-                return await LoadImplAsync(directory, databaseCacheFileName, databaseFileName);
+                return await LoadImplAsync(directory, databaseFileName, databaseCacheFileName);
             }
             catch
             {
@@ -531,7 +531,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             try
             {
-                return await CreateImplAsync(directory, property, targetIndexFileName, targetFileName);
+                return await CreateImplAsync(directory, property, targetFileName, targetIndexFileName);
             }
             catch
             {

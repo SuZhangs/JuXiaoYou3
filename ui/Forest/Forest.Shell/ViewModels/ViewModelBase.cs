@@ -1,6 +1,8 @@
 ﻿using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
 {
@@ -9,11 +11,44 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
+        private readonly Dictionary<string, IRelayCommand> _commandMapping;
+
         private string _rootName;
 
         protected ViewModelBase()
         {
-            Collector = new DisposableCollector(8);
+            _commandMapping = new Dictionary<string, IRelayCommand>();
+            Collector       = new DisposableCollector(8);
+        }
+
+        #region Commands
+
+        protected AsyncRelayCommand AsyncCommand(Func<Task> execute) => new AsyncRelayCommand(execute);
+
+        protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute) => new AsyncRelayCommand(execute, canExecute);
+
+        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute) => new AsyncRelayCommand<T>(execute);
+
+        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute) => new AsyncRelayCommand<T>(execute, canExecute);
+
+        protected RelayCommand Command(Action execute) => new RelayCommand(execute);
+
+        protected RelayCommand Command(Action execute, Func<bool> canExecute) => new RelayCommand(execute, canExecute);
+
+        protected TCommand Associate<TCommand>(string key, TCommand command) where TCommand : IRelayCommand
+        {
+            _commandMapping.TryAdd(key, command);
+            return command;
+        }
+        
+        #endregion
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            if (_commandMapping.TryGetValue(propertyName, out var command))
+            {
+                command?.NotifyCanExecuteChanged();
+            }
         }
 
         /// <summary>

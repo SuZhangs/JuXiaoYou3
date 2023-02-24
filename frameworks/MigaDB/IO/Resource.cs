@@ -116,7 +116,20 @@
                 RelativePath = val
             };
         }
-
+        
+        /// <summary>
+        /// 获得绝对路径
+        /// </summary>
+        /// <param name="path">基础地址</param>
+        /// <returns>返回绝对路径</returns>
+        public string GetAbsolutePath(string path)
+        {
+            return Path.Combine(path, RelativePath);
+        }
+        
+        /// <summary>
+        /// 相对路径
+        /// </summary>
         public string RelativePath { get; init; }
 
         /// <summary>

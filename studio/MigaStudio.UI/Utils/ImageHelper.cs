@@ -10,21 +10,27 @@ using Microsoft.Win32;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.PixelFormats;
+using Image = SixLabors.ImageSharp.Image; 
 
 namespace Acorisoft.FutureGL.MigaStudio.Utils
 {
     public static class ImageHelper
     {
-        public static async Task SetImage(Action<Result<string>> callback, bool requireSizeConstraint)
+        /// <summary>
+        /// 在异步可等待的
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <param name="requireSizeConstraint"></param>
+        public static async Task SetImage(Action<Result<Resource>> callback, bool requireSizeConstraint)
         {
             var opendlg = new OpenFileDialog
             {
-                Filter = GetImageFilter(),
+                Filter = StringFromCode.GetImageFilter(),
             };
 
             if (opendlg.ShowDialog() != true)
             {
-                callback?.Invoke(Result<string>.Failed(AppReason.CanceledByUser));
+                callback?.Invoke(Result<Resource>.Failed(AppReason.CanceledByUser));
             }
 
             try
@@ -47,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utils
                 // 240p 320x240
                 // 720p 1280x720
                 // 1080p 1920x1080
-                var property = ResourceProperty.Image;
+                ResourceProperty property;
 
                 if (horizontalOrientation)
                 {
@@ -75,25 +81,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Utils
                                 : ResourceProperty.Image_Horizontal_240P
                             : ResourceProperty.Image_Horizontal_MinSize;
                 }
+
+                var res = new Resource
+                {
+                    Property = property,
+                    RelativePath = opendlg.FileName
+                };
+                
+                //
+                // 通知客户端
+                callback?.Invoke(Result<Resource>.Successful(res));
             }
             catch (IOException)
             {
-                callback?.Invoke(Result<string>.Failed(AppReason.Occupied));
+                callback?.Invoke(Result<Resource>.Failed(AppReason.Occupied));
             }
-        }
-
-        internal static string GetImageFilter()
-        {
-            // TODO: 翻译
-            return Forest.Language.Culture switch
-            {
-                CultureArea.English => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.French => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                _ => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
-            };
         }
 
         /// <summary>

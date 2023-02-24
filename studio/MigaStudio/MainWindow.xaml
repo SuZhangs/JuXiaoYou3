@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
         xmlns:f="urn:acorisoft/forest/ui"
         xmlns:fs="urn:acorisoft/forest/shell"
-        xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+        xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Lobby"
         mc:Ignorable="d"
         Title="MainWindow"
         MinWidth="1280"
         MinHeight="720">
     <f:Drawer x:Name="MainDrawer">
         <fs:DialogHost x:Name="MainDialogHost">
-            <p:LaunchPage/>
+            <p:QuickStartView/>
         </fs:DialogHost>
     </f:Drawer>
 </fs:ForestWindow>

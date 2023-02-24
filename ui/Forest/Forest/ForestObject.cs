@@ -14,20 +14,24 @@ namespace Acorisoft.FutureGL.Forest
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyName">产生变动的属性名</param>
         protected internal void RaiseUpdated([CallerMemberName] string propertyName = null)
         {
-            if (string.IsNullOrEmpty(propertyName)) return;
             PropertyChangedHandler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            OnPropertyChanged(propertyName);
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="propertyName"></param>
+        /// <param name="propertyName">产生变动的属性名</param>
         protected void RaiseUpdating([CallerMemberName] string propertyName = null)
         {
-            if (string.IsNullOrEmpty(propertyName)) return;
             PropertyChangingHandler?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }
         
@@ -78,19 +82,13 @@ namespace Acorisoft.FutureGL.Forest
         /// <param name="name"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        protected bool SetValue<T>(ref T source, T value, [CallerMemberName] string name = "")
+        protected void SetValue<T>(ref T source, T value, [CallerMemberName] string name = "")
         {
-            if (string.IsNullOrEmpty(name)) return false;
+            if (string.IsNullOrEmpty(name)) return;
             
-            if (EqualityComparer<T>.Default.Equals(source, value))
-            {
-                return false;
-            }
-
             RaiseUpdating(name);
             source = value;
             RaiseUpdated(name);
-            return true;
         }
         
         public event PropertyChangedEventHandler PropertyChanged

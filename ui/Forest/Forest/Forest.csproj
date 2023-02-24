@@ -12,4 +12,13 @@
         <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Effects" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Effects\Bitmaps\GrayBitmapEffect.ps" />
+      <Resource Include="Effects\Bitmaps\GrayBitmapEffect.ps" />
+    </ItemGroup>
+
 </Project>
