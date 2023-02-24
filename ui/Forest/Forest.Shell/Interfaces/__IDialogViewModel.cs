@@ -1,4 +1,4 @@
-﻿using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Result<object>>;
+﻿using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Op<object>>;
 
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {

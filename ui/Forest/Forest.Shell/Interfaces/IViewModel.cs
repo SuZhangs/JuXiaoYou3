@@ -32,12 +32,6 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
         void Resume();
-
-        /// <summary>
-        /// 表示参数传递。
-        /// </summary>
-        /// <param name="arg">视图参数</param>
-        void Start(ViewParam arg);
         
         /// <summary>
         /// 获得调度器

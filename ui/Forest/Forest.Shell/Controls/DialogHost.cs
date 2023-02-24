@@ -213,23 +213,23 @@ namespace Acorisoft.FutureGL.Forest.Controls
             });
         }
 
-        public async Task<Result<T>> ShowDialog<T>(IDialogViewModel dialog, ViewParam param)
+        public async Task<Op<T>> ShowDialog<T>(IDialogViewModel dialog, Parameter param)
         {
             var result = await ShowDialog(dialog, param);
 
             if (result is null)
             {
-                return Result<T>.Failed("参数返回空");
+                return Op<T>.Failed("参数返回空");
             }
 
-            return result.IsFinished ? Result<T>.Success((T)result.Value) : Result<T>.Failed(result.Reason);
+            return result.IsFinished ? Op<T>.Success((T)result.Value) : Op<T>.Failed(result.Reason);
         }
 
-        public async Task<Result<object>> ShowDialog(IDialogViewModel dialog, ViewParam param)
+        public async Task<Op<object>> ShowDialog(IDialogViewModel dialog, Parameter param)
         {
             if (dialog is null)
             {
-                return Result<object>.Failed("视图模型为空");
+                return Op<object>.Failed("视图模型为空");
             }
 
             try
@@ -240,7 +240,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 if (dialog is not __IDialogViewModel dialog2)
                 {
-                    return Result<object>.Failed("这不是一个可等待的对话框");
+                    return Op<object>.Failed("这不是一个可等待的对话框");
                 }
 
                 //
@@ -253,7 +253,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 // 设置参数。
-                param                 ??= new ViewParam();
+                param                 ??= new Parameter();
                 param.ViewModelSource =   previous;
                 param.CloseHandler    =   CloseDialog;
                 dialog2.CloseHandler  =   CloseDialog;
@@ -274,7 +274,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             }
             catch (DuplicateDataException)
             {
-                return Result<object>.Failed("对话框重复打开！");
+                return Op<object>.Failed("对话框重复打开！");
             }
         }
 

@@ -1,4 +1,4 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Interfaces.Delegates
 {
-    public delegate void WindowInitWork(ViewParam parameter);
+    public delegate void WindowInitWork(Parameter parameter);
 }

@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿using System.ComponentModel;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -64,31 +65,28 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 首次启动
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual Task Start()
         {
             return Task.Run(() => { });
         }
-
-        /// <summary>
-        /// 表示参数传递。
-        /// </summary>
-        /// <param name="param">视图参数</param>
-        public virtual void Start(ViewParam param)
-        {
-        }
+        
 
         /// <summary>
         /// 表示关闭
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void Stop()
         {
         }
+        
 
         /// <summary>
         /// 表示挂起
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void Suspend()
         {
         }
@@ -97,6 +95,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 表示恢复
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void Resume()
         {
         }

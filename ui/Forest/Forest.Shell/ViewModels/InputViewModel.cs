@@ -25,7 +25,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
             //
             //
-            if (Wait.TrySetResult(Result<object>.Success(Result)))
+            if (Wait.TrySetResult(Op<object>.Success(Result)))
             {
                 //
                 // 清理现场
@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                 return;
             }
 
-            if (Wait.TrySetResult(Result<object>.Failed(Failed())))
+            if (Wait.TrySetResult(Op<object>.Failed(Failed())))
             {
                 //
                 // 清理现场

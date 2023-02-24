@@ -3,7 +3,7 @@
     /// <summary>
     /// 表示一个文档
     /// </summary>
-    public class Document : StorageObject
+    public class Document : StorageObject, IUniqueness
     {
         /// <summary>
         /// 名字

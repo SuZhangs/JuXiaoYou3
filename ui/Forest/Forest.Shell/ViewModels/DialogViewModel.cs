@@ -1,6 +1,7 @@
-﻿using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using System.ComponentModel;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
-using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Result<object>>;
+using DialogTaskSource = System.Threading.Tasks.TaskCompletionSource<Acorisoft.FutureGL.Forest.Op<object>>;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
 {
@@ -27,12 +28,15 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         protected virtual void OnKeyboardInput(WindowKeyEventArgs e)
         {
         }
+        
+        
 
         /// <summary>
         /// 传递参数。
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
-        public sealed override void Start(ViewParam parameter)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void Start(Parameter parameter)
         {
             if (parameter is null)
             {
@@ -46,7 +50,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
-        protected virtual void OnStart(ViewParam parameter)
+        protected virtual void OnStart(Parameter parameter)
         {
         }
 
@@ -60,7 +64,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                 return;
             }
 
-            if (Wait.TrySetResult(Result<object>.Failed("手动取消")))
+            if (Wait.TrySetResult(Op<object>.Failed("手动取消")))
             {
                 //
                 // 清理现场

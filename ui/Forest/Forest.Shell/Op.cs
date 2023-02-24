@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest
 {
-    public class Result<TValue>
+    public class Op<TValue>
     {
         /// <summary>
         /// 是否完成
@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="reason">失败的原因</param>
         /// <returns>返回一个失败的操作结果</returns>
-        public static Result<TValue> Failed(string reason) => new Result<TValue>
+        public static Op<TValue> Failed(string reason) => new Op<TValue>
         {
             IsFinished = false,
             Reason     = reason
@@ -34,6 +34,6 @@
         /// </summary>
         /// <param name="value">正确操作之后的值</param>
         /// <returns>返回一个成功的操作结果以及值。</returns>
-        public static Result<TValue> Success(TValue value) => new Result<TValue>{ IsFinished = true, Value = value };
+        public static Op<TValue> Success(TValue value) => new Op<TValue>{ IsFinished = true, Value = value };
     }
 }
