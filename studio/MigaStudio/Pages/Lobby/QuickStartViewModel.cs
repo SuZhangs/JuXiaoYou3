@@ -20,11 +20,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
 
         public QuickStartViewModel()
         {
-            CreateCommand      = AsyncCommand(nameof(CreateCommand), CreateImpl, CanCreate);
-            OpenCommand        = AsyncCommand(nameof(OpenCommand), OpenImpl);
-            SelectIconCommand  = AsyncCommand(nameof(SelectIconCommand), SelectIconImpl);
-            SelectCoverCommand = AsyncCommand(nameof(SelectCoverCommand), SelectCoverImpl);
-            UpgradeCommand     = AsyncCommand(nameof(UpgradeCommand), UpgradeImpl);
+            CreateCommand      = AsyncCommand(CreateImpl, CanCreate);
+            OpenCommand        = AsyncCommand(OpenImpl);
+            SelectIconCommand  = AsyncCommand(SelectIconImpl);
+            SelectCoverCommand = AsyncCommand(SelectCoverImpl);
+            UpgradeCommand     = AsyncCommand(UpgradeImpl);
         }
 
         private bool CanCreate() => !string.IsNullOrEmpty(Author) &&

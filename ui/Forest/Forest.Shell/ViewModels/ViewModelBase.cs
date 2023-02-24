@@ -11,13 +11,13 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
-        private readonly Dictionary<string, IRelayCommand> _commandMapping;
+        private readonly List<IRelayCommand> _commandMapping;
 
         private string _rootName;
 
         protected ViewModelBase()
         {
-            _commandMapping = new Dictionary<string, IRelayCommand>();
+            _commandMapping = new List<IRelayCommand>(8);
             Collector       = new DisposableCollector(8);
         }
 
@@ -25,19 +25,19 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         protected AsyncRelayCommand AsyncCommand(Func<Task> execute) => new AsyncRelayCommand(execute);
 
-        protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute) => new AsyncRelayCommand(execute, canExecute);
+        protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute) => Associate( new AsyncRelayCommand(execute, canExecute));
 
         protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute) => new AsyncRelayCommand<T>(execute);
 
-        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute) => new AsyncRelayCommand<T>(execute, canExecute);
+        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute) => Associate(new AsyncRelayCommand<T>(execute, canExecute));
 
         protected RelayCommand Command(Action execute) => new RelayCommand(execute);
 
-        protected RelayCommand Command(Action execute, Func<bool> canExecute) => new RelayCommand(execute, canExecute);
+        protected RelayCommand Command(Action execute, Func<bool> canExecute) => Associate(new RelayCommand(execute, canExecute));
 
-        protected TCommand Associate<TCommand>(string key, TCommand command) where TCommand : IRelayCommand
+        private TCommand Associate<TCommand>(TCommand command) where TCommand : IRelayCommand
         {
-            _commandMapping.TryAdd(key, command);
+            _commandMapping.Add(command);
             return command;
         }
         
@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         protected override void OnPropertyChanged(string propertyName)
         {
-            if (_commandMapping.TryGetValue(propertyName, out var command))
+            foreach (var command in _commandMapping)
             {
                 command?.NotifyCanExecuteChanged();
             }
