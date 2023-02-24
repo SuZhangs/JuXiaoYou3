@@ -256,7 +256,7 @@ namespace Acorisoft.FutureGL.Forest
 
             var impl = (IViewModelRegister)Activator.CreateInstance(implType);
             // TODO:
-            // impl?.Register(new Installer());
+            impl?.Register(new Installer());
         }
 
         public static void InstallViewManually(IBindingInfoProvider provider)

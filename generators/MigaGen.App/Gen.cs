@@ -23,9 +23,8 @@ namespace N506885bf54c6413d99e0b54a5f0f5475
 {{
     public partial class NClass: IViewModelRegister
     {{
-        public void Register()
+        public void Register(IViewInstaller collection)
         {{
-            var collection = Xaml.Get<IViewInstaller>();
             AddViewModels(collection);
             AddProperty(collection);
         }}

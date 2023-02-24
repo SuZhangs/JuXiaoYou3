@@ -4,7 +4,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
 {
     public interface IViewModelRegister
     { 
-        void Register();
+        void Register(IViewInstaller collection);
     }
 
     public interface IViewInstaller
