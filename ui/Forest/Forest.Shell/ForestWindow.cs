@@ -10,8 +10,13 @@ namespace Acorisoft.FutureGL.Forest
         
         protected ForestWindow()
         {
-            Loaded   += OnLoadedIntern;
-            Unloaded += OnUnloadedIntern;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            Loaded      += OnLoadedIntern;
+            Unloaded    += OnUnloadedIntern;
             SizeChanged += OnSizeChanged;
 
             //
@@ -21,6 +26,11 @@ namespace Acorisoft.FutureGL.Forest
             CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnWindowRestore));
             CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnWindowRestore));
             
+            OnApplyStyle();
+        }
+
+        protected virtual void OnApplyStyle()
+        {
             Style ??= Application.Current.Resources[nameof(ForestWindow)] as Style;
         }
 

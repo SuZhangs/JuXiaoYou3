@@ -8,10 +8,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public class AppViewModel : TabBased
     {
-        public AppViewModel() : base(new TabShell())
+        public AppViewModel() : base()
         {
-            Connect<FirstScreenController, UserControl>();
-            Connect<TabShell, TabShellView>();
+            Controller = new TabShell
+            {
+                WindowStateHandler = x => WindowState = x
+            };
             CurrentController = Controller;
         }
     }

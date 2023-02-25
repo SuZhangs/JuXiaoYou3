@@ -10,22 +10,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private IViewController _currentController;
         
-        protected TabBased(ITabViewController controller)
-        {
-            Controller        = controller ?? throw new ArgumentNullException(nameof(controller));
-            CurrentController = Controller;
-        }
-        
-        
-
-        protected static void Connect<TController, TView>() where TView : UserControl where TController : IViewController
-        {
-            Xaml.InstallView(new BindingInfo
-            {
-                ViewModel = typeof(TController),
-                View = typeof(TView)
-            });
-        }
 
         /// <summary>
         /// 表示当前的主要视图控制器。
@@ -33,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <remarks>
         /// 该属性必须为 <see cref="ITabViewController"/> 或者 <see cref="ISingleViewController"/> 类型的实例。
         /// </remarks>
-        public ITabViewController Controller { get; }
+        public ITabViewController Controller { get; protected init; }
 
         /// <summary>
         /// 表示当前的视图控制器。

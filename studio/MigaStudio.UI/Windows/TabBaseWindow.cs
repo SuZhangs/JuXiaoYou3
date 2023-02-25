@@ -8,7 +8,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
     public abstract class TabBaseWindow<TViewModel> : ForestWindow where TViewModel : TabBased
     {
         private TViewModel _dc;
-        
+
+        protected override void OnApplyStyle()
+        {
+            Style ??= Application.Current.Resources["TabBaseWindow"] as Style;
+        }
+
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = Xaml.Get<TViewModel>();

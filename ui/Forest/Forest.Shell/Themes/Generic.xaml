@@ -552,6 +552,57 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="TabBaseWindow" TargetType="{x:Type w:ForestWindow}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Color" Value="Transparent" />
+        <Setter Property="ExtendToTitleBar" Value="False"/>
+        <Setter Property="MinWidth" Value="200" />
+        <Setter Property="Height" Value="64" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome ResizeBorderThickness="7"
+                              CornerRadius="0"
+                              GlassFrameThickness="-1" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type w:ForestWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+
+                        <AdornerDecorator x:Name="PART_Content"
+                                          Grid.Row="0"
+                                          Grid.RowSpan="2">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              TextElement.FontFamily="{TemplateBinding FontFamily}"
+                                              TextElement.FontSize="{TemplateBinding FontSize}"
+                                              TextElement.FontStretch="{TemplateBinding FontStretch}"
+                                              TextElement.FontStyle="{TemplateBinding FontStyle}"
+                                              TextElement.FontWeight="{TemplateBinding FontWeight}"
+                                              TextElement.Foreground="{TemplateBinding Foreground}"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch"
+                                              ClipToBounds="True" />
+                        </AdornerDecorator>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Margin" Value="7" TargetName="PART_Content" />
+                            <Setter Property="WindowChrome.GlassFrameThickness" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type c:EmptyContentHost}">
         <Setter Property="Template">
@@ -587,7 +638,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style TargetType="{x:Type c:ViewHost}">
         <Setter Property="Template">

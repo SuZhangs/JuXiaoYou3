@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
+using Wpf.Ui.Styles.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Windows
 {
@@ -12,6 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         where TMainView : UserControl
         where TViewModel : TabBased
     {
+
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
         {
             var r = base.RegisterFrameworkServices(container);
@@ -28,6 +30,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             
             return r;
         }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
+            });
+            
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
+            });
+            base.OnStartup(e);
+        }
+
 
         protected abstract TViewModel GetShell();
     }

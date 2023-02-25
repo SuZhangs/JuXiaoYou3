@@ -1,5 +1,5 @@
 ﻿<s:TabApp x:Class="Acorisoft.FutureGL.MigaStudio.App"
-          x:TypeArguments="vm:AppViewModel, vm:TabShell, vm:TabShell, vm:FirstScreenController, v:SplashView"
+          x:TypeArguments="vm:AppViewModel, vm:TabShell, v:TabShellView, vm:FirstScreenController, v:SplashView"
           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
@@ -14,8 +14,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml" />
                 <ui:ThemesDictionary Theme="Light" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
             </ResourceDictionary.MergedDictionaries>

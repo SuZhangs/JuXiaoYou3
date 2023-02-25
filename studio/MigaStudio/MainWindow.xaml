@@ -14,6 +14,7 @@
                  Title="MainWindow"
                  MinWidth="1280"
                  MinHeight="720"
+                 ExtendToTitleBar="True"
                  d:DataContext="{d:DesignInstance Type={x:Type vm:AppViewModel}, IsDesignTimeCreatable=True}">
     <f:Drawer x:Name="MainDrawer">
         <fs:DialogHost x:Name="MainDialogHost">

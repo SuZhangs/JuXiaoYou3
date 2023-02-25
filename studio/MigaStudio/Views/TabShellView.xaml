@@ -4,12 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Views"
+             xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300" 
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type vm:TabShell}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top"
+              WindowChrome.IsHitTestVisibleInChrome="False"
+              Background="#F1F1F1"
+              Height="48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="144" />
+            </Grid.ColumnDefinitions>
+            <fs:TitleBar Grid.Column="1"
+                         WindowChrome.IsHitTestVisibleInChrome="True"
+                         WindowState="{Binding WindowState,Mode=OneWay}"/>
+
+            <ListBox Grid.Column="0"
+                     WindowChrome.IsHitTestVisibleInChrome="True"
+                     Margin="0 0 144 0"
+                     VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <ContentControl/>
+    </DockPanel>
 </UserControl>

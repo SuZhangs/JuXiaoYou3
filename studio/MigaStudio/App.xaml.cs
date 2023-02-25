@@ -13,6 +13,7 @@ using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
 
@@ -21,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : ForestApp
+    public partial class App
     {
         private const string RepositorySettingFileName = "repo.json";
         private const string AdvancedSettingFileName   = "advanced.json";
@@ -38,6 +39,11 @@ namespace Acorisoft.FutureGL.MigaStudio
                 Logs     = Path.Combine(domain, "Logs"),
                 Settings = Path.Combine(domain, "UserData")
             }.Initialize();
+        }
+
+        protected override AppViewModel GetShell()
+        {
+            return new AppViewModel();
         }
 
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
