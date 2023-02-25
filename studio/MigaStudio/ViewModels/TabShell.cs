@@ -15,10 +15,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class TabShell : TabController
     {
         private WindowState _windowState;
+        
 
         public TabShell()
         {
-            
+            Xaml.Get<IWindowEventBroadcast>()
+                .PropertyTunnel
+                .WindowStateTunnel = x => WindowState = x;
             AddTabCommand = Command(OnAddTabImpl);
         }
 
@@ -53,14 +56,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public WindowState WindowState
         {
             get => _windowState;
-            set
-            {
-                SetValue(ref _windowState, value);
-                WindowStateHandler?.Invoke(value);
-            }
+            set => SetValue(ref _windowState, value);
         }
-
-        public Action<WindowState> WindowStateHandler { get; set; }
         
         public RelayCommand AddTabCommand { get; }
     }

@@ -10,7 +10,15 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// </summary>
         IObservable<WindowKeyEventArgs> Keys { get; }
         
+        /// <summary>
+        /// 拖拽事件
+        /// </summary>
         IObservable<WindowDragDropArgs> Drags { get; }
+        
+        /// <summary>
+        /// 属性隧道
+        /// </summary>
+        IWindowPropertyTunnel PropertyTunnel { get; }
     }
 
     public interface IWindowEventBroadcastAmbient
@@ -18,15 +26,18 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         void SetEventSource(Window window);
     }
 
-
-
+    class WindowPropertyTunnel: IWindowPropertyTunnel
+    {
+        public Action<WindowState> WindowStateTunnel { get; set; }
+    }
+    
     public class WindowEventBroadcast : IWindowEventBroadcast, IWindowEventBroadcastAmbient
     {
         private readonly Subject<WindowKeyEventArgs> _keys  = new Subject<WindowKeyEventArgs>();
         private readonly Subject<WindowDragDropArgs> _drags = new Subject<WindowDragDropArgs>();
+        private readonly IWindowPropertyTunnel _tunnel = new WindowPropertyTunnel();
 
         private Window _eventSource;
-
         public void SetEventSource(Window window)
         {
             if (window is null)
@@ -98,5 +109,6 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         
         public IObservable<WindowKeyEventArgs> Keys => _keys;
         public IObservable<WindowDragDropArgs> Drags => _drags;
+        public IWindowPropertyTunnel PropertyTunnel => _tunnel;
     }
 }

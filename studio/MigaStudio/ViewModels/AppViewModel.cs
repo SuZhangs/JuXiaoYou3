@@ -16,7 +16,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var shell = new TabShell
             {
-                WindowStateHandler = x => WindowState = x
             };
             
             shell.Onboards.Add(Test());

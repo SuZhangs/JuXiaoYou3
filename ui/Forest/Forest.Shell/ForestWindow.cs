@@ -6,7 +6,8 @@ namespace Acorisoft.FutureGL.Forest
 {
     public abstract class ForestWindow : Window
     {
-        private AppViewModelBase _internalViewModel;
+        private bool? _skip;
+        private Action<WindowState> _tunnel;
         
         protected ForestWindow()
         {
@@ -36,11 +37,19 @@ namespace Acorisoft.FutureGL.Forest
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_internalViewModel is not null ||
-                Xaml.IsRegistered<AppViewModelBase>())
+            if (_skip is null)
             {
-                _internalViewModel             = Xaml.Get<AppViewModelBase>();
-                _internalViewModel.WindowState = WindowState;
+                if (Xaml.IsRegistered<IWindowEventBroadcast>())
+                {
+                    _skip = false;
+                    _tunnel = Xaml.Get<IWindowEventBroadcast>().PropertyTunnel.WindowStateTunnel;
+                }
+                _skip = true;
+            }
+            
+            if (_skip == false)
+            {
+                _tunnel?.Invoke(WindowState);;
             }
         }
 
