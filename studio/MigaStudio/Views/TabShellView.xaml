@@ -5,20 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Views"
              xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
              xmlns:s="urn:acorisoft/studio"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type vm:TabShell}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type vm:TabShell}, IsDesignTimeCreatable=True}"
+                                  SnapsToDevicePixels="True"
+                                  UseLayoutRounding="True">
+    <UserControl.Resources>
+        <GeometryGroup x:Key="PlusSignPath">
+            <GeometryGroup.Children>
+                <LineGeometry StartPoint="12,5" EndPoint="12,19" />
+                <LineGeometry StartPoint="5,12" EndPoint="19,12" />
+            </GeometryGroup.Children>
+        </GeometryGroup>
+    </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
               Background="#F1F1F1"
-              Height="40">
+              Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
             <fs:TitleBar Grid.Column="1"
@@ -35,12 +48,15 @@
                                 AddTabCommand="{Binding AddTabCommand}"
                                 PinTabCommand="{Binding PinTabCommand}"
                                 CloseTabCommand="{Binding CloseTabCommand}"
-                                MinimumTabWidth="40"
+                                MinimumTabWidth="80"
                                 PinnedTabWidth="160"
                                 MaximumTabWidth="160"
-                                Margin="0 12 144 0"
-                                VerticalAlignment="Bottom">
-            </s:ChromeTabControl>
+                                Margin="0 20 144 0"
+                                VerticalAlignment="Bottom"/>
+            
+            <ui:Button Grid.Column="2"
+                       Icon="Add16"
+                       Command="{Binding AddTabCommand}"/>
         </Grid>
 
         <fs:ViewHost ViewModel="{Binding ElementName=Shell,Path=SelectedContent,Mode=OneWay}"/>

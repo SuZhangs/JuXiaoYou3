@@ -16,54 +16,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
     [ToolboxItem(false)]
     public class ChromeTabPanel : Panel
     {
-        private const double _stickyReanimateDuration = 0.10;
-        private const double _tabWidthSlidePercent = 0.5;
-        private bool _isReleasingTab;
-        private bool _hideAddButton;
-        private Size _finalSize;
-        private double _leftMargin;
-        private double _rightMargin;
-        private double _defaultMeasureHeight;
-        private double _currentTabWidth;
-        private int _captureGuard;
-        private int _originalIndex;
-        private int _slideIndex;
-        private List<double> _slideIntervals;
-        private ChromeTabItem _draggedTab;
-        private Point _downPoint;
-        private Point _downTabBoundsPoint;
-        private ChromeTabControl _parent;
-        private Rect _addButtonRect;
-        private Button _addButton;
-        private DateTime _lastMouseDown;
-        private object _lockObject = new object();
+        private const    double           _stickyReanimateDuration = 0.10;
+        private const    double           _tabWidthSlidePercent    = 0.5;
+        private          bool             _isReleasingTab;
+        private          Size             _finalSize;
+        private readonly double           _leftMargin;
+        private readonly double           _defaultMeasureHeight;
+        private          double           _currentTabWidth;
+        private          int              _captureGuard;
+        private          int              _originalIndex;
+        private          int              _slideIndex;
+        private          List<double>     _slideIntervals;
+        private          ChromeTabItem    _draggedTab;
+        private          Point            _downPoint;
+        private          Point            _downTabBoundsPoint;
+        private          ChromeTabControl _parent;
+        private          DateTime         _lastMouseDown;
+        private readonly object           _lockObject = new object();
 
         protected double Overlap => ParentTabControl?.TabOverlap ?? 10;
         protected double MinTabWidth => _parent?.MinimumTabWidth ?? 40;
         protected double MaxTabWidth => _parent?.MaximumTabWidth ?? 125;
         protected double PinnedTabWidth => _parent?.PinnedTabWidth ?? MinTabWidth;
-
-
-
-        private bool _isAddButtonEnabled;
-
-        public bool IsAddButtonEnabled
-        {
-            get => _isAddButtonEnabled;
-            set
-            {
-                if (_isAddButtonEnabled != value)
-                {
-                    _isAddButtonEnabled = value;
-                    _addButton.IsEnabled = value;
-                    if (ParentTabControl != null)
-                    {
-                        _addButton.Background = value == false ? ParentTabControl.AddTabButtonDisabledBrush : ParentTabControl.AddTabButtonBrush;
-                        InvalidateVisual();
-                    }
-                }
-            }
-        }
 
         static ChromeTabPanel()
         {
@@ -73,11 +47,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         public ChromeTabPanel()
         {
             _leftMargin = 0.0;
-            _rightMargin = 25.0;
             _defaultMeasureHeight = 30.0;
             var key = new ComponentResourceKey(typeof(ChromeTabPanel), "addButtonStyle");
-            var addButtonStyle = (Style)FindResource(key);
-            _addButton = new Button { Style = addButtonStyle };
             this.Loaded += ChromeTabPanel_Loaded;
             this.Unloaded += ChromeTabPanel_Unloaded;
         }
@@ -104,45 +75,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             }
         }
 
-        internal void SetAddButtonControlTemplate(ControlTemplate template)
-        {
-            var style = new Style(typeof(Button));
-            style.Setters.Add(new Setter(Control.TemplateProperty, template));
-            _addButton.Style = style;
-        }
 
         protected override int VisualChildrenCount => base.VisualChildrenCount + 1;
-
-        protected override Visual GetVisualChild(int index)
-        {
-            if (index == VisualChildrenCount - 1)
-            {
-                return _addButton;
-            }
-
-            if (index < VisualChildrenCount - 1)
-            {
-                return base.GetVisualChild(index);
-            }
-            throw new IndexOutOfRangeException("Not enough visual children in the ChromeTabPanel.");
-        }
 
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            _rightMargin = ParentTabControl.IsAddButtonVisible ? 25 : 0;
             _currentTabWidth = CalculateTabWidth(finalSize);
             ParentTabControl.CanAddTabInternal=_currentTabWidth > MinTabWidth;
 
-            if (_hideAddButton)
-                _addButton.Visibility = Visibility.Hidden;
-            else if (ParentTabControl.IsAddButtonVisible)
-                _addButton.Visibility = _currentTabWidth > MinTabWidth ? Visibility.Visible : Visibility.Collapsed;
-            else
-                _addButton.Visibility = Visibility.Collapsed;
-
             _finalSize = finalSize;
             var offset = _leftMargin;
+            
             foreach (UIElement element in Children)
             {
                 var thickness = 0.0;
@@ -152,11 +96,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                 element.Arrange(new Rect(offset, 0, tabWidth, finalSize.Height - thickness));
                 offset += tabWidth - Overlap;
             }
-            if (ParentTabControl.IsAddButtonVisible) {
-                var addButtonSize = new Size(ParentTabControl.AddTabButtonWidth, ParentTabControl.AddTabButtonHeight);
-                _addButtonRect = new Rect(new Point(offset + Overlap, (finalSize.Height - addButtonSize.Height) / 2), addButtonSize);
-                _addButton.Arrange(_addButtonRect);
-            }
+            
             return finalSize;
         }
 
@@ -165,15 +105,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             _currentTabWidth = CalculateTabWidth(availableSize);
             ParentTabControl.CanAddTabInternal = _currentTabWidth > MinTabWidth;
 
-            if (_hideAddButton)
-                _addButton.Visibility = Visibility.Hidden;
-            else if (ParentTabControl.IsAddButtonVisible)
-                _addButton.Visibility = _currentTabWidth > MinTabWidth ? Visibility.Visible : Visibility.Collapsed;
-            else
-                _addButton.Visibility = Visibility.Collapsed;
-
             var height = double.IsPositiveInfinity(availableSize.Height) ? _defaultMeasureHeight : availableSize.Height;
             var resultSize = new Size(0, availableSize.Height);
+            
             foreach (UIElement child in Children)
             {
                 var item = ItemsControl.ContainerFromElement(ParentTabControl, child) as ChromeTabItem;
@@ -181,12 +115,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                 child.Measure(tabSize);
                 resultSize.Width += child.DesiredSize.Width - Overlap;
             }
-            if (ParentTabControl.IsAddButtonVisible)
-            {
-                var addButtonSize = new Size(ParentTabControl.AddTabButtonWidth, ParentTabControl.AddTabButtonHeight);
-                _addButton.Measure(addButtonSize);
-                resultSize.Width += addButtonSize.Width;
-            }
+            
             return resultSize;
         }
         private double GetWidthForTabItem(ChromeTabItem tab)
@@ -200,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 
         private double CalculateTabWidth(Size availableSize)
         {
-            var activeWidth = double.IsPositiveInfinity(availableSize.Width) ? 500 : availableSize.Width - _leftMargin - _rightMargin;
+            var activeWidth = double.IsPositiveInfinity(availableSize.Width) ? 500 : availableSize.Width - _leftMargin;
             var numberOfPinnedTabs = Children.Cast<ChromeTabItem>().Count(x => x.IsPinned);
 
             var totalPinnedTabsWidth = numberOfPinnedTabs > 0 ? ((numberOfPinnedTabs * PinnedTabWidth)) : 0;
@@ -214,15 +143,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         {
             base.OnInitialized(e);
             SetTabItemsOnTabs();
+            
             if (Children.Count > 0)
             {
                 if (Children[0] is ChromeTabItem)
                     ParentTabControl.ChangeSelectedItem(Children[0] as ChromeTabItem);
             }
-            if (ParentTabControl != null && ParentTabControl.AddButtonTemplate != null)
-            {
-                SetAddButtonControlTemplate(ParentTabControl.AddButtonTemplate);
-            }
+            
         }
 
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
@@ -238,16 +165,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             {
                 if (_slideIntervals != null)
                 {
-                    return;
-                }
-
-                if (_addButtonRect.Contains(e.GetPosition(this)) && IsAddButtonEnabled)
-                {
-                    if (ParentTabControl != null)
-                    {
-                        _addButton.Background = ParentTabControl.AddTabButtonMouseDownBrush;
-                        InvalidateVisual();
-                    }
                     return;
                 }
 
@@ -356,19 +273,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         private void ProcessMouseMove(Point p)
         {
             var nowPoint = p;
-            if (ParentTabControl != null && ParentTabControl.IsAddButtonVisible && IsAddButtonEnabled)
-            {
-                if (_addButtonRect.Contains(nowPoint))
-                {
-                    _addButton.Background = ParentTabControl.AddTabButtonMouseOverBrush;
-                    InvalidateVisual();
-                }
-                else
-                {
-                    _addButton.Background = ParentTabControl.AddTabButtonBrush;
-                    InvalidateVisual();
-                }
-            }
+            
             if (_draggedTab == null || !ParentTabControl.CanMoveTabs)
             {
                 return;
@@ -421,8 +326,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                 //We return on small marging changes to avoid the tabs jumping around when quickly clicking between tabs.
                 if (Math.Abs(_draggedTab.Margin.Left) < 10)
                     return;
-                _addButton.Visibility = Visibility.Hidden;
-                _hideAddButton = true;
 
                 var changed = 0;
                 var localSlideIndex = _slideIndex;
@@ -477,13 +380,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
-            
-            if (ParentTabControl != null && ParentTabControl.IsAddButtonVisible && IsAddButtonEnabled)
-            {
-                _addButton.Background = ParentTabControl.AddTabButtonBrush;
-                InvalidateVisual();
-            }
-            
+
             if (_draggedTab != null && Mouse.LeftButton != MouseButtonState.Pressed && !_isReleasingTab)
             {
                 var p = e.GetPosition(this);
@@ -502,20 +399,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         {
             lock (_lockObject)
             {
-                if (ParentTabControl != null && ParentTabControl.IsAddButtonVisible)
-                {
-                    if (_addButtonRect.Contains(p) && IsAddButtonEnabled)
-                    {
-                        _addButton.Background = ParentTabControl.AddTabButtonBrush;
-                        InvalidateVisual();
-                        if (_addButton.Visibility == Visibility.Visible)
-                        {
-                            ParentTabControl.AddTab();
-                        }
-                        return;
-                    }
-
-                }
+                
                 if (isDragging)
                 {
                     ReleaseMouseCapture();
@@ -534,8 +418,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                                 _captureGuard = 0;
                                 ParentTabControl.MoveTab(_originalIndex, localSlideIndex - 1);
                                 _slideIntervals = null;
-                                _addButton.Visibility = Visibility.Visible;
-                                _hideAddButton = false;
                                 InvalidateVisual();
                                 if (closeTabOnRelease && ParentTabControl.CloseTabCommand != null)
                                 {

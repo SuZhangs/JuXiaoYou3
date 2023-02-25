@@ -74,7 +74,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         {
             if (DesignerProperties.GetIsInDesignMode(this))
                 return;
-            ((ChromeTabPanel)ItemsHost).IsAddButtonEnabled = AddTabCommand.CanExecute(AddTabCommandParameter);
+            
+            AddTabCommand.CanExecute(AddTabCommandParameter);
         }
 
         public static DependencyProperty AddTabCommandParameterProperty =
@@ -102,27 +103,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         // Using a DependencyProperty as the backing store for CloseTabWhenDraggedOutsideBonds.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CloseTabWhenDraggedOutsideBondsProperty =
             DependencyProperty.Register(nameof(CloseTabWhenDraggedOutsideBonds), typeof(bool), typeof(ChromeTabControl), new PropertyMetadata(false));
-
-
-        public bool IsAddButtonVisible
-        {
-            get => (bool)GetValue(IsAddButtonVisibleProperty);
-            set => SetValue(IsAddButtonVisibleProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for IsAddButtonEnabled.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsAddButtonVisibleProperty =
-            DependencyProperty.Register(nameof(IsAddButtonVisible), typeof(bool), typeof(ChromeTabControl), new PropertyMetadata(true, IsAddButtonVisiblePropertyCallback));
-
-        private static void IsAddButtonVisiblePropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (DesignerProperties.GetIsInDesignMode(d))
-                return;
-            var ctc = d as ChromeTabControl;
-
-            var panel = (ChromeTabPanel)ctc.ItemsHost;
-            panel?.InvalidateVisual();
-        }
 
 
         public bool CanMoveTabs
@@ -156,49 +136,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         // Using a DependencyProperty as the backing store for SelectedTabBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedTabBrushProperty =
             DependencyProperty.Register(nameof(SelectedTabBrush), typeof(Brush), typeof(ChromeTabControl), new PropertyMetadata(null, SelectedTabBrushPropertyCallback));
-
-
-        public Brush AddTabButtonBrush
-        {
-            get => (Brush)GetValue(AddButtonBrushProperty);
-            set => SetValue(AddButtonBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddButtonBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddButtonBrushProperty =
-            DependencyProperty.Register(nameof(AddTabButtonBrush), typeof(Brush), typeof(ChromeTabControl), new PropertyMetadata(Brushes.Transparent));
-
-        public Brush AddTabButtonMouseDownBrush
-        {
-            get => (Brush)GetValue(AddButtonMouseDownBrushProperty);
-            set => SetValue(AddButtonMouseDownBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddButtonBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddButtonMouseDownBrushProperty =
-            DependencyProperty.Register(nameof(AddTabButtonMouseDownBrush), typeof(Brush), typeof(ChromeTabControl), new PropertyMetadata(Brushes.DarkGray));
-
-        public Brush AddTabButtonMouseOverBrush
-        {
-            get => (Brush)GetValue(AddButtonMouseOverBrushProperty);
-            set => SetValue(AddButtonMouseOverBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddButtonMouseOverBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddButtonMouseOverBrushProperty =
-            DependencyProperty.Register(nameof(AddTabButtonMouseOverBrush), typeof(Brush), typeof(ChromeTabControl), new PropertyMetadata(Brushes.White));
-
-
-        public Brush AddTabButtonDisabledBrush
-        {
-            get => (Brush)GetValue(AddButtonDisabledBrushProperty);
-            set => SetValue(AddButtonDisabledBrushProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddButtonDisabledBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddButtonDisabledBrushProperty =
-            DependencyProperty.Register(nameof(AddTabButtonDisabledBrush), typeof(Brush), typeof(ChromeTabControl), new PropertyMetadata(Brushes.DarkGray));
-
 
         public double MinimumTabWidth
         {
@@ -278,41 +215,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         public static readonly DependencyProperty TabOverlapProperty =
             DependencyProperty.Register(nameof(TabOverlap), typeof(double), typeof(ChromeTabControl), new PropertyMetadata(10.0));
 
-        public ControlTemplate AddButtonTemplate
-        {
-            get => (ControlTemplate)GetValue(AddButtonTemplateProperty);
-            set => SetValue(AddButtonTemplateProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddButtonControlTemplate.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddButtonTemplateProperty =
-            DependencyProperty.Register(nameof(AddButtonTemplate), typeof(ControlTemplate), typeof(ChromeTabControl), new PropertyMetadata(null, OnAddButtonTemplateChanged));
-
-        private static void OnAddButtonTemplateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var ctc = (ChromeTabControl)d;
-            var panel = ctc.ItemsHost as ChromeTabPanel;
-            panel?.SetAddButtonControlTemplate(e.NewValue as ControlTemplate);
-        }
-
-        public double AddTabButtonWidth
-        {
-            get => (double)GetValue(AddTabButtonWidthProperty);
-            set => SetValue(AddTabButtonWidthProperty, value);
-        }
-
-        public static readonly DependencyProperty AddTabButtonWidthProperty =
-            DependencyProperty.Register(nameof(AddTabButtonWidth), typeof(double), typeof(ChromeTabControl), new PropertyMetadata(20.0));
-
-        public double AddTabButtonHeight
-        {
-            get => (double)GetValue(AddTabButtonHeightProperty);
-            set => SetValue(AddTabButtonHeightProperty, value);
-        }
-
-        public static readonly DependencyProperty AddTabButtonHeightProperty =
-            DependencyProperty.Register(nameof(AddTabButtonHeight), typeof(double), typeof(ChromeTabControl), new PropertyMetadata(12.0));
-
         static ChromeTabControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ChromeTabControl), new FrameworkPropertyMetadata(typeof(ChromeTabControl)));
@@ -325,11 +227,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 
         private void ChromeTabControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ItemsHost is ChromeTabPanel panel)
-            {
-                if (AddTabCommand != null)
-                    panel.IsAddButtonEnabled = AddTabCommand.CanExecute(AddTabCommandParameter);
-            }
+            AddTabCommand?.CanExecute(AddTabCommandParameter);
         }
 
         private static void SelectedTabBrushPropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
