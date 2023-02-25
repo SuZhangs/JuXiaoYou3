@@ -76,9 +76,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         }
 
 
-        protected override int VisualChildrenCount => base.VisualChildrenCount + 1;
-
-
         protected override Size ArrangeOverride(Size finalSize)
         {
             _currentTabWidth = CalculateTabWidth(finalSize);
