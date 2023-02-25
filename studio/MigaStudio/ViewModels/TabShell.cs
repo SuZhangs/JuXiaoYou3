@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class TabShell : TabController
     {
         private WindowState _windowState;
-        
+        private ITabViewModel _currentViewModel;
 
         public TabShell()
         {
@@ -50,8 +50,33 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             return home;
         }
 
+        public ITabViewModel CurrentViewModel
+        {
+            get => _currentViewModel;
+            set
+            {
+                _currentViewModel?.Suspend();
+                
+                SetValue(ref _currentViewModel, value);
+                
+                if (_currentViewModel is null)
+                {
+                    return;
+                }
+                
+                if (_currentViewModel.Initialized)
+                {
+                    _currentViewModel.Resume();
+                }
+                else
+                {
+                    _currentViewModel.Start();
+                }
+            }
+        }
+
         /// <summary>
-        /// 获取或设置 <see cref="WindowState"/> 属性。
+        /// 用于绑定的<see cref="WindowState"/> 属性。
         /// </summary>
         public WindowState WindowState
         {

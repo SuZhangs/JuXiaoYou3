@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
@@ -13,6 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private string _title;
         private bool   _isPinned;
+        private bool _initialized;
         
         #region Override
 
@@ -40,6 +42,27 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         #endregion
+
+        public sealed override Task Start()
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    OnStart();
+                    _initialized = true;
+                }
+                catch
+                {
+                    _initialized = false;
+                }
+            });
+        }
+
+        public virtual void OnStart()
+        {
+            
+        }
 
         public sealed override void Start(Parameter arg)
         {
@@ -96,5 +119,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <see cref="Uniqueness"/> 属性用来表示是否唯一，这个唯一是按照类型来算的。如果这个值为true，那么只能存在一个打开的类型。
         /// </remarks>
         public virtual bool Uniqueness => false;
+
+        /// <summary>
+        /// 是否已经初始化
+        /// </summary>
+        public bool Initialized => _initialized;
     }
 }

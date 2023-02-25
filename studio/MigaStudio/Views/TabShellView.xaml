@@ -13,8 +13,8 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type vm:TabShell}, IsDesignTimeCreatable=True}"
-                                  SnapsToDevicePixels="True"
-                                  UseLayoutRounding="True">
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True">
     <UserControl.Resources>
         <GeometryGroup x:Key="PlusSignPath">
             <GeometryGroup.Children>
@@ -22,12 +22,14 @@
                 <LineGeometry StartPoint="5,12" EndPoint="19,12" />
             </GeometryGroup.Children>
         </GeometryGroup>
+
+        <Style TargetType="ListBoxItem" BasedOn="{StaticResource TabItem}"></Style>
     </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
               Background="#F1F1F1"
-              Height="32">
+              Height="36">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="48" />
@@ -35,32 +37,32 @@
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
 
-            <s:ChromeTabControl x:Name="Shell"
-                                Grid.Column="0"
-                                WindowChrome.IsHitTestVisibleInChrome="True"
-                                DisplayMemberPath="Title"
-                                HorizontalAlignment="Left"
-                                ItemsSource="{Binding Onboards,Mode=OneWay}"
-                                SelectedItem="{Binding SelectedTab}"
-                                AddTabCommand="{Binding AddTabCommand}"
-                                PinTabCommand="{Binding PinTabCommand}"
-                                CloseTabCommand="{Binding CloseTabCommand}"
-                                MinimumTabWidth="60"
-                                PinnedTabWidth="160"
-                                MaximumTabWidth="160"
-                                VerticalAlignment="Bottom"/>
+            <ListBox x:Name="Shell"
+                     Grid.Column="0"
+                     WindowChrome.IsHitTestVisibleInChrome="True"
+                     ItemsSource="{Binding Onboards,Mode=OneWay}"
+                     Margin="0 10 0 0"
+                     SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
+                     VerticalAlignment="Stretch">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+            </ListBox>
 
             <ui:Button Grid.Column="1"
                        WindowChrome.IsHitTestVisibleInChrome="True"
                        Icon="Add16"
                        Command="{Binding AddTabCommand}"
-                                Margin="16 0 0 0"/>
-            
+                       Margin="16 0 0 0" />
+
             <fs:TitleBar Grid.Column="3"
                          WindowChrome.IsHitTestVisibleInChrome="True"
                          WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 
-        <fs:ViewHost ViewModel="{Binding ElementName=Shell,Path=SelectedContent,Mode=OneWay}"/>
+        <fs:ViewHost ViewModel="{Binding CurrentViewModel,Mode=OneWay}" />
     </DockPanel>
 </UserControl>
