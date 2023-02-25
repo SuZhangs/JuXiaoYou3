@@ -19,12 +19,11 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type Button}"
-           x:Key="CloseButtonStyle">
+    <Style TargetType="{x:Type Button}" x:Key="CloseButtonStyle">
         <Style.Resources>
-            <sys:Double x:Key="CloseButtonWidth">6</sys:Double>
-            <sys:Double x:Key="CloseCircleWidth">12</sys:Double>
-            <sys:Double x:Key="CloseButtonOffset">3</sys:Double>
+            <sys:Double x:Key="CloseButtonWidth">8</sys:Double>
+            <sys:Double x:Key="CloseCircleWidth">16</sys:Double>
+            <sys:Double x:Key="CloseButtonOffset">4</sys:Double>
         </Style.Resources>
         <Setter Property="Height"
                 Value="{StaticResource CloseCircleWidth}" />
@@ -87,14 +86,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ChromeTabControl}">
-                    <Grid>
-                        <Border BorderThickness="0,0,0,1"
-                                BorderBrush="#FF999999">
-                            <local:ChromeTabPanel IsItemsHost="True"
+                    <Border>
+                        <local:ChromeTabPanel IsItemsHost="True"
                                                   Background="{TemplateBinding Background}">
-                            </local:ChromeTabPanel>
-                        </Border>
-                    </Grid>
+                        </local:ChromeTabPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -120,7 +116,7 @@
                             <ColumnDefinition Width="10" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="14" />
                         </Grid.ColumnDefinitions>
                         <local:TabShape x:Name="TabFill"
                                         Stretch="Fill"
@@ -152,7 +148,7 @@
                         <ContentPresenter x:Name="ContentSite"
                                           Margin="0,0,2,0"
                                           Grid.Column="1"
-                                          VerticalAlignment="Stretch"
+                                          VerticalAlignment="Center"
                                           HorizontalAlignment="Stretch"
                                           ContentSource="Header">
                         </ContentPresenter>

@@ -15,5 +15,10 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             Xaml.Get<IViewHostAmbientService>().SetServiceProvider(this);
         }
+
+        protected override void OnViewModelChanged(ViewModelBase vm)
+        {
+            base.OnViewModelChanged(vm);
+        }
     }
 }

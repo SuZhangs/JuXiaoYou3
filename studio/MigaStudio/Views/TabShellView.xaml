@@ -16,7 +16,7 @@
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
               Background="#F1F1F1"
-              Height="48">
+              Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="144" />
@@ -28,6 +28,8 @@
             <s:ChromeTabControl x:Name="Shell"
                                 Grid.Column="0"
                                 WindowChrome.IsHitTestVisibleInChrome="True"
+                                DisplayMemberPath="Title"
+                                HorizontalAlignment="Left"
                                 ItemsSource="{Binding Onboards,Mode=OneWay}"
                                 SelectedItem="{Binding SelectedTab}"
                                 AddTabCommand="{Binding AddTabCommand}"
@@ -36,7 +38,7 @@
                                 MinimumTabWidth="40"
                                 PinnedTabWidth="160"
                                 MaximumTabWidth="160"
-                                Margin="0 0 144 0"
+                                Margin="0 12 144 0"
                                 VerticalAlignment="Bottom">
             </s:ChromeTabControl>
         </Grid>
