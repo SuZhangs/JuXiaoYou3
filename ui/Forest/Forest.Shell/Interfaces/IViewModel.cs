@@ -13,6 +13,12 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
         Task Start();
+        
+        /// <summary>
+        /// 表示参数传递。
+        /// </summary>
+        /// <param name="arg">视图参数</param>
+        void Start(Parameter arg);
 
         /// <summary>
         /// 表示关闭

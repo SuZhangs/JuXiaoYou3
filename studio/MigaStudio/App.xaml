@@ -1,20 +1,24 @@
-﻿<shell:ForestApp x:Class="Acorisoft.FutureGL.MigaStudio.App"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
-                 xmlns:shell="urn:acorisoft/forest/shell"
-                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                 xmlns:f="urn:acorisoft/forest/ui"
-                 xmlns:fs="urn:acorisoft/forest/shell"
-                 StartupUri="MainWindow.xaml">
+﻿<s:TabApp x:Class="Acorisoft.FutureGL.MigaStudio.App"
+          x:TypeArguments="vm:AppViewModel, vm:TabShell, vm:TabShell, vm:FirstScreenController, v:SplashView"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
+          xmlns:shell="urn:acorisoft/forest/shell"
+          xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+          xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
+          xmlns:v="clr-namespace:Acorisoft.FutureGL.MigaStudio.Views"
+          xmlns:f="urn:acorisoft/forest/ui"
+          xmlns:fs="urn:acorisoft/forest/shell"
+          xmlns:s="urn:acorisoft/studio"
+          StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml" />
                 <ui:ThemesDictionary Theme="Light" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-</shell:ForestApp>
+</s:TabApp>

@@ -1,7 +1,7 @@
 ﻿
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
-    public class ComposeCache : StorageObject
+    public class ComposeCache : StorageObject, IDataCache
     {
         
     }

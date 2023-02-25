@@ -112,6 +112,23 @@ namespace Acorisoft.FutureGL.Forest
         }
 
         #endregion
+        
+        
+
+        public static T GetViewModel<T>()
+        {
+            var key = typeof(T);
+            
+            //
+            // instance是一个ViewModel
+            // 返回 View
+            if (ViewModelInfoMapper.TryGetValue(key, out var info))
+            {
+                return (T)Activator.CreateInstance(info.ViewModel);
+            }
+
+            return default(T);
+        }
 
         public static object Connect(Type key)
         {

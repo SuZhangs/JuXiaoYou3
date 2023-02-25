@@ -5,7 +5,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
     /// <summary>
     /// 文档缓存
     /// </summary>
-    public class DocumentCache : StorageObject
+    public class DocumentCache : StorageObject, IDataCache
     {
         /// <summary>
         /// 头像

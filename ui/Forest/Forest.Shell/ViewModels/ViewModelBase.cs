@@ -71,6 +71,15 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             return Task.Run(() => { });
         }
         
+        /// <summary>
+        /// 表示参数传递。
+        /// </summary>
+        /// <param name="arg">视图参数</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public virtual void Start(Parameter arg)
+        {
+        }
+        
 
         /// <summary>
         /// 表示关闭

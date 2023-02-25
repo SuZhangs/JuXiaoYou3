@@ -13,11 +13,6 @@ namespace Acorisoft.FutureGL.Forest.Models
         public object[] Args { get; init; }
         
         /// <summary>
-        /// 数据标识符，在TabViewModel中使用！
-        /// </summary>
-        internal string DataIdentifier { get; set; }
-        
-        /// <summary>
         /// 来源视图模型，在DialogViewModel中使用！
         /// </summary>
         internal IViewModel ViewModelSource { get; set; }

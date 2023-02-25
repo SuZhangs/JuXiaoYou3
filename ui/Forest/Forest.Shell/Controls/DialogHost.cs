@@ -265,9 +265,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 //
-                Dispatcher.Invoke(() => ViewModel = dialog);
-
-                Focus();
+                Dispatcher.Invoke(() =>
+                {
+                    Focus();
+                    return ViewModel = dialog;
+                });
+                
                 //
                 // 等待
                 return await dialog2.WaitHandle.Task;
@@ -300,52 +303,55 @@ namespace Acorisoft.FutureGL.Forest.Controls
         /// <remarks>注意：该操作不会设置返回值。也不会取消</remarks>
         public void CloseDialog()
         {
-            if (_stack.Current is null)
+            Dispatcher.Invoke(() =>
             {
-                return;
-            }
+                if (_stack.Current is null)
+                {
+                    return;
+                }
 
-            //
-            //
-            var finished = _stack.CompletedOrCancel();
+                //
+                //
+                var finished = _stack.CompletedOrCancel();
 
-            //
-            //
-            finished.Stop();
+                //
+                //
+                finished.Stop();
 
-            //
-            // 恢复上一个
-            if (!_stack.CanCompletedOrCancel())
-            {
+                //
+                // 恢复上一个
+                if (!_stack.CanCompletedOrCancel())
+                {
+                    IsOpened  = false;
+                    ViewModel = null;
+                    return;
+                }
+
+                //
+                //
+                if (finished is not __IDialogViewModel dialog2)
+                {
+                    IsOpened = false;
+                    return;
+                }
+
+                //
+                // 设置取消
+                dialog2.WaitHandle.TrySetCanceled();
+
+                //
+                // 恢复上下文
+                var current = _stack.Current;
+
+                //
+                //
+                current.Resume();
+
+                //
+                // 弹出
                 IsOpened  = false;
-                ViewModel = null;
-                return;
-            }
-
-            //
-            //
-            if (finished is not __IDialogViewModel dialog2)
-            {
-                IsOpened = false;
-                return;
-            }
-
-            //
-            // 设置取消
-            dialog2.WaitHandle.TrySetCanceled();
-
-            //
-            // 恢复上下文
-            var current = _stack.Current;
-
-            //
-            //
-            current.Resume();
-
-            //
-            // 弹出
-            IsOpened  = false;
-            ViewModel = current;
+                ViewModel = current;
+            });
         }
 
         /// <summary>

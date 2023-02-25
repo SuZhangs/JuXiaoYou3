@@ -7,7 +7,6 @@ namespace Acorisoft.FutureGL.Forest.Services
 {
     public class DialogService : IDialogService, IDialogServiceAmbient,  IBusyService, IBusyServiceAmbient, INotifyService, INotifyServiceAmbient
     {
-        
         class Session : IBusySession
         {
             public void Dispose()
@@ -113,6 +112,10 @@ namespace Acorisoft.FutureGL.Forest.Services
             _host.Messaging(notification);
         }
         
+        /// <summary>
+        /// 创建会话。
+        /// </summary>
+        /// <returns>返回会话</returns>
         public IBusySession CreateSession()
         {
             _session ??= new Session
@@ -125,7 +128,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             return _session;
         }
 
-        #region IAmbientService
+        #region IDialogAmbientService
 
         /// <summary>
         /// 危险提示对话框

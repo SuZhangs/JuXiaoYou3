@@ -23,4 +23,10 @@
       <PackageReference Include="WPF-UI" Version="3.0.0-preview.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Resources\Behaviors" />
+      <Folder Include="Resources\ContentTemplates" />
+      <Folder Include="Resources\Converters" />
+    </ItemGroup>
+
 </Project>

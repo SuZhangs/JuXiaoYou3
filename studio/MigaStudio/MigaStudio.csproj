@@ -23,7 +23,6 @@
       <Folder Include="Reosurces\ContentTemplates" />
       <Folder Include="Reosurces\Converters" />
       <Folder Include="Styles" />
-      <Folder Include="Views" />
     </ItemGroup>
 
     <ItemGroup>

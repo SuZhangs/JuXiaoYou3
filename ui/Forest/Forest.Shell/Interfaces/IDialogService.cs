@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     /// <summary>
     /// <see cref="IDialogService"/> 类型表示一个对话框服务
     /// </summary>
-    public interface IDialogService : IAmbientService
+    public interface IDialogService : IDialogAmbientService
     {
         /// <summary>
         /// 弹出对话框
@@ -69,9 +69,9 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     }
 
     /// <summary>
-    /// <see cref="IAmbientService"/> 类型表示一个环境服务
+    /// <see cref="IDialogAmbientService"/> 类型表示一个环境服务
     /// </summary>
-    public interface IAmbientService
+    public interface IDialogAmbientService
     {
 
         /// <summary>
@@ -167,6 +167,9 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         Task<bool> Obsolete(string title, string content, string okButtonText, string cancelButtonText);
     }
 
+    /// <summary>
+    /// <see cref="IDialogServiceAmbient"/> 类型表示一个对话框环境服务
+    /// </summary>
     public interface IDialogServiceAmbient : IServiceAmbient<DialogHost>
     {
         

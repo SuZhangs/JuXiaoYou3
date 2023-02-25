@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Start(Parameter parameter)
+        public sealed override void Start(Parameter parameter)
         {
             if (parameter is null)
             {

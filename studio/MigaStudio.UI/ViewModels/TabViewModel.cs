@@ -10,20 +10,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>
     {
-        public void Start(IUniquenessProtocol param)
-        { 
-            //
-            // 第一个参数必须是ID
-            Id = param.Id;
-            
-            OnStart(param);
-        }
+        #region Override
+
         
-        /// <summary>
-        /// 传递参数。
-        /// </summary>
-        /// <param name="protocol">指定要传递的参数。</param>
-        protected abstract void OnStart(IUniquenessProtocol protocol);
 
         public bool Equals(TabViewModel other)
         {
@@ -44,6 +33,20 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        #endregion
+
+        public sealed override void Start(Parameter arg)
+        {
+            var np = NavigationParameter.FromParameter(arg);
+            Id = np.Id;
+            OnStart(np);
+        }
+
+        protected virtual void OnStart(NavigationParameter parameter)
+        {
+            
         }
 
         /// <summary>

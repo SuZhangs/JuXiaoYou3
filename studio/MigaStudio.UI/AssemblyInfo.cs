@@ -15,10 +15,4 @@ using System.Windows.Markup;
     //(used if a resource is not found in the page,
     // app, or any theme specific resource dictionaries)
 )]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.PreviewSystem")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.PreviewSystem.Controls")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.TemplateSystem")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.ModuleSystem")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.Controls")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.ModuleSystem.UI")]
-[assembly: XmlnsDefinition("https://www.acorisoft.cn/miga/template", "Acorisoft.MigaStudio.ModuleSystem.Editors")]
+[assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Windows")]

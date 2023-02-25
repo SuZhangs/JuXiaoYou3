@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.Forest.AppModels
 {
-    public interface ITabViewController : IViewController
+    public interface ITabViewController : IViewController, ITabViewModel
     {
         
     }

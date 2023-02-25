@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {
@@ -8,6 +9,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ViewHost), new FrameworkPropertyMetadata(typeof(ViewHost)));
         }
-        
+
+
+        public ViewHost()
+        {
+            Xaml.Get<IViewHostAmbientService>().SetServiceProvider(this);
+        }
     }
 }

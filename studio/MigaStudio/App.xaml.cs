@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using DryIoc;
 using NLog;
@@ -59,11 +61,15 @@ namespace Acorisoft.FutureGL.MigaStudio
 
             //
             // 注册设置
-            Xaml.Use<ISystemSetting>(new SystemSetting
+            container.Use<SystemSetting, ISystemSetting>(new SystemSetting
             {
                 RepositorySetting = repositorySetting,
                 RepositorySettingFileName = repositorySettingFileName
             });
+
+            container.Use<ViewHostServiceAdapter,
+                IViewHostServiceAdapter,
+                IViewHostAmbientService>(new ViewHostServiceAdapter());
 
             return data;
         }
