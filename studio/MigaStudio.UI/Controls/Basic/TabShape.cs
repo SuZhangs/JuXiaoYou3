@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 
         // Using a DependencyProperty as the backing store for TabShapePath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabShapePathProperty =
-            DependencyProperty.Register("TabShapePath", typeof(Path), typeof(TabShape), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(TabShapePath), typeof(Path), typeof(TabShape), new PropertyMetadata(null));
 
 
 

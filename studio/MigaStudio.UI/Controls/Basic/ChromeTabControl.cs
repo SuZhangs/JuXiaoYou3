@@ -1,20 +1,22 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 {
-    [TemplatePart(Name = "PART_ItemsHolder", Type = typeof(Panel))]
     public class ChromeTabControl : Selector
     {
-        private                bool                                           _addTabButtonClicked;
         private                object                                         _lastSelectedItem;
-        private                Panel                                          _itemsHolder;
         private                ConditionalWeakTable<object, DependencyObject> _objectToContainerMap;
         public static readonly DependencyProperty                             SelectedContentProperty = DependencyProperty.Register(nameof(SelectedContent), typeof(object), typeof(ChromeTabControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
@@ -75,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             ((ChromeTabPanel)ItemsHost).IsAddButtonEnabled = AddTabCommand.CanExecute(AddTabCommandParameter);
         }
 
-        public static readonly DependencyProperty AddTabCommandParameterProperty =
+        public static DependencyProperty AddTabCommandParameterProperty =
             DependencyProperty.Register(nameof(AddTabCommandParameter), typeof(object), typeof(ChromeTabControl));
 
         public object AddTabCommandParameter
@@ -89,42 +91,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             get => (ICommand)GetValue(AddTabCommandProperty);
             set => SetValue(AddTabCommandProperty, value);
         }
-
-        public static readonly DependencyProperty ReorderTabsCommandProperty =
-            DependencyProperty.Register(
-                nameof(ReorderTabsCommand),
-                typeof(ICommand),
-                typeof(ChromeTabControl));
-
-        public ICommand ReorderTabsCommand
-        {
-            get => (ICommand)GetValue(ReorderTabsCommandProperty);
-            set => SetValue(ReorderTabsCommandProperty, value);
-        }
-
-        // Provide CLR accessors for the event
-        public event TabDragEventHandler TabDraggedOutsideBonds
-        {
-            add => AddHandler(TabDraggedOutsideBondsEvent, value);
-            remove => RemoveHandler(TabDraggedOutsideBondsEvent, value);
-        }
-
-        // Using a RoutedEvent
-        public static readonly RoutedEvent TabDraggedOutsideBondsEvent = EventManager.RegisterRoutedEvent(
-            "TabDraggedOutsideBonds", RoutingStrategy.Bubble, typeof(TabDragEventHandler), typeof(ChromeTabControl));
-
-
-        // Provide CLR accessors for the event
-        public event ContainerOverrideEventHandler ContainerItemPreparedForOverride
-        {
-            add => AddHandler(ContainerItemPreparedForOverrideEvent, value);
-            remove => RemoveHandler(ContainerItemPreparedForOverrideEvent, value);
-        }
-
-        // Using a RoutedEvent
-        public static readonly RoutedEvent ContainerItemPreparedForOverrideEvent = EventManager.RegisterRoutedEvent(
-            "ContainerItemPreparedForOverride", RoutingStrategy.Bubble, typeof(ContainerOverrideEventHandler), typeof(ChromeTabControl));
-
 
         [Obsolete("Set TabDragEventArgs.Handled in TabDraggedOutsideBonds event instead.")]
         public bool CloseTabWhenDraggedOutsideBonds
@@ -312,58 +278,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         public static readonly DependencyProperty TabOverlapProperty =
             DependencyProperty.Register(nameof(TabOverlap), typeof(double), typeof(ChromeTabControl), new PropertyMetadata(10.0));
 
-
-        /// <summary>
-        /// Controls the persist behavior of tabs. All = all tabs live in memory, None = no tabs live in memory, Timed= tabs gets cleared from memory after a period of being unselected.
-        /// </summary>
-        public TabPersistBehavior TabPersistBehavior
-        {
-            get => (TabPersistBehavior)GetValue(TabPersistBehaviorProperty);
-            set => SetValue(TabPersistBehaviorProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for TabTearTriggerDistance.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TabPersistBehaviorProperty =
-            DependencyProperty.Register(nameof(TabPersistBehavior), typeof(TabPersistBehavior), typeof(ChromeTabControl), new PropertyMetadata(TabPersistBehavior.None, OnTabPersistBehaviorPropertyChanged));
-
-        private static void OnTabPersistBehaviorPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var ct = (ChromeTabControl)d;
-            if (((TabPersistBehavior)e.NewValue) == TabPersistBehavior.None)
-            {
-                ct._itemsHolder.Children.Clear();
-            }
-            else
-            {
-                ct.SetSelectedContent(false);
-            }
-        }
-
-        /// <summary>
-        /// The time an inactive tab stays cached in memory before being cleared. Default duration is 30 minutes.
-        /// </summary>
-        public TimeSpan TabPersistDuration
-        {
-            get => (TimeSpan)GetValue(TabPersistDurationProperty);
-            set => SetValue(TabPersistDurationProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for TabTearTriggerDistance.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TabPersistDurationProperty =
-            DependencyProperty.Register(nameof(TabPersistDuration), typeof(TimeSpan), typeof(ChromeTabControl), new PropertyMetadata(TimeSpan.FromMinutes(30)));
-
-
-        public AddTabButtonBehavior AddTabButtonBehavior
-        {
-            get => (AddTabButtonBehavior)GetValue(AddTabButtonBehaviorProperty);
-            set => SetValue(AddTabButtonBehaviorProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for AddTabButtonBehavior.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AddTabButtonBehaviorProperty =
-            DependencyProperty.Register(nameof(AddTabButtonBehavior), typeof(AddTabButtonBehavior), typeof(ChromeTabControl), new PropertyMetadata(AddTabButtonBehavior.OpenNewTab));
-
-
         public ControlTemplate AddButtonTemplate
         {
             get => (ControlTemplate)GetValue(AddButtonTemplateProperty);
@@ -449,15 +363,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 
             if (AddTabCommand != null && AddTabCommand.CanExecute(null))
             {
-                _addTabButtonClicked = true;
                 AddTabCommand?.Execute(null);
             }
         }
-        //internal void SetCanAddTab(bool value)
-        //{
-        //    SetValue(CanAddTabPropertyKey, value);
-        //}
-        //internal bool CanAddTab => (bool)GetValue(CanAddTabProperty);
 
         internal void RemoveTab(object obj)
         {
@@ -560,22 +468,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                 return;
             if (!fromItem.IsPinned && toItem.IsPinned)
                 return;
+            
             var tabReorder = new TabReorder(fromIndex, toIndex);
-            if (ReorderTabsCommand != null && ReorderTabsCommand.CanExecute(tabReorder))
+            
+            var sourceType = ItemsSource.GetType();
+            if (sourceType.IsGenericType)
             {
-                ReorderTabsCommand.Execute(tabReorder);
-            }
-            else
-            {
-                var sourceType = ItemsSource.GetType();
-                if (sourceType.IsGenericType)
+                var sourceDefinition = sourceType.GetGenericTypeDefinition();
+                if (sourceDefinition == typeof(ObservableCollection<>))
                 {
-                    var sourceDefinition = sourceType.GetGenericTypeDefinition();
-                    if (sourceDefinition == typeof(ObservableCollection<>))
-                    {
-                        var method = sourceType.GetMethod("Move");
-                        method.Invoke(ItemsSource, new object[] { fromIndex, toIndex });
-                    }
+                    var method = sourceType.GetMethod("Move");
+                    method.Invoke(ItemsSource, new object[] { fromIndex, toIndex });
                 }
             }
 
@@ -591,7 +494,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _itemsHolder = GetTemplateChild("PART_ItemsHolder") as Panel;
             SetSelectedContent(false);
         }
 
@@ -633,48 +535,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnItemsChanged(e);
-            if (_itemsHolder != null)
-            {
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Replace:
-                    case NotifyCollectionChangedAction.Reset:
-                    {
-                        var itemsToRemove = _itemsHolder.Children.Cast<ContentPresenter>().Where(x => !Items.Contains(x.Content)).ToList();
-                        foreach (var item in itemsToRemove)
-                            _itemsHolder.Children.Remove(item);
-                    }
-                        break;
-                    case NotifyCollectionChangedAction.Add:
-                    {
-                        // don't do anything with new items not created by the add button, because we don't want to
-                        // create visuals that aren't being shown.
-                        if (_addTabButtonClicked && AddTabButtonBehavior == AddTabButtonBehavior.OpenNewTab)
-                        {
-                            _addTabButtonClicked = false;
-                            if (e.NewItems != null)
-                                ChangeSelectedItem(AsTabItem(e.NewItems.Cast<object>().Last()));
-                        }
-                    }
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        if (e.OldItems != null)
-                        {
-                            foreach (var item in e.OldItems)
-                            {
-                                var cp = FindChildContentPresenter(item);
-                                if (cp != null)
-                                {
-                                    _itemsHolder.Children.Remove(cp);
-                                }
-                            }
-                        }
-
-
-                        break;
-                }
-            }
-
             SetSelectedContent(Items.Count == 0);
             SetChildrenZ();
         }
@@ -722,20 +582,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             }
 
             var item = AsTabItem(SelectedItem);
-            if (TabPersistBehavior != TabPersistBehavior.None)
-            {
-                if (item != null && _itemsHolder != null)
-                {
-                    CreateChildContentPresenter(SelectedItem);
-                    // show the right child
-                    foreach (ContentPresenter child in _itemsHolder.Children)
-                    {
-                        var childTabItem = AsTabItem(child.Content);
-                        child.Visibility = childTabItem.IsSelected ? Visibility.Visible : Visibility.Collapsed;
-                    }
-                }
-            }
-
             SelectedContent = item?.Content;
         }
 
@@ -749,8 +595,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
                 ObjectToContainer.Add(item, element);
                 SetChildrenZ();
             }
-
-            RaiseEvent(new ContainerOverrideEventArgs(ContainerItemPreparedForOverrideEvent, this, item, AsTabItem(element)));
+            
+            var tabItem = AsTabItem(element);
+            var pinned = (item as IPinnable)?.IsPinned ?? false;
+            tabItem.IsPinned = pinned;
         }
 
         protected ChromeTabItem AsTabItem(object item)
@@ -766,7 +614,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             return tabItem;
         }
 
-        private ConditionalWeakTable<object, DependencyObject> ObjectToContainer =>
+        private ConditionalWeakTable<object, DependencyObject> ObjectToContainer => 
             _objectToContainerMap ??= new ConditionalWeakTable<object, DependencyObject>();
 
         protected void SetChildrenZ()
@@ -793,79 +641,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             }
         }
 
-        /// <summary>
-        /// create the child ContentPresenter for the given item (could be data or a TabItem)
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        private ContentPresenter CreateChildContentPresenter(object item)
-        {
-            if (item == null)
-            {
-                return null;
-            }
-
-            var cp = FindChildContentPresenter(item);
-
-            if (cp != null)
-            {
-                return cp;
-            }
-
-            // the actual child to be added. 
-            cp = new ContentPresenter
-            {
-                Content    = (item is ChromeTabItem) ? (item as ChromeTabItem).Content : item,
-                Visibility = Visibility.Collapsed
-            };
-            _itemsHolder.Children.Add(cp);
-            return cp;
-        }
-
-        /// <summary>
-        ///<para>Find the <see cref="ContentPresenter"/> for the given object. Data could be a <see cref="ChromeTabItem"/> or a ViewModel.</para>
-        ///<para>Returns <see cref="ContentPresenter"/>, or <see langword="null" /> if the content is not loaded.</para>
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public ContentPresenter FindChildContentPresenter(object data)
-        {
-            if (data is ChromeTabItem)
-            {
-                data = ((ChromeTabItem)data).Content;
-            }
-
-            if (data == null)
-            {
-                return null;
-            }
-
-            if (_itemsHolder == null)
-            {
-                return null;
-            }
-
-            foreach (ContentPresenter cp in _itemsHolder.Children)
-            {
-                if (cp.Content == data)
-                {
-                    return cp;
-                }
-            }
-
-            return null;
-        }
-
         internal void RemoveFromItemHolder(ChromeTabItem item)
         {
-            if (_itemsHolder == null)
-                return;
-            var presenter = FindChildContentPresenter(item);
-            if (presenter != null)
-            {
-                _itemsHolder.Children.Remove(presenter);
-                Debug.WriteLine("Removing cached ContentPresenter");
-            }
         }
     }
 }

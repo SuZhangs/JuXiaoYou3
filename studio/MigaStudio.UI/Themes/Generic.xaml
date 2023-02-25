@@ -81,37 +81,19 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type local:ChromeTabControl}"
-           xmlns:conv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Converters">
+    <Style TargetType="{x:Type local:ChromeTabControl}">
         <Setter Property="Background"
                 Value="Transparent" />
-        <Setter Property="TabPersistBehavior"
-                Value="None" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ChromeTabControl}">
-                    <ControlTemplate.Resources>
-                        <conv:TabPersistBehaviorToContentPresenterVisibilityConverter x:Key="TabPersistBehaviorToContentPresenterVisibilityConverter" />
-                        <conv:TabPersistBehaviorToItemHolderVisibilityConverter x:Key="TabPersistBehaviorToItemHolderVisibilityConverter" />
-                    </ControlTemplate.Resources>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
                         <Border BorderThickness="0,0,0,1"
                                 BorderBrush="#FF999999">
                             <local:ChromeTabPanel IsItemsHost="True"
                                                   Background="{TemplateBinding Background}">
                             </local:ChromeTabPanel>
                         </Border>
-                        <Grid Grid.Row="1"
-                              Visibility="{TemplateBinding TabPersistBehavior,Converter={StaticResource TabPersistBehaviorToContentPresenterVisibilityConverter}}">
-                            <ContentPresenter Content="{TemplateBinding SelectedContent}" />
-                        </Grid>
-                        <Grid x:Name="PART_ItemsHolder"
-                              Grid.Row="1"
-                              Visibility="{TemplateBinding TabPersistBehavior,Converter={StaticResource TabPersistBehaviorToItemHolderVisibilityConverter}}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -123,7 +105,7 @@
     <SolidColorBrush x:Key="TabStrokeBrush">#FF999999</SolidColorBrush>
     <SolidColorBrush x:Key="SelectedTabStrokeBrush">WhiteSmoke</SolidColorBrush>
     <SolidColorBrush x:Key="TabHighlightBrush">White</SolidColorBrush>
-    <SolidColorBrush x:Key="SelectedTabHighlighBrush">Transparent</SolidColorBrush>
+    <SolidColorBrush x:Key="SelectedTabHighlightBrush">Transparent</SolidColorBrush>
     <sys:Double x:Key="MinTabWidthToShowCloseButton">60</sys:Double>
     <Style TargetType="{x:Type local:ChromeTabItem}"
            xmlns:conv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Converters">
@@ -159,10 +141,10 @@
                                         VerticalAlignment="Top"
                                         Stroke="{StaticResource TabStrokeBrush}"
                                         Stretch="Fill"
-                                        Grid.ColumnSpan="4" />
+                                        Grid.ColumnSpan="4" Grid.Column="0" />
                         <local:TabShape x:Name="TabHighlight"
                                         Margin="1,1,1,1"
-                                        Grid.ColumnSpan="4"
+                                        Grid.ColumnSpan="4" Grid.Column="0"
                                         VerticalAlignment="Top"
                                         Stretch="Fill"
                                         Stroke="{StaticResource TabHighlightBrush}" />
@@ -222,7 +204,7 @@
                                     Value="0" />
                             <Setter Property="Stroke"
                                     TargetName="TabHighlight"
-                                    Value="{StaticResource SelectedTabHighlighBrush}" />
+                                    Value="{StaticResource SelectedTabHighlightBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

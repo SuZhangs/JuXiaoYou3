@@ -12,6 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
         private string _title;
+        private bool   _isPinned;
         
         #region Override
 
@@ -71,6 +72,22 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 用于表示当前的视图模型的唯一标识符。
         /// </summary>
         public string Id { get; private set; }
+        
+        
+        /// <summary>
+        /// 是否固定
+        /// </summary>
+        public bool IsPinned
+        {
+            get => _isPinned;
+            set
+            {
+                if (_isPinned != value)
+                {
+                    SetValue(ref _isPinned, value);
+                }
+            }
+        }
 
         /// <summary>
         /// 用来表示当前的视图模型是否为唯一的。

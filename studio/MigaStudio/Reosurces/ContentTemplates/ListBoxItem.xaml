@@ -10,7 +10,7 @@
     <Style x:Key="TabItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
+                <SolidColorBrush Color="Black" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background">

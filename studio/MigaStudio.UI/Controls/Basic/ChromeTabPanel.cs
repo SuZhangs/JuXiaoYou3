@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 
@@ -12,27 +16,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
     [ToolboxItem(false)]
     public class ChromeTabPanel : Panel
     {
-        private const double           _stickyReanimateDuration = 0.10;
-        private const double           _tabWidthSlidePercent    = 0.5;
-        private       bool             _isReleasingTab;
-        private       bool             _hideAddButton;
-        private       Size             _finalSize;
-        private       double           _leftMargin;
-        private       double           _rightMargin;
-        private       double           _defaultMeasureHeight;
-        private       double           _currentTabWidth;
-        private       int              _captureGuard;
-        private       int              _originalIndex;
-        private       int              _slideIndex;
-        private       List<double>     _slideIntervals;
-        private       ChromeTabItem    _draggedTab;
-        private       Point            _downPoint;
-        private       Point            _downTabBoundsPoint;
-        private       ChromeTabControl _parent;
-        private       Rect             _addButtonRect;
-        private       Button           _addButton;
-        private       DateTime         _lastMouseDown;
-        private       object           _lockObject = new object();
+        private const double _stickyReanimateDuration = 0.10;
+        private const double _tabWidthSlidePercent = 0.5;
+        private bool _isReleasingTab;
+        private bool _hideAddButton;
+        private Size _finalSize;
+        private double _leftMargin;
+        private double _rightMargin;
+        private double _defaultMeasureHeight;
+        private double _currentTabWidth;
+        private int _captureGuard;
+        private int _originalIndex;
+        private int _slideIndex;
+        private List<double> _slideIntervals;
+        private ChromeTabItem _draggedTab;
+        private Point _downPoint;
+        private Point _downTabBoundsPoint;
+        private ChromeTabControl _parent;
+        private Rect _addButtonRect;
+        private Button _addButton;
+        private DateTime _lastMouseDown;
+        private object _lockObject = new object();
 
         protected double Overlap => ParentTabControl?.TabOverlap ?? 10;
         protected double MinTabWidth => _parent?.MinimumTabWidth ?? 40;
@@ -490,27 +494,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
             base.OnPreviewMouseMove(e);
-
             ProcessMouseMove(e.GetPosition(this));
-
-            if (_draggedTab == null || DateTime.UtcNow.Subtract(_lastMouseDown).TotalMilliseconds < 50)
-            {
-                return;
-            }
-            var nowPoint = e.GetPosition(this);
-            var isOutsideTabPanel = nowPoint.X < 0 - ParentTabControl.TabTearTriggerDistance
-                                    || nowPoint.X > ActualWidth + ParentTabControl.TabTearTriggerDistance
-                                    || nowPoint.Y < -(ActualHeight)
-                                    || nowPoint.Y > ActualHeight + 5 + ParentTabControl.TabTearTriggerDistance;
-            if (isOutsideTabPanel && Mouse.LeftButton == MouseButtonState.Pressed)
-            {
-                var viewmodel = _draggedTab.Content;
-                var eventArgs = new TabDragEventArgs(ChromeTabControl.TabDraggedOutsideBondsEvent, this, viewmodel, PointToScreen(e.GetPosition(this)));
-                RaiseEvent(eventArgs);
-                var closeTab = eventArgs.Handled || ParentTabControl.CloseTabWhenDraggedOutsideBonds;
-                OnTabRelease(e.GetPosition(this), IsMouseCaptured, closeTab, 0.01);//If we set it to 0 the completed event never fires, so we set it to a small decimal.
-
-            }
         }
 
 

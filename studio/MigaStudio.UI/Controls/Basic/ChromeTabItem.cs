@@ -1,11 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
 {
-
     public class ChromeTabItem : HeaderedContentControl
     {
         private DispatcherTimer _persistentTimer;
@@ -95,51 +98,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
         private void ChromeTabItem_Unloaded(object sender, RoutedEventArgs e)
         {
             this.Unloaded -= ChromeTabItem_Unloaded;
-            StopPersistTimer();
         }
 
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
-            var tabItem = (ChromeTabItem)d;
-
-            if (tabItem.ParentTabControl != null && tabItem.ParentTabControl.TabPersistBehavior == TabPersistBehavior.Timed)
-            {
-                if ((bool)args.NewValue)
-                {
-                    tabItem.StopPersistTimer();
-                }
-                else
-                {
-                    tabItem.StartPersistTimer();
-
-                }
-            }
-        }
-
-        private void StartPersistTimer()
-        {
-            StopPersistTimer();
-
-            _persistentTimer = new DispatcherTimer {Interval = ParentTabControl.TabPersistDuration};
-            _persistentTimer.Tick += PersistentTimer_Tick;
-            _persistentTimer.Start();
-        }
-
-        private void StopPersistTimer()
-        {
-            if (_persistentTimer != null)
-            {
-                _persistentTimer.Stop();
-                _persistentTimer.Tick -= PersistentTimer_Tick;
-                _persistentTimer = null;
-            }
-        }
-
-
-        private void PersistentTimer_Tick(object sender, EventArgs e)
-        {
-            StopPersistTimer();
-            ParentTabControl?.RemoveFromItemHolder(this);
         }
 
         private static void HandlePinTabCommand(object sender, ExecutedRoutedEventArgs e)
@@ -166,7 +128,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Basic
             if (!(sender is ChromeTabItem item)) { return; }
             item.ParentTabControl.RemoveTab(item);
         }
-        
         public int Index => ParentTabControl?.GetTabIndex(this) ?? -1;
 
         protected override void OnKeyDown(KeyEventArgs e)
