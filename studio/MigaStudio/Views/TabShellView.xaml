@@ -27,16 +27,13 @@
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
               Background="#F1F1F1"
-              Height="50">
+              Height="32">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="48" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="64" />
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
-            <fs:TitleBar Grid.Column="1"
-                         WindowChrome.IsHitTestVisibleInChrome="True"
-                         WindowState="{Binding WindowState,Mode=OneWay}" />
 
             <s:ChromeTabControl x:Name="Shell"
                                 Grid.Column="0"
@@ -48,15 +45,20 @@
                                 AddTabCommand="{Binding AddTabCommand}"
                                 PinTabCommand="{Binding PinTabCommand}"
                                 CloseTabCommand="{Binding CloseTabCommand}"
-                                MinimumTabWidth="80"
+                                MinimumTabWidth="60"
                                 PinnedTabWidth="160"
                                 MaximumTabWidth="160"
-                                Margin="0 20 144 0"
                                 VerticalAlignment="Bottom"/>
-            
-            <ui:Button Grid.Column="2"
+
+            <ui:Button Grid.Column="1"
+                       WindowChrome.IsHitTestVisibleInChrome="True"
                        Icon="Add16"
-                       Command="{Binding AddTabCommand}"/>
+                       Command="{Binding AddTabCommand}"
+                                Margin="16 0 0 0"/>
+            
+            <fs:TitleBar Grid.Column="3"
+                         WindowChrome.IsHitTestVisibleInChrome="True"
+                         WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 
         <fs:ViewHost ViewModel="{Binding ElementName=Shell,Path=SelectedContent,Mode=OneWay}"/>

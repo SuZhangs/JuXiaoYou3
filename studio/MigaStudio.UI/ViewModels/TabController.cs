@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected TabController()
         {
             Onboards  = new ObservableCollection<ITabViewModel>();
-            Outboards = new ObservableCollection<ITabViewController>();
+            Outboards = new ObservableCollection<ITabViewModel>();
         }
 
         
@@ -23,6 +23,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<ITabViewController> Outboards { get; }
+        public ObservableCollection<ITabViewModel> Outboards { get; }
     }
 }

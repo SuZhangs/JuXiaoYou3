@@ -252,6 +252,169 @@
         </Setter>
     </Style>
 
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="5"
+                               RadiusX="24"
+                               RadiusY="24"
+                               StrokeDashArray="4 4"
+                               StrokeThickness="1   "
+                               Stroke="{DynamicResource Brushes.ForegroundInAccent}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CancelButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="bd"
+                            Background="{DynamicResource Brushes.Background}"
+                            CornerRadius="24">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="bd">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#4F5B66" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="icon">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource Background}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="bd">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#3F4952" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Path.Stroke).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="icon">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource Background}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="bd">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#9BA6B1" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Path x:Name="icon"
+                              Stroke="#4F5B66"
+                              StrokeThickness="2"
+                              Stretch="Uniform"
+                              Width="11"
+                              Height="11"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <GeometryGroup.Children>
+                                        <LineGeometry StartPoint="18,6" EndPoint="6,18" />
+                                        <LineGeometry StartPoint="6,6" EndPoint="18,18" />
+                                    </GeometryGroup.Children>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type c:GeometryMessageBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:GeometryMessageBar}">
+                    <Border x:Name="bd"
+                            Background="White"
+                            CornerRadius="10"
+                            BorderThickness="4 0 0 0"
+                            BorderBrush="{TemplateBinding Highlight}"
+                            Padding="24 16"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True"
+                            Width="480"
+                            Height="64">
+                        <DockPanel>
+                            <Path x:Name="Icon"
+                                      Data="{TemplateBinding Geometry}"
+                                      Stroke="{TemplateBinding Highlight}"
+                                      StrokeThickness="2"
+                                      Stretch="Uniform"
+                                      Height="31"
+                                      Width="31" />
+                            <TextBlock DockPanel.Dock="Top"
+                                           FontSize="16"
+                                           Foreground="{TemplateBinding Highlight}"
+                                           Margin="16 0 0 0"
+                                           Text="{TemplateBinding Header}"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFilled" Value="True">
+                            <Setter Property="Stroke" Value="{x:Null}" TargetName="Icon"/>
+                            <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
+                            <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Highlight}" TargetName="Icon"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type c:ImageMessageBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:ImageMessageBar}">
+                    <Border x:Name="bd"
+                            Background="{DynamicResource Brushes.Background}"
+                            CornerRadius="10"
+                            BorderThickness="4 0 0 0"
+                            BorderBrush="{TemplateBinding Highlight}"
+                            Padding="24 16"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True"
+                            Width="480"
+                            Height="64">
+                        <DockPanel>
+                            <Image x:Name="Icon"
+                                       Source="{TemplateBinding Image}"
+                                       Stretch="Uniform"
+                                       Height="31"
+                                       Width="31" />
+                            <TextBlock DockPanel.Dock="Top"
+                                           FontSize="16"
+                                           Foreground="{TemplateBinding Highlight}"
+                                           Margin="16 0 0 0"
+                                           Text="{TemplateBinding Header}"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <SolidColorBrush x:Key="Window.Bg" Color="Transparent" />
     <SolidColorBrush x:Key="Window.Bg.Hover">#30000000</SolidColorBrush>
