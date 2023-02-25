@@ -6,12 +6,13 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
+namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public class QuickStartViewModel : PageViewModel
+    public class QuickStartController : TabController
     {
         private string _name;
         private string _foreignName;
@@ -20,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
         private string _icon;
         private string _intro;
 
-        public QuickStartViewModel()
+        public QuickStartController()
         {
             CreateCommand      = AsyncCommand(CreateImpl, CanCreate, true);
             OpenCommand        = AsyncCommand(OpenImpl);

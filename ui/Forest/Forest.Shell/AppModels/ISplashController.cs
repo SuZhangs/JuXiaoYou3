@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.Forest.AppModels
 {
-    public interface ISplashController : IViewController
+    public interface ISplashController : IViewController, IRootViewModel
     {
         
     }

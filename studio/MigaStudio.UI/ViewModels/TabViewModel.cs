@@ -1,4 +1,5 @@
 ﻿using System;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
@@ -8,8 +9,10 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>
+    public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
+        private string _title;
+        
         #region Override
 
         
@@ -47,6 +50,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected virtual void OnStart(NavigationParameter parameter)
         {
             
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Title"/> 属性。
+        /// </summary>
+        public string Title
+        {
+            get => _title;
+            set => SetValue(ref _title, value);
         }
 
         /// <summary>

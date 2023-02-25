@@ -8,22 +8,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class TabController : ViewModelBase, ITabViewController
     {
-        private string _id;
-        
         protected TabController()
         {
             Onboards  = new ObservableCollection<ITabViewModel>();
             Outboards = new ObservableCollection<ITabViewController>();
         }
 
-        /// <summary>
-        /// 当前的ID
-        /// </summary>
-        public string Id
-        {
-            get => _id;
-            set => SetValue(ref _id, value);
-        }
         
         /// <summary>
         /// 

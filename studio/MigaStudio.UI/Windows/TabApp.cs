@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
     public abstract class TabApp<TViewModel,TMainController, TMainView, TSplashController, TSplash> : TabApp<TViewModel,TMainController, TMainView>
         where TMainController : ITabViewController
         where TMainView : UserControl
-        where TSplashController : IViewController
+        where TSplashController : IRootViewModel
         where TSplash : UserControl
         where TViewModel : TabBased
     {

@@ -3,10 +3,10 @@ using Acorisoft.FutureGL.Forest.Attributes;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
 {
-    [Connected(View = typeof(QuickStartView), ViewModel = typeof(QuickStartViewModel))]
-    public partial class QuickStartView : UserControl
+    [Connected(View = typeof(HomeView), ViewModel = typeof(HomeViewModel))]
+    public partial class HomeView : UserControl
     {
-        public QuickStartView()
+        public HomeView()
         {
             InitializeComponent();
         }
