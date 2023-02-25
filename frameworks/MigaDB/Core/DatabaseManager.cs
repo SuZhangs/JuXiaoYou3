@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Exceptions;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaDB.Exceptions;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using MediatR;
@@ -26,7 +27,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public static DatabaseManager GetDefaultDatabaseManager(ILogger logger)
         {
             return CreateBuilder(logger)
-                    .Build(Constants.DatabaseCurrentVersion);
+                .Setup<TemplateEngine>()
+                .Build(Constants.DatabaseCurrentVersion);
         }
 
         #region DatabaseManagerBuilder

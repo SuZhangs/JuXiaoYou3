@@ -25,7 +25,6 @@
 
     <ItemGroup>
       <Folder Include="Resources\Behaviors" />
-      <Folder Include="Resources\ContentTemplates" />
       <Folder Include="Resources\Converters" />
     </ItemGroup>
 
@@ -36,6 +35,16 @@
         <SubType>Designer</SubType>
       </Page>
       <Page Update="Utilities\ImageEditView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\Icons\BasicIcon.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\ContentTemplates\ListBoxItem.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

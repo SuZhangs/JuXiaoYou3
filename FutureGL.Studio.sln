@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem", "studio\SubSyst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaGen.App", "generators\MigaGen.App\MigaGen.App.csproj", "{94A668AE-ADE1-4113-B843-CE27E99B5A3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.Profession", "studio\MigaStudio.Profession\MigaStudio.Profession.csproj", "{635256C6-8BF6-4C9E-A72A-BBF61FDF3AB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{94A668AE-ADE1-4113-B843-CE27E99B5A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94A668AE-ADE1-4113-B843-CE27E99B5A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94A668AE-ADE1-4113-B843-CE27E99B5A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635256C6-8BF6-4C9E-A72A-BBF61FDF3AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635256C6-8BF6-4C9E-A72A-BBF61FDF3AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635256C6-8BF6-4C9E-A72A-BBF61FDF3AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635256C6-8BF6-4C9E-A72A-BBF61FDF3AB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

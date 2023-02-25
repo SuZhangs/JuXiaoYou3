@@ -148,7 +148,7 @@
                                     VerticalAlignment="Center" />
 
                             <ContentPresenter x:Name="PART_Positive"
-                                              Grid.Column="5"
+                                              Grid.Column="4"
                                               Content="{TemplateBinding Positive}"
                                               ContentTemplate="{TemplateBinding PositiveTemplate}"
                                               ContentStringFormat="{TemplateBinding PositiveStringFormat}"
