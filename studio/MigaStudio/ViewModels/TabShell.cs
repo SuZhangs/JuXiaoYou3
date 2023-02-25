@@ -14,11 +14,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public class TabShell : TabController
     {
+        private readonly int _minItemSize;
+        private readonly int _maxItemSize;
+        private readonly int _workspaceSize;
         private WindowState _windowState;
         private ITabViewModel _currentViewModel;
 
         public TabShell()
         {
+            _workspaceSize = (int)(SystemParameters.WorkArea.Width - 256);
+            _minItemSize = 84;
+            _maxItemSize = 160;
+            
             Xaml.Get<IWindowEventBroadcast>()
                 .PropertyTunnel
                 .WindowStateTunnel = x => WindowState = x;
@@ -27,7 +34,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void OnAddTabImpl()
         {
-            if (Onboards.Count < 10)
+            var currentSize = _workspaceSize / Onboards.Count + 1;
+            if (currentSize >= _minItemSize)
             {
                 Onboards.Add(Test());
             }

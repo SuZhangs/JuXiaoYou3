@@ -9,7 +9,7 @@
     <DataTemplate DataType="{x:Type s:TabViewModel}">
         <Border Background="Transparent"
                 Padding="8 4 8 0"
-                MaxWidth="192"
+                Width="100"
                 WindowChrome.IsHitTestVisibleInChrome="True">
             <DockPanel>
                 <f:SimpleButton DockPanel.Dock="Right"

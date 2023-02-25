@@ -24,5 +24,9 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             InitializeComponent();
         }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+        }
     }
 }
