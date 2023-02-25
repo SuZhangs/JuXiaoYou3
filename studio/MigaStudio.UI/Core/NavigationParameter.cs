@@ -2,6 +2,7 @@
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
@@ -12,6 +13,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Params = args;
         }
 
+        public static NavigationParameter Test()
+        {
+            var args = new Parameter
+            {
+                Args = new object[8]
+            };
+
+            args.Args[0] = ID.Get();
+            return new NavigationParameter(args);
+        }
+        
         public static NavigationParameter New(IData data, IDataCache cache, ITabViewController controller)
         {
             var args = new Parameter
@@ -33,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <summary>
         /// 唯一标识符
         /// </summary>
-        public string Id => Document.Id ?? Index.Id;
+        public string Id => (string)Params.Args[0];
 
         /// <summary>
         /// 目标文档

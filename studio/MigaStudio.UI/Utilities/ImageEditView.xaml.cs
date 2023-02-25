@@ -20,7 +20,7 @@ using Rectangle = SixLabors.ImageSharp.Rectangle;
 
 // ReSharper disable MethodHasAsyncOverload
 
-namespace Acorisoft.FutureGL.MigaStudio.Windows
+namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public class ThumbAdorner : Adorner
     {

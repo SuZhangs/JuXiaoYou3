@@ -12,7 +12,7 @@ using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.PixelFormats;
 using Image = SixLabors.ImageSharp.Image; 
 
-namespace Acorisoft.FutureGL.MigaStudio.Utils
+namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public static class ImageHelper
     {

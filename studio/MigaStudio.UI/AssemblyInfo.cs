@@ -15,4 +15,6 @@ using System.Windows.Markup;
     //(used if a resource is not found in the page,
     // app, or any theme specific resource dictionaries)
 )]
+[assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Controls.Basic")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Windows")]
+[assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.ViewModels")]

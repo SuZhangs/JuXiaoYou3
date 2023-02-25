@@ -20,7 +20,6 @@
 
     <ItemGroup>
       <Folder Include="Reosurces\Behaviors" />
-      <Folder Include="Reosurces\ContentTemplates" />
       <Folder Include="Reosurces\Converters" />
       <Folder Include="Styles" />
     </ItemGroup>

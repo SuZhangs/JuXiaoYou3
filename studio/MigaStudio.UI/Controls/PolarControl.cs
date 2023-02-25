@@ -95,13 +95,13 @@ namespace  Acorisoft.FutureGL.MigaStudio.Controls
         [MethodImpl(MethodImplOptions.NoInlining)]
         internal static Point GetArcPoint(double degree, Rect bound)
         {
-            Point arcPoint = GetArcPoint(degree);
+            var arcPoint = GetArcPoint(degree);
             return RelativeToAbsolutePoint(bound, arcPoint);
         }
         
         internal static Point GetArcPoint(double degree)
         {
-            double num = degree * Math.PI / 180.0;
+            var num = degree * Math.PI / 180.0;
             return new Point(0.5 + 0.5 * Math.Sin(num), 0.5 - 0.5 * Math.Cos(num));
         }
         

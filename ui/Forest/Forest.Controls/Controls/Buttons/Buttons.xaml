@@ -56,6 +56,51 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <Style TargetType="{x:Type b:SimpleButton}">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="{DynamicResource Brushes.Transparent}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brushes.Black}" />
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinWidth" Value="42" />
+        <Setter Property="HoverBackgroundBrush" Value="{DynamicResource Window.Bg.Hover}" />
+        <Setter Property="HoverForegroundBrush" Value="{DynamicResource Brushes.Black}" />
+        <Setter Property="PressBackgroundBrush" Value="{DynamicResource Window.Bg.Press}" />
+        <Setter Property="PressForegroundBrush" Value="{DynamicResource Brushes.Black}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:SimpleButton}">
+                    <Border x:Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background"
+                                    Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=HoverBackgroundBrush}"
+                                    TargetName="PART_Border" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background"
+                                    Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PressBackgroundBrush}"
+                                    TargetName="PART_Border" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type b:HighlightButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />

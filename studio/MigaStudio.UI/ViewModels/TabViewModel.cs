@@ -46,6 +46,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Id = np.Id;
             OnStart(np);
         }
+        
+        public void Start(NavigationParameter arg)
+        {
+            Id = arg.Id;
+            OnStart(arg);
+        }
 
         protected virtual void OnStart(NavigationParameter parameter)
         {
