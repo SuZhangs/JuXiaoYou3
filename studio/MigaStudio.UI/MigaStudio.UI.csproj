@@ -24,8 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resources\Behaviors" />
-      <Folder Include="Resources\ContentTemplates" />
       <Folder Include="Resources\Converters" />
     </ItemGroup>
 
@@ -44,6 +42,9 @@
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\ContentTemplates\ListBoxItem.xaml">
+        <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
 

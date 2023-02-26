@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public TabShell()
         {
-            _workspaceSize = (int)(SystemParameters.WorkArea.Width - 256);
+            _workspaceSize = (int)(SystemParameters.WorkArea.Width - 320);
             _minItemSize = 84;
             _maxItemSize = 160;
             

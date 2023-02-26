@@ -4,21 +4,80 @@
                     xmlns:fs="urn:acorisoft/forest/shell"
                     xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                    xmlns:s="urn:acorisoft/studio">
-    
-    <DataTemplate DataType="{x:Type s:TabViewModel}">
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <Style TargetType="{x:Type Button}" x:Key="CloseButtonStyle">
+        <Style.Resources>
+            <sys:Double x:Key="CloseButtonWidth">8</sys:Double>
+            <sys:Double x:Key="CloseCircleWidth">16</sys:Double>
+            <sys:Double x:Key="CloseButtonOffset">4</sys:Double>
+        </Style.Resources>
+        <Setter Property="Height"
+                Value="{StaticResource CloseCircleWidth}" />
+        <Setter Property="Width"
+                Value="{StaticResource CloseCircleWidth}" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="DarkGray" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Canvas Background="Transparent"
+                            x:Name="CloseButton"
+                            Width="{StaticResource CloseCircleWidth}"
+                            Height="{StaticResource CloseCircleWidth}">
+                        <Ellipse Width="{StaticResource CloseCircleWidth}"
+                                 Fill="{TemplateBinding Background}"
+                                 Height="{StaticResource CloseCircleWidth}" />
+                        <Canvas Canvas.Left="{StaticResource CloseButtonOffset}"
+                                Canvas.Top="{StaticResource CloseButtonOffset}"
+                                Background="Transparent"
+                                Width="{StaticResource CloseButtonWidth}"
+                                Height="{StaticResource CloseButtonWidth}">
+                            <Line X1="0"
+                                  Y1="0"
+                                  X2="{StaticResource CloseButtonWidth}"
+                                  Y2="{StaticResource CloseButtonWidth}"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="2" />
+                            <Line X1="0"
+                                  Y1="{StaticResource CloseButtonWidth}"
+                                  X2="{StaticResource CloseButtonWidth}"
+                                  Y2="0"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="2" />
+                        </Canvas>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="DarkGray" />
+                <Setter Property="Foreground"
+                        Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate DataType="{x:Type vm:TabViewModel}">
         <Border Background="Transparent"
                 Padding="8 4 8 0"
-                Width="100"
                 WindowChrome.IsHitTestVisibleInChrome="True">
             <DockPanel>
-                <f:SimpleButton DockPanel.Dock="Right"
-                                MinHeight="20"
-                                MinWidth="20"
-                                Height="20"
-                                Width="20">
-                    <ui:SymbolIcon Symbol="Dismiss20" />
-                </f:SimpleButton>
+                <Button DockPanel.Dock="Right"
+                        MinHeight="20"
+                        MinWidth="20"
+                        Style="{StaticResource CloseButtonStyle}"
+                        Height="20"
+                        Width="20" />
                 <TextBlock DockPanel.Dock="Left"
                            FontSize="13"
                            Text="{Binding Title,Mode=OneWay}"

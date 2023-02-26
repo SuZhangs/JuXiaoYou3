@@ -614,27 +614,29 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:TitleBar}">
-                    <StackPanel Orientation="Horizontal"
-                                WindowChrome.IsHitTestVisibleInChrome="True"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Width="144">
-                        <p:PrimitiveButton Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                    <Border Background="{TemplateBinding Background}">
+                        <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"
+                                    Orientation="Horizontal"                                                               
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Width="144">
+                            <p:PrimitiveButton Command="{x:Static SystemCommands.MinimizeWindowCommand}"
                                            Height="29"
                                            Width="48"
                                            Mode="Minimum" />
 
-                        <p:PrimitiveButton Height="29"
+                            <p:PrimitiveButton Height="29"
                                            Width="48"
                                            Mode="Maximum"
                                            Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                                            WindowState="{TemplateBinding WindowState}" />
 
-                        <p:PrimitiveButton Height="29"
+                            <p:PrimitiveButton Height="29"
                                            Width="48"
                                            Mode="Close"
                                            Command="{x:Static SystemCommands.CloseWindowCommand}" />
-                    </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

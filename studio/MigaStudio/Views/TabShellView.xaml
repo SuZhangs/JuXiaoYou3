@@ -9,6 +9,7 @@
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
              xmlns:s="urn:acorisoft/studio"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -28,42 +29,55 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
-              Background="#F1F1F1"
               Height="36">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="42" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="42" />
                 <ColumnDefinition Width="64" />
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
-            <ui:Button Grid.Column="0"
-                       WindowChrome.IsHitTestVisibleInChrome="True"
-                       Icon="GridDots20"
-                       Command="{Binding AddTabCommand}"
-                       Margin="16 0 0 0" />
+            
+            <!-- 主菜单按钮 -->
+            <f:SimpleButton Grid.Column="0"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                            FontSize="17">
+                <ui:SymbolIcon Symbol="GridDots20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+            </f:SimpleButton>
 
             <ListBox x:Name="Shell"
                      Grid.Column="1"
                      WindowChrome.IsHitTestVisibleInChrome="True"
+                     ScrollViewer.CanContentScroll="False"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Background="#F1F1F1"
                      ItemsSource="{Binding Onboards,Mode=OneWay}"
-                     Margin="0 10 0 0"
+                     Margin="10 10 10 0"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">
+                <i:Interaction.Behaviors>
+                    <s:RefreshTabItemSizeBehavior ViewModel="{Binding}"/>
+                </i:Interaction.Behaviors>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <s:TabItemPanel/>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
 
             </ListBox>
 
-            <ui:Button Grid.Column="2"
+            <!-- 主菜单按钮 -->
+            <f:SimpleButton Grid.Column="2"
                        WindowChrome.IsHitTestVisibleInChrome="True"
-                       Icon="Add16"
-                       Command="{Binding AddTabCommand}"
-                       Margin="16 0 0 0" />
+                       Command="{Binding AddTabCommand}">
+                <ui:SymbolIcon Symbol="Add12"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+            </f:SimpleButton>
 
+            <!-- 标题栏 -->
             <fs:TitleBar Grid.Column="4"
                          WindowChrome.IsHitTestVisibleInChrome="True"
                          WindowState="{Binding WindowState,Mode=OneWay}" />
