@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Shell.InvalidateMeasure();
+            //Shell.InvalidateMeasure();
         }
 
         private void MouseDown_ClosePage(object sender, MouseButtonEventArgs e)

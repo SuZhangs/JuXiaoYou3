@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             Xaml.Get<IWindowEventBroadcast>()
                 .PropertyTunnel
-                .WindowStateTunnel = x => WindowState = x;
+                .WindowState = x => WindowState = x;
             AddTabCommand = Command(OnAddTabImpl);
         }
 

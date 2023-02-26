@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaStudio.ViewModels;
+﻿using Acorisoft.FutureGL.MigaStudio.Resources.Panels;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using Microsoft.Xaml.Behaviors;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Behaviors
@@ -15,15 +16,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Behaviors
 
         protected override void OnAttached()
         {
+
+            var workSpaceSize = SystemParameters.WorkArea.Width;
+            
+            AssociatedObject.SetValue(TabItemPanel.MaxSizeProperty, (int)(workSpaceSize - 300));
+            AssociatedObject.SetValue(TabItemPanel.MinSizeProperty, (int)Math.Clamp(workSpaceSize * 0.8, 1280, 3840) - 300);
+            AssociatedObject.Loaded += OnLoaded;
+            if (Application.Current.MainWindow is ForestWindow fw)
+            {
+                fw.WindowStateChanged += OnWindowStateChanged;
+            }
+
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
             if (ViewModel is null)
             {
                 return;
             }
-
-            _disposable =ViewModel.ItemsChanged.Subscribe(_ =>
+            
+            _disposable = ViewModel.ItemsChanged.Subscribe(_ =>
             {
                 AssociatedObject.InvalidateMeasure();
             });
+        }
+
+        private void OnWindowStateChanged(object sender, WindowState e)
+        {
+            AssociatedObject.SetValue(TabItemPanel.WindowStateProperty, e);
         }
 
         protected override void OnDetaching()

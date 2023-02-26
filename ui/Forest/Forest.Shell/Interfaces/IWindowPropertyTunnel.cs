@@ -2,6 +2,6 @@
 {
     public interface IWindowPropertyTunnel
     {
-        Action<WindowState> WindowStateTunnel { get; set; }
+        Action<WindowState> WindowState { get; set; }
     }
 }

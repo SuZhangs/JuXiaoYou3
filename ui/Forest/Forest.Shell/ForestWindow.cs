@@ -8,7 +8,19 @@ namespace Acorisoft.FutureGL.Forest
     {
         private bool? _skip;
         private Action<WindowState> _tunnel;
-        
+
+        static ForestWindow()
+        {
+            WindowStateProperty.AddOwner(typeof(ForestWindow))
+                .OverrideMetadata(typeof(ForestWindow), new FrameworkPropertyMetadata(OnWindowStateChanged));
+        }
+
+        private static void OnWindowStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var w = (ForestWindow)d;
+            w.OnWindowStateChangedIntern(d, (WindowState)e.NewValue);
+        }
+
         protected ForestWindow()
         {
             Initialize();
@@ -18,7 +30,6 @@ namespace Acorisoft.FutureGL.Forest
         {
             Loaded      += OnLoadedIntern;
             Unloaded    += OnUnloadedIntern;
-            SizeChanged += OnSizeChanged;
 
             //
             //
@@ -35,14 +46,14 @@ namespace Acorisoft.FutureGL.Forest
             Style ??= Application.Current.Resources[nameof(ForestWindow)] as Style;
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        private void OnWindowStateChangedIntern(object sender, WindowState e)
         {
             if (_skip is null)
             {
                 if (Xaml.IsRegistered<IWindowEventBroadcast>())
                 {
-                    _skip = false;
-                    _tunnel = Xaml.Get<IWindowEventBroadcast>().PropertyTunnel.WindowStateTunnel;
+                    _skip   = false;
+                    _tunnel = Xaml.Get<IWindowEventBroadcast>().PropertyTunnel.WindowState;
                 }
                 _skip = true;
             }
@@ -51,6 +62,14 @@ namespace Acorisoft.FutureGL.Forest
             {
                 _tunnel?.Invoke(WindowState);;
             }
+            
+            OnWindowStateChanged(sender, e);
+            WindowStateChanged?.Invoke(sender, e);
+        }
+
+        protected virtual void OnWindowStateChanged(object sender, WindowState e)
+        {
+            
         }
 
 
@@ -208,5 +227,7 @@ namespace Acorisoft.FutureGL.Forest
             get => (object)GetValue(ShellContentProperty);
             set => SetValue(ShellContentProperty, value);
         }
+
+        public event EventHandler<WindowState> WindowStateChanged;
     }
 }

@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
 
     class WindowPropertyTunnel: IWindowPropertyTunnel
     {
-        public Action<WindowState> WindowStateTunnel { get; set; }
+        public Action<WindowState> WindowState { get; set; }
     }
     
     public class WindowEventBroadcast : IWindowEventBroadcast, IWindowEventBroadcastAmbient
