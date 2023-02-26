@@ -57,9 +57,6 @@
                      Margin="10 10 10 0"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">
-                <i:Interaction.Behaviors>
-                    <s:RefreshTabItemSizeBehavior ViewModel="{Binding}"/>
-                </i:Interaction.Behaviors>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <s:TabItemPanel/>

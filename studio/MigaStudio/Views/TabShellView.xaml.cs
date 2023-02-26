@@ -16,13 +16,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
         public TabShellView()
         {
             InitializeComponent();
-            this.SizeChanged += OnSizeChanged;
-        }
-
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //Shell.InvalidateMeasure();
         }
 
         private void MouseDown_ClosePage(object sender, MouseButtonEventArgs e)

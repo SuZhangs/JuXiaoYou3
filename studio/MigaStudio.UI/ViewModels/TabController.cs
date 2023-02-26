@@ -10,11 +10,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class TabController : ViewModelBase, ITabViewController
     {
-        private readonly Subject<Unit> _itemsChanged;
-        
         protected TabController()
         {
-            _itemsChanged = new Subject<Unit>();
             Onboards      = new ObservableCollection<ITabViewModel>();
             Outboards     = new ObservableCollection<ITabViewModel>();
         }
@@ -29,10 +26,5 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 
         /// </summary>
         public ObservableCollection<ITabViewModel> Outboards { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public IObservable<Unit> ItemsChanged => _itemsChanged;
     }
 }

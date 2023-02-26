@@ -5,6 +5,5 @@ namespace Acorisoft.FutureGL.Forest.AppModels
 {
     public interface ITabViewController : IViewController, IRootViewModel
     {
-        IObservable<Unit> ItemsChanged { get; }
     }
 }

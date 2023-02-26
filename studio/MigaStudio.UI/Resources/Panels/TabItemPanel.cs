@@ -3,52 +3,7 @@
     public class TabItemPanel : Panel
     {
         private int          _columns;
-        private ItemsControl _ic;
-
-        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.RegisterAttached(
-            "MaxSize", typeof(int), typeof(TabItemPanel), new PropertyMetadata(default(int)));
-
-        public static readonly DependencyProperty MinSizeProperty = DependencyProperty.RegisterAttached(
-            "MinSize",
-            typeof(int),
-            typeof(TabItemPanel),
-            new PropertyMetadata(default(int)));
-
-        public static readonly DependencyProperty WindowStateProperty = DependencyProperty.RegisterAttached(
-            "WindowState",
-            typeof(WindowState),
-            typeof(TabItemPanel),
-            new PropertyMetadata(WindowState.Normal));
-
-        public static void SetWindowState(DependencyObject element, WindowState value)
-        {
-            element.SetValue(WindowStateProperty, value);
-        }
-
-        public static WindowState GetWindowState(DependencyObject element)
-        {
-            return (WindowState)element.GetValue(WindowStateProperty);
-        }
-
-        public static void SetMinSize(DependencyObject element, int value)
-        {
-            element.SetValue(MinSizeProperty, value);
-        }
-
-        public static int GetMinSize(DependencyObject element)
-        {
-            return (int)element.GetValue(MinSizeProperty);
-        }
-
-        public static void SetMaxSize(DependencyObject element, int value)
-        {
-            element.SetValue(MaxSizeProperty, value);
-        }
-
-        public static int GetMaxSize(DependencyObject element)
-        {
-            return (int)element.GetValue(MaxSizeProperty);
-        }
+        
 
         /// <summary>
         /// Compute the desired size of this UniformGrid by measuring all of the
@@ -65,10 +20,7 @@
         protected override Size MeasureOverride(Size constraint)
         {
             _columns = InternalChildren.Count == 0 ? 1 : InternalChildren.Count;
-            var init = Owner.ActualWidth > 0;
-            var actualWidth = (WindowState)Owner.GetValue(WindowStateProperty) == WindowState.Maximized ? (int)Owner.GetValue(MaxSizeProperty) : (int)Owner.GetValue(MinSizeProperty);
-            var width = init ? actualWidth : constraint.Width;
-            var childConstraint = new Size(Math.Clamp(width / _columns, 60, 256), constraint.Height);
+            var childConstraint = new Size(Math.Clamp(constraint.Width / _columns, 60, 256), constraint.Height);
             var maxChildDesiredWidth = 0.0;
             var maxChildDesiredHeight = 0.0;
 
@@ -93,7 +45,7 @@
                 }
             }
 
-            return init ? new Size(maxChildDesiredWidth * _columns, maxChildDesiredHeight) : new Size(width, maxChildDesiredHeight);
+            return new Size(maxChildDesiredWidth * _columns, maxChildDesiredHeight);
         }
 
         /// <summary>
@@ -105,9 +57,7 @@
         /// <param name="arrangeSize">Arrange size</param>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
-            var actualWidth = (WindowState)Owner.GetValue(WindowStateProperty) == WindowState.Maximized ? (int)Owner.GetValue(MaxSizeProperty) : (int)Owner.GetValue(MinSizeProperty);
-            var width = Owner.ActualWidth == 0 ? arrangeSize.Width : actualWidth;
-            var w = Math.Clamp(width / _columns, 60, 256);
+            var w = Math.Clamp(arrangeSize.Width / _columns, 60, 256);
             var h = arrangeSize.Height;
             var xStep = 0d;
 
@@ -126,8 +76,5 @@
 
             return arrangeSize;
         }
-
-
-        public ItemsControl Owner => _ic ??= ItemsControl.GetItemsOwner(this);
     }
 }
