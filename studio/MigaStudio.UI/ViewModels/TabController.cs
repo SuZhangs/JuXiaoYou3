@@ -16,6 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Outboards     = new ObservableCollection<ITabViewModel>();
         }
 
+        public int MaximumTabItemCount => (int)((SystemParameters.WorkArea.Width - 300) / 128);
         
         /// <summary>
         /// 

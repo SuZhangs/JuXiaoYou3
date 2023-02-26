@@ -45,6 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             base.OnStartup(e);
         }
 
+        protected int MinimumScreenWidth() => (int)SystemParameters.WorkArea.Width;
 
         protected abstract TViewModel GetShell();
     }

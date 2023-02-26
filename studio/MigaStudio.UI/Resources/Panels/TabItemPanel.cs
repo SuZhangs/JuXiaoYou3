@@ -2,7 +2,8 @@
 {
     public class TabItemPanel : Panel
     {
-        private int          _columns;
+        private int  _columns;
+        private bool _init;
         
 
         /// <summary>

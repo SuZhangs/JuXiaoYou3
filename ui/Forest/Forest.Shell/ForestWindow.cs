@@ -1,6 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Runtime.InteropServices;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Microsoft.Win32;
 
 namespace Acorisoft.FutureGL.Forest
 {
@@ -227,7 +229,7 @@ namespace Acorisoft.FutureGL.Forest
             get => (object)GetValue(ShellContentProperty);
             set => SetValue(ShellContentProperty, value);
         }
-
+        
         public event EventHandler<WindowState> WindowStateChanged;
     }
 }
