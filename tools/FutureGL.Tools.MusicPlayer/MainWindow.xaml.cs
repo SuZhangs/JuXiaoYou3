@@ -24,16 +24,5 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer
         {
             InitializeComponent();
         }
-        
-        private void Button_ClosePlaylist(object sender, RoutedEventArgs e)
-        {
-            MusicBox.IsRightOpen = false;
-        }
-        
-
-        private void Button_OpenPlaylist(object sender, RoutedEventArgs e)
-        {
-            MusicBox.IsRightOpen = true;
-        }
     }
 }
