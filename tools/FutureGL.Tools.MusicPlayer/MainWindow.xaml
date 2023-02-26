@@ -11,7 +11,8 @@
         MaxWidth="384"
         MinWidth="384">
     <Grid>
-        <f:Drawer x:Name="MusicBox">
+        <f:Drawer x:Name="MusicBox"
+                  Style="{StaticResource FullSizeDrawer}">
             <f:Drawer.Resources>
                 <BlurEffect x:Key="BlurEffect" Radius="30" RenderingBias="Performance" />
 
