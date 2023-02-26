@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigaUtils", "frameworks\MigaUtils\MigaUtils.csproj", "{EBC7FABE-5A55-4FF8-8AE4-C4AC92674D0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest", "ui\Forest\Forest\Forest.csproj", "{74C21259-A1EB-487E-8DD5-CD90CA9EB69E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Controls", "ui\Forest\Forest.Controls\Forest.Controls.csproj", "{BA0D9B12-ED16-43EF-B7A1-5E54C7ED989C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Shell", "ui\Forest\Forest.Shell\Forest.Shell.csproj", "{3ACB9450-0DC7-4599-A80D-1A748B67BA3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.MusicPlayer", "tools\FutureGL.Tools.MusicPlayer\FutureGL.Tools.MusicPlayer.csproj", "{42987FA1-8BF2-425D-BA37-05AD26CD9976}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBC7FABE-5A55-4FF8-8AE4-C4AC92674D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC7FABE-5A55-4FF8-8AE4-C4AC92674D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC7FABE-5A55-4FF8-8AE4-C4AC92674D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC7FABE-5A55-4FF8-8AE4-C4AC92674D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74C21259-A1EB-487E-8DD5-CD90CA9EB69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74C21259-A1EB-487E-8DD5-CD90CA9EB69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74C21259-A1EB-487E-8DD5-CD90CA9EB69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74C21259-A1EB-487E-8DD5-CD90CA9EB69E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0D9B12-ED16-43EF-B7A1-5E54C7ED989C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0D9B12-ED16-43EF-B7A1-5E54C7ED989C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0D9B12-ED16-43EF-B7A1-5E54C7ED989C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0D9B12-ED16-43EF-B7A1-5E54C7ED989C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ACB9450-0DC7-4599-A80D-1A748B67BA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ACB9450-0DC7-4599-A80D-1A748B67BA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ACB9450-0DC7-4599-A80D-1A748B67BA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ACB9450-0DC7-4599-A80D-1A748B67BA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

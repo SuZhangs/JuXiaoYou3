@@ -20,11 +20,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         public ForestTextBoxBase()
         {
-            Finder                           =  GetTemplateChild();
-            StateMachine                     =  new VisualDFA();
-            Loaded                           += OnLoadedIntern;
-            Unloaded                         += OnUnloadedIntern;
-            IsEnabledChanged                 += OnEnableChanged;
+            Animator         =  Animator.CreateDummy();
+            Finder           =  GetTemplateChild();
+            StateMachine     =  new VisualDFA();
+            Loaded           += OnLoadedIntern;
+            Unloaded         += OnUnloadedIntern;
+            IsEnabledChanged += OnEnableChanged;
             Initialize();
         }
 

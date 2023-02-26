@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         
         protected ForestButtonBase()
         {
+            Animator                         =  Animator.CreateDummy();
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
             Loaded                           += OnLoadedIntern;

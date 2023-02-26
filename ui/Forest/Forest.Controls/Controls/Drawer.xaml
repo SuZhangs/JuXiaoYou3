@@ -192,6 +192,14 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Left"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Left"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0,0.5" />
@@ -211,6 +219,14 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Left"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Left"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,0.5" />
@@ -233,6 +249,14 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Right"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Right"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="1,0.5" />
@@ -252,6 +276,14 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Right"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Right"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,0.5" />
@@ -274,6 +306,14 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Top"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Top"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,0" />
@@ -293,6 +333,14 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Top"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Top"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,0.5" />
@@ -316,6 +364,14 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Bottom"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Bottom"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,1" />
@@ -335,6 +391,14 @@
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Bottom"
+                                                                       Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="PART_Bottom"
                                                                       Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
                                             <EasingPointKeyFrame KeyTime="0:0:0" Value="0.5,0.5" />

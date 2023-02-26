@@ -15,5 +15,22 @@
         /// </summary>
         /// <param name="state">下一个状态</param>
         public abstract void NextState(VisualState state);
+
+        class DummyAnimator : Animator
+        {
+            public override void NextState()
+            {
+                
+            }
+
+            public override void NextState(VisualState state)
+            {
+            }
+        }
+
+        public static Animator CreateDummy()
+        {
+            return new DummyAnimator();
+        }
     }
 }

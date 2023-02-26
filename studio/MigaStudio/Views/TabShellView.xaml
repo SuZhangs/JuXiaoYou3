@@ -62,22 +62,19 @@
                         Orientation="Horizontal">
 
                 <!-- 主菜单按钮 -->
-                <f:SimpleButton Grid.Column="0"
-                            WindowChrome.IsHitTestVisibleInChrome="True"
+                <f:SimpleButton WindowChrome.IsHitTestVisibleInChrome="True"
                             FontSize="17">
                     <ui:SymbolIcon Symbol="GridDots20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
                 </f:SimpleButton>
-                <f:SimpleButton Grid.Column="2"
-                            WindowChrome.IsHitTestVisibleInChrome="True"
+                <f:SimpleButton WindowChrome.IsHitTestVisibleInChrome="True"
                             Command="{Binding AddTabCommand}">
                     <ui:SymbolIcon Symbol="Add12"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
                 </f:SimpleButton>
-                <f:SimpleButton Grid.Column="2"
-                            WindowChrome.IsHitTestVisibleInChrome="True"
+                <f:SimpleButton WindowChrome.IsHitTestVisibleInChrome="True"
                             Command="{Binding AddTabCommand}">
                     <ui:SymbolIcon Symbol="Add12"
                                HorizontalAlignment="Center"
