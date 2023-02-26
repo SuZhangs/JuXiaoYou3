@@ -62,7 +62,7 @@
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="Background" Value="{DynamicResource Brushes.Transparent}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Brushes.Black}" />
         <Setter Property="MinHeight" Value="32" />
         <Setter Property="MinWidth" Value="42" />

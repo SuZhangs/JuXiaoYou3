@@ -31,21 +31,12 @@
               WindowChrome.IsHitTestVisibleInChrome="False"
               Height="36">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="16" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="144" />
                 <ColumnDefinition Width="64" />
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
-            
-            <!-- 主菜单按钮 -->
-            <f:SimpleButton Grid.Column="0"
-                            WindowChrome.IsHitTestVisibleInChrome="True"
-                            FontSize="17">
-                <ui:SymbolIcon Symbol="GridDots20"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-            </f:SimpleButton>
 
             <ListBox x:Name="Shell"
                      Grid.Column="1"
@@ -54,7 +45,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      Background="#F1F1F1"
                      ItemsSource="{Binding Onboards,Mode=OneWay}"
-                     Margin="10 10 10 0"
+                     Margin="0 4 0 0"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">
                 <ListBox.ItemsPanel>
@@ -66,13 +57,33 @@
             </ListBox>
 
             <!-- 主菜单按钮 -->
-            <f:SimpleButton Grid.Column="2"
-                       WindowChrome.IsHitTestVisibleInChrome="True"
-                       Command="{Binding AddTabCommand}">
-                <ui:SymbolIcon Symbol="Add12"
+            <StackPanel Grid.Column="2"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                        Orientation="Horizontal">
+
+                <!-- 主菜单按钮 -->
+                <f:SimpleButton Grid.Column="0"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                            FontSize="17">
+                    <ui:SymbolIcon Symbol="GridDots20"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
-            </f:SimpleButton>
+                </f:SimpleButton>
+                <f:SimpleButton Grid.Column="2"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                            Command="{Binding AddTabCommand}">
+                    <ui:SymbolIcon Symbol="Add12"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </f:SimpleButton>
+                <f:SimpleButton Grid.Column="2"
+                            WindowChrome.IsHitTestVisibleInChrome="True"
+                            Command="{Binding AddTabCommand}">
+                    <ui:SymbolIcon Symbol="Add12"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </f:SimpleButton>
+            </StackPanel>
 
             <!-- 标题栏 -->
             <fs:TitleBar Grid.Column="4"

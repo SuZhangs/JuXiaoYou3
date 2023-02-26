@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void OnAddTabImpl()
         {
-            if (Onboards.Count <= MaximumTabItemCount)
+            if (Onboards.Count < MaximumTabItemCount)
             {
                 Onboards.Add(Test());
             }
