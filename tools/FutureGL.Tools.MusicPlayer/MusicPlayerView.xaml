@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer"
+             xmlns:b="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.Behaviors"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
@@ -15,56 +16,71 @@
              MinWidth="384"
              d:DataContext="{d:DesignInstance Type={x:Type vm:MusicPlayerViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <local:MuteOrUnmuteIconConverter x:Key="MuteOrUnMuteIconConverter" />
-        <local:PlayOrPauseIconConverter x:Key="PlayOrPauseIconConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FutureGL.Tools.MusicPlayer;component/MusicIconPack.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:MuteOrUnmuteIconConverter x:Key="MuteOrUnMuteIconConverter" />
+            <local:PlayOrPauseIconConverter x:Key="PlayOrPauseIconConverter" />
+            <local:PlayModeIconConverter x:Key="PlayModeIconConverter" />
+            <local:TimeSpanConverter x:Key="TimeSpanConverter"/>
 
 
-        <ImageBrush x:Key="CoverImage"
-                    ImageSource="{Binding Cover,Mode=OneWay}"
-                    Stretch="None"
-                    Viewport="0,0,1,1"
-                    Viewbox="0,0,0.8,0.8" />
-        <ImageBrush x:Key="BackgroundImage"
-                    ImageSource="{Binding Background,Mode=OneWay}"
-                    Stretch="UniformToFill" />
+            <ImageBrush x:Key="CoverImage"
+                        ImageSource="{Binding Cover,Mode=OneWay}"
+                        Stretch="UniformToFill"/>
+            
+            <ImageBrush x:Key="BackgroundImage"
+                        ImageSource="{Binding Background,Mode=OneWay}"
+                        Stretch="UniformToFill" />
 
-        <BlurEffect x:Key="BlurEffect" Radius="30" RenderingBias="Performance" />
+            <BlurEffect x:Key="BlurEffect" Radius="30" RenderingBias="Performance" />
 
-        <LinearGradientBrush x:Key="MaskBrush" StartPoint="0 0" EndPoint="1 1">
-            <GradientStop Color="#4A000000" Offset="0" />
-            <GradientStop Color="#5A000000" Offset="0.7" />
-            <GradientStop Color="#6A000000" Offset="0.8" />
-            <GradientStop Color="#7A000000" Offset="1" />
-        </LinearGradientBrush>
+            <LinearGradientBrush x:Key="MaskBrush" StartPoint="0 0" EndPoint="1 1">
+                <GradientStop Color="#4A000000" Offset="0" />
+                <GradientStop Color="#5A000000" Offset="0.7" />
+                <GradientStop Color="#6A000000" Offset="0.8" />
+                <GradientStop Color="#7A000000" Offset="1" />
+            </LinearGradientBrush>
+            
+            <b:MusicPlayerViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
 
-        <DataTemplate DataType="{x:Type local:Music}">
-            <Border Background="Transparent"
-                    Height="48"
-                    Cursor="Hand"
-                    Margin="0 0 0 8">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="48" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="48" />
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0"
-                            Background="Gray"
-                            CornerRadius="6"
-                            Width="48" />
-                    <DockPanel Grid.Column="1"
-                               Margin="16 4 0 0">
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontSize="15"
-                                   FontWeight="Bold"
-                                   Text="Music Item1" />
+            <DataTemplate DataType="{x:Type local:Music}">
+                <f:LooklessButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.PlayMusicCommand}"
+                                  CommandParameter="{Binding}"
+                                  Height="48"
+                                  Margin="0 0 0 8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="48" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="48" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Background="Gray"
+                                CornerRadius="6"
+                                Width="48" 
+                                Padding="4">
+                            <Path Data="{StaticResource Playlist}"
+                                  Fill="White"
+                                  Stretch="Uniform"
+                                  Height="23"
+                                  Width="23"/>
+                        </Border>
+                        <DockPanel Grid.Column="1"
+                                   Margin="16 4 0 0">
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="15"
+                                       FontWeight="Bold"
+                                       Text="{Binding Name}" />
 
-                        <TextBlock Margin="0 4 0 0"
-                                   Text="Test Band" />
-                    </DockPanel>
-                </Grid>
-            </Border>
-        </DataTemplate>
+                            <TextBlock Margin="0 4 0 0"
+                                       Text="{Binding Author}" />
+                        </DockPanel>
+                    </Grid>
+                </f:LooklessButton>
+            </DataTemplate>
+        </ResourceDictionary>
     </UserControl.Resources>
     <f:Drawer x:Name="MusicBox"
               Style="{StaticResource FullSizeDrawer}">
@@ -150,7 +166,7 @@
                                                         Style="{StaticResource BlackIconButton}"
                                                         Height="32"
                                                         Width="32" />
-                                    
+
                                     <f:ForestIconButton Command="{Binding RemoveMusicFromPlaylistCommand}"
                                                         Icon="{StaticResource Remove}"
                                                         Style="{StaticResource BlackIconButton}"
@@ -262,22 +278,30 @@
                                        Foreground="White"
                                        HorizontalAlignment="Left"
                                        Margin="0 0 0 10"
-                                       Text="Play from Playlist" />
+                                       Text="{Binding Current.Name,Mode=OneWay}" />
 
                             <TextBlock Foreground="White"
                                        HorizontalAlignment="Left"
-                                       Text="Default Playlist" />
+                                       Text="{Binding Current.Author,Mode=OneWay}" />
                         </DockPanel>
                     </DockPanel>
 
                     <!-- 进度 -->
                     <StackPanel Grid.Row="3"
                                 Margin="32 32 32 0">
-                        <Slider />
+                        <Slider Value="{Binding Position,Mode=OneWay,Converter={StaticResource TimeSpanConverter}}"
+                                Maximum="{Binding Duration,Mode=OneWay,Converter={StaticResource TimeSpanConverter}}"/>
+                        
                         <TextBlock Foreground="White"
                                    FontSize="13"
-                                   HorizontalAlignment="Right"
-                                   Text="2:52/5:31" />
+                                   HorizontalAlignment="Right">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0:hh\:mm\:ss} / {1:hh\:mm\:ss}">
+                                    <Binding Path="Position" Mode="OneWay"/>
+                                    <Binding Path="Duration" Mode="OneWay"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </StackPanel>
 
                     <!-- 按钮 -->
@@ -286,14 +310,16 @@
                                 Orientation="Horizontal"
                                 Margin="0 8">
                         <f:ForestIconButton Margin="0 0 3 0"
-                                            Icon="{StaticResource Shuffle}"
+                                            Command="{Binding ChangePlayModeCommand}"
+                                            Icon="{Binding Mode,Mode=OneWay,Converter={StaticResource PlayModeIconConverter}}"
                                             IconSize="23" />
 
                         <f:ForestIconButton Icon="{StaticResource Previous}"
                                             Margin="3 0"
                                             IconSize="31" />
 
-                        <f:ForestIconButton Icon="{Binding IsPlaying,Mode=OneWay,Converter={StaticResource PlayOrPauseIconConverter}}"
+                        <f:ForestIconButton Command="{Binding PlayOrPauseCommand}"
+                                            Icon="{Binding IsPlaying,Mode=OneWay,Converter={StaticResource PlayOrPauseIconConverter}}"
                                             Margin="3 0"
                                             IconSize="37"
                                             Height="64"
@@ -303,7 +329,8 @@
                                             Margin="3 0"
                                             IconSize="31" />
 
-                        <f:ForestIconButton Click="Button_OpenPlaylist" Icon="{StaticResource Playlist}"
+                        <f:ForestIconButton Click="Button_OpenPlaylist"
+                                            Icon="{StaticResource Playlist}"
                                             IconSize="23"
                                             Margin="3 0 0 0" />
                     </StackPanel>

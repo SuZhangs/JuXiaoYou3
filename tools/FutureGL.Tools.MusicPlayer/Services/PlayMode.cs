@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
 {
-    public enum PlayMode
+    public enum PlayMode : int
     {
         Loop,
         Shuffle,
