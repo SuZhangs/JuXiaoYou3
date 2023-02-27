@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Windows;
 using Acorisoft.FutureGL.MigaUtils;
+using GongSolutions.Wpf.DragDrop;
 using NAudio.Wave;
 
 namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
 {
-    public class MusicService : Disposable
+    public class MusicService : Disposable, IDropTarget
     {
         private readonly WaveOutEvent _device;
         private readonly Timer        _timer;
@@ -51,7 +53,7 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             }
 
             _positionStream.SetValue(_reader.TotalTime);
-            StateUpdatedHandler?.Invoke(TimeSpan.Zero, PlaybackState.Stopped, null);
+            StateUpdatedHandler?.Invoke(TimeSpan.Zero, PlaybackState.Stopped, null, -1);
             _reader.Dispose();
             _reader = null;
 
@@ -140,9 +142,10 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
                 return;
             }
 
+
             //
             // 没有播放列表就创建
-            if (_playlistStream.CurrentValue is null)
+            if ( _currentIndex == -1 || _playlistStream.CurrentValue is null)
             {
                 SetPlaylist(new Playlist
                 {
@@ -151,6 +154,17 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             }
             else
             {
+                _currentIndex = Playlist.CurrentValue.Items.IndexOf(music);
+
+                if (_currentIndex == -1)
+                {
+                    SetPlaylist(new Playlist
+                    {
+                        Items = new ObservableCollection<Music>(new[] { music })
+                    }, true);
+                    return;
+                }
+                
                 //
                 // 停止播放
                 Stop();
@@ -159,7 +173,8 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
                 _device.Init(_reader);
                 _device.Play();
                 _durationStream.SetValue(_reader.TotalTime);
-                StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, music);
+                _targetStream.SetValue(music);
+                StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, music, _currentIndex);
             }
         }
 
@@ -229,8 +244,23 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             }
         }
 
-        public void SetPosition()
+        /// <summary>
+        /// 设置播放位置
+        /// </summary>
+        /// <param name="time"></param>
+        public void SetPosition(TimeSpan time)
         {
+            if (_reader is null)
+            {
+                return;
+            }
+
+            _reader.CurrentTime = time;
+
+            if (_device.PlaybackState == PlaybackState.Paused)
+            {
+                _device.Play();
+            }
         }
 
         protected override void ReleaseManagedResources()
@@ -254,12 +284,49 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
 
         public IObservableProperty<Music> Music => _targetStream;
         public IObservableProperty<Playlist> Playlist => _playlistStream;
-        public Action<TimeSpan, PlaybackState, Music> StateUpdatedHandler { get; set; }
+        public Action<TimeSpan, PlaybackState, Music, int> StateUpdatedHandler { get; set; }
 
         public PlayMode Mode
         {
             get;
             set;
+        }
+
+        public void DragOver(IDropInfo dropInfo)
+        {
+            if (dropInfo.Data is Music &&
+                dropInfo.TargetItem is Music) {
+                dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
+                dropInfo.Effects           = DragDropEffects.Move;
+            }
+        }
+
+        public void Drop(IDropInfo dropInfo)
+        {
+            if (dropInfo.Data is Music source&&
+                dropInfo.TargetItem is Music target)
+            {
+                var items = _playlistStream.CurrentValue.Items;
+                var sourceIndex = items.IndexOf(source);
+                var targetIndex = items.IndexOf(target);
+                var current = _targetStream.CurrentValue;
+                items.Move(sourceIndex, targetIndex);
+
+                if (target is not null)
+                {
+                    if (current.Id == source.Id)
+                    {
+                        _currentIndex = targetIndex;
+                        StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
+                    }
+                    else if(current.Id == target.Id)
+                    {
+                        _currentIndex = sourceIndex;
+                        StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
+                    }
+                }
+                
+            }
         }
     }
 }

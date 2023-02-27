@@ -7,6 +7,7 @@
              xmlns:b="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.Behaviors"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels"
              xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:dragdrop="urn:gong-wpf-dragdrop"
              mc:Ignorable="d"
              d:DesignHeight="640"
              d:DesignWidth="384"
@@ -50,6 +51,13 @@
                                   CommandParameter="{Binding}"
                                   Height="48"
                                   Margin="0 0 0 8">
+                    <f:LooklessButton.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="删除"
+                                      Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMusicFromPlaylistCommand}"
+                                      CommandParameter="{Binding}"/>
+                        </ContextMenu>
+                    </f:LooklessButton.ContextMenu>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="48" />
@@ -173,7 +181,10 @@
                                                         Height="32"
                                                         Width="32" />
                                 </StackPanel>
-                                <ItemsControl Margin="0 16 0 0"
+                                <ItemsControl dragdrop:DragDrop.IsDragSource="True"
+                                              dragdrop:DragDrop.IsDropTarget="True"
+                                              dragdrop:DragDrop.DropHandler="{Binding}"
+                                              Margin="0 16 0 0"
                                               ItemsSource="{Binding Playlist.Items,Mode=OneWay}" />
 
                             </DockPanel>
@@ -290,7 +301,9 @@
                     <StackPanel Grid.Row="3"
                                 Margin="32 32 32 0">
                         <Slider Value="{Binding Position,Mode=OneWay,Converter={StaticResource TimeSpanConverter}}"
-                                Maximum="{Binding Duration,Mode=OneWay,Converter={StaticResource TimeSpanConverter}}"/>
+                                Maximum="{Binding Duration,Mode=OneWay,Converter={StaticResource TimeSpanConverter}}"
+                                PreviewMouseDown="Slider_OnMouseDown"
+                                PreviewMouseUp="Slider_OnMouseUp"/>
                         
                         <TextBlock Foreground="White"
                                    FontSize="13"
@@ -315,6 +328,7 @@
                                             IconSize="23" />
 
                         <f:ForestIconButton Icon="{StaticResource Previous}"
+                                            Command="{Binding PlayPreviousCommand}"
                                             Margin="3 0"
                                             IconSize="31" />
 
@@ -326,6 +340,7 @@
                                             Width="64" />
 
                         <f:ForestIconButton Icon="{StaticResource Next}"
+                                            Command="{Binding PlayNextCommand}"
                                             Margin="3 0"
                                             IconSize="31" />
 

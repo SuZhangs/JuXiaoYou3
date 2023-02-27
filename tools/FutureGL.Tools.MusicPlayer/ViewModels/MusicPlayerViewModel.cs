@@ -12,12 +12,15 @@ using System.IO;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
-using Acorisoft.FutureGL.Forest.Styles.Animations;
+using GongSolutions.Wpf.DragDrop;
 using NAudio.Wave;
+using TagLib;
+using TagLib.Mpeg;
+using File = TagLib.File;
 
 namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
 {
-    public sealed class MusicPlayerViewModel : ForestObject
+    public sealed class MusicPlayerViewModel : ForestObject, IDropTarget
     {
         private readonly MusicService    _service;
         private readonly HashSet<string> _hash;
@@ -29,9 +32,12 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
         private ImageSource _cover;
         private ImageSource _background;
         private bool        _isPlaying;
+        private int         _index;
         private Playlist    _playlist;
         private Music       _current;
         private PlayMode    _mode;
+        private TimeSpan    _position;
+        private TimeSpan    _duration;
 
 
         public MusicPlayerViewModel()
@@ -53,6 +59,17 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
                 {
                     Duration = x;
                 });
+            _service.Playlist.Observable
+                .ObserveOn(_scheduler)
+                .Where(x => x != null)
+                .Subscribe(x =>
+            {
+                _hash.Clear();
+                foreach (var item in x.Items)
+                {
+                    _hash.Add(item.Id);
+                }
+            });
 
             Background = new BitmapImage(new Uri("E:\\1.jpg"));
             Cover      = Background;
@@ -66,22 +83,37 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             AddMusicToPlaylistCommand      = new RelayCommand(AddMusicToPlaylistImpl, HasPlaylist);
             RemoveMusicFromPlaylistCommand = new RelayCommand<Music>(RemoveMusicFromPlaylistImpl, HasMusicItem);
             PlayMusicCommand               = new RelayCommand<Music>(PlayMusicImpl, HasMusicItem);
+            PlayPreviousCommand            = new RelayCommand(() => _service.PlayLast(), WasFirstItem);
+            PlayNextCommand                = new RelayCommand(() => _service.PlayNext(), WasLastItem);
             PlayOrPauseCommand             = new RelayCommand(PlayOrPauseImpl, HasPlaylist);
             MuteOrUnMuteCommand            = new RelayCommand(MuteOrUnmuteImpl);
             ChangePlayModeCommand          = new RelayCommand(ChangePlayModeImpl);
         }
 
-        private void HandleStateChanged(TimeSpan duration, PlaybackState state, Music item)
+        private void HandleStateChanged(TimeSpan duration, PlaybackState state, Music item, int index)
         {
+            if (state == PlaybackState.Playing && item is null)
+            {
+                _index = index;
+                PlayNextCommand?.NotifyCanExecuteChanged();
+                PlayPreviousCommand?.NotifyCanExecuteChanged();
+                return;
+            }
+            
+            _index = index;
             Duration  = duration;
             IsPlaying = state == PlaybackState.Playing;
-            Current   = item;
             Position  = TimeSpan.Zero;
+            Current = item;
+            PlayNextCommand?.NotifyCanExecuteChanged();
+            PlayPreviousCommand?.NotifyCanExecuteChanged();
         }
 
         private bool HasPlaylist() => Playlist is not null;
         
         private bool HasMusicItem(Music item) => item is not null && Playlist is not null;
+        private bool WasLastItem() => Playlist is not null && _index < Playlist.Items.Count - 1;
+        private bool WasFirstItem() => Playlist is not null && _index > 0;
 
         private void ChangePlayModeImpl()
         {
@@ -128,6 +160,7 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             var opendlg = new OpenFileDialog
             {
                 Filter = "音乐文件|*.wav;*.mp3",
+                Multiselect = true
             };
 
             if (opendlg.ShowDialog() != true)
@@ -135,44 +168,77 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
                 return;
             }
 
-            if (!_hash.Add(opendlg.FileName))
+            foreach (var fileName in opendlg.FileNames)
             {
-                // TODO: duplicated
-                return;
-            }
-
-            var file = TagLib.File.Create(opendlg.FileName);
-            var musicFile = (TagLib.Mpeg.AudioFile)file;
-            var tag = musicFile.GetTag(TagLib.TagTypes.Id3v2);
-            var cover = string.Empty;
-
-            if (tag.Pictures is not null)
-            {
-                var pic = tag.Pictures.First();
-                cover = Path.Combine(Path.GetDirectoryName(opendlg.FileName)!, Path.GetFileNameWithoutExtension(opendlg.FileName) + ".png");
-
-                if (!File.Exists(cover))
+                if (!_hash.Add(fileName))
                 {
-                    File.WriteAllBytes(cover, pic.Data.Data);
+                    // TODO: duplicated
+                    return;
                 }
+
+                var file = File.Create(fileName);
+                var musicFile = (AudioFile)file;
+                var tag = musicFile.GetTag(TagTypes.Id3v2);
+                var cover = string.Empty;
+
+                if (tag.Pictures is not null)
+                {
+                    var pic = tag.Pictures.First();
+                    cover = Path.Combine(Path.GetDirectoryName(fileName)!, Path.GetFileNameWithoutExtension(fileName) + ".png");
+
+                    if (!System.IO.File.Exists(cover))
+                    {
+                        System.IO.File.WriteAllBytes(cover, pic.Data.Data);
+                    }
+                }
+
+                var music = new Music
+                {
+                    Id     = fileName,
+                    Path   = fileName,
+                    Name   = tag.Title,
+                    Author = tag.FirstPerformer,
+                    Cover  = cover
+                };
+
+                //
+                //
+                Playlist.Items.Add(music);
             }
-
-            var music = new Music
-            {
-                Id     = opendlg.FileName,
-                Path   = opendlg.FileName,
-                Name   = tag.Title,
-                Author = tag.FirstPerformer,
-                Cover  = cover
-            };
-
-            //
-            //
-            Playlist.Items.Add(music);
         }
 
         private void RemoveMusicFromPlaylistImpl(Music item)
         {
+            if (item is null)
+            {
+                return;
+            }
+
+            var index = _playlist.Items.IndexOf(item);
+            
+            if (index == -1)
+            {
+                return;
+            }
+
+            var removedItem = _playlist.Items[index];
+            _playlist.Items.RemoveAt(index);
+            _hash.Remove(item.Id);
+
+            if(_current is null)
+            {
+                return;
+            }
+
+            if (_playlist.Items.Count == 0)
+            {
+                _service.Stop();
+            }
+            else if (_current.Id == removedItem.Id)
+            {
+                _service.Stop();
+                _service.Play(_playlist.Items[index % _playlist.Items.Count]);
+            }
         }
 
         private void PlayMusicImpl(Music item)
@@ -193,9 +259,10 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             }
         }
 
+        public void SetPosition(TimeSpan time) => _service.SetPosition(time);
+        
         void Play(Music item)
         {
-            Current   = item;
             IsPlaying = true;
 
             //
@@ -208,6 +275,17 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
                 Cover      = new BitmapImage(new Uri(item.Cover));
                 Background = Cover;
             }
+        }
+        
+        
+        void IDropTarget.DragOver(IDropInfo dropInfo)
+        {
+            _service.DragOver(dropInfo);
+        }
+
+        void IDropTarget.Drop(IDropInfo dropInfo)
+        {
+            _service.Drop(dropInfo);
         }
 
         /// <summary>
@@ -225,7 +303,11 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
         public Playlist Playlist
         {
             get => _playlist;
-            set => SetValue(ref _playlist, value);
+            set
+            {
+                SetValue(ref _playlist, value);
+                _service.SetPlaylist(value);
+            } 
         }
 
         /// <summary>
@@ -294,9 +376,6 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             }
         }
 
-        private TimeSpan _position;
-        private TimeSpan _duration;
-
         /// <summary>
         /// 获取或设置 <see cref="Duration"/> 属性。
         /// </summary>
@@ -315,6 +394,8 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             set => SetValue(ref _position, value);
         }
 
+        public RelayCommand PlayPreviousCommand { get; }
+        public RelayCommand PlayNextCommand { get; }
         public RelayCommand MuteOrUnMuteCommand { get; }
         public RelayCommand AddMusicToPlaylistCommand { get; }
         public RelayCommand ChangePlayModeCommand { get; }
