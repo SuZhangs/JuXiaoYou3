@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer"
+             xmlns:vm="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="640"
@@ -12,15 +13,20 @@
              MinHeight="640"
              MaxWidth="384"
              MinWidth="384"
-             d:DataContext="{d:DesignInstance Type={x:Type local:MusicPlayerViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type vm:MusicPlayerViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <local:MuteOrUnmuteIconConverter x:Key="MuteOrUnMuteIconConverter"/>
-        <local:PlayOrPauseIconConverter x:Key="PlayOrPauseIconConverter"/>
+        <local:MuteOrUnmuteIconConverter x:Key="MuteOrUnMuteIconConverter" />
+        <local:PlayOrPauseIconConverter x:Key="PlayOrPauseIconConverter" />
+
+
         <ImageBrush x:Key="CoverImage"
                     ImageSource="{Binding Cover,Mode=OneWay}"
                     Stretch="None"
                     Viewport="0,0,1,1"
                     Viewbox="0,0,0.8,0.8" />
+        <ImageBrush x:Key="BackgroundImage"
+                    ImageSource="{Binding Background,Mode=OneWay}"
+                    Stretch="UniformToFill" />
 
         <BlurEffect x:Key="BlurEffect" Radius="30" RenderingBias="Performance" />
 
@@ -31,48 +37,34 @@
             <GradientStop Color="#7A000000" Offset="1" />
         </LinearGradientBrush>
 
-        <Style TargetType="{x:Type f:ForestIconButton}">
-            <Setter Property="CornerRadius" Value="99" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Background" Value="{f:Brush Background}" />
-            <Setter Property="Foreground" Value="{f:Brush Foreground}" />
-            <Setter Property="Height" Value="48" />
-            <Setter Property="Width" Value="48" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type f:ForestIconButton}">
-                        <Border x:Name="PART_Border"
-                                Background="Transparent"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                Padding="{TemplateBinding Padding}">
-                            <Path x:Name="Icon"
-                                  Data="{TemplateBinding Icon}"
-                                  Width="{TemplateBinding IconSize}"
-                                  Height="{TemplateBinding IconSize}"
-                                  Fill="{f:Brush ForegroundInHighlight}"
-                                  Stretch="Uniform"
-                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#20FFFFFF" TargetName="PART_Border" />
-                                <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#50FFFFFF" TargetName="PART_Border" />
-                                <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Fill" Value="{f:Brush ForegroundInActive}" TargetName="Icon" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <DataTemplate DataType="{x:Type local:Music}">
+            <Border Background="Transparent"
+                    Height="48"
+                    Cursor="Hand"
+                    Margin="0 0 0 8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="48" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0"
+                            Background="Gray"
+                            CornerRadius="6"
+                            Width="48" />
+                    <DockPanel Grid.Column="1"
+                               Margin="16 4 0 0">
+                        <TextBlock DockPanel.Dock="Top"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Text="Music Item1" />
+
+                        <TextBlock Margin="0 4 0 0"
+                                   Text="Test Band" />
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
     </UserControl.Resources>
     <f:Drawer x:Name="MusicBox"
               Style="{StaticResource FullSizeDrawer}">
@@ -107,14 +99,11 @@
                         <DockPanel Grid.Row="1"
                                    Margin="32 0">
                             <Rectangle DockPanel.Dock="Left"
+                                       Fill="{StaticResource BackgroundImage}"
                                        Height="128"
                                        Width="128"
-                                       VerticalAlignment="Top">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="E:\1.jpg"
-                                                Stretch="UniformToFill" />
-                                </Rectangle.Fill>
-                            </Rectangle>
+                                       VerticalAlignment="Top" />
+
 
                             <!-- 播放列表 -->
                             <StackPanel Margin="32 0 0 0">
@@ -146,65 +135,31 @@
                                 Background="#F1F1F1"
                                 Padding="32 16 8 8">
                             <DockPanel>
-                                <TextBlock DockPanel.Dock="Top"
-                                           FontSize="16"
-                                           FontWeight="Bold"
-                                           Text="列表" />
-                                <ItemsControl Margin="0 16 0 0">
-                                    <Border Background="Transparent"
-                                            Height="48"
-                                            Cursor="Hand"
-                                            Margin="0 0 0 8">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="48" />
-                                                <ColumnDefinition Width="1*" />
-                                                <ColumnDefinition Width="48" />
-                                            </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0"
-                                                    Background="Gray"
-                                                    CornerRadius="6"
-                                                    Width="48" />
-                                            <DockPanel Grid.Column="1"
-                                                       Margin="16 4 0 0">
-                                                <TextBlock DockPanel.Dock="Top"
-                                                           FontSize="15"
-                                                           FontWeight="Bold"
-                                                           Text="Music Item1" />
+                                <StackPanel DockPanel.Dock="Top"
+                                            Orientation="Horizontal">
 
-                                                <TextBlock Margin="0 4 0 0"
-                                                           Text="Test Band" />
-                                            </DockPanel>
-                                        </Grid>
-                                    </Border>
+                                    <TextBlock DockPanel.Dock="Top"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Margin="0 0 32 0"
+                                               Text="列表"
+                                               VerticalAlignment="Center" />
 
-                                    <Border Background="Transparent"
-                                            Height="48"
-                                            Cursor="Hand"
-                                            Margin="0 0 0 8">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="48" />
-                                                <ColumnDefinition Width="1*" />
-                                                <ColumnDefinition Width="48" />
-                                            </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0"
-                                                    Background="Gray"
-                                                    CornerRadius="6"
-                                                    Width="48" />
-                                            <DockPanel Grid.Column="1"
-                                                       Margin="16 4 0 0">
-                                                <TextBlock DockPanel.Dock="Top"
-                                                           FontSize="15"
-                                                           FontWeight="Bold"
-                                                           Text="Music Item1" />
+                                    <f:ForestIconButton Command="{Binding AddMusicToPlaylistCommand}"
+                                                        Icon="{StaticResource Plus}"
+                                                        Style="{StaticResource BlackIconButton}"
+                                                        Height="32"
+                                                        Width="32" />
+                                    
+                                    <f:ForestIconButton Command="{Binding RemoveMusicFromPlaylistCommand}"
+                                                        Icon="{StaticResource Remove}"
+                                                        Style="{StaticResource BlackIconButton}"
+                                                        Height="32"
+                                                        Width="32" />
+                                </StackPanel>
+                                <ItemsControl Margin="0 16 0 0"
+                                              ItemsSource="{Binding Playlist.Items,Mode=OneWay}" />
 
-                                                <TextBlock Margin="0 4 0 0"
-                                                           Text="Test Band" />
-                                            </DockPanel>
-                                        </Grid>
-                                    </Border>
-                                </ItemsControl>
                             </DockPanel>
                         </Border>
                     </Grid>
@@ -222,7 +177,7 @@
                 <DockPanel>
                     <f:ForestIconButton x:Name="VolumeButton"
                                         DockPanel.Dock="Left"
-                                        Click="Button_MuteOrUnmute"
+                                        Command="{Binding MuteOrUnMuteCommand}"
                                         Icon="{Binding IsMute,Mode=OneWay,Converter={StaticResource MuteOrUnMuteIconConverter}}"
                                         IconSize="23"
                                         Height="32"
@@ -279,15 +234,11 @@
                     </DockPanel>
 
                     <!-- 封面 -->
-                    <Rectangle x:Name="PART_BG"
-                               Grid.Row="1"
+                    <Rectangle Grid.Row="1"
+                               Fill="{StaticResource BackgroundImage}"
                                Height="256"
-                               Width="256">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="E:\1.jpg"
-                                        Stretch="UniformToFill" />
-                        </Rectangle.Fill>
-                    </Rectangle>
+                               Width="256" />
+
 
                     <!-- 音乐参数 -->
                     <DockPanel Grid.Row="2"
