@@ -251,7 +251,8 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
             }
 
             if (_service.Music.CurrentValue is not null &&
-                _service.Music.CurrentValue.Id == item.Id)
+                _service.Music.CurrentValue.Id == item.Id &&
+                IsPlaying)
             {
                 _service.Pause();
             }

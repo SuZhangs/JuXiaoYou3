@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer"
              xmlns:b="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.Behaviors"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:dragdrop="urn:gong-wpf-dragdrop"
              mc:Ignorable="d"
@@ -47,17 +48,20 @@
             <b:MusicPlayerViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
 
             <DataTemplate DataType="{x:Type local:Music}">
-                <f:LooklessButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.PlayMusicCommand}"
-                                  CommandParameter="{Binding}"
+                <Border Background="Transparent" 
                                   Height="48"
                                   Margin="0 0 0 8">
-                    <f:LooklessButton.ContextMenu>
+                    <i:Interaction.Behaviors>
+                        <f:DoubleClickBehavior Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.PlayMusicCommand}"
+                                               CommandParameter="{Binding}"/>
+                    </i:Interaction.Behaviors>
+                    <Border.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="删除"
                                       Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMusicFromPlaylistCommand}"
                                       CommandParameter="{Binding}"/>
                         </ContextMenu>
-                    </f:LooklessButton.ContextMenu>
+                    </Border.ContextMenu>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="48" />
@@ -86,7 +90,7 @@
                                        Text="{Binding Author}" />
                         </DockPanel>
                     </Grid>
-                </f:LooklessButton>
+                </Border>
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>

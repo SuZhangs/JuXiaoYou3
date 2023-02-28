@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Acorisoft.FutureGL.Tools.MusicPlayer"
-        xmlns:f="urn:acorisoft/forest/ui"
+        xmlns:fs="urn:acorisoft/forest/shell"
         mc:Ignorable="d"
         MaxHeight="640"
         MinHeight="640"
@@ -12,9 +12,15 @@
         MinWidth="384"
         WindowStyle="None">
     <WindowChrome.WindowChrome>
-        <WindowChrome/>
+        <WindowChrome GlassFrameThickness="-1"
+                      ResizeBorderThickness="8"
+                      CaptionHeight="30"/>
     </WindowChrome.WindowChrome>
     <Grid>
         <local:MusicPlayerView/>
+
+        <fs:TitleBar HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     WindowChrome.IsHitTestVisibleInChrome="False"/>
     </Grid>
 </Window>
