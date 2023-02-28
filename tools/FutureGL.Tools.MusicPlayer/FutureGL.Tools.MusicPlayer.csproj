@@ -6,6 +6,7 @@
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
         <RootNamespace>Acorisoft.FutureGL.Tools.MusicPlayer</RootNamespace>
+		<OutDir>../../Builds/Tools/Music</OutDir>
     </PropertyGroup>
 
     <ItemGroup>

@@ -143,7 +143,8 @@
                                            Margin="0 10 0 52"
                                            Text="Play from Playlist" />
 
-                                <f:SimpleButton Margin="0 0 32 0">
+                                <f:SimpleButton Margin="0 0 32 0"
+                                                Visibility="Collapsed">
                                     <Border BorderBrush="White"
                                             BorderThickness="1">
                                         <TextBlock Foreground="White"
@@ -171,12 +172,6 @@
 
                                     <f:ForestIconButton Command="{Binding AddMusicToPlaylistCommand}"
                                                         Icon="{StaticResource Plus}"
-                                                        Style="{StaticResource BlackIconButton}"
-                                                        Height="32"
-                                                        Width="32" />
-
-                                    <f:ForestIconButton Command="{Binding RemoveMusicFromPlaylistCommand}"
-                                                        Icon="{StaticResource Remove}"
                                                         Style="{StaticResource BlackIconButton}"
                                                         Height="32"
                                                         Width="32" />
@@ -251,13 +246,13 @@
                         <TextBlock DockPanel.Dock="Top"
                                    Foreground="White"
                                    HorizontalAlignment="Center"
-                                   Text="Play from Playlist" />
+                                   Text="当前播放列表" />
 
                         <TextBlock Foreground="White"
                                    FontSize="16"
                                    FontWeight="Bold"
                                    HorizontalAlignment="Center"
-                                   Text="Default Playlist" />
+                                   Text="{Binding Playlist.Name,Mode=OneWay}" />
                     </DockPanel>
 
                     <!-- 封面 -->

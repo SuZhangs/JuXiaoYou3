@@ -17,6 +17,8 @@ using NAudio.Wave;
 using TagLib;
 using TagLib.Mpeg;
 using File = TagLib.File;
+using System.Diagnostics;
+using static System.Windows.Forms.AxHost;
 
 namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
 {
@@ -294,7 +296,11 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.ViewModels
         public Music Current
         {
             get => _current;
-            set => SetValue(ref _current, value);
+            set
+            {
+                SetValue(ref _current, value);
+                Debug.WriteLine(value?.Path);
+            }
         }
 
         /// <summary>

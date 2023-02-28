@@ -200,7 +200,10 @@ namespace Acorisoft.FutureGL.Forest
                 return Culture switch
                 {
                     CultureArea.English => "Ok",
-
+                    CultureArea.French => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean => "kr.ini",
+                    CultureArea.Russian => "ru.ini",
                     _ => "确定"
                 };
             }
@@ -216,7 +219,10 @@ namespace Acorisoft.FutureGL.Forest
                 return Culture switch
                 {
                     CultureArea.English => "Reject",
-
+                    CultureArea.French => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean => "kr.ini",
+                    CultureArea.Russian => "ru.ini",
                     _ => "拒绝"
                 };
             }
@@ -232,6 +238,10 @@ namespace Acorisoft.FutureGL.Forest
                 return Culture switch
                 {
                     CultureArea.English => "Cancel",
+                    CultureArea.French => "Annuler",
+                    CultureArea.Japanese => "取り消す",
+                    CultureArea.Korean => "취소",
+                    CultureArea.Russian => "Отмена",
 
                     _ => "放弃"
                 };
