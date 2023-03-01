@@ -12,7 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public class AppViewModel : TabBased
+    public class AppViewModel : TabBaseAppViewModel
     {
         public AppViewModel() : base()
         {
@@ -24,7 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void StartOverride()
         {
             CurrentController.Start();
-            base.Start();
         }
     }
 }

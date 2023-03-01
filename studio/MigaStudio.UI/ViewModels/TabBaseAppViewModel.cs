@@ -7,10 +7,15 @@ using Acorisoft.FutureGL.Forest.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public abstract class TabBased : AppViewModelBase
+    public abstract class TabBaseAppViewModel : AppViewModelBase
     {
         private IViewController _currentController;
         private bool            _initialized;
+
+        protected TabBaseAppViewModel()
+        {
+            ApplicationModel = Xaml.Get<ApplicationModel>();
+        }
 
         public sealed override void Start()
         {
@@ -27,6 +32,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
 
+        /// <summary>
+        /// 应用程序模型
+        /// </summary>
+        public ApplicationModel ApplicationModel { get; }
 
         /// <summary>
         /// 表示当前的主要视图控制器。

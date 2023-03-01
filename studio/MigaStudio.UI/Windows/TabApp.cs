@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
     public abstract class TabApp<TViewModel, TMainController, TMainView> : ForestApp
         where TMainController : ITabViewController
         where TMainView : UserControl
-        where TViewModel : TabBased
+        where TViewModel : TabBaseAppViewModel
     {
 
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
@@ -55,7 +55,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         where TMainView : UserControl
         where TSplashController : IRootViewModel
         where TSplash : UserControl
-        where TViewModel : TabBased
+        where TViewModel : TabBaseAppViewModel
     {
         
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)

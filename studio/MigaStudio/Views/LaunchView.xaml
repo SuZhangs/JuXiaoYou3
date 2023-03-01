@@ -18,6 +18,6 @@
                    Text="橘小柚"/>
         
         <TextBlock FontSize="14"
-                   Text="正在加载"/>
+                   Text="{Binding Caption,Mode=OneWay}"/>
     </StackPanel>
 </UserControl>

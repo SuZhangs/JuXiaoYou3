@@ -32,8 +32,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
             await SaveAsync();
         }
         
+        public AdvancedSettingModel AdvancedSetting { get; init; }
         public RepositorySetting RepositorySetting { get; init; }
         
+        public string AdvancedSettingFileName { get; init; }
         public string RepositorySettingFileName { get; init; }
     }
 }

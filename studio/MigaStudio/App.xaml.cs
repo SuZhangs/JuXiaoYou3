@@ -24,8 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio
     /// </summary>
     public partial class App
     {
-        private const string RepositorySettingFileName = "repo.json";
-        private const string AdvancedSettingFileName   = "advanced.json";
         
         protected sealed override ApplicationModel ConfigureDirectory()
         {
@@ -54,24 +52,6 @@ namespace Acorisoft.FutureGL.MigaStudio
             //
             var (logger, appModel) = data;
             
-            
-            //
-            // Repository Setting
-            var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
-            var repositorySetting = JSON.OpenSetting<RepositorySetting>(repositorySettingFileName,
-                () => new RepositorySetting
-                {
-                    LastRepository = null,
-                    Repositories = new HashSet<RepositoryCache>()
-                });
-
-            //
-            // 注册设置
-            container.Use<SystemSetting, ISystemSetting>(new SystemSetting
-            {
-                RepositorySetting = repositorySetting,
-                RepositorySettingFileName = repositorySettingFileName
-            });
 
             container.Use<ViewServiceAdapter,
                 IViewServiceAdapter,

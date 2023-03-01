@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaStudio.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Windows
 {
-    public abstract class TabBaseWindow<TViewModel> : ForestWindow where TViewModel : TabBased
+    public abstract class TabBaseWindow<TViewModel> : ForestWindow where TViewModel : TabBaseAppViewModel
     {
         private TViewModel _dc;
 
