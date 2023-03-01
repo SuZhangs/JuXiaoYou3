@@ -4,8 +4,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
 {
     public class ConstantValues
     {
-        public static MainTheme[] Themes => new[] { MainTheme.Light, MainTheme.Dark };
-        public static CultureArea[] Languages => new[]
+        public static object[] Themes => new object[] { MainTheme.Light, MainTheme.Dark };
+        public static object[] Languages => new object[]
         {
             CultureArea.Chinese, 
             CultureArea.English, 
@@ -17,6 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
 
 
         internal const string Setting_MainTheme = "setting.theme";
+        internal const string Setting_Language = "setting.language";
         internal const string PageName_Home     = "global.home";
         internal const string PageName_Setting  = "global.setting";
     }

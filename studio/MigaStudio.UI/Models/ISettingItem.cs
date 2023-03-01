@@ -4,7 +4,6 @@
     {
         string MainTitle { get; }
         string SubTitle { get; }
-        string ToolTips { get; }
     }
 
     public interface ISettingItem<T> : ISettingItem
@@ -29,6 +28,5 @@
         public Action<T> Callback { get; set; }
         public string MainTitle { get; init; }
         public string SubTitle { get; init; }
-        public string ToolTips { get; init; }
     }
 }

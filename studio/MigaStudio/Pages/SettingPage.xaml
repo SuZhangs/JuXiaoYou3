@@ -6,62 +6,68 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
              xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="720" 
              d:DesignWidth="1280"
-             d:DataContext="{d:DesignInstance Type={x:Type local:HomeViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <DataTemplate x:Key="Enumeration">
             <TextBlock Text="{Binding Converter={StaticResource Translation}}"/>
         </DataTemplate>
+        
+        <studio:SettingItemTemplateSelector x:Key="SettingItemSelector">
+            <studio:SettingItemTemplateSelector.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="ComboBox"
+                                  DataType="{x:Type studio:ISettingComboBox}">
+                        <Border Background="#F1F1F1"
+                                CornerRadius="12"
+                                Margin="0 0 0 10"
+                                Padding="16"
+                                MinHeight="100">
+                            <DockPanel>
+                                <ComboBox DockPanel.Dock="Right"
+                                          MinWidth="240"
+                                          ItemsSource="{Binding Collection}"
+                                          ItemTemplate="{StaticResource Enumeration}"
+                                          SelectedItem="{Binding Value,Mode=TwoWay}"
+                                          VerticalAlignment="Top"/>
+                                
+                                <StackPanel DockPanel.Dock="Left">
+                                    <TextBlock FontSize="24"
+                                               FontWeight="Bold"
+                                               Text="{Binding MainTitle}"/>
+                                    <TextBlock Foreground="{f:Brush Theme=ForegroundInActive}"
+                                               FontSize="13"
+                                               Margin="0 8 0 0"
+                                               Text="{Binding SubTitle}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </studio:SettingItemTemplateSelector.Resources>
+        </studio:SettingItemTemplateSelector>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   Margin="32 32"
-                   Text="{Binding Title}"/>
-
         <f:ForestTabControl Grid.Row="1"
-                            Margin="32 0"
                             TabStripPlacement="Left"
-                            Padding="32 0">
+                            Padding="64 32">
             <f:ForestTabItem Header="常规" 
                              Icon="{StaticResource IC.Setting}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"
-                               FontSize="24"
-                               Text="常规"/>
-                    <ScrollViewer Margin="0 16 0 0">
-                        <f:SpacingStackPanel Gap="16"
-                                             HorizontalAlignment="Left"
-                                             Width="640">
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Left"
-                                   FontWeight="Bold"
-                                   Text="主题"
-                                   Width="128"
-                                   VerticalAlignment="Center"/>
-                                <ComboBox ItemsSource="{x:Static res:ConstantValues.Themes}"
-                                  ItemTemplate="{StaticResource Enumeration}"/>
-                            </DockPanel>
-
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Left"
-                                   FontWeight="Bold"
-                                   Text="语言"
-                                   Width="128"
-                                   VerticalAlignment="Center"/>
-                                <ComboBox ItemsSource="{x:Static res:ConstantValues.Languages}"
-                                          ItemTemplate="{StaticResource Enumeration}"/>
-                            </DockPanel>
-                        </f:SpacingStackPanel>
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Text="常规设置"/>
+                    <ScrollViewer IsTabStop="False"
+                                  Focusable="False"
+                                  Margin="0 32 0 0">
+                        <ItemsControl ItemsSource="{Binding Items,Mode=OneWay}"
+                                      ItemTemplateSelector="{StaticResource SettingItemSelector}">
+                        </ItemsControl>
                     </ScrollViewer>
                 </DockPanel>
             </f:ForestTabItem>
