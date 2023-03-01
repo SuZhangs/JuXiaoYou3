@@ -21,7 +21,7 @@
         protected override Size MeasureOverride(Size constraint)
         {
             _columns = InternalChildren.Count == 0 ? 1 : InternalChildren.Count;
-            var childConstraint = new Size(Math.Clamp(constraint.Width / _columns, 60, 256) - 1.5, constraint.Height);
+            var childConstraint = new Size(Math.Clamp(constraint.Width / _columns, 60, 200) - 1.5, constraint.Height);
             var maxChildDesiredWidth = 0.0;
             var maxChildDesiredHeight = 0.0;
 
@@ -58,7 +58,7 @@
         /// <param name="arrangeSize">Arrange size</param>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
-            var w = Math.Clamp(arrangeSize.Width / _columns, 60, 256) - 1.5;
+            var w = Math.Clamp(arrangeSize.Width / _columns, 60, 200) - 1.5;
             var h = arrangeSize.Height;
             var xStep = 0d;
 

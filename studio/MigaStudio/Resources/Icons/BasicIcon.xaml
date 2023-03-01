@@ -6,4 +6,12 @@
             <LineGeometry StartPoint="6,6" EndPoint="18,18" />
         </GeometryGroup.Children>
     </GeometryGroup>
+
+    <GeometryGroup x:Key="FeatherIcon.Plus">
+        <GeometryGroup.Children>
+            <LineGeometry StartPoint="12,5" EndPoint="12,19" />
+            <LineGeometry StartPoint="5,12" EndPoint="19,12" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
+
 </ResourceDictionary>

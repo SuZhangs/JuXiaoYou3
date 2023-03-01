@@ -48,6 +48,7 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
+              Background="#F1F1F1"
               Height="36">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="16" />
@@ -59,12 +60,10 @@
 
             <ListBox x:Name="Shell"
                      Grid.Column="1"
-                     WindowChrome.IsHitTestVisibleInChrome="True"
+                     WindowChrome.IsHitTestVisibleInChrome="False"
                      ScrollViewer.CanContentScroll="False"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     Background="#F1F1F1"
                      ItemsSource="{Binding Workspace,Mode=OneWay}"
-                     Margin="0 4 0 0"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">
                 <ListBox.ItemsPanel>
@@ -83,13 +82,15 @@
                 <!-- 新建标签页按钮 -->
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
                                     Command="{Binding AddTabCommand}"
-                                    Icon="{StaticResource FeatherIcon.Close}"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    IconSize="19"
                                     Width="48"/>
                 <!-- 设置页按钮 -->
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
                                     Command="{Binding AddTabCommand}"
-                                    CommandParameter="{x:Type pages:SettingPage}"
+                                    CommandParameter="{x:Type pages:SettingViewModel}"
                                     Icon="{StaticResource IC.Setting}"
+                                    IconSize="19"
                                     IsFilled="True"
                                     Width="48"/>
                 
@@ -97,15 +98,21 @@
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
                                     Icon="{StaticResource IC.ArrowDown}"
                                     IsFilled="True"
+                                    IconSize="29"
                                     Width="48"/>
             </StackPanel>
+
+            <Border Grid.Column="3"
+                    Background="White"/>
 
             <!-- 标题栏 -->
             <fs:TitleBar Grid.Column="4"
                          WindowChrome.IsHitTestVisibleInChrome="True"
+                         Background="White"
                          WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 
-        <fs:ViewHost ViewModel="{Binding CurrentViewModel,Mode=OneWay}" />
+        <fs:ViewHost ClipToBounds="True"
+                     ViewModel="{Binding CurrentViewModel,Mode=OneWay}" />
     </DockPanel>
 </UserControl>

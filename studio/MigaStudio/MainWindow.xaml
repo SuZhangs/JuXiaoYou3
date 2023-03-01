@@ -19,6 +19,7 @@
     <f:Drawer x:Name="MainDrawer">
         <fs:DialogHost x:Name="MainDialogHost">
             <fs:ViewHost x:Name="ViewHost"
+                         ClipToBounds="True"
                          ViewModel="{Binding CurrentController,Mode=OneWay}" />
         </fs:DialogHost>
     </f:Drawer>

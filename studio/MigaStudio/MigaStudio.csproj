@@ -21,7 +21,6 @@
     <ItemGroup>
       <Folder Include="Pages\Lobby" />
       <Folder Include="Resources\Behaviors" />
-      <Folder Include="Resources\Converters" />
       <Folder Include="Styles" />
     </ItemGroup>
 

@@ -7,6 +7,7 @@
           xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
           xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
           xmlns:v="clr-namespace:Acorisoft.FutureGL.MigaStudio.Views"
+          xmlns:convs="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
           xmlns:f="urn:acorisoft/forest/ui"
           xmlns:fs="urn:acorisoft/forest/shell"
           xmlns:s="urn:acorisoft/studio"
@@ -20,6 +21,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/ListBoxItem.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <convs:TranslationConverter x:Key="Translation"/>
         </ResourceDictionary>
     </Application.Resources>
 </s:TabApp>
