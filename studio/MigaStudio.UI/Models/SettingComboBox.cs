@@ -11,12 +11,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
     
     public class SettingComboBox<T> : ObservableObject, ISettingComboBox
     {
+        private object _value;
+        
         /// <summary>
         /// 集合
         /// </summary>
         public IEnumerable<object> Collection { get; init; }
-
-        private object _value;
 
         /// <summary>
         /// 获取或设置 <see cref="Value"/> 属性。
