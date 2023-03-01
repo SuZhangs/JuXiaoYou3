@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
@@ -43,6 +45,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #endregion
 
+        #region Start / OnStart
+
+        
         public sealed override Task Start()
         {
             return Task.Run(() =>
@@ -64,10 +69,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
 
+        /// <summary>
+        /// 传递参数。
+        /// </summary>
+        /// <param name="arg"></param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public sealed override void Start(Parameter arg)
         {
             var np = NavigationParameter.FromParameter(arg);
-            Id = np.Id;
+            Id         = np.Id;
+            Controller = (TabController)np.Controller;
             OnStart(np);
         }
         
@@ -81,6 +92,39 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             
         }
+
+        #endregion
+
+        #region Controller
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TViewModel"></typeparam>
+        public TViewModel New<TViewModel>() where TViewModel : TabViewModel
+        {
+            var vm = Xaml.GetViewModel<TViewModel>();
+            vm.Start(NavigationParameter.New(vm, Controller));
+            Controller.Start(vm);
+            return vm;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="cache"></param>
+        /// <typeparam name="TViewModel"></typeparam>
+        public void New<TViewModel>(IData data, IDataCache cache) where TViewModel : TabViewModel
+        {
+            var vm = Xaml.Get<TViewModel>();
+            vm.Start(NavigationParameter.New(data, cache, Controller));
+            Controller.Start(vm);
+        }
+
+        #endregion
+        
+        protected TabController Controller { get; private set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Title"/> 属性。

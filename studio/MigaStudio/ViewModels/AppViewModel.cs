@@ -17,11 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var shell = new TabShell
             {
             };
-            
-            shell.Onboards.Add(Test());
-            shell.Onboards.Add(Test());
-            shell.Onboards.Add(Test());
-            
+
             Controller        = shell;
             CurrentController = Controller;
         }

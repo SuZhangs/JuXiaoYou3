@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Reosurces\Behaviors" />
-      <Folder Include="Reosurces\Converters" />
+      <Folder Include="Resources\Behaviors" />
+      <Folder Include="Resources\Converters" />
       <Folder Include="Styles" />
     </ItemGroup>
 
@@ -52,6 +52,11 @@
 
     <ItemGroup>
       <Page Update="Views\QuickStartView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Resources\ContentTemplates\ListBoxItem.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

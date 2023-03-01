@@ -8,8 +8,10 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
+             xmlns:vm2="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels;assembly=MigaStudio.UI"
              xmlns:s="urn:acorisoft/studio"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:proxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -23,7 +25,29 @@
                 <LineGeometry StartPoint="5,12" EndPoint="19,12" />
             </GeometryGroup.Children>
         </GeometryGroup>
+        <proxy:TabShellBindingProxy x:Key="Shell"  ViewModel="{Binding}"/>
 
+        <DataTemplate DataType="{x:Type vm2:TabViewModel}">
+            <Border Background="Transparent"
+                    Padding="8 4 8 0"
+                    WindowChrome.IsHitTestVisibleInChrome="True">
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            Command="{Binding Source={StaticResource Shell},Path=ViewModel.RemoveTabCommand}"
+                            CommandParameter="{Binding}"
+                            MinHeight="20"
+                            MinWidth="20"
+                            Style="{StaticResource CloseButtonStyle}"
+                            Height="20"
+                            Width="20" />
+                    <TextBlock DockPanel.Dock="Left"
+                               FontSize="13"
+                               Text="{Binding Title,Mode=OneWay}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Border>
+        </DataTemplate>
         <Style TargetType="ListBoxItem" BasedOn="{StaticResource TabItem}"/>
     </UserControl.Resources>
     <DockPanel>
@@ -44,7 +68,7 @@
                      ScrollViewer.CanContentScroll="False"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      Background="#F1F1F1"
-                     ItemsSource="{Binding Onboards,Mode=OneWay}"
+                     ItemsSource="{Binding Workspace,Mode=OneWay}"
                      Margin="0 4 0 0"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">

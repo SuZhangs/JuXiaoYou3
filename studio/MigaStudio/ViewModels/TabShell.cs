@@ -15,64 +15,23 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class TabShell : TabController
     {
         private WindowState _windowState;
-        private ITabViewModel _currentViewModel;
 
         public TabShell()
         {
             Xaml.Get<IWindowEventBroadcast>()
                 .PropertyTunnel
                 .WindowState = x => WindowState = x;
-            AddTabCommand = Command(OnAddTabImpl);
         }
 
-        private void OnAddTabImpl()
+        protected override void RequireStartupTabViewModel()
         {
-            if (Onboards.Count < MaximumTabItemCount)
-            {
-                Onboards.Add(Test());
-            }
-            else
-            {
-                Xaml.Get<INotifyService>().Notify(new IconNotification
-                {
-                    Title = " 已经添加到。。。" 
-                });
-                Outboards.Add(Test());
-            }
+            Test();
         }
-        
-        
+
+
         private ITabViewModel Test()
         {
-            var home = new HomeViewModel();
-            home.Start(NavigationParameter.Test());
-            home.Title = home.Id;
-            return home;
-        }
-
-        public ITabViewModel CurrentViewModel
-        {
-            get => _currentViewModel;
-            set
-            {
-                _currentViewModel?.Suspend();
-                
-                SetValue(ref _currentViewModel, value);
-                
-                if (_currentViewModel is null)
-                {
-                    return;
-                }
-                
-                if (_currentViewModel.Initialized)
-                {
-                    _currentViewModel.Resume();
-                }
-                else
-                {
-                    _currentViewModel.Start();
-                }
-            }
+            return New<HomeViewModel>();
         }
 
         /// <summary>
@@ -83,7 +42,5 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             get => _windowState;
             set => SetValue(ref _windowState, value);
         }
-        
-        public RelayCommand AddTabCommand { get; }
     }
 }
