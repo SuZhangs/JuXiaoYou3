@@ -30,29 +30,40 @@
 
         <f:ForestTabControl Grid.Row="1"
                             Margin="32 0"
-                            TabStripPlacement="Left">
-            <f:ForestTabItem Header="常规" Icon="{StaticResource IC.Setting}">
-                <StackPanel>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Left"
+                            TabStripPlacement="Left"
+                            Padding="32 0">
+            <f:ForestTabItem Header="常规" 
+                             Icon="{StaticResource IC.Setting}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"
+                               FontSize="24"
+                               Text="常规"/>
+                    <ScrollViewer Margin="0 16 0 0">
+                        <f:SpacingStackPanel Gap="16"
+                                             HorizontalAlignment="Left"
+                                             Width="640">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Left"
                                    FontWeight="Bold"
                                    Text="主题"
-                                   Width="320"
+                                   Width="128"
                                    VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{x:Static res:ConstantValues.Themes}"
+                                <ComboBox ItemsSource="{x:Static res:ConstantValues.Themes}"
                                   ItemTemplate="{StaticResource Enumeration}"/>
-                    </DockPanel>
-                    
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Left"
+                            </DockPanel>
+
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Left"
                                    FontWeight="Bold"
                                    Text="语言"
-                                   Width="320"
+                                   Width="128"
                                    VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{x:Static res:ConstantValues.Languages}"
-                                  ItemTemplate="{StaticResource Enumeration}"/>
-                    </DockPanel>
-                </StackPanel>
+                                <ComboBox ItemsSource="{x:Static res:ConstantValues.Languages}"
+                                          ItemTemplate="{StaticResource Enumeration}"/>
+                            </DockPanel>
+                        </f:SpacingStackPanel>
+                    </ScrollViewer>
+                </DockPanel>
             </f:ForestTabItem>
             <f:ForestTabItem Header="高级" Icon="{StaticResource IC.Setting}"/>
             <f:ForestTabItem Header="字体" Icon="{StaticResource IC.Setting}"/>

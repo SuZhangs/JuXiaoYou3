@@ -14,5 +14,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
             CultureArea.Korean, 
             CultureArea.French
         };
+
+
+        internal const string Setting_MainTheme = "setting.theme";
+        internal const string PageName_Home     = "global.home";
+        internal const string PageName_Setting  = "global.setting";
     }
 }

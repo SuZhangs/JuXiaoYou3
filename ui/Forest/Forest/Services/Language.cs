@@ -93,6 +93,11 @@ namespace Acorisoft.FutureGL.Forest
 
         #endregion
 
+        public static string GetText(string id)
+        {
+            return GlobalStrings.TryGetValue(id, out var text) ? text : id;
+        }
+        
         #region Name
 
         /// <summary>
