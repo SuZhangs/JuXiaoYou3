@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 {
                     var job = Jobs.Dequeue();
 
-                    if (job is null || job.Handler is null)
+                    if (job?.Handler is null)
                     {
                         continue;
                     }
