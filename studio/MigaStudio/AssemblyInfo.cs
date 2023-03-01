@@ -1,3 +1,4 @@
+global using Acorisoft.FutureGL.Forest.Attributes;
 using System.Windows;
 
 [assembly: ThemeInfo(

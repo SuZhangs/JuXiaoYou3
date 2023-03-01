@@ -10,7 +10,7 @@ using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
+namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class HomeViewModel : TabViewModel
     {
@@ -18,5 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Lobby
         {
             Title = "首页";
         }
+
+        public sealed override bool Uniqueness => true;
     }
 }

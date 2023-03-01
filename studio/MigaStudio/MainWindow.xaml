@@ -9,7 +9,7 @@
                  xmlns:f="urn:acorisoft/forest/ui"
                  xmlns:fs="urn:acorisoft/forest/shell"
                  xmlns:s="urn:acorisoft/studio"
-                 xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Lobby"
+                 xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                  mc:Ignorable="d"
                  Title="MainWindow"
                  MinWidth="1280"

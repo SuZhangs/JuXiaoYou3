@@ -7,7 +7,7 @@ using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Pages.Lobby;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -25,13 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void RequireStartupTabViewModel()
         {
-            Test();
-        }
-
-
-        private ITabViewModel Test()
-        {
-            return New<HomeViewModel>();
+            New<HomeViewModel>();
         }
 
         /// <summary>

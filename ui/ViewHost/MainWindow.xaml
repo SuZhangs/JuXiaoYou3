@@ -8,5 +8,5 @@
         mc:Ignorable="d"
         MinWidth="1280"
         MinHeight="720">
-    <mgp:LaunchPage/>
+    <mgp:SettingPage/>
 </Window>
