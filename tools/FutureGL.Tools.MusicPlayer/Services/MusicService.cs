@@ -13,9 +13,14 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
         private readonly WaveOutEvent _device;
         private readonly Timer        _timer;
 
-        private AudioFileReader _reader;
-        private bool            _manualStop;
-        private int             _currentIndex;
+        private AudioFileReader                             _reader;
+        private bool                                        _manualStop;
+        private int                                         _currentIndex;
+        private TimeSpan                                    _currentTime;
+        private PlaybackState                               _currentState;
+        private Music                                       _item;
+        private int                                         _currentIndex2;
+        private Action<TimeSpan, PlaybackState, Music, int> _handler;
 
         private readonly ObservableProperty<TimeSpan> _positionStream;
         private readonly ObservableProperty<TimeSpan> _durationStream;
@@ -32,6 +37,20 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             _timer                  =  new Timer(DurationPushHandler, null, 0, 1000);
             _device                 =  new WaveOutEvent();
             _device.PlaybackStopped += OnDevicePlayStopped;
+        }
+
+        void Update(TimeSpan time, PlaybackState state, Music item, int index)
+        {
+            _currentTime   = time;
+            _currentState  = state;
+            _item          = item;
+            _currentIndex2 = index;
+            StateUpdatedHandler?.Invoke(_currentTime, _currentState, _item, _currentIndex2);
+        }
+
+        void Reconnect()
+        {
+            StateUpdatedHandler?.Invoke(_currentTime, _currentState, _item, _currentIndex2);
         }
 
         private void DurationPushHandler(object state)
@@ -53,7 +72,7 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             }
 
             _positionStream.SetValue(_reader.TotalTime);
-            StateUpdatedHandler?.Invoke(TimeSpan.Zero, PlaybackState.Stopped, null, -1);
+            Update(TimeSpan.Zero, PlaybackState.Stopped, null, -1);
             _reader.Dispose();
             _reader = null;
 
@@ -62,6 +81,9 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             PlayNext();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PlayLast()
         {
             var maxIndex = _playlistStream.CurrentValue.Items.Count - 1;
@@ -91,6 +113,9 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             Play(music);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PlayNext()
         {
             var maxIndex = _playlistStream.CurrentValue.Items.Count;
@@ -174,7 +199,7 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
                 _device.Play();
                 _durationStream.SetValue(_reader.TotalTime);
                 _targetStream.SetValue(music);
-                StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, music, _currentIndex);
+                Update(_reader.TotalTime, PlaybackState.Playing, music, _currentIndex);
             }
         }
 
@@ -263,35 +288,6 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
             }
         }
 
-        protected override void ReleaseManagedResources()
-        {
-            _timer.Dispose();
-            _playlistStream.Dispose();
-            _positionStream.Dispose();
-            _targetStream.Dispose();
-            _device.Dispose();
-            _reader?.Dispose();
-        }
-
-
-        public IObservable<TimeSpan> Duration => _durationStream.Observable;
-        public IObservable<TimeSpan> Position => _positionStream.Observable;
-        public float Volume
-        {
-            get => _device.Volume;
-            set => _device.Volume = value;
-        }
-
-        public IObservableProperty<Music> Music => _targetStream;
-        public IObservableProperty<Playlist> Playlist => _playlistStream;
-        public Action<TimeSpan, PlaybackState, Music, int> StateUpdatedHandler { get; set; }
-
-        public PlayMode Mode
-        {
-            get;
-            set;
-        }
-
         public void DragOver(IDropInfo dropInfo)
         {
             if (dropInfo.Data is Music &&
@@ -317,16 +313,50 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer.Services
                     if (current.Id == source.Id)
                     {
                         _currentIndex = targetIndex;
-                        StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
+                        Update(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
                     }
                     else if(current.Id == target.Id)
                     {
                         _currentIndex = sourceIndex;
-                        StateUpdatedHandler?.Invoke(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
+                        Update(_reader.TotalTime, PlaybackState.Playing, null, _currentIndex);
                     }
                 }
                 
             }
         }
+
+        protected override void ReleaseManagedResources()
+        {
+            _timer.Dispose();
+            _playlistStream.Dispose();
+            _positionStream.Dispose();
+            _targetStream.Dispose();
+            _device.Dispose();
+            _reader?.Dispose();
+        }
+
+
+        public IObservable<TimeSpan> Duration => _durationStream.Observable;
+        public IObservable<TimeSpan> Position => _positionStream.Observable;
+        public float Volume
+        {
+            get => _device.Volume;
+            set => _device.Volume = value;
+        }
+
+        public IObservableProperty<Music> Music => _targetStream;
+        public IObservableProperty<Playlist> Playlist => _playlistStream;
+
+        public Action<TimeSpan, PlaybackState, Music, int> StateUpdatedHandler
+        {
+            get => _handler;
+            set
+            {
+                _handler = value;
+                Reconnect();
+            }
+        }
+
+        public PlayMode Mode { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using Acorisoft.FutureGL.Forest;
 
-namespace Acorisoft.FutureGL.MigaStudio.SubSystem.Models
+namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer
 {
     public class Playlist : ForestObject
     {
@@ -14,7 +15,10 @@ namespace Acorisoft.FutureGL.MigaStudio.SubSystem.Models
             get => _name;
             set => SetValue(ref _name, value);
         }
-
+        
+        /// <summary>
+        /// 类型
+        /// </summary>
         public ObservableCollection<Music> Items { get; init; }
     }
 }

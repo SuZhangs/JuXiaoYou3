@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType Condition="'$(Configuration)'=='DEBUG'">WinExe</OutputType>
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>disable</Nullable>
         <OutDir>../../Builds/SubSystem</OutDir>
+        <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
@@ -16,8 +16,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="NAudio" Version="2.1.0" />
-      <PackageReference Include="TagLibSharp" Version="2.3.0" />
+        <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+        <PackageReference Include="NAudio" Version="2.1.0" />
+        <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Wpf.Ui">
+        <HintPath>F:\.nuget\wpf-ui\3.0.0-preview.1\lib\net7.0-windows7.0\Wpf.Ui.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>
@@ -26,12 +33,11 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Wpf.Ui">
-        <HintPath>F:\.nuget\wpf-ui\3.0.0-preview.1\lib\net7.0-windows7.0\Wpf.Ui.dll</HintPath>
-      </Reference>
+      <Page Update="Views\MusicPlayerView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>
