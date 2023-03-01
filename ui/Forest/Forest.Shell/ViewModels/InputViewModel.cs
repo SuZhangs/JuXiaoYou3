@@ -73,12 +73,12 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #region Lifetime
 
-        public sealed override Task Start()
+        public sealed override void Start()
         {
             var web = Xaml.Get<IWindowEventBroadcast>();
             _disposable = web.Keys.Subscribe(this);
             StartOverride();
-            return base.Start();
+            base.Start();
         }
 
         public sealed override void Resume()

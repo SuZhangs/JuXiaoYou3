@@ -23,6 +23,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 .WindowState = x => WindowState = x;
         }
 
+        public override void Start()
+        {
+            RequireStartupTabViewModel();
+        }
+
         protected override void RequireStartupTabViewModel()
         {
             New<HomeViewModel>();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
@@ -9,7 +10,23 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public abstract class TabBased : AppViewModelBase
     {
         private IViewController _currentController;
-        
+        private bool            _initialized;
+
+        public sealed override void Start()
+        {
+            if (_initialized)
+            {
+                _initialized = true;
+            }
+            
+            StartOverride();
+        }
+
+        protected virtual void StartOverride()
+        {
+            
+        }
+
 
         /// <summary>
         /// 表示当前的主要视图控制器。
@@ -28,7 +45,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public IViewController CurrentController
         {
             get => _currentController;
-            set => SetValue(ref _currentController, value);
+            set
+            {
+                if (_initialized)
+                {
+                    value?.Start();
+                }
+                SetValue(ref _currentController, value);
+            }
         }
     }
 }

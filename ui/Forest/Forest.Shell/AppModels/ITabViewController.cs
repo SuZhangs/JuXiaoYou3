@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.AppModels
 {
-    public interface ITabViewController : IViewController, IRootViewModel
+    public interface ITabViewController : IViewController, IRootViewModel, ILifetimeSupport
     {
         /// <summary>
         /// 启动指定的视图模型

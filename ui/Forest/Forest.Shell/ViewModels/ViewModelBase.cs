@@ -66,9 +66,8 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// </summary>
         /// <returns>返回一个可等待的任务。</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual Task Start()
+        public virtual void Start()
         {
-            return Task.Run(() => { });
         }
         
         /// <summary>

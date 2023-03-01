@@ -48,20 +48,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         #region Start / OnStart
 
         
-        public sealed override Task Start()
+        public sealed override void Start()
         {
-            return Task.Run(() =>
+            try
             {
-                try
-                {
-                    OnStart();
-                    _initialized = true;
-                }
-                catch
-                {
-                    _initialized = false;
-                }
-            });
+                OnStart();
+                _initialized = true;
+            }
+            catch
+            {
+                _initialized = false;
+            }
         }
 
         public virtual void OnStart()

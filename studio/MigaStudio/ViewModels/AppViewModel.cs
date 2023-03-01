@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Controls;
+using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaStudio.Core;
@@ -17,21 +18,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var shell = new TabShell();
             Controller        = shell;
-            CurrentController = Controller;
+            CurrentController = new LaunchViewController(this);
         }
 
-        public override Task Start()
+        protected override void StartOverride()
         {
-            (Controller as TabShell)?.New<HomeViewModel>();
-            return base.Start();
-        }
-
-        private ITabViewModel Test()
-        {
-            var home = new HomeViewModel();
-            home.Start(NavigationParameter.Test());
-            home.Title = home.Id;
-            return home;
+            CurrentController.Start();
+            base.Start();
         }
     }
 }
