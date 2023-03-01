@@ -20,10 +20,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             
             ComboBox<MainTheme>(ConstantValues.Setting_MainTheme, 
+                BasicAppSetting.Theme,
                 x => BasicAppSetting.Theme = x,
                 ConstantValues.Themes);
             
-            ComboBox<CultureArea>(ConstantValues.Setting_Language, 
+            ComboBox<CultureArea>(ConstantValues.Setting_Language,  
+                BasicAppSetting.Language,
                 x => BasicAppSetting.Language = x,
                 ConstantValues.Languages);
         }

@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 CultureArea.Japanese => "日本語",
                 CultureArea.Korean => "한국어",
                 CultureArea.Russian => "Русский",
-                _ => "确定"
+                _ => "简体中文"
             };
         }
 

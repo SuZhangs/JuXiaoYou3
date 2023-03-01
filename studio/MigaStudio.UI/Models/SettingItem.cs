@@ -22,7 +22,11 @@
         public T Value
         {
             get => _value;
-            set => SetValue(ref _value, value);
+            set
+            {
+                SetValue(ref _value, value);
+                Callback?.Invoke(value);
+            }
         }
 
         public Action<T> Callback { get; set; }

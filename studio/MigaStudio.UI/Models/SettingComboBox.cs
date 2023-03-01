@@ -24,7 +24,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         public object Value
         {
             get => _value;
-            set => SetValue(ref _value, value);
+            set
+            {
+                SetValue(ref _value, value);
+                Callback?.Invoke((T)value);
+            }
         }
 
         public Action<T> Callback { get; set; }

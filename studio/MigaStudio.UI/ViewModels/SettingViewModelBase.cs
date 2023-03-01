@@ -12,8 +12,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             Items = new ObservableCollection<ISettingItem>();
         }
-        
-        protected ISettingItem Text(string id, Action<string> callback)
+
+        protected ISettingItem Text(string id, string defaultValue, Action<string> callback)
         {
             var mainTitleKey = $"{id}";
             var subTitleKey = $"{id}.Tips";
@@ -23,13 +23,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 MainTitle = Language.GetText(mainTitleKey),
                 SubTitle = Language.GetText(subTitleKey),
                 Callback = callback,
+                Value = defaultValue
             };
-            
+
             Items.Add(item);
             return item;
         }
-        
-        protected ISettingItem ComboBox<T>(string id, Action<T> callback, IEnumerable<object> collection)
+
+        protected ISettingItem ComboBox<T>(string id, T defaultValue, Action<T> callback,
+            IEnumerable<object> collection)
         {
             var mainTitleKey = $"{id}";
             var subTitleKey = $"{id}.Tips";
@@ -39,13 +41,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 MainTitle = Language.GetText(mainTitleKey),
                 SubTitle = Language.GetText(subTitleKey),
                 Callback = callback,
-                Collection = collection
+                Collection = collection,
+                Value = defaultValue
             };
-            
+
             Items.Add(item);
             return item;
         }
-        
+
         public ObservableCollection<ISettingItem> Items { get; }
     }
 }
