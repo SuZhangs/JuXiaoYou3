@@ -73,13 +73,12 @@ namespace Acorisoft.FutureGL.MigaStudio
                 RepositorySettingFileName = repositorySettingFileName
             });
 
-            container.Use<ViewHostServiceAdapter,
-                IViewHostServiceAdapter,
-                IViewHostAmbientService>(new ViewHostServiceAdapter());
+            container.Use<ViewServiceAdapter,
+                IViewServiceAdapter,
+                IViewServiceAmbient>(new ViewServiceAdapter());
 
             return data;
         }
-
 
         protected override void RegisterServices(ILogger logger, IContainer container)
         {

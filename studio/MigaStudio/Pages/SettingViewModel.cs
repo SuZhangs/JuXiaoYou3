@@ -30,6 +30,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 ConstantValues.Languages);
         }
 
+        public override void Stop()
+        {
+            
+        }
+
         protected BasicAppSetting BasicAppSetting { get; }
 
         public sealed override bool Uniqueness => true;

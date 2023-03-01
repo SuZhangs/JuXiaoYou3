@@ -6,13 +6,13 @@ using Acorisoft.FutureGL.Forest.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public class ViewHostServiceAdapter : IViewHostServiceAdapter, IViewHostAmbientService
+    public class ViewServiceAdapter : IViewServiceAdapter, IViewServiceAmbient
     {
-        private readonly ViewHostService _service;
+        private readonly ViewService _service;
         
-        public ViewHostServiceAdapter()
+        public ViewServiceAdapter()
         {
-            _service = new ViewHostService();
+            _service = new ViewService();
         }
         
 
@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         
         public void SetServiceProvider(ViewHostBase host) => _service.SetServiceProvider(host);
 
-        public IViewHostService Host => _service;
+        public IViewService Host => _service;
         
         public ITabViewController Controller { get; set; }
     }

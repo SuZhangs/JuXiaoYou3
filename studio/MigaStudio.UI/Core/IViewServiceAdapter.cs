@@ -8,7 +8,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     /// <summary>
     /// <see cref="IViewHostServiceAdapter"/> 类型表示一个视图服务模型的适配器，用于重写
     /// </summary>
-    public interface IViewHostServiceAdapter
+    public interface IViewServiceAdapter
     {
         /// <summary>
         /// 跳转到指定的页面
@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <summary>
         /// 
         /// </summary>
-        IViewHostService Host { get; }
+        IViewService Host { get; }
         
         /// <summary>
         /// 控制器

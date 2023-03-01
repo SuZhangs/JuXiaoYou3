@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     /// <summary>
     /// <see cref="IViewHostService"/> 表示视图服务模型
     /// </summary>
-    public interface IViewHostService
+    public interface IViewService
     {
         /// <summary>
         /// 跳转到指定的页面
@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         void Route(IViewModel viewModel, Parameter parameter);
     }
 
-    public interface IViewHostAmbientService : IServiceAmbient<ViewHostBase>
+    public interface IViewServiceAmbient : IServiceAmbient<ViewHostBase>
     {
     }
 }

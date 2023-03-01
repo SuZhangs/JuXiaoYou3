@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.Services
 {
-    public class ViewHostService : IViewHostService, IViewHostAmbientService
+    public class ViewService : IViewService, IViewServiceAmbient
     {
         private ViewHostBase _viewHost;
         public void Route<TViewModel>()  where TViewModel : IViewModel

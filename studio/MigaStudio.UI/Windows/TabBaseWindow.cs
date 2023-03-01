@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
 
             //
             //
-            Xaml.Get<ViewHostServiceAdapter>().Controller = _dc.Controller;
+            Xaml.Get<ViewServiceAdapter>().Controller = _dc.Controller;
             
             //
             // 启动

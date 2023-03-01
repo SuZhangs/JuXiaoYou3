@@ -16,6 +16,8 @@
         <ProjectReference Include="..\..\generators\MigaGen.App\MigaGen.App.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
       <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
       <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
+      <ProjectReference Include="..\SubSystem.Template\SubSystem.Template.csproj" />
+      <ProjectReference Include="..\SubSystem\SubSystem.csproj" />
     </ItemGroup>
 
     <ItemGroup>
