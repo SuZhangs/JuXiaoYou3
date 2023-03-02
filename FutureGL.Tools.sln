@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.ModuleEditor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaGen.App", "generators\MigaGen.App\MigaGen.App.csproj", "{F5311A5F-F8F5-4A9F-809E-57210EC559AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5311A5F-F8F5-4A9F-809E-57210EC559AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5311A5F-F8F5-4A9F-809E-57210EC559AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5311A5F-F8F5-4A9F-809E-57210EC559AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5311A5F-F8F5-4A9F-809E-57210EC559AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

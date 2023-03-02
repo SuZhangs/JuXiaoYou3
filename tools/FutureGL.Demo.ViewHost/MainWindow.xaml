@@ -4,19 +4,30 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:local="clr-namespace:Acorisoft.FutureGL.Demo.ViewHost"
+                 xmlns:vm="clr-namespace:Acorisoft.FutureGL.Demo.ViewHost.ViewModels"
                  xmlns:f="urn:acorisoft/forest/ui"
                  xmlns:fs="urn:acorisoft/forest/shell"
                  mc:Ignorable="d"
                  MinWidth="1280"
                  MinHeight="720">
+    <Window.DataContext>
+        <vm:AppViewModel/>
+    </Window.DataContext>
     <f:Drawer x:Name="Drawer">
         <f:Drawer.LeftContent>
             <Border Background="White"
                     CornerRadius="0 32 32 0"
                     Width="384"
                     Padding="0 32 0 0">
-                
+                <ListBox ItemsSource="{Binding Demos,Mode=OneWay}"
+                         DisplayMemberPath="Name"
+                         SelectedItem="{Binding Demos,Mode=TwoWay}"/>
             </Border>
         </f:Drawer.LeftContent>
+        <f:StretchPanel>
+            <fs:ViewHost ViewModel="{Binding ViewModel,Mode=OneWay}"></fs:ViewHost>
+            <fs:TitleBar HorizontalAlignment="Right"
+                         VerticalAlignment="Top"/>
+        </f:StretchPanel>
     </f:Drawer>
 </fs:ForestWindow>
