@@ -1,0 +1,104 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mb="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Module;assembly=MigaDB">
+    
+    <DataTemplate DataType="{x:Type mb:AudioBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:BinaryBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:ColorBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:DegreeBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:FileBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:HeartBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:HistogramBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:ImageBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:LikabilityBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:MusicBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:NumberBlock}">
+        
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type mb:OptionItem}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:RadarBlock}">
+        
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type mb:RadioBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:RateBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:ReferenceBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:SequenceBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:SliderBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:StarBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:SwitchBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:VideoBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:MultiLineBlock}">
+        
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type mb:SingleLineBlock}">
+        
+    </DataTemplate>
+    
+    
+    <DataTemplate DataType="{x:Type mb:GroupBlock}">
+        
+    </DataTemplate>
+</ResourceDictionary>
