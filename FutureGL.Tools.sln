@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Shell", "ui\Forest\F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.MusicPlayer", "tools\FutureGL.Tools.MusicPlayer\FutureGL.Tools.MusicPlayer.csproj", "{42987FA1-8BF2-425D-BA37-05AD26CD9976}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.ModuleEditor", "tools\FutureGL.Tools.ModuleEditor\FutureGL.Tools.ModuleEditor.csproj", "{4252CC77-A806-4B7C-9951-074175E4206E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42987FA1-8BF2-425D-BA37-05AD26CD9976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4252CC77-A806-4B7C-9951-074175E4206E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4252CC77-A806-4B7C-9951-074175E4206E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4252CC77-A806-4B7C-9951-074175E4206E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4252CC77-A806-4B7C-9951-074175E4206E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
