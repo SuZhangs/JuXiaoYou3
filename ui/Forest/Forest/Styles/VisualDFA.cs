@@ -21,7 +21,12 @@ namespace Acorisoft.FutureGL.Forest.Styles
             /// <summary>
             /// 迁移函数
             /// </summary>
-            public Dictionary<VisualStateTrigger, VisualState> Transitions { get; init; }
+            internal Dictionary<VisualStateTrigger, VisualState> InternalTransitions { get; init; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public IReadOnlyDictionary<VisualStateTrigger, VisualState> Transitions => InternalTransitions;
         }
 
         private readonly Dictionary<VisualState, Transition> _transitions = new Dictionary<VisualState, Transition>();
@@ -49,7 +54,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                     transition = new Transition
                     {
                         FromState = next,
-                        Transitions = new Dictionary<VisualStateTrigger, VisualState>
+                        InternalTransitions = new Dictionary<VisualStateTrigger, VisualState>
                         {
                             { VisualStateTrigger.Back, now }
                         }
@@ -59,7 +64,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 }
                 else
                 {
-                    transition.Transitions.TryAdd(VisualStateTrigger.Back, now);
+                    transition.InternalTransitions.TryAdd(VisualStateTrigger.Back, now);
                 }
             }
 
@@ -68,7 +73,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 transition = new Transition
                 {
                     FromState = now,
-                    Transitions = new Dictionary<VisualStateTrigger, VisualState>
+                    InternalTransitions = new Dictionary<VisualStateTrigger, VisualState>
                     {
                         { function, next }
                     }
@@ -77,7 +82,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 return _transitions.TryAdd(now, transition);
             }
 
-            return transition.Transitions.TryAdd(function, next);
+            return transition.InternalTransitions.TryAdd(function, next);
         }
 
         /// <summary>
@@ -93,7 +98,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
             
             if (_transitions.TryGetValue(now, out var transition))
             {
-                result = transition.Transitions.Remove(function);
+                result = transition.InternalTransitions.Remove(function);
             }
 
             if (!result)
@@ -103,7 +108,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
             
             if (_transitions.TryGetValue(next, out transition))
             {
-                result |= transition.Transitions.Remove(VisualStateTrigger.Back);
+                result |= transition.InternalTransitions.Remove(VisualStateTrigger.Back);
             }
 
 
@@ -133,7 +138,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 return false;
             }
 
-            if (!transition.Transitions.TryGetValue(trigger, out var nextState))
+            if (!transition.InternalTransitions.TryGetValue(trigger, out var nextState))
             {
                 return false;
             }
@@ -186,5 +191,10 @@ namespace Acorisoft.FutureGL.Forest.Styles
         /// 当前状态
         /// </summary>
         public VisualState? CurrentState  => _init ? _now : null;
+
+        /// <summary>
+        /// 所有迁移函数
+        /// </summary>
+        public IReadOnlyDictionary<VisualState, Transition> Transitions => _transitions;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -12,6 +13,7 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
+    [DebuggerDisplay("{Id}")]
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
         private string _title;

@@ -56,6 +56,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void RemoveTabImpl(ITabViewModel viewModel)
         {
+            RemoveTabItem(viewModel);
+        }
+
+        public void RemoveTabItem(ITabViewModel viewModel)
+        {
             if (viewModel is null)
             {
                 return;
@@ -97,7 +102,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 
                 return;
             }
-
             Outboards.Remove(viewModel);
         }
 
@@ -120,6 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Start(vm);
             return vm;
         }
+        
         /// <summary>
         /// 启动指定的视图模型
         /// </summary>
