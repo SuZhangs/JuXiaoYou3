@@ -8,8 +8,14 @@
                  xmlns:f="urn:acorisoft/forest/ui"
                  xmlns:fs="urn:acorisoft/forest/shell"
                  mc:Ignorable="d"
+                 ExtendToTitleBar="True"
                  MinWidth="1280"
                  MinHeight="720">
+    <fs:ForestWindow.TitleBar>
+        <fs:TitleBar WindowChrome.IsHitTestVisibleInChrome="True" 
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Top"/>
+    </fs:ForestWindow.TitleBar>
     <Window.DataContext>
         <vm:AppViewModel/>
     </Window.DataContext>
@@ -20,14 +26,13 @@
                     Width="384"
                     Padding="0 32 0 0">
                 <ListBox ItemsSource="{Binding Demos,Mode=OneWay}"
+                         SelectedIndex="0"
                          DisplayMemberPath="Name"
                          SelectedItem="{Binding Demos,Mode=TwoWay}"/>
             </Border>
         </f:Drawer.LeftContent>
         <f:StretchPanel>
             <fs:ViewHost ViewModel="{Binding ViewModel,Mode=OneWay}"></fs:ViewHost>
-            <fs:TitleBar HorizontalAlignment="Right"
-                         VerticalAlignment="Top"/>
         </f:StretchPanel>
     </f:Drawer>
 </fs:ForestWindow>

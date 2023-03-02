@@ -28,6 +28,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
                     };
                 });
             Demos = new ObservableCollection<NameDemo>(demos);
+            Demo  = Demos[0];
         }
 
         private NameDemo _demo;
@@ -59,6 +60,6 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
             }
         }
 
-        public ObservableCollection<NameDemo> Demos { get; }
+        public ObservableCollection<NameDemo> Demos { get; init; }
     }
 }

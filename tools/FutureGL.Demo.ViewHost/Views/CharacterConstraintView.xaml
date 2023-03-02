@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ViewHost.Views"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Background="#F1F1F1">
         
     </Grid>
 </UserControl>

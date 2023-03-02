@@ -6,6 +6,10 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Services;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.Demo.ViewHost
@@ -15,6 +19,11 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
     /// </summary>
     public partial class App
     {
+        protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
+        {
+            container.Use<ViewService, IViewService, IViewServiceAmbient>(new ViewService());
+            return base.RegisterFrameworkServices(container);
+        }
 
         protected override void RegisterServices(ILogger logger, IContainer container)
         {
