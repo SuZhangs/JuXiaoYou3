@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.MusicPlayer"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.ModuleEditor", "tools\FutureGL.Tools.ModuleEditor\FutureGL.Tools.ModuleEditor.csproj", "{4252CC77-A806-4B7C-9951-074175E4206E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{4252CC77-A806-4B7C-9951-074175E4206E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4252CC77-A806-4B7C-9951-074175E4206E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4252CC77-A806-4B7C-9951-074175E4206E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32B5EF1-654C-40BF-801E-8A1BDEF8B1B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

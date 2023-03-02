@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             _for           = string.Empty;
             _id            = ID.Get();
             _version       = 1;
-            _forType       = DocumentType.CharacterRule;
+            _forType       = DocumentType.CharacterConstraint;
             _metadataMap.Clear();
             MetadataList.Clear();
             Blocks.Clear();

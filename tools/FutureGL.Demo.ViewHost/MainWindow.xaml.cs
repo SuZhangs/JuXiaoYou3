@@ -12,17 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
-namespace ViewHost
+namespace Acorisoft.FutureGL.Demo.ViewHost
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+            Xaml.Get<IWindowEventBroadcast>().Keys.Subscribe(x =>
+            {
+                if (x.Args.Key == Key.F1)
+                {
+                    Drawer.IsLeftOpen = true;
+                }
+            });
         }
     }
 }

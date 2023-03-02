@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
-using NLog;
+﻿using NLog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using DryIoc;
 
-namespace ViewHost
+namespace Acorisoft.FutureGL.Demo.ViewHost
 {
     /// <summary>
     /// Interaction logic for App.xaml
