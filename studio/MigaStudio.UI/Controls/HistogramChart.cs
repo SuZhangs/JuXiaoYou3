@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls
@@ -116,9 +117,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             var chartWidth = (int)Math.Clamp(width / dataChart.Count, 5d, 11d);
             var x = 0d;
 
-            foreach (var chart in dataChart)
+            foreach (var chartHeight in dataChart.Select(chart => chart * height2 / max))
             {
-                var chartHeight = chart / (max *  height2);
                 drawingContext.DrawRectangle(
                     new SolidColorBrush(Xaml.FromHex(color)),
                     null,

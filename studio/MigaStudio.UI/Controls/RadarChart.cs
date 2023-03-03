@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
     {
         struct AxisData
         {
-            internal int[]       values;
+            internal double[]       values;
             internal Pen             pen;
             internal SolidColorBrush bg;
         }
@@ -47,12 +47,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             MaximumProperty = DependencyProperty.Register(
                 nameof(Maximum),
                 typeof(int),
-                typeof(HistogramChart),
+                typeof(RadarChart),
                 new PropertyMetadata(Boxing.IntValues[10]));
             ColorProperty = DependencyProperty.Register(
                 nameof(Color),
                 typeof(string),
-                typeof(HistogramChart),
+                typeof(RadarChart),
                 new PropertyMetadata(default(string)));
             
             DataProperty = DependencyProperty.Register(
@@ -168,11 +168,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                 var color = Xaml.FromHex(c);
                 var axisData = new AxisData
                 {
-                    values = dataSet.Select(x => Math.Clamp(x / max, 0, 1)).ToArray(),
+                    values = dataSet.Select(x => Math.Clamp((double)x / max, 0, 1)).ToArray(),
                     pen    = new Pen(new SolidColorBrush(color), 1),
                     bg = new SolidColorBrush(color)
                     {
-                        Opacity = .45f
+                        Opacity = .25f
                     }
                 };
 
@@ -241,7 +241,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             };
         }
 
-        private static PathGeometry GetPolygon(double r, ref int[] values, ref Point centerPoint)
+        private static PathGeometry GetPolygon(double r, ref double[] values, ref Point centerPoint)
         {
             var count = values.Length;
             var points = new Point[count];

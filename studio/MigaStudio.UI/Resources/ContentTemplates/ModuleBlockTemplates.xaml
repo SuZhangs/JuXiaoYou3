@@ -199,7 +199,7 @@
                            FontSize="15"
                            Margin="16 0 0 0"
                            MinWidth="15"
-                           Text="{Binding Unit}"
+                           Text="{Binding Suffix}"
                            VerticalAlignment="Center" />
                 <ui:NumberBox Minimum="{Binding Minimum}"
                               Maximum="{Binding Maximum}"
@@ -483,14 +483,14 @@
             <DockPanel>
                 
                 <studio:RadarChart Axis="{Binding Axis,Mode=OneWay}"
-                                   Data="{Binding Value,Mode=OneWay}"
+                                   Data="{Binding Data,Mode=OneWay}"
                                    Maximum="{Binding Maximum}"
                                    Color="{Binding Color}"
                                    Height="160"
                                    Width="160"
                                    ShowAxisName="False" />
 
-                <ItemsControl ItemsSource="{Binding Axis}"
+                <ItemsControl ItemsSource="{Binding Value}"
                               Margin="16 0 0 0"
                               VerticalAlignment="Center">
                     <ItemsControl.ItemTemplate>
@@ -498,7 +498,7 @@
                             <DockPanel>
                                 <Slider Interval="1"
                                         IsSnapToTickEnabled="True"
-                                        Value="{Binding Value,Mode=TwoWay}"
+                                        Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Maximum="{Binding Maximum}"
                                         Minimum="0" />
 
@@ -523,13 +523,13 @@
                        VerticalAlignment="Center" />
             <DockPanel>
                 <studio:HistogramChart Axis="{Binding Axis,Mode=OneWay}"
-                                       Data="{Binding Value,Mode=OneWay}"
+                                       Data="{Binding Data,Mode=OneWay}"
                                        Maximum="{Binding Maximum}"
                                        Color="{Binding Color}"
                                        Height="160"
                                        Width="160" />
 
-                <ItemsControl ItemsSource="{Binding Axis}"
+                <ItemsControl ItemsSource="{Binding Value}"
                               Margin="16 0 0 0"
                               VerticalAlignment="Center">
                     <ItemsControl.ItemTemplate>
