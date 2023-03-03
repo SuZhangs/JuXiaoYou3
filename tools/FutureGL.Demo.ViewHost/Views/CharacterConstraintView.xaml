@@ -8,6 +8,34 @@
              d:DesignHeight="300" 
              d:DesignWidth="300">
     <Grid Background="#F1F1F1">
-        
+        <StackPanel>
+            <Border CornerRadius="24"
+                    Height="100"
+                    Width="300">
+                <Border.Background>
+                    <RadialGradientBrush SpreadMethod="Pad"
+                                         Center="1,0.2"
+                                         GradientOrigin="1,0.2"
+                                         RadiusX="1" 
+                                         RadiusY="3">
+                        <GradientStop x:Name="G1" Offset="0" Color="#65b849" />
+                        <GradientStop x:Name="G2" Offset=".166" Color="#65b849" />
+                        <GradientStop x:Name="G3" Offset=".166" Color="#f7b423" />
+                        <GradientStop x:Name="G4" Offset=".3333" Color="#f7b423" />
+                        <GradientStop x:Name="G5" Offset="0.3333" Color="#f58122" />
+                        <GradientStop x:Name="G6" Offset="0.5" Color="#f58122" />
+                        <GradientStop x:Name="G7" Offset="0.5" Color=" #f8f8f8" />
+                        <GradientStop x:Name="G8" Offset="0.5" Color=" #f8f8f8" />
+                        <GradientStop x:Name="G9" Offset="0.50" Color="#de3a3c" />
+                        <GradientStop x:Name="G10" Offset="0.666" Color="#de3a3c" />
+                        <GradientStop x:Name="G11" Offset="0.666" Color="#943f96" />
+                        <GradientStop x:Name="G12" Offset="0.8633" Color="#943f96" />
+                    </RadialGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Button Content="Regen"
+                    Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>
