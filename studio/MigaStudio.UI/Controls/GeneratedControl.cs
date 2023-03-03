@@ -7,12 +7,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
     {
         protected static readonly SolidColorBrush Transparent;
         protected static readonly SolidColorBrush Gray;
+        protected static readonly SolidColorBrush White;
 
         static GeneratedControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GeneratedControl), new FrameworkPropertyMetadata(typeof(GeneratedControl)));
             Transparent = new SolidColorBrush(Colors.Transparent);
             Gray        = new SolidColorBrush(Colors.Gray);
+            White       = new SolidColorBrush(Colors.White);
         }
 
         private readonly List<FrameworkElement> _elements;
@@ -208,7 +210,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
-                b.Background = Gray;
+                b.Background      = Gray;
+                b.BorderBrush     = White;
+                b.BorderThickness = new Thickness(1, 0, 1, 0);
             }
         }
 
@@ -216,6 +220,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
+                b.BorderThickness = new Thickness(1);
                 b.Background = Transparent;
             }
         }

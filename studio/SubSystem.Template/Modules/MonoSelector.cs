@@ -18,6 +18,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
                 var id = string.IsNullOrEmpty(Id) ? GetHashCode().ToString() : Id;
                 Items.AddRange(block.Items.Select(x => new OptionItemUI(id, Fallback, x, OnSelected)));
             }
+
+            Value = string.IsNullOrEmpty(block.Value) ? block.Fallback : block.Value;
         }
 
         private void OnSelected(OptionItemUI item)

@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     {
         public override void ClearValue()
         {
-            Value = string.Empty;
+            Value = null;
         }
         
         protected sealed override bool CompareTemplateOverride(ModuleBlock block)
