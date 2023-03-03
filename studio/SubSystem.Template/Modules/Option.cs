@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
     public class HeartBlockEditUI : ModuleBlockEditUI<HeartBlock, bool>, IOptionBlockEditUI
     {
-        protected HeartBlockEditUI(HeartBlock block) : base(block)
+        public HeartBlockEditUI(HeartBlock block) : base(block)
         {
         }
 
@@ -60,7 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     
     public class SwitchBlockEditUI : ModuleBlockEditUI<SwitchBlock, bool>, IOptionBlockEditUI
     {
-        protected SwitchBlockEditUI(SwitchBlock block) : base(block)
+        public SwitchBlockEditUI(SwitchBlock block) : base(block)
         {
         }
 
@@ -79,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     
     public class StarBlockEditUI : ModuleBlockEditUI<StarBlock, bool>, IOptionBlockEditUI
     {
-        protected StarBlockEditUI(StarBlock block) : base(block)
+        public StarBlockEditUI(StarBlock block) : base(block)
         {
         }
 

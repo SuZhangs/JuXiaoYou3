@@ -96,7 +96,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     
     public sealed class SequenceBlockEditUI : MonoSelectorEditUI
     {
-        public SequenceBlockEditUI(RadioBlock block) : base(block)
+        public SequenceBlockEditUI(SequenceBlock block) : base(block)
         {
         }
 

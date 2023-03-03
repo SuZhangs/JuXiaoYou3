@@ -4,9 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ViewHost.Views"
+             xmlns:mb="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Module;assembly=MigaDB"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Resources/ContentTemplates/ModuleBlockTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ItemsControl Margin="32">
+        <mb:AudioBlock Name="mb:AudioBlock"/>
+        <mb:BinaryBlock Name="mb:BinaryBlock"/>
+        <mb:ColorBlock Name="mb:ColorBlock"/>
+        <mb:DegreeBlock Name="mb:DegreeBlock"/>
+        <mb:FileBlock Name="mb:FileBlock"/>
+        <mb:HeartBlock Name="mb:HeartBlock"/>
+        <mb:HistogramBlock Name="mb:HistogramBlock"/>
+        <mb:ImageBlock Name="mb:ImageBlock"/>
+        <mb:LikabilityBlock Name="mb:LikabilityBlock"/>
+        <mb:MusicBlock Name="mb:MusicBlock"/>
+        <mb:NumberBlock Name="mb:NumberBlock"/>
+        <mb:OptionItem Name="mb:OptionItem"/>
+        <mb:RadarBlock Name="mb:RadarBlock"/>
+        <mb:RadioBlock Name="mb:RadioBlock"/>
+        <mb:RateBlock Name="mb:RateBlock"/>
+        <mb:ReferenceBlock Name="mb:ReferenceBlock"/>
+        <mb:SequenceBlock Name="mb:SequenceBlock"/>
+        <mb:SliderBlock Name="mb:SliderBlock"/>
+        <mb:StarBlock Name="mb:StarBlock"/>
+        <mb:SwitchBlock Name="mb:SwitchBlock"/>
+        <mb:VideoBlock Name="mb:VideoBlock"/>
+        <mb:MultiLineBlock Name="mb:MultiLineBlock"/>
+        <mb:SingleLineBlock Name="mb:SingleLineBlock"/>
+    </ItemsControl>
 </UserControl>

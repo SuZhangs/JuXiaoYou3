@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Controls;
-using Acorisoft.FutureGL.Demo.ViewHost.ViewModels;
-using Acorisoft.FutureGL.Forest.Attributes;
 
 namespace ViewHost.Views
 {

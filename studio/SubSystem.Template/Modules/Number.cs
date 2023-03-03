@@ -6,9 +6,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     /// <summary>
     /// 表示数字内容块。
     /// </summary>
-    public class NumberDataUI : ModuleBlockDataUI<NumberBlock, int>, INumberBlockDataUI
+    public class NumberBlockDataUI : ModuleBlockDataUI<NumberBlock, int>, INumberBlockDataUI
     {
-        public NumberDataUI(NumberBlock block) : base(block)
+        public NumberBlockDataUI(NumberBlock block) : base(block)
         {
             Maximum = block.Maximum;
             Minimum = block.Minimum;
@@ -41,13 +41,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     /// <summary>
     /// 表示数字内容块。
     /// </summary>
-    public class NumberEditUI : ModuleBlockEditUI<NumberBlock, int>, INumberBlockEditUI
+    public class NumberBlockEditUI : ModuleBlockEditUI<NumberBlock, int>, INumberBlockEditUI
     {
         private string _suffix;
         private int    _maximum;
         private int    _minimum;
 
-        public NumberEditUI(NumberBlock block) : base(block)
+        public NumberBlockEditUI(NumberBlock block) : base(block)
         {
             Suffix  = block.Suffix;
             Maximum = block.Maximum;

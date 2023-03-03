@@ -205,7 +205,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
     public class VideoBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
     {
-        public VideoBlockEditUI(AudioBlock block) : base(block)
+        public VideoBlockEditUI(VideoBlock block) : base(block)
         {
         }
 
@@ -223,7 +223,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
     public class FileBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
     {
-        public FileBlockEditUI(AudioBlock block) : base(block)
+        public FileBlockEditUI(FileBlock block) : base(block)
         {
         }
 
@@ -241,7 +241,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
     public class MusicBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
     {
-        public MusicBlockEditUI(AudioBlock block) : base(block)
+        public MusicBlockEditUI(MusicBlock block) : base(block)
         {
         }
 
@@ -259,7 +259,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
     public class ImageBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
     {
-        public ImageBlockEditUI(AudioBlock block) : base(block)
+        public ImageBlockEditUI(ImageBlock block) : base(block)
         {
         }
 
