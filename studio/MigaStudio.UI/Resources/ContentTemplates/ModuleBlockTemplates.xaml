@@ -201,7 +201,8 @@
                            MinWidth="15"
                            Text="{Binding Suffix}"
                            VerticalAlignment="Center" />
-                <ui:NumberBox Minimum="{Binding Minimum}"
+                <ui:NumberBox ClearButtonEnabled="False"
+                              Minimum="{Binding Minimum}"
                               Maximum="{Binding Maximum}"
                               Value="{Binding Value,Mode=TwoWay}"
                               PlaceholderText="{Binding Fallback}" />

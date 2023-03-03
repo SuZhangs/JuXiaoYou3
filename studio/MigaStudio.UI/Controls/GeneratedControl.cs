@@ -212,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             {
                 b.Background      = Gray;
                 b.BorderBrush     = White;
-                b.BorderThickness = new Thickness(1, 0, 1, 0);
+                b.BorderThickness = new Thickness(1, 0, 0, 0);
             }
         }
 
@@ -220,6 +220,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
+                b.BorderBrush = Gray;
                 b.BorderThickness = new Thickness(1);
                 b.Background = Transparent;
             }
