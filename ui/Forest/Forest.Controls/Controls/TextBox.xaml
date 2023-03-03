@@ -27,7 +27,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="#434343"/>
-        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="LightGray" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -46,7 +46,7 @@
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
                           VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Border x:Name="PART_Bd"
-                                BorderBrush="{f:BackgroundBrush}"
+                                BorderBrush="LightGray"
                                 BorderThickness="2"
                                 CornerRadius="6"
                                 MinWidth="{TemplateBinding MinWidth}"

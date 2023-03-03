@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
             newValue = string.IsNullOrEmpty(newValue) ? string.Empty : newValue;
             
-            if (CharacterLimited > -1 && newValue.Length > 0)
+            if (CharacterLimited > 0 && newValue.Length > 0)
             {
                 TargetBlock.Value = newValue[..Math.Clamp(newValue.Length, 1, CharacterLimited)];
             }

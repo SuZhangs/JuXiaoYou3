@@ -1,36 +1,67 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaUtils;
 using DynamicData;
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules
 {
-    public abstract class ChartBlockDataUI : ModuleBlockDataUI<ChartBlock, int[]>, IChartBlockDataUI
+    public abstract class ChartBlockDataUI :  ModuleBlockDataUI, IChartBlockDataUI
     {
+        private List<BindableAxis> _value;
+
         protected ChartBlockDataUI(ChartBlock block) : base(block)
         {
-            Axis    = block.Axis;
-            Color   = block.Color;
-            Maximum = block.Maximum;
-            Minimum = block.Minimum;
+            TargetBlock = block;
+            Fallback    = block.Fallback;
+            Value       = new List<BindableAxis>();
+            Axis        = new List<string>(block.Axis);
+            Color       = block.Color;
+            Maximum     = block.Maximum;
+            Minimum     = block.Minimum;
+            var value = block.Value is null || block.Value.Length == 0 ? block.Fallback : block.Value;
+
+            for (var i = 0; i < Value.Count; i++)
+            {
+                Value.Add(new BindableAxis(OnValueChanged, Axis[i], i, value[i], Maximum));
+            }
+        }
+        
+        public override bool CompareTemplate(ModuleBlock block)
+        {
+            return TargetBlock.CompareTemplate(block);
         }
 
-        protected override int[] OnValueChanged(int[] oldValue, int[] newValue)
+        public override bool CompareValue(ModuleBlock block)
         {
-            if (newValue is null || newValue.Length == 0)
-            {
-                newValue = Fallback;
-            }
+            return TargetBlock.CompareValue(block);
+        }
 
-            for (var i = 0; i < newValue.Length; i++)
-            {
-                newValue[i] = Math.Clamp(newValue[i], Minimum, Maximum);
-            }
+        protected void OnValueChanged(int index, int value)
+        {
+            TargetBlock.Value[index] = value;
+        }
+        
+        protected ChartBlock TargetBlock { get; }
 
-            TargetBlock.Value = newValue;
-            return newValue;
+        /// <summary>
+        /// 默认值
+        /// </summary>
+        public int[] Fallback { get; }
+        
+        /// <summary>
+        /// 当前值
+        /// </summary>
+        public List<BindableAxis> Value
+        {
+            get => _value;
+            set
+            {
+                
+            }
         }
 
 
@@ -44,8 +75,51 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         /// </summary>
         public int Minimum { get; }
 
-        public string[] Axis { get; }
+        public List<string> Axis { get; }
+        
         public string Color { get; }
+    }
+
+    public class BindableAxis : ObservableObject
+    {
+        public BindableAxis(Action<int, int> callback, string name, int index, int value, int max)
+        {
+            Callback = callback;
+            Index    = index;
+            Name     = name;
+            Maximum  = max;
+            _value   = value;
+        }
+
+        private int    _value;
+        private string _name;
+        
+        public Action<int, int> Callback { get; }
+        
+        public int Maximum { get; }
+        public int Index { get; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Name"/> 属性。
+        /// </summary>
+        public string Name
+        {
+            get => _name;
+            set => SetValue(ref _name, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Value"/> 属性。
+        /// </summary>
+        public int Value
+        {
+            get => _value;
+            set
+            {
+                SetValue(ref _value, value);
+                Callback?.Invoke(Index, _value);
+            }
+        }
     }
 
     public abstract class ChartBlockEditUI : ModuleBlockEditUI<ChartBlock, int[]>, IChartBlockEditUI

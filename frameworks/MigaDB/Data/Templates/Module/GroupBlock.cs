@@ -13,13 +13,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// <summary>
     /// 表示两极内容块。
     /// </summary>
-    public interface IGroupBlockDataUI : IGroupBlock, IModuleBlockDataUI
-    {
-    }
-
-    /// <summary>
-    /// 表示两极内容块。
-    /// </summary>
     public interface IGroupBlockEditUI : IModuleBlockEditUI
     {
         ObservableCollection<ModuleBlock> Items { get; }

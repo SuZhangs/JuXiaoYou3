@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// <summary>
     /// 表示图表内容块。
     /// </summary>
-    public interface IChartBlockDataUI : IChartBlock, IModuleBlockDataUI
+    public interface IChartBlockDataUI : IModuleBlock, IModuleBlockDataUI
     {
     }
 

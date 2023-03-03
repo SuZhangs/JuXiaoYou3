@@ -1,19 +1,19 @@
+using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     public abstract class ChartBase : Control
     {
-        protected static readonly AxisCollection        DefaultAxis;
-        protected static readonly ChartDataSet          DefaultData;
-        protected static readonly PieChartDataSet       DefaultPieData;
-        protected static readonly HistogramChartDataSet DefaultHistogramData;
-        protected static readonly SolidColorBrush       DefaultBrush       = new SolidColorBrush(Color.FromRgb(0xc0,0xc0,0xc0));
-        private static readonly   double[]              GuidelineHelpArray = new[] { 0.5d, 0.5d };
+        protected static readonly AxisCollection  DefaultAxis;
+        protected static readonly ChartDataSet    DefaultData;
+        protected static readonly PieChartDataSet DefaultPieData;
+        protected static readonly List<int>       DefaultHistogramData;
+        protected static readonly SolidColorBrush DefaultBrush       = new SolidColorBrush(Color.FromRgb(0xc0, 0xc0, 0xc0));
+        private static readonly   double[]        GuidelineHelpArray = new[] { 0.5d, 0.5d };
 
         static ChartBase()
         {
-
             DefaultAxis = new AxisCollection
             {
                 new Axis
@@ -88,42 +88,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                 },
             };
 
-            DefaultHistogramData = new HistogramChartDataSet(30)
+            DefaultHistogramData = new List<int>
             {
-                new HistogramChartData
-                {
-                    Color = "#007ACC",
-                    Value = 3,
-                    Name  = "Test1"
-                },
-                new HistogramChartData
-                {
-                    Color = "#FFAB12",
-                    Value = 13,
-                    Name  = "Test2"
-                },
-                new HistogramChartData
-                {
-                    Color = "#9132C8",
-                    Value = 30,
-                    Name  = "Test3"
-                },
-                new HistogramChartData
-                {
-                    Color = "#FF9600",
-                    Value = 8,
-                    Name  = "Test4"
-                },
+                3,
+                13,
+                30,
+                8,
             };
         }
-
 
 
         protected static void PushGuideline(DrawingContext drawingContext)
         {
             drawingContext.PushGuidelineSet(new GuidelineSet(GuidelineHelpArray, GuidelineHelpArray));
         }
-
-        
     }
 }

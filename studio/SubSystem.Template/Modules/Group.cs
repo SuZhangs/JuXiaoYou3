@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
 using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules
 {
-    public class GroupBlockDataUI : ModuleBlockDataUI, IGroupBlockDataUI
+    public class GroupBlockDataUI : ModuleBlockDataUI
     {
 
         public GroupBlockDataUI(GroupBlock block) : base(block)
         {
             TargetBlock = block;
-            Items       = new List<ModuleBlock>();
+            Items       = new List<ModuleBlockDataUI>();
             if (block.Items is not null)
             {
-                Items.AddRange(block.Items);
+                Items.AddRange(block.Items.Select(ModuleBlockFactory.GetDataUI));
             }
         }
 
@@ -33,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         /// </summary>
         protected GroupBlock TargetBlock { get; }
 
-        public List<ModuleBlock> Items { get; init; }
+        public List<ModuleBlockDataUI> Items { get; init; }
     }
     
     public class GroupBlockEditUI : ModuleBlockEditUI, IGroupBlockEditUI

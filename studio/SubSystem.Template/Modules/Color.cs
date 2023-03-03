@@ -9,8 +9,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     /// </summary>
     public class ColorBlockDataUI : ModuleBlockDataUI, IColorBlockDataUI
     {
-        private Color  _value;
-        private string _hex;
+        private const string Pattern = "R({0}) G({1}) B({2})";
+        private       Color  _value;
+        private       string _rgb;
+        private       string _hex;
 
         public ColorBlockDataUI(ColorBlock block) : base(block)
         {
@@ -50,9 +52,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
                 if (SetValue(ref _value, value))
                 {
                     Hex               = value.ToString();
+                    Rgb               = string.Format(Pattern, value.R, value.G, value.B);
                     TargetBlock.Value = Hex;
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="Rgb"/> 属性。
+        /// </summary>
+        public string Rgb
+        {
+            get => _rgb;
+            set => SetValue(ref _rgb, value);
         }
 
         /// <summary>

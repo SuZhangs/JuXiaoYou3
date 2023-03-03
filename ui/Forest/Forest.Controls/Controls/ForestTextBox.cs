@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 if (now == VisualState.Highlight1)
                 {
                     HandleHighlight1State(
-                        theme.Duration.Medium,
+                        theme.Duration.Samll,
                         ref background,
                         ref activeBackground,
                         ref highlightForeground);
@@ -120,7 +120,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             var backgroundAnimation = new ColorAnimation
             {
                 Duration = duration,
-                From     = background,
+                From     = Colors.Gray,
                 To       = highlightBackground,
             };
 

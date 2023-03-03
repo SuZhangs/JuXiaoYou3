@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
@@ -8,7 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
     {
         struct AxisData
         {
-            internal double[]        values;
+            internal int[]       values;
             internal Pen             pen;
             internal SolidColorBrush bg;
         }
@@ -42,19 +43,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             FontStyleProperty.AddOwner(typeof(RadarChart))
                 .OverrideMetadata(typeof(RadarChart),
                     new FrameworkPropertyMetadata(OnTypefaceChanged));
-            
+
+            MaximumProperty = DependencyProperty.Register(
+                nameof(Maximum),
+                typeof(int),
+                typeof(HistogramChart),
+                new PropertyMetadata(Boxing.IntValues[10]));
+            ColorProperty = DependencyProperty.Register(
+                nameof(Color),
+                typeof(string),
+                typeof(HistogramChart),
+                new PropertyMetadata(default(string)));
             
             DataProperty = DependencyProperty.Register(
                 nameof(Data),
-                typeof(ChartDataSet),
+                typeof(List<int>),
                 typeof(RadarChart),
-                new FrameworkPropertyMetadata(default(ChartDataSet), FrameworkPropertyMetadataOptions.AffectsRender, InvalidateVisual));
+                new FrameworkPropertyMetadata(default(List<int>), FrameworkPropertyMetadataOptions.AffectsRender, InvalidateVisual));
 
-            AxesProperty = DependencyProperty.Register(
-                nameof(Axes),
-                typeof(AxisCollection),
+            AxisProperty = DependencyProperty.Register(
+                nameof(Axis),
+                typeof(List<string>),
                 typeof(RadarChart),
-                new FrameworkPropertyMetadata(default(AxisCollection), FrameworkPropertyMetadataOptions.AffectsRender, InvalidateVisual));
+                new FrameworkPropertyMetadata(default(List<string>), FrameworkPropertyMetadataOptions.AffectsRender, InvalidateVisual));
 
             ShowAxisNameProperty = DependencyProperty.Register(
                 nameof(ShowAxisName),
@@ -93,8 +104,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             }
 
 
-            var axes = Axes is null || Axes.Count == 0 ? new AxisCollection() : Axes;
-            var data = Data is null || Data.Count == 0 ? new ChartDataSet() : Data;
+            var axes = Axis is null || Axis.Count == 0 ? new List<string>() : Axis;
+            var data = Data is null || Data.Count == 0 ? new List<int>() : Data;
 
             /*
              *             3/2 π
@@ -123,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             base.OnRender(drawingContext);
         }
 
-        private void RenderingAxis(DrawingContext drawingContext, ref Point centerPoint, double r, AxisCollection axes)
+        private void RenderingAxis(DrawingContext drawingContext, ref Point centerPoint, double r, List<string> axes)
         {
             var pen = new Pen(DefaultBrush, 1);
             if (axes is null || axes.Count == 0)
@@ -145,18 +156,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             }
         }
 
-        private static void RenderingData(DrawingContext drawingContext, ref Point centerPoint, double r, int axisCount, ChartDataSet dataSet)
+        private void RenderingData(DrawingContext drawingContext, ref Point centerPoint, double r, int axisCount, List<int> dataSet)
         {
 
             var count = Math.Min(axisCount, dataSet.Count);
+            var c = Color;
+            var max = Maximum;
 
             for (var i = 0; i < count; i++)
             {
-                var set = dataSet[i];
-                var color = Xaml.FromHex(set.Color);
+                var color = Xaml.FromHex(c);
                 var axisData = new AxisData
                 {
-                    values = set.Values.Select(x => Math.Clamp(x / set.Maximum, 0, 1)).ToArray(),
+                    values = dataSet.Select(x => Math.Clamp(x / max, 0, 1)).ToArray(),
                     pen    = new Pen(new SolidColorBrush(color), 1),
                     bg = new SolidColorBrush(color)
                     {
@@ -169,7 +181,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             }
         }
 
-        private void RenderingAxisLine(DrawingContext drawingContext, Pen pen, double r, AxisCollection axes, ref Point centerPoint)
+        private void RenderingAxisLine(DrawingContext drawingContext, Pen pen, double r, List<string> axes, ref Point centerPoint)
         {
             var count = axes.Count;
             var angle = 0;
@@ -188,7 +200,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             {
                 var axis = axes[i];
                 var text = new FormattedText(
-                    axis.Name,
+                    axis,
                     culture,
                     flowDirection,
                     _typeface,
@@ -229,7 +241,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             };
         }
 
-        private static PathGeometry GetPolygon(double r, ref double[] values, ref Point centerPoint)
+        private static PathGeometry GetPolygon(double r, ref int[] values, ref Point centerPoint)
         {
             var count = values.Length;
             var points = new Point[count];
@@ -260,9 +272,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         }
 
 
-        public static readonly DependencyProperty AxesProperty;
+        public static readonly DependencyProperty AxisProperty;
         public static readonly DependencyProperty DataProperty;
         public static readonly DependencyProperty ShowAxisNameProperty;
+        public static readonly DependencyProperty MaximumProperty;
+        public static readonly DependencyProperty ColorProperty;
+
+        public string Color
+        {
+            get => (string)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public int Maximum
+        {
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
+        }
 
         public bool ShowAxisName
         {
@@ -270,16 +296,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             set => SetValue(ShowAxisNameProperty, value);
         }
 
-        public ChartDataSet Data
+        public List<int> Data
         {
-            get => (ChartDataSet)GetValue(DataProperty);
+            get => (List<int>)GetValue(DataProperty);
             set => SetValue(DataProperty, value);
         }
 
-        public AxisCollection Axes
+        public List<string> Axis
         {
-            get => (AxisCollection)GetValue(AxesProperty);
-            set => SetValue(AxesProperty, value);
+            get => (List<string>)GetValue(AxisProperty);
+            set => SetValue(AxisProperty, value);
         }
     }
     

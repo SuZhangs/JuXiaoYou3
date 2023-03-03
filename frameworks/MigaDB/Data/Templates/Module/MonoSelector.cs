@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
     /// <summary>
     /// 表示多行内容块。
     /// </summary>
-    public interface IMonoSelectorBlockDataUI : IMonoSelectorBlock, IModuleBlockDataUI
+    public interface IMonoSelectorBlockDataUI : IModuleBlock, IModuleBlock<string>, IModuleBlockDataUI
     {
     }
 

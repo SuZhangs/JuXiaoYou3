@@ -11,14 +11,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         protected MonoSelectorDataUI(MonoSelectorBlock block) : base(block)
         {
-            Items          = new List<OptionItem>();
+            Items          = new List<OptionItemUI>();
             
             if (block.Items is not null && block.Items.Count > 0)
             {
-                Items.AddRange(block.Items);
+                var id = string.IsNullOrEmpty(Id) ? GetHashCode().ToString() : Id;
+                Items.AddRange(block.Items.Select(x => new OptionItemUI(id, Fallback, x, OnSelected)));
             }
         }
 
+        private void OnSelected(OptionItemUI item)
+        {
+            Value = item.Value;
+        }
+        
         protected override string OnValueChanged(string oldValue, string newValue)
         {
             if (Items.Any(x => x.Value != newValue))
@@ -31,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
         }
 
-        public List<OptionItem> Items { get; }
+        public List<OptionItemUI> Items { get; }
     }
 
     public abstract class MonoSelectorEditUI : ModuleBlockEditUI<MonoSelectorBlock, string>, IMonoSelectorBlockEditUI

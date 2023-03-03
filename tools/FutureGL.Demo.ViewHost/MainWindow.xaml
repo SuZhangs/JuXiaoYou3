@@ -12,9 +12,17 @@
                  MinWidth="1280"
                  MinHeight="720">
     <fs:ForestWindow.TitleBar>
-        <fs:TitleBar WindowChrome.IsHitTestVisibleInChrome="True" 
+        <f:StretchPanel>
+            <TextBlock WindowChrome.IsHitTestVisibleInChrome="False"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Text="{Binding Demo.Name,Mode=OneWay}"
+                       VerticalAlignment="Center"/>
+            <fs:TitleBar WindowChrome.IsHitTestVisibleInChrome="True" 
                      HorizontalAlignment="Right"
                      VerticalAlignment="Top"/>
+        </f:StretchPanel>
     </fs:ForestWindow.TitleBar>
     <Window.DataContext>
         <vm:AppViewModel/>
@@ -25,7 +33,6 @@
                     Width="384"
                     Padding="16">
                 <DockPanel>
-
                     <TextBlock DockPanel.Dock="Top"
                                FontSize="24"
                                Margin="0 0 0 24"
@@ -38,8 +45,6 @@
                 </DockPanel>
             </Border>
         </f:Drawer.LeftContent>
-        <f:StretchPanel>
-            <fs:ViewHost ViewModel="{Binding ViewModel,Mode=OneWay}"></fs:ViewHost>
-        </f:StretchPanel>
+        <fs:ViewHost ViewModel="{Binding ViewModel,Mode=OneWay}"/>
     </f:Drawer>
 </fs:ForestWindow>

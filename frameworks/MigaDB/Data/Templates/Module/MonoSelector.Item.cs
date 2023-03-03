@@ -23,4 +23,33 @@
             set => SetValue(ref _name, value);
         }
     }
+
+    public class OptionItemUI
+    {
+        private readonly Action<OptionItemUI> _expression;
+
+        public OptionItemUI(string id, string value, OptionItem item, Action<OptionItemUI> expression)
+        {
+            Id            = id;
+            SelectedValue = value;
+            Item          = item;
+            Name          = item.Name;
+            Value         = item.Value;
+            _expression   = expression;
+        }
+
+        public string SelectedValue { get; }
+        /// <summary>
+        /// 获取或设置 <see cref="Expression"/> 属性。
+        /// </summary>
+        public Action<OptionItemUI> Expression
+        {
+            get => _expression;
+        }
+
+        public OptionItem Item { get; }
+        public string Id { get; init; }
+        public string Name { get; init; }
+        public string Value { get; init; }
+    }
 }
