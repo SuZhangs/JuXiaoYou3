@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Minimum     = block.Minimum;
             var value = block.Value is null || block.Value.Length == 0 ? block.Fallback : block.Value;
 
-            for (var i = 0; i < Value.Count; i++)
+            for (var i = 0; i < value.Length; i++)
             {
                 Value.Add(new BindableAxis(OnValueChanged, Axis[i], i, value[i], Maximum));
             }
