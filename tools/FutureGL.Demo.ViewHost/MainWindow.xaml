@@ -22,13 +22,20 @@
     <f:Drawer x:Name="Drawer">
         <f:Drawer.LeftContent>
             <Border Background="White"
-                    CornerRadius="0 32 32 0"
                     Width="384"
-                    Padding="0 32 0 0">
-                <ListBox ItemsSource="{Binding Demos,Mode=OneWay}"
-                         SelectedIndex="0"
-                         DisplayMemberPath="Name"
-                         SelectedItem="{Binding Demos,Mode=TwoWay}"/>
+                    Padding="16">
+                <DockPanel>
+
+                    <TextBlock DockPanel.Dock="Top"
+                               FontSize="24"
+                               Margin="0 0 0 24"
+                               Text="Demo"/>
+
+                    <ListBox ItemsSource="{Binding Demos,Mode=OneWay}"
+                             SelectedIndex="0"
+                             DisplayMemberPath="Name"
+                             SelectedItem="{Binding Demo,Mode=TwoWay}"/>
+                </DockPanel>
             </Border>
         </f:Drawer.LeftContent>
         <f:StretchPanel>

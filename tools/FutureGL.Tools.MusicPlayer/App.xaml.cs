@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Tools.MusicPlayer
@@ -17,6 +19,7 @@ namespace Acorisoft.FutureGL.Tools.MusicPlayer
         public App()
         {
             ThemeSystem.Instance.Theme = new ForestLightTheme();
+            Xaml.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
         }
     }
 }

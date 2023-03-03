@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/FutureGL.Tools.MusicPlayer;component/MusicIconPack.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
