@@ -11,6 +11,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
             Maximum = block.Maximum;
             Minimum = block.Minimum;
+            
+            if (block.Value == -1)
+            {
+                block.Value = block.Fallback;
+            }
+
+            Value = block.Value;
         }
 
         protected sealed override int OnValueChanged(int oldValue, int newValue)

@@ -6,6 +6,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         public SwitchBlockDataUI(OptionBlock block) : base(block)
         {
+            Value = block.Value;
         }
 
         protected override bool OnValueChanged(bool oldValue, bool newValue)
@@ -19,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         public StarBlockDataUI(StarBlock block) : base(block)
         {
+            Value = block.Value;
         }
         protected override bool OnValueChanged(bool oldValue, bool newValue)
         {
@@ -31,6 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         public HeartBlockDataUI(HeartBlock block) : base(block)
         {
+            Value = block.Value;
         }
         protected override bool OnValueChanged(bool oldValue, bool newValue)
         {

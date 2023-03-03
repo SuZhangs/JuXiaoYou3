@@ -27,6 +27,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         
         protected override string OnValueChanged(string oldValue, string newValue)
         {
+            if (Items is null)
+            {
+                return newValue;
+            }
+            
             if (Items.Any(x => x.Value != newValue))
             {
                 newValue = Items.First().Value;

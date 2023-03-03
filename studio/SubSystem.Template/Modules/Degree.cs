@@ -12,6 +12,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             DivideLine = block.DivideLine;
             Positive   = block.Positive;
             Negative   = block.Negative;
+            
+            if (block.Value == -1)
+            {
+                block.Value = block.Fallback;
+            }
+
+            Value = block.Value;
         }
 
         protected override int OnValueChanged(int oldValue, int newValue)

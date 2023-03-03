@@ -7,6 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public SingleLineBlockDataUI(SingleLineBlock block) : base(block)
         {
             Suffix = block.Suffix;
+            Value  = block.Value;
         }
 
         protected override string OnValueChanged(string oldValue, string newValue)

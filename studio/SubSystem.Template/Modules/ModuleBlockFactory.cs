@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 {
@@ -18,8 +19,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                     new DegreeBlock
                     {
                         Name       = nameof(DegreeBlock),
-                        Fallback   = 12,
-                        Maximum    = 30,
+                        Fallback   = 6,
+                        Maximum    = 10,
                         Minimum    = 0,
                         DivideLine = 10,
                         Negative   = nameof(DegreeBlock.Negative),
@@ -30,8 +31,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                     new DegreeBlock
                     {
                         Name       = nameof(DegreeBlock),
-                        Fallback   = 12,
-                        Maximum    = 30,
+                        Fallback   = 6,
+                        Maximum    = 10,
                         Minimum    = 0,
                         DivideLine = 10,
                         Negative   = nameof(DegreeBlock.Negative),
@@ -42,10 +43,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                     new DegreeBlock
                     {
                         Name       = nameof(DegreeBlock),
-                        Fallback   = 12,
-                        Maximum    = 30,
+                        Fallback   = 6,
+                        Maximum    = 10,
                         Minimum    = 0,
                         DivideLine = 10,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                    new BinaryBlock()
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = true,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                    new BinaryBlock
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = false,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                    new BinaryBlock
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = true,
                         Negative   = nameof(DegreeBlock.Negative),
                         Positive   = nameof(DegreeBlock.Positive),
                         ToolTips   = nameof(DegreeBlock),
@@ -91,6 +119,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         public static IEnumerable<ModuleBlock> CreateBlocks()
         {
+            var b = CreateBlocksImpl();
+            b.ForEach(x => x.ClearValue());
+            return b;
+        }
+
+        public static ModuleBlock[] CreateBlocksImpl()
+        {
+            
             return new ModuleBlock[]
             {
                 new SingleLineBlock
@@ -139,8 +175,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 new DegreeBlock
                 {
                     Name       = nameof(DegreeBlock),
-                    Fallback   = 12,
-                    Maximum    = 30,
+                    Fallback   = 4,
+                    Maximum    = 10,
                     Minimum    = 0,
                     DivideLine = 10,
                     Negative   = nameof(DegreeBlock.Negative),

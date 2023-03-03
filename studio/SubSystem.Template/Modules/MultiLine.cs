@@ -9,6 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
             EnableExpression = block.EnableExpression;
             CharacterLimited = block.CharacterLimited;
+            Value            = block.Value;
         }
 
         protected override string OnValueChanged(string oldValue, string newValue)

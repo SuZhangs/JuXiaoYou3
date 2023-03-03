@@ -301,9 +301,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:BinaryBlockDataUI}">
-        <Border Height="54"
+        <Border Height="26"
                 HorizontalAlignment="Left"
-                Margin="0 0 0 12"
                 MinWidth="320">
             <studio:BinaryControl Negative="{Binding Negative}"
                                   Positive="{Binding Positive}"
@@ -473,7 +472,7 @@
 
 
     <DataTemplate DataType="{x:Type subTemp:RadarBlockDataUI}">
-        <DockPanel>
+        <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
                        FontSize="15"
                        FontWeight="Bold"
@@ -514,7 +513,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HistogramBlockDataUI}">
-        <DockPanel>
+        <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
                        FontSize="15"
                        FontWeight="Bold"

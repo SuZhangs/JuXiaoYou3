@@ -58,7 +58,7 @@
         /// 清除当前值。
         /// </summary>
         public override void ClearValue() => Value = -1;
-        
+
         /// <summary>
         /// 当前值
         /// </summary>

@@ -6,8 +6,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
     {
         public BinaryBlockDataUI(BinaryBlock block) : base(block)
         {
-            Negative = block.Negative;
-            Positive = block.Positive;
+            Negative     = block.Negative;
+            Positive     = block.Positive;
+            Value        = block.Value;
+            DisplayValue = Value ? Positive : Negative;
         }
         
         protected override bool OnValueChanged(bool oldValue, bool newValue)

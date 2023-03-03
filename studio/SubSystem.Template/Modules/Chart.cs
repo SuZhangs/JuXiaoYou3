@@ -26,13 +26,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Maximum = block.Maximum;
             Minimum = block.Minimum;
 
-            block.Value ??= new int[block.Axis.Length];
-
-            var value = block.Value is null || block.Value.Length == 0 ? block.Fallback : block.Value;
-
-            for (var i = 0; i < value.Length; i++)
+            if (block.Value is null)
             {
-                Value.Add(new BindableAxis(OnValueChanged, Axis[i], i, value[i], Maximum));
+                block.Value = new int[block.Fallback.Length];
+                Array.Copy(block.Fallback, block.Value, block.Value.Length);
+            }
+
+            for (var i = 0; i < block.Value.Length; i++)
+            {
+                Value.Add(new BindableAxis(OnValueChanged, Axis[i], i, block.Value[i], Maximum));
             }
         }
 

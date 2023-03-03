@@ -53,7 +53,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         {
             TargetBlock = block;
             Fallback    = block.Fallback;
-            Value       = block.Value;
         }
 
         public override bool CompareTemplate(ModuleBlock block)
@@ -64,6 +63,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public override bool CompareValue(ModuleBlock block)
         {
             return TargetBlock.CompareValue(block);
+        }
+
+        protected void SetCoerceValue(TValue value)
+        {
+            _value = value;
         }
 
         protected abstract TValue OnValueChanged(TValue oldValue, TValue newValue);
