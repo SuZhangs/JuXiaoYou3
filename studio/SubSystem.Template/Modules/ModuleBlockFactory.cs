@@ -6,39 +6,283 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 {
     public class ModuleBlockFactory
     {
+        public static GroupBlock CreateGroupBlock()
+        {
+            return new GroupBlock
+            {
+                Name     = nameof(SingleLineBlock),
+                ToolTips = nameof(SingleLineBlock),
+                Metadata = nameof(SingleLineBlock),
+                Items = new List<ModuleBlock>
+                {
+                    new DegreeBlock
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = 12,
+                        Maximum    = 30,
+                        Minimum    = 0,
+                        DivideLine = 10,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                    new DegreeBlock
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = 12,
+                        Maximum    = 30,
+                        Minimum    = 0,
+                        DivideLine = 10,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                    new DegreeBlock
+                    {
+                        Name       = nameof(DegreeBlock),
+                        Fallback   = 12,
+                        Maximum    = 30,
+                        Minimum    = 0,
+                        DivideLine = 10,
+                        Negative   = nameof(DegreeBlock.Negative),
+                        Positive   = nameof(DegreeBlock.Positive),
+                        ToolTips   = nameof(DegreeBlock),
+                        Metadata   = nameof(DegreeBlock),
+                    },
+                }
+            };
+        }
+
+        public static SequenceBlock CreateSequenceBlock()
+        {
+            var b = new SequenceBlock
+            {
+                Name     = nameof(SequenceBlock),
+                Fallback = "Item1",
+                Items    = new List<OptionItem>(),
+                ToolTips = nameof(SequenceBlock),
+                Metadata = nameof(SequenceBlock),
+            };
+            b.Items.Add(new OptionItem { Name = "Item1", Value = "Item1" });
+            b.Items.Add(new OptionItem { Name = "Item2", Value = "Item2" });
+            b.Items.Add(new OptionItem { Name = "Item3", Value = "Item3" });
+            b.Items.Add(new OptionItem { Name = "Item4", Value = "ItemA" });
+            return b;
+        }
+
+        public static RadioBlock CreateRadioBlock()
+        {
+            var b = new RadioBlock
+            {
+                Name     = nameof(RadioBlock),
+                Fallback = "Item1",
+                Items    = new List<OptionItem>(),
+                ToolTips = nameof(RadioBlock),
+                Metadata = nameof(RadioBlock),
+            };
+            b.Items.Add(new OptionItem { Name = "Item1", Value = "Item1" });
+            b.Items.Add(new OptionItem { Name = "Item2", Value = "Item2" });
+            b.Items.Add(new OptionItem { Name = "Item3", Value = "Item3" });
+            b.Items.Add(new OptionItem { Name = "Item4", Value = "ItemA" });
+            return b;
+        }
+
         public static IEnumerable<ModuleBlock> CreateBlocks()
         {
             return new ModuleBlock[]
             {
-                new SingleLineBlock(),
-                new MultiLineBlock(),
-                new ColorBlock(),
-                new NumberBlock(),
-                new SliderBlock(),
-                
-                new DegreeBlock(),
-                new SwitchBlock(),
-                new BinaryBlock(),
-                new HeartBlock(),
-                new StarBlock(),
-                
-                
-                new RadioBlock(),
-                new SequenceBlock(),
-                new GroupBlock(),
-                
-                new LikabilityBlock(),
-                new RateBlock(),
-                
-                new RadarBlock(),
-                new HistogramBlock(),
-                
-                new AudioBlock(),
-                new FileBlock(),
-                new VideoBlock(),
-                new MusicBlock(),
-                new ImageBlock(),
-                new ReferenceBlock(),
+                new SingleLineBlock
+                {
+                    Name     = nameof(SingleLineBlock),
+                    Suffix   = nameof(SingleLineBlock),
+                    Fallback = nameof(SingleLineBlock),
+                    ToolTips = nameof(SingleLineBlock),
+                    Metadata = nameof(SingleLineBlock),
+                },
+                new MultiLineBlock
+                {
+                    Name     = nameof(MultiLineBlock),
+                    Fallback = nameof(MultiLineBlock),
+                    ToolTips = nameof(MultiLineBlock),
+                    Metadata = nameof(MultiLineBlock),
+                },
+                new ColorBlock
+                {
+                    Name     = nameof(ColorBlock),
+                    Fallback = "#007ACC",
+                    ToolTips = nameof(ColorBlock),
+                    Metadata = nameof(ColorBlock),
+                },
+                new NumberBlock
+                {
+                    Name     = nameof(NumberBlock),
+                    Fallback = 12,
+                    Maximum  = 30,
+                    Minimum  = 0,
+                    Suffix   = nameof(NumberBlock),
+                    ToolTips = nameof(NumberBlock),
+                    Metadata = nameof(NumberBlock),
+                },
+                new SliderBlock
+                {
+                    Name     = nameof(SliderBlock),
+                    Fallback = 12,
+                    Maximum  = 30,
+                    Minimum  = 0,
+                    Suffix   = nameof(SliderBlock),
+                    ToolTips = nameof(SliderBlock),
+                    Metadata = nameof(SliderBlock),
+                },
+
+                new DegreeBlock
+                {
+                    Name       = nameof(DegreeBlock),
+                    Fallback   = 12,
+                    Maximum    = 30,
+                    Minimum    = 0,
+                    DivideLine = 10,
+                    Negative   = nameof(DegreeBlock.Negative),
+                    Positive   = nameof(DegreeBlock.Positive),
+                    ToolTips   = nameof(DegreeBlock),
+                    Metadata   = nameof(DegreeBlock),
+                },
+                new SwitchBlock
+                {
+                    Name     = nameof(SwitchBlock),
+                    Fallback = false,
+                    ToolTips = nameof(SwitchBlock),
+                    Metadata = nameof(SwitchBlock),
+                },
+                new BinaryBlock
+                {
+                    Name     = nameof(BinaryBlock),
+                    Fallback = false,
+                    ToolTips = nameof(BinaryBlock),
+                    Metadata = nameof(BinaryBlock),
+                    Negative = nameof(DegreeBlock.Negative),
+                    Positive = nameof(DegreeBlock.Positive),
+                },
+                new HeartBlock
+                {
+                    Name     = nameof(HeartBlock),
+                    Fallback = false,
+                    ToolTips = nameof(HeartBlock),
+                    Metadata = nameof(HeartBlock),
+                },
+                new StarBlock
+                {
+                    Name     = nameof(StarBlock),
+                    Fallback = false,
+                    ToolTips = nameof(StarBlock),
+                    Metadata = nameof(StarBlock),
+                },
+
+
+                CreateRadioBlock(),
+                CreateSequenceBlock(),
+                CreateGroupBlock(),
+
+
+                new LikabilityBlock
+                {
+                    Name     = nameof(LikabilityBlock),
+                    Fallback = 6,
+                    Maximum  = 10,
+                    Minimum  = 0,
+                    ToolTips = nameof(LikabilityBlock),
+                    Metadata = nameof(LikabilityBlock),
+                },
+                new RateBlock
+                {
+                    Name     = nameof(RateBlock),
+                    Fallback = 6,
+                    Maximum  = 10,
+                    Minimum  = 0,
+                    ToolTips = nameof(RateBlock),
+                    Metadata = nameof(RateBlock),
+                },
+
+
+                new RadarBlock
+                {
+                    Name     = nameof(RadarBlock),
+                    Maximum  = 10,
+                    Minimum  = 0,
+                    ToolTips = nameof(RadarBlock),
+                    Metadata = nameof(RadarBlock),
+                    Axis     = new []{"Axis1","Axis2","Axis3","Axis4"},
+                    Fallback = new []{3,4,5,6},
+                    Color    = "#007ACC"
+                },
+                new HistogramBlock{
+                    Name     = nameof(HistogramBlock),
+                    Maximum  = 10,
+                    Minimum  = 0,
+                    ToolTips = nameof(HistogramBlock),
+                    Metadata = nameof(HistogramBlock),
+                    Axis     = new []{"Axis1","Axis2","Axis3","Axis4"},
+                    Fallback = new []{3,4,5,6},
+                    Color    = "#007ACC"
+                },
+
+
+                new AudioBlock
+                {
+                    Name            = nameof(AudioBlock),
+                    TargetName      = nameof(AudioBlock),
+                    TargetSource    = nameof(AudioBlock),
+                    TargetThumbnail = nameof(AudioBlock),
+                    ToolTips        = nameof(AudioBlock),
+                    Metadata        = nameof(AudioBlock),
+                },
+                new FileBlock
+                {
+                    Name            = nameof(FileBlock),
+                    TargetName      = nameof(FileBlock),
+                    TargetSource    = nameof(FileBlock),
+                    TargetThumbnail = nameof(FileBlock),
+                    ToolTips        = nameof(FileBlock),
+                    Metadata        = nameof(FileBlock),
+                },
+                new VideoBlock
+                {
+                    Name            = nameof(VideoBlock),
+                    TargetName      = nameof(VideoBlock),
+                    TargetSource    = nameof(VideoBlock),
+                    TargetThumbnail = nameof(VideoBlock),
+                    ToolTips        = nameof(VideoBlock),
+                    Metadata        = nameof(VideoBlock),
+                },
+                new MusicBlock
+                {
+                    Name            = nameof(MusicBlock),
+                    TargetName      = nameof(MusicBlock),
+                    TargetSource    = nameof(MusicBlock),
+                    TargetThumbnail = nameof(MusicBlock),
+                    ToolTips        = nameof(MusicBlock),
+                    Metadata        = nameof(MusicBlock),
+                },
+                new ImageBlock
+                {
+                    Name            = nameof(ImageBlock),
+                    TargetName      = nameof(ImageBlock),
+                    TargetSource    = nameof(ImageBlock),
+                    TargetThumbnail = nameof(ImageBlock),
+                    ToolTips        = nameof(ImageBlock),
+                    Metadata        = nameof(ImageBlock),
+                },
+                new ReferenceBlock
+                {
+                    Name            = nameof(ReferenceBlock),
+                    DataSource      = ReferenceSource.Compose,
+                    TargetName      = nameof(ReferenceBlock),
+                    TargetSource    = nameof(ReferenceBlock),
+                    TargetThumbnail = nameof(ReferenceBlock),
+                    ToolTips        = nameof(ReferenceBlock),
+                    Metadata        = nameof(ReferenceBlock),
+                },
             };
         }
 
@@ -78,7 +322,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 _ => throw new ArgumentOutOfRangeException(nameof(block), block, null)
             };
         }
-         
+
         public static ModuleBlockEditUI GetEditUI(ModuleBlock block)
         {
             return block switch
