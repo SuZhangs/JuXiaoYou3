@@ -23,8 +23,11 @@
 
         internal Database(LiteDatabase kernel)
         {
-            _database = kernel ?? throw new ArgumentNullException(nameof(kernel));
-            _props    = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
+            _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
+            _props                 = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
+            _databaseDirectory     = AppDomain.CurrentDomain.BaseDirectory;
+            _databaseFileName      = Path.Combine(_databaseDirectory, Constants.DatabaseFileName);
+            _databaseIndexFileName = Path.Combine(_databaseDirectory, Constants.DatabaseIndexFileName);
 
             Property = Get<DatabaseProperty>();
         }

@@ -1,6 +1,6 @@
 namespace MigaFX.Tests
 {
-    [TestClass]
+    [TestClass, TestCategory("FX")]
     public class UnitTest1
     {
         [TestMethod]
