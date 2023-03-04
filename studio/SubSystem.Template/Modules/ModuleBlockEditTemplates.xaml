@@ -1,0 +1,554 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mb="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Module;assembly=MigaDB"
+                    xmlns:subTemp="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules"
+                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:color="clr-namespace:ColorPicker;assembly=Forest.Controls"
+                    xmlns:f="urn:acorisoft/forest/ui"
+                    xmlns:studio="urn:acorisoft/studio"
+                    xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors">
+    <Geometry x:Key="Favorite">F1 M24,24z M0,0z M14,9L14,5A3,3,0,0,0,11,2L7,11 7,22 18.28,22A2,2,0,0,0,20.28,20.3L21.66,11.3A2,2,0,0,0,19.66,9z M7,22L4,22A2,2,0,0,1,2,20L2,13A2,2,0,0,1,4,11L7,11</Geometry>
+    <Geometry x:Key="Star">F1 M24,24z M0,0z M12,2L12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2z</Geometry>
+    <Geometry x:Key="Heart">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
+
+    <!--
+        @ param: TargetBlock
+        @ member:
+            1. AudioBlock
+            2. VideoBlock
+            3. MusicBlock
+            4. FileBlock
+            5. ImageBlock
+            6. ReferenceBlock
+    -->
+    <DataTemplate DataType="{x:Type subTemp:AudioBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="SlideMicrophone20"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:VideoBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="Video16"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:FileBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="Video16"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:ImageBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="Video16"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:MusicBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="MusicNote2Play20"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:ReferenceBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}" />
+
+            <studio:ReferenceControl Icon="People16"
+                                     DisplayName="{Binding TargetName,Mode=TwoWay}"
+                                     Source="{Binding TargetSource,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <!--
+        @ param: BasicBlock
+        @ member:
+            1. SingleLineBlock
+            2. MultiLineBlock
+            3. ColorBlock
+            4. NumberBlock
+            5. SliderBlock
+            6. 
+    -->
+
+    <DataTemplate DataType="{x:Type subTemp:SingleLineBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right"
+                           FontSize="15"
+                           Margin="16 0 0 0"
+                           MinWidth="15"
+                           Text="{Binding Suffix}"
+                           VerticalAlignment="Center" />
+
+                <ui:TextBox PlaceholderText="{Binding Fallback}"
+                            Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:MultiLineBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+
+            <f:ForestTextBox AcceptsReturn="True"
+                             AcceptsTab="True"
+                             Height="160"
+                             Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:ColorBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <color:PortableColorPicker DockPanel.Dock="Left"
+                                           SelectedColor="{Binding Value,Mode=TwoWay}"
+                                           FontSize="15"
+                                           Height="48"
+                                           VerticalAlignment="Center"
+                                           Width="48" />
+                <f:LooklessButton Margin="16 0 0 0">
+                    <DockPanel VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top"
+                                   Margin="0 0 0 2"
+                                   Text="{Binding Hex,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+
+                        <TextBlock Foreground="DarkGray"
+                                   Text="{Binding Rgb,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </DockPanel>
+                </f:LooklessButton>
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:NumberBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right"
+                           FontSize="15"
+                           Margin="16 0 0 0"
+                           MinWidth="15"
+                           Text="{Binding Suffix}"
+                           VerticalAlignment="Center" />
+                <ui:NumberBox ClearButtonEnabled="False"
+                              Minimum="{Binding Minimum}"
+                              Maximum="{Binding Maximum}"
+                              Value="{Binding Value,Mode=TwoWay}"
+                              PlaceholderText="{Binding Fallback}" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:SliderBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right"
+                           FontSize="15"
+                           Margin="16 0 0 0"
+                           Text="{Binding Value,Mode=OneWay}"
+                           VerticalAlignment="Center" />
+
+                <Slider Interval="1"
+                        IsSnapToTickEnabled="True"
+                        Maximum="{Binding Maximum}"
+                        Minimum="{Binding Minimum}"
+                        Value="{Binding Value,Mode=TwoWay}"
+                        VerticalAlignment="Center" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <!--
+        @ param: OptionBlock
+        @ member:
+            1. StarBlock
+            2. HeartBlock
+            3. SwitchBlock
+            4. BinaryBlock
+            5. DegreeBlock
+            
+    -->
+
+    <DataTemplate DataType="{x:Type subTemp:StarBlockDataUI}">
+        <Border Background="#f1f1f1"
+                Height="42"
+                HorizontalAlignment="Stretch"
+                Margin="0 0 0 12"
+                Padding="0 0 16 0">
+            <DockPanel VerticalAlignment="Center">
+                <studio:SwitchOnControl DockPanel.Dock="Right"
+                                        Foreground="#FFC107"
+                                        Icon="{StaticResource Star}"
+                                        IsChecked="{Binding Value,Mode=TwoWay}" />
+                <TextBlock FontSize="15"
+                           Margin="16 0 0 0"
+                           Text="{Binding Name}"
+                           VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:HeartBlockDataUI}">
+        <Border Background="#f1f1f1"
+                Height="42"
+                HorizontalAlignment="Stretch"
+                Margin="0 0 0 12"
+                Padding="0 0 16 0">
+            <DockPanel VerticalAlignment="Center">
+                <studio:SwitchOnControl DockPanel.Dock="Right"
+                                        Foreground="#FF6699"
+                                        Icon="{StaticResource Heart}"
+                                        IsChecked="{Binding Value,Mode=TwoWay}" />
+                <TextBlock FontSize="15"
+                           Margin="16 0 0 0"
+                           Text="{Binding Name}"
+                           VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:SwitchBlockDataUI}">
+        <Border Background="#f1f1f1"
+                Height="42"
+                HorizontalAlignment="Stretch"
+                Margin="0 0 0 12"
+                Padding="0 0 16 0">
+            <DockPanel VerticalAlignment="Center">
+                <ui:ToggleSwitch DockPanel.Dock="Right"
+                                 IsChecked="{Binding Value,Mode=TwoWay}" />
+                <TextBlock FontSize="15"
+                           Margin="16 0 0 0"
+                           Text="{Binding Name}"
+                           VerticalAlignment="Center" />
+            </DockPanel>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:BinaryBlockDataUI}">
+        <Border Height="26"
+                HorizontalAlignment="Left"
+                MinWidth="320">
+            <studio:BinaryControl Negative="{Binding Negative}"
+                                  Positive="{Binding Positive}"
+                                  IsChecked="{Binding Value,Mode=TwoWay}" />
+        </Border>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type subTemp:DegreeBlockDataUI}">
+        <DockPanel>
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Width="256">
+                <Run FontWeight="Bold"
+                     FontSize="13"
+                     Text="{Binding Name,Mode=OneWay}" />
+                <Run FontSize="13"
+                     Text="{Binding DisplayValue,Mode=OneWay,StringFormat={}（{0}）}" />
+            </TextBlock>
+            <studio:DegreeControl FontSize="15"
+                                  Margin="16 0 0 0"
+                                  VerticalAlignment="Center"
+                                  Value="{Binding Value,Mode=TwoWay}" />
+        </DockPanel>
+    </DataTemplate>
+
+
+    <!--
+        @ param: CounterBlock
+        @ member:
+            1. RateBlock
+            2. LikabilityBlock
+    -->
+    <DataTemplate DataType="{x:Type subTemp:LikabilityBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 4"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right"
+                           FontSize="15"
+                           Margin="16 0 0 0"
+                           VerticalAlignment="Center" />
+                <studio:FavoriteControl Maximum="{Binding Maximum}"
+                                        Value="{Binding Value,Mode=TwoWay}" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:RateBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 4"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right"
+                           FontSize="15"
+                           Margin="16 0 0 0"
+                           VerticalAlignment="Center" />
+                <studio:RatingControl Maximum="{Binding Maximum}"
+                                      Value="{Binding Value,Mode=TwoWay}" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+
+    <!--
+        @ param: GroupBlock
+        @ member:
+            1. RadioBlock
+            2. SequenceBlock
+            3. GroupBlock
+            4. OptionItem
+    -->
+
+    <DataTemplate DataType="{x:Type subTemp:SequenceBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}（{1}）">
+                        <Binding Path="Name" />
+                        <Binding Path="Value" Mode="OneWay" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ItemsSource="{Binding Items}"
+                     VerticalAlignment="Stretch"
+                     VerticalContentAlignment="Top"
+                     DisplayMemberPath="Value"
+                     SelectedValuePath="Value"
+                     SelectedValue="{Binding Value,Mode=TwoWay}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:GroupBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0 0 0 16"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+
+            <ItemsControl ItemsSource="{Binding Items}"
+                          VerticalAlignment="Stretch"
+                          VerticalContentAlignment="Top">
+            </ItemsControl>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:RadioBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0 0 0 8"
+                       VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}（{1}）">
+                        <Binding Path="Name" />
+                        <Binding Path="Value" Mode="OneWay" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <ItemsControl ItemsSource="{Binding Items}"
+                          VerticalAlignment="Stretch"
+                          VerticalContentAlignment="Top">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type mb:OptionItemUI}">
+                        <RadioButton GroupName="{Binding Id}"
+                                     Content="{Binding Name}">
+                            <i:Interaction.Behaviors>
+                                <studio:RadioPropertyBehavior />
+                            </i:Interaction.Behaviors>
+                        </RadioButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+    </DataTemplate>
+
+    <!--
+        @ param: ChartBlock
+        @ member:
+            1. RadarBlock
+            2. HistogramBlock
+    -->
+
+
+    <DataTemplate DataType="{x:Type subTemp:RadarBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 4"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                
+                <studio:RadarChart Axis="{Binding Axis,Mode=OneWay}"
+                                   Data="{Binding Data,Mode=OneWay}"
+                                   Maximum="{Binding Maximum}"
+                                   Color="{Binding Color}"
+                                   Height="160"
+                                   Width="160"
+                                   ShowAxisName="False" />
+
+                <ItemsControl ItemsSource="{Binding Value}"
+                              Margin="16 0 0 0"
+                              VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
+                            <DockPanel>
+                                <Slider Interval="1"
+                                        IsSnapToTickEnabled="True"
+                                        Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        Maximum="{Binding Maximum}"
+                                        Minimum="0" />
+
+                                <TextBlock Margin="16 0 0 0"
+                                           Text="{Binding Name}"
+                                           VerticalAlignment="Center" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type subTemp:HistogramBlockDataUI}">
+        <DockPanel Margin="0 0 0 12">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Margin="0 0 0 4"
+                       Text="{Binding Name}"
+                       VerticalAlignment="Center" />
+            <DockPanel>
+                <studio:HistogramChart Axis="{Binding Axis,Mode=OneWay}"
+                                       Data="{Binding Data,Mode=OneWay}"
+                                       Maximum="{Binding Maximum}"
+                                       Color="{Binding Color}"
+                                       Height="160"
+                                       Width="160" />
+
+                <ItemsControl ItemsSource="{Binding Value}"
+                              Margin="16 0 0 0"
+                              VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
+                            <DockPanel>
+                                <Slider Interval="1"
+                                        IsSnapToTickEnabled="True"
+                                        Value="{Binding Value,Mode=TwoWay}"
+                                        Maximum="{Binding Maximum}"
+                                        Minimum="0" />
+
+                                <TextBlock Margin="16 0 0 0"
+                                           Text="{Binding Name}"
+                                           VerticalAlignment="Center" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>

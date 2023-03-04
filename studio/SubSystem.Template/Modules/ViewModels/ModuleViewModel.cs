@@ -4,12 +4,13 @@ using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 {
-    public class ModuleViewModel : ViewModelBase
+    public class ModuleViewModel : TabViewModel
     {
         private readonly Dictionary<string, int> _metadataMap;
 

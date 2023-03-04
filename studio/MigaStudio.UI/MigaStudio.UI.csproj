@@ -15,7 +15,6 @@
       <ProjectReference Include="..\..\ui\Forest\Forest.Controls\Forest.Controls.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
-      <ProjectReference Include="..\SubSystem.Template\SubSystem.Template.csproj" />
     </ItemGroup>
 
     <ItemGroup>

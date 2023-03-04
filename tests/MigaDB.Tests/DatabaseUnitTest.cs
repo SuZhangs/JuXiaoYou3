@@ -18,8 +18,14 @@ namespace MigaDB.Tests
             db.Open();
 
             var dp = db.Database.Set(new DatabaseProperty { v = 1 });
+            Assert.IsTrue(db.Database.Get<DatabaseProperty>().v == dp.v);
+            Assert.IsTrue(dp.v == 1);
             
-            Assert.IsTrue(db.Database.Get<DatabaseProperty>().v == 1);
+            
+            db.Reopen();
+            dp = db.Database.Set(new DatabaseProperty { v = 1 });
+            Assert.IsTrue(db.Database.Get<DatabaseProperty>().v == dp.v);
+            Assert.IsTrue(dp.v == 1);
         }
     }
 }

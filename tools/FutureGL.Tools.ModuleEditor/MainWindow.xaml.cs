@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FutureGL.Tools.ModuleEditor
+namespace Acorisoft.FutureGL.Tools.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
