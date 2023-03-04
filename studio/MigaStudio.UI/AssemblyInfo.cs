@@ -22,3 +22,4 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Models")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Windows")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.ViewModels")]
+[assembly: InternalsVisibleTo("Forest.Tests")]

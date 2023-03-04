@@ -13,12 +13,17 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    [DebuggerDisplay("{Id}")]
+    [DebuggerDisplay("{Id}-{Title}")]
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
         private string _title;
         private bool   _isPinned;
         private bool _initialized;
+
+        protected TabViewModel()
+        {
+            ApprovalRequired = true;
+        }
         
         #region Override
 
@@ -154,6 +159,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// 是否可被关闭
+        /// </summary>
+        public virtual bool Removable => true;
+        
+        /// <summary>
+        /// 需要询问
+        /// </summary>
+        public bool ApprovalRequired { get; protected set; }
 
         /// <summary>
         /// 用来表示当前的视图模型是否为唯一的。

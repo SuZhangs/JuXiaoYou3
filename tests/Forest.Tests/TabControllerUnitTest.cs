@@ -65,7 +65,7 @@ namespace Forest.Tests
         }
 
         [TestMethod]
-        public void RemoveTabItem()
+        public void RemoveTabWithPromise()
         {
             var ttc  = new TestTabController();
             var tab1 = Test<Tab2>(ttc);
@@ -76,7 +76,7 @@ namespace Forest.Tests
 
 
             var count = ttc.Workspace.Count;
-            ttc.RemoveTabItem(tab5);
+            ttc.RemoveTabWithPromise(tab5);
             
             //
             // 并没有减少
@@ -92,7 +92,7 @@ namespace Forest.Tests
             //
             // First-Index Remove
             ttc.CurrentViewModel = ttc.Workspace[0];
-            ttc.RemoveTabItem(tab1);
+            ttc.RemoveTabWithPromise(tab1);
             Assert.IsTrue(ReferenceEquals(tab2, ttc.CurrentViewModel));
             
             //
@@ -102,7 +102,7 @@ namespace Forest.Tests
             //
             // Last-Index Remove
             ttc.CurrentViewModel = ttc.Workspace[ttc.Workspace.IndexOf(tab3)];
-            ttc.RemoveTabItem(tab4);
+            ttc.RemoveTabWithPromise(tab4);
             Assert.IsTrue(ReferenceEquals(tab3, ttc.CurrentViewModel));
             
             
@@ -113,7 +113,7 @@ namespace Forest.Tests
 
             //
             // center-index Remove
-            ttc.RemoveTabItem(tab2);
+            ttc.RemoveTabWithPromise(tab2);
             Assert.IsTrue(ReferenceEquals(tab3, ttc.CurrentViewModel));
             
             //

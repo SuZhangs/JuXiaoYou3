@@ -2,7 +2,7 @@
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {
     
-    public interface ITabViewModel :IRootViewModel
+    public interface ITabViewModel :IRootViewModel, IApprovalRequired
     {
         /// <summary>
         /// 唯一标识符。
@@ -22,6 +22,11 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <summary>
         /// 唯一性
         /// </summary>
-        public bool Uniqueness { get; }
+        bool Uniqueness { get; }
+        
+        /// <summary>
+        /// 是否可被关闭
+        /// </summary>
+        bool Removable { get; }
     }
 }

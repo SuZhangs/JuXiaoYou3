@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     /// <summary>
     /// <see cref="IDialogService"/> 类型表示一个对话框服务
     /// </summary>
-    public interface IDialogService : IDialogAmbientService
+    public interface IDialogService : IBuiltinDialogService
     {
         /// <summary>
         /// 弹出对话框
@@ -69,9 +69,9 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     }
 
     /// <summary>
-    /// <see cref="IDialogAmbientService"/> 类型表示一个环境服务
+    /// <see cref="IBuiltinDialogService"/> 类型表示一个环境服务
     /// </summary>
-    public interface IDialogAmbientService
+    public interface IBuiltinDialogService
     {
 
         /// <summary>

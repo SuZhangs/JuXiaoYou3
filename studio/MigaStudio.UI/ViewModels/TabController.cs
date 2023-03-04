@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Subjects;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
@@ -23,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Workspace        = new ObservableCollection<ITabViewModel>();
             Outboards        = new ObservableCollection<ITabViewModel>();
             AddTabCommand    = new RelayCommand<object>(AddTabImpl);
-            RemoveTabCommand = new RelayCommand<ITabViewModel>(RemoveTabImpl);
+            RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
         }
 
         private void AddTabImpl(object param)
@@ -54,18 +55,29 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
 
-        private void RemoveTabImpl(ITabViewModel viewModel)
-        {
-            RemoveTabItem(viewModel);
-        }
-
-        public void RemoveTabItem(ITabViewModel viewModel)
+        private async Task RemoveTabImpl(ITabViewModel viewModel)
         {
             if (viewModel is null)
             {
                 return;
             }
 
+            if (!viewModel.Removable)
+            {
+                return;
+            }
+
+            if (viewModel.ApprovalRequired && 
+                !await Xaml.Get<IBuiltinDialogService>().Danger(CloseTabItemCaption, CloseTabItemContent))
+            {
+                return;
+            }
+            
+            RemoveTabWithPromise(viewModel);
+        }
+
+        internal void RemoveTabWithPromise(ITabViewModel viewModel)
+        {
             var index = Workspace.IndexOf(viewModel);
 
             if (index > -1)
@@ -103,6 +115,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
             Outboards.Remove(viewModel);
+        }
+
+        public Task RemoveTabItem(ITabViewModel viewModel)
+        {
+            return RemoveTabImpl(viewModel);
         }
 
         protected virtual void OnCurrentViewModelChanged(ITabViewModel oldViewModel, ITabViewModel newViewModel)
@@ -248,6 +265,28 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 移除标签页
         /// </summary>
-        public RelayCommand<ITabViewModel> RemoveTabCommand { get; }
+        public AsyncRelayCommand<ITabViewModel> RemoveTabCommand { get; }
+
+        internal static string CloseTabItemCaption
+        {
+            get
+            {
+                return Language.Culture switch
+                {
+                    _ => "确认退出？"
+                };
+            }
+        }
+        
+        internal static string CloseTabItemContent
+        {
+            get
+            {
+                return Language.Culture switch
+                {
+                    _ => "当前页面尚未保存，您确定要退出？"
+                };
+            }
+        }
     }
 }

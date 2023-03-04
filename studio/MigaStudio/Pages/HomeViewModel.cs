@@ -20,5 +20,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
         public sealed override bool Uniqueness => true;
+        public sealed override bool Removable => false;
     }
 }

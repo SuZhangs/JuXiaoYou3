@@ -20,6 +20,7 @@
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
+        <f:BooleanTrueToVisibilityConverter x:Key="bt2Visibility"></f:BooleanTrueToVisibilityConverter>
         <proxy:TabShellBindingProxy x:Key="Shell" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type vm2:TabViewModel}">
@@ -34,7 +35,8 @@
                             MinWidth="20"
                             Style="{StaticResource CloseButtonStyle}"
                             Height="20"
-                            Width="20" />
+                            Width="20" 
+                            Visibility="{Binding Removable, Converter={StaticResource bt2Visibility}}"/>
                     <TextBlock DockPanel.Dock="Left"
                                FontSize="13"
                                Text="{Binding Title,Mode=OneWay}"
@@ -63,6 +65,7 @@
                      WindowChrome.IsHitTestVisibleInChrome="False"
                      ScrollViewer.CanContentScroll="False"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Margin="0 2 0 0"
                      ItemsSource="{Binding Workspace,Mode=OneWay}"
                      SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
                      VerticalAlignment="Stretch">

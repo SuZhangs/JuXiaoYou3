@@ -21,9 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\Lobby" />
       <Folder Include="Resources\Behaviors" />
-      <Folder Include="Styles" />
     </ItemGroup>
 
     <ItemGroup>

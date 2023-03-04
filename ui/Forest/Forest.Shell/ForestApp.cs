@@ -150,7 +150,8 @@ namespace Acorisoft.FutureGL.Forest
                 IBusyService,
                 IBusyServiceAmbient,
                 INotifyServiceAmbient,
-                INotifyService>(new DialogService());
+                INotifyService,
+                IBuiltinDialogService>(new DialogService());
             container.Use<ILogger>(logger);
             Xaml.InstallViewManually(new BuiltinViews());
 
