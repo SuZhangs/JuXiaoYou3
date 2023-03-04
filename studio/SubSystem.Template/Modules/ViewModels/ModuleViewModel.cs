@@ -19,17 +19,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private string       _contractList;
         private int          _version;
         private string       _organizations;
-        private string       _copyright;
         private string       _intro;
         private DocumentType _forType;
         private string       _for;
-        private string       _id;
 
         public ModuleViewModel()
         {
             _metadataMap = new Dictionary<string, int>();
-            MetadataList  = new ObservableCollection<MetadataCache>();
-            Blocks        = new ObservableCollection<ModuleBlock>();
+            MetadataList = new ObservableCollection<MetadataCache>();
+            Blocks       = new ObservableCollection<ModuleBlock>();
+            Title        = "<未命名>";
         }
 
         public void NewTemplate()
@@ -38,10 +37,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             _authorList    = string.Empty;
             _contractList  = string.Empty;
             _organizations = string.Empty;
-            _copyright     = string.Empty;
             _intro         = string.Empty;
             _for           = string.Empty;
-            _id            = ID.Get();
             _version       = 1;
             _forType       = DocumentType.CharacterConstraint;
             _metadataMap.Clear();
@@ -55,10 +52,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             _authorList    = template.AuthorList;
             _contractList  = template.ContractList;
             _organizations = template.Organizations;
-            _copyright     = template.Copyright;
             _intro         = template.Intro;
             _for           = template.For;
-            _id            = template.Id;
             _version       = template.Version;
             _forType       = template.ForType;
             _metadataMap.Clear();
@@ -114,15 +109,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Id"/> 属性。
-        /// </summary>
-        public string Id
-        {
-            get => _id;
-            set => SetValue(ref _id, value);
-        }
-
-        /// <summary>
         /// 获取或设置 <see cref="For"/> 属性。
         /// </summary>
         public string For
@@ -147,15 +133,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         {
             get => _intro;
             set => SetValue(ref _intro, value);
-        }
-        
-        /// <summary>
-        /// 获取或设置 <see cref="Copyright"/> 属性。
-        /// </summary>
-        public string Copyright
-        {
-            get => _copyright;
-            set => SetValue(ref _copyright, value);
         }
         
         /// <summary>
@@ -205,9 +182,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         public string Name
         {
             get => _name;
-            set => SetValue(ref _name, value);
+            set
+            {
+                SetValue(ref _name, value);
+                Title = value;
+            }
         }
-        
+
         /// <summary>
         /// 模组内容块集合。
         /// </summary>

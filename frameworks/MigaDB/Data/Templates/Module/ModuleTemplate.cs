@@ -9,7 +9,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
         private string       _contractList;
         private int          _version;
         private string       _organizations;
-        private string       _copyright;
         private string       _intro;
         private DocumentType _forType;
         private string       _for;
@@ -60,15 +59,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
         {
             get => _intro;
             set => SetValue(ref _intro, value);
-        }
-        
-        /// <summary>
-        /// 获取或设置 <see cref="Copyright"/> 属性。
-        /// </summary>
-        public string Copyright
-        {
-            get => _copyright;
-            set => SetValue(ref _copyright, value);
         }
         
         /// <summary>

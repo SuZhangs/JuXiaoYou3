@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Modules.Views.ModuleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules.Views"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules.ViewModels"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:studio="urn:acorisoft/studio"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+                 d:DataContext="{d:DesignInstance Type={x:Type vm:ModuleViewModel}, IsDesignTimeCreatable=True}">
+    <f:Drawer>
+        <f:ForestTabControl Padding="16"
+                            Margin="16"
+                            TabStripPlacement="Left">
+            <f:HighlightTabItem Header="基础信息">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="128" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Background="#F1F1F1">
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="名字"
+                                    Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="介绍"
+                                    Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="作者"
+                                    Text="{Binding AuthorList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="联系方式"
+                                    Text="{Binding ContractList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="组织"
+                                    Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:TextBox Margin="4"
+                                    PlaceholderText="版权"
+                                    Text="{Binding Copyright,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </Grid>
+            </f:HighlightTabItem>
+            <f:HighlightTabItem Header="编辑属性"/>
+            <f:HighlightTabItem Header="常用工具"/>
+            <f:HighlightTabItem Header="测试工具"/>
+            <f:HighlightTabItem Header="关于我们"/>
+        </f:ForestTabControl>
+    </f:Drawer>
+</UserControl>

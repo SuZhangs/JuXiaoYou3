@@ -1,6 +1,7 @@
 ﻿using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
@@ -23,6 +24,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
                 View = typeof(TMainView),
                 ViewModel = typeof(TMainController)
             });
+            
+
+            container.Use<ViewServiceAdapter,
+                        IViewServiceAdapter,
+                        IViewServiceAmbient>(new ViewServiceAdapter());
 
             //
             // 创建Shell

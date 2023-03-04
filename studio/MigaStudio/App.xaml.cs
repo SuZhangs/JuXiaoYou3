@@ -44,22 +44,6 @@ namespace Acorisoft.FutureGL.MigaStudio
             return new AppViewModel();
         }
 
-        protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
-        {
-            var data = base.RegisterFrameworkServices(container);
-            
-            //
-            //
-            var (logger, appModel) = data;
-            
-
-            container.Use<ViewServiceAdapter,
-                IViewServiceAdapter,
-                IViewServiceAmbient>(new ViewServiceAdapter());
-
-            return data;
-        }
-
         protected override void RegisterServices(ILogger logger, IContainer container)
         {
             container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
