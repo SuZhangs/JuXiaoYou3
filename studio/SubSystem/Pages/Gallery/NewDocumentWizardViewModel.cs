@@ -4,7 +4,6 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    [Name("新建设定")]
     public class NewDocumentWizardViewModel : DialogViewModel
     {
         private string _name;

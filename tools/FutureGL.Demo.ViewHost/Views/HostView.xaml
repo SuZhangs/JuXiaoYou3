@@ -10,13 +10,13 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:HostViewModel}, IsDesignTimeCreatable=True}">
     <Grid>
-        <Border Background="#30000000"
-                CornerRadius="32">
-            <dialog:DocumentGallery>
+        <Border Background="#30000000">
+            <dialog:NewDocumentWizard Height="640"
+                                    Width="960">
                 <UserControl.DataContext>
-                    <dialog:NewDocumentWizard/>
+                    <dialog:NewDocumentWizardViewModel/>
                 </UserControl.DataContext>
-            </dialog:DocumentGallery>
+            </dialog:NewDocumentWizard>
         </Border>
     </Grid>
 </UserControl>

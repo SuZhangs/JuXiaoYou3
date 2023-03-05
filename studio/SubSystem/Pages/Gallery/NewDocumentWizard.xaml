@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewDocumentWizardViewModel}, IsDesignTimeCreatable=True}"
              Height="640"
              Width="960">
-    <Grid>
+    <Grid Background="{f:BackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
