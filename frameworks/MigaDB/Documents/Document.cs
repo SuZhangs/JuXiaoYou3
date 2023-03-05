@@ -19,7 +19,22 @@
         /// 类型
         /// </summary>
         public DocumentType Type { get; init; }
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string Avatar { get; set; }
         
+        /// <summary>
+        /// 版本
+        /// </summary>
+        public int Version { get; set; }
+
+        /// <summary>
+        /// 是否可删除
+        /// </summary>
+        public bool Removable { get; set; }
+
         /// <summary>
         /// 部件
         /// </summary>

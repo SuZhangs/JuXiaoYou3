@@ -2,15 +2,20 @@
 {
     public class DataEngineAdapter
     {
-        public DataEngineAdapter()
+        public DataEngineAdapter(DatabaseAdapter adapter)
         {
-            
+            Adapter = adapter ?? throw new ArgumentNullException(nameof(adapter));
         }
+        
+        /// <summary>
+        /// 获取当前测试的数据库适配器。
+        /// </summary>
+        public DatabaseAdapter Adapter { get;}
     }
 
     public class DataEngineAdapter<TEngine> : DataEngineAdapter where TEngine : DataEngine
     {
-        public DataEngineAdapter(TEngine engine) : base()
+        public DataEngineAdapter(TEngine engine) : base(new DatabaseAdapter())
         {
             //
             // 创建引擎。
@@ -22,7 +27,21 @@
         /// </summary>
         public void Start()
         {
-            
+            Adapter.Open();
+            Engine.DatabaseOpeningForTesting(Adapter);
+        }
+
+        public void Restart()
+        {
+            Stop();
+            Adapter.Reopen();
+            Engine.DatabaseOpeningForTesting(Adapter);
+        }
+
+        public void Stop()
+        {
+            Adapter.Stop();
+            Engine.DatabaseClosingForTesting();
         }
         
         /// <summary>

@@ -13,6 +13,21 @@
         MissingParameter,
         
         /// <summary>
+        /// Id为空
+        /// </summary>
+        MissingId,
+        
+        /// <summary>
+        /// 重复
+        /// </summary>
+        Duplicated,
+        
+        /// <summary>
+        /// 数据一致性被破坏
+        /// </summary>
+        ConsistencyBroken,
+        
+        /// <summary>
         /// 参数错误
         /// </summary>
         ParameterDataError,

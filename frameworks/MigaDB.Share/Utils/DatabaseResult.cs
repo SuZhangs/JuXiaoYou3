@@ -30,10 +30,10 @@
         /// <summary>
         /// 数据损坏
         /// </summary>
-        DataBroken,
+        DatabaseBroken,
         
         /// <summary>
-        /// 缺少参数
+        /// 缺少参数或者为空
         /// </summary>
         MissingParameter,
         

@@ -388,7 +388,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             }
             catch (LiteException)
             {
-                return DatabaseResult.Failed(DatabaseFailedReason.DataBroken);
+                return DatabaseResult.Failed(DatabaseFailedReason.DatabaseBroken);
             }
         }
 
@@ -459,7 +459,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             }
             catch (LiteException)
             {
-                return DatabaseResult.Failed(DatabaseFailedReason.DataBroken);
+                return DatabaseResult.Failed(DatabaseFailedReason.DatabaseBroken);
             }
         }
 

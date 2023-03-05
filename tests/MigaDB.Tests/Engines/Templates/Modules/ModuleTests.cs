@@ -1,4 +1,4 @@
-﻿namespace MigaDB.Tests.Data.Templates.Modules
+﻿namespace MigaDB.Tests.Engines.Templates.Modules
 {
     [TestClass, TestCategory("Data")]
     public class ModuleTests

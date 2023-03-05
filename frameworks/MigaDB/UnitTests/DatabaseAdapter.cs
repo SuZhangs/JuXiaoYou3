@@ -9,6 +9,11 @@ namespace Acorisoft.FutureGL.MigaDB.UnitTests
             Directory = AppDomain.CurrentDomain.BaseDirectory;
         }
 
+        public void Stop()
+        {
+            Database.Dispose();
+        }
+
         public void Open()
         {
             DbStream  = new MemoryStream();
@@ -19,9 +24,10 @@ namespace Acorisoft.FutureGL.MigaDB.UnitTests
 
         public void Reopen()
         {
+            Stop();
+            
             DbStream.Seek(0, SeekOrigin.Begin);
             LogStream.Seek(0, SeekOrigin.Begin);
-            Database.Dispose();
             Kernel   = new LiteDatabase(DbStream, BsonMapper.Global, LogStream);
             Database = new Database(Kernel);
         }

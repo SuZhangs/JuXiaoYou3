@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Acorisoft.FutureGL.MigaDB.UnitTests;
+using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {
@@ -70,8 +71,18 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// <summary>
         /// 测试开启
         /// </summary>
-        /// <param name="session"></param>
-        internal void DatabaseOpeningForTesting(DatabaseSession session) => OnDatabaseOpening(session);
+        /// <param name="adapter">测试适配器</param>
+        internal void DatabaseOpeningForTesting(DatabaseAdapter adapter)
+        {
+            var session = new DatabaseSession
+            {
+                Database      = adapter.Database,
+                DebugMode     = true,
+                RootDirectory = adapter.Directory
+            };
+            
+            OnDatabaseOpening(session);
+        }
 
         /// <summary>
         /// 测试关闭
