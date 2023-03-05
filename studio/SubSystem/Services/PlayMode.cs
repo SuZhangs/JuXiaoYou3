@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer.Services
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services
 {
     public enum PlayMode : int
     {

@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Windows.Data;
 using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.MigaStudio.MusicPlayer.Services;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 
-namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer
+namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
     public class PlayModeIconConverter : IValueConverter
     {

@@ -9,7 +9,9 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.Services;
+using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.Demo.ViewHost
@@ -27,6 +29,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
 
         protected override void RegisterServices(ILogger logger, IContainer container)
         {
+            InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)

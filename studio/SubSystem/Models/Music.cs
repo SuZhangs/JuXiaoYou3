@@ -1,6 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 
-namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer
+namespace Acorisoft.FutureGL.MigaStudio.Models
 {
     public class Music : ForestObject
     {

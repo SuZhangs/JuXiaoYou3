@@ -4,27 +4,26 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Acorisoft.FutureGL.Forest;
 
-namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer
+namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
 
-    
-    public sealed class PlayOrPauseIconConverter : IValueConverter
+    public sealed class MuteOrUnmuteIconConverter : IValueConverter
     {
-        private Geometry _off;
         private Geometry _on;
+        private Geometry _off;
         
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = value != null && (bool)value;
             if (val)
             {
-                _off ??= Xaml.GetGeometry("Pause");
-                return _off;
+                _on ??= Xaml.GetGeometry("Mute");
+                return _on;
             }
             else
             {
-                _on ??= Xaml.GetGeometry("Play");
-                return _on;
+                _off ??= Xaml.GetGeometry("Volume");
+                return _off;
             }
         }
 

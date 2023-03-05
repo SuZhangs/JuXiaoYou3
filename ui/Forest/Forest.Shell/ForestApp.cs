@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reactive.Concurrency;
 using System.Threading;
+using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Enums;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -85,6 +86,15 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 初始化
             Initialize();
+        }
+
+        protected static void InstallView<TView, TViewModel>() where TView : UserControl where TViewModel : ViewModelBase, IViewModel
+        {
+            Xaml.InstallView(new BindingInfo
+            {
+                ViewModel = typeof(TView),
+                View      = typeof(TViewModel)
+            });
         }
 
         private void Initialize()

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Reactive.Subjects;
 using Acorisoft.FutureGL.Forest;
 
-namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer.Services
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services
 {
     /// <summary>
     /// 可观察属性。

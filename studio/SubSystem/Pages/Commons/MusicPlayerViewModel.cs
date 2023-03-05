@@ -17,10 +17,10 @@ using TagLib;
 using TagLib.Mpeg;
 using File = TagLib.File;
 using System.Diagnostics;
-using Acorisoft.FutureGL.MigaStudio.MusicPlayer.Services;
-using static System.Windows.Forms.AxHost;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
+using Acorisoft.FutureGL.MigaStudio.Models;
 
-namespace Acorisoft.FutureGL.MigaStudio.MusicPlayer.ViewModels
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public sealed class MusicPlayerViewModel : ForestObject, IDropTarget
     {
