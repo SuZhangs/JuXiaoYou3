@@ -12,7 +12,7 @@ using Acorisoft.FutureGL.Forest.Styles.Animations;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public class HighlightTabItem : ForestTabItem
+    public class HighlightTabItem : ForestTabItemBase
     {
 
         private const string PART_BdName      = "PART_Bd";

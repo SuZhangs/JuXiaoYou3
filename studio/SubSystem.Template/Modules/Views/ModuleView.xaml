@@ -25,23 +25,33 @@
 
                     <StackPanel Background="#F1F1F1">
                         <ui:TextBox Margin="4"
+                                    PlaceholderText="ID"
+                                    Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <ui:TextBox Margin="4"
                                     PlaceholderText="名字"
                                     Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
                         <ui:TextBox Margin="4"
                                     PlaceholderText="介绍"
                                     Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
                         <ui:TextBox Margin="4"
                                     PlaceholderText="作者"
                                     Text="{Binding AuthorList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
                         <ui:TextBox Margin="4"
                                     PlaceholderText="联系方式"
                                     Text="{Binding ContractList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
                         <ui:TextBox Margin="4"
                                     PlaceholderText="组织"
                                     Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        
                         <ui:TextBox Margin="4"
-                                    PlaceholderText="版权"
-                                    Text="{Binding Copyright,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    IsReadOnly="True"
+                                    PlaceholderText="版本号"
+                                    Text="{Binding Version,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
             </f:HighlightTabItem>

@@ -12,7 +12,7 @@ using Acorisoft.FutureGL.Forest.Styles.Animations;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public class TabItem : ForestTabItem
+    public class TabItem : ForestTabItemBase
     {
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             nameof(CornerRadius),

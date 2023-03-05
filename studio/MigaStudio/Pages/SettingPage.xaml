@@ -55,8 +55,8 @@
         <f:ForestTabControl Grid.Row="1"
                             TabStripPlacement="Left"
                             Padding="64 32 128 32">
-            <f:ForestTabItem Header="常规" 
-                             Icon="{StaticResource IC.Setting}">
+            <f:TabItem Header="常规" 
+                       Icon="{StaticResource IC.Setting}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"
                                FontSize="32"
@@ -70,11 +70,11 @@
                         </ItemsControl>
                     </ScrollViewer>
                 </DockPanel>
-            </f:ForestTabItem>
-            <f:ForestTabItem Header="高级" Icon="{StaticResource IC.Setting}"/>
-            <f:ForestTabItem Header="字体" Icon="{StaticResource IC.Setting}"/>
-            <f:ForestTabItem Header="许可证" Icon="{StaticResource IC.Setting}"/>
-            <f:ForestTabItem Header="关于" Icon="{StaticResource IC.Setting}"/>
+            </f:TabItem>
+            <f:TabItem Header="高级" Icon="{StaticResource IC.Setting}"/>
+            <f:TabItem Header="字体" Icon="{StaticResource IC.Setting}"/>
+            <f:TabItem Header="许可证" Icon="{StaticResource IC.Setting}"/>
+            <f:TabItem Header="关于" Icon="{StaticResource IC.Setting}"/>
         </f:ForestTabControl>
     </Grid>
 </UserControl>

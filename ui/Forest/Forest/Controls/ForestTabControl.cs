@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ForestTabItem();
+            return new ForestTabItemBase();
         }
     }
 }

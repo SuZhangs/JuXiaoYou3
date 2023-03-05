@@ -17,45 +17,45 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public class ForestTabItem : TabItem, ITextResourceAdapter
+    public class ForestTabItemBase : TabItem, ITextResourceAdapter
     {
-        static ForestTabItem()
+        static ForestTabItemBase()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestTabItem), new FrameworkPropertyMetadata(typeof(ForestTabItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestTabItemBase), new FrameworkPropertyMetadata(typeof(ForestTabItemBase)));
         }
 
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
             nameof(Icon),
             typeof(Geometry),
-            typeof(ForestTabItem),
+            typeof(ForestTabItemBase),
             new PropertyMetadata(default(Geometry)));
 
         public static readonly DependencyProperty IsFilledProperty = DependencyProperty.Register(
             nameof(IsFilled),
             typeof(bool),
-            typeof(ForestTabItem),
+            typeof(ForestTabItemBase),
             new PropertyMetadata(Boxing.False));
 
         public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register(
             nameof(Placement),
             typeof(Dock),
-            typeof(ForestTabItem),
+            typeof(ForestTabItemBase),
             new PropertyMetadata(Dock.Left));
 
 
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
             nameof(IconSize),
             typeof(double),
-            typeof(ForestTabItem),
+            typeof(ForestTabItemBase),
             new PropertyMetadata(17d));
 
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
             nameof(Palette),
             typeof(HighlightColorPalette),
-            typeof(ForestTabItem),
+            typeof(ForestTabItemBase),
             new PropertyMetadata(default(HighlightColorPalette)));
 
-        public ForestTabItem()
+        public ForestTabItemBase()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();

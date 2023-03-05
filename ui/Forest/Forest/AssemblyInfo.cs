@@ -1,5 +1,11 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Windows;
+global using System.Windows.Input;
+global using Acorisoft.FutureGL.Forest.Enums;
+global using Acorisoft.FutureGL.Forest.Interfaces;
+global using Acorisoft.FutureGL.Forest.Styles;
+global using Acorisoft.FutureGL.Forest.Styles.Animations;
 global using System.Windows.Controls;
 global using System.Windows.Media;
 global using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
