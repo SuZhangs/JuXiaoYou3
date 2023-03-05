@@ -14,12 +14,13 @@ namespace Acorisoft.FutureGL.Forest
     /// </summary>
     public static partial class Xaml
     {
-        static readonly Dictionary<Type, BindingInfo>   ViewInfoMapper;
-        static readonly Dictionary<Type, BindingInfo>   ViewModelInfoMapper;
-        static readonly Dictionary<Type, object>        InstanceScope;
-        static readonly Dictionary<string, Geometry>    FastGeometryMapper;
-        static readonly Dictionary<string, ImageSource> FastImageMapper;
-        static readonly Dictionary<string, ImageBrush>  FastImageBrushMapper;
+        public static readonly GuidelineSet                    GuidelineSet = new GuidelineSet(new[] { 0.5d, 0.5d }, new[] { 0.5d, 0.5d });
+        static readonly        Dictionary<Type, BindingInfo>   ViewInfoMapper;
+        static readonly        Dictionary<Type, BindingInfo>   ViewModelInfoMapper;
+        static readonly        Dictionary<Type, object>        InstanceScope;
+        static readonly        Dictionary<string, Geometry>    FastGeometryMapper;
+        static readonly        Dictionary<string, ImageSource> FastImageMapper;
+        static readonly        Dictionary<string, ImageBrush>  FastImageBrushMapper;
 
         static Xaml()
         {

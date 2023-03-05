@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
+using Acorisoft.FutureGL.Forest.Adorners;
 using ColorPicker.Models;
 using SixLabors.ImageSharp.ColorSpaces;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
@@ -13,6 +15,7 @@ namespace ViewHost.Views
         public CharacterConstraintView()
         {
             InitializeComponent();
+            AdornerLayer.GetAdornerLayer(Btn)?.Add(new ThumbAdorner(Btn));
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -17,11 +17,11 @@
         Padding                  = 0x1,
         Image                    = 0x00100,
         Image_Square             = Image + 0x010,
-        Image_Horizontal_MinSize = Image + 0x011,
-        Image_Horizontal_240P    = Image + 0x010,
+        Image_Horizontal_MinSize = Image + 0x021,
+        Image_Horizontal_240P    = Image + 0x020,
         Image_Horizontal_720P    = Image + 0x040,
         Image_Horizontal_1080P   = Image + 0x080,
-        Image_Vertical_MinSize   = Image + 0x101,
+        Image_Vertical_MinSize   = Image + 0x111,
         Image_Vertical_240P      = Image + 0x110,
         Image_Vertical_720P      = Image + 0x120,
         Image_Vertical_1080P     = Image + 0x140,
@@ -36,7 +36,7 @@
 
     public class Resource
     {
-        private static string ParseOldVersion(string src)
+        public static string ParseOldVersion(string src)
         {
             if (string.IsNullOrEmpty(src))
             {
@@ -44,10 +44,10 @@
             }
 
             // miga://v1.img/param
-            return src.Length < 14 ? null : ParseImpl(src);
+            return src.Length < 14 ? null : ParseOldVersionImpl(src);
         }
 
-        private static string ParseImpl(string src)
+        private static string ParseOldVersionImpl(string src)
         {
             if (string.IsNullOrEmpty(src))
             {
