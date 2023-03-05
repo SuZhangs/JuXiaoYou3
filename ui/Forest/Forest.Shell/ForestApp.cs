@@ -92,8 +92,8 @@ namespace Acorisoft.FutureGL.Forest
         {
             Xaml.InstallView(new BindingInfo
             {
-                ViewModel = typeof(TView),
-                View      = typeof(TViewModel)
+                ViewModel = typeof(TViewModel),
+                View      = typeof(TView)
             });
         }
 

@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaGen.App", "generators\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.Tests", "tests\MigaStudio.Tests\MigaStudio.Tests.csproj", "{54976D5B-A8E0-4BC3-9DD9-1346C28B9031}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{646EFBD8-1E75-480A-9106-36F7AB8D56D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{54976D5B-A8E0-4BC3-9DD9-1346C28B9031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54976D5B-A8E0-4BC3-9DD9-1346C28B9031}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54976D5B-A8E0-4BC3-9DD9-1346C28B9031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
