@@ -2,7 +2,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.Windows;
 global using System.Windows.Controls;
-global using VisualState = Acorisoft.FutureGL.Forest.Enums.VisualState;
+global using VisualState = Acorisoft.FutureGL.Forest.Styles.VisualState;
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]

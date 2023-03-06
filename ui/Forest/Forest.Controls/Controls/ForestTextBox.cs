@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media;
 using System.Windows.Documents;
 using System.Windows.Media.Animation;
-using Acorisoft.FutureGL.Forest.Enums;
+
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Forest.Controls

@@ -7,11 +7,47 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="5"
-                               RadiusX="8"
-                               RadiusY="8"
+                               RadiusX="24"
+                               RadiusY="24"
                                StrokeDashArray="4 4"
                                StrokeThickness="1   "
-                               Stroke="White" />
+                               Stroke="{f:ForegroundInHighlightBrush}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style TargetType="{x:Type b:DialogButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:DialogButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{f:BackgroundBrush}"
+                            CornerRadius="24"
+                            Padding="16 0">
+                        <DockPanel HorizontalAlignment="Center">
+                            <Path x:Name="PART_Icon"
+                                  Data="{StaticResource Close}"
+                                  Stroke="#4F5B66"
+                                  StrokeThickness="2"
+                                  Stretch="Uniform"
+                                  Width="17"
+                                  Height="17" />
+                            
+                            <ContentPresenter x:Name="PART_Content"
+                                              TextElement.FontSize="16"
+                                              TextElement.Foreground="#4F5B66"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              Margin="10 0 0 0"
+                                              VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

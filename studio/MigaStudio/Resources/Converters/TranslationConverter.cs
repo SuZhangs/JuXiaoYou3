@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.Enums;
+
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

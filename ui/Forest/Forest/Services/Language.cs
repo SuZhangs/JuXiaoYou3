@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using Acorisoft.FutureGL.Forest.Enums;
+using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Interfaces;
 
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable SuspiciousTypeConversion.Global
 
-namespace Acorisoft.FutureGL.Forest
+namespace Acorisoft.FutureGL.Forest.Services
 {
     public static class Language
     {

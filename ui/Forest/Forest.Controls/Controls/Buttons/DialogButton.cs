@@ -1,27 +1,66 @@
-﻿using System.Windows.Media;
-using System.Windows.Documents;
+﻿using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
+using System.Windows.Shapes;
 
 using Acorisoft.FutureGL.Forest.Styles;
 
-namespace Acorisoft.FutureGL.Forest.Controls
+namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {
-    public class HighlightTextBox : ForestTextBoxBase
+    /// <summary>
+    /// 这是一个特殊用途的按钮
+    /// </summary>
+    public class DialogButton : ForestButtonBase
     {
-        static HighlightTextBox()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HighlightTextBox), new FrameworkPropertyMetadata(typeof(HighlightTextBox)));
-        }
-        
-        private Storyboard _storyboard;
+        public static readonly DependencyProperty SensitiveCaseProperty = DependencyProperty.Register(
+            nameof(SensitiveCase),
+            typeof(bool),
+            typeof(DialogButton),
+            new PropertyMetadata(Boxing.False));
 
-        public HighlightTextBox()
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            nameof(Icon),
+            typeof(Geometry),
+            typeof(DialogButton),
+            new PropertyMetadata(default(Geometry)));
+
+
+        public static readonly DependencyProperty IsFilledProperty = DependencyProperty.Register(
+            nameof(IsFilled),
+            typeof(bool),
+            typeof(DialogButton),
+            new PropertyMetadata(Boxing.False));
+
+
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+            nameof(IconSize),
+            typeof(double),
+            typeof(DialogButton),
+            new PropertyMetadata(17d));
+
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            nameof(CornerRadius),
+            typeof(CornerRadius),
+            typeof(DialogButton),
+            new PropertyMetadata(new CornerRadius(8)));
+
+
+        private const string PART_BdName      = "PART_Bd";
+        private const string PART_ContentName = "PART_Content";
+        private const string PART_IconName    = "PART_Icon";
+
+        private Border           _bd;
+        private ContentPresenter _content;
+        private Path             _icon;
+        private Storyboard       _storyboard;
+
+        public DialogButton()
         {
-            StateMachine.StateChangedHandler =  HandleStateChanged;
+            StateMachine.StateChangedHandler = OnStateChanged;
         }
 
-        private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
+
+        private void OnStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
             var palette = Palette;
             var theme   = ThemeSystem.Instance.Theme;
@@ -36,15 +75,15 @@ namespace Acorisoft.FutureGL.Forest.Controls
             var disabledForeground  = theme.Colors[(int)ForestTheme.ForegroundInActive];
 
             // Stop Animation
-            _storyboard?.Stop(PART_Bd);
+            _storyboard?.Stop(_bd);
 
             if (!init)
             {
                 HandleNormalState(
                     ref background,
+                    ref foreground,
                     ref disabledBackground,
-                    ref disabledForeground,
-                    ref foreground);
+                    ref disabledForeground);
             }
             else
             {
@@ -83,8 +122,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             //
             // 设置背景颜色
-            PART_Bd.Background = background.ToSolidColorBrush();
-            PART_Bd.Effect     = null;
+            _bd.Background = background.ToSolidColorBrush();
+            _bd.Effect     = null;
 
             // 设置文本颜色
             SetForeground(ref foreground);
@@ -93,12 +132,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private void SetForeground(ref Color highlightForeground)
         {
             var foreground = highlightForeground.ToSolidColorBrush();
-            PART_Content.SetValue(TextElement.ForegroundProperty, foreground);
+            _content.SetValue(TextElement.ForegroundProperty, foreground);
         }
 
-        private void HandleNormalState(ref Color background, ref Color disabledBackground, ref Color disabledForeground, ref Color foreground)
+        private void HandleNormalState(ref Color background, ref Color foreground, ref Color disabledBackground, ref Color disabledForeground)
         {
-            if (!IsEnabled || IsReadOnly)
+            if (!IsEnabled)
             {
                 HandleDisabledState(ref disabledBackground, ref disabledForeground);
                 return;
@@ -106,8 +145,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             //
             // 设置背景颜色
-            PART_Bd.Background = background.ToSolidColorBrush();
-            PART_Bd.Effect     = null;
+            _bd.Background = background.ToSolidColorBrush();
+            _bd.Effect     = null;
 
             // 设置文本颜色
             SetForeground(ref foreground);
@@ -125,7 +164,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 To       = highlightBackground,
             };
 
-            Storyboard.SetTarget(backgroundAnimation, PART_Bd);
+            Storyboard.SetTarget(backgroundAnimation, _bd);
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
@@ -135,7 +174,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             //
             // 开始动画
-            PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
             SetForeground(ref highlightForeground);
@@ -160,7 +199,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             };
 
             // Storyboard.SetTarget(OpacityAnimation, _bd);
-            Storyboard.SetTarget(backgroundAnimation, PART_Bd);
+            Storyboard.SetTarget(backgroundAnimation, _bd);
             // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
 
@@ -174,28 +213,52 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             //
             // 开始动画
-            PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 创建阴影
-            PART_Bd.Effect = BuildHighlightShadowEffect(ref highlightBackground);
 
             // 设置文本颜色
-            SelectionBrush = ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.HighlightA2].ToSolidColorBrush();
+            // SelectionBrush = ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.HighlightA2].ToSolidColorBrush();
             SetForeground(ref highlightForeground);
         }
 
-        private static DropShadowEffect BuildHighlightShadowEffect(ref Color color)
+
+        protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
-            // <DropShadowEffect x:Key = "Shadow.A3" Direction = "270" ShadowDepth = "4.5" BlurRadius = "14" Opacity = "0.42" Color = "{DynamicResource AccentA3}" />
-            return new DropShadowEffect
-            {
-                Color       = color,
-                ShadowDepth = 4.5d,
-                BlurRadius  = 14,
-                Opacity     = 0.42d,
-                Direction   = 270
-            };
+            finder.Find<Border>(PART_BdName, x => _bd                     = x)
+                  .Find<ContentPresenter>(PART_ContentName, x => _content = x)
+                  .Find<Path>(PART_IconName, x => _icon                   = x);
         }
-        
+
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+
+        public double IconSize
+        {
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
+        }
+
+        public bool IsFilled
+        {
+            get => (bool)GetValue(IsFilledProperty);
+            set => SetValue(IsFilledProperty, Boxing.Box(value));
+        }
+
+        public Geometry Icon
+        {
+            get => (Geometry)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        public bool SensitiveCase
+        {
+            get => (bool)GetValue(SensitiveCaseProperty);
+            set => SetValue(SensitiveCaseProperty, Boxing.Box(value));
+        }
     }
 }

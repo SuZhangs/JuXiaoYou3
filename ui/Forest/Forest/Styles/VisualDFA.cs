@@ -1,5 +1,4 @@
 ﻿using Acorisoft.FutureGL.Forest.Delegates;
-using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles
 {

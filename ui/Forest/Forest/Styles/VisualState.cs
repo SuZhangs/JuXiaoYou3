@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.Forest.Enums
+﻿namespace Acorisoft.FutureGL.Forest.Styles
 {
     /// <summary>
     /// 用于表示一个视觉状态。

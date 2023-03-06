@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Collections.Concurrent;
-using Acorisoft.FutureGL.Forest.Enums;
 
 namespace Acorisoft.FutureGL.Forest.Styles
 {

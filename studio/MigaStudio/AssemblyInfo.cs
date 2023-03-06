@@ -1,5 +1,7 @@
 global using Acorisoft.FutureGL.Forest.Attributes;
 global using Acorisoft.FutureGL.MigaStudio.ViewModels;
+global using Acorisoft.FutureGL.Forest.Services;
+global using Acorisoft.FutureGL.Forest.Styles;
 using System.Windows;
 
 [assembly: ThemeInfo(

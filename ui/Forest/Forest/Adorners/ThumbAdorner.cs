@@ -5,19 +5,25 @@ namespace Acorisoft.FutureGL.Forest.Adorners
 
     public class ThumbAdorner : Adorner
     {
-        private static readonly SolidColorBrush Brush = new SolidColorBrush(Colors.Red);
-        private static readonly Pen             Pen   = new Pen(Brush, 1);
+        private readonly SolidColorBrush Brush;
+        private readonly Pen             Pen;
 
-        public ThumbAdorner(UIElement adornedElement) : base(adornedElement)
+        public ThumbAdorner(UIElement adornedElement) : this(adornedElement, Colors.Red)
         {
         }
+        
+        public ThumbAdorner(UIElement adornedElement, Color color) : base(adornedElement)
+        {
+            Brush = new SolidColorBrush(color);
+            Pen   = new Pen(Brush, 1);
+        }
 
-        private static void DrawCorner(DrawingContext drawingContext, Point pos)
+        private void DrawCorner(DrawingContext drawingContext, Point pos)
         {
             drawingContext.DrawRectangle(Brush, null, new Rect(pos.X - 2, pos.Y - 2, 4, 4));
         }
 
-        private static void DrawAllCorner(DrawingContext drawingContext, double width, double height)
+        private void DrawAllCorner(DrawingContext drawingContext, double width, double height)
         {
             DrawCorner(drawingContext, new Point(0, 0));
             DrawCorner(drawingContext, new Point(width, 0));

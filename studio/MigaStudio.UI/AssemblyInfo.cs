@@ -4,6 +4,8 @@ global using System.Windows;
 global using System.Windows.Controls;
 global using System.Windows.Media;
 global using Acorisoft.FutureGL.Forest;
+global using Acorisoft.FutureGL.Forest.Services;
+global using Acorisoft.FutureGL.Forest.Styles;
 global using Acorisoft.FutureGL.MigaUtils;
 using System.Windows.Markup;
 

@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.Forest.Enums
+﻿namespace Acorisoft.FutureGL.Forest.Styles
 {
     /// <summary>
     /// 视觉状态触发器

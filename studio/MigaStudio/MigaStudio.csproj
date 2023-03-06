@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resources\Behaviors" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="Languages\cn.ini">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
