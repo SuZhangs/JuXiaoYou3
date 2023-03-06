@@ -54,6 +54,7 @@
                           Margin="16"
                           Padding="16 0">
                 <TextBlock FontSize="14"
+                           TextAlignment="Center"
                            Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
                            TextWrapping="Wrap" />
             </ScrollViewer>

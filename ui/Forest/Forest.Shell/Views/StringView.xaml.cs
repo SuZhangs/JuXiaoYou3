@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
     }
 
-    public sealed class StringViewModel : FieldViewModel
+    public sealed class StringViewModel : InputViewModel
     {
         private string     _text;
 
@@ -21,10 +21,11 @@ namespace Acorisoft.FutureGL.Forest.Views
             Result = _text;
         }
 
-        protected override string ReportFailedMessage()
+        protected override string Failed()
         {
-            return "文本为空";
+            return string.Empty;
         }
+
 
         /// <summary>
         /// 获取或设置 <see cref="Text"/> 属性。
@@ -35,7 +36,6 @@ namespace Acorisoft.FutureGL.Forest.Views
             set
             {
                 SetValue(ref _text, value);
-                NotifyPropertyUpdate();
             }
         }
     }

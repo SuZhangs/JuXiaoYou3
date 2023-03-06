@@ -26,11 +26,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void BuildAnimation()
         {
-            var theme = ThemeSystem.Instance.Theme;
+            var theme   = ThemeSystem.Instance.Theme;
             var palette = Palette;
-            
-            // TODO: wait fixed
-
             var nsColor = theme.GetCallToActionColor(palette, 1);
             var h1Color = theme.GetCallToActionColor(palette, 2);
             var h2Color = theme.GetCallToActionColor(palette, 3);

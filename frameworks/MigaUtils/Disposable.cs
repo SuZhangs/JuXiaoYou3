@@ -4,12 +4,10 @@
     {
         protected virtual void ReleaseUnmanagedResources()
         {
-            // TODO release unmanaged resources here
         }
 
         protected virtual void ReleaseManagedResources()
         {
-            // TODO release managed resources here
         }
 
         protected void Dispose(bool disposing)

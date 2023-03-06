@@ -8,7 +8,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
     {
         private string _name;
         private string _avatar;
-        private DocumentType _type;
+        private static DocumentType _type = DocumentType.CharacterConstraint;
+
+        public NewDocumentWizardViewModel()
+        {
+            // TODO:
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
@@ -39,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         protected override bool IsCompleted()
         {
-            return false;
+            return !string.IsNullOrEmpty(Name);
         }
 
         protected override void Finish()
@@ -48,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         protected override string Failed()
         {
-            return string.Empty;
+            return "名字为空";
         }
     }
 }

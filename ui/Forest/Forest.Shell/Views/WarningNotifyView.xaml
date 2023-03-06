@@ -50,14 +50,13 @@
                        Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
                        VerticalAlignment="Center" />
 
-            <ScrollViewer Grid.Row="2"
-                          Margin="16"
-                          Padding="16 0"
-                          Style="{StaticResource UiScrollViewer}">
-                <TextBlock FontSize="14"
-                           Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
-                           TextWrapping="Wrap" />
-            </ScrollViewer>
+            <TextBlock Grid.Row="2"
+                       Margin="16 48 16 16"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
+                       TextWrapping="Wrap" />
 
             <!-- 按钮 -->
             <f:DialogButton Grid.Row="3"

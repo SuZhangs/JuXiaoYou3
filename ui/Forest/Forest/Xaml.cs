@@ -286,7 +286,6 @@ namespace Acorisoft.FutureGL.Forest
             }
 
             var impl = (IViewModelRegister)Activator.CreateInstance(implType);
-            // TODO:
             impl?.Register(new Installer());
         }
 

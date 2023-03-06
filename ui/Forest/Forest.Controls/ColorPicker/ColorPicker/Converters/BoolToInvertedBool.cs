@@ -16,7 +16,7 @@ namespace ColorPicker.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException("ConvertBack() of BoolToInvertedBoolConverter is not implemented");
+            throw new NotSupportedException("ConvertBack() of BoolToInvertedBoolConverter is not implemented");
         }
     }
 }

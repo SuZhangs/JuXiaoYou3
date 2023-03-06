@@ -147,7 +147,6 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
             }
             else
             {
-                // TODO: add StateBasedMapper
                 Completed?.Invoke(this, new PropertySetter
                 {
                     TargetElement = TargetElement,

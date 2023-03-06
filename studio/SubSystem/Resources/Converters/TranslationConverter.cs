@@ -2,6 +2,9 @@
 using System.Globalization;
 using System.Windows.Data;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Services;
+using Acorisoft.FutureGL.Forest.Styles;
+using Acorisoft.FutureGL.MigaDB.Documents;
 
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
@@ -14,13 +17,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             {
                 MainTheme mt => GetMainTheme(mt),
                 CultureArea ca => GetCultureArea(ca),
+                DocumentType dt => GetDocumentType(dt),
                 _ => string.Empty
             };
         }
 
-        private static string GetMainTheme(MainTheme theme)
+        private static string GetMainTheme(MainTheme value)
         {
-            return theme switch
+            return value switch
             {
                 MainTheme.Dark => Language.Culture switch
                 {
@@ -40,9 +44,42 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             };
         }
         
-        private static string GetCultureArea(CultureArea theme)
+        
+        private static string GetDocumentType(DocumentType type)
         {
-            return theme switch
+            return type switch
+            {
+                DocumentType.CharacterConstraint => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "人物设定",
+                    _                    => "Character"
+                },
+                DocumentType.AbilityConstraint => Language.Culture switch
+                {
+                    CultureArea.Chinese => "能力",
+                    _                   => "Ability"
+                },
+                DocumentType.GeographyConstraint => Language.Culture switch
+                {
+                    CultureArea.Chinese => "地图",
+                    _                   => "Geography"
+                },
+                DocumentType.ItemConstraint => Language.Culture switch
+                {
+                    CultureArea.Chinese => "物品",
+                    _                   => "Item"
+                },
+                _ => Language.Culture switch
+                {
+                    CultureArea.Chinese => "其他",
+                    _                   => "Other"
+                },
+            };
+        }
+        
+        private static string GetCultureArea(CultureArea value)
+        {
+            return value switch
             {
                 CultureArea.English => "English",
                 CultureArea.French => "Français",
@@ -55,7 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 }

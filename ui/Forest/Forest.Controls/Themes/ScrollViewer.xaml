@@ -138,9 +138,6 @@
                     <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource Base.ScrollBarPageButton}" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <!--
-                        TODO: Need to add a custom Thumb with a corner radius that will increase when OnMouseOver is triggered.
-                    -->
                     <Thumb
                         Margin="0"
                         Padding="0"

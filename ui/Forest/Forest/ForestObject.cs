@@ -40,7 +40,6 @@ namespace Acorisoft.FutureGL.Forest
         /// </summary>
         protected virtual void ReleaseUnmanagedResources()
         {
-            // TODO release unmanaged resources here
         }
 
         /// <summary>
@@ -48,7 +47,6 @@ namespace Acorisoft.FutureGL.Forest
         /// </summary>
         protected virtual void ReleaseManagedResources()
         {
-            // TODO release managed resources here
         }
 
         /// <summary>
