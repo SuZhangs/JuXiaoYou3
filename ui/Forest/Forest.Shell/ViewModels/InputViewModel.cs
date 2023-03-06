@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             }
             else
             {
-                Xaml.Get<IBuiltinDialogService>().Warning("提示", Failed());
+                Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Warning, Language.NotifyText, Failed());
             }
         }
 

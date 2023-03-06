@@ -232,6 +232,25 @@ namespace Acorisoft.FutureGL.Forest.Services
                 };
             }
         }
+        
+        /// <summary>
+        /// 拒绝
+        /// </summary>
+        public static string NotifyText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Notify",
+                    CultureArea.French   => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean   => "kr.ini",
+                    CultureArea.Russian  => "ru.ini",
+                    _                    => "提示"
+                };
+            }
+        }
 
         /// <summary>
         /// 拒绝

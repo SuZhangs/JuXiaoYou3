@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.Forest.Views;
 
 namespace Acorisoft.FutureGL.Forest.Services
 {
-    public class DialogService : IDialogService, IDialogServiceAmbient,  IBusyService, IBusyServiceAmbient, INotifyService, INotifyServiceAmbient
+    public class DialogService : IDialogService, IDialogServiceAmbient, IBusyService, IBusyServiceAmbient, INotifyService, INotifyServiceAmbient
     {
         class Session : IBusySession
         {
@@ -15,11 +15,8 @@ namespace Acorisoft.FutureGL.Forest.Services
                 {
                     return;
                 }
-                
-                Host.Dispatcher.Invoke(() =>
-                {
-                    Host.IsBusy = false;
-                });
+
+                Host.Dispatcher.Invoke(() => { Host.IsBusy = false; });
 
                 Clean();
             }
@@ -33,7 +30,6 @@ namespace Acorisoft.FutureGL.Forest.Services
 
                 Host.Dispatcher.Invoke(() =>
                 {
-
                     //
                     // 更新
                     Host.BusyText = text;
@@ -44,11 +40,11 @@ namespace Acorisoft.FutureGL.Forest.Services
                     }
                 });
             }
-            
+
             public DialogHost Host { get; init; }
             public Action Clean { get; init; }
         }
-        
+
         private const string Color = "#6F0240";
 
         private Session    _session;
@@ -82,7 +78,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                 //
                 notification.Initialize();
             }
-            
+
             _host.Messaging(notification);
         }
 
@@ -108,10 +104,10 @@ namespace Acorisoft.FutureGL.Forest.Services
                 //
                 notification.Initialize();
             }
-            
+
             _host.Messaging(notification);
         }
-        
+
         /// <summary>
         /// 创建会话。
         /// </summary>
@@ -129,6 +125,78 @@ namespace Acorisoft.FutureGL.Forest.Services
         }
 
         #region IDialogAmbientService
+        
+        /// <summary>
+        /// 通知对话框
+        /// </summary>
+        /// <param name="level">标题</param>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <returns></returns>
+        public Task Notify(CriticalLevel level, string title, string content)
+        {
+            return Notify(level, title, content, Language.ConfirmText);
+        }
+
+        /// <summary>
+        /// 通知对话框
+        /// </summary>
+        /// <param name="level">标题</param>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="buttonText">确认按钮文本</param>
+        /// <returns></returns>
+        public async Task Notify(CriticalLevel level, string title, string content, string buttonText)
+        {
+            DialogViewModel dvm;
+
+            if (level == CriticalLevel.Danger)
+            {
+                dvm = new DangerNotifyViewModel
+                {
+                    Title            = title,
+                    Content          = content,
+                    CancelButtonText = buttonText,
+                };
+            }
+            else if (level == CriticalLevel.Warning)
+            {
+                dvm = new WarningNotifyViewModel
+                {
+                    Title            = title,
+                    Content          = content,
+                    CancelButtonText = buttonText,
+                };
+            }
+            else if (level == CriticalLevel.Info)
+            {
+                dvm = new InfoViewModel
+                {
+                    Title            = title,
+                    Content          = content,
+                    CancelButtonText = buttonText,
+                };
+            }
+            else if (level == CriticalLevel.Success)
+            {
+                dvm = new SuccessViewModel
+                {
+                    Title            = title,
+                    Content          = content,
+                    CancelButtonText = buttonText,
+                };
+            }
+            else
+            {
+                dvm = new ObsoleteViewModel
+                {
+                    Title   = title,
+                    Content = content,
+                };
+            }
+
+            await _host.ShowDialog(dvm, new Parameter());
+        }
 
         /// <summary>
         /// 危险提示对话框
@@ -197,7 +265,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             var result = await _host.ShowDialog(dvm, new Parameter());
             return result.IsFinished;
         }
-        
+
         /// <summary>
         /// 信息提示对话框
         /// </summary>
@@ -230,7 +298,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             var result = await _host.ShowDialog(dvm, new Parameter());
             return result.IsFinished;
         }
-        
+
 
         /// <summary>
         /// 成功提示对话框
@@ -266,7 +334,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             var result = await _host.ShowDialog(dvm, new Parameter());
             return result.IsFinished;
         }
-        
+
         /// <summary>
         /// 过时提示对话框
         /// </summary>
@@ -300,8 +368,9 @@ namespace Acorisoft.FutureGL.Forest.Services
             var result = await _host.ShowDialog(dvm, new Parameter());
             return result.IsFinished;
         }
+
         #endregion
-        
+
         #region IDialogService
 
         /// <summary>
