@@ -132,6 +132,8 @@
                 </WrapPanel>
                 <WrapPanel Margin="0 64 0 0">
                     <f:DialogButton Content="Test" Purpose="CallToAction" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="CallToAction2" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="CallToAction3" Height="48"/>
                     <f:DialogButton Content="Test" Purpose="CallToClose" Height="48"/>
                     <f:DialogButton Content="Test" Purpose="Close" Height="48"/>
                     <f:DialogButton Content="Test" Purpose="Info" Height="48"/>
