@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Delegates;
-
-namespace Acorisoft.FutureGL.Forest.Styles
+﻿namespace Acorisoft.FutureGL.Forest.Styles
 {
     /// <summary>
     /// 表示一个视觉DFA状态机。

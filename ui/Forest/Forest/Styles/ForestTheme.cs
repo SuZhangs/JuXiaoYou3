@@ -35,6 +35,7 @@
         Danger100,
         Danger200,
         Danger300,
+        DangerDisabled,
         
         
         /// <summary>
@@ -43,6 +44,7 @@
         Warning100,
         Warning200,
         Warning300,
+        WarningDisabled,
         
         
         /// <summary>
@@ -51,6 +53,7 @@
         Success100,
         Success200,
         Success300,
+        SuccessDisabled,
         
         
         /// <summary>
@@ -59,6 +62,7 @@
         Info100,
         Info200,
         Info300,
+        InfoDisabled,
         
         
         /// <summary>
@@ -67,6 +71,16 @@
         Obsolete100,
         Obsolete200,
         Obsolete300,
+        ObsoleteDisabled,
+        
+        
+        /// <summary>
+        /// 普通
+        /// </summary>
+        SlateGray100,
+        SlateGray200,
+        SlateGray300,
+        SlateGrayDisabled,
         
         
         /// <summary>

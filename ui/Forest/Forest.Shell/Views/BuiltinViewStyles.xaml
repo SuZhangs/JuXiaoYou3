@@ -519,7 +519,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#33ADFF" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#0092f2" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -535,7 +535,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#9BA6B1" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#80ccff" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -663,7 +663,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="bd">
-                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#9BA6B1" />
+                                            <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#ffd680" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
