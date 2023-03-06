@@ -10,6 +10,7 @@
         Warning,
         Info,
         Success,
-        Obsolete
+        Obsolete,
+        SlateGray,
     }
 }

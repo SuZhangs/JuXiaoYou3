@@ -33,7 +33,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             GetTemplateChildOverride(Finder);
             BuildState();
-            BuildAnimation();
         }
 
         /// <summary>

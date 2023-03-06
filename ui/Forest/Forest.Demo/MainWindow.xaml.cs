@@ -42,8 +42,8 @@ namespace Acorisoft.FutureGL.Forest
 
             if (dialog is OperationViewModel dialog2)
             {
-                dialog2.CompleteButtonText = Forest.Language.ConfirmText;
-                dialog2.CancelButtonText = Forest.Language.CancelText;
+                dialog2.CompleteButtonText = Services.Language.ConfirmText;
+                dialog2.CancelButtonText   = Services.Language.CancelText;
             }
             
             await DialogHost.ShowDialog(dialog, null);
@@ -54,8 +54,8 @@ namespace Acorisoft.FutureGL.Forest
             var dialog = new DangerViewModel
             {
 
-                CompleteButtonText = Forest.Language.ConfirmText,
-                CancelButtonText   = Forest.Language.CancelText,
+                CompleteButtonText = Services.Language.ConfirmText,
+                CancelButtonText   = Services.Language.CancelText,
             };
             
             ViewHost.ViewModel = ViewHost.ViewModel is null ? dialog : null;

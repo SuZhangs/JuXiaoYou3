@@ -38,7 +38,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             GetTemplateChildOverride(Finder);
             BuildState();
-            BuildAnimation();
         }
 
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)

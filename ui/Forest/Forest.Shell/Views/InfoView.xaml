@@ -61,12 +61,14 @@
             </ScrollViewer>
 
             <!-- 按钮 -->
-            <Button Grid.Row="3"
-                    Content="{Binding CompleteButtonText,Mode=OneWay}"
-                    Command="{Binding CompletedCommand}"
-                    Height="48"
-                    Margin="16"
-                    Style="{StaticResource InfoButton}" />
+            <f:DialogButton Grid.Row="3"
+                            Icon="{StaticResource Checked}"
+                            IconSize="29"
+                            Content="{Binding CompleteButtonText,Mode=OneWay}"
+                            Command="{Binding CompletedCommand}"
+                            Height="48"
+                            Margin="16"
+                            Purpose="Info"/>
         </Grid>
     </Border>
 </UserControl>

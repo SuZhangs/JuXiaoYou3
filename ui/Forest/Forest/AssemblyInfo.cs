@@ -15,7 +15,6 @@ using System.Windows.Markup;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Adorners")]
-[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Enums")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Behaviors")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Panels")]
@@ -23,3 +22,4 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Effects.Bitmaps")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Markup")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Styles")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Services")]

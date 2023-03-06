@@ -62,12 +62,14 @@
 
             <!-- 按钮 -->
             <!-- 按钮 -->
-            <Button Grid.Row="3"
-                    Content="{Binding CompleteButtonText,Mode=OneWay}"
-                    Command="{Binding CompletedCommand}"
-                    Height="48"
-                    Margin="16"
-                    Style="{StaticResource ObsoleteButton}" />
+            <f:DialogButton Grid.Row="3"
+                            Icon="{StaticResource Checked}"
+                            IconSize="29"
+                            Content="{Binding CompleteButtonText,Mode=OneWay}"
+                            Command="{Binding CompletedCommand}"
+                            Height="48"
+                            Margin="16"
+                            Purpose="Obsolete"/>
         </Grid>
     </Border>
 </UserControl>

@@ -20,15 +20,20 @@
         <fs:TitleBar HorizontalAlignment="Right"/>
     </fs:ForestWindow.TitleBar>
     <Window.Resources>
-        <Geometry x:Key="Icon">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Views/BuiltinViewStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Geometry x:Key="Icon">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
+        </ResourceDictionary>
     </Window.Resources>
     <f:ForestTabControl TabStripPlacement="Left">
-        <f:ForestTabItem Header="按钮展示"
+        <f:HighlightTabItem Header="按钮展示"
                          Icon="{StaticResource Icon}"
                          f:Language.Name="Test">
             <demo:ButtonDemo />
-        </f:ForestTabItem>
-        <f:ForestTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
+        </f:HighlightTabItem>
+        <f:HighlightTabItem Header="首屏页面" IsEnabled="True" Icon="{StaticResource Icon}">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right"
                             Width="320">
@@ -50,8 +55,8 @@
                 </StackPanel>
                 <fs:DialogHost x:Name="DialogHost" />
             </DockPanel>
-        </f:ForestTabItem>
-        <f:ForestTabItem Header="ContentHost" Icon="{StaticResource Icon}">
+        </f:HighlightTabItem>
+        <f:HighlightTabItem Header="ContentHost" Icon="{StaticResource Icon}">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right"
                             Width="320">
@@ -82,62 +87,107 @@
                     </fs:EmptyContentHost.EmptyState>
                 </fs:EmptyContentHost>
             </DockPanel>
-        </f:ForestTabItem>
-        <f:ForestTabItem Header="ColorPicker" Icon="{StaticResource Icon}">
+        </f:HighlightTabItem>
+        <f:HighlightTabItem Header="ColorPicker" Icon="{StaticResource Icon}">
            <ScrollViewer>
                <WrapPanel>
                    <cp:PortableColorPicker Height="64" Width="64"/>
                    <cp:StandardColorPicker Margin="16" Height="418" Width="220"/>
                </WrapPanel>
            </ScrollViewer>
-        </f:ForestTabItem>
-        <f:ForestTabItem Header="按钮组" Icon="{StaticResource Icon}">
-            <WrapPanel Background="#F1F1F1">
-                <Border Background="White"
+        </f:HighlightTabItem>
+        <f:HighlightTabItem Header="对话框按钮" Icon="{StaticResource Icon}">
+            <StackPanel>
+                <WrapPanel>
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource CancelButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource CancelButton2}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource CancelButton3}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource CancelButton4}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource CloseButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource DangerButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource WarningButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource InfoButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource SuccessButton}" />
+                    <Button Height="48"
+                        Content="Test"
+                        Style="{StaticResource ObsoleteButton}" />
+                </WrapPanel>
+                <WrapPanel Margin="0 64 0 0">
+                    <f:DialogButton Content="Test" Purpose="CallToAction" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="CallToClose" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="Close" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="Info" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="Obsolete" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="Success" Height="48"/>
+                    <f:DialogButton Content="Test" Purpose="Warning" Height="48"/>
+                </WrapPanel>
+            </StackPanel>
+        </f:HighlightTabItem>
+        <f:HighlightTabItem Header="按钮组" Icon="{StaticResource Icon}">
+        <WrapPanel Background="#F1F1F1">
+            <Border Background="White"
                         Margin="8"
                         MinWidth="280"
                         MinHeight="64"
                         Padding="14 16 16 16">
-                    <DockPanel>
-                        <f:HighlightButton DockPanel.Dock="Top"
+                <DockPanel>
+                    <f:HighlightButton DockPanel.Dock="Top"
                                            Content="添加" />
-                        <f:SpacingUniformGrid Columns="4"
+                    <f:SpacingUniformGrid Columns="4"
                                               Gap="2"
                                      Margin="0 8 0 0">
-                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch"/>
-                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch"/>
-                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch"/>
-                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch"/>
-                        </f:SpacingUniformGrid>
-                    </DockPanel>
-                </Border>
+                        <ui:Button Icon="Edit16" HorizontalAlignment="Stretch"/>
+                        <ui:Button Icon="Delete16" HorizontalAlignment="Stretch"/>
+                        <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch"/>
+                        <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch"/>
+                    </f:SpacingUniformGrid>
+                </DockPanel>
+            </Border>
 
-                <Border Background="White"
+            <Border Background="White"
                         Margin="8"
                         MinWidth="280"
                         MinHeight="64"
                         Padding="14 16 16 16">
-                    <DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <ui:Button DockPanel.Dock="Right"
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top">
+                        <ui:Button DockPanel.Dock="Right"
                                        Icon="Edit16"
                                        HorizontalAlignment="Stretch"
                                        Margin="8 0 0 0"
                                        VerticalAlignment="Stretch" />
 
-                            <f:HighlightButton Content="添加" />
-                        </DockPanel>
-
-                        <UniformGrid Columns="4"
-                                     Margin="0 8 0 0">
-                            <ui:Button Icon="Edit16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="Delete16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                            <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
-                        </UniformGrid>
+                        <f:HighlightButton Content="添加" />
                     </DockPanel>
-                </Border>
-            </WrapPanel>
-        </f:ForestTabItem>
+
+                    <UniformGrid Columns="4"
+                                     Margin="0 8 0 0">
+                        <ui:Button Icon="Edit16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
+                        <ui:Button Icon="Delete16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
+                        <ui:Button Icon="ArrowUp16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
+                        <ui:Button Icon="ArrowDown16" HorizontalAlignment="Stretch" Margin="2 0 2 0" />
+                    </UniformGrid>
+                </DockPanel>
+            </Border>
+        </WrapPanel>
+        </f:HighlightTabItem>
     </f:ForestTabControl>
 </fs:ForestWindow>

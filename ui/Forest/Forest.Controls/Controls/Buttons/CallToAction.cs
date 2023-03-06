@@ -28,12 +28,14 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         {
             var theme = ThemeSystem.Instance.Theme;
             var palette = Palette;
+            
+            // TODO: wait fixed
 
             var nsColor = theme.GetCallToActionColor(palette, 1);
             var h1Color = theme.GetCallToActionColor(palette, 2);
             var h2Color = theme.GetCallToActionColor(palette, 3);
             var nfColor = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
-            var ndColor = theme.Colors[(int)ForestTheme.Background];
+            var ndColor = theme.GetCallToActionColor(palette, 4);
 
             // 状态驱动的动画
             //

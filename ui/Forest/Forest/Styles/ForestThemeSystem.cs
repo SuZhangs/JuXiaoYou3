@@ -45,6 +45,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                     HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info200],
                     HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success200],
                     HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete200],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGray200],
                     _                                       => Colors[(int)ForestTheme.HighlightA4],
                 },
                 3 => palette switch
@@ -56,7 +57,18 @@ namespace Acorisoft.FutureGL.Forest.Styles
                     HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info300],
                     HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success300],
                     HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete300],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGray300],
                     _                                       => Colors[(int)ForestTheme.HighlightA5],
+                },
+                4 => palette switch
+                {
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.DangerDisabled],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.WarningDisabled],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.InfoDisabled],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.SuccessDisabled],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.ObsoleteDisabled],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGrayDisabled],
+                    _                                       => Colors[(int)ForestTheme.Background],
                 },
                 _ => palette switch
                 {
@@ -67,6 +79,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
                     HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info100],
                     HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success100],
                     HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete100],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGray100],
                     _                                       => Colors[(int)ForestTheme.HighlightA3],
                 }
             };

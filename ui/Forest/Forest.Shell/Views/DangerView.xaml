@@ -63,14 +63,17 @@
                          Height="48"
                          Margin="16"
                          Rows="1">
-                <Button IsDefault="True"
-                        Content="{Binding CompleteButtonText,Mode=OneWay}"
-                        Command="{Binding CompletedCommand}"
-                        Style="{StaticResource CancelButton2}" />
+                <f:DialogButton Icon="{StaticResource Checked}"
+                                IconSize="29"
+                                IsDefault="True"
+                                Content="{Binding CompleteButtonText,Mode=OneWay}"
+                                Command="{Binding CompletedCommand}"
+                                Purpose="Close"/>
                 
-                <Button Content="{Binding CancelButtonText,Mode=OneWay}"
-                        Command="{Binding CancelCommand}"
-                        Style="{StaticResource DangerButton}" />
+                <f:DialogButton Icon="{StaticResource Close}"
+                                Content="{Binding CancelButtonText,Mode=OneWay}"
+                                Command="{Binding CancelCommand}"
+                                Purpose="CallToClose"/>
             </UniformGrid>
         </Grid>
     </Border>

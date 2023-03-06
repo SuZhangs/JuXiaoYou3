@@ -30,12 +30,12 @@
                             Padding="16 0">
                         <DockPanel HorizontalAlignment="Center">
                             <Path x:Name="PART_Icon"
-                                  Data="{StaticResource Close}"
+                                  Data="{TemplateBinding Icon}"
                                   Stroke="#4F5B66"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
-                                  Width="17"
-                                  Height="17" />
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}" />
                             
                             <ContentPresenter x:Name="PART_Content"
                                               TextElement.FontSize="16"

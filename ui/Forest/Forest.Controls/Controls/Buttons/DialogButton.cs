@@ -2,7 +2,6 @@
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Buttons
@@ -12,11 +11,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
     /// </summary>
     public class DialogButton : ForestButtonBase
     {
-        public static readonly DependencyProperty SensitiveCaseProperty = DependencyProperty.Register(
-            nameof(SensitiveCase),
-            typeof(bool),
+        public static readonly DependencyProperty PurposeProperty = DependencyProperty.Register(
+            nameof(Purpose),
+            typeof(ButtonPurpose),
             typeof(DialogButton),
-            new PropertyMetadata(Boxing.False));
+            new PropertyMetadata(ButtonPurpose.CallToAction));
 
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
             nameof(Icon),
@@ -38,12 +37,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             typeof(DialogButton),
             new PropertyMetadata(17d));
 
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
-            nameof(CornerRadius),
-            typeof(CornerRadius),
-            typeof(DialogButton),
-            new PropertyMetadata(new CornerRadius(8)));
-
 
         private const string PART_BdName      = "PART_Bd";
         private const string PART_ContentName = "PART_Content";
@@ -54,118 +47,191 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private Path             _icon;
         private Storyboard       _storyboard;
 
+        private SolidColorBrush _backgroundBrush;
+        private SolidColorBrush _foregroundBrush;
+        private SolidColorBrush _backgroundHighlight1Brush;
+        private SolidColorBrush _backgroundHighlight2Brush;
+        private SolidColorBrush _foregroundHighlightBrush;
+        private SolidColorBrush _foregroundHighlight2Brush;
+        private SolidColorBrush _backgroundDisabledBrush;
+        private SolidColorBrush _foregroundDisabledBrush;
+
         public DialogButton()
         {
             StateMachine.StateChangedHandler = OnStateChanged;
         }
 
+        private void InvalidateState()
+        {
+            _backgroundBrush           = null;
+            _foregroundBrush           = null;
+            _backgroundHighlight1Brush = null;
+            _foregroundHighlightBrush = null;
+            _backgroundHighlight2Brush = null;
+            _foregroundHighlight2Brush = null;
+            _backgroundDisabledBrush   = null;
+            _foregroundDisabledBrush   = null;
+            InvalidateVisual();
+        }
 
         private void OnStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
-            var palette = Palette;
-            var theme   = ThemeSystem.Instance.Theme;
-
-            // 正常的背景颜色
-            var background          = theme.Colors[(int)ForestTheme.Background];
-            var foreground          = theme.Colors[(int)ForestTheme.Foreground];
-            var highlightBackground = theme.GetHighlightColor(palette, 3);
-            var activeBackground    = theme.GetHighlightColor(palette, 1);
-            var disabledBackground  = theme.Colors[(int)ForestTheme.BackgroundInactive];;
-            var highlightForeground = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
-            var disabledForeground  = theme.Colors[(int)ForestTheme.ForegroundInActive];
+            var theme = ThemeSystem.Instance.Theme;
 
             // Stop Animation
             _storyboard?.Stop(_bd);
 
             if (!init)
             {
-                HandleNormalState(
-                    ref background,
-                    ref foreground,
-                    ref disabledBackground,
-                    ref disabledForeground);
+                HandleNormalState();
             }
             else
             {
                 if (now == VisualState.Highlight1)
                 {
-                    HandleHighlight1State(
-                        theme.Duration.Medium,
-                        ref background,
-                        ref activeBackground,
-                        ref highlightForeground);
+                    HandleHighlight1State(theme.Duration.Medium);
                 }
                 else if (now == VisualState.Highlight2)
                 {
-                    HandleHighlight2State(
-                        theme.Duration.Medium,
-                        ref activeBackground,
-                        ref highlightBackground,
-                        ref highlightForeground);
+                    HandleHighlight2State(theme.Duration.Medium);
                 }
                 else if (now == VisualState.Normal)
                 {
-                    HandleNormalState(
-                        ref background,
-                        ref disabledBackground,
-                        ref disabledForeground,
-                        ref foreground);
+                    HandleNormalState();
                 }
                 else if (now == VisualState.Inactive)
                 {
-                    HandleDisabledState(ref disabledForeground, ref disabledForeground);
+                    HandleDisabledState();
                 }
             }
         }
 
-        private void HandleDisabledState(ref Color background, ref Color foreground)
+        private void SetForeground(Brush foreground)
         {
-            //
-            // 设置背景颜色
-            _bd.Background = background.ToSolidColorBrush();
-            _bd.Effect     = null;
-
-            // 设置文本颜色
-            SetForeground(ref foreground);
-        }
-
-        private void SetForeground(ref Color highlightForeground)
-        {
-            var foreground = highlightForeground.ToSolidColorBrush();
             _content.SetValue(TextElement.ForegroundProperty, foreground);
+
+            if (IsFilled)
+            {
+                _icon.StrokeThickness = 0;
+                _icon.Fill            = foreground;
+            }
+            else
+            {
+                _icon.StrokeThickness = 2;
+                _icon.Stroke          = foreground;
+            }
         }
 
-        private void HandleNormalState(ref Color background, ref Color foreground, ref Color disabledBackground, ref Color disabledForeground)
+        public static Color GetPurposeColor(ButtonPurpose purpose, int level)
+        {
+            var colors = ThemeSystem.Instance.Theme.Colors;
+
+            return level switch
+            {
+                2 => purpose switch
+                {
+
+                    ButtonPurpose.CallToAction => colors[(int)ForestTheme.HighlightA4],
+                    ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB4],
+                    ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC4],
+                    ButtonPurpose.CallToClose  => colors[(int)ForestTheme.Danger200],
+                    ButtonPurpose.Close        => colors[(int)ForestTheme.SlateGray200],
+                    ButtonPurpose.Warning      => colors[(int)ForestTheme.Warning200],
+                    ButtonPurpose.Info         => colors[(int)ForestTheme.Info200],
+                    ButtonPurpose.Success      => colors[(int)ForestTheme.Success200],
+                    ButtonPurpose.Obsolete     => colors[(int)ForestTheme.Obsolete200],
+                    _                          => colors[(int)ForestTheme.HighlightA4],
+                },
+                3 => purpose switch
+                {
+
+                    ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA5],
+                    ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB5],
+                    ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC5],
+                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.Danger300],
+                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGray300],
+                    ButtonPurpose.Warning       => colors[(int)ForestTheme.Warning300],
+                    ButtonPurpose.Info          => colors[(int)ForestTheme.Info300],
+                    ButtonPurpose.Success       => colors[(int)ForestTheme.Success300],
+                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.Obsolete300],
+                    _                           => colors[(int)ForestTheme.HighlightA5],
+                },
+                4 => purpose switch
+                {
+                    ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA1],
+                    ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB1],
+                    ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC1],
+                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.DangerDisabled],
+                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGrayDisabled],
+                    ButtonPurpose.Warning       => colors[(int)ForestTheme.WarningDisabled],
+                    ButtonPurpose.Info          => colors[(int)ForestTheme.InfoDisabled],
+                    ButtonPurpose.Success       => colors[(int)ForestTheme.SuccessDisabled],
+                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.ObsoleteDisabled],
+                    _                           => colors[(int)ForestTheme.HighlightA1],
+                },
+                _ => purpose switch
+                {
+                    ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA3],
+                    ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB3],
+                    ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC3],
+                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.Danger100],
+                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGray100],
+                    ButtonPurpose.Warning       => colors[(int)ForestTheme.Warning100],
+                    ButtonPurpose.Info          => colors[(int)ForestTheme.Info100],
+                    ButtonPurpose.Success       => colors[(int)ForestTheme.Success100],
+                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.Obsolete100],
+                    _                           => colors[(int)ForestTheme.HighlightA3],
+                }
+            };
+        }
+
+        private void HandleNormalState()
         {
             if (!IsEnabled)
             {
-                HandleDisabledState(ref disabledBackground, ref disabledForeground);
+                HandleDisabledState();
                 return;
             }
 
-            //
-            // 设置背景颜色
-            _bd.Background = background.ToSolidColorBrush();
-            _bd.Effect     = null;
+            var purpose = Purpose;               
+            var theme = ThemeSystem.Instance.Theme;
 
-            // 设置文本颜色
-            SetForeground(ref foreground);
+            if (purpose == ButtonPurpose.Close)
+            {
+                _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray100]);
+            }
+            else
+            {
+                _backgroundBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 1));
+                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            }
+
+            _bd.Background = _backgroundBrush;
+            SetForeground(_foregroundBrush);
         }
 
-        private void HandleHighlight1State(Duration duration, ref Color background, ref Color highlightBackground, ref Color highlightForeground)
+        private void HandleHighlight1State(Duration duration)
         {
             //
             // Opacity 动画
+            var purpose = Purpose;               
+            var theme   = ThemeSystem.Instance.Theme;
 
+            _foregroundHighlightBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _backgroundHighlight1Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 2));
+
+            // 白底变特殊色
+            // 高亮色变白色
             var backgroundAnimation = new ColorAnimation
             {
                 Duration = duration,
-                From     = background,
-                To       = highlightBackground,
+                From     = _backgroundBrush.Color,
+                To       = _backgroundHighlight1Brush.Color,
             };
 
             Storyboard.SetTarget(backgroundAnimation, _bd);
-            Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
+            Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
@@ -177,64 +243,70 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(ref highlightForeground);
+            SetForeground(_foregroundHighlightBrush);
         }
 
-        private void HandleHighlight2State(Duration duration, ref Color background, ref Color highlightBackground, ref Color highlightForeground)
+        private void HandleHighlight2State(Duration duration)
         {
             //
             // Opacity 动画
-            // var OpacityAnimation = new DoubleAnimation()
-            // {
-            //     Duration = duration,
-            //     From     = 0.5,
-            //     To       = 1,
-            // };
+            var purpose = Purpose;               
+            var theme   = ThemeSystem.Instance.Theme;
 
+            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _backgroundHighlight2Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 3));
+
+            // 白底变特殊色
+            // 高亮色变白色
             var backgroundAnimation = new ColorAnimation
             {
                 Duration = duration,
-                From     = background,
-                To       = highlightBackground,
+                From     = _backgroundHighlight1Brush.Color,
+                To       = _backgroundHighlight2Brush.Color,
             };
 
-            // Storyboard.SetTarget(OpacityAnimation, _bd);
             Storyboard.SetTarget(backgroundAnimation, _bd);
-            // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
-            Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
+            Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection
-                {
-                    /*OpacityAnimation,*/ backgroundAnimation
-                }
+                Children = new TimelineCollection { backgroundAnimation }
             };
 
             //
             // 开始动画
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
-            // 创建阴影
-
             // 设置文本颜色
-            // SelectionBrush = ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.HighlightA2].ToSolidColorBrush();
-            SetForeground(ref highlightForeground);
+            SetForeground(_foregroundHighlightBrush);
         }
 
+
+        private void HandleDisabledState()
+        {
+            var purpose = Purpose;               
+            var theme   = ThemeSystem.Instance.Theme;
+
+            if (purpose == ButtonPurpose.Close)
+            {
+                _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
+            }
+            else
+            {
+                _backgroundBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 4));
+                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            }
+
+            _bd.Background = _backgroundBrush;
+            SetForeground(_foregroundBrush);
+        }
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
             finder.Find<Border>(PART_BdName, x => _bd                     = x)
                   .Find<ContentPresenter>(PART_ContentName, x => _content = x)
                   .Find<Path>(PART_IconName, x => _icon                   = x);
-        }
-
-
-        public CornerRadius CornerRadius
-        {
-            get => (CornerRadius)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
         }
 
         public double IconSize
@@ -255,10 +327,10 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             set => SetValue(IconProperty, value);
         }
 
-        public bool SensitiveCase
+        public ButtonPurpose Purpose
         {
-            get => (bool)GetValue(SensitiveCaseProperty);
-            set => SetValue(SensitiveCaseProperty, Boxing.Box(value));
+            get => (ButtonPurpose)GetValue(PurposeProperty);
+            set => SetValue(PurposeProperty, value);
         }
     }
 }
