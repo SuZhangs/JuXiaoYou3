@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
 
             Colors.TryAdd((int)ForestTheme.Danger100, Color.FromRgb(0xbb, 0x21, 0x24));
             Colors.TryAdd((int)ForestTheme.Danger200, Color.FromRgb(0xd9, 0x08, 0x0c));
-            Colors.TryAdd((int)ForestTheme.Danger300, Color.FromRgb(0x60, 0x06, 0x09));
+            Colors.TryAdd((int)ForestTheme.Danger300, Color.FromRgb(0xA6, 0x06, 0x09));
             Colors.TryAdd((int)ForestTheme.DangerDisabled, Color.FromRgb(0xec, 0x93, 0x94));
             
             Colors.TryAdd((int)ForestTheme.Warning100, Color.FromRgb(0xdb, 0x94, 0x00));
