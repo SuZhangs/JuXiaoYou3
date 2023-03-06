@@ -15,7 +15,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Views/BuiltinViewStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Image.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -63,14 +64,14 @@
                          Height="48"
                          Margin="16"
                          Rows="1">
-                <f:DialogButton Icon="{StaticResource Checked}"
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
                                 IconSize="29"
                                 IsDefault="True"
                                 Content="{Binding CompleteButtonText,Mode=OneWay}"
                                 Command="{Binding CompletedCommand}"
                                 Purpose="Close"/>
                 
-                <f:DialogButton Icon="{StaticResource Close}"
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
                                 Content="{Binding CancelButtonText,Mode=OneWay}"
                                 Command="{Binding CancelCommand}"
                                 Purpose="CallToClose"/>

@@ -8,51 +8,83 @@
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
-             d:DesignHeight="640"
-             d:DesignWidth="960"
+             d:DesignHeight="480"
+             d:DesignWidth="768"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewDocumentWizardViewModel}, IsDesignTimeCreatable=True}"
-             Height="640"
-             Width="960">
-    <Grid Background="{f:BackgroundBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
+             Height="480"
+             Width="480">
+    <Border Background="{f:BackgroundBrush}"
+            CornerRadius="10"
+            BorderThickness="0 4 0 0"
+            BorderBrush="{f:Brush HighlightA3}"
+            Padding="16">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"/>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <DockPanel>
-            <DockPanel DockPanel.Dock="Top">
-                <TextBlock DockPanel.Dock="Top"
-                           FontSize="24"
-                           FontWeight="Bold"
-                           Text="分类"/>
-                <TextBlock DockPanel.Dock="Top"
-                           Text="选择设定类型"/>
-            </DockPanel>
-
-            <WrapPanel>
-                <RadioButton Content="人设"/>
-                <RadioButton Content="物品"/>
-                <RadioButton Content="能力"/>
-                <RadioButton Content="地图"/>
-                <RadioButton Content="其他"/>
-            </WrapPanel>
-        </DockPanel>
-
-        <DockPanel Grid.Column="1">
-            <TextBlock DockPanel.Dock="Top"
+            <!-- 标题 -->
                        FontSize="24"
                        FontWeight="Bold"
-                       Text="基本信息"/>
-            <StackPanel>
-                <f:LooklessButton Height="192"
-                                  Width="192">
-                    <Border Background="Gray">
-                        
-                    </Border>
-                </f:LooklessButton>
+                       Foreground="{f:Brush HighlightA3}"
+                       HorizontalAlignment="Center"
+                       Margin="0 16 0 0"
+                       Text="创建设定"
+                       VerticalAlignment="Center" />
 
-                <ui:TextBox PlaceholderText="名字"/>
-            </StackPanel>
-        </DockPanel>
-    </Grid>
+            <Grid Grid.Row="1"
+                  Margin="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="144" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <f:LooklessButton Height="144"
+                                  Width="144">
+                    <Border Background="Gray"
+                                CornerRadius="12"/>
+                </f:LooklessButton>
+                <ui:TextBox Grid.Row="1"
+                            Margin="0 24"
+                            PlaceholderText="名字"
+                            Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <UniformGrid Grid.Row="2"
+                             Columns="5"
+                             Rows="0">
+                    <RadioButton Content="人设"/>
+                    <RadioButton Content="物品"/>
+                    <RadioButton Content="能力"/>
+                    <RadioButton Content="地图"/>
+                    <RadioButton Content="其他"/>
+                </UniformGrid>
+            </Grid>
+
+            <!-- 按钮 -->
+            <UniformGrid Grid.Row="3"
+                         Columns="2"
+                         HorizontalAlignment="Right"
+                         Height="48"
+                         Margin="16"
+                         Rows="1"
+                         Width="280">
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
+                                IconSize="29"
+                                IsDefault="True"
+                                Content="{x:Static f:Language.ConfirmText}"
+                                Command="{Binding CompletedCommand}"
+                                Purpose="CallToAction"/>
+
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
+                                Content="{x:Static f:Language.CancelText}"
+                                Command="{Binding CancelCommand}"
+                                Purpose="Close"/>
+            </UniformGrid>
+        </Grid>
+    </Border>
 </UserControl>

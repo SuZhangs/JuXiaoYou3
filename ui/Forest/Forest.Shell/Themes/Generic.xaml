@@ -5,6 +5,10 @@
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls"
                     xmlns:m="clr-namespace:Acorisoft.FutureGL.Forest.Models"
                     xmlns:w="clr-namespace:Acorisoft.FutureGL.Forest">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialDesignIcon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <!-- Dialog Host -->
     <Style x:Key="Indicator"

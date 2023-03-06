@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public class NewDocumentWizardViewModel : DialogViewModel
+    public class NewDocumentWizardViewModel : InputViewModel
     {
         private string _name;
         private string _avatar;
@@ -35,6 +35,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         {
             get => _name;
             set => SetValue(ref _name, value);
+        }
+
+        protected override bool IsCompleted()
+        {
+            return false;
+        }
+
+        protected override void Finish()
+        {
+        }
+
+        protected override string Failed()
+        {
+            return string.Empty;
         }
     }
 }

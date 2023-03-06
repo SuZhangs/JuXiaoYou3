@@ -16,8 +16,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
-                <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/Icons/BasicIcon.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/Icons/MaterialDesignIcon.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/ListBoxItem.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
             </ResourceDictionary.MergedDictionaries>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:f="urn:acorisoft/forest/shell"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.Demo.ViewHost.Views"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.Demo.ViewModels"
              xmlns:dialog="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery;assembly=SubSystem"
@@ -10,13 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:HostViewModel}, IsDesignTimeCreatable=True}">
     <Grid>
-        <Border Background="#30000000">
-            <dialog:NewDocumentWizard Height="640"
-                                    Width="960">
-                <UserControl.DataContext>
-                    <dialog:NewDocumentWizardViewModel/>
-                </UserControl.DataContext>
-            </dialog:NewDocumentWizard>
-        </Border>
+        <f:DialogHost>
+        </f:DialogHost>
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     {
         protected InputViewModel() : base()
         {
-            CompletedCommand = new RelayCommand(Complete, IsCompleted);
+            CompletedCommand = new RelayCommand(Complete);
         }
 
         protected void Complete()
@@ -19,18 +19,25 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                 return;
             }
 
-            //
-            //
-            Finish();
-
-            //
-            //
-            if (Wait.TrySetResult(Op<object>.Success(Result)))
+            if (IsCompleted())
             {
                 //
-                // 清理现场
-                CloseAction();
-                CloseAction = null;
+                //
+                Finish();
+
+                //
+                //
+                if (Wait.TrySetResult(Op<object>.Success(Result)))
+                {
+                    //
+                    // 清理现场
+                    CloseAction();
+                    CloseAction = null;
+                }
+            }
+            else
+            {
+                Xaml.Get<IBuiltinDialogService>().Warning("提示", Failed());
             }
         }
 
