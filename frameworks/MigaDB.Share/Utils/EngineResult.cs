@@ -3,6 +3,11 @@
     public enum EngineFailedReason
     {
         /// <summary>
+        /// 用户取消
+        /// </summary>
+        Cancelled,
+        
+        /// <summary>
         /// 没有改变
         /// </summary>
         NoChanged,

@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using DryIoc;
@@ -383,5 +385,22 @@ namespace Acorisoft.FutureGL.Forest
         /// <param name="color">要转换的颜色</param>
         /// <returns>返回纯色画刷</returns>
         public static SolidColorBrush ToSolidColorBrush(this Color color) => new SolidColorBrush(color);
+
+        public static ImageSource FromStream(byte[] buffer, int w, int h)
+        {
+            var ms = new MemoryStream(buffer);
+            return FromStream(ms, w, h);
+        }
+        
+        public static ImageSource FromStream(MemoryStream ms, int w, int h)
+        {
+            var bi = new BitmapImage();
+            bi.BeginInit();
+            bi.DecodePixelWidth  = w;
+            bi.DecodePixelHeight = h;
+            bi.StreamSource      = ms;
+            bi.EndInit();
+            return bi;
+        }
     }
 }

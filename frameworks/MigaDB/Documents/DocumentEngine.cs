@@ -24,6 +24,46 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         }
 
         #region Documents
+        
+        
+        /// <summary>
+        /// 添加文档
+        /// </summary>
+        /// <param name="document">指定要添加的文档</param>
+        /// <returns>返回操作结果</returns>
+        public EngineResult AddDocument(DocumentCache document)
+        {
+            if (document is null)
+            {
+                return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
+            }
+
+            if (string.IsNullOrEmpty(document.Id))
+            {
+                return EngineResult.Failed(EngineFailedReason.MissingId);
+            }
+
+            if (DocumentDB.HasID(document.Id) ||
+                DocumentCacheDB.HasID(document.Id))
+            {
+                return EngineResult.Failed(EngineFailedReason.Duplicated);
+            }
+
+
+            DocumentCacheDB.Insert(document);
+            
+            //
+            // 一致性检查
+            if (!DocumentDB.HasID(document.Id) ||
+                !DocumentCacheDB.HasID(document.Id))
+            {
+                return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
+            }
+            
+            //
+            //
+            return EngineResult.Successful;
+        }
 
         /// <summary>
         /// 添加文档
