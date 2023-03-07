@@ -404,6 +404,7 @@ namespace Acorisoft.FutureGL.Forest
             ms.Seek(0, SeekOrigin.Begin);
             var bi = new BitmapImage();
             bi.BeginInit();
+            bi.CacheOption       = BitmapCacheOption.OnLoad;
             bi.DecodePixelWidth  = w;
             bi.DecodePixelHeight = h;
             bi.StreamSource      = ms;

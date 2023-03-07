@@ -12,7 +12,6 @@ namespace Acorisoft.FutureGL.Forest.Styles
 
         private void InitializeColors()
         {
-            
             Colors.TryAdd((int)ForestTheme.HighlightA1, Color.FromRgb(0xff, 0xda, 0x96));
             Colors.TryAdd((int)ForestTheme.HighlightA2, Color.FromRgb(0xff, 0xc2, 0x54));
             Colors.TryAdd((int)ForestTheme.HighlightA3, Color.FromRgb(0xff, 0xab, 0x12));

@@ -310,11 +310,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void ScaleRate_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var minSize      = Math.Min(32, _minImageSize);
+            var minSize      = Math.Min(100, _minImageSize);
 
             Scale               = ScaleRate.Value;
-            ScaleDown.IsEnabled = _thumbOriginalSize * ((Scale + ScaleFactor) / 100d) <= _minImageSize;
-            ScaleUp.IsEnabled   = minSize <= _thumbOriginalSize * ((Scale - ScaleFactor) / 100d) ;
+            ScaleUp.IsEnabled = _thumbOriginalSize * ((Scale + ScaleFactor) / 100d) <= _minImageSize;
+            ScaleDown.IsEnabled   = minSize < _thumbOriginalSize * ((Scale - ScaleFactor) / 100d) ;
             ThumbSize           = _thumbOriginalSize * Scale / 100d;
             Thumb.Width         = ThumbSize;
             Thumb.Height        = ThumbSize;

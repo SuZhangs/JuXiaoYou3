@@ -21,9 +21,6 @@
     </fs:ForestWindow.TitleBar>
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Views/BuiltinViewStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <Geometry x:Key="Icon">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
         </ResourceDictionary>
     </Window.Resources>
@@ -95,53 +92,6 @@
                    <cp:StandardColorPicker Margin="16" Height="418" Width="220"/>
                </WrapPanel>
            </ScrollViewer>
-        </f:HighlightTabItem>
-        <f:HighlightTabItem Header="对话框按钮" Icon="{StaticResource Icon}">
-            <StackPanel>
-                <WrapPanel>
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource CancelButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource CancelButton2}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource CancelButton3}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource CancelButton4}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource CloseButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource DangerButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource WarningButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource InfoButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource SuccessButton}" />
-                    <Button Height="48"
-                        Content="Test"
-                        Style="{StaticResource ObsoleteButton}" />
-                </WrapPanel>
-                <WrapPanel Margin="0 64 0 0">
-                    <f:DialogButton Content="Test" Purpose="CallToAction" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="CallToAction2" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="CallToAction3" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="CallToClose" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="Close" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="Info" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="Obsolete" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="Success" Height="48"/>
-                    <f:DialogButton Content="Test" Purpose="Warning" Height="48"/>
-                </WrapPanel>
-            </StackPanel>
         </f:HighlightTabItem>
         <f:HighlightTabItem Header="按钮组" Icon="{StaticResource Icon}">
         <WrapPanel Background="#F1F1F1">

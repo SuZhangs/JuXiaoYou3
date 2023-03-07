@@ -22,11 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private double _posX;
         private double _posY;
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
         protected override void OnStart(Parameter parameter)
         {
             if (parameter.Args[0] is Image<Rgba32> img &&
@@ -52,6 +47,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void Finish()
         {
+            BackendImage.Dispose();
+            BackgroundImage.Dispose();
+            BackendImage    = null;
+            BackgroundImage = null;
             var ms = new MemoryStream();
             BackendImage.Mutate(x => { x.Crop(new Rectangle((int)PosX, (int)PosY, (int)ThumbSize, (int)ThumbSize)); });
             BackendImage.SaveAsPng(ms);

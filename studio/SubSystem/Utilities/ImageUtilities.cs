@@ -94,6 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                     if (!r.IsFinished)
                     {
+                        ms.Dispose();
                         return new ImageOpResult { IsFinished = false };
                     }
 
