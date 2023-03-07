@@ -27,6 +27,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                     //
                     // 加载
                     notification.Synchronizer.Set();
+                    Reset();
                     OnDatabaseOpening(notification.Session);
                     notification.Synchronizer.Unset();
                 }
@@ -58,6 +59,10 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         #endregion
 
+        private void Reset() => Version = 0;
+        
+        protected void Modified() => Version++;
+
         // /// <summary>
         // /// 刷新
         // /// </summary>
@@ -81,6 +86,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 RootDirectory = adapter.Directory
             };
             
+            Reset();
             OnDatabaseOpening(session);
         }
 
@@ -110,6 +116,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             {
                 try
                 {
+                    Reset();
                     OnDatabaseOpening(_notification.Session);
                     _notification = null;
                     Activated     = true;
@@ -123,6 +130,11 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
             return Activated;
         }
+        
+        /// <summary>
+        /// 版本，用于避免过度刷新
+        /// </summary>
+        public int Version { get; private set; }
         
         /// <summary>
         /// 是否为懒加载模式

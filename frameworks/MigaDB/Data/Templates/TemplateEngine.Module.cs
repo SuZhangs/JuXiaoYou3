@@ -93,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             {
                 var payload = await PNG.ReadDataAsync(fileName);
                 var template = JSON.FromJson<ModuleTemplate>(payload);
+                Modified();
                 return await AddTemplate(template);
             }
             catch (IOException)
@@ -155,6 +156,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                     UpdateMetadata(templateInside, template);
                 }
 
+                Modified();
                 return EngineResult.Successful;
             });
         }
@@ -182,6 +184,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                     TemplateDB.Delete(template.Id);
                     TemplateCacheDB.Delete(template.Id);
                     RemoveMetadata(template);
+                    Modified();
                     return EngineResult.Successful;
                 }
                 

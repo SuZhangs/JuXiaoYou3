@@ -380,10 +380,23 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <typeparam name="TViewModel">视图模型类型</typeparam>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<T>> Dialog<T, TViewModel>() where TViewModel : IDialogViewModel
-            => _host.ShowDialog<T>(Classes.CreateInstance<TViewModel>(), new Parameter());
+            => _host.ShowDialog<T>(Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>(), new Parameter());
 
         public Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel) where TViewModel : IDialogViewModel
             => _host.ShowDialog<T>(viewModel, new Parameter());
+        
+        
+        /// <summary>
+        /// 弹出对话框
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <typeparam name="TViewModel">视图模型类型</typeparam>
+        /// <param name="parameter">参数</param>
+        /// <returns>返回一个可等待的任务</returns>
+        public Task<Op<T>> Dialog<T, TViewModel>(Parameter parameter) where TViewModel : IDialogViewModel
+        {
+           return _host.ShowDialog<T>(Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>(), parameter);
+        } 
 
         /// <summary>
         /// 弹出对话框

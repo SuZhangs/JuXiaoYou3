@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Acorisoft.FutureGL.Forest.Attributes;
@@ -17,11 +18,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
     public class NewDocumentWizardViewModel : InputViewModel
     {
-        private        string       _name;
-        private        ImageSource  _avatar;
-        private        Resource     _resource;
-        private        byte[]       _buffer;
-        private static DocumentType _type = DocumentType.CharacterConstraint;
+        private                 string       _name;
+        private                 ImageSource  _avatar;
+        private                 MemoryStream _buffer;
+        private static          DocumentType _type = DocumentType.CharacterConstraint;
 
         public NewDocumentWizardViewModel()
         {
@@ -44,11 +44,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             //
             //
             Avatar    = Xaml.FromStream(op.Buffer, 256, 256);
-            _resource = op.Resource;
             _buffer   = op.Buffer;
         }
-        
-        
+
 
         protected override bool IsCompleted()
         {
@@ -64,23 +62,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             if (!dm.IsOpen.CurrentValue)
             {
                 Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Warning, 
-                    StringFromCode.Notify, 
+                    CriticalLevel.Warning,
+                    StringFromCode.Notify,
                     StringFromCode.GetDatabaseResult(DatabaseFailedReason.DatabaseNotOpen));
                 return;
             }
 
-            var ie  = dm.GetEngine<ImageEngine>();
-            var de  = dm.GetEngine<DocumentEngine>();
+            var ie           = dm.GetEngine<ImageEngine>();
+            var de           = dm.GetEngine<DocumentEngine>();
+            var originLength = (int)_buffer.Length;
+            var originBuffer = _buffer.GetBuffer();
+            var saltedStream = new MemoryStream(originBuffer, 0, originLength);
             
+            saltedStream.Write(BitConverter.GetBytes(originLength));
+
+            var    raw = Pool.MD5.ComputeHash(saltedStream);
+            var    md5 = Convert.ToBase64String(raw);
+            string avatar;
+            
+            if (ie.HasFile(md5))
+            {
+                var fr = ie.Records.FindById(md5);
+                avatar = fr.Uri;
+            }
+            else
+            {
+                avatar = Resource.ToUnifiedUri($"avatar_{ID.Get()}", ResourceType.Image);
+                var record = new FileRecord
+                {
+                    Id  = md5,
+                    Uri = avatar,
+                };
+
+                ie.AddFile(record);
+                ie.SetAvatar(_buffer, avatar);
+            }
+            
+
             //
             // 写入图片，不做去重处理
-            ie.Write(_buffer, _resource);
-            
+
             var document = new DocumentCache
             {
                 Id             = ID.Get(),
-                Avatar         = _resource.GetUri(),
+                Avatar         = avatar,
                 Keywords       = new ObservableCollection<string>(),
                 Name           = _name,
                 Removable      = false,
@@ -90,23 +115,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 Version        = 1,
                 IsDeleted      = false,
             };
-            
+
             var r = de.AddDocument(document);
 
             if (r.IsFinished)
-            {                
+            {
                 Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Success, 
-                    StringFromCode.Notify, 
+                    CriticalLevel.Success,
+                    StringFromCode.Notify,
                     StringFromCode.OperationOfAddIsSuccess);
             }
             else
             {
                 Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Warning, 
-                    StringFromCode.Notify, 
+                    CriticalLevel.Warning,
+                    StringFromCode.Notify,
                     StringFromCode.GetEngineResult(r.Reason));
             }
+
+            Result = document;
         }
 
         protected override string Failed()
@@ -140,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             get => _name;
             set => SetValue(ref _name, value);
         }
-        
+
         public AsyncRelayCommand SetAvatarCommand { get; }
     }
 }

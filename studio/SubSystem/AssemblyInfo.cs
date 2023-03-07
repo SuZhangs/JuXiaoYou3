@@ -1,5 +1,7 @@
-global using Acorisoft.FutureGL.MigaStudio.ViewModels;
 global using Acorisoft.FutureGL.Forest;
+global using Acorisoft.FutureGL.Forest.ViewModels;
+
+global using Acorisoft.FutureGL.MigaStudio.ViewModels;
 global using Acorisoft.FutureGL.MigaUtils;
 
 using System.Windows;

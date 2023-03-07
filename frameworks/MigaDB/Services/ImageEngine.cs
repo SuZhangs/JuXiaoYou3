@@ -9,9 +9,9 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             
         }
 
-        public void Write(byte[] buffer, Resource resource)
+        public void SetAvatar(MemoryStream ms, string resource)
         {
-            if (buffer is null)
+            if (ms is null || ms.Length == 0)
             {
                 return;
             }
@@ -21,10 +21,10 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 return;
             }
 
-            var dst = Path.Combine(FullDirectory, resource.RelativePath);
+            var dst = Path.Combine(FullDirectory, $"{resource}.png");
             var fs  = new FileStream(dst, FileMode.Create, FileAccess.Write);
             
-            fs.Write(buffer, 0, buffer.Length);
+            ms.CopyTo(fs);
             fs.Dispose();
         }
     }

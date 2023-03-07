@@ -1,8 +1,11 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.IO
-{
+﻿using System.Text;
 
+namespace Acorisoft.FutureGL.MigaDB.IO
+{
     public class Resource
     {
+        private static readonly byte[] Prefix = Encoding.ASCII.GetBytes("pos_");
+        
         public static string ParseOldVersion(string src)
         {
             if (string.IsNullOrEmpty(src))
@@ -27,10 +30,10 @@
                 return null;
             }
 
-            var schemeName = src[..4];
+            var schemeName      = src[..4];
             var schemeVerPrefix = src[7];
-            var schemeVer = int.TryParse(src.AsSpan(8, 1), out var val) ? val : 0;
-            var param = src[14..];
+            var schemeVer       = int.TryParse(src.AsSpan(8, 1), out var val) ? val : 0;
+            var param           = src[14..];
 
             // ReSharper disable once MergeIntoLogicalPattern
             if (schemeVerPrefix != 'v' && schemeVerPrefix != 'V')
@@ -46,30 +49,29 @@
 
             return schemeName.EqualsWithIgnoreCase("miga") ? $"resx.v100.{param}" : null;
         }
-        
-        /// <summary>
-        /// 获得绝对路径
-        /// </summary>
-        /// <param name="path">基础地址</param>
-        /// <returns>返回绝对路径</returns>
-        public string GetAbsolutePath(string path)
+
+        private static byte GetFlags(ResourceType type)
         {
-            return Path.Combine(path, RelativePath);
+            return type switch
+            {
+                ResourceType.Video => 0x76, // v
+                ResourceType.Audio => 0x61, // a
+                ResourceType.File  => 0x66, // f
+                ResourceType.Music => 0x6d, //m
+                _                  => 0x69  // i
+            };
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public string GetUri()
+        public static string ToUnifiedUri(string id, ResourceType type)
         {
-            throw new NotSupportedException();
+            // pos_i:{id}
+            var buffer = new byte[6 + id.Length];
+            var ascii  = Encoding.ASCII.GetBytes(id);
+            Array.Copy(Prefix, buffer, Prefix.Length);
+            buffer[Prefix.Length] = GetFlags(type);
+            Array.Copy(ascii, 0, buffer, Prefix.Length + 1, ascii.Length);
+
+            return Encoding.ASCII.GetString(buffer);
         }
-        
-        /// <summary>
-        /// 相对路径
-        /// </summary>
-        public string RelativePath { get; init; }
     }
 }

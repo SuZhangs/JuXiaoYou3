@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
         public HostView()
         {
             InitializeComponent();
-            Xaml.Get<IDialogService>().Dialog<Document, NewDocumentWizardViewModel>();
+            Xaml.Get<IDialogService>().Dialog<DocumentCache, NewDocumentWizardViewModel>();
         }
     }
 }

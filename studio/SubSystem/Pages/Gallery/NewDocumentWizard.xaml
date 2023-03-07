@@ -25,7 +25,7 @@
             Padding="16">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="64"/>
+                <RowDefinition Height="48"/>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -38,29 +38,30 @@
                        HorizontalAlignment="Center"
                        Margin="0 16 0 0"
                        Text="创建设定"
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Top" />
 
             <Grid Grid.Row="1"
                   Margin="16">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="144" />
+                    <RowDefinition Height="128" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
 
-                <f:LooklessButton Height="144"
-                                  Width="144">
+                <f:LooklessButton Height="128"
+                                  Width="128">
                     <Border Background="Gray"
                                 CornerRadius="12"/>
                 </f:LooklessButton>
                 <ui:TextBox Grid.Row="1"
-                            Margin="16 24"
+                            Margin="48 24"
                             PlaceholderText="名字"
                             Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <ListBox Grid.Row="2"
+                         HorizontalAlignment="Center"
                          ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
                          SelectedItem="{Binding Type,Mode=TwoWay}">
                     <ListBox.ItemTemplate>
@@ -68,6 +69,11 @@
                             <TextBlock Text="{Binding Converter={StaticResource Translation}}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
                 </ListBox>
             </Grid>
 

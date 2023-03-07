@@ -62,6 +62,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             
             //
             //
+            Modified();
             return EngineResult.Successful;
         }
 
@@ -121,6 +122,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             
             //
             //
+            Modified();
             return EngineResult.Successful;
         }
 
@@ -147,6 +149,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             cache.TimeOfModified = DateTime.Now;
 
 
+            Modified();
             DocumentCacheDB.Update(cache);
         }
 
@@ -193,6 +196,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             cache.IsDeleted      = false;
             cache.TimeOfModified = DateTime.Now;
 
+            Modified();
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
         }
@@ -248,6 +252,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             var markAsDeletedComposeCache = ComposeCacheDB.Find(Query.EQ("IsDeleted", true)).Select(x => x.Id).ToHashSet();
             ComposeCacheDB.DeleteMany(x => x.IsDeleted);
             ComposeDB.DeleteMany(x => markAsDeletedComposeCache.Contains(x.Id));
+            
+            Modified();
         }
 
         /// <summary>

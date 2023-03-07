@@ -254,7 +254,7 @@ namespace $NAMESPACE$&#xD;
              xmlns:thisVM="clr-namespace:$NAMESPACE$"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:$CLASS$ViewModel}, IsDesignTimeCreatable=True}"&gt;
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:$CLASS$Model}, IsDesignTimeCreatable=True}"&gt;
     &lt;Grid&gt;
 	    $END$
     &lt;/Grid&gt;
