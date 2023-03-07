@@ -18,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
+            Xaml.InstallView<DocumentGallery, DocumentGalleryViewModel>();
         }
     }
 }

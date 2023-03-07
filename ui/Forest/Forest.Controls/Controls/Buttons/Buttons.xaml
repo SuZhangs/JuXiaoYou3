@@ -231,6 +231,7 @@
     </Style>
 
     <Style TargetType="{x:Type b:HighlightButton}">
+        <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -241,7 +242,7 @@
                 <ControlTemplate TargetType="{x:Type b:HighlightButton}">
                     <Border x:Name="PART_Bd"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="8"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             SnapsToDevicePixels="true"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="PART_Content"

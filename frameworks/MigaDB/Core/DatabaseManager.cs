@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
@@ -28,6 +29,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             return CreateBuilder(logger)
                 .Setup<TemplateEngine>()
+                .Setup<DocumentEngine>()
                 .Build(Constants.DatabaseCurrentVersion);
         }
 

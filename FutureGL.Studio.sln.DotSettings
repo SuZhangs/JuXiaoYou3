@@ -64,6 +64,8 @@
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
+
+    [Connected(View = typeof($CLASS$), ViewModel = typeof($CLASS$Model))]&#xD;
     public partial class $CLASS$ : UserControl&#xD;
     {&#xD;
         public $CLASS$()&#xD;
@@ -235,6 +237,7 @@ namespace $NAMESPACE$&#xD;
 &#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
+    [Connected(View = typeof($CLASS$), ViewModel = typeof($CLASS$Model))]&#xD;
     public partial class $CLASS$ : UserControl&#xD;
     {&#xD;
         public $CLASS$()&#xD;

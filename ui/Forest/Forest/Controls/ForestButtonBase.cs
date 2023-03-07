@@ -21,6 +21,13 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(HighlightColorPalette),
             typeof(ForestButtonBase),
             new PropertyMetadata(default(HighlightColorPalette)));
+
+
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            nameof(CornerRadius),
+            typeof(CornerRadius),
+            typeof(ForestButtonBase),
+            new PropertyMetadata(default(CornerRadius)));
         
         protected ForestButtonBase()
         {
@@ -206,6 +213,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             get => (HighlightColorPalette)GetValue(PaletteProperty);
             set => SetValue(PaletteProperty, value);
+        }
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
         }
     }
 }

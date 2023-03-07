@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.Forest.Services
 
         public void Route(IViewModel viewModel)
         {
-            Route(viewModel, new Parameter());
+            Route(viewModel, new Parameter { Args = new object[8] });
         }
 
         public void Route(IViewModel viewModel, Parameter parameter)
