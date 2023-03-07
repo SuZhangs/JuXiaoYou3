@@ -3,6 +3,7 @@ using System.Buffers;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
@@ -24,9 +25,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
     public class ImageUtilities
     {
-        private static readonly byte[] __MemoryBuffer = new byte[8 * 1048576];
-        private static readonly MD5    _md5           = MD5.Create();
-
         public static async Task<ImageOpResult> Avatar()
         {
             var opendlg = new VistaOpenFileDialog
@@ -44,8 +42,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             //
             //
-            var          image = Image.Load<Rgba32>(fileName);
-            MemoryStream ms;
+            var buffer = await File.ReadAllBytesAsync(fileName);
+            var ms     = new MemoryStream(buffer);
+            var image  = Image.Load<Rgba32>(buffer);
+            
+
+            if (image.Width < 32 || image.Height < 32)
+            {
+                buffer = null;
+                image.Dispose();
+                ms.Dispose();
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.ImageTooSmall);
+                return new ImageOpResult{ IsFinished = false};
+            }
+
+            if (image.Width > 1920 || image.Height > 1080)
+            {
+                buffer = null;
+                image.Dispose();
+                ms.Dispose();
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.ImageTooBig);
+                return new ImageOpResult{ IsFinished = false};
+            }
 
             if (image.Width != image.Height)
             {
@@ -54,7 +72,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 {
                     Args = new object[]
                     {
-                        image
+                        image,
+                        ms
                     }
                 });
 
@@ -63,46 +82,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     return new ImageOpResult { IsFinished = false };
                 }
 
+                ms.Dispose();
                 ms = r.Value;
             }
             else
             {
-                ms = new MemoryStream(__MemoryBuffer);
+                ms.Dispose();
+                ms = new MemoryStream();
                 await image.SaveAsPngAsync(ms);
             }
-            
-            
-
-            //
-            // 计算HASH
-            var originLength = (int)ms.Length;
-            var originBuffer = ms.GetBuffer();
-            var saltedStream = new MemoryStream(originBuffer, 0, originLength);
-            saltedStream.Write(BitConverter.GetBytes(originLength));
-
-            var raw = await _md5.ComputeHashAsync(saltedStream);
-            var md5 = Convert.ToBase64String(raw);
-            var ie  = Xaml.Get<ImageEngine>();
-            var uri = Resource.ToUnifiedUri($"avatar_{ID.Get()}", ResourceType.Image);
-
-            if (ie.HasFile(md5))
-            {
-                var fr = ie.Records.FindById(md5);
-                return new ImageOpResult
-                {
-                    IsFinished = true,
-                    Buffer     = ms,
-                    FileName   = opendlg.FileName
-                };
-            }
-
-            var record = new FileRecord
-            {
-                Id  = md5,
-                Uri = uri,
-            };
-
-            ie.AddFile(record);
 
             return new ImageOpResult
             {

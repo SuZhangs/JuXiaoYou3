@@ -43,8 +43,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
             //
             //
-            Avatar    = Xaml.FromStream(op.Buffer, 256, 256);
-            _buffer   = op.Buffer;
+            try
+            {
+                Avatar  = Xaml.FromStream(op.Buffer, 256, 256);
+                _buffer = op.Buffer;
+            }
+            catch
+            {
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.BadImage);
+            }
         }
 
 

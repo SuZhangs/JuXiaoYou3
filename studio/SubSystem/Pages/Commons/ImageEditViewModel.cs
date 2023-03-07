@@ -1,7 +1,14 @@
-﻿
+﻿using System;
+using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using Size = SixLabors.ImageSharp.Size;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -11,7 +18,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private double _imageWidth;
         private double _imageHeight;
         private double _thumbSize;
-        
+        private double _posX;
+        private double _posY;
+
         public override void Start()
         {
             base.Start();
@@ -19,11 +28,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnStart(Parameter parameter)
         {
-            if (parameter.Args[0] is Image<Rgba32> img)
+            if (parameter.Args[0] is Image<Rgba32> img &&
+                parameter.Args[1] is MemoryStream ms)
             {
-                BackendImage = img;
-                ImageWidth   = img.Width;
-                _imageHeight = img.Height;
+                ms.Seek(0, SeekOrigin.Begin);
+
+                BackendImage    = img;
+                BackgroundImage = ms;
+                ImageWidth      = img.Width;
+                ImageHeight     = img.Height;
             }
         }
 
@@ -34,25 +47,42 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             base.ReleaseManagedResources();
         }
 
-        protected override bool IsCompleted()
-        {
-            throw new System.NotImplementedException();
-        }
+        protected override bool IsCompleted() => true;
 
         protected override void Finish()
         {
-            throw new System.NotImplementedException();
+            var ms = new MemoryStream();
+            BackendImage.Mutate(x => { x.Crop(new Rectangle((int)PosX, (int)PosY, (int)ThumbSize, (int)ThumbSize)); });
+            BackendImage.SaveAsPng(ms);
+            Result = ms;
         }
 
-        protected override string Failed()
-        {
-            throw new System.NotImplementedException();
-        }
-        
+        protected override string Failed() => string.Empty;
+
         /// <summary>
         /// 目标图片
         /// </summary>
         public Image<Rgba32> BackendImage { get; private set; }
+
+        public MemoryStream BackgroundImage { get; private set; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="ThumbSize"/> 属性。
+        /// </summary>
+        public double PosX
+        {
+            get => _posX;
+            set => SetValue(ref _posX, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="ThumbSize"/> 属性。
+        /// </summary>
+        public double PosY
+        {
+            get => _posY;
+            set => SetValue(ref _posY, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="ThumbSize"/> 属性。

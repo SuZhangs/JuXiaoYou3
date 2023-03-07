@@ -401,6 +401,7 @@ namespace Acorisoft.FutureGL.Forest
         
         public static ImageSource FromStream(MemoryStream ms, int w, int h)
         {
+            ms.Seek(0, SeekOrigin.Begin);
             var bi = new BitmapImage();
             bi.BeginInit();
             bi.DecodePixelWidth  = w;

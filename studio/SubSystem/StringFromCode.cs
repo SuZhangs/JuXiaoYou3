@@ -1,4 +1,6 @@
-﻿using Acorisoft.FutureGL.Forest.Services;
+﻿using System;
+using System.IO;
+using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio
@@ -19,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "SubSystem.cn.ini",
             };
             LanguageDictionary = new CustomLanguage();
-            LanguageDictionary.SetLanguage(fileName);
+            LanguageDictionary.SetLanguage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
         }
         
         public static string GetText(string id)
@@ -59,12 +61,15 @@ namespace Acorisoft.FutureGL.MigaStudio
             // TODO: 翻译
             return reason switch
             { 
-                EngineFailedReason.Duplicated => GetText("Enum.EngineFailedReason.Duplicated"),
-                _ => GetText("Enum.EngineFailedReason.Unknown")
+                EngineFailedReason.Duplicated => GetText("enum.EngineFailedReason.Duplicated"),
+                _ => GetText("enum.EngineFailedReason.Unknown")
             };
         }
 
         public static string Notify => GetText("dialog.title.notify");
+        public static string BadImage => GetText("text.notimage");
+        public static string ImageTooSmall => GetText("text.ImageTooSmall");
+        public static string ImageTooBig => GetText("text.ImageTooBig");
         
         public static string OperationOfAddIsSuccess => GetText("text.OperationOfAddIsSuccess");
         

@@ -7,6 +7,7 @@
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
              xmlns:thisResources="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:thisMarkups="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Markup"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
@@ -16,7 +17,7 @@
              Height="480"
              Width="480">
     <UserControl.Resources>
-        <thisConverters:TranslationConverter x:Key="Translation"/>
+        <thisConverters:TranslationConverter x:Key="Translation" />
     </UserControl.Resources>
     <Border Background="{f:BackgroundBrush}"
             CornerRadius="10"
@@ -25,7 +26,7 @@
             Padding="16">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
+                <RowDefinition Height="48" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -37,7 +38,7 @@
                        Foreground="{f:Brush HighlightA3}"
                        HorizontalAlignment="Center"
                        Margin="0 16 0 0"
-                       Text="创建设定"
+                       Text="{thisMarkups:Text dialog.title.NewDocumentWizard}"
                        VerticalAlignment="Top" />
 
             <Grid Grid.Row="1"
@@ -50,15 +51,22 @@
                 </Grid.RowDefinitions>
 
 
-                <f:LooklessButton Height="128"
+                <f:LooklessButton Command="{Binding SetAvatarCommand}"
+                                  Height="128"
                                   Width="128">
                     <Border Background="Gray"
-                                CornerRadius="12"/>
+                            CornerRadius="12">
+                        <Border CornerRadius="12">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay}"/>
+                            </Border.Background>
+                        </Border>
+                        </Border>
                 </f:LooklessButton>
                 <ui:TextBox Grid.Row="1"
                             Margin="48 24"
-                            PlaceholderText="名字"
-                            Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            PlaceholderText="{thisMarkups:Text text.name}"
+                            Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                 <ListBox Grid.Row="2"
                          HorizontalAlignment="Center"
@@ -66,12 +74,12 @@
                          SelectedItem="{Binding Type,Mode=TwoWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Converter={StaticResource Translation}}"/>
+                            <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
+                            <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
@@ -90,12 +98,12 @@
                                 IsDefault="True"
                                 Content="{x:Static f:Language.ConfirmText}"
                                 Command="{Binding CompletedCommand}"
-                                Purpose="CallToAction"/>
+                                Purpose="CallToAction" />
 
                 <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
                                 Content="{x:Static f:Language.CancelText}"
                                 Command="{Binding CancelCommand}"
-                                Purpose="Close"/>
+                                Purpose="Close" />
             </UniformGrid>
         </Grid>
     </Border>
