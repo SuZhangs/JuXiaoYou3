@@ -56,6 +56,11 @@
         /// 参数为文件，文件占用
         /// </summary>
         ParameterSourceOccupied,
+        
+        /// <summary>
+        /// 未知的错误
+        /// </summary>
+        Unknown,
     }
     
     public class EngineResult

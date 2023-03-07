@@ -28,5 +28,29 @@
         </GeometryGroup.Children>
     </GeometryGroup>
     
+    <GeometryGroup x:Key="FeatherIcon.MinusCircle">
+        <GeometryGroup.Children>
+            <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />
+            <LineGeometry StartPoint="8,12" EndPoint="16,12" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
+    
+    <GeometryGroup x:Key="FeatherIcon.PlusCircle">
+        <GeometryGroup.Children>
+            <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />
+            <LineGeometry StartPoint="12,8" EndPoint="12,16" />
+            <LineGeometry StartPoint="8,12" EndPoint="16,12" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
+    <GeometryGroup x:Key="FeatherIcon.File">
+        <GeometryGroup.Children>
+            <Geometry>F1 M24,24z M0,0z M13,2L6,2A2,2,0,0,0,4,4L4,20A2,2,0,0,0,6,22L18,22A2,2,0,0,0,20,20L20,9z</Geometry>
+            <Geometry>F1 M24,24z M0,0z M13,2L13,2 13,9 20,9</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
+    
     <Geometry x:Key="FeatherIcon.Checked">F1 M24,24z M0,0z M20,6L20,6 9,17 4,12</Geometry>
+    <Geometry x:Key="FeatherIcon.Command">F1 M24,24z M0,0z M18,3A3,3,0,0,0,15,6L15,18A3,3,0,0,0,18,21A3,3,0,0,0,21,18A3,3,0,0,0,18,15L6,15A3,3,0,0,0,3,18A3,3,0,0,0,6,21A3,3,0,0,0,9,18L9,6A3,3,0,0,0,6,3A3,3,0,0,0,3,6A3,3,0,0,0,6,9L18,9A3,3,0,0,0,21,6A3,3,0,0,0,18,3z</Geometry>
+    <Geometry x:Key="FeatherIcon.Minimum">F1 M24,24z M0,0z M8,3L8,6A2,2,0,0,1,6,8L3,8 M21,8L18,8A2,2,0,0,1,16,6L16,3 M16,21L16,18A2,2,0,0,1,18,16L21,16 M3,16L6,16A2,2,0,0,1,8,18L8,21</Geometry>
+    <Geometry x:Key="FeatherIcon.Folder">F1 M24,24z M0,0z M22,19A2,2,0,0,1,20,21L4,21A2,2,0,0,1,2,19L2,5A2,2,0,0,1,4,3L9,3 11,6 20,6A2,2,0,0,1,22,8z</Geometry>
 </ResourceDictionary>

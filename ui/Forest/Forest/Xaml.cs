@@ -275,6 +275,13 @@ namespace Acorisoft.FutureGL.Forest
             ViewModelInfoMapper.TryAdd(bindingInfo.ViewModel, bindingInfo);
         }
 
+        public static void InstallView<TView, TViewModel>() where TView : UserControl where TViewModel : IViewModel =>
+            InstallView(new BindingInfo
+            {
+                ViewModel = typeof(TViewModel),
+                View      = typeof(TView)
+            });
+
         /// <summary>
         /// 
         /// </summary>

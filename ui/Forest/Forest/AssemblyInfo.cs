@@ -8,11 +8,12 @@ global using Acorisoft.FutureGL.Forest.Styles.Animations;
 global using System.Windows.Controls;
 global using System.Windows.Media;
 global using VisualState = Acorisoft.FutureGL.Forest.Styles.VisualState;
-
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
+[assembly: InternalsVisibleTo("Forest.Shell")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Adorners")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Behaviors")]

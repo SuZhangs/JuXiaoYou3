@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.Forest.Effects.Bitmaps
         {
             var pixelShader = new PixelShader
             {
-                UriSource = new Uri("pack://application:,,,/Forest;component/Bitmaps/GrayBitmapEffect.ps", UriKind.RelativeOrAbsolute)
+                UriSource = new Uri("pack://application:,,,/Forest;component/Effects/Bitmaps/GrayBitmapEffect.ps", UriKind.RelativeOrAbsolute)
             };
             PixelShader = pixelShader;
 

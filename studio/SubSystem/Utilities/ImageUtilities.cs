@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Ookii.Dialogs.Wpf;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;

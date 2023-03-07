@@ -383,7 +383,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             => _host.ShowDialog<T>(Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>(), new Parameter());
 
         public Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel) where TViewModel : IDialogViewModel
-            => _host.ShowDialog<T>(viewModel, new Parameter());
+            => _host.ShowDialog<T>(viewModel, new Parameter{ Args = new object[8]});
         
         
         /// <summary>
@@ -416,7 +416,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<T>> Dialog<T>(IDialogViewModel viewModel)
-            => _host.ShowDialog<T>(viewModel, new Parameter());
+            => _host.ShowDialog<T>(viewModel, new Parameter{ Args = new object[8]});
 
         /// <summary>
         /// 弹出对话框
@@ -434,7 +434,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<object>> Dialog(IDialogViewModel viewModel)
-            => _host.ShowDialog(viewModel, new Parameter());
+            => _host.ShowDialog(viewModel, new Parameter{ Args = new object[8]});
 
         /// <summary>
         /// 弹出对话框
