@@ -14,7 +14,7 @@
              d:DesignHeight="480"
              d:DesignWidth="768"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewDocumentWizardViewModel}, IsDesignTimeCreatable=True}"
-             Height="480"
+             Height="450"
              Width="480">
     <UserControl.Resources>
         <thisConverters:TranslationConverter x:Key="Translation" />

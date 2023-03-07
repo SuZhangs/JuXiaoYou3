@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            return Id?.GetHashCode() ?? -1;
         }
 
         #endregion

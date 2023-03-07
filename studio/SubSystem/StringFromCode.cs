@@ -72,6 +72,19 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string ImageTooBig => GetText("text.ImageTooBig");
         
         public static string OperationOfAddIsSuccess => GetText("text.OperationOfAddIsSuccess");
+        public static string ImageProcessing
+        {
+            // TODO: 翻译
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Russian  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                _                    => "正在处理图片....",
+            };
+        }
         
         public static string ImageFilter
         {

@@ -51,7 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             {
                 DocumentType.CharacterConstraint => Language.Culture switch
                 {
-                    CultureArea.Chinese  => "人物设定",
+                    CultureArea.Chinese  => "人物",
                     _                    => "Character"
                 },
                 DocumentType.AbilityConstraint => Language.Culture switch

@@ -84,6 +84,31 @@
                         </Border>
 
 
+                        <!-- 对话框 -->
+                        <Border x:Name="PART_DialogMask"
+                                Background="{f:MaskBrush}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                Visibility="Collapsed"
+                                KeyboardNavigation.ControlTabNavigation="Cycle"
+                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                KeyboardNavigation.TabNavigation="Cycle"
+                                FocusManager.FocusedElement="{Binding ElementName=PART_Dialog}">
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
+                            </Border.Effect>
+                            <Border x:Name="PART_Dialog"
+                                    Background="Transparent"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Padding="8"
+                                    Visibility="Collapsed">
+
+                                <ContentPresenter Content="{TemplateBinding Dialog}"
+                                                  Margin="8" />
+                            </Border>
+                        </Border>
+
                         <!-- 进度条 -->
                         <Border x:Name="PART_IndicatorMask"
                                 Background="{f:MaskBrush}"
@@ -127,31 +152,6 @@
                                                Text="{TemplateBinding BusyText}"
                                                TextWrapping="Wrap" />
                                 </Grid>
-                            </Border>
-                        </Border>
-
-                        <!-- 对话框 -->
-                        <Border x:Name="PART_DialogMask"
-                                Background="{f:MaskBrush}"
-                                VerticalAlignment="Stretch"
-                                HorizontalAlignment="Stretch"
-                                Visibility="Collapsed"
-                                KeyboardNavigation.ControlTabNavigation="Cycle"
-                                KeyboardNavigation.DirectionalNavigation="Cycle"
-                                KeyboardNavigation.TabNavigation="Cycle"
-                                FocusManager.FocusedElement="{Binding ElementName=PART_Dialog}">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
-                            </Border.Effect>
-                            <Border x:Name="PART_Dialog"
-                                    Background="Transparent"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Padding="8"
-                                    Visibility="Collapsed">
-
-                                <ContentPresenter Content="{TemplateBinding Dialog}"
-                                                  Margin="8" />
                             </Border>
                         </Border>
                     </Grid>
