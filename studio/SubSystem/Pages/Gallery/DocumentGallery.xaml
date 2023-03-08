@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
     <Grid Margin="0 36 0 0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
@@ -31,7 +31,7 @@
                         Margin="48 0 0 0"
                         Orientation="Horizontal">
                 <f:CallToAction Content="新建"
-                                CornerRadius="24"
+                                CornerRadius="20"
                                 Palette="HighlightPalette2"
                                 Width="128"/>
                 <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>

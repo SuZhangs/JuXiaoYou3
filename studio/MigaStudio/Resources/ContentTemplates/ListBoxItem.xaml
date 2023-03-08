@@ -82,8 +82,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="LightGray" />
-                            <Setter Property="Background" Value="Gray" TargetName="Border" />
+                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Background" Value="{f:Brush HighlightB3}" TargetName="Border" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

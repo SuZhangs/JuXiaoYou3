@@ -52,7 +52,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private SolidColorBrush _backgroundHighlight1Brush;
         private SolidColorBrush _backgroundHighlight2Brush;
         private SolidColorBrush _foregroundHighlightBrush;
-        private SolidColorBrush _foregroundHighlight2Brush;
         private SolidColorBrush _backgroundDisabledBrush;
         private SolidColorBrush _foregroundDisabledBrush;
 
@@ -68,7 +67,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _backgroundHighlight1Brush = null;
             _foregroundHighlightBrush = null;
             _backgroundHighlight2Brush = null;
-            _foregroundHighlight2Brush = null;
             _backgroundDisabledBrush   = null;
             _foregroundDisabledBrush   = null;
             InvalidateVisual();
@@ -280,8 +278,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // 设置文本颜色
             SetForeground(_foregroundHighlightBrush);
         }
-
-
+        
         private void HandleDisabledState()
         {
             var purpose = Purpose;               
@@ -289,17 +286,17 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
             if (purpose == ButtonPurpose.Close)
             {
-                _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
-                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
+                _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
             }
             else
             {
-                _backgroundBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 4));
-                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+                _backgroundDisabledBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 4));
+                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInActive]);
             }
 
-            _bd.Background = _backgroundBrush;
-            SetForeground(_foregroundBrush);
+            _bd.Background = _backgroundDisabledBrush;
+            SetForeground(_foregroundDisabledBrush);
         }
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)

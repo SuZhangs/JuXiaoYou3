@@ -52,6 +52,134 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+        <Style TargetType="{x:Type b:PrimaryButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:PrimaryButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{f:Brush HighlightB1}"
+                            BorderThickness="1"
+                            BorderBrush="{f:Brush HighlightB3}"
+                            CornerRadius="3"
+                            Padding="16 0">
+                        <ContentPresenter x:Name="PART_Content"
+                                          TextElement.FontSize="16"
+                                          TextElement.Foreground="#4F5B66"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          Margin="10 0 0 0"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type b:PrimaryIconButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:PrimaryIconButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{f:Brush HighlightB1}"
+                            BorderThickness="1"
+                            BorderBrush="{f:Brush HighlightB3}"
+                            CornerRadius="3"
+                            Padding="16 0">
+                        <DockPanel HorizontalAlignment="Center">
+                            <Path x:Name="PART_Icon"
+                                  Data="{TemplateBinding Icon}"
+                                  Stroke="#4F5B66"
+                                  StrokeThickness="2"
+                                  Stretch="Uniform"
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}" />
+                            
+                            <ContentPresenter x:Name="PART_Content"
+                                              TextElement.FontSize="16"
+                                              TextElement.Foreground="#4F5B66"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              Margin="10 0 0 0"
+                                              VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type b:SecondaryButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:SecondaryButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{f:Brush HighlightB1}"
+                            BorderThickness="1"
+                            BorderBrush="{f:Brush HighlightB3}"
+                            CornerRadius="3"
+                            Padding="16 0">
+                        <ContentPresenter x:Name="PART_Content"
+                                          TextElement.FontSize="16"
+                                          TextElement.Foreground="#4F5B66"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          Margin="10 0 0 0"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type b:SecondaryIconButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:SecondaryIconButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{f:Brush HighlightB1}"
+                            BorderThickness="1"
+                            BorderBrush="{f:Brush HighlightB3}"
+                            CornerRadius="3"
+                            Padding="16 0">
+                        <DockPanel HorizontalAlignment="Center">
+                            <Path x:Name="PART_Icon"
+                                  Data="{TemplateBinding Icon}"
+                                  Stroke="#4F5B66"
+                                  StrokeThickness="2"
+                                  Stretch="Uniform"
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}" />
+                            
+                            <ContentPresenter x:Name="PART_Content"
+                                              TextElement.FontSize="16"
+                                              TextElement.Foreground="#4F5B66"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              Margin="10 0 0 0"
+                                              VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type b:LooklessButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -100,13 +228,13 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource Brushes.Black}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="MinHeight" Value="32" />
         <Setter Property="MinWidth" Value="42" />
-        <Setter Property="HoverBackgroundBrush" Value="{DynamicResource Window.Bg.Hover}" />
-        <Setter Property="HoverForegroundBrush" Value="{DynamicResource Brushes.Black}" />
-        <Setter Property="PressBackgroundBrush" Value="{DynamicResource Window.Bg.Press}" />
-        <Setter Property="PressForegroundBrush" Value="{DynamicResource Brushes.Black}" />
+        <Setter Property="HoverBackgroundBrush" Value="{f:MaskBrush}" />
+        <Setter Property="HoverForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
+        <Setter Property="PressBackgroundBrush" Value="{f:MaskDarkenBrush}" />
+        <Setter Property="PressForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -233,7 +361,7 @@
     <Style TargetType="{x:Type b:HighlightButton}">
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="8" />
@@ -258,8 +386,9 @@
 
 
     <Style TargetType="{x:Type b:CallToAction}">
+        <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="8" />
@@ -268,7 +397,7 @@
                 <ControlTemplate TargetType="{x:Type b:CallToAction}">
                     <Border x:Name="PART_Bd"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="8"
+                            CornerRadius="{TemplateBinding CornerRadius}"
                             SnapsToDevicePixels="true"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="PART_Content"

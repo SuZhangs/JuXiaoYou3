@@ -420,16 +420,6 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="Window.Bg" Color="Transparent" />
-    <SolidColorBrush x:Key="Window.Bg.Hover">#30000000</SolidColorBrush>
-    <SolidColorBrush x:Key="Window.Bg.Press">#50000000</SolidColorBrush>
-    <SolidColorBrush x:Key="Window.Bg.Accent" Color="Transparent" />
-    <SolidColorBrush x:Key="Window.Bg.Accent.Hover">#30000000</SolidColorBrush>
-    <SolidColorBrush x:Key="Window.Bg.Accent.Press">#50000000</SolidColorBrush>
-    <SolidColorBrush x:Key="Window.Fg" Color="Black" />
-    <SolidColorBrush x:Key="Window.Fg.Hover" Color="Black" />
-    <SolidColorBrush x:Key="Window.Fg.Press" Color="Black" />
-
     <Style TargetType="{x:Type p:PrimitiveButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
@@ -437,9 +427,9 @@
             <Trigger Property="Mode" Value="GoBack">
                 <Setter Property="MinHeight" Value="32" />
                 <Setter Property="MinWidth" Value="32" />
-                <Setter Property="HoverBackgroundBrush" Value="{DynamicResource Window.Bg.Hover}" />
+                <Setter Property="HoverBackgroundBrush" Value="{f:MaskBrush}" />
                 <Setter Property="HoverForegroundBrush" Value="{f:ForegroundBrush}" />
-                <Setter Property="PressBackgroundBrush" Value="{DynamicResource Window.Bg.Press}" />
+                <Setter Property="PressBackgroundBrush" Value="{f:MaskDarkenBrush}" />
                 <Setter Property="PressForegroundBrush" Value="{f:ForegroundBrush}" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="UseLayoutRounding" Value="True" />
@@ -483,9 +473,9 @@
             <Trigger Property="Mode" Value="Minimum">
                 <Setter Property="MinHeight" Value="32" />
                 <Setter Property="MinWidth" Value="32" />
-                <Setter Property="HoverBackgroundBrush" Value="{DynamicResource Window.Bg.Hover}" />
+                <Setter Property="HoverBackgroundBrush" Value="{f:MaskBrush}" />
                 <Setter Property="HoverForegroundBrush" Value="{f:ForegroundBrush}" />
-                <Setter Property="PressBackgroundBrush" Value="{DynamicResource Window.Bg.Press}" />
+                <Setter Property="PressBackgroundBrush" Value="{f:MaskDarkenBrush}" />
                 <Setter Property="PressForegroundBrush" Value="{f:ForegroundBrush}" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="Template">
@@ -525,9 +515,9 @@
             <Trigger Property="Mode" Value="Maximum">
                 <Setter Property="MinHeight" Value="32" />
                 <Setter Property="MinWidth" Value="32" />
-                <Setter Property="HoverBackgroundBrush" Value="{DynamicResource Window.Bg.Hover}" />
+                <Setter Property="HoverBackgroundBrush" Value="{f:MaskBrush}" />
                 <Setter Property="HoverForegroundBrush" Value="{f:ForegroundBrush}" />
-                <Setter Property="PressBackgroundBrush" Value="{DynamicResource Window.Bg.Press}" />
+                <Setter Property="PressBackgroundBrush" Value="{f:MaskDarkenBrush}" />
                 <Setter Property="PressForegroundBrush" Value="{f:ForegroundBrush}" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="Template">
@@ -691,7 +681,7 @@
                         <Border x:Name="PART_TitleBar"
                                 Grid.Row="0"
                                 Background="{TemplateBinding Color}">
-                            <ContentControl Background="{DynamicResource Window.Bg}"
+                            <ContentControl Background="{f:BackgroundBrush}"
                                                 Content="{TemplateBinding TitleBar}"
                                                 ContentTemplate="{TemplateBinding TitleBarTemplate}"
                                                 ContentTemplateSelector="{TemplateBinding TitleBarTemplateSelector}"
@@ -888,7 +878,7 @@
     <!-- -->
     <!--                             ~1~ 标题栏 @1@ -->
     <!--                             <ContentControl Grid.Column="0" -->
-    <!--                                             Background="{DynamicResource Window.Bg}" -->
+    <!--                                             Background="{{f:BackgroundBrush}}" -->
     <!--                                             Content="{TemplateBinding TitleBar}" -->
     <!--                                             ContentTemplate="{TemplateBinding TitleBarTemplate}" -->
     <!--                                             ContentTemplateSelector="{TemplateBinding TitleBarTemplateSelector}" -->

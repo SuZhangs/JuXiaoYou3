@@ -10,7 +10,28 @@
              d:DesignHeight="720" 
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type local:HomeViewModel}, IsDesignTimeCreatable=True}">
-    <Grid Background="CornflowerBlue">
-        
+    <Grid HorizontalAlignment="Left"
+          Width="1880">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="800" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <!-- 常驻 -->
+        <WrapPanel Margin="16"
+                     Orientation="Horizontal">
+
+            <Border Background="{f:Brush HighlightB1}"
+                    BorderThickness="1"
+                    BorderBrush="{f:Brush HighlightB3}"
+                    CornerRadius="3"
+                    Width="256"
+                    Height="144"/>
+
+            <f:PrimaryButton Content="Test" Palette="HighlightPalette1"/>
+            <f:PrimaryIconButton Content="Test" Palette="Obsolete"/>
+            <f:PrimaryIconButton Content="Test" Palette="Success"/>
+            <f:PrimaryIconButton Content="Test" Palette="Danger"/>
+        </WrapPanel>
     </Grid>
 </UserControl>

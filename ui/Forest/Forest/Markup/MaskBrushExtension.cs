@@ -11,4 +11,12 @@ namespace Acorisoft.FutureGL.Forest.Markup
             return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask].ToSolidColorBrush();
         }
     }
+    
+    public class MaskDarkenBrushExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.MaskDarken].ToSolidColorBrush();
+        }
+    }
 }
