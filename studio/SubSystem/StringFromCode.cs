@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             // TODO: 翻译
             get => Language.Culture switch
             {
-                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.English  => "Processing...",
                 CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
                 CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
                 CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
