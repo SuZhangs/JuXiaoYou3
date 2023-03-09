@@ -23,6 +23,7 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <f:TilePanel x:Name="Panel"
                          Margin="48"
+                         HorizontalAlignment="Stretch"
                          TileSize="210"
                          Gap="6">
                 <Border f:TilePanel.H="2"

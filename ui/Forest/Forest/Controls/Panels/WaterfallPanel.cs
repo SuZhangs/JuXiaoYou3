@@ -2,224 +2,6 @@
 
 namespace Acorisoft.FutureGL.Forest.Controls.Panels
 {
-    internal struct PanelUvSize
-    {
-        private readonly Orientation _orientation;
-
-        public Size ScreenSize => new(U, V);
-
-        public double U { get; set; }
-
-        public double V { get; set; }
-
-        public double Width
-        {
-            get => _orientation == Orientation.Horizontal ? U : V;
-            private set
-            {
-                if (_orientation == Orientation.Horizontal)
-                {
-                    U = value;
-                }
-                else
-                {
-                    V = value;
-                }
-            }
-        }
-
-        public double Height
-        {
-            get => _orientation == Orientation.Horizontal ? V : U;
-            private set
-            {
-                if (_orientation == Orientation.Horizontal)
-                {
-                    V = value;
-                }
-                else
-                {
-                    U = value;
-                }
-            }
-        }
-
-        public PanelUvSize(Orientation orientation, double width, double height)
-        {
-            U            = V = 0d;
-            _orientation = orientation;
-            Width        = width;
-            Height       = height;
-        }
-
-        public PanelUvSize(Orientation orientation, Size size)
-        {
-            U            = V = 0d;
-            _orientation = orientation;
-            Width        = size.Width;
-            Height       = size.Height;
-        }
-
-        public PanelUvSize(Orientation orientation)
-        {
-            U            = V = 0d;
-            _orientation = orientation;
-        }
-    }
-
-    public class WaterfallPanel : Panel
-    {
-        public static readonly DependencyProperty GroupsProperty = DependencyProperty.Register(
-            nameof(Groups), typeof(int), typeof(WaterfallPanel), new FrameworkPropertyMetadata(
-                Boxing.IntValues[3], FrameworkPropertyMetadataOptions.AffectsMeasure), IsGroupsValid);
-
-        public int Groups
-        {
-            get => (int)GetValue(GroupsProperty);
-            set => SetValue(GroupsProperty, value);
-        }
-
-        private static bool IsGroupsValid(object value) => (int)value >= 1;
-
-        public static readonly DependencyProperty AutoGroupProperty = DependencyProperty.Register(
-            nameof(AutoGroup), typeof(bool), typeof(WaterfallPanel), new FrameworkPropertyMetadata(
-                Boxing.False, FrameworkPropertyMetadataOptions.AffectsMeasure));
-
-        public bool AutoGroup
-        {
-            get => (bool)GetValue(AutoGroupProperty);
-            set => SetValue(AutoGroupProperty, Boxing.Box(value));
-        }
-
-        public static readonly DependencyProperty DesiredLengthProperty = DependencyProperty.Register(
-            nameof(DesiredLength), typeof(double), typeof(WaterfallPanel), new FrameworkPropertyMetadata(Boxing.DoubleValues[0],
-                FrameworkPropertyMetadataOptions.AffectsMeasure), IsInRangeOfPosDoubleIncludeZero);
-
-        public double DesiredLength
-        {
-            get => (double)GetValue(DesiredLengthProperty);
-            set => SetValue(DesiredLengthProperty, value);
-        }
-
-        public static readonly DependencyProperty OrientationProperty =
-            StackPanel.OrientationProperty.AddOwner(typeof(WaterfallPanel),
-                new FrameworkPropertyMetadata(Orientation.Horizontal,
-                    FrameworkPropertyMetadataOptions.AffectsMeasure));
-
-        public Orientation Orientation
-        {
-            get => (Orientation)GetValue(OrientationProperty);
-            set => SetValue(OrientationProperty, value);
-        }
-
-        /// <summary>
-        ///     是否在正浮点数范围内（包括0）
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static bool IsInRangeOfPosDoubleIncludeZero(object value)
-        {
-            var v = (double)value;
-            return !(double.IsNaN(v) || double.IsInfinity(v)) && v >= 0;
-        }
-
-        public static bool IsVerySmall(double value) => Math.Abs(value) < 1E-06;
-
-        private int CalculateGroupCount(Orientation orientation, PanelUvSize size)
-        {
-            if (!AutoGroup)
-            {
-                return Groups;
-            }
-
-            var itemLength = DesiredLength;
-
-            if (IsVerySmall(itemLength))
-            {
-                return Groups;
-            }
-
-            return (int)(size.U / itemLength);
-        }
-
-        protected override Size ArrangeOverride(Size finalSize)
-        {
-            var orientation  = Orientation;
-            var uvConstraint = new PanelUvSize(orientation, finalSize);
-
-            var groups = CalculateGroupCount(orientation, uvConstraint);
-            if (groups < 1)
-            {
-                return finalSize;
-            }
-
-            var vArr  = new double[groups].ToList();
-            var itemU = uvConstraint.U / groups;
-
-            var children = InternalChildren;
-            for (int i = 0, count = children.Count; i < count; i++)
-            {
-                var child = children[i];
-                if (child == null)
-                {
-                    continue;
-                }
-
-                var minIndex      = vArr.IndexOf(vArr.Min());
-                var minV          = vArr[minIndex];
-                var childUvSize   = new PanelUvSize(orientation, child.DesiredSize);
-                var childSize     = new PanelUvSize(orientation, itemU, childUvSize.V);
-                var childRectSize = new PanelUvSize(orientation, minIndex * itemU, minV);
-
-                child.Arrange(new Rect(new Point(childRectSize.U, childRectSize.V), childSize.ScreenSize));
-                vArr[minIndex] = minV + childUvSize.V;
-            }
-
-            return finalSize;
-        }
-
-        protected override Size MeasureOverride(Size constraint)
-        {
-            var orientation  = Orientation;
-            var uvConstraint = new PanelUvSize(orientation, constraint);
-
-            var groups = CalculateGroupCount(orientation, uvConstraint);
-            if (groups < 1)
-            {
-                return constraint;
-            }
-
-            var vArr  = new double[groups].ToList();
-            var itemU = uvConstraint.U / groups;
-            if (double.IsNaN(itemU) || double.IsInfinity(itemU))
-            {
-                return constraint;
-            }
-
-            var children = InternalChildren;
-            for (int i = 0, count = children.Count; i < count; i++)
-            {
-                var child = children[i];
-                if (child == null)
-                {
-                    continue;
-                }
-
-                child.Measure(constraint);
-
-                var sz       = new PanelUvSize(orientation, child.DesiredSize);
-                var minIndex = vArr.IndexOf(vArr.Min());
-                var minV     = vArr[minIndex];
-
-                vArr[minIndex] = minV + sz.V;
-            }
-
-            uvConstraint = new PanelUvSize(orientation, new Size(uvConstraint.ScreenSize.Width, vArr.Max()));
-
-            return uvConstraint.ScreenSize;
-        }
-    }
-
     /// <summary>
     /// TilePanel
     /// 瀑布流布局
@@ -242,130 +24,124 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         /// <summary>
         /// 容器内元素的高度
         /// </summary>
-        public int TileSize
+        public int TileHeight
         {
-            get { return (int)GetValue(TileSizeProperty); }
-            set { SetValue(TileSizeProperty, value); }
+            get { return (int)GetValue(TileHeightProperty); }
+            set { SetValue(TileHeightProperty, value); }
         }
-
         /// <summary>
         /// 容器内元素的高度
         /// </summary>
-        public static readonly DependencyProperty TileSizeProperty =
-            DependencyProperty.Register(nameof(TileSize), typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.AffectsMeasure));
-
+        public static readonly DependencyProperty TileHeightProperty =
+            DependencyProperty.Register("TileHeight", typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        /// <summary>
+        /// 容器内元素的宽度
+        /// </summary>
+        public int TileWidth
+        {
+            get { return (int)GetValue(TileWidthProperty); }
+            set { SetValue(TileWidthProperty, value); }
+        }
+        /// <summary>
+        /// 容器内元素的宽度
+        /// </summary>
+        public static readonly DependencyProperty TileWidthProperty =
+            DependencyProperty.Register("TileWidth", typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.AffectsMeasure));
         /// <summary>
         ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static int GetW(DependencyObject obj)
+        public static int GetWidthPix(DependencyObject obj)
         {
-            return (int)obj.GetValue(WProperty);
+            return (int)obj.GetValue(WidthPixProperty);
         }
-
         /// <summary>
         ///
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="value"></param>
-        public static void SetW(DependencyObject obj, int value)
+        public static void SetWidthPix(DependencyObject obj, int value)
         {
             if (value > 0)
             {
-                obj.SetValue(WProperty, value);
+                obj.SetValue(WidthPixProperty, value);
             }
         }
-
         /// <summary>
-        /// 元素的宽度比例，相对于TileSize
+        /// 元素的宽度比例，相对于TileWidth
         /// </summary>
-        public static readonly DependencyProperty WProperty =
-            DependencyProperty.RegisterAttached("W", typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
-
+        public static readonly DependencyProperty WidthPixProperty =
+            DependencyProperty.RegisterAttached("WidthPix", typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
         /// <summary>
         ///
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static int GetH(DependencyObject obj)
+        public static int GetHeightPix(DependencyObject obj)
         {
-            return (int)obj.GetValue(HProperty);
+            return (int)obj.GetValue(HeightPixProperty);
         }
-
         /// <summary>
         ///
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="value"></param>
-        public static void SetH(DependencyObject obj, int value)
+        public static void SetHeightPix(DependencyObject obj, int value)
         {
             if (value > 0)
             {
-                obj.SetValue(HProperty, value);
+                obj.SetValue(HeightPixProperty, value);
             }
         }
-
         /// <summary>
         /// 元素的高度比例，相对于TileHeight
         /// </summary>
-        public static readonly DependencyProperty HProperty =
-            DependencyProperty.RegisterAttached("H", typeof(int), typeof(TilePanel),
-                new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
-
+        public static readonly DependencyProperty HeightPixProperty =
+            DependencyProperty.RegisterAttached("HeightPix", typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
         /// <summary>
         /// 排列方向
         /// </summary>
-        public Orientation Orientation         {
+        public Orientation Orientation
+        {
             get { return (Orientation)GetValue(OrientationProperty); }
             set { SetValue(OrientationProperty, value); }
         }
-        
         /// <summary>
-        /// Tile之间的间距
+        /// 排列方向
         /// </summary>
         public static readonly DependencyProperty OrientationProperty =
-            DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(TilePanel), new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsMeasure));
-
+            DependencyProperty.Register("Orientation", typeof(Orientation), typeof(TilePanel), new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsMeasure));
         /// <summary>
         /// 格子数量
         /// </summary>
-        private int TileCount;
-
+        public int TileCount
+        {
+            get { return (int)GetValue(TileCountProperty); }
+            set { SetValue(TileCountProperty, value); }
+        }
+        /// <summary>
+        /// 格子数量
+        /// </summary>
+        public static readonly DependencyProperty TileCountProperty =
+            DependencyProperty.Register("TileCount", typeof(int), typeof(TilePanel), new PropertyMetadata(4));
         /// <summary>
         /// Tile之间的间距
         /// </summary>
-        public Thickness Gap
+        public Thickness TileMargin
         {
-            get { return (Thickness)GetValue(GapProperty); }
-            set { SetValue(GapProperty, value); }
+            get { return (Thickness)GetValue(TileMarginProperty); }
+            set { SetValue(TileMarginProperty, value); }
         }
-
         /// <summary>
         /// Tile之间的间距
         /// </summary>
-        public static readonly DependencyProperty GapProperty =
-            DependencyProperty.Register(nameof(Gap), typeof(Thickness), typeof(TilePanel), new FrameworkPropertyMetadata(new Thickness(2), FrameworkPropertyMetadataOptions.AffectsMeasure));
-
-
-        public TilePanel()
-        {
-            TileCount        =  4;
-            Orientation      =  Orientation.Horizontal;
-            this.SizeChanged += OnSizeChanged;
-        }
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var bound = Margin.Left + Margin.Right;
-            TileCount = (int)((ActualWidth - bound) / TileSize);
-        }
-
+        public static readonly DependencyProperty TileMarginProperty =
+            DependencyProperty.Register("TileMargin", typeof(Thickness), typeof(TilePanel), new FrameworkPropertyMetadata(new Thickness(2), FrameworkPropertyMetadataOptions.AffectsMeasure));
         /// <summary>
         /// 最小的高度比例
         /// </summary>
         private int MinHeightPix { get; set; }
-
         /// <summary>
         /// 最小的宽度比例
         /// </summary>
@@ -376,48 +152,46 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         #region 方法
 
         private Dictionary<string, Point> Maps { get; set; }
-
         private OccupyType SetMaps(Point currentPosition, Size childPix)
         {
             var isOccupy = OccupyType.NONE;
 
             if (currentPosition.X + currentPosition.Y != 0)
             {
-                if (Orientation == Orientation.Horizontal)
+                if (this.Orientation == System.Windows.Controls.Orientation.Horizontal)
                 {
-                    isOccupy = IsOccupyWidth(currentPosition, childPix);
+                    isOccupy = this.IsOccupyWidth(currentPosition, childPix);
                 }
                 else
                 {
-                    isOccupy = IsOccupyHeight(currentPosition, childPix);
+                    isOccupy = this.IsOccupyHeight(currentPosition, childPix);
                 }
             }
 
             if (isOccupy == OccupyType.NONE)
             {
-                for (var i = 0; i < childPix.Width; i++)
+                for (int i = 0; i < childPix.Width; i++)
                 {
-                    for (var j = 0; j < childPix.Height; j++)
+                    for (int j = 0; j < childPix.Height; j++)
                     {
-                        Maps[$"x_{currentPosition.X + i}y_{currentPosition.Y + j}"] = new Point(currentPosition.X + i, currentPosition.Y + j);
+                        this.Maps[string.Format("x_{0}y_{1}", currentPosition.X + i, currentPosition.Y + j)] = new Point(currentPosition.X + i, currentPosition.Y + j);
                     }
                 }
             }
 
             return isOccupy;
         }
-
         private OccupyType IsOccupyWidth(Point currentPosition, Size childPix)
         {
             //计算当前行能否放下当前元素
-            if (TileCount - currentPosition.X - childPix.Width < 0)
+            if (this.TileCount - currentPosition.X - childPix.Width < 0)
             {
                 return OccupyType.OVERFLOW;
             }
 
-            for (var i = 0; i < childPix.Width; i++)
+            for (int i = 0; i < childPix.Width; i++)
             {
-                if (Maps.ContainsKey($"x_{currentPosition.X + i}y_{currentPosition.Y}"))
+                if (this.Maps.ContainsKey(string.Format("x_{0}y_{1}", currentPosition.X + i, currentPosition.Y)))
                 {
                     return OccupyType.WIDTHHEIGHT;
                 }
@@ -425,18 +199,17 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
 
             return OccupyType.NONE;
         }
-
         private OccupyType IsOccupyHeight(Point currentPosition, Size childPix)
         {
             //计算当前行能否放下当前元素
-            if (TileCount - currentPosition.Y - childPix.Height < 0)
+            if (this.TileCount - currentPosition.Y - childPix.Height < 0)
             {
                 return OccupyType.OVERFLOW;
             }
 
-            for (var i = 0; i < childPix.Height; i++)
+            for (int i = 0; i < childPix.Height; i++)
             {
-                if (Maps.ContainsKey($"x_{currentPosition.X}y_{currentPosition.Y + i}"))
+                if (this.Maps.ContainsKey(string.Format("x_{0}y_{1}", currentPosition.X, currentPosition.Y + i)))
                 {
                     return OccupyType.WIDTHHEIGHT;
                 }
@@ -444,7 +217,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
 
             return OccupyType.NONE;
         }
-
         /// <summary>
         ///
         /// </summary>
@@ -452,87 +224,81 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         /// <returns></returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var    childPix          = new Size();
-            var    childPosition     = new Point();
+            Size childPix = new Size();
+            Point childPosition = new Point();
             Point? lastChildPosition = null;
+            OccupyType isOccupy = OccupyType.NONE;
+            FrameworkElement child;
 
-            Maps = new Dictionary<string, Point>();
-            for (var i = 0; i < Children.Count;)
+            this.Maps = new Dictionary<string, Point>();
+            for (int i = 0; i < this.Children.Count; )
             {
-                var child = Children[i] as FrameworkElement;
+                child = this.Children[i] as FrameworkElement;
+                childPix.Width = TilePanel.GetWidthPix(child);
+                childPix.Height = TilePanel.GetHeightPix(child);
 
-                if (child is null)
+                if (this.Orientation == System.Windows.Controls.Orientation.Vertical)
                 {
-                    continue;
-                }
-
-                childPix.Width  = GetW(child);
-                childPix.Height = GetH(child);
-
-                if (Orientation == Orientation.Vertical)
-                {
-                    if (childPix.Height > TileCount)
+                    if (childPix.Height > this.TileCount)
                     {
-                        childPix.Height = TileCount;
+                        childPix.Height = this.TileCount;
                     }
                 }
                 else
                 {
-                    if (childPix.Width > TileCount)
+                    if (childPix.Width > this.TileCount)
                     {
-                        childPix.Width = TileCount;
+                        childPix.Width = this.TileCount;
                     }
                 }
-
-                var isOccupy = SetMaps(childPosition, childPix);
-
+                isOccupy = this.SetMaps(childPosition, childPix);
                 //换列
                 if (isOccupy == OccupyType.WIDTHHEIGHT)
                 {
-                    lastChildPosition ??= childPosition;
-                    if (Orientation == Orientation.Horizontal)
+                    if (lastChildPosition == null) lastChildPosition = childPosition;
+                    if (this.Orientation == System.Windows.Controls.Orientation.Horizontal)
                     {
-                        childPosition.X += MinWidthPix;
+                        childPosition.X += this.MinWidthPix;
                     }
                     else
                     {
-                        childPosition.Y += MinHeightPix;
+                        childPosition.Y += this.MinHeightPix;
                     }
                 }
                 //换行
                 else if (isOccupy == OccupyType.OVERFLOW)
                 {
-                    lastChildPosition ??= childPosition;
-                    if (Orientation == Orientation.Horizontal)
+                    if (lastChildPosition == null) lastChildPosition = childPosition;
+                    if (this.Orientation == System.Windows.Controls.Orientation.Horizontal)
                     {
-                        childPosition.X =  0;
-                        childPosition.Y += Maps[$"x_{childPosition.X}y_{childPosition.Y}"].Y;
+                        childPosition.X = 0;
+                        childPosition.Y += this.Maps[string.Format("x_{0}y_{1}", childPosition.X, childPosition.Y)].Y;
                         //childPosition.Y++;//= this.MinHeightPix;
                     }
                     else
                     {
-                        childPosition.Y =  0;
-                        childPosition.X += Maps[$"x_{childPosition.X}y_{childPosition.Y}"].X;
+                        childPosition.Y = 0;
+                        childPosition.X += this.Maps[string.Format("x_{0}y_{1}", childPosition.X, childPosition.Y)].X;
                         //childPosition.X++;//= this.MinWidthPix;
                     }
                 }
                 else
                 {
                     i++;
-                    child.Arrange(new Rect(childPosition.X * TileSize + Math.Floor(childPosition.X / MinWidthPix) * (Gap.Left + Gap.Right),
-                        childPosition.Y * TileSize + Math.Floor(childPosition.Y / MinHeightPix) * (Gap.Top + Gap.Bottom),
-                        child.DesiredSize.Width, child.DesiredSize.Height));
+                    child.Arrange(new Rect(childPosition.X * this.TileWidth + Math.Floor(childPosition.X / this.MinWidthPix) * (this.TileMargin.Left + this.TileMargin.Right),
+                                           childPosition.Y * this.TileHeight + Math.Floor(childPosition.Y / this.MinHeightPix) * (this.TileMargin.Top + this.TileMargin.Bottom),
+                                           child.DesiredSize.Width, child.DesiredSize.Height));
                     if (lastChildPosition != null)
                     {
-                        childPosition     = (Point)lastChildPosition;
+                        childPosition = (Point)lastChildPosition;
                         lastChildPosition = null;
                     }
                     else
                     {
-                        if (Orientation == Orientation.Horizontal)
+                        if (this.Orientation == System.Windows.Controls.Orientation.Horizontal)
                         {
                             childPosition.X += childPix.Width;
-                            if (childPosition.X == TileCount)
+                            if (childPosition.X == this.TileCount)
                             {
                                 childPosition.X = 0;
                                 childPosition.Y++;
@@ -541,7 +307,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                         else
                         {
                             childPosition.Y += childPix.Height;
-                            if (childPosition.Y == TileCount)
+                            if (childPosition.Y == this.TileCount)
                             {
                                 childPosition.Y = 0;
                                 childPosition.X++;
@@ -553,7 +319,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
 
             return finalSize;
         }
-
         /// <summary>
         ///
         /// </summary>
@@ -563,54 +328,53 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         {
             int childWidthPix, childHeightPix, maxRowCount = 0;
 
-            if (Children.Count == 0) return new Size();
-
+            if (this.Children.Count == 0) return new Size();
             //遍历孩子元素
-            foreach (FrameworkElement child in Children)
+            foreach (FrameworkElement child in this.Children)
             {
-                childWidthPix  = GetW(child);
-                childHeightPix = GetH(child);
+                childWidthPix = TilePanel.GetWidthPix(child);
+                childHeightPix = TilePanel.GetHeightPix(child);
 
-                if (MinHeightPix == 0) MinHeightPix = childHeightPix;
-                if (MinWidthPix == 0) MinWidthPix   = childWidthPix;
+                if (this.MinHeightPix == 0) this.MinHeightPix = childHeightPix;
+                if (this.MinWidthPix == 0) this.MinWidthPix = childWidthPix;
 
-                if (MinHeightPix > childHeightPix) MinHeightPix = childHeightPix;
-                if (MinWidthPix > childWidthPix) MinWidthPix    = childWidthPix;
+                if (this.MinHeightPix > childHeightPix) this.MinHeightPix = childHeightPix;
+                if (this.MinWidthPix > childWidthPix) this.MinWidthPix = childWidthPix;
             }
 
-            foreach (FrameworkElement child in Children)
+            foreach (FrameworkElement child in this.Children)
             {
-                childWidthPix  = GetW(child);
-                childHeightPix = GetH(child);
+                childWidthPix = TilePanel.GetWidthPix(child);
+                childHeightPix = TilePanel.GetHeightPix(child);
 
-                child.Margin              = Gap;
-                child.HorizontalAlignment = HorizontalAlignment.Left;
-                child.VerticalAlignment   = VerticalAlignment.Top;
+                child.Margin = this.TileMargin;
+                child.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                child.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
-                child.Width  = TileSize * childWidthPix + (child.Margin.Left + child.Margin.Right) * ((childWidthPix - MinWidthPix) / MinWidthPix);
-                child.Height = TileSize * childHeightPix + (child.Margin.Top + child.Margin.Bottom) * ((childHeightPix - MinHeightPix) / MinHeightPix);
+                child.Width = this.TileWidth * childWidthPix + (child.Margin.Left + child.Margin.Right) * ((childWidthPix - this.MinWidthPix) / this.MinWidthPix);
+                child.Height = this.TileHeight * childHeightPix + (child.Margin.Top + child.Margin.Bottom) * ((childHeightPix - this.MinHeightPix) / this.MinHeightPix);
 
                 maxRowCount += childWidthPix * childHeightPix;
 
                 child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             }
 
-            if (TileCount <= 0) throw new ArgumentOutOfRangeException();
+            if (this.TileCount <= 0) throw new ArgumentOutOfRangeException();
             //if (this.MinWidthPix == 0) this.MinWidthPix = 1;
             //if (this.MinHeightPix == 0) this.MinHeightPix = 1;
-            if (Orientation == Orientation.Horizontal)
+            if (this.Orientation == Orientation.Horizontal)
             {
-                Width = constraint.Width = TileCount * TileSize + TileCount / MinWidthPix * (Gap.Left + Gap.Right);
-                var heightPix            = Math.Ceiling((double)maxRowCount / TileCount);
+                this.Width = constraint.Width = this.TileCount * this.TileWidth + this.TileCount / this.MinWidthPix * (this.TileMargin.Left + this.TileMargin.Right);
+                double heightPix = Math.Ceiling((double)maxRowCount / this.TileCount);
                 if (!double.IsNaN(heightPix))
-                    constraint.Height = heightPix * TileSize + heightPix / MinHeightPix * (Gap.Top + Gap.Bottom);
+                    constraint.Height = heightPix * this.TileHeight + heightPix / this.MinHeightPix * (this.TileMargin.Top + this.TileMargin.Bottom);
             }
             else
             {
-                Height = constraint.Height = TileCount * TileSize + TileCount / MinHeightPix * (Gap.Top + Gap.Bottom);
-                var widthPix               = Math.Ceiling((double)maxRowCount / TileCount);
+                this.Height = constraint.Height = this.TileCount * this.TileHeight + this.TileCount / this.MinHeightPix * (this.TileMargin.Top + this.TileMargin.Bottom);
+                double widthPix = Math.Ceiling((double)maxRowCount / this.TileCount);
                 if (!double.IsNaN(widthPix))
-                    constraint.Width = widthPix * TileSize + widthPix / MinWidthPix * (Gap.Left + Gap.Right);
+                    constraint.Width = widthPix * this.TileWidth + widthPix / this.MinWidthPix * (this.TileMargin.Left + this.TileMargin.Right);
             }
 
             return constraint;
