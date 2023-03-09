@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Acorisoft.FutureGL.Demo.ViewHost.Views.UserControlHostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:this="clr-namespace:Acorisoft.FutureGL.Demo.ViewHost.Views"
+             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.Demo.ViewHost.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:UserControlHostViewModel}, IsDesignTimeCreatable=True}">
+    <Grid>
+        <f:TilePanel ItemSize="48"
+                          UnitPerRow="6">
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="2"
+                    Background="Brown"
+                    Content="1"/>
+            <Button f:TilePanel.H="4"
+                    f:TilePanel.W="6"
+                    Background="SlateBlue"
+                    Content="2"/>
+            <Button f:TilePanel.H="6"
+                    f:TilePanel.W="6"
+                    Background="SlateGray"
+                    Content="3"/>
+            <Button f:TilePanel.H="6"
+                    f:TilePanel.W="8"
+                    Background="DarkSlateBlue"
+                    Content="4"/>
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="4"
+                    Background="DarkSlateGray"
+                    Content="5"/>
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="2"
+                    Background="CornflowerBlue"
+                    Content="6"/>
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="2"
+                    Background="Teal"
+                    Content="7"/>
+            <Button f:TilePanel.H="4"
+                    f:TilePanel.W="4"
+                    Background="Silver"
+                    Content="8"/>
+            <Button f:TilePanel.H="4"
+                    f:TilePanel.W="8"
+                    Background="YellowGreen"
+                    Content="9"/>
+            <Button f:TilePanel.H="8"
+                    f:TilePanel.W="2"
+                    Background="Orange"
+                    Content="10"/>
+            <Button f:TilePanel.H="6"
+                    f:TilePanel.W="2"
+                    Background="Orchid"
+                    Content="11"/>
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="6"
+                    Background="OrangeRed"
+                    Content="12"/>
+            <Button f:TilePanel.H="2"
+                    f:TilePanel.W="8"
+                    Background="BlueViolet"
+                    Content="13"/>
+        </f:TilePanel>
+    </Grid>
+</UserControl>

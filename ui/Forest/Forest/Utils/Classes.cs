@@ -6,15 +6,8 @@ using Expression = System.Linq.Expressions;
 using Getter = System.Func<object, object>;
 using Setter = System.Action<object, object>;
 
-namespace Acorisoft.FutureGL.Forest
+namespace Acorisoft.FutureGL.Forest.Utils
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public sealed class ValidateAttribute : Attribute
-    {
-        
-    }
-
     /// <summary>
     /// 类型帮助类。
     /// </summary>
