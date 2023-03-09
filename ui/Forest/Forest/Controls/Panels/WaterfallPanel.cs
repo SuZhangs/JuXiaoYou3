@@ -227,18 +227,18 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
     public class TilePanel : Panel
     {
         #region 枚举
-
+    
         private enum OccupyType
         {
             NONE,
             WIDTHHEIGHT,
             OVERFLOW
         }
-
+    
         #endregion
-
+    
         #region 属性
-
+    
         /// <summary>
         /// 容器内元素的高度
         /// </summary>
@@ -342,7 +342,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         /// 格子数量
         /// </summary>
         public static readonly DependencyProperty TileCountProperty =
-            DependencyProperty.Register(nameof(TileCount), typeof(int), typeof(TilePanel), new PropertyMetadata(4));
+            DependencyProperty.Register(nameof(TileCount), typeof(int), typeof(TilePanel), new FrameworkPropertyMetadata(4, FrameworkPropertyMetadataOptions.AffectsMeasure));
         /// <summary>
         /// Tile之间的间距
         /// </summary>
@@ -364,16 +364,16 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         /// 最小的宽度比例
         /// </summary>
         private int MinWidthPix { get; set; }
-
+    
         #endregion
-
+    
         #region 方法
-
+    
         private Dictionary<string, Point> Maps { get; set; }
         private OccupyType SetMaps(Point currentPosition, Size childPix)
         {
             var isOccupy = OccupyType.NONE;
-
+    
             if (currentPosition.X + currentPosition.Y != 0)
             {
                 if (Orientation == Orientation.Horizontal)
@@ -385,7 +385,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                     isOccupy = IsOccupyHeight(currentPosition, childPix);
                 }
             }
-
+    
             if (isOccupy == OccupyType.NONE)
             {
                 for (var i = 0; i < childPix.Width; i++)
@@ -396,7 +396,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                     }
                 }
             }
-
+    
             return isOccupy;
         }
         
@@ -407,7 +407,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             {
                 return OccupyType.OVERFLOW;
             }
-
+    
             for (var i = 0; i < childPix.Width; i++)
             {
                 if (Maps.ContainsKey($"x_{currentPosition.X + i}y_{currentPosition.Y}"))
@@ -415,7 +415,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                     return OccupyType.WIDTHHEIGHT;
                 }
             }
-
+    
             return OccupyType.NONE;
         }
         private OccupyType IsOccupyHeight(Point currentPosition, Size childPix)
@@ -425,7 +425,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             {
                 return OccupyType.OVERFLOW;
             }
-
+    
             for (var i = 0; i < childPix.Height; i++)
             {
                 if (Maps.ContainsKey($"x_{currentPosition.X}y_{currentPosition.Y + i}"))
@@ -433,7 +433,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                     return OccupyType.WIDTHHEIGHT;
                 }
             }
-
+    
             return OccupyType.NONE;
         }
         /// <summary>
@@ -446,20 +446,20 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             var              childPix          = new Size();
             var              childPosition     = new Point();
             Point?           lastChildPosition = null;
-
+    
             Maps = new Dictionary<string, Point>();
             for (var i = 0; i < Children.Count; )
             {
                 var child = Children[i] as FrameworkElement;
-
+    
                 if (child is null)
                 {
                     continue;
                 }
-
+    
                 childPix.Width = GetWidthPix(child);
                 childPix.Height = GetHeightPix(child);
-
+    
                 if (Orientation == Orientation.Vertical)
                 {
                     if (childPix.Height > TileCount)
@@ -540,7 +540,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                     }
                 }
             }
-
+    
             return finalSize;
         }
         /// <summary>
@@ -551,7 +551,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         protected override Size MeasureOverride(Size constraint)
         {
             int childWidthPix, childHeightPix, maxRowCount = 0;
-
+    
             if (Children.Count == 0) return new Size();
             
             //遍历孩子元素
@@ -559,31 +559,31 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             {
                 childWidthPix = GetWidthPix(child);
                 childHeightPix = GetHeightPix(child);
-
+    
                 if (MinHeightPix == 0) MinHeightPix = childHeightPix;
                 if (MinWidthPix == 0) MinWidthPix = childWidthPix;
-
+    
                 if (MinHeightPix > childHeightPix) MinHeightPix = childHeightPix;
                 if (MinWidthPix > childWidthPix) MinWidthPix = childWidthPix;
             }
-
+    
             foreach (FrameworkElement child in Children)
             {
                 childWidthPix = GetWidthPix(child);
                 childHeightPix = GetHeightPix(child);
-
+    
                 child.Margin = TileMargin;
                 child.HorizontalAlignment = HorizontalAlignment.Left;
                 child.VerticalAlignment = VerticalAlignment.Top;
-
+    
                 child.Width = TileWidth * childWidthPix + (child.Margin.Left + child.Margin.Right) * ((childWidthPix - MinWidthPix) / MinWidthPix);
                 child.Height = TileHeight * childHeightPix + (child.Margin.Top + child.Margin.Bottom) * ((childHeightPix - MinHeightPix) / MinHeightPix);
-
+    
                 maxRowCount += childWidthPix * childHeightPix;
-
+    
                 child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             }
-
+    
             if (TileCount <= 0) throw new ArgumentOutOfRangeException();
             //if (this.MinWidthPix == 0) this.MinWidthPix = 1;
             //if (this.MinHeightPix == 0) this.MinHeightPix = 1;
@@ -601,10 +601,10 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                 if (!double.IsNaN(widthPix))
                     constraint.Width = widthPix * TileWidth + widthPix / MinWidthPix * (TileMargin.Left + TileMargin.Right);
             }
-
+    
             return constraint;
         }
-
+    
         #endregion
     }
 

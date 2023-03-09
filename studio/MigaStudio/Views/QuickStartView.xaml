@@ -6,72 +6,92 @@
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:studio="urn:acorisoft/studio"
              mc:Ignorable="d"
              d:DesignHeight="720" 
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type vm:QuickStartController}, IsDesignTimeCreatable=True}">
     <Grid>
+
         <!-- 模糊图层 -->
         <Rectangle x:Name="PART_BlurBG">
-            <Rectangle.Effect>
-                <BlurEffect Radius="30" RenderingBias="Performance" />
-            </Rectangle.Effect>
             <Rectangle.Fill>
-                <ImageBrush ImageSource="E:\1.jpg"
-                                    Stretch="None"
-                                    Viewport="0,0,1,1"
-                                    Viewbox="0,0,0.8,0.8" />
+                <ImageBrush ImageSource="E:\bg_1.png"/>
             </Rectangle.Fill>
         </Rectangle>
 
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <f:TilePanel x:Name="Panel"
+                         Margin="48"
+                         TileCount="6"
+                         TileHeight="210"
+                         TileWidth="210"
+                         TileMargin="6">
+                <Border f:TilePanel.HeightPix="2"
+                        f:TilePanel.WidthPix="2"
+                        Background="White"
+                        CornerRadius="16"
+                        VerticalAlignment="Top"/>
 
-        <!-- 背景叠加层 -->
-        <Rectangle x:Name="PART_MaskBG">
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
-                    <GradientStop Color="#4A000000" Offset="0" />
-                    <GradientStop Color="#5A000000" Offset="0.7" />
-                    <GradientStop Color="#6A000000" Offset="0.8" />
-                    <GradientStop Color="#7A000000" Offset="1" />
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        
-        <Border Background="White"
-                CornerRadius="24"
-                HorizontalAlignment="Center"
-                Padding="32"
-                VerticalAlignment="Center">
-            <Grid Height="540"
-                  Width="420">
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="2"
+                                       Accent="#ffab12"
+                                       Header="新建世界观">
+                    <TextBlock Text="ces"/>
+                </studio:QuickStartPane>
 
-                <StackPanel>
-                    
-                    <ui:TextBox Margin="0 0 0 8"
-                                PlaceholderText="世界观名称"
-                                PlaceholderEnabled="True"
-                                Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <ui:TextBox Margin="0 8"
-                                PlaceholderText="世界观外文名（拼音或者英文）"
-                                PlaceholderEnabled="True"
-                                Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <ui:TextBox Margin="0 8"
-                                PlaceholderText="作者名称"
-                                PlaceholderEnabled="True"
-                                Text="{Binding Author,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <f:HighlightButton Content="新建"
-                                       Command="{Binding CreateCommand}"
-                                       Margin="0 8"
-                                       Palette="HighlightPalette2"/>
-                    <f:HighlightButton Content="打开"
-                                       Margin="0 8"
-                                       Palette="HighlightPalette2"/>
-                    <f:HighlightButton Content="导入"
-                                       Margin="0 8"
-                                       Palette="HighlightPalette2"/>
-                </StackPanel>
-            </Grid>
-        </Border>
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#bec936"
+                                       Header="打开世界观"/>
+
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#6a5acd"
+                                       Header="导入旧世界观"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#ff6600"
+                                           Header="反馈问题"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#0092f2"
+                                           Header="获得帮助"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#99b433"
+                                           Header="反馈问题"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#0092f2"
+                                           Header="获得帮助"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#9f6ce6"
+                                           Header="赞助我们"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#9f6ce6"
+                                           Header="获得帮助"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#99b433"
+                                           Header="反馈问题"/>
+
+                <studio:QuickStartPane f:TilePanel.HeightPix="1"
+                                       f:TilePanel.WidthPix="1"
+                                       Accent="#0092f2"
+                                           Header="获得帮助"/>
+            </f:TilePanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.Attributes;
 
 namespace Acorisoft.FutureGL.MigaStudio.Views
@@ -9,6 +10,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
         public QuickStartView()
         {
             InitializeComponent();
+            this.SizeChanged += OnSizeChanged;
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var count = (int)(ActualWidth / 210);
+            Panel.TileCount = count;
         }
     }
 }

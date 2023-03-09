@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
@@ -76,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             //
             //
-            Context.SwitchController(Context.MainController);
+            Context.SwitchController(Context.Controllers.First(x => x is QuickStartController));
         }
         
         public GlobalStudioContext Context { get; private set; }
