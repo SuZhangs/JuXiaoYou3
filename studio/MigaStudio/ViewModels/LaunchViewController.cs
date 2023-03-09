@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
@@ -16,7 +17,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public LaunchViewController()
         {
-            Job("正在加载设置", _ =>
+            // 加载设置
+            Job(StringFromCode.GetText("text.launch.loadSetting"), _ =>
             {
                 var appModel = Xaml.Get<ApplicationModel>();
 
@@ -48,6 +50,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     RepositorySetting         = repositorySetting,
                     RepositorySettingFileName = repositorySettingFileName
                 });
+            });
+            
+            // 检查更新
+            Job(StringFromCode.GetText("text.launch.checkVersion"), x =>
+            {
+                Thread.Sleep(1000);
+            });
+            
+            Job(StringFromCode.GetText("text.launch.openDatabase"), x =>
+            {
+                Thread.Sleep(1000);
             });
         }
 
