@@ -1,26 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Reactive.Concurrency;
+﻿using System.Reactive.Concurrency;
 using System.Threading;
-using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.AppModels;
-using Acorisoft.FutureGL.Forest.ViewModels;
-using Acorisoft.FutureGL.MigaStudio.Models;
 
-namespace Acorisoft.FutureGL.MigaStudio.ViewModels
+namespace Acorisoft.FutureGL.Forest.ViewModels
 {
-    public class LaunchViewControllerBase: ViewModelBase, ISplashController
+    public abstract class LaunchViewControllerBase: ViewModelBase, ISplashController
     {
         private          string _caption;
+        private          object _context;
         private readonly object _sync;
         
-        protected LaunchViewControllerBase(TabBaseAppViewModel globalParameter)
+        protected LaunchViewControllerBase()
         {
             _sync   = new object();
-            Context = globalParameter;
             Jobs    = new Queue<AsyncJob>(32);
+            Init();
         }
 
-        protected void Job(string id, Action<TabBaseAppViewModel> handler)
+        private void Init()
+        {
+            _context ??= GetExecuteContext();
+        }
+
+        protected void Job(string id, Action<object> handler)
         {
             Jobs.Enqueue(new AsyncJob
             {
@@ -47,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         Caption = job.Title;
                     });
                 
-                    job.Handler(Context);
+                    job.Handler(_context);
                 }
                 
                 Scheduler.Schedule(() =>
@@ -58,6 +60,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 
             }
         }
+
+        protected abstract object GetExecuteContext();
 
         protected virtual void OnJobCompleted()
         {
@@ -77,11 +81,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             get => _caption;
             set => SetValue(ref _caption, value);
         }
-
-        /// <summary>
-        /// 上下文
-        /// </summary>
-        public TabBaseAppViewModel Context { get; }
         
         /// <summary>
         /// 所有
