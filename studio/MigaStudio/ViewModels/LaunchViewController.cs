@@ -14,10 +14,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         private const string RepositorySettingFileName = "repo.json";
         private const string AdvancedSettingFileName   = "advanced.json";
 
-        public LaunchViewController(TabBaseAppViewModel globalParameter)
+        public LaunchViewController()
         {
-            Context = globalParameter;
-            
             Job("正在加载设置", _ =>
             {
                 var appModel = Xaml.Get<ApplicationModel>();
@@ -53,13 +51,21 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             });
         }
 
+        public override void Start(Parameter arg)
+        {
+            Context = arg.Args[0] as GlobalStudioContext;
+            base.Start(arg);
+        }
+
         protected override object GetExecuteContext() => Context;
 
         protected override void OnJobCompleted()
         {
-            Context.CurrentController = Context.Controller;
+            //
+            //
+            Context.SwitchController(Context.MainController);
         }
         
-        public TabBaseAppViewModel Context { get; }
+        public GlobalStudioContext Context { get; private set; }
     }
 }

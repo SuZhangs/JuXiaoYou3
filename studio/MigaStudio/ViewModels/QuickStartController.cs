@@ -153,5 +153,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public AsyncRelayCommand CreateCommand { get; }
         public AsyncRelayCommand OpenCommand { get; }
         public AsyncRelayCommand UpgradeCommand { get; }
+        public sealed override string Id => "::Quick";
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.Reactive.Concurrency;
 using System.Threading;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
 {
-    public abstract class LaunchViewControllerBase: ViewModelBase, ISplashController
+    public abstract class LaunchViewControllerBase: ViewModelBase, ITabViewController
     {
         private          string _caption;
         private          object _context;
@@ -63,6 +64,8 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         protected abstract object GetExecuteContext();
 
+        public void Start(ITabViewModel viewModel){}
+
         protected virtual void OnJobCompleted()
         {
             
@@ -86,5 +89,10 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 所有
         /// </summary>
         public Queue<AsyncJob> Jobs { get; }
+
+        /// <summary>
+        /// 唯一标识符
+        /// </summary>
+        public string Id => "::Launch";
     }
 }

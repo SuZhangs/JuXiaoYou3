@@ -1,6 +1,8 @@
-﻿namespace Acorisoft.FutureGL.Forest.AppModels
+﻿using Acorisoft.FutureGL.Forest.Interfaces;
+
+namespace Acorisoft.FutureGL.Forest.AppModels
 {
-    public interface IViewController : ILifetimeSupport
+    public interface IViewController : IViewModel
     {
         
     }

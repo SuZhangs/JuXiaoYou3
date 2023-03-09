@@ -10,5 +10,10 @@ namespace Acorisoft.FutureGL.Forest.AppModels
         /// </summary>
         /// <param name="viewModel">指定的视图模型</param>
         void Start(ITabViewModel viewModel);
+
+        /// <summary>
+        /// 唯一标识符
+        /// </summary>
+        string Id { get; }
     }
 }

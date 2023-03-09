@@ -33,6 +33,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             New<HomeViewModel>();
         }
 
+        public sealed override string Id => "::Main";
+
         /// <summary>
         /// 用于绑定的<see cref="WindowState"/> 属性。
         /// </summary>

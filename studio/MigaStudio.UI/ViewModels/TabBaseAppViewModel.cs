@@ -9,22 +9,28 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class TabBaseAppViewModel : AppViewModelBase
     {
-        private IViewController _currentController;
-        private bool            _initialized;
+        private GlobalStudioContext _context;
+        private IViewController     _currentController;
+        private bool                _initialized;
 
         protected TabBaseAppViewModel()
         {
             ApplicationModel = Xaml.Get<ApplicationModel>();
         }
 
+        protected void OnInitialize(GlobalStudioContext context)
+        {
+            _context     = context;
+            _initialized = true;
+        }
+
         public sealed override void Start()
         {
             if (_initialized)
             {
-                _initialized = true;
+                StartOverride();
             }
             
-            StartOverride();
         }
 
         protected virtual void StartOverride()
@@ -32,6 +38,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
 
+        protected virtual void OnControllerChanged(IViewController oldController, IViewController newController)
+        {
+        }
+        
         /// <summary>
         /// 应用程序模型
         /// </summary>
@@ -56,10 +66,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             get => _currentController;
             set
             {
-                if (_initialized)
-                {
-                    value?.Start();
-                }
+                OnControllerChanged(_currentController, value);
+                
                 SetValue(ref _currentController, value);
             }
         }

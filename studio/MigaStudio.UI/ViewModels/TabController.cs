@@ -17,7 +17,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class TabController : ViewModelBase, ITabViewController
     {
-        private ITabViewModel _currentViewModel;
+        private ITabViewModel       _currentViewModel;
+        private GlobalStudioContext _context;
 
         protected TabController()
         {
@@ -26,6 +27,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             AddTabCommand    = new RelayCommand<object>(AddTabImpl);
             RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
         }
+
+        #region AddTab / RemoveTab
+
+        
 
         private void AddTabImpl(object param)
         {
@@ -121,6 +126,25 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             return RemoveTabImpl(viewModel);
         }
+        
+        #endregion
+
+        #region Start
+
+        public override void Start()
+        {
+            if (_context is null)
+            {
+                return;
+            }
+        }
+
+        public override void Start(Parameter arg)
+        {
+            _context = arg.Args[0] as GlobalStudioContext;
+        }
+
+        #endregion
 
         protected virtual void OnCurrentViewModelChanged(ITabViewModel oldViewModel, ITabViewModel newViewModel)
         {
@@ -246,6 +270,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 SetValue(ref _currentViewModel, value);
             }
         }
+        
+        /// <summary>
+        /// 唯一标识符
+        /// </summary>
+        public abstract string Id { get; }
 
         /// <summary>
         /// 工作区标签页
@@ -266,11 +295,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 移除标签页
         /// </summary>
         public AsyncRelayCommand<ITabViewModel> RemoveTabCommand { get; }
+        
+        
 
         internal static string CloseTabItemCaption
         {
             get
             {
+                // TODO: 翻译
                 return Language.Culture switch
                 {
                     _ => "确认退出？"
@@ -282,6 +314,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             get
             {
+                // TODO: 翻译
                 return Language.Culture switch
                 {
                     _ => "当前页面尚未保存，您确定要退出？"
