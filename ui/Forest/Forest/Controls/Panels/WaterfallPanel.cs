@@ -358,7 +358,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var bound = Margin.Left + Margin.Right;
-            TileCount = (int)((this.ActualWidth - bound) / Gap);
+            TileCount = (int)((ActualWidth - bound) / TileSize);
         }
 
         /// <summary>
