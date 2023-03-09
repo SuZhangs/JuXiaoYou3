@@ -7,9 +7,20 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         public void SwitchController(ITabViewController controller)
         {
-            if(controller is null) return;
-            ControllerSetter?.Invoke(controller);
+            if(controller is null ||
+               ControllerSetter is null) return;
+            ControllerSetter(controller);
         }
+        
+        /// <summary>
+        /// 是否打开数据库
+        /// </summary>
+        public bool IsDatabaseOpen { get; set; }
+        
+        /// <summary>
+        /// 是否为第一次启动
+        /// </summary>
+        public bool FirstTimeStartup { get; set; }
         
         public Action<ITabViewController> ControllerSetter { get; init; }
 
