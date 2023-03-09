@@ -23,72 +23,70 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <f:TilePanel x:Name="Panel"
                          Margin="48"
-                         TileCount="6"
-                         TileHeight="210"
-                         TileWidth="210"
-                         TileMargin="6">
-                <Border f:TilePanel.HeightPix="2"
-                        f:TilePanel.WidthPix="2"
+                         TileSize="210"
+                         Gap="6">
+                <Border f:TilePanel.H="2"
+                        f:TilePanel.W="2"
                         Background="White"
                         CornerRadius="16"
                         VerticalAlignment="Top"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="2"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="2"
                                        Accent="#ffab12"
                                        Header="新建世界观">
                     <TextBlock Text="ces"/>
                 </studio:QuickStartPane>
 
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#bec936"
                                        Header="打开世界观"/>
 
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#6a5acd"
                                        Header="导入旧世界观"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#ff6600"
                                            Header="反馈问题"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#0092f2"
                                            Header="获得帮助"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#99b433"
                                            Header="反馈问题"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#0092f2"
                                            Header="获得帮助"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#9f6ce6"
                                            Header="赞助我们"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#9f6ce6"
                                            Header="获得帮助"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#99b433"
                                            Header="反馈问题"/>
 
-                <studio:QuickStartPane f:TilePanel.HeightPix="1"
-                                       f:TilePanel.WidthPix="1"
+                <studio:QuickStartPane f:TilePanel.H="1"
+                                       f:TilePanel.W="1"
                                        Accent="#0092f2"
                                            Header="获得帮助"/>
             </f:TilePanel>
