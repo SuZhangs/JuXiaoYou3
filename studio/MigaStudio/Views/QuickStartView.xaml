@@ -8,6 +8,8 @@
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:studio="urn:acorisoft/studio"
              mc:Ignorable="d"
+             Foreground="{f:ForegroundInHighlightBrush}"
+             FontFamily="DengXian Light"
              d:DesignHeight="720" 
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type vm:QuickStartController}, IsDesignTimeCreatable=True}">
@@ -20,78 +22,75 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-            <f:TilePanel x:Name="Panel"
-                         Margin="48"
-                         HorizontalAlignment="Stretch"
-                         TileSize="210"
-                         TileCount="6"
-                         Gap="6">
-                <Border f:TilePanel.H="2"
-                        f:TilePanel.W="2"
-                        Background="White"
-                        CornerRadius="16"
-                        VerticalAlignment="Top"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      Margin="48 48 48 16">
+            <StackPanel>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
+                <f:TilePanel x:Name="Panel"
+                             HorizontalAlignment="Left"
+                             Margin="0 24 0 0"
+                             TileSize="210"
+                             TileCount="5"
+                             Gap="8">
+
+                    <f:TilePanel f:TilePanel.H="2"
+                             f:TilePanel.W="4"
+                             HorizontalAlignment="Left"
+                             TileSize="210"
+                             TileCount="4"
+                             Gap="0 0 16 16">
+
+                        <Border f:TilePanel.H="2"
+                            f:TilePanel.W="2"
+                            Background="White"
+                            CornerRadius="16"
+                            VerticalAlignment="Top"/>
+
+                        <studio:QuickStartPane f:TilePanel.H="1"
                                        f:TilePanel.W="2"
                                        Accent="#ffab12"
                                        Header="新建世界观">
-                    <TextBlock Text="ces"/>
-                </studio:QuickStartPane>
+                            <TextBlock Text="ces"/>
+                        </studio:QuickStartPane>
 
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#bec936"
-                                       Header="打开世界观"/>
+                        <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#bec936"
+                                           Header="打开世界观"/>
 
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#6a5acd"
-                                       Header="导入旧世界观"/>
+                        <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#6a5acd"
+                                           Header="导入旧世界观"/>
+                    </f:TilePanel>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#ff6600"
-                                           Header="反馈问题"/>
+                    <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#ff6600"
+                                           Header="BUG反馈"/>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#0092f2"
-                                           Header="获得帮助"/>
+                    <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#0092f2"
+                                           Header="教程"/>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#99b433"
-                                           Header="反馈问题"/>
+                    <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="2"
+                                           Accent="#9f6ce6"
+                                           HeaderTemplate="{x:Null}">
+                        <studio:QuickStartPane.Header>
+                            <StackPanel>
+                                <TextBlock Text="赞助我们"/>
+                                <TextBlock Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"/>
+                            </StackPanel>
+                        </studio:QuickStartPane.Header>
+                    </studio:QuickStartPane>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#0092f2"
-                                           Header="获得帮助"/>
 
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#9f6ce6"
-                                           Header="赞助我们"/>
-
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#9f6ce6"
-                                           Header="获得帮助"/>
-
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#99b433"
-                                           Header="反馈问题"/>
-
-                <studio:QuickStartPane f:TilePanel.H="1"
-                                       f:TilePanel.W="1"
-                                       Accent="#0092f2"
-                                           Header="获得帮助"/>
-            </f:TilePanel>
+                </f:TilePanel>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

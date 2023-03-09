@@ -340,7 +340,7 @@
                         <Border DockPanel.Dock="Bottom"
                                     Background="{TemplateBinding Accent}"
                                     CornerRadius="0 0 16 16"
-                                    Height="48">
+                                    MinHeight="48">
                             <ContentPresenter ContentSource="Header"
                                               HorizontalAlignment="Stretch"/>
 
