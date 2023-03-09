@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using Acorisoft.FutureGL.Forest.Utils;
-
-namespace Acorisoft.FutureGL.Forest.Controls.Panels
+﻿namespace Acorisoft.FutureGL.Forest.Controls.Panels
 {
     // public class TilePanel : Panel
     // {

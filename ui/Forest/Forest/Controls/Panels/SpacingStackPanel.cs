@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Controls.Panels
+﻿namespace Acorisoft.FutureGL.Forest.Controls.Panels
 {
     public class SpacingStackPanel : StackPanel
     {
