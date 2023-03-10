@@ -17,7 +17,7 @@
         <!-- 模糊图层 -->
         <Rectangle x:Name="PART_BlurBG">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="E:\bg_1.png"/>
+                <ImageBrush ImageSource="E:\bg_4.png"/>
             </Rectangle.Fill>
         </Rectangle>
 
@@ -29,7 +29,7 @@
                              HorizontalAlignment="Left"
                              TileWidth="210"
                              TileHeight="280"
-                             TileCount="5"
+                             TileCount="6"
                              Gap="6">
 
                     <f:TilePanel f:TilePanel.H="2"
@@ -48,16 +48,19 @@
                             <Grid>
                                 <Border Background="{f:Brush HighlightA3}"
                                         CornerRadius="64"
-                                        Height="84"
-                                        Width="84"
                                         Margin="24"
+                                          Height="84"
+                                          Width="84"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom">
-                                    <Path Data="{StaticResource FeatherIcon.Edit}"
+                                    <Path Data="{StaticResource IC.Play}"
+                                          Stretch="Uniform"
                                           Stroke="{f:ForegroundInHighlightBrush}"
                                           StrokeThickness="2"
                                           HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"
+                                          Height="48"
+                                          Width="48"/>
                                 </Border>
                             </Grid>
                         </Border>
@@ -65,39 +68,142 @@
                         <studio:QuickStartPane f:TilePanel.H="1"
                                        f:TilePanel.W="2"
                                        Accent="#ffab12"
-                                       Header="新建世界观">
-                            <TextBlock Text="ces"/>
+                                            HeaderTemplate="{x:Null}">
+                            <studio:QuickStartPane.Header>
+                                <StackPanel Margin="16 8 16 12">
+                                    <TextBlock FontSize="18"
+                                               FontWeight="Bold"
+                                               Margin="0 8"
+                                               Text="新建世界观"/>
+                                    <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
+                                               Margin="0 8"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </studio:QuickStartPane.Header>
+                            <Path Data="{StaticResource FeatherIcon.File}"
+                                  Stretch="Uniform"
+                                  Stroke="#ffab12"
+                                  StrokeThickness="6"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="96"
+                                  Width="96"/>
+                        </studio:QuickStartPane>
+
+                        <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#bec936"
+                                            HeaderTemplate="{x:Null}">
+                            <studio:QuickStartPane.Header>
+                                <StackPanel Margin="16 8 16 12">
+                                    <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 8"
+                                           Text="打开世界观"/>
+                                    <TextBlock FontFamily="{StaticResource SongTi}"
+                                               LineHeight="18"
+                                               Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </studio:QuickStartPane.Header>
+
+                            <Path Data="{StaticResource FeatherIcon.Folder}"
+                                  Stretch="Uniform"
+                                  Stroke="#bec936"
+                                  StrokeThickness="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="64"
+                                  Width="64"/>
                         </studio:QuickStartPane>
 
 
                         <studio:QuickStartPane f:TilePanel.H="1"
                                            f:TilePanel.W="1"
-                                           Accent="#bec936"
-                                           Header="打开世界观"/>
-
-
-                        <studio:QuickStartPane f:TilePanel.H="1"
-                                           f:TilePanel.W="1"
                                            Accent="#6a5acd"
-                                           Header="导入旧世界观"/>
+                                            HeaderTemplate="{x:Null}">
+                            <studio:QuickStartPane.Header>
+                                <StackPanel Margin="16 8 16 12">
+                                    <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 8"
+                                           Text="升级旧世界观"/>
+                                    <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </studio:QuickStartPane.Header>
+                            <Path Data="{StaticResource FeatherIcon.Update}"
+                                  Stretch="Uniform"
+                                  Stroke="#6a5acd"
+                                  StrokeThickness="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="64"
+                                  Width="64"/>
+                        </studio:QuickStartPane>
                     </f:TilePanel>
 
                     <studio:QuickStartPane f:TilePanel.H="1"
                                            f:TilePanel.W="1"
-                                           Accent="#ff6600"
-                                           Header="BUG反馈"/>
+                                           Accent="#CF4747"
+                                            HeaderTemplate="{x:Null}">
+                        <studio:QuickStartPane.Header>
+                            <StackPanel Margin="16 8 16 12">
+                                <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 8"
+                                           Text="BUG反馈"/>
+                                <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </studio:QuickStartPane.Header>
+                        <Path Data="{StaticResource IC.Bug}"
+                                  Stretch="Uniform"
+                                  Fill="#CF4747"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="84"
+                                  Width="84"/>
+                    </studio:QuickStartPane>
 
                     <studio:QuickStartPane f:TilePanel.H="1"
                                            f:TilePanel.W="1"
                                            Accent="#0092f2"
-                                           Header="教程"/>
+                                            HeaderTemplate="{x:Null}">
+                        <studio:QuickStartPane.Header>
+                            <StackPanel Margin="16 8 16 12">
+                                <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 8"
+                                           Text="观看教程"/>
+                                <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </studio:QuickStartPane.Header>
+                        <Path Data="{StaticResource IC.Play}"
+                                  Stretch="Uniform"
+                                  Stroke="#0092f2"
+                                  StrokeThickness="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="96"
+                                  Width="96"/>
+                    </studio:QuickStartPane>
 
                     <studio:QuickStartPane f:TilePanel.H="1"
                                            f:TilePanel.W="1"
                                            Accent="#9f6ce6"
                                            HeaderTemplate="{x:Null}">
                         <studio:QuickStartPane.Header>
-                            <StackPanel Margin="12 8 12 12">
+                            <StackPanel Margin="16 8 16 12">
                                 <TextBlock FontSize="18"
                                            FontWeight="Bold"
                                            Margin="0 8"
@@ -117,8 +223,29 @@
 
                     <studio:QuickStartPane f:TilePanel.H="1"
                                            f:TilePanel.W="1"
-                                           Accent="#0092f2"
-                                           Header="教程"/>
+                                           Accent="#0eb0c9"
+                                            HeaderTemplate="{x:Null}">
+                        <studio:QuickStartPane.Header>
+                            <StackPanel Margin="16 8 16 12">
+                                <TextBlock FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 8"
+                                           Text="联系我们"/>
+                                <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </studio:QuickStartPane.Header>
+                        <Path Data="{StaticResource FeatherIcon.Chat}"
+                                  Stretch="Uniform"
+                                  Stroke="#0eb0c9"
+                                  StrokeThickness="4"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Height="84"
+                                  Width="84"/>
+                    </studio:QuickStartPane>
                 </f:TilePanel>
             </StackPanel>
         </ScrollViewer>
