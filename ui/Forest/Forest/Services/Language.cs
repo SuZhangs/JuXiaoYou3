@@ -45,11 +45,10 @@ namespace Acorisoft.FutureGL.Forest.Services
         public static void SetId(FrameworkElement element, string id)
         {
             var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
-            var    textKey = $"{id}.Text";
-            var    toolKey = $"{id}.ToolTips";
+            var    toolKey = $"{id}.tips";
             string text;
 
-            if (GlobalStrings.TryGetValue(textKey, out text))
+            if (GlobalStrings.TryGetValue(id, out text))
             {
                 adapter.SetText(text);
             }
@@ -118,8 +117,8 @@ namespace Acorisoft.FutureGL.Forest.Services
             {
                 var    id      = $"{vmls.RootName}.{value}";
                 var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
-                var    textKey = $"{id}.Text";
-                var    toolKey = $"{id}.ToolTips";
+                var    textKey = $"{id}";
+                var    toolKey = $"{id}.tips";
                 string text;
 
                 if (GlobalStrings.TryGetValue(textKey, out text))

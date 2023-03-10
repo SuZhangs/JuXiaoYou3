@@ -18,7 +18,7 @@
          <Style x:Key="MainTitleTemplate" TargetType="TextBlock">
              <Setter Property="FontSize" Value="18"/>
              <Setter Property="FontWeight" Value="Bold"/>
-             <Setter Property="FontFamily" Value="{StaticResource SongTi}"/>
+             <Setter Property="FontFamily" Value="{StaticResource HeiTi}"/>
             <Setter Property="Margin" Value="0 8"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
@@ -71,11 +71,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16">
                                 <TextBlock f:Language.Id="quickstart.newButton"
-                                           Style="{StaticResource MainTitleTemplate}"
-                                           Text="新建世界观" />
+                                           Style="{StaticResource MainTitleTemplate}" />
                                 <TextBlock f:Language.Id="quickstart.newButton.tips"
-                                           Style="{StaticResource SubTitleTemplate}"
-                                           Text="点击这里新建一个新的世界观，从头创造新世界！"/>
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Path Data="{StaticResource FeatherIcon.File}"
@@ -93,11 +91,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                 <TextBlock f:Language.Id="quickstart.openButton"
-                                           Style="{StaticResource MainTitleTemplate}"
-                                           Text="打开世界观" />
+                                           Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.openButton.tips"
-                                           Style="{StaticResource SubTitleTemplate}"
-                                           Text="打开已经创建的世界观，可以继续编辑！"/>
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
 
@@ -114,11 +110,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                 <TextBlock f:Language.Id="quickstart.upgradeButton"
-                                           Style="{StaticResource MainTitleTemplate}"
-                                           Text="升级旧世界观" />
+                                           Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.upgradeButton.tips"
-                                           Style="{StaticResource SubTitleTemplate}"
-                                           Text="如果您曾经使用过橘小柚，点击这里可以升级过去创建的世界观！"/>
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Path Data="{StaticResource FeatherIcon.Update}"
@@ -140,14 +134,13 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                  <TextBlock f:Language.Id="quickstart.feedbackButton"
-                                                    Style="{StaticResource MainTitleTemplate}"
-                                                    Text="BUG反馈" />
+                                                    Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.feedbackButton.tips"
-                                           Style="{StaticResource SubTitleTemplate}"
-                                           Text="软件或多或少都会有BUG，请务必跟我们反馈！我们将会及时的修复这些BUG！"/>
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Path Data="{StaticResource IC.Bug}"
+                              Fill="#CF4747"
                               Style="{StaticResource LargeIcon}"/>
                     </studio:QuickStartPane>
 
@@ -158,15 +151,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                 <TextBlock f:Language.Id="quickstart.guideButton"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Margin="0 8"
-                                           Text="浏览教程" />
+                                           Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.guideButton.tips"
-                                           FontFamily="{StaticResource SongTi}"
-                                           LineHeight="18"
-                                           Text="橘小柚的上手难度有点高，为了能够获得更好的创作体验，我们建议浏览软件的教程。"
-                                           TextWrapping="Wrap" />
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Path Data="{StaticResource IC.Play}"
@@ -183,15 +170,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                 <TextBlock f:Language.Id="quickstart.sponsorButton"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Margin="0 8"
-                                           Text="赞助我们" />
+                                           Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.sponsorButton.tips"
-                                           FontFamily="{StaticResource SongTi}"
-                                           LineHeight="18"
-                                           Text="一个项目的运转需要资金，赞助我们可以让我们有更多的条件去尝试新功能！"
-                                           TextWrapping="Wrap" />
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Image Source="pack://application:,,,/Forest.Fonts;component/afd.png"
@@ -208,15 +189,9 @@
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="16 8 16 12">
                                 <TextBlock f:Language.Id="quickstart.contractButton"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Margin="0 8"
-                                           Text="联系我们" />
+                                           Style="{StaticResource MainTitleTemplate}"/>
                                 <TextBlock f:Language.Id="quickstart.contractButton.tips"
-                                           FontFamily="{StaticResource SongTi}"
-                                           LineHeight="18"
-                                           Text="如果您有什么需求或者好的建议，都可以联系我们！我们会很高兴您的到来！"
-                                           TextWrapping="Wrap" />
+                                           Style="{StaticResource SubTitleTemplate}"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
                         <Path Data="{StaticResource FeatherIcon.Chat}"
