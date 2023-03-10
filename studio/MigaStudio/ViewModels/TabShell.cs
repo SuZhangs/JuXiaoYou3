@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -23,9 +24,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 .WindowState = x => WindowState = x;
         }
 
-        public override void Start()
+        protected override void StartOverride()
         {
             RequireStartupTabViewModel();
+            New<CharacterConstraintViewModel>();
+            New<ItemConstraintViewModel>();
         }
 
         protected override void RequireStartupTabViewModel()

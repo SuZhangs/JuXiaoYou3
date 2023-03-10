@@ -1,3 +1,4 @@
+global using Acorisoft.FutureGL.Forest.Attributes;
 global using Acorisoft.FutureGL.Forest;
 global using Acorisoft.FutureGL.Forest.ViewModels;
 

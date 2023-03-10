@@ -2,6 +2,7 @@
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using ImageEditViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Commons.ImageEditViewModel;
 
@@ -19,6 +20,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
             Xaml.InstallView<DocumentGallery, DocumentGalleryViewModel>();
+            Xaml.InstallView<ConstraintEditorView, CharacterConstraintViewModel>();
+            Xaml.InstallView<ConstraintEditorView, ItemConstraintViewModel>();
         }
     }
 }

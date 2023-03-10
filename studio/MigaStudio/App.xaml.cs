@@ -13,6 +13,7 @@ using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
@@ -51,6 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
+            SubSystem.InstallViews();
         }
     }
 }

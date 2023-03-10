@@ -19,6 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private ITabViewModel       _currentViewModel;
         private GlobalStudioContext _context;
+        private bool                _initialized;
 
         protected TabController()
         {
@@ -131,17 +132,34 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #region Start
 
-        public override void Start()
+        public sealed override void Start()
         {
             if (_context is null)
             {
                 return;
             }
+
+            if (!_initialized)
+            {
+                StartOverride();
+                _initialized = true;
+            }
         }
 
-        public override void Start(Parameter arg)
+        protected virtual void StartOverride()
+        {
+            
+        }
+        
+        protected virtual void StartOverride(Parameter arg)
+        {
+            
+        }
+
+        public sealed override void Start(Parameter arg)
         {
             _context = arg.Args[0] as GlobalStudioContext;
+            StartOverride(arg);
         }
 
         #endregion

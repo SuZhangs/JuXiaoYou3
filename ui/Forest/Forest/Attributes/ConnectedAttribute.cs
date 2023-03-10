@@ -2,7 +2,7 @@ using System;
 
 namespace Acorisoft.FutureGL.Forest.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
     public sealed class ConnectedAttribute : Attribute
     {
         public Type View { get; init; }

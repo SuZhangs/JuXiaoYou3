@@ -10,6 +10,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         private          string _caption;
         private          object _context;
         private readonly object _sync;
+        private          bool   _init;
         
         protected LaunchViewControllerBase()
         {
@@ -71,8 +72,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             
         }
 
-        public override void Start()
+        public sealed override void Start()
         {
+            if (_init)
+            {
+                return;
+            }
+
+            _init = true;
             ThreadPool.QueueUserWorkItem(_ => AsyncJobProcess());
         }
 
