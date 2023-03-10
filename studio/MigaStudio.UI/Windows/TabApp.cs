@@ -48,6 +48,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             {
                 Source = new Uri("pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
             });
+            
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/Forest.Fonts;component/Fonts.xaml", UriKind.RelativeOrAbsolute)
+            });
             base.OnStartup(e);
         }
 

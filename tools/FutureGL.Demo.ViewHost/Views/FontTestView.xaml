@@ -13,23 +13,27 @@
         <sys:String x:Key="text">Simple Prototype 简单文本测试</sys:String>
         <FontFamily x:Key="F1">清松手寫體1</FontFamily>
         <FontFamily x:Key="F2">Source Han Serif CN</FontFamily>
-        <FontFamily x:Key="F3">Gen Jyuu Gothic Normal</FontFamily>
+        <FontFamily x:Key="F3">手札体-简</FontFamily>
         <FontFamily x:Key="F4">杨任东竹石体-Regular</FontFamily>
         <FontFamily x:Key="F5">思源黑体 CN Regular</FontFamily>
         <FontFamily x:Key="F6">阿里巴巴普惠体 R</FontFamily>
+        <FontFamily x:Key="F13">阿里巴巴普惠体 M</FontFamily>
+        <FontFamily x:Key="F14">阿里巴巴普惠体 L</FontFamily>
         <FontFamily x:Key="F7">贤二体</FontFamily>
-        <FontFamily x:Key="F8">DFGangBiW2-B5</FontFamily>
+        <FontFamily x:Key="F8">华康少女文字W5(P)</FontFamily>
         <FontFamily x:Key="F9">华康龙门石碑W9(P)</FontFamily>
         <FontFamily x:Key="F10">华康圆体W3(P)</FontFamily>
         <FontFamily x:Key="F11">手书体</FontFamily>
-        <FontFamily x:Key="F12">思源黑体 CN Regular</FontFamily>
+        <FontFamily x:Key="F12">华康楷体W5-A</FontFamily>
     </UserControl.Resources>
     <ScrollViewer>
        <UniformGrid Columns="2">
             <HeaderedContentControl Header="清松手寫體"
                                    Margin="28">
                <StackPanel Orientation="Vertical">
-                    <TextBlock Typography.StandardSwashes="1" FontSize="16" FontFamily="{StaticResource F1}" Text="{StaticResource text}" />
+                    <TextBlock Typography.StandardSwashes="1"
+                               Typography.ContextualSwashes="1"
+                               FontSize="16" FontFamily="{StaticResource F1}" Text="{StaticResource text}" />
                    <TextBlock FontSize="20" FontFamily="{StaticResource F1}" Text="{StaticResource text}" />
                    <TextBlock FontSize="32" FontFamily="{StaticResource F1}" Text="{StaticResource text}" />
                     <TextBlock Typography.StandardSwashes="1"
@@ -37,44 +41,23 @@
                                FontSize="48" FontFamily="{StaticResource F1}" Text="{StaticResource text}" />
                </StackPanel>
            </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="思源宋体"
+
+            <HeaderedContentControl Header="思源宋体"
+                                   Margin="28">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="13" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="16" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="32" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="48" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
+                </StackPanel>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl Header="思源黑体"
                                    Margin="28">
                <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="13" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F2}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           
-           <HeaderedContentControl Header="思源柔黑"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="13" FontFamily="{StaticResource F3}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F3}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F3}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F3}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           
-           
-           <HeaderedContentControl Header="杨任东竹石体"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="13" FontFamily="{StaticResource F4}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F4}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F4}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F4}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="思源黑体"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="13" FontFamily="{StaticResource F5}" Text="{StaticResource text}" />
+                    <TextBlock Typography.StandardSwashes="1"
+                               Typography.StylisticSet1="True"
+                               FontSize="13" FontFamily="{StaticResource F5}" Text="{StaticResource text}" />
                    <TextBlock FontSize="16" FontFamily="{StaticResource F5}" Text="{StaticResource text}" />
                    <TextBlock FontSize="32" FontFamily="{StaticResource F5}" Text="{StaticResource text}" />
                    <TextBlock FontSize="48" FontFamily="{StaticResource F5}" Text="{StaticResource text}" />
@@ -90,56 +73,50 @@
                    <TextBlock FontSize="48" FontFamily="{StaticResource F6}" Text="{StaticResource text}" />
                </StackPanel>
            </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="汉仪贤二体"
+
+
+            <HeaderedContentControl Header="阿里巴巴普惠体 (M)"
+                                   Margin="28">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="13" FontFamily="{StaticResource F13}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="16" FontFamily="{StaticResource F13}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="32" FontFamily="{StaticResource F13}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="48" FontFamily="{StaticResource F13}" Text="{StaticResource text}" />
+                </StackPanel>
+            </HeaderedContentControl>
+
+
+            <HeaderedContentControl Header="得意黑"
+                                   Margin="28">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontStyle="Italic"
+FontSize="13" FontFamily="得意黑" Text="{StaticResource text}" />
+                    <TextBlock FontSize="16" FontFamily="得意黑" Text="{StaticResource text}" />
+                    <TextBlock FontSize="32" FontFamily="得意黑" Text="{StaticResource text}" />
+                    <TextBlock FontSize="48" FontFamily="得意黑" Text="{StaticResource text}" />
+                </StackPanel>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl Header="汉仪贤二体"
                                    Margin="28">
                <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F7}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="16" FontFamily="{StaticResource F7}" Text="{StaticResource text}" />
                    <TextBlock FontSize="20" FontFamily="{StaticResource F7}" Text="{StaticResource text}" />
                    <TextBlock FontSize="32" FontFamily="{StaticResource F7}" Text="{StaticResource text}" />
                    <TextBlock FontSize="48" FontFamily="{StaticResource F7}" Text="{StaticResource text}" />
                </StackPanel>
            </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="华康钢笔体"
+
+
+            <HeaderedContentControl Header="智勇手书中文体"
                                    Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="13" FontFamily="{StaticResource F8}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F8}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F8}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F8}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="华康龙门石碑"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F9}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="20" FontFamily="{StaticResource F9}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F9}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F9}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="华康圆体W3(P)"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F10}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="20" FontFamily="{StaticResource F10}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F10}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F10}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-           
-           <HeaderedContentControl Header="智勇手书中文体"
-                                   Margin="28">
-               <StackPanel Orientation="Vertical">
-                   <TextBlock FontSize="16" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="20" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="32" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
-                   <TextBlock FontSize="48" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
-               </StackPanel>
-           </HeaderedContentControl>
-       </UniformGrid>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="16" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="20" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="32" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
+                    <TextBlock FontSize="48" FontFamily="{StaticResource F11}" Text="{StaticResource text}" />
+                </StackPanel>
+            </HeaderedContentControl>
+        </UniformGrid>
     </ScrollViewer>
 </UserControl>

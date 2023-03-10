@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="PuHuiTi.otf" />
+      <Resource Include="PuHuiTi.otf" />
+      <None Remove="SourceHanSerifCN.otf" />
+      <Resource Include="SourceHanSerifCN.otf" />
+      <None Remove="清松手寫體1.ttf" />
+      <Resource Include="清松手寫體1.ttf" />
+    </ItemGroup>
+
+</Project>

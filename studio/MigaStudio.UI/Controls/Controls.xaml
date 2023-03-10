@@ -326,7 +326,6 @@
                 <DataTemplate>
                     <TextBlock Foreground="{f:ForegroundInHighlightBrush}"
                                FontSize="16"
-                               FontWeight="Bold"
                                Text="{Binding Mode=OneWay}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>

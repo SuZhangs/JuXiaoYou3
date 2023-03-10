@@ -4,7 +4,7 @@
                  xmlns:shell="urn:acorisoft/forest/shell"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:f="urn:acorisoft/forest/ui"
-                 xmlns:fs="urn:acorisoft/forest/shell"
+                 xmlns:fs="urn:acorisoft/forest/shell"                
                  StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
                 <ui:ThemesDictionary Theme="Light" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Fonts;component/Fonts.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

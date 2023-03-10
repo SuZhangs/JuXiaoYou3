@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.Tests", "tests\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{646EFBD8-1E75-480A-9106-36F7AB8D56D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Fonts", "ui\Forest\Forest.Fonts\Forest.Fonts.csproj", "{8A84F333-5822-4B89-9C8F-6348CAC612DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{646EFBD8-1E75-480A-9106-36F7AB8D56D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A84F333-5822-4B89-9C8F-6348CAC612DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A84F333-5822-4B89-9C8F-6348CAC612DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A84F333-5822-4B89-9C8F-6348CAC612DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A84F333-5822-4B89-9C8F-6348CAC612DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{8DFF5AF2-54A6-4FDB-BD68-B8F40101C600} = {829B50A7-1B53-48F0-B1C8-7B5DC4CB3324}
 		{802A9642-0DD7-4025-91DE-26491FF59BBB} = {829B50A7-1B53-48F0-B1C8-7B5DC4CB3324}
 		{94A668AE-ADE1-4113-B843-CE27E99B5A3D} = {00FFC34C-2A5F-4F43-B99B-B8044A55FCDD}
+		{8A84F333-5822-4B89-9C8F-6348CAC612DE} = {00FFC34C-2A5F-4F43-B99B-B8044A55FCDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADC66617-EF09-469B-8799-FB3A75277D8D}

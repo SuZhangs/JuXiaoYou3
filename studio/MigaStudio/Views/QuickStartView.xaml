@@ -9,7 +9,6 @@
              xmlns:studio="urn:acorisoft/studio"
              mc:Ignorable="d"
              Foreground="{f:ForegroundInHighlightBrush}"
-             FontFamily="DengXian Light"
              d:DesignHeight="720" 
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type vm:QuickStartController}, IsDesignTimeCreatable=True}">
@@ -34,11 +33,12 @@
                              Gap="6">
 
                     <f:TilePanel f:TilePanel.H="2"
-                             f:TilePanel.W="4"
-                             HorizontalAlignment="Left"
-                             TileWidth="240"
-                             TileCount="4"
-                             Gap="0 0 12 12">
+                                 f:TilePanel.W="4"
+                                 HorizontalAlignment="Left"
+                                 TileWidth="210"
+                                 TileHeight="280"
+                                 TileCount="4"
+                                 Gap="0 0 12 12">
 
                         <Border f:TilePanel.H="2"
                                 f:TilePanel.W="2"
@@ -98,12 +98,12 @@
                                            HeaderTemplate="{x:Null}">
                         <studio:QuickStartPane.Header>
                             <StackPanel Margin="12 8 12 12">
-                                <TextBlock FontSize="16"
+                                <TextBlock FontSize="18"
                                            FontWeight="Bold"
-                                           FontFamily="DengXian"
                                            Margin="0 8"
                                            Text="赞助我们"/>
-                                <TextBlock LineHeight="18"
+                                <TextBlock FontFamily="{StaticResource SongTi}"
+                                           LineHeight="18"
                                            Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
                                            TextWrapping="Wrap"/>
                             </StackPanel>
