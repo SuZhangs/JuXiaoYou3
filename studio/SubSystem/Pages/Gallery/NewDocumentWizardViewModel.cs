@@ -95,10 +95,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             else
             {
                 avatar = Resource.ToAvatarUri(ID.Get(), ResourceType.Image);
+                
                 var record = new FileRecord
                 {
                     Id  = md5,
                     Uri = avatar,
+                    Type = ResourceType.Image
                 };
 
                 ie.AddFile(record);
