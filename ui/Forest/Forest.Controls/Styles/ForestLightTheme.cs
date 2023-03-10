@@ -12,17 +12,18 @@ namespace Acorisoft.FutureGL.Forest.Styles
 
         private void InitializeColors()
         {
-            Colors.TryAdd((int)ForestTheme.HighlightA1, Color.FromRgb(0xff, 0xda, 0x96));
-            Colors.TryAdd((int)ForestTheme.HighlightA2, Color.FromRgb(0xff, 0xc2, 0x54));
-            Colors.TryAdd((int)ForestTheme.HighlightA3, Color.FromRgb(0xff, 0xab, 0x12));
-            Colors.TryAdd((int)ForestTheme.HighlightA4, Color.FromRgb(0xd4, 0x89, 0x00));
-            Colors.TryAdd((int)ForestTheme.HighlightA5, Color.FromRgb(0x96, 0x61, 0x00));
 
-            Colors.TryAdd((int)ForestTheme.HighlightB1, Color.FromRgb(0xe5, 0xe9, 0xaf));
-            Colors.TryAdd((int)ForestTheme.HighlightB2, Color.FromRgb(0xd1, 0xd9, 0x72));
-            Colors.TryAdd((int)ForestTheme.HighlightB3, Color.FromRgb(0xbe, 0xc9, 0x36));
-            Colors.TryAdd((int)ForestTheme.HighlightB4, Color.FromRgb(0x98, 0xa1, 0x2b));
-            Colors.TryAdd((int)ForestTheme.HighlightB5, Color.FromRgb(0x72, 0x79, 0x20));
+            Colors.TryAdd((int)ForestTheme.HighlightA1, Color.FromRgb(0xe5, 0xe9, 0xaf));
+            Colors.TryAdd((int)ForestTheme.HighlightA2, Color.FromRgb(0xd1, 0xd9, 0x72));
+            Colors.TryAdd((int)ForestTheme.HighlightA3, Color.FromRgb(0xbe, 0xc9, 0x36));
+            Colors.TryAdd((int)ForestTheme.HighlightA4, Color.FromRgb(0x98, 0xa1, 0x2b));
+            Colors.TryAdd((int)ForestTheme.HighlightA5, Color.FromRgb(0x72, 0x79, 0x20));
+            
+            Colors.TryAdd((int)ForestTheme.HighlightB1, Color.FromRgb(0xff, 0xda, 0x96));
+            Colors.TryAdd((int)ForestTheme.HighlightB2, Color.FromRgb(0xff, 0xc2, 0x54));
+            Colors.TryAdd((int)ForestTheme.HighlightB3, Color.FromRgb(0xff, 0xab, 0x12));
+            Colors.TryAdd((int)ForestTheme.HighlightB4, Color.FromRgb(0xd4, 0x89, 0x00));
+            Colors.TryAdd((int)ForestTheme.HighlightB5, Color.FromRgb(0x96, 0x61, 0x00));
 
             Colors.TryAdd((int)ForestTheme.HighlightC1, Color.FromRgb(0xbf, 0xb8, 0xe9));
             Colors.TryAdd((int)ForestTheme.HighlightC2, Color.FromRgb(0x95, 0x89, 0xdb));

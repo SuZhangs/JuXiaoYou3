@@ -69,7 +69,7 @@
                                        Text="打开世界观" />
                                 <TextBlock FontFamily="{StaticResource SongTi}"
                                        LineHeight="18"
-                                       Text="打开已经创建的世界观，继续您的畅想之旅！"
+                                       Text="打开已经创建的世界观，可以继续编辑！"
                                        TextWrapping="Wrap" />
                             </StackPanel>
                         </studio:QuickStartPane.Header>
@@ -97,7 +97,7 @@
                                        Text="升级旧世界观" />
                                 <TextBlock FontFamily="{StaticResource SongTi}"
                                        LineHeight="18"
-                                       Text="升级过去创建的世界观，重拾您的思绪，载入幻想之乡！"
+                                       Text="如果您曾经使用过橘小柚，点击这里可以升级过去创建的世界观！"
                                        TextWrapping="Wrap" />
                             </StackPanel>
                         </studio:QuickStartPane.Header>

@@ -126,6 +126,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
             if (IsFilled)
             {
+                _icon.StrokeThickness = 0d;
                 _icon.Fill = foreground;
             }
             else

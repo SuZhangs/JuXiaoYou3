@@ -7,12 +7,14 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
+             Background="{f:Brush HighlightA4}"
              d:DesignHeight="720" 
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type vm:LaunchViewController}, IsDesignTimeCreatable=True}">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBlock FontSize="48"
+        <TextBlock Foreground="{f:ForegroundInHighlightBrush}"
+                   FontSize="48"
                    FontWeight="Bold"
                    FontFamily="华康勘亭流W9(P)"
                    Text="橘小柚"/>

@@ -39,8 +39,10 @@
                                     <TextBlock FontSize="20"
                                                FontWeight="Bold"
                                                Text="{Binding MainTitle}"/>
+
                                     <TextBlock Foreground="{f:Brush Theme=ForegroundInActive}"
-                                               FontSize="13"
+                                               FontFamily="{StaticResource SongTi}"
+                                               FontSize="14"
                                                Margin="0 8 0 0"
                                                Text="{Binding SubTitle}"/>
                                 </StackPanel>
@@ -56,6 +58,7 @@
                             TabStripPlacement="Left"
                             Padding="64 32 128 32">
             <f:TabItem Header="常规" 
+                       IsFilled="True"
                        Icon="{StaticResource IC.Setting}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"
@@ -71,10 +74,14 @@
                     </ScrollViewer>
                 </DockPanel>
             </f:TabItem>
-            <f:TabItem Header="高级" Icon="{StaticResource IC.Setting}"/>
-            <f:TabItem Header="字体" Icon="{StaticResource IC.Setting}"/>
-            <f:TabItem Header="许可证" Icon="{StaticResource IC.Setting}"/>
-            <f:TabItem Header="关于" Icon="{StaticResource IC.Setting}"/>
+            <f:TabItem Header="高级" Icon="{StaticResource IC.Setting}"
+                       IsFilled="True"/>
+            <f:TabItem Header="字体" Icon="{StaticResource IC.Setting}"
+                       IsFilled="True"/>
+            <f:TabItem Header="许可证" Icon="{StaticResource IC.Setting}"
+                       IsFilled="True"/>
+            <f:TabItem Header="关于" Icon="{StaticResource IC.Setting}"
+                       IsFilled="True"/>
         </f:ForestTabControl>
     </Grid>
 </UserControl>
