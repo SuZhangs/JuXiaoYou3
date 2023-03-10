@@ -335,22 +335,37 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:QuickStartPane}">
-                    <DockPanel>
-                        <Border DockPanel.Dock="Bottom"
-                                    Background="{TemplateBinding Accent}"
-                                    CornerRadius="0 0 16 16"
-                                    MinHeight="48">
-                            <ContentPresenter ContentSource="Header"
-                                              HorizontalAlignment="Stretch"/>
+                   <f:StretchPanel>
+                       <DockPanel>
+                           <Border DockPanel.Dock="Bottom"
+                                   Background="{TemplateBinding Accent}"
+                                   CornerRadius="0 0 16 16"
+                                   MinHeight="84">
+                               <ContentPresenter ContentSource="Header"
+                                                 HorizontalAlignment="Stretch"/>
 
-                        </Border>
-                        <Border Background="White"
-                                CornerRadius="16 16 0 0"
-                                Padding="8">
-                            <ContentPresenter ContentSource="Content"
-                                              HorizontalAlignment="Stretch"/>
-                        </Border>
-                    </DockPanel>
+                           </Border>
+                           <Border Background="White"
+                                   CornerRadius="16 16 0 0"
+                                   Padding="8">
+                               <ContentPresenter ContentSource="Content"
+                                                 HorizontalAlignment="Stretch"/>
+                           </Border>
+                       </DockPanel>
+                       <Border x:Name="mask"
+                               CornerRadius="16"
+                               Visibility="Collapsed"/>
+                   </f:StretchPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
+                            <Setter Property="Background" TargetName="mask" Value="#30FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
+                            <Setter Property="Background" TargetName="mask" Value="#30000000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

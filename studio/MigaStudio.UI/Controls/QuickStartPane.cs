@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Acorisoft.FutureGL.Forest.Controls.Buttons;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
-    public class QuickStartPane : ContentControl
+    public class QuickStartPane : LooklessButton
     {
         static QuickStartPane()
         {

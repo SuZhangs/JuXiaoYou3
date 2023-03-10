@@ -13,6 +13,8 @@
       <Resource Include="SourceHanSerifCN.otf" />
       <None Remove="清松手寫體1.ttf" />
       <Resource Include="清松手寫體1.ttf" />
+      <None Remove="afd.png" />
+      <Resource Include="afd.png" />
     </ItemGroup>
 
 </Project>

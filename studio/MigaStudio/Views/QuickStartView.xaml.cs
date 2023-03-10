@@ -10,11 +10,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
         public QuickStartView()
         {
             InitializeComponent();
-
-            SizeChanged += (_, _) =>
-            {
-                Panel.TileCount = (int)((ActualWidth - 210) / Panel.TileWidth);
-            };
         }
 
     }
