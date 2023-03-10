@@ -56,12 +56,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             // 检查更新
             Job(StringFromCode.GetText("text.launch.checkVersion"), x =>
             {
-                Thread.Sleep(1000);
             });
             
             Job(StringFromCode.GetText("text.launch.openDatabase"), x =>
             {
-                Thread.Sleep(1000);
             });
         }
 

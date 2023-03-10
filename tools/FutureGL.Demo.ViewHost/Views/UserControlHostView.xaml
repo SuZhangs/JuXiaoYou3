@@ -10,8 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:UserControlHostViewModel}, IsDesignTimeCreatable=True}">
     <Grid>
-        <f:TilePanel ItemSize="48"
-                          UnitPerRow="6">
+        <f:TilePanel>
             <Button f:TilePanel.H="2"
                     f:TilePanel.W="2"
                     Background="Brown"

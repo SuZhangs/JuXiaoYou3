@@ -1,261 +1,421 @@
-﻿namespace Acorisoft.FutureGL.Forest.Controls.Panels
+﻿
+// ReSharper disable CompareOfFloatsByEqualityOperator
+
+namespace Acorisoft.FutureGL.Forest.Controls.Panels
 {
-    // public class TilePanel : Panel
-    // {
-    //     #region Attach Properties
-    //
-    //     public static readonly DependencyProperty WProperty = DependencyProperty.RegisterAttached(
-    //         "WOverride", typeof(int), typeof(TilePanel), new PropertyMetadata(Boxing.IntValues[1]));
-    //
-    //     public static readonly DependencyProperty HProperty = DependencyProperty.RegisterAttached(
-    //         "HOverride", typeof(int), typeof(TilePanel), new PropertyMetadata(Boxing.IntValues[1]));
-    //
-    //     public static void SetH(DependencyObject element, int value)
-    //     {
-    //         element.SetValue(HProperty, Math.Clamp(value, 1, 64));
-    //     }
-    //
-    //     public static int GetH(DependencyObject element)
-    //     {
-    //         return (int)element.GetValue(HProperty);
-    //     }
-    //
-    //     public static void SetW(DependencyObject element, int value)
-    //     {
-    //         element.SetValue(WProperty, Math.Clamp(value, 1, 64));
-    //     }
-    //
-    //     public static int GetW(DependencyObject element)
-    //     {
-    //         return (int)element.GetValue(WProperty);
-    //     }
-    //
-    //     #endregion
-    //
-    //     public static readonly DependencyProperty ItemSizeProperty = DependencyProperty.Register(
-    //         nameof(ItemSize),
-    //         typeof(double),
-    //         typeof(TilePanel),
-    //         new PropertyMetadata(32d));
-    //
-    //     public static readonly DependencyProperty GapProperty = DependencyProperty.Register(
-    //         nameof(Gap),
-    //         typeof(double),
-    //         typeof(TilePanel),
-    //         new PropertyMetadata(default(double)));
-    //
-    //     private class ArrangeItem
-    //     {
-    //         public int              w;
-    //         public int              h;
-    //         public FrameworkElement element;
-    //     }
-    //
-    //     private class LayoutWindow
-    //     {
-    //         private double pixelX;
-    //         private double pixelY;
-    //         private int    gapH;
-    //         private int    gapW;
-    //         private int    gapX;
-    //         private int    gapY;
-    //         private double size;
-    //         private double gap;
-    //
-    //         private int maxW;
-    //         private int maxH;
-    //         private int w;
-    //         private int h;
-    //         private int lastH;
-    //
-    //         public void Init(double s, double g, int mh, int mw)
-    //         {
-    //             size = s;
-    //             gap  = g;
-    //             maxH = mh;
-    //             maxW = mw;
-    //         }
-    //
-    //         public bool LayoutNext(ArrangeItem item)
-    //         {
-    //             if (item.w + w > maxW)
-    //             {
-    //                 h    += lastH;
-    //                 gapY++;
-    //                 
-    //                 if (h + h <= maxH)
-    //                 {
-    //                     w    = 0;
-    //                     gapX = 0;
-    //                 }
-    //             }
-    //             
-    //             if (h + h > maxH)
-    //             {
-    //                 return false;
-    //             }
-    //
-    //             var x = pixelX + size * w + (gapW + gapX) * gap;
-    //             var y = pixelY + size * h + (gapH + gapY) * gap;
-    //
-    //             item.element.Arrange(new Rect(
-    //                 x,
-    //                 y,
-    //                 item.w * size,
-    //                 item.h * size));
-    //             
-    //             Debug.WriteLine($"{x},{y} -> {item.w}-{item.h}");
-    //
-    //             lastH =  item.h;
-    //             w     += item.w;
-    //             gapX++;
-    //             return true;
-    //         }
-    //
-    //         public void MoveRight()
-    //         {
-    //             pixelX += size * w;
-    //             gapW   += gapX;
-    //             gapX   =  0;
-    //             gapY   =  0;
-    //             W      += maxW;
-    //             w      =  0;
-    //             h      =  0;
-    //         }
-    //
-    //         public void MoveNext()
-    //         {
-    //             pixelY +=  size * h;
-    //             gapH   += gapY;
-    //             gapX   =  0;
-    //             gapY   =  0;
-    //             W = 0;
-    //             w      =  0;
-    //             h      =  0;
-    //         }
-    //
-    //         public int W { get; private set; }
-    //     }
-    //
-    //     protected override Size MeasureOverride(Size availableSize)
-    //     {
-    //         var unitSize = ItemSize;
-    //         var gap      = Gap;
-    //
-    //         foreach (FrameworkElement element in Children)
-    //         {
-    //             if (element is null)
-    //             {
-    //                 continue;
-    //             }
-    //
-    //             if (element.Visibility == Visibility.Collapsed)
-    //             {
-    //                 continue;
-    //             }
-    //
-    //             var h      = GetH(element);
-    //             var w      = GetW(element);
-    //             var width  = w * unitSize;
-    //             var height = h * unitSize;
-    //
-    //             element.Height = height;
-    //             element.Width  = width;
-    //             element.Measure(new Size(height, width));
-    //             availableSize.Width  += width;
-    //             availableSize.Height =  Math.Max(availableSize.Height, height);
-    //         }
-    //
-    //
-    //         return base.MeasureOverride(availableSize);
-    //     }
-    //
-    //     protected override Size ArrangeOverride(Size finalSize)
-    //     {
-    //         var unitSize = ItemSize;
-    //         var gap      = Gap;
-    //         var (items, maxH, maxW) = TakeAvailableElements();
-    //         var maxLayoutColumn = ((int)(finalSize.Width - 1) / unitSize) - 1;
-    //         var window          = new LayoutWindow();
-    //
-    //         window.Init(unitSize, gap, maxH, maxW);
-    //
-    //         if (window.W > maxLayoutColumn)
-    //         {
-    //             // 不需要布局了
-    //             return finalSize;
-    //         }
-    //
-    //         foreach (var item in items)
-    //         {
-    //             if (!window.LayoutNext(item))
-    //             {
-    //                 if (window.W + item.w > maxLayoutColumn)
-    //                 {
-    //                     window.MoveNext();
-    //                 }
-    //                 else
-    //                 {
-    //                     window.MoveRight();
-    //                 }
-    //                 window.LayoutNext(item);
-    //             }
-    //         }
-    //
-    //         return finalSize;
-    //     }
-    //
-    //     private (ArrangeItem[], int, int) TakeAvailableElements()
-    //     {
-    //         var list = new List<FrameworkElement>(32);
-    //         var maxH = 0;
-    //         var maxW = 0;
-    //         list.AddRange(Children.Cast<FrameworkElement>()
-    //                               .Where(element => element is not null && element.Visibility != Visibility.Collapsed));
-    //         return new ValueTuple<ArrangeItem[], int, int>(list.Select(x =>
-    //         {
-    //             var i = new ArrangeItem
-    //             {
-    //                 element = x,
-    //                 w       = GetW(x),
-    //                 h       = GetH(x)
-    //             };
-    //             maxH = Math.Max(maxH, i.h);
-    //             maxW = Math.Max(maxW, i.w);
-    //             return i;
-    //         }).ToArray(), maxH, maxW);
-    //     }
-    //
-    //     public double Gap
-    //     {
-    //         get => (double)GetValue(GapProperty);
-    //         set => SetValue(GapProperty, value);
-    //     }
-    //     //
-    //     // /// <summary>
-    //     // /// 每行的最大高度数量
-    //     // /// </summary>
-    //     // /// <remarks>
-    //     // /// <para>最大值为：16</para>
-    //     // /// <para>最小值为：1</para>
-    //     // /// </remarks>
-    //     // public int UnitPerRow
-    //     // {
-    //     //     get => (int)GetValue(UnitPerRowProperty);
-    //     //     set => SetValue(UnitPerRowProperty, Math.Clamp(value, 1, 16));
-    //     // }
-    //
-    //     /// <summary>
-    //     /// 每个单位的高度
-    //     /// </summary>
-    //     /// <remarks>
-    //     /// <para>最大值为：128px</para>
-    //     /// <para>最小值为：32px</para>
-    //     /// </remarks>
-    //     public double ItemSize
-    //     {
-    //         get => (double)GetValue(ItemSizeProperty);
-    //         set => SetValue(ItemSizeProperty, Math.Clamp(value, 32, 256));
-    //     }
-    // }
+    // 
+    // Thx: nick121212
+    // https://www.cnblogs.com/nicktyui
+    /// <summary>
+    /// TilePanel
+    /// 瀑布流布局
+    /// </summary>
+    public class TilePanel : Panel
+    {
+        #region 枚举
+
+        private enum OccupyType
+        {
+            NONE,
+            WIDTHHEIGHT,
+            OVERFLOW
+        }
+
+        #endregion
+
+        #region 属性
+        
+        /// <summary>
+        /// 容器内元素的高度
+        /// </summary>
+        public static readonly DependencyProperty TileWidthProperty =
+            DependencyProperty.Register(
+                nameof(TileWidth),
+                typeof(int),
+                typeof(TilePanel),
+                new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+
+        public static readonly DependencyProperty TileHeightProperty = DependencyProperty.Register(
+            nameof(TileHeight),
+            typeof(int),
+            typeof(TilePanel),
+            new FrameworkPropertyMetadata(100, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public int TileHeight
+        {
+            get => (int)GetValue(TileHeightProperty);
+            set => SetValue(TileHeightProperty, value);
+        }
+        
+        /// <summary>
+        /// 容器内元素的宽度
+        /// </summary>
+        public int TileWidth
+        {
+            get { return (int)GetValue(TileWidthProperty); }
+            set { SetValue(TileWidthProperty, value); }
+        }
+       
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static int GetW(DependencyObject obj)
+        {
+            return (int)obj.GetValue(WProperty);
+        }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
+        public static void SetW(DependencyObject obj, int value)
+        {
+            if (value > 0)
+            {
+                obj.SetValue(WProperty, value);
+            }
+        }
+        /// <summary>
+        /// 元素的宽度比例，相对于TileWidth
+        /// </summary>
+        public static readonly DependencyProperty WProperty =
+            DependencyProperty.RegisterAttached(
+                "W", 
+                typeof(int),
+                typeof(TilePanel), 
+                new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static int GetH(DependencyObject obj)
+        {
+            return (int)obj.GetValue(HProperty);
+        }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
+        public static void SetH(DependencyObject obj, int value)
+        {
+            if (value > 0)
+            {
+                obj.SetValue(HProperty, value);
+            }
+        }
+        /// <summary>
+        /// 元素的高度比例，相对于TileHeight
+        /// </summary>
+        public static readonly DependencyProperty HProperty =
+            DependencyProperty.RegisterAttached(
+                "H", 
+                typeof(int), 
+                typeof(TilePanel),
+                new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure));
+        /// <summary>
+        /// 排列方向
+        /// </summary>
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+        /// <summary>
+        /// 排列方向
+        /// </summary>
+        public static readonly DependencyProperty OrientationProperty =
+            DependencyProperty.Register(
+                nameof(Orientation), 
+                typeof(Orientation),
+                typeof(TilePanel), 
+                new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        /// <summary>
+        /// 格子数量
+        /// </summary>
+        public int TileCount
+        {
+            get { return (int)GetValue(TileCountProperty); }
+            set { SetValue(TileCountProperty, value); }
+        }
+        /// <summary>
+        /// 格子数量
+        /// </summary>
+        public static readonly DependencyProperty TileCountProperty =
+            DependencyProperty.Register(
+                nameof(TileCount), 
+                typeof(int), 
+                typeof(TilePanel), 
+                new FrameworkPropertyMetadata(4, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        /// <summary>
+        /// Tile之间的间距
+        /// </summary>
+        public Thickness Gap
+        {
+            get { return (Thickness)GetValue(GapProperty); }
+            set { SetValue(GapProperty, value); }
+        }
+        /// <summary>
+        /// Tile之间的间距
+        /// </summary>
+        public static readonly DependencyProperty GapProperty =
+            DependencyProperty.Register(nameof(Gap), 
+                typeof(Thickness),
+                typeof(TilePanel), 
+                new FrameworkPropertyMetadata(new Thickness(2), FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
+        /// 最小的高度比例
+        /// </summary>
+        private int MinHeightPix;
+
+        /// <summary>
+        /// 最小的宽度比例
+        /// </summary>
+        private int MinWidthPix;
+
+        #endregion
+
+        #region 方法
+
+        private Dictionary<string, Point> Maps { get; set; }
+        private OccupyType SetMaps(Point currentPosition, Size childPix)
+        {
+            var isOccupy = OccupyType.NONE;
+
+            if (currentPosition.X + currentPosition.Y != 0)
+            {
+                if (Orientation == Orientation.Horizontal)
+                {
+                    isOccupy = IsOccupyWidth(currentPosition, childPix);
+                }
+                else
+                {
+                    isOccupy = IsOccupyHeight(currentPosition, childPix);
+                }
+            }
+
+            if (isOccupy == OccupyType.NONE)
+            {
+                for (var i = 0; i < childPix.Width; i++)
+                {
+                    for (var j = 0; j < childPix.Height; j++)
+                    {
+                        Maps[$"x_{currentPosition.X + i}y_{currentPosition.Y + j}"] = new Point(currentPosition.X + i, currentPosition.Y + j);
+                    }
+                }
+            }
+
+            return isOccupy;
+        }
+        private OccupyType IsOccupyWidth(Point currentPosition, Size childPix)
+        {
+            //计算当前行能否放下当前元素
+            if (TileCount - currentPosition.X - childPix.Width < 0)
+            {
+                return OccupyType.OVERFLOW;
+            }
+
+            for (var i = 0; i < childPix.Width; i++)
+            {
+                if (Maps.ContainsKey($"x_{currentPosition.X + i}y_{currentPosition.Y}"))
+                {
+                    return OccupyType.WIDTHHEIGHT;
+                }
+            }
+
+            return OccupyType.NONE;
+        }
+        private OccupyType IsOccupyHeight(Point currentPosition, Size childPix)
+        {
+            //计算当前行能否放下当前元素
+            if (TileCount - currentPosition.Y - childPix.Height < 0)
+            {
+                return OccupyType.OVERFLOW;
+            }
+
+            for (var i = 0; i < childPix.Height; i++)
+            {
+                if (Maps.ContainsKey($"x_{currentPosition.X}y_{currentPosition.Y + i}"))
+                {
+                    return OccupyType.WIDTHHEIGHT;
+                }
+            }
+
+            return OccupyType.NONE;
+        }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="finalSize"></param>
+        /// <returns></returns>
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            var childPix = new Size();
+            var childPosition = new Point();
+            Point? lastChildPosition = null;
+
+            Maps = new Dictionary<string, Point>();
+            for (var i = 0; i < Children.Count; )
+            {
+                var child = Children[i] as FrameworkElement;
+                
+                if(child is null)
+                {
+                    continue;
+                }
+                
+                childPix.Width = GetW(child);
+                childPix.Height = GetH(child);
+
+                if (Orientation == Orientation.Vertical)
+                {
+                    if (childPix.Height > TileCount)
+                    {
+                        childPix.Height = TileCount;
+                    }
+                }
+                else
+                {
+                    if (childPix.Width > TileCount)
+                    {
+                        childPix.Width = TileCount;
+                    }
+                }
+                var isOccupy = SetMaps(childPosition, childPix);
+                //换列
+                if (isOccupy == OccupyType.WIDTHHEIGHT)
+                {
+                    if (lastChildPosition == null) lastChildPosition = childPosition;
+                    if (Orientation == Orientation.Horizontal)
+                    {
+                        childPosition.X += MinWidthPix;
+                    }
+                    else
+                    {
+                        childPosition.Y += MinHeightPix;
+                    }
+                }
+                //换行
+                else if (isOccupy == OccupyType.OVERFLOW)
+                {
+                    lastChildPosition ??= childPosition;
+                    if (Orientation == Orientation.Horizontal)
+                    {
+                        childPosition.X = 0;
+                        childPosition.Y += Maps[$"x_{childPosition.X}y_{childPosition.Y}"].Y;
+                        //childPosition.Y++;//= this.MinHeightPix;
+                    }
+                    else
+                    {
+                        childPosition.Y = 0;
+                        childPosition.X += Maps[$"x_{childPosition.X}y_{childPosition.Y}"].X;
+                        //childPosition.X++;//= this.MinWidthPix;
+                    }
+                }
+                else
+                {
+                    i++;
+                    child.Arrange(new Rect(childPosition.X * TileWidth + Math.Floor(childPosition.X / MinWidthPix) * (Gap.Left + Gap.Right),
+                                           childPosition.Y * TileHeight + Math.Floor(childPosition.Y / MinHeightPix) * (Gap.Top + Gap.Bottom),
+                                           child.DesiredSize.Width, child.DesiredSize.Height));
+                    if (lastChildPosition != null)
+                    {
+                        childPosition = (Point)lastChildPosition;
+                        lastChildPosition = null;
+                    }
+                    else
+                    {
+                        if (Orientation == Orientation.Horizontal)
+                        {
+                            childPosition.X += childPix.Width;
+                            if (childPosition.X == TileCount)
+                            {
+                                childPosition.X = 0;
+                                childPosition.Y++;
+                            }
+                        }
+                        else
+                        {
+                            childPosition.Y += childPix.Height;
+                            if (childPosition.Y == TileCount)
+                            {
+                                childPosition.Y = 0;
+                                childPosition.X++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return finalSize;
+        }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="constraint"></param>
+        /// <returns></returns>
+        protected override Size MeasureOverride(Size constraint)
+        {
+            int childWidthPix, childHeightPix, maxRowCount = 0;
+
+            if (Children.Count == 0) return new Size();
+            //遍历孩子元素
+            foreach (FrameworkElement child in Children)
+            {
+                childWidthPix = GetW(child);
+                childHeightPix = GetH(child);
+
+                if (MinHeightPix == 0) MinHeightPix = childHeightPix;
+                if (MinWidthPix == 0) MinWidthPix = childWidthPix;
+
+                if (MinHeightPix > childHeightPix) MinHeightPix = childHeightPix;
+                if (MinWidthPix > childWidthPix) MinWidthPix = childWidthPix;
+            }
+
+            foreach (FrameworkElement child in Children)
+            {
+                childWidthPix = GetW(child);
+                childHeightPix = GetH(child);
+
+                child.Margin = Gap;
+                child.HorizontalAlignment = HorizontalAlignment.Left;
+                child.VerticalAlignment = VerticalAlignment.Top;
+
+                child.Width = TileWidth * childWidthPix + (child.Margin.Left + child.Margin.Right) *
+                    ((childWidthPix - MinWidthPix) / MinWidthPix);
+                child.Height = TileHeight * childHeightPix + (child.Margin.Top + child.Margin.Bottom) * ((childHeightPix - MinHeightPix) / MinHeightPix);
+
+                maxRowCount += childWidthPix * childHeightPix;
+
+                child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            }
+
+            if (TileCount <= 0) throw new ArgumentOutOfRangeException();
+            //if (this.MinWidthPix == 0) this.MinWidthPix = 1;
+            //if (this.MinHeightPix == 0) this.MinHeightPix = 1;
+            if (Orientation == Orientation.Horizontal)
+            {
+                Width = constraint.Width = TileCount * TileWidth + TileCount / MinWidthPix * (Gap.Left + Gap.Right);
+                var heightPix = Math.Ceiling((double)maxRowCount / TileCount);
+                if (!double.IsNaN(heightPix))
+                    constraint.Height = heightPix * TileHeight + heightPix / MinHeightPix * (Gap.Top + Gap.Bottom);
+            }
+            else
+            {
+                Height = constraint.Height = TileCount * TileHeight + TileCount / MinHeightPix * (Gap.Top + Gap.Bottom);
+                var widthPix               = Math.Ceiling((double)maxRowCount / TileCount);
+                if (!double.IsNaN(widthPix))
+                    constraint.Width = widthPix * TileWidth + widthPix / MinWidthPix * (Gap.Left + Gap.Right);
+            }
+
+            return constraint;
+        }
+
+        #endregion
+    }
 }

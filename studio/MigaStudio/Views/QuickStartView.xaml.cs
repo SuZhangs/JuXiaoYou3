@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
 
             SizeChanged += (_, _) =>
             {
-                Panel.TileCount = (int)((ActualWidth - 210) / Panel.TileSize);
+                Panel.TileCount = (int)((ActualWidth - 210) / Panel.TileWidth);
             };
         }
 

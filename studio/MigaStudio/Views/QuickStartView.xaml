@@ -28,23 +28,39 @@
 
                 <f:TilePanel x:Name="Panel"
                              HorizontalAlignment="Left"
-                             Margin="0 24 0 0"
-                             TileSize="210"
+                             TileWidth="210"
+                             TileHeight="280"
                              TileCount="5"
-                             Gap="8">
+                             Gap="6">
 
                     <f:TilePanel f:TilePanel.H="2"
                              f:TilePanel.W="4"
                              HorizontalAlignment="Left"
-                             TileSize="210"
+                             TileWidth="240"
                              TileCount="4"
-                             Gap="0 0 16 16">
+                             Gap="0 0 12 12">
 
                         <Border f:TilePanel.H="2"
-                            f:TilePanel.W="2"
-                            Background="White"
-                            CornerRadius="16"
-                            VerticalAlignment="Top"/>
+                                f:TilePanel.W="2"
+                                Background="White"
+                                CornerRadius="16"
+                                VerticalAlignment="Top">
+                            <Grid>
+                                <Border Background="{f:Brush HighlightA3}"
+                                        CornerRadius="64"
+                                        Height="84"
+                                        Width="84"
+                                        Margin="24"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom">
+                                    <Path Data="{StaticResource FeatherIcon.Edit}"
+                                          Stroke="{f:ForegroundInHighlightBrush}"
+                                          StrokeThickness="2"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
 
                         <studio:QuickStartPane f:TilePanel.H="1"
                                        f:TilePanel.W="2"
@@ -77,18 +93,32 @@
                                            Header="教程"/>
 
                     <studio:QuickStartPane f:TilePanel.H="1"
-                                           f:TilePanel.W="2"
+                                           f:TilePanel.W="1"
                                            Accent="#9f6ce6"
                                            HeaderTemplate="{x:Null}">
                         <studio:QuickStartPane.Header>
-                            <StackPanel>
-                                <TextBlock Text="赞助我们"/>
-                                <TextBlock Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"/>
+                            <StackPanel Margin="12 8 12 12">
+                                <TextBlock FontSize="16"
+                                           FontWeight="Bold"
+                                           FontFamily="DengXian"
+                                           Margin="0 8"
+                                           Text="赞助我们"/>
+                                <TextBlock LineHeight="18"
+                                           Text="一个好项目的运转需要一定的资金，赞助我们可以让我们拥有更多的条件去尝试更多的功能"
+                                           TextWrapping="Wrap"/>
                             </StackPanel>
                         </studio:QuickStartPane.Header>
+                        <Image Source="E:\logo.png"
+                               Stretch="Uniform"
+                               Height="64"
+                               Width="64"/>
                     </studio:QuickStartPane>
 
 
+                    <studio:QuickStartPane f:TilePanel.H="1"
+                                           f:TilePanel.W="1"
+                                           Accent="#0092f2"
+                                           Header="教程"/>
                 </f:TilePanel>
             </StackPanel>
         </ScrollViewer>
