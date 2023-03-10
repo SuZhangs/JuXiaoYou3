@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         }
         
 
-        public void Route<TViewModel>(NavigationParameter parameter) where TViewModel : IViewModel
+        public void Route<TViewModel>(NavigationParameter parameter) where TViewModel : ITabViewModel
         {
             var viewModel = Xaml.GetViewModel<TViewModel>();
             
@@ -25,18 +25,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            _service.Route(viewModel, parameter.Params);
+            Route(viewModel, null);
         }
         
 
-        public void Route(IViewModel viewModel, NavigationParameter parameter)
+        public void Route(ITabViewModel viewModel, NavigationParameter parameter)
         {
             if (parameter.Controller is null)
             {
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            _service.Route(viewModel, parameter.Params);
+            viewModel.Start(parameter.Params ?? NavigationParameter.New(viewModel, Controller).Params);
+            Controller.Start(viewModel);
         }
         
         public void SetServiceProvider(ViewHostBase host) => _service.SetServiceProvider(host);

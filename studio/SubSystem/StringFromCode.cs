@@ -113,5 +113,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _ => "模组文件|*.png",
             };
         }
+
+        public static string EmptyName => GetText("text.EmptyName");
     }
 }

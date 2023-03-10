@@ -94,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
             else
             {
-                avatar = Resource.ToUnifiedUri($"avatar_{ID.Get()}", ResourceType.Image);
+                avatar = Resource.ToAvatarUri(ID.Get(), ResourceType.Image);
                 var record = new FileRecord
                 {
                     Id  = md5,
@@ -145,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         protected override string Failed()
         {
-            return "名字为空";
+            return StringFromCode.EmptyName;
         }
 
         /// <summary>

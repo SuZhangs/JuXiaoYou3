@@ -4,7 +4,9 @@ namespace Acorisoft.FutureGL.MigaDB.IO
 {
     public class Resource
     {
-        private static readonly byte[] Prefix = Encoding.ASCII.GetBytes("pos_");
+        public const            string AvatarUriPattern = "avatar_{0}";
+        public const            string UriPattern = "pos_{0}:{1}";
+        private static readonly byte[] Prefix           = Encoding.ASCII.GetBytes("pos_");
         
         public static string ParseOldVersion(string src)
         {
@@ -65,13 +67,13 @@ namespace Acorisoft.FutureGL.MigaDB.IO
         public static string ToUnifiedUri(string id, ResourceType type)
         {
             // pos_i:{id}
-            var buffer = new byte[6 + id.Length];
-            var ascii  = Encoding.ASCII.GetBytes(id);
-            Array.Copy(Prefix, buffer, Prefix.Length);
-            buffer[Prefix.Length] = GetFlags(type);
-            Array.Copy(ascii, 0, buffer, Prefix.Length + 1, ascii.Length);
-
-            return Encoding.ASCII.GetString(buffer);
+            return string.Format(UriPattern, GetFlags(type), id);
+        }
+        
+        public static string ToAvatarUri(string id, ResourceType type)
+        {
+            // pos_i:{id}
+            return string.Format(UriPattern, GetFlags(type), string.Format(AvatarUriPattern, id));
         }
     }
 }

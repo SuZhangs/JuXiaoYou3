@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="parameter">跳转参数</param>
         /// <typeparam name="TViewModel">指定的视图模型</typeparam>
         /// <returns>返回操作结果</returns>
-        void Route<TViewModel>(NavigationParameter parameter)  where TViewModel : IViewModel;
+        void Route<TViewModel>(NavigationParameter parameter)  where TViewModel : ITabViewModel;
 
         /// <summary>
         /// 跳转到指定的页面
@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="parameter">跳转参数</param>
         /// <param name="viewModel">指定的视图模型</param>
         /// <returns>返回操作结果</returns>
-        void Route(IViewModel viewModel, NavigationParameter parameter);
+        void Route(ITabViewModel viewModel, NavigationParameter parameter);
         
         /// <summary>
         /// 

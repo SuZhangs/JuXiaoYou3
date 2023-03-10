@@ -23,12 +23,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             DataContext = _dc;
 
             // 这个方法会使得视图模型多次启动
-            //
-            // Xaml.Get<ViewServiceAdapter>().Controller = _dc.Controller;
+            
+            Xaml.Get<ViewServiceAdapter>().Controller = _dc.Controller;
             
             //
             // 启动
-            //_dc.Start();
+            _dc.Start();
             
             //
             base.OnLoaded(sender, e);
