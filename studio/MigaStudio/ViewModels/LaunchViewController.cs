@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 //
                 // Repository Setting
                 var advancedSettingFileName = Path.Combine(appModel.Settings, AdvancedSettingFileName);
-                var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(repositorySettingFileName,
+                var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(advancedSettingFileName,
                     () => new AdvancedSettingModel
                     {
                         DebugMode = DebugMode.Release,
@@ -75,7 +75,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             //
             //
-            Context.SwitchController(Context.Controllers.First(x => x is QuickStartController));
+            Context.SwitchController(Context.Controllers.First(x => x is TabShell));
         }
         
         public GlobalStudioContext Context { get; private set; }
