@@ -363,7 +363,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
-                            <Setter Property="Background" TargetName="mask" Value="#30000000"/>
+                            <Setter Property="Background" TargetName="mask" Value="#50FFFFFF"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
