@@ -35,18 +35,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             typeof(ForestIconButton),
             new PropertyMetadata(17d));
 
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
-            nameof(CornerRadius),
-            typeof(CornerRadius),
-            typeof(ForestIconButton),
-            new PropertyMetadata(new CornerRadius(8)));
-
-        public CornerRadius CornerRadius
-        {
-            get => (CornerRadius)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
-        }
-
         public double IconSize
         {
             get => (double)GetValue(IconSizeProperty);

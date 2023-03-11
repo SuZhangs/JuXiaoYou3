@@ -35,6 +35,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         public TabItem()
         {
+            // TODO: add style
             var controller = ItemsControl.GetItemsOwner(this) as TabControl;
             var placement = controller?.TabStripPlacement ?? Dock.Top;
             

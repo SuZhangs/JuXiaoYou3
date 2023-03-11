@@ -6,6 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Drawer.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/TextBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Buttons/Buttons.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/ListBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/TabControl.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

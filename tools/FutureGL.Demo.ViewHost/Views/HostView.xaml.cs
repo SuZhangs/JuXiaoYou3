@@ -5,6 +5,8 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using SixLabors.ImageSharp;
@@ -23,7 +25,9 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Xaml.Get<IDialogService>().Dialog<DocumentCache, NewDocumentWizardViewModel>();
+            SubSystem.OptionSelection("过滤",
+                FilteringOption.Name, 
+                new[] { FilteringOption.Name, FilteringOption.TimeOfCreated, FilteringOption.TimeOfModified });
         }
     }
 }
