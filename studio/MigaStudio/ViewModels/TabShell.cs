@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
+using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -27,8 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
-            New<CharacterConstraintViewModel>();
-            New<ItemConstraintViewModel>();
+            New<DocumentGalleryViewModel>();
         }
 
         protected override void RequireStartupTabViewModel()

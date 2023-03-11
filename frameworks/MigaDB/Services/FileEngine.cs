@@ -9,6 +9,20 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             BaseDirectory = folderName;
         }
 
+        public string GetFileName(string id) => Path.Combine(FullDirectory, id);
+
+        public MemoryStream Get(string id)
+        {
+            id = GetFileName(id);
+            if (File.Exists(id))
+            {
+                var buffer = File.ReadAllBytes(id);
+                return new MemoryStream(buffer);
+            }
+
+            return null;
+        }
+
         public bool HasFile(string md5)
         {
             return !string.IsNullOrEmpty(md5) &&
@@ -16,7 +30,6 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                    Records.HasID(md5);
         }
         
-
         public void AddFile(FileRecord record)
         {
             if (record is null)
@@ -47,6 +60,16 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         {
             Records       = session.Database.GetCollection<FileRecord>(Constants.Name_FileTable);
             FullDirectory = Path.Combine(session.RootDirectory, BaseDirectory);
+            
+            if (!Directory.Exists(session.RootDirectory))
+            {
+                Directory.CreateDirectory(session.RootDirectory);
+            }
+            
+            if (!Directory.Exists(FullDirectory))
+            {
+                Directory.CreateDirectory(FullDirectory);
+            }
         }
 
         public ILiteCollection<FileRecord> Records { get; private set; }

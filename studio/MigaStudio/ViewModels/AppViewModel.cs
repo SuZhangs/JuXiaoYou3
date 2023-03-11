@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Views;

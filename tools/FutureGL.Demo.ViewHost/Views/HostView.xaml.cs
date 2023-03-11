@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Demo.ViewModels;
 using Acorisoft.FutureGL.Forest;
@@ -25,9 +26,12 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            SubSystem.OptionSelection("过滤",
-                FilteringOption.Name, 
-                new[] { FilteringOption.Name, FilteringOption.TimeOfCreated, FilteringOption.TimeOfModified });
+            SubSystem.OptionSelection<FilteringOption>("过滤",
+                (object) FilteringOption.Name, 
+                new object[]
+                {
+                    FilteringOption.Name, FilteringOption.TimeOfCreated, FilteringOption.TimeOfModified
+                });
         }
     }
 }

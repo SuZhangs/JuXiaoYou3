@@ -54,11 +54,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             
             //
             // 一致性检查
-            if (!DocumentDB.HasID(document.Id) ||
-                !DocumentCacheDB.HasID(document.Id))
-            {
-                return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
-            }
+            //if (!DocumentDB.HasID(document.Id) ||
+            //    !DocumentCacheDB.HasID(document.Id))
+            //{
+            //    return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
+            //}
             
             //
             //

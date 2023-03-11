@@ -16,10 +16,9 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
             _sync   = new object();
             Jobs    = new Queue<AsyncJob>(32);
-            Init();
         }
 
-        private void Init()
+        protected void Init()
         {
             _context ??= GetExecuteContext();
         }

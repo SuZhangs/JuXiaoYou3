@@ -59,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         #endregion
 
-        private void Reset() => Version = 0;
+        private void Reset() => Version = 16;
         
         protected void Modified() => Version++;
 

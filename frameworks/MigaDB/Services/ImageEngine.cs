@@ -21,9 +21,10 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 return;
             }
 
-            var dst = Path.Combine(FullDirectory, $"{resource}.png");
+            var dst = Path.Combine(FullDirectory, resource);
             var fs  = new FileStream(dst, FileMode.Create, FileAccess.Write);
             
+            ms.Seek(0, SeekOrigin.Begin);
             ms.CopyTo(fs);
             fs.Dispose();
         }

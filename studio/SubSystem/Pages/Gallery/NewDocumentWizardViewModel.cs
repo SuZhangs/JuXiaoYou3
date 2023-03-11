@@ -76,12 +76,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
 
             var ie           = dm.GetEngine<ImageEngine>();
-            var de           = dm.GetEngine<DocumentEngine>();
             var originLength = (int)_buffer.Length;
             var originBuffer = _buffer.GetBuffer();
-            var saltedStream = new MemoryStream(originBuffer, 0, originLength);
+            var saltedStream = new MemoryStream(originBuffer.Length + 4);
             
             saltedStream.Write(BitConverter.GetBytes(originLength));
+            saltedStream.Write(originBuffer);
 
             var    raw = Pool.MD5.ComputeHash(saltedStream);
             var    md5 = Convert.ToBase64String(raw);
@@ -94,17 +94,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
             else
             {
-                avatar = Resource.ToAvatarUri(ID.Get(), ResourceType.Image);
-                
+                avatar = $"avatar_{ID.Get()}.png";
+                ie.SetAvatar(_buffer, avatar);
+
                 var record = new FileRecord
                 {
-                    Id  = md5,
-                    Uri = avatar,
+                    Id   = md5,
+                    Uri  = avatar,
                     Type = ResourceType.Image
                 };
 
                 ie.AddFile(record);
-                ie.SetAvatar(_buffer, avatar);
             }
             
 
@@ -124,23 +124,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 Version        = 1,
                 IsDeleted      = false,
             };
-
-            var r = de.AddDocument(document);
-
-            if (r.IsFinished)
-            {
-                Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Success,
-                    StringFromCode.Notify,
-                    StringFromCode.OperationOfAddIsSuccess);
-            }
-            else
-            {
-                Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Warning,
-                    StringFromCode.Notify,
-                    StringFromCode.GetEngineResult(r.Reason));
-            }
 
             Result = document;
         }

@@ -30,6 +30,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return CreateBuilder(logger)
                 .Setup<TemplateEngine>()
                 .Setup<DocumentEngine>()
+                .Setup<ImageEngine>(false)
                 .Build(Constants.DatabaseCurrentVersion);
         }
 

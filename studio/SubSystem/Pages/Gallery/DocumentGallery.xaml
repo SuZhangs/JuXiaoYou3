@@ -3,19 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        
+        <SolidColorBrush x:Key="Transparent" Color="Transparent"/>
+        <thisConverters:AvatarConverter x:Key="Avatar"/>
+        
+        <DataTemplate DataType="{x:Type doc:DocumentCache}">
+            <Border Background="{StaticResource Transparent}">
+                <DockPanel>
+                    <Border CornerRadius="12"
+                            Height="96"
+                            Width="96">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Converter={StaticResource Avatar}}"/>
+                        </Border.Background>
+                    </Border>
+                    
+                    <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Margin="0 36 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="48" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -32,11 +55,16 @@
                         Orientation="Horizontal">
                 <f:CallToAction Content="新建"
                                 CornerRadius="20"
+                                Command="{Binding NewDocumentCommand}"
                                 Palette="HighlightPalette2"
                                 Width="128"/>
                 <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>
                 <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>
             </StackPanel>
         </Grid>
+        
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

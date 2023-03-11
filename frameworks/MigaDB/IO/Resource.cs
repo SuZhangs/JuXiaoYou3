@@ -51,29 +51,5 @@ namespace Acorisoft.FutureGL.MigaDB.IO
 
             return schemeName.EqualsWithIgnoreCase("miga") ? $"resx.v100.{param}" : null;
         }
-
-        private static byte GetFlags(ResourceType type)
-        {
-            return type switch
-            {
-                ResourceType.Video => 0x76, // v
-                ResourceType.Audio => 0x61, // a
-                ResourceType.File  => 0x66, // f
-                ResourceType.Music => 0x6d, //m
-                _                  => 0x69  // i
-            };
-        }
-
-        public static string ToUnifiedUri(string id, ResourceType type)
-        {
-            // pos_i:{id}
-            return string.Format(UriPattern, GetFlags(type), id);
-        }
-        
-        public static string ToAvatarUri(string id, ResourceType type)
-        {
-            // pos_i:{id}
-            return string.Format(UriPattern, GetFlags(type), string.Format(AvatarUriPattern, id));
-        }
     }
 }
