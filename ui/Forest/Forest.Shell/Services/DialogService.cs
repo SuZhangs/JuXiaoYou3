@@ -446,6 +446,11 @@ namespace Acorisoft.FutureGL.Forest.Services
         public Task<Op<object>> Dialog(IDialogViewModel viewModel, Parameter parameter)
             => _host.ShowDialog(viewModel, parameter);
 
+        
+        public void CloseAll() => _host.CloseDialog();
+        public bool IsOpened() => _host.IsDialogOpened();
+        public bool IsOpened(IDialogViewModel viewModel) => _host.IsDialogOpened(viewModel);
+
         #endregion
     }
 }

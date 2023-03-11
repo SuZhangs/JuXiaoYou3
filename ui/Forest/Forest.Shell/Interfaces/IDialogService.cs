@@ -84,6 +84,24 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
         Task<Op<object>> Dialog(IDialogViewModel viewModel, Parameter parameter);
+
+        /// <summary>
+        /// 关闭所有对话框
+        /// </summary>
+        void CloseAll();
+
+        /// <summary>
+        /// 判断是否已经打开对话框
+        /// </summary>
+        /// <returns>如果打开返回true，否则返回false。</returns>
+        bool IsOpened();
+
+        /// <summary>
+        /// 判断是否已经打开对话框
+        /// </summary>
+        /// <param name="viewModel">要判断的对话框视图模型实例</param>
+        /// <returns>如果打开返回true，否则返回false。</returns>
+        bool IsOpened(IDialogViewModel viewModel);
     }
 
     /// <summary>

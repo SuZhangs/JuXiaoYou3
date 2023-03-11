@@ -56,7 +56,7 @@
                 <f:CallToAction Content="新建"
                                 CornerRadius="20"
                                 Command="{Binding NewDocumentCommand}"
-                                Palette="HighlightPalette2"
+                                Palette="HighlightPalette1"
                                 Width="128"/>
                 <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>
                 <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>

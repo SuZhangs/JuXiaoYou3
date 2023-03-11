@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -81,8 +82,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 if (view is not FrameworkElement fe)
                 {
-                    if (host._stack.CanCompletedOrCancel())
-                        host._stack.CompletedOrCancel();
+                    if (host._stack.CanCompleteDialog())
+                        host._stack.CompleteDialog();
                     return;
                 }
 
@@ -213,6 +214,18 @@ namespace Acorisoft.FutureGL.Forest.Controls
             });
         }
 
+        public void CloseAll()
+        {
+            while (_stack.CanCompleteDialog())
+            {
+                CloseDialog();
+            }
+        }
+        
+        public bool IsDialogOpened() => _stack.CanCompleteDialog();
+        
+        public bool IsDialogOpened(IDialogViewModel viewModel) => viewModel is not null && _stack.Contains(viewModel);
+
         public async Task<Op<T>> ShowDialog<T>(IDialogViewModel dialog, Parameter param)
         {
             var result = await ShowDialog(dialog, param);
@@ -312,7 +325,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 //
-                var finished = _stack.CompletedOrCancel();
+                var finished = _stack.CompleteDialog();
 
                 //
                 //
@@ -320,7 +333,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 // 恢复上一个
-                if (!_stack.CanCompletedOrCancel())
+                if (!_stack.CanCompleteDialog())
                 {
                     IsOpened  = false;
                     ViewModel = null;
@@ -336,7 +349,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 }
 
                 //
-                // 设置取消
+                // 如果对话框还没关闭，则直接尝试取消
                 dialog2.WaitHandle.TrySetCanceled();
 
                 //
@@ -417,7 +430,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             private IDialogViewModel _previous;
 
             /// <summary>
-            /// 等待会打开对话框
+            /// 等待打开对话框
             /// </summary>
             /// <param name="dialog">要打开的对话框</param>
             /// <returns></returns>
@@ -452,7 +465,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             /// 完成或者取消
             /// </summary>
             /// <returns>返回完成的值。</returns>
-            public IDialogViewModel CompletedOrCancel()
+            public IDialogViewModel CompleteDialog()
             {
                 //
                 // 注意：
@@ -480,7 +493,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             /// 是否可以完成或者取消
             /// </summary>
             /// <returns>返回一个值</returns>
-            public bool CanCompletedOrCancel() => _waitingStack.Count > 0 || _current is not null;
+            public bool CanCompleteDialog() => _waitingStack.Count > 0 || _current is not null;
 
             /// <summary>
             /// 当前的值
@@ -491,6 +504,9 @@ namespace Acorisoft.FutureGL.Forest.Controls
             /// 之前的值
             /// </summary>
             public IDialogViewModel Previous => _previous;
+
+            public bool Contains(IDialogViewModel viewModel) => ReferenceEquals(_current, viewModel) ||
+                                                                _waitingStack.Any(x => ReferenceEquals(x, viewModel));
         }
     }
 }
