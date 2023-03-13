@@ -1,28 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
-        <OutDir>../../Builds/Base</OutDir>
-        <RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
-        <PackageId>MigaDB.Share</PackageId>
-        <Authors>Luoyisi</Authors>
-        <Configurations>Debug;Release;NUGET</Configurations>
-        <Platforms>AnyCPU;x86</Platforms>
-    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<OutDir>../../Builds/Base</OutDir>
+		<RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
+		<GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
+		<PackageId>MigaDB.Share</PackageId>
+		<Authors>Luoyisi</Authors>
+		<Configurations>DEBUG;RELEASE;NUGET</Configurations>
+		<Platforms>x86</Platforms>
+		<Title>MigaDB</Title>
+		<Description>可公开的文档层Api</Description>
+		<Copyright>All right reseved by Luoyisi</Copyright>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="DryIoc.dll" Version="4.8.2" />
-      <PackageReference Include="LiteDB" Version="5.0.15" />
-      <PackageReference Include="MediatR" Version="11.1.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DryIoc.dll" Version="4.8.2" />
+		<PackageReference Include="LiteDB" Version="5.0.15" />
+		<PackageReference Include="MediatR" Version="11.1.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="System.IO.Hashing" Version="7.0.0" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
+	</ItemGroup>
 
 </Project>
