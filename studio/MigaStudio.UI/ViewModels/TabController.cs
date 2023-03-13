@@ -135,11 +135,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public sealed override void Start()
         {
-            if (_context is null)
-            {
-                return;
-            }
-
             if (!_initialized)
             {
                 StartOverride();

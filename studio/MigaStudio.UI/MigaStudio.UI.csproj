@@ -6,6 +6,7 @@
         <UseWPF>true</UseWPF>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <OutDir>../../Builds/Studio</OutDir>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

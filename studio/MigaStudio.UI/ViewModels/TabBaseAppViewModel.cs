@@ -17,6 +17,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             ApplicationModel = Xaml.Get<ApplicationModel>();
         }
+        
+        protected void OnInitialize()
+        {
+            _initialized = true;
+        }
 
         protected void OnInitialize(GlobalStudioContext context)
         {

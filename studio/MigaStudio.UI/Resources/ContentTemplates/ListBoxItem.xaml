@@ -2,28 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:fs="urn:acorisoft/forest/shell"
-                    xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
-
+    
+    
     <Style TargetType="{x:Type Button}" x:Key="CloseButtonStyle">
         <Style.Resources>
             <sys:Double x:Key="CloseButtonWidth">8</sys:Double>
             <sys:Double x:Key="CloseCircleWidth">16</sys:Double>
-            <sys:Double x:Key="CloseButtonOffset">4</sys:Double>
+            <sys:Double x:Key="CloseButtonOffset">6</sys:Double>
         </Style.Resources>
-        <Setter Property="Height"
-                Value="{StaticResource CloseCircleWidth}" />
-        <Setter Property="Width"
-                Value="{StaticResource CloseCircleWidth}" />
-        <Setter Property="VerticalAlignment"
-                Value="Center" />
-        <Setter Property="HorizontalAlignment"
-                Value="Center" />
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="Foreground"
-                Value="DarkGray" />
+        <Setter Property="Height" Value="{StaticResource CloseCircleWidth}" />
+        <Setter Property="Width" Value="{StaticResource CloseCircleWidth}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -34,8 +28,8 @@
                         <Ellipse Width="{StaticResource CloseCircleWidth}"
                                  Fill="{TemplateBinding Background}"
                                  Height="{StaticResource CloseCircleWidth}" />
-                        <Canvas Canvas.Left="{StaticResource CloseButtonOffset}"
-                                Canvas.Top="{StaticResource CloseButtonOffset}"
+                        <Canvas Canvas.Left="4"
+                                Canvas.Top="4"
                                 Background="Transparent"
                                 Width="{StaticResource CloseButtonWidth}"
                                 Height="{StaticResource CloseButtonWidth}">
@@ -60,32 +54,12 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="DarkGray" />
+                        Value="LightGray" />
                 <Setter Property="Foreground"
                         Value="White" />
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <DataTemplate DataType="{x:Type vm:TabViewModel}">
-        <Border Background="Transparent"
-                Padding="8 4 8 0"
-                WindowChrome.IsHitTestVisibleInChrome="True">
-            <DockPanel>
-                <Button DockPanel.Dock="Right"
-                        MinHeight="20"
-                        MinWidth="20"
-                        Style="{StaticResource CloseButtonStyle}"
-                        Height="20"
-                        Width="20" />
-                <TextBlock DockPanel.Dock="Left"
-                           FontSize="13"
-                           Text="{Binding Title,Mode=OneWay}"
-                           TextTrimming="CharacterEllipsis"
-                           VerticalAlignment="Center" />
-            </DockPanel>
-        </Border>
-    </DataTemplate>
 
 
     <Style x:Key="TabItem" TargetType="{x:Type ListBoxItem}">
@@ -100,9 +74,41 @@
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition  Property="IsMouseOver" Value="True"/>
+                                <Condition  Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Background" Value="{f:Brush HighlightA2}" TargetName="Border" />
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="LightGray" />
-                            <Setter Property="Background" Value="Gray" TargetName="Border" />
+                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Background" Value="{f:Brush HighlightA4}" TargetName="Border" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
