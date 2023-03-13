@@ -48,8 +48,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
             Xaml.InstallView<DocumentGallery, DocumentGalleryViewModel>();
 
-            Xaml.InstallView<ConstraintEditorView, CharacterConstraintViewModel>();
-            Xaml.InstallView<ConstraintEditorView, ItemConstraintViewModel>();
+            Xaml.InstallView<DocumentEditorView, AbilityDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorView, CharacterDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorView, ItemDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorView, OtherDocumentViewModel>();
+            Xaml.InstallView<GeographyEditorView, GeographyDocumentViewModel>();
         }
     }
 }

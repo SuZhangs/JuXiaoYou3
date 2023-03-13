@@ -19,17 +19,24 @@
         <thisConverters:AvatarConverter x:Key="Avatar"/>
         
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
-            <Border Background="{StaticResource Transparent}">
+            <Border Background="{StaticResource Transparent}"
+                    Cursor="Hand"
+                    Margin="8">
                 <DockPanel>
-                    <Border CornerRadius="12"
-                            Height="96"
-                            Width="96">
+                    <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="84"
+                            Width="84">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding Converter={StaticResource Avatar}}"/>
                         </Border.Background>
                     </Border>
                     
-                    <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                    <TextBlock FontSize="14"
+                               FontFamily="{StaticResource HeiTi}"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}"/>
                 </DockPanel>
             </Border>
         </DataTemplate>
@@ -58,13 +65,23 @@
                                 Command="{Binding NewDocumentCommand}"
                                 Palette="HighlightPalette1"
                                 Width="128"/>
-                <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>
-                <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"/>
+                <f:ForestIconButton Icon="{StaticResource FeatherIcon.Filter}"
+                                    Width="36"/>
+                <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"
+                                    Width="36"/>
             </StackPanel>
         </Grid>
         
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}"/>
+        <!-- 列表 -->
+        <ScrollViewer Grid.Row="1"
+                      Margin="32">
+            <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>

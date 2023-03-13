@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public abstract class ConstraintEditorVMBase : TabViewModel
+    public abstract class DocumentEditorVMBase : TabViewModel
     {
         public DocumentType Type { get; private set; }
     }
