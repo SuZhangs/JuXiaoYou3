@@ -2,7 +2,7 @@
 {
     public class StretchPanel : Panel
     {
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride(Size Document)
         {
             var maxSize = new Size();
 
@@ -13,7 +13,7 @@
                     continue;
                 }
                 
-                child.Measure(constraint);
+                child.Measure(Document);
                 maxSize.Width  = Math.Max(maxSize.Width, child.DesiredSize.Width);
                 maxSize.Height = Math.Max(maxSize.Height, child.DesiredSize.Height);
             }

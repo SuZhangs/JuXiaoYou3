@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 return;
             }
 
-            Records.Update(record);
+            Records.Insert(record);
         }
         
         public void RemoveFile(FileRecord record)

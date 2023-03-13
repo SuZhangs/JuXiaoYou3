@@ -88,7 +88,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
             _backgroundBrush = theme.GetHighlightColor(palette, 1).ToSolidColorBrush();
             _borderBrush     = theme.GetHighlightColor(palette, 3).ToSolidColorBrush();
-            _foregroundBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
+            _foregroundBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             _bd.Background  = _backgroundBrush;
             _bd.BorderBrush = _borderBrush;

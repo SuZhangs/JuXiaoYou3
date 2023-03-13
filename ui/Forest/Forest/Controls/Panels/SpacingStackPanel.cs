@@ -2,7 +2,7 @@
 {
     public class SpacingStackPanel : StackPanel
     {
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride(Size Document)
         {
             var gap = Gap;
             if (gap > 0)
@@ -24,7 +24,7 @@
                 }
             }
             
-            return base.MeasureOverride(constraint);
+            return base.MeasureOverride(Document);
         }
 
         public static readonly DependencyProperty GapProperty = DependencyProperty.Register(

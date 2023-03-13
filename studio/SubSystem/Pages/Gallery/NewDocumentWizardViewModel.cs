@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
@@ -21,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         private                 string       _name;
         private                 ImageSource  _avatar;
         private                 MemoryStream _buffer;
-        private static          DocumentType _type = DocumentType.CharacterConstraint;
+        private static          DocumentType _type = DocumentType.CharacterDocument;
 
         public NewDocumentWizardViewModel()
         {
@@ -75,15 +76,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 return;
             }
 
-            var ie           = dm.GetEngine<ImageEngine>();
-            var originLength = (int)_buffer.Length;
-            var originBuffer = _buffer.GetBuffer();
-            var saltedStream = new MemoryStream(originBuffer.Length + 4);
-            
-            saltedStream.Write(BitConverter.GetBytes(originLength));
-            saltedStream.Write(originBuffer);
-
-            var    raw = Pool.MD5.ComputeHash(saltedStream);
+            var    ie  = dm.GetEngine<ImageEngine>();
+            var    raw = Pool.MD5.ComputeHash(_buffer);
             var    md5 = Convert.ToBase64String(raw);
             string avatar;
             

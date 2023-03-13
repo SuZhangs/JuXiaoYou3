@@ -357,9 +357,9 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
         /// <summary>
         ///
         /// </summary>
-        /// <param name="constraint"></param>
+        /// <param name="Document"></param>
         /// <returns></returns>
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride(Size Document)
         {
             int childWidthPix, childHeightPix, maxRowCount = 0;
 
@@ -400,20 +400,20 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
             //if (this.MinHeightPix == 0) this.MinHeightPix = 1;
             if (Orientation == Orientation.Horizontal)
             {
-                Width = constraint.Width = TileCount * TileWidth + TileCount / MinWidthPix * (Gap.Left + Gap.Right);
+                Width = Document.Width = TileCount * TileWidth + TileCount / MinWidthPix * (Gap.Left + Gap.Right);
                 var heightPix = Math.Ceiling((double)maxRowCount / TileCount);
                 if (!double.IsNaN(heightPix))
-                    constraint.Height = heightPix * TileHeight + heightPix / MinHeightPix * (Gap.Top + Gap.Bottom);
+                    Document.Height = heightPix * TileHeight + heightPix / MinHeightPix * (Gap.Top + Gap.Bottom);
             }
             else
             {
-                Height = constraint.Height = TileCount * TileHeight + TileCount / MinHeightPix * (Gap.Top + Gap.Bottom);
+                Height = Document.Height = TileCount * TileHeight + TileCount / MinHeightPix * (Gap.Top + Gap.Bottom);
                 var widthPix               = Math.Ceiling((double)maxRowCount / TileCount);
                 if (!double.IsNaN(widthPix))
-                    constraint.Width = widthPix * TileWidth + widthPix / MinWidthPix * (Gap.Left + Gap.Right);
+                    Document.Width = widthPix * TileWidth + widthPix / MinWidthPix * (Gap.Left + Gap.Right);
             }
 
-            return constraint;
+            return Document;
         }
 
         #endregion

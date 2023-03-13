@@ -24,8 +24,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         }
 
         #region Documents
-        
-        
+
         /// <summary>
         /// 添加文档
         /// </summary>
@@ -51,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
 
             DocumentCacheDB.Insert(document);
-            
+
             //
             // 一致性检查
             //if (!DocumentDB.HasID(document.Id) ||
@@ -59,7 +58,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             //{
             //    return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
             //}
-            
+
             //
             //
             Modified();
@@ -111,7 +110,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             DocumentCacheDB.Insert(cache);
             DocumentDB.Insert(document);
-            
+
             //
             // 一致性检查
             if (!DocumentDB.HasID(document.Id) ||
@@ -119,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             {
                 return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
             }
-            
+
             //
             //
             Modified();
@@ -145,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
-            cache.IsDeleted = true;
+            cache.IsDeleted      = true;
             cache.TimeOfModified = DateTime.Now;
 
 
@@ -181,14 +180,14 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             }
 
             var cache = DocumentCacheDB.FindById(document.Id);
-            
+
             //
             // 空检查
             if (cache is null)
             {
                 return;
             }
-            
+
             cache.Name           = document.Name;
             cache.Intro          = document.Intro;
             cache.Avatar         = document.Avatar;
@@ -199,6 +198,32 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
+        }
+
+
+        /// <summary>
+        /// 更新文档
+        /// </summary>
+        /// <param name="cache">指定要更新的文档</param>
+        public void UpdateDocument(DocumentCache cache)
+        {
+            if (cache is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cache.Id))
+            {
+                return;
+            }
+
+            if (!DocumentCacheDB.HasID(cache.Id))
+            {
+                return;
+            }
+
+            Modified();
+            DocumentCacheDB.Update(cache);
         }
 
         /// <summary>
@@ -223,7 +248,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             return cache.IsDeleted ? null : GetDocument(cache.Id);
         }
-        
+
         #endregion
 
         public void AddCompose(Compose document)
@@ -237,7 +262,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         public void UpdateCompose(Compose document)
         {
         }
-        
+
 
         /// <summary>
         /// 清空所有文档
@@ -247,12 +272,12 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             var markAsDeletedDocumentCache = DocumentCacheDB.Find(Query.EQ("IsDeleted", true)).Select(x => x.Id).ToHashSet();
             DocumentCacheDB.DeleteMany(x => x.IsDeleted);
             DocumentDB.DeleteMany(x => markAsDeletedDocumentCache.Contains(x.Id));
-            
-            
+
+
             var markAsDeletedComposeCache = ComposeCacheDB.Find(Query.EQ("IsDeleted", true)).Select(x => x.Id).ToHashSet();
             ComposeCacheDB.DeleteMany(x => x.IsDeleted);
             ComposeDB.DeleteMany(x => markAsDeletedComposeCache.Contains(x.Id));
-            
+
             Modified();
         }
 

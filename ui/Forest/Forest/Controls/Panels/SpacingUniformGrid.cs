@@ -4,7 +4,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
 {
     public class SpacingUniformGrid : UniformGrid
     {
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride(Size Document)
         {
             var gap     = Gap;
             var rows    = Rows;
@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Panels
                 }
             }
             
-            return base.MeasureOverride(constraint);
+            return base.MeasureOverride(Document);
         }
 
 

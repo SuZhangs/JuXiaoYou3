@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.Forest.ViewModels;
 namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
 {
     [Name("人物设定")]
-    public class CharacterConstraintViewModel : PageViewModel
+    public class CharacterDocumentViewModel : PageViewModel
     {
         
     }

@@ -2,6 +2,8 @@
 {
     public interface IDataCache
     {
+        DocumentType Type { get; }
+        
         /// <summary>
         /// 唯一标识符
         /// </summary>
@@ -21,6 +23,11 @@
         /// 
         /// </summary>
         bool IsDeleted { get; set; }
+        
+        /// <summary>
+        /// 是否锁定
+        /// </summary>
+        bool IsLocked { get; set; }
         
         /// <summary>
         /// 

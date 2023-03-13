@@ -38,8 +38,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void ReleaseManagedResources()
         {
-            BackendImage?.Dispose();
-            BackendImage = null;
+            BackendImage.Dispose();
+            BackgroundImage.Dispose();
+            BackendImage    = null;
+            BackgroundImage = null;
             base.ReleaseManagedResources();
         }
 
@@ -47,13 +49,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void Finish()
         {
-            BackendImage.Dispose();
-            BackgroundImage.Dispose();
-            BackendImage    = null;
-            BackgroundImage = null;
             var ms = new MemoryStream();
             BackendImage.Mutate(x => { x.Crop(new Rectangle((int)PosX, (int)PosY, (int)ThumbSize, (int)ThumbSize)); });
             BackendImage.SaveAsPng(ms);
+            ms.Seek(0, SeekOrigin.Begin);
             Result = ms;
         }
 

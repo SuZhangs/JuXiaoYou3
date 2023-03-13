@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Documents;
+﻿using Acorisoft.FutureGL.MigaDB.Interfaces;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {

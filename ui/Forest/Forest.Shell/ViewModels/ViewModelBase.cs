@@ -39,10 +39,17 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         }
 
         protected RelayCommand Command(Action execute) => new RelayCommand(execute);
+        
+        protected RelayCommand<T> Command<T>(Action<T> execute) => new RelayCommand<T>(execute);
 
         protected RelayCommand Command(Action execute, Func<bool> canExecute, bool updateWhenViewModelChanged = false)
         {
             return updateWhenViewModelChanged ? Associate(new RelayCommand(execute, canExecute)) : new RelayCommand(execute, canExecute);
+        }
+        
+        protected RelayCommand<T> Command<T>(Action<T> execute, Predicate<T> canExecute, bool updateWhenViewModelChanged = false)
+        {
+            return updateWhenViewModelChanged ? Associate(new RelayCommand<T>(execute, canExecute)) : new RelayCommand<T>(execute, canExecute);
         }
 
         private TCommand Associate<TCommand>(TCommand command) where TCommand : IRelayCommand

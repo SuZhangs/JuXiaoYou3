@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.IO;
+using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 
@@ -27,12 +32,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
             Title           = StringFromCode.GetText($"name.{nameof(DocumentGallery)}");
             DatabaseManager = Xaml.Get<IDatabaseManager>();
+            ImageEngine     = DatabaseManager.GetEngine<ImageEngine>();
             DocumentEngine  = DatabaseManager.GetEngine<DocumentEngine>();
             DocumentSource  = new SourceList<IDataCache>();
 
-            NewDocumentCommand = new AsyncRelayCommand(NewDocumentImpl);
-            NextPageCommand    = new RelayCommand(NextPageImpl, CanNextPage);
-            LastPageCommand    = new RelayCommand(LastPageImpl, CanLastPage);
+            NewDocumentCommand          = AsyncCommand(NewDocumentImpl);
+            SelectDocumentCommand       = Command<DocumentCache>(SelectDocumentImpl);
+            ChangeDocumentAvatarCommand = AsyncCommand<DocumentCache>(ChangeDocumentAvatarImpl, HasDocument);
+            NextPageCommand             = Command(NextPageImpl, CanNextPage);
+            LastPageCommand             = Command(LastPageImpl, CanLastPage);
 
 
             DocumentSource.Connect()
@@ -40,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                           .Bind(out _collection)
                           .Subscribe()
                           .DisposeWith(Collector);
-            
+
             //
             // 初始化
             PageIndex = 1;
@@ -48,9 +56,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         #region Command
 
-        private bool CanNextPage() => _pageIndex + 1 < _totalPage;
+        #region Last / Next
+
         
-        private bool CanLastPage() => _pageIndex > 0;
+
+        private bool CanNextPage() => _pageIndex + 1 < _totalPage;
+
+        private bool CanLastPage() => _pageIndex > 1;
 
         private void NextPageImpl()
         {
@@ -63,7 +75,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             PageIndex--;
             LoadPage();
         }
+        
 
+        #endregion
+
+
+        #region Document
+
+        private static bool HasDocument(IDataCache cache) => cache is not null; 
+        
         private async Task NewDocumentImpl()
         {
             var wizard = await SubSystem.NewDocumentWizard();
@@ -89,23 +109,82 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                     CriticalLevel.Success,
                     StringFromCode.Notify,
                     StringFromCode.OperationOfAddIsSuccess);
-                
+
                 Update();
                 Refresh();
             }
         }
         
 
+        private void SelectDocumentImpl(DocumentCache index)
+        {
+            if (index is null)
+            {
+                return;
+            }
+
+            Selected = index;
+            
+            // TODO: 进一步操作
+            IsDocumentPropertyPaneOpen = Selected is not null;
+        }
+
+
+        private async Task ChangeDocumentAvatarImpl(DocumentCache index)
+        {
+            if (index is null)
+            {
+                return;
+            }
+
+            var r = await ImageUtilities.Avatar();
+            
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var    buffer = r.Buffer;
+            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
+            var    md5    = Convert.ToBase64String(raw);
+            string avatar;
+            
+            if (ImageEngine.HasFile(md5))
+            {
+                var fr = ImageEngine.Records.FindById(md5);
+                avatar = fr.Uri;
+            }
+            else
+            {
+                avatar = $"avatar_{ID.Get()}.png";
+                buffer.Seek(0, SeekOrigin.Begin);
+                ImageEngine.SetAvatar(buffer, avatar);
+
+                var record = new FileRecord
+                {
+                    Id   = md5,
+                    Uri  = avatar,
+                    Type = ResourceType.Image
+                };
+
+                ImageEngine.AddFile(record);
+            }
+
+            index.Avatar = avatar;
+            DocumentEngine.UpdateDocument(index);
+        }
+        #endregion
+
+
         #endregion
 
         #region Private Methods
-        
 
         private void LoadPage()
         {
             var index    = Math.Clamp(_pageIndex, 1, _totalPage);
             var iterator = DocumentEngine.DocumentCacheDB.FindAll().Skip((index - 1) * 50).Take(50);
-            
+
             DocumentSource.Clear();
             DocumentSource.AddRange(iterator);
         }
@@ -116,7 +195,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             _totalPage = (totalCount + 49) / 50;
         }
 
-        
+
         private async void OnKeyPress(WindowKeyEventArgs arg)
         {
             var keyArg = arg.Args;
@@ -133,7 +212,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         #endregion
 
         #region OnStart / Refresh / Resume
-        
 
         public void Refresh()
         {
@@ -170,12 +248,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         #region Properties
 
-        
-
         #region Bindable Properties
 
-        private int _pageIndex;
-        private int _totalPage;
+        private int                         _pageIndex;
+        private int                         _totalPage;
+        private IDataCache                  _selected;
+        private bool                      _isDocumentPropertyPaneOpen;
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsDocumentPropertyPaneOpen"/> 属性。
+        /// </summary>
+        public bool IsDocumentPropertyPaneOpen
+        {
+            get => _isDocumentPropertyPaneOpen;
+            set => SetValue(ref _isDocumentPropertyPaneOpen, value);
+        }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="Selected"/> 属性。
+        /// </summary>
+        public IDataCache Selected
+        {
+            get => _selected;
+            set => SetValue(ref _selected, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="TotalPage"/> 属性。
@@ -216,19 +313,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         public SourceList<IDataCache> DocumentSource { get; }
         public ReadOnlyObservableCollection<IDataCache> Collection => _collection;
         public DocumentEngine DocumentEngine { get; }
+        public ImageEngine ImageEngine { get; }
 
         public IDatabaseManager DatabaseManager { get; }
 
         #region Commands
 
-        
-
         public AsyncRelayCommand NewDocumentCommand { get; }
         public RelayCommand NextPageCommand { get; }
         public RelayCommand LastPageCommand { get; }
+        
+        public RelayCommand<DocumentCache> SelectDocumentCommand { get; }
+        public AsyncRelayCommand<DocumentCache> ChangeDocumentAvatarCommand { get; }
 
         #endregion
-        
+
         #endregion
     }
 }

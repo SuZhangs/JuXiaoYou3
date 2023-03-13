@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources
 {
@@ -6,11 +7,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
     {
         public static readonly DocumentType[] DocumentTypes = new[]
         {
-            DocumentType.CharacterConstraint,
-            DocumentType.GeographyConstraint,
-            DocumentType.AbilityConstraint,
-            DocumentType.ItemConstraint,
-            DocumentType.OtherConstraint
+            DocumentType.CharacterDocument,
+            DocumentType.GeographyDocument,
+            DocumentType.AbilityDocument,
+            DocumentType.ItemDocument,
+            DocumentType.OtherDocument
         };
     }
 }

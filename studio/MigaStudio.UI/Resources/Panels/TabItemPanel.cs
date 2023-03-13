@@ -8,20 +8,20 @@
 
         /// <summary>
         /// Compute the desired size of this UniformGrid by measuring all of the
-        /// children with a constraint equal to a cell's portion of the given
-        /// constraint (e.g. for a 2 x 4 grid, the child constraint would be
-        /// constraint.Width*0.5 x constraint.Height*0.25).  The maximum child
+        /// children with a Document equal to a cell's portion of the given
+        /// Document (e.g. for a 2 x 4 grid, the child Document would be
+        /// Document.Width*0.5 x Document.Height*0.25).  The maximum child
         /// width and maximum child height are tracked, and then the desired size
         /// is computed by multiplying these maximums by the row and column count
         /// (e.g. for a 2 x 4 grid, the desired size for the UniformGrid would be
         /// maxChildDesiredWidth*2 x maxChildDesiredHeight*4).
         /// </summary>
-        /// <param name="constraint">Constraint</param>
+        /// <param name="Document">Document</param>
         /// <returns>Desired size</returns>
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride(Size Document)
         {
             _columns = InternalChildren.Count == 0 ? 1 : InternalChildren.Count;
-            var childConstraint = new Size(Math.Clamp(constraint.Width / _columns, 60, 200) - 1.5, constraint.Height);
+            var childDocument = new Size(Math.Clamp(Document.Width / _columns, 60, 200) - 1.5, Document.Height);
             var maxChildDesiredWidth = 0.0;
             var maxChildDesiredHeight = 0.0;
 
@@ -31,7 +31,7 @@
                 var child = InternalChildren[i];
 
                 // Measure the child.
-                child.Measure(childConstraint);
+                child.Measure(childDocument);
 
                 var childDesiredSize = child.DesiredSize;
 

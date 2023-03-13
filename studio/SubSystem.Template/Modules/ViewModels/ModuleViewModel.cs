@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
@@ -40,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             _intro         = string.Empty;
             _for           = string.Empty;
             _version       = 1;
-            _forType       = DocumentType.CharacterConstraint;
+            _forType       = DocumentType.CharacterDocument;
             _metadataMap.Clear();
             MetadataList.Clear();
             Blocks.Clear();

@@ -9,10 +9,10 @@ using SixLabors.ImageSharp.ColorSpaces.Conversion;
 
 namespace ViewHost.Views
 {
-    [Connected(View = typeof(CharacterConstraintView), ViewModel = typeof(CharacterConstraintViewModel))]
-    public partial class CharacterConstraintView : UserControl
+    [Connected(View = typeof(CharacterDocumentView), ViewModel = typeof(CharacterDocumentViewModel))]
+    public partial class CharacterDocumentView : UserControl
     {
-        public CharacterConstraintView()
+        public CharacterDocumentView()
         {
             InitializeComponent();
             AdornerLayer.GetAdornerLayer(Btn)?.Add(new ThumbAdorner(Btn));

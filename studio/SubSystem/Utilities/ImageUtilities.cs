@@ -49,14 +49,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             using (var session = Xaml.Get<IBusyService>().CreateSession())
             {
                 var buffer = await File.ReadAllBytesAsync(fileName);
-                var ms     = new MemoryStream(buffer);
+                var origin     = new MemoryStream(buffer);
+                var result    = (MemoryStream)null;
                 var image  = Image.Load<Rgba32>(buffer);
 
 
                 if (image.Width < 32 || image.Height < 32)
                 {
                     image.Dispose();
-                    ms.Dispose();
+                    origin.Dispose();
                     await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.ImageTooSmall);
                     return new ImageOpResult { IsFinished = false };
                 }
@@ -64,7 +65,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                 if (image.Width != image.Height)
                 {
-                    var ds         = Xaml.Get<IDialogService>();
                     var horizontal = image.Width > 1920;
 
                     if (horizontal || image.Height > 1080)
@@ -74,46 +74,46 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                             session.Update(StringFromCode.ImageProcessing);
                             var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
                             image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
-                            var ms1 = new MemoryStream();
-                            image.SaveAsPng(ms1);
-                            ms1.Seek(0, SeekOrigin.Begin);
-                            ms.Dispose();
-                            ms = ms1;
+                            
+                            // rewrite
+                            origin = new MemoryStream();
+                            image.SaveAsPng(origin);
+                            origin.Seek(0, SeekOrigin.Begin);
                             session.Dispose();
                         });
                     }
 
-                    var r = await ds.Dialog<MemoryStream, ImageEditViewModel>(new Parameter
+                    var r = await Xaml.Get<IDialogService>()
+                                      .Dialog<MemoryStream, ImageEditViewModel>(new Parameter
                     {
                         Args = new object[]
                         {
                             image,
-                            ms
+                            origin
                         }
                     });
 
                     if (!r.IsFinished)
                     {
-                        ms.Dispose();
+                        origin.Dispose();
                         return new ImageOpResult { IsFinished = false };
                     }
 
-
-                    ms.Dispose();
-                    ms = r.Value;
+                    result = r.Value;
+                    result.Seek(0, SeekOrigin.Begin);
                 }
-                else
-                {
-                    ms.Dispose();
-                    ms = new MemoryStream();
-                    await image.SaveAsPngAsync(ms);
-                    session.Dispose();
-                }
+                
+                
+                origin.Dispose();
+                result = new MemoryStream();
+                await image.SaveAsPngAsync(result);
+                result.Seek(0, SeekOrigin.Begin);
+                session.Dispose();
 
                 return new ImageOpResult
                 {
                     IsFinished = true,
-                    Buffer     = ms,
+                    Buffer     = result,
                     FileName   = opendlg.FileName
                 };
             }

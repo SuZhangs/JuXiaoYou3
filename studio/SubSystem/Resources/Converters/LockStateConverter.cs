@@ -1,0 +1,29 @@
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
+
+namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
+{
+    public class LockStateConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is IDataCache cache)
+            {
+                return cache.IsLocked ? Lock : Unlock;
+            }
+
+            return Unlock;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+        
+        public Geometry Lock { get; set; }
+        public Geometry Unlock { get; set; }
+    }
+}

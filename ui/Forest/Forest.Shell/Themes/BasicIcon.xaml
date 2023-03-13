@@ -55,6 +55,20 @@
             <Geometry>F1 M24,24z M0,0z M17,6L17,6 23,6 23,12</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
+    
+    <GeometryGroup x:Key="FeatherIcon.Lock">
+        <GeometryGroup.Children>
+            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="3,11,18,11" />
+            <Geometry>F1 M24,24z M0,0z M7,11L7,7A5,5,0,0,1,17,7L17,11</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
+    
+    <GeometryGroup x:Key="FeatherIcon.Unlock">
+        <GeometryGroup.Children>
+            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="3,11,18,11" />
+            <Geometry>F1 M24,24z M0,0z M7,11L7,7A5,5,0,0,1,16.9,6</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
 
     <Geometry x:Key="FeatherIcon.Left">F1 M24,24z M0,0z M15,18L15,18 9,12 15,6</Geometry>
     <Geometry x:Key="FeatherIcon.Right">F1 M24,24z M0,0z M9,18L9,18 15,12 9,6</Geometry>

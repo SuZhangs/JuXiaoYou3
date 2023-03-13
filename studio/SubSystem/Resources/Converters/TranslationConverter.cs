@@ -5,6 +5,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Models;
 
 
@@ -91,22 +92,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             return type switch
             {
-                DocumentType.CharacterConstraint => Language.Culture switch
+                DocumentType.CharacterDocument => Language.Culture switch
                 {
                     CultureArea.Chinese => "人物",
                     _                   => "Character"
                 },
-                DocumentType.AbilityConstraint => Language.Culture switch
+                DocumentType.AbilityDocument => Language.Culture switch
                 {
                     CultureArea.Chinese => "能力",
                     _                   => "Ability"
                 },
-                DocumentType.GeographyConstraint => Language.Culture switch
+                DocumentType.GeographyDocument => Language.Culture switch
                 {
                     CultureArea.Chinese => "地图",
                     _                   => "Geography"
                 },
-                DocumentType.ItemConstraint => Language.Culture switch
+                DocumentType.ItemDocument => Language.Culture switch
                 {
                     CultureArea.Chinese => "物品",
                     _                   => "Item"

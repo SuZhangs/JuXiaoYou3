@@ -29,7 +29,7 @@
         /// <summary>
         /// 设定
         /// </summary>
-        Constraint,
+        Document,
         
         /// <summary>
         /// 剧情
