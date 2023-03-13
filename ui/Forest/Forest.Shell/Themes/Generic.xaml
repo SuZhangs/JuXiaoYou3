@@ -45,6 +45,8 @@
     </Style>
 
     <Style TargetType="{x:Type c:DialogHost}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:DialogHost}">
@@ -605,6 +607,8 @@
     </Style>
 
     <Style TargetType="{x:Type c:TitleBar}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:TitleBar}">
@@ -762,6 +766,8 @@
     </Style>
 
     <Style TargetType="{x:Type c:EmptyContentHost}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:EmptyContentHost}">
@@ -797,6 +803,8 @@
     </Style>
 
     <Style TargetType="{x:Type c:ViewHost}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:ViewHost}">

@@ -130,7 +130,7 @@
                             CornerRadius="3"
                             Padding="16 0">
                         <ContentPresenter x:Name="PART_Content"
-                                          TextElement.FontSize="16"
+                                          TextElement.FontSize="13"
                                           TextElement.Foreground="#4F5B66"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
