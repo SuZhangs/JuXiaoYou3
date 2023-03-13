@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 .Subscribe(OnKeyPress)
                 .DisposeWith(Collector);
 
+            Title           = StringFromCode.GetText($"name.{nameof(DocumentGallery)}");
             DatabaseManager = Xaml.Get<IDatabaseManager>();
             DocumentEngine  = DatabaseManager.GetEngine<DocumentEngine>();
             DocumentSource  = new SourceList<IDataCache>();

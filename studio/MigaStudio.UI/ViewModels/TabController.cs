@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using CommunityToolkit.Mvvm.Input;
+using DryIoc;
 
 // ReSharper disable MemberCanBeMadeStatic.Global
 
@@ -166,6 +167,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected virtual void OnCurrentViewModelChanged(ITabViewModel oldViewModel, ITabViewModel newViewModel)
         {
+            if (newViewModel is null)
+            {
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(newViewModel.Title))
+            {
+                var key = $"text.{newViewModel.GetType().Name}";
+                newViewModel.Title = Language.GetText(key);
+            }
         }
 
         protected virtual void RequireStartupTabViewModel()

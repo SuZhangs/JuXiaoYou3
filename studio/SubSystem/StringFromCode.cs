@@ -7,7 +7,6 @@ namespace Acorisoft.FutureGL.MigaStudio
 {
     public static class StringFromCode
     {
-        public static readonly CustomLanguage LanguageDictionary;
 
         static StringFromCode()
         {
@@ -20,14 +19,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Russian  => "SubSystem.ru.ini",
                 _                    => "SubSystem.cn.ini",
             };
-            LanguageDictionary = new CustomLanguage();
-            LanguageDictionary.SetLanguage(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
+            Language.AppendLanguageSource(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
         }
-        
-        public static string GetText(string id)
-        {
-            return LanguageDictionary.GlobalStrings.TryGetValue(id, out var text) ? text : id;
-        }
+
+        public static string GetText(string id) => Language.GetText(id);
         
         
         public static string GetDatabaseResult(DatabaseFailedReason reason)

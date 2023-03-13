@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <summary>
         /// 标题。
         /// </summary>
-        string Title { get; }
+        string Title { get; set; }
         
         /// <summary>
         /// 唯一性

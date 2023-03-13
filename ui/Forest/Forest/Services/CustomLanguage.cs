@@ -20,6 +20,11 @@ namespace Acorisoft.FutureGL.Forest.Services
 
                 foreach (var line in lines)
                 {
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
+                    
                     var separator = line.IndexOf('=');
                     var id        = line[..separator].Trim();
                     var value     = line[(separator + 1)..].Trim();

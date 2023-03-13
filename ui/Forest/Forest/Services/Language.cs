@@ -162,7 +162,11 @@ namespace Acorisoft.FutureGL.Forest.Services
                 var temp  = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                 foreach (var line in lines)
-                {
+                {                   
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
                     var separator = line.IndexOf('=');
                     var id        = line[..separator].Trim();
                     var value     = line[(separator + 1)..].Trim();
@@ -175,6 +179,32 @@ namespace Acorisoft.FutureGL.Forest.Services
                 foreach (var kv in temp)
                 {
                     _stringDictionary.Add(kv.Key, kv.Value);
+                }
+            }
+            catch
+            {
+                //
+            }
+        }
+
+        public static void AppendLanguageSource(string fileName)
+        {
+            // pageRoot.Id.Function
+            try
+            {
+                var lines = File.ReadAllLines(fileName);
+
+                foreach (var line in lines)
+                {                   
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
+                    var separator = line.IndexOf('=');
+                    var id        = line[..separator].Trim();
+                    var value     = line[(separator + 1)..].Trim();
+
+                    _stringDictionary.TryAdd(id, value);
                 }
             }
             catch
