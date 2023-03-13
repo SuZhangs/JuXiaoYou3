@@ -4,7 +4,10 @@
         <Nullable>disable</Nullable>
         <RootNamespace>Acorisoft.FutureGL.Forest</RootNamespace>
         <OutDir>../../../Builds/Forest</OutDir>
+        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
         <UseWPF>true</UseWPF>
+        <Configurations>Debug;Release;NUGET</Configurations>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

@@ -6,6 +6,11 @@
         <Nullable>disable</Nullable>
         <OutDir>../../Builds/Base</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
+        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
+        <PackageId>MigaDB.Share</PackageId>
+        <Authors>Luoyisi</Authors>
+        <Configurations>Debug;Release;NUGET</Configurations>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
