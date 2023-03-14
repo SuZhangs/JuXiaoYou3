@@ -87,6 +87,9 @@
         /// 背景色
         /// </summary>
         Background,
+        BackgroundLevel1,
+        BackgroundLevel2,
+        BackgroundLevel3,
         BackgroundInHighlight,
         BackgroundInactive,
         
@@ -95,6 +98,9 @@
         /// 前景色
         /// </summary>
         Foreground,
+        ForegroundLevel1,
+        ForegroundLevel2,
+        ForegroundLevel3,
         ForegroundInHighlight,
         ForegroundInActive,
         

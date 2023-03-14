@@ -50,7 +50,7 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
-              Background="#F1F1F1"
+              Background="{f:Brush BackgroundInactive}"
               Height="36">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="16" />
