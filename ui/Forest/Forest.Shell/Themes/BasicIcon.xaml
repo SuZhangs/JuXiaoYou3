@@ -69,6 +69,14 @@
             <Geometry>F1 M24,24z M0,0z M7,11L7,7A5,5,0,0,1,16.9,6</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
+    
+    <GeometryGroup x:Key="FeatherIcon.Box">
+        <GeometryGroup.Children>
+            <Geometry>F1 M24,24z M0,0z M21,16L21,8A2,2,0,0,0,20,6.27L13,2.27A2,2,0,0,0,11,2.27L4,6.27A2,2,0,0,0,3,8L3,16A2,2,0,0,0,4,17.73L11,21.73A2,2,0,0,0,13,21.73L20,17.73A2,2,0,0,0,21,16z</Geometry>
+            <Geometry>F1 M24,24z M0,0z M3.27,6.96L3.27,6.96 12,12.01 20.73,6.96</Geometry>
+            <LineGeometry StartPoint="12,22.08" EndPoint="12,12" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
 
     <Geometry x:Key="FeatherIcon.Left">F1 M24,24z M0,0z M15,18L15,18 9,12 15,6</Geometry>
     <Geometry x:Key="FeatherIcon.Right">F1 M24,24z M0,0z M9,18L9,18 15,12 9,6</Geometry>
