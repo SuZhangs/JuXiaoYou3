@@ -6,7 +6,7 @@ using Microsoft.Win32;
 
 namespace Acorisoft.FutureGL.Forest
 {
-    public abstract class ForestWindow : Window
+    public abstract class ForestWindow : Window, ITextResourceAdapter
     {
         private bool? _skip;
         private Action<WindowState> _tunnel;
@@ -74,6 +74,20 @@ namespace Acorisoft.FutureGL.Forest
             
         }
 
+        #region ITextResourceAdapter
+
+        
+        void ITextResourceAdapter.SetText(string text)
+        {
+            Title = text;
+        }
+
+        void ITextResourceAdapter.SetToolTips(string text)
+        {
+            ToolTip = text;
+        }
+
+        #endregion
 
         #region SystemCommands
 
@@ -131,6 +145,7 @@ namespace Acorisoft.FutureGL.Forest
             typeof(bool),
             typeof(ForestWindow),
             new PropertyMetadata(Boxing.True));
+        
         /// <summary>
         /// 实现 <see cref="TitleBar"/> 属性的依赖属性。
         /// </summary>

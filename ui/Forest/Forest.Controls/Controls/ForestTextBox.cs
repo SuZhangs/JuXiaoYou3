@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             var foreground          = theme.Colors[(int)ForestTheme.Foreground];
             var highlightBackground = theme.GetHighlightColor(palette, 3);
             var activeBackground    = theme.GetHighlightColor(palette, 1);
-            var disabledBackground  = theme.Colors[(int)ForestTheme.BackgroundInactive];;
+            var disabledBackground  = theme.Colors[(int)ForestTheme.BackgroundInactive];
             var highlightForeground = theme.Colors[(int)ForestTheme.ForegroundInHighlight];
             var disabledForeground  = theme.Colors[(int)ForestTheme.ForegroundInActive];
 
@@ -92,6 +92,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private void SetForeground(ref Color highlightForeground)
         {
             var foreground = highlightForeground.ToSolidColorBrush();
+            Foreground = foreground;
             PART_Content.SetValue(TextElement.ForegroundProperty, foreground);
         }
 

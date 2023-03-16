@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
              xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
              xmlns:f="urn:acorisoft/forest/ui"
-             xmlns:mg="https://www.acorisoft.cn/miga/ui"
              mc:Ignorable="d"
              d:DesignHeight="384"
              d:DesignWidth="480"
@@ -29,7 +28,6 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -44,61 +42,31 @@
                        Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
                        VerticalAlignment="Center" />
 
-            <!-- 错误提示 -->
-            <Border Grid.Row="1"
-                    Background="{f:BackgroundBrush}"
-                    BorderBrush="SlateGray"
-                    BorderThickness="3 0 0 0"
-                    CornerRadius="6"
-                    Margin="16 8"
-                    Padding="16 8 8 8"
-                    Visibility="{Binding Visibility,Mode=OneWay}">
-                <Border.Effect>
-                    <DropShadowEffect Direction="270" ShadowDepth="1" BlurRadius="5" Opacity="0.42" Color="SlateGray" />
-                </Border.Effect>
-                <DockPanel>
-                    <Path DockPanel.Dock="Left"
-                          Data="{StaticResource FeatherIcon.Close}"
-                          Stroke="SlateGray"
-                          StrokeThickness="2"
-                          Width="11"
-                          Height="11"
-                          Stretch="Uniform"/>
-
-                    <TextBlock  Foreground="SlateGray"
-                                FontSize="14"
-                                FontWeight="Bold"
-                                Margin="16 0 0 0"
-                                Text="{Binding ErrorMessage,Mode=OneWay}"
-                                TextWrapping="Wrap"
-                                VerticalAlignment="Center"/>
-                </DockPanel>
-            </Border>
-
-            <!-- TODO: 完善文本输入框 -->
-            <!-- <mg:TextBoxEx Grid.Row="2" -->
-            <!--               ScrollViewer.CanContentScroll="True" -->
-            <!--              VerticalScrollBarVisibility="Auto" -->
-            <!--              Margin="16" -->
-            <!--              Padding="8" -->
-            <!--              Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" -->
-            <!--              TextWrapping="Wrap"/> -->
+            <f:ForestTextBox Grid.Row="1"
+                             ScrollViewer.CanContentScroll="True"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="16"
+                             Padding="8"
+                             Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                             TextWrapping="Wrap" />
 
             <!-- 按钮 -->
-            <UniformGrid Grid.Row="3"
+            <UniformGrid Grid.Row="2"
                          Columns="2"
                          Height="48"
                          Margin="16"
                          Rows="1">
-                
-                <!-- <Button IsDefault="True" -->
-                <!--         Content="{Binding Source={x:Static app:Translate.Instance},Path=OkButtonText,Mode=OneWay}" -->
-                <!--         Command="{Binding CompletedCommand}" -->
-                <!--         Style="{StaticResource CancelButton4}" /> -->
-                <!-- -->
-                <!-- <Button Content="{Binding Source={x:Static app:Translate.Instance},Path=CancelButtonText,Mode=OneWay}" -->
-                <!--         Command="{Binding CancelCommand}" -->
-                <!--         Style="{StaticResource CancelButton3}" /> -->
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
+                                IconSize="29"
+                                IsDefault="True"
+                                Content="{x:Static f:Language.CompleteText}"
+                                Command="{Binding CompletedCommand}"
+                                Purpose="Warning" />
+
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
+                                Content="{x:Static f:Language.CancelText}"
+                                Command="{Binding CancelCommand}"
+                                Purpose="Close" />
             </UniformGrid>
         </Grid>
     </Border>

@@ -117,7 +117,21 @@ namespace Acorisoft.FutureGL.Forest
 
         #endregion
         
-        
+        /// <summary>
+        /// 寻找指定元素的父级。
+        /// </summary>
+        /// <param name="source"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T FindAncestor<T>(DependencyObject source) where T : DependencyObject
+        {
+            while (source != null && source.GetType() != typeof(T))
+            {
+                source = VisualTreeHelper.GetParent(source);
+            }
+
+            return source as T;
+        }
 
         public static T GetViewModel<T>(Type key)
         {

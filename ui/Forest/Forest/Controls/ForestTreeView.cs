@@ -13,6 +13,19 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             return new ForestTreeViewItem();
         }
+
+
+        public static readonly DependencyProperty BindableSelectedItemProperty = DependencyProperty.Register(
+            nameof(BindableSelectedItem),
+            typeof(object),
+            typeof(ForestTreeView),
+            new PropertyMetadata(default(object)));
+
+        public object BindableSelectedItem
+        {
+            get => (object)GetValue(BindableSelectedItemProperty);
+            set => SetValue(BindableSelectedItemProperty, value);
+        }
     }
 
     public class ForestTreeViewItem : TreeViewItem

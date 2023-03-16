@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.Forest.Views
 
         protected override string Failed()
         {
-            return string.Empty;
+            return "值为空";
         }
 
 

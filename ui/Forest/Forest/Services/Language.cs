@@ -242,6 +242,25 @@ namespace Acorisoft.FutureGL.Forest.Services
                 };
             }
         }
+        
+        /// <summary>
+        /// 确定
+        /// </summary>
+        public static string CompleteText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Complete",
+                    CultureArea.French   => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean   => "kr.ini",
+                    CultureArea.Russian  => "ru.ini",
+                    _                    => "完成"
+                };
+            }
+        }
 
         /// <summary>
         /// 拒绝
