@@ -36,6 +36,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="cache">索引</param>
         /// <param name="controller">控制器</param>
         /// <returns>返回一个新的导航参数。</returns>
+        public static NavigationParameter New(string id, ITabViewController controller)
+        {
+            var args = new Parameter
+            {
+                Args = new object[8]
+            };
+
+            args.Args[0] = controller;
+            args.Args[1] = id;
+            return new NavigationParameter(args);
+        }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="cache">索引</param>
+        /// <param name="controller">控制器</param>
+        /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter New(IData data, IDataCache cache, ITabViewController controller)
         {
             var args = new Parameter
