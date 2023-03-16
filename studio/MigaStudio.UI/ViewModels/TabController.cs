@@ -119,8 +119,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     RequireStartupTabViewModel();
                 }
                 
+                OnRemoveViewModel(viewModel);
                 return;
             }
+            
+            OnRemoveViewModel(viewModel);
             Outboards.Remove(viewModel);
         }
 
@@ -159,6 +162,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         #endregion
+
+        protected virtual void OnAddViewModel(ITabViewModel viewModel)
+        {
+            
+        }
+        
+        protected virtual void OnRemoveViewModel(ITabViewModel viewModel)
+        {
+            
+        }
 
         protected virtual void OnCurrentViewModelChanged(ITabViewModel oldViewModel, ITabViewModel newViewModel)
         {
@@ -247,6 +260,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 if (Workspace.Count < MaximumWorkspaceItemCount)
                 {
+                    OnAddViewModel(viewModel);
                     Workspace.Add(viewModel);
                     CurrentViewModel = viewModel;
                 }

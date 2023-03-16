@@ -77,7 +77,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="arg"></param>
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public sealed override void Start(Parameter arg)
         {
             var np = NavigationParameter.FromParameter(arg);
@@ -88,7 +87,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         public void Start(NavigationParameter arg)
         {
-            Id = arg.Id;
+            Id         = arg.Id;
+            Controller = (TabController)arg.Controller;
             OnStart(arg);
         }
 
