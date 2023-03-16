@@ -4,9 +4,9 @@
     {
         public static readonly DependencyProperty HeaderThicknessProperty = DependencyProperty.Register(
             nameof(HeaderThickness),
-            typeof(string),
+            typeof(Thickness),
             typeof(ForestSection),
-            new PropertyMetadata(default(string)));
+            new PropertyMetadata(default(Thickness)));
 
         /// <summary>
         /// 实现 <see cref="Header"/> 属性的依赖属性。
@@ -53,9 +53,9 @@
 
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             nameof(CornerRadius),
-            typeof(Thickness),
+            typeof(CornerRadius),
             typeof(ForestSection),
-            new PropertyMetadata(default(Thickness)));
+            new PropertyMetadata(default(CornerRadius)));
 
 
         /// <summary>
@@ -95,6 +95,10 @@
             new PropertyMetadata(default(string)));
 
 
+        static ForestSection()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestSection), new FrameworkPropertyMetadata(typeof(ForestSection)));
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="ToolBarStringFormat"/> 属性。
@@ -131,9 +135,9 @@
             get => (object)GetValue(ToolBarProperty);
             set => SetValue(ToolBarProperty, value);
         }   
-        public Thickness CornerRadius
+        public CornerRadius CornerRadius
         {
-            get => (Thickness)GetValue(CornerRadiusProperty);
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
             set => SetValue(CornerRadiusProperty, value);
         }
         
@@ -178,9 +182,9 @@
             get => (object)GetValue(HeaderProperty);
             set => SetValue(HeaderProperty, value);
         }   
-        public string HeaderThickness
+        public Thickness HeaderThickness
         {
-            get => (string)GetValue(HeaderThicknessProperty);
+            get => (Thickness)GetValue(HeaderThicknessProperty);
             set => SetValue(HeaderThicknessProperty, value);
         }
     }
