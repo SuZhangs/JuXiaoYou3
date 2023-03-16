@@ -95,9 +95,35 @@
             new PropertyMetadata(default(string)));
 
 
+        public static readonly DependencyProperty HeaderFontSizeProperty = DependencyProperty.Register(
+            nameof(HeaderFontSize),
+            typeof(double),
+            typeof(ForestSection),
+            new PropertyMetadata(default(double)));
+
+
+        public static readonly DependencyProperty HeaderFontFamilyProperty = DependencyProperty.Register(
+            nameof(HeaderFontFamily),
+            typeof(FontFamily),
+            typeof(ForestSection),
+            new PropertyMetadata(default(FontFamily)));
+
         static ForestSection()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestSection), new FrameworkPropertyMetadata(typeof(ForestSection)));
+        }
+        
+
+        public double HeaderFontSize
+        {
+            get => (double)GetValue(HeaderFontSizeProperty);
+            set => SetValue(HeaderFontSizeProperty, value);
+        }
+        
+        public FontFamily HeaderFontFamily
+        {
+            get => (FontFamily)GetValue(HeaderFontFamilyProperty);
+            set => SetValue(HeaderFontFamilyProperty, value);
         }
 
         /// <summary>

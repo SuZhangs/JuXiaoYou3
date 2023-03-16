@@ -3,6 +3,7 @@
                     xmlns:f="urn:acorisoft/forest/ui">
     <Style TargetType="{x:Type f:ForestSection}">
         <Setter Property="Background" Value="{f:Brush HighlightA4}" />
+        <Setter Property="HeaderFontSize" Value="14"/>
         <Setter Property="HeaderThickness" Value="0 0 0 2" />
         <Setter Property="CornerRadius" Value="6 6 0 0" />
         <Setter Property="HeaderPadding" Value="32 8" />
@@ -21,7 +22,9 @@
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         HorizontalAlignment="Left"
                                         Padding="{TemplateBinding HeaderPadding}">
-                                    <ContentPresenter Content="{TemplateBinding Header}"
+                                    <ContentPresenter TextElement.FontFamily="{TemplateBinding HeaderFontFamily}"
+                                                      TextElement.FontSize="{TemplateBinding HeaderFontSize}"
+                                                      Content="{TemplateBinding Header}"
                                                       ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                       ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                                       ContentStringFormat="{TemplateBinding HeaderStringFormat}"
