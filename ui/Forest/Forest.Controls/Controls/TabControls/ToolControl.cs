@@ -43,8 +43,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.TabControls
 
             _background = theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
             _foreground = theme.Colors[(int)ForestTheme.Foreground].ToSolidColorBrush();
-            _highlight  = theme.GetHighlightColor(palette, 1).ToSolidColorBrush();
-            _highlight2 = theme.GetHighlightColor(palette, 3).ToSolidColorBrush();
+            _highlight  = theme.GetHighlightColor(palette, 3).ToSolidColorBrush();
+            _highlight2 = theme.GetHighlightColor(palette, 4).ToSolidColorBrush();
             _disabled   = theme.Colors[(int)ForestTheme.BackgroundInactive].ToSolidColorBrush();
 
             // Stop Animation

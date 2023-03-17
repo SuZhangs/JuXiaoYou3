@@ -55,7 +55,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="0"/> 
+                            <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="0"/>
                             <Setter Property="Grid.Column" TargetName="HeaderBorder" Value="0"/>
                             <Setter Property="Grid.RowSpan" TargetName="HeaderBorder" Value="3"/>
                             <Setter Property="Grid.RowSpan" TargetName="Border" Value="3"/>
@@ -82,140 +82,24 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="TabStripPlacement" Value="Left">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type c:ForestTabControl}">
-                            <Grid KeyboardNavigation.TabNavigation="Local">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>
-
-                                <TabPanel x:Name="HeaderPanel"
-                                          Grid.Column="0"
-                                          Panel.ZIndex="1"
-                                          IsItemsHost="True"
-                                          KeyboardNavigation.TabIndex="1"
-                                          Background="Transparent" />
-
-                                <Border x:Name="Border"
-                                        Grid.Column="1"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        KeyboardNavigation.TabNavigation="Local"
-                                        KeyboardNavigation.DirectionalNavigation="Contained"
-                                        KeyboardNavigation.TabIndex="2"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Padding="{TemplateBinding Padding}">
-
-                                    <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                      ContentSource="SelectedContent"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch" />
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <Trigger Property="TabStripPlacement" Value="Right">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type c:ForestTabControl}">
-                            <Grid KeyboardNavigation.TabNavigation="Local">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <TabPanel x:Name="HeaderPanel"
-                                          Grid.Column="1"
-                                          Panel.ZIndex="1"
-                                          IsItemsHost="True"
-                                          KeyboardNavigation.TabIndex="1"
-                                          Background="Transparent" />
-
-                                <Border x:Name="Border"
-                                        Grid.Column="0"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        KeyboardNavigation.TabNavigation="Local"
-                                        KeyboardNavigation.DirectionalNavigation="Contained"
-                                        KeyboardNavigation.TabIndex="2"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Padding="{TemplateBinding Padding}">
-                                    <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                      ContentSource="SelectedContent"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch" />
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <Trigger Property="TabStripPlacement" Value="Bottom">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type c:ForestTabControl}">
-                            <Grid KeyboardNavigation.TabNavigation="Local">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TabPanel x:Name="HeaderPanel"
-                                          Grid.Row="1"
-                                          Panel.ZIndex="1"
-                                          IsItemsHost="True"
-                                          KeyboardNavigation.TabIndex="1"
-                                          Background="Transparent" />
-
-                                <Border x:Name="Border"
-                                        Grid.Row="0"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        KeyboardNavigation.TabNavigation="Local"
-                                        KeyboardNavigation.DirectionalNavigation="Contained"
-                                        KeyboardNavigation.TabIndex="2"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Padding="{TemplateBinding Padding}">
-                                    <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                      Margin="4"
-                                                      ContentSource="SelectedContent"
-                                                      HorizontalAlignment="Stretch"
-                                                      VerticalAlignment="Stretch" />
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type t:TabItem}">
-        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="MinHeight" Value="16" />
         <Setter Property="MinWidth" Value="64" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="IconSize" Value="23" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="Placement" Value="Top" />
+        <Setter Property="Placement" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type t:TabItem}">
                     <Border x:Name="PART_Bd"
-                            DockPanel.Dock="Top"
                             BorderBrush="{TemplateBinding Background}"
-                            BorderThickness="2">
+                            CornerRadius="8 8 0 0"
+                            Padding="4">
                         <DockPanel Background="Transparent"
                                    HorizontalAlignment="Center"
                                    LastChildFill="True"
@@ -246,9 +130,12 @@
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Icon"/>
+                        </Trigger>
                         <Trigger Property="Placement" Value="Top">
                             <Setter Property="DockPanel.Dock" Value="Top" TargetName="PART_Icon" />
-                            <Setter Property="Margin" Value="0 8 0 0" TargetName="PART_Content" />
+                            <Setter Property="Margin" Value="8 0 0 0" TargetName="PART_Content" />
                         </Trigger>
                         <Trigger Property="Placement" Value="Right">
                             <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Icon" />
