@@ -63,8 +63,8 @@ namespace Acorisoft.FutureGL.Forest.Styles
             Colors.TryAdd((int)ForestTheme.SlateGrayDisabled, Color.FromRgb(0x9b, 0xa6, 0xb1));
             
             
-            Colors.TryAdd((int)ForestTheme.Mask, Color.FromArgb(0x20, 0xff, 0xff, 0xff));
-            Colors.TryAdd((int)ForestTheme.MaskDarken, Color.FromArgb(0x50, 0xff, 0xff, 0xff));
+            Colors.TryAdd((int)ForestTheme.Mask, Color.FromArgb(0x50, 0xff, 0xff, 0xff));
+            Colors.TryAdd((int)ForestTheme.MaskDarken, Color.FromArgb(0x80, 0xff, 0xff, 0xff));
             Colors.TryAdd((int)ForestTheme.Background, Color.FromRgb(0x33, 0x34, 0x35));
             Colors.TryAdd((int)ForestTheme.BackgroundInHighlight, Color.FromRgb(0x53, 0x54, 0x55));
             Colors.TryAdd((int)ForestTheme.BackgroundInactive, Color.FromRgb(0x7a, 0x7a, 0x7a));

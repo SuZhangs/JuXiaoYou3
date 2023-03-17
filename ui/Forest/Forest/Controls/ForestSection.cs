@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ForestSection : ContentControl
+    public class ForestSection : ContentControl, ITextResourceAdapter
     {
         public static readonly DependencyProperty HeaderThicknessProperty = DependencyProperty.Register(
             nameof(HeaderThickness),
@@ -212,6 +212,16 @@
         {
             get => (Thickness)GetValue(HeaderThicknessProperty);
             set => SetValue(HeaderThicknessProperty, value);
+        }
+
+        void ITextResourceAdapter.SetText(string text)
+        {
+            Header = text;
+        }
+
+        void ITextResourceAdapter.SetToolTips(string text)
+        {
+            ToolTip = text;
         }
     }
 }

@@ -221,4 +221,45 @@ namespace Acorisoft.FutureGL.Forest.Controls
             set => SetValue(CornerRadiusProperty, value);
         }
     }
+
+    public abstract class ForestIconButtonBase : ForestButtonBase
+    {
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            nameof(Icon),
+            typeof(Geometry),
+            typeof(ForestIconButtonBase),
+            new PropertyMetadata(default(Geometry)));
+
+
+        public static readonly DependencyProperty IsFilledProperty = DependencyProperty.Register(
+            nameof(IsFilled),
+            typeof(bool),
+            typeof(ForestIconButtonBase),
+            new PropertyMetadata(Boxing.False));
+
+
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+            nameof(IconSize),
+            typeof(double),
+            typeof(ForestIconButtonBase),
+            new PropertyMetadata(17d));
+
+        public double IconSize
+        {
+            get => (double)GetValue(IconSizeProperty);
+            set => SetValue(IconSizeProperty, value);
+        }
+
+        public bool IsFilled
+        {
+            get => (bool)GetValue(IsFilledProperty);
+            set => SetValue(IsFilledProperty, Boxing.Box(value));
+        }
+
+        public Geometry Icon
+        {
+            get => (Geometry)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+    }
 }
