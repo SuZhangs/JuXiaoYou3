@@ -3,7 +3,6 @@
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
                     xmlns:f="urn:acorisoft/forest/ui">
 
-    <Color x:Key="ControlFillColorDefault">#B3FFFFFF</Color>
     <Duration x:Key="ScrollAnimationDuration">0:0:0.16</Duration>
     <Duration x:Key="ButtonHoverAnimationDuration">0:0:0.16</Duration>
 
@@ -27,7 +26,7 @@
                             Margin="{TemplateBinding Margin}"
                             CornerRadius="6">
                         <Border.Background>
-                            <SolidColorBrush Opacity="0" Color="{DynamicResource ControlFillColorDefault}" />
+                            <SolidColorBrush Opacity="0" Color="{f:Mask}" />
                         </Border.Background>
                         <ContentPresenter Name="contentPresenter"
                                           Focusable="False"
@@ -112,7 +111,7 @@
                     HorizontalAlignment="Center"
                     CornerRadius="6">
                 <Border.Background>
-                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Opacity="0.0" Color="{f:Mask}" />
                 </Border.Background>
             </Border>
 
@@ -234,7 +233,7 @@
                     VerticalAlignment="Center"
                     CornerRadius="6">
                 <Border.Background>
-                    <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+                    <SolidColorBrush Opacity="0.0" Color="{f:Mask}" />
                 </Border.Background>
             </Border>
             <RepeatButton x:Name="PART_ButtonScrollLeft"

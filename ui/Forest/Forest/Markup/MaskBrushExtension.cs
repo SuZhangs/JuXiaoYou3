@@ -12,6 +12,22 @@ namespace Acorisoft.FutureGL.Forest.Markup
         }
     }
     
+    public class MaskExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask];
+        }
+    }
+    
+    public class MaskDarkenExtension : MarkupExtension
+    {
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.MaskDarken];
+        }
+    }
+    
     public class MaskDarkenBrushExtension : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
