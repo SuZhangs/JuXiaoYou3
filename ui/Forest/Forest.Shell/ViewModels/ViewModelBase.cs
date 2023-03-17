@@ -60,6 +60,18 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #endregion
 
+        protected sealed override void ReleaseManagedResources()
+        {
+            _commandMapping.Clear();
+            Collector.Dispose();
+            ReleaseManagedResourcesOverride();
+        }
+
+        protected virtual void ReleaseManagedResourcesOverride()
+        {
+            
+        }
+
         protected override void OnPropertyChanged(string propertyName)
         {
             foreach (var command in _commandMapping)

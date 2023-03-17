@@ -17,6 +17,7 @@ namespace Acorisoft.FutureGL.Forest
     /// </summary>
     public static partial class Xaml
     {
+        public static readonly SolidColorBrush                 Transparent  = new SolidColorBrush(Colors.Transparent);
         public static readonly GuidelineSet                    GuidelineSet = new GuidelineSet(new[] { 0.5d, 0.5d }, new[] { 0.5d, 0.5d });
         static readonly        Dictionary<Type, BindingInfo>   ViewInfoMapper;
         static readonly        Dictionary<Type, BindingInfo>   ViewModelInfoMapper;

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Printing;
+using System.Windows;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Styles;
@@ -13,7 +14,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
-    public abstract class ForestButtonBase : Button, IHighlightColorPalette, ITextResourceAdapter
+    public abstract class ForestButtonBase : Button, IHighlightColorPalette, ITextResourceAdapter, IForestControl
     {
 
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
@@ -111,8 +112,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             
         }
-
-
+        
         protected abstract void GetTemplateChildOverride(ITemplatePartFinder finder);
 
         /// <summary>
@@ -174,7 +174,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
             StateMachine.ResetState();
             base.OnMouseLeave(e);
         }
-        
+
+        protected virtual void OnResetVisualState()
+        {
+            
+        }
 
         public override void OnApplyTemplate()
         {
@@ -184,12 +188,18 @@ namespace Acorisoft.FutureGL.Forest.Controls
         }
         
 
-        public void SetText(string text)
+        public void InvalidateState()
+        {
+            OnResetVisualState();
+            InvalidateMeasure();
+        }
+
+        void ITextResourceAdapter.SetText(string text)
         {
             Content = text;
         }
 
-        public void SetToolTips(string text)
+        void ITextResourceAdapter.SetToolTips(string text)
         {
             ToolTip = text;
         }

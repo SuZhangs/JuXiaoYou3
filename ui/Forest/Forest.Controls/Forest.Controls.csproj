@@ -23,4 +23,12 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Controls\TabControls\TabControl.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
 </Project>

@@ -61,7 +61,7 @@
                                 IsDefault="True"
                                 Content="{x:Static f:Language.CompleteText}"
                                 Command="{Binding CompletedCommand}"
-                                Purpose="Warning" />
+                                Purpose="Info" />
 
                 <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
                                 Content="{x:Static f:Language.CancelText}"

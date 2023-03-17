@@ -9,3 +9,4 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Buttons")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Selectors")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/toolkits", "Acorisoft.FutureGL.Forest.UI.Tools")]
