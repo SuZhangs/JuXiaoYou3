@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.Forest.Controls
+﻿using System.Windows.Media;
+
+namespace Acorisoft.FutureGL.Forest.Controls
 {
     public class ForestSection : ForestHeaderedControlBase
     {

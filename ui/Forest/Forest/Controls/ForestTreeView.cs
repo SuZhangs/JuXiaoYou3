@@ -14,6 +14,25 @@ namespace Acorisoft.FutureGL.Forest.Controls
             return new ForestTreeViewItem();
         }
 
+        protected override void OnMouseRightButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseRightButtonDown(e);
+            
+            var ancestor = Xaml.FindAncestor<TreeViewItem>(e.OriginalSource as FrameworkElement);
+
+            if (ancestor is null)
+            {
+                return;
+            }
+            
+            ancestor.IsSelected = true;
+        }
+
+        protected override void OnSelectedItemChanged(RoutedPropertyChangedEventArgs<object> e)
+        {
+            BindableSelectedItem = SelectedItem;
+            base.OnSelectedItemChanged(e);
+        }
 
         public static readonly DependencyProperty BindableSelectedItemProperty = DependencyProperty.Register(
             nameof(BindableSelectedItem),

@@ -8,7 +8,7 @@
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
             nameof(Header),
             typeof(object),
-            typeof(ForestSection),
+            typeof(ForestHeaderedControlBase),
             new PropertyMetadata(default(object)));
 
         /// <summary>
@@ -17,7 +17,7 @@
         public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
             nameof(HeaderTemplate),
             typeof(DataTemplate),
-            typeof(ForestSection),
+            typeof(ForestHeaderedControlBase),
             new PropertyMetadata(default(DataTemplate)));
 
         /// <summary>
@@ -26,7 +26,7 @@
         public static readonly DependencyProperty HeaderTemplateSelectorProperty = DependencyProperty.Register(
             nameof(HeaderTemplateSelector),
             typeof(DataTemplateSelector),
-            typeof(ForestSection),
+            typeof(ForestHeaderedControlBase),
             new PropertyMetadata(default(DataTemplateSelector)));
 
         /// <summary>
@@ -35,7 +35,7 @@
         public static readonly DependencyProperty HeaderStringFormatProperty = DependencyProperty.Register(
             nameof(HeaderStringFormat),
             typeof(string),
-            typeof(ForestSection),
+            typeof(ForestHeaderedControlBase),
             new PropertyMetadata(default(string)));
         
         /// <summary>
