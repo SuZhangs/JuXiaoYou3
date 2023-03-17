@@ -25,7 +25,6 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         private const string PART_BdName      = "PART_Bd";
         private const string PART_ContentName = "PART_Content";
         private const string PART_IconName    = "PART_Icon";
-        private const string PART_LineName    = "PART_Line";
 
 
         private Storyboard       _storyboard;
@@ -46,8 +45,8 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
             _background = theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
             _foreground = theme.Colors[(int)ForestTheme.Foreground].ToSolidColorBrush();
-            _highlight  = theme.GetHighlightColor(palette, 1).ToSolidColorBrush();
-            _highlight2 = theme.GetHighlightColor(palette, 3).ToSolidColorBrush();
+            _highlight  = theme.GetHighlightColor(palette, 3).ToSolidColorBrush();
+            _highlight2 = theme.GetHighlightColor(palette, 4).ToSolidColorBrush();
             _disabled   = theme.Colors[(int)ForestTheme.BackgroundInactive].ToSolidColorBrush();
 
             // Stop Animation
