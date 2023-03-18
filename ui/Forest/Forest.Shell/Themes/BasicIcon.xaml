@@ -84,6 +84,21 @@
             <Geometry>F1 M24,24z M0,0z M2,12L2,12 12,17 22,12</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
+    <GeometryGroup x:Key="FeatherIcon.ZoomIn">
+        <GeometryGroup.Children>
+            <EllipseGeometry RadiusX="8" RadiusY="8" Center="11,11" />
+            <LineGeometry StartPoint="21,21" EndPoint="16.65,16.65" />
+            <LineGeometry StartPoint="11,8" EndPoint="11,14" />
+            <LineGeometry StartPoint="8,11" EndPoint="14,11" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
+    <GeometryGroup x:Key="FeatherIcon.ZoomOut">
+        <GeometryGroup.Children>
+            <EllipseGeometry RadiusX="8" RadiusY="8" Center="11,11" />
+            <LineGeometry StartPoint="21,21" EndPoint="16.65,16.65" />
+            <LineGeometry StartPoint="8,11" EndPoint="14,11" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
     <GeometryGroup x:Key="FeatherIcon.Grid">
         <GeometryGroup.Children>
             <RectangleGeometry RadiusX="0" RadiusY="0" Rect="3,3,7,7" />
