@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public class ForestListBoxBase
+    public abstract class ForestListBoxBase : ListBox
     {
         
     }

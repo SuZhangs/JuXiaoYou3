@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabControl), new FrameworkPropertyMetadata(typeof(TabControl)));
         }
-        
+
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new TabItem();
@@ -37,11 +37,11 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
-        
+
         protected override void OnStateChanged(bool init, VisualState now)
         {
             var palette = Palette;
-            var theme = ThemeSystem.Instance.Theme;
+            var theme   = ThemeSystem.Instance.Theme;
 
             _background = theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
             _foreground = theme.Colors[(int)ForestTheme.Foreground].ToSolidColorBrush();
@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         {
             //
             // 设置背景颜色
-            _bd.Background    = _disabled;
+            _bd.Background = _disabled;
 
             // 设置文本颜色
             SetForeground();
@@ -120,11 +120,13 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
             //
             // 设置背景颜色
-            _bd.Background = IsSelected ? _highlight2 :
+            _bd.Background = IsSelected
+                ? _highlight2
+                :
                 //
                 // 设置背景颜色
                 _background;
-            
+
             // 设置文本颜色
             SetForeground();
         }
@@ -154,7 +156,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-             SetForeground();
+            SetForeground();
         }
 
         private void HandleHighlight2State(Duration duration)
@@ -174,7 +176,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
                 From     = _highlight.Color,
                 To       = _highlight2.Color,
             };
-            
+
 
             // Storyboard.SetTarget(OpacityAnimation, _bd);
             Storyboard.SetTarget(backgroundAnimation, _bd);
@@ -183,7 +185,10 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection { /*OpacityAnimation,*/ backgroundAnimation }
+                Children = new TimelineCollection
+                {
+                    /*OpacityAnimation,*/ backgroundAnimation
+                }
             };
 
             //

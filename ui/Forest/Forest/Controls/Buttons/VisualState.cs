@@ -69,10 +69,16 @@
             GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
         }
 
         #endregion
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
+        }
     }
     
     
@@ -164,10 +170,16 @@
             GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
         }
 
         #endregion
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
+        }
     }
     
     
@@ -260,9 +272,15 @@
             GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
         }
 
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
+        }
         #endregion
     }
     
@@ -333,12 +351,19 @@
 
         public override void OnApplyTemplate()
         {
+            GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
         }
 
         #endregion
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
+        }
     }
     
     
@@ -431,9 +456,15 @@
             GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
         }
 
         #endregion
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
+        }
     }
 }

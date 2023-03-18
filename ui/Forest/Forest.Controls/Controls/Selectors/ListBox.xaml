@@ -61,4 +61,83 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <Style TargetType="{x:Type c1:ChromeListBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c1:ChromeListBoxItem}">
+                    <Border x:Name="PART_Bd"
+                            Background="Transparent"
+                            CornerRadius="8 8 0 0">
+                        <ContentPresenter x:Name="PART_Content"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition  Property="IsMouseOver" Value="True"/>
+                                <Condition  Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Background" Value="{f:Brush HighlightA2}" TargetName="PART_Bd" />
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Bd"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Bd"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Background" Value="{f:Brush HighlightA4}" TargetName="PART_Bd" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Bd"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="0.0"
+                                            To="1.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="PART_Bd"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Opacity)"
+                                            From="1.0"
+                                            To="0.0"
+                                            Duration="0:0:.16" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
