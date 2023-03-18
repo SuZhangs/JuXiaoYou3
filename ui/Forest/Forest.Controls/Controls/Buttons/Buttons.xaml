@@ -52,144 +52,144 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style TargetType="{x:Type b:PrimaryButton}">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Padding" Value="8" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type b:PrimaryButton}">
-                    <Border x:Name="PART_Bd"
-                            Background="{f:Brush HighlightB1}"
-                            BorderThickness="1"
-                            BorderBrush="{f:Brush HighlightB3}"
-                            CornerRadius="3"
-                            Padding="{TemplateBinding Padding}">
-                        <ContentPresenter x:Name="PART_Content"
-                                          TextElement.FontSize="14"
-                                          TextElement.Foreground="#4F5B66"
-                                          Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type b:PrimaryIconButton}">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Padding" Value="8" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type b:PrimaryIconButton}">
-                    <Border x:Name="PART_Bd"
-                            Background="{f:Brush HighlightB1}"
-                            BorderThickness="1"
-                            BorderBrush="{f:Brush HighlightB3}"
-                            CornerRadius="3"
-                            Padding="{TemplateBinding Padding}">
-                        <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
-                            <Path x:Name="PART_Icon"
-                                  Data="{TemplateBinding Icon}"
-                                  Margin="8 0"
-                                  Stroke="#4F5B66"
-                                  StrokeThickness="1"
-                                  Stretch="Uniform"
-                                  Width="{TemplateBinding IconSize}"
-                                  Height="{TemplateBinding IconSize}" />
-                            
-                            <ContentPresenter x:Name="PART_Content"
-                                              TextElement.FontSize="14"
-                                              TextElement.Foreground="#4F5B66"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Center"/>
-                        </DockPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style TargetType="{x:Type b:SecondaryButton}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="8" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type b:SecondaryButton}">
-                    <Border x:Name="PART_Bd"
-                            Background="{f:Brush HighlightB1}"
-                            BorderThickness="1"
-                            BorderBrush="{f:Brush HighlightB3}"
-                            CornerRadius="3"
-                            Padding="{TemplateBinding Padding}">
-                        <ContentPresenter x:Name="PART_Content"
-                                          TextElement.FontSize="14"
-                                          TextElement.Foreground="#4F5B66"
-                                          Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type b:SecondaryIconButton}">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Padding" Value="8" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type b:SecondaryIconButton}">
-                    <Border x:Name="PART_Bd"
-                            Background="{f:Brush HighlightB1}"
-                            BorderThickness="1"
-                            BorderBrush="{f:Brush HighlightB3}"
-                            CornerRadius="3"
-                            Padding="{TemplateBinding Padding}">
-                        <DockPanel HorizontalAlignment="Center">
-                            <Path x:Name="PART_Icon"
-                                  Data="{TemplateBinding Icon}"
-                                  Stroke="#4F5B66"
-                                  StrokeThickness="2"
-                                  Stretch="Uniform"
-                                  Width="{TemplateBinding IconSize}"
-                                  Height="{TemplateBinding IconSize}" />
-                            
-                            <ContentPresenter x:Name="PART_Content"
-                                              TextElement.FontSize="14"
-                                              TextElement.Foreground="#4F5B66"
-                                              Content="{TemplateBinding Content}"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                        </DockPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!-- -->
+    <!-- <Style TargetType="{x:Type b:PrimaryButton}"> -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
+    <!--     <Setter Property="Padding" Value="8" /> -->
+    <!--     <Setter Property="Template"> -->
+    <!--         <Setter.Value> -->
+    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryButton}"> -->
+    <!--                 <Border x:Name="PART_Bd" -->
+    <!--                         Background="{f:Brush HighlightB1}" -->
+    <!--                         BorderThickness="1" -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
+    <!--                         CornerRadius="3" -->
+    <!--                         Padding="{TemplateBinding Padding}"> -->
+    <!--                     <ContentPresenter x:Name="PART_Content" -->
+    <!--                                       TextElement.FontSize="14" -->
+    <!--                                       TextElement.Foreground="#4F5B66" -->
+    <!--                                       Content="{TemplateBinding Content}" -->
+    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}" -->
+    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
+    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
+    <!--                 </Border> -->
+    <!--             </ControlTemplate> -->
+    <!--         </Setter.Value> -->
+    <!--     </Setter> -->
+    <!-- </Style> -->
+    <!-- -->
+    <!-- <Style TargetType="{x:Type b:PrimaryIconButton}"> -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
+    <!--     <Setter Property="Padding" Value="8" /> -->
+    <!--     <Setter Property="Template"> -->
+    <!--         <Setter.Value> -->
+    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryIconButton}"> -->
+    <!--                 <Border x:Name="PART_Bd" -->
+    <!--                         Background="{f:Brush HighlightB1}" -->
+    <!--                         BorderThickness="1" -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
+    <!--                         CornerRadius="3" -->
+    <!--                         Padding="{TemplateBinding Padding}"> -->
+    <!--                     <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
+    <!--                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"> -->
+    <!--                         <Path x:Name="PART_Icon" -->
+    <!--                               Data="{TemplateBinding Icon}" -->
+    <!--                               Margin="8 0" -->
+    <!--                               Stroke="#4F5B66" -->
+    <!--                               StrokeThickness="1" -->
+    <!--                               Stretch="Uniform" -->
+    <!--                               Width="{TemplateBinding IconSize}" -->
+    <!--                               Height="{TemplateBinding IconSize}" /> -->
+    <!--                          -->
+    <!--                         <ContentPresenter x:Name="PART_Content" -->
+    <!--                                           TextElement.FontSize="14" -->
+    <!--                                           TextElement.Foreground="#4F5B66" -->
+    <!--                                           Content="{TemplateBinding Content}" -->
+    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}" -->
+    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
+    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
+    <!--                                           VerticalAlignment="Center" -->
+    <!--                                           HorizontalAlignment="Center"/> -->
+    <!--                     </DockPanel> -->
+    <!--                 </Border> -->
+    <!--             </ControlTemplate> -->
+    <!--         </Setter.Value> -->
+    <!--     </Setter> -->
+    <!-- </Style> -->
+    <!-- -->
+    <!-- <Style TargetType="{x:Type b:SecondaryButton}"> -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="Padding" Value="8" /> -->
+    <!--     <Setter Property="Template"> -->
+    <!--         <Setter.Value> -->
+    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryButton}"> -->
+    <!--                 <Border x:Name="PART_Bd" -->
+    <!--                         Background="{f:Brush HighlightB1}" -->
+    <!--                         BorderThickness="1" -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
+    <!--                         CornerRadius="3" -->
+    <!--                         Padding="{TemplateBinding Padding}"> -->
+    <!--                     <ContentPresenter x:Name="PART_Content" -->
+    <!--                                       TextElement.FontSize="14" -->
+    <!--                                       TextElement.Foreground="#4F5B66" -->
+    <!--                                       Content="{TemplateBinding Content}" -->
+    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}" -->
+    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
+    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
+    <!--                 </Border> -->
+    <!--             </ControlTemplate> -->
+    <!--         </Setter.Value> -->
+    <!--     </Setter> -->
+    <!-- </Style> -->
+    <!-- -->
+    <!-- <Style TargetType="{x:Type b:SecondaryIconButton}"> -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
+    <!--     <Setter Property="Padding" Value="8" /> -->
+    <!--     <Setter Property="Template"> -->
+    <!--         <Setter.Value> -->
+    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryIconButton}"> -->
+    <!--                 <Border x:Name="PART_Bd" -->
+    <!--                         Background="{f:Brush HighlightB1}" -->
+    <!--                         BorderThickness="1" -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
+    <!--                         CornerRadius="3" -->
+    <!--                         Padding="{TemplateBinding Padding}"> -->
+    <!--                     <DockPanel HorizontalAlignment="Center"> -->
+    <!--                         <Path x:Name="PART_Icon" -->
+    <!--                               Data="{TemplateBinding Icon}" -->
+    <!--                               Stroke="#4F5B66" -->
+    <!--                               StrokeThickness="2" -->
+    <!--                               Stretch="Uniform" -->
+    <!--                               Width="{TemplateBinding IconSize}" -->
+    <!--                               Height="{TemplateBinding IconSize}" /> -->
+    <!--                          -->
+    <!--                         <ContentPresenter x:Name="PART_Content" -->
+    <!--                                           TextElement.FontSize="14" -->
+    <!--                                           TextElement.Foreground="#4F5B66" -->
+    <!--                                           Content="{TemplateBinding Content}" -->
+    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}" -->
+    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
+    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
+    <!--                     </DockPanel> -->
+    <!--                 </Border> -->
+    <!--             </ControlTemplate> -->
+    <!--         </Setter.Value> -->
+    <!--     </Setter> -->
+    <!-- </Style> -->
 
     <Style TargetType="{x:Type b:LooklessButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
