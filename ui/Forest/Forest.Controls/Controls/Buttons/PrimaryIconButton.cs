@@ -28,14 +28,13 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             StateMachine.StateChangedHandler = OnStateChanged;
         }
 
-        private void InvalidateState()
+        protected override void OnInvalidateState()
         {
             _backgroundBrush           = null;
             _foregroundBrush           = null;
             _backgroundHighlight1Brush = null;
             _foregroundHighlightBrush = null;
             _backgroundHighlight2Brush = null;
-            InvalidateVisual();
         }
 
         private void OnStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)

@@ -26,7 +26,6 @@
         {
             GetTemplateChildOverride(Finder);
             BuildState();
-            BuildAnimation();
         }
 
 
@@ -74,7 +73,7 @@
         /// <summary>
         /// 构建状态
         /// </summary>
-        protected virtual void BuildState()
+        private void BuildState()
         {
             StateMachine.AddState(VisualState.Normal, VisualState.Highlight1, VisualStateTrigger.Next);
             StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight2, VisualStateTrigger.Next);
@@ -83,11 +82,6 @@
             StateMachine.AddState(VisualState.Highlight2, VisualState.Highlight1, VisualStateTrigger.Disabled);
             StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
         }
-
-        protected virtual void BuildAnimation()
-        {
-        }
-
 
         protected abstract void GetTemplateChildOverride(ITemplatePartFinder finder);
 
