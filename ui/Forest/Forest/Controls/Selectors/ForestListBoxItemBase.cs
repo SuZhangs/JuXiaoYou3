@@ -85,7 +85,7 @@
 
         public void InvalidateState()
         {
-            if (IsInitialized)
+            if (IsLoaded)
             {
                 OnInvalidateState();
                 StateMachine.GotoState();

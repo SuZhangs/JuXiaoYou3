@@ -120,7 +120,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         public void InvalidateState()
         {
-            if (IsInitialized)
+            if (IsLoaded)
             {
                 OnInvalidateState();
                 StateMachine.GotoState();

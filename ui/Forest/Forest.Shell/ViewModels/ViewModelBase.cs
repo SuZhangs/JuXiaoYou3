@@ -2,7 +2,6 @@
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels

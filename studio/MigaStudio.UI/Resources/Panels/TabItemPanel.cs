@@ -3,8 +3,6 @@
     public class TabItemPanel : Panel
     {
         private int  _columns;
-        private bool _init;
-        
 
         /// <summary>
         /// Compute the desired size of this UniformGrid by measuring all of the

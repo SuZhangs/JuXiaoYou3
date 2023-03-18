@@ -138,25 +138,25 @@
             IconProperty = DependencyProperty.Register(
                 nameof(Icon),
                 typeof(Geometry),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconCheckBoxBase),
                 new PropertyMetadata(default(Geometry), OnIconChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconCheckBoxBase),
                 new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
                 typeof(double),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconCheckBoxBase),
                 new PropertyMetadata(17d));
 
             HasIconPropertyKey = DependencyProperty.RegisterReadOnly(
                 nameof(HasIcon),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconCheckBoxBase),
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
@@ -214,13 +214,13 @@
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
                 typeof(HighlightColorPalette),
-                typeof(ForestButtonBase),
+                typeof(ForestCheckBoxBase),
                 new PropertyMetadata(default(HighlightColorPalette), OnPaletteChanged));
             
             CornerRadiusProperty = DependencyProperty.Register(
                 nameof(CornerRadius),
                 typeof(CornerRadius),
-                typeof(ForestButtonBase),
+                typeof(ForestCheckBoxBase),
                 new PropertyMetadata(default(CornerRadius)));
         }
 
@@ -260,25 +260,25 @@
             IconProperty = DependencyProperty.Register(
                 nameof(Icon),
                 typeof(Geometry),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRadioButtonBase),
                 new PropertyMetadata(default(Geometry), OnIconChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRadioButtonBase),
                 new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
                 typeof(double),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRadioButtonBase),
                 new PropertyMetadata(17d));
 
             HasIconPropertyKey = DependencyProperty.RegisterReadOnly(
                 nameof(HasIcon),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRadioButtonBase),
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
@@ -336,13 +336,13 @@
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
                 typeof(HighlightColorPalette),
-                typeof(ForestButtonBase),
+                typeof(ForestRadioButtonBase),
                 new PropertyMetadata(default(HighlightColorPalette), OnPaletteChanged));
             
             CornerRadiusProperty = DependencyProperty.Register(
                 nameof(CornerRadius),
                 typeof(CornerRadius),
-                typeof(ForestButtonBase),
+                typeof(ForestRadioButtonBase),
                 new PropertyMetadata(default(CornerRadius)));
         }
 
@@ -382,25 +382,25 @@
             IconProperty = DependencyProperty.Register(
                 nameof(Icon),
                 typeof(Geometry),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRepeatButtonBase),
                 new PropertyMetadata(default(Geometry), OnIconChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRepeatButtonBase),
                 new PropertyMetadata(Boxing.False));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
                 typeof(double),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRepeatButtonBase),
                 new PropertyMetadata(17d));
 
             HasIconPropertyKey = DependencyProperty.RegisterReadOnly(
                 nameof(HasIcon),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconRepeatButtonBase),
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
@@ -458,13 +458,13 @@
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
                 typeof(HighlightColorPalette),
-                typeof(ForestButtonBase),
+                typeof(ForestRepeatButtonBase),
                 new PropertyMetadata(default(HighlightColorPalette), OnPaletteChanged));
             
             CornerRadiusProperty = DependencyProperty.Register(
                 nameof(CornerRadius),
                 typeof(CornerRadius),
-                typeof(ForestButtonBase),
+                typeof(ForestRepeatButtonBase),
                 new PropertyMetadata(default(CornerRadius)));
         }
 
@@ -504,25 +504,25 @@
             IconProperty = DependencyProperty.Register(
                 nameof(Icon),
                 typeof(Geometry),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconToggleButtonBase),
                 new PropertyMetadata(default(Geometry), OnIconChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconToggleButtonBase),
                 new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
                 typeof(double),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconToggleButtonBase),
                 new PropertyMetadata(17d));
 
             HasIconPropertyKey = DependencyProperty.RegisterReadOnly(
                 nameof(HasIcon),
                 typeof(bool),
-                typeof(ForestIconButtonBase),
+                typeof(ForestIconToggleButtonBase),
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
@@ -581,13 +581,13 @@
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
                 typeof(HighlightColorPalette),
-                typeof(ForestButtonBase),
+                typeof(ForestToggleButtonBase),
                 new PropertyMetadata(default(HighlightColorPalette), OnPaletteChanged));
             
             CornerRadiusProperty = DependencyProperty.Register(
                 nameof(CornerRadius),
                 typeof(CornerRadius),
-                typeof(ForestButtonBase),
+                typeof(ForestToggleButtonBase),
                 new PropertyMetadata(default(CornerRadius)));
         }
 

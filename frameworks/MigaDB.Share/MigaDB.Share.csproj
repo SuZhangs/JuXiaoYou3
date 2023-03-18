@@ -16,6 +16,18 @@
 		<Copyright>All right reseved by Luoyisi</Copyright>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RELEASE|x86'">
+	  <LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG|x86'">
+	  <LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|x86'">
+	  <LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="DryIoc.dll" Version="4.8.2" />
 		<PackageReference Include="LiteDB" Version="5.0.15" />

@@ -148,7 +148,48 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type t:StateButton}">
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="IsFilled" Value="False" />
+        <Setter Property="IconSize" Value="17" />
+        <Setter Property="UseHighlight" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type t:StateButton}">
+                    <Border x:Name="PART_Bd"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <Path x:Name="PART_Icon"
+                                  Data="{TemplateBinding Icon}"
+                                  Stretch="Uniform"
+                                  Margin="0 0 8 0"
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}" />
 
+                            <ContentPresenter x:Name="PART_Content"
+                                              TextElement.FontSize="14"
+                                              TextElement.Foreground="#4F5B66"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="{x:Type t:TabItem}">
         <Setter Property="MinHeight" Value="16" />
         <Setter Property="MinWidth" Value="64" />

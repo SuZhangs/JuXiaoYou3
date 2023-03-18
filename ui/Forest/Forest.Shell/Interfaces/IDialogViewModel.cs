@@ -8,12 +8,6 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
     public interface IDialogViewModel : IViewModel
     {
         /// <summary>
-        /// 表示参数传递。
-        /// </summary>
-        /// <param name="arg">视图参数</param>
-        void Start(Parameter arg);
-        
-        /// <summary>
         /// 取消命令。
         /// </summary>
         RelayCommand CancelCommand { get; }

@@ -145,7 +145,7 @@
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight1 && IsChecked == true)
+            if (IsChecked != true)
             {
                 StateMachine.NextState(VisualState.Highlight1);
             }
@@ -155,8 +155,7 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState == VisualState.Highlight1 && 
-                IsChecked == true)
+            if (StateMachine.CurrentState == VisualState.Highlight1)
             {
                 
                 ReleaseMouseCapture();
@@ -185,7 +184,6 @@
     
     partial class ForestRadioButtonBase
     {
-        
         #region Button State Defnitions
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -247,7 +245,7 @@
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight1 && IsChecked == true)
+            if (IsChecked != true)
             {
                 StateMachine.NextState(VisualState.Highlight1);
             }
@@ -257,8 +255,7 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState == VisualState.Highlight1 && 
-                IsChecked == true)
+            if (StateMachine.CurrentState == VisualState.Highlight1)
             {
                 
                 ReleaseMouseCapture();
@@ -276,12 +273,12 @@
             base.OnApplyTemplate();
         }
 
+        #endregion
         
         protected virtual void OnApplyTemplateOverride()
         {
             
         }
-        #endregion
     }
     
     
@@ -369,7 +366,6 @@
     
     partial class ForestToggleButtonBase
     {
-        
         #region Button State Defnitions
 
         private void OnEnableChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -431,7 +427,7 @@
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight1 && IsChecked == true)
+            if (IsChecked != true)
             {
                 StateMachine.NextState(VisualState.Highlight1);
             }
@@ -441,8 +437,7 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState == VisualState.Highlight1 && 
-                IsChecked == true)
+            if (StateMachine.CurrentState == VisualState.Highlight1)
             {
                 
                 ReleaseMouseCapture();
@@ -451,7 +446,7 @@
             base.OnMouseLeave(e);
         }
 
-        public sealed override void OnApplyTemplate()
+        public override void OnApplyTemplate()
         {
             GetTemplateChildOverride(Finder);
             Finder.Find();
