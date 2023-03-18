@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             }
             else
             {
-                _icon.StrokeThickness = 2;
+                _icon.StrokeThickness = 1;
                 _icon.Stroke          = foreground;
             }
         }

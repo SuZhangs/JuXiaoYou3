@@ -121,10 +121,12 @@
 
         public void InvalidateState()
         {
-            OnInvalidateState();
-            StateMachine.GotoState();
+            if (IsInitialized)
+            {
+                OnInvalidateState();
+                StateMachine.GotoState();
+            }
         }
-
         #endregion
 
         #region ITextResourceAdapter Members
