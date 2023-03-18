@@ -9,116 +9,14 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
     /// <summary>
     /// 这是一个特殊用途的按钮
     /// </summary>
-    public class DialogButton : ForestButtonBase
+    public class DialogButton : ForestIconButtonBase
     {
         public static readonly DependencyProperty PurposeProperty = DependencyProperty.Register(
             nameof(Purpose),
             typeof(ButtonPurpose),
             typeof(DialogButton),
             new PropertyMetadata(ButtonPurpose.CallToAction));
-
-        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
-            nameof(Icon),
-            typeof(Geometry),
-            typeof(DialogButton),
-            new PropertyMetadata(default(Geometry)));
-
-
-        public static readonly DependencyProperty IsFilledProperty = DependencyProperty.Register(
-            nameof(IsFilled),
-            typeof(bool),
-            typeof(DialogButton),
-            new PropertyMetadata(Boxing.False));
-
-
-        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
-            nameof(IconSize),
-            typeof(double),
-            typeof(DialogButton),
-            new PropertyMetadata(17d));
-
-
-        private const string PART_BdName      = "PART_Bd";
-        private const string PART_ContentName = "PART_Content";
-        private const string PART_IconName    = "PART_Icon";
-
-        private Border           _bd;
-        private ContentPresenter _content;
-        private Path             _icon;
-        private Storyboard       _storyboard;
-
-        private SolidColorBrush _backgroundBrush;
-        private SolidColorBrush _foregroundBrush;
-        private SolidColorBrush _backgroundHighlight1Brush;
-        private SolidColorBrush _backgroundHighlight2Brush;
-        private SolidColorBrush _foregroundHighlightBrush;
-        private SolidColorBrush _backgroundDisabledBrush;
-        private SolidColorBrush _foregroundDisabledBrush;
-
-        public DialogButton()
-        {
-            StateMachine.StateChangedHandler = OnStateChanged;
-        }
-
-        private void InvalidateState()
-        {
-            _backgroundBrush           = null;
-            _foregroundBrush           = null;
-            _backgroundHighlight1Brush = null;
-            _foregroundHighlightBrush = null;
-            _backgroundHighlight2Brush = null;
-            _backgroundDisabledBrush   = null;
-            _foregroundDisabledBrush   = null;
-            InvalidateVisual();
-        }
-
-        private void OnStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
-        {
-            var theme = ThemeSystem.Instance.Theme;
-
-            // Stop Animation
-            _storyboard?.Stop(_bd);
-
-            if (!init)
-            {
-                HandleNormalState();
-            }
-            else
-            {
-                if (now == VisualState.Highlight1)
-                {
-                    HandleHighlight1State(theme.Duration.Medium);
-                }
-                else if (now == VisualState.Highlight2)
-                {
-                    HandleHighlight2State(theme.Duration.Medium);
-                }
-                else if (now == VisualState.Normal)
-                {
-                    HandleNormalState();
-                }
-                else if (now == VisualState.Inactive)
-                {
-                    HandleDisabledState();
-                }
-            }
-        }
-
-        private void SetForeground(Brush foreground)
-        {
-            _content.SetValue(TextElement.ForegroundProperty, foreground);
-
-            if (IsFilled)
-            {
-                _icon.StrokeThickness = 0;
-                _icon.Fill            = foreground;
-            }
-            else
-            {
-                _icon.StrokeThickness = 2;
-                _icon.Stroke          = foreground;
-            }
-        }
+        
 
         public static Color GetPurposeColor(ButtonPurpose purpose, int level)
         {
@@ -128,21 +26,19 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             {
                 2 => purpose switch
                 {
-
-                    ButtonPurpose.CallToAction => colors[(int)ForestTheme.HighlightA4],
+                    ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA4],
                     ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB4],
                     ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC4],
-                    ButtonPurpose.CallToClose  => colors[(int)ForestTheme.Danger200],
-                    ButtonPurpose.Close        => colors[(int)ForestTheme.SlateGray200],
-                    ButtonPurpose.Warning      => colors[(int)ForestTheme.Warning200],
-                    ButtonPurpose.Info         => colors[(int)ForestTheme.Info200],
-                    ButtonPurpose.Success      => colors[(int)ForestTheme.Success200],
-                    ButtonPurpose.Obsolete     => colors[(int)ForestTheme.Obsolete200],
-                    _                          => colors[(int)ForestTheme.HighlightA4],
+                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.Danger200],
+                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGray200],
+                    ButtonPurpose.Warning       => colors[(int)ForestTheme.Warning200],
+                    ButtonPurpose.Info          => colors[(int)ForestTheme.Info200],
+                    ButtonPurpose.Success       => colors[(int)ForestTheme.Success200],
+                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.Obsolete200],
+                    _                           => colors[(int)ForestTheme.HighlightA4],
                 },
                 3 => purpose switch
                 {
-
                     ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA5],
                     ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB5],
                     ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC5],
@@ -183,16 +79,62 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             };
         }
 
-        private void HandleNormalState()
-        {
-            if (!IsEnabled)
-            {
-                HandleDisabledState();
-                return;
-            }
 
-            var purpose = Purpose;               
-            var theme = ThemeSystem.Instance.Theme;
+        private const string PART_BdName      = "PART_Bd";
+        private const string PART_ContentName = "PART_Content";
+        private const string PART_IconName    = "PART_Icon";
+
+        private Border           _bd;
+        private ContentPresenter _content;
+        private Path             _icon;
+        private Storyboard       _storyboard;
+
+        private SolidColorBrush _backgroundBrush;
+        private SolidColorBrush _foregroundBrush;
+        private SolidColorBrush _backgroundHighlight1Brush;
+        private SolidColorBrush _backgroundHighlight2Brush;
+        private SolidColorBrush _foregroundHighlightBrush;
+        private SolidColorBrush _backgroundDisabledBrush;
+        private SolidColorBrush _foregroundDisabledBrush;
+
+
+        protected override void OnInvalidateState()
+        {
+            _backgroundBrush           = null;
+            _foregroundBrush           = null;
+            _backgroundHighlight1Brush = null;
+            _foregroundHighlightBrush  = null;
+            _backgroundHighlight2Brush = null;
+            _backgroundDisabledBrush   = null;
+            _foregroundDisabledBrush   = null;
+            InvalidateVisual();
+        }
+
+        protected sealed override void StopAnimation()
+        {
+            _storyboard?.Stop(_bd);
+        }
+
+
+        protected override void SetForeground(Brush foreground)
+        {
+            _content.SetValue(TextElement.ForegroundProperty, foreground);
+
+            if (IsFilled)
+            {
+                _icon.StrokeThickness = 0;
+                _icon.Fill            = foreground;
+            }
+            else
+            {
+                _icon.StrokeThickness = 2;
+                _icon.Stroke          = foreground;
+            }
+        }
+
+        protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
+        {
+            var purpose = Purpose;
 
             if (purpose == ButtonPurpose.Close)
             {
@@ -209,14 +151,13 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             SetForeground(_foregroundBrush);
         }
 
-        private void HandleHighlight1State(Duration duration)
+        protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             //
             // Opacity 动画
-            var purpose = Purpose;               
-            var theme   = ThemeSystem.Instance.Theme;
+            var purpose = Purpose;
 
-            _foregroundHighlightBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight1Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 2));
 
             // 白底变特殊色
@@ -244,12 +185,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             SetForeground(_foregroundHighlightBrush);
         }
 
-        private void HandleHighlight2State(Duration duration)
+        protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             //
             // Opacity 动画
-            var purpose = Purpose;               
-            var theme   = ThemeSystem.Instance.Theme;
+            var purpose = Purpose;
 
             _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight2Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 3));
@@ -278,11 +218,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // 设置文本颜色
             SetForeground(_foregroundHighlightBrush);
         }
-        
-        private void HandleDisabledState()
+
+
+        protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            var purpose = Purpose;               
-            var theme   = ThemeSystem.Instance.Theme;
+            var purpose = Purpose;
 
             if (purpose == ButtonPurpose.Close)
             {
@@ -299,6 +239,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             SetForeground(_foregroundDisabledBrush);
         }
 
+
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
             finder.Find<Border>(PART_BdName, x => _bd                     = x)
@@ -306,23 +247,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                   .Find<Path>(PART_IconName, x => _icon                   = x);
         }
 
-        public double IconSize
-        {
-            get => (double)GetValue(IconSizeProperty);
-            set => SetValue(IconSizeProperty, value);
-        }
-
-        public bool IsFilled
-        {
-            get => (bool)GetValue(IsFilledProperty);
-            set => SetValue(IsFilledProperty, Boxing.Box(value));
-        }
-
-        public Geometry Icon
-        {
-            get => (Geometry)GetValue(IconProperty);
-            set => SetValue(IconProperty, value);
-        }
 
         public ButtonPurpose Purpose
         {

@@ -15,6 +15,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
     /// <remarks>
     /// <para>推荐的状态图：Normal -> Highlight1 -> Highlight2 -> Normal</para>
     /// </remarks>
+    [Obsolete]
     public abstract class ForestButtonBase : Button, IHighlightColorPalette, ITextResourceAdapter, IForestControl
     {
         public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
