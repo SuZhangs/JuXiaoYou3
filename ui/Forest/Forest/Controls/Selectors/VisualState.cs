@@ -80,7 +80,7 @@
 
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            if (StateMachine.CurrentState != VisualState.Highlight1 && !IsSelected)
+            if (StateMachine.CurrentState != VisualState.Highlight2 && !IsSelected)
             {
                 StateMachine.NextState(VisualState.Highlight1);
             }

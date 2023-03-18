@@ -2,6 +2,9 @@
 {
     public abstract class ForestListBoxBase : ListBox
     {
-        
+        static ForestListBoxBase()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestListBoxBase), new FrameworkPropertyMetadata(typeof(ForestListBoxBase)));
+        }
     }
 }

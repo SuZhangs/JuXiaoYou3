@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void StopAnimation()
         {
-            _storyboard?.Stop();
+            _storyboard?.Stop(_bd);
         }
 
         protected override void SetForeground(Brush brush)
@@ -59,7 +59,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         {
             _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
-            
+            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+
             //
             // 设置背景颜色
             _bd.Background = IsSelected
