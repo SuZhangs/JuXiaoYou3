@@ -219,7 +219,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             SetForeground(_foregroundHighlightBrush);
         }
 
-
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             var purpose = Purpose;
