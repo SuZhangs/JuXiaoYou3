@@ -145,7 +145,7 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="HasIcon" Value="True">
                                     <Setter Property="Visibility" Value="Visible" TargetName="PART_Icon" />
-                                    <Setter Property="Margin" Value="8 0" TargetName="PART_Icon" />
+                                    <Setter Property="Margin" Value="0 0 8 0" TargetName="PART_Icon" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
