@@ -158,6 +158,11 @@
             }
         }
 
+        public void GotoState()
+        {
+            StateChangedHandler?.Invoke(true, _last, _now, VisualStateTrigger.Next);
+        }
+
         /// <summary>
         /// 重置状态
         /// </summary>

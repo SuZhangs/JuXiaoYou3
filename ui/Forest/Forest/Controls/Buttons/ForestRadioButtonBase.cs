@@ -14,16 +14,10 @@
             IsEnabledChanged += OnEnableChanged;
             Checked          += OnCheckedIntern;
             Unchecked        += OnUncheckedIntern;
-            Initialize();
+            BuildState();
         }
 
         #region Initialize
-
-        private void Initialize()
-        {
-            GetTemplateChildOverride(Finder);
-            BuildState();
-        }
 
 
         /// <summary>
@@ -128,7 +122,7 @@
         public void InvalidateState()
         {
             OnInvalidateState();
-            InvalidateMeasure();
+            StateMachine.GotoState();
         }
 
         #endregion

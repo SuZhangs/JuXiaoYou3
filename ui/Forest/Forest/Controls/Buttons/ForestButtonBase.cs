@@ -12,17 +12,10 @@
             Loaded                           += OnLoadedIntern;
             Unloaded                         += OnUnloadedIntern;
             IsEnabledChanged                 += OnEnableChanged;
-            Initialize();
+            BuildState();
         }
 
         #region Initialize
-        
-
-        private void Initialize()
-        {
-            GetTemplateChildOverride(Finder);
-            BuildState();
-        }
         
 
         /// <summary>
@@ -126,7 +119,7 @@
         public void InvalidateState()
         {
             OnInvalidateState();
-            InvalidateMeasure();
+            StateMachine.GotoState();
         }
         #endregion
 

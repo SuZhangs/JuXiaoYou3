@@ -66,6 +66,7 @@
 
         public override void OnApplyTemplate()
         {
+            GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
@@ -160,6 +161,7 @@
 
         public override void OnApplyTemplate()
         {
+            GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
@@ -255,6 +257,7 @@
 
         public override void OnApplyTemplate()
         {
+            GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
@@ -423,8 +426,9 @@
             base.OnMouseLeave(e);
         }
 
-        public override void OnApplyTemplate()
+        public sealed override void OnApplyTemplate()
         {
+            GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
             base.OnApplyTemplate();

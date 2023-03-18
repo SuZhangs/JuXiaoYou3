@@ -3,6 +3,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Acorisoft.FutureGL.Forest.Controls;
+using Acorisoft.FutureGL.Forest.Controls.Buttons;
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Forest.UI.Tools
@@ -49,8 +50,11 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void SetForeground(Brush foreground)
         {
-            _content.SetValue(TextElement.ForegroundProperty, foreground);
-
+            if (ShowText)
+            {
+                _content.SetValue(TextElement.ForegroundProperty, foreground);
+            }
+            
             if (IsFilled)
             {
                 _icon.StrokeThickness = 0;
@@ -65,7 +69,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundBrush ??= Xaml.Transparent;
+            _backgroundBrush ??= new SolidColorBrush(Colors.Transparent);
             _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             _bd.Background = _backgroundBrush;
@@ -104,7 +108,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foregroundBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight2Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask200]);
 
             // 白底变特殊色
@@ -143,9 +147,30 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
-            finder.Find<Border>(PART_BdName, x => _bd                     = x)
-                  .Find<Path>(PART_IconName, x => _icon                   = x)
-                  .Find<ContentPresenter>(PART_ContentName, x => _content = x);
+            if (ShowText)
+            {
+                finder.Find<Border>(PART_BdName, x => _bd                     = x)
+                      .Find<Path>(PART_IconName, x => _icon                   = x)
+                      .Find<ContentPresenter>(PART_ContentName, x => _content = x);
+            }
+            else
+            {
+                finder.Find<Border>(PART_BdName, x => _bd   = x)
+                      .Find<Path>(PART_IconName, x => _icon = x);
+            }
+        }
+
+
+        public static readonly DependencyProperty ShowTextProperty = DependencyProperty.Register(
+            nameof(ShowText),
+            typeof(bool),
+            typeof(ToolButton),
+            new PropertyMetadata(Boxing.False));
+
+        public bool ShowText
+        {
+            get => (bool)GetValue(ShowTextProperty);
+            set => SetValue(ShowTextProperty, Boxing.Box(value));
         }
     }
 }

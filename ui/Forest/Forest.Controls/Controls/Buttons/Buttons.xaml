@@ -261,18 +261,6 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background"
-                                    Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=HoverBackgroundBrush}"
-                                    TargetName="PART_Border" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background"
-                                    Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PressBackgroundBrush}"
-                                    TargetName="PART_Border" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -291,11 +279,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type b:ForestIconButton}">
-                    <Border x:Name="PART_Border"
+                    <Border x:Name="PART_Bd"
                             Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}"
                             Padding="{TemplateBinding Padding}">
-                        <Path x:Name="Icon"
+                        <Path x:Name="PART_Icon"
                               Data="{TemplateBinding Icon}"
                               Width="{TemplateBinding IconSize}"
                               Height="{TemplateBinding IconSize}"
@@ -303,67 +291,6 @@
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFilled" Value="false">
-                            <Setter Property="Stroke" Value="{f:Brush Foreground}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
-                        </Trigger>
-                        <Trigger Property="IsFilled" Value="True">
-                            <Setter Property="Fill" Value="{f:Brush Foreground}" TargetName="Icon"/>
-                        </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="true" />
-                                <Condition Property="IsFilled" Value="false" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask100}" TargetName="PART_Border"/>
-                            <Setter Property="Stroke" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="true" />
-                                <Condition Property="IsFilled" Value="true" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask100}" TargetName="PART_Border"/>
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsPressed" Value="true" />
-                                <Condition Property="IsFilled" Value="false" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask200}" TargetName="PART_Border"/>
-                            <Setter Property="Stroke" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsPressed" Value="true" />
-                                <Condition Property="IsFilled" Value="true" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask200}" TargetName="PART_Border"/>
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="false" />
-                                <Condition Property="IsFilled" Value="false" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" Value="{f:Brush ForegroundInActive}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="false" />
-                                <Condition Property="IsFilled" Value="true" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInActive}" TargetName="Icon"/>
-                            <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
-                        </MultiTrigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -409,17 +336,36 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type b:CallToAction}">
                     <Border x:Name="PART_Bd"
-                            Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            SnapsToDevicePixels="true"
                             Padding="{TemplateBinding Padding}">
-                        <ContentPresenter x:Name="PART_Content"
-                                          TextElement.FontSize="14"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <Path x:Name="PART_Icon"
+                                  Data="{TemplateBinding Icon}"
+                                  Stroke="#4F5B66"
+                                  StrokeThickness="1"
+                                  Stretch="Uniform"
+                                  Width="{TemplateBinding IconSize}"
+                                  Height="{TemplateBinding IconSize}" 
+                                  Visibility="Collapsed"/>
+    
+                            <ContentPresenter x:Name="PART_Content"
+                                              TextElement.FontSize="14"
+                                              TextElement.Foreground="#4F5B66"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                              ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </DockPanel>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasIcon" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Icon"/>
+                            <Setter Property="Margin" Value="8 0" TargetName="PART_Icon"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

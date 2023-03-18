@@ -23,7 +23,7 @@
                 nameof(IsFilled),
                 typeof(bool),
                 typeof(ForestIconButtonBase),
-                new PropertyMetadata(Boxing.False));
+                new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
@@ -38,17 +38,27 @@
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestIconButtonBase), new FrameworkPropertyMetadata(typeof(ForestIconButtonBase)));
+        }
+
+        private static void OnIsFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = ((ForestIconButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ForestIconButtonBase)d).HasIcon = e.NewValue is Geometry;
+            var ctrl = ((ForestIconButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         public bool HasIcon
         {
             get => (bool)GetValue(HasIconProperty);
-            private set => SetValue(HasIconProperty, value);
+            private set => SetValue(HasIconPropertyKey, value);
         }
 
         public double IconSize
@@ -135,7 +145,7 @@
                 nameof(IsFilled),
                 typeof(bool),
                 typeof(ForestIconButtonBase),
-                new PropertyMetadata(Boxing.False));
+                new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
@@ -150,17 +160,27 @@
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestIconCheckBoxBase), new FrameworkPropertyMetadata(typeof(ForestIconCheckBoxBase)));
+        }
+        
+        private static void OnIsFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = ((ForestIconCheckBoxBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ForestIconCheckBoxBase)d).HasIcon = e.NewValue is Geometry;
+            var ctrl = ((ForestIconCheckBoxBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         public bool HasIcon
         {
             get => (bool)GetValue(HasIconProperty);
-            private set => SetValue(HasIconProperty, value);
+            private set => SetValue(HasIconPropertyKey, value);
         }
 
         public double IconSize
@@ -189,7 +209,7 @@
 
         static ForestCheckBoxBase()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestButtonBase), new FrameworkPropertyMetadata(typeof(ForestButtonBase)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestCheckBoxBase), new FrameworkPropertyMetadata(typeof(ForestCheckBoxBase)));
             
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
@@ -247,7 +267,7 @@
                 nameof(IsFilled),
                 typeof(bool),
                 typeof(ForestIconButtonBase),
-                new PropertyMetadata(Boxing.False));
+                new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
@@ -262,17 +282,27 @@
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestIconRadioButtonBase), new FrameworkPropertyMetadata(typeof(ForestIconRadioButtonBase)));
+        }
+        
+        private static void OnIsFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = ((ForestIconRadioButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ForestIconRadioButtonBase)d).HasIcon = e.NewValue is Geometry;
+            var ctrl = ((ForestIconRadioButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         public bool HasIcon
         {
             get => (bool)GetValue(HasIconProperty);
-            private set => SetValue(HasIconProperty, value);
+            private set => SetValue(HasIconPropertyKey, value);
         }
 
         public double IconSize
@@ -301,7 +331,7 @@
 
         static ForestRadioButtonBase()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestButtonBase), new FrameworkPropertyMetadata(typeof(ForestButtonBase)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestRadioButtonBase), new FrameworkPropertyMetadata(typeof(ForestRadioButtonBase)));
             
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
@@ -374,17 +404,27 @@
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestIconRepeatButtonBase), new FrameworkPropertyMetadata(typeof(ForestIconRepeatButtonBase)));
+        }
+
+        private static void OnIsFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = ((ForestIconRepeatButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ForestIconRepeatButtonBase)d).HasIcon = e.NewValue is Geometry;
+            var ctrl = ((ForestIconRepeatButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         public bool HasIcon
         {
             get => (bool)GetValue(HasIconProperty);
-            private set => SetValue(HasIconProperty, value);
+            private set => SetValue(HasIconPropertyKey, value);
         }
 
         public double IconSize
@@ -413,7 +453,7 @@
 
         static ForestRepeatButtonBase()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestButtonBase), new FrameworkPropertyMetadata(typeof(ForestButtonBase)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestRepeatButtonBase), new FrameworkPropertyMetadata(typeof(ForestRepeatButtonBase)));
             
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
@@ -471,7 +511,7 @@
                 nameof(IsFilled),
                 typeof(bool),
                 typeof(ForestIconButtonBase),
-                new PropertyMetadata(Boxing.False));
+                new PropertyMetadata(Boxing.False, OnIsFilledChanged));
 
             IconSizeProperty = DependencyProperty.Register(
                 nameof(IconSize),
@@ -486,17 +526,28 @@
                 new PropertyMetadata(Boxing.False));
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestIconToggleButtonBase), new FrameworkPropertyMetadata(typeof(ForestIconToggleButtonBase)));
+        }
+
+        
+        private static void OnIsFilledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ctrl = ((ForestIconToggleButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((ForestIconToggleButtonBase)d).HasIcon = e.NewValue is Geometry;
+            var ctrl = ((ForestIconToggleButtonBase)d);
+            ctrl.HasIcon = e.NewValue is Geometry;
+            ctrl.InvalidateState();
         }
 
         public bool HasIcon
         {
             get => (bool)GetValue(HasIconProperty);
-            private set => SetValue(HasIconProperty, value);
+            private set => SetValue(HasIconPropertyKey, value);
         }
 
         public double IconSize
@@ -525,7 +576,7 @@
 
         static ForestToggleButtonBase()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestButtonBase), new FrameworkPropertyMetadata(typeof(ForestButtonBase)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestToggleButtonBase), new FrameworkPropertyMetadata(typeof(ForestToggleButtonBase)));
             
             PaletteProperty = DependencyProperty.Register(
                 nameof(Palette),
