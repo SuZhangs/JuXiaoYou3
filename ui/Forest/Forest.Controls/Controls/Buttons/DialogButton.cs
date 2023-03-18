@@ -159,12 +159,12 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
                     ButtonPurpose.CallToAction  => colors[(int)ForestTheme.HighlightA1],
                     ButtonPurpose.CallToAction2 => colors[(int)ForestTheme.HighlightB1],
                     ButtonPurpose.CallToAction3 => colors[(int)ForestTheme.HighlightC1],
-                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.DangerDisabled],
-                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGrayDisabled],
-                    ButtonPurpose.Warning       => colors[(int)ForestTheme.WarningDisabled],
-                    ButtonPurpose.Info          => colors[(int)ForestTheme.InfoDisabled],
-                    ButtonPurpose.Success       => colors[(int)ForestTheme.SuccessDisabled],
-                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.ObsoleteDisabled],
+                    ButtonPurpose.CallToClose   => colors[(int)ForestTheme.Danger400],
+                    ButtonPurpose.Close         => colors[(int)ForestTheme.SlateGray400],
+                    ButtonPurpose.Warning       => colors[(int)ForestTheme.Warning400],
+                    ButtonPurpose.Info          => colors[(int)ForestTheme.Info400],
+                    ButtonPurpose.Success       => colors[(int)ForestTheme.Success400],
+                    ButtonPurpose.Obsolete      => colors[(int)ForestTheme.Obsolete400],
                     _                           => colors[(int)ForestTheme.HighlightA1],
                 },
                 _ => purpose switch
@@ -287,7 +287,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             if (purpose == ButtonPurpose.Close)
             {
                 _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
-                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
+                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
             }
             else
             {

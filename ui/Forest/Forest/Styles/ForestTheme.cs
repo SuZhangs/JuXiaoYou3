@@ -35,7 +35,7 @@
         Danger100,
         Danger200,
         Danger300,
-        DangerDisabled,
+        Danger400,
         
         
         /// <summary>
@@ -44,7 +44,7 @@
         Warning100,
         Warning200,
         Warning300,
-        WarningDisabled,
+        Warning400,
         
         
         /// <summary>
@@ -53,7 +53,7 @@
         Success100,
         Success200,
         Success300,
-        SuccessDisabled,
+        Success400,
         
         
         /// <summary>
@@ -62,7 +62,7 @@
         Info100,
         Info200,
         Info300,
-        InfoDisabled,
+        Info400,
         
         
         /// <summary>
@@ -71,7 +71,7 @@
         Obsolete100,
         Obsolete200,
         Obsolete300,
-        ObsoleteDisabled,
+        Obsolete400,
         
         
         /// <summary>
@@ -80,7 +80,7 @@
         SlateGray100,
         SlateGray200,
         SlateGray300,
-        SlateGrayDisabled,
+        SlateGray400,
         
         
         /// <summary>
@@ -90,6 +90,7 @@
         BackgroundLevel1,
         BackgroundLevel2,
         BackgroundLevel3,
+        BackgroundLevel4,
         BackgroundInHighlight,
         BackgroundInactive,
         
@@ -101,6 +102,7 @@
         ForegroundLevel1,
         ForegroundLevel2,
         ForegroundLevel3,
+        ForegroundLevel4,
         ForegroundInHighlight,
         ForegroundInActive,
         
@@ -108,8 +110,8 @@
         
         ColorPalette_Bootstrap_,
         
-        Mask,
+        Mask100,
+        Mask200,
         MaskInactive,
-        MaskDarken,
     }
 }

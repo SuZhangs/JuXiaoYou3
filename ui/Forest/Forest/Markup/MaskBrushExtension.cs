@@ -8,7 +8,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask].ToSolidColorBrush();
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask100].ToSolidColorBrush();
         }
     }
     
@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask];
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask100];
         }
     }
     
@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.MaskDarken];
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask200];
         }
     }
     
@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.MaskDarken].ToSolidColorBrush();
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Mask200].ToSolidColorBrush();
         }
     }
 }

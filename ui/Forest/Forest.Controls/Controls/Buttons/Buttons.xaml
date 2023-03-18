@@ -316,7 +316,7 @@
                                 <Condition Property="IsMouseOver" Value="true" />
                                 <Condition Property="IsFilled" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask}" TargetName="PART_Border"/>
+                            <Setter Property="Background" Value="{f:Brush Mask100}" TargetName="PART_Border"/>
                             <Setter Property="Stroke" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
                             <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
                         </MultiTrigger>
@@ -325,7 +325,7 @@
                                 <Condition Property="IsMouseOver" Value="true" />
                                 <Condition Property="IsFilled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush Mask}" TargetName="PART_Border"/>
+                            <Setter Property="Background" Value="{f:Brush Mask100}" TargetName="PART_Border"/>
                             <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
                             <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
                         </MultiTrigger>
@@ -334,7 +334,7 @@
                                 <Condition Property="IsPressed" Value="true" />
                                 <Condition Property="IsFilled" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush MaskDarken}" TargetName="PART_Border"/>
+                            <Setter Property="Background" Value="{f:Brush Mask200}" TargetName="PART_Border"/>
                             <Setter Property="Stroke" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
                             <Setter Property="StrokeThickness" Value="1" TargetName="Icon"/>
                         </MultiTrigger>
@@ -343,7 +343,7 @@
                                 <Condition Property="IsPressed" Value="true" />
                                 <Condition Property="IsFilled" Value="true" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush MaskDarken}" TargetName="PART_Border"/>
+                            <Setter Property="Background" Value="{f:Brush Mask200}" TargetName="PART_Border"/>
                             <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon"/>
                             <Setter Property="StrokeThickness" Value="0" TargetName="Icon"/>
                         </MultiTrigger>

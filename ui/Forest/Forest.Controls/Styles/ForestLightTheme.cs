@@ -35,37 +35,37 @@ namespace Acorisoft.FutureGL.Forest.Styles
             Colors.TryAdd((int)ForestTheme.Danger100, Color.FromRgb(0xbb, 0x21, 0x24));
             Colors.TryAdd((int)ForestTheme.Danger200, Color.FromRgb(0xd9, 0x08, 0x0c));
             Colors.TryAdd((int)ForestTheme.Danger300, Color.FromRgb(0xA6, 0x06, 0x09));
-            Colors.TryAdd((int)ForestTheme.DangerDisabled, Color.FromRgb(0xec, 0x93, 0x94));
+            Colors.TryAdd((int)ForestTheme.Danger400, Color.FromRgb(0xec, 0x93, 0x94));
             
             Colors.TryAdd((int)ForestTheme.Warning100, Color.FromRgb(0xdb, 0x94, 0x00));
             Colors.TryAdd((int)ForestTheme.Warning200, Color.FromRgb(0xff, 0xb3, 0x14));
             Colors.TryAdd((int)ForestTheme.Warning300, Color.FromRgb(0xa8, 0x72, 0x00));
-            Colors.TryAdd((int)ForestTheme.WarningDisabled, Color.FromRgb(0xff, 0xd6, 0x80));
+            Colors.TryAdd((int)ForestTheme.Warning400, Color.FromRgb(0xff, 0xd6, 0x80));
             
             Colors.TryAdd((int)ForestTheme.Info100, Color.FromRgb(0x00, 0x7a, 0xcc));
             Colors.TryAdd((int)ForestTheme.Info200, Color.FromRgb(0x00, 0x92, 0xf2));
             Colors.TryAdd((int)ForestTheme.Info300, Color.FromRgb(0x00, 0x55, 0x8f));
-            Colors.TryAdd((int)ForestTheme.InfoDisabled, Color.FromRgb(0x80, 0xcc, 0xff));
+            Colors.TryAdd((int)ForestTheme.Info400, Color.FromRgb(0x80, 0xcc, 0xff));
             
             Colors.TryAdd((int)ForestTheme.Success100, Color.FromRgb(0x99, 0xb4, 0x33));
             Colors.TryAdd((int)ForestTheme.Success200, Color.FromRgb(0xb2, 0xcc, 0x4c));
             Colors.TryAdd((int)ForestTheme.Success300, Color.FromRgb(0x76, 0x8b, 0x27));
-            Colors.TryAdd((int)ForestTheme.SuccessDisabled, Color.FromRgb(0xdd, 0xe8, 0xb0));
+            Colors.TryAdd((int)ForestTheme.Success400, Color.FromRgb(0xdd, 0xe8, 0xb0));
             
             Colors.TryAdd((int)ForestTheme.Obsolete100, Color.FromRgb(0xca, 0x51, 0x00));
             Colors.TryAdd((int)ForestTheme.Obsolete200, Color.FromRgb(0xff, 0x66, 0x00));
             Colors.TryAdd((int)ForestTheme.Obsolete300, Color.FromRgb(0x99, 0x3d, 0x00));
-            Colors.TryAdd((int)ForestTheme.ObsoleteDisabled, Color.FromRgb(0xff, 0x94, 0x4d));
+            Colors.TryAdd((int)ForestTheme.Obsolete400, Color.FromRgb(0xff, 0x94, 0x4d));
             
             
             Colors.TryAdd((int)ForestTheme.SlateGray100, Color.FromRgb(0x70, 0x80, 0x90));
             Colors.TryAdd((int)ForestTheme.SlateGray200, Color.FromRgb(0x4f, 0x5b, 0x66));
             Colors.TryAdd((int)ForestTheme.SlateGray300, Color.FromRgb(0x28, 0x2e, 0x34));
-            Colors.TryAdd((int)ForestTheme.SlateGrayDisabled, Color.FromRgb(0x9b, 0xa6, 0xb1));
+            Colors.TryAdd((int)ForestTheme.SlateGray400, Color.FromRgb(0x9b, 0xa6, 0xb1));
             
             
-            Colors.TryAdd((int)ForestTheme.Mask, Color.FromArgb(0x20, 0x00, 0x00, 0x00));
-            Colors.TryAdd((int)ForestTheme.MaskDarken, Color.FromArgb(0x50, 0x00, 0x00, 0x00));
+            Colors.TryAdd((int)ForestTheme.Mask100, Color.FromArgb(0x20, 0x00, 0x00, 0x00));
+            Colors.TryAdd((int)ForestTheme.Mask200, Color.FromArgb(0x50, 0x00, 0x00, 0x00));
             Colors.TryAdd((int)ForestTheme.Background, System.Windows.Media.Colors.White);
             Colors.TryAdd((int)ForestTheme.BackgroundInHighlight, System.Windows.Media.Colors.White);
             Colors.TryAdd((int)ForestTheme.BackgroundInactive, Color.FromRgb(0xf1, 0xf1, 0xf1));

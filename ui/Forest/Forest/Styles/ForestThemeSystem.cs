@@ -62,12 +62,12 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 },
                 4 => palette switch
                 {
-                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.DangerDisabled],
-                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.WarningDisabled],
-                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.InfoDisabled],
-                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.SuccessDisabled],
-                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.ObsoleteDisabled],
-                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGrayDisabled],
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.Danger400],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.Warning400],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info400],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success400],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete400],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGray400],
                     _                                       => Colors[(int)ForestTheme.Background],
                 },
                 _ => palette switch
@@ -141,12 +141,12 @@ namespace Acorisoft.FutureGL.Forest.Styles
                 {
                     HighlightColorPalette.HighlightPalette2 => Colors[(int)ForestTheme.HighlightB1],
                     HighlightColorPalette.HighlightPalette3 => Colors[(int)ForestTheme.HighlightC1],
-                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.DangerDisabled],
-                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.WarningDisabled],
-                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.InfoDisabled],
-                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.SuccessDisabled],
-                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.ObsoleteDisabled],
-                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGrayDisabled],
+                    HighlightColorPalette.Danger            => Colors[(int)ForestTheme.Danger400],
+                    HighlightColorPalette.Warning           => Colors[(int)ForestTheme.Warning400],
+                    HighlightColorPalette.Info              => Colors[(int)ForestTheme.Info400],
+                    HighlightColorPalette.Success           => Colors[(int)ForestTheme.Success400],
+                    HighlightColorPalette.Obsolete          => Colors[(int)ForestTheme.Obsolete400],
+                    HighlightColorPalette.SlateGray         => Colors[(int)ForestTheme.SlateGray400],
                     _                                       => Colors[(int)ForestTheme.HighlightA1],
                 }
             };

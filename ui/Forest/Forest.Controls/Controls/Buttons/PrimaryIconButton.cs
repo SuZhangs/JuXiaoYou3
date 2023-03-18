@@ -177,8 +177,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         {    
             var theme   = ThemeSystem.Instance.Theme;
 
-            _backgroundBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
-            _borderBrush     = new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
+            _backgroundBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
+            _borderBrush     = new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
             _foregroundBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
 
             _bd.Background  = _backgroundBrush;
@@ -398,8 +398,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         {    
             var theme   = ThemeSystem.Instance.Theme;
 
-            _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
-            _borderBrush     ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGrayDisabled]);
+            _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
+            _borderBrush     ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
             _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
 
             _bd.Background  = _backgroundBrush;

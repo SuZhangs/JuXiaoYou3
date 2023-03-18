@@ -1,12 +1,7 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public interface IForestControl : ITextResourceAdapter
+    public interface IForestControl : ITextResourceAdapter, IHighlightColorPalette
     {
         void InvalidateState();
-        
-        /// <summary>
-        /// 调色板
-        /// </summary>
-        HighlightColorPalette Palette { get; }
     }
 }
