@@ -10,7 +10,6 @@
 
         protected ForestCheckBoxBase()
         {
-            Animator                         =  Animator.CreateDummy();
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
             Checked                          += OnCheckedIntern;
