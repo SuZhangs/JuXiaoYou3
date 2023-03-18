@@ -2,15 +2,16 @@
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Styles;
 
-namespace Acorisoft.FutureGL.Forest.Controls.Buttons
+namespace Acorisoft.FutureGL.Forest.UI.Tools
 {
-    public class CallToAction : ForestIconButtonBase
+    public class ToolButton : ForestIconButtonBase
     {
-        static CallToAction()
+        static ToolButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CallToAction), new FrameworkPropertyMetadata(typeof(CallToAction)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ToolButton), new FrameworkPropertyMetadata(typeof(ToolButton)));
         }
 
         private const string           PART_BdName      = "PART_Bd";
@@ -25,7 +26,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private SolidColorBrush _foregroundBrush;
         private SolidColorBrush _backgroundHighlight1Brush;
         private SolidColorBrush _backgroundHighlight2Brush;
-        private SolidColorBrush _foregroundHighlightBrush;
         private SolidColorBrush _backgroundDisabledBrush;
         private SolidColorBrush _foregroundDisabledBrush;
 
@@ -35,7 +35,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _backgroundBrush           = null;
             _foregroundBrush           = null;
             _backgroundHighlight1Brush = null;
-            _foregroundHighlightBrush  = null;
             _backgroundHighlight2Brush = null;
             _backgroundDisabledBrush   = null;
             _foregroundDisabledBrush   = null;
@@ -66,7 +65,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundBrush ??= new SolidColorBrush(theme.GetHighlightColor(palette, 4));
+            _backgroundBrush ??= Xaml.Transparent;
             _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             _bd.Background = _backgroundBrush;
@@ -75,8 +74,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _backgroundHighlight1Brush ??= new SolidColorBrush(theme.GetHighlightColor(palette, 3));
+            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _backgroundHighlight1Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask100]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -100,13 +99,13 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foregroundHighlightBrush);
+            SetForeground(_foregroundBrush);
         }
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _backgroundHighlight2Brush ??= new SolidColorBrush(theme.GetHighlightColor(palette, 5));
+            _foregroundBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _backgroundHighlight2Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask200]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -130,12 +129,12 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foregroundHighlightBrush);
+            SetForeground(_foregroundBrush);
         }
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundDisabledBrush ??= new SolidColorBrush(theme.GetHighlightColor(palette, 2));
+            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
             _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInActive]);
 
             _bd.Background = _backgroundDisabledBrush;
