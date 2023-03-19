@@ -1,8 +1,8 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public abstract partial class ForestTabItemBase : TabItem, IForestControl, IForestIconControl
+    public abstract partial class ForestTreeViewItemBase : TreeViewItem, IForestControl, IForestIconControl
     {
-        protected ForestTabItemBase()
+            protected ForestTreeViewItemBase()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
@@ -94,7 +94,6 @@
 
         void ITextResourceAdapter.SetText(string text)
         {
-            Header = text;
         }
 
         void ITextResourceAdapter.SetToolTips(string text)
