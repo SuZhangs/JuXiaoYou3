@@ -3,7 +3,8 @@
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls;assembly=Forest"
                     xmlns:s="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors;assembly=Forest"
-                    xmlns:c1="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors"
+                    xmlns:s1="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors"
+                    xmlns:c1="clr-namespace:Acorisoft.FutureGL.Forest.Controls"
                     xmlns:p="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Panels;assembly=Forest">
     
     <Style x:Key="ClearStyle.ListBox" TargetType="{x:Type s:ForestListBoxBase}">
@@ -63,16 +64,16 @@
         </Setter>
     </Style>
     
-    <Style TargetType="{x:Type c1:ChromeListBox}" BasedOn="{StaticResource ClearStyle.ListBox}">
-    </Style>
+    <Style TargetType="{x:Type s1:ChromeListBox}" BasedOn="{StaticResource ClearStyle.ListBox}"/>
+    <Style TargetType="{x:Type c1:ListBox}" BasedOn="{StaticResource ClearStyle.ListBox}"/>
     
     
-    <Style TargetType="{x:Type c1:ChromeListBoxItem}">
+    <Style TargetType="{x:Type s1:ChromeListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type c1:ChromeListBoxItem}">
+                <ControlTemplate TargetType="{x:Type s1:ChromeListBoxItem}">
                     <Border x:Name="PART_Bd"
                             Background="Transparent"
                             CornerRadius="8 8 0 0">
@@ -82,4 +83,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="{x:Type c1:ListBoxItem}" BasedOn="{StaticResource ClearStyle.ListBoxItem}"/>
 </ResourceDictionary>

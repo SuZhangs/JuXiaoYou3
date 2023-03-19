@@ -1,15 +1,19 @@
-﻿
-namespace Acorisoft.FutureGL.Forest.Controls.Selectors
+﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ChromeListBox : ForestListBoxBase
+    public class ListBox : ForestListBoxBase
     {
+        static ListBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ListBox), new FrameworkPropertyMetadata(typeof(ListBox)));
+        }
+        
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ChromeListBoxItem();
+            return new ListBoxItem();
         }
     }
 
-    public class ChromeListBoxItem : ForestListBoxItemBase
+    public class ListBoxItem : ForestListBoxItemBase
     {
         private const string PART_BdName      = "PART_Bd";
         private const string PART_ContentName = "PART_Content";
@@ -24,6 +28,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
+
+        static ListBoxItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ListBoxItem), new FrameworkPropertyMetadata(typeof(ListBoxItem)));
+        }
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
@@ -54,8 +63,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
-            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
             //
             // 设置背景颜色
@@ -71,7 +80,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         {
             //
             // Opacity 动画
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -98,7 +107,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
             var backgroundAnimation = new ColorAnimation
             {

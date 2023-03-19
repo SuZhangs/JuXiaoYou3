@@ -84,7 +84,7 @@
         public Dock Placement
         {
             get => (Dock)GetValue(PlacementProperty);
-            private set => SetValue(PlacementProperty, value);
+            set => SetValue(PlacementProperty, value);
         }
 
         public bool HasIcon
@@ -210,7 +210,7 @@
         public Dock Placement
         {
             get => (Dock)GetValue(PlacementProperty);
-            private set => SetValue(PlacementProperty, value);
+            set => SetValue(PlacementProperty, value);
         }
 
         public bool HasIcon
@@ -336,7 +336,7 @@
         public Dock Placement
         {
             get => (Dock)GetValue(PlacementProperty);
-            private set => SetValue(PlacementProperty, value);
+            set => SetValue(PlacementProperty, value);
         }
 
         public bool HasIcon
@@ -462,7 +462,7 @@
         public Dock Placement
         {
             get => (Dock)GetValue(PlacementProperty);
-            private set => SetValue(PlacementProperty, value);
+            set => SetValue(PlacementProperty, value);
         }
 
         public bool HasIcon

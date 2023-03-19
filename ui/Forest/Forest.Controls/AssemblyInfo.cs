@@ -5,6 +5,10 @@ global using System.Windows.Controls;
 global using VisualState = Acorisoft.FutureGL.Forest.Styles.VisualState;
 
 global using Acorisoft.FutureGL.Forest.Controls.Selectors;
+global using System.Windows.Documents;
+global using System.Windows.Media;
+global using System.Windows.Media.Animation;
+global using Acorisoft.FutureGL.Forest.Styles;
 
 using System.Windows.Markup;
 
