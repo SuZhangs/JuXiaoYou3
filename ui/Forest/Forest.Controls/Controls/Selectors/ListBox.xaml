@@ -40,7 +40,7 @@
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="8" />
+        <Setter Property="Padding" Value="2" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -50,7 +50,7 @@
                             Margin="0" 
                             Padding="{TemplateBinding Padding}" 
                             Background="Transparent"
-                            CornerRadius="6">
+                            CornerRadius="3">
                         <ContentPresenter x:Name="PART_Content"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"

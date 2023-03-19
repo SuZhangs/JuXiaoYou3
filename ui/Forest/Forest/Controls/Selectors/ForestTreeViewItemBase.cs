@@ -94,6 +94,7 @@
 
         void ITextResourceAdapter.SetText(string text)
         {
+            Header = text;
         }
 
         void ITextResourceAdapter.SetToolTips(string text)

@@ -7,6 +7,7 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeView), new FrameworkPropertyMetadata(typeof(TreeView)));
         }
 
+
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new TreeViewItem();
@@ -31,8 +32,14 @@
 
         static TreeViewItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ListBoxItem), new FrameworkPropertyMetadata(typeof(ListBoxItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeViewItem), new FrameworkPropertyMetadata(typeof(TreeViewItem)));
         }
+        
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new TreeViewItem();
+        }
+        
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
