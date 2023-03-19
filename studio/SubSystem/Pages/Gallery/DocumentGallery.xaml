@@ -15,14 +15,14 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="Transparent" Color="Transparent"/>
-        
-        <thisProxy:DocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+        <SolidColorBrush x:Key="Transparent" Color="Transparent" />
+
+        <thisProxy:DocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:LockStateConverter x:Key="LockStateConverter"
                                            Lock="{StaticResource FeatherIcon.Lock}"
-                                           Unlock="{StaticResource FeatherIcon.Unlock}"/>
-        <thisConverters:AvatarConverter x:Key="AvatarConverter"/>
-        
+                                           Unlock="{StaticResource FeatherIcon.Unlock}" />
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectDocumentCommand}"
                             CommandParameter="{Binding}"
@@ -37,19 +37,19 @@
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
                                     <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                        <Binding Path="Avatar" Mode="OneWay"/>
-                                        <Binding Path="Type"/>
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
                                     </MultiBinding>
                                 </ImageBrush.ImageSource>
                             </ImageBrush>
                         </Border.Background>
                     </Border>
-                    
+
                     <TextBlock FontSize="14"
                                FontFamily="{StaticResource HeiTi}"
                                Margin="0 8 0 0"
                                HorizontalAlignment="Center"
-                               Text="{Binding Name,Mode=OneWay}"/>
+                               Text="{Binding Name,Mode=OneWay}" />
                 </DockPanel>
             </f:SimpleButton>
         </DataTemplate>
@@ -72,8 +72,8 @@
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
                                         <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                            <Binding Path="Avatar" Mode="OneWay"/>
-                                            <Binding Path="Type"/>
+                                            <Binding Path="Avatar" Mode="OneWay" />
+                                            <Binding Path="Type" />
                                         </MultiBinding>
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
@@ -85,24 +85,23 @@
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                Margin="0 8"
-                               Text="{Binding Selected.Name,Mode=OneWay}"/>
+                               Text="{Binding Selected.Name,Mode=OneWay}" />
 
                     <UniformGrid Columns="4">
                         <TextBlock FontSize="24"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               Margin="0 8"
-                               Text="{Binding Selected.Type,Mode=OneWay}"/>
-                        
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0 8"
+                                   Text="{Binding Selected.Type,Mode=OneWay}" />
+
                         <f:ForestIconButton Icon="{Binding Selected.IsLocked, Mode=OneWay,Converter={StaticResource LockStateConverter}}"
-                                         CornerRadius="3"
-                                         Margin="4"
-                                         Palette="Info"
-                                        Padding="8"/>
+                                            CornerRadius="3"
+                                            Margin="4"
+                                            Palette="Info"
+                                            Padding="8" />
                     </UniformGrid>
 
-                    <f:CallToAction Content="编辑" CornerRadius="3" Margin="4"/>
-                    <f:PrimaryButton Content="删除" CornerRadius="3" Margin="4" Palette="Danger"/>
+                    <f:CallToAction Content="编辑" CornerRadius="3" Margin="4" />
                 </StackPanel>
             </Grid>
         </f:Drawer.RightContent>
@@ -121,30 +120,30 @@
                 </Grid.ColumnDefinitions>
                 <!-- 操作 -->
                 <StackPanel Grid.Column="0"
-                        Margin="48 0 0 0"
-                        Orientation="Horizontal">
+                            Margin="48 0 0 0"
+                            Orientation="Horizontal">
                     <f:ForestIconButton Icon="{StaticResource FeatherIcon.Filter}"
-                                       IconSize="17"
-                                       IsFilled="False"/>
+                                        IconSize="17"
+                                        IsFilled="False" />
                     <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"
-                                       IconSize="17"
-                                       IsFilled="False"/>
+                                        IconSize="17"
+                                        IsFilled="False" />
                 </StackPanel>
 
                 <!-- 选项 -->
-                <f:HighlightTextBox Grid.Column="1"/>
+                <f:HighlightTextBox Grid.Column="1" />
 
                 <!-- 操作 -->
                 <StackPanel Grid.Column="2"
-                        Margin="48 0 0 0"
-                        Orientation="Horizontal">
+                            Margin="48 0 0 0"
+                            Orientation="Horizontal">
                     <f:CallToAction Content="新建"
-                                CornerRadius="20"
-                                Command="{Binding NewDocumentCommand}"
-                                Palette="HighlightPalette1"
-                                Width="128"/>
-                    <ui:Button Content="导入"/>
-                    <ui:Button Content="导入"/>
+                                    CornerRadius="20"
+                                    Command="{Binding NewDocumentCommand}"
+                                    Palette="HighlightPalette1"
+                                    Width="128" />
+                    <ui:Button Content="导入" />
+                    <ui:Button Content="导入" />
                 </StackPanel>
             </Grid>
 
@@ -165,52 +164,52 @@
                             Margin="48 0 0 0"
                             Orientation="Horizontal">
                     <f:ForestIconButton Icon="{StaticResource FeatherIcon.Filter}"
-                                       IconSize="17"
-                                       IsFilled="False"/>
+                                        IconSize="17"
+                                        IsFilled="False" />
                     <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"
-                                       IconSize="17"
-                                       IsFilled="False"/>
+                                        IconSize="17"
+                                        IsFilled="False" />
                 </StackPanel>
 
                 <f:ForestIconButton Grid.Column="1"
-                                CornerRadius="48"
-                                Command="{Binding LastPageCommand}"
-                                FocusVisualStyle="{x:Null}"
-                                Focusable="False"
-                                Icon="{StaticResource FeatherIcon.Left}"
-                                IconSize="23"
-                                IsTabStop="False"
-                                Height="42"
-                                Width="42"/>
+                                    CornerRadius="48"
+                                    Command="{Binding LastPageCommand}"
+                                    FocusVisualStyle="{x:Null}"
+                                    Focusable="False"
+                                    Icon="{StaticResource FeatherIcon.Left}"
+                                    IconSize="23"
+                                    IsTabStop="False"
+                                    Height="42"
+                                    Width="42" />
 
                 <TextBlock Grid.Column="2"
                            FontSize="16"
                            HorizontalAlignment="Center"
                            Text="{Binding PageIndex,Mode=OneWay}"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center" />
 
                 <f:ForestIconButton Grid.Column="3"
-                                CornerRadius="48"
-                                Command="{Binding NextPageCommand}"
-                                FocusVisualStyle="{x:Null}"
-                                Focusable="False"
-                                HorizontalAlignment="Left"
-                                Icon="{StaticResource FeatherIcon.Right}"
-                                IconSize="23"
-                                IsTabStop="False"
-                                Height="42"
-                                Width="42"/>
+                                    CornerRadius="48"
+                                    Command="{Binding NextPageCommand}"
+                                    FocusVisualStyle="{x:Null}"
+                                    Focusable="False"
+                                    HorizontalAlignment="Left"
+                                    Icon="{StaticResource FeatherIcon.Right}"
+                                    IconSize="23"
+                                    IsTabStop="False"
+                                    Height="42"
+                                    Width="42" />
             </Grid>
 
             <!-- 列表 -->
             <ScrollViewer Grid.Row="2"
-                      Margin="32 0">
+                          Margin="32 0">
                 <ItemsControl Focusable="False"
-                          IsTabStop="False"
-                          ItemsSource="{Binding Collection,Mode=OneWay}">
+                              IsTabStop="False"
+                              ItemsSource="{Binding Collection,Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel/>
+                            <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>

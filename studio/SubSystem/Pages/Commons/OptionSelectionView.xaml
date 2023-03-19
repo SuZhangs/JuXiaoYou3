@@ -11,7 +11,7 @@
              mc:Ignorable="d"
              Width="400"
              Height="300"
-             d:DesignHeight="300" 
+             d:DesignHeight="300"
              d:DesignWidth="400"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:OptionSelectionViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -25,7 +25,7 @@
             Padding="16">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="54"/>
+                <RowDefinition Height="54" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -40,15 +40,15 @@
                        Text="{Binding Title}"
                        VerticalAlignment="Top" />
 
-            <f:ForestListBox Grid.Row="1"
-                             SelectedItem="{Binding Selected,Mode=TwoWay}"
-                             ItemsSource="{Binding Options,Mode=OneWay}">
+            <f:ListBox Grid.Row="1"
+                       SelectedItem="{Binding Selected,Mode=TwoWay}"
+                       ItemsSource="{Binding Options,Mode=OneWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </f:ForestListBox>
+            </f:ListBox>
 
             <!-- 按钮 -->
             <UniformGrid Grid.Row="2"
@@ -61,12 +61,12 @@
                                 IsDefault="True"
                                 Content="{x:Static f:Language.ConfirmText}"
                                 Command="{Binding CompletedCommand}"
-                                Purpose="CallToAction"/>
+                                Purpose="CallToAction" />
 
                 <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
                                 Content="{x:Static f:Language.CancelText}"
                                 Command="{Binding CancelCommand}"
-                                Purpose="Close"/>
+                                Purpose="Close" />
             </UniformGrid>
         </Grid>
     </Border>

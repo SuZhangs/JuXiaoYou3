@@ -219,7 +219,8 @@
                                   Stretch="Uniform"
                                   Height="{TemplateBinding IconSize}"
                                   Width="{TemplateBinding IconSize}"
-                                  VerticalAlignment="Center" />
+                                  VerticalAlignment="Center"
+                                  Visibility="Collapsed"/>
 
                             <ContentPresenter x:Name="PART_Content"
                                               HorizontalAlignment="Center"
@@ -229,69 +230,43 @@
                                               ContentTemplate="{TemplateBinding HeaderTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                               Focusable="False"
-                                              Margin="8 0 0 0"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               TextElement.Foreground="Gray" />
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Placement" Value="Top">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Placement" Value="Top"/>
+                                <Condition Property="HasIcon" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
                             <Setter Property="DockPanel.Dock" Value="Top" TargetName="PART_Icon" />
                             <Setter Property="Margin" Value="8 0 0 0" TargetName="PART_Content" />
-                        </Trigger>
-                        <Trigger Property="Placement" Value="Right">
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Placement" Value="Right"/>
+                                <Condition Property="HasIcon" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
                             <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Icon" />
                             <Setter Property="Margin" Value="0 0 8 0" TargetName="PART_Content" />
-                        </Trigger>
-                        <Trigger Property="Placement" Value="Bottom">
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Placement" Value="Bottom"/>
+                                <Condition Property="HasIcon" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible" />
                             <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="PART_Icon" />
                             <Setter Property="Margin" Value="0 0 0 8" TargetName="PART_Content" />
-                        </Trigger>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type t:TabItem}">
-                            <Border x:Name="PART_Bd"
-                                    BorderBrush="{TemplateBinding Background}"
-                                    CornerRadius="8 8 0 0"
-                                    Padding="4">
-                                <DockPanel Background="Transparent"
-                                           HorizontalAlignment="Center"
-                                           LastChildFill="True"
-                                           VerticalAlignment="Center">
-                                    <Path x:Name="PART_Icon"
-                                          DockPanel.Dock="Left"
-                                          Data="{TemplateBinding Icon}"
-                                          HorizontalAlignment="Center"
-                                          Stroke="Gray"
-                                          StrokeThickness="2"
-                                          Stretch="Uniform"
-                                          Visibility="Collapsed" />
-
-                                    <ContentPresenter x:Name="PART_Content"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-                                                      Content="{TemplateBinding Header}"
-                                                      ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                                      ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                      Focusable="False"
-                                                      RecognizesAccessKey="True"
-                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                      TextElement.Foreground="Gray" />
-                                </DockPanel>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

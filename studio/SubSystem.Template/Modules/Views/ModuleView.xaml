@@ -12,10 +12,10 @@
              d:DesignHeight="300" d:DesignWidth="300"
                  d:DataContext="{d:DesignInstance Type={x:Type vm:ModuleViewModel}, IsDesignTimeCreatable=True}">
     <f:Drawer>
-        <f:ForestTabControl Padding="16"
+        <f:ShadowTabControl Padding="16"
                             Margin="16"
                             TabStripPlacement="Left">
-            <f:HighlightTabItem Header="基础信息">
+            <f:ShadowTabItem Header="基础信息">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="128" />
@@ -54,11 +54,11 @@
                                     Text="{Binding Version,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
-            </f:HighlightTabItem>
-            <f:HighlightTabItem Header="编辑属性"/>
-            <f:HighlightTabItem Header="常用工具"/>
-            <f:HighlightTabItem Header="测试工具"/>
-            <f:HighlightTabItem Header="关于我们"/>
-        </f:ForestTabControl>
+            </f:ShadowTabItem>
+            <f:ShadowTabItem Header="编辑属性"/>
+            <f:ShadowTabItem Header="常用工具"/>
+            <f:ShadowTabItem Header="测试工具"/>
+            <f:ShadowTabItem Header="关于我们"/>
+        </f:ShadowTabControl>
     </f:Drawer>
 </UserControl>

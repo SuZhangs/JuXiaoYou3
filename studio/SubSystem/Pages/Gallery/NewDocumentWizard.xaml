@@ -58,27 +58,27 @@
                             CornerRadius="12">
                         <Border CornerRadius="12">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay}"/>
+                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay}" />
                             </Border.Background>
                         </Border>
-                        </Border>
+                    </Border>
                 </f:LooklessButton>
-                
+
                 <ui:TextBox Grid.Row="1"
                             Margin="48 24"
                             PlaceholderText="{thisMarkups:Text text.name}"
                             Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                <f:ForestListBox Grid.Row="2"
-                                 HorizontalAlignment="Center"
-                                 Margin="0 8 0 0"
-                                 ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
-                                 SelectedItem="{Binding Type,Mode=TwoWay}">
+                <f:ListBox Grid.Row="2"
+                           HorizontalAlignment="Center"
+                           Margin="0 8 0 0"
+                           ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
+                           SelectedItem="{Binding Type,Mode=TwoWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
-                                       Text="{Binding Converter={StaticResource Translation}}" 
-                                       Width="48"/>
+                                       Text="{Binding Converter={StaticResource Translation}}"
+                                       Width="48" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>
@@ -86,7 +86,7 @@
                             <WrapPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-                </f:ForestListBox>
+                </f:ListBox>
             </Grid>
 
             <!-- 按钮 -->
