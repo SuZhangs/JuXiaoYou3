@@ -80,7 +80,7 @@
                 <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush HighlightA1}"/>
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:MaskDarkenBrush}"/>
                 <Setter TargetName="Thumb" Property="Control.Background" Value="{f:Brush HighlightA3}"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -135,7 +135,7 @@
                 <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush HighlightA1}"/>
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:MaskDarkenBrush}"/>
                 <Setter TargetName="Thumb" Property="Control.Background" Value="{f:Brush HighlightA3}"/>
             </Trigger>
         </ControlTemplate.Triggers>

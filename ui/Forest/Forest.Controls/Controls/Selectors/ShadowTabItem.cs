@@ -130,6 +130,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
             _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
             _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             
