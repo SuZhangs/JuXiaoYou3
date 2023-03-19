@@ -5,7 +5,6 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
-using Wpf.Ui.Styles.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Windows
 {

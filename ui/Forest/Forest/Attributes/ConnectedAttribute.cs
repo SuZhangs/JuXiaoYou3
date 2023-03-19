@@ -1,5 +1,3 @@
-using System;
-
 namespace Acorisoft.FutureGL.Forest.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]

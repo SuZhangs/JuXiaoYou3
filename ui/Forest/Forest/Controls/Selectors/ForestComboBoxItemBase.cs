@@ -1,8 +1,8 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public abstract partial class ForestTabItemBase : TabItem, IForestControl, IForestIconControl
+    public abstract partial class ForestComboBoxItemBase : ComboBoxItem, IForestControl, IForestIconControl
     {
-        protected ForestTabItemBase()
+        protected ForestComboBoxItemBase()
         {
             Finder                           =  GetTemplateChild();
             StateMachine                     =  new VisualDFA();
@@ -77,6 +77,9 @@
         /// </summary>
         /// <returns></returns>
         protected ITemplatePartFinder GetTemplateChild() => new Finder(GetTemplateChild);
+
+        
+
 
         #region IForestControl Members
 

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// <see cref="IStateDrivenAnimatorBuilder"/> 接口表示一个动画构建器。

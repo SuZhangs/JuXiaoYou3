@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// <see cref="IStateDrivenTargetBuilder"/> 接口表示一个目标构造器。

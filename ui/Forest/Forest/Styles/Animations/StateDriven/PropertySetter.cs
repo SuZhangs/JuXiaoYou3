@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     /// <summary>
     /// 表示一个属性设置器。

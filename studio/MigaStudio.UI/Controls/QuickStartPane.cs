@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Acorisoft.FutureGL.Forest.Controls.Buttons;
+﻿using Acorisoft.FutureGL.Forest.Controls.Buttons;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls
 {

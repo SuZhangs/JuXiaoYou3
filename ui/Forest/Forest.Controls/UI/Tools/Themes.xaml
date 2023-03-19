@@ -13,7 +13,7 @@
         <Setter Property="Padding" Value="0 0 0 0" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type c:ForestTabControl}">
+                <ControlTemplate TargetType="{x:Type t:TabControl}">
                     <Grid KeyboardNavigation.TabNavigation="Local">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="FC" Width="Auto" />

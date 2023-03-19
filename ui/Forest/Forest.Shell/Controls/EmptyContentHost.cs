@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using Acorisoft.FutureGL.Forest.Interfaces;
+
 // ReSharper disable PropertyCanBeMadeInitOnly.Local
 
 namespace Acorisoft.FutureGL.Forest.Controls

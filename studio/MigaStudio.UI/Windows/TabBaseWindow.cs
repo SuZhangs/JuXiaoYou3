@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.AppModels;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.MigaStudio.Core;
+﻿using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Windows

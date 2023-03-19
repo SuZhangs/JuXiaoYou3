@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.Forest.Interfaces
+﻿namespace Acorisoft.FutureGL.Forest.Interfaces
 {
     public interface IEmptyStateSupport
     {

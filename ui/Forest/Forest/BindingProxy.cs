@@ -1,5 +1,3 @@
-using System.Windows;
-
 namespace Acorisoft.FutureGL.Forest
 {
     public class BindingProxy : Freezable

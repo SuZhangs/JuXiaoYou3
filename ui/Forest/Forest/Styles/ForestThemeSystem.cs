@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace Acorisoft.FutureGL.Forest.Styles
 {

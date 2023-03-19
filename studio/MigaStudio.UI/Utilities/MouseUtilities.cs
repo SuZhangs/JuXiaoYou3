@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Runtime.InteropServices;
 
 namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {

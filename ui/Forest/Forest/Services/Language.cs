@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Windows;
-using Acorisoft.FutureGL.Forest.Styles;
-using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using System.IO;
 
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable SuspiciousTypeConversion.Global

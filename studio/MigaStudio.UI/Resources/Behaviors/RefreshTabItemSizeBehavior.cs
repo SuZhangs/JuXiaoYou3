@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Resources.Panels;
-using Acorisoft.FutureGL.MigaStudio.ViewModels;
-using Microsoft.Xaml.Behaviors;
+﻿using Microsoft.Xaml.Behaviors;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Behaviors
 {

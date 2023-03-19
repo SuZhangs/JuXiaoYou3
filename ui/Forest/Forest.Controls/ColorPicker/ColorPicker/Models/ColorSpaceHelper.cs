@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ColorPicker.Models
+﻿namespace ColorPicker.Models
 {
     public static class ColorSpaceHelper
     {

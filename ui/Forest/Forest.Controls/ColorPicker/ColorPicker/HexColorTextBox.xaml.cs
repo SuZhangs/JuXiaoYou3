@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace ColorPicker
+﻿namespace ColorPicker
 {
     public partial class HexColorTextBox : PickerControlBase
     {

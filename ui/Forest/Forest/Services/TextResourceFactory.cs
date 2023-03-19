@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls.Primitives;
-using Acorisoft.FutureGL.Forest.Controls;
-using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using System.Windows.Controls.Primitives;
 
 namespace Acorisoft.FutureGL.Forest
 {

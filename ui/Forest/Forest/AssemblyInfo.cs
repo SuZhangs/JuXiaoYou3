@@ -9,7 +9,6 @@ global using System.Windows.Controls;
 global using System.Windows.Media;
 global using VisualState = Acorisoft.FutureGL.Forest.Styles.VisualState;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
@@ -19,6 +18,8 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Behaviors")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Panels")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Buttons")]
+[assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Controls.Selectors")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Converters")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Effects.Bitmaps")]
 [assembly: XmlnsDefinition("urn:acorisoft/forest/ui", "Acorisoft.FutureGL.Forest.Markup")]

@@ -1,5 +1,4 @@
 ﻿using ColorPicker.Models;
-using System.Windows;
 
 namespace ColorPicker
 {

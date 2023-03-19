@@ -2,12 +2,11 @@
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Styles;
 
 namespace Acorisoft.FutureGL.Forest.UI.Tools
 {
-    public class TabControl : ForestTabControl
+    public class TabControl : ForestTabControlBase
     {
         static TabControl()
         {
@@ -34,48 +33,10 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
+        private SolidColorBrush _foregroundHighlight;
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
-
-        protected override void OnStateChanged(bool init, VisualState now)
-        {
-            var palette = Palette;
-            var theme   = ThemeSystem.Instance.Theme;
-
-            _background = theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
-            _foreground = theme.Colors[(int)ForestTheme.Foreground].ToSolidColorBrush();
-            _highlight  = theme.GetHighlightColor(palette, 5).ToSolidColorBrush();
-            _highlight2 = theme.GetHighlightColor(palette, 4).ToSolidColorBrush();
-            _disabled   = theme.Colors[(int)ForestTheme.BackgroundInactive].ToSolidColorBrush();
-
-            // Stop Animation
-            _storyboard?.Stop(_bd);
-
-            if (!init)
-            {
-                HandleNormalState();
-            }
-            else
-            {
-                if (now == VisualState.Highlight1)
-                {
-                    HandleHighlight1State(theme.Duration.Medium);
-                }
-                else if (now == VisualState.Highlight2)
-                {
-                    HandleHighlight2State(theme.Duration.Medium);
-                }
-                else if (now == VisualState.Normal)
-                {
-                    HandleNormalState();
-                }
-                else if (now == VisualState.Inactive)
-                {
-                    HandleDisabledState();
-                }
-            }
-        }
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
@@ -85,54 +46,55 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         }
 
 
-        private void HandleDisabledState()
+        protected override void StopAnimation()
         {
-            //
-            // 设置背景颜色
-            _bd.Background = _disabled;
-
-            // 设置文本颜色
-            SetForeground();
+            _storyboard?.Stop(_bd);
         }
 
-        private void SetForeground()
+        protected override void SetForeground(Brush foreground)
         {
-            _content.SetValue(TextElement.ForegroundProperty, _foreground);
+            _content.SetValue(TextElement.ForegroundProperty, foreground);
 
             if (IsFilled)
             {
-                _icon.Fill = _foreground;
+                _icon.Fill = foreground;
             }
             else
             {
-                _icon.Stroke          = _foreground;
+                _icon.Stroke          = foreground;
                 _icon.StrokeThickness = 1d;
             }
         }
 
-        private void HandleNormalState()
+        protected override void OnInvalidateState()
         {
-            if (!IsEnabled)
-            {
-                HandleDisabledState();
-                return;
-            }
+            _background          = null;
+            _foreground          = null;
+            _foregroundHighlight = null;
+            _highlight           = null;
+            _highlight2          = null;
+            _disabled            = null;
+        }
 
+        protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
+        {
+            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             //
             // 设置背景颜色
             _bd.Background = IsSelected
                 ? _highlight2
-                :
-                //
-                // 设置背景颜色
-                _background;
+                : _background;
 
             // 设置文本颜色
-            SetForeground();
+            SetForeground(_foreground);
         }
 
-        private void HandleHighlight1State(Duration duration)
+        protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            
             //
             // Opacity 动画
 
@@ -156,11 +118,14 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground();
+            SetForeground(_foregroundHighlight);
         }
 
-        private void HandleHighlight2State(Duration duration)
+        protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            
             //
             // Opacity 动画
             // var OpacityAnimation = new DoubleAnimation()
@@ -196,7 +161,20 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground();
+            SetForeground(_foregroundHighlight);
+        }
+
+        protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
+        {
+            _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+
+            //
+            // 设置背景颜色
+            _bd.Background = _disabled;
+
+            // 设置文本颜色
+            SetForeground(_foregroundHighlight);
         }
     }
 }

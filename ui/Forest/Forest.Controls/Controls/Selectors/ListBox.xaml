@@ -2,11 +2,40 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls;assembly=Forest"
-                    xmlns:s="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors"
+                    xmlns:s="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors;assembly=Forest"
                     xmlns:c1="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Selectors"
                     xmlns:p="clr-namespace:Acorisoft.FutureGL.Forest.Controls.Panels;assembly=Forest">
     
-    <Style TargetType="{x:Type c:ForestListBoxItem}">
+    <Style x:Key="ClearStyle.ListBox" TargetType="{x:Type s:ForestListBoxBase}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type s:ForestListBoxBase}">
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ItemsControl.IsGrouping" Value="True">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    <Grid>
+                        <ScrollViewer Name="PART_ContentHost" >
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ClearStyle.ListBoxItem" TargetType="{x:Type s:ForestListBoxItemBase}">
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Margin" Value="0" />
@@ -15,7 +44,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type c:ForestListBoxItem}">
+                <ControlTemplate TargetType="{x:Type s:ForestListBoxItemBase}">
                     <Border Name="PART_Bd"
                             Margin="0" 
                             Padding="{TemplateBinding Padding}" 
@@ -34,33 +63,7 @@
         </Setter>
     </Style>
     
-    <Style TargetType="{x:Type s:ChromeListBox}">
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
-        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type s:ChromeListBox}">
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="ItemsControl.IsGrouping" Value="True">
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                    <Grid>
-                        <ScrollViewer Name="PART_ContentHost" >
-                            <ItemsPresenter />
-                        </ScrollViewer>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style TargetType="{x:Type c1:ChromeListBox}" BasedOn="{StaticResource ClearStyle.ListBox}">
     </Style>
     
     

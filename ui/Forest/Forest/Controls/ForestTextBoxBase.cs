@@ -1,11 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Styles;
-using Acorisoft.FutureGL.Forest.Styles.Animations;
-
-namespace Acorisoft.FutureGL.Forest.Controls
+﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
     public class ForestTextBoxBase : TextBox, ITextResourceAdapter
     {

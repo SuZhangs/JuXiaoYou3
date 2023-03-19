@@ -5,8 +5,6 @@ using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.AppModels;
 
 using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.Views;
 using DryIoc;

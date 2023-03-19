@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Interfaces;
-
-namespace Acorisoft.FutureGL.Forest
+﻿namespace Acorisoft.FutureGL.Forest
 {
     /// <summary>
     /// 参数

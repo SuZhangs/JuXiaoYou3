@@ -3,6 +3,9 @@ global using System.Collections.Generic;
 global using System.Windows;
 global using System.Windows.Controls;
 global using VisualState = Acorisoft.FutureGL.Forest.Styles.VisualState;
+
+global using Acorisoft.FutureGL.Forest.Controls.Selectors;
+
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]

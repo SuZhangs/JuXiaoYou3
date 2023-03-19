@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        protected override void ReleaseManagedResources()
+        protected override void ReleaseManagedResourcesOverride()
         {
             BackendImage.Dispose();
             BackgroundImage.Dispose();

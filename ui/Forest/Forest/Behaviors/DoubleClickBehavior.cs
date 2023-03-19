@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using Microsoft.Xaml.Behaviors;
+﻿using Microsoft.Xaml.Behaviors;
 
 namespace Acorisoft.FutureGL.Forest.Behaviors
 {

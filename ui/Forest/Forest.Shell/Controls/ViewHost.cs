@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.Controls
 {

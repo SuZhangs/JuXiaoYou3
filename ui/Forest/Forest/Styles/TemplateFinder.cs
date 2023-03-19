@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Styles
+﻿namespace Acorisoft.FutureGL.Forest.Styles
 {
     public interface ITemplatePartFinder
     {

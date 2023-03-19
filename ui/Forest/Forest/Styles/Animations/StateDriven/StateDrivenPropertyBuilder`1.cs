@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Styles.Animations
+﻿namespace Acorisoft.FutureGL.Forest.Styles.Animations
 {
     public abstract class StateDrivenPropertyBuilder<TValue> : IStateDrivenAnimationBuilder<TValue>
     {

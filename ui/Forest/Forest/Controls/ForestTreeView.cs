@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Controls
+﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
     public class ForestTreeView : TreeView
     {

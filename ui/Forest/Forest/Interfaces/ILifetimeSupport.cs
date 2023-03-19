@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Acorisoft.FutureGL.Forest
+﻿namespace Acorisoft.FutureGL.Forest
 {
     public interface ILifetimeSupport
     {

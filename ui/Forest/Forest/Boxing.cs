@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest
+﻿namespace Acorisoft.FutureGL.Forest
 {
     public class Boxing
     {

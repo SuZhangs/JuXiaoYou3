@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public abstract class ForestItemsControlBase : ItemsControl, ITextResourceAdapter
+    public abstract class ForestTabControlBase : TabControl, ITextResourceAdapter
     {
         
         #region ITextResourceAdapter Members

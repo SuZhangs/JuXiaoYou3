@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace ColorPicker
+﻿namespace ColorPicker
 {
     public partial class ColorSliders : PickerControlBase
     {

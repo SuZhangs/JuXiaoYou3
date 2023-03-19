@@ -1,5 +1,4 @@
-﻿using System.Reactive;
-using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.AppModels
 {

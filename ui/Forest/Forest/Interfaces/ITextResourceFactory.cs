@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Acorisoft.FutureGL.Forest.Interfaces
+﻿namespace Acorisoft.FutureGL.Forest.Interfaces
 {
     public interface ITextResourceFactory
     {
