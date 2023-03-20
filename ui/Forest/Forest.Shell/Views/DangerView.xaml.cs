@@ -1,9 +1,10 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Threading;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
-    public partial class DangerView : UserControl
+    public partial class DangerView:ForestUserControl 
     {
         public DangerView()
         {

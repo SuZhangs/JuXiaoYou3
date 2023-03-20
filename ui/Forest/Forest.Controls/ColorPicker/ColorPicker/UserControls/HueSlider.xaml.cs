@@ -1,10 +1,11 @@
 ﻿using ColorPicker.Models;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker.UserControls
 {
-    internal partial class HueSlider : UserControl
+    internal partial class HueSlider:UserControl 
     {
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(nameof(Value), typeof(double), typeof(HueSlider),

@@ -1,8 +1,9 @@
 ﻿using System.Windows.Controls;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
-    public partial class StringView : UserControl
+    public partial class StringView:ForestUserControl 
     {
         public StringView()
         {

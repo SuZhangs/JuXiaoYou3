@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Modules.Views.ModuleView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Modules.Views.ModuleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -61,4 +61,4 @@
             <f:ShadowTabItem Header="关于我们"/>
         </f:ShadowTabControl>
     </f:Drawer>
-</UserControl>
+</f:ForestUserControl>

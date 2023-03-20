@@ -1,8 +1,9 @@
 ﻿using System.Windows.Controls;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
-    public partial class InfoView : UserControl
+    public partial class InfoView:ForestUserControl 
     {
         public InfoView()
         {

@@ -3,7 +3,7 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.AppModels;
-
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.Views;
@@ -104,7 +104,7 @@ namespace Acorisoft.FutureGL.Forest
             Initialize();
         }
 
-        protected static void InstallView<TView, TViewModel>() where TView : UserControl where TViewModel : ViewModelBase, IViewModel
+        protected static void InstallView<TView, TViewModel>() where TView:ForestUserControl  where TViewModel : ViewModelBase, IViewModel
         {
             Xaml.InstallView(new BindingInfo
             {

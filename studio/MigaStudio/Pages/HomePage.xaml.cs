@@ -1,10 +1,11 @@
 ﻿using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.Attributes;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     [Connected(View = typeof(HomePage), ViewModel = typeof(HomeViewModel))]
-    public partial class HomePage : UserControl
+    public partial class HomePage:ForestUserControl 
     {
         public HomePage()
         {

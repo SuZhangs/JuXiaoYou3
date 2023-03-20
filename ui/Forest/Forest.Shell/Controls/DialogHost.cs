@@ -87,7 +87,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
                     return;
                 }
 
-                fe.Loaded += OnDialogContentLoaded;
+                if (view is ForestUserControl ph)
+                {
+                    
+                }
+                else
+                {
+                    fe.Loaded += OnDialogContentLoaded;
+                }
 
                 //
                 // 设置视图

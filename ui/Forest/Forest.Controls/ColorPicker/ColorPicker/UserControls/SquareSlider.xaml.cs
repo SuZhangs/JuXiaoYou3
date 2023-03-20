@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker.UserControls
 {
-    internal partial class SquareSlider : UserControl, INotifyPropertyChanged
+    internal partial class SquareSlider:UserControl , INotifyPropertyChanged
     {
         public static readonly DependencyProperty HueProperty
             = DependencyProperty.Register(nameof(Hue), typeof(double), typeof(SquareSlider),

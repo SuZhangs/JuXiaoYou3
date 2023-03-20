@@ -1,25 +1,16 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.Forest.Views.StringView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Gallery.TemplateGalleryView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
-             xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
+             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
+             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
-             d:DesignHeight="384"
-             d:DesignWidth="480"
-             d:DataContext="{d:DesignInstance Type={x:Type local:StringViewModel},IsDesignTimeCreatable = True}"
-             Width="480"
-             Height="384">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Image.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateGalleryViewModel}, IsDesignTimeCreatable=True}"
+             Height="540"
+             Width="960">
     <Border Background="{f:BackgroundBrush}"
             CornerRadius="10"
             BorderThickness="0 4 0 0"

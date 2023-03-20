@@ -1,9 +1,10 @@
 ﻿using ColorPicker.Models;
 using System.Windows.Media;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker
 {
-    public class PickerControlBase : UserControl, IColorStateStorage
+    public class PickerControlBase:UserControl , IColorStateStorage
     {
         public static readonly DependencyProperty ColorStateProperty =
             DependencyProperty.Register(nameof(ColorState), typeof(ColorState), typeof(PickerControlBase),

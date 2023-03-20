@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
@@ -36,16 +37,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 .Subscribe(OnKeyPress)
                 .DisposeWith(Collector);
 
-            DatabaseManager = Xaml.Get<IDatabaseManager>();
-            ImageEngine     = DatabaseManager.GetEngine<ImageEngine>();
-            DocumentEngine  = DatabaseManager.GetEngine<DocumentEngine>();
+            var dbMgr = Xaml.Get<IDatabaseManager>();
+            DatabaseManager = dbMgr;
+            ImageEngine     = dbMgr.GetEngine<ImageEngine>();
+            DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
+            TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
             DocumentSource  = new SourceList<IDataCache>();
 
-            NewDocumentCommand          = AsyncCommand(NewDocumentImpl);
-            SelectDocumentCommand       = Command<DocumentCache>(SelectDocumentImpl);
-            ChangeDocumentAvatarCommand = AsyncCommand<DocumentCache>(ChangeDocumentAvatarImpl, HasDocument);
-            NextPageCommand             = Command(NextPageImpl, CanNextPage);
-            LastPageCommand             = Command(LastPageImpl, CanLastPage);
+            NewDocumentCommand         = AsyncCommand(NewDocumentImpl);
+            SelectDocumentCommand      = Command<DocumentCache>(SelectDocumentImpl);
+            ChangeAvatarCommand        = AsyncCommand<DocumentCache>(ChangeDocumentAvatarImpl, HasDocument);
+            GotoTemplateGalleryCommand = AsyncCommand(GotoTemplateGalleryImpl);
+            NextPageCommand            = Command(NextPageImpl, CanNextPage);
+            LastPageCommand            = Command(LastPageImpl, CanLastPage);
 
 
             DocumentSource.Connect()
@@ -174,6 +178,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
             index.Avatar = avatar;
             DocumentEngine.UpdateDocument(index);
+        }
+
+        #endregion
+
+        #region GotoPage
+
+        private async Task GotoTemplateGalleryImpl()
+        {
+            await Xaml.Get<IDialogService>()
+                      .Dialog(Xaml.GetViewModel<TemplateGalleryViewModel>());
+            
+            // TODO: 更新模组
+            if (!TemplateEngine.Activated)
+            {
+                TemplateEngine.Activate();
+            }
+            
+            
         }
 
         #endregion
@@ -347,6 +369,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         public SourceList<IDataCache> DocumentSource { get; }
         public ReadOnlyObservableCollection<IDataCache> Collection => _collection;
         public DocumentEngine DocumentEngine { get; }
+        public TemplateEngine TemplateEngine { get; }
         public ImageEngine ImageEngine { get; }
 
         public IDatabaseManager DatabaseManager { get; }
@@ -358,8 +381,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         public RelayCommand LastPageCommand { get; }
 
         public RelayCommand<DocumentCache> SelectDocumentCommand { get; }
-        public AsyncRelayCommand<DocumentCache> ChangeDocumentAvatarCommand { get; }
-
+        public AsyncRelayCommand<DocumentCache> ChangeAvatarCommand { get; }
+        public AsyncRelayCommand GotoTemplateGalleryCommand { get; }
+        
         #endregion
 
         #endregion

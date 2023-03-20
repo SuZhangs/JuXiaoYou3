@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Commons.MusicPlayerView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Services.MusicPlayerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
-             xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
+             xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services"
              xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:converters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -356,4 +356,4 @@
             </f:StretchPanel>
         </Border>
     </f:Drawer>
-</UserControl>
+</f:ForestUserControl>

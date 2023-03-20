@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.SettingPage"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.SettingPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -83,4 +83,4 @@
                              IsFilled="True" />
         </f:ShadowTabControl>
     </Grid>
-</UserControl>
+</f:ForestUserControl>

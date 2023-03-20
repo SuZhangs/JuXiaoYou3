@@ -8,14 +8,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
 
-    public partial class MusicPlayerView : UserControl
+    public partial class MusicPlayerView:ForestUserControl 
     {
         public MusicPlayerView()
         {

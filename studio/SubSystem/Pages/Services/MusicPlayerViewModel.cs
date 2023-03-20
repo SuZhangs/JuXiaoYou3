@@ -20,7 +20,7 @@ using System.Diagnostics;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
     public sealed class MusicPlayerViewModel : ForestObject, IDropTarget
     {

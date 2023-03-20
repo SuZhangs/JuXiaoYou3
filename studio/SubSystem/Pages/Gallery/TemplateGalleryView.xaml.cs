@@ -3,9 +3,11 @@ using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public partial class NewDocumentWizard:ForestUserControl 
+
+    [Connected(View = typeof(TemplateGalleryView), ViewModel = typeof(TemplateGalleryViewModel))]
+    public partial class TemplateGalleryView:ForestUserControl 
     {
-        public NewDocumentWizard()
+        public TemplateGalleryView()
         {
             InitializeComponent();
         }

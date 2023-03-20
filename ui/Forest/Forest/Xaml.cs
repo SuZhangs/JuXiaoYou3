@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Windows.Media.Imaging;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.Models;
 using DryIoc;
@@ -289,7 +290,7 @@ namespace Acorisoft.FutureGL.Forest
             ViewModelInfoMapper.TryAdd(bindingInfo.ViewModel, bindingInfo);
         }
 
-        public static void InstallView<TView, TViewModel>() where TView : UserControl where TViewModel : IViewModel =>
+        public static void InstallView<TView, TViewModel>() where TView:UserControl  where TViewModel : IViewModel =>
             InstallView(new BindingInfo
             {
                 ViewModel = typeof(TViewModel),

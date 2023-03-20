@@ -5,13 +5,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Views
 {
-    public partial class TabShellView : UserControl
+    public partial class TabShellView:ForestUserControl 
     {
         public TabShellView()
         {

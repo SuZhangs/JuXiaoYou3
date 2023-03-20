@@ -1,20 +1,20 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Gallery.DocumentGallery"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
-             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
-             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
-             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
-             xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
-             xmlns:f="urn:acorisoft/forest/ui"
-             xmlns:ftk="urn:acorisoft/forest/toolkits"
-             xmlns:fs="urn:acorisoft/forest/shell"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Gallery.DocumentGallery"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
+                   xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
+                   xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
+                   xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                   xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
+                   xmlns:f="urn:acorisoft/forest/ui"
+                   xmlns:ftk="urn:acorisoft/forest/toolkits"
+                   xmlns:fs="urn:acorisoft/forest/shell"
+                   xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                   mc:Ignorable="d"
+                   d:DesignHeight="300" d:DesignWidth="300"
+                   d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <SolidColorBrush x:Key="Transparent" Color="Transparent" />
 
@@ -85,13 +85,13 @@
 
                 <ftk:TabControl DockPanel.Dock="Bottom"
                                 Padding="0 16 0 0">
-                    <ftk:TabItem Header="目录"
-                             Icon="{StaticResource FeatherIcon.Folder}">
-
-                    </ftk:TabItem>
                     <ftk:TabItem Header="属性">
                     </ftk:TabItem>
                     <ftk:TabItem Header="灵感"
+                             Icon="{StaticResource FeatherIcon.Folder}">
+
+                    </ftk:TabItem>
+                    <ftk:TabItem Header="目录"
                              Icon="{StaticResource FeatherIcon.Folder}">
 
                     </ftk:TabItem>
@@ -135,7 +135,6 @@
 
                             <ftk:ToolButton Content="类型"
                                             Icon="{StaticResource FeatherIcon.Filter}"
-                                            IsFilled="True"
                                             ShowText="True"/>
 
                             <ftk:ToolButton Content="顺序"
@@ -187,4 +186,4 @@
             </f:ForestSection>
         </Grid>
     </f:Drawer>
-</UserControl>
+</f:ForestUserControl>
