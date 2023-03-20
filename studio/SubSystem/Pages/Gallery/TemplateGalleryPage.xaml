@@ -6,59 +6,75 @@
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Gallery"
              xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateGalleryViewModel}, IsDesignTimeCreatable=True}"
              Height="540"
              Width="960">
-    <Border Background="{f:BackgroundBrush}"
-            CornerRadius="10"
-            BorderThickness="0 4 0 0"
-            BorderBrush="SlateGray"
+    <Border Background="#454649"
+            CornerRadius="12"
             Padding="16">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!-- 标题 -->
-            <TextBlock Grid.Row="0"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="SlateGray"
-                       HorizontalAlignment="Center"
-                       Margin="0 16 0 0"
-                       Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
-                       VerticalAlignment="Center" />
+            <f:ForestSection Grid.Row="0"
+                             Header="模组">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Margin="0 0 0 4"
+                                Orientation="Horizontal">
+                        <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="清空"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
 
-            <f:ForestTextBox Grid.Row="1"
-                             ScrollViewer.CanContentScroll="True"
-                             VerticalScrollBarVisibility="Auto"
-                             Margin="16"
-                             Padding="8"
-                             Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             TextWrapping="Wrap" />
+
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top"
+                                    Orientation="Horizontal">
+
+                        <ftk:ToolButton Content="类型"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True"/>
+
+                        <ftk:ToolButton Content="顺序"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True"/>
+
+                        <ftk:ToolButton Content="筛选"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True"/>
+                    </StackPanel>
+
+
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </f:ForestSection>
 
             <!-- 按钮 -->
-            <UniformGrid Grid.Row="2"
-                         Columns="2"
-                         Height="48"
-                         Margin="16"
-                         Rows="1">
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
+
+            <f:DialogButton Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Icon="{StaticResource FeatherIcon.Checked}"
                                 IconSize="29"
                                 IsDefault="True"
                                 Content="{x:Static f:Language.CompleteText}"
-                                Command="{Binding CompletedCommand}"
-                                Purpose="Info" />
-
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
-                                Content="{x:Static f:Language.CancelText}"
                                 Command="{Binding CancelCommand}"
-                                Purpose="Close" />
-            </UniformGrid>
+                            Height="48"
+                                Purpose="Info" 
+                            Width="160"/>
         </Grid>
     </Border>
 </f:ForestUserControl>

@@ -88,7 +88,7 @@
 
                         <!-- 对话框 -->
                         <Border x:Name="PART_DialogMask"
-                                Background="{f:MaskBrush}"
+                                Background="#30000000"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
                                 Visibility="Collapsed"
@@ -113,7 +113,7 @@
 
                         <!-- 进度条 -->
                         <Border x:Name="PART_IndicatorMask"
-                                Background="{f:MaskBrush}"
+                                Background="#30000000"
                                 Visibility="Collapsed"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
