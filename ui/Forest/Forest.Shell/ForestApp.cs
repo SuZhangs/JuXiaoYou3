@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.Forest
 {
     public abstract class ForestApp : Application
     {
-        internal class BuiltinViews : IBindingInfoProvider
+        protected class BuiltinViews : IBindingInfoProvider
         {
             public IEnumerable<BindingInfo> GetBindingInfo()
             {
@@ -67,7 +67,7 @@ namespace Acorisoft.FutureGL.Forest
         }
         
 
-        protected const string BasicSettingFileName = "main.json";
+        private readonly string BasicSettingFileName;
 
         /*
          * 生命周期:
@@ -89,8 +89,16 @@ namespace Acorisoft.FutureGL.Forest
          *            |
          *        
          */
-        protected ForestApp()
+
+        protected ForestApp() : this("main.json")
         {
+            
+        }
+        
+        protected ForestApp(string fileName)
+        {
+            BasicSettingFileName = fileName;
+            
             //
             // 初始化
             Initialize();

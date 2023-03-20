@@ -6,6 +6,7 @@
         <Nullable>disable</Nullable>
         <OutDir>../../Builds/Base</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

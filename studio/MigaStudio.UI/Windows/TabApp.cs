@@ -13,7 +13,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         where TMainView : UserControl
         where TViewModel : TabBaseAppViewModel
     {
-
+        protected TabApp()
+        {
+            
+        }
+        
+        protected TabApp(string fileName) : base(fileName)
+        {
+            
+        }
+        
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
         {
             var r = base.RegisterFrameworkServices(container);
@@ -68,7 +77,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         where TSplash : UserControl
         where TViewModel : TabBaseAppViewModel
     {
+        protected TabApp()
+        {
+            
+        }
         
+        protected TabApp(string fileName) : base(fileName)
+        {
+            
+        }
         protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
         {
             var r = base.RegisterFrameworkServices(container);

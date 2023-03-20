@@ -7,6 +7,7 @@
         <UseWPF>true</UseWPF>
         <OutDir>../../Builds/JuXiaoYou</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

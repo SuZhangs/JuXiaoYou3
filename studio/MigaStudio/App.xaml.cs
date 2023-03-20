@@ -25,6 +25,10 @@ namespace Acorisoft.FutureGL.MigaStudio
     /// </summary>
     public partial class App
     {
+        public App() : base("juxiaoyou-main.json")
+        {
+            
+        }
         
         protected sealed override ApplicationModel ConfigureDirectory()
         {
