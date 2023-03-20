@@ -46,13 +46,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
 
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
-            Xaml.InstallView<DocumentGallery, DocumentGalleryViewModel>();
+            Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
+            Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
 
-            Xaml.InstallView<DocumentEditorView, AbilityDocumentViewModel>();
-            Xaml.InstallView<DocumentEditorView, CharacterDocumentViewModel>();
-            Xaml.InstallView<DocumentEditorView, ItemDocumentViewModel>();
-            Xaml.InstallView<DocumentEditorView, OtherDocumentViewModel>();
-            Xaml.InstallView<GeographyEditorView, GeographyDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorPage, ItemDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
+            Xaml.InstallView<GeographyEditorPage, GeographyDocumentViewModel>();
         }
     }
 }

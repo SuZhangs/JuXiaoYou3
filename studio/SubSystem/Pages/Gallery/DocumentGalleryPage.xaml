@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Gallery.DocumentGallery"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Gallery.DocumentGalleryPage"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -116,6 +116,7 @@
                                         ShowText="True"/>
 
                         <ftk:ToolButton Content="模板"
+                                        Command="{Binding GotoTemplateGalleryCommand}"
                                         Icon="{StaticResource IC.Code}"
                                         IsFilled="True"
                                         ShowText="True"/>

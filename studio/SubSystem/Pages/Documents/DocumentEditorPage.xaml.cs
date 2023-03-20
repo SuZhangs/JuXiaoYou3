@@ -6,19 +6,19 @@ using Acorisoft.FutureGL.Forest.Utils;
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
 
-    [Connected(View = typeof(DocumentEditorView), ViewModel = typeof(CharacterDocumentViewModel))]
-    [Connected(View = typeof(DocumentEditorView), ViewModel = typeof(ItemDocumentViewModel))]
-    [Connected(View = typeof(DocumentEditorView), ViewModel = typeof(AbilityDocumentViewModel))]
-    [Connected(View = typeof(DocumentEditorView), ViewModel = typeof(OtherDocumentViewModel))]
-    public partial class DocumentEditorView
+    [Connected(View = typeof(DocumentEditorPage), ViewModel = typeof(CharacterDocumentViewModel))]
+    [Connected(View = typeof(DocumentEditorPage), ViewModel = typeof(ItemDocumentViewModel))]
+    [Connected(View = typeof(DocumentEditorPage), ViewModel = typeof(AbilityDocumentViewModel))]
+    [Connected(View = typeof(DocumentEditorPage), ViewModel = typeof(OtherDocumentViewModel))]
+    public partial class DocumentEditorPage
     {
         public static readonly DependencyProperty SubViewsProperty = DependencyProperty.Register(
             nameof(SubViews),
             typeof(ObservableCollection<FrameworkElement>),
-            typeof(DocumentEditorView),
+            typeof(DocumentEditorPage),
             new PropertyMetadata(default(ObservableCollection<FrameworkElement>)));
         
-        public DocumentEditorView()
+        public DocumentEditorPage()
         {
             InitializeComponent();
             SubViews           =  new ObservableCollection<FrameworkElement>();
