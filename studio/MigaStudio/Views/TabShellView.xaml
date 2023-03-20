@@ -45,7 +45,6 @@
                 </DockPanel>
             </Border>
         </DataTemplate>
-        <Style TargetType="ListBoxItem" BasedOn="{StaticResource TabItem}" />
     </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top"
@@ -60,22 +59,22 @@
                 <ColumnDefinition Width="144" />
             </Grid.ColumnDefinitions>
 
-            <ListBox x:Name="Shell"
-                     Grid.Column="1"
-                     WindowChrome.IsHitTestVisibleInChrome="False"
-                     ScrollViewer.CanContentScroll="False"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     Margin="0 2 0 0"
-                     ItemsSource="{Binding Workspace,Mode=OneWay}"
-                     SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
-                     VerticalAlignment="Stretch">
-                <ListBox.ItemsPanel>
+            <f:ChromeListBox x:Name="Shell"
+                             Grid.Column="1"
+                             WindowChrome.IsHitTestVisibleInChrome="False"
+                             ScrollViewer.CanContentScroll="False"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             Margin="0 2 0 0"
+                             ItemsSource="{Binding Workspace,Mode=OneWay}"
+                             SelectedItem="{Binding CurrentViewModel,Mode=TwoWay}"
+                             VerticalAlignment="Stretch">
+                <f:ChromeListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <s:TabItemPanel />
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
+                </f:ChromeListBox.ItemsPanel>
 
-            </ListBox>
+            </f:ChromeListBox>
 
             <!-- 主菜单按钮 -->
             <StackPanel Grid.Column="2"
@@ -106,12 +105,12 @@
             </StackPanel>
 
             <Border Grid.Column="3"
-                    Background="White"/>
+                    Background="{f:Brush BackgroundInActive}"/>
 
             <!-- 标题栏 -->
             <fs:TitleBar Grid.Column="4"
                          WindowChrome.IsHitTestVisibleInChrome="True"
-                         Background="White"
+                         Background="{f:Brush BackgroundInActive}"
                          WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 

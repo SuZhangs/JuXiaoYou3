@@ -9,6 +9,7 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.UI;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
@@ -52,6 +53,12 @@ namespace Acorisoft.FutureGL.MigaStudio
         protected override void RegisterServices(ILogger logger, IContainer container)
         {
             container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
+        }
+
+        protected override void RegisterContextServices(IContainer container)
+        {
+            Resources.MergedDictionaries.Add(ForestUI.UseToolKits());
+            base.RegisterContextServices(container);
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)

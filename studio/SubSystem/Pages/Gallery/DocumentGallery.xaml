@@ -9,6 +9,7 @@
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
              xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
@@ -53,167 +54,137 @@
                 </DockPanel>
             </f:SimpleButton>
         </DataTemplate>
+
+        <Style TargetType="{x:Type f:ListBoxItem}" BasedOn="{StaticResource ClearStyle.ListBoxItem}">
+            <Setter Property="Padding" Value="8" />
+        </Style>
     </UserControl.Resources>
-    <f:Drawer Padding="0 16 0 0"
-              IsRightOpen="{Binding IsDocumentPropertyPaneOpen,Mode=TwoWay}">
-        <f:Drawer.RightContent>
-            <Grid Background="#F1F1F1"
-                  Width="384">
-                <StackPanel Margin="16 0">
-                    <f:LooklessButton Command="{Binding ChangeDocumentAvatarCommand}"
-                                      CommandParameter="{Binding Selected,Mode=OneWay}"
-                                      Margin="16"
-                                      Height="192"
-                                      Width="192">
-                        <Border BorderThickness="1"
-                                BorderBrush="Black"
-                                DataContext="{Binding Selected,Mode=OneWay}">
-                            <Border.Background>
-                                <ImageBrush>
-                                    <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                            <Binding Path="Avatar" Mode="OneWay" />
-                                            <Binding Path="Type" />
-                                        </MultiBinding>
-                                    </ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Border.Background>
-                        </Border>
-                    </f:LooklessButton>
-
-                    <TextBlock FontSize="24"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               Margin="0 8"
-                               Text="{Binding Selected.Name,Mode=OneWay}" />
-
-                    <UniformGrid Columns="4">
-                        <TextBlock FontSize="24"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   Margin="0 8"
-                                   Text="{Binding Selected.Type,Mode=OneWay}" />
-
-                        <f:ForestIconButton Icon="{Binding Selected.IsLocked, Mode=OneWay,Converter={StaticResource LockStateConverter}}"
-                                            CornerRadius="3"
-                                            Margin="4"
-                                            Palette="Info"
-                                            Padding="8" />
-                    </UniformGrid>
-
-                    <f:CallToAction Content="编辑" CornerRadius="3" Margin="4" />
-                </StackPanel>
-            </Grid>
-        </f:Drawer.RightContent>
+    <f:Drawer>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="64" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="320"
+                                  Width="320" 
+                                  MaxWidth="480"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="540" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <!-- 操作 -->
-                <StackPanel Grid.Column="0"
-                            Margin="48 0 0 0"
-                            Orientation="Horizontal">
-                    <f:ForestIconButton Icon="{StaticResource FeatherIcon.Filter}"
-                                        IconSize="17"
-                                        IsFilled="False" />
-                    <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"
-                                        IconSize="17"
-                                        IsFilled="False" />
+            <!-- 菜单栏 -->
+            <DockPanel Margin="16">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Margin="0 0 0 8"
+                               FontSize="18"
+                               Text="搜索"/>
+
+                    <DockPanel Margin="0 0 0 32">
+                        <ftk:ToolButton DockPanel.Dock="Right"
+                                        Margin="8 0 0 0"
+                                        Icon="{StaticResource FeatherIcon.Search}"/>
+                        <TextBox />
+                    </DockPanel>
                 </StackPanel>
 
-                <!-- 选项 -->
-                <f:HighlightTextBox Grid.Column="1" />
+                <ftk:TabControl DockPanel.Dock="Bottom"
+                                Padding="0 16 0 0">
+                    <ftk:TabItem Header="目录"
+                             Icon="{StaticResource FeatherIcon.Folder}">
 
-                <!-- 操作 -->
-                <StackPanel Grid.Column="2"
-                            Margin="48 0 0 0"
-                            Orientation="Horizontal">
-                    <f:CallToAction Content="新建"
-                                    CornerRadius="20"
-                                    Command="{Binding NewDocumentCommand}"
-                                    Palette="HighlightPalette1"
-                                    Width="128" />
-                    <ui:Button Content="导入" />
-                    <ui:Button Content="导入" />
-                </StackPanel>
-            </Grid>
+                    </ftk:TabItem>
+                    <ftk:TabItem Header="属性">
+                    </ftk:TabItem>
+                    <ftk:TabItem Header="灵感"
+                             Icon="{StaticResource FeatherIcon.Folder}">
 
-            <!-- 分页 -->
-            <Grid Grid.Row="1"
-                  Margin="16 0"
-                  VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="48" />
-                </Grid.ColumnDefinitions>
+                    </ftk:TabItem>
+                </ftk:TabControl>
+            </DockPanel>
+
+            <GridSplitter Background="{f:Brush BackgroundInactive}"
+                          Margin="0 144 0 96"
+                          Width="1"/>
+
+            <!-- 内容栏 -->
+            
+            <f:ForestSection Grid.Column="1"
+                             Header="内容"
+                             Margin="16">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+
+                        <ftk:ToolButton Content="分组"
+                                        Icon="{StaticResource FeatherIcon.Folder}"
+                                        ShowText="True"/>
+
+                        <ftk:ToolButton Content="模板"
+                                        Icon="{StaticResource IC.Code}"
+                                        IsFilled="True"
+                                        ShowText="True"/>
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="84" />
+                            <ColumnDefinition Width="36" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal">
+
+                            <ftk:ToolButton Content="类型"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            IsFilled="True"
+                                            ShowText="True"/>
+
+                            <ftk:ToolButton Content="顺序"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True"/>
+
+                            <ftk:ToolButton Content="筛选"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True"/>
+                        </StackPanel>
 
 
-                <!-- 操作 -->
-                <StackPanel Grid.Column="0"
-                            Margin="48 0 0 0"
-                            Orientation="Horizontal">
-                    <f:ForestIconButton Icon="{StaticResource FeatherIcon.Filter}"
-                                        IconSize="17"
-                                        IsFilled="False" />
-                    <f:ForestIconButton Icon="{StaticResource FeatherIcon.Plus}"
-                                        IconSize="17"
-                                        IsFilled="False" />
-                </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+                            <ftk:ToolButton Content="添加"
+                                            Icon="{StaticResource FeatherIcon.Plus}"
+                                            ShowText="True"/>
 
-                <f:ForestIconButton Grid.Column="1"
-                                    CornerRadius="48"
-                                    Command="{Binding LastPageCommand}"
-                                    FocusVisualStyle="{x:Null}"
-                                    Focusable="False"
-                                    Icon="{StaticResource FeatherIcon.Left}"
-                                    IconSize="23"
-                                    IsTabStop="False"
-                                    Height="42"
-                                    Width="42" />
+                            <ftk:ToolButton Content="删除"
+                                            Icon="{StaticResource FeatherIcon.Trash}"
+                                            ShowText="True"/>
 
-                <TextBlock Grid.Column="2"
-                           FontSize="16"
-                           HorizontalAlignment="Center"
-                           Text="{Binding PageIndex,Mode=OneWay}"
-                           VerticalAlignment="Center" />
+                            <ftk:ToolButton Content="保护"
+                                            Icon="{StaticResource FeatherIcon.Lock}"
+                                            ShowText="True"/>
+                        </StackPanel>
 
-                <f:ForestIconButton Grid.Column="3"
-                                    CornerRadius="48"
-                                    Command="{Binding NextPageCommand}"
-                                    FocusVisualStyle="{x:Null}"
-                                    Focusable="False"
-                                    HorizontalAlignment="Left"
-                                    Icon="{StaticResource FeatherIcon.Right}"
-                                    IconSize="23"
-                                    IsTabStop="False"
-                                    Height="42"
-                                    Width="42" />
-            </Grid>
 
-            <!-- 列表 -->
-            <ScrollViewer Grid.Row="2"
-                          Margin="32 0">
-                <ItemsControl Focusable="False"
-                              IsTabStop="False"
-                              ItemsSource="{Binding Collection,Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+
+                        <ftk:ToolButton Grid.Column="2"
+                                            Content="上一页"
+                                            Margin="48 0 0 0"
+                                            Icon="{StaticResource FeatherIcon.Left}"/>
+
+                        <ftk:ToolButton Grid.Column="3"
+                                            Content="下一页"
+                                            Icon="{StaticResource FeatherIcon.Right}"/>
+                    </Grid>
+
+
+
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </f:ForestSection>
         </Grid>
     </f:Drawer>
 </UserControl>

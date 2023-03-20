@@ -21,6 +21,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
     public class DocumentGalleryViewModel : TabViewModel
     {
+        private const int MaxCountPerPage     = 40;
+        private const int MaxCountPerPageMask = 39;
+        private const int MaxPageCount        = 250;
+        private const int MinPageIndex        = 1;
+
+
         private readonly ReadOnlyObservableCollection<IDataCache> _collection;
 
         public DocumentGalleryViewModel()
@@ -30,7 +36,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 .Subscribe(OnKeyPress)
                 .DisposeWith(Collector);
 
-            Title           = StringFromCode.GetText($"name.{nameof(DocumentGallery)}");
             DatabaseManager = Xaml.Get<IDatabaseManager>();
             ImageEngine     = DatabaseManager.GetEngine<ImageEngine>();
             DocumentEngine  = DatabaseManager.GetEngine<DocumentEngine>();
@@ -51,16 +56,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
             //
             // 初始化
-            PageIndex = 1;
+            PageIndex = MinPageIndex;
         }
 
         #region Command
 
         #region Last / Next
 
-        
-
-        private bool CanNextPage() => _pageIndex + 1 < _totalPage;
+        private bool CanNextPage() => _pageIndex + 1 < _totalPageCount;
 
         private bool CanLastPage() => _pageIndex > 1;
 
@@ -75,15 +78,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             PageIndex--;
             LoadPage();
         }
-        
 
         #endregion
 
 
         #region Document
 
-        private static bool HasDocument(IDataCache cache) => cache is not null; 
-        
+        private static bool HasDocument(IDataCache cache) => cache is not null;
+
         private async Task NewDocumentImpl()
         {
             var wizard = await SubSystem.NewDocumentWizard();
@@ -114,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 Refresh();
             }
         }
-        
+
 
         private void SelectDocumentImpl(DocumentCache index)
         {
@@ -124,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
 
             Selected = index;
-            
+
             // TODO: 进一步操作
             IsDocumentPropertyPaneOpen = Selected is not null;
         }
@@ -138,7 +140,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
 
             var r = await ImageUtilities.Avatar();
-            
+
             if (!r.IsFinished)
             {
                 return;
@@ -148,7 +150,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
             var    md5    = Convert.ToBase64String(raw);
             string avatar;
-            
+
             if (ImageEngine.HasFile(md5))
             {
                 var fr = ImageEngine.Records.FindById(md5);
@@ -173,29 +175,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             index.Avatar = avatar;
             DocumentEngine.UpdateDocument(index);
         }
-        #endregion
 
+        #endregion
 
         #endregion
 
         #region Private Methods
 
+        /// <summary>
+        /// 加载图片，确保图片的索引位于（1，250），也就是最大支持7500个设定
+        /// </summary>
+        /// <remarks>
+        /// 注意：在加载页面之前，必须使用Update方法更新总页面数。
+        /// </remarks>
         private void LoadPage()
         {
-            var index    = Math.Clamp(_pageIndex, 1, _totalPage);
-            var iterator = DocumentEngine.DocumentCacheDB.FindAll().Skip((index - 1) * 50).Take(50);
+            // 值范围：[1,250]
+            var index = Math.Clamp(
+                _pageIndex, 
+                MinPageIndex, 
+                Math.Min(_totalPageCount, MaxPageCount));
+            
+            // Take(MaxCountPerPage)可能会出错
+            // 需要Take(Math.Min(,1,MaxCountPerPage)
+            var takeElementCount =  _totalElementCount > MaxCountPerPage ? MaxCountPerPage : _totalElementCount;
+            
+            var iterator = DocumentEngine.DocumentCacheDB
+                                         .FindAll()
+                                         .Skip((index - 1) * MaxCountPerPage)
+                                         .Take(takeElementCount);
 
+            // 不进行空检查，因为这个错误在发生的时候会导致整个应用无法正常运行
             DocumentSource.Clear();
             DocumentSource.AddRange(iterator);
         }
 
         private void Update()
         {
-            var totalCount = DocumentEngine.DocumentCacheDB.Count();
-            _totalPage = (totalCount + 49) / 50;
+            _totalElementCount = DocumentEngine.DocumentCacheDB.Count();
+            _totalPageCount    = (_totalElementCount + MaxCountPerPageMask) / MaxCountPerPage;
         }
 
 
+
+        #endregion
+
+        #region Inputs
+
+        
         private async void OnKeyPress(WindowKeyEventArgs arg)
         {
             var keyArg = arg.Args;
@@ -217,14 +244,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         {
             if (!DocumentEngine.Activated)
             {
+                // 在第一次加载文档引擎的时候，各项依赖属性都未刷新
+                // 需要调用Update方法，更新属性
                 DocumentEngine.Activate();
                 Update();
             }
             else if (Version == DocumentEngine.Version)
             {
+                //
+                // 如果版本号相同就不需要更新，避免频繁的创建对象
                 return;
             }
 
+            //
+            // 每次调用该方法，都需要同步引擎的版本和当前的版本。
             Version = DocumentEngine.Version;
 
             //
@@ -250,10 +283,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         #region Bindable Properties
 
-        private int                         _pageIndex;
-        private int                         _totalPage;
-        private IDataCache                  _selected;
-        private bool                      _isDocumentPropertyPaneOpen;
+        private int        _pageIndex;
+        private int        _totalPageCount;
+        private int        _totalElementCount;
+        private IDataCache _selected;
+        private bool       _isDocumentPropertyPaneOpen;
 
         /// <summary>
         /// 获取或设置 <see cref="IsDocumentPropertyPaneOpen"/> 属性。
@@ -279,10 +313,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         /// </summary>
         public int TotalPage
         {
-            get => _totalPage;
+            get => _totalPageCount;
             set
             {
-                SetValue(ref _totalPage, value);
+                SetValue(ref _totalPageCount, value);
                 LastPageCommand.NotifyCanExecuteChanged();
                 NextPageCommand.NotifyCanExecuteChanged();
             }
@@ -322,7 +356,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         public AsyncRelayCommand NewDocumentCommand { get; }
         public RelayCommand NextPageCommand { get; }
         public RelayCommand LastPageCommand { get; }
-        
+
         public RelayCommand<DocumentCache> SelectDocumentCommand { get; }
         public AsyncRelayCommand<DocumentCache> ChangeDocumentAvatarCommand { get; }
 

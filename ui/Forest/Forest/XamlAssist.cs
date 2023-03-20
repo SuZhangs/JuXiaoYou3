@@ -2,67 +2,102 @@
 {
     public  class XamlAssist : DependencyObject
     {
+        #region EnableSizeScale
 
-        public static readonly DependencyProperty ItemProperty = DependencyProperty.RegisterAttached(
-            "Item", typeof(object), typeof(XamlAssist), new PropertyMetadata(default(object)));
-
-        public static readonly DependencyProperty EnableBindingProperty = DependencyProperty.RegisterAttached(
-            "EnableBindingOverride", typeof(bool), typeof(XamlAssist), new PropertyMetadata(default(bool)));
-
-        public static void SetEnableBinding(DependencyObject element, bool value)
-        {
-            if (element is TreeView tv)
-            {
-                OnAttached(tv);
-                tv.Unloaded += (o, _) => OnDetaching(o as TreeView);
-            }
-            element.SetValue(EnableBindingProperty, value);
-        }
-
-        public static bool GetEnableBinding(DependencyObject element)
-        {
-            return (bool)element.GetValue(EnableBindingProperty);
-        }
         
-        static void OnAttached(TreeView AssociatedObject)
+        public static readonly DependencyProperty EnableSizeScaleProperty = DependencyProperty.RegisterAttached(
+            "EnableSizeScale", typeof(bool), typeof(XamlAssist), new PropertyMetadata(Boxing.False, OnHighSolutionChanged));
+
+        public static readonly DependencyProperty OriginalSizeProperty = DependencyProperty.RegisterAttached(
+            "OriginalSize", typeof(int), typeof(XamlAssist), new PropertyMetadata(-1));
+
+        public static void SetOriginalSize(DependencyObject element, int value)
         {
-            AssociatedObject.SelectedItemChanged  += OnSelectedItemChanged;
-            AssociatedObject.MouseRightButtonDown += OnMouseRightButtonDown;
+            element.SetValue(OriginalSizeProperty, value);
         }
 
-        static void OnDetaching(TreeView AssociatedObject)
+        public static int GetOriginalSize(DependencyObject element)
         {
-            AssociatedObject.SelectedItemChanged  -= OnSelectedItemChanged;
-            AssociatedObject.MouseRightButtonDown -= OnMouseRightButtonDown;
+            return (int)element.GetValue(OriginalSizeProperty);
         }
 
-        private static void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private static void OnHighSolutionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var ancestor = Xaml.FindAncestor<TreeViewItem>(e.OriginalSource as FrameworkElement);
+            if (d is not Grid grid)
+            {
+                return;
+            }
             
-            if(ancestor is null)return;
-            
-            ancestor.IsSelected = true;
+            grid.SizeChanged += OnSizeChanged;
+            grid.Unloaded += (_,_) => grid.SizeChanged -= OnSizeChanged;
         }
 
-        private static void OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private static void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (sender is not TreeView AssociatedObject)
+            if (sender is not Grid grid)
             {
                 return;
             }
 
-            SetItem(AssociatedObject, AssociatedObject.SelectedItem);
+            var width  = grid.ActualWidth;
+            var height = grid.ActualHeight;
+
+            if (width <= 1920 && height <= 1080)
+            {
+                return;
+            }
+            
+            var scaleY = height / 1080;
+            var scaleX = width / 1920;
+            int originalSize;
+
+            foreach (var definition in grid.ColumnDefinitions)
+            {
+                if (definition.Width.IsAuto)
+                {
+                    continue;
+                }
+
+                originalSize = GetOriginalSize(definition);
+
+                if (originalSize == -1)
+                {
+                    originalSize = (int)definition.Width.Value;
+                    SetOriginalSize(definition, originalSize);
+                }
+
+                definition.Width = new GridLength(originalSize * scaleX);
+            }
+                
+            foreach (var definition in grid.RowDefinitions)
+            {
+                if (definition.Height.IsAuto)
+                {
+                    continue;
+                }
+                
+                originalSize = GetOriginalSize(definition);
+
+                if (originalSize == -1)
+                {
+                    originalSize = (int)definition.Height.Value;
+                    SetOriginalSize(definition, originalSize);
+                }
+                    
+                definition.Height = new GridLength(originalSize * scaleY);
+            }
         }
 
-        public static void SetItem(DependencyObject element, object value)
+        public static void SetEnableSizeScale(Grid element, bool value)
         {
-            element.SetValue(ItemProperty, value);
+            element.SetValue(EnableSizeScaleProperty, value);
         }
 
-        public static object GetItem(DependencyObject element)
+        public static bool GetEnableSizeScale(Grid element)
         {
-            return (object)element.GetValue(ItemProperty);
+            return (bool)element.GetValue(EnableSizeScaleProperty);
         }
+        
+        #endregion
     }
 }

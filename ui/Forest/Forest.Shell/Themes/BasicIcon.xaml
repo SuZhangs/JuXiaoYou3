@@ -84,6 +84,12 @@
             <Geometry>F1 M24,24z M0,0z M2,12L2,12 12,17 22,12</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
+    <GeometryGroup x:Key="FeatherIcon.Search">
+        <GeometryGroup.Children>
+            <EllipseGeometry RadiusX="8" RadiusY="8" Center="11,11" />
+            <LineGeometry StartPoint="21,21" EndPoint="16.65,16.65" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
     <GeometryGroup x:Key="FeatherIcon.ZoomIn">
         <GeometryGroup.Children>
             <EllipseGeometry RadiusX="8" RadiusY="8" Center="11,11" />
