@@ -231,7 +231,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             else
             {
                 _backgroundDisabledBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 4));
-                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInActive]);
+                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
             }
 
             _bd.Background = _backgroundDisabledBrush;

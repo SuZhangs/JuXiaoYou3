@@ -36,7 +36,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{f:Brush Foreground}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="MinHeight" Value="24" />
         <Setter Property="MinWidth" Value="24" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -51,7 +51,7 @@
                               Data="{TemplateBinding Icon}"
                               Width="{TemplateBinding IconSize}"
                               Height="{TemplateBinding IconSize}"
-                              Stroke="{f:Brush Foreground}"
+                              Stroke="{f:Brush ForegroundLevel1}"
                               StrokeThickness="1"
                               Stretch="Uniform"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -65,7 +65,7 @@
                             <Setter Property="Background" Value="#50000000" TargetName="PART_Border" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Stroke" Value="{f:Brush ForegroundInActive}" TargetName="Icon" />
+                            <Setter Property="Stroke" Value="{f:Brush ForegroundDisabled}" TargetName="Icon" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -77,8 +77,8 @@
         <Setter Property="CornerRadius" Value="99" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="Background" Value="{f:Brush Background}" />
-        <Setter Property="Foreground" Value="{f:Brush Foreground}" />
+        <Setter Property="Background" Value="{f:Brush BackgroundLevel3}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="Height" Value="48" />
         <Setter Property="Width" Value="48" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -108,7 +108,7 @@
                             <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInActive}" TargetName="Icon" />
+                            <Setter Property="Fill" Value="{f:Brush ForegroundDisabled}" TargetName="Icon" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

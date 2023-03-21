@@ -272,7 +272,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Background" Value="{f:Brush BackgroundDisabled}" />
-        <Setter Property="Foreground" Value="{f:Brush Foreground}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="MinHeight" Value="24" />
         <Setter Property="MinWidth" Value="24" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
