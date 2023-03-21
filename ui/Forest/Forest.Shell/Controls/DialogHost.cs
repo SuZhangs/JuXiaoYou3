@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             var host = (DialogHost)d;
 
-            if (e.NewValue is IViewModel newValue)
+            if (e.NewValue is IDialogViewModel newValue)
             {
                 var view = Xaml.Connect(newValue);
 
@@ -96,6 +96,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
                     fe.Loaded += OnDialogContentLoaded;
                 }
 
+                //
+                // 设置标题
+                if (string.IsNullOrEmpty(newValue.Title))
+                {
+                    newValue.Title = Services.Language
+                                             .GetTypeName(newValue.GetType());
+                }
+                
                 //
                 // 设置视图
                 host.Dialog   = view;

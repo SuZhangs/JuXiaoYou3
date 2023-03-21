@@ -177,8 +177,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             if (string.IsNullOrEmpty(newViewModel.Title))
             {
-                var key = $"text.{newViewModel.GetType().Name}";
-                newViewModel.Title = Language.GetText(key);
+                newViewModel.Title = Language.GetTypeName(newViewModel.GetType());
             }
         }
 

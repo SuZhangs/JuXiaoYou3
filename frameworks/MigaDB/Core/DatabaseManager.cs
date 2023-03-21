@@ -25,13 +25,13 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// </summary>
         /// <returns>返回一个新的数据库管理器实例。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static DatabaseManager GetDefaultDatabaseManager(ILogger logger)
+        public static DatabaseManager GetDefaultDatabaseManager(ILogger logger, DatabaseMode mode)
         {
             return CreateBuilder(logger)
-                .Setup<TemplateEngine>()
-                .Setup<DocumentEngine>()
-                .Setup<ImageEngine>(false)
-                .Build(Constants.DatabaseCurrentVersion);
+                   .Setup<TemplateEngine>()
+                   .Setup<DocumentEngine>()
+                   .Setup<ImageEngine>(false)
+                   .Build(Constants.DatabaseCurrentVersion, mode);
         }
 
         #region DatabaseManagerBuilder
@@ -198,7 +198,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             /// 构建引擎。
             /// </summary>
             /// <returns>返回一个<see cref="IDatabaseManager"/></returns>
-            public DatabaseManager Build(int databaseVersion)
+            public DatabaseManager Build(int databaseVersion, DatabaseMode mode)
             {
                 lock (_sync)
                 {
@@ -208,7 +208,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                         _maintainers, 
                         _updaters,
                         _engines,
-                        _minimumTargetVersion);
+                        _minimumTargetVersion,
+                        mode);
                 }
             }
         }
@@ -224,6 +225,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly IDatabaseSynchronizer              _synchronizer;
         private readonly IReadOnlyList<IDataEngine>         _engines;
         private readonly int                                _minimumTargetVersion;
+        private readonly DatabaseMode                       _databaseMode;
         private readonly ILogger                            _logger;
 
 
@@ -232,7 +234,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                                IReadOnlyList<IDatabaseMaintainer> maintainers,
                                IReadOnlyList<IDatabaseUpdater> updaters,
                                IReadOnlyList<IDataEngine> engines, 
-                               int minimumTargetVersion)
+                               int minimumTargetVersion,
+                               DatabaseMode mode)
         {
             _logger               = logger;
             _maintainers          = maintainers;
@@ -240,6 +243,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _updaters             = updaters;
             _minimumTargetVersion = minimumTargetVersion;
             Container             = container;
+            _databaseMode         = mode;
             _database             = new ObservableProperty<IDatabase>();
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
@@ -339,14 +343,37 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             try
             {
-                var kernel = new LiteDatabase(new ConnectionString
+                LiteDatabase  kernel;
+                Database database;
+                
+                if (_databaseMode == DatabaseMode.Attached)
                 {
-                    Filename    = fileName,
-                    InitialSize = Constants.DatabaseSize
-                });
-
-                //
-                var database = new Database(kernel, root, fileName, indexFileName);
+                    var buffer = await File.ReadAllBytesAsync(fileName);
+                    var ms     = new MemoryStream(buffer);
+                    var log    = new MemoryStream();
+                    kernel = new LiteDatabase(ms, BsonMapper.Global, log);
+                    database = new Database(kernel, root, fileName, indexFileName);
+                    database.Collect(ms);
+                    database.Collect(log);
+                }
+                else if (_databaseMode == DatabaseMode.Debug)
+                {
+                    var ms  = new MemoryStream();
+                    var log = new MemoryStream();
+                    kernel   = new LiteDatabase(ms, BsonMapper.Global, log);
+                    database = new Database(kernel, root, fileName, indexFileName);
+                    database.Collect(ms);
+                    database.Collect(log);
+                }
+                else
+                {
+                    kernel = new LiteDatabase(new ConnectionString
+                    {
+                        Filename    = fileName,
+                        InitialSize = Constants.DatabaseSize
+                    });
+                    database = new Database(kernel, root, fileName, indexFileName);
+                }
 
                 //
                 var property = database.Get<DatabaseProperty>();
@@ -584,7 +611,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         }
 
         /// <summary>
-        /// 
+        /// 保存当前数据库的对象更改。
         /// </summary>
         /// <returns>返回一个操作结果</returns>
         public async Task<DatabaseResult> CacheAsync()

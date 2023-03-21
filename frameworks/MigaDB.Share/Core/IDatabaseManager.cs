@@ -24,12 +24,16 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回一个操作结果</returns>
         Task<DatabaseResult> CreateAsync(string directory, DatabaseProperty property);
 
+        /// <summary>
+        /// 保存当前数据库的对象更改。
+        /// </summary>
+        /// <returns>返回一个操作结果</returns>
         Task<DatabaseResult> CacheAsync();
 
         /// <summary>
         /// 关闭世界观。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>返回一个操作结果</returns>
         Task<DatabaseResult> CloseAsync();
 
         /// <summary>

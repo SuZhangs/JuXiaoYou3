@@ -22,7 +22,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
 
             // 这个方法会使得视图模型多次启动
             
-            Xaml.Get<ViewServiceAdapter>().Controller = _dc.Controller;
+            Xaml.Get<ViewServiceAdapter>()
+                .Controller = _dc.Controller;
             
             //
             // 启动

@@ -110,7 +110,7 @@ namespace Acorisoft.FutureGL.Forest
         {
             //
             // 注册上下文依赖的服务
-            (Application.Current as ForestApp)?.RegisterContextServices(Xaml.Container);
+            (Application.Current as ForestApp)?.RegisterContextServicesIntern();
             
             //
             // 安装事件广播

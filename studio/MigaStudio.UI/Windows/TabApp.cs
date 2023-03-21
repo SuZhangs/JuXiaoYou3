@@ -22,10 +22,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         {
         }
 
-        protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
+        protected override void RegisterFrameworkServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            var r = base.RegisterFrameworkServices(container);
-
             Xaml.InstallView(new BindingInfo
             {
                 View      = typeof(TMainView),
@@ -40,27 +38,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             //
             // 创建Shell
             Xaml.Use<TViewModel>(GetShell());
-
-            return r;
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void RegisterResourceDictionary(ResourceDictionary appResDict)
         {
-            Resources.MergedDictionaries.Add(new ResourceDictionary
+            appResDict.MergedDictionaries.Add(new ResourceDictionary
             {
                 Source = new Uri("pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
             });
 
-            Resources.MergedDictionaries.Add(new ResourceDictionary
+            appResDict.MergedDictionaries.Add(new ResourceDictionary
             {
                 Source = new Uri("pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
             });
 
-            Resources.MergedDictionaries.Add(new ResourceDictionary
+            appResDict.MergedDictionaries.Add(new ResourceDictionary
             {
                 Source = new Uri("pack://application:,,,/Forest.Fonts;component/Fonts.xaml", UriKind.RelativeOrAbsolute)
             });
-            base.OnStartup(e);
         }
 
         [Obsolete]
@@ -84,17 +79,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         {
         }
 
-        protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
+        protected override void RegisterFrameworkServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            var r = base.RegisterFrameworkServices(container);
-
             Xaml.InstallView(new BindingInfo
             {
                 View      = typeof(TSplash),
                 ViewModel = typeof(TSplashController)
             });
 
-            return r;
+            //
+            // 创建Shell
+            Xaml.Use<TViewModel>(GetShell());
+            base.RegisterFrameworkServices(logger, appModel, container);
         }
     }
 }

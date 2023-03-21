@@ -14,44 +14,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public class LaunchViewController : LaunchViewControllerBase
     {
-        private const string RepositorySettingFileName = "repo.json";
-        private const string AdvancedSettingFileName   = "advanced.json";
 
         public LaunchViewController()
         {
             // 加载设置
             Job(StringFromCode.GetText("text.launch.loadSetting"), _ =>
             {
-                var appModel = Xaml.Get<ApplicationModel>();
-
-                //
-                // Repository Setting
-                var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
-                var repositorySetting = JSON.OpenSetting<RepositorySetting>(repositorySettingFileName,
-                    () => new RepositorySetting
-                    {
-                        LastRepository = null,
-                        Repositories   = new HashSet<RepositoryCache>()
-                    });
-
-                //
-                // Repository Setting
-                var advancedSettingFileName = Path.Combine(appModel.Settings, AdvancedSettingFileName);
-                var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(advancedSettingFileName,
-                    () => new AdvancedSettingModel
-                    {
-                        DebugMode = DebugMode.Release,
-                    });
-
-                //
-                // 注册设置
-                Xaml.Use<SystemSetting, ISystemSetting>(new SystemSetting
-                {
-                    AdvancedSettingFileName   = advancedSettingFileName,
-                    AdvancedSetting           = advancedSetting,
-                    RepositorySetting         = repositorySetting,
-                    RepositorySettingFileName = repositorySettingFileName
-                });
+                
             });
             
             // 检查更新

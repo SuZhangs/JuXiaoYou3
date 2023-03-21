@@ -92,6 +92,11 @@ namespace Acorisoft.FutureGL.Forest.Services
         {
             return GlobalStrings.TryGetValue(id, out var text) ? text : id;
         }
+
+        public static string GetTypeName(Type type)
+        {
+            return $"text.{type.Name}";
+        }
         
         #region Name
 

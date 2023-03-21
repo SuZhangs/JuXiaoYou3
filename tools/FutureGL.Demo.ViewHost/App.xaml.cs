@@ -23,15 +23,17 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
     /// </summary>
     public partial class App
     {
-        protected override (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
+        private IDatabaseManager _databaseManager;
+
+        protected override void RegisterFrameworkServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
             container.Use<ViewService, IViewService, IViewServiceAmbient>(new ViewService());
-            return base.RegisterFrameworkServices(container);
         }
 
-        protected override void RegisterServices(ILogger logger, IContainer container)
+        protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
+            _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
+                DatabaseManager.GetDefaultDatabaseManager(logger, DatabaseMode.Release));
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)
@@ -39,5 +41,12 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
             SubSystem.InstallViews();
         }
 
+
+        protected override async void OnExitOverride(ExitEventArgs e)
+        {
+            //
+            // 移除所有对象
+            await _databaseManager.CloseAsync();
+        }
     }
 }

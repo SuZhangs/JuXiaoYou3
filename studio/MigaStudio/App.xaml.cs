@@ -26,22 +26,30 @@ namespace Acorisoft.FutureGL.MigaStudio
     /// </summary>
     public partial class App
     {
-        public App() : base("juxiaoyou-main.json")
+        private const string SettingDir                = "JuXiaoYou";
+        private const string UserDataDir               = "UserData";
+        private const string LogDir                    = "Logs";
+        private const string BasicSettingFileName      = "juxiaoyou-main.json";
+        private const string RepositorySettingFileName = "repo.json";
+        private const string AdvancedSettingFileName   = "advanced.json";
+
+        private IDatabaseManager _databaseManager;
+
+        public App() : base(BasicSettingFileName)
         {
-            
         }
-        
+
         protected sealed override ApplicationModel ConfigureDirectory()
         {
             var domain = ApplicationModel.CheckDirectory(
                 Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    "JuXiaoYou"));
+                    SettingDir));
 
             return new ApplicationModel
             {
-                Logs     = Path.Combine(domain, "Logs"),
-                Settings = Path.Combine(domain, "UserData")
+                Logs     = Path.Combine(domain, LogDir),
+                Settings = Path.Combine(domain, UserDataDir)
             }.Initialize();
         }
 
@@ -50,20 +58,70 @@ namespace Acorisoft.FutureGL.MigaStudio
             return new AppViewModel();
         }
 
-        protected override void RegisterServices(ILogger logger, IContainer container)
+
+        protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
+            var setting = InstallSetting(logger, appModel, container);
+            
+            _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
+                DatabaseManager.GetDefaultDatabaseManager(
+                    logger,
+                    setting.DebugMode));
         }
 
-        protected override void RegisterContextServices(IContainer container)
+        private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            Resources.MergedDictionaries.Add(ForestUI.UseToolKits());
-            base.RegisterContextServices(container);
+            logger.Info("写入设置");
+            
+            //
+            // Repository Setting
+            var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
+            var repositorySetting = JSON.OpenSetting<RepositorySetting>(repositorySettingFileName,
+                () => new RepositorySetting
+                {
+                    LastRepository = null,
+                    Repositories   = new HashSet<RepositoryCache>()
+                });
+
+            //
+            // Repository Setting
+            var advancedSettingFileName = Path.Combine(appModel.Settings, AdvancedSettingFileName);
+            var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(advancedSettingFileName,
+                () => new AdvancedSettingModel
+                {
+                    DebugMode = DatabaseMode.Release,
+                });
+
+            //
+            // 注册设置
+            Xaml.Use<SystemSetting, ISystemSetting>(new SystemSetting
+            {
+                AdvancedSettingFileName   = advancedSettingFileName,
+                AdvancedSetting           = advancedSetting,
+                RepositorySetting         = repositorySetting,
+                RepositorySettingFileName = repositorySettingFileName
+            });
+            
+            return advancedSetting;
+        }
+
+        protected override void RegisterResourceDictionary(ResourceDictionary appResDict)
+        {
+            appResDict.MergedDictionaries.Add(ForestUI.UseToolKits());
+            base.RegisterResourceDictionary(appResDict);
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
             SubSystem.InstallViews();
+        }
+
+
+        protected override async void OnExitOverride(ExitEventArgs e)
+        {
+            //
+            // 移除所有对象
+            await _databaseManager.CloseAsync();
         }
     }
 }

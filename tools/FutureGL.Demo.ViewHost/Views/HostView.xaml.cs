@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using Acorisoft.FutureGL.Demo.ViewModels;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Documents;
@@ -16,7 +18,7 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace Acorisoft.FutureGL.Demo.ViewHost.Views
 {
     [Connected(View = typeof(HostView), ViewModel = typeof(HostViewModel))]
-    public partial class HostView : System.Windows.Controls.UserControl
+    public partial class HostView : ForestUserControl
     {
         public HostView()
         {

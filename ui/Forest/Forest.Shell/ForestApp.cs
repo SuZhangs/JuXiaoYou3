@@ -66,29 +66,7 @@ namespace Acorisoft.FutureGL.Forest
             }
         }
         
-
         private readonly string BasicSettingFileName;
-
-        /*
-         * 生命周期:
-         *          sCtor
-         *            |
-         *          Ctor
-         *            |
-         *     RegisterServices (Internal)
-         *            |
-         *     RegisterServices (Public)
-         *            |
-         *       RegisterViews
-         *            |
-         *       ViewModel.Start
-         *            |
-         *  RegisterDependentServices
-         *            |
-         *        SplashView
-         *            |
-         *        
-         */
 
         protected ForestApp() : this("main.json")
         {
@@ -115,10 +93,54 @@ namespace Acorisoft.FutureGL.Forest
 
         private void Initialize()
         {
-            var (logger, appModel) = RegisterFrameworkServices(Xaml.Container);
-            RegisterServices(logger, Xaml.Container);
+            var (logger, appModel) = RegisterFrameworkServicesIntern(Xaml.Container);
+            RegisterServices(logger,appModel, Xaml.Container);
             Xaml.InstallViewFromSourceGenerator();
             RegisterViews(logger, Xaml.Container);
+        }
+        
+        
+
+        /*
+         * 生命周期:
+         *            sCtor
+         *              |
+         *             Ctor
+         *              |
+         *  RegisterFrameworkServices
+         *              |
+         *     RegisterServices (Internal)
+         *              |
+         *     RegisterServices (Public)
+         *              |
+         *         RegisterViews
+         *              |
+         *         ViewModel.Start
+         *              |
+         *  RegisterDependentServices
+         *              |
+         *          SplashView
+         *              |
+         *          OnStartUp
+         *              |
+         *           OnExit
+         */
+
+        #region Lifetime
+
+        #region RegisterFrameworkServices
+
+        #region Configure Methods
+        
+
+        /// <summary>
+        /// 获得主题
+        /// </summary>
+        /// <returns>返回主题。</returns>
+        /// <remarks>必须在启动前完成。</remarks>
+        protected virtual ForestThemeSystem GetThemeSystem(BasicAppSetting basicAppSetting)
+        {
+            return basicAppSetting.Theme == MainTheme.Light ? new ForestLightTheme() : new ForestDarkTheme();
         }
 
         protected virtual string ConfigureLanguageFile()
@@ -136,53 +158,7 @@ namespace Acorisoft.FutureGL.Forest
             return Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"), fileName);
         }
 
-        /// <summary>
-        /// 注册框架服务。
-        /// </summary>
-        /// <param name="container">服务容器。</param>
-        protected virtual (ILogger, ApplicationModel) RegisterFrameworkServices(IContainer container)
-        {
-            var appModel = ConfigureDirectory();
-            var logger = ConfigureLogger(appModel);
-
-            //
-            // 构建基本的属性
-            var basicAppSetting = JSON.OpenSetting<BasicAppSetting>(
-                Path.Combine(appModel.Settings, BasicSettingFileName),
-                () => new BasicAppSetting
-                {
-                    Language = CultureArea.Chinese,
-                    Theme = MainTheme.Light
-                });
-
-            //
-            // 设置主题。
-            ThemeSystem.Instance.Theme = GetThemeSystem(basicAppSetting);
-
-            //
-            // 设置语言。
-            Language.Culture = basicAppSetting.Language;
-            Language.SetLanguage(ConfigureLanguageFile());
-
-            //
-            // 注册服务
-            container.Use<BasicAppSetting>(basicAppSetting);
-            container.Use<ApplicationModel>(appModel);
-            container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
-            container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
-            container.Use<DialogService,
-                IDialogService,
-                IDialogServiceAmbient,
-                IBusyService,
-                IBusyServiceAmbient,
-                INotifyServiceAmbient,
-                INotifyService,
-                IBuiltinDialogService>(new DialogService());
-            container.Use<ILogger>(logger);
-            Xaml.InstallViewManually(new BuiltinViews());
-
-            return new ValueTuple<ILogger, ApplicationModel>(logger, appModel);
-        }
+        
 
         /// <summary>
         /// 配置日志工具
@@ -224,16 +200,82 @@ namespace Acorisoft.FutureGL.Forest
             {
                 Logs = Path.Combine(domain, "Logs"),
                 Settings = Path.Combine(domain, "UserData"),
-                Languages = Path.Combine(domain, "Languages")
             }.Initialize();
         }
+        
+        
+        #endregion
+        
+        /// <summary>
+        /// 注册框架服务。
+        /// </summary>
+        /// <param name="container">服务容器。</param>
+        private (ILogger, ApplicationModel) RegisterFrameworkServicesIntern(IContainer container)
+        {
+            var appModel = ConfigureDirectory();
+            var logger = ConfigureLogger(appModel);
+
+            //
+            //
+            Logger   = logger;
+            AppModel = appModel;
+
+            //
+            // 构建基本的属性
+            var basicAppSetting = JSON.OpenSetting<BasicAppSetting>(
+                Path.Combine(appModel.Settings, BasicSettingFileName),
+                () => new BasicAppSetting
+                {
+                    Language = CultureArea.Chinese,
+                    Theme = MainTheme.Light
+                });
+
+            //
+            // 设置主题。
+            ThemeSystem.Instance.Theme = GetThemeSystem(basicAppSetting);
+
+            //
+            // 设置语言。
+            Language.Culture = basicAppSetting.Language;
+            Language.SetLanguage(ConfigureLanguageFile());
+
+            //
+            // 注册服务
+            container.Use<BasicAppSetting>(basicAppSetting);
+            container.Use<ApplicationModel>(appModel);
+            container.Use<ForestResourceFactory, ITextResourceFactory>(new ForestResourceFactory());
+            container.Use<WindowEventBroadcast, IWindowEventBroadcast, IWindowEventBroadcastAmbient>(new WindowEventBroadcast());
+            container.Use<DialogService,
+                IDialogService,
+                IDialogServiceAmbient,
+                IBusyService,
+                IBusyServiceAmbient,
+                INotifyServiceAmbient,
+                INotifyService,
+                IBuiltinDialogService>(new DialogService());
+            container.Use<ILogger>(logger);
+            Xaml.InstallViewManually(new BuiltinViews());
+
+            RegisterFrameworkServices(logger, appModel, container);
+            return new ValueTuple<ILogger, ApplicationModel>(logger, appModel);
+        }
+
+        protected virtual void RegisterFrameworkServices(ILogger logger, ApplicationModel appModel, IContainer container)
+        {
+            
+        }
+
+        #endregion
+        
+        
 
         /// <summary>
         /// 注册服务。
         /// </summary>
         /// <param name="logger">日志工具。</param>
+        /// <param name="appModel">应用模型。</param>
         /// <param name="container">服务容器。</param>
-        protected abstract void RegisterServices(ILogger logger, IContainer container);
+        protected abstract void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container);
 
         /// <summary>
         /// 注册视图
@@ -241,26 +283,74 @@ namespace Acorisoft.FutureGL.Forest
         /// <param name="logger">日志工具。</param>
         /// <param name="container">服务容器。</param>
         protected abstract void RegisterViews(ILogger logger, IContainer container);
+        
+        #region RegisterContextServices
 
+        
         /// <summary>
         /// 注册上下文依赖的服务。
         /// </summary>
-        /// <param name="container">服务容器。</param>
-        protected internal virtual void RegisterContextServices(IContainer container)
+        internal void RegisterContextServicesIntern()
         {
+            var container = Xaml.Container;
             container.Use<SynchronizationContextScheduler, IScheduler>(
                 new SynchronizationContextScheduler(
                     SynchronizationContext.Current!));
+            
+            RegisterFrameworkServices(Logger, AppModel, container);
         }
 
-        /// <summary>
-        /// 获得主题
-        /// </summary>
-        /// <returns>返回主题。</returns>
-        /// <remarks>必须在启动前完成。</remarks>
-        protected virtual ForestThemeSystem GetThemeSystem(BasicAppSetting basicAppSetting)
+        protected virtual void RegisterContextServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            return basicAppSetting.Theme == MainTheme.Light ? new ForestLightTheme() : new ForestDarkTheme();
+            
         }
+
+        #endregion
+
+        #region OnStartup
+
+        protected sealed override void OnStartup(StartupEventArgs e)
+        {
+            RegisterResourceDictionary(Resources);
+            StartupOverride(e);
+            base.OnStartup(e);
+        }
+        
+        protected virtual void StartupOverride(StartupEventArgs e){}
+
+        protected virtual void RegisterResourceDictionary(ResourceDictionary appResDict)
+        {
+            
+        }
+
+        #endregion
+
+
+        #region OnExit
+
+        
+        protected sealed override void OnExit(ExitEventArgs e)
+        {
+            //
+            // 重载
+            OnExitOverride(e);
+            
+            //
+            // 注意，当容器释放之后，程序将不可恢复。
+            Xaml.Container
+                .Dispose();
+
+            base.OnExit(e);
+        }
+        
+        protected virtual void OnExitOverride(ExitEventArgs e){}
+
+        #endregion
+
+        #endregion
+        
+        
+        public ILogger Logger { get; private set; }
+        public ApplicationModel AppModel { get; private set; }
     }
 }

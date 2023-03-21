@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Core
 {
-    public class Database : Disposable, IDatabase, IObjectCollection
+    public class Database : Disposable, IDatabase, IObjectCollection, IDisposableCollector
     {
         private readonly string _databaseDirectory;
         private readonly string _databaseFileName;
@@ -8,9 +8,11 @@
 
         private readonly  LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
+        private readonly DisposableCollector           _collector;
 
         public Database(LiteDatabase kernel, string root, string fileName, string indexFileName)
         {
+            _collector             = new DisposableCollector();
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _databaseDirectory     = root;
             _databaseFileName      = fileName;
@@ -23,6 +25,7 @@
 
         internal Database(LiteDatabase kernel)
         {
+            _collector             = new DisposableCollector();
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _props                 = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
             _databaseDirectory     = AppDomain.CurrentDomain.BaseDirectory;
@@ -36,6 +39,7 @@
         protected override void ReleaseManagedResources()
         {
             _database.Dispose();
+            _collector.Dispose();
         }
 
 
@@ -105,6 +109,11 @@
             //
             // Update
             Set(information);
+        }
+
+        public void Collect(IDisposable disposable)
+        {
+            _collector.Collect(disposable);
         }
 
         /// <summary>
