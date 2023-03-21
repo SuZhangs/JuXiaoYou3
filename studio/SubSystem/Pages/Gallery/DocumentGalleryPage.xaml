@@ -98,7 +98,7 @@
                 </ftk:TabControl>
             </DockPanel>
 
-            <GridSplitter Background="{f:Brush BackgroundInactive}"
+            <GridSplitter Background="{f:Brush BackgroundDisabled}"
                           Margin="0 144 0 96"
                           Width="1"/>
 

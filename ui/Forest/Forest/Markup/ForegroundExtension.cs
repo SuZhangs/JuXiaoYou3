@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Foreground];
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.ForegroundLevel1];
         }
     }
 
@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Foreground].ToSolidColorBrush();
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.ForegroundLevel1].ToSolidColorBrush();
         }
     }
 
@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Background];
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundLevel3];
         }
     }
 
@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.Background].ToSolidColorBrush();
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundLevel3].ToSolidColorBrush();
         }
     }
     
@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundInactive];
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundDisabled];
         }
     }
 
@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundInactive].ToSolidColorBrush();
+            return ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundDisabled].ToSolidColorBrush();
         }
     }
 }

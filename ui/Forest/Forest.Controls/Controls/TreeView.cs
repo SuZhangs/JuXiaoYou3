@@ -70,7 +70,7 @@
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
             //
@@ -148,7 +148,7 @@
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _disabled   = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _disabled   = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foreground = new SolidColorBrush(Colors.LightGray);
             
             //

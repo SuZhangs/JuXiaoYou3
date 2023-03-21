@@ -86,29 +86,41 @@
         /// <summary>
         /// 背景色
         /// </summary>
-        Background,
+        BorderBrush,
         BackgroundLevel1,
         BackgroundLevel2,
         BackgroundLevel3,
         BackgroundLevel4,
-        BackgroundInHighlight,
-        BackgroundInactive,
+        BackgroundLevel5,
+        BackgroundLevel6,
+        BackgroundDisabled,
         
+        /*
+         * 
+                            <SolidColorBrush x:Key="BorderBrush" Color="#777C88" />
+                            <SolidColorBrush x:Key="BackgroundLevel1" Color="#5F636D" />
+                            <SolidColorBrush x:Key="BackgroundLevel2" Color="#474A52" />
+                            <SolidColorBrush x:Key="BackgroundLevel3" Color="#43454C" />
+                            <SolidColorBrush x:Key="BackgroundLevel4" Color="#323439" />
+                            <SolidColorBrush x:Key="BackgroundLevel5" Color="#26282B" />
+                            <SolidColorBrush x:Key="BackgroundLevel6" Color="#18191B" />
+                            <SolidColorBrush x:Key="BackgroundDisabled" Color="#3C3E44" />
+                            <SolidColorBrush x:Key="ForegroundLevel1" Color="#E0E0E0" />
+                            <SolidColorBrush x:Key="ForegroundLevel2" Color="#C1C1BE" />
+                            <SolidColorBrush x:Key="ForegroundLevel3" Color="#A8A8A4" />
+                            <SolidColorBrush x:Key="ForegroundDisabled" Color="#757570" />
+                            <SolidColorBrush x:Key="ForegroundOther" Color="#8492a6" />
+         */
         
         /// <summary>
         /// 前景色
         /// </summary>
-        Foreground,
         ForegroundLevel1,
         ForegroundLevel2,
         ForegroundLevel3,
-        ForegroundLevel4,
+        ForegroundOther,
         ForegroundInHighlight,
-        ForegroundInActive,
-        
-        ColorPalette_Metro_,
-        
-        ColorPalette_Bootstrap_,
+        ForegroundDisabled,
         
         Mask100,
         Mask200,

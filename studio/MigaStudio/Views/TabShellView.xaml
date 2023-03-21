@@ -49,7 +49,7 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top"
               WindowChrome.IsHitTestVisibleInChrome="False"
-              Background="{f:Brush BackgroundInactive}"
+              Background="{f:Brush BackgroundDisabled}"
               Height="36">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="16" />
@@ -105,12 +105,12 @@
             </StackPanel>
 
             <Border Grid.Column="3"
-                    Background="{f:Brush BackgroundInActive}"/>
+                    Background="{f:Brush BackgroundDisabled}"/>
 
             <!-- 标题栏 -->
             <fs:TitleBar Grid.Column="4"
                          WindowChrome.IsHitTestVisibleInChrome="True"
-                         Background="{f:Brush BackgroundInActive}"
+                         Background="{f:Brush BackgroundDisabled}"
                          WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 

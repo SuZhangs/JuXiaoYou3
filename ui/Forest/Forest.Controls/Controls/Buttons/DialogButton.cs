@@ -138,7 +138,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
             if (purpose == ButtonPurpose.Close)
             {
-                _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+                _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
                 _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray100]);
             }
             else
@@ -225,7 +225,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
             if (purpose == ButtonPurpose.Close)
             {
-                _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+                _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
                 _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
             }
             else

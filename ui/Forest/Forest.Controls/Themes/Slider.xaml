@@ -38,13 +38,13 @@
             <TickBar Name="TopTick" 
                      Grid.Row="0" 
                      Height="6"
-                     Fill="{f:Brush BackgroundInHighlight}"
+                     Fill="{f:Brush BackgroundLevel3}"
                      Placement="Top" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             <Border Name="TrackBackground" 
                     Grid.Row="1" 
-                    Background="{f:Brush BackgroundInHighlight}"                    
+                    Background="{f:Brush BackgroundLevel3}"                    
                     Height="4"
                     Margin="0 1"
                     CornerRadius="2">
@@ -63,7 +63,7 @@
             <TickBar Name="BottomTick" 
                      Grid.Row="2"
                      Height="6"
-                     Fill="{f:Brush BackgroundInHighlight}"
+                     Fill="{f:Brush BackgroundLevel3}"
                      Placement="Bottom"
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
@@ -94,13 +94,13 @@
             </Grid.ColumnDefinitions>
             <TickBar Name="TopTick" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundInHighlight}" 
+                     Fill="{f:Brush BackgroundLevel3}" 
                      Placement="Left" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             <Border Name="TrackBackground" 
                     Grid.Column="1" 
-                    Background="{f:Brush BackgroundInHighlight}"   
+                    Background="{f:Brush BackgroundLevel3}"   
                     Width="4"
                     Margin="1 0"
                     CornerRadius="2">
@@ -118,7 +118,7 @@
             </Track>
             <TickBar Name="BottomTick" Grid.Column="2" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundInHighlight}" 
+                     Fill="{f:Brush BackgroundLevel3}" 
                      Placement="Right" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />

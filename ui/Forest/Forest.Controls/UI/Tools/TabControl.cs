@@ -79,8 +79,8 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
-            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
-            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
+            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             //
             // 设置背景颜色
             _bd.Background = IsSelected
@@ -168,7 +168,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             //

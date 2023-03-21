@@ -69,7 +69,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _backgroundBrush ??= new SolidColorBrush(Colors.Transparent);
-            _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
+            _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             _bd.Background = _backgroundBrush;
             SetForeground(_foregroundBrush);
@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
+            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _backgroundHighlight1Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask100]);
 
             // 白底变特殊色
@@ -107,7 +107,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
+            _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _backgroundHighlight2Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask200]);
 
             // 白底变特殊色
@@ -137,7 +137,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
+            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInActive]);
 
             _bd.Background = _backgroundDisabledBrush;

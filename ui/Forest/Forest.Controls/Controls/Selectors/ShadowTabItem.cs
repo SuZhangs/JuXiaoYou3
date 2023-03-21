@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         {
             if (IsSelected)
             {
-                _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+                _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
                 _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
                 
                 //
@@ -84,7 +84,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
             else
             {
                 
-                _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+                _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
                 _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
                 //
                 // 设置背景颜色
@@ -98,7 +98,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             
             
@@ -130,8 +130,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
-            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
+            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             
             
@@ -174,7 +174,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             
             //
