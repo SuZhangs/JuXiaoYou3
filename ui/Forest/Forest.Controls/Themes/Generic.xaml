@@ -12,6 +12,12 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/TreeView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
+    <!-- -->
+    <!-- <DropShadowEffect x:Key="Ui.Shadow1" Direction="270" ShadowDepth="1" BlurRadius="5" Opacity="0.42" Color="#AA000000"/> -->
+    <!-- <DropShadowEffect x:Key="Ui.Shadow2" Direction="270" ShadowDepth="1.5" BlurRadius="8" Opacity="0.42" Color="#AA000000"/> -->
+    <!-- <DropShadowEffect x:Key="Ui.Shadow3" Direction="270" ShadowDepth="4.5" BlurRadius="14" Opacity="0.42" Color="#AA000000"/> -->
+    <!-- <DropShadowEffect x:Key="Ui.Shadow4" Direction="270" ShadowDepth="8" BlurRadius="25" Opacity="0.42" Color="#AA000000"/> -->
+    <!-- <DropShadowEffect x:Key="Ui.Shadow5" Direction="270" ShadowDepth="13" BlurRadius="35" Opacity="0.42" Color="#AA000000"/> -->
     
     <Style TargetType="HeaderedContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
