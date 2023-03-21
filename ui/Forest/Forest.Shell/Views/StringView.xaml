@@ -1,17 +1,17 @@
 ﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.Forest.Views.StringView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
-             xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
-             xmlns:f="urn:acorisoft/forest/ui"
-             mc:Ignorable="d"
-             d:DesignHeight="384"
-             d:DesignWidth="480"
-             d:DataContext="{d:DesignInstance Type={x:Type local:StringViewModel},IsDesignTimeCreatable = True}"
-             Width="480"
-             Height="384">
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:local="clr-namespace:Acorisoft.FutureGL.Forest.Views"
+                     xmlns:app="clr-namespace:Acorisoft.FutureGL.Forest"
+                     xmlns:f="urn:acorisoft/forest/ui"
+                     mc:Ignorable="d"
+                     d:DesignHeight="384"
+                     d:DesignWidth="480"
+                     d:DataContext="{d:DesignInstance Type={x:Type local:StringViewModel},IsDesignTimeCreatable = True}"
+                     Width="480"
+                     Height="384">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -42,13 +42,13 @@
                        Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
                        VerticalAlignment="Center" />
 
-            <f:ForestTextBox Grid.Row="1"
-                             ScrollViewer.CanContentScroll="True"
-                             VerticalScrollBarVisibility="Auto"
-                             Margin="16"
-                             Padding="8"
-                             Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             TextWrapping="Wrap" />
+            <f:SingleLine Grid.Row="1"
+                          ScrollViewer.CanContentScroll="True"
+                          VerticalScrollBarVisibility="Auto"
+                          Margin="16"
+                          Padding="8"
+                          Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          TextWrapping="Wrap" />
 
             <!-- 按钮 -->
             <UniformGrid Grid.Row="2"

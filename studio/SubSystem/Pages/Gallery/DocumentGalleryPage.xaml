@@ -60,12 +60,12 @@
         </Style>
     </UserControl.Resources>
     <f:Drawer>
-        <Grid>
+        <Grid ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="320"
-                                  Width="320" 
+                                  Width="1*" 
                                   MaxWidth="480"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
             <!-- 菜单栏 -->
@@ -102,8 +102,7 @@
                           Margin="0 144 0 96"
                           Width="1"/>
 
-            <!-- 内容栏 -->
-            
+            <!-- 内容栏 -->            
             <f:ForestSection Grid.Column="1"
                              Header="内容"
                              Margin="16">

@@ -2,11 +2,18 @@
 {
     public enum DatabaseMode
     {
-        Debug,
+        /// <summary>
+        /// 实际模式，打开实际文件并读写
+        /// </summary>
         Release,
         
         /// <summary>
-        /// 数据库附加
+        /// 调试模式，不打开实际文件
+        /// </summary>
+        Debug,
+        
+        /// <summary>
+        /// 附加模式，打开实际文件，只读不写
         /// </summary>
         Attached
     }

@@ -296,8 +296,8 @@ namespace Acorisoft.FutureGL.Forest
             container.Use<SynchronizationContextScheduler, IScheduler>(
                 new SynchronizationContextScheduler(
                     SynchronizationContext.Current!));
-            
-            RegisterFrameworkServices(Logger, AppModel, container);
+
+            RegisterContextServices(Logger, AppModel, container);
         }
 
         protected virtual void RegisterContextServices(ILogger logger, ApplicationModel appModel, IContainer container)

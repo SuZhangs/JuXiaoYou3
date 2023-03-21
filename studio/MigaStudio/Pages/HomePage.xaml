@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="720"
@@ -21,12 +22,13 @@
         <WrapPanel Margin="16"
                    Orientation="Horizontal">
 
-            <Border Background="{f:Brush HighlightB1}"
-                    BorderThickness="1"
-                    BorderBrush="{f:Brush HighlightB3}"
-                    CornerRadius="3"
-                    Width="256"
-                    Height="144" />
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"
+                            Content="模组编辑器"
+                            Command="{Binding GotoTemplateEditorCommand}" Background="{f:Brush HighlightB1}"
+                            BorderThickness="1"
+                            BorderBrush="{f:Brush HighlightB3}"
+                            CornerRadius="3"
+                            ShowText="True"/>
         </WrapPanel>
     </Grid>
 </f:ForestUserControl>

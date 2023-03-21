@@ -134,8 +134,8 @@
                            Text="{Binding Suffix}"
                            VerticalAlignment="Center" />
 
-                <ui:TextBox PlaceholderText="{Binding Fallback}"
-                            Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <f:SingleLine Watermark="{Binding Fallback}"
+                              Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
         </DockPanel>
     </DataTemplate>
@@ -149,10 +149,8 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <f:ForestTextBox AcceptsReturn="True"
-                             AcceptsTab="True"
-                             Height="160"
-                             Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            <f:Multiline Height="160"
+                         Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
     </DataTemplate>
 

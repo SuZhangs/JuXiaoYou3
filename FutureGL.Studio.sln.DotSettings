@@ -66,7 +66,7 @@ namespace $NAMESPACE$&#xD;
 {&#xD;
 
     [Connected(View = typeof($CLASS$), ViewModel = typeof($CLASS$Model))]&#xD;
-    public partial class $CLASS$ : UserControl&#xD;
+    public partial class $CLASS$ &#xD;
     {&#xD;
         public $CLASS$()&#xD;
         {&#xD;
@@ -81,6 +81,7 @@ namespace $NAMESPACE$&#xD;
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="urn:acorisoft/forest/ui"
              xmlns:this="clr-namespace:$NAMESPACE$"
              xmlns:thisVM="clr-namespace:$NAMESPACE$"
              mc:Ignorable="d" 
@@ -89,7 +90,7 @@ namespace $NAMESPACE$&#xD;
     &lt;Grid&gt;
 	    $END$
     &lt;/Grid&gt;
-&lt;/UserControl&gt;
+&lt;/f:ForestUserControl&gt;
 </s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1D53CE9255A65D468F1C0CC3391F75A4/UITag/@EntryValue">Forest UI</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=584F352E1E30354DB0A7724DF4374347/@KeyIndexDefined">True</s:Boolean>
@@ -238,7 +239,7 @@ namespace $NAMESPACE$&#xD;
 namespace $NAMESPACE$&#xD;
 {&#xD;
     [Connected(View = typeof($CLASS$), ViewModel = typeof($CLASS$Model))]&#xD;
-    public partial class $CLASS$ : UserControl&#xD;
+    public partial class $CLASS$ &#xD;
     {&#xD;
         public $CLASS$()&#xD;
         {&#xD;
@@ -253,6 +254,7 @@ namespace $NAMESPACE$&#xD;
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:f="urn:acorisoft/forest/ui"
              xmlns:this="clr-namespace:$NAMESPACE$"
              xmlns:thisVM="clr-namespace:$NAMESPACE$"
              mc:Ignorable="d" 
@@ -261,7 +263,7 @@ namespace $NAMESPACE$&#xD;
     &lt;Grid&gt;
 	    $END$
     &lt;/Grid&gt;
-&lt;/UserControl&gt;
+&lt;/f:ForestUserControl&gt;
 </s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9670F79B1A25A40B622B4CE2CE909EC/UITag/@EntryValue">Forest UI</s:String>
 	<s:Boolean x:Key="/Default/ReSpeller/DontCheckVerbatimStrings/@EntryValue">True</s:Boolean>
@@ -272,9 +274,11 @@ namespace $NAMESPACE$&#xD;
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Doujinshi/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Dragablz/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Fran_00E7ais/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Headered/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=juxiaoyou/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Kichiku/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Lookless/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Miga/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=migastudio/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_041E_0442_043C_0435_043D_0430/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0420_0443_0441_0441_043A_0438_0439/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

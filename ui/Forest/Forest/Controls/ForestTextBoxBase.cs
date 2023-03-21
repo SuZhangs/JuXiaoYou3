@@ -1,32 +1,99 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ForestTextBoxBase : TextBox, ITextResourceAdapter
+    public abstract class ForestTextBoxBase : TextBox, ITextResourceAdapter
     {
-        public static readonly DependencyProperty PaletteProperty = DependencyProperty.Register(
-            nameof(Palette),
-            typeof(HighlightColorPalette),
-            typeof(ForestTextBoxBase),
-            new PropertyMetadata(default(HighlightColorPalette)));
+        public static readonly DependencyProperty WatermarkProperty;
+        public static readonly DependencyPropertyKey HasTextPropertyKey;
+        public static readonly DependencyProperty HasTextProperty;
+
+        static ForestTextBoxBase()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestTextBoxBase), new FrameworkPropertyMetadata(typeof(ForestTextBoxBase)));
+            
+            WatermarkProperty = DependencyProperty.Register(
+                nameof(Watermark),
+                typeof(string),
+                typeof(ForestTextBoxBase),
+                new PropertyMetadata(default(string)));
+            
+            HasTextPropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(HasText),
+                typeof(bool),
+                typeof(ForestTextBoxBase),
+                new PropertyMetadata(Boxing.False));
+            
+            HasTextProperty = HasTextPropertyKey.DependencyProperty;
+        }
 
         private const string PART_BdName      = "PART_Bd";
         private const string PART_ContentName = "PART_ContentHost";
 
-        public ForestTextBoxBase()
+        protected ForestTextBoxBase()
         {
-            Animator         =  Animator.CreateDummy();
             Finder           =  GetTemplateChild();
-            StateMachine     =  new VisualDFA();
+            StateMachine = new VisualDFA
+            {
+                StateChangedHandler = HandleStateChanged
+            };
             Loaded           += OnLoadedIntern;
             Unloaded         += OnUnloadedIntern;
             IsEnabledChanged += OnEnableChanged;
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            GetTemplateChildOverride(Finder);
             BuildState();
         }
+
+        
+        #region Button States
+
+        protected abstract void StopAnimation();
+        protected abstract void SetForeground(Brush brush);
+        protected abstract void OnInvalidateState();
+
+
+
+        private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
+        {
+            var theme   = ThemeSystem.Instance.Theme;
+
+            // Stop Animation
+            StopAnimation();
+
+            if (!init)
+            {
+                if (IsEnabled)
+                {
+                    GoToNormalState(theme);
+                }
+                else
+                {
+                    GoToDisableState(theme);
+                }
+
+                return;
+            }
+
+            switch (now)
+            {
+                default:
+                    GoToNormalState(theme);
+                    break;
+                case VisualState.Highlight1:
+                    GoToHighlight1State(theme.Duration.Medium, theme);
+                    break;
+                case VisualState.Highlight2:
+                    GoToHighlight2State(theme.Duration.Medium, theme);
+                    break;
+                case VisualState.Inactive:
+                    GoToDisableState(theme);
+                    break;
+            }
+        }
+
+        protected abstract void GoToNormalState( ForestThemeSystem theme);
+        protected abstract void GoToHighlight1State(Duration duration,  ForestThemeSystem theme);
+        protected abstract void GoToHighlight2State(Duration duration,  ForestThemeSystem theme);
+        protected abstract void GoToDisableState( ForestThemeSystem theme);
+
+        #endregion
 
         /// <summary>
         /// 构建状态
@@ -64,7 +131,7 @@
         /// <summary>
         /// 构建状态
         /// </summary>
-        protected virtual void BuildState()
+        private void BuildState()
         {
             StateMachine.AddState(VisualState.Normal, VisualState.Highlight1, VisualStateTrigger.Next);
             StateMachine.AddState(VisualState.Highlight1, VisualState.Highlight2, VisualStateTrigger.Next);
@@ -73,11 +140,6 @@
             StateMachine.AddState(VisualState.Highlight2, VisualState.Highlight1, VisualStateTrigger.Disabled);
             StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
         }
-
-        protected virtual void BuildAnimation()
-        {
-        }
-
 
         protected virtual void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
@@ -90,12 +152,6 @@
         /// </summary>
         /// <returns></returns>
         protected ITemplatePartFinder GetTemplateChild() => new Finder(GetTemplateChild);
-
-        /// <summary>
-        /// 开始构建状态驱动的动画
-        /// </summary>
-        /// <returns>返回一个动画构建器。</returns>
-        protected IStateDrivenAnimatorBuilder StateDrivenAnimation() => new StateDrivenAnimatorBuilder();
 
         private void OnLoadedIntern(object sender, RoutedEventArgs e)
         {
@@ -154,11 +210,22 @@
 
             base.OnMouseLeave(e);
         }
+        
+
+        void ITextResourceAdapter.SetText(string text)
+        {
+        }
+
+        void ITextResourceAdapter.SetToolTips(string text)
+        {
+            ToolTip = text;
+        }
 
 
         public override void OnApplyTemplate()
         {
-            Finder.Done(BuildAnimation).Find();
+            GetTemplateChildOverride(Finder);
+            Finder.Find();
             StateMachine.NextState();
             base.OnApplyTemplate();
         }
@@ -173,30 +240,23 @@
         /// </summary>
         protected VisualDFA StateMachine { get; }
 
-        /// <summary>
-        /// 动画工具
-        /// </summary>
-        public Animator Animator { get; protected set; }
-
         protected Border PART_Bd { get; private set; }
         protected ScrollViewer PART_Content { get; private set; }
+        
+
+        public bool HasText
+        {
+            get => (bool)GetValue(HasTextProperty);
+            private set => SetValue(HasTextPropertyKey, Boxing.Box(value));
+        }
 
         /// <summary>
         /// 动画工具
         /// </summary>
-        public HighlightColorPalette Palette
+        public string Watermark
         {
-            get => (HighlightColorPalette)GetValue(PaletteProperty);
-            set => SetValue(PaletteProperty, value);
-        }
-
-        public void SetText(string text)
-        {
-        }
-
-        public void SetToolTips(string text)
-        {
-            ToolTip = text;
+            get => (string)GetValue(WatermarkProperty);
+            set => SetValue(WatermarkProperty, value);
         }
     }
 }

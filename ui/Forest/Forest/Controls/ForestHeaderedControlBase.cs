@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls
 {
-    public class ForestHeaderedControlBase : ForestContentControlBase, ITextResourceAdapter
+    public abstract class ForestHeaderedControlBase : ForestContentControlBase, ITextResourceAdapter
     {
         /// <summary>
         /// 实现 <see cref="Header"/> 属性的依赖属性。

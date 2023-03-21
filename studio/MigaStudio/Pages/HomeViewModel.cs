@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages.Tools;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
@@ -17,9 +18,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public HomeViewModel()
         {
             Title = "首页";
+
+            GotoTemplateEditorCommand = Command(GotoTemplateEditorImpl);
+        }
+
+        private void GotoTemplateEditorImpl()
+        {
+            Controller.New<TemplateEditorViewModel>();
         }
 
         public sealed override bool Uniqueness => true;
         public sealed override bool Removable => false;
+
+        public RelayCommand GotoTemplateEditorCommand { get; }
     }
 }
