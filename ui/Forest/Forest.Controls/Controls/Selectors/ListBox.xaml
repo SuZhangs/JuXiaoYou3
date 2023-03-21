@@ -64,8 +64,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style TargetType="{x:Type s1:ChromeListBox}" BasedOn="{StaticResource ClearStyle.ListBox}"/>
+
+    <Style TargetType="{x:Type s1:ChromeListBox}" BasedOn="{StaticResource ClearStyle.ListBox}">
+        <Setter Property="Background" Value="{f:Brush BackgroundLevel4}" />
+    </Style>
     <Style TargetType="{x:Type c1:ListBox}" BasedOn="{StaticResource ClearStyle.ListBox}"/>
     
     
