@@ -7,7 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
-    <Style x:Key="DefaultTextBoxStyle" TargetType="{x:Type c:ForestTextBoxBase}">
+    <Style x:Key="ClearStyle.TextBox" TargetType="{x:Type c:ForestTextBoxBase}">
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
                 <Style>
@@ -72,6 +72,6 @@
         </Setter>
     </Style>
     
-    <Style TargetType="{x:Type cc:ForestTextBox}" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
-    <Style TargetType="{x:Type cc:HighlightTextBox}" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
+    <Style TargetType="{x:Type c:SingleLine}" BasedOn="{StaticResource ClearStyle.TextBox}"/>
+    <Style TargetType="{x:Type c:Multiline}" BasedOn="{StaticResource ClearStyle.TextBox}"/>
 </ResourceDictionary>
