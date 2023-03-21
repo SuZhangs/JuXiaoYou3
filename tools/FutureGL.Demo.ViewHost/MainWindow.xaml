@@ -12,19 +12,6 @@
                  ExtendToTitleBar="True"
                  MinWidth="1280"
                  MinHeight="720">
-    <fs:ForestWindow.TitleBar>
-        <f:StretchPanel>
-            <TextBlock WindowChrome.IsHitTestVisibleInChrome="False"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       Text="{Binding Demo.Name,Mode=OneWay}"
-                       VerticalAlignment="Center"/>
-            <fs:TitleBar WindowChrome.IsHitTestVisibleInChrome="True" 
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Top"/>
-        </f:StretchPanel>
-    </fs:ForestWindow.TitleBar>
     <Window.DataContext>
         <vm:AppViewModel/>
     </Window.DataContext>

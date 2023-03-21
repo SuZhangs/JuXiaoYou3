@@ -19,7 +19,6 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Xaml.Get<IViewService>().Route(new DocumentGalleryViewModel());
         }
     }
 }

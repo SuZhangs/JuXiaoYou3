@@ -11,4 +11,34 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/TabControl.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Selectors/TreeView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+    
+    
+    <Style TargetType="HeaderedContentControl">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="HeaderedContentControl">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top"
+                                          TextElement.FontSize="18"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                          VerticalAlignment="Stretch"
+                                          HorizontalAlignment="Stretch"/>
+                        
+                        <ContentPresenter DockPanel.Dock="Bottom"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

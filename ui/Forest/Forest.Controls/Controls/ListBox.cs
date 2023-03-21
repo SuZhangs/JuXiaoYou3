@@ -25,6 +25,8 @@
 
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
+        private SolidColorBrush _foregroundInHighlight;
+        private SolidColorBrush _foregroundDisabled;
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
@@ -47,22 +49,23 @@
 
         protected override void SetForeground(Brush brush)
         {
-            _content.SetValue(TextElement.ForegroundProperty, _foreground);
+            _content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
         protected override void OnInvalidateState()
         {
-            _background = null;
-            _foreground = null;
-            _highlight  = null;
-            _highlight2 = null;
-            _disabled   = null;
+            _background            = null;
+            _foreground            = null;
+            _foregroundInHighlight = null;
+            _highlight             = null;
+            _highlight2            = null;
+            _disabled              = null;
             InvalidateVisual();
         }
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Foreground]);
             _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Background]);
             _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
@@ -80,7 +83,8 @@
         {
             //
             // Opacity 动画
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -102,13 +106,14 @@
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundInHighlight);
         }
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _highlight2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -136,20 +141,20 @@
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundInHighlight);
         }
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _disabled   = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
-            _foreground = new SolidColorBrush(Colors.LightGray);
+            _disabled           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundInactive]);
+            _foregroundDisabled ??= new SolidColorBrush(Colors.LightGray);
             
             //
             // 设置背景颜色
             _bd.Background = _disabled;
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundDisabled);
         }
     }
 }

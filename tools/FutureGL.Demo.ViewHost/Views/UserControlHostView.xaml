@@ -9,60 +9,124 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:UserControlHostViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        <f:TilePanel>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="2"
-                    Background="Brown"
-                    Content="1"/>
-            <Button f:TilePanel.H="4"
-                    f:TilePanel.W="6"
-                    Background="SlateBlue"
-                    Content="2"/>
-            <Button f:TilePanel.H="6"
-                    f:TilePanel.W="6"
-                    Background="SlateGray"
-                    Content="3"/>
-            <Button f:TilePanel.H="6"
-                    f:TilePanel.W="8"
-                    Background="DarkSlateBlue"
-                    Content="4"/>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="4"
-                    Background="DarkSlateGray"
-                    Content="5"/>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="2"
-                    Background="CornflowerBlue"
-                    Content="6"/>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="2"
-                    Background="Teal"
-                    Content="7"/>
-            <Button f:TilePanel.H="4"
-                    f:TilePanel.W="4"
-                    Background="Silver"
-                    Content="8"/>
-            <Button f:TilePanel.H="4"
-                    f:TilePanel.W="8"
-                    Background="YellowGreen"
-                    Content="9"/>
-            <Button f:TilePanel.H="8"
-                    f:TilePanel.W="2"
-                    Background="Orange"
-                    Content="10"/>
-            <Button f:TilePanel.H="6"
-                    f:TilePanel.W="2"
-                    Background="Orchid"
-                    Content="11"/>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="6"
-                    Background="OrangeRed"
-                    Content="12"/>
-            <Button f:TilePanel.H="2"
-                    f:TilePanel.W="8"
-                    Background="BlueViolet"
-                    Content="13"/>
-        </f:TilePanel>
-    </Grid>
+    <ScrollViewer>
+        <StackPanel>
+            <UniformGrid Columns="2">
+                <Border Background="#F1F1F1"
+                    Padding="64">
+                    <HeaderedContentControl Foreground="#000D16"
+                                        Header="Light Theme"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch">
+                        <StackPanel Margin="0 24 0 0">
+                            <Border Background="#FFFFFF"
+                                    Height="96"
+                                    Padding="16">
+                                <TextBlock FontSize="16"
+                                       Text="强化色"/>
+                            </Border>
+                            <Border Background="#EBEBEB" Height="96"
+                                Padding="16">
+                                <TextBlock FontSize="16"
+                                       Text="降色2"/>
+                            </Border>
+                            <Border Background="#E6E6E6" Height="96"
+                                Padding="16">
+                                <TextBlock FontSize="16"
+                                       Text="降色3"/>
+                            </Border>
+                            <Border Background="#E0E0E0" Height="96"
+                                Padding="16">
+                                <TextBlock FontSize="16"
+                                       Text="降色4"/>
+                            </Border>
+                            <Border Background="#F6F6F6" Height="96"
+                                Padding="16">
+                                <TextBlock FontSize="16"
+                                       Text="无效色"/>
+                            </Border>
+
+                            <UniformGrid Columns="3">
+                                <StackPanel>
+                                    <TextBlock Foreground="#000D16"
+                                               FontSize="32"
+                                               Text="Primary"/>
+
+                                    <TextBlock Foreground="#AFB8BE"
+                                               FontSize="32"
+                                               Text="Secondary"/>
+
+                                    <TextBlock Foreground="#C0C8CF"
+                                               FontSize="32"
+                                               Text="Thirdly"/>
+
+                                    <TextBlock Foreground="#D5DADD"
+                                               FontSize="32"
+                                               Text="Disabled"/>
+                                    <TextBlock Foreground="#8492a6"
+                                           FontSize="32"
+                                           Text="特殊色"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Foreground="#000D16"
+                                               FontSize="24"
+                                               Text="Primary"/>
+
+                                    <TextBlock Foreground="#AFB8BE"
+                                               FontSize="24"
+                                               Text="Secondary"/>
+
+                                    <TextBlock Foreground="#C0C8CF"
+                                               FontSize="24"
+                                               Text="Thirdly"/>
+
+                                    <TextBlock Foreground="#D5DADD"
+                                               FontSize="24"
+                                               Text="Disabled"/>
+                                    <TextBlock Foreground="#8492a6"
+                                           FontSize="24"
+                                           Text="特殊色"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Foreground="#000D16"
+                                               FontSize="14"
+                                               Text="Primary"/>
+
+                                    <TextBlock Foreground="#AFB8BE"
+                                               FontSize="14"
+                                               Text="Secondary"/>
+
+                                    <TextBlock Foreground="#C0C8CF"
+                                               FontSize="14"
+                                               Text="Thirdly"/>
+
+                                    <TextBlock Foreground="#D5DADD"
+                                               FontSize="14"
+                                               Text="Disabled"/>
+                                    <TextBlock Foreground="#8492a6"
+                                           FontSize="14"
+                                           Text="特殊色"/>
+                                </StackPanel>
+                            </UniformGrid>
+                        </StackPanel>
+                    </HeaderedContentControl>
+
+                </Border>
+
+
+                <Border Background="#323439"
+                    Padding="64">
+                    <HeaderedContentControl Foreground="#E9EAEB"
+                                        Header="Dark Theme"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch">
+                        <StackPanel>
+
+                        </StackPanel>
+                    </HeaderedContentControl>
+
+                </Border>
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
 </f:ForestUserControl>

@@ -38,7 +38,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         protected override void SetForeground(Brush brush)
         {
-            _content.SetValue(TextElement.ForegroundProperty, _foreground);
+            _content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
         protected override void OnInvalidateState()

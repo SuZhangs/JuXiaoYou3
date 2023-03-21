@@ -3,6 +3,7 @@
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls;assembly=Forest"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:cc="clr-namespace:Acorisoft.FutureGL.Forest.Controls">
+    
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>

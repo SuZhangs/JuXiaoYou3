@@ -52,6 +52,7 @@
                             Background="Transparent"
                             CornerRadius="3">
                         <ContentPresenter x:Name="PART_Content"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
