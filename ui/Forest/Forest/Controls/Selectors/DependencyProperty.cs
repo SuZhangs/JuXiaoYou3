@@ -648,6 +648,11 @@
                         .OverrideMetadata(
                             typeof(ForestMenuItemBase),
                             new FrameworkPropertyMetadata(default(Geometry), OnIconChanged));
+            
+            RoleProperty.AddOwner(typeof(ForestMenuItemBase))
+                        .OverrideMetadata(
+                            typeof(ForestMenuItemBase),
+                            new FrameworkPropertyMetadata(default(MenuItemRole), OnMenuItemRoleChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
@@ -687,6 +692,15 @@
 
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestMenuItemBase), new FrameworkPropertyMetadata(typeof(ForestMenuItemBase)));
+        }
+
+        private static void OnMenuItemRoleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var menuItem = (ForestMenuItemBase)d;
+            menuItem.InvalidateState();
+            menuItem.OnMenuItemRoleChanged(
+                e.OldValue is MenuItemRole r ? r : default(MenuItemRole),
+                e.NewValue is MenuItemRole r1 ? r1 : default(MenuItemRole));
         }
 
 

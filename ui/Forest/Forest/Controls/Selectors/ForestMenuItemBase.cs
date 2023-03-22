@@ -71,7 +71,10 @@
             StateMachine.AddState(VisualState.Normal, VisualState.Inactive, VisualStateTrigger.Disabled);
         }
 
-
+        protected virtual void OnMenuItemRoleChanged(MenuItemRole oldRole, MenuItemRole newValue)
+        {
+            
+        }
         /// <summary>
         /// 
         /// </summary>
