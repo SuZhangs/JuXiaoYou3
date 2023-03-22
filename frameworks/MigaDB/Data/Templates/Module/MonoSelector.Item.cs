@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     public class OptionItem : ObservableObject
     {

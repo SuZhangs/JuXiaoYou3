@@ -19,6 +19,24 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             ApprovalRequired = true;
         }
+
+        private static string Unsave
+        {
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "[+] {0}",
+                CultureArea.French   => "[+] {0}",
+                CultureArea.Japanese => "[+] {0}",
+                CultureArea.Korean   => "[+] {0}",
+                CultureArea.Russian  => "[+] {0}",
+                _                    => "[+] {0}",
+            };
+        }
+
+        protected void SetTitle(string title, bool useUnsavePattern = false)
+        {
+            Title = useUnsavePattern ? string.Format(Unsave, title) : title;
+        }
         
         #region Override
 

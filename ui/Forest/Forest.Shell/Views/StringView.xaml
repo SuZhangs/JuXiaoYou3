@@ -17,6 +17,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Image.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/CommonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -34,13 +35,9 @@
 
             <!-- 标题 -->
             <TextBlock Grid.Row="0"
-                       FontSize="24"
-                       FontWeight="Bold"
                        Foreground="SlateGray"
-                       HorizontalAlignment="Center"
-                       Margin="0 16 0 0"
                        Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
-                       VerticalAlignment="Center" />
+                       Style="{StaticResource TextBlock.DialogTitle}" />
 
             <f:SingleLine Grid.Row="1"
                           ScrollViewer.CanContentScroll="True"

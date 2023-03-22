@@ -3,5 +3,4 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
 </ResourceDictionary>

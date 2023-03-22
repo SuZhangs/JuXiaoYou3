@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ViewHost.Views"
              xmlns:f="urn:acorisoft/forest/ui"
-             xmlns:mb="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Module;assembly=MigaDB"
+             xmlns:mb="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;assembly=MigaDB"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">

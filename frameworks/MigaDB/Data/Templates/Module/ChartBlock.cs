@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     /// <summary>
     /// 表示图表内容块。

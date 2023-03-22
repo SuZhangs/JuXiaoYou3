@@ -1,5 +1,5 @@
 ﻿using System;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
 

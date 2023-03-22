@@ -5,13 +5,13 @@
         /*
          * Basic
          */
-        BasicType = 0x00010000,
-        Color     = BasicType + 0x0001,
-        Degree    = BasicType + 0x0002,
-        Number    = BasicType + 0x0004,
-        Slider    = BasicType + 0x0008,
-        Text      = BasicType + 0x000f,
-        Page      = BasicType + 0x0010,
+        BasicType  = 0x00010000,
+        Color      = BasicType + 0x0001,
+        Degree     = BasicType + 0x0002,
+        Number     = BasicType + 0x0004,
+        Slider     = BasicType + 0x0008,
+        SingleLine = BasicType + 0x000f,
+        MultiLine  = BasicType + 0x0010,
 
         /*
          * Option
@@ -19,8 +19,8 @@
         OptionType = 0x00020000,
         Switch     = OptionType + 0x0001,
         Radio      = OptionType + 0x0002,
-        Talent     = OptionType + 0x0004,
-        Favorite   = OptionType + 0x0008,
+        Heart      = OptionType + 0x0004,
+        Star       = OptionType + 0x0008,
         Binary     = OptionType + 0x000f,
         Sequence   = OptionType + 0x0010,
 

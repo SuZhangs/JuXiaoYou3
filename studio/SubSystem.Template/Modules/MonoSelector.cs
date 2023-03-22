@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using DynamicData;
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
 

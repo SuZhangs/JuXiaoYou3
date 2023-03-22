@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -40,9 +41,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
-            SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl);
+            SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl, HasElement);
             NewBlockCommand            = AsyncCommand(NewBlockImpl);
-            EditBlockCommand           = AsyncCommand(EditBlockImpl);
+            EditBlockCommand           = AsyncCommand<ModuleBlock>(EditBlockImpl, HasElement);
             RemoveBlockCommand         = AsyncCommand(RemoveBlockImpl);
             ShiftUpBlockCommand        = AsyncCommand(ShiftUpBlockImpl);
             ShiftDownBlockCommand      = AsyncCommand(ShiftDownBlockImpl);
@@ -53,6 +54,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
             ShiftDownElementCommand    = AsyncCommand(ShiftDownElementImpl);
             RemoveElementCommand       = AsyncCommand(RemoveElementImpl);
             RefreshMetadataListCommand = AsyncCommand(RefreshMetadataListImpl);
+            
+            SetDirtyState(false);
+        }
+
+        private static bool HasElement<T>(T element) where T : class => element is not null;
+
+        private void SetDirtyState(bool value)
+        {
+            _dirty           = value;
+            ApprovalRequired = value;
+            UpdateTitle();
+        }
+
+        private void UpdateTitle()
+        {
+            var name = string.IsNullOrEmpty(Name) ? Id : Name;
+            SetTitle(name, _dirty);
         }
 
         private void NewTemplateImpl()
@@ -161,10 +179,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
         private async Task NewBlockImpl()
         {
+            var r = await NewBlockViewModel.New();
         }
 
-        private async Task EditBlockImpl()
+        private async Task EditBlockImpl(ModuleBlock element)
         {
+            var r = await EditBlockViewModel.New(element);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+            
+            
         }
 
         private async Task RemoveBlockImpl()
@@ -205,16 +232,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
         private async Task RefreshMetadataListImpl()
         {
-        }
-
-        public void SetDirtyState(bool value)
-        {
-            _dirty = value;
-
-            var name = string.IsNullOrEmpty(Name) ? Id : Name;
-
-            // TODO: 翻译
-            Title = _dirty ? $"{name}- 未保存" : name;
         }
 
         /// <summary>
@@ -301,7 +318,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
         public string Name
         {
             get => _name;
-            set => SetValue(ref _name, value);
+            set
+            {
+                SetValue(ref _name, value);
+                UpdateTitle();
+            }
         }
 
         /// <summary>
@@ -313,7 +334,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
         public AsyncRelayCommand OpenTemplateCommand { get; }
         public AsyncRelayCommand<FrameworkElement> SaveTemplateCommand { get; }
         public AsyncRelayCommand NewBlockCommand { get; }
-        public AsyncRelayCommand EditBlockCommand { get; }
+        public AsyncRelayCommand<ModuleBlock> EditBlockCommand { get; }
         public AsyncRelayCommand RemoveBlockCommand { get; }
         public AsyncRelayCommand ShiftUpBlockCommand { get; }
         public AsyncRelayCommand ShiftDownBlockCommand { get; }

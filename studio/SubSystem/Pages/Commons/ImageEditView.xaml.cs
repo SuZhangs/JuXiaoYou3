@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             this.Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             _grayImage        = new BitmapImage();
             _grayImage.BeginInit();

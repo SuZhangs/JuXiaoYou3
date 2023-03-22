@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Module;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils;
 

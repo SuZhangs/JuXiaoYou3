@@ -1,6 +1,6 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Documents;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     public class ModuleTemplateCache : StorageObject
     {

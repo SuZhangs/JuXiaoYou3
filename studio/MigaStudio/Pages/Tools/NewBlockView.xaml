@@ -1,0 +1,102 @@
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Tools.NewBlockView"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Tools"
+                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Tools"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules;assembly=SubSystem.Template"
+                     xmlns:thisModel2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;assembly=SubSystem.Template"
+                     xmlns:thisModel3="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Metadatas;assembly=MigaDB"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem.Template"
+                     mc:Ignorable="d"
+                     d:DesignHeight="300" d:DesignWidth="300"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewBlockViewModel}, IsDesignTimeCreatable=True}"
+                     Height="540"
+                     Width="768">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <thisConverters:ModuleBlockConverter x:Key="Name"/>
+
+            <DataTemplate DataType="{x:Type thisModel3:MetadataKind}">
+                <TextBlock Margin="8"
+                       Text="{Binding Converter={StaticResource Name}}"/>
+            </DataTemplate>
+
+
+            <Style x:Key="TextBlock.DialogTitle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0 16 0 0"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Background="{f:BackgroundBrush}"
+            CornerRadius="12"
+            Padding="16">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Foreground="{f:ForegroundBrush}"
+                       Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
+                       Style="{DynamicResource TextBlock.DialogTitle}"/>
+
+            <!-- 选项 -->
+            <f:TreeView Grid.Row="1"
+                        Grid.Column="0"
+                        BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
+                <f:TreeViewItem Header="基础块" 
+                                Padding="8"
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicBlockKinds}"/>
+                <f:TreeViewItem Header="高级块" 
+                                Padding="8"
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedBlockKinds}"/>
+                <f:TreeViewItem Header="选项块" 
+                                Padding="8"
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.OptionBlockKinds}"/>
+                <f:TreeViewItem Header="图表块" 
+                                Padding="8"
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartBlockKinds}"/>
+            </f:TreeView>
+
+            <!-- 预览 -->
+            <f:StretchPanel Grid.Row="1"
+                            Grid.Column="1">
+                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"/>
+                
+                <Border Background="{x:Static f:Xaml.Transparent}"/>
+            </f:StretchPanel>
+            
+            <!-- 按钮 -->
+            <f:DialogButton Grid.Row="2"
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            Icon="{StaticResource FeatherIcon.Checked}"
+                            IconSize="29"
+                            IsDefault="True"
+                            Content="{x:Static f:Language.CompleteText}"
+                            Command="{Binding CancelCommand}"
+                            Height="48"
+                            Purpose="Info" 
+                            Width="160"/>
+        </Grid>
+    </Border>
+</f:ForestUserControl>

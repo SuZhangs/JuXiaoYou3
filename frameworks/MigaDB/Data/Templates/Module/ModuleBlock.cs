@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Module
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     /// <summary>
     /// 表示一个模组内容块。

@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             this.Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             UpdateState();
         }

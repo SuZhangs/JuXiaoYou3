@@ -24,14 +24,17 @@
                             Margin="0 0 0 4"
                             Orientation="Horizontal">
                     <ftk:ToolButton Content="新建"
+                                    Command="{Binding NewTemplateCommand}"
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="打开"
+                                    Command="{Binding OpenTemplateCommand}"
                                     Icon="{StaticResource IC.Folder}"
                                     IsFilled="True"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="保存"
+                                    Command="{Binding SaveTemplateCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
                                     ShowText="True"/>
@@ -94,6 +97,7 @@
                             Margin="0 0 0 4"
                             Orientation="Horizontal">
                     <ftk:ToolButton Content="添加"
+                                    Command="{Binding NewBlockCommand}"
                                     Icon="{StaticResource FeatherIcon.Plus}"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="编辑"
