@@ -36,21 +36,22 @@
 
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <Border Background="#43454C"
+                    <Border Background="#242529"
                         Padding="64">
                         <Border.Resources>
                             <SolidColorBrush x:Key="BorderBrush" Color="#777C88" />
-                            <SolidColorBrush x:Key="BackgroundLevel1" Color="#5F636D" />
-                            <SolidColorBrush x:Key="BackgroundLevel2" Color="#474A52" />
-                            <SolidColorBrush x:Key="BackgroundLevel3" Color="#43454C" />
-                            <SolidColorBrush x:Key="BackgroundLevel4" Color="#323439" />
-                            <SolidColorBrush x:Key="BackgroundLevel5" Color="#26282B" />
-                            <SolidColorBrush x:Key="BackgroundLevel6" Color="#18191B" />
+                            <!--<SolidColorBrush x:Key="BackgroundLevel1" Color="#5F636D" />-->
+                            <SolidColorBrush x:Key="BackgroundLevel1" Color="#54575F" />
+                            <SolidColorBrush x:Key="BackgroundLevel2" Color="#43464C" />
+                            <SolidColorBrush x:Key="BackgroundLevel3" Color="#242529" />
+                            <SolidColorBrush x:Key="BackgroundLevel4" Color="#1D1E21" />
+                            <SolidColorBrush x:Key="BackgroundLevel5" Color="#151618" />
+                            <SolidColorBrush x:Key="BackgroundLevel6" Color="#0A0A0B" />
                             <SolidColorBrush x:Key="BackgroundDisabled" Color="#3C3E44" />
-                            <SolidColorBrush x:Key="ForegroundLevel1" Color="#E0E0E0" />
-                            <SolidColorBrush x:Key="ForegroundLevel2" Color="#C1C1BE" />
-                            <SolidColorBrush x:Key="ForegroundLevel3" Color="#A8A8A4" />
-                            <SolidColorBrush x:Key="ForegroundDisabled" Color="#757570" />
+                            <SolidColorBrush x:Key="ForegroundLevel1" Color="#EBEBEB" />
+                            <SolidColorBrush x:Key="ForegroundLevel2" Color="#8C8C8C" />
+                            <SolidColorBrush x:Key="ForegroundLevel3" Color="#737373" />
+                            <SolidColorBrush x:Key="ForegroundDisabled" Color="#595959" />
                             <SolidColorBrush x:Key="ForegroundOther" Color="#8492a6" />
                         </Border.Resources>
                         <HeaderedContentControl Foreground="#E0E0E0"
@@ -71,10 +72,10 @@
                                             Width="192" />
 
                                         <Border Background="{DynamicResource BackgroundLevel1}"
-                                            CornerRadius="8"
-                                            Effect="{StaticResource Ui.Shadow3}"
-                                            Margin="-16 16 0 0"
-                                            Width="192" />
+                                                CornerRadius="8"
+                                                Effect="{StaticResource Ui.Shadow3}"
+                                                Margin="-16 16 0 0"
+                                                Width="192" />
                                     </StackPanel>
                                 </Border>
 
@@ -319,15 +320,15 @@
                     </Border>
 
 
-                    <Border Background="#F1F1F1"
+                    <Border Background="#EFEFEF"
                         Padding="64">
                         <Border.Resources>
                             <SolidColorBrush x:Key="BackgroundLevel1" Color="#FFFFFF" />
-                            <SolidColorBrush x:Key="BackgroundLevel2" Color="#FAFAFA" />
-                            <SolidColorBrush x:Key="BackgroundLevel3" Color="#F1F1F1" />
-                            <SolidColorBrush x:Key="BackgroundLevel4" Color="#EBEBEB" />
-                            <SolidColorBrush x:Key="BackgroundLevel5" Color="#E6E6E6" />
-                            <SolidColorBrush x:Key="BackgroundLevel6" Color="#E0E0E0" />
+                            <SolidColorBrush x:Key="BackgroundLevel2" Color="#F9F9F9" />
+                            <SolidColorBrush x:Key="BackgroundLevel3" Color="#EFEFEF" />
+                            <SolidColorBrush x:Key="BackgroundLevel4" Color="#D9D9D9" />
+                            <SolidColorBrush x:Key="BackgroundLevel5" Color="#CCCCCC" />
+                            <SolidColorBrush x:Key="BackgroundLevel6" Color="#BFBFBF" />
                             <SolidColorBrush x:Key="BackgroundDisabled" Color="#F6F6F6" />
                             <SolidColorBrush x:Key="ForegroundLevel1" Color="#000D16" />
                             <SolidColorBrush x:Key="ForegroundLevel2" Color="#75818A" />

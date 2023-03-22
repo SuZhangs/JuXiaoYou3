@@ -21,6 +21,9 @@
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/ListBoxItem.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Menu.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/MenuItem.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ContextMenu.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <convs:TranslationConverter x:Key="Translation"/>

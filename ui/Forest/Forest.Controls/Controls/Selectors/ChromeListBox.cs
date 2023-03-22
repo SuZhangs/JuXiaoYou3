@@ -22,6 +22,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
         private SolidColorBrush _foregroundHighlight;
+        private SolidColorBrush _foregroundDisabled;
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
@@ -50,15 +51,16 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
             _highlight           = null;
             _highlight2          = null;
             _disabled            = null;
+            _foregroundDisabled  = null;
             InvalidateVisual();
         }
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _foreground          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _background          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
-            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _background          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel5]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
 
             //
             // 设置背景颜色
@@ -76,7 +78,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
         {
             //
             // Opacity 动画
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -98,13 +101,14 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundHighlight);
         }
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
+            _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -132,20 +136,20 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundHighlight);
         }
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _disabled   = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
-            _foreground = new SolidColorBrush(Colors.LightGray);
+            _disabled           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
+            _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
             
             //
             // 设置背景颜色
             _bd.Background = _disabled;
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(_foregroundDisabled);
         }
     }
 }

@@ -7,16 +7,15 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Tools"
                      xmlns:thisModel="urn:acorisoft/migastudio/template"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateEditorViewModel}, IsDesignTimeCreatable=True}">
     <Grid Margin="8 16">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="320"
-                              Width="320" 
-                              MaxWidth="480"/>
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="384" />
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="280" />
         </Grid.ColumnDefinitions>
 
         <f:ForestSection Grid.Column="0"
@@ -24,10 +23,31 @@
                          Margin="8 0">
             <ScrollViewer>
                 <StackPanel>
-                    <TextBox Margin="0 8"/>
-                    <TextBox Margin="0 8"/>
-                    <TextBox Margin="0 8"/>
-                    <TextBox Margin="0 8"/>
+                    <f:SingleLine Margin="0 8"
+                                  Watermark="名字"/>
+                    <f:SingleLine Margin="0 8"
+                                  Watermark="世界观名字"/>
+                    <f:SingleLine Margin="0 8"
+                                  Watermark="作者"/>
+                    <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                               Margin="0 8">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                        <TextBlock Text="Character"/>
+                    </f:ListBox>
+                    <f:Multiline Height="256"
+                                 Margin="0 8"
+                                 Watermark="介绍"
+                                 TextWrapping="Wrap"/>
                 </StackPanel>
             </ScrollViewer>
         </f:ForestSection>
@@ -35,11 +55,35 @@
         <f:ForestSection Grid.Column="1" 
                          Header="模组"
                          Margin="8 0">
-
+            <f:ForestSection.ToolBar>
+                <StackPanel HorizontalAlignment="Right"
+                            Margin="0 0 0 4"
+                            Orientation="Horizontal">
+                    <ftk:ToolButton Content="添加"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    ShowText="True"/>
+                    <ftk:ToolButton Content="编辑"
+                                    Icon="{StaticResource FeatherIcon.Edit}"
+                                    ShowText="True"/>
+                    <ftk:ToolButton Content="删除"
+                                    Icon="{StaticResource FeatherIcon.Clear}"
+                                    ShowText="True"/>
+                    <ftk:ToolButton Content="清空"
+                                    Icon="{StaticResource FeatherIcon.Trash}"
+                                    ShowText="True"/>
+                </StackPanel>
+            </f:ForestSection.ToolBar>
         </f:ForestSection>
         <f:ForestSection Grid.Column="2" 
-                         Header="模组"
+                         Header="Kitty Spell"
                          Margin="8 0">
+            <f:ForestSection.ToolBar>
+                <ftk:ToolButton Content="Refresh"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 0 4"
+                                    Icon="{StaticResource FeatherIcon.Search}"
+                                    ShowText="True"/>
+            </f:ForestSection.ToolBar>
 
         </f:ForestSection>
     </Grid>

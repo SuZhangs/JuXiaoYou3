@@ -60,7 +60,7 @@
         </Style>
     </UserControl.Resources>
     <f:Drawer>
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="320"
                                   Width="1*" 

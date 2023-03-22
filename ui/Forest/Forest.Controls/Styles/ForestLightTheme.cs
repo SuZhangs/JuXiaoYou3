@@ -68,11 +68,11 @@ namespace Acorisoft.FutureGL.Forest.Styles
             Colors.TryAdd((int)ForestTheme.Mask200, Color.FromArgb(0x50, 0x00, 0x00, 0x00));
             Colors.TryAdd((int)ForestTheme.BorderBrush, Color.FromRgb( 0xc9, 0xc9, 0xc9));
             Colors.TryAdd((int)ForestTheme.BackgroundLevel1, Color.FromRgb( 0xff, 0xff, 0xff));
-            Colors.TryAdd((int)ForestTheme.BackgroundLevel2, Color.FromRgb( 0xfa, 0xfa, 0xfa));
-            Colors.TryAdd((int)ForestTheme.BackgroundLevel3, Color.FromRgb( 0xf1, 0xf1, 0xf1));
-            Colors.TryAdd((int)ForestTheme.BackgroundLevel4, Color.FromRgb( 0xeb, 0xeb, 0xeb));
-            Colors.TryAdd((int)ForestTheme.BackgroundLevel5, Color.FromRgb( 0xe6, 0xe6, 0xe6));
-            Colors.TryAdd((int)ForestTheme.BackgroundLevel6, Color.FromRgb( 0xe0, 0xe0, 0xe0));
+            Colors.TryAdd((int)ForestTheme.BackgroundLevel2, Color.FromRgb( 0xf9, 0xf9, 0xf9));
+            Colors.TryAdd((int)ForestTheme.BackgroundLevel3, Color.FromRgb( 0xEF, 0xEF, 0xEF));
+            Colors.TryAdd((int)ForestTheme.BackgroundLevel4, Color.FromRgb( 0xD9, 0xD9, 0xD9));
+            Colors.TryAdd((int)ForestTheme.BackgroundLevel5, Color.FromRgb( 0xCC, 0xCC, 0xCC));
+            Colors.TryAdd((int)ForestTheme.BackgroundLevel6, Color.FromRgb( 0xBF, 0xBF, 0xBF));
             Colors.TryAdd((int)ForestTheme.BackgroundDisabled, Color.FromRgb( 0xf6, 0xf6, 0xf6));
             Colors.TryAdd((int)ForestTheme.ForegroundLevel1, Color.FromRgb( 0x00, 0x0d, 0x16));
             Colors.TryAdd((int)ForestTheme.ForegroundLevel2, Color.FromRgb( 0x75, 0x81, 0x8a));

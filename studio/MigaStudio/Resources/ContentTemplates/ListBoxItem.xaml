@@ -18,7 +18,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel3}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -55,9 +55,9 @@
             <Trigger Property="IsMouseOver"
                      Value="True">
                 <Setter Property="Background"
-                        Value="LightGray" />
+                        Value="{f:Brush BackgroundLevel5}" />
                 <Setter Property="Foreground"
-                        Value="White" />
+                        Value="{f:Brush ForegroundLevel1}" />
             </Trigger>
         </Style.Triggers>
     </Style>

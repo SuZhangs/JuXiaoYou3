@@ -2,9 +2,11 @@
 {
     public abstract class ForestTextBoxBase : TextBox, ITextResourceAdapter
     {
-        public static readonly DependencyProperty WatermarkProperty;
+        public static readonly DependencyProperty    WatermarkProperty;
         public static readonly DependencyPropertyKey HasTextPropertyKey;
-        public static readonly DependencyProperty HasTextProperty;
+        public static readonly DependencyProperty    HasTextProperty;
+        protected const        string                PART_BdName      = "PART_Bd";
+        protected const        string                PART_ContentName = "PART_ContentHost";
 
         static ForestTextBoxBase()
         {
@@ -24,9 +26,6 @@
             
             HasTextProperty = HasTextPropertyKey.DependencyProperty;
         }
-
-        private const string PART_BdName      = "PART_Bd";
-        private const string PART_ContentName = "PART_ContentHost";
 
         protected ForestTextBoxBase()
         {
@@ -210,6 +209,12 @@
 
             base.OnMouseLeave(e);
         }
+
+        protected override void OnTextChanged(TextChangedEventArgs e)
+        {
+            HasText = !string.IsNullOrEmpty(Text);
+            base.OnTextChanged(e);
+        }
         
 
         void ITextResourceAdapter.SetText(string text)
@@ -240,8 +245,8 @@
         /// </summary>
         protected VisualDFA StateMachine { get; }
 
-        protected Border PART_Bd { get; private set; }
-        protected ScrollViewer PART_Content { get; private set; }
+        protected Border PART_Bd { get; set; }
+        protected ScrollViewer PART_Content { get; set; }
         
 
         public bool HasText
