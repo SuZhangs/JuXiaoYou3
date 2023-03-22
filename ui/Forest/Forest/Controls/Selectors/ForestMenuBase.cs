@@ -1,7 +1,8 @@
 ﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
-    public abstract class ForestListBoxBase : ListBox, ITextResourceAdapter
+    public abstract partial class ForestMenuBase : Menu, ITextResourceAdapter
     {
+        
         #region ITextResourceAdapter Members
 
         void ITextResourceAdapter.SetText(string text)
@@ -15,9 +16,10 @@
 
         #endregion
     }
-
-    public abstract class ForestListViewBase : ListView, ITextResourceAdapter
+    
+    public abstract partial class ForestContextMenuBase : ContextMenu, ITextResourceAdapter
     {
+        
         #region ITextResourceAdapter Members
 
         void ITextResourceAdapter.SetText(string text)
