@@ -54,13 +54,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            var newRole = Role;
 
-            if (newRole != _oldRole)
-            {
-                InvalidateState();
-                _oldRole = newRole;
-            }
         }
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)

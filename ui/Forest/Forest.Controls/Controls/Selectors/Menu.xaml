@@ -113,7 +113,7 @@
                         <Border x:Name="SubmenuBorder" 
                                 Margin="12,0,12,18" 
                                 Padding="0,3,0,3"
-                                BorderBrush="{DynamicResource MenuBorderColorDefaultBrush}" 
+                                BorderBrush="{f:Brush BackgroundLevel2}" 
                                 BorderThickness="1" 
                                 CornerRadius="8"
                                 SnapsToDevicePixels="True"
@@ -133,7 +133,7 @@
             <Trigger Property="IsSuspendingPopupAnimation" Value="True">
                 <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
             </Trigger>
-            <Trigger Value="{x:Null}" Property="HasIcon">
+            <Trigger Value="False" Property="HasIcon">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Value="{x:Null}" Property="Header">
@@ -183,7 +183,7 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{f:MaskDarkenBrush}" />
             </Trigger>
-            <Trigger Value="{x:Null}" Property="HasIcon">
+            <Trigger Value="False" Property="HasIcon">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Value="{x:Null}" Property="Header">
@@ -261,7 +261,7 @@
             <Trigger Property="IsHighlighted" Value="True">
                 <Setter TargetName="Border" Property="Background" Value="{f:MaskDarkenBrush}" />
             </Trigger>
-            <Trigger Value="{x:Null}" Property="HasIcon">
+            <Trigger Value="False" Property="HasIcon">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsCheckable" Value="True">
@@ -362,7 +362,7 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Value="{x:Null}" Property="HasIcon">
+            <Trigger Value="False" Property="HasIcon">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
@@ -407,7 +407,6 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="HasDropShadow" Value="False" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />
-        <Setter Property="" Value="Slide" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">

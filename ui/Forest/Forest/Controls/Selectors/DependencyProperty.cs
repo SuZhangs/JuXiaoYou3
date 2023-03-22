@@ -648,11 +648,6 @@
                         .OverrideMetadata(
                             typeof(ForestMenuItemBase),
                             new FrameworkPropertyMetadata(default(Geometry), OnIconChanged));
-            
-            RoleProperty.AddOwner(typeof(ForestMenuItemBase))
-                        .OverrideMetadata(
-                            typeof(ForestMenuItemBase),
-                            new FrameworkPropertyMetadata(default(MenuItemRole), OnMenuItemRoleChanged));
 
             IsFilledProperty = DependencyProperty.Register(
                 nameof(IsFilled),
