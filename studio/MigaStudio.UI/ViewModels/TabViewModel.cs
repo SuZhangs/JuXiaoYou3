@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    [DebuggerDisplay("{Id}-{Title}")]
+    [DebuggerDisplay("{PageId}-{Title}")]
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
         private string _title;
@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             if (ReferenceEquals(this, other)) return true;
             return Uniqueness ?
                 other.GetType() == GetType() :
-                Id == other.Id;
+                PageId == other.PageId;
         }
 
         public sealed override bool Equals(object obj)
@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public override int GetHashCode()
         {
-            return Id?.GetHashCode() ?? -1;
+            return PageId?.GetHashCode() ?? -1;
         }
 
         #endregion
@@ -75,14 +75,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public sealed override void Start(Parameter arg)
         {
             var np = NavigationParameter.FromParameter(arg);
-            Id         = np.Id;
+            PageId         = np.Id;
             Controller = (TabController)np.Controller;
             OnStart(np);
         }
         
         public void Start(NavigationParameter arg)
         {
-            Id         = arg.Id;
+            PageId         = arg.Id;
             Controller = (TabController)arg.Controller;
             OnStart(arg);
         }
@@ -137,7 +137,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 用于表示当前的视图模型的唯一标识符。
         /// </summary>
-        public string Id { get; private set; }
+        public string PageId { get; private set; }
         
         
         /// <summary>

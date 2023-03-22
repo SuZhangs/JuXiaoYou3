@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Markup
         
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return StringFromCode.GetText(Id);
+            return SubSystemString.GetText(Id);
         }
         
         public string Id { get; set; }

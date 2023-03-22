@@ -106,15 +106,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             {
                 await Xaml.Get<IBuiltinDialogService>()
                           .Notify(CriticalLevel.Warning,
-                              StringFromCode.Notify,
-                              StringFromCode.GetEngineResult(result.Reason));
+                              SubSystemString.Notify,
+                              SubSystemString.GetEngineResult(result.Reason));
             }
             else
             {
                 await Xaml.Get<IBuiltinDialogService>().Notify(
                     CriticalLevel.Success,
-                    StringFromCode.Notify,
-                    StringFromCode.OperationOfAddIsSuccess);
+                    SubSystemString.Notify,
+                    SubSystemString.OperationOfAddIsSuccess);
 
                 Update();
                 Refresh();

@@ -5,10 +5,10 @@ using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {
-    public static class StringFromCode
+    public static class SubSystemString
     {
 
-        static StringFromCode()
+        static SubSystemString()
         {
             var fileName = Language.Culture switch
             {
@@ -19,6 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Russian  => "SubSystem.ru.ini",
                 _                    => "SubSystem.cn.ini",
             };
+            
             Language.AppendLanguageSource(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
         }
 
@@ -67,6 +68,8 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string ImageTooBig => GetText("text.ImageTooBig");
         
         public static string OperationOfAddIsSuccess => GetText("text.OperationOfAddIsSuccess");
+        public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
+        
         public static string ImageProcessing
         {
             // TODO: 翻译

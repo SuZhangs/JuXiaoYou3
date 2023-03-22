@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         {
             var opendlg = new VistaOpenFileDialog
             {
-                Filter      = StringFromCode.ImageFilter,
+                Filter      = SubSystemString.ImageFilter,
                 Multiselect = false
             };
 
@@ -58,7 +58,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 {
                     image.Dispose();
                     origin.Dispose();
-                    await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.ImageTooSmall);
+                    await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooSmall);
                     return new ImageOpResult { IsFinished = false };
                 }
 
@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     {
                         await Task.Run(() =>
                         {
-                            session.Update(StringFromCode.ImageProcessing);
+                            session.Update(SubSystemString.ImageProcessing);
                             var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
                             image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
                             

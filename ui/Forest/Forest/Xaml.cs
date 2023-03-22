@@ -426,5 +426,102 @@ namespace Acorisoft.FutureGL.Forest
             bi.EndInit();
             return bi;
         }
+        
+        /// <summary>
+        /// 渲染
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="dip"></param>
+        /// <returns></returns>
+        public static RenderTargetBitmap Capture(FrameworkElement element, int dip = 96)
+        {
+            if (element is null)
+            {
+                return null;
+            }
+
+            var bitmap = new RenderTargetBitmap(
+                (int)element.ActualWidth,
+                (int)element.ActualHeight,
+                dip,
+                dip,
+                PixelFormats.Pbgra32);
+            bitmap.Render(element);
+
+            return bitmap;
+        }
+        
+        /// <summary>
+        /// 渲染
+        /// </summary>
+        /// <param name="fileStream"></param>
+        /// <param name="element"></param>
+        /// <param name="dip"></param>
+        /// <returns></returns>
+        public static RenderTargetBitmap Capture(Stream fileStream, FrameworkElement element, int dip = 96)
+        {
+            if (element is null)
+            {
+                return null;
+            }
+            
+            var bitmap = new RenderTargetBitmap(
+                (int)element.ActualWidth,
+                (int)element.ActualHeight,
+                dip,
+                dip,
+                PixelFormats.Pbgra32);
+            bitmap.Render(element);
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(fileStream);
+            fileStream.Dispose();
+
+            return bitmap;
+        }
+
+        public static MemoryStream CaptureToStream(FrameworkElement element, int dip = 96)
+        {
+            if (element is null)
+            {
+                return null;
+            }
+            
+            var bitmap = new RenderTargetBitmap(
+                (int)element.ActualWidth,
+                (int)element.ActualHeight,
+                dip,
+                dip,
+                PixelFormats.Pbgra32);
+            bitmap.Render(element);
+            var ms      = new MemoryStream();
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(ms);
+
+            return ms;
+        }
+        
+        public static byte[] CaptureToBuffer(FrameworkElement element, int dip = 96)
+        {
+            if (element is null)
+            {
+                return null;
+            }
+            
+            var bitmap = new RenderTargetBitmap(
+                (int)element.ActualWidth,
+                (int)element.ActualHeight,
+                dip,
+                dip,
+                PixelFormats.Pbgra32);
+            bitmap.Render(element);
+            var ms      = new MemoryStream();
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(ms);
+
+            return ms.ToArray();
+        }
     }
 }

@@ -185,16 +185,115 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
         }
 
+        private bool DeterminedViewModelExists(string unifiedKey)
+        {
+            foreach (var item in Workspace)
+            {
+                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
+
+                if (unifiedKey == unifiedKey2)
+                {
+                    CurrentViewModel = item;
+                    return true;
+                }
+            }
+
+            foreach (var item in Outboards)
+            {
+                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
+
+                if (unifiedKey == unifiedKey2)
+                {
+                    if (Workspace.Count > 0)
+                    {
+                        var lastOneIndex = Workspace.Count - 1;
+                        (Workspace[lastOneIndex], Outboards[0]) = (Outboards[0], Workspace[lastOneIndex]);
+                        CurrentViewModel                        = Workspace[lastOneIndex];
+                    }
+                    else
+                    {
+                        CurrentViewModel = item;
+                        return true;
+                    }
+
+                    break;
+                }
+            }
+
+            return false;
+        }
+        
+        private bool DeterminedViewModelExists(string unifiedKey, out ITabViewModel viewModel)
+        {
+            foreach (var item in Workspace)
+            {
+                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
+
+                if (unifiedKey == unifiedKey2)
+                {
+                    CurrentViewModel = item;
+                    viewModel        = item;
+                    return true;
+                }
+            }
+
+            foreach (var item in Outboards)
+            {
+                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
+
+                if (unifiedKey == unifiedKey2)
+                {
+                    if (Workspace.Count > 0)
+                    {
+                        var lastOneIndex = Workspace.Count - 1;
+                        (Workspace[lastOneIndex], Outboards[0]) = (Outboards[0], Workspace[lastOneIndex]);
+                        CurrentViewModel                        = Workspace[lastOneIndex];
+                    }
+                    else
+                    {
+                        CurrentViewModel = item;
+                        viewModel        = item;
+                        return true;
+                    }
+
+                    break;
+                }
+            }
+
+            viewModel = null;
+            return false;
+        }
+
         /// <summary>
-        /// 
+        /// 打开视图模型
         /// </summary>
-        /// <typeparam name="TViewModel"></typeparam>
+        /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
+        /// <returns>返回一个新的实例。</returns>
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
             vm.Start(NavigationParameter.New(vm, this));
             Start(vm);
             return vm;
+        }
+
+        /// <summary>
+        /// 打开视图模型
+        /// </summary>
+        /// <param name="id">唯一标识符</param>
+        /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
+        /// <returns>返回一个新的实例或已经打开的视图模型。</returns>
+        public TViewModel New<TViewModel>(string id) where TViewModel : TabViewModel
+        {
+            if (DeterminedViewModelExists(id, out var vm))
+            {
+                return (TViewModel)vm;
+            }
+            
+            var vm1 = Xaml.GetViewModel<TViewModel>();
+            vm1.Start(NavigationParameter.New(vm, this));
+            Start(vm1);
+            return vm1;
         }
         
         /// <summary>
@@ -208,47 +307,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
 
-            if (string.IsNullOrEmpty(viewModel.Id))
+            if (string.IsNullOrEmpty(viewModel.PageId))
             {
                 viewModel.Start(NavigationParameter.New(viewModel, this).Params);
             }
 
-            var unifiedKey = viewModel.Uniqueness ? viewModel.GetType().FullName : viewModel.Id;
-            var result = true;
-
-            foreach (var item in Workspace)
-            {
-                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.Id;
-
-                if (unifiedKey == unifiedKey2)
-                {
-                    CurrentViewModel = item;
-                    result           = false;
-                    break;
-                }
-            }
-
-            foreach (var item in Outboards)
-            {
-                var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.Id;
-
-                if (unifiedKey == unifiedKey2)
-                {
-                    if (Workspace.Count > 0)
-                    {
-                        var lastOneIndex = Workspace.Count - 1;
-                        (Workspace[lastOneIndex], Outboards[0]) = (Outboards[0], Workspace[lastOneIndex]);
-                        CurrentViewModel                        = Workspace[lastOneIndex];
-                    }
-                    else
-                    {
-                        CurrentViewModel = item;
-                        result           = false;
-                    }
-
-                    break;
-                }
-            }
+            var unifiedKey = viewModel.Uniqueness ? viewModel.GetType().FullName : viewModel.PageId;
+            var result = !DeterminedViewModelExists(unifiedKey);
 
             if (result)
             {

@@ -41,6 +41,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Padding" Value="8" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:ForestTextBoxBase}">
@@ -49,13 +50,14 @@
                         <Border x:Name="PART_Bd"
                                 BorderBrush="{x:Null}"
                                 BorderThickness="1"
-                                CornerRadius="6"
+                                CornerRadius="3"
                                 MinWidth="{TemplateBinding MinWidth}"
                                 MinHeight="{TemplateBinding MinHeight}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch">
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               VerticalAlignment="Center"
                                               CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
@@ -65,42 +67,7 @@
                                               Style="{StaticResource Base.ScrollViewer}"
                                               TextElement.Foreground="{TemplateBinding Foreground}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
-                            </Grid>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style TargetType="{x:Type c:SingleLine}" BasedOn="{StaticResource ClearStyle.TextBox}">
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type c:ForestTextBoxBase}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="PART_Bd"
-                                BorderBrush="{x:Null}"
-                                BorderThickness="1"
-                                CornerRadius="0"
-                                MinWidth="{TemplateBinding MinWidth}"
-                                MinHeight="{TemplateBinding MinHeight}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              VerticalAlignment="Center"
-                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
-                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                              IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                              IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                              Style="{StaticResource Base.ScrollViewer}"
-                                              TextElement.Foreground="{TemplateBinding Foreground}"
-                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
-                                
+
                                 <TextBlock x:Name="PART_Watermark"
                                            FontSize="{TemplateBinding FontSize}"
                                            Foreground="{f:Brush ForegroundLevel3}"
@@ -120,6 +87,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type c:SingleLine}" BasedOn="{StaticResource ClearStyle.TextBox}">
+        <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style TargetType="{x:Type c:Multiline}" BasedOn="{StaticResource ClearStyle.TextBox}"/>
 </ResourceDictionary>

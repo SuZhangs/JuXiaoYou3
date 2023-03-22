@@ -81,8 +81,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             args.Args[0] = controller;
             args.Args[1] = viewModel.Uniqueness ? 
                 viewModel.GetType().FullName : 
-                    string.IsNullOrEmpty(viewModel.Id) ? 
-                    Guid.NewGuid().ToString("N"): viewModel.Id;
+                    string.IsNullOrEmpty(viewModel.PageId) ? 
+                    Guid.NewGuid().ToString("N"): viewModel.PageId;
             return new NavigationParameter(args);
         }
 

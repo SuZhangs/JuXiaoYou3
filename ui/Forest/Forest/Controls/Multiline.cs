@@ -45,8 +45,10 @@ namespace Acorisoft.FutureGL.Forest.Controls
         public static readonly DependencyProperty HeaderTemplateProperty;
         public static readonly DependencyProperty HeaderTemplateSelectorProperty;
         public static readonly DependencyProperty HeaderStringFormatProperty;
+        private const          string             PART_WatermarkName = "PART_Watermark";
         
 
+        private TextBlock       _watermark;
         private Storyboard      _storyboard;
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
@@ -55,6 +57,13 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private SolidColorBrush _foregroundHighlight;
         private SolidColorBrush _backgroundDisabled;
         private SolidColorBrush _foregroundDisabled;
+
+        protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
+        {
+            finder.Find<Border>(PART_BdName, x => PART_Bd                 = x)
+                  .Find<TextBlock>(PART_WatermarkName, x => _watermark    = x)
+                  .Find<ScrollViewer>(PART_ContentName, x => PART_Content = x);
+        }
 
         protected override void StopAnimation()
         {
@@ -83,7 +92,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _background        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
             _foreground        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
             
-            PART_Bd.Background =   _background;
+            PART_Bd.Background    = _background;
+            _watermark.Foreground = _foreground;
             SetForeground(_foreground);
         }
 
@@ -145,6 +155,9 @@ namespace Acorisoft.FutureGL.Forest.Controls
             PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
+            _watermark.Foreground = _foregroundHighlight;
+            CaretBrush            = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            SelectionBrush        = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA2]);
             SetForeground(_foregroundHighlight);
         }
 

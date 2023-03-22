@@ -51,7 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
             catch
             {
-                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, StringFromCode.Notify, StringFromCode.BadImage);
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.BadImage);
             }
         }
 
@@ -71,8 +71,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             {
                 Xaml.Get<IBuiltinDialogService>().Notify(
                     CriticalLevel.Warning,
-                    StringFromCode.Notify,
-                    StringFromCode.GetDatabaseResult(DatabaseFailedReason.DatabaseNotOpen));
+                    SubSystemString.Notify,
+                    SubSystemString.GetDatabaseResult(DatabaseFailedReason.DatabaseNotOpen));
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         protected override string Failed()
         {
-            return StringFromCode.EmptyName;
+            return SubSystemString.EmptyName;
         }
 
         /// <summary>

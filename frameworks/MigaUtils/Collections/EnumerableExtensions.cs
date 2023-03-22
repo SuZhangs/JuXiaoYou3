@@ -19,5 +19,30 @@
                 handler(item);
             }
         }
+
+        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> target, bool clear = false)
+        {
+            if (collection is null)
+            {
+                return;
+            }
+            
+            if (clear)
+            {
+                collection.Clear();
+            }
+
+            if (collection is List<T> l)
+            {
+                l.AddRange(target);
+            }
+            else
+            {
+                foreach (var item in target)
+                {
+                    collection.Add(item);
+                }
+            }
+        }
     }
 }

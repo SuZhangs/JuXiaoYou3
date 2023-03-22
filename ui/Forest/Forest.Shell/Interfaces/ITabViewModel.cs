@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <summary>
         /// 唯一标识符。
         /// </summary>
-        string Id { get; }
+        string PageId { get; }
         
         /// <summary>
         /// 是否初始化。
