@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
+using Slider = Acorisoft.FutureGL.Forest.Controls.Slider;
 
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
