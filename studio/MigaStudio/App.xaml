@@ -24,6 +24,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/Menu.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/MenuItem.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ContextMenu.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ToggleSwitch.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <convs:TranslationConverter x:Key="Translation"/>

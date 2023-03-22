@@ -72,12 +72,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         public List<OptionItem> Items { get; init; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed class RadioBlock : MonoSelectorBlock
-    {
-    }
 
     /// <summary>
     /// 

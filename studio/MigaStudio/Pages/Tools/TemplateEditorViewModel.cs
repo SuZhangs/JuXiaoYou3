@@ -38,6 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
         {
             Id      = ID.Get();
             Version = 1;
+            Blocks = new ObservableCollection<ModuleBlock>();
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
@@ -180,6 +181,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
         private async Task NewBlockImpl()
         {
             var r = await NewBlockViewModel.New();
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            Blocks.Add(r.Value);
         }
 
         private async Task EditBlockImpl(ModuleBlock element)
@@ -328,7 +336,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
         /// <summary>
         /// 模组内容块集合。
         /// </summary>
-        public List<ModuleBlock> Blocks { get; init; }
+        public ObservableCollection<ModuleBlock> Blocks { get; init; }
 
         public RelayCommand NewTemplateCommand { get; }
         public AsyncRelayCommand OpenTemplateCommand { get; }

@@ -73,12 +73,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public ObservableCollection<OptionItem> Items { get; }
     }
 
-    public sealed class RadioBlockDataUI : MonoSelectorDataUI
-    {
-        public RadioBlockDataUI(RadioBlock block) : base(block)
-        {
-        }
-    }
     
     public sealed class SequenceBlockDataUI : MonoSelectorDataUI
     {
@@ -87,26 +81,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         }
     }
 
-    public sealed class RadioBlockEditUI : MonoSelectorEditUI
-    {
-        public RadioBlockEditUI(RadioBlock block) : base(block)
-        {
-        }
-
-        protected override MonoSelectorBlock CreateInstanceOverride()
-        {
-            return new RadioBlock
-            {
-                Id       = Id,
-                Name     = Name,
-                Items    = new List<OptionItem>(Items),
-                Metadata = Metadata,
-                Fallback = Fallback,
-                ToolTips = ToolTips,
-            };
-        }
-    }
-    
     public sealed class SequenceBlockEditUI : MonoSelectorEditUI
     {
         public SequenceBlockEditUI(SequenceBlock block) : base(block)

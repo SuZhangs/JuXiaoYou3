@@ -85,14 +85,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToNormalState(ForestThemeSystem theme)
         {
-            _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel1]);
             _borderBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
-            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
+            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
             PART_Bd.Background      = _background;
             PART_Bd.BorderBrush     = _borderBrush;
             PART_Bd.BorderThickness = BorderThickness;
-            _watermark.Foreground   = _foreground;
+            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
             SetForeground(_foreground);
         }
 
@@ -183,10 +183,15 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToDisableState(ForestThemeSystem theme)
         {
-            _backgroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
+            _backgroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _borderBrush        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
             _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
             
-            PART_Bd.Background = _backgroundDisabled;
+            PART_Bd.Background      = _backgroundDisabled;
+            PART_Bd.Background      = _background;
+            PART_Bd.BorderBrush     = _borderBrush;
+            PART_Bd.BorderThickness = BorderThickness;
+            _watermark.Foreground   = _foreground;
             SetForeground(_foregroundDisabled);
         }
 

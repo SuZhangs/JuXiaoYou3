@@ -53,22 +53,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             return b;
         }
 
-        public static RadioBlock CreateRadio()
-        {
-            var b = new RadioBlock
-            {
-                Name     = nameof(RadioBlock),
-                Fallback = "Item1",
-                Items    = new List<OptionItem>(),
-                ToolTips = nameof(RadioBlock),
-                Metadata = nameof(RadioBlock),
-            };
-            b.Items.Add(new OptionItem { Name = "Item1", Value = "Item1" });
-            b.Items.Add(new OptionItem { Name = "Item2", Value = "Item2" });
-            b.Items.Add(new OptionItem { Name = "Item3", Value = "Item3" });
-            b.Items.Add(new OptionItem { Name = "Item4", Value = "ItemA" });
-            return b;
-        }
 
         private static SingleLineBlock CreateSingleLine() => new SingleLineBlock
         {
@@ -293,7 +277,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 CreateStar(),
 
 
-                CreateRadio(),
                 CreateSequence(),
                 CreateGroup(),
 
@@ -329,8 +312,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 HeartBlock HeartBlock   => new HeartBlockDataUI(HeartBlock),
                 StarBlock StarBlock     => new StarBlockDataUI(StarBlock),
 
-
-                RadioBlock RadioBlock       => new RadioBlockDataUI(RadioBlock),
                 SequenceBlock SequenceBlock => new SequenceBlockDataUI(SequenceBlock),
                 GroupBlock GroupBlock       => new GroupBlockDataUI(GroupBlock),
 
@@ -367,7 +348,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 MetadataKind.Star   => CreateStar(),
 
 
-                MetadataKind.Radio    => CreateRadio(),
                 MetadataKind.Sequence => CreateSequence(),
                 MetadataKind.Group    => CreateGroup(),
 
@@ -404,7 +384,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 StarBlock StarBlock     => new StarBlockEditUI(StarBlock),
 
 
-                RadioBlock RadioBlock       => new RadioBlockEditUI(RadioBlock),
                 SequenceBlock SequenceBlock => new SequenceBlockEditUI(SequenceBlock),
                 GroupBlock GroupBlock       => new GroupBlockEditUI(GroupBlock),
 

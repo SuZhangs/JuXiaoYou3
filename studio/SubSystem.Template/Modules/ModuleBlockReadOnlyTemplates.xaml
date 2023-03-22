@@ -224,12 +224,12 @@
                            Text="{Binding Value,Mode=OneWay}"
                            VerticalAlignment="Center" />
 
-                <Slider Interval="1"
-                        IsSnapToTickEnabled="True"
-                        Maximum="{Binding Maximum}"
-                        Minimum="{Binding Minimum}"
-                        Value="{Binding Value,Mode=TwoWay}"
-                        VerticalAlignment="Center" />
+                <f:Slider Interval="1"
+                                IsSnapToTickEnabled="True"
+                                Maximum="{Binding Maximum}"
+                                Minimum="{Binding Minimum}"
+                                Value="{Binding Value,Mode=TwoWay}"
+                                VerticalAlignment="Center" />
             </DockPanel>
         </DockPanel>
     </DataTemplate>
@@ -431,37 +431,6 @@
         </DockPanel>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type subTemp:RadioBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
-            <TextBlock DockPanel.Dock="Top"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Margin="0 0 0 8"
-                       VerticalAlignment="Center">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0}（{1}）">
-                        <Binding Path="Name" />
-                        <Binding Path="Value" Mode="OneWay" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-
-            <ItemsControl ItemsSource="{Binding Items}"
-                          VerticalAlignment="Stretch"
-                          VerticalContentAlignment="Top">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type mb:OptionItemUI}">
-                        <RadioButton GroupName="{Binding Id}"
-                                     Content="{Binding Name}">
-                            <i:Interaction.Behaviors>
-                                <studio1:RadioPropertyBehavior />
-                            </i:Interaction.Behaviors>
-                        </RadioButton>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </DockPanel>
-    </DataTemplate>
 
     <!--
         @ param: ChartBlock

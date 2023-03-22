@@ -211,12 +211,12 @@
                                         Height="32"
                                         Width="32" />
 
-                    <Slider Margin="32 0 0 0"
-                            Maximum="1"
-                            Minimum="0"
-                            Value="{Binding Volume,Mode=TwoWay}"
-                            ValueChanged="OnVolumeChanged"
-                            VerticalAlignment="Center" />
+                    <f:Slider Margin="32 0 0 0"
+                                    Maximum="1"
+                                    Minimum="0"
+                                    Value="{Binding Volume,Mode=TwoWay}"
+                                    ValueChanged="OnVolumeChanged"
+                                    VerticalAlignment="Center" />
                 </DockPanel>
             </Border>
         </f:Drawer.TopContent>

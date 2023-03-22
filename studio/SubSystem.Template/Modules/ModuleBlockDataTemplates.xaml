@@ -246,7 +246,7 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:StarBlockDataUI}">
-        <Border Background="#f1f1f1"
+        <Border Background="{f:Brush BackgroundLevel1}"
                 Height="42"
                 HorizontalAlignment="Stretch"
                 Margin="0 0 0 12"
@@ -265,7 +265,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HeartBlockDataUI}">
-        <Border Background="#f1f1f1"
+        <Border Background="{f:Brush BackgroundLevel1}"
                 Height="42"
                 HorizontalAlignment="Stretch"
                 Margin="0 0 0 12"
@@ -284,7 +284,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SwitchBlockDataUI}">
-        <Border Background="#f1f1f1"
+        <Border Background="{f:Brush BackgroundLevel1}"
                 Height="42"
                 HorizontalAlignment="Stretch"
                 Margin="0 0 0 12"
@@ -427,38 +427,6 @@
             <ItemsControl ItemsSource="{Binding Items}"
                           VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top">
-            </ItemsControl>
-        </DockPanel>
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type subTemp:RadioBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
-            <TextBlock DockPanel.Dock="Top"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Margin="0 0 0 8"
-                       VerticalAlignment="Center">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0}（{1}）">
-                        <Binding Path="Name" />
-                        <Binding Path="Value" Mode="OneWay" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-
-            <ItemsControl ItemsSource="{Binding Items}"
-                          VerticalAlignment="Stretch"
-                          VerticalContentAlignment="Top">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type mb:OptionItemUI}">
-                        <RadioButton GroupName="{Binding Id}"
-                                     Content="{Binding Name}">
-                            <i:Interaction.Behaviors>
-                                <studio1:RadioPropertyBehavior />
-                            </i:Interaction.Behaviors>
-                        </RadioButton>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </DockPanel>
     </DataTemplate>

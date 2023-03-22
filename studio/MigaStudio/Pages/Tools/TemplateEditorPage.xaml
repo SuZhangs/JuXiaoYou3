@@ -113,9 +113,9 @@
             </f:ForestSection.ToolBar>
 
             <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding Blocks,Mode=OneWay}">
+                <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}">
                     
-                </ItemsControl>
+                </f:ListBox>
             </ScrollViewer>
         </f:ForestSection>
         <f:ForestSection Grid.Column="2" 

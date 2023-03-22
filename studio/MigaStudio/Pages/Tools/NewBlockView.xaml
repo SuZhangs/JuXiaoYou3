@@ -80,7 +80,9 @@
             <!-- 预览 -->
             <f:StretchPanel Grid.Row="1"
                             Grid.Column="1">
-                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"/>
+                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
                 
                 <Border Background="{x:Static f:Xaml.Transparent}"/>
             </f:StretchPanel>
@@ -93,7 +95,7 @@
                             IconSize="29"
                             IsDefault="True"
                             Content="{x:Static f:Language.CompleteText}"
-                            Command="{Binding CancelCommand}"
+                            Command="{Binding CompletedCommand}"
                             Height="48"
                             Purpose="Info" 
                             Width="160"/>
