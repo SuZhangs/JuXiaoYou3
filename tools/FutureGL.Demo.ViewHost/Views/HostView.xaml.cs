@@ -23,10 +23,9 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
         public HostView()
         {
             InitializeComponent();
-            this.Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             SubSystem.OptionSelection<FilteringOption>("过滤",
                 (object) FilteringOption.Name, 

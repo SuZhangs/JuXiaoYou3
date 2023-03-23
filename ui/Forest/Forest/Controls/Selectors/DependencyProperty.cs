@@ -742,7 +742,7 @@
             set => SetValue(IsFilledProperty, Boxing.Box(value));
         }
 
-        public Geometry Icon
+        public new Geometry Icon
         {
             get => (Geometry)GetValue(IconProperty);
             set => SetValue(IconProperty, value);

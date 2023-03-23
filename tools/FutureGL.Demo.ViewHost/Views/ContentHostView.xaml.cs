@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
             this.Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
         }
     }
