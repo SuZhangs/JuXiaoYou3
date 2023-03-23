@@ -89,8 +89,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToNormalState(ForestThemeSystem theme)
         {
-            _background        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
-            _foreground        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
+            _background        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
+            _foreground        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
             PART_Bd.Background    = _background;
             _watermark.Foreground = _foreground;
@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
             _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
-            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel6]);
+            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel5]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
             // 白底变特殊色

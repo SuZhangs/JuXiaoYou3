@@ -35,17 +35,17 @@
         <Border>
 
             <UniformGrid Columns="2">
-                <Border Background="#242529"
+                <Border Background="#303136"
                         Padding="64">
                     <Border.Resources>
                         <SolidColorBrush x:Key="BorderBrush" Color="#777C88" />
                         <!--<SolidColorBrush x:Key="BackgroundLevel1" Color="#5F636D" />-->
-                        <SolidColorBrush x:Key="BackgroundLevel1" Color="#656872" />
+                        <SolidColorBrush x:Key="BackgroundLevel1" Color="#54575F" />
                         <SolidColorBrush x:Key="BackgroundLevel2" Color="#43464C" />
-                        <SolidColorBrush x:Key="BackgroundLevel3" Color="#242529" />
-                        <SolidColorBrush x:Key="BackgroundLevel4" Color="#1D1E21" />
-                        <SolidColorBrush x:Key="BackgroundLevel5" Color="#151618" />
-                        <SolidColorBrush x:Key="BackgroundLevel6" Color="#0A0A0B" />
+                        <SolidColorBrush x:Key="BackgroundLevel3" Color="#303136" />
+                        <SolidColorBrush x:Key="BackgroundLevel4" Color="#242529" />
+                        <SolidColorBrush x:Key="BackgroundLevel5" Color="#1D1E21" />
+                        <SolidColorBrush x:Key="BackgroundLevel6" Color="#131416" />
                         <SolidColorBrush x:Key="BackgroundDisabled" Color="#3C3E44" />
                         <SolidColorBrush x:Key="ForegroundLevel1" Color="#EBEBEB" />
                         <SolidColorBrush x:Key="ForegroundLevel2" Color="#8C8C8C" />

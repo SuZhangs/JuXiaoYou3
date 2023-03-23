@@ -100,7 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
 
             var cache  = wizard.Value;
-            var result = DocumentEngine.AddDocument(cache);
+            var result = DocumentEngine.AddDocumentCache(cache);
 
             if (!result.IsFinished)
             {

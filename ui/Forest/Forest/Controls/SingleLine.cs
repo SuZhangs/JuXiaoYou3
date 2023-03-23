@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void SetForeground(Brush brush)
         {
-            PART_Bd.SetValue(TextElement.ForegroundProperty, brush);
+            PART_Content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
         protected override void OnInvalidateState()
@@ -92,7 +92,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             PART_Bd.Background      = _background;
             PART_Bd.BorderBrush     = _borderBrush;
             PART_Bd.BorderThickness = BorderThickness;
-            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
+            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             SetForeground(_foreground);
         }
 
@@ -104,28 +104,28 @@ namespace Acorisoft.FutureGL.Forest.Controls
             
             // 白底变特殊色
             // 高亮色变白色
-            // var backgroundAnimation = new ColorAnimation
-            // {
-            //     Duration = duration,
-            //     From     = _background.Color,
-            //     To       = _backgroundHighlight1.Color,
-            // };
-            
-            var borderAnimation = new ColorAnimation
+            var backgroundAnimation = new ColorAnimation
             {
                 Duration = duration,
-                From     = _borderBrush.Color,
-                To       = _highlight.Color,
+                From     = _background.Color,
+                To       = _backgroundHighlight1.Color,
             };
+            
+            // var borderAnimation = new ColorAnimation
+            // {
+            //     Duration = duration,
+            //     From     = _borderBrush.Color,
+            //     To       = _highlight.Color,
+            // };
 
-            // Storyboard.SetTarget(backgroundAnimation, PART_Bd);
-            // Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
-            Storyboard.SetTarget(borderAnimation, PART_Bd);
-            Storyboard.SetTargetProperty(borderAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
+            Storyboard.SetTarget(backgroundAnimation, PART_Bd);
+            Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
+            // Storyboard.SetTarget(borderAnimation, PART_Bd);
+            // Storyboard.SetTargetProperty(borderAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection { /*backgroundAnimation,*/ borderAnimation }
+                Children = new TimelineCollection { backgroundAnimation,/*borderAnimation*/  }
             };
 
             //
@@ -139,7 +139,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
             _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
-            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
+            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
             
@@ -151,22 +151,15 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 From     = _backgroundHighlight1.Color,
                 To       = _backgroundHighlight2.Color,
             };
-            
-            var borderAnimation = new ColorAnimation
-            {
-                Duration = duration,
-                From     = _backgroundHighlight1.Color,
-                To       = _highlight.Color,
-            };
 
             Storyboard.SetTarget(backgroundAnimation, PART_Bd);
-            Storyboard.SetTarget(borderAnimation, PART_Bd);
-            Storyboard.SetTargetProperty(borderAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
+            // Storyboard.SetTarget(borderAnimation, PART_Bd);
+            // Storyboard.SetTargetProperty(borderAnimation, new PropertyPath("(Border.BorderBrush).(SolidColorBrush.Color)"));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
             {
-                Children = new TimelineCollection { backgroundAnimation, borderAnimation }
+                Children = new TimelineCollection { backgroundAnimation, /* borderAnimation */ }
             };
 
             //

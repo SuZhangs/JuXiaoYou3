@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// </summary>
         /// <param name="document">指定要添加的文档</param>
         /// <returns>返回操作结果</returns>
-        public EngineResult AddDocument(DocumentCache document)
+        public EngineResult AddDocumentCache(DocumentCache document)
         {
             if (document is null)
             {
@@ -269,12 +269,17 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// </summary>
         public void ReduceSize()
         {
-            var markAsDeletedDocumentCache = DocumentCacheDB.Find(Query.EQ("IsDeleted", true)).Select(x => x.Id).ToHashSet();
+            var expression = Query.EQ(nameof(DocumentCache.IsDeleted), true);
+            var markAsDeletedDocumentCache = DocumentCacheDB.Find(expression)
+                                                            .Select(x => x.Id)
+                                                            .ToHashSet();
             DocumentCacheDB.DeleteMany(x => x.IsDeleted);
             DocumentDB.DeleteMany(x => markAsDeletedDocumentCache.Contains(x.Id));
 
 
-            var markAsDeletedComposeCache = ComposeCacheDB.Find(Query.EQ("IsDeleted", true)).Select(x => x.Id).ToHashSet();
+            var markAsDeletedComposeCache = ComposeCacheDB.Find(expression)
+                                                          .Select(x => x.Id)
+                                                          .ToHashSet();
             ComposeCacheDB.DeleteMany(x => x.IsDeleted);
             ComposeDB.DeleteMany(x => markAsDeletedComposeCache.Contains(x.Id));
 
