@@ -20,7 +20,7 @@
         <Setter Property="Width" Value="16" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Background" Value="{f:Brush HighlightA3}" />
+        <Setter Property="Background" Value="{f:Brush HighlightA4}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -42,14 +42,14 @@
             <TickBar x:Name="TopTick" 
                      Grid.Row="0" 
                      Height="6"
-                     Fill="{f:Brush BackgroundLevel1}"
+                     Fill="{f:Brush BackgroundLevel2}"
                      Placement="Top" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             
             <Border x:Name="TrackBackground" 
                     Grid.Row="1" 
-                    Background="{f:Brush BackgroundLevel1}"                    
+                    Background="{f:Brush BackgroundLevel2}"                    
                     Height="4"
                     Margin="0 1"
                     CornerRadius="2">
@@ -68,7 +68,7 @@
             <TickBar x:Name="BottomTick" 
                      Grid.Row="2"
                      Height="6"
-                     Fill="{f:Brush BackgroundLevel1}"
+                     Fill="{f:Brush BackgroundLevel2}"
                      Placement="Bottom"
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
@@ -85,8 +85,8 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel2}"/>
-                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA4}"/>
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel1}"/>
+                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA3}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -99,13 +99,13 @@
             </Grid.ColumnDefinitions>
             <TickBar x:Name="TopTick" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundLevel1}" 
+                     Fill="{f:Brush BackgroundLevel2}" 
                      Placement="Left" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             <Border x:Name="TrackBackground" 
                     Grid.Column="1" 
-                    Background="{f:Brush BackgroundLevel1}"   
+                    Background="{f:Brush BackgroundLevel2}"   
                     Width="4"
                     Margin="1 0"
                     CornerRadius="2">
@@ -123,7 +123,7 @@
             </Track>
             <TickBar x:Name="BottomTick" Grid.Column="2" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundLevel1}" 
+                     Fill="{f:Brush BackgroundLevel2}" 
                      Placement="Right" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
@@ -140,8 +140,8 @@
                 <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel2}"/>
-                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA4}"/>
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel1}"/>
+                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA3}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

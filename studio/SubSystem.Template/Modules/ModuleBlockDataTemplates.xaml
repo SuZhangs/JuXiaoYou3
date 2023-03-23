@@ -231,11 +231,10 @@
                            MinWidth="15"
                            Text="{Binding Suffix}"
                            VerticalAlignment="Center" />
-                <ui:NumberBox ClearButtonEnabled="False"
-                              Minimum="{Binding Minimum}"
+                <studio:NumberBox Minimum="{Binding Minimum}"
                               Maximum="{Binding Maximum}"
                               Value="{Binding Value,Mode=TwoWay}"
-                              PlaceholderText="{Binding Fallback}" />
+                              Watermark="{Binding Fallback}" />
             </DockPanel>
         </DockPanel>
     </DataTemplate>
@@ -328,7 +327,7 @@
                 <ui:ToggleSwitch DockPanel.Dock="Right"
                                  IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
-                       Foreground="{f:ForegroundBrush}"
+                           Foreground="{f:ForegroundBrush}"
                            Margin="16 0 0 0"
                            Text="{Binding Name}"
                            VerticalAlignment="Center" />
@@ -442,20 +441,25 @@
                 </TextBlock.Text>
             </TextBlock>
 
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ItemsSource="{Binding Items}"
                      Foreground="{f:ForegroundBrush}"
                      VerticalAlignment="Stretch"
                      VerticalContentAlignment="Top"
-                     DisplayMemberPath="Value"
                      SelectedValuePath="Value"
                      SelectedValue="{Binding Value,Mode=TwoWay}">
-                <ListBox.ItemsPanel>
+                <f:ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+                </f:ListBox.ItemsPanel>
+                <f:ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Value}"
+                                   Padding="8 4"/>
+                    </DataTemplate>
+                </f:ListBox.ItemTemplate>
+            </f:ListBox>
         </DockPanel>
     </DataTemplate>
 
@@ -510,13 +514,15 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
-                                <f:Slider Foreground="{f:ForegroundBrush}" Interval="1"
+                                <f:Slider Foreground="{f:ForegroundBrush}" 
+                                          Interval="1"
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Maximum="{Binding Maximum}"
                                         Minimum="0" />
 
-                                <TextBlock Margin="16 0 0 0"
+                                <TextBlock Foreground="{f:ForegroundBrush}" 
+                                           Margin="16 0 0 0"
                                            Text="{Binding Name}"
                                            VerticalAlignment="Center" />
                             </DockPanel>

@@ -171,10 +171,6 @@
             {
                 StateMachine.NextState(VisualState.Highlight2);
             }
-            else
-            {
-                StateMachine.NextState(VisualStateTrigger.Next);
-            }
 
             base.OnGotKeyboardFocus(e);
         }
@@ -227,12 +223,20 @@
         }
 
 
-        public override void OnApplyTemplate()
+        public sealed override void OnApplyTemplate()
         {
             GetTemplateChildOverride(Finder);
             Finder.Find();
             StateMachine.NextState();
+            OnApplyTemplateOverride();
             base.OnApplyTemplate();
+        }
+        
+        
+        
+        protected virtual void OnApplyTemplateOverride()
+        {
+            
         }
 
         /// <summary>

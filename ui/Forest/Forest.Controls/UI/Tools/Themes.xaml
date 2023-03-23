@@ -4,7 +4,6 @@
                     xmlns:t="clr-namespace:Acorisoft.FutureGL.Forest.UI.Tools"
                     xmlns:f="urn:acorisoft/forest/ui">
 
-
     <Style TargetType="{x:Type t:TabControl}">
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="BorderBrush" Value="{f:Brush HighlightA4}" />

@@ -2,7 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ctrl="clr-namespace:Acorisoft.FutureGL.MigaStudio.Controls"
                     xmlns:f="urn:acorisoft/forest/ui"
+                    xmlns:ftk="urn:acorisoft/forest/toolkits"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="{x:Type ctrl:ActionButton}">
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
@@ -226,7 +230,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}">
-                        <Grid Background="{f:Brush BackgroundLevel2}">
+                        <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="18" />
@@ -242,14 +246,14 @@
                                               ContentStringFormat="{TemplateBinding NegativeStringFormat}"
                                               ContentTemplateSelector="{TemplateBinding NegativeTemplateSelector}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              TextElement.Foreground="Gray"
+                                              TextElement.Foreground="{f:ForegroundBrush}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="0 0 16 0"
                                               SnapsToDevicePixels="True" />
 
                             <Rectangle Grid.Column="1"
                                        Grid.ColumnSpan="3"
-                                       Fill="LightGray"
+                                       Fill="{f:Brush BackgroundLevel1}"
                                        Height="2"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch" />
@@ -268,7 +272,7 @@
                                               ContentTemplate="{TemplateBinding PositiveTemplate}"
                                               ContentStringFormat="{TemplateBinding PositiveStringFormat}"
                                               ContentTemplateSelector="{TemplateBinding PositiveTemplateSelector}"
-                                              TextElement.Foreground="Gray"
+                                              TextElement.Foreground="{f:ForegroundBrush}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               SnapsToDevicePixels="True"
@@ -281,14 +285,14 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Grid.Column" Value="1" TargetName="PART_Thumb" />
-                            <Setter Property="TextElement.Foreground" Value="Gray" TargetName="PART_Positive" />
-                            <Setter Property="Background" Value="Gray" TargetName="PART_Thumb" />
+                            <Setter Property="TextElement.Foreground" Value="{f:Brush BackgroundLevel1}" TargetName="PART_Positive" />
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel1}" TargetName="PART_Thumb" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Grid.Column" Value="3" TargetName="PART_Thumb" />
-                            <Setter Property="TextElement.Foreground" Value="Crimson"
+                            <Setter Property="TextElement.Foreground" Value="{f:Brush HighlightA4}"
                                     TargetName="PART_Positive" />
-                            <Setter Property="Background" Value="Crimson" TargetName="PART_Thumb" />
+                            <Setter Property="Background" Value="{f:Brush HighlightA4}" TargetName="PART_Thumb" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -309,7 +313,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:SwitchOnControl}">
-                    <Grid Background="{f:Brush BackgroundLevel2}">
+                    <Grid Background="Transparent">
                         <Path x:Name="Icon"
                               Data="{TemplateBinding Icon}"
                               Height="24"
@@ -385,7 +389,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:ReferenceControl}">
-                    <Border Background="{f:Brush BackgroundLevel2}">
+                    <Border Background="{f:Brush BackgroundLevel3}">
                         <DockPanel LastChildFill="True">
                             <ctrl:ActionButton DockPanel.Dock="Left"
                                                Icon="{TemplateBinding Icon}"
@@ -485,6 +489,103 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
                             <Setter Property="Background" TargetName="mask" Value="#50FFFFFF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type ctrl:NumberBox}">
+                <Setter Property="FocusVisualStyle">
+            <Setter.Value>
+                <Style>
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle
+                                    RadiusX="4"
+                                    RadiusY="4"
+                                    SnapsToDevicePixels="True"
+                                    Stroke="{DynamicResource Brushes.ForegroundInAccent}"
+                                    StrokeThickness="1" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:NumberBox}">
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                        <Border x:Name="PART_Bd"
+                                BorderBrush="{x:Null}"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                Padding="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Grid.Column="0"
+                                              VerticalAlignment="Center"
+                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                              IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
+                                              Style="{StaticResource Base.ScrollViewer}"
+                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+
+                                <TextBlock x:Name="PART_Watermark"
+                                           Grid.Column="1"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{TemplateBinding Watermark}"
+                                           Margin="{TemplateBinding Padding}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Visibility="Collapsed"/>
+                                
+                                <ftk:ToolButton x:Name="PART_Up"
+                                                Grid.Column="1"
+                                                IconSize="23"
+                                                Icon="F1 M24,24z M0,0z M18,15L18,15 12,9 6,15"/>
+                                
+                                <ftk:ToolButton x:Name="PART_Down"
+                                                Grid.Column="2"
+                                                IconSize="23"
+                                                Icon="F1 M24,24z M0,0z M6,9L6,9 12,15 18,9"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasText" Value="False">
+                            <Setter Property="Visibility" TargetName="PART_Watermark" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

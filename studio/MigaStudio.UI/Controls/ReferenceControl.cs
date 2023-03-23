@@ -1,6 +1,4 @@
-﻿using Wpf.Ui.Common;
-
-namespace Acorisoft.FutureGL.MigaStudio.Controls
+﻿namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     
     public class ActionButton : Button

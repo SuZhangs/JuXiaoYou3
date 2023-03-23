@@ -415,19 +415,24 @@
                 </TextBlock.Text>
             </TextBlock>
 
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ItemsSource="{Binding Items}"
                      VerticalAlignment="Stretch"
                      VerticalContentAlignment="Top"
-                     DisplayMemberPath="Value"
                      SelectedValuePath="Value"
                      SelectedValue="{Binding Value,Mode=TwoWay}">
-                <ListBox.ItemsPanel>
+                <f:ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+                </f:ListBox.ItemsPanel>
+                <f:ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Value}"
+                                   Padding="8 4"/>
+                    </DataTemplate>
+                </f:ListBox.ItemTemplate>
+            </f:ListBox>
         </DockPanel>
     </DataTemplate>
 
