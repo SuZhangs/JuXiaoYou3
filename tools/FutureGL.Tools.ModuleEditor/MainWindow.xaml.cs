@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Tools.ModuleEditor.Views;
 
 namespace Acorisoft.FutureGL.Tools.ModuleEditor
 {
@@ -23,6 +24,11 @@ namespace Acorisoft.FutureGL.Tools.ModuleEditor
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Temp.Content = new TestView();
         }
     }
 }

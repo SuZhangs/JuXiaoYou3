@@ -13,8 +13,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Resources/Icons/BasicIcon.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Resources/Icons/MaterialDesignIcon.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialDesignIcon.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Resources/ContentTemplates/ListBoxItem.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml" />

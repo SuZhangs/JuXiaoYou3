@@ -6,9 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
-using Acorisoft.FutureGL.MigaStudio.Modules.Views;
 using Acorisoft.FutureGL.Tools.ModuleEditor.ViewModels;
 using DryIoc;
 using NLog;
@@ -20,18 +20,12 @@ namespace Acorisoft.FutureGL.Tools.ModuleEditor
     /// </summary>
     public partial class App
     {
-        protected override void RegisterServices(ILogger logger, IContainer container)
-        { 
-            
+        protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
+        {
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
-            Xaml.InstallView(new BindingInfo
-            {
-                View = typeof(ModuleView),
-                ViewModel = typeof(ModuleViewModel)
-            });
         }
 
         protected override AppViewModel GetShell()

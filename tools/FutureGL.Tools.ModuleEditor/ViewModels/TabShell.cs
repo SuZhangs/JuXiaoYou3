@@ -17,15 +17,17 @@ namespace Acorisoft.FutureGL.Tools.ModuleEditor.ViewModels
                 .WindowState = x => WindowState = x;
         }
 
-        public override void Start()
+        protected override void StartOverride()
         {
             RequireStartupTabViewModel();
         }
 
         protected override void RequireStartupTabViewModel()
         {
-            New<ModuleViewModel>();
+            // New<ModuleViewModel>();
         }
+
+        public override string Id { get; }
 
         /// <summary>
         /// 用于绑定的<see cref="WindowState"/> 属性。

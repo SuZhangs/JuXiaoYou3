@@ -13,13 +13,12 @@
                  Title="MainWindow"
                  MinWidth="1280"
                  MinHeight="720"
-                 ExtendToTitleBar="True"
                  d:DataContext="{d:DesignInstance Type={x:Type vm:AppViewModel}, IsDesignTimeCreatable=True}">
-    <f:Drawer x:Name="MainDrawer">
-        <fs:DialogHost x:Name="MainDialogHost">
-            <fs:ViewHost x:Name="ViewHost"
-                         ClipToBounds="True"
-                         ViewModel="{Binding CurrentController,Mode=OneWay}" />
-        </fs:DialogHost>
-    </f:Drawer>
+    <DockPanel Margin="0 36 0 0">
+        <Button DockPanel.Dock="Top"
+                Content="Refresh"
+                Click="ButtonBase_OnClick"
+                Height="48"/>
+        <ContentControl x:Name="Temp"/>
+    </DockPanel>
 </s:TabBaseWindow>
