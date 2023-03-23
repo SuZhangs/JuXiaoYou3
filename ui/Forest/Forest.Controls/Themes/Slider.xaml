@@ -20,7 +20,7 @@
         <Setter Property="Width" Value="16" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Background" Value="{f:Brush HighlightA2}" />
+        <Setter Property="Background" Value="{f:Brush HighlightA3}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -42,14 +42,14 @@
             <TickBar x:Name="TopTick" 
                      Grid.Row="0" 
                      Height="6"
-                     Fill="{f:Brush BackgroundLevel2}"
+                     Fill="{f:Brush BackgroundLevel1}"
                      Placement="Top" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             
             <Border x:Name="TrackBackground" 
                     Grid.Row="1" 
-                    Background="{f:Brush BackgroundLevel2}"                    
+                    Background="{f:Brush BackgroundLevel1}"                    
                     Height="4"
                     Margin="0 1"
                     CornerRadius="2">
@@ -68,25 +68,25 @@
             <TickBar x:Name="BottomTick" 
                      Grid.Row="2"
                      Height="6"
-                     Fill="{f:Brush BackgroundLevel3}"
+                     Fill="{f:Brush BackgroundLevel1}"
                      Placement="Bottom"
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
-                <Setter TargetName="TopTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="TickPlacement" Value="BottomRight">
-                <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="TickPlacement" Value="Both">
-                <Setter TargetName="TopTick" Property="UIElement.Visibility" Value="Visible" />
-                <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel1}"/>
-                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA3}"/>
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel2}"/>
+                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA4}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -99,13 +99,13 @@
             </Grid.ColumnDefinitions>
             <TickBar x:Name="TopTick" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundLevel3}" 
+                     Fill="{f:Brush BackgroundLevel1}" 
                      Placement="Left" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
             <Border x:Name="TrackBackground" 
                     Grid.Column="1" 
-                    Background="{f:Brush BackgroundLevel3}"   
+                    Background="{f:Brush BackgroundLevel1}"   
                     Width="4"
                     Margin="1 0"
                     CornerRadius="2">
@@ -123,25 +123,25 @@
             </Track>
             <TickBar x:Name="BottomTick" Grid.Column="2" 
                      Width="6" 
-                     Fill="{f:Brush BackgroundLevel3}" 
+                     Fill="{f:Brush BackgroundLevel1}" 
                      Placement="Right" 
                      SnapsToDevicePixels="True"
                      Visibility="Collapsed" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
-                <Setter TargetName="TopTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="TickPlacement" Value="BottomRight">
-                <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="TickPlacement" Value="Both">
-                <Setter TargetName="TopTick" Property="UIElement.Visibility" Value="Visible" />
-                <Setter TargetName="BottomTick" Property="UIElement.Visibility" Value="Visible" />
+                <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
             </Trigger>
-            <Trigger Property="UIElement.IsMouseOver" Value="True">
-                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel1}"/>
-                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA3}"/>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="TrackBackground" Property="Border.Background" Value="{f:Brush BackgroundLevel2}"/>
+                <Setter TargetName="Thumb" Property="Background" Value="{f:Brush HighlightA4}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
