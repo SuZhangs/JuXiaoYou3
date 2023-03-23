@@ -267,13 +267,14 @@
                 <ControlTemplate TargetType="{x:Type ctrl:ReferenceControl}">
                     <Border Background="{StaticResource Transparent}">
                         <DockPanel LastChildFill="True">
-                            <ui:Button DockPanel.Dock="Left"
-                                       Icon="{TemplateBinding Icon}"
-                                       FontSize="32"
-                                       Height="72"
-                                       Width="72" />
+                            <f:ActionButton DockPanel.Dock="Left"
+                                           Icon="{TemplateBinding Icon}"
+                                            IsFilled="{TemplateBinding }"
+                                           IconSize="32"
+                                           Height="72"
+                                           Width="72" />
 
-                            <ui:CardAction Margin="16 0 0 0"
+                            <f:ActionButton Margin="16 0 0 0"
                                            HorizontalAlignment="Stretch">
                                 <DockPanel DockPanel.Dock="Right"
                                            VerticalAlignment="Center">
@@ -286,7 +287,7 @@
                                                Text="{TemplateBinding Source}"
                                                VerticalAlignment="Center" />
                                 </DockPanel>
-                            </ui:CardAction>
+                            </f:ActionButton>
                         </DockPanel>
                     </Border>
                 </ControlTemplate>

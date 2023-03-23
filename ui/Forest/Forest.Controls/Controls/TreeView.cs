@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.Forest.Controls
+﻿using System.Windows.Controls.Primitives;
+
+namespace Acorisoft.FutureGL.Forest.Controls
 {
     public class TreeView : ForestTreeViewBase
     {
@@ -18,11 +20,13 @@
     {
         private const string PART_BdName      = "PART_Bd";
         private const string PART_ContentName = "PART_Content";
+        private const string ExpanderName     = "Expander";
 
 
         private Storyboard       _storyboard;
         private Border           _bd;
         private ContentPresenter _content;
+        private ToggleButton     _button;
 
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
@@ -36,16 +40,17 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeViewItem), new FrameworkPropertyMetadata(typeof(TreeViewItem)));
         }
-        
+
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new TreeViewItem();
         }
-        
+
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
             finder.Find<Border>(PART_BdName, x => _bd                     = x)
+                  .Find<ToggleButton>(ExpanderName, x => _button          = x)
                   .Find<ContentPresenter>(PART_ContentName, x => _content = x);
         }
 
@@ -56,6 +61,7 @@
 
         protected override void SetForeground(Brush brush)
         {
+            _button.Foreground = brush;
             _content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
@@ -91,7 +97,7 @@
         {
             //
             // Opacity 动画
-            _highlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
+            _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
             _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
@@ -156,7 +162,7 @@
         {
             _disabled           =   new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
-            
+
             //
             // 设置背景颜色
             _bd.Background = _disabled;

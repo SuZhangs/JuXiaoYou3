@@ -88,7 +88,7 @@
                               Height="16"
                               Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6" 
                               Stretch="Uniform"
-                              Stroke="{f:Brush ForegroundInHighlight}"/>
+                              Stroke="{TemplateBinding Foreground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -136,7 +136,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type s:ForestTreeViewItemBase}">
-                    
                     <Grid Background="{TemplateBinding Background}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -152,7 +151,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <ToggleButton x:Name="Expander"
-                                              Grid.Column="0"
+                                              Grid.Column="0"                                              
                                               Margin="8,0" 
                                               ClickMode="Press"
                                               Style="{StaticResource ClearStyle.TreeView.ToggleButton}"
