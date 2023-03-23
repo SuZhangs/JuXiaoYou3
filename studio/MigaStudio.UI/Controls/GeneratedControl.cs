@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GeneratedControl), new FrameworkPropertyMetadata(typeof(GeneratedControl)));
             Transparent = new SolidColorBrush(Colors.Transparent);
             Gray        = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundLevel1]);
-            White       = new SolidColorBrush(Colors.White);
+            White       = new SolidColorBrush(Colors.Gray);
         }
 
         private readonly List<FrameworkElement> _elements;
@@ -210,8 +210,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
-                b.Background      = Gray;
-                b.BorderBrush     = White;
+                b.Background = White;
+                b.BorderBrush = Gray;
                 b.BorderThickness = new Thickness(1, 0, 0, 0);
             }
         }

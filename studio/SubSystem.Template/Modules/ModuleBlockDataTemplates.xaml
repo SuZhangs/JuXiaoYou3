@@ -35,7 +35,8 @@
             6. ReferenceBlock
     -->
     <DataTemplate DataType="{x:Type subTemp:AudioBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -51,7 +52,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:VideoBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -67,7 +69,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:FileBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -83,7 +86,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ImageBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -99,7 +103,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:MusicBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -115,7 +120,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ReferenceBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="14"
@@ -143,7 +149,8 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:SingleLineBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -167,7 +174,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:MultiLineBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -182,7 +190,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ColorBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -215,7 +224,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:NumberBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        FontSize="15"
                        FontWeight="Bold"
@@ -240,7 +250,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SliderBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -278,58 +289,65 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:StarBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel1}"
+        <Border Background="{f:Brush BackgroundLevel3}"
                 Height="42"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Left"
                 Margin="0 0 0 12"
-                Padding="0 0 16 0">
+                MinWidth="256"
+                MaxWidth="320">
             <DockPanel VerticalAlignment="Center">
                 <studio:SwitchOnControl DockPanel.Dock="Right"
                                         Foreground="#FFC107"
                                         Icon="{StaticResource Star}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
-                       Foreground="{f:ForegroundBrush}"
-                           Margin="16 0 0 0"
+                           Foreground="{f:ForegroundBrush}"
                            Text="{Binding Name}"
+                           TextTrimming="CharacterEllipsis"
+                           ToolTip="{Binding Name}"
                            VerticalAlignment="Center" />
             </DockPanel>
         </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HeartBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel1}"
+        <Border Background="{f:Brush BackgroundLevel3}"
                 Height="42"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Left"
                 Margin="0 0 0 12"
-                Padding="0 0 16 0">
+                   MinWidth="256"
+                MaxWidth="320">
             <DockPanel VerticalAlignment="Center">
                 <studio:SwitchOnControl DockPanel.Dock="Right"
                                         Foreground="#FF6699"
                                         Icon="{StaticResource Heart}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
-                       Foreground="{f:ForegroundBrush}"
-                           Margin="16 0 0 0"
+                           Foreground="{f:ForegroundBrush}"
                            Text="{Binding Name}"
+                           TextTrimming="CharacterEllipsis"
+                           ToolTip="{Binding Name}"
                            VerticalAlignment="Center" />
             </DockPanel>
         </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SwitchBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel1}"
+        <Border Background="{f:Brush BackgroundLevel3}"
                 Height="42"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Left"
                 Margin="0 0 0 12"
-                Padding="0 0 16 0">
+                   MinWidth="256"
+                MaxWidth="320">
             <DockPanel VerticalAlignment="Center">
-                <ui:ToggleSwitch DockPanel.Dock="Right"
+                <f:ToggleSwitch DockPanel.Dock="Right"
                                  IsChecked="{Binding Value,Mode=TwoWay}" />
+
                 <TextBlock FontSize="15"
                            Foreground="{f:ForegroundBrush}"
-                           Margin="16 0 0 0"
                            Text="{Binding Name}"
+                           TextTrimming="CharacterEllipsis"
+                           ToolTip="{Binding Name}"
                            VerticalAlignment="Center" />
             </DockPanel>
         </Border>
@@ -338,8 +356,10 @@
     <DataTemplate DataType="{x:Type subTemp:BinaryBlockDataUI}">
         <Border Height="26"
                 HorizontalAlignment="Left"
+                Margin="0 0 0 4"
                 MinWidth="320">
-            <studio:BinaryControl Negative="{Binding Negative}"
+            <studio:BinaryControl Foreground="{f:ForegroundBrush}"
+                                  Negative="{Binding Negative}"
                                   Positive="{Binding Positive}"
                                   IsChecked="{Binding Value,Mode=TwoWay}" />
         </Border>
@@ -347,19 +367,19 @@
 
 
     <DataTemplate DataType="{x:Type subTemp:DegreeBlockDataUI}">
-        <DockPanel>
+        <DockPanel Margin="0 0 0 4"
+                   MinWidth="320">
             <TextBlock Foreground="{f:ForegroundBrush}"
-                HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Width="256">
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center">
                 <Run FontWeight="Bold"
-                     FontSize="13"
+                     FontSize="14"
                      Text="{Binding Name,Mode=OneWay}" />
-                <Run FontSize="13"
+                <Run FontSize="14"
                      Text="{Binding DisplayValue,Mode=OneWay,StringFormat={}（{0}）}" />
             </TextBlock>
             <studio:DegreeControl FontSize="15"
-                       Foreground="{f:ForegroundBrush}"
+                                  Foreground="{f:ForegroundBrush}"
                                   Margin="16 0 0 0"
                                   VerticalAlignment="Center"
                                   Value="{Binding Value,Mode=TwoWay}" />
@@ -374,7 +394,8 @@
             2. LikabilityBlock
     -->
     <DataTemplate DataType="{x:Type subTemp:LikabilityBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -395,7 +416,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:RateBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -426,7 +448,8 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:SequenceBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="18"
@@ -464,7 +487,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:GroupBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="18"
@@ -490,7 +514,8 @@
 
 
     <DataTemplate DataType="{x:Type subTemp:RadarBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"
@@ -534,7 +559,8 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HistogramBlockDataUI}">
-        <DockPanel Margin="0 0 0 12">
+        <DockPanel Margin="0 0 0 12"
+                   MinWidth="320">
             <TextBlock DockPanel.Dock="Top"
                        Foreground="{f:ForegroundBrush}"
                        FontSize="15"

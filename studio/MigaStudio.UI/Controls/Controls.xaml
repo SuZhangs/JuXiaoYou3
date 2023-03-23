@@ -285,7 +285,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Grid.Column" Value="1" TargetName="PART_Thumb" />
-                            <Setter Property="TextElement.Foreground" Value="{f:Brush BackgroundLevel1}" TargetName="PART_Positive" />
+                            <Setter Property="TextElement.Foreground" Value="{f:ForegroundBrush}" TargetName="PART_Positive" />
                             <Setter Property="Background" Value="{f:Brush BackgroundLevel1}" TargetName="PART_Thumb" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
@@ -319,7 +319,7 @@
                               Height="24"
                               HorizontalAlignment="Center"
                               Stretch="None"
-                              Stroke="Gray"
+                              Stroke="{f:ForegroundBrush}"
                               StrokeThickness="1"
                               Width="24"
                               VerticalAlignment="Center"/>
@@ -330,10 +330,10 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush ForegroundLevel3}"/>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="LightGray"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush ForegroundLevel3}"/>
                         </Trigger>
                         
                         <Trigger Property="IsChecked" Value="True">
