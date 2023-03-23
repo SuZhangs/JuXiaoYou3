@@ -16,8 +16,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
     <Style TargetType="{x:Type b:DialogButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
         <Setter Property="Margin" Value="10 0 0 0" />
@@ -36,7 +36,7 @@
                                   Stretch="Uniform"
                                   Width="{TemplateBinding IconSize}"
                                   Height="{TemplateBinding IconSize}" />
-                            
+
                             <ContentPresenter x:Name="PART_Content"
                                               TextElement.FontSize="14"
                                               TextElement.Foreground="#4F5B66"
@@ -53,143 +53,143 @@
         </Setter>
     </Style>
     <!-- -->
-    <!-- <Style TargetType="{x:Type b:PrimaryButton}"> -->
-    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
-    <!--     <Setter Property="Padding" Value="8" /> -->
-    <!--     <Setter Property="Template"> -->
-    <!--         <Setter.Value> -->
-    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryButton}"> -->
-    <!--                 <Border x:Name="PART_Bd" -->
-    <!--                         Background="{f:Brush HighlightB1}" -->
-    <!--                         BorderThickness="1" -->
-    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
-    <!--                         CornerRadius="3" -->
-    <!--                         Padding="{TemplateBinding Padding}"> -->
-    <!--                     <ContentPresenter x:Name="PART_Content" -->
-    <!--                                       TextElement.FontSize="14" -->
-    <!--                                       TextElement.Foreground="#4F5B66" -->
-    <!--                                       Content="{TemplateBinding Content}" -->
-    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}" -->
-    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
-    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
-    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
-    <!--                 </Border> -->
-    <!--             </ControlTemplate> -->
-    <!--         </Setter.Value> -->
-    <!--     </Setter> -->
-    <!-- </Style> -->
+    <!-- <Style TargetType="{x:Type b:PrimaryButton}">  -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />  -->
+    <!--     <Setter Property="Padding" Value="8" />  -->
+    <!--     <Setter Property="Template">  -->
+    <!--         <Setter.Value>  -->
+    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryButton}">  -->
+    <!--                 <Border x:Name="PART_Bd"  -->
+    <!--                         Background="{f:Brush HighlightB1}"  -->
+    <!--                         BorderThickness="1"  -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}"  -->
+    <!--                         CornerRadius="3"  -->
+    <!--                         Padding="{TemplateBinding Padding}">  -->
+    <!--                     <ContentPresenter x:Name="PART_Content"  -->
+    <!--                                       TextElement.FontSize="14"  -->
+    <!--                                       TextElement.Foreground="#4F5B66"  -->
+    <!--                                       Content="{TemplateBinding Content}"  -->
+    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}"  -->
+    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"  -->
+    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"  -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>  -->
+    <!--                 </Border>  -->
+    <!--             </ControlTemplate>  -->
+    <!--         </Setter.Value>  -->
+    <!--     </Setter>  -->
+    <!-- </Style>  -->
     <!-- -->
-    <!-- <Style TargetType="{x:Type b:PrimaryIconButton}"> -->
-    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
-    <!--     <Setter Property="Padding" Value="8" /> -->
-    <!--     <Setter Property="Template"> -->
-    <!--         <Setter.Value> -->
-    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryIconButton}"> -->
-    <!--                 <Border x:Name="PART_Bd" -->
-    <!--                         Background="{f:Brush HighlightB1}" -->
-    <!--                         BorderThickness="1" -->
-    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
-    <!--                         CornerRadius="3" -->
-    <!--                         Padding="{TemplateBinding Padding}"> -->
-    <!--                     <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-    <!--                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"> -->
-    <!--                         <Path x:Name="PART_Icon" -->
-    <!--                               Data="{TemplateBinding Icon}" -->
-    <!--                               Margin="8 0" -->
-    <!--                               Stroke="#4F5B66" -->
-    <!--                               StrokeThickness="1" -->
-    <!--                               Stretch="Uniform" -->
-    <!--                               Width="{TemplateBinding IconSize}" -->
-    <!--                               Height="{TemplateBinding IconSize}" /> -->
-    <!--                          -->
-    <!--                         <ContentPresenter x:Name="PART_Content" -->
-    <!--                                           TextElement.FontSize="14" -->
-    <!--                                           TextElement.Foreground="#4F5B66" -->
-    <!--                                           Content="{TemplateBinding Content}" -->
-    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}" -->
-    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
-    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
-    <!--                                           VerticalAlignment="Center" -->
-    <!--                                           HorizontalAlignment="Center"/> -->
-    <!--                     </DockPanel> -->
-    <!--                 </Border> -->
-    <!--             </ControlTemplate> -->
-    <!--         </Setter.Value> -->
-    <!--     </Setter> -->
-    <!-- </Style> -->
+    <!-- <Style TargetType="{x:Type b:PrimaryIconButton}">  -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />  -->
+    <!--     <Setter Property="Padding" Value="8" />  -->
+    <!--     <Setter Property="Template">  -->
+    <!--         <Setter.Value>  -->
+    <!--             <ControlTemplate TargetType="{x:Type b:PrimaryIconButton}">  -->
+    <!--                 <Border x:Name="PART_Bd"  -->
+    <!--                         Background="{f:Brush HighlightB1}"  -->
+    <!--                         BorderThickness="1"  -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}"  -->
+    <!--                         CornerRadius="3"  -->
+    <!--                         Padding="{TemplateBinding Padding}">  -->
+    <!--                     <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  -->
+    <!--                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">  -->
+    <!--                         <Path x:Name="PART_Icon"  -->
+    <!--                               Data="{TemplateBinding Icon}"  -->
+    <!--                               Margin="8 0"  -->
+    <!--                               Stroke="#4F5B66"  -->
+    <!--                               StrokeThickness="1"  -->
+    <!--                               Stretch="Uniform"  -->
+    <!--                               Width="{TemplateBinding IconSize}"  -->
+    <!--                               Height="{TemplateBinding IconSize}" />  -->
+    <!--                           -->
+    <!--                         <ContentPresenter x:Name="PART_Content"  -->
+    <!--                                           TextElement.FontSize="14"  -->
+    <!--                                           TextElement.Foreground="#4F5B66"  -->
+    <!--                                           Content="{TemplateBinding Content}"  -->
+    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}"  -->
+    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"  -->
+    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}"  -->
+    <!--                                           VerticalAlignment="Center"  -->
+    <!--                                           HorizontalAlignment="Center"/>  -->
+    <!--                     </DockPanel>  -->
+    <!--                 </Border>  -->
+    <!--             </ControlTemplate>  -->
+    <!--         </Setter.Value>  -->
+    <!--     </Setter>  -->
+    <!-- </Style>  -->
     <!-- -->
-    <!-- <Style TargetType="{x:Type b:SecondaryButton}"> -->
-    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
-    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="Padding" Value="8" /> -->
-    <!--     <Setter Property="Template"> -->
-    <!--         <Setter.Value> -->
-    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryButton}"> -->
-    <!--                 <Border x:Name="PART_Bd" -->
-    <!--                         Background="{f:Brush HighlightB1}" -->
-    <!--                         BorderThickness="1" -->
-    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
-    <!--                         CornerRadius="3" -->
-    <!--                         Padding="{TemplateBinding Padding}"> -->
-    <!--                     <ContentPresenter x:Name="PART_Content" -->
-    <!--                                       TextElement.FontSize="14" -->
-    <!--                                       TextElement.Foreground="#4F5B66" -->
-    <!--                                       Content="{TemplateBinding Content}" -->
-    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}" -->
-    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
-    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
-    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
-    <!--                 </Border> -->
-    <!--             </ControlTemplate> -->
-    <!--         </Setter.Value> -->
-    <!--     </Setter> -->
-    <!-- </Style> -->
+    <!-- <Style TargetType="{x:Type b:SecondaryButton}">  -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />  -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="Padding" Value="8" />  -->
+    <!--     <Setter Property="Template">  -->
+    <!--         <Setter.Value>  -->
+    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryButton}">  -->
+    <!--                 <Border x:Name="PART_Bd"  -->
+    <!--                         Background="{f:Brush HighlightB1}"  -->
+    <!--                         BorderThickness="1"  -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}"  -->
+    <!--                         CornerRadius="3"  -->
+    <!--                         Padding="{TemplateBinding Padding}">  -->
+    <!--                     <ContentPresenter x:Name="PART_Content"  -->
+    <!--                                       TextElement.FontSize="14"  -->
+    <!--                                       TextElement.Foreground="#4F5B66"  -->
+    <!--                                       Content="{TemplateBinding Content}"  -->
+    <!--                                       ContentTemplate="{TemplateBinding ContentTemplate}"  -->
+    <!--                                       ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"  -->
+    <!--                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"  -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>  -->
+    <!--                 </Border>  -->
+    <!--             </ControlTemplate>  -->
+    <!--         </Setter.Value>  -->
+    <!--     </Setter>  -->
+    <!-- </Style>  -->
     <!-- -->
-    <!-- <Style TargetType="{x:Type b:SecondaryIconButton}"> -->
-    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
-    <!--     <Setter Property="Padding" Value="8" /> -->
-    <!--     <Setter Property="Template"> -->
-    <!--         <Setter.Value> -->
-    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryIconButton}"> -->
-    <!--                 <Border x:Name="PART_Bd" -->
-    <!--                         Background="{f:Brush HighlightB1}" -->
-    <!--                         BorderThickness="1" -->
-    <!--                         BorderBrush="{f:Brush HighlightB3}" -->
-    <!--                         CornerRadius="3" -->
-    <!--                         Padding="{TemplateBinding Padding}"> -->
-    <!--                     <DockPanel HorizontalAlignment="Center"> -->
-    <!--                         <Path x:Name="PART_Icon" -->
-    <!--                               Data="{TemplateBinding Icon}" -->
-    <!--                               Stroke="#4F5B66" -->
-    <!--                               StrokeThickness="2" -->
-    <!--                               Stretch="Uniform" -->
-    <!--                               Width="{TemplateBinding IconSize}" -->
-    <!--                               Height="{TemplateBinding IconSize}" /> -->
-    <!--                          -->
-    <!--                         <ContentPresenter x:Name="PART_Content" -->
-    <!--                                           TextElement.FontSize="14" -->
-    <!--                                           TextElement.Foreground="#4F5B66" -->
-    <!--                                           Content="{TemplateBinding Content}" -->
-    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}" -->
-    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" -->
-    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}" -->
-    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/> -->
-    <!--                     </DockPanel> -->
-    <!--                 </Border> -->
-    <!--             </ControlTemplate> -->
-    <!--         </Setter.Value> -->
-    <!--     </Setter> -->
-    <!-- </Style> -->
+    <!-- <Style TargetType="{x:Type b:SecondaryIconButton}">  -->
+    <!--     <Setter Property="HorizontalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="VerticalContentAlignment" Value="Center" />  -->
+    <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />  -->
+    <!--     <Setter Property="Padding" Value="8" />  -->
+    <!--     <Setter Property="Template">  -->
+    <!--         <Setter.Value>  -->
+    <!--             <ControlTemplate TargetType="{x:Type b:SecondaryIconButton}">  -->
+    <!--                 <Border x:Name="PART_Bd"  -->
+    <!--                         Background="{f:Brush HighlightB1}"  -->
+    <!--                         BorderThickness="1"  -->
+    <!--                         BorderBrush="{f:Brush HighlightB3}"  -->
+    <!--                         CornerRadius="3"  -->
+    <!--                         Padding="{TemplateBinding Padding}">  -->
+    <!--                     <DockPanel HorizontalAlignment="Center">  -->
+    <!--                         <Path x:Name="PART_Icon"  -->
+    <!--                               Data="{TemplateBinding Icon}"  -->
+    <!--                               Stroke="#4F5B66"  -->
+    <!--                               StrokeThickness="2"  -->
+    <!--                               Stretch="Uniform"  -->
+    <!--                               Width="{TemplateBinding IconSize}"  -->
+    <!--                               Height="{TemplateBinding IconSize}" />  -->
+    <!--                           -->
+    <!--                         <ContentPresenter x:Name="PART_Content"  -->
+    <!--                                           TextElement.FontSize="14"  -->
+    <!--                                           TextElement.Foreground="#4F5B66"  -->
+    <!--                                           Content="{TemplateBinding Content}"  -->
+    <!--                                           ContentTemplate="{TemplateBinding ContentTemplate}"  -->
+    <!--                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"  -->
+    <!--                                           ContentStringFormat="{TemplateBinding ContentStringFormat}"  -->
+    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  -->
+    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>  -->
+    <!--                     </DockPanel>  -->
+    <!--                 </Border>  -->
+    <!--             </ControlTemplate>  -->
+    <!--         </Setter.Value>  -->
+    <!--     </Setter>  -->
+    <!-- </Style>  -->
 
     <Style TargetType="{x:Type b:LooklessButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -266,148 +266,320 @@
         </Setter>
     </Style>
 
-    <!-- <Double x:Key="RadioButtonBorderThemeThickness">1</Double> -->
-    <!-- <Double x:Key="ToggleButtonWidth">40</Double> -->
-    <!-- <Double x:Key="ToggleButtonHeight">20</Double> -->
-    <!-- <Thickness x:Key="ToggleSwitchPadding">8,6,0,0</Thickness> -->
-    <!-- <Thickness x:Key="ToggleSwitchBorderThemeThickness">1</Thickness> -->
-    <!-- <Thickness x:Key="ToggleSwitchContentMargin">8,0,0,0</Thickness> -->
-    <!-- -->
-    <!-- -->
-    <!-- <Style TargetType="{x:Type f:ToggleSwitch}"> -->
-    <!--     <Setter Property="FrameworkElement.FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" /> -->
-    <!--     <Setter Property="Background" Value="{SolidColorBrush Color={DynamicResource SystemAccentColorSecondary}}" /> -->
-    <!--     <Setter Property="Foreground" Value="{SolidColorBrush Color={DynamicResource TextFillColorPrimary}}" /> -->
-    <!--     <Setter Property="BorderBrush" Value="Transparent" /> -->
-    <!--     <Setter Property="BorderThickness" Value="{StaticResource ToggleSwitchBorderThemeThickness}" /> -->
-    <!--     <Setter Property="Padding" Value="{StaticResource ToggleSwitchPadding}" /> -->
-    <!--     <Setter Property="HorizontalAlignment" Value="Left" /> -->
-    <!--     <Setter Property="VerticalAlignment" Value="Center" /> -->
-    <!--     <Setter Property="HorizontalContentAlignment" Value="Left" /> -->
-    <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
-    <!--     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" /> -->
-    <!--     <Setter Property="FontWeight" Value="Normal" /> -->
-    <!--     <Setter Property="UIElement.SnapsToDevicePixels" Value="True" /> -->
-    <!--     <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" /> -->
-    <!--     <Setter Property="Template"> -->
-    <!--         <Setter.Value> -->
-    <!--             <ControlTemplate TargetType="{x:Type f:ToggleSwitch}"> -->
-    <!--                 <ControlTemplate.Triggers> -->
-    <!--                     <Trigger Value="{x:Null}" Property="Content"> -->
-    <!--                         <Setter TargetName="ContentPresenter" Property="Margin" Value="0" /> -->
-    <!--                     </Trigger> -->
-    <!--                     <Trigger Property="Content" Value=""> -->
-    <!--                         <Setter TargetName="ContentPresenter" Property="Margin" Value="0" /> -->
-    <!--                     </Trigger> -->
-    <!--                     <Trigger Property="ToggleButton.IsChecked" Value="True"> -->
-    <!--                         <Trigger.EnterActions> -->
-    <!--                             <BeginStoryboard> -->
-    <!--                                 <Storyboard> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" From="1.0" To="0.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" From="0.0" To="1.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleEllipse" Storyboard.TargetProperty="(Ellipse.Opacity)" From="1.0" To="0.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse" Storyboard.TargetProperty="(Ellipse.Opacity)" From="0.0" To="1.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleEllipse" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" From="-9" To="9" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" From="-9" To="9" Duration="00:00:00.167" /> -->
-    <!--                                 </Storyboard> -->
-    <!--                             </BeginStoryboard> -->
-    <!--                         </Trigger.EnterActions> -->
-    <!--                         <Trigger.ExitActions> -->
-    <!--                             <BeginStoryboard> -->
-    <!--                                 <Storyboard> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" From="0.0" To="1.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" From="1.0" To="0.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleEllipse" Storyboard.TargetProperty="(Ellipse.Opacity)" From="0.0" To="1.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse" Storyboard.TargetProperty="(Ellipse.Opacity)" From="1.0" To="0.0" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ToggleEllipse" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" From="9" To="-9" Duration="00:00:00.167" /> -->
-    <!--                                     <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" From="9" To="-9" Duration="00:00:00.167" /> -->
-    <!--                                 </Storyboard> -->
-    <!--                             </BeginStoryboard> -->
-    <!--                         </Trigger.ExitActions> -->
-    <!--                     </Trigger> -->
-    <!--                     <MultiTrigger> -->
-    <!--                         <MultiTrigger.Conditions> -->
-    <!--                             <Condition Property="UIElement.IsMouseOver" Value="True" /> -->
-    <!--                             <Condition Property="ToggleButton.IsChecked" Value="False" /> -->
-    <!--                             <Condition Property="IsEnabled" Value="True" /> -->
-    <!--                         </MultiTrigger.Conditions> -->
-    <!--                         <Setter TargetName="ToggleRectangle" Property="Fill" Value="{SolidColorBrush Color={DynamicResource ControlFillColorSecondary}}" /> -->
-    <!--                     </MultiTrigger> -->
-    <!--                     <MultiTrigger> -->
-    <!--                         <MultiTrigger.Conditions> -->
-    <!--                             <Condition Property="ToggleButton.IsChecked" Value="False" /> -->
-    <!--                             <Condition Property="IsEnabled" Value="False" /> -->
-    <!--                         </MultiTrigger.Conditions> -->
-    <!--                         <Setter TargetName="ToggleRectangle" Value="{DynamicResource ControlStrokeColorDefaultBrush}" Property="Stroke" /> -->
-    <!--                         <Setter TargetName="ToggleRectangle" Value="{DynamicResource ControlStrokeColorDefaultBrush}" Property="Fill" /> -->
-    <!--                         <Setter TargetName="ToggleEllipse" Value="{DynamicResource ControlStrokeColorDefaultBrush}" Property="Fill" /> -->
-    <!--                         <Setter Value="{DynamicResource TextFillColorDisabledBrush}" Property="Foreground" /> -->
-    <!--                     </MultiTrigger> -->
-    <!--                     <MultiTrigger> -->
-    <!--                         <MultiTrigger.Conditions> -->
-    <!--                             <Condition Property="ToggleButton.IsChecked" Value="True" /> -->
-    <!--                             <Condition Property="IsEnabled" Value="False" /> -->
-    <!--                         </MultiTrigger.Conditions> -->
-    <!--                         <Setter TargetName="ActiveToggleRectangle" Property="Fill" Value="{SolidColorBrush Opacity=0.6, Color={DynamicResource SystemAccentColorSecondary}}" /> -->
-    <!--                         <Setter TargetName="ActiveToggleEllipse" Property="Fill" Value="{SolidColorBrush Opacity=0.8, Color={DynamicResource TextOnAccentFillColorPrimary}}" /> -->
-    <!--                         <Setter Value="{DynamicResource TextFillColorDisabledBrush}" Property="Foreground" /> -->
-    <!--                     </MultiTrigger> -->
-    <!--                 </ControlTemplate.Triggers> -->
-    <!--                 <Grid Background="Transparent"> -->
-    <!--                     <Grid.ColumnDefinitions> -->
-    <!--                         <ColumnDefinition Width="Auto" /> -->
-    <!--                         <ColumnDefinition Width="*" /> -->
-    <!--                     </Grid.ColumnDefinitions> -->
-    <!--                     <Grid Grid.Column="0"  -->
-    <!--                           Width="{StaticResource ToggleButtonWidth}"  -->
-    <!--                           Height="{StaticResource ToggleButtonHeight}"> -->
-    <!--                         <Rectangle Name="ToggleRectangle"  -->
-    <!--                                    Width="{StaticResource ToggleButtonWidth}"  -->
-    <!--                                    Height="{StaticResource ToggleButtonHeight}"  -->
-    <!--                                    HorizontalAlignment="Center"  -->
-    <!--                                    VerticalAlignment="Center" -->
-    <!--                                    Fill="Transparent" -->
-    <!--                                    RadiusX="10" -->
-    <!--                                    RadiusY="10"  -->
-    <!--                                    StrokeThickness="1" -->
-    <!--                                    Stroke="{SolidColorBrush Color={DynamicResource ControlStrokeColorTertiary}}" /> -->
-    <!--                         <Rectangle Name="ActiveToggleRectangle"  -->
-    <!--                                    Width="{StaticResource ToggleButtonWidth}" -->
-    <!--                                    Height="{StaticResource ToggleButtonHeight}"  -->
-    <!--                                    HorizontalAlignment="Center" VerticalAlignment="Center"  -->
-    <!--                                    Fill="{TemplateBinding Background}" Opacity="0.0" RadiusX="10"  -->
-    <!--                                    RadiusY="10" StrokeThickness="0" /> -->
-    <!--                         <Ellipse Name="ToggleEllipse"  -->
-    <!--                                  Width="12"  -->
-    <!--                                  Height="12"  -->
-    <!--                                  Margin="0"  -->
-    <!--                                  HorizontalAlignment="Center" -->
-    <!--                                  VerticalAlignment="Center"  -->
-    <!--                                  RenderTransformOrigin="0.5, 0.5"  -->
-    <!--                                  RenderTransform="{TranslateTransform X=-9}"  -->
-    <!--                                  Fill="{SolidColorBrush Color={DynamicResource ControlStrokeColorTertiary}}" /> -->
-    <!--                         <Ellipse Name="ActiveToggleEllipse"  -->
-    <!--                                  Width="12" Height="12"  -->
-    <!--                                  Margin="0"  -->
-    <!--                                  HorizontalAlignment="Center"  -->
-    <!--                                  VerticalAlignment="Center"  -->
-    <!--                                  Opacity="0.0"  -->
-    <!--                                  RenderTransformOrigin="0.5, 0.5"  -->
-    <!--                                  RenderTransform="{TranslateTransform X=-9}"  -->
-    <!--                                  Fill="{SolidColorBrush Color={DynamicResource TextOnAccentFillColorPrimary}}" /> -->
-    <!--                     </Grid> -->
-    <!--                     <ContentPresenter Name="ContentPresenter" -->
-    <!--                                       Grid.Column="1"  -->
-    <!--                                       Margin="{StaticResource ToggleSwitchContentMargin}" -->
-    <!--                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  -->
-    <!--                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" -->
-    <!--                                       Content="{TemplateBinding Content}"  -->
-    <!--                                       Foreground="{TemplateBinding Foreground}" /> -->
-    <!--                 </Grid> -->
-    <!--             </ControlTemplate> -->
-    <!--         </Setter.Value> -->
-    <!--     </Setter> -->
-    <!-- </Style> -->
+    <Thickness x:Key="ToggleSwitchPadding">8,6,0,0</Thickness>
+    <Thickness x:Key="ToggleSwitchBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="ToggleSwitchContentMargin">8,0,0,0</Thickness>
+
+
+    <Style TargetType="{x:Type f:ToggleSwitch}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="{StaticResource ToggleSwitchBorderThemeThickness}" />
+        <Setter Property="Padding" Value="{StaticResource ToggleSwitchPadding}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type f:ToggleSwitch}">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0"
+                              Width="40"
+                              Height="20">
+                            <Rectangle x:Name="ToggleRectangle"
+                                       Width="40"
+                                       Height="20"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Fill="Transparent"
+                                       RadiusX="10"
+                                       RadiusY="10"
+                                       StrokeThickness="1"
+                                       Stroke="{f:Brush BorderBrush}" />
+                            <Rectangle x:Name="ActiveToggleRectangle"
+                                       Width="40"
+                                       Height="20"
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Fill="{f:Brush HighlightA4}" 
+                                       Opacity="0.0" 
+                                       RadiusX="10"
+                                       RadiusY="10"
+                                       StrokeThickness="0" />
+                            <Ellipse x:Name="ToggleEllipse"
+                                         Width="12"
+                                         Height="12"
+                                         Margin="0"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         RenderTransformOrigin="0.5, 0.5"
+                                         Fill="{f:Brush BackgroundLevel1}">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform X="-9"/>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <Ellipse x:Name="ActiveToggleEllipse"
+                                     Width="12" Height="12"
+                                     Margin="0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Opacity="0.0"
+                                     RenderTransformOrigin="0.5, 0.5"
+                                     Fill="White" >
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform X="-9"/>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                        </Grid>
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Grid.Column="1"
+                                          Margin="{StaticResource ToggleSwitchContentMargin}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ToggleRectangle"
+                                                         Storyboard.TargetProperty="(Rectangle.Opacity)" 
+                                                         From="1" 
+                                                         To="0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleRectangle"
+                                                         Storyboard.TargetProperty="(Rectangle.Opacity)"
+                                                         From="0.0"
+                                                         To="1.0" Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.Opacity)"
+                                                         From="1.0"
+                                                         To="0.0" Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.Opacity)"
+                                                         From="0.0"
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)"
+                                                         From="-9"
+                                                         To="9"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)"
+                                                         From="-9"
+                                                         To="9"
+                                                         Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ToggleRectangle"
+                                                         Storyboard.TargetProperty="(Rectangle.Opacity)" 
+                                                         From="0.0" 
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleRectangle" 
+                                                         Storyboard.TargetProperty="(Rectangle.Opacity)"
+                                                         From="1.0" 
+                                                         To="0.0" 
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.Opacity)" 
+                                                         From="0.0" 
+                                                         To="1.0" 
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse"
+                                                         Storyboard.TargetProperty="(Ellipse.Opacity)"
+                                                         From="1.0"
+                                                         To="0.0" 
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ToggleEllipse" 
+                                                         Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)"
+                                                         From="9" 
+                                                         To="-9"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ActiveToggleEllipse" 
+                                                         Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" 
+                                                         From="9" 
+                                                         To="-9"
+                                                         Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ToggleRectangle" 
+                                        Property="Fill" 
+                                        Value="{f:Brush BackgroundLevel1}" />
+                            <Setter TargetName="ToggleEllipse" 
+                                        Property="Fill" 
+                                        Value="White" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush BackgroundLevel1}" Property="Stroke" />
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush BackgroundLevel1}" Property="Fill" />
+                            <Setter TargetName="ToggleEllipse" Value="{f:Brush BackgroundDisabled}" Property="Fill" />
+                            <Setter Value="{f:Brush ForegroundDisabled}" Property="Foreground" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ToggleButton.IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ActiveToggleRectangle"
+                                    Property="Fill" 
+                                    Value="{f:Brush HighlightA1}" />
+                            <Setter TargetName="ActiveToggleEllipse" 
+                                    Property="Fill"
+                                    Value="{f:Brush HighlightA2}" />
+                            <Setter Value="{f:Brush ForegroundDisabled}" 
+                                    Property="Foreground" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type b:ActionButton}">
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="14 16" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Border.CornerRadius" Value="3" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type b:ActionButton}">
+                    <Border x:Name="ContentBorder" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{TemplateBinding Width}" 
+                            Height="{TemplateBinding Height}" 
+                            MinWidth="{TemplateBinding MinWidth}" 
+                            MinHeight="{TemplateBinding MinHeight}" 
+                            Padding="{TemplateBinding Padding}" 
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" >
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Path x:Name="ControlIcon" 
+                                  Grid.Column="0" 
+                                  Margin="0 0 14 0" 
+                                  Height="{TemplateBinding IconSize}" 
+                                  Width="{TemplateBinding IconSize}" 
+                                  Stretch="Uniform" 
+                                  Data="{TemplateBinding Icon}" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                            
+                            <ContentPresenter x:Name="ContentPresenter" 
+                                              Grid.Column="1" 
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}" 
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                            
+                            <Path x:Name="ChevronIcon" 
+                                  Grid.Column="2"
+                                  Margin="0 0 14 0" 
+                                  Height="{TemplateBinding IconSize}" 
+                                  Width="{TemplateBinding IconSize}" 
+                                  Stretch="Uniform" 
+                                  Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel2}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel1}"/>
+                        </Trigger>
+                        <Trigger Property="IsFilled" Value="True">
+                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
+                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
+                            <Setter Property="StrokeThickness" Value="0" TargetName="ControlIcon" />
+                            <Setter Property="StrokeThickness" Value="0" TargetName="ChevronIcon" />
+                            <Setter Property="Stroke" Value="{x:Null}" TargetName="ControlIcon" />
+                            <Setter Property="Stroke" Value="{x:Null}" TargetName="ChevronIcon" />
+                        </Trigger>
+                        <Trigger Property="IsFilled" Value="False">
+                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
+                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
+                            <Setter Property="StrokeThickness" Value="1" TargetName="ControlIcon" />
+                            <Setter Property="StrokeThickness" Value="1" TargetName="ChevronIcon" />
+                            <Setter Property="Fill" Value="{x:Null}" TargetName="ControlIcon" />
+                            <Setter Property="Fill" Value="{x:Null}" TargetName="ChevronIcon" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
+                            <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
+                            <Setter TargetName="ControlIcon" Value="{f:Brush ForegroundDisabled}" Property="Stroke" />
+                            <Setter TargetName="ChevronIcon" Value="{f:Brush ForegroundDisabled}" Property="Stroke" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
+                            <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
+                            <Setter TargetName="ControlIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
+                            <Setter TargetName="ChevronIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type b:ForestIconButton}">
         <Setter Property="CornerRadius" Value="0" />
@@ -437,9 +609,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!-- -->
+
     <!-- <Style TargetType="{x:Type b:HighlightButton}"> -->
-    <!--     <Setter Property="CornerRadius" Value="8"/> -->
+    <!--     <Setter Property="CornerRadius" Value="8" /> -->
     <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
     <!--     <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" /> -->
     <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
@@ -467,7 +639,7 @@
 
 
     <Style TargetType="{x:Type b:CallToAction}">
-        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
         <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -488,9 +660,9 @@
                                   StrokeThickness="1"
                                   Stretch="Uniform"
                                   Width="{TemplateBinding IconSize}"
-                                  Height="{TemplateBinding IconSize}" 
-                                  Visibility="Collapsed"/>
-    
+                                  Height="{TemplateBinding IconSize}"
+                                  Visibility="Collapsed" />
+
                             <ContentPresenter x:Name="PART_Content"
                                               TextElement.FontSize="14"
                                               TextElement.Foreground="#4F5B66"
@@ -499,13 +671,13 @@
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                               ContentStringFormat="{TemplateBinding ContentStringFormat}"
                                               VerticalAlignment="Center"
-                                              HorizontalAlignment="Center"/>
+                                              HorizontalAlignment="Center" />
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasIcon" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Icon"/>
-                            <Setter Property="Margin" Value="8 0" TargetName="PART_Icon"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Icon" />
+                            <Setter Property="Margin" Value="8 0" TargetName="PART_Icon" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
