@@ -2,6 +2,7 @@
 using System.Linq;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaStudio.Modules;
 using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
 
@@ -12,7 +13,10 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
     {
         public ModuleBlockViewModel()
         {
-            Blocks = new ObservableCollection<ModuleBlockDataUI>(ModuleBlockFactory.CreateBlocks().Select(ModuleBlockFactory.GetDataUI));
+            Blocks = new ObservableCollection<ModuleBlockDataUI>(
+                ModuleBlockFactory.CreateBlocks()
+                                  .Where(x => x is not ColorBlock)
+                                  .Select(ModuleBlockFactory.GetDataUI));
         }
         public ObservableCollection<ModuleBlockDataUI> Blocks { get; init; }
     }

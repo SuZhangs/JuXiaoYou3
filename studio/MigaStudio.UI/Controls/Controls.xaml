@@ -3,6 +3,120 @@
                     xmlns:ctrl="clr-namespace:Acorisoft.FutureGL.MigaStudio.Controls"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    
+    <Style TargetType="{x:Type ctrl:ActionButton}">
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="14 16" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Border.CornerRadius" Value="3" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:ActionButton}">
+                    <Border x:Name="ContentBorder" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{TemplateBinding Width}" 
+                            Height="{TemplateBinding Height}" 
+                            MinWidth="{TemplateBinding MinWidth}" 
+                            MinHeight="{TemplateBinding MinHeight}" 
+                            Padding="{TemplateBinding Padding}" 
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" >
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Path x:Name="ControlIcon" 
+                                  Grid.Column="0" 
+                                  Margin="0 0 14 0" 
+                                  Height="{TemplateBinding IconSize}" 
+                                  Width="{TemplateBinding IconSize}" 
+                                  Stretch="Uniform" 
+                                  Data="{TemplateBinding Icon}" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                            
+                            <ContentPresenter x:Name="ContentPresenter" 
+                                              Grid.Column="1" 
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}" 
+                                              TextElement.Foreground="{TemplateBinding Foreground}" />
+                            
+                            <Path x:Name="ChevronIcon" 
+                                  Grid.Column="2"
+                                  Margin="0 0 14 0" 
+                                  Height="{TemplateBinding IconSize}" 
+                                  Width="{TemplateBinding IconSize}" 
+                                  Stretch="Uniform" 
+                                  Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6" 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel2}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel1}"/>
+                        </Trigger>
+                        <Trigger Property="IsFilled" Value="True">
+                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
+                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
+                            <Setter Property="StrokeThickness" Value="0" TargetName="ControlIcon" />
+                            <Setter Property="StrokeThickness" Value="0" TargetName="ChevronIcon" />
+                            <Setter Property="Stroke" Value="{x:Null}" TargetName="ControlIcon" />
+                            <Setter Property="Stroke" Value="{x:Null}" TargetName="ChevronIcon" />
+                        </Trigger>
+                        <Trigger Property="IsFilled" Value="False">
+                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
+                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
+                            <Setter Property="StrokeThickness" Value="1" TargetName="ControlIcon" />
+                            <Setter Property="StrokeThickness" Value="1" TargetName="ChevronIcon" />
+                            <Setter Property="Fill" Value="{x:Null}" TargetName="ControlIcon" />
+                            <Setter Property="Fill" Value="{x:Null}" TargetName="ChevronIcon" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
+                            <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
+                            <Setter TargetName="ControlIcon" Value="{f:Brush ForegroundDisabled}" Property="Stroke" />
+                            <Setter TargetName="ChevronIcon" Value="{f:Brush ForegroundDisabled}" Property="Stroke" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
+                            <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
+                            <Setter TargetName="ControlIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
+                            <Setter TargetName="ChevronIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="{x:Type ctrl:DegreeControl}">
         <Setter Property="Height" Value="32" />
         <Setter Property="MaxWidth" Value="240" />
@@ -112,7 +226,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}">
-                        <Grid Background="{StaticResource Transparent}">
+                        <Grid Background="{f:Brush BackgroundLevel2}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="18" />
@@ -195,7 +309,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:SwitchOnControl}">
-                    <Grid Background="{StaticResource Transparent}">
+                    <Grid Background="{f:Brush BackgroundLevel2}">
                         <Path x:Name="Icon"
                               Data="{TemplateBinding Icon}"
                               Height="24"
@@ -207,12 +321,18 @@
                               VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="False">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
                             <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Stroke" TargetName="Icon" Value="LightGray"/>
                         </Trigger>
                         
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Stroke" TargetName="Icon" Value="{x:Null}"/>
                             <Setter Property="Stroke" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
                             <Setter Property="Fill" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
                         </Trigger>
@@ -233,7 +353,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:HighlightControl}">
-                    <Grid Background="{StaticResource Transparent}">
+                    <Grid Background="{f:Brush BackgroundLevel2}">
                         <Path x:Name="Icon"
                               Height="24"
                               HorizontalAlignment="Center"
@@ -265,16 +385,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:ReferenceControl}">
-                    <Border Background="{StaticResource Transparent}">
+                    <Border Background="{f:Brush BackgroundLevel2}">
                         <DockPanel LastChildFill="True">
-                            <f:ActionButton DockPanel.Dock="Left"
-                                           Icon="{TemplateBinding Icon}"
-                                            IsFilled="{TemplateBinding }"
-                                           IconSize="32"
-                                           Height="72"
-                                           Width="72" />
+                            <ctrl:ActionButton DockPanel.Dock="Left"
+                                               Icon="{TemplateBinding Icon}"
+                                               IsFilled="{TemplateBinding IsFilled}"
+                                               IconSize="32"
+                                               Height="72"
+                                               Width="72" />
 
-                            <f:ActionButton Margin="16 0 0 0"
+                            <ctrl:ActionButton Margin="16 0 0 0"
                                            HorizontalAlignment="Stretch">
                                 <DockPanel DockPanel.Dock="Right"
                                            VerticalAlignment="Center">
@@ -287,7 +407,7 @@
                                                Text="{TemplateBinding Source}"
                                                VerticalAlignment="Center" />
                                 </DockPanel>
-                            </f:ActionButton>
+                            </ctrl:ActionButton>
                         </DockPanel>
                     </Border>
                 </ControlTemplate>

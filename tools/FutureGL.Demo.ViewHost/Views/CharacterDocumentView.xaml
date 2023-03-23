@@ -8,6 +8,7 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                      xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls;assembly=Forest.Controls"
+                     xmlns:studio="urn:acorisoft/studio"
                      mc:Ignorable="d"
                      d:DesignHeight="300"
                      d:DesignWidth="300">
@@ -84,9 +85,10 @@
         <StackPanel Grid.Row="1">
             <f:ToggleSwitch Grid.Row="1" Content="Test" IsChecked="False"/>
             <ui:ToggleSwitch Grid.Row="1" Content="Test" />
-            <f:ActionButton Grid.Row="1" Content="Test" Icon="{StaticResource FeatherIcon.Chat}"
+            <studio:ActionButton Grid.Row="1" Content="Test" Icon="{StaticResource FeatherIcon.Chat}"
                             Margin="8"/>
-
+            <studio:ReferenceControl Icon="{StaticResource FeatherIcon.Chat}"
+                                     IsFilled="True"/>
         </StackPanel>
         <f:Menu>
             <f:MenuItem Header="TopItem" />

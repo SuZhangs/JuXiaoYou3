@@ -37,6 +37,7 @@
     <DataTemplate DataType="{x:Type subTemp:AudioBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -52,6 +53,7 @@
     <DataTemplate DataType="{x:Type subTemp:VideoBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -67,6 +69,7 @@
     <DataTemplate DataType="{x:Type subTemp:FileBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -82,6 +85,7 @@
     <DataTemplate DataType="{x:Type subTemp:ImageBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -97,6 +101,7 @@
     <DataTemplate DataType="{x:Type subTemp:MusicBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -112,6 +117,7 @@
     <DataTemplate DataType="{x:Type subTemp:ReferenceBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="14"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -119,6 +125,7 @@
 
             <studio:ReferenceControl Icon="{StaticResource Notebook}"
                                      IsFilled="True"
+                                     Foreground="{f:ForegroundBrush}"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
         </DockPanel>
@@ -138,6 +145,7 @@
     <DataTemplate DataType="{x:Type subTemp:SingleLineBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -145,6 +153,7 @@
                        VerticalAlignment="Center" />
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right"
+                       Foreground="{f:ForegroundBrush}"
                            FontSize="15"
                            Margin="16 0 0 0"
                            MinWidth="15"
@@ -160,6 +169,7 @@
     <DataTemplate DataType="{x:Type subTemp:MultiLineBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -174,6 +184,7 @@
     <DataTemplate DataType="{x:Type subTemp:ColorBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -189,11 +200,12 @@
                 <f:LooklessButton Margin="16 0 0 0">
                     <DockPanel VerticalAlignment="Center">
                         <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                                    Margin="0 0 0 2"
                                    Text="{Binding Hex,Mode=OneWay}"
                                    VerticalAlignment="Center" />
 
-                        <TextBlock Foreground="DarkGray"
+                        <TextBlock Foreground="{f:Brush ForegroundLevel3}"
                                    Text="{Binding Rgb,Mode=OneWay}"
                                    VerticalAlignment="Center" />
                     </DockPanel>
@@ -207,11 +219,13 @@
             <TextBlock DockPanel.Dock="Top"
                        FontSize="15"
                        FontWeight="Bold"
+                       Foreground="{f:ForegroundBrush}"
                        Margin="0 0 0 8"
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right"
+                           Foreground="{f:ForegroundBrush}"
                            FontSize="15"
                            Margin="16 0 0 0"
                            MinWidth="15"
@@ -229,6 +243,7 @@
     <DataTemplate DataType="{x:Type subTemp:SliderBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -236,12 +251,13 @@
                        VerticalAlignment="Center" />
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right"
+                           Foreground="{f:ForegroundBrush}"
                            FontSize="15"
                            Margin="16 0 0 0"
                            Text="{Binding Value,Mode=OneWay}"
                            VerticalAlignment="Center" />
 
-                <Slider Interval="1"
+                <f:Slider Interval="1"
                         IsSnapToTickEnabled="True"
                         Maximum="{Binding Maximum}"
                         Minimum="{Binding Minimum}"
@@ -274,6 +290,7 @@
                                         Icon="{StaticResource Star}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
+                       Foreground="{f:ForegroundBrush}"
                            Margin="16 0 0 0"
                            Text="{Binding Name}"
                            VerticalAlignment="Center" />
@@ -293,6 +310,7 @@
                                         Icon="{StaticResource Heart}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
+                       Foreground="{f:ForegroundBrush}"
                            Margin="16 0 0 0"
                            Text="{Binding Name}"
                            VerticalAlignment="Center" />
@@ -310,6 +328,7 @@
                 <ui:ToggleSwitch DockPanel.Dock="Right"
                                  IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
+                       Foreground="{f:ForegroundBrush}"
                            Margin="16 0 0 0"
                            Text="{Binding Name}"
                            VerticalAlignment="Center" />
@@ -330,7 +349,8 @@
 
     <DataTemplate DataType="{x:Type subTemp:DegreeBlockDataUI}">
         <DockPanel>
-            <TextBlock HorizontalAlignment="Left"
+            <TextBlock Foreground="{f:ForegroundBrush}"
+                HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Width="256">
                 <Run FontWeight="Bold"
@@ -340,6 +360,7 @@
                      Text="{Binding DisplayValue,Mode=OneWay,StringFormat={}（{0}）}" />
             </TextBlock>
             <studio:DegreeControl FontSize="15"
+                       Foreground="{f:ForegroundBrush}"
                                   Margin="16 0 0 0"
                                   VerticalAlignment="Center"
                                   Value="{Binding Value,Mode=TwoWay}" />
@@ -356,6 +377,7 @@
     <DataTemplate DataType="{x:Type subTemp:LikabilityBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 4"
@@ -363,6 +385,7 @@
                        VerticalAlignment="Center" />
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right"
+                       Foreground="{f:ForegroundBrush}"
                            FontSize="15"
                            Margin="16 0 0 0"
                            VerticalAlignment="Center" />
@@ -375,6 +398,7 @@
     <DataTemplate DataType="{x:Type subTemp:RateBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 4"
@@ -382,6 +406,7 @@
                        VerticalAlignment="Center" />
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right"
+                       Foreground="{f:ForegroundBrush}"
                            FontSize="15"
                            Margin="16 0 0 0"
                            VerticalAlignment="Center" />
@@ -404,6 +429,7 @@
     <DataTemplate DataType="{x:Type subTemp:SequenceBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="18"
                        FontWeight="Bold"
                        Margin="0 0 0 8"
@@ -418,6 +444,7 @@
 
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ItemsSource="{Binding Items}"
+                     Foreground="{f:ForegroundBrush}"
                      VerticalAlignment="Stretch"
                      VerticalContentAlignment="Top"
                      DisplayMemberPath="Value"
@@ -435,13 +462,15 @@
     <DataTemplate DataType="{x:Type subTemp:GroupBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="18"
                        FontWeight="Bold"
                        Margin="0 0 0 16"
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <ItemsControl ItemsSource="{Binding Items}"
+            <ItemsControl 
+                       Foreground="{f:ForegroundBrush}" ItemsSource="{Binding Items}"
                           VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top">
             </ItemsControl>
@@ -459,6 +488,7 @@
     <DataTemplate DataType="{x:Type subTemp:RadarBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 4"
@@ -480,7 +510,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
-                                <Slider Interval="1"
+                                <f:Slider Foreground="{f:ForegroundBrush}" Interval="1"
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Maximum="{Binding Maximum}"
@@ -500,6 +530,7 @@
     <DataTemplate DataType="{x:Type subTemp:HistogramBlockDataUI}">
         <DockPanel Margin="0 0 0 12">
             <TextBlock DockPanel.Dock="Top"
+                       Foreground="{f:ForegroundBrush}"
                        FontSize="15"
                        FontWeight="Bold"
                        Margin="0 0 0 4"
@@ -519,13 +550,15 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
-                                <Slider Interval="1"
+                                <f:Slider Foreground="{f:ForegroundBrush}" 
+                                        Interval="1"
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay}"
                                         Maximum="{Binding Maximum}"
                                         Minimum="0" />
 
                                 <TextBlock Margin="16 0 0 0"
+                       Foreground="{f:ForegroundBrush}"
                                            Text="{Binding Name}"
                                            VerticalAlignment="Center" />
                             </DockPanel>

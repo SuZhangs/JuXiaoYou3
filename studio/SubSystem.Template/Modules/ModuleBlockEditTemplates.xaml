@@ -240,7 +240,7 @@
                            Text="{Binding Value,Mode=OneWay}"
                            VerticalAlignment="Center" />
 
-                <Slider Interval="1"
+                <f:Slider Interval="1"
                         IsSnapToTickEnabled="True"
                         Maximum="{Binding Maximum}"
                         Minimum="{Binding Minimum}"

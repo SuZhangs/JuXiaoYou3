@@ -480,7 +480,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
-                                <Slider Interval="1"
+                                <f:Slider Interval="1"
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Maximum="{Binding Maximum}"
@@ -519,7 +519,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
-                                <Slider Interval="1"
+                                <f:Slider Interval="1"
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay}"
                                         Maximum="{Binding Maximum}"
