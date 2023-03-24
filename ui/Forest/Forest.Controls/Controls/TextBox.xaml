@@ -69,7 +69,7 @@
 
                                 <TextBlock x:Name="PART_Watermark"
                                            FontSize="{TemplateBinding FontSize}"
-                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           Foreground="{f:Brush ForegroundInAdaptive}"
                                            Text="{TemplateBinding Watermark}"
                                            Margin="{TemplateBinding Padding}"
                                            HorizontalAlignment="Left"
@@ -89,7 +89,6 @@
     </Style>
     
     <Style TargetType="{x:Type c:SingleLine}" BasedOn="{StaticResource ClearStyle.TextBox}">
-        <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style TargetType="{x:Type c:Multiline}" BasedOn="{StaticResource ClearStyle.TextBox}"/>
 </ResourceDictionary>

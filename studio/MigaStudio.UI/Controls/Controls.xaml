@@ -253,7 +253,7 @@
 
                             <Rectangle Grid.Column="1"
                                        Grid.ColumnSpan="3"
-                                       Fill="{f:Brush AdaptiveLevel4}"
+                                       Fill="{f:Brush AdaptiveLevel3}"
                                        Height="2"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch" />
@@ -293,7 +293,7 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel2}" TargetName="PART_Thumb" />
+                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel3}" TargetName="PART_Thumb" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Grid.Column" Value="3" TargetName="PART_Thumb" />
@@ -326,7 +326,7 @@
                               Height="24"
                               HorizontalAlignment="Center"
                               Stretch="None"
-                              Stroke="{f:Brush AdaptiveLevel4}"
+                              Stroke="{f:Brush AdaptiveLevel3}"
                               StrokeThickness="1"
                               Width="24"
                               VerticalAlignment="Center"/>
@@ -337,10 +337,10 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel2}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel3}"/>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel4}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel3}"/>
                         </Trigger>
                         
                         <Trigger Property="IsChecked" Value="True">
@@ -571,7 +571,7 @@
                                 <TextBlock x:Name="PART_Watermark"
                                            Grid.Column="1"
                                            FontSize="{TemplateBinding FontSize}"
-                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           Foreground="{f:Brush ForegroundInAdaptive}"
                                            Text="{TemplateBinding Watermark}"
                                            Margin="{TemplateBinding Padding}"
                                            HorizontalAlignment="Left"

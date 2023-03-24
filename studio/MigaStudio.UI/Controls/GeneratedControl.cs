@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GeneratedControl), new FrameworkPropertyMetadata(typeof(GeneratedControl)));
             Transparent = new SolidColorBrush(Colors.Transparent);
             BG          = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
-            Border      = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
+            Border      = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
         }
 
         private readonly List<FrameworkElement> _elements;

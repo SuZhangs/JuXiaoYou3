@@ -101,7 +101,6 @@
         AdaptiveLevel1,
         AdaptiveLevel2,
         AdaptiveLevel3,
-        AdaptiveLevel4,
         
         /// <summary>
         /// 前景色
@@ -109,6 +108,8 @@
         ForegroundLevel1,
         ForegroundLevel2,
         ForegroundLevel3,
+        ForegroundInHighlight,
+        ForegroundInAdaptive,
         ForegroundOther,
         ForegroundDisabled,
         

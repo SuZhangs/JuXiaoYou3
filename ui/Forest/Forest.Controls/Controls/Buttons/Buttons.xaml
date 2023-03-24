@@ -306,7 +306,7 @@
                                        RadiusX="10"
                                        RadiusY="10"
                                        StrokeThickness="1"
-                                       Stroke="{f:Brush AdaptiveLevel4}" />
+                                       Stroke="{f:Brush AdaptiveLevel3}" />
                             <Rectangle x:Name="ActiveToggleRectangle"
                                        Width="40"
                                        Height="20"
@@ -432,18 +432,18 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleRectangle" 
                                         Property="Fill" 
-                                        Value="{f:Brush AdaptiveLevel2}" />
+                                        Value="{f:Brush AdaptiveLevel1}" />
                             <Setter TargetName="ToggleEllipse" 
                                         Property="Fill" 
-                                        Value="{f:Brush AdaptiveLevel4}" />
+                                        Value="{f:Brush AdaptiveLevel3}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel2}" Property="Stroke" />
-                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel2}" Property="Fill" />
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel1}" Property="Stroke" />
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel1}" Property="Fill" />
                             <Setter TargetName="ToggleEllipse" Value="{f:Brush BackgroundDisabled}" Property="Fill" />
                             <Setter Value="{f:Brush ForegroundDisabled}" Property="Foreground" />
                         </MultiTrigger>

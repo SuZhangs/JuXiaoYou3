@@ -49,7 +49,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private SolidColorBrush _backgroundHighlight2;
         private SolidColorBrush _foregroundHighlight;
         private SolidColorBrush _backgroundDisabled;
-        private SolidColorBrush _highlight;
         private SolidColorBrush _foregroundDisabled;
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
@@ -66,6 +65,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void SetForeground(Brush brush)
         {
+            _watermark.Foreground = brush;
             PART_Content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
@@ -79,7 +79,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _backgroundHighlight2 = null;
             _backgroundDisabled   = null;
             _foregroundDisabled   = null;
-            _highlight            = null;
             InvalidateVisual();
         }
 
@@ -88,17 +87,15 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
-            PART_Bd.Background      = _background;
-            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
+            PART_Bd.Background    = _background;
+            _watermark.Foreground = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
             SetForeground(_foreground);
         }
 
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
-            
             // 白底变特殊色
             // 高亮色变白色
             var backgroundAnimation = new ColorAnimation
@@ -135,10 +132,9 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
-            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
+            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
             
             // 白底变特殊色
             // 高亮色变白色
@@ -162,9 +158,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             //
             // 开始动画
             PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
-
-            // 设置文本颜色
-            _watermark.Foreground   = _highlight;
             SelectionBrush          = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA2]);
             SetForeground(_foregroundHighlight);
         }
@@ -179,7 +172,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             PART_Bd.Background      = _background;
             PART_Bd.BorderBrush     = _borderBrush;
             PART_Bd.BorderThickness = BorderThickness;
-            _watermark.Foreground   = _foreground;
             SetForeground(_foregroundDisabled);
         }
 

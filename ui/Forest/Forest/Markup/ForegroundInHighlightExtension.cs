@@ -2,13 +2,13 @@
 
 namespace Acorisoft.FutureGL.Forest.Markup
 {
-    public class AdaptiveLevel1Extension : MarkupExtension
+    public class ForegroundInHighlightExtension : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return ThemeSystem.Instance
                               .Theme
-                              .Colors[(int)ForestTheme.AdaptiveLevel1];
+                              .Colors[(int)ForestTheme.ForegroundInHighlight];
         }
     }
     
@@ -18,7 +18,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
         {
             return ThemeSystem.Instance
                               .Theme
-                              .Colors[(int)ForestTheme.AdaptiveLevel1]
+                              .Colors[(int)ForestTheme.ForegroundInHighlight]
                               .ToSolidColorBrush();
         }
     }

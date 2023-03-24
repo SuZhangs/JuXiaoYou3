@@ -144,7 +144,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             else
             {
                 _backgroundBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 1));
-                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+                _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             }
 
             _bd.Background = _backgroundBrush;
@@ -157,7 +157,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // Opacity 动画
             var purpose = Purpose;
 
-            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight1Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 2));
 
             // 白底变特殊色
@@ -191,7 +191,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // Opacity 动画
             var purpose = Purpose;
 
-            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+            _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight2Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 3));
 
             // 白底变特殊色

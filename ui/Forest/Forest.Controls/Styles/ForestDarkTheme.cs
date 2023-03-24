@@ -32,14 +32,15 @@ namespace Acorisoft.FutureGL.Forest.Styles
             colors.TryAdd((int)ForestTheme.ForegroundLevel3, Color.FromRgb( 0x73, 0x73, 0x73));
             colors.TryAdd((int)ForestTheme.ForegroundOther, Color.FromRgb( 0x59, 0x59, 0x59));
             colors.TryAdd((int)ForestTheme.ForegroundDisabled, Color.FromRgb( 0x75, 0x75, 0x70));
+            colors.TryAdd((int)ForestTheme.ForegroundInHighlight, Color.FromRgb( 0xff, 0xff, 0xff));
+            colors.TryAdd((int)ForestTheme.ForegroundInAdaptive, Color.FromRgb(0x1d, 0x1e, 0x21));
         }
 
         protected override void InitializeAdaptiveBrush(ConcurrentDictionary<int, Color> colors)
         {
-            colors.TryAdd((int)ForestTheme.AdaptiveLevel1, Color.FromRgb( 0xff, 0xff, 0xff));
-            colors.TryAdd((int)ForestTheme.AdaptiveLevel2, Color.FromRgb( 0x60, 0x63, 0x6c));
-            colors.TryAdd((int)ForestTheme.AdaptiveLevel3, Color.FromRgb( 0x54, 0x57, 0x5F));
-            colors.TryAdd((int)ForestTheme.AdaptiveLevel4, Color.FromRgb( 0x43, 0x46, 0x4C));
+            colors.TryAdd((int)ForestTheme.AdaptiveLevel1, Color.FromRgb( 0xae, 0xb0, 0xb7));
+            colors.TryAdd((int)ForestTheme.AdaptiveLevel2, Color.FromRgb( 0x8d, 0x91, 0x9a));
+            colors.TryAdd((int)ForestTheme.AdaptiveLevel3, Color.FromRgb( 0x65, 0x68, 0x72));
         }
     }
 }

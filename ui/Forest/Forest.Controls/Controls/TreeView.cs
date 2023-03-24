@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
-        private SolidColorBrush _AdaptiveLevel1;
+        private SolidColorBrush _foregroundInHighlight;
         private SolidColorBrush _foregroundDisabled;
         private SolidColorBrush _highlight;
         private SolidColorBrush _highlight2;
@@ -72,7 +72,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _highlight             = null;
             _highlight2            = null;
             _disabled              = null;
-            _AdaptiveLevel1 = null;
+            _foregroundInHighlight = null;
             _foregroundDisabled    = null;
             InvalidateVisual();
         }
@@ -98,7 +98,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             //
             // Opacity 动画
             _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _AdaptiveLevel1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -120,14 +120,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_AdaptiveLevel1);
+            SetForeground(_foregroundInHighlight);
         }
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
             _highlight2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
-            _AdaptiveLevel1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -155,7 +155,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
-            SetForeground(_AdaptiveLevel1);
+            SetForeground(_foregroundInHighlight);
         }
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)

@@ -29,7 +29,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         private SolidColorBrush _backgroundHighlight2;
         private SolidColorBrush _foregroundHighlight;
         private SolidColorBrush _backgroundDisabled;
-        private SolidColorBrush _highlight;
         private SolidColorBrush _foregroundDisabled;
 
         public NumberBox() : base()
@@ -143,6 +142,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         protected override void SetForeground(Brush brush)
         {
+            _watermark.Foreground = brush;
             PART_Content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
@@ -155,7 +155,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             _backgroundHighlight2 = null;
             _backgroundDisabled   = null;
             _foregroundDisabled   = null;
-            _highlight            = null;
             InvalidateVisual();
         }
 
@@ -164,16 +163,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
-            PART_Bd.Background      = _background;
-            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
+            PART_Bd.Background    = _background;
             SetForeground(_foreground);
         }
 
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -211,10 +208,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
-            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
+            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -241,7 +237,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
             // 设置文本颜色
             PART_Bd.BorderThickness = BorderThickness;
-            _watermark.Foreground   = _highlight;
             SelectionBrush          = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA2]);
             SetForeground(_foregroundHighlight);
         }
@@ -252,7 +247,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
 
             PART_Bd.Background      = _background;
-            _watermark.Foreground   = _foreground;
             SetForeground(_foregroundDisabled);
         }
 
