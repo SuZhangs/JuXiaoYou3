@@ -366,6 +366,43 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
             };
         }
+        
+        public static ModuleBlockEditUI GetEditUI(MetadataKind kind)
+        {
+            ModuleBlock b = kind switch
+            {
+                MetadataKind.SingleLine => CreateSingleLine(),
+                MetadataKind.MultiLine  => CreateMultiLine(),
+                MetadataKind.Color      => CreateColor(),
+                MetadataKind.Number     => CreateNumber(),
+                MetadataKind.Slider     => CreateSlider(),
+
+                MetadataKind.Degree => CreateDegree(),
+                MetadataKind.Switch => CreateSwitch(),
+                MetadataKind.Binary => CreateBinary(),
+                MetadataKind.Heart  => CreateHeart(),
+                MetadataKind.Star   => CreateStar(),
+
+
+                MetadataKind.Sequence => CreateSequence(),
+                MetadataKind.Group    => CreateGroup(),
+
+                MetadataKind.Likability => CreateLikability(),
+                MetadataKind.Rate       => CreateRate(),
+
+                MetadataKind.Radar     => CreateRadar(),
+                MetadataKind.Histogram => CreateHistogram(),
+
+                MetadataKind.Audio     => CreateAudio(),
+                MetadataKind.File      => CreateFile(),
+                MetadataKind.Video     => CreateVideo(),
+                MetadataKind.Music     => CreateMusic(),
+                MetadataKind.Image     => CreateImage(),
+                MetadataKind.Reference => CreateReference(),
+                _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
+            };
+            return GetEditUI(b);
+        }
 
         public static ModuleBlockEditUI GetEditUI(ModuleBlock block)
         {

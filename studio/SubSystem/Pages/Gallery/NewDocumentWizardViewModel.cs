@@ -17,7 +17,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public class NewDocumentWizardViewModel : InputViewModel
+    public class NewDocumentWizardViewModel : ImplicitDialogVM
     {
         private                 string       _name;
         private                 ImageSource  _avatar;

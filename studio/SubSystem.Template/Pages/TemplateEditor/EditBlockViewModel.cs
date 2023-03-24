@@ -2,15 +2,16 @@
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaStudio.Modules;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 {
     public class EditBlockViewModel : DialogViewModel
     {
-        public static Task<Op<ModuleBlock>> New(ModuleBlock element)
+        public static Task<Op<ModuleBlockEditUI>> New(ModuleBlockEditUI element)
         {
             return Xaml.Get<IDialogService>()
-                       .Dialog<ModuleBlock>(new EditBlockViewModel(), new Parameter
+                       .Dialog<ModuleBlockEditUI>(new EditBlockViewModel(), new Parameter
                        {
                            Args = new object[]
                            {

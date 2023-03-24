@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
     }
     
-    public sealed class ObsoleteViewModel : OperationViewModel
+    public sealed class ObsoleteViewModel : BooleanDialogVM
     {
         private string _content;
 

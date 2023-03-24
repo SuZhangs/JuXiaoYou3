@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class OptionSelectionViewModel : InputViewModel
+    public class OptionSelectionViewModel : ImplicitDialogVM
     {
         private object              _selected;
         private IEnumerable<object> _options;

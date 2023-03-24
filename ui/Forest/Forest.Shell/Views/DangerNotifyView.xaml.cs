@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
     }
     
-    public sealed class DangerNotifyViewModel : OperationViewModel
+    public sealed class DangerNotifyViewModel : BooleanDialogVM
     {
         private string _content;
 

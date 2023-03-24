@@ -13,7 +13,7 @@ using Size = SixLabors.ImageSharp.Size;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class ImageEditViewModel : InputViewModel
+    public class ImageEditViewModel : ImplicitDialogVM
     {
         private double _scale;
         private double _imageWidth;

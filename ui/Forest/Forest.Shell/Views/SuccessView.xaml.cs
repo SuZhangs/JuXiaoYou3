@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Views
     }
     
     
-    public sealed class SuccessViewModel : OperationViewModel
+    public sealed class SuccessViewModel : BooleanDialogVM
     {
         private string _content;
 

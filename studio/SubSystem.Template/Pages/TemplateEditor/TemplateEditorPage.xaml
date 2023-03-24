@@ -101,19 +101,25 @@
                                     Icon="{StaticResource FeatherIcon.Plus}"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="编辑"
+                                    Command="{Binding EditBlockCommand}"
+                                    CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Edit}"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="删除"
+                                    Command="{Binding RemoveBlockCommand}"
+                                    CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Clear}"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="清空"
+                                    Command="{Binding RemoveAllBlockCommand}"
                                     Icon="{StaticResource FeatherIcon.Trash}"
                                     ShowText="True"/>
                 </StackPanel>
             </f:ForestSection.ToolBar>
 
             <ScrollViewer>
-                <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}">
+                <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}"
+                           SelectedItem="{Binding SelectedBlock,Mode=TwoWay}">
                     
                 </f:ListBox>
             </ScrollViewer>

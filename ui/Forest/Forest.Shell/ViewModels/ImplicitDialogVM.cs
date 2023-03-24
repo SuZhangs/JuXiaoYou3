@@ -4,9 +4,9 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.Forest.ViewModels
 {
-    public abstract class InputViewModel : DialogViewModel, IInputViewModel
+    public abstract class ImplicitDialogVM : DialogViewModel, IInputViewModel
     {
-        protected InputViewModel() : base()
+        protected ImplicitDialogVM()
         {
             CompletedCommand = new RelayCommand(Complete);
         }
@@ -33,11 +33,13 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                     CloseAction();
                     CloseAction = null;
                 }
+
+                return;
             }
-            else
-            {
-                Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Warning, Language.NotifyText, Failed());
-            }
+
+
+            Xaml.Get<IBuiltinDialogService>()
+                .Notify(CriticalLevel.Warning, Language.NotifyText, Failed());
         }
 
         protected abstract bool IsCompleted();
@@ -71,10 +73,10 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         public RelayCommand CompletedCommand { get; }
     }
 
-    public abstract class OperationViewModel : InputViewModel, IObserver<WindowKeyEventArgs>
+    public abstract class BooleanDialogVM : ImplicitDialogVM, IObserver<WindowKeyEventArgs>
     {
-        private string _completeButtonText;
-        private string _cancelButtonText;
+        private string      _completeButtonText;
+        private string      _cancelButtonText;
         private IDisposable _disposable;
 
         #region Lifetime
@@ -105,16 +107,22 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             _disposable?.Dispose();
             base.Stop();
         }
-        
-        internal virtual void StartOverride(){}
+
+        internal virtual void StartOverride()
+        {
+        }
 
         #endregion
 
         #region IObserver<WindowKeyEventArgs>
 
-        
-        void IObserver<WindowKeyEventArgs>.OnCompleted() { }
-        void IObserver<WindowKeyEventArgs>.OnError(Exception error) { }
+        void IObserver<WindowKeyEventArgs>.OnCompleted()
+        {
+        }
+
+        void IObserver<WindowKeyEventArgs>.OnError(Exception error)
+        {
+        }
 
         void IObserver<WindowKeyEventArgs>.OnNext(WindowKeyEventArgs value)
         {
@@ -130,7 +138,6 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #region InputViewModel Overrides
 
-        
         protected override bool IsCompleted() => true;
 
         protected sealed override void Finish()
@@ -163,5 +170,68 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             get => _completeButtonText;
             set => SetValue(ref _completeButtonText, value);
         }
+    }
+
+    public abstract class ExplicitDialogVM : DialogViewModel, IInputViewModel
+    {
+        protected ExplicitDialogVM()
+        {
+            CompletedCommand = new RelayCommand(Complete, IsCompleted);
+        }
+
+        protected void Complete()
+        {
+            if (CloseAction is null)
+            {
+                return;
+            }
+
+            if (IsCompleted())
+            {
+                //
+                //
+                Finish();
+
+                //
+                //
+                if (Wait.TrySetResult(Op<object>.Success(Result)))
+                {
+                    //
+                    // 清理现场
+                    CloseAction();
+                    CloseAction = null;
+                }
+            }
+        }
+
+        protected abstract bool IsCompleted();
+        protected abstract void Finish();
+        protected abstract string Failed();
+
+        public sealed override void Cancel()
+        {
+            if (CloseAction is null)
+            {
+                return;
+            }
+
+            if (Wait.TrySetResult(Op<object>.Failed(Failed())))
+            {
+                //
+                // 清理现场
+                CloseAction();
+                CloseAction = null;
+            }
+        }
+
+        /// <summary>
+        /// 结果
+        /// </summary>
+        public object Result { get; protected set; }
+
+        /// <summary>
+        /// 取消命令。
+        /// </summary>
+        public RelayCommand CompletedCommand { get; }
     }
 }

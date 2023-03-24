@@ -10,7 +10,7 @@
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules;assembly=SubSystem.Template"
                      xmlns:thisModel2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;assembly=SubSystem.Template"
                      xmlns:thisModel3="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Metadatas;assembly=MigaDB"
-                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem.Template"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewBlockViewModel}, IsDesignTimeCreatable=True}"
@@ -83,22 +83,29 @@
                 <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                
                 <Border Background="{x:Static f:Xaml.Transparent}"/>
             </f:StretchPanel>
             
             <!-- 按钮 -->
-            <f:DialogButton Grid.Row="2"
-                            Grid.Column="1"
-                            HorizontalAlignment="Center"
-                            Icon="{StaticResource FeatherIcon.Checked}"
+            <UniformGrid Grid.Row="2"
+                         Grid.Column="1"
+                         Columns="2"
+                         Height="48"
+                         HorizontalAlignment="Right"
+                         Width="320">
+
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
                             IconSize="29"
                             IsDefault="True"
                             Content="{x:Static f:Language.CompleteText}"
                             Command="{Binding CompletedCommand}"
-                            Height="48"
-                            Purpose="Info" 
-                            Width="160"/>
+                            Purpose="Info" />
+                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
+                                IconSize="17"
+                                Content="{x:Static f:Language.CancelText}"
+                                Command="{Binding CancelCommand}"
+                                Purpose="Close" />
+            </UniformGrid>
         </Grid>
     </Border>
 </f:ForestUserControl>

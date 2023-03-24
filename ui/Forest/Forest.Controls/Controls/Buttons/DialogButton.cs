@@ -157,6 +157,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             // Opacity 动画
             var purpose = Purpose;
 
+            _backgroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray100]);
             _foregroundHighlightBrush  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
             _backgroundHighlight1Brush ??= new SolidColorBrush(GetPurposeColor(purpose, 2));
 
@@ -223,16 +225,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         {
             var purpose = Purpose;
 
-            if (purpose == ButtonPurpose.Close)
-            {
-                _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
-                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
-            }
-            else
-            {
-                _backgroundDisabledBrush ??= new SolidColorBrush(GetPurposeColor(purpose, 4));
-                _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
-            }
+            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.SlateGray400]);
 
             _bd.Background = _backgroundDisabledBrush;
             SetForeground(_foregroundDisabledBrush);

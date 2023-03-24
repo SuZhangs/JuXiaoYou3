@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
     }
 
-    public sealed class StringViewModel : InputViewModel
+    public sealed class StringViewModel : ImplicitDialogVM
     {
         private string     _text;
 

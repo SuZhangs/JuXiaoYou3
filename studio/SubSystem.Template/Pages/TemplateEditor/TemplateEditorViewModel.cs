@@ -10,11 +10,15 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Modules;
+using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
+
+// ReSharper disable MemberCanBeMadeStatic.Local
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 {
@@ -39,24 +43,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         {
             Id      = ID.Get();
             Version = 1;
-            Blocks = new ObservableCollection<ModuleBlock>();
+            Blocks  = new ObservableCollection<ModuleBlockEditUI>();
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
             SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl, HasElement);
             NewBlockCommand            = AsyncCommand(NewBlockImpl);
-            EditBlockCommand           = AsyncCommand<ModuleBlock>(EditBlockImpl, HasElement);
-            RemoveBlockCommand         = AsyncCommand(RemoveBlockImpl);
-            ShiftUpBlockCommand        = AsyncCommand(ShiftUpBlockImpl);
-            ShiftDownBlockCommand      = AsyncCommand(ShiftDownBlockImpl);
+            EditBlockCommand           = AsyncCommand<ModuleBlockEditUI>(EditBlockImpl, HasElement);
+            RemoveBlockCommand         = AsyncCommand<ModuleBlockEditUI>(RemoveBlockImpl);
+            ShiftUpBlockCommand        = Command<ModuleBlockEditUI>(ShiftUpBlockImpl);
+            ShiftDownBlockCommand      = Command<ModuleBlockEditUI>(ShiftDownBlockImpl);
             RemoveAllBlockCommand      = AsyncCommand(RemoveAllBlockImpl);
             NewElementCommand          = AsyncCommand(NewElementImpl);
             EditElementCommand         = AsyncCommand(EditElementImpl);
-            ShiftUpElementCommand      = AsyncCommand(ShiftUpElementImpl);
-            ShiftDownElementCommand    = AsyncCommand(ShiftDownElementImpl);
+            // ShiftUpElementCommand      = AsyncCommand(ShiftUpElementImpl);
+            // ShiftDownElementCommand    = AsyncCommand(ShiftDownElementImpl);
             RemoveElementCommand       = AsyncCommand(RemoveElementImpl);
             RefreshMetadataListCommand = AsyncCommand(RefreshMetadataListImpl);
-            
+
             SetDirtyState(false);
         }
 
@@ -75,15 +79,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             SetTitle(name, _dirty);
         }
 
+        #region Templates
+
         private void NewTemplateImpl()
         {
+            // 新建模板的行为是:
+            // 1) 直接弹出新的标签页
             Controller.New<TemplateEditorViewModel>();
         }
 
+        // private ModuleTemplate OpenOrUpgrade(string payload)
+        // {
+        //     try
+        //     {
+        //
+        //     }
+        //     catch()
+        //     {
+        //         
+        //     }
+        // }
+
+
         private async Task OpenTemplateImpl()
         {
+            // 打开模板的行为是:
+            // 1) 判断当前的页面是否保存
+            // 2) 选择文件
+            // 3) 打开文件并赋值
             var ds = Xaml.Get<IDialogService>();
 
+            // 行为 1)
             if (_dirty)
             {
                 var r = await ds.Warning(TemplateSystemString.Notify, TemplateSystemString.AreYouSureCreateNew);
@@ -103,6 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             try
             {
+                // 3) 打开文件并赋值
                 var fileName        = opendlg.FileName;
                 var templatePayload = await PNG.ReadDataAsync(fileName);
                 var template        = JSON.FromJson<ModuleTemplate>(templatePayload);
@@ -117,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 ForType       = template.ForType;
                 SetDirtyState(false);
 
-                Blocks.AddRange(template.Blocks, true);
+                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
             catch (Exception)
@@ -131,10 +158,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         private async Task SaveTemplateImpl(FrameworkElement target)
         {
+            // 保存模板的行为是:
+            // 1) 判断当前的页面是否保存
+            // 2) 选择文件
+            // 3) 打开文件并赋值
             var savedlg = new SaveFileDialog
             {
                 Filter = TemplateSystemString.ModuleFilter
             };
+
             var ds = Xaml.Get<IDialogService>();
 
             if (savedlg.ShowDialog() != true)
@@ -156,9 +188,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                     Organizations = _organizations,
                     Version       = _version,
                     MetadataList  = MetadataList.ToList(),
-                    Blocks        = Blocks.ToList(),
-                    ForType       = _forType,
-                    For           = _for
+                    Blocks = Blocks.Select(x => x.CreateInstance())
+                                   .ToList(),
+                    ForType = _forType,
+                    For     = _for
                 };
                 var payload = JSON.Serialize(template);
 
@@ -179,6 +212,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
         }
 
+        #endregion
+
+
+        #region Block
+
         private async Task NewBlockImpl()
         {
             var r = await NewBlockViewModel.New();
@@ -188,10 +226,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 return;
             }
 
-            Blocks.Add(r.Value);
+            var element = r.Value;
+            Blocks.Add(element);
+
+            await EditBlockViewModel.New(element);
         }
 
-        private async Task EditBlockImpl(ModuleBlock element)
+        private async Task EditBlockImpl(ModuleBlockEditUI element)
         {
             var r = await EditBlockViewModel.New(element);
 
@@ -199,25 +240,82 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             {
                 return;
             }
-            
-            
+
+            await Xaml.Get<IDialogService>()
+                      .Notify(
+                          CriticalLevel.Success,
+                          TemplateSystemString.Notify,
+                          TemplateSystemString.OperationOfSaveIsSuccessful);
         }
 
-        private async Task RemoveBlockImpl()
+        private async Task RemoveBlockImpl(ModuleBlockEditUI element)
         {
+            var r = await Xaml.Get<IDialogService>()
+                              .Danger(
+                                  TemplateSystemString.Notify,
+                                  Language.RemoveAllItemText);
+
+            if (!r)
+            {
+                return;
+            }
+
+            Blocks.Remove(element);
         }
 
-        private async Task ShiftUpBlockImpl()
+        private void ShiftUpBlockImpl(ModuleBlockEditUI element)
         {
+            if (element is null)
+            {
+                return;
+            }
+
+            var targetIndex = Blocks.IndexOf(element);
+
+            if (targetIndex <= 0)
+            {
+                return;
+            }
+
+            Blocks.Move(targetIndex, targetIndex - 1);
         }
 
-        private async Task ShiftDownBlockImpl()
+        private void ShiftDownBlockImpl(ModuleBlockEditUI element)
         {
+            if (element is null)
+            {
+                return;
+            }
+
+            var targetIndex = Blocks.IndexOf(element);
+
+            if (targetIndex < 0 ||
+                targetIndex >= Blocks.Count - 1)
+            {
+                return;
+            }
+
+            Blocks.Move(targetIndex, targetIndex + 1);
         }
 
         private async Task RemoveAllBlockImpl()
         {
+            var r = await Xaml.Get<IDialogService>()
+                              .Danger(
+                                  TemplateSystemString.Notify,
+                                  Language.RemoveAllItemText);
+
+            if (!r)
+            {
+                return;
+            }
+            
+            //
+            // 清空
+            Blocks.Clear();
         }
+
+        #endregion
 
         private async Task NewElementImpl()
         {
@@ -227,11 +325,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         {
         }
 
-        private async Task ShiftUpElementImpl()
+        private async Task ShiftUpElementImpl(object element)
         {
         }
 
-        private async Task ShiftDownElementImpl()
+        private async Task ShiftDownElementImpl(object element)
         {
         }
 
@@ -334,19 +432,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
         }
 
+        private ModuleBlockEditUI _selectedBlock;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedBlock"/> 属性。
+        /// </summary>
+        public ModuleBlockEditUI SelectedBlock
+        {
+            get => _selectedBlock;
+            set
+            {
+                SetValue(ref _selectedBlock, value);
+                EditBlockCommand.NotifyCanExecuteChanged();
+                RemoveBlockCommand.NotifyCanExecuteChanged();
+            }
+        }
+
         /// <summary>
         /// 模组内容块集合。
         /// </summary>
-        public ObservableCollection<ModuleBlock> Blocks { get; init; }
+        public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
 
         public RelayCommand NewTemplateCommand { get; }
         public AsyncRelayCommand OpenTemplateCommand { get; }
         public AsyncRelayCommand<FrameworkElement> SaveTemplateCommand { get; }
         public AsyncRelayCommand NewBlockCommand { get; }
-        public AsyncRelayCommand<ModuleBlock> EditBlockCommand { get; }
-        public AsyncRelayCommand RemoveBlockCommand { get; }
-        public AsyncRelayCommand ShiftUpBlockCommand { get; }
-        public AsyncRelayCommand ShiftDownBlockCommand { get; }
+        public AsyncRelayCommand<ModuleBlockEditUI> EditBlockCommand { get; }
+        public AsyncRelayCommand<ModuleBlockEditUI> RemoveBlockCommand { get; }
+        public RelayCommand<ModuleBlockEditUI> ShiftUpBlockCommand { get; }
+        public RelayCommand<ModuleBlockEditUI> ShiftDownBlockCommand { get; }
         public AsyncRelayCommand RemoveAllBlockCommand { get; }
         public AsyncRelayCommand NewElementCommand { get; }
         public AsyncRelayCommand EditElementCommand { get; }

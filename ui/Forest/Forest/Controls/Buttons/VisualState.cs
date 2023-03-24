@@ -22,7 +22,7 @@
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 

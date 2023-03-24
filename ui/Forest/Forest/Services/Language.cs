@@ -321,5 +321,45 @@ namespace Acorisoft.FutureGL.Forest.Services
                 };
             }
         }
+        
+        /// <summary>
+        /// 拒绝
+        /// </summary>
+        public static string RemoveItemText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Cancel",
+                    CultureArea.French   => "Annuler",
+                    CultureArea.Japanese => "取り消す",
+                    CultureArea.Korean   => "취소",
+                    CultureArea.Russian  => "Отмена",
+
+                    _ => "你确定要删除这项数据吗？"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 拒绝
+        /// </summary>
+        public static string RemoveAllItemText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Cancel",
+                    CultureArea.French   => "Annuler",
+                    CultureArea.Japanese => "取り消す",
+                    CultureArea.Korean   => "취소",
+                    CultureArea.Russian  => "Отмена",
+
+                    _ => "你确定要删除全部数据吗？"
+                };
+            }
+        }
     }
 }

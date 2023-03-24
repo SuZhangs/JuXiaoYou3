@@ -5,6 +5,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaStudio.Modules;
 using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
@@ -13,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
     // 1) 部分ModuleBlockDataUI需要最小宽度和高度
     // 2) 实现CardAction的替代
     // 3) 实现其他控件的替代
-    public class NewBlockViewModel : InputViewModel
+    public class NewBlockViewModel : ImplicitDialogVM
     {
         private IModuleBlockDataUI _previewItem;
         private object      _maybeMetadataKind;
@@ -29,6 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             {
                 SetValue(ref _type, value);
                 PreviewItem = ModuleBlockFactory.GetDataUI(ModuleBlockFactory.GetBlock(value));
+                CompletedCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -58,17 +60,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             set => SetValue(ref _previewItem, value);
         }
         
-        public static Task<Op<ModuleBlock>> New()
+        public static Task<Op<ModuleBlockEditUI>> New()
         {
             return Xaml.Get<IDialogService>()
-                       .Dialog<ModuleBlock>(new NewBlockViewModel());
+                       .Dialog<ModuleBlockEditUI>(new NewBlockViewModel());
         }
 
         protected override bool IsCompleted() => _previewItem is not null;
 
         protected override void Finish()
         {
-            Result = ModuleBlockFactory.GetBlock(_type);
+            Result = ModuleBlockFactory.GetEditUI(_type);
         }
 
         protected override string Failed() => "";
