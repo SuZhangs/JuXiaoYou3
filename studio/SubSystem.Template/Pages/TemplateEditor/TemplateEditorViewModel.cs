@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;

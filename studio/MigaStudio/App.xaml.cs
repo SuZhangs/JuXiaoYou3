@@ -114,6 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
             SubSystem.InstallViews();
+            TemplateSystem.InstallViews();
         }
 
 
