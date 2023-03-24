@@ -10,7 +10,7 @@
              xmlns:studio="urn:acorisoft/studio"
              mc:Ignorable="d"
              f:Language.Root="quickstart"
-             Foreground="{f:ForegroundInHighlightBrush}"
+             Foreground="{f:AdaptiveLevel1Brush}"
              d:DesignHeight="720"
              d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance Type={x:Type vm:QuickStartController}, IsDesignTimeCreatable=True}">

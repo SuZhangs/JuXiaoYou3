@@ -81,7 +81,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             _background          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _foreground          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
             
             //
             // 设置背景颜色
@@ -98,7 +98,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _highlight           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
             
             //
             // Opacity 动画
@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         {
             _highlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             _highlight2          ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
             
             //
             // Opacity 动画
@@ -173,7 +173,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _disabled            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
-            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
 
             //
             // 设置背景颜色

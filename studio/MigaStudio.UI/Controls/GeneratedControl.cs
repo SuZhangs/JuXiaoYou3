@@ -6,15 +6,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
     public abstract class GeneratedControl : Control
     {
         protected static readonly SolidColorBrush Transparent;
-        protected static readonly SolidColorBrush Gray;
-        protected static readonly SolidColorBrush White;
+        protected static readonly SolidColorBrush BG;
+        protected static readonly SolidColorBrush Border;
 
         static GeneratedControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GeneratedControl), new FrameworkPropertyMetadata(typeof(GeneratedControl)));
             Transparent = new SolidColorBrush(Colors.Transparent);
-            Gray        = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.BackgroundLevel1]);
-            White       = new SolidColorBrush(Colors.Gray);
+            BG          = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
+            Border      = new SolidColorBrush(ThemeSystem.Instance.Theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
         }
 
         private readonly List<FrameworkElement> _elements;
@@ -35,11 +35,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         /// <param name="tag">指定当前的编号</param>
         /// <returns>返回一个新的Element</returns>
         protected abstract FrameworkElement GenerateElement();
+
         protected abstract void HighlightElement(FrameworkElement element);
         protected abstract void UnhighlightElement(FrameworkElement element);
+
         protected virtual void SetFirstElement(FrameworkElement element)
         {
-            
         }
 
         protected void Rebuild()
@@ -58,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                     _elements.Clear();
                 }
 
-                var max = Maximum;
+                var max   = Maximum;
                 var width = 0d;
 
                 for (var i = 0; i < max; i++)
@@ -71,8 +72,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                     {
                         SetFirstElement(element);
                     }
-                    
-                    width             =  element.Width;
+
+                    width = element.Width;
                     _elements.Add(element);
                     _items.Items.Add(element);
                 }
@@ -97,10 +98,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             lock (_sync)
             {
-                if(_elements.Count == 0)
+                if (_elements.Count == 0)
                 {
                     return;
                 }
+
                 for (var i = 0; i < index; i++)
                 {
                     HighlightElement(_elements[i]);
@@ -143,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var gc = (GeneratedControl)d;
+            var gc    = (GeneratedControl)d;
             var value = (int)e.NewValue;
 
             if (!gc._initialized)
@@ -194,11 +196,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             return new Border
             {
-                Background = Transparent,
-                Width = 24,
-                Height = 12,
-                BorderBrush = Gray,
-                BorderThickness = new Thickness(1),
+                Background          = Transparent,
+                Width               = 24,
+                Height              = 12,
+                BorderBrush         = BG,
+                BorderThickness     = new Thickness(1),
                 UseLayoutRounding   = true,
                 SnapsToDevicePixels = true,
                 VerticalAlignment   = VerticalAlignment.Center,
@@ -210,8 +212,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
-                b.Background = White;
-                b.BorderBrush = Gray;
+                b.Background      = Border;
+                b.BorderBrush     = BG;
                 b.BorderThickness = new Thickness(1, 0, 0, 0);
             }
         }
@@ -220,12 +222,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             if (element is Border b)
             {
-                b.BorderBrush = Gray;
+                b.BorderBrush     = BG;
                 b.BorderThickness = new Thickness(1);
-                b.Background = Transparent;
+                b.Background      = Transparent;
             }
         }
-        
+
         // F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z
         // F1 M24,24z M0,0z M12,2L12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2z
     }

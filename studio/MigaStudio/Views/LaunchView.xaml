@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type vm:LaunchViewController}, IsDesignTimeCreatable=True}">
     <StackPanel HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBlock Foreground="{f:ForegroundInHighlightBrush}"
+        <TextBlock Foreground="{f:AdaptiveLevel1Brush}"
                    FontSize="48"
                    FontWeight="Bold"
                    FontFamily="华康勘亭流W9(P)"

@@ -80,7 +80,7 @@
                                 <Condition  Property="IsMouseOver" Value="True"/>
                                 <Condition  Property="IsSelected" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Foreground" Value="{f:AdaptiveLevel1Brush}" />
                             <Setter Property="Background" Value="{f:Brush HighlightA2}" TargetName="Border" />
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -108,7 +108,7 @@
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+                            <Setter Property="Foreground" Value="{f:AdaptiveLevel1Brush}" />
                             <Setter Property="Background" Value="{f:Brush HighlightA4}" TargetName="Border" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>

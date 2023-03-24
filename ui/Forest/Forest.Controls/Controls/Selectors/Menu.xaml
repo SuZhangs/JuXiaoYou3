@@ -134,7 +134,7 @@
                 <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{f:MaskBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{f:OverlayBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{f:Brush ForegroundDisabled}" />
@@ -194,7 +194,7 @@
                 <Setter Property="Fill" Value="{x:Null}" TargetName="Icon" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{f:MaskBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{f:OverlayBrush}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -285,7 +285,7 @@
                 <Setter Property="Fill" Value="{x:Null}" TargetName="Icon" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="Border" Property="Background" Value="{f:MaskBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{f:OverlayBrush}" />
             </Trigger>
             <Trigger Property="HasIcon" Value="False">
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
@@ -391,7 +391,7 @@
                 <Setter TargetName="Icon" Property="Margin" Value="0" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{f:MaskBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{f:OverlayBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{f:Brush ForegroundDisabled}" />

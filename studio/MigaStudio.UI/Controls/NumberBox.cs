@@ -23,7 +23,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         private ToolButton _up;
         private ToolButton _down;
 
-        private SolidColorBrush _borderBrush;
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
         private SolidColorBrush _backgroundHighlight1;
@@ -44,7 +43,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         private void HandleStateChanged(bool init, VisualState last, VisualState now, VisualStateTrigger value)
         {
             var theme = ThemeSystem.Instance.Theme;
-            Debug.WriteLine(now);
             // Stop Animation
             StopAnimation();
 
@@ -150,7 +148,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         protected override void OnInvalidateState()
         {
-            _borderBrush          = null;
             _background           = null;
             _foreground           = null;
             _backgroundHighlight1 = null;
@@ -164,20 +161,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         protected override void GoToNormalState(ForestThemeSystem theme)
         {
-            _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel1]);
-            _borderBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
+            _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             PART_Bd.Background      = _background;
-            PART_Bd.BorderBrush     = _borderBrush;
-            PART_Bd.BorderThickness = BorderThickness;
-            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _watermark.Foreground   = new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
             SetForeground(_foreground);
         }
 
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
 
@@ -217,8 +211,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
 
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
-            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
+            _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel4]);
             _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _highlight            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
 
@@ -248,7 +242,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             // 设置文本颜色
             PART_Bd.BorderThickness = BorderThickness;
             _watermark.Foreground   = _highlight;
-            CaretBrush              = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
             SelectionBrush          = new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA2]);
             SetForeground(_foregroundHighlight);
         }
@@ -256,13 +249,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         protected override void GoToDisableState(ForestThemeSystem theme)
         {
             _backgroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
-            _borderBrush        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
             _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
 
-            PART_Bd.Background      = _backgroundDisabled;
             PART_Bd.Background      = _background;
-            PART_Bd.BorderBrush     = _borderBrush;
-            PART_Bd.BorderThickness = BorderThickness;
             _watermark.Foreground   = _foreground;
             SetForeground(_foregroundDisabled);
         }

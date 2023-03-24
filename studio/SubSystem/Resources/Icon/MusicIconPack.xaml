@@ -93,7 +93,7 @@
                               Data="{TemplateBinding Icon}"
                               Width="{TemplateBinding IconSize}"
                               Height="{TemplateBinding IconSize}"
-                              Fill="{f:Brush ForegroundInHighlight}"
+                              Fill="{f:Brush AdaptiveLevel1}"
                               Stretch="Uniform"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -101,11 +101,11 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#20FFFFFF" TargetName="PART_Border" />
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon" />
+                            <Setter Property="Fill" Value="{f:Brush AdaptiveLevel1}" TargetName="Icon" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#50FFFFFF" TargetName="PART_Border" />
-                            <Setter Property="Fill" Value="{f:Brush ForegroundInHighlight}" TargetName="Icon" />
+                            <Setter Property="Fill" Value="{f:Brush AdaptiveLevel1}" TargetName="Icon" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Fill" Value="{f:Brush ForegroundDisabled}" TargetName="Icon" />

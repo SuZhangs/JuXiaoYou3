@@ -27,6 +27,7 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Setter Property="CaretBrush" Value="{f:ForegroundBrush}"/>
         <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />

@@ -78,7 +78,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _backgroundHighlight1Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask100]);
+            _backgroundHighlight1Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay100]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -108,7 +108,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
             _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _backgroundHighlight2Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Mask200]);
+            _backgroundHighlight2Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay200]);
 
             // 白底变特殊色
             // 高亮色变白色

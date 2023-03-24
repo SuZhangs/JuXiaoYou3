@@ -232,7 +232,9 @@ namespace Acorisoft.FutureGL.Forest
 
             //
             // 设置主题。
-            ThemeSystem.Instance.Theme = GetThemeSystem(basicAppSetting);
+            var theme = GetThemeSystem(basicAppSetting);
+            theme.Initialize();
+            ThemeSystem.Instance.Theme = theme;
 
             //
             // 设置语言。

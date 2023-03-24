@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem", "studio\SubSyst
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SubSystems", "SubSystems", "{5BE31570-095D-49A2-91BE-D8A1F55751AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Tools.ThemeEditor", "tools\FutureGL.Tools.ThemeEditor\FutureGL.Tools.ThemeEditor.csproj", "{432FE557-206D-4770-8540-2E032B514171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,14 @@ Global
 		{589C1C7F-88D3-4F4E-A982-EA5108050124}.Release|Any CPU.Build.0 = Release|Any CPU
 		{589C1C7F-88D3-4F4E-A982-EA5108050124}.Release|x86.ActiveCfg = Release|x86
 		{589C1C7F-88D3-4F4E-A982-EA5108050124}.Release|x86.Build.0 = Release|x86
+		{432FE557-206D-4770-8540-2E032B514171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Debug|x86.Build.0 = Debug|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Release|x86.ActiveCfg = Release|Any CPU
+		{432FE557-206D-4770-8540-2E032B514171}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

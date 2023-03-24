@@ -11,7 +11,7 @@
                                RadiusY="24"
                                StrokeDashArray="4 4"
                                StrokeThickness="1   "
-                               Stroke="{f:ForegroundInHighlightBrush}" />
+                               Stroke="{f:AdaptiveLevel1Brush}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -241,10 +241,10 @@
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="MinHeight" Value="32" />
         <Setter Property="MinWidth" Value="42" />
-        <Setter Property="HoverBackgroundBrush" Value="{f:MaskBrush}" />
-        <Setter Property="HoverForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
-        <Setter Property="PressBackgroundBrush" Value="{f:MaskDarkenBrush}" />
-        <Setter Property="PressForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
+        <Setter Property="HoverBackgroundBrush" Value="{f:OverlayBrush}" />
+        <Setter Property="HoverForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
+        <Setter Property="PressBackgroundBrush" Value="{f:Overlay2Brush}" />
+        <Setter Property="PressForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -306,7 +306,7 @@
                                        RadiusX="10"
                                        RadiusY="10"
                                        StrokeThickness="1"
-                                       Stroke="{f:Brush BorderBrush}" />
+                                       Stroke="{f:Brush AdaptiveLevel4}" />
                             <Rectangle x:Name="ActiveToggleRectangle"
                                        Width="40"
                                        Height="20"
@@ -324,7 +324,7 @@
                                          HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          RenderTransformOrigin="0.5, 0.5"
-                                         Fill="{f:Brush BackgroundLevel1}">
+                                         Fill="{f:Brush AdaptiveLevel3}">
                                 <Ellipse.RenderTransform>
                                     <TranslateTransform X="-9"/>
                                 </Ellipse.RenderTransform>
@@ -432,18 +432,18 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleRectangle" 
                                         Property="Fill" 
-                                        Value="{f:Brush BackgroundLevel1}" />
+                                        Value="{f:Brush AdaptiveLevel2}" />
                             <Setter TargetName="ToggleEllipse" 
                                         Property="Fill" 
-                                        Value="White" />
+                                        Value="{f:Brush AdaptiveLevel4}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ToggleRectangle" Value="{f:Brush BackgroundLevel1}" Property="Stroke" />
-                            <Setter TargetName="ToggleRectangle" Value="{f:Brush BackgroundLevel1}" Property="Fill" />
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel2}" Property="Stroke" />
+                            <Setter TargetName="ToggleRectangle" Value="{f:Brush AdaptiveLevel2}" Property="Fill" />
                             <Setter TargetName="ToggleEllipse" Value="{f:Brush BackgroundDisabled}" Property="Fill" />
                             <Setter Value="{f:Brush ForegroundDisabled}" Property="Foreground" />
                         </MultiTrigger>
@@ -500,7 +500,7 @@
     <!-- <Style TargetType="{x:Type b:HighlightButton}"> -->
     <!--     <Setter Property="CornerRadius" Value="8" /> -->
     <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
-    <!--     <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" /> -->
+    <!--     <Setter Property="Foreground" Value="{f:AdaptiveLevel1Brush}" /> -->
     <!--     <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
     <!--     <Setter Property="VerticalContentAlignment" Value="Center" /> -->
     <!--     <Setter Property="Padding" Value="8" /> -->
@@ -528,7 +528,7 @@
     <Style TargetType="{x:Type b:CallToAction}">
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
+        <Setter Property="Foreground" Value="{f:AdaptiveLevel1Brush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="8" />

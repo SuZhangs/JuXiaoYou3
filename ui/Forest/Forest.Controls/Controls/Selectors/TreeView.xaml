@@ -118,7 +118,7 @@
                                            RadiusY="6"
                                            StrokeDashArray="4 4"
                                            StrokeThickness="1   "
-                                           Stroke="{f:ForegroundInHighlightBrush}" />
+                                           Stroke="{f:AdaptiveLevel1Brush}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

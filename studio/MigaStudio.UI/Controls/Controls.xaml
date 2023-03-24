@@ -253,7 +253,7 @@
 
                             <Rectangle Grid.Column="1"
                                        Grid.ColumnSpan="3"
-                                       Fill="{f:Brush BackgroundLevel1}"
+                                       Fill="{f:Brush AdaptiveLevel4}"
                                        Height="2"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Stretch" />
@@ -286,8 +286,15 @@
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Grid.Column" Value="1" TargetName="PART_Thumb" />
                             <Setter Property="TextElement.Foreground" Value="{f:ForegroundBrush}" TargetName="PART_Positive" />
-                            <Setter Property="Background" Value="{f:Brush BackgroundLevel1}" TargetName="PART_Thumb" />
+                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel3}" TargetName="PART_Thumb" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel2}" TargetName="PART_Thumb" />
+                        </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Grid.Column" Value="3" TargetName="PART_Thumb" />
                             <Setter Property="TextElement.Foreground" Value="{f:Brush HighlightA4}"
@@ -319,7 +326,7 @@
                               Height="24"
                               HorizontalAlignment="Center"
                               Stretch="None"
-                              Stroke="{f:ForegroundBrush}"
+                              Stroke="{f:Brush AdaptiveLevel4}"
                               StrokeThickness="1"
                               Width="24"
                               VerticalAlignment="Center"/>
@@ -330,10 +337,10 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush ForegroundLevel3}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel2}"/>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush ForegroundLevel3}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel4}"/>
                         </Trigger>
                         
                         <Trigger Property="IsChecked" Value="True">
@@ -449,7 +456,7 @@
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <TextBlock Foreground="{f:ForegroundInHighlightBrush}"
+                    <TextBlock Foreground="{f:AdaptiveLevel1Brush}"
                                FontSize="14"
                                Text="{Binding Mode=OneWay}"
                                HorizontalAlignment="Center"

@@ -65,9 +65,10 @@
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
-            _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
-            _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
+            _foreground            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
+            _background            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _highlight2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
             //
             // 设置背景颜色
@@ -76,7 +77,9 @@
                 : _background;
 
             // 设置文本颜色
-            SetForeground(_foreground);
+            SetForeground(IsSelected
+                ? _foregroundInHighlight
+                : _foreground);
         }
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
@@ -84,7 +87,7 @@
             //
             // Opacity 动画
             _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
-            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
 
             var backgroundAnimation = new ColorAnimation
             {
@@ -113,7 +116,7 @@
         {
             _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
             _highlight2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
-            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+            _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel1]);
 
             var backgroundAnimation = new ColorAnimation
             {
