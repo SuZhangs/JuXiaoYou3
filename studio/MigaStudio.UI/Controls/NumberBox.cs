@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -31,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         private SolidColorBrush _backgroundDisabled;
         private SolidColorBrush _foregroundDisabled;
 
-        public NumberBox() : base()
+        public NumberBox()
         {
             _formatter                       = new ValidateNumberFormatter();
             StateMachine.StateChangedHandler = HandleStateChanged;
@@ -161,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         protected override void GoToNormalState(ForestThemeSystem theme)
         {
             _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
-            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
 
             PART_Bd.Background    = _background;
             SetForeground(_foreground);
@@ -170,7 +169,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
             _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
-            _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -210,7 +209,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel2]);
             _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.AdaptiveLevel3]);
-            _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
+            _foregroundHighlight  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
 
             // 白底变特殊色
             // 高亮色变白色
@@ -531,7 +530,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         /// <summary>
         /// Is called when something is pasted in this <see cref="NumberBox"/>.
         /// </summary>
-        protected virtual void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
+        protected void OnClipboardPaste(object sender, DataObjectPastingEventArgs e)
         {
             // TODO: Fix clipboard
             if (sender is not NumberBox)

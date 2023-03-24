@@ -7,7 +7,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style TargetType="{x:Type ctrl:ActionButton}">
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
@@ -53,13 +53,13 @@
                                   Data="{TemplateBinding Icon}" 
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center" />
-                            
+
                             <ContentPresenter x:Name="ContentPresenter" 
                                               Grid.Column="1" 
                                               VerticalAlignment="Center"
                                               Content="{TemplateBinding Content}" 
                                               TextElement.Foreground="{TemplateBinding Foreground}" />
-                            
+
                             <Path x:Name="ChevronIcon" 
                                   Grid.Column="2"
                                   Margin="0 0 14 0" 
@@ -120,7 +120,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ctrl:DegreeControl}">
         <Setter Property="Height" Value="32" />
         <Setter Property="MaxWidth" Value="240" />
@@ -211,7 +211,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <SolidColorBrush x:Key="Transparent" Color="Transparent"/>
 
     <Style TargetType="{x:Type ctrl:BinaryControl}">
@@ -293,7 +293,7 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel3}" TargetName="PART_Thumb" />
+                            <Setter Property="Background" Value="{f:Brush AdaptiveLevel2}" TargetName="PART_Thumb" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Grid.Column" Value="3" TargetName="PART_Thumb" />
@@ -306,8 +306,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
+
+
     <Style TargetType="{x:Type ctrl:SwitchOnControl}">
         <Setter Property="Height" Value="32" />
         <Setter Property="MaxWidth" Value="240" />
@@ -325,7 +325,7 @@
                               Data="{TemplateBinding Icon}"
                               Height="24"
                               HorizontalAlignment="Center"
-                              Stretch="None"
+                              Stretch="Uniform"
                               Stroke="{f:Brush AdaptiveLevel3}"
                               StrokeThickness="1"
                               Width="24"
@@ -337,12 +337,12 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel3}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel1}"/>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel3}"/>
                         </Trigger>
-                        
+
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Stroke" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
                             <Setter Property="Fill" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
@@ -352,7 +352,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ctrl:HighlightControl}">
         <Setter Property="Height" Value="32" />
         <Setter Property="MaxWidth" Value="240" />
@@ -379,7 +379,7 @@
                             <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
                             <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Off}"/>
                         </Trigger>
-                        
+
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Stroke" TargetName="Icon" Value="Crimson"/>
                             <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=On}"/>
@@ -448,7 +448,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ctrl:QuickStartPane}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -467,27 +467,27 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:QuickStartPane}">
-                   <f:StretchPanel>
-                       <DockPanel>
-                           <Border DockPanel.Dock="Bottom"
+                    <f:StretchPanel>
+                        <DockPanel>
+                            <Border DockPanel.Dock="Bottom"
                                    Background="{TemplateBinding Accent}"
                                    CornerRadius="0 0 16 16"
                                    MinHeight="84">
-                               <ContentPresenter ContentSource="Header"
+                                <ContentPresenter ContentSource="Header"
                                                  HorizontalAlignment="Stretch"/>
 
-                           </Border>
-                           <Border Background="White"
+                            </Border>
+                            <Border Background="White"
                                    CornerRadius="16 16 0 0"
                                    Padding="8">
-                               <ContentPresenter ContentSource="Content"
+                                <ContentPresenter ContentSource="Content"
                                                  HorizontalAlignment="Stretch"/>
-                           </Border>
-                       </DockPanel>
-                       <Border x:Name="mask"
+                            </Border>
+                        </DockPanel>
+                        <Border x:Name="mask"
                                CornerRadius="16"
                                Visibility="Collapsed"/>
-                   </f:StretchPanel>
+                    </f:StretchPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
@@ -502,9 +502,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ctrl:NumberBox}">
-                <Setter Property="FocusVisualStyle">
+        <Setter Property="FocusVisualStyle">
             <Setter.Value>
                 <Style>
                     <Setter Property="Control.Template">
@@ -525,6 +525,7 @@
         <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
+        <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -577,12 +578,12 @@
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            Visibility="Collapsed"/>
-                                
+
                                 <ftk:ToolButton x:Name="PART_Up"
                                                 Grid.Column="1"
                                                 IconSize="23"
                                                 Icon="F1 M24,24z M0,0z M18,15L18,15 12,9 6,15"/>
-                                
+
                                 <ftk:ToolButton x:Name="PART_Down"
                                                 Grid.Column="2"
                                                 IconSize="23"
