@@ -19,8 +19,7 @@
     </UserControl.Resources>
     <ScrollViewer Margin="32">
         <ItemsControl HorizontalAlignment="Left"
-                      ItemsSource="{Binding Blocks}"
-                      Width="480">
+                      ItemsSource="{Binding Blocks}">
         </ItemsControl>
     </ScrollViewer>
 </f:ForestUserControl>

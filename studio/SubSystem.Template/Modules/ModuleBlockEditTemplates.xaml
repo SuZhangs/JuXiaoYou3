@@ -548,7 +548,7 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:SequenceBlockEditUI}">
-        <f:DialogPage Width="640">
+        <f:DialogPage Width="960">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -572,6 +572,9 @@
                                          Header="提示"
                                          Height="128"
                                          Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <f:ToggleSwitch Margin="0 4"
+                                    Content="值与名字不同？"
+                                    IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <f:ForestSection Grid.Column="1"
                                  Header="元素">
@@ -621,7 +624,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:GroupBlockEditUI}">
-        <f:DialogPage Width="640">
+        <f:DialogPage Width="960">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -642,7 +645,8 @@
                                          Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <f:ForestSection Grid.Column="1"
-                                 Header="元素">
+                                 Header="元素"
+                                 Margin="16 0">
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
@@ -678,7 +682,7 @@
                         <f:ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="8"
-                                           Text="{Binding Value,Mode=OneWay}"
+                                           Text="{Binding Name,Mode=OneWay}"
                                            TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </f:ListBox.ItemTemplate>
@@ -697,7 +701,7 @@
 
 
     <DataTemplate DataType="{x:Type subTemp:RadarBlockEditUI}">
-        <f:DialogPage Width="640">
+        <f:DialogPage Width="960">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -732,7 +736,8 @@
                                          Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <f:ForestSection Grid.Column="1"
-                                 Header="元素">
+                                 Header="元素"
+                                 Margin="16 0">
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
@@ -764,11 +769,11 @@
                         </StackPanel>
                     </f:ForestSection.ToolBar>
                     <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Items,Mode=OneWay}">
+                               ItemsSource="{Binding Axis,Mode=OneWay}">
                         <f:ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="8"
-                                           Text="{Binding Value,Mode=OneWay}"
+                                           Text="{Binding Mode=OneWay}"
                                            TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </f:ListBox.ItemTemplate>
@@ -779,7 +784,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HistogramBlockEditUI}">
-        <f:DialogPage Width="640">
+        <f:DialogPage Width="960">
             <Grid Background="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -814,7 +819,8 @@
                                          Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <f:ForestSection Grid.Column="1"
-                                 Header="元素">
+                                 Header="元素"
+                                 Margin="16 0">
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
@@ -846,11 +852,11 @@
                         </StackPanel>
                     </f:ForestSection.ToolBar>
                     <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Items,Mode=OneWay}">
+                               ItemsSource="{Binding Axis,Mode=OneWay}">
                         <f:ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="8"
-                                           Text="{Binding Value,Mode=OneWay}"
+                                           Text="{Binding}"
                                            TextTrimming="CharacterEllipsis" />
                             </DataTemplate>
                         </f:ListBox.ItemTemplate>
