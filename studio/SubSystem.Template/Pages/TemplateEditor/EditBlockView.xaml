@@ -14,7 +14,7 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditBlockViewModel}, IsDesignTimeCreatable=True}"
-                     MinHeight="540"
+                     MinHeight="320"
                      MinWidth="640">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -31,7 +31,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
-                  Accent="Indigo"
+                  Accent="{f:Brush HighlightA3}"
                   Content="{Binding Block}"
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">

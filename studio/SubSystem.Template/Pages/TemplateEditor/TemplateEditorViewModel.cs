@@ -41,9 +41,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         public TemplateEditorViewModel()
         {
-            Id      = ID.Get();
-            Version = 1;
-            Blocks  = new ObservableCollection<ModuleBlockEditUI>();
+            Id                     = ID.Get();
+            Version                = 1;
+            Blocks                 = new ObservableCollection<ModuleBlockEditUI>();
+            MetadataList           = new ObservableCollection<MetadataCache>();
+            OpenPreviewPaneCommand = new RelayCommand(() => IsPreviewPaneOpen = true);
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
@@ -54,12 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             ShiftUpBlockCommand        = Command<ModuleBlockEditUI>(ShiftUpBlockImpl);
             ShiftDownBlockCommand      = Command<ModuleBlockEditUI>(ShiftDownBlockImpl);
             RemoveAllBlockCommand      = AsyncCommand(RemoveAllBlockImpl);
-            NewElementCommand          = AsyncCommand(NewElementImpl);
-            EditElementCommand         = AsyncCommand(EditElementImpl);
-            // ShiftUpElementCommand      = AsyncCommand(ShiftUpElementImpl);
-            // ShiftDownElementCommand    = AsyncCommand(ShiftDownElementImpl);
-            RemoveElementCommand       = AsyncCommand(RemoveElementImpl);
-            RefreshMetadataListCommand = AsyncCommand(RefreshMetadataListImpl);
+            RefreshMetadataListCommand = Command(RefreshMetadataListImpl);
 
             SetDirtyState(false);
         }
@@ -214,6 +211,57 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         #endregion
 
+        #region Metadata
+
+        private void DetectAll()
+        {
+            foreach (var block in Blocks)
+            {
+                DetectMetadata(block);
+            }
+        }
+        
+        private void DetectMetadata(IModuleBlockEditUI element)
+        {
+            if (element is GroupBlockEditUI gbe)
+            {
+                foreach (var subItem in gbe.Items)
+                {
+                    if (subItem is null)
+                    {
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(subItem.Metadata))
+                    {
+                        continue;
+                    }
+
+                    AddOrUpdateMetadata(subItem.Name, subItem.Metadata);
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(element.Metadata))
+                {
+                    return;
+                }
+
+                AddOrUpdateMetadata(element.Name, element.Metadata);
+            }
+        }
+
+        private void AddOrUpdateMetadata(string name, string meta)
+        {
+            MetadataList.Add(new MetadataCache
+            {
+                Name         = name,
+                Id           = ID.Get(),
+                MetadataName = meta
+            });
+        }
+
+        #endregion
 
         #region Block
 
@@ -228,9 +276,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             var element = r.Value;
             Blocks.Add(element);
-            
-            
+
+
             await EditBlockViewModel.Edit(element);
+            DetectAll();
+            SetDirtyState(true);
         }
 
         private async Task EditBlockImpl(ModuleBlockEditUI element)
@@ -241,6 +291,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             {
                 return;
             }
+
+            DetectAll();
+            SetDirtyState(true);
 
             await Xaml.Get<IDialogService>()
                       .Notify(
@@ -262,6 +315,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
 
             Blocks.Remove(element);
+            DetectAll();
+            SetDirtyState(true);
         }
 
         private void ShiftUpBlockImpl(ModuleBlockEditUI element)
@@ -310,36 +365,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             {
                 return;
             }
-            
+
             //
             // 清空
             Blocks.Clear();
+            MetadataList.Clear();
+            SetDirtyState(true);
         }
 
         #endregion
 
-        private async Task NewElementImpl()
+        private void RefreshMetadataListImpl()
         {
-        }
-
-        private async Task EditElementImpl()
-        {
-        }
-
-        private async Task ShiftUpElementImpl(object element)
-        {
-        }
-
-        private async Task ShiftDownElementImpl(object element)
-        {
-        }
-
-        private async Task RemoveElementImpl()
-        {
-        }
-
-        private async Task RefreshMetadataListImpl()
-        {
+            DetectAll();
         }
 
         /// <summary>
@@ -449,6 +487,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
         }
 
+        private bool _isPreviewPaneOpen;
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsPreviewPaneOpen"/> 属性。
+        /// </summary>
+        public bool IsPreviewPaneOpen
+        {
+            get => _isPreviewPaneOpen;
+            set => SetValue(ref _isPreviewPaneOpen, value);
+        }
+
         /// <summary>
         /// 模组内容块集合。
         /// </summary>
@@ -463,11 +512,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         public RelayCommand<ModuleBlockEditUI> ShiftUpBlockCommand { get; }
         public RelayCommand<ModuleBlockEditUI> ShiftDownBlockCommand { get; }
         public AsyncRelayCommand RemoveAllBlockCommand { get; }
-        public AsyncRelayCommand NewElementCommand { get; }
-        public AsyncRelayCommand EditElementCommand { get; }
-        public AsyncRelayCommand ShiftUpElementCommand { get; }
-        public AsyncRelayCommand ShiftDownElementCommand { get; }
-        public AsyncRelayCommand RemoveElementCommand { get; }
-        public AsyncRelayCommand RefreshMetadataListCommand { get; }
+        public RelayCommand OpenPreviewPaneCommand { get; }
+        public RelayCommand RefreshMetadataListCommand { get; }
     }
 }

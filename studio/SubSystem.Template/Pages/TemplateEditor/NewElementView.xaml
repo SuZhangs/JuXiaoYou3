@@ -15,7 +15,7 @@
                      d:DesignHeight="300" 
                      d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewElementViewModel}, IsDesignTimeCreatable=True}"
-                     MinHeight="480"
+                     MinHeight="320"
                      Width="768">
     <UserControl.Resources>
         <ResourceDictionary>
