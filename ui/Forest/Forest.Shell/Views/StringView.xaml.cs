@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading.Tasks;
+using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.Controls;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
@@ -39,5 +41,8 @@ namespace Acorisoft.FutureGL.Forest.Views
                 SetValue(ref _text, value);
             }
         }
+        
+        public static Task<Op<string>> String() => Xaml.Get<IDialogService>()
+                                                       .Dialog<string, StringViewModel>();
     }
 }

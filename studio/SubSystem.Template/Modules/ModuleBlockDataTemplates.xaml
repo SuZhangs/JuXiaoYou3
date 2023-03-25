@@ -9,21 +9,11 @@
                     xmlns:studio="urn:acorisoft/studio"
                     xmlns:studio1="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors"
                     xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors">
+        <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialDesignIcon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
     
-    <Geometry x:Key="Notebook">F1 M24,24z M0,0z M20,2L4,2 4,22 20,22 20,2z M6,4L11,4 11,12 8.5,10.5 6,12 6,4z</Geometry>
-    <Geometry x:Key="Favorite">F1 M24,24z M0,0z M14,9L14,5A3,3,0,0,0,11,2L7,11 7,22 18.28,22A2,2,0,0,0,20.28,20.3L21.66,11.3A2,2,0,0,0,19.66,9z M7,22L4,22A2,2,0,0,1,2,20L2,13A2,2,0,0,1,4,11L7,11</Geometry>
-    <Geometry x:Key="Star">F1 M24,24z M0,0z M12,2L12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2z</Geometry>
-    <Geometry x:Key="Heart">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
-    <Geometry x:Key="Image">F1 M24,24z M0,0z M21,21L21,3 3,3 3,21 21,21z M8.5,13.5L11,16.51 14.5,12 19,18 5,18 8.5,13.5z</Geometry>
-    <Geometry x:Key="File">F1 M24,24z M0,0z M4.01,2L4,22 20,22 20,8 14,2 4.01,2z M13,9L13,3.5 18.5,9 13,9z</Geometry>
-    <Geometry x:Key="Video">F1 M24,24z M0,0z M4,6L2,6 2,22 18,22 18,20 4,20 4,6z M22,2L6,2 6,18 22,18 22,2z M12,14.5L12,5.5 18,10 12,14.5z</Geometry>
-    <Geometry x:Key="Music">F1 M24,24z M0,0z M22,2L6,2 6,18 22,18 22,2z M18,7L15,7 15,12.5A2.5,2.5,0,0,1,10,12.5A2.5,2.5,0,0,1,12.5,10C13.07,10,13.58,10.19,14,10.51L14,5 18,5 18,7z M4,6L2,6 2,22 18,22 18,20 4,20 4,6z</Geometry>
-    <GeometryGroup x:Key="Audio">
-        <GeometryGroup.Children>
-            <Geometry>F1 M24,24z M0,0z M12,14C13.66,14,15,12.66,15,11L15,5C15,3.34 13.66,2 12,2 10.34,2 9,3.34 9,5L9,11C9,12.66,10.34,14,12,14z</Geometry>
-            <Geometry>F1 M24,24z M0,0z M17,11C17,13.76 14.76,16 12,16 9.24,16 7,13.76 7,11L5,11C5,14.53,7.61,17.43,11,17.92L11,21 13,21 13,17.92C16.39,17.43,19,14.53,19,11L17,11z</Geometry>
-        </GeometryGroup.Children>
-    </GeometryGroup>
     <!--
         @ param: TargetBlock
         @ member:
@@ -44,7 +34,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource Audio}"
+            <studio:ReferenceControl Icon="{StaticResource IC.Audio}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -61,7 +51,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource Video}"
+            <studio:ReferenceControl Icon="{StaticResource IC.Video}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -78,7 +68,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource File}"
+            <studio:ReferenceControl Icon="{StaticResource IC.File}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -95,7 +85,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource Image}"
+            <studio:ReferenceControl Icon="{StaticResource IC.Image}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -112,7 +102,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource Music}"
+            <studio:ReferenceControl Icon="{StaticResource IC.Music}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -129,7 +119,7 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource Notebook}"
+            <studio:ReferenceControl Icon="{StaticResource IC.Notebook}"
                                      IsFilled="True"
                                      Foreground="{f:ForegroundBrush}"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
@@ -184,7 +174,7 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <f:Multiline Height="160"
+            <f:MultiLine Height="160"
                          Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
     </DataTemplate>
@@ -298,7 +288,7 @@
             <DockPanel VerticalAlignment="Center">
                 <studio:SwitchOnControl DockPanel.Dock="Right"
                                         Foreground="#FFC107"
-                                        Icon="{StaticResource Star}"
+                                        Icon="{StaticResource FeatherIcon.Star}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
                            Foreground="{f:ForegroundBrush}"
@@ -320,7 +310,7 @@
             <DockPanel VerticalAlignment="Center">
                 <studio:SwitchOnControl DockPanel.Dock="Right"
                                         Foreground="#FF6699"
-                                        Icon="{StaticResource Heart}"
+                                        Icon="{StaticResource FeatherIcon.Heart}"
                                         IsChecked="{Binding Value,Mode=TwoWay}" />
                 <TextBlock FontSize="15"
                            Foreground="{f:ForegroundBrush}"

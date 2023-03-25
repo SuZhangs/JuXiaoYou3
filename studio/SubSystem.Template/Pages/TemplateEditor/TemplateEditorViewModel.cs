@@ -228,13 +228,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             var element = r.Value;
             Blocks.Add(element);
-
-            await EditBlockViewModel.New(element);
+            
+            
+            await EditBlockViewModel.Edit(element);
         }
 
         private async Task EditBlockImpl(ModuleBlockEditUI element)
         {
-            var r = await EditBlockViewModel.New(element);
+            var r = await EditBlockViewModel.Edit(element);
 
             if (!r.IsFinished)
             {

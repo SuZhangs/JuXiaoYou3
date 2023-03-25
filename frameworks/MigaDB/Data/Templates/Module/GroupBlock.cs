@@ -15,7 +15,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public interface IGroupBlockEditUI : IModuleBlockEditUI
     {
-        ObservableCollection<ModuleBlock> Items { get; }
     }
 
     public class GroupBlock : ModuleBlock, IGroupBlock

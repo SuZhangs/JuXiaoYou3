@@ -19,14 +19,14 @@
     /// <summary>
     /// 表示两极内容块。
     /// </summary>
-    public interface IBinaryBlockDataUI : IBinaryBlock, IModuleBlockDataUI
+    public interface IBinaryBlockDataUI : IBinaryBlock, IModuleBlockDataUI, IHeaderlessBlock
     {
     }
 
     /// <summary>
     /// 表示两极内容块。
     /// </summary>
-    public interface IBinaryBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<bool>
+    public interface IBinaryBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<bool>, IHeaderlessBlock
     {
         /// <summary>
         /// 负面值
@@ -43,7 +43,7 @@
     /// <summary>
     /// 表示两极内容块。
     /// </summary>
-    public class BinaryBlock : ModuleBlock, IBinaryBlock
+    public class BinaryBlock : ModuleBlock, IBinaryBlock, IHeaderlessBlock
     {
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {

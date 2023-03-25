@@ -14,6 +14,10 @@
         </GeometryGroup.Children>
     </GeometryGroup>
     
+    <Geometry x:Key="FeatherIcon.Favorite">F1 M24,24z M0,0z M14,9L14,5A3,3,0,0,0,11,2L7,11 7,22 18.28,22A2,2,0,0,0,20.28,20.3L21.66,11.3A2,2,0,0,0,19.66,9z M7,22L4,22A2,2,0,0,1,2,20L2,13A2,2,0,0,1,4,11L7,11</Geometry>
+    <Geometry x:Key="FeatherIcon.Star">F1 M24,24z M0,0z M12,2L12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2z</Geometry>
+    <Geometry x:Key="FeatherIcon.Heart">F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z</Geometry>
+    
     <GeometryGroup x:Key="FeatherIcon.Trash">
         <GeometryGroup.Children>
             <Geometry>F1 M24,24z M0,0z M3,6L3,6 5,6 21,6</Geometry>

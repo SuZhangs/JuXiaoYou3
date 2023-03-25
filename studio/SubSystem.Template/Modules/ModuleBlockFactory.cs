@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
@@ -21,6 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         {
             return new GroupBlock
             {
+                Id       = ID.Get(),
                 Name     = nameof(SingleLineBlock),
                 ToolTips = nameof(SingleLineBlock),
                 Metadata = nameof(SingleLineBlock),
@@ -40,6 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         {
             var b = new SequenceBlock
             {
+                Id       = ID.Get(),
                 Name     = nameof(SequenceBlock),
                 Fallback = "Item1",
                 Items    = new List<OptionItem>(),
@@ -56,6 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static SingleLineBlock CreateSingleLine() => new SingleLineBlock
         {
+            Id = ID.Get(),
             Name     = nameof(SingleLineBlock),
             Suffix   = nameof(SingleLineBlock),
             Fallback = nameof(SingleLineBlock),
@@ -65,6 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static MultiLineBlock CreateMultiLine() => new MultiLineBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(MultiLineBlock),
             Fallback = nameof(MultiLineBlock),
             ToolTips = nameof(MultiLineBlock),
@@ -73,6 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static ColorBlock CreateColor() => new ColorBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(ColorBlock),
             Fallback = "#007ACC",
             ToolTips = nameof(ColorBlock),
@@ -82,6 +88,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static NumberBlock CreateNumber() => new NumberBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(NumberBlock),
             Fallback = 12,
             Maximum  = 30,
@@ -93,6 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static SliderBlock CreateSlider() => new SliderBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(SliderBlock),
             Fallback = 12,
             Maximum  = 30,
@@ -104,6 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static DegreeBlock CreateDegree() => new DegreeBlock
         {
+            Id         = ID.Get(),
             Name       = nameof(DegreeBlock),
             Fallback   = 4,
             Maximum    = 10,
@@ -118,6 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static SwitchBlock CreateSwitch() => new SwitchBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(SwitchBlock),
             Fallback = false,
             ToolTips = nameof(SwitchBlock),
@@ -127,6 +137,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static BinaryBlock CreateBinary() => new BinaryBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(BinaryBlock),
             Fallback = false,
             ToolTips = nameof(BinaryBlock),
@@ -138,6 +149,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static HeartBlock CreateHeart() => new HeartBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(HeartBlock),
             Fallback = false,
             ToolTips = nameof(HeartBlock),
@@ -147,6 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static StarBlock CreateStar() => new StarBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(StarBlock),
             Fallback = false,
             ToolTips = nameof(StarBlock),
@@ -155,6 +168,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static LikabilityBlock CreateLikability() => new LikabilityBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(LikabilityBlock),
             Fallback = 6,
             Maximum  = 10,
@@ -165,6 +179,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static RateBlock CreateRate() => new RateBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(RateBlock),
             Fallback = 6,
             Maximum  = 10,
@@ -175,6 +190,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static RadarBlock CreateRadar() => new RadarBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(RadarBlock),
             Maximum  = 10,
             Minimum  = 0,
@@ -188,6 +204,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static HistogramBlock CreateHistogram() => new HistogramBlock
         {
+            Id       = ID.Get(),
             Name     = nameof(HistogramBlock),
             Maximum  = 10,
             Minimum  = 0,
@@ -200,6 +217,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static AudioBlock CreateAudio() => new AudioBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(AudioBlock),
             TargetName      = nameof(AudioBlock),
             TargetSource    = nameof(AudioBlock),
@@ -210,6 +228,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static FileBlock CreateFile() => new FileBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(FileBlock),
             TargetName      = nameof(FileBlock),
             TargetSource    = nameof(FileBlock),
@@ -220,6 +239,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static VideoBlock CreateVideo() => new VideoBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(VideoBlock),
             TargetName      = nameof(VideoBlock),
             TargetSource    = nameof(VideoBlock),
@@ -230,6 +250,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static MusicBlock CreateMusic() => new MusicBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(MusicBlock),
             TargetName      = nameof(MusicBlock),
             TargetSource    = nameof(MusicBlock),
@@ -240,6 +261,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static ImageBlock CreateImage() => new ImageBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(ImageBlock),
             TargetName      = nameof(ImageBlock),
             TargetSource    = nameof(ImageBlock),
@@ -250,6 +272,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
 
         private static ReferenceBlock CreateReference() => new ReferenceBlock
         {
+            Id              = ID.Get(),
             Name            = nameof(ReferenceBlock),
             DataSource      = ReferenceSource.Compose,
             TargetName      = nameof(ReferenceBlock),
@@ -440,12 +463,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             };
         }
 
+        public static readonly MetadataKind[] GroupElementKinds = new[]
+        {
+            MetadataKind.Degree,
+            MetadataKind.Switch,
+            MetadataKind.Star,
+            MetadataKind.Heart,
+            MetadataKind.Binary,
+            MetadataKind.Likability,
+            MetadataKind.Rate,
+        };
+
         // (\MetadataKind.w,
         // MetadataKind.$1,
         public static readonly MetadataKind[] BasicBlockKinds = new[]
         {
             MetadataKind.Color,
-            MetadataKind.Degree,
             MetadataKind.Number,
             MetadataKind.Slider,
             MetadataKind.SingleLine,
@@ -467,7 +500,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         public static readonly MetadataKind[] OptionBlockKinds = new[]
         {
             MetadataKind.Switch,
-            MetadataKind.Radio,
             MetadataKind.Star,
             MetadataKind.Heart,
             MetadataKind.Binary,

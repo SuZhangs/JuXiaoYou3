@@ -81,7 +81,9 @@ namespace Acorisoft.FutureGL.MigaStudio
             };
         }
         public static string OperationOfAddIsSuccessful => GetText("text.OperationOfAddIsSuccessful");
+        public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
+        public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
         
         public static string ImageProcessing
         {

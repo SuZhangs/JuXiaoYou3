@@ -165,7 +165,7 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <f:Multiline Height="160"
+            <f:MultiLine Height="160"
                          Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
     </DataTemplate>

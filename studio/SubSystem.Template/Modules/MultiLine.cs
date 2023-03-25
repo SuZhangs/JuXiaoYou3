@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         public MultiLineBlockEditUI(MultiLineBlock block) : base(block)
         {
             EnableExpression = block.EnableExpression;
-            CharacterLimited = block.CharacterLimited;
+            CharacterLimited = block.CharacterLimited == 0? 100 : block.CharacterLimited;
         }
 
         protected override MultiLineBlock CreateInstanceOverride()

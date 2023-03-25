@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Themes/Generic.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockEditTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

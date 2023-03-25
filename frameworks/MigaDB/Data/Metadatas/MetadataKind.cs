@@ -18,11 +18,10 @@
          */
         OptionType = 0x00020000,
         Switch     = OptionType + 0x0001,
-        Radio      = OptionType + 0x0002,
-        Heart      = OptionType + 0x0004,
-        Star       = OptionType + 0x0008,
-        Binary     = OptionType + 0x000f,
-        Sequence   = OptionType + 0x0010,
+        Heart      = OptionType + 0x0002,
+        Star       = OptionType + 0x0004,
+        Binary     = OptionType + 0x0008,
+        Sequence   = OptionType + 0x000f,
 
         /*
         * Reference

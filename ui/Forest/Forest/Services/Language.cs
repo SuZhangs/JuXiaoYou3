@@ -248,6 +248,44 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <summary>
         /// 确定
         /// </summary>
+        public static string ItemDuplicatedText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Item duplicated",
+                    CultureArea.French   => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean   => "kr.ini",
+                    CultureArea.Russian  => "ru.ini",
+                    _                    => "选项重复！"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 确定
+        /// </summary>
+        public static string ContentDuplicatedText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Ok",
+                    CultureArea.French   => "fr.ini",
+                    CultureArea.Japanese => "jp.ini",
+                    CultureArea.Korean   => "kr.ini",
+                    CultureArea.Russian  => "ru.ini",
+                    _                    => "内容重复！"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 确定
+        /// </summary>
         public static string CompleteText
         {
             get

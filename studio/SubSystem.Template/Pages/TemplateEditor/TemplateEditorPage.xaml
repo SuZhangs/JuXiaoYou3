@@ -80,7 +80,7 @@
                     <f:SingleLine Margin="0 8"
                                   Watermark="联系方式"
                                   Text="{Binding ContractList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <f:Multiline Height="144"
+                    <f:MultiLine Height="144"
                                  Margin="0 8"
                                  Watermark="介绍"
                                  TextWrapping="Wrap"

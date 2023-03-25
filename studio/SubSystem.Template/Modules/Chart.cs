@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
 using Acorisoft.FutureGL.MigaUtils;
+using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
@@ -18,13 +24,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
         protected ChartBlockDataUI(ChartBlock block) : base(block)
         {
-            TargetBlock = block;
-            Fallback = block.Fallback;
-            _value = new List<BindableAxis>();
-            Axis = new List<string>(block.Axis);
-            Color = block.Color;
-            Maximum = block.Maximum;
-            Minimum = block.Minimum;
+            TargetBlock   = block;
+            Fallback      = block.Fallback;
+            
+            _value        = new List<BindableAxis>();
+            Axis          = new List<string>(block.Axis);
+            Color         = block.Color;
+            Maximum       = block.Maximum;
+            Minimum       = block.Minimum;
 
             if (block.Value is null)
             {
@@ -53,6 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             TargetBlock.Value[index] = value;
             Data = new List<int>(TargetBlock.Value);
         }
+        
 
         protected ChartBlock TargetBlock { get; }
 
@@ -155,16 +163,116 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
 
         protected ChartBlockEditUI(ChartBlock block) : base(block)
         {
-            Axis = new ObservableCollection<string>();
-            Maximum = block.Maximum;
-            Minimum = block.Minimum;
-            Color = block.Color;
+            Axis          = new ObservableCollection<string>();
+            Maximum       = block.Maximum;
+            Minimum       = block.Minimum;
+            Color         = block.Color;
+            AddCommand    = new AsyncRelayCommand(AddImpl);
+            RemoveCommand = new AsyncRelayCommand<string>(RemoveImpl);
+            EditCommand   = new AsyncRelayCommand<string>(EditImpl);
+            UpCommand     = new RelayCommand<string>(UpImpl);
+            DownCommand   = new RelayCommand<string>(DownImpl);
 
             if (block.Axis is not null)
             {
                 Axis.AddRange(block.Axis);
             }
         }
+        
+        
+        private async Task AddImpl()
+        {
+            var r = await StringViewModel.String();
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+            
+            Axis.Add(r.Value);
+        }
+
+        private async Task EditImpl(string item)
+        {
+            if (string.IsNullOrEmpty(item))
+            {
+                return;
+            }
+
+            var r = await StringViewModel.String();
+
+            if (r.IsFinished && !string.IsNullOrEmpty(r.Value))
+            {
+                var index = Axis.IndexOf(item);
+                Axis[index] = r.Value;
+            }
+        }
+
+        private async Task RemoveImpl(string item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            var r = await Xaml.Get<IDialogService>()
+                              .Danger(TemplateSystemString.Notify,
+                                  TemplateSystemString.AreYouSureCreateNew);
+
+            if (!r)
+            {
+                return;
+            }
+
+            if (Axis.Remove(item))
+            {
+                await Xaml.Get<IDialogService>()
+                          .Notify(
+                              CriticalLevel.Success,
+                              TemplateSystemString.Notify,
+                              TemplateSystemString.OperationOfRemoveIsSuccessful);
+            }
+        }
+
+        private void UpImpl(string item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            var index = Axis.IndexOf(item);
+
+            if (index < 1)
+            {
+                return;
+            }
+
+            Axis.Move(index, index - 1);
+        }
+
+        private void DownImpl(string item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            var index = Axis.IndexOf(item);
+
+            if (index >= Axis.Count - 1)
+            {
+                return;
+            }
+
+            Axis.Move(index, index + 1);
+        }
+
+        public AsyncRelayCommand AddCommand { get; }
+        public AsyncRelayCommand<string> EditCommand { get; }
+        public AsyncRelayCommand<string> RemoveCommand { get; }
+        public RelayCommand<string> UpCommand { get; }
+        public RelayCommand<string> DownCommand { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。

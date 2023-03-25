@@ -3,7 +3,7 @@
     /// <summary>
     /// 表示程度内容块。
     /// </summary>
-    public interface IDegreeBlock : IModuleBlock, IModuleBlock<int>
+    public interface IDegreeBlock : IModuleBlock, IModuleBlock<int>, IHeaderlessBlock
     {
         /// <summary>
         /// 分割线
@@ -34,14 +34,14 @@
     /// <summary>
     /// 表示程度内容块。
     /// </summary>
-    public interface IDegreeBlockDataUI : IDegreeBlock, IModuleBlockDataUI
+    public interface IDegreeBlockDataUI : IDegreeBlock, IModuleBlockDataUI, IHeaderlessBlock
     {
     }
 
     /// <summary>
     /// 表示程度内容块。
     /// </summary>
-    public interface IDegreeBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<int>
+    public interface IDegreeBlockEditUI : IModuleBlockEditUI, IModuleBlockEditUI<int>, IHeaderlessBlock
     {
         /// <summary>
         /// 分割线

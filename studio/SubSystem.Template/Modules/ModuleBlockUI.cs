@@ -108,6 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         
         protected ModuleBlockEditUI(IModuleBlock block)
         {
+            Id       = string.IsNullOrEmpty(block.Id) ? ID.Get() : block.Id; 
             Name     = block.Name;
             ToolTips = block.ToolTips;
             Metadata = block.Metadata;
@@ -118,7 +119,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
         /// <summary>
         /// 唯一标识符
         /// </summary>
-        public string Id { get; } = ID.Get();
+        public string Id { get; }
 
         /// <summary>
         /// 喵喵咒语
