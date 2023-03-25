@@ -6,7 +6,7 @@ using Acorisoft.FutureGL.MigaStudio.Modules;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 {
-    public class EditBlockViewModel : DialogViewModel
+    public class EditBlockViewModel : ImplicitDialogVM
     {
         private ModuleBlockEditUI _block;
 
@@ -35,6 +35,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                                element
                            }
                        });
+        }
+
+        protected override bool IsCompleted() => true;
+
+        protected override void Finish()
+        {
+            Result = Block;
+        }
+
+        protected override string Failed()
+        {
+            return string.Empty;
         }
     }
 }

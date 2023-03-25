@@ -30,140 +30,128 @@
             6. ReferenceBlock
     -->
     <DataTemplate DataType="{x:Type subTemp:AudioBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:VideoBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:FileBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ImageBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:MusicBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ReferenceBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                    <f:ListBox Margin="0 4"
-                               SelectedItem="{Binding DataSource,Mode=TwoWay}">
-                        <f:ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </f:ListBox.ItemsPanel>
-                        <t:ReferenceSource>Document</t:ReferenceSource>
-                        <t:ReferenceSource>Compose</t:ReferenceSource>
-                    </f:ListBox>
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:ListBox Margin="0 4"
+                           SelectedItem="{Binding DataSource,Mode=TwoWay}">
+                    <f:ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </f:ListBox.ItemsPanel>
+                    <t:ReferenceSource>Document</t:ReferenceSource>
+                    <t:ReferenceSource>Compose</t:ReferenceSource>
+                </f:ListBox>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <!--
@@ -178,169 +166,159 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:SingleLineBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="单位" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="单位" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:MultiLineBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <TextBlock Margin="0 4"
-                               FontSize="16"
-                               Foreground="{f:ForegroundBrush}"
-                               Text="最大字数" />
+                <TextBlock Margin="0 4"
+                           FontSize="16"
+                           Foreground="{f:ForegroundBrush}"
+                           Text="最大字数" />
 
-                    <studio:NumberBox Margin="0 4 0 8"
-                                      Maximum="3000"
-                                      Minimum="100"
-                                      Value="{Binding CharacterLimited,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}" />
+                <studio:NumberBox Margin="0 4 0 8"
+                                  Maximum="3000"
+                                  Minimum="100"
+                                  Value="{Binding CharacterLimited,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:ColorBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <TextBlock FontSize="18"
-                               Foreground="{f:ForegroundBrush}"
-                               Margin="0 16 0 0"
-                               Text="默认值" />
+                <TextBlock FontSize="18"
+                           Foreground="{f:ForegroundBrush}"
+                           Margin="0 16 0 0"
+                           Text="默认值" />
 
-                    <color:PortableColorPicker Margin="0 8"
-                                               HorizontalAlignment="Left"
-                                               Height="48"
-                                               Width="48"
-                                               SelectedColor="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <color:PortableColorPicker Margin="0 8"
+                                           HorizontalAlignment="Left"
+                                           Height="48"
+                                           Width="48"
+                                           SelectedColor="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:NumberBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="单位" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="单位" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SliderBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="单位" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="单位" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <!--
@@ -355,129 +333,119 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:StarBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HeartBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SwitchBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:BinaryBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="正面值" />
+        <Border Background="Transparent"
+                Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="正面值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="负面值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="负面值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
-
     <DataTemplate DataType="{x:Type subTemp:DegreeBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="正面值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="正面值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="负面值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="负面值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding DivideLine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="分割线" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding DivideLine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="分割线" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
 
@@ -488,53 +456,49 @@
             2. LikabilityBlock
     -->
     <DataTemplate DataType="{x:Type subTemp:LikabilityBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:RateBlockEditUI}">
-        <f:DialogPage Width="640">
-            <Border Background="Transparent">
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
+        <Border Background="Transparent" Width="640">
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-            </Border>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
 
@@ -548,148 +512,144 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:SequenceBlockEditUI}">
-        <f:DialogPage Width="960">
-            <Grid Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Grid Background="Transparent" Width="960">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    <f:ToggleSwitch Margin="0 4"
-                                    Content="值与名字不同？"
-                                    IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <f:ForestSection Grid.Column="1"
-                                 Header="元素">
-                    <f:ForestSection.ToolBar>
-                        <StackPanel HorizontalAlignment="Right"
-                                    Orientation="Horizontal"
-                                    Margin="0 0 0 4">
-                            <ftk:ToolButton Content="添加"
-                                            Command="{Binding AddCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="编辑"
-                                            Command="{Binding EditCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="删除"
-                                            Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="上移"
-                                            Command="{Binding UpCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Up}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="下移"
-                                            Command="{Binding DownCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Down}"
-                                            ShowText="True" />
-                        </StackPanel>
-                    </f:ForestSection.ToolBar>
-                    <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Items,Mode=OneWay}">
-                        <f:ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="8"
-                                           Text="{Binding Value,Mode=OneWay}"
-                                           TextTrimming="CharacterEllipsis" />
-                            </DataTemplate>
-                        </f:ListBox.ItemTemplate>
-                    </f:ListBox>
-                </f:ForestSection>
-            </Grid>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <f:ToggleSwitch Margin="0 4"
+                                Content="值与名字不同？"
+                                IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <f:ForestSection Grid.Column="1"
+                             Header="元素">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 4">
+                        <ftk:ToolButton Content="添加"
+                                        Command="{Binding AddCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="编辑"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="删除"
+                                        Command="{Binding RemoveCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="上移"
+                                        Command="{Binding UpCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="下移"
+                                        Command="{Binding DownCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:ListBox x:Name="Item"
+                           ItemsSource="{Binding Items,Mode=OneWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding Value,Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </f:ForestSection>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:GroupBlockEditUI}">
-        <f:DialogPage Width="960">
-            <Grid Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Grid Background="Transparent" Width="960">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <f:ForestSection Grid.Column="1"
-                                 Header="元素"
-                                 Margin="16 0">
-                    <f:ForestSection.ToolBar>
-                        <StackPanel HorizontalAlignment="Right"
-                                    Orientation="Horizontal"
-                                    Margin="0 0 0 4">
-                            <ftk:ToolButton Content="添加"
-                                            Command="{Binding AddCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="编辑"
-                                            Command="{Binding EditCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="删除"
-                                            Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="上移"
-                                            Command="{Binding UpCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Up}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="下移"
-                                            Command="{Binding DownCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Down}"
-                                            ShowText="True" />
-                        </StackPanel>
-                    </f:ForestSection.ToolBar>
-                    <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Items,Mode=OneWay}">
-                        <f:ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="8"
-                                           Text="{Binding Name,Mode=OneWay}"
-                                           TextTrimming="CharacterEllipsis" />
-                            </DataTemplate>
-                        </f:ListBox.ItemTemplate>
-                    </f:ListBox>
-                </f:ForestSection>
-            </Grid>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <f:ForestSection Grid.Column="1"
+                             Header="元素"
+                             Margin="16 0">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 4">
+                        <ftk:ToolButton Content="添加"
+                                        Command="{Binding AddCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="编辑"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="删除"
+                                        Command="{Binding RemoveCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="上移"
+                                        Command="{Binding UpCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="下移"
+                                        Command="{Binding DownCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:ListBox x:Name="Item"
+                           ItemsSource="{Binding Items,Mode=OneWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </f:ForestSection>
+        </Grid>
     </DataTemplate>
 
     <!--
@@ -701,168 +661,164 @@
 
 
     <DataTemplate DataType="{x:Type subTemp:RadarBlockEditUI}">
-        <f:DialogPage Width="960">
-            <Grid Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Grid Background="Transparent" Width="960">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <f:ForestSection Grid.Column="1"
-                                 Header="元素"
-                                 Margin="16 0">
-                    <f:ForestSection.ToolBar>
-                        <StackPanel HorizontalAlignment="Right"
-                                    Orientation="Horizontal"
-                                    Margin="0 0 0 4">
-                            <ftk:ToolButton Content="添加"
-                                            Command="{Binding AddCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="编辑"
-                                            Command="{Binding EditCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="删除"
-                                            Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="上移"
-                                            Command="{Binding UpCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Up}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="下移"
-                                            Command="{Binding DownCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Down}"
-                                            ShowText="True" />
-                        </StackPanel>
-                    </f:ForestSection.ToolBar>
-                    <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Axis,Mode=OneWay}">
-                        <f:ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="8"
-                                           Text="{Binding Mode=OneWay}"
-                                           TextTrimming="CharacterEllipsis" />
-                            </DataTemplate>
-                        </f:ListBox.ItemTemplate>
-                    </f:ListBox>
-                </f:ForestSection>
-            </Grid>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <f:ForestSection Grid.Column="1"
+                             Header="元素"
+                             Margin="16 0">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 4">
+                        <ftk:ToolButton Content="添加"
+                                        Command="{Binding AddCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="编辑"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="删除"
+                                        Command="{Binding RemoveCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="上移"
+                                        Command="{Binding UpCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="下移"
+                                        Command="{Binding DownCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:ListBox x:Name="Item"
+                           ItemsSource="{Binding Axis,Mode=OneWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </f:ForestSection>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HistogramBlockEditUI}">
-        <f:DialogPage Width="960">
-            <Grid Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="名字" />
+        <Grid Background="Transparent" Width="960">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Header="喵喵咒语" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="最小值" />
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="最大值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="最小值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="0 4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                          Header="默认值" />
+                <f:HeaderedSingleLine Margin="0 4"
+                                      IsReadOnly="True"
+                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                      Header="默认值" />
 
-                    <f:HeaderedMultiLine Margin="0 4"
-                                         Header="提示"
-                                         Height="128"
-                                         Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <f:ForestSection Grid.Column="1"
-                                 Header="元素"
-                                 Margin="16 0">
-                    <f:ForestSection.ToolBar>
-                        <StackPanel HorizontalAlignment="Right"
-                                    Orientation="Horizontal"
-                                    Margin="0 0 0 4">
-                            <ftk:ToolButton Content="添加"
-                                            Command="{Binding AddCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="编辑"
-                                            Command="{Binding EditCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="删除"
-                                            Command="{Binding RemoveCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="上移"
-                                            Command="{Binding UpCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Up}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="下移"
-                                            Command="{Binding DownCommand}"
-                                            CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
-                                            Icon="{StaticResource FeatherIcon.Down}"
-                                            ShowText="True" />
-                        </StackPanel>
-                    </f:ForestSection.ToolBar>
-                    <f:ListBox x:Name="Item"
-                               ItemsSource="{Binding Axis,Mode=OneWay}">
-                        <f:ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="8"
-                                           Text="{Binding}"
-                                           TextTrimming="CharacterEllipsis" />
-                            </DataTemplate>
-                        </f:ListBox.ItemTemplate>
-                    </f:ListBox>
-                </f:ForestSection>
-            </Grid>
-        </f:DialogPage>
+                <f:HeaderedMultiLine Margin="0 4"
+                                     Header="提示"
+                                     Height="128"
+                                     Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <f:ForestSection Grid.Column="1"
+                             Header="元素"
+                             Margin="16 0">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Margin="0 0 0 4">
+                        <ftk:ToolButton Content="添加"
+                                        Command="{Binding AddCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="编辑"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="删除"
+                                        Command="{Binding RemoveCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="上移"
+                                        Command="{Binding UpCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="下移"
+                                        Command="{Binding DownCommand}"
+                                        CommandParameter="{Binding ElementName=Item,Mode=OneWay,Path=SelectedItem}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:ListBox x:Name="Item"
+                           ItemsSource="{Binding Axis,Mode=OneWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding}"
+                                       TextTrimming="CharacterEllipsis" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </f:ForestSection>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

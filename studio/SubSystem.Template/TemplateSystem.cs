@@ -9,6 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             Xaml.InstallView<EditBlockView, EditBlockViewModel>();
             Xaml.InstallView<NewBlockView, NewBlockViewModel>();
+            Xaml.InstallView<NewElementView, NewElementViewModel>();
             Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
         }
     }

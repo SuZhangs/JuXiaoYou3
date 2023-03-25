@@ -13,13 +13,13 @@
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewBlockViewModel}, IsDesignTimeCreatable=True}"
-                     Height="540"
-                     Width="768">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditBlockViewModel}, IsDesignTimeCreatable=True}"
+                     MinHeight="540"
+                     MinWidth="640">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockEditTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <thisConverters:ModuleBlockConverter x:Key="Name"/>
@@ -31,37 +31,9 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
-                  Accent="Indigo">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-
-            <!-- 选项 -->
-            <f:TreeView Grid.Column="0"
-                        BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
-                <f:TreeViewItem Header="基础块" 
-                                Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicBlockKinds}"/>
-                <f:TreeViewItem Header="高级块" 
-                                Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedBlockKinds}"/>
-                <f:TreeViewItem Header="选项块" 
-                                Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.OptionBlockKinds}"/>
-                <f:TreeViewItem Header="图表块" 
-                                Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartBlockKinds}"/>
-            </f:TreeView>
-
-            <!-- 预览 -->
-            <f:StretchPanel Grid.Column="1">
-                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                <Border Background="{x:Static f:Xaml.Transparent}"/>
-            </f:StretchPanel>
-        </Grid>
+                  Accent="Indigo"
+                  Content="{Binding Block}"
+                  CancelCommand="{Binding CancelCommand}"
+                  CompletedCommand="{Binding CompletedCommand}">
     </f:DialogPage>
 </f:ForestUserControl>

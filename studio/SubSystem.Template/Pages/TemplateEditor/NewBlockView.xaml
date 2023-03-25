@@ -31,7 +31,9 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
-                  Accent="Indigo">
+                  Accent="Indigo"
+                  CancelCommand="{Binding CancelCommand}"
+                  CompletedCommand="{Binding CompletedCommand}">
         
         <Grid>
             <Grid.ColumnDefinitions>

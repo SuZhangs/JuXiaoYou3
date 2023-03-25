@@ -150,13 +150,13 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         static HeaderedMultiLine()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiLine), new FrameworkPropertyMetadata(typeof(MultiLine)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HeaderedMultiLine), new FrameworkPropertyMetadata(typeof(HeaderedMultiLine)));
 
-            AcceptsTabProperty.AddOwner(typeof(MultiLine))
-                              .OverrideMetadata(typeof(MultiLine), new FrameworkPropertyMetadata(Boxing.True));
+            AcceptsTabProperty.AddOwner(typeof(HeaderedMultiLine))
+                              .OverrideMetadata(typeof(HeaderedMultiLine), new FrameworkPropertyMetadata(Boxing.True));
 
-            AcceptsReturnProperty.AddOwner(typeof(MultiLine))
-                                 .OverrideMetadata(typeof(MultiLine), new FrameworkPropertyMetadata(Boxing.True));
+            AcceptsReturnProperty.AddOwner(typeof(HeaderedMultiLine))
+                                 .OverrideMetadata(typeof(HeaderedMultiLine), new FrameworkPropertyMetadata(Boxing.True));
             HeaderStringFormatProperty = DependencyProperty.Register(
                 nameof(HeaderStringFormat),
                 typeof(string),
