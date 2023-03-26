@@ -44,6 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             Id                     = ID.Get();
             Version                = 1;
             Blocks                 = new ObservableCollection<ModuleBlockEditUI>();
+            Blocks.CollectionChanged += (_, _) => RaiseUpdated(nameof(PreviewBlocks));
             MetadataList           = new ObservableCollection<MetadataCache>();
             OpenPreviewPaneCommand = new RelayCommand(() => IsPreviewPaneOpen = true);
 
@@ -502,6 +503,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// 模组内容块集合。
         /// </summary>
         public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
+
+        public IEnumerable<ModuleBlockDataUI> PreviewBlocks =>
+            Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
 
         public RelayCommand NewTemplateCommand { get; }
         public AsyncRelayCommand OpenTemplateCommand { get; }

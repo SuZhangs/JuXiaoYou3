@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaStudio.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -30,8 +31,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             Job(TemplateSystemString.GetText("text.launch.openDatabase"), x =>
             {
+                // TODO: 记得移除这一项
+                
+                
                 var dr = Xaml.Get<IDatabaseManager>()
-                             .LoadAsync(@"C:\Users\Administrator\Documents\我的世界观\Juxiaoyou3")
+                             .LoadAsync(@"C:\Users\罗易斯\Documents\我的世界观\Juxiaoyou3")
                              .GetAwaiter()
                              .GetResult();
                 if (dr.IsFinished)

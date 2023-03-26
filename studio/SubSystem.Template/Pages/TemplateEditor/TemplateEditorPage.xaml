@@ -9,17 +9,25 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateEditorViewModel}, IsDesignTimeCreatable=True}">
-    <f:Drawer Margin="8 16"
+    <f:Drawer Padding="8 16"
               IsRightOpen="{Binding IsPreviewPaneOpen,Mode=TwoWay}">
         <f:Drawer.RightContent>
-            <Grid Background="{f:BackgroundBrush}"
+            <Grid Background="{f:Brush AdaptiveLevel2}"
                   Width="640">
                 <Grid.Resources>
                     <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
                 </Grid.Resources>
                 <ScrollViewer>
                     <Border x:Name="Canvas">
-                        <ItemsControl ItemsSource="{Binding Blocks,Mode=OneWay}"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                            <TextBlock Text="{Binding For,Mode=OneWay}"/>
+                            <TextBlock Text="{Binding ContractList,Mode=OneWay}"/>
+                            <TextBlock Text="{Binding AuthorList,Mode=OneWay}"/>
+                            <TextBlock Text="{Binding Intro,Mode=OneWay}"/>
+                            <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}"/>
+                            <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}"/>
+                        </StackPanel>
                     </Border>
                 </ScrollViewer>
             </Grid>
@@ -153,7 +161,8 @@
                          Header="Kitty Spell"
                          Margin="8 0">
                 <f:ForestSection.ToolBar>
-                    <ftk:ToolButton Content="Refresh"
+                    <ftk:ToolButton Content="刷新"
+                                    Command="{Binding RefreshMetadataListCommand}"
                                 HorizontalAlignment="Right"
                                 Margin="0 0 0 4"
                                     Icon="{StaticResource FeatherIcon.Search}"
@@ -166,7 +175,9 @@
                             <DataTemplate>
                                 <Border BorderBrush="{f:Brush BorderBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="3">
+                                        CornerRadius="3"
+                                        Margin="0 4"
+                                        Padding="8">
                                     <DockPanel>
                                         
                                         <TextBlock DockPanel.Dock="Top"
