@@ -23,9 +23,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             return new GroupBlock
             {
                 Id       = ID.Get(),
-                Name     = nameof(SingleLineBlock),
-                ToolTips = nameof(SingleLineBlock),
-                Metadata = nameof(SingleLineBlock),
+                Name     = TemplateSystemString.GetSingleLineName(),
+                ToolTips  = TemplateSystemString.GetToolTipsField(),
+                
                 Items = new List<ModuleBlock>
                 {
                     CreateDegree(),
@@ -43,12 +43,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             var b = new SequenceBlock
             {
                 Id       = ID.Get(),
-                Name     = nameof(SequenceBlock),
+                Name     = TemplateSystemString.GetSequenceName(),
                 Fallback = "Item1",
                 Value = null,
                 Items    = new List<OptionItem>(),
-                ToolTips = nameof(SequenceBlock),
-                Metadata = nameof(SequenceBlock),
+                ToolTips  = TemplateSystemString.GetToolTipsField(),
+                
             };
             b.Items.Add(new OptionItem { Name = "Item1", Value = "Item1" });
             b.Items.Add(new OptionItem { Name = "Item2", Value = "Item2" });
@@ -62,150 +62,150 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         {
             Id = ID.Get(),
             Value = null,
-            Name     = nameof(SingleLineBlock),
-            Suffix   = nameof(SingleLineBlock),
-            Fallback = nameof(SingleLineBlock),
-            ToolTips = nameof(SingleLineBlock),
-            Metadata = nameof(SingleLineBlock),
+            Name     = TemplateSystemString.GetSingleLineName(),
+            Suffix   = TemplateSystemString.GetSuffixField(),
+            Fallback   = TemplateSystemString.GetFallbackField(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static MultiLineBlock CreateMultiLine() => new MultiLineBlock
         {
             Id       = ID.Get(),
             Value    = null,
-            Name     = nameof(MultiLineBlock),
-            Fallback = nameof(MultiLineBlock),
-            ToolTips = nameof(MultiLineBlock),
-            Metadata = nameof(MultiLineBlock),
+            Name     = TemplateSystemString.GetMultiLineName(),
+            Fallback  = TemplateSystemString.GetFallbackField(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static ColorBlock CreateColor() => new ColorBlock
         {
             Id       = ID.Get(),
             Value    = null,
-            Name     = nameof(ColorBlock),
+            Name     = TemplateSystemString.GetColorName(),
             Fallback = "#007ACC",
-            ToolTips = nameof(ColorBlock),
-            Metadata = nameof(ColorBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
 
         private static NumberBlock CreateNumber() => new NumberBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(NumberBlock),
+            Name     = TemplateSystemString.GetNumberName(),
             Fallback = 12,
             Maximum  = 30,
             Minimum  = 0,
             Value    = -1,
-            Suffix   = nameof(NumberBlock),
-            ToolTips = nameof(NumberBlock),
-            Metadata = nameof(NumberBlock),
+            Suffix   = TemplateSystemString.GetNumberName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static SliderBlock CreateSlider() => new SliderBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(SliderBlock),
+            Name     = TemplateSystemString.GetSliderName(),
             Fallback = 12,
             Maximum  = 30,
             Minimum  = 0,
             Value    = -1,
-            Suffix   = nameof(SliderBlock),
-            ToolTips = nameof(SliderBlock),
-            Metadata = nameof(SliderBlock),
+            Suffix   = TemplateSystemString.GetSliderName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static DegreeBlock CreateDegree() => new DegreeBlock
         {
             Id         = ID.Get(),
-            Name       = nameof(DegreeBlock),
+            Name       = TemplateSystemString.GetDegreeName(),
             Fallback   = 4,
             Maximum    = 10,
             Minimum    = 0,
             DivideLine = 10,
             Value      = -1,
-            Negative   = nameof(DegreeBlock.Negative),
-            Positive   = nameof(DegreeBlock.Positive),
-            ToolTips   = nameof(DegreeBlock),
-            Metadata   = nameof(DegreeBlock),
+            Negative  = TemplateSystemString.GetNegativeField(),
+            Positive  = TemplateSystemString.GetPositiveField(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
 
         private static SwitchBlock CreateSwitch() => new SwitchBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(SwitchBlock),
+            Name     = TemplateSystemString.GetSwitchName(),
             Fallback = false,
-            ToolTips = nameof(SwitchBlock),
-            Metadata = nameof(SwitchBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
 
         private static BinaryBlock CreateBinary() => new BinaryBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(BinaryBlock),
+            Name     = TemplateSystemString.GetBinaryName(),
             Fallback = false,
-            ToolTips = nameof(BinaryBlock),
-            Metadata = nameof(BinaryBlock),
-            Negative = nameof(DegreeBlock.Negative),
-            Positive = nameof(DegreeBlock.Positive),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
+            Negative  = TemplateSystemString.GetNegativeField(),
+            Positive  = TemplateSystemString.GetPositiveField(),
         };
 
 
         private static HeartBlock CreateHeart() => new HeartBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(HeartBlock),
+            Name     = TemplateSystemString.GetHeartName(),
             Fallback = false,
-            ToolTips = nameof(HeartBlock),
-            Metadata = nameof(HeartBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
 
         private static StarBlock CreateStar() => new StarBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(StarBlock),
+            Name     = TemplateSystemString.GetStarName(),
             Fallback = false,
-            ToolTips = nameof(StarBlock),
-            Metadata = nameof(StarBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static LikabilityBlock CreateLikability() => new LikabilityBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(LikabilityBlock),
+            Name     = TemplateSystemString.GetLikabilityName(),
             Fallback = 6,
             Maximum  = 10,
             Minimum  = 0,
             Value    = -1,
-            ToolTips = nameof(LikabilityBlock),
-            Metadata = nameof(LikabilityBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static RateBlock CreateRate() => new RateBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(RateBlock),
+            Name     = TemplateSystemString.GetRateName(),
             Fallback = 6,
             Maximum  = 10,
             Value    = -1,
             Minimum  = 0,
-            ToolTips = nameof(RateBlock),
-            Metadata = nameof(RateBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static RadarBlock CreateRadar() => new RadarBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(RadarBlock),
+            Name     = TemplateSystemString.GetRadarName(),
             Maximum  = 10,
             Value    = null,
             Minimum  = 0,
-            ToolTips = nameof(RadarBlock),
-            Metadata = nameof(RadarBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
             Axis     = new[] { "Axis1", "Axis2", "Axis3", "Axis4" },
             Fallback = new[] { 3, 4, 5, 6 },
             Color    = "#007ACC"
@@ -215,12 +215,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private static HistogramBlock CreateHistogram() => new HistogramBlock
         {
             Id       = ID.Get(),
-            Name     = nameof(HistogramBlock),
+            Name     = TemplateSystemString.GetHistogramName(),
             Maximum  = 10,
             Value    = null,
             Minimum  = 0,
-            ToolTips = nameof(HistogramBlock),
-            Metadata = nameof(HistogramBlock),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
             Axis     = new[] { "Axis1", "Axis2", "Axis3", "Axis4" },
             Fallback = new[] { 3, 4, 5, 6 },
             Color    = "#007ACC"
@@ -229,68 +229,67 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private static AudioBlock CreateAudio() => new AudioBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(AudioBlock),
-            TargetName      = nameof(AudioBlock),
-            TargetSource    = nameof(AudioBlock),
-            TargetThumbnail = nameof(AudioBlock),
-            ToolTips        = nameof(AudioBlock),
-            Metadata        = nameof(AudioBlock),
+            Name            = TemplateSystemString.GetAudioName(),
+            TargetName      = TemplateSystemString.GetAudioName(),
+            TargetSource    = TemplateSystemString.GetAudioName(),
+            TargetThumbnail = TemplateSystemString.GetAudioName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
         };
 
         private static FileBlock CreateFile() => new FileBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(FileBlock),
-            TargetName      = nameof(FileBlock),
-            TargetSource    = nameof(FileBlock),
-            TargetThumbnail = nameof(FileBlock),
-            ToolTips        = nameof(FileBlock),
-            Metadata        = nameof(FileBlock),
+            Name            = TemplateSystemString.GetFileName(),
+            TargetName      = TemplateSystemString.GetFileName(),
+            TargetSource    = TemplateSystemString.GetFileName(),
+            TargetThumbnail = TemplateSystemString.GetFileName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static VideoBlock CreateVideo() => new VideoBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(VideoBlock),
-            TargetName      = nameof(VideoBlock),
-            TargetSource    = nameof(VideoBlock),
-            TargetThumbnail = nameof(VideoBlock),
-            ToolTips        = nameof(VideoBlock),
-            Metadata        = nameof(VideoBlock),
+            Name            = TemplateSystemString.GetVideoName(),
+            TargetName      = TemplateSystemString.GetVideoName(),
+            TargetSource    = TemplateSystemString.GetVideoName(),
+            TargetThumbnail = TemplateSystemString.GetVideoName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static MusicBlock CreateMusic() => new MusicBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(MusicBlock),
-            TargetName      = nameof(MusicBlock),
-            TargetSource    = nameof(MusicBlock),
-            TargetThumbnail = nameof(MusicBlock),
-            ToolTips        = nameof(MusicBlock),
-            Metadata        = nameof(MusicBlock),
+            Name            = TemplateSystemString.GetMusicName(),
+            TargetName      = TemplateSystemString.GetMusicName(),
+            TargetSource    = TemplateSystemString.GetMusicName(),
+            TargetThumbnail = TemplateSystemString.GetMusicName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static ImageBlock CreateImage() => new ImageBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(ImageBlock),
-            TargetName      = nameof(ImageBlock),
-            TargetSource    = nameof(ImageBlock),
-            TargetThumbnail = nameof(ImageBlock),
-            ToolTips        = nameof(ImageBlock),
-            Metadata        = nameof(ImageBlock),
+            Name            = TemplateSystemString.GetImageName(),
+            TargetName      = TemplateSystemString.GetImageName(),
+            TargetSource    = TemplateSystemString.GetImageName(),
+            TargetThumbnail = TemplateSystemString.GetImageName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         private static ReferenceBlock CreateReference() => new ReferenceBlock
         {
             Id              = ID.Get(),
-            Name            = nameof(ReferenceBlock),
+            Name            = TemplateSystemString.GetReferenceName(),
             DataSource      = ReferenceSource.Compose,
-            TargetName      = nameof(ReferenceBlock),
-            TargetSource    = nameof(ReferenceBlock),
-            TargetThumbnail = nameof(ReferenceBlock),
-            ToolTips        = nameof(ReferenceBlock),
-            Metadata        = nameof(ReferenceBlock),
+            TargetName      = TemplateSystemString.GetReferenceName(),
+            TargetSource    = TemplateSystemString.GetReferenceName(),
+            TargetThumbnail = TemplateSystemString.GetReferenceName(),
+            ToolTips  = TemplateSystemString.GetToolTipsField(),
+            
         };
 
         #endregion

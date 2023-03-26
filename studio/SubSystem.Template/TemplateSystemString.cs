@@ -400,6 +400,169 @@ namespace Acorisoft.FutureGL.MigaStudio
         
         
         #endregion
+
+        #region Property Translate
+
+        public static string GetNameField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "名字",
+                CultureArea.Russian  => "Name",
+                CultureArea.Korean   => "Name",
+                CultureArea.Japanese => "Name",
+                CultureArea.French   => "Name",
+                _                    => "Name"
+
+            };
+        }
+        
+        
+        public static string GetMaximumField()
+        {
+            
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "最大值",
+                CultureArea.Russian  => "Maximum",
+                CultureArea.Korean   => "Maximum",
+                CultureArea.Japanese => "Maximum",
+                CultureArea.French   => "Maximum",
+                _                    => "Maximum"
+
+            };
+        }
+        
+        
+        public static string GetMinimumField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "最小值",
+                CultureArea.Russian  => "Minimum",
+                CultureArea.Korean   => "Minimum",
+                CultureArea.Japanese => "Minimum",
+                CultureArea.French   => "Minimum",
+                _                    => "Minimum"
+
+            };
+        }
+        
+        
+        public static string GetDivideLineField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "分割线",
+                CultureArea.Russian  => "DivideLine",
+                CultureArea.Korean   => "DivideLine",
+                CultureArea.Japanese => "DivideLine",
+                CultureArea.French   => "DivideLine",
+                _                    => "DivideLine"
+
+            };
+        }
+        
+        public static string GetFallbackField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "默认值",
+                CultureArea.Russian  => "Fallback",
+                CultureArea.Korean   => "Fallback",
+                CultureArea.Japanese => "Fallback",
+                CultureArea.French   => "Fallback",
+                _                    => "Fallback"
+
+            };
+        }
+        
+        
+        public static string GetToolTipsField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "提示",
+                CultureArea.Russian  => "ToolTips",
+                CultureArea.Korean   => "ToolTips",
+                CultureArea.Japanese => "ToolTips",
+                CultureArea.French   => "ToolTips",
+                _                    => "ToolTips"
+
+            };
+        }
+        
+        
+        public static string GetMetadataField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "喵喵咒语",
+                CultureArea.Russian  => "Kitty Spell",
+                CultureArea.Korean   => "Kitty Spell",
+                CultureArea.Japanese => "Kitty Spell",
+                CultureArea.French   => "Kitty Spell",
+                _                    => "Kitty Spell"
+
+            };
+        }
+
+        public static string GetNegativeField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "负面值",
+                CultureArea.Russian  => "Negative",
+                CultureArea.Korean   => "Negative",
+                CultureArea.Japanese => "Negative",
+                CultureArea.French   => "Negative",
+                _                    => "Negative"
+
+            };
+        }
+        
+        public static string GetColorField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "颜色",
+                CultureArea.Russian  => "Color",
+                CultureArea.Korean   => "Color",
+                CultureArea.Japanese => "Color",
+                CultureArea.French   => "Color",
+                _                    => "Color"
+
+            };
+        }
+        
+        public static string GetPositiveField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "正面值",
+                CultureArea.Russian  => "Positive",
+                CultureArea.Korean   => "Positive",
+                CultureArea.Japanese => "Positive",
+                CultureArea.French   => "Positive",
+                _                    => "Positive"
+
+            };
+        }
+        
+        public static string GetSuffixField()
+        {
+            return Language.Culture switch
+            {
+                CultureArea.Chinese  => "Kg",
+                CultureArea.Russian  => "Kg",
+                CultureArea.Korean   => "Kg",
+                CultureArea.Japanese => "Kg",
+                CultureArea.French   => "Kg",
+                _                    => "Kg"
+
+            };
+        }
+        #endregion
         
         
         public static string GetDatabaseResult(DatabaseFailedReason reason)
