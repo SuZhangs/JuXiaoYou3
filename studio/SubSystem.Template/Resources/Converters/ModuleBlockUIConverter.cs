@@ -11,17 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ModuleBlock mb)
-            {
-                return ModuleBlockFactory.GetDataUI(mb);
-            }
-            
-            if (value is ModuleBlockEditUI mbe)
-            {
-                return ModuleBlockFactory.GetDataUI(mbe.CreateInstance());
-            }
-
-            return null;
+            return TemplateSystemString.GetModuleBlockNameByType(value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

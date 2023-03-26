@@ -8,21 +8,6 @@ namespace Acorisoft.FutureGL.MigaStudio
     public static class SubSystemString
     {
 
-        static SubSystemString()
-        {
-            var fileName = Language.Culture switch
-            {
-                CultureArea.English  => "SubSystem.en.ini",
-                CultureArea.French   => "SubSystem.fr.ini",
-                CultureArea.Japanese => "SubSystem.jp.ini",
-                CultureArea.Korean   => "SubSystem.kr.ini",
-                CultureArea.Russian  => "SubSystem.ru.ini",
-                _                    => "SubSystem.cn.ini",
-            };
-            
-            Language.AppendLanguageSource(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
-        }
-
         public static string GetText(string id) => Language.GetText(id);
         
         

@@ -63,10 +63,15 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             var setting = InstallSetting(logger, appModel, container);
             
+            //
+            // TODO: 安装语言
+            SubSystem.InstallLanguages();
+            TemplateSystem.InstallLanguages();
+            
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
                 DatabaseManager.GetDefaultDatabaseManager(
                     logger,
-                    setting.DebugMode));
+                    DatabaseMode.Debug));
         }
 
         private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)
@@ -113,6 +118,8 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
+            //
+            // TODO: 安装视图
             SubSystem.InstallViews();
             TemplateSystem.InstallViews();
         }

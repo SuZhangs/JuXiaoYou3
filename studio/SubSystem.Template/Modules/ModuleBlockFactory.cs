@@ -45,6 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
                 Id       = ID.Get(),
                 Name     = nameof(SequenceBlock),
                 Fallback = "Item1",
+                Value = null,
                 Items    = new List<OptionItem>(),
                 ToolTips = nameof(SequenceBlock),
                 Metadata = nameof(SequenceBlock),
@@ -60,6 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private static SingleLineBlock CreateSingleLine() => new SingleLineBlock
         {
             Id = ID.Get(),
+            Value = null,
             Name     = nameof(SingleLineBlock),
             Suffix   = nameof(SingleLineBlock),
             Fallback = nameof(SingleLineBlock),
@@ -70,6 +72,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private static MultiLineBlock CreateMultiLine() => new MultiLineBlock
         {
             Id       = ID.Get(),
+            Value    = null,
             Name     = nameof(MultiLineBlock),
             Fallback = nameof(MultiLineBlock),
             ToolTips = nameof(MultiLineBlock),
@@ -79,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
         private static ColorBlock CreateColor() => new ColorBlock
         {
             Id       = ID.Get(),
+            Value    = null,
             Name     = nameof(ColorBlock),
             Fallback = "#007ACC",
             ToolTips = nameof(ColorBlock),
@@ -93,6 +97,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Fallback = 12,
             Maximum  = 30,
             Minimum  = 0,
+            Value    = -1,
             Suffix   = nameof(NumberBlock),
             ToolTips = nameof(NumberBlock),
             Metadata = nameof(NumberBlock),
@@ -105,6 +110,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Fallback = 12,
             Maximum  = 30,
             Minimum  = 0,
+            Value    = -1,
             Suffix   = nameof(SliderBlock),
             ToolTips = nameof(SliderBlock),
             Metadata = nameof(SliderBlock),
@@ -118,6 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Maximum    = 10,
             Minimum    = 0,
             DivideLine = 10,
+            Value      = -1,
             Negative   = nameof(DegreeBlock.Negative),
             Positive   = nameof(DegreeBlock.Positive),
             ToolTips   = nameof(DegreeBlock),
@@ -173,6 +180,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Fallback = 6,
             Maximum  = 10,
             Minimum  = 0,
+            Value    = -1,
             ToolTips = nameof(LikabilityBlock),
             Metadata = nameof(LikabilityBlock),
         };
@@ -183,6 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Name     = nameof(RateBlock),
             Fallback = 6,
             Maximum  = 10,
+            Value    = -1,
             Minimum  = 0,
             ToolTips = nameof(RateBlock),
             Metadata = nameof(RateBlock),
@@ -193,6 +202,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Id       = ID.Get(),
             Name     = nameof(RadarBlock),
             Maximum  = 10,
+            Value    = null,
             Minimum  = 0,
             ToolTips = nameof(RadarBlock),
             Metadata = nameof(RadarBlock),
@@ -207,6 +217,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules.ViewModels
             Id       = ID.Get(),
             Name     = nameof(HistogramBlock),
             Maximum  = 10,
+            Value    = null,
             Minimum  = 0,
             ToolTips = nameof(HistogramBlock),
             Metadata = nameof(HistogramBlock),

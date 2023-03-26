@@ -13,17 +13,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             Maximum = block.Maximum;
             Minimum = block.Minimum;
             Suffix  = block.Suffix;
-            
-            if (block.Value == -1)
-            {
-                block.Value = block.Fallback;
-            }
             Value   = block.Value;
         }
 
         protected override int OnValueChanged(int oldValue, int newValue)
         {
-            newValue          = Math.Clamp(newValue, Minimum, Maximum);
+            newValue          = newValue == -1 ? Fallback : Math.Clamp(newValue, Minimum, Maximum);
             TargetBlock.Value = newValue;
             return newValue;
         }

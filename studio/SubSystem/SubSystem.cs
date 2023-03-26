@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
@@ -38,6 +40,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             optionVM.Title = title;
             return Xaml.Get<IDialogService>().Dialog<TOption>(optionVM, parameter);
+        }
+        public static void InstallLanguages()
+        {
+            var fileName = Language.Culture switch
+            {
+                CultureArea.English  => "SubSystem.en.ini",
+                CultureArea.French   => "SubSystem.fr.ini",
+                CultureArea.Japanese => "SubSystem.jp.ini",
+                CultureArea.Korean   => "SubSystem.kr.ini",
+                CultureArea.Russian  => "SubSystem.ru.ini",
+                _                    => "SubSystem.cn.ini",
+            };
+            
+            Language.AppendLanguageSource(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
         }
 
         public static void InstallViews()

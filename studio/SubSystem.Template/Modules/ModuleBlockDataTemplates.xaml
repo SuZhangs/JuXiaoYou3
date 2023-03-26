@@ -9,9 +9,10 @@
                     xmlns:studio="urn:acorisoft/studio"
                     xmlns:studio1="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors"
                     xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors">
-        <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/BasicIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialDesignIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     <!--
@@ -361,7 +362,12 @@
                    MinWidth="320">
             <TextBlock Foreground="{f:ForegroundBrush}"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center">
+                       VerticalAlignment="Center"
+                       ToolTip="{Binding Name}"
+                       TextWrapping="Wrap"
+                       TextTrimming="CharacterEllipsis"
+                       MaxHeight="64"
+                       Width="200">
                 <Run FontWeight="Bold"
                      FontSize="14"
                      Text="{Binding Name,Mode=OneWay}" />

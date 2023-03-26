@@ -22,7 +22,7 @@
                 <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockEditTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <thisConverters:ModuleBlockConverter x:Key="Name"/>
+            <thisConverters:MetadataKindConverter x:Key="Name"/>
 
             <DataTemplate DataType="{x:Type thisModel3:MetadataKind}">
                 <TextBlock Margin="8"

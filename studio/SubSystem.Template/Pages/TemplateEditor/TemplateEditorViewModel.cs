@@ -28,29 +28,33 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
     public class TemplateEditorViewModel : TabViewModel
     {
-        private string       _name;
-        private string       _authorList;
-        private string       _contractList;
-        private int          _version;
-        private string       _organizations;
-        private string       _intro;
-        private DocumentType _forType;
-        private string       _for;
-        private string       _id;
-        private bool         _dirty;
+
+        private readonly HashSet<string> _metaHashSet;
+            
+        private string          _name;
+        private string          _authorList;
+        private string          _contractList;
+        private int             _version;
+        private string          _organizations;
+        private string          _intro;
+        private DocumentType    _forType;
+        private string          _for;
+        private string          _id;
+        private bool            _dirty;
 
         public TemplateEditorViewModel()
         {
-            Id                     = ID.Get();
-            Version                = 1;
-            Blocks                 = new ObservableCollection<ModuleBlockEditUI>();
+            _metaHashSet             =  new HashSet<string>();
+            Id                       =  ID.Get();
+            Version                  =  1;
+            Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
             Blocks.CollectionChanged += (_, _) => RaiseUpdated(nameof(PreviewBlocks));
-            MetadataList           = new ObservableCollection<MetadataCache>();
-            OpenPreviewPaneCommand = new RelayCommand(() => IsPreviewPaneOpen = true);
+            MetadataList             =  new ObservableCollection<MetadataCache>();
+            OpenPreviewPaneCommand   =  new RelayCommand(() => IsPreviewPaneOpen = true);
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
-            SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl, HasElement);
+            SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl);
             NewBlockCommand            = AsyncCommand(NewBlockImpl);
             EditBlockCommand           = AsyncCommand<ModuleBlockEditUI>(EditBlockImpl, HasElement);
             RemoveBlockCommand         = AsyncCommand<ModuleBlockEditUI>(RemoveBlockImpl);
@@ -61,6 +65,94 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             SetDirtyState(false);
         }
+
+        #region Translate
+
+        // TODO: 翻译
+        private static string GetName(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "世界观：未知"
+                };
+            }
+
+            return value;
+        }
+        
+        private static string GetFor(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "世界观名字"
+                };
+            }
+            
+            var pattern = Language.Culture switch
+            {
+                _ => "世界观:{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+        
+        private static string GetAuthor(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "作者：佚名"
+                };
+            }
+            
+            var pattern = Language.Culture switch
+            {
+                _ => "作者：{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+        
+        
+        private static string GetContractList(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "联系方式：暂无"
+                };
+            }
+            
+            var pattern = Language.Culture switch
+            {
+                _ => "联系方式：{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+        
+        
+        private static string GetIntro(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "简介：暂无"
+                };
+            }
+
+            return value;
+        }
+        
+
+        #endregion
 
         private static bool HasElement<T>(T element) where T : class => element is not null;
 
@@ -197,7 +289,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 await PNG.Write(fileName, payload, ms);
                 SetDirtyState(false);
                 await ds.Notify(
-                    CriticalLevel.Danger,
+                    CriticalLevel.Success,
                     TemplateSystemString.Notify,
                     TemplateSystemString.OperationOfSaveIsSuccessful);
             }
@@ -216,6 +308,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         private void DetectAll()
         {
+            MetadataList.Clear();
+            _metaHashSet.Clear();
             foreach (var block in Blocks)
             {
                 DetectMetadata(block);
@@ -254,12 +348,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         private void AddOrUpdateMetadata(string name, string meta)
         {
-            MetadataList.Add(new MetadataCache
+            if (_metaHashSet.Add(meta))
             {
-                Name         = name,
-                Id           = ID.Get(),
-                MetadataName = meta
-            });
+                MetadataList.Add(new MetadataCache
+                {
+                    Name         = name,
+                    Id           = ID.Get(),
+                    MetadataName = meta
+                });
+            }
         }
 
         #endregion
@@ -295,6 +392,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             DetectAll();
             SetDirtyState(true);
+            RaiseUpdated(nameof(PreviewBlocks));
 
             await Xaml.Get<IDialogService>()
                       .Notify(
@@ -396,7 +494,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string For
         {
-            get => _for;
+            get => GetFor(_for);
             set => SetValue(ref _for, value);
         }
 
@@ -414,7 +512,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string Intro
         {
-            get => _intro;
+            get => GetIntro(_intro);
             set => SetValue(ref _intro, value);
         }
 
@@ -446,7 +544,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string ContractList
         {
-            get => _contractList;
+            get => GetContractList(_contractList);
             set => SetValue(ref _contractList, value);
         }
 
@@ -455,7 +553,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string AuthorList
         {
-            get => _authorList;
+            get => GetAuthor(_authorList);
             set => SetValue(ref _authorList, value);
         }
 
@@ -464,7 +562,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string Name
         {
-            get => _name;
+            get => GetName(_name);
             set
             {
                 SetValue(ref _name, value);

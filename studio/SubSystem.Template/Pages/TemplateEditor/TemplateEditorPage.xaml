@@ -4,33 +4,95 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
                      mc:Ignorable="d"
+                     f:Language.Root="TemplateEditorPage"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateEditorViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <thisConverters:ModuleBlockUIConverter x:Key="BlockName"/>
+
+        <DataTemplate DataType="{x:Type thisModel:ModuleBlockEditUI}">
+            <TextBlock Margin="4"
+                       Text="{Binding Converter={StaticResource BlockName}}"/>
+        </DataTemplate>
+    </UserControl.Resources>
     <f:Drawer Padding="8 16"
               IsRightOpen="{Binding IsPreviewPaneOpen,Mode=TwoWay}">
         <f:Drawer.RightContent>
-            <Grid Background="{f:Brush AdaptiveLevel2}"
-                  Width="640">
-                <Grid.Resources>
-                    <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
-                </Grid.Resources>
+            <Border Background="{f:BackgroundBrush}"
+                    Width="640">
+                <Border.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Border.Resources>
                 <ScrollViewer>
-                    <Border x:Name="Canvas">
+                    <Border x:Name="Canvas"
+                            Padding="32"
+                            Background="{f:BackgroundBrush}">
                         <StackPanel>
-                            <TextBlock Text="{Binding Name,Mode=OneWay}"/>
-                            <TextBlock Text="{Binding For,Mode=OneWay}"/>
-                            <TextBlock Text="{Binding ContractList,Mode=OneWay}"/>
-                            <TextBlock Text="{Binding AuthorList,Mode=OneWay}"/>
-                            <TextBlock Text="{Binding Intro,Mode=OneWay}"/>
+                            <TextBlock FontSize="32"
+                                       Text="{Binding Name,Mode=OneWay}"/>
+                            <TextBlock FontSize="20"
+                                       Margin="0 4"
+                                       Text="{Binding For,Mode=OneWay}"/>
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="{Binding AuthorList,Mode=OneWay}"/>
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="{Binding ContractList,Mode=OneWay}"/>
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       MaxHeight="96"
+                                       Margin="0 4"
+                                       TextTrimming="CharacterEllipsis"                                      
+                                       Text="{Binding Intro,Mode=OneWay}"/>
+                            <TextBlock f:Language.Name="Blocks"
+                                       FontSize="18"
+                                       Margin="0 12"/>
                             <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}"/>
-                            <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}"/>
+
+                            <TextBlock f:Language.Name="Metadatas"
+                                       FontSize="18"
+                                       Margin="0 12"/>
+                            <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}"
+                                          MaxHeight="384">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="{f:Brush BorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="3"
+                                                Margin="4"
+                                                Padding="8">
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           FontSize="14"
+                                                           FontWeight="Bold"
+                                                           Text="{Binding MetadataName}"/>
+                                                <TextBlock Text="{Binding MetadataName}"/>
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
                     </Border>
                 </ScrollViewer>
-            </Grid>
+            </Border>
         </f:Drawer.RightContent>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -57,7 +119,7 @@
                                     IsFilled="True"
                                     ShowText="True"/>
                         <ftk:ToolButton Content="保存"
-                                    Command="{Binding SaveTemplateCommand}"
+                                        Command="{Binding SaveTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Canvas}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"

@@ -40,19 +40,8 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// </remarks>
         public static void SetId(FrameworkElement element, string id)
         {
-            var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
-            var    toolKey = $"{id}.tips";
-            string text;
-
-            if (GlobalStrings.TryGetValue(id, out text))
-            {
-                adapter.SetText(text);
-            }
-
-            if (GlobalStrings.TryGetValue(toolKey, out text))
-            {
-                adapter.SetToolTips(text);
-            }
+            element.DataContextChanged += OnElementDataContextChanged_SetId;
+            element.Unloaded           += OnElementUnloaded_SetId;
 
             element.SetValue(IdProperty, id);
         }
@@ -67,16 +56,49 @@ namespace Acorisoft.FutureGL.Forest.Services
             return (string)element.GetValue(IdProperty);
         }
 
+        
+        private static void OnElementUnloaded_SetId(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement element)
+            {
+                return;
+            }
+            
+            element.DataContextChanged -= OnElementDataContextChanged_SetId;
+            element.Unloaded           -= OnElementUnloaded_SetId;
+        }
+
+        private static void OnElementDataContextChanged_SetId(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var element = (FrameworkElement)sender;
+            var id      = GetId(element);
+            
+            //
+            // Find RootName
+            //
+            var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
+            var    toolKey = $"{id}.tips";
+            string text;
+
+            if (GlobalStrings.TryGetValue(id, out text))
+            {
+                adapter.SetText(text);
+            }
+
+            if (GlobalStrings.TryGetValue(toolKey, out text))
+            {
+                adapter.SetToolTips(text);
+            }
+        }
+        
         #endregion
 
         #region Root
 
         public static void SetRoot(FrameworkElement element, string value)
         {
-            if (element.DataContext is IViewModelLanguageService vmls)
-            {
-                vmls.RootName = value;
-            }
+            element.DataContextChanged += OnElementDataContextChanged_SetRoot;
+            element.Unloaded           += OnElementUnloaded_SetRoot;
 
             element.SetValue(RootProperty, value);
         }
@@ -86,6 +108,34 @@ namespace Acorisoft.FutureGL.Forest.Services
             return (string)element.GetValue(RootProperty);
         }
 
+        
+        
+        
+        private static void OnElementUnloaded_SetRoot(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement element)
+            {
+                return;
+            }
+            
+            element.DataContextChanged -= OnElementDataContextChanged_SetRoot;
+            element.Unloaded           -= OnElementUnloaded_SetRoot;
+        }
+
+        private static void OnElementDataContextChanged_SetRoot(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var element = (FrameworkElement)sender;
+            var value   = GetRoot(element);
+            
+            //
+            // Find RootName
+            //
+            if (e.NewValue is IViewModelLanguageService vmls)
+            {
+                vmls.RootName = value;
+            }
+        }
+        
         #endregion
 
         public static string GetText(string id)
@@ -112,15 +162,37 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// </remarks>
         public static void SetName(FrameworkElement element, string value)
         {
+            element.DataContextChanged += OnElementDataContextChanged_SetName;
+            element.Unloaded           += OnElementUnloaded_SetName;
+
+            element.SetValue(NameProperty, value);
+        }
+
+        private static void OnElementUnloaded_SetName(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement element)
+            {
+                return;
+            }
+            
+            element.DataContextChanged -= OnElementDataContextChanged_SetName;
+            element.Unloaded           -= OnElementUnloaded_SetName;
+        }
+
+        private static void OnElementDataContextChanged_SetName(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var element = (FrameworkElement)sender;
+            var value   = GetName(element);
+            
             //
             // Find RootName
             //
-            if (element.DataContext is IViewModelLanguageService vmls)
+            if (e.NewValue is IViewModelLanguageService vmls)
             {
-                var    id      = $"{vmls.RootName}.{value}";
-                var    adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
-                var    textKey = $"{id}";
-                var    toolKey = $"{id}.tips";
+                var id = $"{vmls.RootName}.{value}";
+                var adapter = element as ITextResourceAdapter ?? Xaml.Get<ITextResourceFactory>().Adapt(element);
+                var textKey = $"{id}";
+                var toolKey = $"{id}.tips";
                 string text;
 
                 if (GlobalStrings.TryGetValue(textKey, out text))
@@ -135,8 +207,6 @@ namespace Acorisoft.FutureGL.Forest.Services
 
                 element.SetValue(IdProperty, id);
             }
-
-            element.SetValue(NameProperty, value);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Core
+﻿using Acorisoft.FutureGL.MigaDB.Utils;
+
+namespace Acorisoft.FutureGL.MigaDB.Core
 {
     public class Database : Disposable, IDatabase, IObjectCollection, IDisposableCollector
     {
@@ -8,9 +10,11 @@
 
         private readonly  LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
-        private readonly DisposableCollector           _collector;
+        private readonly  DisposableCollector           _collector;
+        private readonly  DatabaseMode                  _mode;
 
-        public Database(LiteDatabase kernel, string root, string fileName, string indexFileName)
+        
+        public Database(LiteDatabase kernel, string root, string fileName, string indexFileName, DatabaseMode mode)
         {
             _collector             = new DisposableCollector();
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
@@ -18,9 +22,9 @@
             _databaseFileName      = fileName;
             _databaseIndexFileName = indexFileName;
             _props                 = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
+            _mode                  = mode;
 
-
-            Property = Get<DatabaseProperty>();
+            Property = Initialize();
         }
 
         internal Database(LiteDatabase kernel)
@@ -35,6 +39,36 @@
             Property = Get<DatabaseProperty>();
         }
 
+        private DatabaseProperty Initialize()
+        {
+            if (_mode == DatabaseMode.Debug)
+            {
+                return Set<DatabaseProperty>(new DatabaseProperty
+                {
+                    Name = "DEBUG",
+                    Author = "DEBUG",
+                    ForeignName = "DEBUG",
+                    Id = ID.Get()
+                });
+            }
+            
+            return Get<DatabaseProperty>();
+        }
+
+        private DatabaseVersion GetVersion()
+        {
+            if (_mode == DatabaseMode.Debug)
+            {
+                return Set<DatabaseVersion>(new DatabaseVersion
+                {
+                    TimeOfCreated = DateTime.Now,
+                    TimeOfModified = DateTime.Now,
+                    Version = 1
+                });
+            }
+            
+            return Get<DatabaseVersion>();
+        }
 
         protected override void ReleaseManagedResources()
         {
@@ -135,7 +169,7 @@
         /// 获取当前数据库版本
         /// </summary>
         /// <remarks>操作为非缓存操作，避免数据不一致。</remarks>
-        public int Version => Get<DatabaseVersion>().Version;
+        public int Version => GetVersion().Version;
 
         /// <summary>
         /// 获取当前数据库属性。

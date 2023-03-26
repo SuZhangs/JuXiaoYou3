@@ -352,7 +352,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                     var ms     = new MemoryStream(buffer);
                     var log    = new MemoryStream();
                     kernel = new LiteDatabase(ms, BsonMapper.Global, log);
-                    database = new Database(kernel, root, fileName, indexFileName);
+                    database = new Database(kernel, root, fileName, indexFileName, _databaseMode);
                     database.Collect(ms);
                     database.Collect(log);
                 }
@@ -361,7 +361,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                     var ms  = new MemoryStream();
                     var log = new MemoryStream();
                     kernel   = new LiteDatabase(ms, BsonMapper.Global, log);
-                    database = new Database(kernel, root, fileName, indexFileName);
+                    database = new Database(kernel, root, fileName, indexFileName, _databaseMode);
                     database.Collect(ms);
                     database.Collect(log);
                 }
@@ -372,7 +372,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                         Filename    = fileName,
                         InitialSize = Constants.DatabaseSize
                     });
-                    database = new Database(kernel, root, fileName, indexFileName);
+                    database = new Database(kernel, root, fileName, indexFileName, _databaseMode);
                 }
 
                 //
@@ -433,7 +433,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 });
 
                 //
-                var database   = new Database(kernel, root, fileName, indexFileName);
+                var database   = new Database(kernel, root, fileName, indexFileName, _databaseMode);
                 var timeOfBoth = DateTime.Now;
 
                 //
