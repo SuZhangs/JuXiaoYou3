@@ -63,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
             
-            newController.Start(_parameter);
+            newController.Startup(_parameter);
             newController.Start();
         }
 

@@ -288,7 +288,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 //
-                dialog.Start(param);
+                dialog.Startup(param);
 
 
                 //

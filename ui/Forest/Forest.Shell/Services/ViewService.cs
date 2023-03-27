@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.Forest.Services
 
         public void Route(IViewModel viewModel, Parameter parameter)
         {
-            viewModel.Start(parameter);
+            viewModel.Startup(parameter);
             _viewHost.ViewModel = viewModel;
             
         }

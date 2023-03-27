@@ -44,11 +44,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             });
         }
 
-        protected override void StartOverride(Parameter arg)
+        protected override void OnStartup(Parameter arg)
         {
             Context = arg.Args[0] as GlobalStudioContext;
             Init();
-            base.StartOverride(arg);
+            base.OnStartup(arg);
         }
 
         protected override object GetExecuteContext() => Context;

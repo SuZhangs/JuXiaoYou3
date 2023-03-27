@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            viewModel.Start(parameter.Params ?? NavigationParameter.New(viewModel, Controller).Params);
+            viewModel.Startup(parameter.Params ?? NavigationParameter.New(viewModel, Controller).Params);
             Controller.Start(viewModel);
         }
         

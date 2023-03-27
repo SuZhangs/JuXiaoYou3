@@ -190,7 +190,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="arg"></param>
-        protected sealed override void StartOverride(Parameter arg)
+        protected sealed override void OnStartup(Parameter arg)
         {
             var np = NavigationParameter.FromParameter(arg);
             PageId         = np.Id;
@@ -214,7 +214,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Start(NavigationParameter.New(vm, Controller).Params);
+            vm.Startup(NavigationParameter.New(vm, Controller).Params);
             Controller.Start(vm);
             return vm;
         }
@@ -228,7 +228,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public void New<TViewModel>(IData data, IDataCache cache) where TViewModel : TabViewModel
         {
             var vm = Xaml.Get<TViewModel>();
-            vm.Start(NavigationParameter.New(data, cache, Controller).Params);
+            vm.Startup(NavigationParameter.New(data, cache, Controller).Params);
             Controller.Start(vm);
         }
 

@@ -97,7 +97,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// </summary>
         /// <param name="arg">视图参数</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Start(Parameter arg)
+        public void Startup(Parameter arg)
         {
             if (_initialized)
             {
@@ -108,17 +108,13 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 #endif
             }
 
-            _initialized = true;
-            StartIntern(arg);
-        }
-
-        private void StartIntern(Parameter arg)
-        {
+            _initialized      = true;
             OriginalParameter = arg;
-            StartOverride(arg);
+            OnStartup(arg);
         }
 
-        protected virtual void StartOverride(Parameter arg)
+
+        protected virtual void OnStartup(Parameter arg)
         {
             
         }
