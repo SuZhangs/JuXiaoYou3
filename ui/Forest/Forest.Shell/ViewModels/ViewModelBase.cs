@@ -13,8 +13,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
         private readonly List<IRelayCommand> _commandMapping;
-
-        private string _rootName;
+        private          string              _rootName;
 
         protected ViewModelBase()
         {

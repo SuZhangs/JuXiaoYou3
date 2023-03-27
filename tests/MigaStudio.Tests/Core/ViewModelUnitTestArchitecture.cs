@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
+using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
 using DryIoc;
 using NLog;
@@ -12,7 +13,7 @@ using NLog.Targets;
 
 namespace MigaStudio.Tests.Core
 {
-    public static class ViewModelUnitTest
+    public static class ViewModelUnitTestArchitecture
     {
         private static ILogger ConfigureLogger()
         {
@@ -69,6 +70,17 @@ namespace MigaStudio.Tests.Core
             public string Name { get; init; }
             public bool Result { get; init; }
             public Type PropertyType { get; init; }
+        }
+
+        public static void UnitTest(ViewModelBase vm)
+        {
+            ConstructorUnitTest(vm);
+        }
+
+        private static void ConstructorUnitTest(ViewModelBase vm)
+        {
+            AssertAllPropertyWasNotNull(vm);
+            AssertAllFieldWasNotNull(vm);
         }
         
         public static void AssertAllPropertyWasNotNull(object value)
