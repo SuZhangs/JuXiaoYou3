@@ -216,7 +216,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Modules
             }
 
             var r = await Xaml.Get<IDialogService>()
-                              .Danger(TemplateSystemString.Notify,
+                              .Danger(
+                                  TemplateSystemString.Notify,
                                   TemplateSystemString.AreYouSureCreateNew);
 
             if (!r)

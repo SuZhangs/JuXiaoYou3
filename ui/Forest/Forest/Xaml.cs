@@ -37,6 +37,14 @@ namespace Acorisoft.FutureGL.Forest
             FastImageBrushMapper = new Dictionary<string, ImageBrush>();
         }
 
+        #region Commons
+
+        public static bool AlwaysTrue<T>(T _) => true;
+        public static bool AlwaysFalse<T>(T _) => false;
+        
+
+        #endregion
+
         #region Color
 
         /// <summary>

@@ -5,17 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms.VisualStyles;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Utils;
-using Acorisoft.FutureGL.MigaStudio.Modules;
-using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
-using Acorisoft.FutureGL.MigaStudio.ViewModels;
-using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
+using DynamicData.Kernel;
 using Microsoft.Win32;
 using NLog;
 
@@ -23,10 +15,6 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 {
-    public class TemplateEditorViewModelProxy : BindingProxy<TemplateEditorViewModel>
-    {
-    }
-
     public class TemplateEditorViewModel : TabViewModel
     {
         [NullCheck(UniTestLifetime.Constructor)]
@@ -200,12 +188,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             // 1) 判断当前的页面是否保存
             // 2) 选择文件
             // 3) 打开文件并赋值
-            var ds = Xaml.Get<IDialogService>();
 
             // 行为 1)
             if (_dirty)
             {
-                var r = await ds.Warning(TemplateSystemString.Notify, TemplateSystemString.AreYouSureCreateNew);
+                var r = await SensitiveOperation(TemplateSystemString.AreYouSureCreateNew);
 
                 if (!r) return;
             }
@@ -242,10 +229,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
             catch (Exception ex)
             {
-                await ds.Notify(
-                    CriticalLevel.Danger,
-                    TemplateSystemString.Notify,
-                    TemplateSystemString.BadModule);
+                await Error(TemplateSystemString.BadModule);
                 
                 Xaml.Get<ILogger>()
                     .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");
@@ -270,8 +254,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 FileName = PreviewName,
                 Filter = TemplateSystemString.ModuleFilter
             };
-
-            var ds = Xaml.Get<IDialogService>();
 
             if (savedlg.ShowDialog() != true)
             {
@@ -301,18 +283,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
 
                 await PNG.Write(fileName, payload, ms);
+                await Successful(TemplateSystemString.OperationOfSaveIsSuccessful);
                 SetDirtyState(false);
-                await ds.Notify(
-                    CriticalLevel.Success,
-                    TemplateSystemString.Notify,
-                    TemplateSystemString.OperationOfSaveIsSuccessful);
             }
             catch(Exception ex)
             {
-                await ds.Notify(
-                    CriticalLevel.Danger,
-                    TemplateSystemString.Notify,
-                    TemplateSystemString.BadModule);
+                await Error(TemplateSystemString.BadModule);
                 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
@@ -411,19 +387,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             SetDirtyState(true);
             RaiseUpdated(nameof(PreviewBlocks));
 
-            await Xaml.Get<IDialogService>()
-                      .Notify(
-                          CriticalLevel.Success,
-                          TemplateSystemString.Notify,
-                          TemplateSystemString.OperationOfSaveIsSuccessful);
+            await Successful(TemplateSystemString.OperationOfSaveIsSuccessful);
         }
 
         private async Task RemoveBlockImpl(ModuleBlockEditUI element)
         {
-            var r = await Xaml.Get<IDialogService>()
-                              .Danger(
-                                  TemplateSystemString.Notify,
-                                  Language.RemoveAllItemText);
+            var r = await DangerousOperation(Language.RemoveAllItemText);
 
             if (!r)
             {
@@ -472,10 +441,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
         private async Task RemoveAllBlockImpl()
         {
-            var r = await Xaml.Get<IDialogService>()
-                              .Danger(
-                                  TemplateSystemString.Notify,
-                                  Language.RemoveAllItemText);
+            var r = await DangerousOperation(Language.RemoveAllItemText);
 
             if (!r)
             {
