@@ -29,6 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             RequireStartupTabViewModel();
             New<DocumentGalleryViewModel>();
+            New<CharacterDocumentViewModel>();
         }
 
         protected override void RequireStartupTabViewModel()

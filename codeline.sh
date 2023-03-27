@@ -1,2 +1,2 @@
-cloc 8457168
+cloc.exe cloc 10358f4
 read -n 1
