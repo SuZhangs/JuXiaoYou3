@@ -14,6 +14,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     {
         private readonly List<IRelayCommand> _commandMapping;
         private          string              _rootName;
+        private          bool                _initialized;
 
         protected ViewModelBase()
         {
@@ -98,6 +99,16 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void Start(Parameter arg)
         {
+            if (_initialized)
+            {
+#if DEBUG
+                throw new InvalidOperationException();
+#else
+                return;
+#endif
+            }
+
+            _initialized = true;
             StartIntern(arg);
         }
 
