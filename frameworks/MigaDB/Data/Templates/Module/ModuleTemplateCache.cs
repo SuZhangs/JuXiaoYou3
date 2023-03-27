@@ -2,8 +2,22 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
-    public class ModuleTemplateCache : StorageObject
+    public class ModuleTemplateCache : ObservableObject
     {
+        private bool _isRemovable;
+        
+        [BsonId]
+        public string Id { get; init; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsRemovable"/> 属性。
+        /// </summary>
+        public bool IsRemovable
+        {
+            get => _isRemovable;
+            set => SetValue(ref _isRemovable, value);
+        }
+        
         /// <summary>
         /// 获取或设置 <see cref="ForType"/> 属性。
         /// </summary>

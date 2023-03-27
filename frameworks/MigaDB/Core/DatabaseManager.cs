@@ -227,6 +227,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly int                                _minimumTargetVersion;
         private readonly DatabaseMode                       _databaseMode;
         private readonly ILogger                            _logger;
+        private readonly DatabaseCreationMaintainer         _defaultMaintainer;
 
 
         public DatabaseManager(ILogger logger,
@@ -244,6 +245,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _minimumTargetVersion = minimumTargetVersion;
             Container             = container;
             _databaseMode         = mode;
+            _defaultMaintainer    = new DatabaseCreationMaintainer();
             _database             = new ObservableProperty<IDatabase>();
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
@@ -433,17 +435,14 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 });
 
                 //
-                var database   = new Database(kernel, root, fileName, indexFileName, _databaseMode);
-                var timeOfBoth = DateTime.Now;
+                var database = new Database(kernel, root, fileName, indexFileName, _databaseMode);
+                
+                //
+                // 默认设置
+                database.Set<DatabaseProperty>(property);
 
                 //
-                database.Set<DatabaseProperty>(property);
-                database.Set<DatabaseVersion>(new DatabaseVersion
-                {
-                    TimeOfModified = timeOfBoth,
-                    TimeOfCreated  = timeOfBoth,
-                    Version        = Constants.MinVersion
-                });
+                _defaultMaintainer.Maintain(database);
 
                 //
                 // 提取属性
@@ -500,10 +499,16 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回一个操作结果</returns>
         public async Task<DatabaseResult> LoadAsync(string directory)
         {
+            if (string.IsNullOrEmpty(directory))
+            {
+                return DatabaseResult.Failed(DatabaseFailedReason.DirectoryNotExists);
+            }
+            
             if (!Directory.Exists(directory) && _databaseMode != DatabaseMode.Debug)
             {
                 return DatabaseResult.Failed(DatabaseFailedReason.DirectoryNotExists);
             }
+
 
 
             //

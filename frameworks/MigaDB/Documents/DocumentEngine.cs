@@ -84,7 +84,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             if (document.Parts is null || document.Metas is null)
             {
-                return EngineResult.Failed(EngineFailedReason.ParameterDataError);
+                return EngineResult.Failed(EngineFailedReason.InputDataError);
             }
 
             if (DocumentDB.HasID(document.Id) ||

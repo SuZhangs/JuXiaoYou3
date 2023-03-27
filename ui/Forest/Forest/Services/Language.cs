@@ -7,7 +7,6 @@ namespace Acorisoft.FutureGL.Forest.Services
 {
     public static class Language
     {
-
         private static readonly Dictionary<string, string> _stringDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         
         #region DependencyProperties
@@ -150,6 +149,30 @@ namespace Acorisoft.FutureGL.Forest.Services
         public static string GetText(string id)
         {
             return GlobalStrings.TryGetValue(id, out var text) ? text : id;
+        }
+
+        public static string GetEnum<T>(string prefix, T value) where T : Enum
+        {
+            var key = $"enum.{prefix}.{value}";
+            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+        }
+        
+        public static string GetEnum(string prefix, Enum value)
+        {
+            var key = $"enum.{prefix}.{value}";
+            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+        }
+        
+        public static string GetEnum(Enum value)
+        {
+            var key = $"enum.{value.GetType().Name}.{value}";
+            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+        }
+        
+        public static string GetEnum<T>(T value) where T : Enum
+        {
+            var key = $"enum.{typeof(T).Name}.{value}";
+            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
         }
 
         public static string GetTypeName(Type type)

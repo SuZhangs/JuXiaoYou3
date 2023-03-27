@@ -33,9 +33,9 @@
         ConsistencyBroken,
         
         /// <summary>
-        /// 参数错误
+        /// 参数或者执行中遇到的数据错误
         /// </summary>
-        ParameterDataError,
+        InputDataError,
         
         /// <summary>
         /// 参数为空
@@ -43,19 +43,19 @@
         ParameterEmptyOrNull,
         
         /// <summary>
-        /// 参数为文件，无访问权限
+        /// 参数或者执行中遇到的文件无访问权限
         /// </summary>
-        ParameterSourceUnauthorizedAccess,
+        InputSourceUnauthorizedAccess,
         
         /// <summary>
-        /// 参数为文件，文件不存在
+        /// 参数或者执行中遇到的文件不存在
         /// </summary>
-        ParameterSourceNotExists,
+        InputSourceNotExists,
         
         /// <summary>
-        /// 参数为文件，文件占用
+        /// 参数或者执行中遇到的文件占用
         /// </summary>
-        ParameterSourceOccupied,
+        InputSourceOccupied,
         
         /// <summary>
         /// 未知的错误

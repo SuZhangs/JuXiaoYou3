@@ -81,32 +81,38 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             TemplateCacheDB = null;
             MetadataCacheDB = null;
         }
-
+        
         /// <summary>
         /// 添加模板
         /// </summary>
         /// <param name="fileName">指定要添加的模板路径。</param>
         /// <returns>返回操作结果</returns>
-        public async Task<EngineResult> AddTemplate(string fileName)
+        public async Task<EngineResult> AddModule(string fileName)
         {
             try
             {
-                var payload = await PNG.ReadDataAsync(fileName);
+                var payload  = await PNG.ReadDataAsync(fileName);
                 var template = JSON.FromJson<ModuleTemplate>(payload);
-                Modified();
-                return await AddTemplate(template);
+
+                return template is null ? 
+                    EngineResult.Failed(EngineFailedReason.InputDataError) :
+                    AddModule(template);
             }
             catch (IOException)
             {
-                return EngineResult.Failed(EngineFailedReason.ParameterSourceOccupied);
+                return EngineResult.Failed(EngineFailedReason.InputSourceOccupied);
             }
             catch (UnauthorizedAccessException)
             {
-                return EngineResult.Failed(EngineFailedReason.ParameterSourceUnauthorizedAccess);
+                return EngineResult.Failed(EngineFailedReason.InputSourceUnauthorizedAccess);
             }
             catch (JsonException)
             {
-                return EngineResult.Failed(EngineFailedReason.ParameterDataError);
+                return EngineResult.Failed(EngineFailedReason.InputDataError);
+            }
+            catch (Exception)
+            {
+                return EngineResult.Failed(EngineFailedReason.Unknown);
             }
         }
 
@@ -115,50 +121,76 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
         /// </summary>
         /// <param name="template">指定要添加的参数。</param>
         /// <returns>返回操作结果</returns>
-        public Task<EngineResult> AddTemplate(ModuleTemplate template)
+        public EngineResult AddModule(ModuleTemplate template)
         {
             if (template is null)
             {
-                return Task.FromResult(EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull));
+                return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
             }
             
-            return Task.Run(() =>
+            if (!ModuleTemplate.IsValid(template))
             {
-                if (!ModuleTemplate.IsValid(template))
-                {
-                    return EngineResult.Failed(EngineFailedReason.ParameterDataError);
-                }
+                return EngineResult.Failed(EngineFailedReason.InputDataError);
+            }
 
+            //
+            // 判断数据库中是否有同名模组
+            var templateInside = TemplateDB.FindById(template.Id);
+
+            if (templateInside is null)
+            {
                 //
-                // 判断数据库中是否有同名模组
-                var templateInside = TemplateDB.FindById(template.Id);
-
-                if (templateInside is null)
+                // Update
+                TemplateDB.Insert(template);
+                TemplateCacheDB.Insert(template.ExtractIndex());
+                AddMetadata(template);
+            }
+            else
+            {
+                if (templateInside.Version >= template.Version)
                 {
-                    
-                    //
-                    // Update
-                    TemplateDB.Insert(template);
-                    TemplateCacheDB.Insert(template.ExtractIndex());
-                    AddMetadata(template);
+                    return EngineResult.Failed(EngineFailedReason.NoChanged);
                 }
-                else
-                {
-                    if (templateInside.Version >= template.Version)
-                    {
-                        return EngineResult.Failed(EngineFailedReason.NoChanged);
-                    }
                     
-                    //
-                    // Update
-                    TemplateDB.Update(template);
-                    TemplateCacheDB.Update(template.ExtractIndex());
-                    UpdateMetadata(templateInside, template);
-                }
+                //
+                // Update
+                TemplateDB.Update(template);
+                TemplateCacheDB.Update(template.ExtractIndex());
+                UpdateMetadata(templateInside, template);
+            }
 
+            Modified();
+            return EngineResult.Successful;
+        }
+        
+        
+        /// <summary>
+        /// 移除模板
+        /// </summary>
+        /// <param name="cache">指定要添加的参数。</param>
+        /// <returns>返回操作结果</returns>
+        public EngineResult RemoveModule(ModuleTemplateCache cache)
+        {
+            if (cache is null)
+            {
+                return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
+            }
+            
+            //
+            // 判断数据库中是否有同名模组
+            var templateInside = TemplateDB.FindById(cache.Id);
+
+            if (templateInside is not null)
+            {
+                TemplateDB.Delete(cache.Id);
+                TemplateCacheDB.Delete(cache.Id);
+                RemoveMetadata(templateInside);
                 Modified();
                 return EngineResult.Successful;
-            });
+            }
+                
+            return EngineResult.Failed(EngineFailedReason.MissingParameter);
+            
         }
 
         /// <summary>
@@ -166,7 +198,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
         /// </summary>
         /// <param name="template">指定要添加的参数。</param>
         /// <returns>返回操作结果</returns>
-        public Task<EngineResult> RemoveTemplate(ModuleTemplate template)
+        public Task<EngineResult> RemoveModule(ModuleTemplate template)
         {
             if (template is null)
             {
