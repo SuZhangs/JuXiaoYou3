@@ -20,6 +20,7 @@
 
     <thisConverters:String2BooleanConverter x:Key="String2Boolean" />
     <thisConverters:String2IntConverter x:Key="String2Int" />
+    <thisConverters:ReferenceSourceConverter x:Key="RefSource" />
     <!--
         @ param: TargetBlock
         @ member:
@@ -34,16 +35,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -55,16 +59,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -76,16 +83,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -97,16 +107,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -118,16 +131,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -139,13 +155,15 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
                 <f:ListBox Margin="4 8"
@@ -155,11 +173,18 @@
                             <WrapPanel />
                         </ItemsPanelTemplate>
                     </f:ListBox.ItemsPanel>
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type t:ReferenceSource}">
+                            <TextBlock Margin="4"
+                                       Text="{Binding Converter={StaticResource RefSource}}"/>
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
                     <t:ReferenceSource>Document</t:ReferenceSource>
                     <t:ReferenceSource>Compose</t:ReferenceSource>
                 </f:ListBox>
 
-                <f:HeaderedMultiLine Margin="4 8"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4 8"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -182,24 +207,29 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="单位" />
+                    <f:HeaderedSingleLine f:Language.Id="global.suffix"
+                                          Margin="4"
+                                          Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="单位" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -212,20 +242,24 @@
                 Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <TextBlock Margin="4"
+                <TextBlock f:Language.Id="global.characterlimit"
+                           Margin="4"
                            FontSize="16"
                            Foreground="{f:ForegroundBrush}"
                            Text="最大字数" />
@@ -235,7 +269,8 @@
                                   Minimum="100"
                                   Value="{Binding CharacterLimited,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}" />
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -247,16 +282,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <TextBlock FontSize="16"
+                <TextBlock f:Language.Id="global.fallback"
+                           FontSize="16"
                            Foreground="{f:ForegroundBrush}"
                            Margin="4 16 0 0"
                            Text="默认值" />
@@ -267,7 +305,8 @@
                                            Width="48"
                                            SelectedColor="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -279,32 +318,39 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.name"
+                                      Margin="4"
                                       Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       Header="名字" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                      Margin="4"
                                       Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       Header="喵喵咒语" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                      Margin="4"
                                       Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
                                       Header="最小值" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                      Margin="4"
                                       Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
                                       Header="最大值" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.suffix"
+                                      Margin="4"
                                       Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       Header="单位" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                      Margin="4"
                                       Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
                                       Header="默认值" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -316,32 +362,39 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最小值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
+                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
+                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="单位" />
+                    <f:HeaderedSingleLine f:Language.Id="global.suffix"
+                                          Margin="4"
+                                          Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="单位" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -364,16 +417,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -385,16 +441,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -406,16 +465,19 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -428,20 +490,24 @@
                 Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="正面值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.positive"
+                                          Margin="4"
+                                          Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="正面值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="负面值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.negative"
+                                          Margin="4"
+                                          Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="负面值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -455,32 +521,39 @@
                 Width="640">
             <StackPanel >
                 <UniformGrid Columns="3">
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
                                           Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
                                           Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.positive"
+                                          Margin="4"
                                           Text="{Binding Positive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="正面值" />
+                                          Header="正面值" />
 
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.negative"
+                                          Margin="4"
                                           Text="{Binding Negative,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="负面值" />
+                                          Header="负面值" />
 
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.divideline"
+                                          Margin="4"
                                           Text="{Binding DivideLine,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="分割线" />
+                                          Header="分割线" />
 
-                    <f:HeaderedSingleLine Margin="4"
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
                                           Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -499,20 +572,24 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最小值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
+                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
+                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -524,20 +601,24 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最小值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
+                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最小值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
+                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -565,29 +646,35 @@
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <f:ToggleSwitch Margin="4 8"
+                <f:ToggleSwitch f:Language.Id="global.diffValue"
+                                Margin="4 8"
                                 Content="值与名字不同？"
                                 IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <f:ForestSection Grid.Column="1"
+                             f:Language.Id="global.content"
                              Header="元素"
                              Margin="8 4">
                 <f:ForestSection.ToolBar>
@@ -633,20 +720,24 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.name"
+                                      Margin="4"
                                       Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       Header="名字" />
 
-                <f:HeaderedSingleLine Margin="4"
+                <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                      Margin="4"
                                       Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       Header="喵喵咒语" />
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <f:ForestSection Grid.Column="1"
+                             f:Language.Id="global.content"
                              Header="元素"
                              Margin="16 0">
                 <f:ForestSection.ToolBar>
@@ -699,30 +790,36 @@
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="最小值" />
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="最小值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -772,35 +869,42 @@
             </Grid.ColumnDefinitions>
             <StackPanel>
                 <UniformGrid Columns="2">
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      Header="喵喵咒语" />
+                    <f:HeaderedSingleLine f:Language.Id="global.metadata"
+                                          Margin="4"
+                                          Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="喵喵咒语" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="最小值" />
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="最大值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="最小值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.maximum"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="最大值" />
 
-                    <f:HeaderedSingleLine Margin="4"
-                                      IsReadOnly="True"
-                                      Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
-                                      Header="默认值" />
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          IsReadOnly="True"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Header="默认值" />
                 </UniformGrid>
 
-                <f:HeaderedMultiLine Margin="4"
+                <f:HeaderedMultiLine f:Language.Id="global.tooltips"
+                                     Margin="4"
                                      Header="提示"
                                      Height="128"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <f:ForestSection Grid.Column="1"
+            <f:ForestSection f:Language.Id="global.content"
+                             Grid.Column="1"
                              Header="元素"
                              Margin="16 0">
                 <f:ForestSection.ToolBar>

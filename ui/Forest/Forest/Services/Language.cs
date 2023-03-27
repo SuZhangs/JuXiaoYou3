@@ -7,7 +7,10 @@ namespace Acorisoft.FutureGL.Forest.Services
 {
     public static class Language
     {
+
         private static readonly Dictionary<string, string> _stringDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        
+        #region DependencyProperties
 
         public static readonly DependencyProperty NameProperty = DependencyProperty.RegisterAttached(
             "NameOverride",
@@ -26,6 +29,8 @@ namespace Acorisoft.FutureGL.Forest.Services
             typeof(string),
             typeof(Language),
             new PropertyMetadata(default(string)));
+
+        #endregion
 
         #region Id
 
@@ -138,6 +143,10 @@ namespace Acorisoft.FutureGL.Forest.Services
         
         #endregion
 
+        #region GetText
+
+        
+
         public static string GetText(string id)
         {
             return GlobalStrings.TryGetValue(id, out var text) ? text : id;
@@ -148,6 +157,8 @@ namespace Acorisoft.FutureGL.Forest.Services
             var key = $"text.{type.Name}";
             return GlobalStrings.TryGetValue(key, out var text) ? text : key;
         }
+
+        #endregion
         
         #region Name
 
@@ -221,11 +232,14 @@ namespace Acorisoft.FutureGL.Forest.Services
 
         #endregion
 
+        #region LanguageSource
+
+        
         /// <summary>
         /// 设置语言
         /// </summary>
         /// <param name="fileName">文件名</param>
-        public static void SetLanguage(string fileName)
+        public static void SetLanguageSource(string fileName)
         {
             // pageRoot.Id.Function
             try
@@ -259,6 +273,10 @@ namespace Acorisoft.FutureGL.Forest.Services
             }
         }
 
+        /// <summary>
+        /// 添加语言
+        /// </summary>
+        /// <param name="fileName">文件名</param>
         public static void AppendLanguageSource(string fileName)
         {
             // pageRoot.Id.Function
@@ -285,6 +303,13 @@ namespace Acorisoft.FutureGL.Forest.Services
             }
         }
 
+        #endregion
+
+        #region Language Properties
+
+        
+
+        
         /// <summary>
         /// 全局内容文本
         /// </summary>
@@ -295,6 +320,8 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// </summary>
         /// <remarks>语言的切换必须重启。</remarks>
         public static CultureArea Culture { get; set; }
+        
+        #endregion
 
         /// <summary>
         /// 确定
@@ -439,11 +466,11 @@ namespace Acorisoft.FutureGL.Forest.Services
             {
                 return Culture switch
                 {
-                    CultureArea.English  => "Cancel",
-                    CultureArea.French   => "Annuler",
-                    CultureArea.Japanese => "取り消す",
-                    CultureArea.Korean   => "취소",
-                    CultureArea.Russian  => "Отмена",
+                    CultureArea.English  => "Are you sure you want to delete this data?",
+                    CultureArea.French   => "Êtes-vous sûr de vouloir supprimer ces données?",
+                    CultureArea.Japanese => "このデータを削除することは確実ですか?",
+                    CultureArea.Korean   => "이 데이터를 삭제하시겠습니까?",
+                    CultureArea.Russian  => "Вы уверены, что хотите удалить данные?",
 
                     _ => "你确定要删除这项数据吗？"
                 };
@@ -459,13 +486,71 @@ namespace Acorisoft.FutureGL.Forest.Services
             {
                 return Culture switch
                 {
-                    CultureArea.English  => "Cancel",
-                    CultureArea.French   => "Annuler",
-                    CultureArea.Japanese => "取り消す",
-                    CultureArea.Korean   => "취소",
-                    CultureArea.Russian  => "Отмена",
+                    CultureArea.English  => "Are you sure you want to delete all your data?",
+                    CultureArea.French   => "Êtes-vous sûr de vouloir supprimer toutes les données?",
+                    CultureArea.Japanese => "全てのデータを削除することは確実ですか?",
+                    CultureArea.Korean   => "모든 데이터를 삭제하시겠습니까?",
+                    CultureArea.Russian  => "Вы уверены, что хотите удалить все данные?",
 
                     _ => "你确定要删除全部数据吗？"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 新建
+        /// </summary>
+        public static string NewText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Create",
+                    CultureArea.French   => "Nouvelles",
+                    CultureArea.Japanese => "新築です",
+                    CultureArea.Korean   => "신축",
+                    CultureArea.Russian  => "нов",
+
+                    _ => "新建"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 打开
+        /// </summary>
+        public static string OpenText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Open",
+                    CultureArea.French   => "Ouvrir",
+                    CultureArea.Japanese => "開けます",
+                    CultureArea.Korean   => "열어",
+                    CultureArea.Russian  => "откр",
+                    _                    => "打开"
+                };
+            }
+        }
+        
+        /// <summary>
+        /// 拒绝
+        /// </summary>
+        public static string SaveText
+        {
+            get
+            {
+                return Culture switch
+                {
+                    CultureArea.English  => "Save",
+                    CultureArea.French   => "La conservation",
+                    CultureArea.Japanese => "保存します",
+                    CultureArea.Korean   => "저장",
+                    CultureArea.Russian  => "сохран",
+                    _                    => "保存"
                 };
             }
         }

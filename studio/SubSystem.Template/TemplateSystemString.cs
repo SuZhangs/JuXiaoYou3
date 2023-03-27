@@ -3,6 +3,7 @@ using System.IO;
 using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Modules;
 
@@ -10,6 +11,16 @@ namespace Acorisoft.FutureGL.MigaStudio
 {
     public static class TemplateSystemString
     {
+        public static readonly DocumentType[] DocumentTypes = new[]
+        {
+            DocumentType.CharacterDocument,
+            DocumentType.AbilityDocument,
+            DocumentType.GeographyDocument,
+            DocumentType.ItemDocument,
+            DocumentType.OtherDocument,
+            DocumentType.MysteryDocument,
+        };
+        
         public static string GetText(string id) => Language.GetText(id);
 
         #region ModuleBlock Translate
@@ -25,10 +36,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Audio",
                 CultureArea.French   => "Audio",
                 _                    => "Audio"
-
             };
         }
-        
+
         public static string GetUnknownName()
         {
             return Language.Culture switch
@@ -39,9 +49,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Unknown",
                 CultureArea.French   => "Unknown",
                 _                    => "Unknown"
-
             };
         }
+
         public static string GetGroupName()
         {
             return Language.Culture switch
@@ -52,10 +62,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Group",
                 CultureArea.French   => "Group",
                 _                    => "Group"
-
             };
         }
-        
+
         public static string GetSequenceName()
         {
             return Language.Culture switch
@@ -66,10 +75,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Sequence",
                 CultureArea.French   => "Sequence",
                 _                    => "Sequence"
-
             };
         }
-        
+
         public static string GetColorName()
         {
             return Language.Culture switch
@@ -80,10 +88,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Color",
                 CultureArea.French   => "Color",
                 _                    => "Color"
-
             };
         }
-        
+
         public static string GetNumberName()
         {
             return Language.Culture switch
@@ -94,10 +101,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Number",
                 CultureArea.French   => "Number",
                 _                    => "Number"
-
             };
         }
-        
+
         public static string GetHistogramName()
         {
             return Language.Culture switch
@@ -108,10 +114,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Histogram",
                 CultureArea.French   => "Histogram",
                 _                    => "Histogram"
-
             };
         }
-        
+
         public static string GetRadarName()
         {
             return Language.Culture switch
@@ -122,10 +127,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Radar",
                 CultureArea.French   => "Radar",
                 _                    => "Radar"
-
             };
         }
-        
+
         public static string GetLikabilityName()
         {
             return Language.Culture switch
@@ -136,10 +140,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Likability",
                 CultureArea.French   => "Likability",
                 _                    => "Likability"
-
             };
         }
-        
+
         public static string GetDegreeName()
         {
             return Language.Culture switch
@@ -150,10 +153,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Degree",
                 CultureArea.French   => "Degree",
                 _                    => "Degree"
-
             };
         }
-        
+
         public static string GetRateName()
         {
             return Language.Culture switch
@@ -164,10 +166,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Rate",
                 CultureArea.French   => "Rate",
                 _                    => "Rate"
-
             };
         }
-        
+
         public static string GetSliderName()
         {
             return Language.Culture switch
@@ -178,10 +179,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Slider",
                 CultureArea.French   => "Slider",
                 _                    => "Slider"
-
             };
         }
-        
+
         public static string GetMultiLineName()
         {
             return Language.Culture switch
@@ -192,10 +192,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "MultiLine",
                 CultureArea.French   => "MultiLine",
                 _                    => "MultiLine"
-
             };
         }
-        
+
         public static string GetSingleLineName()
         {
             return Language.Culture switch
@@ -206,10 +205,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "SingleLine",
                 CultureArea.French   => "SingleLine",
                 _                    => "SingleLine"
-
             };
         }
-        
+
         public static string GetReferenceName()
         {
             return Language.Culture switch
@@ -220,10 +218,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Reference",
                 CultureArea.French   => "Reference",
                 _                    => "Reference"
-
             };
         }
-        
+
         public static string GetVideoName()
         {
             return Language.Culture switch
@@ -234,10 +231,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Video",
                 CultureArea.French   => "Video",
                 _                    => "Video"
-
             };
         }
-        
+
         public static string GetMusicName()
         {
             return Language.Culture switch
@@ -248,10 +244,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Music",
                 CultureArea.French   => "Music",
                 _                    => "Music"
-
             };
         }
-        
+
         public static string GetImageName()
         {
             return Language.Culture switch
@@ -262,10 +257,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Image",
                 CultureArea.French   => "Image",
                 _                    => "Image"
-
             };
         }
-        
+
         public static string GetFileName()
         {
             return Language.Culture switch
@@ -276,10 +270,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "File",
                 CultureArea.French   => "File",
                 _                    => "File"
-
             };
         }
-        
+
         public static string GetBinaryName()
         {
             return Language.Culture switch
@@ -290,10 +283,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Binary",
                 CultureArea.French   => "Binary",
                 _                    => "Binary"
-
             };
         }
-        
+
         public static string GetSwitchName()
         {
             return Language.Culture switch
@@ -304,10 +296,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Switch",
                 CultureArea.French   => "Switch",
                 _                    => "Switch"
-
             };
         }
-        
+
         public static string GetHeartName()
         {
             return Language.Culture switch
@@ -318,10 +309,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Heart",
                 CultureArea.French   => "Heart",
                 _                    => "Heart"
-
             };
         }
-        
+
         public static string GetStarName()
         {
             return Language.Culture switch
@@ -332,16 +322,15 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Star",
                 CultureArea.French   => "Star",
                 _                    => "Star"
-
             };
         }
-        
+
 
         public static string GetModuleBlockNameByType(object type)
         {
             return type switch
             {
-                AudioBlockEditUI      =>  GetAudioName(),
+                AudioBlockEditUI      => GetAudioName(),
                 FileBlockEditUI       => GetFileName(),
                 ImageBlockEditUI      => GetImageName(),
                 MusicBlockEditUI      => GetMusicName(),
@@ -366,12 +355,12 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                     => GetUnknownName(),
             };
         }
-        
+
         public static string GetModuleBlockNameByKind(MetadataKind type)
         {
             return type switch
             {
-                MetadataKind.Audio      =>  GetAudioName(),
+                MetadataKind.Audio      => GetAudioName(),
                 MetadataKind.File       => GetFileName(),
                 MetadataKind.Image      => GetImageName(),
                 MetadataKind.Music      => GetMusicName(),
@@ -393,12 +382,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 MetadataKind.Group      => GetGroupName(),
                 MetadataKind.Radar      => GetRadarName(),
                 MetadataKind.Histogram  => GetHistogramName(),
-                _                     => GetUnknownName(),
+                _                       => GetUnknownName(),
             };
         }
 
-        
-        
         #endregion
 
         #region Property Translate
@@ -413,14 +400,12 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Name",
                 CultureArea.French   => "Name",
                 _                    => "Name"
-
             };
         }
-        
-        
+
+
         public static string GetMaximumField()
         {
-            
             return Language.Culture switch
             {
                 CultureArea.Chinese  => "最大值",
@@ -429,11 +414,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Maximum",
                 CultureArea.French   => "Maximum",
                 _                    => "Maximum"
-
             };
         }
-        
-        
+
+
         public static string GetMinimumField()
         {
             return Language.Culture switch
@@ -444,11 +428,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Minimum",
                 CultureArea.French   => "Minimum",
                 _                    => "Minimum"
-
             };
         }
-        
-        
+
+
         public static string GetDivideLineField()
         {
             return Language.Culture switch
@@ -459,10 +442,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "DivideLine",
                 CultureArea.French   => "DivideLine",
                 _                    => "DivideLine"
-
             };
         }
-        
+
         public static string GetFallbackField()
         {
             return Language.Culture switch
@@ -473,11 +455,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Fallback",
                 CultureArea.French   => "Fallback",
                 _                    => "Fallback"
-
             };
         }
-        
-        
+
+
         public static string GetToolTipsField()
         {
             return Language.Culture switch
@@ -488,11 +469,10 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "ToolTips",
                 CultureArea.French   => "ToolTips",
                 _                    => "ToolTips"
-
             };
         }
-        
-        
+
+
         public static string GetMetadataField()
         {
             return Language.Culture switch
@@ -503,7 +483,6 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Kitty Spell",
                 CultureArea.French   => "Kitty Spell",
                 _                    => "Kitty Spell"
-
             };
         }
 
@@ -517,10 +496,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Negative",
                 CultureArea.French   => "Negative",
                 _                    => "Negative"
-
             };
         }
-        
+
         public static string GetColorField()
         {
             return Language.Culture switch
@@ -531,10 +509,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Color",
                 CultureArea.French   => "Color",
                 _                    => "Color"
-
             };
         }
-        
+
         public static string GetPositiveField()
         {
             return Language.Culture switch
@@ -545,10 +522,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Positive",
                 CultureArea.French   => "Positive",
                 _                    => "Positive"
-
             };
         }
-        
+
         public static string GetSuffixField()
         {
             return Language.Culture switch
@@ -559,17 +535,17 @@ namespace Acorisoft.FutureGL.MigaStudio
                 CultureArea.Japanese => "Kg",
                 CultureArea.French   => "Kg",
                 _                    => "Kg"
-
             };
         }
+
         #endregion
-        
-        
+
+
         public static string GetDatabaseResult(DatabaseFailedReason reason)
         {
             // TODO: 翻译
             return reason switch
-            { 
+            {
                 DatabaseFailedReason.DatabaseNotOpen => Language.Culture switch
                 {
                     CultureArea.English  => "Database Not open!",
@@ -590,14 +566,14 @@ namespace Acorisoft.FutureGL.MigaStudio
                 }
             };
         }
-        
+
         public static string GetEngineResult(EngineFailedReason reason)
         {
             // TODO: 翻译
             return reason switch
-            { 
+            {
                 EngineFailedReason.Duplicated => GetText("enum.EngineFailedReason.Duplicated"),
-                _ => GetText("enum.EngineFailedReason.Unknown")
+                _                             => GetText("enum.EngineFailedReason.Unknown")
             };
         }
 
@@ -605,7 +581,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string BadModule => GetText("text.notModule");
         public static string ImageTooSmall => GetText("text.ImageTooSmall");
         public static string ImageTooBig => GetText("text.ImageTooBig");
-        
+
         public static string OperationOfSaveIsSuccessful
         {
             // TODO: 翻译
@@ -619,11 +595,12 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "保存成功！",
             };
         }
+
         public static string OperationOfAddIsSuccessful => GetText("text.OperationOfAddIsSuccessful");
         public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
-        
+
         public static string ImageProcessing
         {
             // TODO: 翻译
@@ -637,32 +614,32 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "正在处理图片....",
             };
         }
-        
+
         public static string ImageFilter
         {
             // TODO: 翻译
             get => Language.Culture switch
             {
-                CultureArea.English => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.French => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
                 CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                _ => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Russian  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
             };
         }
-        
+
         public static string ModuleFilter
         {
             // TODO: 翻译
             get => Language.Culture switch
             {
-                CultureArea.English => "Module File|*.png",
-                CultureArea.French => "Module File|*.png",
+                CultureArea.English  => "Module File|*.png",
+                CultureArea.French   => "Module File|*.png",
                 CultureArea.Japanese => "Module File|*.png",
-                CultureArea.Korean => "Module File|*.png",
-                CultureArea.Russian => "Module File|*.png",
-                _ => "模组文件|*.png",
+                CultureArea.Korean   => "Module File|*.png",
+                CultureArea.Russian  => "Module File|*.png",
+                _                    => "模组文件|*.png",
             };
         }
 

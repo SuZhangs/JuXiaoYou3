@@ -239,7 +239,7 @@ namespace Acorisoft.FutureGL.Forest
             //
             // 设置语言。
             Language.Culture = basicAppSetting.Language;
-            Language.SetLanguage(ConfigureLanguageFile());
+            Language.SetLanguageSource(ConfigureLanguageFile());
 
             //
             // 注册服务

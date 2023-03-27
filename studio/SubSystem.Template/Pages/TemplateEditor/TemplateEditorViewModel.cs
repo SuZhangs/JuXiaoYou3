@@ -42,11 +42,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         private string          _id;
         private bool            _dirty;
 
+        private bool   _isOpen;
+        private string _fileName;
+
         public TemplateEditorViewModel()
         {
             _metaHashSet             =  new HashSet<string>();
             Id                       =  ID.Get();
             Version                  =  1;
+            ForType                  =  DocumentType.CharacterDocument;
             Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
             Blocks.CollectionChanged += (_, _) => RaiseUpdated(nameof(PreviewBlocks));
             MetadataList             =  new ObservableCollection<MetadataCache>();
@@ -57,9 +61,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             SaveTemplateCommand        = AsyncCommand<FrameworkElement>(SaveTemplateImpl);
             NewBlockCommand            = AsyncCommand(NewBlockImpl);
             EditBlockCommand           = AsyncCommand<ModuleBlockEditUI>(EditBlockImpl, HasElement);
-            RemoveBlockCommand         = AsyncCommand<ModuleBlockEditUI>(RemoveBlockImpl);
-            ShiftUpBlockCommand        = Command<ModuleBlockEditUI>(ShiftUpBlockImpl);
-            ShiftDownBlockCommand      = Command<ModuleBlockEditUI>(ShiftDownBlockImpl);
+            RemoveBlockCommand         = AsyncCommand<ModuleBlockEditUI>(RemoveBlockImpl, HasElement);
+            ShiftUpBlockCommand        = Command<ModuleBlockEditUI>(ShiftUpBlockImpl, HasElement);
+            ShiftDownBlockCommand      = Command<ModuleBlockEditUI>(ShiftDownBlockImpl, HasElement);
             RemoveAllBlockCommand      = AsyncCommand(RemoveAllBlockImpl);
             RefreshMetadataListCommand = Command(RefreshMetadataListImpl);
 
@@ -232,8 +236,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 ContractList  = template.ContractList;
                 For           = template.For;
                 ForType       = template.ForType;
+                
                 SetDirtyState(false);
-
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
@@ -252,8 +256,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             // 1) 判断当前的页面是否保存
             // 2) 选择文件
             // 3) 打开文件并赋值
+            
             var savedlg = new SaveFileDialog
             {
+                FileName = PreviewName,
                 Filter = TemplateSystemString.ModuleFilter
             };
 
@@ -276,7 +282,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                     AuthorList    = _authorList,
                     ContractList  = _contractList,
                     Organizations = _organizations,
-                    Version       = _version,
+                    Version       = ++Version,
                     MetadataList  = MetadataList.ToList(),
                     Blocks = Blocks.Select(x => x.CreateInstance())
                                    .ToList(),
@@ -489,13 +495,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         }
 
 
+        public string PreviewFor => GetFor(_for);
+        public string PreviewIntro => GetFor(_intro);
+        public string PreviewContractList => GetContractList(_contractList);
+        public string PreviewAuthorList => GetAuthor(_authorList);
+        public string PreviewName => GetName(_name);
+
         /// <summary>
         /// 世界观
         /// </summary>
         public string For
         {
-            get => GetFor(_for);
-            set => SetValue(ref _for, value);
+            get => _for;
+            set
+            {
+                SetValue(ref _for, value);
+                RaiseUpdated(nameof(PreviewFor));
+            }
         }
 
         /// <summary>
@@ -512,8 +528,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string Intro
         {
-            get => GetIntro(_intro);
-            set => SetValue(ref _intro, value);
+            get => _intro;
+            set
+            {
+                SetValue(ref _intro, value);
+                RaiseUpdated(nameof(PreviewIntro));
+            }
         }
 
         /// <summary>
@@ -544,8 +564,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string ContractList
         {
-            get => GetContractList(_contractList);
-            set => SetValue(ref _contractList, value);
+            get => _contractList;
+            set
+            {
+                SetValue(ref _contractList, value);
+                RaiseUpdated(nameof(PreviewContractList));
+            }
         }
 
         /// <summary>
@@ -553,8 +577,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string AuthorList
         {
-            get => GetAuthor(_authorList);
-            set => SetValue(ref _authorList, value);
+            get => _authorList;
+            set
+            {
+                SetValue(ref _authorList, value);
+                RaiseUpdated(nameof(PreviewAuthorList));
+            }
         }
 
         /// <summary>
@@ -562,11 +590,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// </summary>
         public string Name
         {
-            get => GetName(_name);
+            get => _name;
             set
             {
                 SetValue(ref _name, value);
                 UpdateTitle();
+                RaiseUpdated(nameof(PreviewName));
             }
         }
 
