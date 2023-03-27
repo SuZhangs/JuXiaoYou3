@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
     public class TemplateEditorViewModel : TabViewModel
     {
-
+        [NullCheck(UniTestLifetime.Constructor)]
         private readonly HashSet<string> _metaHashSet;
             
         private string          _name;
@@ -559,6 +559,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// <summary>
         /// 元数据列表
         /// </summary>
+        [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<MetadataCache> MetadataList { get; init; }
 
         /// <summary>
@@ -640,21 +641,43 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         /// <summary>
         /// 模组内容块集合。
         /// </summary>
+        [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
 
         public IEnumerable<ModuleBlockDataUI> PreviewBlocks =>
             Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NewTemplateCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand OpenTemplateCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<FrameworkElement> SaveTemplateCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleBlockEditUI> EditBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleBlockEditUI> RemoveBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<ModuleBlockEditUI> ShiftUpBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<ModuleBlockEditUI> ShiftDownBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand RemoveAllBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand OpenPreviewPaneCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RefreshMetadataListCommand { get; }
     }
 }

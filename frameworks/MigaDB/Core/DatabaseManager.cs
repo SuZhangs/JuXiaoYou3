@@ -500,7 +500,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回一个操作结果</returns>
         public async Task<DatabaseResult> LoadAsync(string directory)
         {
-            if (!Directory.Exists(directory))
+            if (!Directory.Exists(directory) && _databaseMode != DatabaseMode.Debug)
             {
                 return DatabaseResult.Failed(DatabaseFailedReason.DirectoryNotExists);
             }
@@ -513,14 +513,14 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             //
             // 缺失数据库缓存
-            if (!File.Exists(databaseCacheFileName))
+            if (!File.Exists(databaseCacheFileName) && _databaseMode != DatabaseMode.Debug)
             {
                 return DatabaseResult.Failed(DatabaseFailedReason.MissingFileName);
             }
 
             //
             // 缺失数据库
-            if (!File.Exists(databaseFileName))
+            if (!File.Exists(databaseFileName) && _databaseMode != DatabaseMode.Debug)
             {
                 return DatabaseResult.Failed(DatabaseFailedReason.DatabaseNotExists);
             }
