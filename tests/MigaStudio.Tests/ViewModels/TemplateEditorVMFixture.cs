@@ -11,7 +11,7 @@ namespace MigaStudio.Tests.ViewModels
         {
             //
             // 初始化
-            ViewModelUniTest.Initialize(Xaml.Container);
+            ViewModelUnitTest.Initialize(Xaml.Container);
         }
         
         /// <summary>
@@ -22,7 +22,8 @@ namespace MigaStudio.Tests.ViewModels
         {
             var vm = new TemplateEditorViewModel();
             
-            ViewModelUniTest.AssertAllClassPropertyWasNotNull(vm);
+            ViewModelUnitTest.AssertAllPropertyWasNotNull(vm);
+            ViewModelUnitTest.AssertAllFieldWasNotNull(vm);
         }
     }
 }

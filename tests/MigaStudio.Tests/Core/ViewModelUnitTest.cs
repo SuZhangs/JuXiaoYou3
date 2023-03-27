@@ -1,21 +1,18 @@
 ﻿using System.Reactive.Concurrency;
 using System.Reflection;
 using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.Forest.Styles;
 using Acorisoft.FutureGL.MigaDB.Core;
 using DryIoc;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
 
-namespace MigaStudio.Tests
+namespace MigaStudio.Tests.Core
 {
-    public class ViewModelUniTest
+    public static class ViewModelUnitTest
     {
         private static ILogger ConfigureLogger()
         {
@@ -74,7 +71,7 @@ namespace MigaStudio.Tests
             public Type PropertyType { get; init; }
         }
         
-        public static void AssertAllClassPropertyWasNotNull(object value)
+        public static void AssertAllPropertyWasNotNull(object value)
         {
             if (value is null)
             {
@@ -98,7 +95,7 @@ namespace MigaStudio.Tests
             Assert.IsTrue(iterator.All(x => x.Result));
         }
         
-        public static void AssertAllClassFieldWasNotNull(object value)
+        public static void AssertAllFieldWasNotNull(object value)
         {
             if (value is null)
             {

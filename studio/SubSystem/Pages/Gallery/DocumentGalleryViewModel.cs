@@ -366,22 +366,42 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         /// <remarks>重新加载内容，这个过程虽然对于后端是没有什么压力的，但是对于前端以及大量的IO操作则是致命性的。</remarks>
         public int Version { get; private set; }
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public SourceList<IDataCache> DocumentSource { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public ReadOnlyObservableCollection<IDataCache> Collection => _collection;
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public TemplateEngine TemplateEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public ImageEngine ImageEngine { get; }
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public IDatabaseManager DatabaseManager { get; }
 
         #region Commands
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NextPageCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand LastPageCommand { get; }
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> SelectDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<DocumentCache> ChangeAvatarCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand GotoTemplateGalleryCommand { get; }
         
         #endregion

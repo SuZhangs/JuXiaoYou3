@@ -1,4 +1,5 @@
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using MigaStudio.Tests.Core;
 
 /*
  * 为了更好地实现代码测试
