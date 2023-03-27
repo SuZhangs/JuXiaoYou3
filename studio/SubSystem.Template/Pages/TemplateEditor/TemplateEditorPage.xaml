@@ -6,6 +6,7 @@
                      xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Modules"
+                     xmlns:thisModel2="clr-namespace:Acorisoft.FutureGL.MigaDB.Interfaces;assembly=MigaDB.Share"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
@@ -15,6 +16,7 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateEditorViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <thisConverters:ModuleBlockUIConverter x:Key="BlockName" />
+        <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
 
         <DataTemplate DataType="{x:Type thisModel:ModuleBlockEditUI}">
             <TextBlock Margin="4"
@@ -24,7 +26,76 @@
     <f:Drawer Padding="8 16"
               IsRightOpen="{Binding IsPreviewPaneOpen,Mode=TwoWay}">
         <f:Drawer.RightContent>
-            <thisVM:PreviewBlockView />
+            <Border Background="{f:BackgroundBrush}"
+                    Width="640">
+                <Border.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/SubSystem.Template;component/Modules/ModuleBlockDataTemplates.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Border.Resources>
+                <ScrollViewer>
+                    <Border x:Name="Canvas"
+                            Padding="32"
+                            Background="{f:BackgroundBrush}">
+                        <StackPanel>
+                            <TextBlock FontSize="32"
+                                       Text="{Binding PreviewName,Mode=OneWay}" />
+                            <TextBlock FontSize="20"
+                                       Margin="0 4"
+                                       Text="{Binding PreviewFor,Mode=OneWay}" />
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="{Binding PreviewAuthorList,Mode=OneWay}" />
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="{Binding PreviewContractList,Mode=OneWay}" />
+                            <TextBlock FontSize="14"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       MaxHeight="96"
+                                       Margin="0 4"
+                                       TextTrimming="CharacterEllipsis"
+                                       Text="{Binding PreviewIntro,Mode=OneWay}" />
+                            <TextBlock f:Language.Name="Blocks"
+                                       FontSize="18"
+                                       Margin="0 12" />
+                            <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}" />
+
+                            <TextBlock f:Language.Name="Metadatas"
+                                       FontSize="18"
+                                       Margin="0 12" />
+                            <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}"
+                                          MaxHeight="384">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="{f:Brush BorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="3"
+                                                Margin="4"
+                                                Padding="8">
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Top"
+                                                           FontSize="14"
+                                                           FontWeight="Bold"
+                                                           Text="{Binding MetadataName}" />
+                                                <TextBlock Text="{Binding MetadataName}" />
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </ScrollViewer>
+            </Border>
         </f:Drawer.RightContent>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -68,50 +139,56 @@
                                    ItemsSource="{x:Static local:TemplateSystemString.DocumentTypes}"
                                    SelectedItem="{Binding ForType,Mode=TwoWay}"
                                    Margin="0 8">
+                            <f:ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type thisModel2:DocumentType}">
+                                    <TextBlock Margin="4"
+                                               Text="{Binding Converter={StaticResource DocumentTypeName}}" />
+                                </DataTemplate>
+                            </f:ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel />
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </f:ListBox>
-                        <f:HeaderedSingleLine f:Language.Id="global.id" 
+                        <f:HeaderedSingleLine f:Language.Id="global.id"
                                               IsReadOnly="True"
                                               Margin="0 8"
                                               Header="ID"
                                               Text="{Binding Id,Mode=OneWay}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.version" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.version"
                                               IsReadOnly="True"
                                               Margin="0 8"
                                               Header="版本"
                                               Text="{Binding Version,Mode=OneWay}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.name" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.name"
                                               Margin="0 8"
                                               Header="名字"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.mystery" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.mystery"
                                               Margin="0 8"
                                               Header="世界观名字"
                                               Text="{Binding For,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.author" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.author"
                                               Margin="0 8"
                                               Header="作者"
                                               Text="{Binding AuthorList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.organization" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.organization"
                                               Margin="0 8"
                                               Header="组织"
                                               Text="{Binding Organizations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
-                        <f:HeaderedSingleLine f:Language.Id="global.contract" 
+
+                        <f:HeaderedSingleLine f:Language.Id="global.contract"
                                               Margin="0 8"
                                               Header="联系方式"
                                               Text="{Binding ContractList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
-                        <f:HeaderedMultiLine f:Language.Id="global.intro" 
+
+                        <f:HeaderedMultiLine f:Language.Id="global.intro"
                                              Height="144"
                                              Margin="0 8"
                                              Header="介绍"

@@ -17,6 +17,7 @@ using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
+using NLog;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 
@@ -42,8 +43,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         private string          _id;
         private bool            _dirty;
 
-        private bool   _isOpen;
-        private string _fileName;
 
         public TemplateEditorViewModel()
         {
@@ -241,17 +240,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await ds.Notify(
                     CriticalLevel.Danger,
                     TemplateSystemString.Notify,
                     TemplateSystemString.BadModule);
+                
+                Xaml.Get<ILogger>()
+                    .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");
+                          
             }
         }
 
         private async Task SaveTemplateImpl(FrameworkElement target)
         {
+            if(target is null)
+            {
+                return;
+            }
+
             // 保存模板的行为是:
             // 1) 判断当前的页面是否保存
             // 2) 选择文件
@@ -299,12 +307,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
                     TemplateSystemString.Notify,
                     TemplateSystemString.OperationOfSaveIsSuccessful);
             }
-            catch
+            catch(Exception ex)
             {
                 await ds.Notify(
-                    CriticalLevel.Success,
+                    CriticalLevel.Danger,
                     TemplateSystemString.Notify,
                     TemplateSystemString.BadModule);
+                
+                Xaml.Get<ILogger>()
+                    .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
             }
         }
 

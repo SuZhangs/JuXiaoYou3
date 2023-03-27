@@ -114,10 +114,7 @@
                          WindowState="{Binding WindowState,Mode=OneWay}" />
         </Grid>
 
-        <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Auto">
-            <fs:ViewHost ClipToBounds="True"
-                         ViewModel="{Binding CurrentViewModel,Mode=OneWay}" />
-        </ScrollViewer>
+        <fs:ViewHost ClipToBounds="True"
+                     ViewModel="{Binding CurrentViewModel,Mode=OneWay}" />
     </DockPanel>
 </f:ForestUserControl>

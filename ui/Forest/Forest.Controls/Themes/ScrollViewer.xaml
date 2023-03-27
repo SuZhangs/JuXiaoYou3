@@ -81,7 +81,7 @@
     </Style>
 
     <Style x:Key="Base.ScrollBarThumb" TargetType="{x:Type Thumb}">
-        <Setter Property="Background" Value="{f:Brush BackgroundLevel1}"/>
+        <Setter Property="Background" Value="{f:Brush AdaptiveLevel1}"/>
         <Setter Property="Border.CornerRadius" Value="4" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />

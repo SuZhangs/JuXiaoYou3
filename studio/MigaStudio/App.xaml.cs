@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -37,6 +38,19 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         public App() : base(BasicSettingFileName)
         {
+            Current.DispatcherUnhandledException += OnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        }
+
+        private void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            Logger.Error(e.Exception);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Logger.Error(e.ExceptionObject);
         }
 
         protected sealed override ApplicationModel ConfigureDirectory()
@@ -67,6 +81,13 @@ namespace Acorisoft.FutureGL.MigaStudio
             // TODO: 安装语言
             SubSystem.InstallLanguages();
             TemplateSystem.InstallLanguages();
+            
+            //
+            // TODO: 安装设置
+            // _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
+            //     DatabaseManager.GetDefaultDatabaseManager(
+            //         logger,
+            //         setting.DebugMode));
             
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
                 DatabaseManager.GetDefaultDatabaseManager(
