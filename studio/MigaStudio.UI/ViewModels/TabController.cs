@@ -145,15 +145,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
         
-        protected virtual void StartOverride(Parameter arg)
+        protected virtual void OnStart(Parameter arg)
         {
             
         }
 
-        public sealed override void Start(Parameter arg)
+        protected sealed override void StartOverride(Parameter arg)
         {
             _context = arg.Args[0] as GlobalStudioContext;
-            StartOverride(arg);
+            OnStart(arg);
         }
 
         #endregion
@@ -272,7 +272,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Start(NavigationParameter.New(vm, this));
+            vm.Start(NavigationParameter.New(vm, this).Params);
             Start(vm);
             return vm;
         }
@@ -291,7 +291,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
             
             var vm1 = Xaml.GetViewModel<TViewModel>();
-            vm1.Start(NavigationParameter.New(vm, this));
+            vm1.Start(NavigationParameter.New(vm, this).Params);
             Start(vm1);
             return vm1;
         }

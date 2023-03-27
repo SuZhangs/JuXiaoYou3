@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
 
@@ -88,13 +89,28 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
         }
         
+        [NullCheck(UniTestLifetime.StartParameter)]
+        public Parameter OriginalParameter { get; set; }
+        
         /// <summary>
         /// 表示参数传递。
         /// </summary>
         /// <param name="arg">视图参数</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void Start(Parameter arg)
+        public void Start(Parameter arg)
         {
+            StartIntern(arg);
+        }
+
+        private void StartIntern(Parameter arg)
+        {
+            OriginalParameter = arg;
+            StartOverride(arg);
+        }
+
+        protected virtual void StartOverride(Parameter arg)
+        {
+            
         }
         
 
