@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 
@@ -14,7 +15,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         private       string _rgb;
         private       string _hex;
 
-        public ColorBlockDataUI(ColorBlock block) : base(block)
+        public ColorBlockDataUI(ColorBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public ColorBlockDataUI(ColorBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock = block;
             Fallback    = Xaml.FromHex(block.Fallback);

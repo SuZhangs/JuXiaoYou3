@@ -4,7 +4,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class SingleLineBlockDataUI : ModuleBlockDataUI<SingleLineBlock, string>, ISingleLineBlockDataUI
     {
-        public SingleLineBlockDataUI(SingleLineBlock block) : base(block)
+        public SingleLineBlockDataUI(SingleLineBlock block) : this(block, ModuleBlockFactory.EmptyHandler) 
+        {
+        }
+        
+        public SingleLineBlockDataUI(SingleLineBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Suffix = block.Suffix;
             Value  = block.Value;

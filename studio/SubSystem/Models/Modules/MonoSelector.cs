@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public abstract class MonoSelectorDataUI : ModuleBlockDataUI<MonoSelectorBlock, string>, IMonoSelectorBlockDataUI
     {
-        protected MonoSelectorDataUI(MonoSelectorBlock block) : base(block)
+        protected MonoSelectorDataUI(MonoSelectorBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Items = new List<OptionItemUI>();
 
@@ -89,7 +89,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
     public sealed class SequenceBlockDataUI : MonoSelectorDataUI
     {
-        public SequenceBlockDataUI(SequenceBlock block) : base(block)
+        public SequenceBlockDataUI(SequenceBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public SequenceBlockDataUI(SequenceBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }

@@ -4,7 +4,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class SwitchBlockDataUI : ModuleBlockDataUI<OptionBlock, bool>, IOptionBlockDataUI
     {
-        public SwitchBlockDataUI(OptionBlock block) : base(block)
+        public SwitchBlockDataUI(OptionBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public SwitchBlockDataUI(OptionBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Value = block.Value;
         }
@@ -18,7 +22,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     
     public class StarBlockDataUI : ModuleBlockDataUI<StarBlock, bool>, IOptionBlockDataUI
     {
-        public StarBlockDataUI(StarBlock block) : base(block)
+        
+        public StarBlockDataUI(StarBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        public StarBlockDataUI(StarBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Value = block.Value;
         }
@@ -31,7 +39,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     
     public class HeartBlockDataUI : ModuleBlockDataUI<HeartBlock, bool>, IOptionBlockDataUI
     {
-        public HeartBlockDataUI(HeartBlock block) : base(block)
+        public HeartBlockDataUI(HeartBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public HeartBlockDataUI(HeartBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Value = block.Value;
         }

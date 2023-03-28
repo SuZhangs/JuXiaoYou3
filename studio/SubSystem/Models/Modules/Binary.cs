@@ -1,10 +1,15 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+﻿
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class BinaryBlockDataUI : ModuleBlockDataUI<BinaryBlock, bool>, IBinaryBlockDataUI
     {
-        public BinaryBlockDataUI(BinaryBlock block) : base(block)
+        public BinaryBlockDataUI(BinaryBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public BinaryBlockDataUI(BinaryBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Negative     = block.Negative;
             Positive     = block.Positive;

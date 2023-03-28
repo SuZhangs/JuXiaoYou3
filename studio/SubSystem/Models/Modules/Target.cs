@@ -6,14 +6,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public abstract class TargetBlockDataUI : ModuleBlockDataUI, ITargetBlockDataUI
     {
-        protected TargetBlockDataUI(TargetBlock block) : base(block)
+        protected TargetBlockDataUI(TargetBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock     = block;
             TargetName      = block.TargetName;
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
         }
-        
+
         public override bool CompareTemplate(ModuleBlock block)
         {
             return TargetBlock.CompareTemplate(block);
@@ -54,7 +54,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             get => _targetSource;
             set
             {
-                
                 TargetBlock.TargetSource = value;
                 SetValue(ref _targetSource, value);
             }
@@ -76,42 +75,62 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
     public class AudioBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
     {
-        public AudioBlockDataUI(AudioBlock block) : base(block)
+        public AudioBlockDataUI(AudioBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+
+        public AudioBlockDataUI(AudioBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }
 
     public class VideoBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
     {
-        public VideoBlockDataUI(VideoBlock block) : base(block)
+        public VideoBlockDataUI(VideoBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+
+        public VideoBlockDataUI(VideoBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }
 
     public class FileBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
     {
-        public FileBlockDataUI(FileBlock block) : base(block)
+        public FileBlockDataUI(FileBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
+        {
+        }
+
+        public FileBlockDataUI(FileBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
         }
     }
 
     public class MusicBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
     {
-        public MusicBlockDataUI(MusicBlock block) : base(block)
+        public MusicBlockDataUI(MusicBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
+        {
+        }
+
+        public MusicBlockDataUI(MusicBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
         }
     }
 
     public class ImageBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
     {
-        public ImageBlockDataUI(ImageBlock block) : base(block)
+        public ImageBlockDataUI(ImageBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
+        {
+        }
+
+        public ImageBlockDataUI(ImageBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
         }
     }
 
     public class ReferenceBlockDataUI : ModuleBlockDataUI, ITargetBlockDataUI, IReferenceBlock
     {
-        public ReferenceBlockDataUI(ReferenceBlock block) : base(block)
+        public ReferenceBlockDataUI(ReferenceBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock     = block;
             TargetName      = block.TargetName;
@@ -119,7 +138,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             TargetThumbnail = block.TargetThumbnail;
             DataSource      = block.DataSource;
         }
-        
+
+        public ReferenceBlockDataUI(ReferenceBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+
         public override bool CompareTemplate(ModuleBlock block)
         {
             return TargetBlock.CompareTemplate(block);
@@ -130,9 +153,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             return TargetBlock.CompareValue(block);
         }
 
-        private string          _targetName;
-        private string          _targetSource;
-        private string          _targetThumbnail;
+        private string _targetName;
+        private string _targetSource;
+        private string _targetThumbnail;
 
         /// <summary>
         /// 目标内容块
@@ -160,7 +183,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             get => _targetSource;
             set
             {
-                
                 TargetBlock.TargetSource = value;
                 SetValue(ref _targetSource, value);
             }

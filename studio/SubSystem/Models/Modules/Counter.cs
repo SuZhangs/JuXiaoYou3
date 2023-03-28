@@ -7,16 +7,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public abstract class CounterBlockDataUI : ModuleBlockDataUI<CounterBlock, int>, ICounterBlockDataUI
     {
-        protected CounterBlockDataUI(CounterBlock block) : base(block)
+        protected CounterBlockDataUI(CounterBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler )
         {
             Maximum = block.Maximum;
             Minimum = block.Minimum;
-            Value = block.Value;
+            Value   = block.Value == -1 ? block.Fallback : block.Value;
         }
 
         protected sealed override int OnValueChanged(int oldValue, int newValue)
         {
-            newValue          = newValue == -1 ? Fallback : Math.Clamp(newValue, Minimum, Maximum);
+            newValue          = Math.Clamp(newValue, Minimum, Maximum);
             TargetBlock.Value = newValue;
             return newValue;
         }
@@ -34,14 +34,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
     public class RateBlockDataUI : CounterBlockDataUI
     {
-        public RateBlockDataUI(RateBlock block) : base(block)
+        public RateBlockDataUI(RateBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public RateBlockDataUI(RateBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }
 
     public class LikabilityBlockDataUI : CounterBlockDataUI
     {
-        public LikabilityBlockDataUI(LikabilityBlock block) : base(block)
+        public LikabilityBlockDataUI(LikabilityBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public LikabilityBlockDataUI(LikabilityBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }

@@ -24,8 +24,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             {
                 Id       = ID.Get(),
                 Name     = SubSystemString.GetSingleLineName(),
-                ToolTips  = SubSystemString.GetToolTipsField(),
-                
+                ToolTips = SubSystemString.GetToolTipsField(),
+
                 Items = new List<ModuleBlock>
                 {
                     CreateDegree(),
@@ -45,10 +45,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 Id       = ID.Get(),
                 Name     = SubSystemString.GetSequenceName(),
                 Fallback = "Item1",
-                Value = null,
+                Value    = null,
                 Items    = new List<OptionItem>(),
-                ToolTips  = SubSystemString.GetToolTipsField(),
-                
+                ToolTips = SubSystemString.GetToolTipsField(),
             };
             b.Items.Add(new OptionItem { Name = "Item1", Value = "Item1" });
             b.Items.Add(new OptionItem { Name = "Item2", Value = "Item2" });
@@ -60,13 +59,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         private static SingleLineBlock CreateSingleLine() => new SingleLineBlock
         {
-            Id = ID.Get(),
-            Value = null,
+            Id       = ID.Get(),
+            Value    = null,
             Name     = SubSystemString.GetSingleLineName(),
             Suffix   = SubSystemString.GetSuffixField(),
-            Fallback   = SubSystemString.GetFallbackField(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            Fallback = SubSystemString.GetFallbackField(),
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static MultiLineBlock CreateMultiLine() => new MultiLineBlock
@@ -74,9 +72,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Id       = ID.Get(),
             Value    = null,
             Name     = SubSystemString.GetMultiLineName(),
-            Fallback  = SubSystemString.GetFallbackField(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            Fallback = SubSystemString.GetFallbackField(),
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static ColorBlock CreateColor() => new ColorBlock
@@ -85,8 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Value    = null,
             Name     = SubSystemString.GetColorName(),
             Fallback = "#007ACC",
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
 
@@ -99,8 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Minimum  = 0,
             Value    = -1,
             Suffix   = SubSystemString.GetNumberName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static SliderBlock CreateSlider() => new SliderBlock
@@ -112,8 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Minimum  = 0,
             Value    = -1,
             Suffix   = SubSystemString.GetSliderName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static DegreeBlock CreateDegree() => new DegreeBlock
@@ -125,10 +119,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Minimum    = 0,
             DivideLine = 10,
             Value      = -1,
-            Negative  = SubSystemString.GetNegativeField(),
-            Positive  = SubSystemString.GetPositiveField(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            Negative   = SubSystemString.GetNegativeField(),
+            Positive   = SubSystemString.GetPositiveField(),
+            ToolTips   = SubSystemString.GetToolTipsField(),
         };
 
 
@@ -137,8 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Id       = ID.Get(),
             Name     = SubSystemString.GetSwitchName(),
             Fallback = false,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
 
@@ -147,10 +139,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Id       = ID.Get(),
             Name     = SubSystemString.GetBinaryName(),
             Fallback = false,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
-            Negative  = SubSystemString.GetNegativeField(),
-            Positive  = SubSystemString.GetPositiveField(),
+            ToolTips = SubSystemString.GetToolTipsField(),
+
+            Negative = SubSystemString.GetNegativeField(),
+            Positive = SubSystemString.GetPositiveField(),
         };
 
 
@@ -159,8 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Id       = ID.Get(),
             Name     = SubSystemString.GetHeartName(),
             Fallback = false,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
 
@@ -169,8 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Id       = ID.Get(),
             Name     = SubSystemString.GetStarName(),
             Fallback = false,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static LikabilityBlock CreateLikability() => new LikabilityBlock
@@ -181,8 +171,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Maximum  = 10,
             Minimum  = 0,
             Value    = -1,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static RateBlock CreateRate() => new RateBlock
@@ -193,8 +182,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Maximum  = 10,
             Value    = -1,
             Minimum  = 0,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
         };
 
         private static RadarBlock CreateRadar() => new RadarBlock
@@ -204,8 +192,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Maximum  = 10,
             Value    = null,
             Minimum  = 0,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
+
             Axis     = new[] { "Axis1", "Axis2", "Axis3", "Axis4" },
             Fallback = new[] { 3, 4, 5, 6 },
             Color    = "#007ACC"
@@ -219,8 +207,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             Maximum  = 10,
             Value    = null,
             Minimum  = 0,
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips = SubSystemString.GetToolTipsField(),
+
             Axis     = new[] { "Axis1", "Axis2", "Axis3", "Axis4" },
             Fallback = new[] { 3, 4, 5, 6 },
             Color    = "#007ACC"
@@ -233,7 +221,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetAudioName(),
             TargetSource    = SubSystemString.GetAudioName(),
             TargetThumbnail = SubSystemString.GetAudioName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         private static FileBlock CreateFile() => new FileBlock
@@ -243,8 +231,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetFileName(),
             TargetSource    = SubSystemString.GetFileName(),
             TargetThumbnail = SubSystemString.GetFileName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         private static VideoBlock CreateVideo() => new VideoBlock
@@ -254,8 +241,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetVideoName(),
             TargetSource    = SubSystemString.GetVideoName(),
             TargetThumbnail = SubSystemString.GetVideoName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         private static MusicBlock CreateMusic() => new MusicBlock
@@ -265,8 +251,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetMusicName(),
             TargetSource    = SubSystemString.GetMusicName(),
             TargetThumbnail = SubSystemString.GetMusicName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         private static ImageBlock CreateImage() => new ImageBlock
@@ -276,8 +261,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetImageName(),
             TargetSource    = SubSystemString.GetImageName(),
             TargetThumbnail = SubSystemString.GetImageName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         private static ReferenceBlock CreateReference() => new ReferenceBlock
@@ -288,8 +272,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             TargetName      = SubSystemString.GetReferenceName(),
             TargetSource    = SubSystemString.GetReferenceName(),
             TargetThumbnail = SubSystemString.GetReferenceName(),
-            ToolTips  = SubSystemString.GetToolTipsField(),
-            
+            ToolTips        = SubSystemString.GetToolTipsField(),
         };
 
         #endregion
@@ -328,7 +311,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        
+
         public static ModuleBlockDataUI GetDataUI(ModuleBlock block)
         {
             return block switch
@@ -364,37 +347,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        public static ModuleBlockDataUI GetDataUI(ModuleBlock block, Action<ModuleBlock, ModuleBlockDataUI> handler)
+        public static ModuleBlockDataUI GetDataUI(ModuleBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler)
         {
             return block switch
             {
-                SingleLineBlock SingleLineBlock => new SingleLineBlockDataUI(SingleLineBlock),
-                MultiLineBlock MultiLineBlock   => new MultiLineBlockDataUI(MultiLineBlock),
-                ColorBlock ColorBlock           => new ColorBlockDataUI(ColorBlock),
-                NumberBlock NumberBlock         => new NumberBlockDataUI(NumberBlock),
-                SliderBlock SliderBlock         => new SliderBlockDataUI(SliderBlock),
+                SingleLineBlock SingleLineBlock => new SingleLineBlockDataUI(SingleLineBlock, handler),
+                MultiLineBlock MultiLineBlock   => new MultiLineBlockDataUI(MultiLineBlock, handler),
+                ColorBlock ColorBlock           => new ColorBlockDataUI(ColorBlock, handler),
+                NumberBlock NumberBlock         => new NumberBlockDataUI(NumberBlock, handler),
+                SliderBlock SliderBlock         => new SliderBlockDataUI(SliderBlock, handler),
 
-                DegreeBlock DegreeBlock => new DegreeBlockDataUI(DegreeBlock),
-                SwitchBlock SwitchBlock => new SwitchBlockDataUI(SwitchBlock),
-                BinaryBlock BinaryBlock => new BinaryBlockDataUI(BinaryBlock),
-                HeartBlock HeartBlock   => new HeartBlockDataUI(HeartBlock),
-                StarBlock StarBlock     => new StarBlockDataUI(StarBlock),
+                DegreeBlock DegreeBlock => new DegreeBlockDataUI(DegreeBlock, handler),
+                SwitchBlock SwitchBlock => new SwitchBlockDataUI(SwitchBlock, handler),
+                BinaryBlock BinaryBlock => new BinaryBlockDataUI(BinaryBlock, handler),
+                HeartBlock HeartBlock   => new HeartBlockDataUI(HeartBlock, handler),
+                StarBlock StarBlock     => new StarBlockDataUI(StarBlock, handler),
 
-                SequenceBlock SequenceBlock => new SequenceBlockDataUI(SequenceBlock),
-                GroupBlock GroupBlock       => new GroupBlockDataUI(GroupBlock),
+                SequenceBlock SequenceBlock => new SequenceBlockDataUI(SequenceBlock, handler),
+                GroupBlock GroupBlock       => new GroupBlockDataUI(GroupBlock, handler),
 
-                LikabilityBlock LikabilityBlock => new LikabilityBlockDataUI(LikabilityBlock),
-                RateBlock RateBlock             => new RateBlockDataUI(RateBlock),
+                LikabilityBlock LikabilityBlock => new LikabilityBlockDataUI(LikabilityBlock, handler),
+                RateBlock RateBlock             => new RateBlockDataUI(RateBlock, handler),
 
-                RadarBlock RadarBlock         => new RadarBlockDataUI(RadarBlock),
-                HistogramBlock HistogramBlock => new HistogramBlockDataUI(HistogramBlock),
+                RadarBlock RadarBlock         => new RadarBlockDataUI(RadarBlock, handler),
+                HistogramBlock HistogramBlock => new HistogramBlockDataUI(HistogramBlock, handler),
 
-                AudioBlock AudioBlock         => new AudioBlockDataUI(AudioBlock),
-                FileBlock FileBlock           => new FileBlockDataUI(FileBlock),
-                VideoBlock VideoBlock         => new VideoBlockDataUI(VideoBlock),
-                MusicBlock MusicBlock         => new MusicBlockDataUI(MusicBlock),
-                ImageBlock ImageBlock         => new ImageBlockDataUI(ImageBlock),
-                ReferenceBlock ReferenceBlock => new ReferenceBlockDataUI(ReferenceBlock),
+                AudioBlock AudioBlock         => new AudioBlockDataUI(AudioBlock, handler),
+                FileBlock FileBlock           => new FileBlockDataUI(FileBlock, handler),
+                VideoBlock VideoBlock         => new VideoBlockDataUI(VideoBlock, handler),
+                MusicBlock MusicBlock         => new MusicBlockDataUI(MusicBlock, handler),
+                ImageBlock ImageBlock         => new ImageBlockDataUI(ImageBlock, handler),
+                ReferenceBlock ReferenceBlock => new ReferenceBlockDataUI(ReferenceBlock, handler),
                 _                             => throw new ArgumentOutOfRangeException(nameof(block), block, null)
             };
         }
@@ -434,7 +417,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
             };
         }
-        
+
         public static ModuleBlockEditUI GetEditUI(MetadataKind kind)
         {
             ModuleBlock b = kind switch
@@ -557,5 +540,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             MetadataKind.Histogram,
             MetadataKind.Radar,
         };
+
+
+        internal static void EmptyHandler(ModuleBlockDataUI ui, ModuleBlock block)
+        {
+        }
     }
 }

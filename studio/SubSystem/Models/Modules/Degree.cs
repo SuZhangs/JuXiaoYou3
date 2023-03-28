@@ -5,7 +5,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class DegreeBlockDataUI : ModuleBlockDataUI<DegreeBlock, int>, IDegreeBlockDataUI
     {
-        public DegreeBlockDataUI(DegreeBlock block) : base(block)
+        public DegreeBlockDataUI(DegreeBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public DegreeBlockDataUI(DegreeBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Maximum    = block.Maximum;
             Minimum    = block.Minimum;

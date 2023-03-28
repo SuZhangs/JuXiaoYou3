@@ -5,7 +5,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class MultiLineBlockDataUI : ModuleBlockDataUI<MultiLineBlock, string>, IMultiLineBlockDataUI
     {
-        public MultiLineBlockDataUI(MultiLineBlock block) : base(block)
+        public MultiLineBlockDataUI(MultiLineBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public MultiLineBlockDataUI(MultiLineBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             EnableExpression = block.EnableExpression;
             CharacterLimited = block.CharacterLimited;

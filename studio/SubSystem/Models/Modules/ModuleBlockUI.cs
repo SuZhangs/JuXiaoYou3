@@ -53,18 +53,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     {
         private          TValue                                 _value;
 
-        protected ModuleBlockDataUI(TBlock block) : this(block, null)
-        {
-            TargetBlock = block;
-            Fallback    = block.Fallback;
-        }
-
         protected ModuleBlockDataUI(TBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             if (handler is null)
             {
                 throw new ArgumentNullException(nameof(handler));
             }
+            
+            TargetBlock = block;
+            Fallback    = block.Fallback;
         }
 
         public override bool CompareTemplate(ModuleBlock block)

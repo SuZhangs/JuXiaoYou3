@@ -5,17 +5,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class SliderBlockDataUI : ModuleBlockDataUI<SliderBlock, int>, INumberBlockDataUI
     {
-        public SliderBlockDataUI(SliderBlock block) : base(block)
+        public SliderBlockDataUI(SliderBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public SliderBlockDataUI(SliderBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Maximum = block.Maximum;
             Minimum = block.Minimum;
             Suffix  = block.Suffix;
-            Value = block.Value;
+            Value   = block.Value == -1 ? block.Fallback :block.Value;
         }
 
         protected override int OnValueChanged(int oldValue, int newValue)
         {
-            newValue          = newValue == -1 ? Fallback : Math.Clamp(newValue, Minimum, Maximum);
+            newValue          = Math.Clamp(newValue, Minimum, Maximum);
             TargetBlock.Value = newValue;
             return newValue;
         }

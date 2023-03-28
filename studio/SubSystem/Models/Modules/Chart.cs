@@ -21,8 +21,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     {
         private readonly List<BindableAxis> _value;
         private List<int> _data;
-
-        protected ChartBlockDataUI(ChartBlock block) : base(block)
+        
+        protected ChartBlockDataUI(ChartBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock   = block;
             Fallback      = block.Fallback;
@@ -307,14 +307,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
     public class RadarBlockDataUI : ChartBlockDataUI
     {
-        public RadarBlockDataUI(RadarBlock block) : base(block)
+        public RadarBlockDataUI(RadarBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
         }
-    }
-
-    public class HistogramBlockDataUI : ChartBlockDataUI
-    {
-        public HistogramBlockDataUI(HistogramBlock block) : base(block)
+        
+        public RadarBlockDataUI(RadarBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
     }
@@ -339,6 +336,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 Axis = Axis.ToArray(),
                 Color = Color,
             };
+        }
+    }
+    
+    
+
+    public class HistogramBlockDataUI : ChartBlockDataUI
+    {
+        
+        public HistogramBlockDataUI(HistogramBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public HistogramBlockDataUI(HistogramBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
+        {
         }
     }
 

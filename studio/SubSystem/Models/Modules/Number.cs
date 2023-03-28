@@ -8,7 +8,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     /// </summary>
     public class NumberBlockDataUI : ModuleBlockDataUI<NumberBlock, int>, INumberBlockDataUI
     {
-        public NumberBlockDataUI(NumberBlock block) : base(block)
+        public NumberBlockDataUI(NumberBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
+        {
+        }
+        
+        public NumberBlockDataUI(NumberBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             Maximum = block.Maximum;
             Minimum = block.Minimum;
