@@ -4,12 +4,14 @@ using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.ViewModels.CustomDataParts;
 using Acorisoft.FutureGL.MigaUtils.Collections;
+using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
@@ -24,9 +26,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected DocumentEditorVMBase()
         {
-            InternalSubViews = new ObservableCollection<HeaderedSubView>();
-            SubViews         = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            CustomDataParts  = new ObservableCollection<ICustomDataPart>();
+            InternalSubViews   = new ObservableCollection<HeaderedSubView>();
+            SubViews           = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
+            CustomDataParts    = new ObservableCollection<ICustomDataPart>();
+            InvisibleDataParts = new ObservableCollection<DataPart>();
+            ModuleDataParts    = new ObservableCollection<PartOfModule>();
             Initialize();
         }
 
@@ -174,21 +178,53 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         #region DataParts
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<DataPart> FixedDataParts { get; }
+        public ObservableCollection<DataPart> InvisibleDataParts { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<PartOfModule> Modules { get; }
+        public ObservableCollection<PartOfModule> ModuleDataParts { get; }
 
         #endregion
+        
+        
+
+        
 
         #endregion
-
 
         public DocumentType Type { get; private set; }
     }
     
     partial class DocumentEditorVMBase
     {
+        //---------------------------------------------
+        //
+        // Commands
+        //
+        //---------------------------------------------
+        
+        public AsyncRelayCommand SaveDocumentCommand { get; }
+        public AsyncRelayCommand OpenDocumentCommand { get; }
+        public AsyncRelayCommand EditDocumentCommand { get; }
+        
+        
+        public AsyncRelayCommand AddCustomDataPartCommand { get; }
+        public AsyncRelayCommand<ICustomDataPart> ShiftUpCustomDataPartCommand { get; }
+        public AsyncRelayCommand<ICustomDataPart> ShiftDownCustomDataPartCommand { get; }
+        public AsyncRelayCommand<ICustomDataPart> RemoveCustomDataPartCommand { get; }
+        
+        public AsyncRelayCommand AddModulePartCommand { get; }
+        public AsyncRelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
+        public AsyncRelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
+        public AsyncRelayCommand<PartOfModule> RemoveModulePartCommand { get; }
+        public AsyncRelayCommand<PartOfModule> RemoveAllModulePartCommand { get; }
+    }
+    
+    partial class DocumentEditorVMBase
+    {
+        private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
+        private readonly Dictionary<string, int>      _MetadataTrackerOfString;
+        private readonly Dictionary<int, Metadata>    _MetadataTrackerOfIndex;
+        
         //
         // DocumentManager Part
         protected void OpenDocument(Document document)
@@ -196,14 +232,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             // Clear
             SelectedCustomDataPart = null;
-            Modules.Clear();
-            FixedDataParts.Clear();
+            ModuleDataParts.Clear();
+            InvisibleDataParts.Clear();
 
             foreach (var part in document.Parts)
             {
                 if (part is PartOfModule module)
                 {
-                    Modules.Add(module);
+                    ModuleDataParts.Add(module);
                 }
                 else if (part is ICustomDataPart custom)
                 {
@@ -211,7 +247,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
                 else
                 {
-                    FixedDataParts.Add(part);
+                    InvisibleDataParts.Add(part);
                 }
             }
         }

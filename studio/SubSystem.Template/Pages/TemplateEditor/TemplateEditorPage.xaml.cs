@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 {
@@ -9,6 +10,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         public TemplateEditorPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel<TemplateEditorViewModel>().Canvas = Canvas;
+            base.OnLoaded(sender, e);
         }
     }
 }

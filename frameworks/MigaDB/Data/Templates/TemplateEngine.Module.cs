@@ -1,6 +1,4 @@
-﻿
-
-using Acorisoft.FutureGL.MigaDB.Core;
+﻿using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Newtonsoft.Json;
 
@@ -31,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 }
             }
         }
-        
+
         private void RemoveMetadata(ModuleTemplate template)
         {
             foreach (var meta in template.MetadataList)
@@ -43,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 }
 
                 insideMetadata.RefCount--;
-                
+
                 //
                 //
                 if (insideMetadata.RefCount == 0)
@@ -56,18 +54,18 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 }
             }
         }
-        
+
         private void UpdateMetadata(ModuleTemplate insideTemplate, ModuleTemplate outSideTemplate)
         {
             //
             // removeAll
             RemoveMetadata(insideTemplate);
-            
+
             //
             // addAll
             AddMetadata(outSideTemplate);
         }
-        
+
         protected void ModuleOpening(IDatabase database)
         {
             TemplateDB      = database.GetCollection<ModuleTemplate>(Constants.Name_ModuleTemplate);
@@ -81,7 +79,27 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             TemplateCacheDB = null;
             MetadataCacheDB = null;
         }
-        
+
+        /// <summary>
+        /// 创建模板
+        /// </summary>
+        /// <param name="cache">模板缓存</param>
+        /// <returns></returns>
+        public PartOfModule CreateModule(ModuleTemplateCache cache)
+        {
+            var module = new PartOfModule
+            {
+                Id     = cache.Id,
+                Name   = cache.Name,
+                Index  = 0,
+                Blocks = new List<ModuleBlock>()
+            };
+
+            var template = TemplateDB.FindById(cache.Id);
+            module.Blocks.AddRange(template.Blocks);
+            return module;
+        }
+
         /// <summary>
         /// 添加模板
         /// </summary>
@@ -94,9 +112,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 var payload  = await PNG.ReadDataAsync(fileName);
                 var template = JSON.FromJson<ModuleTemplate>(payload);
 
-                return template is null ? 
-                    EngineResult.Failed(EngineFailedReason.InputDataError) :
-                    AddModule(template);
+                return template is null ? EngineResult.Failed(EngineFailedReason.InputDataError) : AddModule(template);
             }
             catch (IOException)
             {
@@ -127,7 +143,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             {
                 return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
             }
-            
+
             if (!ModuleTemplate.IsValid(template))
             {
                 return EngineResult.Failed(EngineFailedReason.InputDataError);
@@ -151,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 {
                     return EngineResult.Failed(EngineFailedReason.NoChanged);
                 }
-                    
+
                 //
                 // Update
                 TemplateDB.Update(template);
@@ -162,8 +178,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             Modified();
             return EngineResult.Successful;
         }
-        
-        
+
+
         /// <summary>
         /// 移除模板
         /// </summary>
@@ -175,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             {
                 return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
             }
-            
+
             //
             // 判断数据库中是否有同名模组
             var templateInside = TemplateDB.FindById(cache.Id);
@@ -188,9 +204,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 Modified();
                 return EngineResult.Successful;
             }
-                
+
             return EngineResult.Failed(EngineFailedReason.MissingParameter);
-            
         }
 
         /// <summary>
@@ -204,7 +219,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
             {
                 return Task.FromResult(EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull));
             }
-            
+
             return Task.Run(() =>
             {
                 //
@@ -219,12 +234,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                     Modified();
                     return EngineResult.Successful;
                 }
-                
+
                 return EngineResult.Failed(EngineFailedReason.MissingParameter);
             });
-            
         }
-        
+
         /// <summary>
         /// 导出模板
         /// </summary>
@@ -241,12 +255,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
 
             //
             var template = TemplateDB.FindById(id);
-            
+
             if (template is null)
             {
                 return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
             }
-            
+
             if (string.IsNullOrEmpty(fileName))
             {
                 return EngineResult.Failed(EngineFailedReason.ParameterEmptyOrNull);
@@ -261,12 +275,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
         /// 模板
         /// </summary>
         public ILiteCollection<ModuleTemplate> TemplateDB { get; private set; }
-        
+
         /// <summary>
         /// 模板缓存
         /// </summary>
         public ILiteCollection<ModuleTemplateCache> TemplateCacheDB { get; private set; }
-        
+
         /// <summary>
         /// 元数据缓存
         /// </summary>
