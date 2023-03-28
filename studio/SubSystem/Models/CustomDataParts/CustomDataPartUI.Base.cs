@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Acorisoft.FutureGL.MigaStudio.ViewModels.CustomDataParts
+namespace Acorisoft.FutureGL.MigaStudio.Models.CustomDataParts
 {
     public interface ICustomDataPartUI : INotifyPropertyChanged
     {

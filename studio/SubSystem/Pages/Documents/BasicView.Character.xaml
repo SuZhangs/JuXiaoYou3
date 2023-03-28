@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
-              xmlns:f="urn:acorisoft/forest/ui"
-              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <DockPanel>
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+    <StackPanel>
         <HeaderedContentControl DockPanel.Dock="Top"
                                 Header="基本信息（必选）"
                                 Margin="0 8">
@@ -33,54 +37,59 @@
             </UniformGrid>
         </HeaderedContentControl>
 
-        <f:ShadowTabControl Height="720">
-            <f:ShadowTabItem Header="相册">
-                <DockPanel Margin="0 16 0 0">
-                    <StackPanel DockPanel.Dock="Top"
-                                Orientation="Horizontal">
-                        <ftk:ToolButton Content="添加"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True"/>
-                        <ftk:ToolButton Content="删除"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True"/>
-                    </StackPanel>
+        <HeaderedContentControl DockPanel.Dock="Top"
+                                Header="可选信息"
+                                Margin="0 8">
+            <UniformGrid Columns="3">
+                <f:HeaderedSingleLine Header="名字"
+                                      Margin="4"/>
 
-                    <Image/>
-                </DockPanel>
-            </f:ShadowTabItem>
-            <f:ShadowTabItem Header="人物关系">
-                <DockPanel Margin="0 16 0 0">
-                    <StackPanel DockPanel.Dock="Top"
-                                Orientation="Horizontal">
-                        <ftk:ToolButton Content="添加"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True"/>
-                        <ftk:ToolButton Content="删除"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True"/>
-                    </StackPanel>
+                <f:HeaderedSingleLine Header="性别"
+                                      Margin="4"/>
 
-                    <Image/>
-                </DockPanel>
-            </f:ShadowTabItem>
-            <f:ShadowTabItem Header="可选信息">
-                <DockPanel Margin="0 16 0 0">
-                    <StackPanel DockPanel.Dock="Top"
-                                Orientation="Horizontal">
-                        <ftk:ToolButton Content="添加"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True"/>
-                        <ftk:ToolButton Content="删除"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True"/>
-                    </StackPanel>
+                <f:HeaderedSingleLine Header="生日"
+                                      Margin="4"/>
 
-                    <Image/>
-                </DockPanel>
-            </f:ShadowTabItem>
-            <f:CallToAction Palette="HighlightPalette1"
-                            Content="Add"/>
-        </f:ShadowTabControl>
-    </DockPanel>
+                <f:HeaderedSingleLine Header="年龄"
+                                      Margin="4"/>
+
+                <f:HeaderedSingleLine Header="身高（cm）"
+                                      Margin="4"/>
+
+                <f:HeaderedSingleLine Header="体重（kg）"
+                                      Margin="4"/>
+            </UniformGrid>
+        </HeaderedContentControl>
+
+
+        <HeaderedContentControl DockPanel.Dock="Top"
+                                Header="关键字"
+                                Margin="0 8">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"
+                            Orientation="Horizontal">
+                    <ftk:ToolButton f:Language.Id="global.new"
+                                    Content="新建"
+                                    Icon="{StaticResource IC.File}"
+                                    IsFilled="True"
+                                    ShowText="True"/>
+
+                    <ftk:ToolButton f:Language.Id="global.open"
+                                    Content="打开"
+                                    Icon="{StaticResource IC.Folder}"
+                                    IsFilled="True"
+                                    ShowText="True"/>
+                    <ftk:ToolButton f:Language.Id="global.save"
+                                    Content="保存"
+                                    Icon="{StaticResource IC.Save}"
+                                    IsFilled="True"
+                                    ShowText="True"/>
+                </StackPanel>
+
+                <ItemsControl>
+                    
+                </ItemsControl>
+            </DockPanel>
+        </HeaderedContentControl>
+    </StackPanel>
 </UserControl >

@@ -1,8 +1,9 @@
-﻿<UserControl  x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Documents.OtherBasicView"
+﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Documents.DataPartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
@@ -14,4 +15,4 @@
     <Grid>
         
     </Grid>
-</UserControl >
+</UserControl>

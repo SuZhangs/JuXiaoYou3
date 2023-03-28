@@ -1,7 +1,7 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 
-namespace Acorisoft.FutureGL.MigaStudio.ViewModels.CustomDataParts
+namespace Acorisoft.FutureGL.MigaStudio.Models.CustomDataParts
 {
     public static class CustomDataPartUIFactory
     {

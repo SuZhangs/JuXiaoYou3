@@ -13,10 +13,10 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
     {
         public ModuleBlockViewModel()
         {
-            Blocks = new ObservableCollection<ModuleBlockEditUI>(
+            Blocks = new ObservableCollection<ModuleBlockDataUI>(
                 ModuleBlockFactory.CreateBlocks()
-                                  .Select(ModuleBlockFactory.GetEditUI));
+                                  .Select(ModuleBlockFactory.GetDataUI));
         }
-        public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
+        public ObservableCollection<ModuleBlockDataUI> Blocks { get; init; }
     }
 }

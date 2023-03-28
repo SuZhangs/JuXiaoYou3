@@ -1,2 +1,2 @@
-cloc b0a9d24 --report-file b0a9d24.txt
+cloc 9a9cfbd
 read -n 1
