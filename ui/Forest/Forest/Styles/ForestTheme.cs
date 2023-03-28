@@ -110,6 +110,7 @@
         ForegroundLevel3,
         ForegroundInHighlight,
         ForegroundInAdaptive,
+        ForegroundInAdaptive2,
         ForegroundOther,
         ForegroundDisabled,
         

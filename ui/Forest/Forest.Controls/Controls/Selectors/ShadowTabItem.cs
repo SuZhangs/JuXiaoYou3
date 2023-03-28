@@ -93,7 +93,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
             {
                 
                 _background ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel1]);
-                _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
+                _foreground ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
                 //
                 // 设置背景颜色
                 _bd.Background = _background;

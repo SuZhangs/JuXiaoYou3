@@ -8,8 +8,9 @@
               xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <HeaderedContentControl Header="基本信息（必选）"
+    <DockPanel>
+        <HeaderedContentControl DockPanel.Dock="Top"
+                                Header="基本信息（必选）"
                                 Margin="0 8">
             <UniformGrid Columns="3">
                 <f:HeaderedSingleLine Header="名字"
@@ -32,12 +33,54 @@
             </UniformGrid>
         </HeaderedContentControl>
 
-        <f:ShadowTabControl>
-            <f:ShadowTabItem Header="可选信息"/>
-            <f:ShadowTabItem Header="可选信息"/>
-            <f:ShadowTabItem Header="可选信息"/>
+        <f:ShadowTabControl Height="720">
+            <f:ShadowTabItem Header="相册">
+                <DockPanel Margin="0 16 0 0">
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Horizontal">
+                        <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="删除"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                    </StackPanel>
+
+                    <Image/>
+                </DockPanel>
+            </f:ShadowTabItem>
+            <f:ShadowTabItem Header="人物关系">
+                <DockPanel Margin="0 16 0 0">
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Horizontal">
+                        <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="删除"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                    </StackPanel>
+
+                    <Image/>
+                </DockPanel>
+            </f:ShadowTabItem>
+            <f:ShadowTabItem Header="可选信息">
+                <DockPanel Margin="0 16 0 0">
+                    <StackPanel DockPanel.Dock="Top"
+                                Orientation="Horizontal">
+                        <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="删除"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                    </StackPanel>
+
+                    <Image/>
+                </DockPanel>
+            </f:ShadowTabItem>
             <f:CallToAction Palette="HighlightPalette1"
                             Content="Add"/>
         </f:ShadowTabControl>
-    </StackPanel>
+    </DockPanel>
 </UserControl >

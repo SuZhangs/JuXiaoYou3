@@ -134,12 +134,12 @@
                                 VerticalAlignment="Stretch">
                         <DockPanel>
                             <ContentPresenter x:Name="PART_Header"
-                                                  DockPanel.Dock="Top"
-                                                  TextElement.Foreground="{f:Brush ForegroundInAdaptive}"
-                                                  TextElement.FontSize="14"
-                                                  Content="{TemplateBinding Header}"
-                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                                  ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                              DockPanel.Dock="Top"
+                                              TextElement.Foreground="{f:Brush ForegroundInAdaptive2}"
+                                              TextElement.FontSize="14"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"
                                                   Margin="8"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -211,7 +211,7 @@
                         <DockPanel>
                             <ContentPresenter x:Name="PART_Header"
                                                   DockPanel.Dock="Top"
-                                                  TextElement.Foreground="{f:Brush ForegroundInAdaptive}"
+                                                  TextElement.Foreground="{f:Brush ForegroundInAdaptive2}"
                                                   TextElement.FontSize="14"
                                                   Content="{TemplateBinding Header}"
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"

@@ -33,6 +33,7 @@ namespace Acorisoft.FutureGL.Forest.Styles
             colors.TryAdd((int)ForestTheme.ForegroundDisabled, Color.FromRgb( 0xba, 0xc0, 0xc4));
             colors.TryAdd((int)ForestTheme.ForegroundInHighlight, Color.FromRgb( 0xff, 0xff, 0xff));
             colors.TryAdd((int)ForestTheme.ForegroundInAdaptive, Color.FromRgb( 0x00, 0x0d, 0x16));
+            colors.TryAdd((int)ForestTheme.ForegroundInAdaptive2, Color.FromRgb(0x75, 0x81, 0x8a));
         }
 
         protected override void InitializeAdaptiveBrush(ConcurrentDictionary<int, Color> colors)
