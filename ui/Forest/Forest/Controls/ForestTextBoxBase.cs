@@ -165,24 +165,22 @@
         {
         }
 
-        protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
-        {
-            if (StateMachine.CurrentState == VisualState.Normal)
-            {
-                StateMachine.NextState(VisualState.Highlight2);
-            }
 
-            base.OnGotKeyboardFocus(e);
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            StateMachine.NextState(VisualState.Highlight2);
+            base.OnGotFocus(e);
         }
 
-        protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
+
+        protected override void OnLostFocus(RoutedEventArgs e)
         {
             if (StateMachine.CurrentState == VisualState.Highlight2)
             {
                 StateMachine.NextState(IsMouseOver ? VisualStateTrigger.Back : VisualStateTrigger.Next);
             }
 
-            base.OnLostKeyboardFocus(e);
+            base.OnLostFocus(e);
         }
 
         protected override void OnMouseEnter(MouseEventArgs e)
@@ -197,9 +195,9 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            ReleaseMouseCapture();
-            if (StateMachine.CurrentState == VisualState.Highlight1)
+            if (StateMachine.CurrentState == VisualState.Highlight1 && !IsKeyboardFocused)
             {
+                ReleaseMouseCapture();
                 StateMachine.ResetState();
             }
 

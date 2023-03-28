@@ -3,11 +3,11 @@
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls;assembly=Forest"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:cc="clr-namespace:Acorisoft.FutureGL.Forest.Controls">
-    
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="ClearStyle.TextBox" TargetType="{x:Type c:ForestTextBoxBase}">
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
@@ -27,8 +27,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}"/>
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}"/>
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -41,55 +41,53 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Padding" Value="8" />
+        <Setter Property="Padding" Value="4 0 4 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:ForestTextBoxBase}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="PART_Bd"
-                                BorderBrush="{x:Null}"
-                                BorderThickness="1"
-                                CornerRadius="3"
-                                MinWidth="{TemplateBinding MinWidth}"
-                                MinHeight="{TemplateBinding MinHeight}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <Border x:Name="PART_Bd"
+                                    BorderBrush="{x:Null}"
+                                BorderThickness="1 1 1 2"
+                                    CornerRadius="6"
+                                    MinWidth="{TemplateBinding MinWidth}"
+                                    MinHeight="{TemplateBinding MinHeight}"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              VerticalAlignment="Center"
-                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
-                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                              IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                              IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                              Style="{StaticResource Base.ScrollViewer}"
-                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                                  VerticalAlignment="Center"
+                                                  CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                                  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                                  IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
+                                                  Style="{StaticResource Base.ScrollViewer}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
 
-                                <TextBlock x:Name="PART_Watermark"
-                                           FontSize="{TemplateBinding FontSize}"
-                                           Foreground="{f:Brush ForegroundInAdaptive}"
-                                           Text="{TemplateBinding Watermark}"
-                                           Margin="{TemplateBinding Padding}"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           Visibility="Collapsed"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                            <TextBlock x:Name="PART_Watermark"
+                                               FontSize="{TemplateBinding FontSize}"
+                                               Foreground="{f:Brush ForegroundInAdaptive}"
+                                               Text="{TemplateBinding Watermark}"
+                                               Margin="{TemplateBinding Padding}"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasText" Value="False">
-                            <Setter Property="Visibility" TargetName="PART_Watermark" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PART_Watermark" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
-    <Style  TargetType="{x:Type c:HeaderedSingleLine}">
+
+
+    <Style TargetType="{x:Type c:HeaderedSingleLine}">
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
                 <Style>
@@ -108,8 +106,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}"/>
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}"/>
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -122,52 +120,50 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Padding" Value="8 2 8 8" />
+        <Setter Property="Padding" Value="4 0 4 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:HeaderedSingleLine}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="PART_Bd"
+                    <Border x:Name="PART_Bd"
                                 BorderBrush="{x:Null}"
-                                BorderThickness="1"
-                                CornerRadius="3"
+                                BorderThickness="1 1 1 2"
+                                CornerRadius="6"
                                 MinWidth="{TemplateBinding MinWidth}"
                                 MinHeight="{TemplateBinding MinHeight}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch">
-                            <DockPanel>
-                                <ContentPresenter x:Name="PART_Header"
+                        <DockPanel>
+                            <ContentPresenter x:Name="PART_Header"
                                                   DockPanel.Dock="Top"
                                                   TextElement.Foreground="{f:Brush ForegroundInAdaptive}"
-                                                  TextElement.FontSize="16"
+                                                  TextElement.FontSize="14"
                                                   Content="{TemplateBinding Header}"
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                                  Margin="{TemplateBinding Padding}"
+                                                  Margin="8"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   SnapsToDevicePixels="True"
                                                   RecognizesAccessKey="False" />
-                                <ScrollViewer x:Name="PART_ContentHost"
+                            <ScrollViewer x:Name="PART_ContentHost"
                                               CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                               IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
                                               Style="{StaticResource Base.ScrollViewer}"
+                                                  Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
-                            </DockPanel>
-                        </Border>
-                    </Grid>
+                        </DockPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <Style  TargetType="{x:Type c:HeaderedMultiLine}">
+
+    <Style TargetType="{x:Type c:HeaderedMultiLine}">
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
                 <Style>
@@ -186,8 +182,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}"/>
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}"/>
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -200,52 +196,50 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Padding" Value="8 2 8 8" />
+        <Setter Property="Padding" Value="4 0 4 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:HeaderedMultiLine}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="PART_Bd"
+                    <Border x:Name="PART_Bd"
                                 BorderBrush="{x:Null}"
-                                BorderThickness="1"
-                                CornerRadius="3"
+                                BorderThickness="1 1 1 2"
+                                CornerRadius="6"
                                 MinWidth="{TemplateBinding MinWidth}"
                                 MinHeight="{TemplateBinding MinHeight}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch">
-                            <DockPanel>
-                                <ContentPresenter x:Name="PART_Header"
+                        <DockPanel>
+                            <ContentPresenter x:Name="PART_Header"
                                                   DockPanel.Dock="Top"
                                                   TextElement.Foreground="{f:Brush ForegroundInAdaptive}"
-                                                  TextElement.FontSize="16"
+                                                  TextElement.FontSize="14"
                                                   Content="{TemplateBinding Header}"
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                                  Margin="{TemplateBinding Padding}"
+                                                  Margin="8"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   SnapsToDevicePixels="True"
                                                   RecognizesAccessKey="False" />
-                                <ScrollViewer x:Name="PART_ContentHost"
+                            <ScrollViewer x:Name="PART_ContentHost"
                                               CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                               IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
                                               Style="{StaticResource Base.ScrollViewer}"
+                                                  Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
-                            </DockPanel>
-                        </Border>
-                    </Grid>
+                        </DockPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type c:SingleLine}" BasedOn="{StaticResource ClearStyle.TextBox}">
     </Style>
-    <Style TargetType="{x:Type c:MultiLine}" BasedOn="{StaticResource ClearStyle.TextBox}"/>
+    <Style TargetType="{x:Type c:MultiLine}" BasedOn="{StaticResource ClearStyle.TextBox}" />
 </ResourceDictionary>
