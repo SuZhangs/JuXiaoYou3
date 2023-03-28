@@ -3,8 +3,8 @@ using System.Linq;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaStudio.Modules;
-using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
+using Acorisoft.FutureGL.MigaStudio.Models.Modules;
+using Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels;
 
 namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
 {

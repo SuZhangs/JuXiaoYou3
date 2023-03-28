@@ -19,17 +19,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public LaunchViewController()
         {
             // 加载设置
-            Job(TemplateSystemString.GetText("text.launch.loadSetting"), _ =>
+            Job(SubSystemString.GetText("text.launch.loadSetting"), _ =>
             {
                 
             });
             
             // 检查更新
-            Job(TemplateSystemString.GetText("text.launch.checkVersion"), x =>
+            Job(SubSystemString.GetText("text.launch.checkVersion"), x =>
             {
             });
             
-            Job(TemplateSystemString.GetText("text.launch.openDatabase"), x =>
+            Job(SubSystemString.GetText("text.launch.openDatabase"), x =>
             {
                 var dm = Xaml.Get<IDatabaseManager>();
                 

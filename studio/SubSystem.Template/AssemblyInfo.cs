@@ -8,8 +8,6 @@ global using Acorisoft.FutureGL.Forest.Interfaces;
 global using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 global using Acorisoft.FutureGL.MigaDB.Interfaces;
 global using Acorisoft.FutureGL.MigaDB.Utils;
-global using Acorisoft.FutureGL.MigaStudio.Modules;
-global using Acorisoft.FutureGL.MigaStudio.Modules.ViewModels;
 global using Acorisoft.FutureGL.MigaStudio.ViewModels;
 global using Acorisoft.FutureGL.MigaUtils.Collections;
 

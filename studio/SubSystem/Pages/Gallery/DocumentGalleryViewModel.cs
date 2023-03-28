@@ -114,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 await Xaml.Get<IBuiltinDialogService>().Notify(
                     CriticalLevel.Success,
                     SubSystemString.Notify,
-                    SubSystemString.OperationOfAddIsSuccess);
+                    SubSystemString.OperationOfAddIsSuccessful);
 
                 Update();
                 Refresh();

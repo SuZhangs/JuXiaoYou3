@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
 using ImageEditViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Commons.ImageEditViewModel;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -41,6 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             optionVM.Title = title;
             return Xaml.Get<IDialogService>().Dialog<TOption>(optionVM, parameter);
         }
+        
         public static void InstallLanguages()
         {
             var fileName = Language.Culture switch
@@ -70,6 +72,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, ItemDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<GeographyEditorPage, GeographyDocumentViewModel>();
+            
+            
+            Xaml.InstallView<EditBlockView, EditBlockViewModel>();
+            Xaml.InstallView<NewBlockView, NewBlockViewModel>();
+            Xaml.InstallView<NewElementView, NewElementViewModel>();
+            Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
         }
     }
 }
