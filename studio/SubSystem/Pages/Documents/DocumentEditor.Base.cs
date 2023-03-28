@@ -12,6 +12,7 @@ using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
@@ -201,8 +202,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 {
                     return;
                 }
-                
-                Blocks.AddRange(_module.Blocks.Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleChanged), true));
+
+                var selector = _module.Blocks
+                                      .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleChanged));
+                Blocks.AddRange(selector, true);
             }
         }
 
@@ -231,6 +234,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         [NullCheck(UniTestLifetime.Constructor)] public TemplateEngine TemplateEngine { get; }
         
         [NullCheck(UniTestLifetime.Constructor)] public ImageEngine ImageEngine { get; }
+        
         public DocumentType Type { get; private set; }
     }
     

@@ -2,9 +2,8 @@
 {
     partial class DocumentEditorVMBase
     {
-        protected void OnModuleChanged(ModuleBlock block, ModuleBlockDataUI dataUI)
+        protected void OnModuleChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
         {
-            
         }
     }
 }
