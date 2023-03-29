@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
-            PreviewCommand        = Command(() => IsPreview = true);
+            PreviewCommand        = Command(() => IsPreview = true, () => SelectedTemplate is not null);
 
             Source.Connect()
                   .Filter(_sorter)
@@ -279,6 +279,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                 }
 
                 ExportTemplateCommand.NotifyCanExecuteChanged();
+                PreviewCommand.NotifyCanExecuteChanged();
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
             }
         }

@@ -4,7 +4,7 @@
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls">
     
     <Style TargetType="{x:Type c:ForestSection}">
-        <Setter Property="Background" Value="{f:ForegroundBrush}"/>
+        <Setter Property="Background" Value="{f:BackgroundBrush}"/>
         <Setter Property="HeaderBrush" Value="{f:Brush HighlightA4}" />
         <Setter Property="HeaderFontSize" Value="14"/>
         <Setter Property="HeaderThickness" Value="0 0 0 2" />
