@@ -14,6 +14,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -186,16 +187,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         private async Task GotoTemplateGalleryImpl()
         {
-            await Xaml.Get<IDialogService>()
-                      .Dialog(Xaml.GetViewModel<TemplateGalleryViewModel>());
-            
-            // TODO: 更新模组
-            if (!TemplateEngine.Activated)
-            {
-                TemplateEngine.Activate();
-            }
-            
-            
+           
         }
 
         #endregion

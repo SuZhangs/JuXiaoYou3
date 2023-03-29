@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
@@ -19,10 +20,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
     {
         private const string FileNotExists = "text.FileNotFound";
 
-        [NullCheck(UniTestLifetime.Constructor)] private readonly ReadOnlyObservableCollection<ModuleTemplateCache> _collection;
-        [NullCheck(UniTestLifetime.Constructor)] private readonly BehaviorSubject<Func<ModuleTemplateCache, bool>>  _sorter;
-        [NullCheck(UniTestLifetime.Constructor)] private readonly DataPartReader                                    _reader;
-        
+        [NullCheck(UniTestLifetime.Constructor)]
+        private readonly ReadOnlyObservableCollection<ModuleTemplateCache> _collection;
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        private readonly BehaviorSubject<Func<ModuleTemplateCache, bool>> _sorter;
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        private readonly DataPartReader _reader;
+
         private DocumentType _type;
 
         public TemplateGalleryViewModel()
@@ -34,12 +40,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             _reader            = new DataPartReader();
             Source             = new SourceList<ModuleTemplateCache>();
             MetadataCollection = new ObservableCollection<MetadataCache>();
+            Blocks             = new ObservableCollection<ModuleBlockDataUI>();
 
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand = AsyncCommand(ExportTemplateImpl);
             RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
-            
+
             Source.Connect()
                   .Filter(_sorter)
                   .ObserveOn(Scheduler)
@@ -47,7 +54,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                   .Subscribe()
                   .DisposeWith(Collector);
         }
-        
+
+        public override void OnStart()
+        {
+            TemplateEngine.Activate();
+            Refresh();
+        }
+
         private async Task AddTemplateImpl()
         {
             var opendlg = new OpenFileDialog
@@ -63,9 +76,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
 
             //
             // 
-            var fileNames = opendlg.FileNames;
-            var logger = Xaml.Get<ILogger>();
-
+            var fileNames     = opendlg.FileNames;
+            var logger        = Xaml.Get<ILogger>();
+            var finishedCount = 0;
+            var errorCount    = 0;
 
             foreach (var fileName in fileNames)
             {
@@ -84,17 +98,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
 
                 if (!r.IsFinished)
                 {
-                    var msg = Language.GetEnum(r.Reason);
-                        
-                    logger.Warn(msg);
-                    await Warning(msg);
+                    errorCount++;
                 }
                 else
                 {
-                    await Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    finishedCount++;
                 }
             }
 
+            if (finishedCount == 0)
+            {
+                await Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+            }
+            else
+            {
+                await Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+            }
+            
             Refresh();
         }
 
@@ -116,7 +136,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             if (!r.IsFinished)
             {
                 var msg = Language.GetEnum(r.Reason);
-                        
+
                 logger.Warn(msg);
                 await Warning(msg);
             }
@@ -131,7 +151,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
         {
             var opendlg = new OpenFileDialog
             {
-                Filter = SubSystemString.ModuleFilter
+                Filter      = SubSystemString.ModuleFilter,
+                Multiselect = true
             };
 
             if (opendlg.ShowDialog() != true)
@@ -140,31 +161,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             }
 
             var logger = Xaml.Get<ILogger>();
-            try
-            {
-                var result      = await _reader.ReadAsync(opendlg.FileName);
-                var oldTemplate = result.Result;
-                var template    = ModuleBlockFactory.Upgrade(oldTemplate);
-                var r           = TemplateEngine.AddModule(template);
 
-                if (!r.IsFinished)
-                {
-                    var msg = Language.GetEnum(r.Reason);
-                        
-                    logger.Warn(msg);
-                    await Warning(msg);
-                }
-                else
-                {
-                    await Successful(SubSystemString.OperationOfAddIsSuccessful);
-                    Refresh();
-                }
-            }
-            catch (Exception ex)
+            foreach (var fileName in opendlg.FileNames)
             {
-                logger.Warn(ex.Message);
-                await Warning(ex.Message);
+                try
+                {
+                    var result      = await _reader.ReadFromAsync(fileName);
+                    var oldTemplate = result.Result;
+                    var template    = ModuleBlockFactory.Upgrade(oldTemplate);
+                    var r           = TemplateEngine.AddModule(template);
+
+                    if (!r.IsFinished)
+                    {
+                        var msg = Language.GetEnum(r.Reason);
+
+                        logger.Warn(msg);
+                        await Warning(msg);
+                    }
+                    else
+                    {
+                        await Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn(ex.Message);
+                    await Warning(ex.Message);
+                }
             }
+
+            Refresh();
         }
 
         private async Task ExportTemplateImpl()
@@ -178,10 +204,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             // 加载数据
             Source.Clear();
             Source.AddRange(TemplateEngine.TemplateCacheDB.FindAll());
-            
+
             MetadataCollection.AddRange(TemplateEngine.MetadataCacheDB.FindAll(), true);
         }
-        
+
+        private ModuleTemplateCache _selectedTemplate;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedTemplate"/> 属性。
+        /// </summary>
+        public ModuleTemplateCache SelectedTemplate
+        {
+            get => _selectedTemplate;
+            set
+            {
+                SetValue(ref _selectedTemplate, value);
+                if (_selectedTemplate is null)
+                {
+                    return;
+                }
+
+                var template = TemplateEngine.TemplateDB.FindById(_selectedTemplate.Id);
+                if (template is null)
+                {
+                    return;
+                }
+
+                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
+            }
+        }
+
+
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
         /// </summary>
@@ -194,6 +247,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                 _sorter.OnNext(x => x.ForType == value);
             }
         }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<ModuleBlockDataUI> Blocks { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public SourceList<ModuleTemplateCache> Source { get; }

@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
-using ImageEditViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Commons.ImageEditViewModel;
+using Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -65,7 +65,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
             Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
-            Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
 
             Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();
@@ -78,6 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<NewBlockView, NewBlockViewModel>();
             Xaml.InstallView<NewElementView, NewElementViewModel>();
             Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
+            Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
         }
     }
 }

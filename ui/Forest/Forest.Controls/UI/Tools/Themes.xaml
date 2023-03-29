@@ -192,7 +192,7 @@
     <Style TargetType="{x:Type t:TabItem}">
         <Setter Property="MinHeight" Value="16" />
         <Setter Property="MinWidth" Value="64" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="IconSize" Value="23" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Placement" Value="Left" />
@@ -204,7 +204,7 @@
                     <Border x:Name="PART_Bd"
                             BorderBrush="{TemplateBinding Background}"
                             CornerRadius="8 8 0 0"
-                            Padding="4">
+                            Padding="{TemplateBinding Padding}">
                         <DockPanel Background="Transparent"
                                    HorizontalAlignment="Center"
                                    LastChildFill="True"

@@ -17,7 +17,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                     {
                         Id       = ID.Get(),
                         RefCount = 1,
-                        Name     = meta.Name
+                        Name     = meta.Name,
+                        MetadataName = meta.MetadataName
                     };
 
                     MetadataCacheDB.Insert(outsideMetadata);
