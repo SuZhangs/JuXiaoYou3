@@ -83,12 +83,19 @@
         </Grid.ContextMenu>
 
         <StackPanel Grid.Row="1">
-            <f:ToggleSwitch Grid.Row="1" Content="Test" IsChecked="False"/>
-            <ui:ToggleSwitch Grid.Row="1" Content="Test" />
+            <f:ToggleSwitch Grid.Row="1" Content="Test" IsChecked="False"
+                            Margin="8"/>
+            
             <studio:ActionButton Grid.Row="1" Content="Test" Icon="{StaticResource FeatherIcon.Chat}"
                             Margin="8"/>
-            <studio:ReferenceControl Icon="{StaticResource FeatherIcon.Chat}"
+            <studio:ReferenceControl Margin="8" 
+                                     Icon="{StaticResource FeatherIcon.Chat}"
                                      IsFilled="True"/>
+            <f:SplitButton Margin="8">
+                <f:SplitButtonItem Content="Test 1"/>
+                <f:SplitButtonItem Content="Test 2"/>
+                <f:SplitButtonItem Content="Test 3"/>
+            </f:SplitButton>
         </StackPanel>
         <f:Menu>
             <f:MenuItem Header="TopItem" />

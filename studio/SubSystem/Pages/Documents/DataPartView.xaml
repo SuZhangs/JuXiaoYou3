@@ -13,6 +13,48 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="384"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel>
+            <WrapPanel DockPanel.Dock="Top"
+                       Orientation="Horizontal">
+                <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                <ftk:ToolButton Content="删除"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                <ftk:ToolButton Content="上移"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True"/>
+                <ftk:ToolButton Content="下移"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True"/>
+
+
+                <ftk:ToolButton Content="导入"
+                                Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                ShowText="True"/>
+
+                <ftk:ToolButton Content="升级"
+                                        Icon="{StaticResource FeatherIcon.Update}"
+                                        ShowText="True"/>
+            </WrapPanel>
+
+            <f:ListBox/>
+        </DockPanel>
+
+        <DockPanel Grid.Column="1">
+            <TextBlock DockPanel.Dock="Top"
+                       FontSize="20"
+                       Height="256"
+                       Text="提示"/>
+            
+            <ItemsControl Grid.Column="1"
+                      ItemsSource="{Binding Blocks,Mode=OneWay}"/>
+        </DockPanel>
     </Grid>
 </UserControl>

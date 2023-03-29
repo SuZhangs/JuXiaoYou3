@@ -4,9 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
-    </Grid>
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top"
+                   Orientation="Horizontal">
+            <ftk:ToolButton Content="添加"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+            <ftk:ToolButton Content="删除"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+            
+            <ftk:ToolButton Content="截图"
+                            Icon="{StaticResource FeatherIcon.Camera}"
+                            ShowText="True"/>
+            
+            <ftk:ToolButton Content="导出为PDF"
+                            Icon="{StaticResource FeatherIcon.Box}"
+                            ShowText="True"/>
+            
+            <ftk:ToolButton Content="导出为Markdown"
+                            Icon="{StaticResource FeatherIcon.Box}"
+                            ShowText="True"/>
+            
+            <ftk:ToolButton Content="导出为Markdown"
+                            Icon="{StaticResource FeatherIcon.Box}"
+                            ShowText="True"/>
+        </WrapPanel>
+
+        <ItemsControl/>
+    </DockPanel>
 </UserControl>
