@@ -30,7 +30,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
         [NullCheck(UniTestLifetime.Constructor)]
         private readonly DataPartReader _reader;
 
-        private DocumentType _type;
+        private DocumentType        _type;
+        private ModuleTemplateCache _selectedTemplate;
+        private bool                _isPreview;
 
         public TemplateGalleryViewModel()
         {
@@ -47,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
+            PreviewCommand        = Command(() => IsPreview = true);
 
             Source.Connect()
                   .Filter(_sorter)
@@ -247,8 +250,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             MetadataCollection.AddRange(TemplateEngine.MetadataCacheDB.FindAll(), true);
         }
 
-        private ModuleTemplateCache _selectedTemplate;
-
+        /// <summary>
+        /// 获取或设置 <see cref="IsPreview"/> 属性。
+        /// </summary>
+        public bool IsPreview
+        {
+            get => _isPreview;
+            set => SetValue(ref _isPreview, value);
+        }
         /// <summary>
         /// 获取或设置 <see cref="SelectedTemplate"/> 属性。
         /// </summary>
@@ -309,6 +318,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddTemplateCommand { get; }
 
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand PreviewCommand { get; }
+        
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }
 
