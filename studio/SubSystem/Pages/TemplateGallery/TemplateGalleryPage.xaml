@@ -137,7 +137,6 @@
         </Grid>
         <f:Drawer.RightContent>
             <f:ForestSection f:Language.Id="global.preview"
-                             Background="{f:BackgroundBrush}"
                              Header="预览"
                              Padding="16 10"
                              Width="480">

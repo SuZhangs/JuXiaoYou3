@@ -4,7 +4,8 @@
                     xmlns:c="clr-namespace:Acorisoft.FutureGL.Forest.Controls">
     
     <Style TargetType="{x:Type c:ForestSection}">
-        <Setter Property="Background" Value="{f:Brush HighlightA4}" />
+        <Setter Property="Background" Value="{f:ForegroundBrush}"/>
+        <Setter Property="HeaderBrush" Value="{f:Brush HighlightA4}" />
         <Setter Property="HeaderFontSize" Value="14"/>
         <Setter Property="HeaderThickness" Value="0 0 0 2" />
         <Setter Property="CornerRadius" Value="6 6 0 0" />
@@ -17,10 +18,10 @@
                 <ControlTemplate TargetType="{x:Type c:ForestSection}">
                     <DockPanel Background="Transparent">
                         <Border DockPanel.Dock="Top"
-                                BorderBrush="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding HeaderBrush}"
                                 BorderThickness="{TemplateBinding HeaderThickness}">
                             <DockPanel>
-                                <Border Background="{TemplateBinding Background}"
+                                <Border Background="{TemplateBinding HeaderBrush}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         HorizontalAlignment="Left"
                                         Padding="{TemplateBinding HeaderPadding}">
@@ -43,7 +44,8 @@
                             </DockPanel>
                         </Border>
 
-                        <Border Padding="{TemplateBinding Padding}">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"

@@ -70,6 +70,19 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(ForestSection),
             new PropertyMetadata(default(FontFamily)));
 
+
+        public static readonly DependencyProperty HeaderBrushProperty = DependencyProperty.Register(
+            nameof(HeaderBrush),
+            typeof(Brush),
+            typeof(ForestSection),
+            new PropertyMetadata(default(Brush)));
+
+        public Brush HeaderBrush
+        {
+            get => (Brush)GetValue(HeaderBrushProperty);
+            set => SetValue(HeaderBrushProperty, value);
+        }
+
         static ForestSection()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ForestSection), new FrameworkPropertyMetadata(typeof(ForestSection)));
