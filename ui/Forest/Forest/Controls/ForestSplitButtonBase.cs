@@ -75,13 +75,29 @@ namespace Acorisoft.FutureGL.Forest.Controls
             typeof(ForestSplitButtonBase),
             new PropertyMetadata(default(object)));
 
+        protected override void OnLostFocus(RoutedEventArgs e)
+        {
+            IsDropDownOpen = false;
+            base.OnLostFocus(e);
+        }
+
         protected sealed override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
             var originalItem = SelectedItem;
             
-            Selection = originalItem is FrameworkElement fe ? 
-                fe.DataContext ?? originalItem.ToString() : 
-                originalItem.ToString();
+            
+            if (originalItem is ContentControl contentControl)
+            {
+                Selection = contentControl.Content;
+            }
+            else if (originalItem is FrameworkElement fe)
+            {
+                Selection = fe.DataContext ?? fe.ToString();
+            }
+            else
+            {
+                Selection = originalItem;
+            }
             
             //
             // Close Popup

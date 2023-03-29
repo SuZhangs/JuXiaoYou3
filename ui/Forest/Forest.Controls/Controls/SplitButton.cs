@@ -9,6 +9,13 @@ namespace Acorisoft.FutureGL.Forest.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SplitButton), new FrameworkPropertyMetadata(typeof(SplitButton)));
         }
 
+        public override void OnApplyTemplate()
+        {
+            var popup = GetTemplateChild("Popup") as Popup;
+            base.OnApplyTemplate();
+        }
+
+
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new SplitButtonItem();
@@ -69,7 +76,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             _foreground            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
-            _background            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
+            _background            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
             _highlight2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
 
             //

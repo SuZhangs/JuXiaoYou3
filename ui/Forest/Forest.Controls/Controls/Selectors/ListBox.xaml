@@ -77,7 +77,8 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -117,6 +118,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="MinHeight" Value="32" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -126,7 +128,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="3 3 0 0">
+                            CornerRadius="3 0 0 3">
                         <ContentPresenter x:Name="PART_ContentHost"
                                             Content="{TemplateBinding Content}"
                                             ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -152,19 +154,10 @@
     </Style>
 
     <Style x:Key="ClearStyle.ComboBoxItem" TargetType="{x:Type c1:SplitButtonItem}">
-        <!--  Universal WPF UI focus  -->
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        <!--  Universal WPF UI focus  -->
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="{StaticResource ComboBoxItemMargin}" />
-        <Setter Property="Padding" Value="{StaticResource ComboBoxItemContentMargin}" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -173,48 +166,14 @@
                     <Grid>
                         <Border x:Name="PART_Bd"
                                 Margin="{TemplateBinding Margin}"
-                                Padding="0"
+                                Padding="16 8"
                                 VerticalAlignment="Stretch"
-                                CornerRadius="{TemplateBinding Border.CornerRadius}"
                                 SnapsToDevicePixels="True">
-                            <Grid>
-                                <ContentPresenter x:Name="PART_Content"
-                                                  Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
-                                <Rectangle x:Name="ActiveRectangle"
-                                           Width="3"
-                                           Height="16"
-                                           Margin="0"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           RadiusX="2"
-                                           RadiusY="2"
-                                           Visibility="Collapsed">
-                                    <Rectangle.Fill>
-                                        <SolidColorBrush Color="{DynamicResource SystemAccentColorSecondary}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Grid>
+                            <ContentPresenter x:Name="PART_Content"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center" />
                         </Border>
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <!--<Trigger Property="IsHighlighted" Value="True">
-                            <Setter TargetName="PART_Bd" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>-->
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource TextFillColorTertiary}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -236,6 +195,7 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="Padding" Value="8" />
         <Setter Property="Popup.PopupAnimation" Value="Slide" />
+        <Setter Property="SelectedIndex" Value="0" />
         <!--  WPF doesn't like centering, the animation is ugly and the mouse button sometimes clicks right away.  -->
         <Setter Property="Popup.Placement" Value="Bottom" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -244,8 +204,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c1:SplitButton}">
                     <Border x:Name="PART_Bd"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
+                            MinWidth="96"
+                            MinHeight="36"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="{TemplateBinding Background}"
@@ -257,23 +217,22 @@
                                     Chevron is over Presenter, ToggleButton is over Chevron, TextBox is over ToggleButton.
                                     But, TextBox is not over Chevron, so ToggleButton still works.
                                 -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="48" />
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter x:Name="PART_Content"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="48" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="PART_Content"
                                                   Grid.Column="0"
-                                                  Margin="8"
                                                   HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch"
+                                              Margin="{TemplateBinding Padding}"
                                                   Content="{TemplateBinding Selection}"
                                                   ContentTemplate="{TemplateBinding ItemTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                                   IsHitTestVisible="False"
-                                                  TextElement.Foreground="{TemplateBinding Foreground}" />
+                                                  TextElement.Foreground="{TemplateBinding Foreground}" 
+                                              VerticalAlignment="Center"/>
 
-                                <Path x:Name="ChevronIcon"
+                            <Path x:Name="ChevronIcon"
                                       Grid.Column="1"
                                       VerticalAlignment="Center"
                                       Width="16"
@@ -282,63 +241,62 @@
                                       Stretch="Uniform"
                                       Stroke="{TemplateBinding Foreground}"
                                       RenderTransformOrigin="0.5, 0.5">
-                                    <Path.RenderTransform>
-                                        <RotateTransform Angle="0" />
-                                    </Path.RenderTransform>
-                                </Path>
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="0" />
+                                </Path.RenderTransform>
+                            </Path>
 
-                                <ToggleButton x:Name="ActionButton"
+                            <ToggleButton x:Name="ActionButton"
                                               Grid.Column="0"
                                               BorderThickness="1"
                                               Command="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Command,Mode=OneWay}"
                                               CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem,Mode=OneWay}"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
+                                          Margin="0 0 1 0"
                                               Focusable="False"
                                               Foreground="{TemplateBinding Foreground}"
                                               Style="{StaticResource ClearStyle.SplitButton.Toggle.Action}" />
 
-                                <ToggleButton x:Name="ToggleButton"
+                            <ToggleButton x:Name="ToggleButton"
                                               Grid.Column="1"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
                                               ClickMode="Press"
                                               Focusable="False"
                                               Foreground="{TemplateBinding Foreground}"
+                                          Margin="1 0 0 0"
                                               IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                               Style="{StaticResource ClearStyle.SplitButton.Toggle.Expander}" />
-                            </Grid>
+                            
                             <Popup x:Name="Popup"
-                                   VerticalAlignment="Center"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
                                    AllowsTransparency="True"
                                    Focusable="False"
-                                   PopupAnimation="Slide"
+                                   HorizontalOffset="-12"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
-                                   Placement="{TemplateBinding Popup.Placement}"
-                                   MinWidth="280"
-                                   MaxWidth="640"
-                                   VerticalOffset="1">
-                                <Border x:Name="DropDownBorder"
-                                        Background="{f:Brush BackgroundLevel1}"
-                                        CornerRadius="8"
-                                        Padding="0 16"
-                                        MinWidth="192"
-                                        SnapsToDevicePixels="True">
-                                    <Grid>
-                                        <ScrollViewer MaxHeight="256"
-                                                      Margin="0"
-                                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                                      SnapsToDevicePixels="True"
-                                                      TextElement.FontSize="{TemplateBinding FontSize}"
-                                                      TextElement.FontWeight="{TemplateBinding FontWeight}"
-                                                      TextElement.Foreground="{TemplateBinding Foreground}"
-                                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                   Placement="Bottom"
+                                   PopupAnimation="Slide"
+                                   VerticalOffset="1"
+                                   PlacementTarget="{Binding ElementName=PART_Bd}">
+                                <Grid Margin="8 8 8 16">
+                                    <Grid.Effect>
+                                        <DropShadowEffect BlurRadius="14" Direction="270" Opacity="0.12" ShadowDepth="4.5" Color="#AA000000" />
+                                    </Grid.Effect>
+                                    <Border x:Name="SubmenuBorder"
+                                            Background="{f:Brush BackgroundLevel2}"
+                                            CornerRadius="8"
+                                            SnapsToDevicePixels="True"
+                                            Padding="0 16"
+                                            MinWidth="192">
+                                        <ScrollViewer CanContentScroll="True"
+                                                      MaxHeight="384">
                                             <StackPanel IsItemsHost="True"
-                                                        KeyboardNavigation.DirectionalNavigation="Contained"
-                                                        TextElement.FontSize="{TemplateBinding FontSize}" />
+                                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
                                         </ScrollViewer>
-                                    </Grid>
-                                </Border>
+                                    </Border>
+                                </Grid>
                             </Popup>
                         </Grid>
                     </Border>
@@ -368,10 +326,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="HasItems" Value="False">
-                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="32" />
-                        </Trigger>
-                        <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="False">
-                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0" />
+                            <Setter TargetName="SubmenuBorder" Property="MinHeight" Value="32" />
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="True">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
