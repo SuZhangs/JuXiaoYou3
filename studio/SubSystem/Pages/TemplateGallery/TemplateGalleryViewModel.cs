@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Accessibility;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
@@ -18,13 +19,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
     {
         private const string FileNotExists = "text.FileNotFound";
 
-        [NullCheck(UniTestLifetime.Constructor)]
-        private readonly ReadOnlyObservableCollection<ModuleTemplateCache> _collection;
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        private readonly BehaviorSubject<Func<ModuleTemplateCache, bool>> _sorter;
-
-
+        [NullCheck(UniTestLifetime.Constructor)] private readonly ReadOnlyObservableCollection<ModuleTemplateCache> _collection;
+        [NullCheck(UniTestLifetime.Constructor)] private readonly BehaviorSubject<Func<ModuleTemplateCache, bool>>  _sorter;
+        [NullCheck(UniTestLifetime.Constructor)] private readonly DataPartReader                                    _reader;
+        
         private DocumentType _type;
 
         public TemplateGalleryViewModel()
@@ -33,10 +31,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                                  .GetEngine<TemplateEngine>();
 
             _sorter            = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
+            _reader            = new DataPartReader();
             Source             = new SourceList<ModuleTemplateCache>();
             MetadataCollection = new ObservableCollection<MetadataCache>();
 
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
+            ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
+            ExportTemplateCommand = AsyncCommand(ExportTemplateImpl);
             RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
             
             Source.Connect()
@@ -138,16 +139,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                 return;
             }
 
+            var logger = Xaml.Get<ILogger>();
             try
             {
+                var result      = await _reader.ReadAsync(opendlg.FileName);
+                var oldTemplate = result.Result;
+                var template    = ModuleBlockFactory.Upgrade(oldTemplate);
+                var r           = TemplateEngine.AddModule(template);
+
+                if (!r.IsFinished)
+                {
+                    var msg = Language.GetEnum(r.Reason);
+                        
+                    logger.Warn(msg);
+                    await Warning(msg);
+                }
+                else
+                {
+                    await Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    Refresh();
+                }
             }
             catch (Exception ex)
             {
+                logger.Warn(ex.Message);
+                await Warning(ex.Message);
             }
         }
 
         private async Task ExportTemplateImpl()
-        {   
+        {
+            await Task.Delay(300);
         }
 
         public void Refresh()

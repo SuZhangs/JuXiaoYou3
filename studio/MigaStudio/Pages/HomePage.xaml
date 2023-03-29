@@ -7,6 +7,8 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:te="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;assembly=SubSystem"
+             xmlns:tg="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery;assembly=SubSystem"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -24,10 +26,14 @@
 
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"
                             Content="模组编辑器"
-                            Command="{Binding GotoTemplateEditorCommand}" Background="{f:Brush HighlightB1}"
-                            BorderThickness="1"
-                            BorderBrush="{f:Brush HighlightB3}"
-                            CornerRadius="3"
+                            Command="{Binding GotoPageCommand}"
+                            CommandParameter="{x:Type te:TemplateEditorViewModel}"
+                            ShowText="True"/>
+            
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"
+                            Content="设定模板"
+                            Command="{Binding GotoPageCommand}"
+                            CommandParameter="{x:Type tg:TemplateGalleryViewModel}"
                             ShowText="True"/>
         </WrapPanel>
     </Grid>

@@ -437,9 +437,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:ContextMenu}">
                     <Border x:Name="Border"
-                            Padding="0 16"
+                            Padding="0 4"
                             Background="{TemplateBinding Background}"
-                            Margin="8 16"
+                            Margin="16 4 16 16"
                             Effect="{StaticResource MenuItem.ShadowEffect2}"
                             CornerRadius="8">
                         <StackPanel ClipToBounds="True"

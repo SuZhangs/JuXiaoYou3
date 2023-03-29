@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.ViewModels;
@@ -17,19 +18,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         public HomeViewModel()
         {
-            Title = "首页";
-
-            GotoTemplateEditorCommand = Command(GotoTemplateEditorImpl);
+            Title           = "首页";
+            GotoPageCommand = Command<Type>(GotoTemplateEditorImpl);
         }
 
-        private void GotoTemplateEditorImpl()
+        private void GotoTemplateEditorImpl(Type type)
         {
-            Controller.New<TemplateEditorViewModel>();
+            Controller.New(type);
         }
 
         public sealed override bool Uniqueness => true;
         public sealed override bool Removable => false;
 
-        public RelayCommand GotoTemplateEditorCommand { get; }
+        public RelayCommand<Type> GotoPageCommand { get; }
     }
 }

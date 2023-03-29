@@ -91,4 +91,27 @@
         /// </summary>
         public static readonly EngineResult Successful = new EngineResult { IsFinished = true };
     }
+
+    public class EngineResult<T> : EngineResult
+    {
+        public static EngineResult<T> Finished(EngineFailedReason reason)
+        {
+            return new EngineResult<T>
+            {
+                IsFinished = false,
+                Reason     = reason
+            };
+        }
+        
+        public static EngineResult<T> Finished(T result)
+        {
+            return new EngineResult<T>
+            {
+                IsFinished = true,
+                Result     = result
+            };
+        }
+        
+        public T Result { get; init; }
+    }
 }

@@ -83,7 +83,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type t:ToolButton}">
+    <Style x:Key="ClearStyle.ToolButton" TargetType="{x:Type t:ToolButton}">
         <Setter Property="ShowText" Value="False" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -268,4 +268,6 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type t:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}"/>
+    <Style TargetType="{x:Type t:DropDownButton}" BasedOn="{StaticResource ClearStyle.ToolButton}"/>
 </ResourceDictionary>

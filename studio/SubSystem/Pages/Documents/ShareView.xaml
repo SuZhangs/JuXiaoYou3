@@ -25,11 +25,16 @@
             <ftk:ToolButton Content="截图"
                             Icon="{StaticResource FeatherIcon.Camera}"
                             ShowText="True"/>
-
-            <f:SplitButton >
-                <f:SplitButtonItem Content="导出为PDF"/>
-                <f:SplitButtonItem Content="导出为Markdown"/>
-            </f:SplitButton>
+            <ftk:DropDownButton Content="导出"
+                                Icon="{StaticResource FeatherIcon.Box}"
+                                ShowText="True">
+                <ftk:DropDownButton.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="导出为PDF"/>
+                        <f:MenuItem Header="导出为Markdown"/>
+                    </f:ContextMenu>
+                </ftk:DropDownButton.ContextMenu>
+            </ftk:DropDownButton>
         </WrapPanel>
 
         <ItemsControl/>

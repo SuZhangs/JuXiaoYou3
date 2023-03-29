@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Acorisoft.FutureGL.Forest.Controls.Selectors;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
+using Acorisoft.Miga.Doc.Documents;
+using Acorisoft.Miga.Doc.Parts;
+using ImTools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 {
@@ -12,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
         public static IEnumerable<ModuleBlock> CreateBlocks()
         {
             var b = CreateBlocksImpl();
-            b.ForEach(x => x.ClearValue());
+            EnumerableExtensions.ForEach(b, x => x.ClearValue());
             return b;
         }
 
@@ -544,6 +549,178 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         internal static void EmptyHandler(ModuleBlockDataUI ui, ModuleBlock block)
         {
+        }
+
+        private static DocumentType GetType(DocumentKind kind)
+        {
+            return kind switch
+            {
+                DocumentKind.Assets    => DocumentType.ItemDocument,
+                DocumentKind.Character => DocumentType.CharacterDocument,
+                DocumentKind.Skills    => DocumentType.AbilityDocument,
+                DocumentKind.Materials => DocumentType.ItemDocument,
+                DocumentKind.Map       => DocumentType.GeographyDocument,
+                _                      => DocumentType.OtherDocument,
+            };
+        }
+
+        private static ModuleBlock Upgrade(GroupProperty property)
+        {
+            var group = new GroupBlock
+            {
+                Id       = ID.Get(),
+                Name     = property.Name,
+                Metadata = property.Metadata,
+                ToolTips = property.ToolTips,
+                Items    = property.Values.Select(Upgrade).ToList()
+            };
+            return group;
+        }
+        
+        private static ModuleBlock Upgrade(OptionProperty property)
+        {
+            if (property.Kind == OptionKind.Opposite)
+            {
+                return new BinaryBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = property.Name,
+                    Metadata = property.Metadata,
+                    ToolTips = property.ToolTips,
+                    Negative = property.NegativeValue,
+                    Positive = property.PositiveValue,
+                    Fallback = false
+                };
+            }
+            
+            if (property.Kind == OptionKind.Favorite)
+            {
+                return new HeartBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = property.Name,
+                    Metadata = property.Metadata,
+                    ToolTips = property.ToolTips,
+                    Fallback = false
+                };
+            }
+            
+            return new SwitchBlock
+            {
+                Id       = ID.Get(),
+                Name     = property.Name,
+                Metadata = property.Metadata,
+                ToolTips = property.ToolTips,
+                Fallback = false
+            };
+        }
+
+        private static ModuleBlock Upgrade(InputProperty property)
+        {
+            return property switch
+            {
+                TextProperty t => new SingleLineBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = t.Name,
+                    Metadata = t.Metadata,
+                    Suffix   = t.Unit,
+                    Fallback = t.Fallback,
+                    ToolTips = t.ToolTips
+                },
+                PageProperty p => new MultiLineBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = p.Name,
+                    Metadata = p.Metadata,
+                    Fallback = p.Fallback,
+                    ToolTips = p.ToolTips,
+                    CharacterLimited = 800,
+                    EnableExpression = false,
+                },
+                NumberProperty n => new NumberBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = n.Name,
+                    Metadata = n.Metadata,
+                    Fallback = int.TryParse(n.Fallback, out var n_f) ? n_f : 10,
+                    ToolTips = n.ToolTips,
+                    Maximum = 10,
+                    Minimum = 0,
+                    Suffix = n.Unit,
+                },
+                SequenceProperty s => new SequenceBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = s.Name,
+                    Metadata = s.Metadata,
+                    Fallback = s.Fallback,
+                    ToolTips = s.ToolTips,
+                    Items = s.Values.Select(x => new OptionItem
+                    {
+                        Name = x.Text,
+                        Value = x.Text
+                    }).ToList(),
+                },
+                ColorProperty c => new ColorBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = c.Name,
+                    Metadata = c.Metadata,
+                    Fallback = c.Fallback,
+                    ToolTips = c.ToolTips,
+                },
+                GroupProperty g => Upgrade(g),
+                OptionProperty o => Upgrade(o),
+                _ => null,
+            };
+        }
+
+        public static ModuleTemplate Upgrade(Module oldTemplate)
+        {
+            var template = new ModuleTemplate
+            {
+                Id            = oldTemplate.Id,
+                Name          = oldTemplate.Name,
+                AuthorList    = oldTemplate.Author,
+                ContractList  = oldTemplate.Contract,
+                Organizations = oldTemplate.Organization,
+                Version       = 1,
+                Intro         = oldTemplate.Name,
+                MetadataList  = new List<MetadataCache>(),
+                Blocks        = new List<ModuleBlock>(oldTemplate.Items.Count),
+                ForType       = GetType(oldTemplate.Type)
+            };
+
+            var metadatas = new Dictionary<string, MetadataCache>();
+
+            foreach (var property in oldTemplate.Items)
+            {
+                if (!string.IsNullOrEmpty(property.Metadata) &&
+                    !metadatas.ContainsKey(property.Metadata))
+                {
+                    var meta = new MetadataCache
+                    {
+                        Id           = ID.Get(),
+                        Name         = property.Name,
+                        MetadataName = property.Metadata,
+                        RefCount     = 1
+                    };
+                    metadatas.Add(property.Metadata, meta);
+                    template.MetadataList.Add(meta);
+                }
+
+                var block = Upgrade(property);
+                
+                if (block is null)
+                {
+                    continue; 
+                }
+                
+                template.Blocks.Add(block);
+            }
+
+            return template;
         }
     }
 }
