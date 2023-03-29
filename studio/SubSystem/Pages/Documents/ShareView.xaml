@@ -21,22 +21,15 @@
             <ftk:ToolButton Content="删除"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True"/>
-            
+
             <ftk:ToolButton Content="截图"
                             Icon="{StaticResource FeatherIcon.Camera}"
                             ShowText="True"/>
-            
-            <ftk:ToolButton Content="导出为PDF"
-                            Icon="{StaticResource FeatherIcon.Box}"
-                            ShowText="True"/>
-            
-            <ftk:ToolButton Content="导出为Markdown"
-                            Icon="{StaticResource FeatherIcon.Box}"
-                            ShowText="True"/>
-            
-            <ftk:ToolButton Content="导出为Markdown"
-                            Icon="{StaticResource FeatherIcon.Box}"
-                            ShowText="True"/>
+
+            <f:SplitButton >
+                <f:SplitButtonItem Content="导出为PDF"/>
+                <f:SplitButtonItem Content="导出为Markdown"/>
+            </f:SplitButton>
         </WrapPanel>
 
         <ItemsControl/>

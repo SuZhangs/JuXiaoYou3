@@ -78,7 +78,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="36" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -118,7 +118,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="MinHeight" Value="36" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
@@ -208,7 +208,6 @@
                             MinHeight="36"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="{TemplateBinding Background}"
                             CornerRadius="3">
                         <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -221,6 +220,14 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="48" />
                             </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0"
+                                    CornerRadius="3 0 0 3"
+                                    Background="Transparent"/>
+
+                            <Border Grid.Column="1"
+                                    CornerRadius="0 3 3 0"
+                                    Background="Transparent"/>
+                            
                             <ContentPresenter x:Name="PART_Content"
                                                   Grid.Column="0"
                                                   HorizontalAlignment="Stretch"
@@ -251,6 +258,7 @@
                                               BorderThickness="1"
                                               Command="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Command,Mode=OneWay}"
                                               CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent},Path=SelectedItem,Mode=OneWay}"
+                                          Height="36"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
                                           Margin="0 0 1 0"
@@ -260,6 +268,7 @@
 
                             <ToggleButton x:Name="ToggleButton"
                                               Grid.Column="1"
+                                          Height="36"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch"
                                               ClickMode="Press"
