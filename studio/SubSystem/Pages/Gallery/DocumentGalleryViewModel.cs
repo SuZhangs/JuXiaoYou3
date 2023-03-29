@@ -212,11 +212,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         /// </remarks>
         private void LoadPage()
         {
+            var maxPageCount = Math.Clamp(_totalPageCount, 1, MaxPageCount);
             // 值范围：[1,250]
             var index = Math.Clamp(
                 _pageIndex, 
-                MinPageIndex, 
-                Math.Min(_totalPageCount, MaxPageCount));
+                MinPageIndex,
+                maxPageCount);
             
             // Take(MaxCountPerPage)可能会出错
             // 需要Take(Math.Min(,1,MaxCountPerPage)

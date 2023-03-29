@@ -7,7 +7,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
-                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Modules;assembly=SubSystem.Template"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Modules"
                      xmlns:thisModel2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels"
                      xmlns:thisModel3="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Metadatas;assembly=MigaDB"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
@@ -20,7 +20,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockEditTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <thisConverters:MetadataKindConverter x:Key="Name"/>
