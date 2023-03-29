@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return Language.Culture switch
                 {
                     CultureArea.Chinese => GetChinese(kind),
-                    _ => GetChinese(kind),
+                    _                   => GetChinese(kind),
                 };
             }
 
@@ -28,6 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             return kind switch
             {
+                DocumentType.None              => "全部",
                 DocumentType.AbilityDocument   => "能力",
                 DocumentType.ItemDocument      => "物品",
                 DocumentType.CharacterDocument => "人设",

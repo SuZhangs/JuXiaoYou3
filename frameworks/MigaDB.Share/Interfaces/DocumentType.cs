@@ -2,6 +2,7 @@
 {
     public enum DocumentType : int
     {
+        None              = 0,
         Document          = 0x0100,
         CharacterDocument = Document + 0x001,
         AbilityDocument   = Document + 0x002,

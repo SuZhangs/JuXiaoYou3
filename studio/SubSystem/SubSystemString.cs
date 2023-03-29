@@ -18,6 +18,17 @@ namespace Acorisoft.FutureGL.MigaStudio
             DocumentType.MysteryDocument,
         };
         
+        public static readonly DocumentType[] DocumentGalleryTypes = new[]
+        {
+            DocumentType.None,
+            DocumentType.CharacterDocument,
+            DocumentType.AbilityDocument,
+            DocumentType.GeographyDocument,
+            DocumentType.ItemDocument,
+            DocumentType.OtherDocument,
+            DocumentType.MysteryDocument,
+        };
+        
         public static string GetText(string id) => Language.GetText(id);
 
         #region ModuleBlock Translate

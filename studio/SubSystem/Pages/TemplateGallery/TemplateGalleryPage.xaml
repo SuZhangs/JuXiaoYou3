@@ -4,13 +4,15 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
-                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateGalleryViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
     </UserControl.Resources>
     <Grid Margin="8 16">
         <Grid.ColumnDefinitions>
@@ -45,29 +47,58 @@
                                     ShowText="True"/>
                     <ftk:ToolButton f:Language.Id="global.export"
                                     Content="导出"
+                                    Command="{Binding ExportTemplateCommand}"
+                                    CommandParameter="{Binding ElementName=Canvas}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
                                     ShowText="True"/>
                 </StackPanel>
             </f:ForestSection.ToolBar>
 
-            <f:ListBox SelectedItem="{Binding SelectedTemplate,Mode=TwoWay}"
-                       ItemsSource="{Binding TemplateCollection,Mode=OneWay}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                        <TextBlock FontSize="14"
-                                   Margin="6"
-                                   Text="{Binding Name}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </f:ListBox>
+            <!-- 实际内容-->
+            <DockPanel>
+                
+                <!-- 类型分类-->
+                <f:ListBox DockPanel.Dock="Top"
+                           SelectedItem="{Binding Type,Mode=TwoWay}"
+                           ItemsSource="{x:Static this:SubSystemString.DocumentGalleryTypes}">
+                    .<ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="14"
+                                       Margin="6"
+                                       Text="{Binding Converter={StaticResource DocumentTypeName}}" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+                
+                <!-- 所有模组-->
+                <f:ListBox SelectedItem="{Binding SelectedTemplate,Mode=TwoWay}"
+                           ItemsSource="{Binding TemplateCollection,Mode=OneWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="14"
+                                       Margin="6"
+                                       Text="{Binding Name}" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </DockPanel>
         </f:ForestSection>
 
+        <!-- 侧栏-->
         <ftk:TabControl Grid.Column="1"
                         Margin="16 0">
-            <ftk:TabItem Header="喵喵咒语"
+            
+            <!-- 侧栏-->
+            <ftk:TabItem f:Language.Id="global.metadata"
+                         Header="喵喵咒语"
                          Padding="16 10">
-                <ScrollViewer Grid.Row="1">
+                <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -94,7 +125,10 @@
                     </ItemsControl>
                 </ScrollViewer>
             </ftk:TabItem>
-            <ftk:TabItem Header="预览"
+            
+            <!-- 预览-->
+            <ftk:TabItem f:Language.Id="global.preview"
+                         Header="预览"
                          Padding="16 10">
                 <ftk:TabItem.Resources>
                     <ResourceDictionary>
@@ -103,10 +137,11 @@
                         </ResourceDictionary.MergedDictionaries>
                     </ResourceDictionary>
                 </ftk:TabItem.Resources>
-                <ScrollViewer Grid.Row="1"
-                              Margin="0 16 0 0">
-                    <ItemsControl ItemsSource="{Binding Blocks,Mode=OneWay}">
-                    </ItemsControl>
+                <ScrollViewer Margin="0 16 0 0">
+                    <Border x:Name="Canvas">
+                        <ItemsControl ItemsSource="{Binding Blocks,Mode=OneWay}">
+                        </ItemsControl>
+                    </Border>
                 </ScrollViewer>
             </ftk:TabItem>
         </ftk:TabControl>

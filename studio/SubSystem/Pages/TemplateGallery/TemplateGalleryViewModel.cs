@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using System.Windows;
 using Accessibility;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -44,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
 
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
-            ExportTemplateCommand = AsyncCommand(ExportTemplateImpl);
+            ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
 
             Source.Connect()
@@ -199,9 +200,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             Refresh();
         }
 
-        private async Task ExportTemplateImpl()
+        private async Task ExportTemplateImpl(FrameworkElement target)
         {
-            await Task.Delay(300);
+            if (target is null)
+            {
+                return;
+            }
+            var savedlg = new SaveFileDialog
+            {
+                FileName = SelectedTemplate.Name,
+                Filter   = SubSystemString.ModuleFilter
+            };
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            try
+            {
+                var fileName = savedlg.FileName;
+                var ms       = Xaml.CaptureToBuffer(target);
+                var template = TemplateEngine.TemplateDB.FindById(_selectedTemplate.Id);
+                var payload = JSON.Serialize(template);
+
+
+                await PNG.Write(fileName, payload, ms);
+                await Successful(SubSystemString.OperationOfSaveIsSuccessful);
+            }
+            catch (Exception ex)
+            {
+                await Error(SubSystemString.BadModule);
+
+                Xaml.Get<ILogger>()
+                    .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
+            }
         }
 
         public void Refresh()
@@ -236,6 +269,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                     return;
                 }
 
+                ExportTemplateCommand.NotifyCanExecuteChanged();
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
             }
         }
@@ -250,7 +284,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             set
             {
                 SetValue(ref _type, value);
-                _sorter.OnNext(x => x.ForType == value);
+                _sorter.OnNext(_type == DocumentType.None ? Xaml.AlwaysTrue : x => x.ForType == value);
             }
         }
 
@@ -279,7 +313,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
         public AsyncRelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand ExportTemplateCommand { get; }
+        public AsyncRelayCommand<FrameworkElement> ExportTemplateCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ImportTemplateCommand { get; }
