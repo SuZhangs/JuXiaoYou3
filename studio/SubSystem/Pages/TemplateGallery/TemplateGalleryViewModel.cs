@@ -77,7 +77,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             //
             // 
             var fileNames     = opendlg.FileNames;
-            var logger        = Xaml.Get<ILogger>();
             var finishedCount = 0;
             var errorCount    = 0;
 
@@ -160,7 +159,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                 return;
             }
 
-            var logger = Xaml.Get<ILogger>();
+            var logger        = Xaml.Get<ILogger>();
+            var finishedCount = 0;
+            var errorCount    = 0;
 
             foreach (var fileName in opendlg.FileNames)
             {
@@ -173,14 +174,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
 
                     if (!r.IsFinished)
                     {
-                        var msg = Language.GetEnum(r.Reason);
-
-                        logger.Warn(msg);
-                        await Warning(msg);
+                        errorCount++;
                     }
                     else
                     {
-                        await Successful(SubSystemString.OperationOfAddIsSuccessful);
+                        finishedCount++;
                     }
                 }
                 catch (Exception ex)
@@ -190,6 +188,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
                 }
             }
 
+            if (finishedCount == 0)
+            {
+                await Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+            }
+            else
+            {
+                await Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+            }
             Refresh();
         }
 
