@@ -8,6 +8,7 @@
         <OutDir>../../Builds/JuXiaoYou</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <Platforms>AnyCPU;x86</Platforms>
+        <ApplicationIcon>ico_2.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
