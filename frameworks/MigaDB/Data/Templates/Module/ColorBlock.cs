@@ -40,6 +40,17 @@
             var bb = (ColorBlock)block;
             return bb.Value == Value;
         }
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value,
+                Type  = MetadataKind.Color,
+            };
+        }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>

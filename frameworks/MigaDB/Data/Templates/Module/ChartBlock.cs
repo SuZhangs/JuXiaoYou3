@@ -82,6 +82,23 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             var bb = (ChartBlock)block;
             return Value.SequenceEqual(bb.Value);
         }
+
+        public static string CombineParameter(ChartBlock block)
+        {
+            return string.Empty;
+        }
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Binary,
+                Parameters = CombineParameter(this)
+            };
+        }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>
