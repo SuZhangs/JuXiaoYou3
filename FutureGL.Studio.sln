@@ -37,6 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Fonts", "ui\Forest\F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem", "studio\SubSystem\SubSystem.csproj", "{239204F4-F934-4822-A249-EF6CB7CF0BF4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gists", "Gists", "{6399E2E1-9AB8-4288-8BE1-E947A087C299}"
+	ProjectSection(SolutionItems) = preProject
+		gists\avatar-binding.md = gists\avatar-binding.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
