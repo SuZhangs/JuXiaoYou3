@@ -2,23 +2,31 @@
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
+using Parameter = System.Reflection.Metadata.Parameter;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
     public class NavigationParameter
     {
-        private NavigationParameter(Parameter args)
+        private NavigationParameter(RouteEventArgs args)
         {
             Params = args;
         }
+        
+        //
+        // 注意：
+        // [0] Controller
+        // [1] Id
+        // [2] Target
+        // [3] Parameter
 
         /// <summary>
         /// 测试
         /// </summary>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter Test()
+        public static NavigationParameter Empty()
         {
-            var args = new Parameter
+            var args = new RouteEventArgs
             {
                 Args = new object[8]
             };
@@ -33,9 +41,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="id">数据</param>
         /// <param name="controller">控制器</param>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter New(string id, ITabViewController controller)
+        public static NavigationParameter NewPage(string id, ITabViewController controller)
         {
-            var args = new Parameter
+            var args = new RouteEventArgs
             {
                 Args = new object[8]
             };
@@ -52,16 +60,56 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="cache">索引</param>
         /// <param name="controller">控制器</param>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter New(IData data, IDataCache cache, ITabViewController controller)
+        public static NavigationParameter OpenDocument(IDataCache cache, ITabViewController controller)
         {
-            var args = new Parameter
+            var args = new RouteEventArgs
             {
                 Args = new object[8]
             };
 
             args.Args[0] = controller;
-            args.Args[1] = data;
+            args.Args[1] = cache.Id;
             args.Args[2] = cache;
+            return new NavigationParameter(args);
+        }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="fileName">数据</param>
+        /// <param name="controller">控制器</param>
+        /// <returns>返回一个新的导航参数。</returns>
+        public static NavigationParameter OpenFile(string fileName, ITabViewController controller)
+        {
+            var args = new RouteEventArgs
+            {
+                Args = new object[8]
+            };
+
+            args.Args[0] = controller;
+            args.Args[1] = fileName;
+            args.Args[2] = fileName;
+            return new NavigationParameter(args);
+        }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="fileName">数据</param>
+        /// <param name="parameter">索引</param>
+        /// <param name="controller">控制器</param>
+        /// <returns>返回一个新的导航参数。</returns>
+        public static NavigationParameter OpenFile(string fileName, Parameter parameter, ITabViewController controller)
+        {
+            var args = new RouteEventArgs
+            {
+                Args = new object[8]
+            };
+
+            args.Args[0] = controller;
+            args.Args[1] = fileName;
+            args.Args[2] = fileName;
+            args.Args[3] = parameter;
             return new NavigationParameter(args);
         }
         
@@ -71,9 +119,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <param name="viewModel">视图模型</param>
         /// <param name="controller">控制器</param>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter New(ITabViewModel viewModel, ITabViewController controller)
+        public static NavigationParameter NewPage(ITabViewModel viewModel, ITabViewController controller)
         {
-            var args = new Parameter
+            var args = new RouteEventArgs
             {
                 Args = new object[8]
             };
@@ -91,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// </summary>
         /// <param name="parameter">视图参数</param>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter FromParameter(Parameter parameter)
+        public static NavigationParameter FromParameter(RouteEventArgs parameter)
         {
             return new NavigationParameter(parameter);
         }
@@ -110,24 +158,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         public string Id => (string)Params.Args[1];
 
         /// <summary>
-        /// 目标文档
-        /// </summary>
-        public IData Document
-        {
-            get => (IData)Params.Args[2];
-        }
-
-        /// <summary>
         /// 目标索引
         /// </summary>
         public IDataCache Index
         {
-            get => (IDataCache)Params.Args[3];
+            get => (IDataCache)Params.Args[2];
         }
 
         /// <summary>
         /// 参数
         /// </summary>
-        public Parameter Params { get; }
+        public RouteEventArgs Params { get; }
     }
 }

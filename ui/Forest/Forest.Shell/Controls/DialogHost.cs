@@ -241,7 +241,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         
         public bool IsDialogOpened(IDialogViewModel viewModel) => viewModel is not null && _stack.Contains(viewModel);
 
-        public async Task<Op<T>> ShowDialog<T>(IDialogViewModel dialog, Parameter param)
+        public async Task<Op<T>> ShowDialog<T>(IDialogViewModel dialog, RouteEventArgs param)
         {
             var result = await ShowDialog(dialog, param);
 
@@ -253,7 +253,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             return result.IsFinished ? Op<T>.Success((T)result.Value) : Op<T>.Failed(result.Reason);
         }
 
-        public async Task<Op<object>> ShowDialog(IDialogViewModel dialog, Parameter param)
+        public async Task<Op<object>> ShowDialog(IDialogViewModel dialog, RouteEventArgs param)
         {
             if (dialog is null)
             {
@@ -281,7 +281,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 //
                 // 设置参数。
-                param                 ??= new Parameter();
+                param                 ??= new RouteEventArgs();
                 param.ViewModelSource =   previous;
                 param.CloseHandler    =   CloseDialog;
                 dialog2.CloseHandler  =   CloseDialog;

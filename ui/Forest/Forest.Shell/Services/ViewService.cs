@@ -8,21 +8,21 @@ namespace Acorisoft.FutureGL.Forest.Services
         private ViewHostBase _viewHost;
         public void Route<TViewModel>()  where TViewModel : IViewModel
         {
-            Route<TViewModel>(new Parameter());
+            Route<TViewModel>(new RouteEventArgs());
         }
 
-        public void Route<TViewModel>(Parameter parameter) where TViewModel : IViewModel
+        public void Route<TViewModel>(RouteEventArgs parameter) where TViewModel : IViewModel
         {
             var viewModel = Xaml.GetViewModel<TViewModel>();
-            Route(viewModel, new Parameter());
+            Route(viewModel, new RouteEventArgs());
         }
 
         public void Route(IViewModel viewModel)
         {
-            Route(viewModel, new Parameter { Args = new object[8] });
+            Route(viewModel, new RouteEventArgs { Args = new object[8] });
         }
 
-        public void Route(IViewModel viewModel, Parameter parameter)
+        public void Route(IViewModel viewModel, RouteEventArgs parameter)
         {
             viewModel.Startup(parameter);
             _viewHost.ViewModel = viewModel;

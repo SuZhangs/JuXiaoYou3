@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, object[] options)
         {
             var optionVM = Xaml.GetViewModel<OptionSelectionViewModel>();
-            var parameter = new Parameter
+            var parameter = new RouteEventArgs
             {
                 Args = new object[]
                 {

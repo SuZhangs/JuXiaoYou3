@@ -81,6 +81,7 @@
       <Page Update="Models\Modules\ModuleBlockReadOnlyTemplates.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
+      <Page Remove="ViewModels\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -102,10 +103,15 @@
       <None Update="Languages\SubSystem.ru.ini">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Remove="ViewModels\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModels" />
+      <Compile Remove="ViewModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ViewModels\**" />
     </ItemGroup>
 
 </Project>

@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             });
         }
 
-        #region Override Methods
+        #region OnStart
 
         protected override void OnStart(NavigationParameter parameter)
         {

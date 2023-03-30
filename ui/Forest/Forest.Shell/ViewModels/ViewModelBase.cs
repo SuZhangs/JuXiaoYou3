@@ -90,14 +90,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         }
         
         [NullCheck(UniTestLifetime.StartParameter)]
-        public Parameter OriginalParameter { get; set; }
+        public RouteEventArgs OriginalParameter { get; set; }
         
         /// <summary>
         /// 表示参数传递。
         /// </summary>
         /// <param name="arg">视图参数</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Startup(Parameter arg)
+        public void Startup(RouteEventArgs arg)
         {
             if (_initialized)
             {
@@ -114,7 +114,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         }
 
 
-        protected virtual void OnStartup(Parameter arg)
+        protected virtual void OnStartup(RouteEventArgs arg)
         {
             
         }

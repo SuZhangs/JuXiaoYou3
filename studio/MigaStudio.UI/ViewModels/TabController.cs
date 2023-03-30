@@ -145,12 +145,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
         
-        protected virtual void OnStart(Parameter arg)
+        protected virtual void OnStart(RouteEventArgs arg)
         {
             
         }
 
-        protected sealed override void OnStartup(Parameter arg)
+        protected sealed override void OnStartup(RouteEventArgs arg)
         {
             _context = arg.Args[0] as GlobalStudioContext;
             OnStart(arg);
@@ -272,7 +272,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TabViewModel New(Type viewModel) 
         {
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
-            vm.Startup(NavigationParameter.New(vm, this).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, this).Params);
             Start(vm);
             return vm;
         }
@@ -285,7 +285,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Startup(NavigationParameter.New(vm, this).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, this).Params);
             Start(vm);
             return vm;
         }
@@ -304,7 +304,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
             
             var vm1 = Xaml.GetViewModel<TViewModel>();
-            vm1.Startup(NavigationParameter.New(vm, this).Params);
+            vm1.Startup(NavigationParameter.NewPage(vm, this).Params);
             Start(vm1);
             return vm1;
         }
@@ -322,7 +322,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             if (string.IsNullOrEmpty(viewModel.PageId))
             {
-                viewModel.Startup(NavigationParameter.New(viewModel, this).Params);
+                viewModel.Startup(NavigationParameter.NewPage(viewModel, this).Params);
             }
 
             var unifiedKey = viewModel.Uniqueness ? viewModel.GetType().FullName : viewModel.PageId;

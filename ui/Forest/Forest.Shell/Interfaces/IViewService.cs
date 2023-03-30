@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="parameter">跳转参数</param>
         /// <typeparam name="TViewModel">指定的视图模型</typeparam>
         /// <returns>返回操作结果</returns>
-        void Route<TViewModel>(Parameter parameter) where TViewModel : IViewModel;
+        void Route<TViewModel>(RouteEventArgs parameter) where TViewModel : IViewModel;
 
         /// <summary>
         /// 跳转到指定的页面
@@ -35,7 +35,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="parameter">跳转参数</param>
         /// <param name="viewModel">指定的视图模型</param>
         /// <returns>返回操作结果</returns>
-        void Route(IViewModel viewModel, Parameter parameter);
+        void Route(IViewModel viewModel, RouteEventArgs parameter);
     }
 
     public interface IViewServiceAmbient : IServiceAmbient<ViewHostBase>

@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             });
         }
 
-        protected override void OnStartup(Parameter arg)
+        protected override void OnStartup(RouteEventArgs arg)
         {
             Context = arg.Args[0] as GlobalStudioContext;
             Init();

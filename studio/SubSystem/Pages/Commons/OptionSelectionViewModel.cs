@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private object              _selected;
         private IEnumerable<object> _options;
 
-        protected override void OnStart(Parameter parameter)
+        protected override void OnStart(RouteEventArgs parameter)
         {
             _selected = parameter.Args[0];
             var array  = parameter.Args[1] as Array;
