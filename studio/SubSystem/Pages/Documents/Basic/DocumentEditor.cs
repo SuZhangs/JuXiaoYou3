@@ -61,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private void Initialize()
         {
             CreateSubViews(InternalSubViews);
-            SelectedSubView        = InternalSubViews.FirstOrDefault();
+            SelectedSubView = InternalSubViews.FirstOrDefault();
         }
 
         protected static void AddSubView<TView>(ICollection<HeaderedSubView> collection, string id, bool caching = true) where TView : FrameworkElement
@@ -74,13 +74,56 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             });
         }
 
+        /// <summary>
+        /// 创建子页面
+        /// </summary>
+        /// <param name="collection">集合</param>
+        protected abstract void CreateSubViews(ICollection<HeaderedSubView> collection);
+
         #region OnStart
+
+        private void LoadDocumentIntern()
+        {
+            
+        }
+        
+        private void CreateDocumentIntern()
+        {
+            var document = new Document
+            {
+                Id        = ID.Get(),
+                Version   = 1,
+                Removable = true,
+                Parts     = new DataPartCollection(),
+                Metas     = new MetadataCollection(),
+            };
+
+            //
+            //
+            _document = document;
+            OnCreateDocument(document);
+            
+            //
+            // TODO: add to engine
+        }
+
+        protected abstract void OnCreateDocument(Document document);
 
         protected override void OnStart(NavigationParameter parameter)
         {
             // TODO:
-            _cache = (DocumentCache)parameter.Index;
-            _document = 
+            _cache    = (DocumentCache)parameter.Index;
+            _document = DocumentEngine.GetDocument(parameter.Id);
+
+            if (_document is null)
+            {
+                //
+                // 创建文档
+                CreateDocumentIntern();
+            }
+            
+            // 加载文档
+            LoadDocumentIntern();
             
             base.OnStart(parameter);
         }
@@ -90,12 +133,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             SelectedCustomDataPart = CustomDataParts.FirstOrDefault();
             base.OnStart();
         }
-
-        /// <summary>
-        /// 创建子页面
-        /// </summary>
-        /// <param name="collection">集合</param>
-        protected abstract void CreateSubViews(ICollection<HeaderedSubView> collection);
 
         #endregion
     }

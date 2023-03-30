@@ -2,6 +2,9 @@
 {
     public class DataPartCollection : List<DataPart>
     {
-        
+        public DataPartCollection() : base(32)
+        {
+            
+        }
     }
 }

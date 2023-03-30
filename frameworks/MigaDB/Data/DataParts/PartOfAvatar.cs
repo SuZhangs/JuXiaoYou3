@@ -1,12 +1,7 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class PartOfAvatar : FixedDataPart
+    public class PartOfAvatar : PartOfManifest
     {
-        protected sealed override FixedDataPart CreateInstance()
-        {
-            return new PartOfAvatar();
-        }
-
         public string Avatar { get; set; }
     }
 }
