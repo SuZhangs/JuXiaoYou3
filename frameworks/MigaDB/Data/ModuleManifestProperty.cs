@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Acorisoft.FutureGL.MigaDB.Models
+namespace Acorisoft.FutureGL.MigaDB.Data
 {
     public class ModuleManifestProperty : ObservableObject
     {
@@ -10,6 +10,21 @@ namespace Acorisoft.FutureGL.MigaDB.Models
         private ModuleManifest _defaultItemManifest;
         private ModuleManifest _defaultOtherManifest;
         private ModuleManifest _defaultMysteryManifest;
+
+        public ModuleManifest GetManifest(DocumentType type)
+        {
+            return type switch
+            {
+                DocumentType.AbilityDocument   => _defaultAbilityManifest,
+                DocumentType.CharacterDocument => _defaultCharacterManifest,
+                DocumentType.ItemDocument      => _defaultItemManifest,
+                DocumentType.GeographyDocument => _defaultGeometryManifest,
+                DocumentType.OtherDocument     => _defaultOtherManifest,
+                DocumentType.MysteryDocument     => _defaultMysteryManifest,
+                _ => null
+                
+            };
+        }
         
         public ModuleManifest DefaultAbilityManifest
         {

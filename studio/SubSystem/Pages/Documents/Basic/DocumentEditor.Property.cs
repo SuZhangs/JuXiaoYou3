@@ -64,9 +64,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         [NullCheck(UniTestLifetime.Constructor)]
         protected ObservableCollection<HeaderedSubView> InternalSubViews { get; }
 
-        /// <summary>
-        /// 子页面
-        /// </summary>
         [NullCheck(UniTestLifetime.Constructor)]
         public ReadOnlyCollection<HeaderedSubView> SubViews { get; }
 
@@ -76,11 +73,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         //
         //---------------------------------------------
 
-        #region DetailParts
-
-
-        #endregion
-
 
         //---------------------------------------------
         //
@@ -88,7 +80,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         //
         //---------------------------------------------
 
-        #region DataParts
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
@@ -143,18 +134,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// 自定义部件
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<IPartOfDetail> DetailParts { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<DataPart> InvisibleDataParts { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<PartOfModule> ModuleParts { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<ModuleBlockDataUI> ContentBlocks { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<IPartOfDetail> DetailParts { get; }
 
-        #endregion
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<DataPart> InvisibleDataParts { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PartOfModule> ModuleParts { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<ModuleBlockDataUI> ContentBlocks { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
 
 
-        [NullCheck(UniTestLifetime.Constructor)] public IDatabaseManager DatabaseManager { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public TemplateEngine TemplateEngine { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public ImageEngine ImageEngine { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public DocumentEngine DocumentEngine { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public IDatabaseManager DatabaseManager { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public TemplateEngine TemplateEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ImageEngine ImageEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public DocumentEngine DocumentEngine { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public DocumentType Type { get; private set; }
     }
 }

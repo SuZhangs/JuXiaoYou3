@@ -24,4 +24,8 @@
       <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
 </Project>

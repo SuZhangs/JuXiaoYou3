@@ -8,6 +8,7 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -126,10 +127,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             //
             _document = document;
+            CreateDocumentWithManifest(document);
             OnCreateDocument(document);
             
             //
             // TODO: add to engine
+        }
+
+        private void CreateDocumentWithManifest(Document document)
+        {
+            var manifest = DatabaseManager.Database
+                                          .CurrentValue
+                                          .Get<ModuleManifestProperty>()
+                                          .GetManifest(Type);
+
+            if (Type != manifest.Type)
+            {
+                return;
+            }
+
+            var iterators = manifest.Templates
+                                    .Select(x => TemplateEngine.CreateModule(x));
+            
+            //
+            //
+            document.Parts.AddRange(iterators);
         }
 
         protected abstract void OnCreateDocument(Document document);
