@@ -89,6 +89,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public string Value { get; init; }
     }
 
     public sealed class PreviewBlockHeartDataUI : PreviewBlockDataUI

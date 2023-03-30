@@ -17,6 +17,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             // ModuleBlockDataUI 已经实现了Value的Clamp和Fallback，不需要重新设置了
             // 这里只做Metadata的Add or Update
+            if (block is GroupBlock)
+            {
+                return;
+            }
             
             if (string.IsNullOrEmpty(metadataString))
             {
@@ -26,6 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             //
             var metadata = block.ExtractMetadata();
+            
             AddMetadata(metadata);
             
         }

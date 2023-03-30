@@ -79,5 +79,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     public sealed class SequenceBlock : MonoSelectorBlock
     {
         
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value,
+                Type  = MetadataKind.Text,
+            };
+        }
     }
 }

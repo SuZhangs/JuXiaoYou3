@@ -3,7 +3,7 @@
     /// <summary>
     /// 表示滑块内容块。
     /// </summary>
-    public class SliderBlock : ModuleBlock, INumberBlock
+    public class SliderBlock : ModuleBlock, INumberBlock, IHeaderlessBlock
     {
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

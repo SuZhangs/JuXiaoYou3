@@ -78,6 +78,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 item.ClearValue();
             }
         }
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return null;
+        }
 
         public List<ModuleBlock> Items { get; init; }
     }

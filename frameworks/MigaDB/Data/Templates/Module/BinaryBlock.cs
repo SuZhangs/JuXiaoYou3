@@ -65,7 +65,7 @@
             {
                 Name  = Metadata,
                 Value = Value.ToString(),
-                Type  = MetadataKind.Text,
+                Type  = MetadataKind.Switch,
             };
         }
 

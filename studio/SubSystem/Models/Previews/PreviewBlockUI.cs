@@ -40,18 +40,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             {
                 BaseSource = value;
                 NameLists  = new ObservableCollection<string>();
-                DataLists  = new ObservableCollection<PreviewBlockDataUI>();
+                DataLists  = new ObservableCollection<IPreviewBlockData>();
 
                 foreach (var data in value.DataLists)
                 {
                     NameLists.Add(data.Name);
-                    DataLists.Add(PreviewBlockDataUI.GetDataUI(data));
+                    DataLists.Add(data);
                 }
             }
         }
-        
+
         public ObservableCollection<string> NameLists { get; private init; }
-        public ObservableCollection<PreviewBlockDataUI> DataLists { get; private init; }
+        public ObservableCollection<IPreviewBlockData> DataLists { get; private init; }
     }
 
     public class HistogramPreviewBlockUI : PreviewBlockUI
@@ -67,13 +67,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 Axis       = value.Axis ?? new List<string>();
             }
         }
-        
-        
+
+
         public string Color { get; init; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
     }
-    
+
     public class RadarPreviewBlockUI : PreviewBlockUI
     {
         public RadarPreviewBlock Source
@@ -87,11 +87,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 Axis       = value.Axis ?? new List<string>();
             }
         }
-        
-        
+
+
         public string Color { get; init; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
-        }
-    
+    }
 }

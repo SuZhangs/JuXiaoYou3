@@ -59,6 +59,16 @@
     /// </summary>
     public sealed class SwitchBlock : OptionBlock
     {
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Switch,
+            };
+        }
     }
 
     /// <summary>
@@ -66,6 +76,16 @@
     /// </summary>
     public sealed class HeartBlock : OptionBlock
     {
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Heart,
+            };
+        }
     }
 
 
@@ -74,5 +94,15 @@
     /// </summary>
     public sealed class StarBlock : OptionBlock
     {
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Star,
+            };
+        }
     }
 }
