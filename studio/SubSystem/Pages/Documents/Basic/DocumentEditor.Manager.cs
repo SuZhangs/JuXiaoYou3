@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             //
             // Clear
-            SelectedCustomDataPart = null;
+            SelectedDetailPart = null;
             ModuleDataParts.Clear();
             InvisibleDataParts.Clear();
 
@@ -81,9 +81,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 {
                     ModuleDataParts.Add(module);
                 }
-                else if (part is ICustomDataPart custom)
+                else if (part is IPartOfDetail custom)
                 {
-                    CustomDataParts.Add(custom);
+                    DetailParts.Add(custom);
                 }
                 else
                 {

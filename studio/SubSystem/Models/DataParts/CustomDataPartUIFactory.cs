@@ -5,7 +5,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.DataParts
 {
     public static class CustomDataPartUIFactory
     {
-        public static ICustomDataPartUI GetUI(ICustomDataPart customDataPart, DocumentEditorVMBase context)
+        public static IPartOfDetailUI GetUI(IPartOfDetail customDataPart, DocumentEditorVMBase context)
         {
             return null;
         }

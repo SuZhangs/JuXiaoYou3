@@ -2,12 +2,12 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.DataParts
 {
-    public interface ICustomDataPartUI : INotifyPropertyChanged
+    public interface IPartOfDetailUI : INotifyPropertyChanged
     {
         
     }
 
-    public abstract class CustomDataPartUI : ObservableObject, ICustomDataPartUI
+    public abstract class PartOfDetailUI : ObservableObject, IPartOfDetailUI
     {
         
     }

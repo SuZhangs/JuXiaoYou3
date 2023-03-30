@@ -84,30 +84,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         #region CustomDataParts
 
         /// <summary>
-        /// 获取或设置 <see cref="CustomDataPart"/> 属性。
+        /// 获取或设置 <see cref="DetailPart"/> 属性。
         /// </summary>
-        public ICustomDataPartUI CustomDataPart
+        public IPartOfDetailUI DetailPart
         {
-            get => _customDataPart;
-            private set => SetValue(ref _customDataPart, value);
+            get => _detailPartOfDetail;
+            private set => SetValue(ref _detailPartOfDetail, value);
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="SelectedCustomDataPart"/> 属性。
+        /// 获取或设置 <see cref="SelectedDetailPart"/> 属性。
         /// </summary>
-        public ICustomDataPart SelectedCustomDataPart
+        public IPartOfDetail SelectedDetailPart
         {
-            get => _selectedCustomDataPart;
+            get => _selectedDetailPart;
             set
             {
-                SetValue(ref _selectedCustomDataPart, value);
+                SetValue(ref _selectedDetailPart, value);
 
-                if (_selectedCustomDataPart is null)
+                if (_selectedDetailPart is null)
                 {
                     return;
                 }
 
-                CustomDataPart = CustomDataPartUIFactory.GetUI(_selectedCustomDataPart, this);
+                DetailPart = CustomDataPartUIFactory.GetUI(_selectedDetailPart, this);
             }
         }
 
@@ -115,7 +115,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// 自定义部件
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<ICustomDataPart> CustomDataParts { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<IPartOfDetail> DetailParts { get; }
 
         #endregion
         

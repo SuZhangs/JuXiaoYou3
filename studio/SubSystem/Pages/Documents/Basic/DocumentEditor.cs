@@ -30,13 +30,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         // Fields
         //
         //                                                  ------------------
-        private HeaderedSubView   _selectedSubView;        // SubViews
-        private FrameworkElement  _subView;                // ------------------
-        private ICustomDataPart   _selectedCustomDataPart; // CustomDataPart
-        private ICustomDataPartUI _customDataPart;         // ------------------
-        private Document          _document;               // Document
-        private DocumentCache     _cache;                  //------------------
-        private PartOfModule      _module;                 // Module
+        private HeaderedSubView   _selectedSubView;    // SubViews
+        private FrameworkElement  _subView;            // ------------------
+        private IPartOfDetail     _selectedDetailPart; // CustomDataPart
+        private IPartOfDetailUI _detailPartOfDetail;         // ------------------
+        private Document          _document;           // Document
+        private DocumentCache     _cache;              //------------------
+        private PartOfModule      _module;             // Module
         
 
         protected DocumentEditorVMBase()
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Blocks             = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews   = new ObservableCollection<HeaderedSubView>();
             SubViews           = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            CustomDataParts    = new ObservableCollection<ICustomDataPart>();
+            DetailParts        = new ObservableCollection<IPartOfDetail>();
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleDataParts    = new ObservableCollection<PartOfModule>();
             PreviewBlocks      = new ObservableCollection<PreviewBlock>();
@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         public override void OnStart()
         {
-            SelectedCustomDataPart = CustomDataParts.FirstOrDefault();
+            SelectedDetailPart = DetailParts.FirstOrDefault();
             base.OnStart();
         }
 
