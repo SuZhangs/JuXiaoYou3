@@ -8,7 +8,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.DataParts
     {
         public static IPartOfDetailUI GetUI(IPartOfDetail detail, DocumentEditorVMBase context)
         {
-            RadarChart
             return null;
         }
     }

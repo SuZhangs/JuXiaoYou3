@@ -15,8 +15,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 PreviewStarData psd1 => new PreviewBlockStarDataUI(psd1),
                 PreviewSwitchData psd2 => new PreviewBlockSwitchDataUI(psd2),
                 PreviewHeartData phd => new PreviewBlockHeartDataUI(phd),
-                PreviewHistogramData phcd => new PreviewBlockHistogramDataUI(phcd),
-                PreviewRadarData prcd => new PreviewBlockRadarDataUI(prcd),
                 PreviewLikabilityData pld => new PreviewBlockLikabilityDataUI(pld),
                 PreviewProgressData ppd => new PreviewBlockProgressDataUI(ppd),
                 PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
@@ -92,23 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             throw new NotImplementedException();
         }
     }
-    
-    public sealed class PreviewBlockRadarDataUI : PreviewBlockDataUI
-    {
-        public PreviewBlockRadarDataUI(PreviewRadarData prcd)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    
-    public sealed class PreviewBlockHistogramDataUI : PreviewBlockDataUI
-    {
-        public PreviewBlockHistogramDataUI(PreviewHistogramData phcd)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    
+
     public sealed class PreviewBlockHeartDataUI : PreviewBlockDataUI
     {
         public PreviewBlockHeartDataUI(PreviewHeartData phd)

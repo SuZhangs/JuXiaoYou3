@@ -93,5 +93,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
         }
-    }
+    
 }
