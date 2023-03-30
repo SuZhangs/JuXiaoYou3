@@ -1,7 +1,9 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+﻿using System.Collections.ObjectModel;
+
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 {
-    public abstract class PreviewBlock : StorageUIObject
+    public class PreviewBlock : StorageUIObject
     {
-        
+        public ObservableCollection<IPreviewBlockData> DataLists { get; init; }
     }
 }
