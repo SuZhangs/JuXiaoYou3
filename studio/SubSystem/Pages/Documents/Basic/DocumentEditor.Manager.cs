@@ -37,12 +37,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return false;
             }
-
-            var currentIndex = _document.Parts.Count;
-
-            if (_DataPartTrackerOfId.TryAdd(module.Id, currentIndex))
+            
+            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
             {
-                _DataPartTrackerOfIndex.Add(currentIndex, module);
                 _document.Parts.Add(module);
                 ModuleParts.Add(module);
                 return true;
@@ -53,15 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private PartOfModule GetModuleById(string id)
         {
-            var index = _DataPartTrackerOfId.TryGetValue(id, out var indexTemp) ? indexTemp : -1;
-            var result = index > -1 ? _DataPartTrackerOfIndex[index] : null;
-            return result as PartOfModule;
-        }
-        
-        private PartOfModule GetModuleByIndex(int index)
-        {
-            var result = index > -1 ? _DataPartTrackerOfIndex[index] : null;
-            return result as PartOfModule;
+            return _DataPartTrackerOfId.TryGetValue(id, out var module) ? (PartOfModule)module : null;
         }
         
         //
