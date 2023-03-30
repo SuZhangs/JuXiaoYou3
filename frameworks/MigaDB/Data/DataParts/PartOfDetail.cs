@@ -23,7 +23,7 @@
         public bool Removable { get; set; }
     }
     
-    public class PartOfDetailPlaceHolder : DataPart, IPartOfDetail
+    public abstract class PartOfDetailPlaceHolder : DataPart, IPartOfDetail
     {
         /// <summary>
         /// 索引号 
@@ -38,6 +38,6 @@
         /// <summary>
         /// 是否可移除
         /// </summary>
-        public bool Removable { get; init; }
+        public abstract bool Removable { get; }
     }
 }

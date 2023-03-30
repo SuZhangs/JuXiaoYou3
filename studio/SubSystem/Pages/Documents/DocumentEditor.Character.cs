@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaStudio.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
@@ -15,5 +16,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
         
         
+        protected override void OnCreateDocument(Document document)
+        {
+            document.Parts.Add(new PartOfRel());
+            document.Parts.Add(new PartOfAlbum());
+            document.Parts.Add(new PartOfPlaylist());
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             
             //
             //
-            var metadata = dataUI.ExtractMetadata();
+            var metadata = block.ExtractMetadata();
             AddMetadata(metadata);
             
         }

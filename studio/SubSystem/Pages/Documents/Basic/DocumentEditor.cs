@@ -44,13 +44,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected DocumentEditorVMBase()
         {
-            ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
-            InternalSubViews   = new ObservableCollection<HeaderedSubView>();
-            SubViews           = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            DetailParts        = new ObservableCollection<IPartOfDetail>();
-            InvisibleDataParts = new ObservableCollection<DataPart>();
-            ModuleParts        = new ObservableCollection<PartOfModule>();
-            PreviewBlocks      = new ObservableCollection<PreviewBlock>();
+            _sync                = new object();
+            _DataPartTrackerOfId = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
+            ContentBlocks        = new ObservableCollection<ModuleBlockDataUI>();
+            InternalSubViews     = new ObservableCollection<HeaderedSubView>();
+            SubViews             = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
+            DetailParts          = new ObservableCollection<IPartOfDetail>();
+            InvisibleDataParts   = new ObservableCollection<DataPart>();
+            ModuleParts          = new ObservableCollection<PartOfModule>();
+            PreviewBlocks        = new ObservableCollection<PreviewBlock>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
@@ -87,7 +89,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void LoadDocumentIntern()
         {
-            foreach (var part in _document.Parts.Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
+            foreach (var part in _document.Parts
+                                          .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
             {
                 if (part is PartOfBasic pob)
                 {
@@ -124,6 +127,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void TrackDataPartAndMetadata()
         {
+            var metadatas = _basicPart.Buckets.Select(x => new Metadata
+            {
+                Name  = x.Key,
+                Value = x.Value,
+                Type  = MetadataKind.SingleLine
+            });
+
+            foreach (var metadata in metadatas)
+            {
+                AddMetadata(metadata);
+            }
+
+            foreach (var module in ModuleParts)
+            {
+                foreach (var block in module.Blocks
+                                            .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+                {
+                    AddMetadata(block.ExtractMetadata());
+                }
+            }
         }
 
         private void CreateDocumentIntern()
@@ -211,6 +234,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 SetTitle(_document.Name, true);
             }
+
+            ApprovalRequired = state;
         }
 
         #endregion

@@ -8,5 +8,10 @@
         {
             throw new System.NotImplementedException();
         }
+        
+        protected override void OnCreateDocument(Document document)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

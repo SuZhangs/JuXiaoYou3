@@ -44,12 +44,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         /// 名字
         /// </summary>
         public string Name { get; }
-
-        /// <summary>
-        /// 提交元数据
-        /// </summary>
-        /// <returns>返回一个元数据。</returns>
-        public abstract Metadata ExtractMetadata();
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+﻿
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class ItemDocumentViewModel : DocumentEditorVMBase
     {
@@ -6,5 +7,11 @@
         {
             throw new System.NotImplementedException();
         }
+        
+        protected override void OnCreateDocument(Document document)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

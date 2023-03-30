@@ -119,6 +119,12 @@
         {
             return CompareTemplate(block) && CompareValueOverride(block);
         }
+
+        /// <summary>
+        /// 提交元数据
+        /// </summary>
+        /// <returns>返回一个元数据。</returns>
+        public abstract Metadata ExtractMetadata();
         
         /// <summary>
         /// 清除当前值。
