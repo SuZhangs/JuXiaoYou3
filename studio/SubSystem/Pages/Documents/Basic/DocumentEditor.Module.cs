@@ -23,11 +23,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
             
+            //
+            //
+            var metadata = dataUI.ExtractMetadata();
+            AddMetadata(metadata);
+            
+        }
+
+        private void AddMetadata(Metadata metadata)
+        {
             lock (_sync)
             {
-                //
-                //
-                var metadata = dataUI.ExtractMetadata();
 
                 if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
                 {

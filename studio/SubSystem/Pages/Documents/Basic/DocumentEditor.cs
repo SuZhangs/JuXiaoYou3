@@ -36,19 +36,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private IPartOfDetail    _selectedDetailPart; // Detail
         private IPartOfDetailUI  _detailPartOfDetail; // ------------------
         private PartOfBasic      _basicPart;
-        private Document         _document; // Document
-        private DocumentCache    _cache;    //------------------
-        private PartOfModule     _selectedModulePart;   // Module
-        
+        private Document         _document;           // Document
+        private DocumentCache    _cache;              //------------------
+        private PartOfModule     _selectedModulePart; // Module
+        private bool             _dirtyState;
+
 
         protected DocumentEditorVMBase()
         {
-            ContentBlocks             = new ObservableCollection<ModuleBlockDataUI>();
+            ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews   = new ObservableCollection<HeaderedSubView>();
             SubViews           = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
             DetailParts        = new ObservableCollection<IPartOfDetail>();
             InvisibleDataParts = new ObservableCollection<DataPart>();
-            ModuleParts    = new ObservableCollection<PartOfModule>();
+            ModuleParts        = new ObservableCollection<PartOfModule>();
             PreviewBlocks      = new ObservableCollection<PreviewBlock>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
@@ -56,7 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
-            
+
             Initialize();
         }
 
@@ -86,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void LoadDocumentIntern()
         {
-            foreach (var part in _document.Parts)
+            foreach (var part in _document.Parts.Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
             {
                 if (part is PartOfBasic pob)
                 {
@@ -106,20 +107,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
             }
 
+            CheckDataPart();
+            TrackDataPartAndMetadata();
+        }
+
+        private void CheckDataPart()
+        {
             if (_basicPart is null)
             {
                 _basicPart = new PartOfBasic();
                 _document.Parts.Add(_basicPart);
+
+                Name = _cache.Name;
             }
         }
-        
+
+        private void TrackDataPartAndMetadata()
+        {
+        }
+
         private void CreateDocumentIntern()
         {
             var document = new Document
             {
                 Id        = ID.Get(),
+                Name      = _cache.Name,
                 Version   = 1,
                 Removable = true,
+                Type      = Type,
                 Parts     = new DataPartCollection(),
                 Metas     = new MetadataCollection(),
             };
@@ -129,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             _document = document;
             CreateDocumentWithManifest(document);
             OnCreateDocument(document);
-            
+
             //
             // TODO: add to engine
         }
@@ -148,7 +163,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             var iterators = manifest.Templates
                                     .Select(x => TemplateEngine.CreateModule(x));
-            
+
             //
             //
             document.Parts.AddRange(iterators);
@@ -161,6 +176,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             // TODO:
             _cache    = (DocumentCache)parameter.Index;
             _document = DocumentEngine.GetDocument(parameter.Id);
+            Type      = _cache.Type;
 
             if (_document is null)
             {
@@ -168,10 +184,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 // 创建文档
                 CreateDocumentIntern();
             }
-            
+
             // 加载文档
             LoadDocumentIntern();
-            
+
             base.OnStart(parameter);
         }
 
@@ -179,8 +195,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
-            
+
             base.OnStart();
+        }
+
+        #endregion
+
+        #region SetDirtyState
+
+        protected void SetDirtyState(bool state)
+        {
+            _dirtyState = state;
+
+            if (state)
+            {
+                SetTitle(_document.Name, true);
+            }
         }
 
         #endregion

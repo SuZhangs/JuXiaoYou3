@@ -26,10 +26,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        private readonly Dictionary<string, int>   _DataPartTrackerOfId;
-        private readonly Dictionary<int, DataPart> _DataPartTrackerOfIndex;
-        private readonly Dictionary<string, int>   _MetadataTrackerOfString;
-        private readonly Dictionary<int, Metadata> _MetadataTrackerOfIndex;
+        private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
+        private readonly Dictionary<string, int>      _MetadataTrackerOfString;
+        private readonly Dictionary<int, Metadata>    _MetadataTrackerOfIndex;
 
         [Obsolete]
         private bool AddModule(PartOfModule module)

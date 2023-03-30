@@ -26,6 +26,6 @@
         /// <summary>
         /// 元数据的类型。
         /// </summary>
-        public int Type { get; init; }
+        public MetadataKind Type { get; init; }
     }
 }
