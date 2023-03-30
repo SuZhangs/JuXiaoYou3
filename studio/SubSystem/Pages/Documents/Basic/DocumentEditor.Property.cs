@@ -170,11 +170,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         #endregion
 
         [NullCheck(UniTestLifetime.Constructor)] public IDatabaseManager DatabaseManager { get; }
-        
         [NullCheck(UniTestLifetime.Constructor)] public TemplateEngine TemplateEngine { get; }
-        
         [NullCheck(UniTestLifetime.Constructor)] public ImageEngine ImageEngine { get; }
-        
-        public DocumentType Type { get; private set; }
+        [NullCheck(UniTestLifetime.Constructor)] public DocumentEngine DocumentEngine { get; }
     }
 }

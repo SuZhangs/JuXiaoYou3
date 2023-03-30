@@ -48,6 +48,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleDataParts    = new ObservableCollection<PartOfModule>();
             PreviewBlocks      = new ObservableCollection<PreviewBlock>();
+
+            var dbMgr = Xaml.Get<IDatabaseManager>();
+            DatabaseManager = dbMgr;
+            DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
+            ImageEngine     = dbMgr.GetEngine<ImageEngine>();
+            TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
             
             Initialize();
         }
@@ -73,6 +79,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         protected override void OnStart(NavigationParameter parameter)
         {
             // TODO:
+            _cache = (DocumentCache)parameter.Index;
+            _document = 
+            
             base.OnStart(parameter);
         }
 
