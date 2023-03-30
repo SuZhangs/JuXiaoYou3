@@ -119,6 +119,7 @@
         {
             return CompareTemplate(block) && CompareValueOverride(block);
         }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>

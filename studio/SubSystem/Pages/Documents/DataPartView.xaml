@@ -54,7 +54,7 @@
                        Text="提示"/>
             
             <ItemsControl Grid.Column="1"
-                      ItemsSource="{Binding Blocks,Mode=OneWay}"/>
+                      ItemsSource="{Binding ContentBlocks,Mode=OneWay}"/>
         </DockPanel>
     </Grid>
 </UserControl>

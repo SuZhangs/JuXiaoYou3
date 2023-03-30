@@ -1,4 +1,5 @@
 ﻿using System;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils;
@@ -43,6 +44,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         /// 名字
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// 提交元数据
+        /// </summary>
+        /// <returns>返回一个元数据。</returns>
+        public abstract Metadata ExtractMetadata();
     }
 
     /// <summary>

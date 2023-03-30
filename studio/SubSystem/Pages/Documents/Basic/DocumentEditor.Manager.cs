@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 _DataPartTrackerOfIndex.Add(currentIndex, module);
                 _document.Parts.Add(module);
-                ModuleDataParts.Add(module);
+                ModuleParts.Add(module);
                 return true;
             }
 
@@ -72,14 +72,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             // Clear
             SelectedDetailPart = null;
-            ModuleDataParts.Clear();
+            ModuleParts.Clear();
             InvisibleDataParts.Clear();
 
             foreach (var part in document.Parts)
             {
                 if (part is PartOfModule module)
                 {
-                    ModuleDataParts.Add(module);
+                    ModuleParts.Add(module);
                 }
                 else if (part is IPartOfDetail custom)
                 {

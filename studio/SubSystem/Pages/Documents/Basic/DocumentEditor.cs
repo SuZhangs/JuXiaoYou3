@@ -30,23 +30,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         // Fields
         //
         //                                                  ------------------
-        private HeaderedSubView   _selectedSubView;    // SubViews
-        private FrameworkElement  _subView;            // ------------------
-        private IPartOfDetail     _selectedDetailPart; // CustomDataPart
-        private IPartOfDetailUI _detailPartOfDetail;         // ------------------
-        private Document          _document;           // Document
-        private DocumentCache     _cache;              //------------------
-        private PartOfModule      _module;             // Module
+        private HeaderedSubView  _selectedSubView;    // SubViews
+        private FrameworkElement _subView;            // ------------------
+        private IPartOfDetail    _selectedDetailPart; // Detail
+        private IPartOfDetailUI  _detailPartOfDetail; // ------------------
+        private PartOfBasic      _basicPart;
+        private Document         _document; // Document
+        private DocumentCache    _cache;    //------------------
+        private PartOfModule     _selectedModulePart;   // Module
         
 
         protected DocumentEditorVMBase()
         {
-            Blocks             = new ObservableCollection<ModuleBlockDataUI>();
+            ContentBlocks             = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews   = new ObservableCollection<HeaderedSubView>();
             SubViews           = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
             DetailParts        = new ObservableCollection<IPartOfDetail>();
             InvisibleDataParts = new ObservableCollection<DataPart>();
-            ModuleDataParts    = new ObservableCollection<PartOfModule>();
+            ModuleParts    = new ObservableCollection<PartOfModule>();
             PreviewBlocks      = new ObservableCollection<PreviewBlock>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
@@ -84,7 +85,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void LoadDocumentIntern()
         {
-            
+            foreach (var part in _document.Parts)
+            {
+                if (part is PartOfBasic pob)
+                {
+                    _basicPart = pob;
+                }
+                else if (part is PartOfModule pom)
+                {
+                    ModuleParts.Add(pom);
+                }
+                else if (part is IPartOfDetail pod)
+                {
+                    DetailParts.Add(pod);
+                }
+                else if (part is PartOfManifest)
+                {
+                    InvisibleDataParts.Add(part);
+                }
+            }
+
+            if (_basicPart is null)
+            {
+                _basicPart = new PartOfBasic();
+                _document.Parts.Add(_basicPart);
+            }
         }
         
         private void CreateDocumentIntern()
@@ -131,6 +156,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public override void OnStart()
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
+            SelectedModulePart = ModuleParts.FirstOrDefault();
+            
             base.OnStart();
         }
 

@@ -13,7 +13,7 @@
         /// <summary>
         /// 元数据的值
         /// </summary>
-        public string Value { get; init; }
+        public string Value { get; set; }
         
         /// <summary>
         /// 元数据的额外参数

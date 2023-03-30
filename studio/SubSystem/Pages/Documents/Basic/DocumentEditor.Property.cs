@@ -26,16 +26,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        
-
-        #region Properties
-
         //---------------------------------------------
         //
         // SubViews
         //
         //---------------------------------------------
-        #region SubViews
 
         /// <summary>
         /// 获取或设置 <see cref="SubView"/> 属性。
@@ -66,22 +61,55 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
-        [NullCheck(UniTestLifetime.Constructor)] protected ObservableCollection<HeaderedSubView> InternalSubViews { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        protected ObservableCollection<HeaderedSubView> InternalSubViews { get; }
 
         /// <summary>
         /// 子页面
         /// </summary>
-        [NullCheck(UniTestLifetime.Constructor)] public ReadOnlyCollection<HeaderedSubView> SubViews { get; }
-
-        #endregion
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ReadOnlyCollection<HeaderedSubView> SubViews { get; }
 
         //---------------------------------------------
         //
         // CustomDataParts
         //
         //---------------------------------------------
-        
-        #region CustomDataParts
+
+        #region DetailParts
+
+
+        #endregion
+
+
+        //---------------------------------------------
+        //
+        // DataParts
+        //
+        //---------------------------------------------
+
+        #region DataParts
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
+        /// </summary>
+        public PartOfModule SelectedModulePart
+        {
+            get => _selectedModulePart;
+            set
+            {
+                SetValue(ref _selectedModulePart, value);
+
+                if (_selectedModulePart is null)
+                {
+                    return;
+                }
+
+                var selector = _selectedModulePart.Blocks
+                                                  .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
+                ContentBlocks.AddRange(selector, true);
+            }
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="DetailPart"/> 属性。
@@ -116,58 +144,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
         [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<IPartOfDetail> DetailParts { get; }
-
-        #endregion
-        
-        
-        //---------------------------------------------
-        //
-        // DataParts
-        //
-        //---------------------------------------------
-
-        #region DataParts
-        
-
-        /// <summary>
-        /// 获取或设置 <see cref="Module"/> 属性。
-        /// </summary>
-        public PartOfModule Module
-        {
-            get => _module;
-            set
-            {
-                SetValue(ref _module, value);
-
-                if (_module is null)
-                {
-                    return;
-                }
-
-                var selector = _module.Blocks
-                                      .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleChanged));
-                Blocks.AddRange(selector, true);
-            }
-        }
-
         [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<DataPart> InvisibleDataParts { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<PartOfModule> ModuleDataParts { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<ModuleBlockDataUI> Blocks { get; }
-        
+        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<PartOfModule> ModuleParts { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<ModuleBlockDataUI> ContentBlocks { get; }
         [NullCheck(UniTestLifetime.Constructor)] public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
-        
-        #endregion
-        
-        
-
-        
 
         #endregion
+
 
         [NullCheck(UniTestLifetime.Constructor)] public IDatabaseManager DatabaseManager { get; }
         [NullCheck(UniTestLifetime.Constructor)] public TemplateEngine TemplateEngine { get; }
