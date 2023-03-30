@@ -387,74 +387,74 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        public static ModuleBlock GetBlock(MetadataKind kind)
+        public static ModuleBlock GetBlock(BlockType kind)
         {
             return kind switch
             {
-                MetadataKind.SingleLine => CreateSingleLine(),
-                MetadataKind.MultiLine  => CreateMultiLine(),
-                MetadataKind.Color      => CreateColor(),
-                MetadataKind.Number     => CreateNumber(),
-                MetadataKind.Slider     => CreateSlider(),
+                BlockType.SingleLine => CreateSingleLine(),
+                BlockType.MultiLine  => CreateMultiLine(),
+                BlockType.Color      => CreateColor(),
+                BlockType.Number     => CreateNumber(),
+                BlockType.Slider     => CreateSlider(),
 
-                MetadataKind.Degree => CreateDegree(),
-                MetadataKind.Switch => CreateSwitch(),
-                MetadataKind.Binary => CreateBinary(),
-                MetadataKind.Heart  => CreateHeart(),
-                MetadataKind.Star   => CreateStar(),
+                BlockType.Degree => CreateDegree(),
+                BlockType.Switch => CreateSwitch(),
+                BlockType.Binary => CreateBinary(),
+                BlockType.Heart  => CreateHeart(),
+                BlockType.Star   => CreateStar(),
 
 
-                MetadataKind.Sequence => CreateSequence(),
-                MetadataKind.Group    => CreateGroup(),
+                BlockType.Sequence => CreateSequence(),
+                BlockType.Group    => CreateGroup(),
 
-                MetadataKind.Likability => CreateLikability(),
-                MetadataKind.Rate       => CreateRate(),
+                BlockType.Likability => CreateLikability(),
+                BlockType.Rate       => CreateRate(),
 
-                MetadataKind.Radar     => CreateRadar(),
-                MetadataKind.Histogram => CreateHistogram(),
+                BlockType.Radar     => CreateRadar(),
+                BlockType.Histogram => CreateHistogram(),
 
-                MetadataKind.Audio     => CreateAudio(),
-                MetadataKind.File      => CreateFile(),
-                MetadataKind.Video     => CreateVideo(),
-                MetadataKind.Music     => CreateMusic(),
-                MetadataKind.Image     => CreateImage(),
-                MetadataKind.Reference => CreateReference(),
+                BlockType.Audio     => CreateAudio(),
+                BlockType.File      => CreateFile(),
+                BlockType.Video     => CreateVideo(),
+                BlockType.Music     => CreateMusic(),
+                BlockType.Image     => CreateImage(),
+                BlockType.Reference => CreateReference(),
                 _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
             };
         }
 
-        public static ModuleBlockEditUI GetEditUI(MetadataKind kind)
+        public static ModuleBlockEditUI GetEditUI(BlockType kind)
         {
             ModuleBlock b = kind switch
             {
-                MetadataKind.SingleLine => CreateSingleLine(),
-                MetadataKind.MultiLine  => CreateMultiLine(),
-                MetadataKind.Color      => CreateColor(),
-                MetadataKind.Number     => CreateNumber(),
-                MetadataKind.Slider     => CreateSlider(),
+                BlockType.SingleLine => CreateSingleLine(),
+                BlockType.MultiLine  => CreateMultiLine(),
+                BlockType.Color      => CreateColor(),
+                BlockType.Number     => CreateNumber(),
+                BlockType.Slider     => CreateSlider(),
 
-                MetadataKind.Degree => CreateDegree(),
-                MetadataKind.Switch => CreateSwitch(),
-                MetadataKind.Binary => CreateBinary(),
-                MetadataKind.Heart  => CreateHeart(),
-                MetadataKind.Star   => CreateStar(),
+                BlockType.Degree => CreateDegree(),
+                BlockType.Switch => CreateSwitch(),
+                BlockType.Binary => CreateBinary(),
+                BlockType.Heart  => CreateHeart(),
+                BlockType.Star   => CreateStar(),
 
 
-                MetadataKind.Sequence => CreateSequence(),
-                MetadataKind.Group    => CreateGroup(),
+                BlockType.Sequence => CreateSequence(),
+                BlockType.Group    => CreateGroup(),
 
-                MetadataKind.Likability => CreateLikability(),
-                MetadataKind.Rate       => CreateRate(),
+                BlockType.Likability => CreateLikability(),
+                BlockType.Rate       => CreateRate(),
 
-                MetadataKind.Radar     => CreateRadar(),
-                MetadataKind.Histogram => CreateHistogram(),
+                BlockType.Radar     => CreateRadar(),
+                BlockType.Histogram => CreateHistogram(),
 
-                MetadataKind.Audio     => CreateAudio(),
-                MetadataKind.File      => CreateFile(),
-                MetadataKind.Video     => CreateVideo(),
-                MetadataKind.Music     => CreateMusic(),
-                MetadataKind.Image     => CreateImage(),
-                MetadataKind.Reference => CreateReference(),
+                BlockType.Audio     => CreateAudio(),
+                BlockType.File      => CreateFile(),
+                BlockType.Video     => CreateVideo(),
+                BlockType.Music     => CreateMusic(),
+                BlockType.Image     => CreateImage(),
+                BlockType.Reference => CreateReference(),
                 _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
             };
             return GetEditUI(b);
@@ -496,54 +496,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        public static readonly MetadataKind[] GroupElementKinds = new[]
+        public static readonly BlockType[] GroupElementKinds = new[]
         {
-            MetadataKind.Degree,
-            MetadataKind.Switch,
-            MetadataKind.Star,
-            MetadataKind.Heart,
-            MetadataKind.Binary,
-            MetadataKind.Likability,
-            MetadataKind.Rate,
+            BlockType.Degree,
+            BlockType.Switch,
+            BlockType.Star,
+            BlockType.Heart,
+            BlockType.Binary,
+            BlockType.Likability,
+            BlockType.Rate,
         };
 
-        // (\MetadataKind.w,
-        // MetadataKind.$1,
-        public static readonly MetadataKind[] BasicBlockKinds = new[]
+        // (\BlockType.w,
+        // BlockType.$1,
+        public static readonly BlockType[] BasicBlockKinds = new[]
         {
-            MetadataKind.Color,
-            MetadataKind.Number,
-            MetadataKind.Slider,
-            MetadataKind.SingleLine,
-            MetadataKind.MultiLine,
-            MetadataKind.Likability,
-            MetadataKind.Rate,
+            BlockType.Color,
+            BlockType.Number,
+            BlockType.Slider,
+            BlockType.SingleLine,
+            BlockType.MultiLine,
+            BlockType.Likability,
+            BlockType.Rate,
         };
 
-        public static readonly MetadataKind[] AdvancedBlockKinds = new[]
+        public static readonly BlockType[] AdvancedBlockKinds = new[]
         {
-            MetadataKind.Reference,
-            MetadataKind.Image,
-            MetadataKind.Video,
-            MetadataKind.Music,
-            MetadataKind.Audio,
-            MetadataKind.File,
+            BlockType.Reference,
+            BlockType.Image,
+            BlockType.Video,
+            BlockType.Music,
+            BlockType.Audio,
+            BlockType.File,
         };
 
-        public static readonly MetadataKind[] OptionBlockKinds = new[]
+        public static readonly BlockType[] OptionBlockKinds = new[]
         {
-            MetadataKind.Switch,
-            MetadataKind.Star,
-            MetadataKind.Heart,
-            MetadataKind.Binary,
-            MetadataKind.Sequence,
-            MetadataKind.Group,
+            BlockType.Switch,
+            BlockType.Star,
+            BlockType.Heart,
+            BlockType.Binary,
+            BlockType.Sequence,
+            BlockType.Group,
         };
 
-        public static readonly MetadataKind[] ChartBlockKinds = new[]
+        public static readonly BlockType[] ChartBlockKinds = new[]
         {
-            MetadataKind.Histogram,
-            MetadataKind.Radar,
+            BlockType.Histogram,
+            BlockType.Radar,
         };
 
 

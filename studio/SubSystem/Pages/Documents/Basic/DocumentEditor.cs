@@ -127,16 +127,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void TrackDataPartAndMetadata()
         {
-            var metadatas = _basicPart.Buckets.Select(x => new Metadata
+            foreach (var metadata in _basicPart.Buckets)
             {
-                Name  = x.Key,
-                Value = x.Value,
-                Type  = MetadataKind.SingleLine
-            });
-
-            foreach (var metadata in metadatas)
-            {
-                AddMetadata(metadata);
+                UpsertMetadata(metadata.Key, metadata.Value);
             }
 
             foreach (var module in ModuleParts)

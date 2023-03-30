@@ -54,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 Name  = name,
                 Value = value,
-                Type  = MetadataKind.SingleLine,
+                Type  = MetadataKind.Text,
             });
         }
 

@@ -222,13 +222,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="data"></param>
         /// <param name="cache"></param>
         /// <typeparam name="TViewModel"></typeparam>
-        public void New<TViewModel>(IData data, IDataCache cache) where TViewModel : TabViewModel
+        public void New<TViewModel>(IDataCache cache) where TViewModel : TabViewModel
         {
             var vm = Xaml.Get<TViewModel>();
-            vm.Startup(NavigationParameter.OpenDocument(data, cache, Controller).Params);
+            vm.Startup(NavigationParameter.OpenDocument(cache, Controller).Params);
             Controller.Start(vm);
         }
 

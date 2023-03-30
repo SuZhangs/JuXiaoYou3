@@ -5,11 +5,11 @@ using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
-    public class MetadataKindConverter : IValueConverter
+    public class BlockTypeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is MetadataKind kind)
+            if (value is BlockType kind)
             {
                 
                 return SubSystemString.GetModuleBlockNameByKind(kind);

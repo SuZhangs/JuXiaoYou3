@@ -17,13 +17,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
     public class NewBlockViewModel : ExplicitDialogVM
     {
         private IModuleBlockDataUI _previewItem;
-        private object      _maybeMetadataKind;
-        private MetadataKind      _type;
+        private object             _maybeMetadataKind;
+        private BlockType          _type;
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
         /// </summary>
-        public MetadataKind Type
+        public BlockType Type
         {
             get => _type;
             set
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             {
                 SetValue(ref _maybeMetadataKind, value);
                 
-                if (value is MetadataKind k)
+                if (value is BlockType k)
                 {
                     Type = k;
                 }

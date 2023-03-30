@@ -364,32 +364,32 @@ namespace Acorisoft.FutureGL.MigaStudio
             };
         }
 
-        public static string GetModuleBlockNameByKind(MetadataKind type)
+        public static string GetModuleBlockNameByKind(BlockType type)
         {
             return type switch
             {
-                MetadataKind.Audio      => GetAudioName(),
-                MetadataKind.File       => GetFileName(),
-                MetadataKind.Image      => GetImageName(),
-                MetadataKind.Music      => GetMusicName(),
-                MetadataKind.Video      => GetVideoName(),
-                MetadataKind.Reference  => GetReferenceName(),
-                MetadataKind.MultiLine  => GetMultiLineName(),
-                MetadataKind.SingleLine => GetSingleLineName(),
-                MetadataKind.Slider     => GetSliderName(),
-                MetadataKind.Number     => GetNumberName(),
-                MetadataKind.Color      => GetColorName(),
-                MetadataKind.Degree     => GetDegreeName(),
-                MetadataKind.Rate       => GetRateName(),
-                MetadataKind.Likability => GetLikabilityName(),
-                MetadataKind.Star       => GetStarName(),
-                MetadataKind.Heart      => GetHeartName(),
-                MetadataKind.Switch     => GetSwitchName(),
-                MetadataKind.Binary     => GetBinaryName(),
-                MetadataKind.Sequence   => GetSequenceName(),
-                MetadataKind.Group      => GetGroupName(),
-                MetadataKind.Radar      => GetRadarName(),
-                MetadataKind.Histogram  => GetHistogramName(),
+                BlockType.Audio      => GetAudioName(),
+                BlockType.File       => GetFileName(),
+                BlockType.Image      => GetImageName(),
+                BlockType.Music      => GetMusicName(),
+                BlockType.Video      => GetVideoName(),
+                BlockType.Reference  => GetReferenceName(),
+                BlockType.MultiLine  => GetMultiLineName(),
+                BlockType.SingleLine => GetSingleLineName(),
+                BlockType.Slider     => GetSliderName(),
+                BlockType.Number     => GetNumberName(),
+                BlockType.Color      => GetColorName(),
+                BlockType.Degree     => GetDegreeName(),
+                BlockType.Rate       => GetRateName(),
+                BlockType.Likability => GetLikabilityName(),
+                BlockType.Star       => GetStarName(),
+                BlockType.Heart      => GetHeartName(),
+                BlockType.Switch     => GetSwitchName(),
+                BlockType.Binary     => GetBinaryName(),
+                BlockType.Sequence   => GetSequenceName(),
+                BlockType.Group      => GetGroupName(),
+                BlockType.Radar      => GetRadarName(),
+                BlockType.Histogram  => GetHistogramName(),
                 _                       => GetUnknownName(),
             };
         }
