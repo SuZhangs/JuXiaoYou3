@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 {
-    public class PreviewBlock : StorageUIObject
+    public abstract class PreviewBlock : StorageUIObject
     {
         private string _name;
 
@@ -14,7 +14,24 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
             get => _name;
             set => SetValue(ref _name, value);
         }
-        
+    }
+
+    public sealed class GroupingPreviewBlock : PreviewBlock
+    {
         public ObservableCollection<IPreviewBlockData> DataLists { get; init; }
+    }
+    
+    public sealed class HistogramPreviewBlock : PreviewBlock
+    {
+        public string Color { get; init; }
+        public List<string> Axis { get; init; }
+        public List<int> Value { get; init; }
+    }
+    
+    public sealed class RadarPreviewBlock : PreviewBlock
+    {
+        public string Color { get; init; }
+        public List<string> Axis { get; init; }
+        public List<int> Value { get; init; }
     }
 }

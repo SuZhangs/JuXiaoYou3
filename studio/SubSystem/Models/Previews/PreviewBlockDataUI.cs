@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
+// ReSharper disable IdentifierTypo
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 {
@@ -21,6 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
             };
         }
+        public string Name { get; init; }
     }
 
     public sealed class PreviewBlockStarDataUI : PreviewBlockDataUI
@@ -29,6 +31,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
     
     public sealed class PreviewBlockSwitchDataUI : PreviewBlockDataUI
@@ -37,6 +41,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public bool Value { get; init; }
     }
     
     public sealed class PreviewBlockRateDataUI : PreviewBlockDataUI
@@ -45,6 +51,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
     
     public sealed class PreviewBlockLikabilityDataUI : PreviewBlockDataUI
@@ -53,6 +61,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
     
     public sealed class PreviewBlockDegreeDataUI : PreviewBlockDataUI
@@ -61,6 +71,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
     
     public sealed class PreviewBlockProgressDataUI : PreviewBlockDataUI
@@ -69,6 +81,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
     
     public sealed class PreviewBlockTextDataUI : PreviewBlockDataUI
@@ -101,5 +115,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         {
             throw new NotImplementedException();
         }
+        
+        public int Value { get; init; }
     }
 }

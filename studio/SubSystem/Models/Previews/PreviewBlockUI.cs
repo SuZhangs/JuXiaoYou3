@@ -5,34 +5,93 @@ using Acorisoft.FutureGL.MigaDB.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 {
-    public class PreviewBlockUI : StorageUIObject
+    public abstract class PreviewBlockUI : StorageUIObject
     {
-        private readonly PreviewBlock _source;
-
-        public string Name { get; private init; }
-
-        public PreviewBlock Source
+        public static PreviewBlockUI GetUI(PreviewBlock block)
         {
-            get => _source;
+            return block switch
+            {
+                GroupingPreviewBlock gpb => new GroupingPreviewBlockUI
+                {
+                    Source = gpb
+                },
+                HistogramPreviewBlock hpb => new HistogramPreviewBlockUI
+                {
+                    Source = hpb
+                },
+                RadarPreviewBlock rpb => new RadarPreviewBlockUI
+                {
+                    Source = rpb
+                },
+                _ => null
+            };
+        }
+
+        public string Name { get; protected init; }
+        public PreviewBlock BaseSource { get; protected init; }
+    }
+
+    public class GroupingPreviewBlockUI : PreviewBlockUI
+    {
+        public GroupingPreviewBlock Source
+        {
+            get => (GroupingPreviewBlock)BaseSource;
             init
             {
-                NameLists = new ObservableCollection<string>();
-                DataLists = new ObservableCollection<PreviewBlockDataUI>();
+                BaseSource = value;
+                NameLists  = new ObservableCollection<string>();
+                DataLists  = new ObservableCollection<PreviewBlockDataUI>();
 
-                _source = value;
-                Id      = value.Id;
-                Name    = value.Name;
-                
-                foreach (var data in _source.DataLists)
+                foreach (var data in value.DataLists)
                 {
                     NameLists.Add(data.Name);
                     DataLists.Add(PreviewBlockDataUI.GetDataUI(data));
                 }
             }
         }
-
+        
         public ObservableCollection<string> NameLists { get; private init; }
         public ObservableCollection<PreviewBlockDataUI> DataLists { get; private init; }
     }
 
+    public class HistogramPreviewBlockUI : PreviewBlockUI
+    {
+        public HistogramPreviewBlock Source
+        {
+            get => (HistogramPreviewBlock)BaseSource;
+            init
+            {
+                BaseSource = value;
+                Color      = value.Color ?? "#007ACC";
+                Value      = value.Value ?? new List<int>();
+                Axis       = value.Axis ?? new List<string>();
+            }
+        }
+        
+        
+        public string Color { get; init; }
+        public List<string> Axis { get; init; }
+        public List<int> Value { get; init; }
+    }
+    
+    public class RadarPreviewBlockUI : PreviewBlockUI
+    {
+        public RadarPreviewBlock Source
+        {
+            get => (RadarPreviewBlock)BaseSource;
+            init
+            {
+                BaseSource = value;
+                Color      = value.Color ?? "#007ACC";
+                Value      = value.Value ?? new List<int>();
+                Axis       = value.Axis ?? new List<string>();
+            }
+        }
+        
+        
+        public string Color { get; init; }
+        public List<string> Axis { get; init; }
+        public List<int> Value { get; init; }
+        }
+    }
 }
