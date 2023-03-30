@@ -83,10 +83,28 @@
     public class LikabilityBlock : CounterBlock
     {
         
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Likability,
+            };
+        }
     }
     
     public class RateBlock : CounterBlock
     {
         
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name  = Metadata,
+                Value = Value.ToString(),
+                Type  = MetadataKind.Rate,
+            };
+        }
     }
 }

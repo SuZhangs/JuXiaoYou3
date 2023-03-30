@@ -83,6 +83,19 @@
             TargetThumbnail = string.Empty;
         }
         
+        
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = Value.ToString(),
+                Type       = MetadataKind.Text,
+                Parameters = CombineParameter(this)
+            };
+        }
+        
         /// <summary>
         /// 数据的名字
         /// </summary>

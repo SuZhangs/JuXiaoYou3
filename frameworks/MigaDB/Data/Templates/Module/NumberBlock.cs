@@ -50,6 +50,19 @@
             return bb.Value == Value;
         }
         
+        
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = Value.ToString(),
+                Type       = MetadataKind.Text,
+                Parameters = CombineParameter(this)
+            };
+        }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>

@@ -88,17 +88,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return string.Empty;
         }
         
-        public sealed override Metadata ExtractMetadata()
-        {
-            return new Metadata
-            {
-                Name  = Metadata,
-                Value = Value.ToString(),
-                Type  = MetadataKind.Binary,
-                Parameters = CombineParameter(this)
-            };
-        }
-        
         /// <summary>
         /// 清除当前值。
         /// </summary>
@@ -141,6 +130,17 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     public sealed class RadarBlock : ChartBlock
     {
         
+        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = Value.ToString(),
+                Type       = MetadataKind.RadarChart,
+                Parameters = CombineParameter(this)
+            };
+        }
     }
 
     /// <summary>
@@ -148,6 +148,15 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class HistogramBlock : ChartBlock
     {
-        
+        public sealed override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = Value.ToString(),
+                Type       = MetadataKind.HistogramChart,
+                Parameters = CombineParameter(this)
+            };
+        }
     }
 }
