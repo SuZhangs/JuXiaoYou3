@@ -82,11 +82,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             var bb = (ChartBlock)block;
             return Value.SequenceEqual(bb.Value);
         }
-
-        public static string CombineParameter(ChartBlock block)
-        {
-            return string.Empty;
-        }
         
         /// <summary>
         /// 清除当前值。
@@ -129,16 +124,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class RadarBlock : ChartBlock
     {
-        
-        
-        public sealed override Metadata ExtractMetadata()
+        public override Metadata ExtractMetadata()
         {
             return new Metadata
             {
                 Name       = Metadata,
                 Value      = Value.ToString(),
                 Type       = MetadataKind.RadarChart,
-                Parameters = CombineParameter(this)
+                Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
         }
     }
@@ -148,14 +141,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class HistogramBlock : ChartBlock
     {
-        public sealed override Metadata ExtractMetadata()
+        public override Metadata ExtractMetadata()
         {
             return new Metadata
             {
                 Name       = Metadata,
                 Value      = Value.ToString(),
                 Type       = MetadataKind.HistogramChart,
-                Parameters = CombineParameter(this)
+                Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
         }
     }

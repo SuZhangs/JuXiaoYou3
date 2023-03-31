@@ -54,12 +54,13 @@
         
         public sealed override Metadata ExtractMetadata()
         {
+            var value = Value == -1 ? Fallback : Value;
             return new Metadata
             {
                 Name       = Metadata,
                 Value      = Value.ToString(),
-                Type       = MetadataKind.Text,
-                Parameters = CombineParameter(this)
+                Type       = MetadataKind.Progress,
+                Parameters = MetadataProcessor.NumberBaseFormatted(Maximum, Minimum, value)
             };
         }
         

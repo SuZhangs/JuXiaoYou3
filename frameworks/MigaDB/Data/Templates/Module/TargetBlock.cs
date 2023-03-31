@@ -26,6 +26,8 @@
     /// </summary>
     public enum ReferenceSource
     {
+        // TODO: 与概念挂钩
+
         /// <summary>
         /// 设定
         /// </summary>
@@ -85,17 +87,6 @@
         
         
         
-        public sealed override Metadata ExtractMetadata()
-        {
-            return new Metadata
-            {
-                Name       = Metadata,
-                Value      = Value.ToString(),
-                Type       = MetadataKind.Text,
-                Parameters = CombineParameter(this)
-            };
-        }
-        
         /// <summary>
         /// 数据的名字
         /// </summary>
@@ -115,26 +106,77 @@
     public sealed class AudioBlock : TargetBlock
     {
         
+        
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
     
     public sealed class VideoBlock : TargetBlock
     {
         
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
     
     public sealed class MusicBlock : TargetBlock
     {
         
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
     
     public sealed class ImageBlock : TargetBlock
     {
         
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
     
     public sealed class FileBlock : TargetBlock
     {
         
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
     
     public sealed class ReferenceBlock : TargetBlock, IReferenceBlock
@@ -156,5 +198,17 @@
         /// 数据来源
         /// </summary>
         public ReferenceSource DataSource { get; init; }
+        
+        
+        public override Metadata ExtractMetadata()
+        {
+            return new Metadata
+            {
+                Name       = Metadata,
+                Value      = TargetName,
+                Type       = MetadataKind.Text,
+                Parameters = TargetSource
+            };
+        }
     }
 }

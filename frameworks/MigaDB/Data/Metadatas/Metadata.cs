@@ -7,31 +7,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
     /// </summary>
     public class Metadata
     {
-        private const char ListSeparator = ',';
-        
-        public static string CombineBinaryPattern(string negative, string positive, int maximum, int minimum)
-        {
-            var sb = Pool.GetStringBuilder();
-            sb.Append(negative);
-            sb.Append(ListSeparator);
-            sb.Append(positive);
-            sb.Append(ListSeparator);
-            sb.Append(maximum);
-            sb.Append(ListSeparator);
-            sb.Append(minimum);
-            sb.Append(ListSeparator);
-            var result = sb.ToString();
-            sb.Clear();
-            Pool.ReturnStringBuilder(sb);
-            return result;
-        }
-        
-        // BinaryBase : Binary
-        // BinaryBase-Number : Degree
-        // NumberBase : Number Slider Rate Likability
-        // ChartBase : Radar Histogram
-        // ReferenceBase : Audio Music Video File Image Reference
-        // 
         
         /// <summary>
         /// 元数据的名字
