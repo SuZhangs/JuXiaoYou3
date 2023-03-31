@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
     public sealed class MusicPlayerViewModel : DialogViewModel, IDropTarget
     {
-        private readonly        MusicService    _service;
+        private readonly MusicService _service;
 
         private bool     _isMute;
         private double   _volume;
@@ -43,20 +43,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         private TimeSpan _duration;
         private bool     _isVolumePaneOpen;
         private bool     _isPlaylistPaneOpen;
-        
-        private static Playlist _playlist;
+
+        private Playlist _playlist;
 
         public MusicPlayerViewModel()
         {
-            _service                     = Xaml.Get<MusicService>();
+            _service = Xaml.Get<MusicService>();
             MusicEngine = Xaml.Get<IDatabaseManager>()
                               .GetEngine<MusicEngine>();
             _service.State
                     .ObserveOn(Scheduler)
-                    .Subscribe(x =>
-                    {
-                        HandleStateChanged(x.Item1, x.Item2, x.Item3, x.Item4);
-                    })
+                    .Subscribe(x => { HandleStateChanged(x.Item1, x.Item2, x.Item3, x.Item4); })
                     .DisposeWith(Collector);
             _service.Position
                     .ObserveOn(Scheduler)
@@ -69,15 +66,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                     .DisposeWith(Collector);
 
             Playlist = _service.Playlist
-                               .CurrentValue;
-
-            Background = null;
-            Playlist = new Playlist
+                               .CurrentValue ?? new Playlist
             {
                 Name  = "新建播放列表",
                 Items = new ObservableCollection<Music>()
             };
-            Volume = 0.5d;
+
+            Background = null;
+            Volume     = 0.5d;
 
             AddMusicToPlaylistCommand      = AsyncCommand(AddMusicToPlaylistImpl, HasPlaylist);
             RemoveMusicFromPlaylistCommand = new RelayCommand<Music>(RemoveMusicFromPlaylistImpl, HasMusicItem);
@@ -171,8 +167,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             foreach (var fileName in opendlg.FileNames)
             {
                 Music music;
-                var fileName1 = Path.GetFileNameWithoutExtension(fileName) + ".mp3";
-                
+                var   fileName1 = Path.GetFileNameWithoutExtension(fileName) + ".mp3";
+
                 if (MusicEngine.HasFile(fileName))
                 {
                     music = MusicEngine.GetFile(fileName);
@@ -191,7 +187,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                         await MusicEngine.WriteAlbum(pic.Data.Data, cover);
                     }
 
-                    
+
                     music = new Music
                     {
                         Id     = fileName1,
@@ -200,7 +196,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                         Author = tag.FirstPerformer,
                         Cover  = cover
                     };
-                    
+
                     MusicEngine.AddFile(music);
                 }
 
@@ -245,7 +241,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         private void PlayMusicImpl(Music item)
         {
-            if (_service.Playlist.CurrentValue is null)
+            var targetPlayList = _service.Playlist.CurrentValue;
+
+            if (targetPlayList is null ||
+                !ReferenceEquals(_service.Playlist.CurrentValue, Playlist))
             {
                 _service.SetPlaylist(Playlist);
             }
@@ -407,7 +406,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         }
 
         public MusicEngine MusicEngine { get; }
-        
+
         public RelayCommand PlayPreviousCommand { get; }
         public RelayCommand PlayNextCommand { get; }
         public RelayCommand MuteOrUnMuteCommand { get; }
