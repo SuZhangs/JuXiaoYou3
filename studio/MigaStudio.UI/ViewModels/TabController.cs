@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using CommunityToolkit.Mvvm.Input;
 
@@ -286,6 +287,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var vm = Xaml.GetViewModel<TViewModel>();
             vm.Startup(NavigationParameter.NewPage(vm, this).Params);
+            Start(vm);
+            return vm;
+        }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="cache">索引</param>
+        /// <returns>返回一个新的导航参数。</returns>
+        public TViewModel OpenDocument<TViewModel>(IDataCache cache)where TViewModel : TabViewModel
+        {
+            var vm = Xaml.GetViewModel<TViewModel>();
+            vm.Startup(NavigationParameter.OpenDocument(cache, this).Params);
             Start(vm);
             return vm;
         }

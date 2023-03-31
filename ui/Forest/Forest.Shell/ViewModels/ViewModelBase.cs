@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
         }
         
-        [NullCheck(UniTestLifetime.StartParameter)]
+        [NullCheck(UniTestLifetime.Startup)]
         public RouteEventArgs OriginalParameter { get; set; }
         
         /// <summary>

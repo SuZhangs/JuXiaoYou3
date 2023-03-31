@@ -6,6 +6,9 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
@@ -29,7 +32,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             RequireStartupTabViewModel();
             New<DocumentGalleryViewModel>();
-            New<CharacterDocumentViewModel>();
+            
+            OpenDocument<CharacterDocumentViewModel>(new DocumentCache
+            {
+                Name = "Test",
+                Type = DocumentType.CharacterDocument,
+                TimeOfCreated = DateTime.Today,
+                TimeOfModified = DateTime.Now,
+                Removable = false,
+                IsDeleted = false,
+                Version = 1,
+                Keywords = new ObservableCollection<string>(),
+                Id = ID.Get()
+            });
         }
 
         protected override void RequireStartupTabViewModel()

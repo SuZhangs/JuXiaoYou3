@@ -3,7 +3,7 @@
     public enum UniTestLifetime
     {
         Constructor,
-        StartParameter,
+        Startup,
         Start,
         Running
     }

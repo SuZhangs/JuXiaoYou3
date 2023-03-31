@@ -149,6 +149,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
 
+        [NullCheck(UniTestLifetime.Startup)]
+        public ObservableCollection<string> Keywords => _cache.Keywords;
+
 
         [NullCheck(UniTestLifetime.Constructor)]
         public IDatabaseManager DatabaseManager { get; }

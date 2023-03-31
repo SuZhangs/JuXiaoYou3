@@ -70,6 +70,10 @@ namespace MigaStudio.Tests.Core
             public string Name { get; init; }
             public bool Result { get; init; }
             public Type PropertyType { get; init; }
+            public override string ToString()
+            {
+                return $"{Name}: {Result}";
+            }
         }
 
         public static void UnitTest(ViewModelBase vm)
@@ -102,7 +106,7 @@ namespace MigaStudio.Tests.Core
                                     Result = x.GetValue(value) is not null,
                                     Name = x.Name,
                                     PropertyType = x.PropertyType
-                                });
+                                }).ToArray();
             
             Assert.IsTrue(iterator.All(x => x.Result));
         }

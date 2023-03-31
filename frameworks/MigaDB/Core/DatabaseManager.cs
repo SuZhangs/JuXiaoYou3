@@ -257,6 +257,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             return Task.Run(() =>
             {
+                //
+                _defaultMaintainer.Maintain(database);
                 foreach (var maintainer in _maintainers)
                 {
                     try
@@ -440,9 +442,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 //
                 // 默认设置
                 database.Set<DatabaseProperty>(property);
-
-                //
-                _defaultMaintainer.Maintain(database);
 
                 //
                 // 提取属性

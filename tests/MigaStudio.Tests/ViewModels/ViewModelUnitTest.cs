@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
 
@@ -25,6 +26,12 @@ namespace MigaStudio.Tests.ViewModels
         public void DocumentGalleryFixture()
         {
             ViewModelUnitTestArchitecture.UnitTest(new DocumentGalleryViewModel());
+        }
+        
+        [TestMethod]
+        public void CharacterDocumentFixture()
+        {
+            ViewModelUnitTestArchitecture.UnitTest(new CharacterDocumentViewModel());
         }
     }
 }
