@@ -166,6 +166,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
         /// </summary>
         public void PlayNext()
         {
+            var oldIndex = _currentIndex;
             var maxIndex = _playlistStream.CurrentValue.Items.Count;
             Music music;
 
@@ -177,7 +178,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
 
             if (Mode == PlayMode.Shuffle)
             {
-                _currentIndex = Random.Shared.Next(0, maxIndex);
+                while(oldIndex == _currentIndex)
+                {
+                    _currentIndex = Random.Shared.Next(0, maxIndex - 1);
+                }
                 music         = _playlistStream.CurrentValue.Items[_currentIndex];
                 _targetStream.SetValue(music);
             }

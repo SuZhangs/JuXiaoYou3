@@ -108,8 +108,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         private bool HasPlaylist() => Playlist is not null;
 
         private bool HasMusicItem(Music item) => item is not null && Playlist is not null;
-        private bool WasLastItem() => Playlist is not null && _index < Playlist.Items.Count - 1;
-        private bool WasFirstItem() => Playlist is not null && _index > 0;
+        private bool WasLastItem() => Playlist is not null && (Mode == PlayMode.Shuffle || _index < Playlist.Items.Count - 1);
+        private bool WasFirstItem() => Playlist is not null && (Mode == PlayMode.Shuffle || _index > 0);
 
         private void ChangePlayModeImpl()
         {
@@ -118,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 PlayMode.Loop    => PlayMode.Repeat,
                 PlayMode.Repeat  => PlayMode.Shuffle,
                 PlayMode.Shuffle => PlayMode.Sequence,
-                _                => PlayMode.Sequence
+                _                => PlayMode.Loop
             };
         }
 

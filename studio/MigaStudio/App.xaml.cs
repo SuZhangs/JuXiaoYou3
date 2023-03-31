@@ -83,17 +83,15 @@ namespace Acorisoft.FutureGL.MigaStudio
             SubSystem.InstallLanguages();
             TemplateSystem.InstallLanguages();
             
-            //
-            // TODO: 安装设置
-            // _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
-            //     DatabaseManager.GetDefaultDatabaseManager(
-            //         logger,
-            //         setting.DebugMode));
-            
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
                 DatabaseManager.GetDefaultDatabaseManager(
                     logger,
-                    DatabaseMode.Debug));
+                    setting.DebugMode));
+            
+            // _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
+            //     DatabaseManager.GetDefaultDatabaseManager(
+            //         logger,
+            //         DatabaseMode.Debug));
 
             container.RegisterInstance<MusicService>(new MusicService());
         }
