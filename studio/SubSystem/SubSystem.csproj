@@ -114,4 +114,8 @@
       <EmbeddedResource Remove="ViewModels\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Resource Include="Assets\avatar.png" />
+    </ItemGroup>
+
 </Project>
