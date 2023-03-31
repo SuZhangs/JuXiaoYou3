@@ -124,9 +124,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
             _reader.Dispose();
             _reader = null;
 
-            //
-            // 播放下一个
-            PlayNext();
+            if(Mode == PlayMode.Repeat)
+            {
+                Play(_playlistStream.CurrentValue.Items[_currentIndex]);
+            }
+            else
+            {
+                //
+                // 播放下一个
+                PlayNext();
+            }
         }
 
         /// <summary>
@@ -185,10 +192,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
                 music         = _playlistStream.CurrentValue.Items[_currentIndex];
                 _targetStream.SetValue(music);
             }
-            else
+            if (Mode == PlayMode.Loop)
             {
                 _currentIndex = ++_currentIndex % maxIndex;
-                music         = _playlistStream.CurrentValue.Items[_currentIndex];
+                music = _playlistStream.CurrentValue.Items[_currentIndex];
                 _targetStream.SetValue(music);
             }
 
