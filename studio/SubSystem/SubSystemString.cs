@@ -603,6 +603,14 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
+        public static string Notify => GetText("dialog.title.notify");
+        public static string BadImage => GetText("text.notimage");
+        public static string BadModule => GetText("text.notModule");
+        public static string ImageTooSmall => GetText("text.ImageTooSmall");
+        public static string ImageTooBig => GetText("text.ImageTooBig");
+        public static string EmptyName => GetText("text.EmptyName");
+        public static string KeywordTooMany => GetText("text.KeywordTooMany");
+        public static string AddKeywordTitle => GetText("text.AddKeyword");
 
         public static string ImageProcessing
         {
@@ -617,14 +625,6 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "正在处理图片....",
             };
         }
-
-
-        public static string Notify => GetText("dialog.title.notify");
-        public static string BadImage => GetText("text.notimage");
-        public static string BadModule => GetText("text.notModule");
-        public static string ImageTooSmall => GetText("text.ImageTooSmall");
-        public static string ImageTooBig => GetText("text.ImageTooBig");
-        public static string EmptyName => GetText("text.EmptyName");
         
 
         public static string ModuleFilter

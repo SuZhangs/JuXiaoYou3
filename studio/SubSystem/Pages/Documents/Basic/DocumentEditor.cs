@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
@@ -61,7 +62,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
-            
+            KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
+
+            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
+            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();
         }
 

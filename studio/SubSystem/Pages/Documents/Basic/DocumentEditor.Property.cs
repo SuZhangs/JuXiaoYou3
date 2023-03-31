@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
@@ -164,6 +165,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public KeywordEngine KeywordEngine { get; }
         
         /// <summary>
         /// 

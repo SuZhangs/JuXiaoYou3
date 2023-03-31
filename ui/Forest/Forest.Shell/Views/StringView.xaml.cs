@@ -17,6 +17,12 @@ namespace Acorisoft.FutureGL.Forest.Views
     {
         private string     _text;
 
+        protected override void OnStart(RouteEventArgs parameter)
+        {
+            Title = parameter.Args[0]?.ToString();
+            base.OnStart(parameter);
+        }
+
         protected override bool IsCompleted() => !string.IsNullOrEmpty(_text);
 
         protected override void Finish()
@@ -42,7 +48,10 @@ namespace Acorisoft.FutureGL.Forest.Views
             }
         }
         
-        public static Task<Op<string>> String() => Xaml.Get<IDialogService>()
-                                                       .Dialog<string, StringViewModel>();
+        public static Task<Op<string>> String(string title) => Xaml.Get<IDialogService>()
+                                                       .Dialog<string>(new StringViewModel(), new RouteEventArgs
+                                                       {
+                                                           Args = new []{ title }
+                                                       });
     }
 }

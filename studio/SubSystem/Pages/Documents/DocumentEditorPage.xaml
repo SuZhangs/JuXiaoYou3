@@ -33,15 +33,17 @@
                 </f:LooklessButton>
 
                 <!-- 名字 -->
-                <TextBlock Grid.Row="1"
-                           FontSize="24"
-                           FontWeight="Bold"   
-                           Height="96"
+                <Border Height="96">
+                    <TextBlock FontSize="24"
+                           FontWeight="Bold" 
                            HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
                            Margin="0 16 0 0"
-                           Text="CharacterNameCharacterNameCharacterNameCharacterName"
+                           Text="{Binding Name,Mode=OneWay}"
                            TextWrapping="Wrap"
                            TextTrimming="CharacterEllipsis"/>
+
+                </Border>
 
                 <!-- 操作 -->
                 <UniformGrid Grid.Row="2"

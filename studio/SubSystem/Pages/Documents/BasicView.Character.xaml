@@ -18,22 +18,28 @@
                                 Margin="0 8">
             <UniformGrid Columns="3">
                 <f:HeaderedSingleLine Header="名字"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <f:HeaderedSingleLine Header="性别"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <f:HeaderedSingleLine Header="生日"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Birth,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <f:HeaderedSingleLine Header="年龄"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Age,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <f:HeaderedSingleLine Header="身高（cm）"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Height,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <f:HeaderedSingleLine Header="体重（kg）"
-                                      Margin="4"/>
+                                      Margin="4"
+                                      Text="{Binding Weight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             </UniformGrid>
         </HeaderedContentControl>
 
@@ -41,23 +47,18 @@
                                 Header="可选信息"
                                 Margin="0 8">
             <UniformGrid Columns="3">
-                <f:HeaderedSingleLine Header="名字"
-                                      Margin="4"/>
+                <f:HeaderedSingleLine Header="昵称"
+                                      Margin="4"
+                                      Text="{Binding NickName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <f:HeaderedSingleLine Header="种族"
+                                      Margin="4"                                     
+                                      Text="{Binding Race,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
-                <f:HeaderedSingleLine Header="性别"
-                                      Margin="4"/>
+                <f:HeaderedSingleLine Header="国家"
+                                      Margin="4"
+                                      Text="{Binding Country,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
-                <f:HeaderedSingleLine Header="生日"
-                                      Margin="4"/>
-
-                <f:HeaderedSingleLine Header="年龄"
-                                      Margin="4"/>
-
-                <f:HeaderedSingleLine Header="身高（cm）"
-                                      Margin="4"/>
-
-                <f:HeaderedSingleLine Header="体重（kg）"
-                                      Margin="4"/>
             </UniformGrid>
         </HeaderedContentControl>
 
@@ -68,26 +69,34 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top"
                             Orientation="Horizontal">
-                    <ftk:ToolButton f:Language.Id="global.new"
+                    <f:CallToAction f:Language.Id="global.add"
+                                    Command="{Binding AddKeywordCommand}"
                                     Content="新建"
-                                    Icon="{StaticResource IC.File}"
-                                    IsFilled="True"
-                                    ShowText="True"/>
-
-                    <ftk:ToolButton f:Language.Id="global.open"
-                                    Content="打开"
-                                    Icon="{StaticResource IC.Folder}"
-                                    IsFilled="True"
-                                    ShowText="True"/>
-                    <ftk:ToolButton f:Language.Id="global.save"
-                                    Content="保存"
-                                    Icon="{StaticResource IC.Save}"
-                                    IsFilled="True"
-                                    ShowText="True"/>
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    Palette="HighlightPalette1"/>
                 </StackPanel>
 
-                <ItemsControl>
-                    
+                <ItemsControl ItemsSource="{Binding Keywords,Mode=OneWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{f:Brush HighlightA4}">
+                                <DockPanel>
+                                    <Button DockPanel.Dock="Right"
+                                            Command="{Binding Source={StaticResource Shell},Path=ViewModel.RemoveTabCommand}"
+                                            CommandParameter="{Binding}"
+                                            MinHeight="20"
+                                            MinWidth="20"
+                                            Style="{StaticResource CloseButtonStyle}"
+                                            Height="20"
+                                            Width="20" />
+
+                                    <TextBlock Foreground="{f:Brush ForegroundInHighlight}"
+                                               Text="{Binding}"
+                                               VerticalAlignment="Center"/>
+                                </DockPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </DockPanel>
         </HeaderedContentControl>

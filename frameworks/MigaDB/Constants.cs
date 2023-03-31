@@ -25,6 +25,8 @@
          */
         internal const string PropertyCollectionName    = "_props";
         internal const string Name_FileTable            = "fileTable";
+        internal const string Name_Directory            = "v_dir";
+        internal const string Name_Keyword              = "keywords";
         internal const string Name_ModuleTemplate       = "module";
         internal const string Name_Cache_ModuleTemplate = "cache_module";
         internal const string Name_Cache_Metadata       = "cache_meta";
