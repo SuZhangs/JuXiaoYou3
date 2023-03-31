@@ -46,9 +46,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
                 else
                 {
-                    //
-                    // 自增
-                    Interlocked.Increment(ref _currentIndex);
 
                     var checkedIndex = _document.Metas.Count;
                     _document.Metas.Add(metadata);
@@ -60,6 +57,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     
                     _MetadataTrackerByIndex.Add(_currentIndex, metadata);
                     _MetadataTrackerByName.Add(metadata.Name, _currentIndex);
+                    
+                    //
+                    // 自增
+                    Interlocked.Increment(ref _currentIndex);
                 }
             }
         }

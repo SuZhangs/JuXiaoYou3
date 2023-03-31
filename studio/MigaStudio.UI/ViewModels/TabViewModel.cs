@@ -172,8 +172,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             try
             {
-                OnStart();
-                _initialized = true;
+                if (!_initialized)
+                {
+                    OnStart();
+                    _initialized = true;
+                }
             }
             catch
             {

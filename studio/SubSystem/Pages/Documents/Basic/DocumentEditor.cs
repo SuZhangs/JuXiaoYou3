@@ -44,22 +44,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected DocumentEditorVMBase()
         {
-            _sync                  = new object();
-            _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-            ContentBlocks          = new ObservableCollection<ModuleBlockDataUI>();
-            InternalSubViews       = new ObservableCollection<HeaderedSubView>();
-            SubViews               = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            DetailParts            = new ObservableCollection<IPartOfDetail>();
-            InvisibleDataParts     = new ObservableCollection<DataPart>();
-            ModuleParts            = new ObservableCollection<PartOfModule>();
-            PreviewBlocks          = new ObservableCollection<PreviewBlock>();
-            _MetadataTrackerByName = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            _sync                   = new object();
+            _DataPartTrackerOfId    = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
+            ContentBlocks           = new ObservableCollection<ModuleBlockDataUI>();
+            InternalSubViews        = new ObservableCollection<HeaderedSubView>();
+            SubViews                = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
+            DetailParts             = new ObservableCollection<IPartOfDetail>();
+            InvisibleDataParts      = new ObservableCollection<DataPart>();
+            ModuleParts             = new ObservableCollection<PartOfModule>();
+            PreviewBlocks           = new ObservableCollection<PreviewBlock>();
+            _MetadataTrackerByName  = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            _MetadataTrackerByIndex = new Dictionary<int, Metadata>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
+            
+            Initialize();
         }
 
         private void Initialize()
@@ -210,7 +213,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
-            Initialize();
             base.OnStart();
         }
 
