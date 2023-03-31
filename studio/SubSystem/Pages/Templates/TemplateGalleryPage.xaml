@@ -140,17 +140,10 @@
                              Header="预览"
                              Padding="16 10"
                              Width="480">
-                <f:ForestSection.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockDataTemplates.xaml" />
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </f:ForestSection.Resources>
                 <ScrollViewer Margin="0 16 0 0">
                     <Border x:Name="Canvas"
                             Background="{f:BackgroundBrush}">
-                        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}"/>
+                        <thisVM:PreviewView/>
                     </Border>
                 </ScrollViewer>
             </f:ForestSection>

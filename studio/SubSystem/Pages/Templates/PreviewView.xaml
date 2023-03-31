@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateGalleryViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:IPreviewBlockViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,34 +40,5 @@
                    FontSize="18"
                    Margin="0 12" />
         <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}" />
-
-        <TextBlock f:Language.Name="Metadatas"
-                   FontSize="18"
-                   Margin="0 12" />
-        <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}"
-                      MaxHeight="384">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="{f:Brush BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="3"
-                            Margin="4"
-                            Padding="8">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                       FontSize="14"
-                                       FontWeight="Bold"
-                                       Text="{Binding MetadataName}" />
-                            <TextBlock Text="{Binding MetadataName}" />
-                        </DockPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
     </StackPanel>
 </UserControl>
