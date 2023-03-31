@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
                 if (view is ForestUserControl ph)
                 {
-                    
+                    ph.DataContext = newValue;
                 }
                 else
                 {

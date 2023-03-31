@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
-        
+
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
     </UserControl.Resources>
     <DockPanel>
@@ -27,22 +27,12 @@
                 Width="320"
                 Padding="32">
             <StackPanel>
-                
+
                 <!-- 头像 -->
-                <f:LooklessButton Height="192"
+                <f:LooklessButton Command="{Binding ChangeAvatarCommand}"
+                                  Height="192"
                                   Width="192">
-                    <Border CornerRadius="8">
-                        <Border.Background>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                        <Binding Path="Avatar" Mode="OneWay" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Border.Background>
-                    </Border>
+                    <Image Source="{Binding Avatar,Mode=OneWay, Converter={StaticResource AvatarConverter},UpdateSourceTrigger=PropertyChanged}"/>
                 </f:LooklessButton>
 
                 <!-- 名字 -->
@@ -67,7 +57,7 @@
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True"/>
-                    
+
                     <ftk:ToolButton f:Language.Id="global.open"
                                     Content="打开"
                                     Icon="{StaticResource IC.Folder}"
@@ -102,7 +92,8 @@
                 Padding="16"
                 Effect="{StaticResource ShadowEffect2}">
             <ScrollViewer>
-                <ContentControl  Content="{Binding SubView,Mode=OneWay}"/>
+                <ContentControl Content="{Binding SubView,Mode=OneWay}"
+                                DataContext="{Binding}"/>
             </ScrollViewer>
         </Border>
     </DockPanel>

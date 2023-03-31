@@ -129,9 +129,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             if (_basicPart is null)
             {
-                _basicPart = new PartOfBasic{ Buckets = new Dictionary<string, string>()};
+                _basicPart = new PartOfBasic{ Buckets = new Dictionary<string, string>
+                {
+                    {"@name", "aaaa"},
+                    {"@gender", "123aaaa"},
+                }};
                 _document.Parts.Add(_basicPart);
-
                 Name = _cache.Name;
             }
         }
@@ -223,6 +226,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
             base.OnStart();
+        }
+
+        public override void Resume()
+        {
+            InternalSubViews.Clear();
+            CreateSubViews(InternalSubViews);
+            SelectedSubView    = InternalSubViews.FirstOrDefault();
+            SelectedDetailPart = DetailParts.FirstOrDefault();
+            SelectedModulePart = ModuleParts.FirstOrDefault();
+            base.Resume();
+        }
+
+        public override void Suspend()
+        {
+            InternalSubViews.Clear();
+            base.Suspend();
         }
 
         #endregion

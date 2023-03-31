@@ -236,16 +236,7 @@ namespace Acorisoft.FutureGL.Forest
             // 返回 View
             if (ViewModelInfoMapper.TryGetValue(key, out var info))
             {
-                var view = (FrameworkElement)Activator.CreateInstance(info.View);
-
-                //
-                //
-                if (view is not null)
-                {
-                    view.DataContext = instance;
-                }
-
-                return view;
+                return (FrameworkElement)Activator.CreateInstance(info.View);
             }
 
             //
@@ -253,17 +244,7 @@ namespace Acorisoft.FutureGL.Forest
             // 返回 ViewModel
             // ReSharper disable once InvertIf
             if (ViewInfoMapper.TryGetValue(key, out info) && instance is FrameworkElement fe)
-            {
-                if (info.IsSingleton)
-                {
-                    fe.DataContext = InstanceScope.TryGetValue(key, out var dc) ? dc : null;
-                }
-                else
-                {
-                    fe.DataContext = Activator.CreateInstance(info.ViewModel);
-                }
-
-
+            {               
                 return instance;
             }
 

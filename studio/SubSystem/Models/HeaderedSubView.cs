@@ -7,20 +7,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
     {
         public void Create(object dataContext)
         {
-            if (Caching)
-            {
-                SubView ??= (FrameworkElement)Activator.CreateInstance(Type);
-            }
-            else
-            {
-                SubView = (FrameworkElement)Activator.CreateInstance(Type);
-            }
+            SubView = (FrameworkElement)Activator.CreateInstance(Type);
 
             if (SubView is null)
             {
                 return;
             }
-
+            
             SubView.DataContext = dataContext;
         }
         public bool Caching { get; init; }

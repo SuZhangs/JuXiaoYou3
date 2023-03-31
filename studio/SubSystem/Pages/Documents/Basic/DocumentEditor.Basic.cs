@@ -166,7 +166,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 _cache.Avatar    = value;
                 UpsertMetadata(MetaNameOfAvatar, value);
                 SetDirtyState(true);
-                RaiseUpdating();
+                RaiseUpdating(nameof(Avatar));
             }
         }
 

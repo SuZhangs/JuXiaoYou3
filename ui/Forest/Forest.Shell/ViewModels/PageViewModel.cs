@@ -70,5 +70,10 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         }
 
         protected List<KeyInput> KeyInputs { get; }
+
+        public override string ToString()
+        {
+            return $"{GetHashCode()}";
+        }
     }
 }

@@ -69,8 +69,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
             //
             // 设置数据上下文
             page.DataContext =  vm;
-            page.Loaded      += ViewModelStarting;
-            page.Unloaded    += ViewModelStopping;
+
+            if (page is not ForestUserControl)
+            {
+                page.Loaded   += ViewModelStarting;
+                page.Unloaded += ViewModelStopping;
+            }
 
             //
             // 设置内容

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
@@ -12,14 +13,18 @@ using NLog.Targets.Wrappers;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
-    public class AvatarConverter : IMultiValueConverter
+    public class AvatarConverter : IValueConverter
     {
         private static readonly ConcurrentDictionary<string, ImageSource> Pool = new ConcurrentDictionary<string, ImageSource>();
         private static          ImageEngine                               _engine;
+        private static readonly BitmapImage                               _character = new BitmapImage(new Uri("pack://application:,,,/SubSystem;component/assets/avatar.png"));
 
         private static ImageSource FallbackImage(DocumentType type)
         {
-            return null;
+            return type switch
+            {
+                _ => _character
+            };
         }
 
         private static ImageSource Caching(string avatar)
@@ -37,31 +42,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             return img;
         }
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values is null || values.Length == 0)
+            if (value is null)
             {
                 return FallbackImage(DocumentType.Document);
             }
 
-            if (values[1] is DocumentType type)
-            {
-                var avatar = values[0]?.ToString();
+            var avatar = value.ToString();
 
-                if (string.IsNullOrEmpty(avatar))
-                {
-                    return FallbackImage(type);
-                }
-            
-            
-            
-                return Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
-            }
-            
-            return FallbackImage(DocumentType.Document);
+            return string.IsNullOrEmpty(avatar) ? 
+                FallbackImage(DocumentType.Document) :
+                Caching(avatar);
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
