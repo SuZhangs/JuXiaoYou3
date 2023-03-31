@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reactive.Concurrency;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Controls;
@@ -205,6 +206,13 @@ namespace Acorisoft.FutureGL.Forest
         
         
         #endregion
+
+        private void SaveBasicSettingImpl(BasicAppSetting setting)
+        {
+            JSON.WriteSetting(Path.Combine(AppModel.Settings, BasicSettingFileName), Xaml.Get<BasicAppSetting>());
+        }
+
+        public static void SaveBasicSetting(BasicAppSetting setting) => ((ForestApp)Current).SaveBasicSettingImpl(setting); 
         
         /// <summary>
         /// 注册框架服务。

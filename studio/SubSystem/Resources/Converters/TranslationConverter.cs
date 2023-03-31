@@ -69,7 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             return value switch
             {
-                MainTheme.Dark => Language.Culture switch
+                MainTheme.Light => Language.Culture switch
                 {
                     CultureArea.Chinese => "亮色模式",
                     _                   => "Light Theme"

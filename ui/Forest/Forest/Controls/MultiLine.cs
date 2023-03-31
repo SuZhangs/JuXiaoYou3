@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             
             // 白底变特殊色
             // 高亮色变白色
@@ -106,7 +106,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             
             // 白底变特殊色
@@ -247,7 +247,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToHighlight1State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             
             // 白底变特殊色
             // 高亮色变白色
@@ -282,7 +282,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         protected override void GoToHighlight2State(Duration duration, ForestThemeSystem theme)
         {
-            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA3]);
+            _backgroundHighlight1 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             _backgroundHighlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA4]);
             
             // 白底变特殊色
