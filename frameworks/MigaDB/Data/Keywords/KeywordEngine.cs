@@ -4,7 +4,11 @@
     {
         public void AddKeyword(string keyword)
         {
-            KeywordDB.Upsert(keyword);
+            KeywordDB.Upsert(new Keyword
+            {
+                Id = keyword,
+                Value = keyword
+            });
         }
         
         public void RemoveKeyword(string keyword)
@@ -15,7 +19,7 @@
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             DirectoryDB = session.Database.GetCollection<Directory>(Constants.Name_Directory);
-            KeywordDB   = session.Database.GetCollection<string>(Constants.Name_Keyword);
+            KeywordDB   = session.Database.GetCollection<Keyword>(Constants.Name_Keyword);
         }
 
         protected override void OnDatabaseClosing()
@@ -32,6 +36,6 @@
         /// <summary>
         /// 模板缓存
         /// </summary>
-        public ILiteCollection<string> KeywordDB { get; private set; }
+        public ILiteCollection<Keyword> KeywordDB { get; private set; }
     }
 }
