@@ -25,15 +25,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 Items.AddRange(block.Items
                                     .Select(x => new OptionItemUI(
-                                        GetId(), 
-                                        Fallback, 
-                                        x, 
+                                        GetId(),
+                                        Fallback,
+                                        x,
                                         OnSelected)));
             }
 
             Value = string.IsNullOrEmpty(block.Value) ? block.Fallback : block.Value;
         }
-        
+
         private string GetId() => string.IsNullOrEmpty(Id) ? GetHashCode().ToString() : Id;
 
         private void OnSelected(OptionItemUI item)
@@ -92,7 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public SequenceBlockDataUI(SequenceBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
         }
-        
+
         public SequenceBlockDataUI(SequenceBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
         }
@@ -124,7 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private async Task AddImpl()
         {
-            var r = await StringViewModel.String();
+            var r = await StringViewModel.String(Language.GetText("text.AddItem"));
 
             if (!r.IsFinished)
             {
@@ -133,10 +133,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             var    name = r.Value;
             string value;
-            
+
             if (AllowDiffValue)
             {
-                r = await StringViewModel.String();
+                r = await StringViewModel.String(Language.GetText("text.AddValue"));
 
                 if (!r.IsFinished)
                 {
@@ -154,15 +154,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 await Xaml.Get<IDialogService>()
                           .Notify(
-                              CriticalLevel.Warning, 
-                              SubSystemString.Notify, 
+                              CriticalLevel.Warning,
+                              SubSystemString.Notify,
                               Language.ItemDuplicatedText);
                 return;
             }
-            
+
             Items.Add(new OptionItem
             {
-                Name = name,
+                Name  = name,
                 Value = value
             });
         }
@@ -174,20 +174,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            var r = await StringViewModel.String();
+            var r = await StringViewModel.String(Language.GetText("text.EditName"));
 
             if (r.IsFinished)
             {
                 item.Name = item.Value;
             }
-            
-            r = await StringViewModel.String();
+
+            r = await StringViewModel.String(Language.GetText("text.EditValue"));
 
             if (r.IsFinished)
             {
                 item.Value = item.Value;
             }
-            
         }
 
         private async Task RemoveImpl(OptionItem item)
@@ -196,7 +195,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 return;
             }
-            
+
             var r = await Xaml.Get<IDialogService>()
                               .Danger(SubSystemString.Notify,
                                   SubSystemString.AreYouSureCreateNew);
@@ -211,13 +210,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 await Xaml.Get<IDialogService>()
                           .Notify(
                               CriticalLevel.Success,
-                              SubSystemString.Notify, 
+                              SubSystemString.Notify,
                               SubSystemString.OperationOfRemoveIsSuccessful);
             }
         }
 
         private void UpImpl(OptionItem item)
-        { 
+        {
             if (item is null)
             {
                 return;
@@ -229,12 +228,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 return;
             }
-            
+
             Items.Move(index, index - 1);
         }
-        
+
         private void DownImpl(OptionItem item)
-        { 
+        {
             if (item is null)
             {
                 return;
@@ -246,10 +245,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 return;
             }
-            
+
             Items.Move(index, index + 1);
         }
-        
+
         public AsyncRelayCommand AddCommand { get; }
         public AsyncRelayCommand<OptionItem> EditCommand { get; }
         public AsyncRelayCommand<OptionItem> RemoveCommand { get; }
