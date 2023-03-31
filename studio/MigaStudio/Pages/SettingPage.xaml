@@ -22,7 +22,7 @@
                 <ResourceDictionary>
                     <DataTemplate x:Key="ComboBox"
                                   DataType="{x:Type studio:ISettingComboBox}">
-                        <Border Background="#F1F1F1"
+                        <Border Background="{f:Brush BackgroundLevel1}"
                                 CornerRadius="12"
                                 Margin="0 0 0 10"
                                 Padding="16"
@@ -53,34 +53,33 @@
             </studio:SettingItemTemplateSelector.Resources>
         </studio:SettingItemTemplateSelector>
     </UserControl.Resources>
-    <Grid>
-        <f:ShadowTabControl TabStripPlacement="Left"
-                            Padding="64 32 128 32">
-            <f:ShadowTabItem Header="常规"
+    <f:ShadowTabControl TabStripPlacement="Left"
+                        Margin="16"
+                            Padding="32 0 96 0">
+        <f:ShadowTabItem Header="常规"
                              IsFilled="True"
                              Icon="{StaticResource IC.Setting}">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top"
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top"
                                FontSize="32"
                                FontWeight="Bold"
                                Text="常规设置" />
-                    <ScrollViewer IsTabStop="False"
+                <ScrollViewer IsTabStop="False"
                                   Focusable="False"
                                   Margin="0 32 0 0">
-                        <ItemsControl ItemsSource="{Binding Items,Mode=OneWay}"
+                    <ItemsControl ItemsSource="{Binding Items,Mode=OneWay}"
                                       ItemTemplateSelector="{StaticResource SettingItemSelector}">
-                        </ItemsControl>
-                    </ScrollViewer>
-                </DockPanel>
-            </f:ShadowTabItem>
-            <f:ShadowTabItem Header="高级" Icon="{StaticResource IC.Setting}"
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </f:ShadowTabItem>
+        <f:ShadowTabItem Header="高级" Icon="{StaticResource IC.Setting}"
                              IsFilled="True" />
-            <f:ShadowTabItem Header="字体" Icon="{StaticResource IC.Setting}"
+        <f:ShadowTabItem Header="字体" Icon="{StaticResource IC.Setting}"
                              IsFilled="True" />
-            <f:ShadowTabItem Header="许可证" Icon="{StaticResource IC.Setting}"
+        <f:ShadowTabItem Header="许可证" Icon="{StaticResource IC.Setting}"
                              IsFilled="True" />
-            <f:ShadowTabItem Header="关于" Icon="{StaticResource IC.Setting}"
+        <f:ShadowTabItem Header="关于" Icon="{StaticResource IC.Setting}"
                              IsFilled="True" />
-        </f:ShadowTabControl>
-    </Grid>
+    </f:ShadowTabControl>
 </f:ForestUserControl>

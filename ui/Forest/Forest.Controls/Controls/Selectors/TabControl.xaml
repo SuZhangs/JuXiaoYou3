@@ -187,7 +187,6 @@
                                   DockPanel.Dock="Left"
                                   Data="{TemplateBinding Icon}"
                                   HorizontalAlignment="Center"
-                                  Stroke="Gray"
                                   StrokeThickness="2"
                                   Stretch="Uniform"
                                   Height="{TemplateBinding IconSize}"
@@ -204,8 +203,7 @@
                                               Focusable="False"
                                               Margin="8 0 0 0"
                                               RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              TextElement.Foreground="Gray" />
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
