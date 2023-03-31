@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Markup
         }
     }
     
-    public class AdaptiveLevel1BrushExtension : MarkupExtension
+    public class ForegroundInHighlightBrushExtension : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

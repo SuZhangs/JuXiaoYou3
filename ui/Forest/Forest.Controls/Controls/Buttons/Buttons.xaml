@@ -11,7 +11,7 @@
                                RadiusY="24"
                                StrokeDashArray="4 4"
                                StrokeThickness="1   "
-                               Stroke="{f:AdaptiveLevel1Brush}" />
+                               Stroke="{f:ForegroundInHighlightBrush}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -242,9 +242,9 @@
         <Setter Property="MinHeight" Value="32" />
         <Setter Property="MinWidth" Value="42" />
         <Setter Property="HoverBackgroundBrush" Value="{f:OverlayBrush}" />
-        <Setter Property="HoverForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
+        <Setter Property="HoverForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="PressBackgroundBrush" Value="{f:Overlay2Brush}" />
-        <Setter Property="PressForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
+        <Setter Property="PressForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -528,7 +528,7 @@
     <Style TargetType="{x:Type b:CallToAction}">
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" />
-        <Setter Property="Foreground" Value="{f:AdaptiveLevel1Brush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundInHighlightBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="12 8" />

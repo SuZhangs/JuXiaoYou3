@@ -565,9 +565,9 @@
                 <Setter Property="MinHeight" Value="32" />
                 <Setter Property="MinWidth" Value="32" />
                 <Setter Property="HoverBackgroundBrush" Value="#e81123" />
-                <Setter Property="HoverForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
+                <Setter Property="HoverForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
                 <Setter Property="PressBackgroundBrush" Value="#e81123" />
-                <Setter Property="PressForegroundBrush" Value="{f:AdaptiveLevel1Brush}" />
+                <Setter Property="PressForegroundBrush" Value="{f:ForegroundInHighlightBrush}" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="Template">
                     <Setter.Value>

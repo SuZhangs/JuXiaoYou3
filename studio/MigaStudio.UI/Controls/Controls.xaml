@@ -456,7 +456,7 @@
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <TextBlock Foreground="{f:AdaptiveLevel1Brush}"
+                    <TextBlock Foreground="{f:ForegroundInHighlightBrush}"
                                FontSize="14"
                                Text="{Binding Mode=OneWay}"
                                HorizontalAlignment="Center"
