@@ -172,9 +172,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 Music music;
                 var   fileName1 = Path.GetFileNameWithoutExtension(fileName) + ".mp3";
 
-                if (MusicEngine.HasFile(fileName))
+                if (MusicEngine.HasFile(fileName1))
                 {
-                    music = MusicEngine.GetFile(fileName);
+                    music = MusicEngine.GetFile(fileName1);
                 }
                 else
                 {

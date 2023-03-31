@@ -24,15 +24,15 @@
          * 数据库引擎字段
          */
         internal const string PropertyCollectionName    = "_props";
-        internal const string Name_FileTable            = "fileTable";
-        internal const string Name_MusicTable            = "musicTable";
-        internal const string Name_Directory            = "v_dir";
+        internal const string Name_FileTable            = "file";
+        internal const string Name_MusicTable           = "file_music";
+        internal const string Name_Directory            = "dir";
         internal const string Name_Keyword              = "keywords";
         internal const string Name_ModuleTemplate       = "module";
-        internal const string Name_Cache_ModuleTemplate = "cache_module";
-        internal const string Name_Cache_Metadata       = "cache_meta";
-        internal const string Name_Cache_Document       = "cache_doc";
-        internal const string Name_Cache_Compose        = "cache_compose";
+        internal const string Name_Cache_ModuleTemplate = "idx_module";
+        internal const string Name_Cache_Metadata       = "idx_meta";
+        internal const string Name_Cache_Document       = "idx_doc";
+        internal const string Name_Cache_Compose        = "idx_compose";
         internal const string Name_Document             = "doc";
         internal const string Name_Compose              = "compose";
 

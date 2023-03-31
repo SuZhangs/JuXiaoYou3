@@ -13,6 +13,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// <summary>
         /// 唯一标识符
         /// </summary>
+        [BsonId]
         public string Id { get; init; }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
-            DB = session.Database.GetCollection<Music>(Constants.MusicFolderName);
+            DB = session.Database.GetCollection<Music>(Constants.Name_MusicTable);
             base.OnDatabaseOpening(session);
         }
 
