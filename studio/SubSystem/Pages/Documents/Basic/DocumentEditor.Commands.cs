@@ -119,6 +119,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             
             KeywordEngine.AddKeyword(r.Value);
+            Keywords.Add(r.Value);
             await Successful(SubSystemString.OperationOfAddIsSuccessful);
         }
 
@@ -128,7 +129,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-            
+
+            Keywords.Remove(r.item);
             await Successful(SubSystemString.OperationOfRemoveIsSuccessful);
         }
         
