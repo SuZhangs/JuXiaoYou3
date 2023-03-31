@@ -17,14 +17,11 @@ using Slider = Acorisoft.FutureGL.Forest.Controls.Slider;
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
 
-    public partial class MusicPlayerView:ForestUserControl 
+    public partial class MusicPlayerView
     {
         public MusicPlayerView()
         {
             InitializeComponent();
-            ViewModel   = new MusicPlayerViewModel();
-            DataContext = ViewModel;
-            this.Loaded += OnLoaded;
         }
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
@@ -39,18 +36,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         private void Button_OpenVolume(object sender, RoutedEventArgs e)
         {
-            MusicBox.IsTopOpen = true;
+            ViewModel.IsVolumePaneOpen = true;
         }
 
         private void Button_ClosePlaylist(object sender, RoutedEventArgs e)
         {
-            MusicBox.IsRightOpen = false;
+            ViewModel.IsPlaylistPaneOpen = false;
         }
 
 
         private void Button_OpenPlaylist(object sender, RoutedEventArgs e)
         {
-            MusicBox.IsRightOpen = true;
+            ViewModel.IsPlaylistPaneOpen = true;
         }
 
 
@@ -59,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             ViewModel.IsMute = ViewModel.Volume == 0;
         }
 
-        public MusicPlayerViewModel ViewModel { get; }
+        public MusicPlayerViewModel ViewModel => ViewModel<MusicPlayerViewModel>();
 
         private bool _isDragging;
 

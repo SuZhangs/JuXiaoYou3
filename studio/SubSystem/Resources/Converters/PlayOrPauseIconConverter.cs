@@ -10,27 +10,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     
     public sealed class PlayOrPauseIconConverter : IValueConverter
     {
-        private Geometry _off;
-        private Geometry _on;
-        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = value != null && (bool)value;
-            if (val)
-            {
-                _off ??= Xaml.GetGeometry("Pause");
-                return _off;
-            }
-            else
-            {
-                _on ??= Xaml.GetGeometry("Play");
-                return _on;
-            }
+            return val ? Pause : Play;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
+        
+        public Geometry Play { get; set; }
+        public Geometry Pause { get; set; }
     }
 }

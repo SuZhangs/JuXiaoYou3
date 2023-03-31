@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Media;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 
@@ -14,19 +15,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             {
                 return mode switch
                 {
-                    PlayMode.Loop => Xaml.GetGeometry("Loop"),
-                    PlayMode.Repeat => Xaml.GetGeometry("Repeat"),
-                    PlayMode.Shuffle => Xaml.GetGeometry("Shuffle"),
-                    _ => Xaml.GetGeometry("Sequence")
+                    PlayMode.Loop    => Loop,
+                    PlayMode.Repeat  => Repeat,
+                    PlayMode.Shuffle => Shuffle,
+                    _                => Sequence
                 };
             }
 
-            return Xaml.GetGeometry("Sequence");
+            return Sequence;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
+        
+        public Geometry Loop { get; set; }
+        public Geometry Repeat { get; set; }
+        public Geometry Shuffle { get; set; }
+        public Geometry Sequence { get; set; }
     }
 }

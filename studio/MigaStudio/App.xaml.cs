@@ -16,6 +16,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Pages;
+using Acorisoft.FutureGL.MigaStudio.Resources.Services;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
@@ -93,6 +94,8 @@ namespace Acorisoft.FutureGL.MigaStudio
                 DatabaseManager.GetDefaultDatabaseManager(
                     logger,
                     DatabaseMode.Debug));
+
+            container.RegisterInstance<MusicService>(new MusicService());
         }
 
         private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)

@@ -41,36 +41,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         private TimeSpan    _position;
         private TimeSpan    _duration;
 
+        private bool _isVolumePaneOpen;
+        private bool _isPlaylistPaneOpen;
 
         public MusicPlayerViewModel()
         {
-            _hash      = new HashSet<string>();
-            _service   = new MusicService();
+            _hash                        = new HashSet<string>();
+            _service                     = Xaml.Get<MusicService>();
             _service.StateUpdatedHandler = HandleStateChanged;
             _service.Position
-                .ObserveOn(Scheduler)
-                .Subscribe(x =>
-                {
-                    Position  = x;
-                });
-            
+                    .ObserveOn(Scheduler)
+                    .Subscribe(x => { Position = x; });
+
             _service.Duration
-                .ObserveOn(Scheduler)
-                .Subscribe(x =>
-                {
-                    Duration = x;
-                });
+                    .ObserveOn(Scheduler)
+                    .Subscribe(x => { Duration = x; });
             _service.Playlist.Observable
-                .ObserveOn(Scheduler)
-                .Where(x => x != null)
-                .Subscribe(x =>
-            {
-                _hash.Clear();
-                foreach (var item in x.Items)
-                {
-                    _hash.Add(item.Id);
-                }
-            });
+                    .ObserveOn(Scheduler)
+                    .Where(x => x != null)
+                    .Subscribe(x =>
+                    {
+                        _hash.Clear();
+                        foreach (var item in x.Items)
+                        {
+                            _hash.Add(item.Id);
+                        }
+                    });
 
             Background = new BitmapImage(new Uri("E:\\1.jpg"));
             Cover      = Background;
@@ -100,18 +96,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 PlayPreviousCommand?.NotifyCanExecuteChanged();
                 return;
             }
-            
-            _index = index;
+
+            _index    = index;
             Duration  = duration;
             IsPlaying = state == PlaybackState.Playing;
             Position  = TimeSpan.Zero;
-            Current = item;
+            Current   = item;
             PlayNextCommand?.NotifyCanExecuteChanged();
             PlayPreviousCommand?.NotifyCanExecuteChanged();
         }
 
         private bool HasPlaylist() => Playlist is not null;
-        
+
         private bool HasMusicItem(Music item) => item is not null && Playlist is not null;
         private bool WasLastItem() => Playlist is not null && _index < Playlist.Items.Count - 1;
         private bool WasFirstItem() => Playlist is not null && _index > 0;
@@ -120,10 +116,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         {
             Mode = Mode switch
             {
-                PlayMode.Loop => PlayMode.Repeat,
-                PlayMode.Repeat => PlayMode.Shuffle,
+                PlayMode.Loop    => PlayMode.Repeat,
+                PlayMode.Repeat  => PlayMode.Shuffle,
                 PlayMode.Shuffle => PlayMode.Sequence,
-                _=> PlayMode.Sequence
+                _                => PlayMode.Sequence
             };
         }
 
@@ -141,7 +137,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 }
             }
         }
-        
+
         private void PlayOrPauseImpl()
         {
             if (IsPlaying)
@@ -160,7 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         {
             var opendlg = new OpenFileDialog
             {
-                Filter = "音乐文件|*.wav;*.mp3",
+                Filter      = "音乐文件|*.wav;*.mp3",
                 Multiselect = true
             };
 
@@ -177,10 +173,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                     return;
                 }
 
-                var file = File.Create(fileName);
+                var file      = File.Create(fileName);
                 var musicFile = (AudioFile)file;
-                var tag = musicFile.GetTag(TagTypes.Id3v2);
-                var cover = string.Empty;
+                var tag       = musicFile.GetTag(TagTypes.Id3v2);
+                var cover     = string.Empty;
 
                 if (tag.Pictures is not null)
                 {
@@ -216,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             }
 
             var index = _playlist.Items.IndexOf(item);
-            
+
             if (index == -1)
             {
                 return;
@@ -226,7 +222,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             _playlist.Items.RemoveAt(index);
             _hash.Remove(item.Id);
 
-            if(_current is null)
+            if (_current is null)
             {
                 return;
             }
@@ -262,7 +258,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         }
 
         public void SetPosition(TimeSpan time) => _service.SetPosition(time);
-        
+
         void Play(Music item)
         {
             IsPlaying = true;
@@ -278,8 +274,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 Background = Cover;
             }
         }
-        
-        
+
+
         void IDropTarget.DragOver(IDropInfo dropInfo)
         {
             _service.DragOver(dropInfo);
@@ -304,6 +300,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         }
 
         /// <summary>
+        /// 获取或设置 <see cref="IsPlaylistPaneOpen"/> 属性。
+        /// </summary>
+        public bool IsPlaylistPaneOpen
+        {
+            get => _isPlaylistPaneOpen;
+            set => SetValue(ref _isPlaylistPaneOpen, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsVolumePaneOpen"/> 属性。
+        /// </summary>
+        public bool IsVolumePaneOpen
+        {
+            get => _isVolumePaneOpen;
+            set => SetValue(ref _isVolumePaneOpen, value);
+        }
+
+        /// <summary>
         /// 获取或设置 <see cref="Playlist"/> 属性。
         /// </summary>
         public Playlist Playlist
@@ -313,7 +327,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             {
                 SetValue(ref _playlist, value);
                 _service.SetPlaylist(value);
-            } 
+            }
         }
 
         /// <summary>
@@ -363,10 +377,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         public bool IsPlaying
         {
             get => _isPlaying;
-            set
-            {
-                SetValue(ref _isPlaying, value);
-            }
+            set { SetValue(ref _isPlaying, value); }
         }
 
         /// <summary>
