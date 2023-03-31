@@ -68,6 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
+            ChangeAvatarCommand  = AsyncCommand(ChangeAvatarImpl);
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();

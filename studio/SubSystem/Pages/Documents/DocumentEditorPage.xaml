@@ -6,6 +6,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      mc:Ignorable="d"
@@ -15,6 +16,8 @@
                      SnapsToDevicePixels="True">
     <UserControl.Resources>
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+        
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
     </UserControl.Resources>
     <DockPanel>
@@ -26,11 +29,20 @@
             <StackPanel>
                 
                 <!-- 头像 -->
-                <f:LooklessButton Grid.Row="0"
-                                  Height="192"
+                <f:LooklessButton Height="192"
                                   Width="192">
-                    <Border Background="Gray"
-                            CornerRadius="8"/>
+                    <Border CornerRadius="8">
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
                 </f:LooklessButton>
 
                 <!-- 名字 -->
@@ -47,8 +59,7 @@
                 </Border>
 
                 <!-- 操作 -->
-                <UniformGrid Grid.Row="2"
-                             Columns="3"
+                <UniformGrid Columns="3"
                              Height="48">
 
                     <ftk:ToolButton f:Language.Id="global.new"
@@ -71,8 +82,7 @@
 
 
                 <!-- 名字 -->
-                <f:ListBox Grid.Row="3"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                            Height="280"
                            ItemsSource="{Binding SubViews}"
                            SelectedItem="{Binding SelectedSubView,Mode=TwoWay}">
@@ -87,8 +97,7 @@
         </Border>
 
 
-        <Border Grid.Row="2"
-                Background="{f:Brush BackgroundLevel2}"
+        <Border Background="{f:Brush BackgroundLevel2}"
                 Margin="16 0 0 0"
                 Padding="16"
                 Effect="{StaticResource ShadowEffect2}">

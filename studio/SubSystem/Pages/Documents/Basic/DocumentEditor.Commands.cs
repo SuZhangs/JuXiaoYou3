@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Design;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,9 +18,11 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -28,6 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
+        
         [Obsolete]
         private async Task AddModulePartImpl()
         {
@@ -89,7 +93,45 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// </summary>
         private async Task ChangeAvatarImpl()
         {
+            var r = await ImageUtilities.Avatar();
             
+            if (!r.IsFinished)
+            {
+                return;
+            }
+            
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var    buffer = r.Buffer;
+            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
+            var    md5    = Convert.ToBase64String(raw);
+            string avatar;
+
+            if (ImageEngine.HasFile(md5))
+            {
+                var fr = ImageEngine.Records.FindById(md5);
+                avatar = fr.Uri;
+            }
+            else
+            {
+                avatar = $"avatar_{ID.Get()}.png";
+                buffer.Seek(0, SeekOrigin.Begin);
+                ImageEngine.SetAvatar(buffer, avatar);
+
+                var record = new FileRecord
+                {
+                    Id   = md5,
+                    Uri  = avatar,
+                    Type = ResourceType.Image
+                };
+
+                ImageEngine.AddFile(record);
+            }
+
+            Avatar = avatar;
         }
         
         //---------------------------------------------
@@ -120,6 +162,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             
             KeywordEngine.AddKeyword(r.Value);
             Keywords.Add(r.Value);
+            SetDirtyState(true);
             await Successful(SubSystemString.OperationOfAddIsSuccessful);
         }
 
@@ -131,6 +174,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
 
             Keywords.Remove(item);
+            SetDirtyState(true);
             await Successful(SubSystemString.OperationOfRemoveIsSuccessful);
         }
         
