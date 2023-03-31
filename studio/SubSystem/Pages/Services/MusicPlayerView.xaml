@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models;assembly=MigaStudio.UI"
              xmlns:converters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:f="urn:acorisoft/forest/ui"

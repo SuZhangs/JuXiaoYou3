@@ -8,7 +8,7 @@
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:te="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates;assembly=SubSystem"
-             xmlns:tg="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates;assembly=SubSystem"
+             xmlns:ps="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services;assembly=SubSystem"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -33,7 +33,12 @@
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"
                             Content="设定模板"
                             Command="{Binding GotoPageCommand}"
-                            CommandParameter="{x:Type tg:TemplateGalleryViewModel}"
+                            CommandParameter="{x:Type te:TemplateGalleryViewModel}"
+                            ShowText="True"/>
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"
+                            Content="音乐"
+                            Command="{Binding GotoDialogCommand}"
+                            CommandParameter="{x:Type ps:MusicPlayerViewModel}"
                             ShowText="True"/>
         </WrapPanel>
     </Grid>

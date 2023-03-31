@@ -19,14 +19,14 @@ using File = TagLib.File;
 using System.Diagnostics;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Resources.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
-    public sealed class MusicPlayerViewModel : ForestObject, IDropTarget
+    public sealed class MusicPlayerViewModel : DialogViewModel, IDropTarget
     {
         private readonly MusicService    _service;
         private readonly HashSet<string> _hash;
-        private readonly IScheduler      _scheduler;
 
         private bool        _isMute;
         private double      _volume;
@@ -45,24 +45,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         public MusicPlayerViewModel()
         {
             _hash      = new HashSet<string>();
-            _scheduler = new SynchronizationContextScheduler(SynchronizationContext.Current!);
             _service   = new MusicService();
             _service.StateUpdatedHandler = HandleStateChanged;
             _service.Position
-                .ObserveOn(_scheduler)
+                .ObserveOn(Scheduler)
                 .Subscribe(x =>
                 {
                     Position  = x;
                 });
             
             _service.Duration
-                .ObserveOn(_scheduler)
+                .ObserveOn(Scheduler)
                 .Subscribe(x =>
                 {
                     Duration = x;
                 });
             _service.Playlist.Observable
-                .ObserveOn(_scheduler)
+                .ObserveOn(Scheduler)
                 .Where(x => x != null)
                 .Subscribe(x =>
             {

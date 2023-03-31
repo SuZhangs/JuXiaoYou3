@@ -2,6 +2,15 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
 {
+    
+    public enum PlayMode : int
+    {
+        Loop,
+        Shuffle,
+        Repeat,
+        Sequence
+    }
+    
     public class Music : ForestObject
     {
         private string _name;

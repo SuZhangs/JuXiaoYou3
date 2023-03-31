@@ -23,4 +23,5 @@ namespace Acorisoft.FutureGL.MigaUtils
         /// </summary>
         event Action<T> ValueChanged;
     }
+    
 }

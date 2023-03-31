@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -60,6 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static void InstallViews()
         {
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
+            Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
 
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
