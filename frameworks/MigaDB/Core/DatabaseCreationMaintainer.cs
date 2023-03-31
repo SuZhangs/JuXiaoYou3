@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Data;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {
@@ -11,7 +12,9 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             
             database.Set<ModuleManifestProperty>(new ModuleManifestProperty
             {
-                Manifests = new ObservableCollection<ModuleManifest>()
+                Manifests = new ObservableCollection<ModuleManifest>(),
+                DefaultManifests = new Dictionary<DocumentType, ModuleManifest>(),
+                DefaultPreviews = new Dictionary<DocumentType, PreviewManifest>()
             });
             
             database.Set<DatabaseVersion>(new DatabaseVersion

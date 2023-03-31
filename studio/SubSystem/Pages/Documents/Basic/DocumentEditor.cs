@@ -170,7 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             var manifest = DatabaseManager.Database
                                           .CurrentValue
                                           .Get<ModuleManifestProperty>()
-                                          .GetManifest(Type);
+                                          .GetModuleManifest(Type);
 
             if (Type != manifest.Type)
             {
