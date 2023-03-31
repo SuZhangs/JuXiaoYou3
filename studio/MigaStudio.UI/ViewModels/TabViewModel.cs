@@ -160,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public override int GetHashCode()
         {
-            return PageId?.GetHashCode() ?? -1;
+            return PageId?.GetHashCode() ?? base.GetHashCode();
         }
 
         #endregion

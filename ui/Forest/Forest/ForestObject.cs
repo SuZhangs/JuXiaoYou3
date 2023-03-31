@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.Forest
         /// 
         /// </summary>
         /// <param name="propertyName">产生变动的属性名</param>
-        protected void RaiseUpdating([CallerMemberName] string propertyName = null)
+        private void RaiseUpdating([CallerMemberName] string propertyName = null)
         {
             PropertyChangingHandler?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }

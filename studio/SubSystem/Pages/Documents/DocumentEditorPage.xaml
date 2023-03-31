@@ -32,7 +32,18 @@
                 <f:LooklessButton Command="{Binding ChangeAvatarCommand}"
                                   Height="192"
                                   Width="192">
-                    <Image Source="{Binding Avatar,Mode=OneWay, Converter={StaticResource AvatarConverter},UpdateSourceTrigger=PropertyChanged}"/>
+                    <Border>
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
                 </f:LooklessButton>
 
                 <!-- 名字 -->

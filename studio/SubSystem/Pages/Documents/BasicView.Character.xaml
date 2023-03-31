@@ -22,7 +22,7 @@
             <UniformGrid Columns="3">
                 <f:HeaderedSingleLine Header="名字"
                                       Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,IsAsync=True}" />
+                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                 <f:HeaderedSingleLine Header="性别"
                                       Margin="4"
