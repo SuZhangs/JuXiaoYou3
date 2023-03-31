@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models;assembly=MigaStudio.UI"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Services;assembly=MigaDB"
              xmlns:converters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:f="urn:acorisoft/forest/ui"
@@ -54,14 +54,11 @@
                 </converters:PlayModeIconConverter.Sequence>
             </converters:PlayModeIconConverter>
             <converters:TimeSpanConverter x:Key="TimeSpanConverter"/>
-
-
-            <ImageBrush x:Key="CoverImage"
-                        ImageSource="{Binding Cover,Mode=OneWay}"
-                        Stretch="UniformToFill"/>
+            <converters:AlbumConverter x:Key="AlbumConverter"/>
+            
             
             <ImageBrush x:Key="BackgroundImage"
-                        ImageSource="{Binding Background,Mode=OneWay}"
+                        ImageSource="{Binding Background,Mode=OneWay, Converter={StaticResource AlbumConverter}}"
                         Stretch="UniformToFill" />
 
             <BlurEffect x:Key="BlurEffect" Radius="30" RenderingBias="Performance" />
@@ -135,7 +132,7 @@
                     <f:StretchPanel>
                         <!-- 模糊图层 -->
                         <Rectangle Effect="{StaticResource BlurEffect}"
-                               Fill="{StaticResource CoverImage}" />
+                               Fill="{StaticResource BackgroundImage}" />
 
                         <!-- 背景叠加层 -->
                         <Rectangle Fill="{StaticResource MaskBrush}" />
@@ -259,7 +256,7 @@
                     <!-- 模糊图层 -->
                     <Rectangle x:Name="PART_BlurBG"
                            Effect="{StaticResource BlurEffect}"
-                           Fill="{StaticResource CoverImage}" />
+                           Fill="{StaticResource BackgroundImage}" />
 
 
                     <!-- 背景叠加层 -->

@@ -33,6 +33,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<TemplateEngine>()
                    .Setup<DocumentEngine>()
                    .Setup<ImageEngine>(false)
+                   .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }

@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             else
             {
                 avatar = $"avatar_{ID.Get()}.png";
-                ie.SetAvatar(_buffer, avatar);
+                ie.WriteAvatar(_buffer, avatar);
 
                 var record = new FileRecord
                 {

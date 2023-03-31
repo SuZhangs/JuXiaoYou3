@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.IO;
+using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {
@@ -8,8 +9,48 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         {
             
         }
+        
+        
+        public bool HasFile(string md5)
+        {
+            return !string.IsNullOrEmpty(md5) &&
+                   Records is not null &&
+                   Records.HasID(md5);
+        }
+        
+        public void AddFile(FileRecord record)
+        {
+            if (record is null)
+            {
+                return;
+            }
 
-        public void SetAvatar(MemoryStream ms, string resource)
+            Records.Insert(record);
+        }
+        
+        public void RemoveFile(FileRecord record)
+        {
+            if (record is null)
+            {
+                return;
+            }
+
+            Records.Delete(record.Id);
+        }
+
+        protected override void OnDatabaseClosing()
+        {
+            Records       = null;
+        }
+
+        protected override void OnDatabaseOpening(DatabaseSession session)
+        {
+            Records       = session.Database.GetCollection<FileRecord>(Constants.Name_FileTable);
+            base.OnDatabaseOpening(session);
+        }
+
+
+        public void WriteAvatar(MemoryStream ms, string resource)
         {
             if (ms is null || ms.Length == 0)
             {
@@ -28,5 +69,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             ms.CopyTo(fs);
             fs.Dispose();
         }
+        
+        public ILiteCollection<FileRecord> Records { get; private set; }
     }
 }

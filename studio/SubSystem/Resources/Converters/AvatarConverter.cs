@@ -17,32 +17,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         private static readonly ConcurrentDictionary<string, ImageSource> Pool = new ConcurrentDictionary<string, ImageSource>();
         private static          ImageEngine                               _engine;
-        private static readonly BitmapImage                               _character = new BitmapImage(new Uri("pack://application:,,,/SubSystem;component/assets/avatar.png"));
-        
+
+        private static readonly BitmapImage _character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
+
         private static ImageSource FallbackImage(DocumentType type)
         {
             return _character;
         }
-        
+
         private static ImageSource Caching(string avatar)
         {
             _engine ??= Xaml.Get<IDatabaseManager>()
                             .GetEngine<ImageEngine>();
-            
+
             if (!Pool.TryGetValue(avatar, out var img))
             {
                 var ms = _engine.Get(avatar);
                 img = Xaml.FromStream(ms, 256, 256);
                 Pool.TryAdd(avatar, img);
             }
+
             return img;
         }
+
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values is null || values.Length == 0)
             {
                 return FallbackImage(DocumentType.Document);
             }
+
             if (values[1] is DocumentType type)
             {
                 var avatar = values[0]?.ToString();
@@ -50,14 +54,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 {
                     return FallbackImage(type);
                 }
-            
-            
-            
+
+
                 return Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
             }
-            
+
             return FallbackImage(DocumentType.Document);
         }
+
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();

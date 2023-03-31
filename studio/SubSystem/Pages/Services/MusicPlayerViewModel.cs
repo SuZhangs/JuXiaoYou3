@@ -17,22 +17,26 @@ using TagLib;
 using TagLib.Mpeg;
 using File = TagLib.File;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Acorisoft.FutureGL.MigaStudio.Resources.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
     public sealed class MusicPlayerViewModel : DialogViewModel, IDropTarget
     {
-        private readonly MusicService    _service;
-        private readonly HashSet<string> _hash;
+        private readonly        MusicService    _service;
+        private readonly        HashSet<string> _hash;
 
         private bool        _isMute;
         private double      _volume;
         private double      _lastVolume;
-        private ImageSource _cover;
-        private ImageSource _background;
+        private string _cover;
+        private string _background;
         private bool        _isPlaying;
         private int         _index;
         private Playlist    _playlist;
@@ -51,12 +55,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             _service.StateUpdatedHandler = HandleStateChanged;
             _service.Position
                     .ObserveOn(Scheduler)
-                    .Subscribe(x => { Position = x; });
+                    .Subscribe(x => { Position = x; })
+                    .DisposeWith(Collector);
 
             _service.Duration
                     .ObserveOn(Scheduler)
-                    .Subscribe(x => { Duration = x; });
-            _service.Playlist.Observable
+                    .Subscribe(x => { Duration = x; })
+                    .DisposeWith(Collector);
+            
+            _service.Playlist
+                    .Observable
                     .ObserveOn(Scheduler)
                     .Where(x => x != null)
                     .Subscribe(x =>
@@ -66,10 +74,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                         {
                             _hash.Add(item.Id);
                         }
-                    });
+                    }).DisposeWith(Collector);
 
-            Background = new BitmapImage(new Uri("E:\\1.jpg"));
-            Cover      = Background;
+            Background = null;
             Playlist = new Playlist
             {
                 Name  = "新建播放列表",
@@ -77,7 +84,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             };
             Volume = 0.5d;
 
-            AddMusicToPlaylistCommand      = new RelayCommand(AddMusicToPlaylistImpl, HasPlaylist);
+            AddMusicToPlaylistCommand      = AsyncCommand(AddMusicToPlaylistImpl, HasPlaylist);
             RemoveMusicFromPlaylistCommand = new RelayCommand<Music>(RemoveMusicFromPlaylistImpl, HasMusicItem);
             PlayMusicCommand               = new RelayCommand<Music>(PlayMusicImpl, HasMusicItem);
             PlayPreviousCommand            = new RelayCommand(() => _service.PlayLast(), WasFirstItem);
@@ -152,7 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             }
         }
 
-        private void AddMusicToPlaylistImpl()
+        private async Task AddMusicToPlaylistImpl()
         {
             var opendlg = new OpenFileDialog
             {
@@ -165,28 +172,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 return;
             }
 
+            var me = Xaml.Get<IDatabaseManager>()
+                         .GetEngine<MusicEngine>();
+            
             foreach (var fileName in opendlg.FileNames)
             {
                 if (!_hash.Add(fileName))
                 {
-                    // TODO: duplicated
                     return;
                 }
 
                 var file      = File.Create(fileName);
                 var musicFile = (AudioFile)file;
                 var tag       = musicFile.GetTag(TagTypes.Id3v2);
-                var cover     = string.Empty;
+                var cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
 
                 if (tag.Pictures is not null)
                 {
                     var pic = tag.Pictures.First();
-                    cover = Path.Combine(Path.GetDirectoryName(fileName)!, Path.GetFileNameWithoutExtension(fileName) + ".png");
-
-                    if (!System.IO.File.Exists(cover))
-                    {
-                        System.IO.File.WriteAllBytes(cover, pic.Data.Data);
-                    }
+                    cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
+                    await me.WriteAlbum(pic.Data.Data, cover);
                 }
 
                 var music = new Music
@@ -270,8 +275,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             //
             if (!string.IsNullOrEmpty(item.Cover))
             {
-                Cover      = new BitmapImage(new Uri(item.Cover));
-                Background = Cover;
+                Background = item.Cover;
             }
         }
 
@@ -331,15 +335,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Cover"/> 属性。
-        /// </summary>
-        public ImageSource Cover
-        {
-            get => _cover;
-            set => SetValue(ref _cover, value);
-        }
-
-        /// <summary>
         /// 获取或设置 <see cref="Volume"/> 属性。
         /// </summary>
         public double Volume
@@ -365,7 +360,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         /// <summary>
         /// 获取或设置 <see cref="Background"/> 属性。
         /// </summary>
-        public ImageSource Background
+        public string Background
         {
             get => _background;
             set => SetValue(ref _background, value);
@@ -414,7 +409,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         public RelayCommand PlayPreviousCommand { get; }
         public RelayCommand PlayNextCommand { get; }
         public RelayCommand MuteOrUnMuteCommand { get; }
-        public RelayCommand AddMusicToPlaylistCommand { get; }
+        public AsyncRelayCommand AddMusicToPlaylistCommand { get; }
         public RelayCommand ChangePlayModeCommand { get; }
         public RelayCommand PlayOrPauseCommand { get; }
         public RelayCommand<Music> PlayMusicCommand { get; }

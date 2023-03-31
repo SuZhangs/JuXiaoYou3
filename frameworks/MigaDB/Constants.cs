@@ -25,6 +25,7 @@
          */
         internal const string PropertyCollectionName    = "_props";
         internal const string Name_FileTable            = "fileTable";
+        internal const string Name_MusicTable            = "musicTable";
         internal const string Name_Directory            = "v_dir";
         internal const string Name_Keyword              = "keywords";
         internal const string Name_ModuleTemplate       = "module";

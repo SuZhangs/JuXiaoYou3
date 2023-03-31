@@ -119,7 +119,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 avatar = $"avatar_{ID.Get()}.png";
                 buffer.Seek(0, SeekOrigin.Begin);
-                ImageEngine.SetAvatar(buffer, avatar);
+                ImageEngine.WriteAvatar(buffer, avatar);
 
                 var record = new FileRecord
                 {
