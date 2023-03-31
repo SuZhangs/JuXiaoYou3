@@ -192,7 +192,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
                 music         = _playlistStream.CurrentValue.Items[_currentIndex];
                 _targetStream.SetValue(music);
             }
-            if (Mode == PlayMode.Loop)
+            else
             {
                 _currentIndex = ++_currentIndex % maxIndex;
                 music = _playlistStream.CurrentValue.Items[_currentIndex];
