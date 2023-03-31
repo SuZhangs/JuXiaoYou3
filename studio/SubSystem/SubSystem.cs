@@ -7,8 +7,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
-using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
-using Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {

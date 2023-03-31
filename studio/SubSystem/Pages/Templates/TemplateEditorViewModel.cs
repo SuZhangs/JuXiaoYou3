@@ -15,9 +15,9 @@ using NLog;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class TemplateEditorViewModel : TabViewModel
+    public class TemplateEditorViewModel : TabViewModel, IPreviewBlockViewModel
     {
         [NullCheck(UniTestLifetime.Constructor)]
         private readonly HashSet<string> _metaHashSet;
@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             Version                  =  1;
             ForType                  =  DocumentType.CharacterDocument;
             Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
-            Blocks.CollectionChanged += (_, _) => RaiseUpdated(nameof(PreviewBlocks));
+            PreviewBlocks            =  new ObservableCollection<ModuleBlockDataUI>();
             MetadataList             =  new ObservableCollection<MetadataCache>();
             OpenPreviewPaneCommand   =  new RelayCommand(() => IsPreviewPaneOpen = true);
 
@@ -64,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         }
 
         #region Keyboard Input
-        
+
         private void KeyboardInput_New()
         {
             NewTemplateImpl();
@@ -74,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         {
             await SaveTemplateImpl();
         }
-        
+
         private async void KeyboardInput_Open()
         {
             await OpenTemplateImpl();
@@ -85,7 +85,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         #region Translate
 
         // TODO: 翻译
-        private static string GetName(string value)
+        internal static string GetName(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -98,7 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             return value;
         }
 
-        private static string GetFor(string value)
+        internal static string GetFor(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             return string.Format(pattern, value);
         }
 
-        private static string GetAuthor(string value)
+        internal static string GetAuthor(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -135,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         }
 
 
-        private static string GetContractList(string value)
+        internal static string GetContractList(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -154,7 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         }
 
 
-        private static string GetIntro(string value)
+        internal static string GetIntro(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -166,7 +166,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             return value;
         }
-
 
         #endregion
 
@@ -258,7 +257,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
                 Xaml.Get<ILogger>()
                     .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");
-
             }
         }
 
@@ -393,6 +391,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
 
             var element = r.Value;
             Blocks.Add(element);
+            PreviewBlocks.Add(ModuleBlockFactory.GetDataUI(element.CreateInstance()));
 
 
             await EditBlockViewModel.Edit(element);
@@ -426,6 +425,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
 
             Blocks.Remove(element);
+            PreviewBlocks.Remove(PreviewBlocks.FirstOrDefault(x => x.Id == element.Id));
             DetectAll();
             SetDirtyState(true);
         }
@@ -445,6 +445,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
 
             Blocks.Move(targetIndex, targetIndex - 1);
+            PreviewBlocks.Move(targetIndex, targetIndex - 1);
         }
 
         private void ShiftDownBlockImpl(ModuleBlockEditUI element)
@@ -463,6 +464,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             }
 
             Blocks.Move(targetIndex, targetIndex + 1);
+            PreviewBlocks.Move(targetIndex, targetIndex + 1);
         }
 
         private async Task RemoveAllBlockImpl()
@@ -477,6 +479,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
             //
             // 清空
             Blocks.Clear();
+            PreviewBlocks.Clear();
             MetadataList.Clear();
             SetDirtyState(true);
         }
@@ -638,39 +641,38 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
 
-        public IEnumerable<ModuleBlockDataUI> PreviewBlocks =>
-            Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
+        public ObservableCollection<ModuleBlockDataUI> PreviewBlocks { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NewTemplateCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand OpenTemplateCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand SaveTemplateCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleBlockEditUI> EditBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleBlockEditUI> RemoveBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<ModuleBlockEditUI> ShiftUpBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<ModuleBlockEditUI> ShiftDownBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand RemoveAllBlockCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand OpenPreviewPaneCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RefreshMetadataListCommand { get; }
     }

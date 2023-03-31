@@ -7,7 +7,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
+using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;

@@ -15,9 +15,9 @@ using DynamicData;
 using Microsoft.Win32;
 using NLog;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class TemplateGalleryViewModel : TabViewModel
+    public class TemplateGalleryViewModel : TabViewModel, IPreviewBlockViewModel
     {
         private const string FileNotExists = "text.FileNotFound";
 
@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             _reader            = new DataPartReader();
             Source             = new SourceList<ModuleTemplateCache>();
             MetadataCollection = new ObservableCollection<MetadataCache>();
-            Blocks             = new ObservableCollection<ModuleBlockDataUI>();
+            PreviewBlocks             = new ObservableCollection<ModuleBlockDataUI>();
 
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
@@ -280,10 +280,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
 
                 ExportTemplateCommand.NotifyCanExecuteChanged();
                 PreviewCommand.NotifyCanExecuteChanged();
-                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
+                PreviewBlocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
+                
+                RaiseUpdated(nameof(PreviewBlocks));
+                RaiseUpdated(nameof(PreviewFor));
+                RaiseUpdated(nameof(PreviewIntro));
+                RaiseUpdated(nameof(PreviewContractList));
+                RaiseUpdated(nameof(PreviewAuthorList));
+                RaiseUpdated(nameof(PreviewName));
             }
         }
 
+        
+        public string PreviewFor { get; private set; }
+        public string PreviewIntro { get; private set; }
+        public string PreviewContractList  { get; private set; }
+        public string PreviewAuthorList { get; private set; }
+        public string PreviewName  { get; private set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
@@ -298,8 +311,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery
             }
         }
 
+
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<ModuleBlockDataUI> Blocks { get; }
+        public ObservableCollection<ModuleBlockDataUI> PreviewBlocks { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public SourceList<ModuleTemplateCache> Source { get; }

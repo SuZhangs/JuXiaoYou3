@@ -1,14 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaStudio.Models.Modules;
 using Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class NewElementViewModel : ExplicitDialogVM
+    // TODO:
+    // 1) 部分ModuleBlockDataUI需要最小宽度和高度
+    // 2) 实现CardAction的替代
+    // 3) 实现其他控件的替代
+    public class NewBlockViewModel : ExplicitDialogVM
     {
         private IModuleBlockDataUI _previewItem;
         private object             _maybeMetadataKind;
@@ -57,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
         public static Task<Op<ModuleBlockEditUI>> New()
         {
             return Xaml.Get<IDialogService>()
-                       .Dialog<ModuleBlockEditUI>(new NewElementViewModel());
+                       .Dialog<ModuleBlockEditUI>(new NewBlockViewModel());
         }
 
         protected override bool IsCompleted() => _previewItem is not null;

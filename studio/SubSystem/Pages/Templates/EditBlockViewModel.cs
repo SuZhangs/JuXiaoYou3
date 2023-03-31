@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaStudio.Models.Modules;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     public class EditBlockViewModel : ImplicitDialogVM
     {

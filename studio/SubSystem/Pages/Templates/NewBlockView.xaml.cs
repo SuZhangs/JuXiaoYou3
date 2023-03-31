@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     [Connected(View = typeof(NewBlockView), ViewModel = typeof(NewBlockViewModel))]
     public partial class NewBlockView

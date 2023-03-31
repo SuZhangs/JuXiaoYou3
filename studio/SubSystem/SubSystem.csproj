@@ -67,11 +67,6 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Pages\TemplateGallery\TemplateGalleryPage.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Models\Modules\ModuleBlockDataTemplates.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
@@ -82,6 +77,11 @@
         <Generator>MSBuild:Compile</Generator>
       </Page>
       <Page Remove="ViewModels\**" />
+      <Page Update="Pages\TemplateEditor\TemplateGalleryPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>

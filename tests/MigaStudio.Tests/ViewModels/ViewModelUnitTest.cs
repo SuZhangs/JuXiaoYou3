@@ -1,7 +1,7 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
-using Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor;
+using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 
 namespace MigaStudio.Tests.ViewModels
 {

@@ -14,7 +14,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
-using Acorisoft.FutureGL.MigaStudio.Pages.TemplateGallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;

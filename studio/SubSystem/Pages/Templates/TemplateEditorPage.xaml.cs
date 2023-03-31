@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.TemplateEditor
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
 
     [Connected(View = typeof(TemplateEditorPage), ViewModel = typeof(TemplateEditorViewModel))]
