@@ -120,6 +120,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 PlayMode.Shuffle => PlayMode.Sequence,
                 _                => PlayMode.Loop
             };
+
+            PlayNextCommand?.NotifyCanExecuteChanged();
+            PlayPreviousCommand?.NotifyCanExecuteChanged();
         }
 
         private void MuteOrUnmuteImpl()
