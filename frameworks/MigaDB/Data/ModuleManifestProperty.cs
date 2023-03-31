@@ -17,7 +17,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data
 
         public Dictionary<DocumentType, ModuleManifest> DefaultManifests { get; init; }
         public Dictionary<DocumentType, PreviewManifest> DefaultPreviews { get; init; }
-        
         public ObservableCollection<ModuleManifest> Manifests { get; init; }
     }
 }
