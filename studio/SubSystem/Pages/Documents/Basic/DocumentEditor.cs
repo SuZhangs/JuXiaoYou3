@@ -26,6 +26,10 @@ using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
+    public class DocumentEditorViewModelProxy : BindingProxy<DocumentEditorVMBase>
+    {
+    }
+
     public abstract partial class DocumentEditorVMBase : TabViewModel
     {
         //

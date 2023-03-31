@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            Keywords.Remove(r.item);
+            Keywords.Remove(item);
             await Successful(SubSystemString.OperationOfRemoveIsSuccessful);
         }
         

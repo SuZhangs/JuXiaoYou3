@@ -12,6 +12,9 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+    </UserControl.Resources>
     <StackPanel>
         <HeaderedContentControl DockPanel.Dock="Top"
                                 Header="基本信息（必选）"
@@ -82,7 +85,7 @@
                             <Border Background="{f:Brush HighlightA4}">
                                 <DockPanel>
                                     <Button DockPanel.Dock="Right"
-                                            Command="{Binding Source={StaticResource Shell},Path=ViewModel.RemoveTabCommand}"
+                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveKeywordCommand}"
                                             CommandParameter="{Binding}"
                                             MinHeight="20"
                                             MinWidth="20"
