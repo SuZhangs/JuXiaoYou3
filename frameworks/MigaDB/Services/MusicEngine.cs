@@ -64,6 +64,9 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                    DB.HasID(id);
         }
         
+
+        public Music GetFile(string fileName) => DB.FindById(fileName);
+        
         public void AddFile(Music record)
         {
             if (record is null)
@@ -112,12 +115,6 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 return;
             }
 
-            Records.Insert(new FileRecord
-            {
-                Id = resource,
-                Uri = resource,
-                Type = ResourceType.Music
-            });
             var dst = Path.Combine(FullDirectory, resource);
             var fs  = new FileStream(dst, FileMode.Create, FileAccess.Write);
             await fs.WriteAsync(buffer);

@@ -63,6 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
     {
         private readonly WaveOutEvent _device;
         private readonly Timer        _timer;
+        private readonly BehaviorSubject<Tuple<TimeSpan, PlaybackState, Music, int>> _handler;
 
         private AudioFileReader                             _reader;
         private bool                                        _manualStop;
@@ -71,7 +72,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
         private PlaybackState                               _currentState;
         private Music                                       _item;
         private int                                         _currentIndex2;
-        private Action<TimeSpan, PlaybackState, Music, int> _handler;
 
         private readonly ObservableProperty<TimeSpan> _positionStream;
         private readonly ObservableProperty<TimeSpan> _durationStream;
@@ -80,6 +80,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
 
         public MusicService()
         {
+            _handler = new BehaviorSubject<Tuple<TimeSpan, PlaybackState, Music, int>>(
+                new Tuple<TimeSpan, PlaybackState, Music, int>(TimeSpan.Zero, PlaybackState.Stopped, null, -1));
             _durationStream         =  new ObservableProperty<TimeSpan>();
             _positionStream         =  new ObservableProperty<TimeSpan>(TimeSpan.Zero);
             _targetStream           =  new ObservableProperty<Music>(null);
@@ -96,12 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
             _currentState  = state;
             _item          = item;
             _currentIndex2 = index;
-            StateUpdatedHandler?.Invoke(_currentTime, _currentState, _item, _currentIndex2);
-        }
-
-        void Reconnect()
-        {
-            StateUpdatedHandler?.Invoke(_currentTime, _currentState, _item, _currentIndex2);
+            _handler.OnNext(new Tuple<TimeSpan, PlaybackState, Music, int>(_currentTime, _currentState, _item, _currentIndex2));
         }
 
         private void DurationPushHandler(object state)
@@ -378,6 +375,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
 
         protected override void ReleaseManagedResources()
         {
+            Stop();
             _timer.Dispose();
             _playlistStream.Dispose();
             _positionStream.Dispose();
@@ -398,15 +396,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
         public IObservableProperty<Music> Music => _targetStream;
         public IObservableProperty<Playlist> Playlist => _playlistStream;
 
-        public Action<TimeSpan, PlaybackState, Music, int> StateUpdatedHandler
-        {
-            get => _handler;
-            set
-            {
-                _handler = value;
-                Reconnect();
-            }
-        }
+        public IObservable<Tuple<TimeSpan, PlaybackState, Music, int>> State => _handler;
 
         public PlayMode Mode { get; set; }
     }

@@ -30,29 +30,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
     public sealed class MusicPlayerViewModel : DialogViewModel, IDropTarget
     {
         private readonly        MusicService    _service;
-        private readonly        HashSet<string> _hash;
 
-        private bool        _isMute;
-        private double      _volume;
-        private double      _lastVolume;
-        private string _cover;
-        private string _background;
-        private bool        _isPlaying;
-        private int         _index;
-        private Playlist    _playlist;
-        private Music       _current;
-        private PlayMode    _mode;
-        private TimeSpan    _position;
-        private TimeSpan    _duration;
-
-        private bool _isVolumePaneOpen;
-        private bool _isPlaylistPaneOpen;
+        private bool     _isMute;
+        private double   _volume;
+        private double   _lastVolume;
+        private string   _background;
+        private bool     _isPlaying;
+        private int      _index;
+        private Music    _current;
+        private PlayMode _mode;
+        private TimeSpan _position;
+        private TimeSpan _duration;
+        private bool     _isVolumePaneOpen;
+        private bool     _isPlaylistPaneOpen;
+        
+        private static Playlist _playlist;
 
         public MusicPlayerViewModel()
         {
-            _hash                        = new HashSet<string>();
             _service                     = Xaml.Get<MusicService>();
-            _service.StateUpdatedHandler = HandleStateChanged;
+            MusicEngine = Xaml.Get<IDatabaseManager>()
+                              .GetEngine<MusicEngine>();
+            _service.State
+                    .ObserveOn(Scheduler)
+                    .Subscribe(x =>
+                    {
+                        HandleStateChanged(x.Item1, x.Item2, x.Item3, x.Item4);
+                    })
+                    .DisposeWith(Collector);
             _service.Position
                     .ObserveOn(Scheduler)
                     .Subscribe(x => { Position = x; })
@@ -62,19 +67,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                     .ObserveOn(Scheduler)
                     .Subscribe(x => { Duration = x; })
                     .DisposeWith(Collector);
-            
-            _service.Playlist
-                    .Observable
-                    .ObserveOn(Scheduler)
-                    .Where(x => x != null)
-                    .Subscribe(x =>
-                    {
-                        _hash.Clear();
-                        foreach (var item in x.Items)
-                        {
-                            _hash.Add(item.Id);
-                        }
-                    }).DisposeWith(Collector);
+
+            Playlist = _service.Playlist
+                               .CurrentValue;
 
             Background = null;
             Playlist = new Playlist
@@ -104,11 +99,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 return;
             }
 
-            _index    = index;
-            Duration  = duration;
-            IsPlaying = state == PlaybackState.Playing;
-            Position  = TimeSpan.Zero;
-            Current   = item;
+            _index     = index;
+            Duration   = duration;
+            IsPlaying  = state == PlaybackState.Playing;
+            Position   = TimeSpan.Zero;
+            Current    = item;
+            Background = item?.Cover;
             PlayNextCommand?.NotifyCanExecuteChanged();
             PlayPreviousCommand?.NotifyCanExecuteChanged();
         }
@@ -172,36 +168,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 return;
             }
 
-            var me = Xaml.Get<IDatabaseManager>()
-                         .GetEngine<MusicEngine>();
-            
             foreach (var fileName in opendlg.FileNames)
             {
-                if (!_hash.Add(fileName))
+                Music music;
+                var fileName1 = Path.GetFileNameWithoutExtension(fileName) + ".mp3";
+                
+                if (MusicEngine.HasFile(fileName))
                 {
-                    return;
+                    music = MusicEngine.GetFile(fileName);
                 }
-
-                var file      = File.Create(fileName);
-                var musicFile = (AudioFile)file;
-                var tag       = musicFile.GetTag(TagTypes.Id3v2);
-                var cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
-
-                if (tag.Pictures is not null)
+                else
                 {
-                    var pic = tag.Pictures.First();
-                    cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
-                    await me.WriteAlbum(pic.Data.Data, cover);
+                    var file      = File.Create(fileName);
+                    var musicFile = (AudioFile)file;
+                    var tag       = musicFile.GetTag(TagTypes.Id3v2);
+                    var cover     = Path.GetFileNameWithoutExtension(fileName) + ".png";
+
+                    if (tag.Pictures is not null)
+                    {
+                        var pic = tag.Pictures.First();
+                        cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
+                        await MusicEngine.WriteAlbum(pic.Data.Data, cover);
+                    }
+
+                    
+                    music = new Music
+                    {
+                        Id     = fileName1,
+                        Path   = fileName,
+                        Name   = tag.Title,
+                        Author = tag.FirstPerformer,
+                        Cover  = cover
+                    };
+                    
+                    MusicEngine.AddFile(music);
                 }
-
-                var music = new Music
-                {
-                    Id     = fileName,
-                    Path   = fileName,
-                    Name   = tag.Title,
-                    Author = tag.FirstPerformer,
-                    Cover  = cover
-                };
 
                 //
                 //
@@ -225,7 +226,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
             var removedItem = _playlist.Items[index];
             _playlist.Items.RemoveAt(index);
-            _hash.Remove(item.Id);
 
             if (_current is null)
             {
@@ -406,6 +406,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             set => SetValue(ref _position, value);
         }
 
+        public MusicEngine MusicEngine { get; }
+        
         public RelayCommand PlayPreviousCommand { get; }
         public RelayCommand PlayNextCommand { get; }
         public RelayCommand MuteOrUnMuteCommand { get; }
