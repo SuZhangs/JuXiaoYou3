@@ -24,13 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio
         public MainWindow()
         {
             InitializeComponent();
-            PresentationTraceSources.Refresh();
-            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
-        }
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
         }
     }
 }

@@ -163,11 +163,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             KeywordEngine.AddKeyword(r.Value);
             Keywords.Add(r.Value);
             SetDirtyState(true);
-            await Successful(SubSystemString.OperationOfAddIsSuccessful);
         }
 
         private async Task RemoveKeywordImpl(string item)
         {
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
             if (!Keywords.Remove(item))
             {
                 return;
@@ -175,7 +178,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             Keywords.Remove(item);
             SetDirtyState(true);
-            await Successful(SubSystemString.OperationOfRemoveIsSuccessful);
         }
         
         

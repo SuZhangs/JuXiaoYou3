@@ -10,7 +10,6 @@
                  xmlns:fs="urn:acorisoft/forest/shell"
                  xmlns:s="urn:acorisoft/studio"
                  xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
-                 PresentationTraceSources.TraceLevel="High"
                  mc:Ignorable="d"
                  FontFamily="{StaticResource HeiTi}"
                  FontWeight="Light"
