@@ -37,31 +37,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void AddMetadata(Metadata metadata)
         {
-            lock (_sync)
+            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
+            {
+                _document.Metas[metadataIndex].Value = metadata.Value;
+            }
+            else
             {
 
-                if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
-                {
-                    _document.Metas[metadataIndex].Value = metadata.Value;
-                }
-                else
-                {
+                var checkedIndex = _document.Metas.Count;
+                _document.Metas.Add(metadata);
 
-                    var checkedIndex = _document.Metas.Count;
-                    _document.Metas.Add(metadata);
-
-                    if (checkedIndex != _currentIndex)
-                    {
-                        throw new InvalidOperationException("thread-not safe");
-                    }
-                    
-                    _MetadataTrackerByIndex.Add(_currentIndex, metadata);
-                    _MetadataTrackerByName.Add(metadata.Name, _currentIndex);
-                    
-                    //
-                    // 自增
-                    Interlocked.Increment(ref _currentIndex);
+                if (checkedIndex != _currentIndex)
+                {
+                    throw new InvalidOperationException("thread-not safe");
                 }
+                    
+                _MetadataTrackerByIndex.Add(_currentIndex, metadata);
+                _MetadataTrackerByName.Add(metadata.Name, _currentIndex);
+                    
+                //
+                // 自增
+                Interlocked.Increment(ref _currentIndex);
             }
         }
     }

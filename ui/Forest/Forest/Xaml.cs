@@ -243,7 +243,8 @@ namespace Acorisoft.FutureGL.Forest
             // instance是一个View
             // 返回 ViewModel
             // ReSharper disable once InvertIf
-            if (ViewInfoMapper.TryGetValue(key, out info) && instance is FrameworkElement fe)
+            if (ViewInfoMapper.TryGetValue(key, out info) && 
+                instance is FrameworkElement)
             {               
                 return instance;
             }
