@@ -11,7 +11,9 @@
              d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:ObsoleteViewModel},IsDesignTimeCreatable = True}"
              Width="480"
-             Height="384">
+                     Height="320"
+             MinHeight="320"
+                     MaxHeight="384">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -50,11 +52,13 @@
                        Text="{Binding Title,Mode=OneWay,FallbackValue=Delete}"
                        Style="{StaticResource TextBlock.DialogTitle}"/>
 
+
             <ScrollViewer Grid.Row="2"
                           Margin="16"
-                          Padding="16 0"
+                          Padding="16"
                           Style="{StaticResource UiScrollViewer}">
-                <TextBlock FontSize="14"
+                <TextBlock FontSize="16"
+                           HorizontalAlignment="Center"
                            Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
                            TextWrapping="Wrap" />
             </ScrollViewer>

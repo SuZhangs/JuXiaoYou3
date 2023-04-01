@@ -420,6 +420,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task EditBlockImpl(ModuleBlockEditUI element)
         {
             var r = await EditBlockViewModel.Edit(element);
+            RaiseUpdated(nameof(PreviewBlocks));
 
             if (!r.IsFinished)
             {
@@ -428,8 +429,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             DetectAll();
             SetDirtyState(true);
-            RaiseUpdated(nameof(PreviewBlocks));
-
             await Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 

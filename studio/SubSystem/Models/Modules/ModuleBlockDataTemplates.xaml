@@ -493,8 +493,8 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <ItemsControl 
-                       Foreground="{f:ForegroundBrush}" ItemsSource="{Binding Items}"
+            <ItemsControl Foreground="{f:ForegroundBrush}"
+                          ItemsSource="{Binding Items}"
                           VerticalAlignment="Stretch"
                           VerticalContentAlignment="Top">
             </ItemsControl>

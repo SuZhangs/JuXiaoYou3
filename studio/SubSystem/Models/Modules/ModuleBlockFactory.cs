@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             return new GroupBlock
             {
                 Id       = ID.Get(),
-                Name     = SubSystemString.GetSingleLineName(),
+                Name     = SubSystemString.GetGroupName(),
                 ToolTips = SubSystemString.GetToolTipsField(),
 
                 Items = new List<ModuleBlock>

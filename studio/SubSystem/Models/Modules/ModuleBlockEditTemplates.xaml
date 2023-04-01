@@ -19,6 +19,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <thisConverters:String2BooleanConverter x:Key="String2Boolean" />
+    <thisConverters:BlockNameConverter x:Key="BlockName" />
     <thisConverters:String2IntConverter x:Key="String2Int" />
     <thisConverters:ReferenceSourceConverter x:Key="RefSource" />
     <!--
@@ -521,6 +522,10 @@
                 <UniformGrid Columns="3">
                     <f:HeaderedSingleLine f:Language.Id="global.minimum"
                                           Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
+                    <f:HeaderedSingleLine f:Language.Id="global.minimum"
+                                          Margin="4"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
                                           Header="最小值" />
 
@@ -553,7 +558,7 @@
                 <f:HeaderedMultiLine f:Language.Id="global.tooltips"
                                      Margin="4"
                                      Header="提示"
-                                     Height="128"
+                                     Height="96"
                                      Text="{Binding ToolTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Border>
@@ -784,7 +789,7 @@
                     <f:ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Margin="8"
-                                       Text="{Binding Name,Mode=OneWay}"
+                                       Text="{Binding Mode=OneWay, Converter={StaticResource BlockName}}"
                                        TextTrimming="CharacterEllipsis" />
                         </DataTemplate>
                     </f:ListBox.ItemTemplate>

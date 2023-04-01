@@ -11,7 +11,9 @@
              d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:WarningViewModel},IsDesignTimeCreatable = True}"
              Width="480"
-             Height="384">
+                     Height="320"
+             MinHeight="320"
+                     MaxHeight="384">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
