@@ -13,5 +13,11 @@
         Likability,
         RadarChart,
         HistogramChart,
+        File,
+        Music,
+        Image,
+        Audio,
+        Video,
+        Reference
     }
 }

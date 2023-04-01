@@ -127,7 +127,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.Audio,
                 Parameters = TargetSource
             };
         }
@@ -142,7 +142,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.Video,
                 Parameters = TargetSource
             };
         }
@@ -157,7 +157,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.Music,
                 Parameters = TargetSource
             };
         }
@@ -172,7 +172,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.Image,
                 Parameters = TargetSource
             };
         }
@@ -187,7 +187,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.File,
                 Parameters = TargetSource
             };
         }
@@ -220,7 +220,7 @@
             {
                 Name       = Metadata,
                 Value      = TargetName,
-                Type       = MetadataKind.Text,
+                Type       = MetadataKind.Reference,
                 Parameters = TargetSource
             };
         }
