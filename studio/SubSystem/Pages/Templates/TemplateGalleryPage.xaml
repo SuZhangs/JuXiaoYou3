@@ -26,6 +26,7 @@
                 <f:ForestSection.ToolBar>
                     <StackPanel Grid.Row="0"
                                 Margin="0 0 0 4"
+                                HorizontalAlignment="Right"
                                 Orientation="Horizontal">
 
                         <ftk:ToolButton f:Language.Id="global.add"
@@ -65,8 +66,7 @@
                         
                         <ftk:ToolButton f:Language.Id="global.setting"
                                         Content="设置"
-                                        Command="{Binding ExportTemplateCommand}"
-                                        CommandParameter="{Binding ElementName=Canvas}"
+                                        Command="{Binding ManageManifestCommand}"
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
+using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using CommunityToolkit.Mvvm.Input;
 
@@ -46,7 +47,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            var r1 = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>();
+            var r1 = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RouteEventArgs
+            {
+                Args = new object[]
+                {
+                    Xaml.Get<IDatabaseManager>()
+                        .GetEngine<TemplateEngine>()
+                        .TemplateCacheDB
+                        .FindAll()
+                }
+            });
             if (!r1.IsFinished)
             {
                 return;

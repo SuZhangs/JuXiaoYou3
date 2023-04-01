@@ -587,6 +587,7 @@
                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                       SnapsToDevicePixels="True"
                                                       RecognizesAccessKey="False" />
+                                    
                                     <b:DialogButton Grid.Row="2"
                                                     Height="48"
                                                     Icon="{StaticResource FeatherIcon.Checked}"
@@ -594,7 +595,8 @@
                                                     IsDefault="True"
                                                     Content="{TemplateBinding CancelButtonText}"
                                                     Command="{TemplateBinding CancelCommand}"
-                                                    Purpose="CallToAction" />
+                                                    Purpose="CallToAction" 
+                                                    Width="256"/>
                                 </Grid>
                             </Border>
                         </ControlTemplate>

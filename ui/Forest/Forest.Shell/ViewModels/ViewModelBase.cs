@@ -220,7 +220,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #endregion
 
-        protected static IDialogService DialogService() => DialogService();
+        protected static IDialogService DialogService() => Xaml.Get<IDialogService>();
 
         protected sealed override void ReleaseManagedResources()
         {

@@ -10,8 +10,8 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ModuleManifestViewModel}, IsDesignTimeCreatable=True}"
-                     Height="300"
-                     Width="300">
+                     Height="540"
+                     Width="840">
 
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
                   Accent="{f:Brush HighlightA3}"
@@ -23,11 +23,33 @@
                 <ColumnDefinition Width="384"/>
             </Grid.ColumnDefinitions>
             
-            <f:ListBox Grid.Column="0"
-                       ItemsSource="{Binding Manifests,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedManifest,Mode=TwoWay}">
-                
-            </f:ListBox>
+            <f:ForestSection Grid.Column="0"
+                             Header="设置">
+                <f:ForestSection.ToolBar>
+                    <StackPanel Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 0 4"
+                                Orientation="Horizontal">
+
+                        <ftk:ToolButton f:Language.Id="global.add"
+                                        Content="添加"
+                                        Command="{Binding AddManifestCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+
+                        <ftk:ToolButton f:Language.Id="global.remove"
+                                        Content="删除"
+                                        Command="{Binding RemoveManifestCommand}"
+                                        CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:ListBox ItemsSource="{Binding Manifests,Mode=OneWay}"
+                           SelectedItem="{Binding SelectedManifest,Mode=TwoWay}">
+
+                </f:ListBox>
+            </f:ForestSection>
             
             <ftk:TabControl Grid.Column="1">
                 <ftk:TabItem f:Language.Id="global.Preview"
