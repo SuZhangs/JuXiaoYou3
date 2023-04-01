@@ -143,7 +143,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             else
             {
-                await Successful(SubSystemString.OperationOfRemoveIsSuccessful);
+                if (item == SelectedTemplate)
+                {
+                    SelectedTemplate = null;
+                }
+                
                 Refresh();
             }
         }
@@ -265,6 +269,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _selectedTemplate, value);
+                
+                RaiseUpdated(nameof(PreviewIntro));
+                RaiseUpdated(nameof(PreviewContractList));
+                RaiseUpdated(nameof(PreviewAuthorList));
+                RaiseUpdated(nameof(PreviewName));
+                
                 if (_selectedTemplate is null)
                 {
                     return;
@@ -278,24 +288,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
                 ExportTemplateCommand.NotifyCanExecuteChanged();
                 PreviewCommand.NotifyCanExecuteChanged();
+                RemoveTemplateCommand.NotifyCanExecuteChanged();
                 Blocks.AddRange(template.Blocks, true);
                 RaiseUpdated(nameof(PreviewBlocks));
-                
-                RaiseUpdated(nameof(PreviewBlocks));
-                RaiseUpdated(nameof(PreviewFor));
-                RaiseUpdated(nameof(PreviewIntro));
-                RaiseUpdated(nameof(PreviewContractList));
-                RaiseUpdated(nameof(PreviewAuthorList));
-                RaiseUpdated(nameof(PreviewName));
             }
         }
 
         
-        public string PreviewFor { get; private set; }
-        public string PreviewIntro { get; private set; }
-        public string PreviewContractList  { get; private set; }
-        public string PreviewAuthorList { get; private set; }
-        public string PreviewName  { get; private set; }
+        public string PreviewIntro => SubSystemString.GetIntro(SelectedTemplate.Intro);
+        public string PreviewContractList => SubSystemString.GetContractList(SelectedTemplate.ContractList);
+        public string PreviewAuthorList => SubSystemString.GetAuthor(SelectedTemplate.AuthorList);
+        public string PreviewName => SubSystemString.GetName(SelectedTemplate.Name);
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。

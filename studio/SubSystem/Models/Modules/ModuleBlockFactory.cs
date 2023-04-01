@@ -30,16 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 Id       = ID.Get(),
                 Name     = SubSystemString.GetGroupName(),
                 ToolTips = SubSystemString.GetToolTipsField(),
-
-                Items = new List<ModuleBlock>
-                {
-                    CreateDegree(),
-                    CreateDegree(),
-                    CreateDegree(),
-                    CreateBinary(),
-                    CreateBinary(),
-                    CreateBinary(),
-                }
+                Items    = new List<ModuleBlock>()
             };
         }
 
@@ -389,7 +380,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         public static ModuleBlock GetBlock(BlockType kind)
         {
-            return kind switch
+            ModuleBlock b = kind switch
             {
                 BlockType.SingleLine => CreateSingleLine(),
                 BlockType.MultiLine  => CreateMultiLine(),
@@ -421,6 +412,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 BlockType.Reference => CreateReference(),
                 _                      => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
             };
+
+            if (b is SequenceBlock s)
+            {
+                s.Items.Add(new OptionItem
+                {
+                    Name = "选项1（Item1）",
+                    Value = "选项1（Item1）"
+                });
+                
+                s.Items.Add(new OptionItem
+                {
+                    Name  = "选项2（Item2）",
+                    Value = "选项2（Item2）"
+                });
+            }
+
+            if (b is GroupBlock g)
+            {
+                g.Items.Add(CreateSingleLine());
+                g.Items.Add(CreateSingleLine());
+            }
+
+            return b;
         }
 
         public static ModuleBlockEditUI GetEditUI(BlockType kind)
@@ -674,6 +688,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         public static ModuleTemplate Upgrade(Module oldTemplate)
         {
+            if(oldTemplate is null)
+            {
+                return null;
+            }
+
             var template = new ModuleTemplate
             {
                 Id            = oldTemplate.Id,

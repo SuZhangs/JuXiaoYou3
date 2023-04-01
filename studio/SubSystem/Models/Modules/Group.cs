@@ -107,12 +107,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             {
                 return;
             }
-
-            await Xaml.Get<IDialogService>()
-                      .Notify(
-                          CriticalLevel.Success,
-                          SubSystemString.Notify,
-                          SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         private async Task RemoveImpl(ModuleBlockEditUI element)

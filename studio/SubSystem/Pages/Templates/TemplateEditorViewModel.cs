@@ -81,93 +81,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         #endregion
 
-        #region Translate
-
-        // TODO: 翻译
-        internal static string GetName(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return Language.Culture switch
-                {
-                    _ => "世界观：未知"
-                };
-            }
-
-            return value;
-        }
-
-        internal static string GetFor(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return Language.Culture switch
-                {
-                    _ => "世界观名字"
-                };
-            }
-
-            var pattern = Language.Culture switch
-            {
-                _ => "世界观:{0}",
-            };
-
-            return string.Format(pattern, value);
-        }
-
-        internal static string GetAuthor(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return Language.Culture switch
-                {
-                    _ => "作者：佚名"
-                };
-            }
-
-            var pattern = Language.Culture switch
-            {
-                _ => "作者：{0}",
-            };
-
-            return string.Format(pattern, value);
-        }
-
-
-        internal static string GetContractList(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return Language.Culture switch
-                {
-                    _ => "联系方式：暂无"
-                };
-            }
-
-            var pattern = Language.Culture switch
-            {
-                _ => "联系方式：{0}",
-            };
-
-            return string.Format(pattern, value);
-        }
-
-
-        internal static string GetIntro(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return Language.Culture switch
-                {
-                    _ => "简介：暂无"
-                };
-            }
-
-            return value;
-        }
-
-        #endregion
-
         private static bool HasElement<T>(T element) where T : class => element is not null;
 
         private void SetDirtyState(bool value)
@@ -238,6 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 var template        = JSON.FromJson<ModuleTemplate>(templatePayload);
 
                 Id            = template.Id;
+                AuthorList = template.AuthorList;
                 Version       = template.Version;
                 Name          = template.Name;
                 Intro         = template.Intro;
@@ -247,8 +161,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 ForType       = template.ForType;
 
                 SetDirtyState(false);
-                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 RaiseUpdated(nameof(PreviewBlocks));
+                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
             catch (Exception ex)
@@ -411,8 +325,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             var element = r.Value;
             Blocks.Add(element);
-            RaiseUpdated(nameof(PreviewBlocks));
             await EditBlockViewModel.Edit(element);
+            RaiseUpdated(nameof(PreviewBlocks));
             DetectAll();
             SetDirtyState(true);
         }
@@ -520,11 +434,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public FrameworkElement Canvas { get; set; }
 
-        public string PreviewFor => GetFor(_for);
-        public string PreviewIntro => GetFor(_intro);
-        public string PreviewContractList => GetContractList(_contractList);
-        public string PreviewAuthorList => GetAuthor(_authorList);
-        public string PreviewName => GetName(_name);
+        public string PreviewIntro => SubSystemString.GetIntro(_intro);
+        public string PreviewContractList => SubSystemString.GetContractList(_contractList);
+        public string PreviewAuthorList => SubSystemString.GetAuthor(_authorList);
+        public string PreviewName => SubSystemString.GetName($"{_name}({_for})");
 
         /// <summary>
         /// 世界观
@@ -535,7 +448,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _for, value);
-                RaiseUpdated(nameof(PreviewFor));
+                RaiseUpdated(nameof(PreviewName));
             }
         }
 

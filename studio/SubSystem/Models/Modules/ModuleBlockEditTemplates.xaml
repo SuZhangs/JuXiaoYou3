@@ -789,8 +789,14 @@
                     <f:ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Margin="8"
-                                       Text="{Binding Mode=OneWay, Converter={StaticResource BlockName}}"
-                                       TextTrimming="CharacterEllipsis" />
+                                       TextTrimming="CharacterEllipsis">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource BlockName}">
+                                        <Binding/>
+                                        <Binding Path="Name" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         </DataTemplate>
                     </f:ListBox.ItemTemplate>
                 </f:ListBox>

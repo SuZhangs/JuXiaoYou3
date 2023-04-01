@@ -644,6 +644,94 @@ namespace Acorisoft.FutureGL.MigaStudio
         }
 
         #endregion
+        
+
+        #region ModuleBlockPreview Translate
+
+        // TODO: 翻译
+        internal static string GetName(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "世界观：未知"
+                };
+            }
+
+            return value;
+        }
+
+        internal static string GetFor(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "世界观名字"
+                };
+            }
+
+            var pattern = Language.Culture switch
+            {
+                _ => "世界观:{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+
+        internal static string GetAuthor(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "作者：佚名"
+                };
+            }
+
+            var pattern = Language.Culture switch
+            {
+                _ => "作者：{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+
+
+        internal static string GetContractList(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "联系方式：暂无"
+                };
+            }
+
+            var pattern = Language.Culture switch
+            {
+                _ => "联系方式：{0}",
+            };
+
+            return string.Format(pattern, value);
+        }
+
+
+        internal static string GetIntro(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return Language.Culture switch
+                {
+                    _ => "简介：暂无"
+                };
+            }
+
+            return value;
+        }
+
+        #endregion
 
 
         public static string GetDatabaseResult(DatabaseFailedReason reason)

@@ -4,7 +4,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     public interface IPreviewBlockViewModel
     {
-        public string PreviewFor { get; }
         public string PreviewIntro { get; }
         public string PreviewContractList { get; }
         public string PreviewAuthorList { get; }

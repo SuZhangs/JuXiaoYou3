@@ -16,29 +16,29 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel>
-        <TextBlock FontSize="32"
-                   Text="{Binding PreviewName,Mode=OneWay}" />
-        <TextBlock FontSize="20"
-                   Margin="0 4"
-                   Text="{Binding PreviewFor,Mode=OneWay}" />
-        <TextBlock FontSize="14"
-                   Foreground="{f:Brush ForegroundLevel2}"
-                   Margin="0 4"
-                   Text="{Binding PreviewAuthorList,Mode=OneWay}" />
-        <TextBlock FontSize="14"
-                   Foreground="{f:Brush ForegroundLevel2}"
-                   Margin="0 4"
-                   Text="{Binding PreviewContractList,Mode=OneWay}" />
-        <TextBlock FontSize="14"
-                   Foreground="{f:Brush ForegroundLevel2}"
-                   MaxHeight="96"
-                   Margin="0 4"
-                   TextTrimming="CharacterEllipsis"
-                   Text="{Binding PreviewIntro,Mode=OneWay}" />
-        <TextBlock f:Language.Name="Blocks"
-                   FontSize="18"
-                   Margin="0 12" />
-        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}" />
-    </StackPanel>
+    <Grid>
+        
+        <StackPanel>
+            <TextBlock FontSize="32"
+                       Text="{Binding PreviewName,Mode=OneWay}" />
+            <TextBlock FontSize="14"
+                       Foreground="{f:Brush ForegroundLevel2}"
+                       Margin="0 4"
+                       Text="{Binding PreviewAuthorList,Mode=OneWay}" />
+            <TextBlock FontSize="14"
+                       Foreground="{f:Brush ForegroundLevel2}"
+                       Margin="0 4"
+                       Text="{Binding PreviewContractList,Mode=OneWay}" />
+            <TextBlock FontSize="14"
+                       Foreground="{f:Brush ForegroundLevel2}"
+                       MaxHeight="96"
+                       Margin="0 4"
+                       TextTrimming="CharacterEllipsis"
+                       Text="{Binding PreviewIntro,Mode=OneWay}" />
+        
+            <ItemsControl Margin="0 12"
+                          ItemsSource="{Binding PreviewBlocks,Mode=OneWay}" />
+        </StackPanel>
+        <Border Background="Transparent"/>
+    </Grid>
 </UserControl>

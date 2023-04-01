@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return t;
             }
 
-            if (t is DegreeBlockEditUI d)
+            if (t is BinaryBlockEditUI d)
             {
                 return $"{d.Positive}-{d.Negative}";
             }
@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return SubSystemString.GetModuleBlockNameByKind(bt);
             
 
-            if (value is DegreeBlockEditUI d)
+            if (value is BinaryBlockEditUI d)
             {
                 return $"{d.Positive}-{d.Negative}";
             }

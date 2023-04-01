@@ -47,5 +47,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name { get; set; }
+
+        public string ContractList { get; set; }
     }
 }

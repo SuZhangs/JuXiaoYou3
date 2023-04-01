@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 Id           = Id,
                 Intro        = Intro,
                 AuthorList   = AuthorList,
+                ContractList = ContractList,
                 MetadataList = MetadataList,
                 Version      = Version,
                 Name         = $"{Name}({For})",

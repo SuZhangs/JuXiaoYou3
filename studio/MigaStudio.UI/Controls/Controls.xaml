@@ -246,7 +246,7 @@
                                               ContentStringFormat="{TemplateBinding NegativeStringFormat}"
                                               ContentTemplateSelector="{TemplateBinding NegativeTemplateSelector}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              TextElement.Foreground="{f:ForegroundBrush}"
+                                              TextElement.Foreground="{f:Brush ForegroundLevel3}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="0 0 16 0"
                                               SnapsToDevicePixels="True" />
@@ -297,9 +297,9 @@
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Grid.Column" Value="3" TargetName="PART_Thumb" />
-                            <Setter Property="TextElement.Foreground" Value="{f:Brush HighlightA4}"
+                            <Setter Property="TextElement.Foreground" Value="{f:Brush HighlightB4}"
                                     TargetName="PART_Positive" />
-                            <Setter Property="Background" Value="{f:Brush HighlightA4}" TargetName="PART_Thumb" />
+                            <Setter Property="Background" Value="{f:Brush HighlightB4}" TargetName="PART_Thumb" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
