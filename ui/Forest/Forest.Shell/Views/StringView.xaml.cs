@@ -48,7 +48,7 @@ namespace Acorisoft.FutureGL.Forest.Views
             }
         }
         
-        public static Task<Op<string>> String(string title) => Xaml.Get<IDialogService>()
+        public static Task<Op<string>> String(string title) => DialogService()
                                                        .Dialog<string>(new StringViewModel(), new RouteEventArgs
                                                        {
                                                            Args = new []{ title }

@@ -225,14 +225,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            if (Axis.Remove(item))
-            {
-                await Xaml.Get<IDialogService>()
-                          .Notify(
-                              CriticalLevel.Success,
-                              SubSystemString.Notify,
-                              SubSystemString.OperationOfRemoveIsSuccessful);
-            }
+            Axis.Remove(item);
         }
 
         private void UpImpl(string item)

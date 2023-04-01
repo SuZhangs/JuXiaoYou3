@@ -18,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public GroupBlockDataUI(GroupBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
         {
         }
-        
+
         public GroupBlockDataUI(GroupBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock = block;

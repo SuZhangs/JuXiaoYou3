@@ -62,6 +62,14 @@
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />
+                        
+                        <ftk:ToolButton f:Language.Id="global.setting"
+                                        Content="设置"
+                                        Command="{Binding ExportTemplateCommand}"
+                                        CommandParameter="{Binding ElementName=Canvas}"
+                                        Icon="{StaticResource IC.Save}"
+                                        IsFilled="True"
+                                        ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
 

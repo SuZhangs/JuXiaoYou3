@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         
         private async Task GotoDialogImpl(Type type)
         {
-            await Xaml.Get<IDialogService>()
+            await DialogService()
                       .Dialog(Xaml.GetViewModel<IDialogViewModel>(type));
         }
 

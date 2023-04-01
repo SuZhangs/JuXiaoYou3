@@ -5,11 +5,6 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
-// ReSharper disable StringLiteralTypo
-
-// ReSharper disable MemberCanBeMadeStatic.Global
-
-// ReSharper disable NonReadonlyMemberInGetHashCode
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -20,35 +15,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         private bool   _isPinned;
         private bool   _initialized;
 
-        private static readonly GeometryGroup Checked;
-        private static readonly Geometry      InfoGeometry;
-        private static readonly Geometry      ErrorGeometry;
-
-        static TabViewModel()
-        {
-            InfoGeometry = Geometry.Parse("F1 M24,24z M0,0z M21,15A2,2,0,0,1,19,17L7,17 3,21 3,5A2,2,0,0,1,5,3L19,3A2,2,0,0,1,21,5z");
-            ErrorGeometry = new GeometryGroup
-            {
-                Children = new GeometryCollection
-                {
-                    new LineGeometry{ StartPoint = new Point(18,6), EndPoint = new Point(6,18)},
-                    new LineGeometry{ StartPoint = new Point(6,6), EndPoint = new Point(18,18)},
-                    new EllipseGeometry{ Center = new Point(9,9), RadiusX = 9, RadiusY = 9},
-                }
-            };
-            Checked = new GeometryGroup
-            {
-                Children = new GeometryCollection
-                {
-                    new LineGeometry
-                    {
-                        StartPoint = new Point(12, 5),
-                        EndPoint   = new Point(12, 19)
-                    },
-                    Geometry.Parse("F1 M24,24z M0,0z M19,12L19,12 12,19 5,12")
-                }
-            };
-        }
 
         protected TabViewModel()
         {
@@ -73,130 +39,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Title = useUnsavePattern ? string.Format(Unsave, title) : title;
         }
 
-        #region Notify
-
-        static string DangerOperationCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Dangerous Operation",
-            CultureArea.Korean   => "위험한 조작",
-            CultureArea.Japanese => "危険な操作です",
-            CultureArea.French   => "Une opération dangereuse",
-            CultureArea.Russian  => "Опасная операция",
-            _                    => "危险操作"
-        };
-
-        static string SensitiveOperationCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Sensitive operation",
-            CultureArea.Korean   => "민감한 조작",
-            CultureArea.Japanese => "デリケートな操作です",
-            CultureArea.French   => "Une opération sensible",
-            CultureArea.Russian  => "Деликатная операция",
-            _                    => "敏感操作"
-        };
-
-        static string ErrorCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Error",
-            CultureArea.Korean   => "오류",
-            CultureArea.Japanese => "間違いです",
-            CultureArea.French   => "Les erreurs",
-            CultureArea.Russian  => "ошибк",
-            _                    => "错误"
-        };
-
-        static string WarningCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Warning",
-            CultureArea.Korean   => "경고",
-            CultureArea.Japanese => "警告します",
-            CultureArea.French   => "Avertissement",
-            CultureArea.Russian  => "предупред",
-            _                    => "警告"
-        };
-
-        static string InfoCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Error",
-            CultureArea.Korean   => "오류",
-            CultureArea.Japanese => "間違いです",
-            CultureArea.French   => "Les erreurs",
-            CultureArea.Russian  => "ошибк",
-            _                    => "错误"
-        };
-
-        static string SuccessfulCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Successful",
-            CultureArea.Korean   => "성공",
-            CultureArea.Japanese => "成功です",
-            CultureArea.French   => "Le succès",
-            CultureArea.Russian  => "успешн",
-            _                    => "成功"
-        };
-
-        static string ObsoletedCaption => Language.Culture switch
-        {
-            CultureArea.English  => "Obsoleted",
-            CultureArea.Korean   => "기한이 지나면",
-            CultureArea.Japanese => "期限切れです",
-            CultureArea.French   => "Périmés",
-            CultureArea.Russian  => "Срок годност",
-            _                    => "过期"
-        };
-
-        protected Task<bool> DangerousOperation(string content) => Xaml.Get<IDialogService>()
-                                                                       .Danger(DangerOperationCaption, content);
-
-        protected Task<bool> SensitiveOperation(string content) => Xaml.Get<IDialogService>()
-                                                                       .Danger(SensitiveOperationCaption, content);
-
-
-        protected Task Obsoleted(string content) => Xaml.Get<IDialogService>()
-                                                        .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content);
-
-
-        protected void Successful(string content, int seconds = 2) => Xaml.Get<INotifyService>()
-                                                                          .Notify(new IconNotification
-                                                                          {
-                                                                              Color = ThemeSystem.Instance
-                                                                                                 .Theme
-                                                                                                 .Colors[(int)ForestTheme.Success100],
-                                                                              Delay    = TimeSpan.FromSeconds(seconds),
-                                                                              Geometry = Checked,
-                                                                              IsFilled = false,
-                                                                              Title    = content
-                                                                          });
-
-        protected Task Warning(string content) => Xaml.Get<IDialogService>()
-                                                      .Notify(CriticalLevel.Warning, WarningCaption, content);
-        
-        protected void Info(string content, int seconds = 2) => Xaml.Get<INotifyService>()
-                                                   .Notify(new IconNotification
-                                                   {
-                                                       Color = ThemeSystem.Instance
-                                                                          .Theme
-                                                                          .Colors[(int)ForestTheme.Info100],
-                                                       Delay    = TimeSpan.FromSeconds(seconds),
-                                                       Geometry = InfoGeometry,
-                                                       IsFilled = false,
-                                                       Title    = content
-                                                   });
-        
-        
-        protected void Error(string content, int seconds = 2) => Xaml.Get<INotifyService>()
-                                                                     .Notify(new IconNotification
-                                                                     {
-                                                                         Color = ThemeSystem.Instance
-                                                                                            .Theme
-                                                                                            .Colors[(int)ForestTheme.Danger100],
-                                                                         Delay    = TimeSpan.FromSeconds(seconds),
-                                                                         Geometry = ErrorGeometry,
-                                                                         IsFilled = false,
-                                                                         Title    = content
-                                                                     });
-
-        #endregion
 
         #region Override
 

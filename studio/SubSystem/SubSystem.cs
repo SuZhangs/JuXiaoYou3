@@ -16,7 +16,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         public static Task<Op<DocumentCache>> NewDocumentWizard()
         {
-            return Xaml.Get<IDialogService>().Dialog<DocumentCache, NewDocumentWizardViewModel>();
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, NewDocumentWizardViewModel>();
         }
         
         /// <summary>
@@ -40,7 +41,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
             
             optionVM.Title = title;
-            return Xaml.Get<IDialogService>().Dialog<TOption>(optionVM, parameter);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<TOption>(optionVM, parameter);
         }
         
         public static void InstallLanguages()
@@ -80,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<NewElementView, NewElementViewModel>();
             Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
             Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
+            Xaml.InstallView<ModuleManifestView, ModuleManifestViewModel>();
         }
     }
 }

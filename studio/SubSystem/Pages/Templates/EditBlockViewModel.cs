@@ -27,8 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         public static Task<Op<ModuleBlockEditUI>> Edit(ModuleBlockEditUI element)
         {
-            return Xaml.Get<IDialogService>()
-                       .Dialog<ModuleBlockEditUI>(new EditBlockViewModel(), new RouteEventArgs
+            return DialogService().Dialog<ModuleBlockEditUI>(new EditBlockViewModel(), new RouteEventArgs
                        {
                            Args = new object[]
                            {

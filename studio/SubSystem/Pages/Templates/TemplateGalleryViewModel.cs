@@ -37,12 +37,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             TemplateEngine = Xaml.Get<IDatabaseManager>()
                                  .GetEngine<TemplateEngine>();
 
-            _sorter            = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
-            _reader            = new DataPartReader();
-            Source             = new SourceList<ModuleTemplateCache>();
-            MetadataCollection = new ObservableCollection<MetadataCache>();
-            Blocks             = new ObservableCollection<ModuleBlock>();
-            ApprovalRequired = false;
+            _sorter               = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
+            _reader               = new DataPartReader();
+            Source                = new SourceList<ModuleTemplateCache>();
+            MetadataCollection    = new ObservableCollection<MetadataCache>();
+            Blocks                = new ObservableCollection<ModuleBlock>();
+            ApprovalRequired      = false;
+            ManageManifestCommand = AsyncCommand(ManageManifestImpl);
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
@@ -241,6 +242,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
+        private async Task ManageManifestImpl()
+        {
+            await DialogService()
+                      .Dialog(new ModuleManifestViewModel());
+        }
+
         public void Refresh()
         {
             //
@@ -338,6 +345,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand PreviewCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ManageManifestCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }

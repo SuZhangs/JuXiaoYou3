@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         public static Task<Op<ModuleBlockEditUI>> New()
         {
-            return Xaml.Get<IDialogService>()
+            return DialogService()
                        .Dialog<ModuleBlockEditUI>(new NewBlockViewModel());
         }
 
