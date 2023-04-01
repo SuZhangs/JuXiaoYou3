@@ -36,5 +36,11 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// 获得垃圾回收器
         /// </summary>
         DisposableCollector Collector { get; }
+        
+        
+        /// <summary>
+        /// 是否初始化。
+        /// </summary>
+        bool IsInitialized { get; }
     }
 }

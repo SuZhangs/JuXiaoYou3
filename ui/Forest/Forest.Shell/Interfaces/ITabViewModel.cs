@@ -10,11 +10,6 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         string PageId { get; }
         
         /// <summary>
-        /// 是否初始化。
-        /// </summary>
-        bool Initialized { get; }
-        
-        /// <summary>
         /// 标题。
         /// </summary>
         string Title { get; set; }

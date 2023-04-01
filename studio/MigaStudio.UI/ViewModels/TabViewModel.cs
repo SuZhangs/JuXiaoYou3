@@ -13,7 +13,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private string _title;
         private bool   _isPinned;
-        private bool   _initialized;
 
 
         protected TabViewModel()
@@ -69,15 +68,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             try
             {
-                if (!_initialized)
+                if (!IsInitialized)
                 {
                     OnStart();
-                    _initialized = true;
+                    IsInitialized = true;
                 }
             }
             catch
             {
-                _initialized = false;
+                IsInitialized = false;
             }
         }
 
@@ -184,6 +183,5 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 是否已经初始化
         /// </summary>
-        public bool Initialized => _initialized;
     }
 }

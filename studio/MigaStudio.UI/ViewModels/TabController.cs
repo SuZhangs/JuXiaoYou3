@@ -16,7 +16,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private ITabViewModel       _currentViewModel;
         private GlobalStudioContext _context;
-        private bool                _initialized;
 
         protected TabController()
         {
@@ -134,10 +133,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public sealed override void Start()
         {
-            if (!_initialized)
+            if (!IsInitialized)
             {
                 StartOverride();
-                _initialized = true;
+                IsInitialized = true;
             }
         }
 
@@ -381,7 +380,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     return;
                 }
 
-                if (value.Initialized)
+                if (value.IsInitialized)
                 {
                     value.Resume();
                 }

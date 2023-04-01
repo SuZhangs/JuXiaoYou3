@@ -320,6 +320,11 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 获得垃圾回收器
         /// </summary>
         public DisposableCollector Collector { get; }
+        
+        /// <summary>
+        /// 是否初始化
+        /// </summary>
+        public bool IsInitialized { get; protected set; }
 
         string IViewModelLanguageService.RootName
         {

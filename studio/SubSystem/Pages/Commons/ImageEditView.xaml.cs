@@ -19,7 +19,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             InitializeComponent();
             InstallControls();
-            this.Loaded += OnLoaded;
         }
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
