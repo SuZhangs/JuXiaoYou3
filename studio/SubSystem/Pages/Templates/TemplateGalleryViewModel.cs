@@ -86,7 +86,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 if (!File.Exists(fileName))
                 {
-                    await Error(string.Format(Language.GetText(FileNotExists), fileName));
+                    Error(string.Format(Language.GetText(FileNotExists), fileName));
                     continue;
                 }
 
@@ -109,12 +109,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             if (finishedCount == 0)
             {
-                await Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+                Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
             }
             else
             {
-                await Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
-            }
+                Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount)); }
             
             Refresh();
         }
@@ -196,11 +195,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             if (finishedCount == 0)
             {
-                await Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+                Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
             }
             else
             {
-                await Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+                Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
             }
             Refresh();
         }
@@ -231,11 +230,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
                 await PNG.Write(fileName, payload, ms);
-                await Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                Successful(SubSystemString.OperationOfSaveIsSuccessful);
             }
             catch (Exception ex)
             {
-                await Error(SubSystemString.BadModule);
+                Error(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
@@ -295,10 +294,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         }
 
         
-        public string PreviewIntro => SubSystemString.GetIntro(SelectedTemplate.Intro);
-        public string PreviewContractList => SubSystemString.GetContractList(SelectedTemplate.ContractList);
-        public string PreviewAuthorList => SubSystemString.GetAuthor(SelectedTemplate.AuthorList);
-        public string PreviewName => SubSystemString.GetName(SelectedTemplate.Name);
+        public string PreviewIntro => SubSystemString.GetIntro(SelectedTemplate?.Intro);
+        public string PreviewContractList => SubSystemString.GetContractList(SelectedTemplate?.ContractList);
+        public string PreviewAuthorList => SubSystemString.GetAuthor(SelectedTemplate?.AuthorList);
+        public string PreviewName => SubSystemString.GetName(SelectedTemplate?.Name);
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。

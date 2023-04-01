@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
+// ReSharper disable StringLiteralTypo
+
 // ReSharper disable MemberCanBeMadeStatic.Global
 
 // ReSharper disable NonReadonlyMemberInGetHashCode
@@ -15,7 +18,37 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private string _title;
         private bool   _isPinned;
-        private bool _initialized;
+        private bool   _initialized;
+
+        private static readonly GeometryGroup Checked;
+        private static readonly Geometry      InfoGeometry;
+        private static readonly Geometry      ErrorGeometry;
+
+        static TabViewModel()
+        {
+            InfoGeometry = Geometry.Parse("F1 M24,24z M0,0z M21,15A2,2,0,0,1,19,17L7,17 3,21 3,5A2,2,0,0,1,5,3L19,3A2,2,0,0,1,21,5z");
+            ErrorGeometry = new GeometryGroup
+            {
+                Children = new GeometryCollection
+                {
+                    new LineGeometry{ StartPoint = new Point(18,6), EndPoint = new Point(6,18)},
+                    new LineGeometry{ StartPoint = new Point(6,6), EndPoint = new Point(18,18)},
+                    new EllipseGeometry{ Center = new Point(9,9), RadiusX = 9, RadiusY = 9},
+                }
+            };
+            Checked = new GeometryGroup
+            {
+                Children = new GeometryCollection
+                {
+                    new LineGeometry
+                    {
+                        StartPoint = new Point(12, 5),
+                        EndPoint   = new Point(12, 19)
+                    },
+                    Geometry.Parse("F1 M24,24z M0,0z M19,12L19,12 12,19 5,12")
+                }
+            };
+        }
 
         protected TabViewModel()
         {
@@ -41,17 +74,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         #region Notify
-        
+
         static string DangerOperationCaption => Language.Culture switch
         {
-            CultureArea.English => "Dangerous Operation",
-            CultureArea.Korean => "위험한 조작",
+            CultureArea.English  => "Dangerous Operation",
+            CultureArea.Korean   => "위험한 조작",
             CultureArea.Japanese => "危険な操作です",
-            CultureArea.French => "Une opération dangereuse",
-            CultureArea.Russian => "Опасная операция",
-            _                   => "危险操作"
+            CultureArea.French   => "Une opération dangereuse",
+            CultureArea.Russian  => "Опасная операция",
+            _                    => "危险操作"
         };
-        
+
         static string SensitiveOperationCaption => Language.Culture switch
         {
             CultureArea.English  => "Sensitive operation",
@@ -61,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CultureArea.Russian  => "Деликатная операция",
             _                    => "敏感操作"
         };
-        
+
         static string ErrorCaption => Language.Culture switch
         {
             CultureArea.English  => "Error",
@@ -71,7 +104,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CultureArea.Russian  => "ошибк",
             _                    => "错误"
         };
-        
+
         static string WarningCaption => Language.Culture switch
         {
             CultureArea.English  => "Warning",
@@ -81,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CultureArea.Russian  => "предупред",
             _                    => "警告"
         };
-        
+
         static string InfoCaption => Language.Culture switch
         {
             CultureArea.English  => "Error",
@@ -91,7 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CultureArea.Russian  => "ошибк",
             _                    => "错误"
         };
-        
+
         static string SuccessfulCaption => Language.Culture switch
         {
             CultureArea.English  => "Successful",
@@ -101,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CultureArea.Russian  => "успешн",
             _                    => "成功"
         };
-        
+
         static string ObsoletedCaption => Language.Culture switch
         {
             CultureArea.English  => "Obsoleted",
@@ -113,42 +146,65 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         };
 
         protected Task<bool> DangerousOperation(string content) => Xaml.Get<IDialogService>()
-                                                              .Danger(DangerOperationCaption, content);
-        
+                                                                       .Danger(DangerOperationCaption, content);
+
         protected Task<bool> SensitiveOperation(string content) => Xaml.Get<IDialogService>()
-                                                             .Danger(SensitiveOperationCaption, content);
-        
-        
+                                                                       .Danger(SensitiveOperationCaption, content);
+
+
         protected Task Obsoleted(string content) => Xaml.Get<IDialogService>()
                                                         .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content);
-        
-        
-        protected Task Successful(string content) => Xaml.Get<IDialogService>()
-                                                         .Notify(CriticalLevel.Success, SuccessfulCaption, content);
-        
+
+
+        protected void Successful(string content) => Xaml.Get<INotifyService>()
+                                                         .Notify(new IconNotification
+                                                         {
+                                                             Color = ThemeSystem.Instance
+                                                                                .Theme
+                                                                                .Colors[(int)ForestTheme.Success100],
+                                                             Delay    = TimeSpan.FromSeconds(2),
+                                                             Geometry = Checked,
+                                                             IsFilled = false,
+                                                             Title    = content
+                                                         });
+
         protected Task Warning(string content) => Xaml.Get<IDialogService>()
                                                       .Notify(CriticalLevel.Warning, WarningCaption, content);
         
-        protected Task Info(string content) => Xaml.Get<IDialogService>()
-                                                   .Notify(CriticalLevel.Info, InfoCaption, content);
+        protected void Info(string content) => Xaml.Get<INotifyService>()
+                                                   .Notify(new IconNotification
+                                                   {
+                                                       Color = ThemeSystem.Instance
+                                                                          .Theme
+                                                                          .Colors[(int)ForestTheme.Info100],
+                                                       Delay    = TimeSpan.FromSeconds(2),
+                                                       Geometry = InfoGeometry,
+                                                       IsFilled = false,
+                                                       Title    = content
+                                                   });
         
         
-        protected Task Error(string content) => Xaml.Get<IDialogService>()
-                                                    .Notify(CriticalLevel.Danger, ErrorCaption, content);
+        protected void Error(string content) => Xaml.Get<INotifyService>()
+                                                    .Notify(new IconNotification
+                                                    {
+                                                        Color = ThemeSystem.Instance
+                                                                           .Theme
+                                                                           .Colors[(int)ForestTheme.Danger100],
+                                                        Delay    = TimeSpan.FromSeconds(2),
+                                                        Geometry = ErrorGeometry,
+                                                        IsFilled = false,
+                                                        Title    = content
+                                                    });
 
         #endregion
-        
-        #region Override
 
-        
+        #region Override
 
         public bool Equals(TabViewModel other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Uniqueness ?
-                other.GetType() == GetType() :
-                PageId == other.PageId;
+            return Uniqueness ? other.GetType() == GetType() : PageId == other.PageId;
         }
 
         public sealed override bool Equals(object obj)
@@ -167,7 +223,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #region Start / OnStart
 
-        
         public sealed override void Start()
         {
             try
@@ -186,7 +241,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public virtual void OnStart()
         {
-            
         }
 
         /// <summary>
@@ -196,14 +250,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected sealed override void OnStartup(RouteEventArgs arg)
         {
             var np = NavigationParameter.FromParameter(arg);
-            PageId         = np.Id;
+            PageId     = np.Id;
             Controller = (TabController)np.Controller;
             OnStart(np);
         }
 
         protected virtual void OnStart(NavigationParameter parameter)
         {
-            
         }
 
         #endregion
@@ -221,7 +274,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Controller.Start(vm);
             return vm;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -235,7 +288,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         #endregion
-        
+
         protected TabController Controller { get; private set; }
 
         /// <summary>
@@ -251,8 +304,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 用于表示当前的视图模型的唯一标识符。
         /// </summary>
         public string PageId { get; private set; }
-        
-        
+
+
         /// <summary>
         /// 是否固定
         /// </summary>
@@ -272,7 +325,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 是否可被关闭
         /// </summary>
         public virtual bool Removable => true;
-        
+
         /// <summary>
         /// 需要询问
         /// </summary>

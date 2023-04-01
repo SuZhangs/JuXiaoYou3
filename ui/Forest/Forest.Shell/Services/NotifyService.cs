@@ -25,11 +25,6 @@ namespace Acorisoft.FutureGL.Forest.Services
                 return;
             }
 
-            if (string.IsNullOrEmpty(notification.Color))
-            {
-                notification.Color = Color;
-            }
-
             if (notification.Delay.TotalMilliseconds < 1000)
             {
                 //
@@ -49,11 +44,6 @@ namespace Acorisoft.FutureGL.Forest.Services
             if (notification is null)
             {
                 return;
-            }
-
-            if (string.IsNullOrEmpty(notification.Color))
-            {
-                notification.Color = Color;
             }
 
             if (notification.Delay.TotalMilliseconds < 1000)

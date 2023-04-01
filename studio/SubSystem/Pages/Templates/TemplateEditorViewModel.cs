@@ -167,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             catch (Exception ex)
             {
-                await Error(SubSystemString.BadModule);
+                Error(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");
@@ -241,12 +241,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
                 await PNG.Write(fileName, payload, ms);
-                await Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                Successful(SubSystemString.OperationOfSaveIsSuccessful);
                 SetDirtyState(false);
             }
             catch (Exception ex)
             {
-                await Error(SubSystemString.BadModule);
+                Error(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
@@ -343,7 +343,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             DetectAll();
             SetDirtyState(true);
-            await Successful(SubSystemString.OperationOfSaveIsSuccessful);
+            Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         private async Task RemoveBlockImpl(ModuleBlockEditUI element)

@@ -316,11 +316,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 return;
             }
 
-            if (string.IsNullOrEmpty(message.Color))
-            {
-                message.Color = "#6FA240";
-            }
-
             _queue.Enqueue(message);
             _timer.Start();
         }

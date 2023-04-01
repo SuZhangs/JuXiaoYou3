@@ -2,8 +2,8 @@
 {
     public abstract class Notification : ForestObject
     {
-        private string _title;
-        private string _color;
+        private string   _title;
+        private Color    _color;
         private TimeSpan _delay;
 
         internal void Initialize() => _delay = TimeSpan.FromSeconds(1);
@@ -16,7 +16,7 @@
         /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。
         /// </summary>
-        public string Color
+        public Color Color
         {
             get => _color;
             set => SetValue(ref _color, value);
