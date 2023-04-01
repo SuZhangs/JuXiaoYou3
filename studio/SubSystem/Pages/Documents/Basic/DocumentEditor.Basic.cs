@@ -11,6 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private const string MetaNameOfWeight   = "@weight";
         private const string MetaNameOfHeight   = "@height";
         private const string MetaNameOfGender   = "@gender";
+        private const string MetaNameOfIntro    = "@intro";
         private const string MetaNameOfCountry  = "@country";
         private const string MetaNameOfRace     = "@race";
         private const string MetaNameOfNickName = "@nickname";
@@ -146,6 +147,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfGender, value);
+                SetDirtyState(true);
+                RaiseUpdated();
+            }
+        }
+        
+        public string Intro
+        {
+            get => GetOrAddMetadata(MetaNameOfIntro);
+            set
+            {
+                UpsertMetadata(MetaNameOfIntro, value);
+                _document.Intro = value;
+                _cache.Intro    = value;
                 SetDirtyState(true);
                 RaiseUpdated();
             }

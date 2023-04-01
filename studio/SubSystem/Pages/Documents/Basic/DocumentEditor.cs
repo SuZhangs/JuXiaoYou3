@@ -77,13 +77,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
             ChangeAvatarCommand     = AsyncCommand(ChangeAvatarImpl);
-            AddModulePartCommand    = AsyncCommand(AddModulePartImpl);
-            RemoveModulePartCommand = AsyncCommand<PartOfModule>(RemoveModulePartImpl);
+            
+            AddModulePartCommand       = AsyncCommand(AddModulePartImpl);
+            RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl,HasModulePart);
+            UpgradeModulePartCommand   = Command(UpgradeModulePartImpl);
+            ShiftUpModulePartCommand   = Command<PartOfModule>(ShiftUpModulePartImpl, NotFirstModulePart);
+            ShiftDownModulePartCommand = Command<PartOfModule>(ShiftDownModulePartImpl, NotLastModulePart);
+            
             AddKeywordCommand       = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand    = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();
         }
 
+        private bool HasModulePart(PartOfModule module) => module is not null;
+        private bool NotLastModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) < ModuleParts.Count - 1;
+        private bool NotFirstModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) > 0;
+        
         private void Initialize()
         {
             CreateSubViews(InternalSubViews);
@@ -106,8 +115,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// <param name="collection">集合</param>
         protected abstract void CreateSubViews(ICollection<HeaderedSubView> collection);
 
-        #region OnStart
+        #region OnLoad
 
+        
         private void LoadDocumentImpl()
         {
             foreach (var part in _document.Parts
@@ -164,6 +174,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
+        #endregion
+
+        #region OnStart
+
+
         private void CreateDocumentImpl()
         {
             var document = new Document
@@ -183,8 +198,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             CreateDocumentWithManifest(document);
             OnCreateDocument(document);
 
-            //
-            // TODO: add to engine
+            DocumentEngine.AddDocument(document);
         }
 
         private void CreateDocumentWithManifest(Document document)

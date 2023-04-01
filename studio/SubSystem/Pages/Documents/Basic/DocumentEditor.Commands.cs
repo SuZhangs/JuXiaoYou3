@@ -38,89 +38,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
         }
         
-        private async Task AddModulePartImpl()
-        {
-            //
-            // 只能添加未添加的模组
-            var availableModules = TemplateEngine.TemplateCacheDB
-                                                 .FindAll()
-                                                 .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id));
-            
-            //
-            // 返回用户选择的模组
-            var moduleCaches = await Xaml.Get<IDialogService>()
-                                         .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RouteEventArgs
-                                         {
-                                             Args = new object[]
-                                             {
-                                                 availableModules
-                                             }
-                                         });
-
-            if (!moduleCaches.IsFinished)
-            {
-                return;
-            }
-
-            var module = moduleCaches.Value
-                                     .Select(x => TemplateEngine.CreateModule(x));
-
-            AddModules(module);
-        }
-
-        private async Task RemoveModulePartImpl(PartOfModule module)
-        {
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
-            {
-                return;
-            }
-            
-            //
-            // 删除当前内容
-            if (ReferenceEquals(SelectedModulePart, module))
-            {
-                SelectedModulePart = null;
-            }
-            
-            //
-            // 删除Metadata
-            foreach (var block in module.Blocks
-                                        .Where(x => !string.IsNullOrEmpty(x.Metadata)))
-            {
-                RemoveMetadata(block.ExtractMetadata());
-            }
-            
-            
-        }
-
-
-        private void AddModules(IEnumerable<PartOfModule> modules)
-        {
-            if (modules is null)
-            {
-                return;
-            }
-
-            var result = 0;
-            
-            foreach (var module in modules)
-            {
-                if (AddModule(module))
-                {
-                    _document.Parts.Add(module);
-                    result++;
-                }
-            }
-
-            if (result == 0)
-            {
-                Warning(SubSystemString.NoChange);
-            }
-            else
-            {
-                Successful(SubSystemString.OperationOfAddIsSuccessful);
-            }
-        }
 
         /// <summary>
         /// 
@@ -227,11 +144,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<IPartOfDetail> RemoveDetailPartCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand UpgradeModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand UpgradeModulePartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfModule> RemoveModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfModule> RemoveAllModulePartCommand { get; }
         
         
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddKeywordCommand { get; }

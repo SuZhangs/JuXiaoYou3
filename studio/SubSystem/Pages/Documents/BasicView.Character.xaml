@@ -46,6 +46,10 @@
             </UniformGrid>
         </HeaderedContentControl>
 
+        <f:HeaderedMultiLine Header="介绍"
+                             Margin="4 12"
+                             Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
         <HeaderedContentControl DockPanel.Dock="Top"
                                 Header="可选信息"
                                 Margin="0 8">

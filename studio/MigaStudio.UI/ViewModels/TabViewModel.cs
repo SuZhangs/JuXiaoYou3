@@ -156,45 +156,45 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                                                         .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content);
 
 
-        protected void Successful(string content) => Xaml.Get<INotifyService>()
-                                                         .Notify(new IconNotification
-                                                         {
-                                                             Color = ThemeSystem.Instance
-                                                                                .Theme
-                                                                                .Colors[(int)ForestTheme.Success100],
-                                                             Delay    = TimeSpan.FromSeconds(2),
-                                                             Geometry = Checked,
-                                                             IsFilled = false,
-                                                             Title    = content
-                                                         });
+        protected void Successful(string content, int seconds = 2) => Xaml.Get<INotifyService>()
+                                                                          .Notify(new IconNotification
+                                                                          {
+                                                                              Color = ThemeSystem.Instance
+                                                                                                 .Theme
+                                                                                                 .Colors[(int)ForestTheme.Success100],
+                                                                              Delay    = TimeSpan.FromSeconds(seconds),
+                                                                              Geometry = Checked,
+                                                                              IsFilled = false,
+                                                                              Title    = content
+                                                                          });
 
         protected Task Warning(string content) => Xaml.Get<IDialogService>()
                                                       .Notify(CriticalLevel.Warning, WarningCaption, content);
         
-        protected void Info(string content) => Xaml.Get<INotifyService>()
+        protected void Info(string content, int seconds = 2) => Xaml.Get<INotifyService>()
                                                    .Notify(new IconNotification
                                                    {
                                                        Color = ThemeSystem.Instance
                                                                           .Theme
                                                                           .Colors[(int)ForestTheme.Info100],
-                                                       Delay    = TimeSpan.FromSeconds(2),
+                                                       Delay    = TimeSpan.FromSeconds(seconds),
                                                        Geometry = InfoGeometry,
                                                        IsFilled = false,
                                                        Title    = content
                                                    });
         
         
-        protected void Error(string content) => Xaml.Get<INotifyService>()
-                                                    .Notify(new IconNotification
-                                                    {
-                                                        Color = ThemeSystem.Instance
-                                                                           .Theme
-                                                                           .Colors[(int)ForestTheme.Danger100],
-                                                        Delay    = TimeSpan.FromSeconds(2),
-                                                        Geometry = ErrorGeometry,
-                                                        IsFilled = false,
-                                                        Title    = content
-                                                    });
+        protected void Error(string content, int seconds = 2) => Xaml.Get<INotifyService>()
+                                                                     .Notify(new IconNotification
+                                                                     {
+                                                                         Color = ThemeSystem.Instance
+                                                                                            .Theme
+                                                                                            .Colors[(int)ForestTheme.Danger100],
+                                                                         Delay    = TimeSpan.FromSeconds(seconds),
+                                                                         Geometry = ErrorGeometry,
+                                                                         IsFilled = false,
+                                                                         Title    = content
+                                                                     });
 
         #endregion
 

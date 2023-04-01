@@ -88,16 +88,30 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
         /// <returns></returns>
         public PartOfModule CreateModule(ModuleTemplateCache cache)
         {
+            var template = TemplateDB.FindById(cache.Id);
             var module = new PartOfModule
             {
-                Id     = cache.Id,
-                Name   = cache.Name,
-                Index  = 0,
-                Blocks = new List<ModuleBlock>()
+                Id      = template.Id,
+                Name    = template.Name,
+                Index   = 0,
+                Version = template.Version,
+                Blocks  = new List<ModuleBlock>(template.Blocks)
             };
 
-            var template = TemplateDB.FindById(cache.Id);
-            module.Blocks.AddRange(template.Blocks);
+            return module;
+        }
+
+        public static PartOfModule CreateModule(ModuleTemplate template)
+        {
+            var module = new PartOfModule
+            {
+                Id      = template.Id,
+                Name    = template.Name,
+                Index   = 0,
+                Version = template.Version,
+                Blocks  = new List<ModuleBlock>(template.Blocks)
+            };
+
             return module;
         }
 

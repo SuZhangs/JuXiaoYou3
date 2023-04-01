@@ -92,23 +92,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             {
                 return EngineResult.Failed(EngineFailedReason.Duplicated);
             }
-
-            var cache = new DocumentCache
-            {
-                Id             = document.Id,
-                Name           = document.Name,
-                Avatar         = document.Avatar,
-                Type           = document.Type,
-                Intro          = document.Intro,
-                Keywords       = new ObservableCollection<string>(),
-                IsDeleted      = false,
-                Removable      = document.Removable,
-                TimeOfCreated  = DateTime.Now,
-                TimeOfModified = DateTime.Now
-            };
-
-
-            DocumentCacheDB.Insert(cache);
+            
             DocumentDB.Insert(document);
 
             //
@@ -156,6 +140,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// 更新文档
         /// </summary>
         /// <param name="document">指定要更新的文档</param>
+        /// <param name="cache">指定要更新的文档</param>
         public void UpdateDocument(Document document, DocumentCache cache)
         {
             if (document is null)

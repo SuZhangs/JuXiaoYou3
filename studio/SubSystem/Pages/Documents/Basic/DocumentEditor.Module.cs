@@ -1,5 +1,8 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.Miga.Doc.Parts;
 
@@ -7,123 +10,304 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        private class MetadataIndexCache
+        
+        private async Task AddModulePartImpl()
         {
-            private          int          _index;
+            //
+            // 只能添加未添加的模组
+            var availableModules = TemplateEngine.TemplateCacheDB
+                                                 .FindAll()
+                                                 .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id));
+            
+            //
+            // 返回用户选择的模组
+            var moduleCaches = await Xaml.Get<IDialogService>()
+                                         .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RouteEventArgs
+                                         {
+                                             Args = new object[]
+                                             {
+                                                 availableModules
+                                             }
+                                         });
 
-            public Metadata Source { get; init; }
-
-            public int Index
+            if (!moduleCaches.IsFinished)
             {
-                get => _index;
-                init => _index = value;
+                return;
             }
 
-            /// <summary>
-            /// 
-            /// </summary>
-            public string Value => Source.Value;
+            var module = moduleCaches.Value
+                                     .Select(x => TemplateEngine.CreateModule(x));
 
-            public string this[MetadataCollection metadataCollection]
+            AddModules(module);
+        }
+
+        private async Task RemoveModulePartImpl(PartOfModule module)
+        {
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
             {
-                set
+                return;
+            }
+            
+            //
+            // 删除当前内容
+            if (ReferenceEquals(SelectedModulePart, module))
+            {
+                SelectedModulePart = null;
+            }
+            
+            //
+            // 删除Metadata
+            foreach (var block in module.Blocks
+                                        .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+            {
+                RemoveMetadata(block.ExtractMetadata());
+            }
+            
+            
+            ResortModuleParts();
+        }
+
+        private bool CanUpgrade(PartOfModule module,out ModuleTemplate template)
+        {
+            var id                      = module.Id;
+            var maybeNewVersionTemplate = TemplateEngine.TemplateDB
+                                                        .FindById(id);
+
+            if (maybeNewVersionTemplate is null ||
+                module.Version >= maybeNewVersionTemplate.Version)
+            {
+                template = null;
+                return false;
+            }
+
+            template = maybeNewVersionTemplate;
+            return true;
+        }
+
+        private void UpgradeModule(
+            PartOfModule oldModule,
+            PartOfModule newModule, 
+            IList<ModuleBlock> added, 
+            IList<ModuleBlock> removed,
+            IList<ModuleBlock> modified)
+        {
+            
+            //
+            // 以oldModule作为基准
+            var hashSet = oldModule.Blocks
+                                   .ToDictionary(x => x.Id, x => x);
+            
+            //
+            //
+
+            foreach (var newBlock in newModule.Blocks)
+            {
+                if (hashSet.ContainsKey(newBlock.Id))
                 {
-                    if (Index < 0 || Index > metadataCollection.Count - 1)
-                    {
-                        _index = metadataCollection.Count;
-                        metadataCollection.Add(Source);
-                        Source.Value =  value;
-                    }
-                    else
-                    {
-                        var outside = metadataCollection[Index];
-
-                        if (outside.Value != Source.Value)
-                        {
-                            metadataCollection[Index].Value = value;
-                        }
-
-                        Source.Value =  value;
-                    }
+                    modified.Add(newBlock);
                 }
-            }
-        }
-        
-        [NullCheck(UniTestLifetime.Constructor)] private readonly object                                 _sync;
-        [NullCheck(UniTestLifetime.Constructor)] private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
+                else
+                {
+                    added.Add(newBlock);
+                }
 
-        private int _currentIndex;
-        
-        protected void OnModuleBlockValueChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
-        {
-            var metadataString = block.Metadata;
+                hashSet.Remove(newModule.Id);
+            }
+
             
             //
-            // ModuleBlockDataUI 已经实现了Value的Clamp和Fallback，不需要重新设置了
-            // 这里只做Metadata的Add or Update
-            if (block is GroupBlock)
+            // 删除Block
+            foreach (var removedBlock in oldModule.Blocks.Where(x => hashSet.ContainsKey(x.Id)))
             {
-                return;
+                if (string.IsNullOrEmpty(removedBlock.Metadata))
+                {
+                    continue;
+                }
+                
+                RemoveMetadata(removedBlock.Metadata);
+            }
+
+            foreach (var addedBlock in added)
+            {
+                if (string.IsNullOrEmpty(addedBlock.Metadata))
+                {
+                    continue;
+                }
+                
+                AddMetadata(addedBlock.ExtractMetadata());
+            }
+
+            foreach (var newBlock in modified)
+            {
+                var oldBlock = hashSet[newBlock.Id];
+
+                if (oldBlock.GetType() == newBlock.GetType())
+                {
+                    //
+                    // 内容复制
+                    oldBlock.CopyTo(newBlock);
+                }
+                
+                //
+                //
+                AddMetadata(newBlock.ExtractMetadata());
             }
             
-            if (string.IsNullOrEmpty(metadataString))
-            {
-                return;
-            }
-            
-            //
-            //
-            var metadata = block.ExtractMetadata();
-            
-            AddMetadata(metadata);
-            
+            added.Clear();
+            removed.Clear();
+            modified.Clear();
         }
-        
-        private void AddMetadata(Metadata metadata)
+
+        private void UpgradeModulePartImpl()
         {
-            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
+            var count              = 0;
+            var upgradeCount       = 0;
+            var modifiedCollection = new List<ModuleBlock>(32);
+            var addedCollection    = new List<ModuleBlock>(32);
+            var removedCollection  = new List<ModuleBlock>(32);
+            
+            foreach (var module in ModuleParts)
             {
-                metadataIndex[_document.Metas] = metadata.Value;
+                if (CanUpgrade(module, out var template))
+                {
+                    var newModule = MigaDB.Data
+                                          .Templates
+                                          .TemplateEngine
+                                          .CreateModule(template);
+                    UpgradeModule(
+                        module,
+                        newModule, 
+                        addedCollection,
+                        removedCollection,
+                        modifiedCollection);
+
+                    //
+                    // 替换文档中的部件
+                    var index = _document.Parts.IndexOf(module);
+                    _document.Parts[index] = newModule;
+
+                    //
+                    // 替换当前的部件
+                    index              = ModuleParts.IndexOf(module);
+                    ModuleParts[index] = newModule;
+
+                    //
+                    // 替换当前显示的部件
+                    if (ReferenceEquals(_selectedModulePart, module))
+                    {
+                        SelectedModulePart = newModule;
+                    }
+                    
+                    upgradeCount++;
+                }
+
+                count++;
+            }
+
+            if (upgradeCount == 0)
+            {
+                Info("没有需要升级的模板");
             }
             else
             {
-
-                var checkedIndex = _document.Metas.Count;
                 
-                _document.Metas.Add(metadata);
-
-                if (checkedIndex != _currentIndex)
-                {
-                    throw new InvalidOperationException("thread-not safe");
-                }
-                
-                var index = new MetadataIndexCache
-                {
-                    Source = metadata,
-                    Index  = checkedIndex
-                };
-                
-                _MetadataTrackerByName.Add(metadata.Name, index);
-                    
-                //
-                // 自增
-                Interlocked.Increment(ref _currentIndex);
             }
         }
-
-        private void RemoveMetadata(Metadata metadata)
+        
+        private void ShiftDownModulePartImpl(PartOfModule module)
         {
-            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var cache))
+            var mpI = ModuleParts.IndexOf(module);
+            if(mpI > ModuleParts.Count - 1)return;
+            ModuleParts.Move(mpI, mpI + 1);
+            module.Index = mpI + 1;
+            
+            ResortModuleParts();
+        }
+
+        private void ResortModuleParts()
+        {
+            for (var i = 0; i < ModuleParts.Count; i++)
             {
-                _MetadataTrackerByName.Remove(metadata.Name);
-                _document.Metas.RemoveAt(cache.Index);
+                ModuleParts[i].Index = i;
             }
         }
-
-        private void ClearMetadata()
+        
+        
+        private void ShiftUpModulePartImpl(PartOfModule module)
         {
-            _MetadataTrackerByName.Clear();
-            _document.Metas.Clear();
+            
+            var mpI = ModuleParts.IndexOf(module);
+            if(mpI <= 0)return;
+            ModuleParts.Move(mpI, mpI - 1);
+            module.Index = mpI - 1;
+            
+            ResortModuleParts();
+        }
+
+        private void AddModules(IEnumerable<PartOfModule> modules)
+        {
+            if (modules is null)
+            {
+                return;
+            }
+
+            var result = 0;
+            
+            foreach (var module in modules)
+            {
+                if (AddModule(module))
+                {
+                    _document.Parts.Add(module);
+                    result++;
+                }
+            }
+
+            ResortModuleParts();
+            if (result == 0)
+            {
+                Warning(SubSystemString.NoChange);
+            }
+            else
+            {
+                Successful(SubSystemString.OperationOfAddIsSuccessful);
+            }
+        }
+        
+        private bool AddModule(PartOfModule module)
+        {
+            if (module is null)
+            {
+                return false;
+            }
+            
+            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
+            {
+                module.Index = ModuleParts.Count;
+                ModuleParts.Add(module);
+
+                for (var i = 0; i < module.Blocks.Count; i++)
+                {
+                    var block    = module.Blocks[i];
+                    var metadata = block.Metadata;
+                    
+                    if (string.IsNullOrEmpty(metadata))
+                    {
+                        continue;
+                    }
+
+                    if (_MetadataTrackerByName.ContainsKey(metadata))
+                    {
+                        module.Blocks.RemoveAt(i);
+                    }
+                    else
+                    {
+                        AddMetadata(block.ExtractMetadata());
+                    }
+                }
+                return true;
+            }
+
+            return false;
         }
     }
 }

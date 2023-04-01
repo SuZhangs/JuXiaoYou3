@@ -16,6 +16,11 @@
         public int Index { get; set; }
         
         /// <summary>
+        /// 
+        /// </summary>
+        public int Version { get; init; }
+        
+        /// <summary>
         /// 内容块
         /// </summary>
         public List<ModuleBlock> Blocks { get; init; }

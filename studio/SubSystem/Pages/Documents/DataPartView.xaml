@@ -21,7 +21,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="384"/>
+            <ColumnDefinition Width="384" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -31,40 +31,40 @@
                          HorizontalAlignment="Left"
                          Margin="16 0">
                 <ftk:ToolButton Content="添加"
-                                        Icon="{StaticResource FeatherIcon.PlusCircle}"
-                                        ShowText="True"/>
+                                Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                ShowText="True" />
                 <ftk:ToolButton Content="删除"
-                                        Icon="{StaticResource FeatherIcon.MinusCircle}"
-                                        ShowText="True"/>
+                                Icon="{StaticResource FeatherIcon.MinusCircle}"
+                                ShowText="True" />
                 <ftk:ToolButton Content="上移"
-                                        Icon="{StaticResource FeatherIcon.ArrowUp}"
-                                        ShowText="True"/>
+                                Icon="{StaticResource FeatherIcon.ArrowUp}"
+                                ShowText="True" />
                 <ftk:ToolButton Content="下移"
-                                        Icon="{StaticResource FeatherIcon.ArrowDown}"
-                                        ShowText="True"/>
+                                Icon="{StaticResource FeatherIcon.ArrowDown}"
+                                ShowText="True" />
 
 
                 <ftk:ToolButton Content="导入"
                                 Icon="{StaticResource FeatherIcon.Download}"
-                                ShowText="True"/>
+                                ShowText="True" />
 
                 <ftk:ToolButton Content="升级"
-                                        Icon="{StaticResource FeatherIcon.Upload}"
-                                        ShowText="True"/>
+                                Icon="{StaticResource FeatherIcon.Upload}"
+                                ShowText="True" />
             </UniformGrid>
 
             <f:ListBox ItemsSource="{Binding ModuleParts,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}"/>
+                       SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}" />
         </DockPanel>
 
         <DockPanel Grid.Column="1">
             <TextBlock DockPanel.Dock="Top"
                        FontSize="20"
                        Height="256"
-                       Text="提示"/>
-            
+                       Text="提示" />
+
             <ItemsControl Grid.Column="1"
-                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}"/>
+                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}" />
         </DockPanel>
     </Grid>
 </UserControl>
