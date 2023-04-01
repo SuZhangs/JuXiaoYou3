@@ -27,8 +27,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -106,8 +106,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -135,7 +135,7 @@
                         <DockPanel>
                             <ContentPresenter x:Name="PART_Header"
                                               DockPanel.Dock="Top"
-                                              TextElement.Foreground="{f:Brush ForegroundInAdaptive2}"
+                                              TextElement.Foreground="{f:Brush ForegroundLevel2}"
                                               TextElement.FontSize="14"
                                               Content="{TemplateBinding Header}"
                                               ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -182,8 +182,8 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="CaretBrush" Value="{f:Brush ForegroundInAdaptive}" />
-        <Setter Property="Foreground" Value="{f:Brush ForegroundInAdaptive}" />
+        <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -211,7 +211,7 @@
                         <DockPanel>
                             <ContentPresenter x:Name="PART_Header"
                                                   DockPanel.Dock="Top"
-                                                  TextElement.Foreground="{f:Brush ForegroundInAdaptive2}"
+                                              TextElement.Foreground="{f:Brush ForegroundLevel2}"
                                                   TextElement.FontSize="14"
                                                   Content="{TemplateBinding Header}"
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"

@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel1]);
             _borderBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
-            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
+            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
             PART_Bd.Background  = _background;
             PART_Bd.BorderBrush = _borderBrush;
@@ -147,7 +147,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             _backgroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _borderBrush        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
-            _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
+            _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel2]);
             
             PART_Bd.Background      = _backgroundDisabled;
             PART_Bd.Background      = _background;
@@ -238,7 +238,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             _background  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel1]);
             _borderBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel4]);
-            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInAdaptive]);
+            _foreground  ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             
             PART_Bd.Background  = _background;
             PART_Bd.BorderBrush = _borderBrush;
@@ -323,7 +323,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             _backgroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _borderBrush        ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BorderBrush]);
-            _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel3]);
+            _foregroundDisabled ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel2]);
             
             PART_Bd.Background      = _backgroundDisabled;
             PART_Bd.Background      = _background;
