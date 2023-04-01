@@ -210,7 +210,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             else
             {
-                
+                Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
             }
         }
         

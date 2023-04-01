@@ -27,28 +27,32 @@
 
         <DockPanel>
             <UniformGrid DockPanel.Dock="Top"
-                         Columns="4"
+                         Columns="5"
                          HorizontalAlignment="Left"
                          Margin="16 0">
                 <ftk:ToolButton Content="添加"
+                                Command="{Binding AddModulePartCommand}"
                                 Icon="{StaticResource FeatherIcon.PlusCircle}"
                                 ShowText="True" />
                 <ftk:ToolButton Content="删除"
+                                Command="{Binding RemoveModulePartCommand}"
+                                CommandParameter="{Binding SelectedModulePart,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.MinusCircle}"
                                 ShowText="True" />
                 <ftk:ToolButton Content="上移"
+                                Command="{Binding ShiftUpModulePartCommand}"
+                                CommandParameter="{Binding SelectedModulePart,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.ArrowUp}"
                                 ShowText="True" />
                 <ftk:ToolButton Content="下移"
+                                Command="{Binding ShiftDownModulePartCommand}"
+                                CommandParameter="{Binding SelectedModulePart,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.ArrowDown}"
                                 ShowText="True" />
 
-
-                <ftk:ToolButton Content="导入"
-                                Icon="{StaticResource FeatherIcon.Download}"
-                                ShowText="True" />
-
                 <ftk:ToolButton Content="升级"
+                                Command="{Binding UpgradeModulePartCommand}"
+                                CommandParameter="{Binding SelectedModulePart,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.Upload}"
                                 ShowText="True" />
             </UniformGrid>
@@ -63,8 +67,7 @@
                        Height="256"
                        Text="提示" />
 
-            <ItemsControl Grid.Column="1"
-                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}" />
+            <ItemsControl ItemsSource="{Binding ContentBlocks,Mode=OneWay}" />
         </DockPanel>
     </Grid>
 </UserControl>
