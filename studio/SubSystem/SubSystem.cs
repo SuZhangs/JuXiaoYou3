@@ -67,6 +67,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
             Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
 
+            Xaml.InstallView<ModuleSelectorView, ModuleSelectorViewModel>();
             Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, ItemDocumentViewModel>();

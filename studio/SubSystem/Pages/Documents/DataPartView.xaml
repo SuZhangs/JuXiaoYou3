@@ -61,13 +61,9 @@
                        SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}" />
         </DockPanel>
 
-        <DockPanel Grid.Column="1">
-            <TextBlock DockPanel.Dock="Top"
-                       FontSize="20"
-                       Height="256"
-                       Text="提示" />
 
-            <ItemsControl ItemsSource="{Binding ContentBlocks,Mode=OneWay}" />
-        </DockPanel>
+        <ItemsControl Grid.Column="1"
+                   ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
+                   Margin="32 0" />
     </Grid>
 </UserControl>

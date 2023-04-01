@@ -178,6 +178,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         #region OnStart
 
+        private void ActivateAllEngines()
+        {
+            var engines = new DataEngine[]
+            {
+                TemplateEngine,
+                ImageEngine,
+                DocumentEngine,
+                KeywordEngine,
+            };
+            
+            foreach (var engine in engines)
+            {
+                if (!engine.Activated)
+                {
+                    engine.Activate();
+                }
+            }
+        }
 
         private void CreateDocumentImpl()
         {
@@ -225,7 +243,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected override void OnStart(NavigationParameter parameter)
         {
-            // TODO:
+            ActivateAllEngines();
             _cache    = (DocumentCache)parameter.Index;
             _document = DocumentEngine.GetDocument(parameter.Id);
             Type      = _cache.Type;

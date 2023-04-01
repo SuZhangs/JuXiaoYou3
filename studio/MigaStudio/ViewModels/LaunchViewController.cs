@@ -31,8 +31,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             Job(SubSystemString.GetText("text.launch.openDatabase"), x =>
             {
-                var dm = Xaml.Get<IDatabaseManager>();
-                
                 var dr = Xaml.Get<IDatabaseManager>()
                              .LoadAsync(@"C:\Users\Administrator\Documents\我的世界观\Juxiaoyou3")
                              .GetAwaiter()
@@ -55,7 +53,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void OnJobCompleted()
         {
             var opening    = Context.IsDatabaseOpen;
-            var controller = opening ? Context.Controllers.First(x => x is TabShell) : Context.Controllers.First(x => x is QuickStartController) ;
+            var controller = opening ? 
+                Context.Controllers.First(x => x is TabShell) : 
+                Context.Controllers.First(x => x is QuickStartController) ;
             
             //
             //

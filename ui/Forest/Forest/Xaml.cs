@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Media.Imaging;
@@ -249,6 +250,7 @@ namespace Acorisoft.FutureGL.Forest
                 return instance;
             }
 
+            Debug.WriteLine($"VM:{instance.GetType().Name}的视图无法找到！请注意绑定！");
             return null;
         }
 

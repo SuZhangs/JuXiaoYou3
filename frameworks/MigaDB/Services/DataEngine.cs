@@ -28,6 +28,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                     // 加载
                     notification.Synchronizer.Set();
                     Reset();
+                    Activated = true;
                     OnDatabaseOpening(notification.Session);
                     notification.Synchronizer.Unset();
                 }

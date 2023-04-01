@@ -4,12 +4,20 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:ModuleSelectorViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:ModuleSelectorViewModel}, IsDesignTimeCreatable=True}"
+                     Background="{f:BackgroundBrush}"
+                     Width="640"
+                     Height="480"
+                     Padding="16">
+    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+                  CompletedCommand="{Binding CompletedCommand}">
+        <f:ListBox ItemsSource="{Binding Templates}"
+                   SelectionMode="Multiple"
+                   x:Name="Collection"/>
+    </f:DialogPage>
 </f:ForestUserControl>

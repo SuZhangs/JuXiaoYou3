@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -8,6 +9,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public ModuleSelectorView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel<ModuleSelectorViewModel>().TargetElement = Collection;
+            base.OnLoaded(sender, e);
         }
     }
 }

@@ -140,7 +140,6 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
 
-            _bd.Background = _backgroundDisabledBrush;
             SetForeground(_foregroundDisabledBrush);
         }
 
