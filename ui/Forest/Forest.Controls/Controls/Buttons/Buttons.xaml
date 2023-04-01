@@ -306,7 +306,7 @@
                                        RadiusX="10"
                                        RadiusY="10"
                                        StrokeThickness="1"
-                                       Stroke="{f:Brush AdaptiveLevel3}" />
+                                       Stroke="{f:Brush AdaptiveLevel2}" />
                             <Rectangle x:Name="ActiveToggleRectangle"
                                        Width="40"
                                        Height="20"
@@ -324,7 +324,7 @@
                                          HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          RenderTransformOrigin="0.5, 0.5"
-                                         Fill="{f:Brush AdaptiveLevel3}">
+                                         Fill="{f:Brush AdaptiveLevel2}">
                                 <Ellipse.RenderTransform>
                                     <TranslateTransform X="-9"/>
                                 </Ellipse.RenderTransform>
@@ -432,10 +432,10 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ToggleRectangle" 
                                         Property="Fill" 
-                                        Value="{f:Brush AdaptiveLevel1}" />
+                                        Value="{f:Brush BackgroundLevel4}" />
                             <Setter TargetName="ToggleEllipse" 
                                         Property="Fill" 
-                                        Value="{f:Brush AdaptiveLevel3}" />
+                                        Value="{f:Brush AdaptiveLevel1}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

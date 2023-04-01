@@ -492,9 +492,12 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderThickness" Value="0 4 0 0" />
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Padding" Value="0 8" />
         <Setter Property="Purpose" Value="Form"/>
+        <Setter Property="Accent" Value="{f:Brush SlateGray100}" />
         <Style.Triggers>
             <Trigger Property="Purpose" Value="Form">
                 <Setter Property="Template">
@@ -502,7 +505,7 @@
                         <ControlTemplate TargetType="{x:Type c:DialogPage}">
                             <Border Background="{f:BackgroundBrush}"
                                     CornerRadius="10"
-                                    BorderThickness="0 4 0 0"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{TemplateBinding Accent}"
                                     Padding="16">
                                 <Grid>

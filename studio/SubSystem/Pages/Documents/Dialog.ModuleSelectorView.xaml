@@ -6,6 +6,7 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;assembly=MigaDB"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
@@ -14,10 +15,27 @@
                      Width="640"
                      Height="480"
                      Padding="16">
-    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type thisModel:ModuleTemplateCache}">
+            <DockPanel Margin="8">
+                <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <f:DialogPage BorderThickness="0"
+                  Title="{Binding Title}"
+                  CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
-        <f:ListBox ItemsSource="{Binding Templates}"
+        <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                   ItemsSource="{Binding Templates}"
                    SelectionMode="Multiple"
-                   x:Name="Collection"/>
+                   x:Name="Collection">
+            <f:ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               ItemWidth="280"/>
+                </ItemsPanelTemplate>
+            </f:ListBox.ItemsPanel>
+        </f:ListBox>
     </f:DialogPage>
 </f:ForestUserControl>

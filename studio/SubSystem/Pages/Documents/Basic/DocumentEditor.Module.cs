@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             // 只能添加未添加的模组
             var availableModules = TemplateEngine.TemplateCacheDB
                                                  .FindAll()
-                                                 .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id));
+                                                 .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
             
             //
             // 返回用户选择的模组
@@ -230,6 +230,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 ModuleParts[i].Index = i;
             }
+            ShiftDownModulePartCommand.NotifyCanExecuteChanged();
+            ShiftUpModulePartCommand.NotifyCanExecuteChanged();
         }
         
         

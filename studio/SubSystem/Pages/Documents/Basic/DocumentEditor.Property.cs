@@ -104,7 +104,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     RemoveModulePartCommand.NotifyCanExecuteChanged();
                     ShiftDownModulePartCommand.NotifyCanExecuteChanged();
                     ShiftUpModulePartCommand.NotifyCanExecuteChanged();
-                    UpgradeModulePartCommand.NotifyCanExecuteChanged();
                 }
             }
         }

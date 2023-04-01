@@ -39,7 +39,7 @@
     <Style x:Key="ClearStyle.ListBoxItem" TargetType="{x:Type s:ForestListBoxItemBase}">
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="2" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />

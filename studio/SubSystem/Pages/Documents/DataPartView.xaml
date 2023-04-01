@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
@@ -17,6 +18,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+
+            <DataTemplate DataType="{x:Type thisModel:PartOfModule}">
+                <DockPanel Margin="8">
+                    <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                </DockPanel>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -62,8 +70,9 @@
         </DockPanel>
 
 
-        <ItemsControl Grid.Column="1"
-                   ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
+        <ScrollViewer Grid.Column="1">
+            <ItemsControl ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
                    Margin="32 0" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

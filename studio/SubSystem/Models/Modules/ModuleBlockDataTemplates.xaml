@@ -275,7 +275,7 @@
     -->
 
     <DataTemplate DataType="{x:Type subTemp:StarBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel3}"
+        <Border Background="{f:Brush BackgroundLevel2}"
                 Height="28"
                 HorizontalAlignment="Left"
                 Margin="0 0 0 4"
@@ -297,7 +297,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:HeartBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel3}"
+        <Border Background="{f:Brush BackgroundLevel2}"
                 Height="28"
                 HorizontalAlignment="Left"
                 Margin="0 0 0 4"
@@ -319,7 +319,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type subTemp:SwitchBlockDataUI}">
-        <Border Background="{f:Brush BackgroundLevel3}"
+        <Border Background="{f:Brush BackgroundLevel2}"
                 HorizontalAlignment="Left"
                 Height="32"
                 Margin="0 0 0 4"
