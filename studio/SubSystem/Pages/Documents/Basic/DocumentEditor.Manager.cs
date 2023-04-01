@@ -40,11 +40,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 _document.Parts.Add(module);
                 ModuleParts.Add(module);
-                
-                foreach (var block in module.Blocks
-                                            .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+
+                for (var i = 0; i < module.Blocks.Count; i++)
                 {
-                    AddMetadata(block.ExtractMetadata());
+                    var block    = module.Blocks[i];
+                    var metadata = block.Metadata;
+                    
+                    if (string.IsNullOrEmpty(metadata))
+                    {
+                        continue;
+                    }
+
+                    if (_MetadataTrackerByName.ContainsKey(metadata))
+                    {
+                        module.Blocks.RemoveAt(i);
+                    }
+                    else
+                    {
+                        AddMetadata(block.ExtractMetadata());
+                        i++;
+                    }
                 }
                 return true;
             }

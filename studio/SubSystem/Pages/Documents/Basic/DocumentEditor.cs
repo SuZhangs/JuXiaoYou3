@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Design;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -61,6 +62,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
+            Xaml.Get<IAutoSaveService>()
+                .Observable
+                .ObserveOn(Scheduler)
+                .Subscribe(_ =>
+                {
+                    SaveDocumentImpl();
+                })
+                .DisposeWith(Collector);
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
@@ -150,7 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 foreach (var block in module.Blocks
                                             .Where(x => !string.IsNullOrEmpty(x.Metadata)))
                 {
-                    AddMetadata(block.ExtractMetadata(), block);
+                    AddMetadata(block.ExtractMetadata());
                 }
             }
         }

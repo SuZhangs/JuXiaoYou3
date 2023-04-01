@@ -10,8 +10,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private class MetadataIndexCache
         {
             private          int          _index;
-            private          int          _refCount     = 0;
-            private readonly HashSet<int> _blockTracker = new HashSet<int>();
 
             public Metadata Source { get; init; }
 
@@ -26,24 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             /// </summary>
             public string Value => Source.Value;
 
-            public bool Remove(int hashCode, IList<Metadata> metadataCollection)
-            {
-                if (_blockTracker.Remove(hashCode))
-                {
-                    _refCount--;
-                }
-
-                if (_refCount == 0)
-                {
-                    metadataCollection.RemoveAt(_index);
-                    _blockTracker.Clear();
-                    return true;
-                }
-
-                return false;
-            }
-
-            public string this[MetadataCollection metadataCollection, int hashCode]
+            public string this[MetadataCollection metadataCollection]
             {
                 set
                 {
@@ -63,11 +44,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                         }
 
                         Source.Value =  value;
-                    }
-
-                    if (_blockTracker.Add(hashCode))
-                    {
-                        _refCount++;
                     }
                 }
             }
@@ -99,7 +75,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             var metadata = block.ExtractMetadata();
             
-            AddMetadata(metadata, block);
+            AddMetadata(metadata);
             
         }
         
@@ -107,8 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
             {
-                var hashCode = HashCode.Combine(metadata.Name);
-                metadataIndex[_document.Metas, hashCode] = metadata.Value;
+                metadataIndex[_document.Metas] = metadata.Value;
             }
             else
             {
@@ -136,64 +111,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
-        private void AddMetadata(Metadata metadata, ModuleBlock block)
-        {
-            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
-            {
-                var hashCode = HashCode.Combine(block, metadata.Name);
-                metadataIndex[_document.Metas, hashCode] = metadata.Value;
-            }
-            else
-            {
-
-                var checkedIndex = _document.Metas.Count;
-                
-                _document.Metas.Add(metadata);
-
-                if (checkedIndex != _currentIndex)
-                {
-                    throw new InvalidOperationException("thread-not safe");
-                }
-                
-                var index = new MetadataIndexCache
-                {
-                    Source = metadata,
-                    Index  = checkedIndex
-                };
-                
-                _MetadataTrackerByName.Add(metadata.Name, index);
-                    
-                //
-                // 自增
-                Interlocked.Increment(ref _currentIndex);
-            }
-        }
-        
         private void RemoveMetadata(Metadata metadata)
         {
-            if (!_MetadataTrackerByName.TryGetValue(metadata.Name, out var index))
-            {
-                return;
-            }
-            
-            var hashCode = HashCode.Combine(metadata.Name);
-            if (index.Remove(hashCode, _document.Metas))
+            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var cache))
             {
                 _MetadataTrackerByName.Remove(metadata.Name);
-            }
-        }
-
-        private void RemoveMetadata(Metadata metadata, ModuleBlock block)
-        {
-            if (!_MetadataTrackerByName.TryGetValue(metadata.Name, out var index))
-            {
-                return;
-            }
-            
-            var hashCode = HashCode.Combine(block, metadata.Name);
-            if (index.Remove(hashCode, _document.Metas))
-            {
-                _MetadataTrackerByName.Remove(metadata.Name);
+                _document.Metas.RemoveAt(cache.Index);
             }
         }
 

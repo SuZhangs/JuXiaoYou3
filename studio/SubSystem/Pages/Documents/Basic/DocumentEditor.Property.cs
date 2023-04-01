@@ -94,12 +94,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
                 if (_selectedModulePart is null)
                 {
-                    return;
+                    ContentBlocks.Clear();
                 }
-
-                var selector = _selectedModulePart.Blocks
-                                                  .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
-                ContentBlocks.AddRange(selector, true);
+                else
+                {
+                    var selector = _selectedModulePart.Blocks
+                                                      .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
+                    ContentBlocks.AddRange(selector, true);
+                }
             }
         }
 

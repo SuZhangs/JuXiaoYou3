@@ -93,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             //         logger,
             //         DatabaseMode.Debug));
 
+            container.Use<AutoSaveService, IAutoSaveService>(new AutoSaveService());
             container.RegisterInstance<MusicService>(new MusicService());
         }
 

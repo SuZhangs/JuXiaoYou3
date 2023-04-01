@@ -31,7 +31,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        
+        private void SaveDocumentImpl()
+        {
+            SetDirtyState(false);
+            Successful(SubSystemString.OperationOfSaveIsSuccessful);
+        }
         
         private async Task AddModulePartImpl()
         {
@@ -65,6 +69,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private async Task RemoveModulePartImpl(PartOfModule module)
         {
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+            
+            //
+            // 删除当前内容
+            if (ReferenceEquals(SelectedModulePart, module))
+            {
+                SelectedModulePart = null;
+            }
+            
+            //
+            // 删除Metadata
+            foreach (var block in module.Blocks
+                                        .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+            {
+                RemoveMetadata(block.ExtractMetadata());
+            }
+            
             
         }
 
