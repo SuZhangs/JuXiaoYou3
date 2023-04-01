@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows;
-using Accessibility;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.Miga.Doc.Parts;
@@ -43,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             _reader            = new DataPartReader();
             Source             = new SourceList<ModuleTemplateCache>();
             MetadataCollection = new ObservableCollection<MetadataCache>();
-            PreviewBlocks             = new ObservableCollection<ModuleBlockDataUI>();
+            Blocks             = new ObservableCollection<ModuleBlock>();
 
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
@@ -280,7 +278,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
                 ExportTemplateCommand.NotifyCanExecuteChanged();
                 PreviewCommand.NotifyCanExecuteChanged();
-                PreviewBlocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI), true);
+                Blocks.AddRange(template.Blocks, true);
+                RaiseUpdated(nameof(PreviewBlocks));
                 
                 RaiseUpdated(nameof(PreviewBlocks));
                 RaiseUpdated(nameof(PreviewFor));
@@ -313,7 +312,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<ModuleBlockDataUI> PreviewBlocks { get; }
+        public ObservableCollection<ModuleBlock> Blocks { get; }
+
+        public IEnumerable<ModuleBlockDataUI> PreviewBlocks => Blocks.Select(ModuleBlockFactory.GetDataUI);
 
         [NullCheck(UniTestLifetime.Constructor)]
         public SourceList<ModuleTemplateCache> Source { get; }

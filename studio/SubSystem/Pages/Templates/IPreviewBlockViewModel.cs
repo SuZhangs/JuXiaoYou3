@@ -9,6 +9,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public string PreviewContractList { get; }
         public string PreviewAuthorList { get; }
         public string PreviewName { get; }
-        public ObservableCollection<ModuleBlockDataUI> PreviewBlocks { get; }
+        public IEnumerable<ModuleBlockDataUI> PreviewBlocks { get; }
     }
 }

@@ -178,14 +178,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (r.IsFinished)
             {
-                item.Name = item.Value;
-            }
-
-            r = await StringViewModel.String(Language.GetText("text.EditValue"));
-
-            if (r.IsFinished)
-            {
                 item.Value = item.Value;
+                item.Name = item.Value;
             }
         }
 

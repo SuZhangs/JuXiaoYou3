@@ -41,7 +41,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Version                  =  1;
             ForType                  =  DocumentType.CharacterDocument;
             Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
-            PreviewBlocks            =  new ObservableCollection<ModuleBlockDataUI>();
             MetadataList             =  new ObservableCollection<MetadataCache>();
             OpenPreviewPaneCommand   =  new RelayCommand(() => IsPreviewPaneOpen = true);
 
@@ -249,7 +248,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
                 SetDirtyState(false);
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
-                PreviewBlocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI),true);
+                RaiseUpdated(nameof(PreviewBlocks));
                 MetadataList.AddRange(template.MetadataList, true);
             }
             catch (Exception ex)
@@ -412,9 +411,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             var element = r.Value;
             Blocks.Add(element);
-            PreviewBlocks.Add(ModuleBlockFactory.GetDataUI(element.CreateInstance()));
-
-
+            RaiseUpdated(nameof(PreviewBlocks));
             await EditBlockViewModel.Edit(element);
             DetectAll();
             SetDirtyState(true);
@@ -446,7 +443,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
 
             Blocks.Remove(element);
-            PreviewBlocks.Remove(PreviewBlocks.FirstOrDefault(x => x.Id == element.Id));
+            RaiseUpdated(nameof(PreviewBlocks));
             DetectAll();
             SetDirtyState(true);
         }
@@ -466,7 +463,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
 
             Blocks.Move(targetIndex, targetIndex - 1);
-            PreviewBlocks.Move(targetIndex, targetIndex - 1);
+            RaiseUpdated(nameof(PreviewBlocks));
         }
 
         private void ShiftDownBlockImpl(ModuleBlockEditUI element)
@@ -485,7 +482,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
 
             Blocks.Move(targetIndex, targetIndex + 1);
-            PreviewBlocks.Move(targetIndex, targetIndex + 1);
+            RaiseUpdated(nameof(PreviewBlocks));
         }
 
         private async Task RemoveAllBlockImpl()
@@ -500,7 +497,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             //
             // 清空
             Blocks.Clear();
-            PreviewBlocks.Clear();
+            RaiseUpdated(nameof(PreviewBlocks));
             MetadataList.Clear();
             SetDirtyState(true);
         }
@@ -662,7 +659,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
 
-        public ObservableCollection<ModuleBlockDataUI> PreviewBlocks { get; }
+        public IEnumerable<ModuleBlockDataUI> PreviewBlocks => Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NewTemplateCommand { get; }

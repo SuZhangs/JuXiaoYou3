@@ -125,21 +125,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             var r = await Xaml.Get<IDialogService>()
                               .Danger(
                                   SubSystemString.Notify,
-                                  SubSystemString.AreYouSureCreateNew);
+                                  SubSystemString.AreYouSureRemoveIt);
 
             if (!r)
             {
                 return;
             }
 
-            if (Items.Remove(element))
-            {
-                await Xaml.Get<IDialogService>()
-                          .Notify(
-                              CriticalLevel.Success,
-                              SubSystemString.Notify,
-                              SubSystemString.OperationOfRemoveIsSuccessful);
-            }
+            Items.Remove(element);
         }
 
         private void UpImpl(ModuleBlockEditUI element)

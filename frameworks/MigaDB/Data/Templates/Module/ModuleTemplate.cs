@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 AuthorList   = AuthorList,
                 MetadataList = MetadataList,
                 Version      = Version,
-                Name         = Name,
+                Name         = $"{Name}({For})",
                 ForType      = ForType
             };
         }

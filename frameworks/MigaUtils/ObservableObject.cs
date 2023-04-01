@@ -39,11 +39,6 @@ namespace Acorisoft.FutureGL.MigaUtils
         protected bool SetValue<T>(ref T source, T value, [CallerMemberName] string name = "")
         {
             if (string.IsNullOrEmpty(name)) return false;
-            
-            if (EqualityComparer<T>.Default.Equals(source, value))
-            {
-                return false;
-            }
 
             RaiseUpdating(name);
             source = value;

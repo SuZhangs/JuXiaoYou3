@@ -532,10 +532,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         public static readonly BlockType[] OptionBlockKinds = new[]
         {
-            BlockType.Switch,
-            BlockType.Star,
-            BlockType.Heart,
-            BlockType.Binary,
             BlockType.Sequence,
             BlockType.Group,
         };

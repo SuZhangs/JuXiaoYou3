@@ -684,7 +684,8 @@
                 <f:ToggleSwitch f:Language.Id="global.diffValue"
                                 Margin="4 8"
                                 Content="值与名字不同？"
-                                IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                IsChecked="{Binding AllowDiffValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                Visibility="Collapsed"/>
                 <f:HeaderedMultiLine f:Language.Id="global.tooltips"
                                      Margin="4"
                                      Header="提示"
