@@ -91,15 +91,14 @@
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
                                     Command="{Binding AddTabCommand}"
                                     CommandParameter="{x:Type pages:SettingViewModel}"
-                                    Icon="{StaticResource IC.Setting}"
+                                    Icon="{StaticResource FeatherIcon.Settings}"
                                     IconSize="19"
                                     IsFilled="True"
                                     Width="48"/>
                 
                 <!-- 不活跃面板视图 -->
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
-                                    Icon="{StaticResource IC.ArrowDown}"
-                                    IsFilled="True"
+                                    Icon="{StaticResource FeatherIcon.Down}"
                                     IconSize="29"
                                     Width="48"/>
             </StackPanel>
