@@ -49,17 +49,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected DocumentEditorVMBase()
         {
-            _sync                   = new object();
-            _DataPartTrackerOfId    = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-            ContentBlocks           = new ObservableCollection<ModuleBlockDataUI>();
-            InternalSubViews        = new ObservableCollection<HeaderedSubView>();
-            SubViews                = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            DetailParts             = new ObservableCollection<IPartOfDetail>();
-            InvisibleDataParts      = new ObservableCollection<DataPart>();
-            ModuleParts             = new ObservableCollection<PartOfModule>();
-            PreviewBlocks           = new ObservableCollection<PreviewBlock>();
-            _MetadataTrackerByName  = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            _MetadataTrackerByIndex = new Dictionary<int, Metadata>();
+            _sync                  = new object();
+            _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
+            ContentBlocks          = new ObservableCollection<ModuleBlockDataUI>();
+            InternalSubViews       = new ObservableCollection<HeaderedSubView>();
+            SubViews               = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
+            DetailParts            = new ObservableCollection<IPartOfDetail>();
+            InvisibleDataParts     = new ObservableCollection<DataPart>();
+            ModuleParts            = new ObservableCollection<PartOfModule>();
+            PreviewBlocks          = new ObservableCollection<PreviewBlock>();
+            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
@@ -68,9 +67,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
-            ChangeAvatarCommand  = AsyncCommand(ChangeAvatarImpl);
-            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            ChangeAvatarCommand     = AsyncCommand(ChangeAvatarImpl);
+            AddModulePartCommand    = AsyncCommand(AddModulePartImpl);
+            RemoveModulePartCommand = AsyncCommand<PartOfModule>(RemoveModulePartImpl);
+            AddKeywordCommand       = AsyncCommand(AddKeywordImpl);
+            RemoveKeywordCommand    = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();
         }
 
@@ -98,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         #region OnStart
 
-        private void LoadDocumentIntern()
+        private void LoadDocumentImpl()
         {
             foreach (var part in _document.Parts
                                           .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
@@ -129,18 +130,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             if (_basicPart is null)
             {
-                _basicPart = new PartOfBasic{ Buckets = new Dictionary<string, string>
-                {
-                    {"@name", "aaaa"},
-                    {"@gender", "123aaaa"},
-                }};
+                _basicPart = new PartOfBasic{ Buckets = new Dictionary<string, string>()};
                 _document.Parts.Add(_basicPart);
-                Name = _cache.Name;
+                Name   = _cache.Name;
+                Gender = Language.GetText("global.DefaultGender");
             }
         }
 
         private void TrackDataPartAndMetadata()
         {
+            
             foreach (var metadata in _basicPart.Buckets)
             {
                 UpsertMetadata(metadata.Key, metadata.Value);
@@ -151,12 +150,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 foreach (var block in module.Blocks
                                             .Where(x => !string.IsNullOrEmpty(x.Metadata)))
                 {
-                    AddMetadata(block.ExtractMetadata());
+                    AddMetadata(block.ExtractMetadata(), block);
                 }
             }
         }
 
-        private void CreateDocumentIntern()
+        private void CreateDocumentImpl()
         {
             var document = new Document
             {
@@ -212,11 +211,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 //
                 // 创建文档
-                CreateDocumentIntern();
+                CreateDocumentImpl();
             }
 
             // 加载文档
-            LoadDocumentIntern();
+            LoadDocumentImpl();
 
             base.OnStart(parameter);
         }

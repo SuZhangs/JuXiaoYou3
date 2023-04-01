@@ -27,10 +27,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     partial class DocumentEditorVMBase
     {
         private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
-        private readonly Dictionary<string, int>      _MetadataTrackerOfString;
-        private readonly Dictionary<int, Metadata>    _MetadataTrackerOfIndex;
 
-        [Obsolete]
+        
         private bool AddModule(PartOfModule module)
         {
             if (module is null)
@@ -42,6 +40,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 _document.Parts.Add(module);
                 ModuleParts.Add(module);
+                
+                foreach (var block in module.Blocks
+                                            .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+                {
+                    AddMetadata(block.ExtractMetadata());
+                }
                 return true;
             }
 

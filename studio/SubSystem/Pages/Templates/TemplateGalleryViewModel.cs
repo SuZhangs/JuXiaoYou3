@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Source             = new SourceList<ModuleTemplateCache>();
             MetadataCollection = new ObservableCollection<MetadataCache>();
             Blocks             = new ObservableCollection<ModuleBlock>();
-
+            ApprovalRequired = false;
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);

@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     partial class DocumentEditorVMBase
     {
         
-        [Obsolete]
+        
         private async Task AddModulePartImpl()
         {
             //
@@ -63,7 +63,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddModules(module);
         }
 
-        [Obsolete]
+        private async Task RemoveModulePartImpl(PartOfModule module)
+        {
+            
+        }
+
+
         private void AddModules(IEnumerable<PartOfModule> modules)
         {
             if (modules is null)
@@ -84,7 +89,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             if (result == 0)
             {
-                Warning("没有变化");
+                Warning(SubSystemString.NoChange);
+            }
+            else
+            {
+                Successful(SubSystemString.OperationOfAddIsSuccessful);
             }
         }
 

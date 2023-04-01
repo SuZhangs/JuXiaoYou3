@@ -142,7 +142,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         public string Gender
         {
-            get => GetOrAddMetadata(MetaNameOfGender, Language.GetText("global.DefaultGender"));
+            get => GetOrAddMetadata(MetaNameOfGender);
             set
             {
                 UpsertMetadata(MetaNameOfGender, value);
