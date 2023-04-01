@@ -2,6 +2,8 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Concepts
 {
+    // TODO: 添加DataEngine到DataEngineType
+    // 记得实现 Concept的聚合（Aggregated）
     public class ConceptEngine : DataEngine
     {
         public bool HasConcept(Concept concept)

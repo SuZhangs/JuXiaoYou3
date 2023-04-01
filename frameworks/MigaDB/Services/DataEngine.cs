@@ -1,4 +1,6 @@
-﻿using Acorisoft.FutureGL.MigaDB.UnitTests;
+﻿using Acorisoft.FutureGL.MigaDB.Data;
+using Acorisoft.FutureGL.MigaDB.Data.Concepts;
+using Acorisoft.FutureGL.MigaDB.UnitTests;
 using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
@@ -146,5 +148,16 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// 是否已经加载。
         /// </summary>
         public bool Activated { get; private set; }
+    }
+    
+    
+    public abstract class ConceptDataEngine : DataEngine, IConceptProvider
+    {
+        /// <summary>
+        /// 聚合文档
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public abstract UnifiedItem Aggregate(string id);
     }
 }

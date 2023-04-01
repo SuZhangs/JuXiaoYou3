@@ -1,29 +1,46 @@
 ﻿using System.Collections.ObjectModel;
+using Acorisoft.FutureGL.MigaDB.Data;
+using Acorisoft.FutureGL.MigaDB.Data.Concepts;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using static Acorisoft.FutureGL.MigaDB.Constants;
 
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
-    public class DocumentEngine : DataEngine
+    [ConceptProvider]
+    public class DocumentEngine : DataEngine, IConceptProvider
     {
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             var database = session.Database;
             DocumentDB      = database.GetCollection<Document>(Name_Document);
             DocumentCacheDB = database.GetCollection<DocumentCache>(Name_Cache_Document);
-            ComposeDB       = database.GetCollection<Compose>(Name_Compose);
-            ComposeCacheDB  = database.GetCollection<ComposeCache>(Name_Cache_Compose);
         }
 
         protected override void OnDatabaseClosing()
         {
             DocumentDB      = null;
             DocumentCacheDB = null;
-            ComposeDB       = null;
-            ComposeCacheDB  = null;
         }
 
-        #region Documents
+        
+
+        public UnifiedItem Aggregate(string id)
+        {
+            var cache = DocumentCacheDB.FindById(id);
+
+            if (cache is null)
+            {
+                return null;
+            }
+
+            return new UnifiedItem
+            {
+                Id     = cache.Id,
+                Name   = cache.Name,
+                Intro  = cache.Intro,
+                Avatar = cache.Avatar
+            };
+        }
 
         /// <summary>
         /// 添加文档
@@ -218,19 +235,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             return cache.IsDeleted ? null : GetDocument(cache.Id);
         }
 
-        #endregion
-
-        public void AddCompose(Compose document)
-        {
-        }
-
-        public void RemoveCompose(Compose document)
-        {
-        }
-
-        public void UpdateCompose(Compose document)
-        {
-        }
 
 
         /// <summary>
@@ -245,13 +249,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             DocumentCacheDB.DeleteMany(x => x.IsDeleted);
             DocumentDB.DeleteMany(x => markAsDeletedDocumentCache.Contains(x.Id));
 
-
-            var markAsDeletedComposeCache = ComposeCacheDB.Find(expression)
-                                                          .Select(x => x.Id)
-                                                          .ToHashSet();
-            ComposeCacheDB.DeleteMany(x => x.IsDeleted);
-            ComposeDB.DeleteMany(x => markAsDeletedComposeCache.Contains(x.Id));
-
             Modified();
         }
 
@@ -264,15 +261,5 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// 
         /// </summary>
         public ILiteCollection<Document> DocumentDB { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ILiteCollection<ComposeCache> ComposeCacheDB { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ILiteCollection<Compose> ComposeDB { get; private set; }
     }
 }
