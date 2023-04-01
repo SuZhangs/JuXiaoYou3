@@ -79,6 +79,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             }
         }
         
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            return false;
+        }
+        
         public sealed override Metadata ExtractMetadata()
         {
             return null;

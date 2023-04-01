@@ -125,6 +125,11 @@
         /// </summary>
         /// <returns>返回一个元数据。</returns>
         public abstract Metadata ExtractMetadata();
+
+        /// <summary>
+        /// 复制值（要求为全等复制）
+        /// </summary>
+        public abstract bool CopyTo(ModuleBlock newBlock);
         
         /// <summary>
         /// 清除当前值。

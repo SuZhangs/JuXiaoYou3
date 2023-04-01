@@ -83,6 +83,19 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return Value.SequenceEqual(bb.Value);
         }
         
+        
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is ChartBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>

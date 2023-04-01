@@ -92,6 +92,19 @@
         }
         
         
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is DegreeBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
+        
+        
         public sealed override Metadata ExtractMetadata()
         {
             return new Metadata

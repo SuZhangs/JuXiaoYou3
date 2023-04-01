@@ -37,6 +37,19 @@
             var bb = (OptionBlock)block;
             return bb.Value == Value;
         }
+        
+        
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is OptionBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// 清除当前值。

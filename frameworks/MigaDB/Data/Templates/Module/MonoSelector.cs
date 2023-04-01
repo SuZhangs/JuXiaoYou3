@@ -56,6 +56,17 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return Value == mono.Value;
         }
 
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is MonoSelectorBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// 默认值
         /// </summary>

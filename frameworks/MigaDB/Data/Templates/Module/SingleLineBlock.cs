@@ -49,6 +49,17 @@
             return bb.Value == Value;
         }
         
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is SingleLineBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
         
         public sealed override Metadata ExtractMetadata()
         {

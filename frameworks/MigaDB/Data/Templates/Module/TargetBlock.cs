@@ -77,6 +77,20 @@
                    TargetSource == tb.TargetSource &&
                    TargetThumbnail == tb.TargetThumbnail;
         }
+        
+
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is TargetBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.TargetName   = TargetName;
+                nb.TargetSource = TargetSource;
+                nb.TargetThumbnail   = TargetThumbnail;
+                return true;
+            }
+
+            return false;
+        }
 
         public override void ClearValue()
         {

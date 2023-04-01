@@ -69,6 +69,17 @@
             };
         }
 
+        public override bool CopyTo(ModuleBlock newBlock)
+        {
+            if (newBlock is BinaryBlock nb && CompareTemplateOverride(nb))
+            {
+                nb.Value = Value;
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// 清除当前值。
         /// </summary>
@@ -82,17 +93,17 @@
         /// <summary>
         /// 默认值
         /// </summary>
-        public bool Fallback { get; init; }
+        public bool Fallback { get; set; }
 
         /// <summary>
         /// 后缀
         /// </summary>
-        public string Negative { get; init; }
+        public string Negative { get; set; }
         
         
         /// <summary>
         /// 后缀
         /// </summary>
-        public string Positive { get; init; }
+        public string Positive { get; set; }
     }
 }
