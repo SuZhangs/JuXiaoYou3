@@ -16,7 +16,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             var t = values[0] as ModuleBlockEditUI;
             var n = values[1]?.ToString();
 
-            return string.Format(Pattern, SubSystemString.GetModuleBlockNameByType(t), n);
+            if (string.IsNullOrEmpty(n))
+            {
+                return t;
+            }
+
+            return n;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

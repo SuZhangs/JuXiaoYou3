@@ -220,7 +220,7 @@
                                         <TextBlock DockPanel.Dock="Top"
                                                    FontSize="16"
                                                    FontWeight="Bold"
-                                                   Text="{Binding MetadataName}" />
+                                                   Text="{Binding Name}" />
                                         <TextBlock Text="{Binding MetadataName}" />
                                     </DockPanel>
                                 </Border>

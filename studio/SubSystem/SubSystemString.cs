@@ -706,6 +706,9 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string ImageTooSmall => GetText("text.ImageTooSmall");
         public static string ImageTooBig => GetText("text.ImageTooBig");
         public static string EmptyName => GetText("text.EmptyName");
+        public static string EmptyAuthor => GetText("text.EmptyAuthor");
+        public static string EmptyValue => GetText("text.EmptyValue");
+        public static string EmptyFor => GetText("text.EmptyFor");
         public static string KeywordTooMany => GetText("text.KeywordTooMany");
         public static string AddKeywordTitle => GetText("text.AddKeyword");
 

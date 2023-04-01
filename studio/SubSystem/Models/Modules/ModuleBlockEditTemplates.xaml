@@ -264,10 +264,8 @@
                            Foreground="{f:ForegroundBrush}"
                            Text="最大字数" />
 
-                <studio:NumberBox Margin="4 4 4 8"
-                                  Maximum="3000"
-                                  Minimum="100"
-                                  Value="{Binding CharacterLimited,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}" />
+                <f:HeaderedMultiLine Margin="4 4 4 8" 
+                                     Text="{Binding CharacterLimited,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}" />
 
                 <f:HeaderedMultiLine f:Language.Id="global.tooltips"
                                      Margin="4"
@@ -572,6 +570,16 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
+
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="默认值" />
+
                     <f:HeaderedSingleLine f:Language.Id="global.minimum"
                                           Margin="4"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
@@ -601,6 +609,16 @@
         <Border Background="Transparent" Width="640">
             <StackPanel>
                 <UniformGrid Columns="3">
+                    <f:HeaderedSingleLine f:Language.Id="global.name"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Header="名字" />
+
+                    <f:HeaderedSingleLine f:Language.Id="global.fallback"
+                                          Margin="4"
+                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"
+                                          Header="默认值" />
+
                     <f:HeaderedSingleLine f:Language.Id="global.minimum"
                                           Margin="4"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource String2Int}}"

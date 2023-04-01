@@ -249,6 +249,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
                 SetDirtyState(false);
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
+                PreviewBlocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetDataUI),true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
             catch (Exception ex)
@@ -263,8 +264,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task SaveTemplateImpl()
         {
             var target = Canvas;
+            
             if (target is null)
             {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Name))
+            {
+                await Warning(SubSystemString.EmptyName);
+                return;
+            }
+            
+            
+            if (string.IsNullOrEmpty(AuthorList))
+            {
+                await Warning(SubSystemString.EmptyAuthor);
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(For))
+            {
+                await Warning(SubSystemString.EmptyFor);
                 return;
             }
 

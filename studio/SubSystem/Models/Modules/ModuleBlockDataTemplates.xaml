@@ -7,6 +7,7 @@
                     xmlns:color="clr-namespace:ColorPicker;assembly=Forest.Controls"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:studio="urn:acorisoft/studio"
+                    xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                     xmlns:studio1="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors"
                     xmlns:b="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Behaviors">
     <ResourceDictionary.MergedDictionaries>
@@ -14,7 +15,8 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialDesignIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+    <thisConverters:String2IntConverter x:Key="String2Int" />
+
     <!--
         @ param: TargetBlock
         @ member:
@@ -232,9 +234,7 @@
                            MinWidth="15"
                            Text="{Binding Suffix}"
                            VerticalAlignment="Center" />
-                <studio:NumberBox Minimum="{Binding Minimum}"
-                              Maximum="{Binding Maximum}"
-                              Value="{Binding Value,Mode=TwoWay}"
+                <f:SingleLine Text="{Binding Value,Mode=TwoWay,Converter={StaticResource String2Int}}"
                               Watermark="{Binding Fallback}" />
             </DockPanel>
         </DockPanel>
@@ -520,7 +520,7 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
             <DockPanel>
-                
+
                 <studio:RadarChart Axis="{Binding Axis,Mode=OneWay}"
                                    Data="{Binding Data,Mode=OneWay}"
                                    Maximum="{Binding Maximum}"
