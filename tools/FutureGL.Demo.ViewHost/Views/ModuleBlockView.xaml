@@ -19,7 +19,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <ScrollViewer Margin="32">
-        <ItemsControl HorizontalAlignment="Left"
+        <ItemsControl Background="{f:BackgroundBrush}"
+                      HorizontalAlignment="Left"
                       ItemsSource="{Binding Blocks}">
         </ItemsControl>
     </ScrollViewer>
