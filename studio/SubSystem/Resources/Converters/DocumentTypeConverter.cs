@@ -9,35 +9,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // TODO: 翻译
-            if (value is DocumentType kind)
-            {
-                // TODO: 翻译
-                return Language.Culture switch
-                {
-                    CultureArea.Chinese => GetChinese(kind),
-                    _                   => GetChinese(kind),
-                };
-            }
-
-            return value?.ToString() ?? "Null";
+            return SubSystemString.GetDocumentTypeName(value is DocumentType t ? t : DocumentType.OtherDocument);
         }
-
-
-        private static string GetChinese(DocumentType kind)
-        {
-            return kind switch
-            {
-                DocumentType.None              => "全部",
-                DocumentType.AbilityDocument   => "能力",
-                DocumentType.ItemDocument      => "物品",
-                DocumentType.CharacterDocument => "人设",
-                DocumentType.OtherDocument     => "其他",
-                DocumentType.GeographyDocument => "地图",
-                DocumentType.MysteryDocument   => "世界观设定",
-                _                              => "人设",
-            };
-        }
+        
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

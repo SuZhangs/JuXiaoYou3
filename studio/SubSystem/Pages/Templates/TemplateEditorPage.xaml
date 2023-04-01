@@ -15,12 +15,18 @@
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateEditorViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ModuleBlockUIConverter x:Key="BlockName" />
-        <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
+        <thisConverters:BlockNameConverter x:Key="BlockName" />
+        <thisConverters:DocumentTypeConverter x:Key="DocumentType" />
 
         <DataTemplate DataType="{x:Type thisModel:ModuleBlockEditUI}">
-            <TextBlock Margin="4"
-                       Text="{Binding Converter={StaticResource BlockName}}" />
+            <TextBlock Margin="4">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource BlockName}">
+                        <Binding/>
+                        <Binding Path="Name" Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
         </DataTemplate>
     </UserControl.Resources>
     <f:Drawer Padding="8 16"
@@ -82,7 +88,7 @@
                             <f:ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type thisModel2:DocumentType}">
                                     <TextBlock Margin="4"
-                                               Text="{Binding Converter={StaticResource DocumentTypeName}}" />
+                                               Text="{Binding Converter={StaticResource DocumentType}}" />
                                 </DataTemplate>
                             </f:ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
@@ -182,9 +188,7 @@
 
                 <ScrollViewer>
                     <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}"
-                               SelectedItem="{Binding SelectedBlock,Mode=TwoWay}">
-
-                    </f:ListBox>
+                               SelectedItem="{Binding SelectedBlock,Mode=TwoWay}"/>
                 </ScrollViewer>
             </f:ForestSection>
 

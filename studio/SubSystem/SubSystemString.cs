@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             DocumentType.OtherDocument,
             DocumentType.MysteryDocument,
         };
-        
+
         public static readonly DocumentType[] DocumentGalleryTypes = new[]
         {
             DocumentType.None,
@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             DocumentType.OtherDocument,
             DocumentType.MysteryDocument,
         };
-        
+
         public static string GetText(string id) => Language.GetText(id);
 
         #region ModuleBlock Translate
@@ -390,7 +390,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 BlockType.Group      => GetGroupName(),
                 BlockType.Radar      => GetRadarName(),
                 BlockType.Histogram  => GetHistogramName(),
-                _                       => GetUnknownName(),
+                _                    => GetUnknownName(),
             };
         }
 
@@ -548,6 +548,103 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         #endregion
 
+        #region DocumentType Translate
+
+        public static string GetDocumentTypeName(DocumentType type)
+        {
+            return type switch
+            {
+                DocumentType.Compose => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "写作",
+                    CultureArea.French   => "Compose",
+                    CultureArea.Japanese => "Compose",
+                    CultureArea.Russian  => "Compose",
+                    CultureArea.Korean   => "Compose",
+                    _                    => "Compose",
+                },
+                DocumentType.Document => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "设定",
+                    CultureArea.French   => "Document",
+                    CultureArea.Japanese => "Document",
+                    CultureArea.Russian  => "Document",
+                    CultureArea.Korean   => "Document",
+                    _                    => "Document",
+                },
+                DocumentType.CharacterDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "人设",
+                    CultureArea.French   => "Character",
+                    CultureArea.Japanese => "Character",
+                    CultureArea.Russian  => "Character",
+                    CultureArea.Korean   => "Character",
+                    _                    => "Character",
+                },
+                DocumentType.ItemDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "物品",
+                    CultureArea.French   => "Item",
+                    CultureArea.Japanese => "Item",
+                    CultureArea.Russian  => "Item",
+                    CultureArea.Korean   => "Item",
+                    _                    => "Item",
+                },
+                DocumentType.AbilityDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "能力",
+                    CultureArea.French   => "Ability",
+                    CultureArea.Japanese => "Ability",
+                    CultureArea.Russian  => "Ability",
+                    CultureArea.Korean   => "Ability",
+                    _                    => "Ability",
+                },
+                DocumentType.GeographyDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "地图",
+                    CultureArea.French   => "Geography",
+                    CultureArea.Japanese => "Geography",
+                    CultureArea.Russian  => "Geography",
+                    CultureArea.Korean   => "Geography",
+                    _                    => "Geography",
+                },
+                DocumentType.MysteryDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "世界观",
+                    CultureArea.French   => "Mystery",
+                    CultureArea.Japanese => "Mystery",
+                    CultureArea.Russian  => "Mystery",
+                    CultureArea.Korean   => "Mystery",
+                    _                    => "Mystery",
+                },
+
+                DocumentType.OtherDocument => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "其他",
+                    CultureArea.French   => "Other",
+                    CultureArea.Japanese => "Other",
+                    CultureArea.Russian  => "Other",
+                    CultureArea.Korean   => "Other",
+                    _                    => "Other",
+                },
+                DocumentType.None => Language.Culture switch
+                {
+                    CultureArea.Chinese  => "全部",
+                    CultureArea.French   => "All",
+                    CultureArea.Japanese => "All",
+                    CultureArea.Russian  => "All",
+                    CultureArea.Korean   => "All",
+                    _                    => "All",
+                },
+                _ => Language.Culture switch
+                {
+                    _ => "未知",
+                },
+            };
+        }
+
+        #endregion
+
 
         public static string GetDatabaseResult(DatabaseFailedReason reason)
         {
@@ -625,7 +722,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "正在处理图片....",
             };
         }
-        
+
 
         public static string ModuleFilter
         {
@@ -640,17 +737,18 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "模组文件|*.png",
             };
         }
+
         public static string ImageFilter
         {
             // TODO: 翻译
             get => Language.Culture switch
             {
-                CultureArea.English => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.French => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
                 CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                _ => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Russian  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
             };
         }
     }

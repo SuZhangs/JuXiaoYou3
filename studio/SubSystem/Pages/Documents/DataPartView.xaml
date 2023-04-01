@@ -12,6 +12,13 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockDataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="384"/>
@@ -19,32 +26,35 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel>
-            <WrapPanel DockPanel.Dock="Top"
-                       Orientation="Horizontal">
+            <UniformGrid DockPanel.Dock="Top"
+                         Columns="4"
+                         HorizontalAlignment="Left"
+                         Margin="16 0">
                 <ftk:ToolButton Content="添加"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        Icon="{StaticResource FeatherIcon.PlusCircle}"
                                         ShowText="True"/>
                 <ftk:ToolButton Content="删除"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        Icon="{StaticResource FeatherIcon.MinusCircle}"
                                         ShowText="True"/>
                 <ftk:ToolButton Content="上移"
-                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        Icon="{StaticResource FeatherIcon.ArrowUp}"
                                         ShowText="True"/>
                 <ftk:ToolButton Content="下移"
-                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        Icon="{StaticResource FeatherIcon.ArrowDown}"
                                         ShowText="True"/>
 
 
                 <ftk:ToolButton Content="导入"
-                                Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                Icon="{StaticResource FeatherIcon.Download}"
                                 ShowText="True"/>
 
                 <ftk:ToolButton Content="升级"
-                                        Icon="{StaticResource FeatherIcon.Update}"
+                                        Icon="{StaticResource FeatherIcon.Upload}"
                                         ShowText="True"/>
-            </WrapPanel>
+            </UniformGrid>
 
-            <f:ListBox/>
+            <f:ListBox ItemsSource="{Binding ModuleParts,Mode=OneWay}"
+                       SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}"/>
         </DockPanel>
 
         <DockPanel Grid.Column="1">
@@ -54,7 +64,7 @@
                        Text="提示"/>
             
             <ItemsControl Grid.Column="1"
-                      ItemsSource="{Binding ContentBlocks,Mode=OneWay}"/>
+                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}"/>
         </DockPanel>
     </Grid>
 </UserControl>

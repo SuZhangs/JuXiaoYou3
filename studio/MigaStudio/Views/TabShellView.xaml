@@ -93,7 +93,6 @@
                                     CommandParameter="{x:Type pages:SettingViewModel}"
                                     Icon="{StaticResource FeatherIcon.Settings}"
                                     IconSize="19"
-                                    IsFilled="True"
                                     Width="48"/>
                 
                 <!-- 不活跃面板视图 -->
