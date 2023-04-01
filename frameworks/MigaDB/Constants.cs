@@ -27,6 +27,7 @@
         internal const string Name_FileTable            = "file";
         internal const string Name_MusicTable           = "file_music";
         internal const string Name_Directory            = "dir";
+        internal const string Name_Concept            = "concept";
         internal const string Name_Keyword              = "keywords";
         internal const string Name_ModuleTemplate       = "module";
         internal const string Name_Cache_ModuleTemplate = "idx_module";

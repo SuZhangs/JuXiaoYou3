@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Concepts;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
@@ -35,6 +36,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<ImageEngine>(false)
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
+                   .Setup<ConceptEngine>(false)
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }
 
