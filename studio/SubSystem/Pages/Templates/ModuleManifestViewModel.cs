@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
@@ -17,6 +19,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                            .Database
                            .CurrentValue
                            .Get<ModuleManifestProperty>();
+            AddManifestCommand          = AsyncCommand(AddManifestImpl);
+            RemoveManifestCommand       = AsyncCommand<ModuleManifest>(RemoveManifestImpl, x => x is not null);
+            SetAbilityManifestCommand   = Command<ModuleManifest>(x => Ability   = x);
+            SetCharacterManifestCommand = Command<ModuleManifest>(x => Character = x);
+            SetGeographyManifestCommand = Command<ModuleManifest>(x => Geography = x);
+            SetItemManifestCommand      = Command<ModuleManifest>(x => Item      = x);
+            SetOtherManifestCommand     = Command<ModuleManifest>(x => Other     = x);
         }
 
         private void Save()
@@ -60,27 +69,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 return;
             }
-            var ds = DialogService();
-            var r  = await StringViewModel.String(SubSystemString.EditNameTitle);
-            
-            
-            
-            var r1 = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>();
-            if (!r1.IsFinished)
+
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
             
-            Manifests.Add(manifest);
+            Manifests.Remove(manifest);
+            
+            if (Property.DefaultManifests
+                        .Values
+                        .Any(x => ReferenceEquals(x, manifest)))
+            {
+                await Warning(Language.GetText("text.defaultManifestHasBeenRemoved"));
+            }
+            
             Save();
         }
-        
+
         public ModuleManifestProperty Property { get; }
 
         public ModuleManifest SelectedManifest
         {
             get => _selectedManifest;
-            set => SetValue(ref _selectedManifest, value);
+            set
+            {
+                SetValue(ref _selectedManifest, value);
+                RemoveManifestCommand.NotifyCanExecuteChanged();
+            }
         }
 
         public ModuleManifest Ability
@@ -139,5 +155,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleManifest> Manifests => Property.Manifests;
         
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddManifestCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<ModuleManifest> RemoveManifestCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<ModuleManifest> SetAbilityManifestCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<ModuleManifest> SetCharacterManifestCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<ModuleManifest> SetGeographyManifestCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<ModuleManifest> SetItemManifestCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<ModuleManifest> SetOtherManifestCommand { get; }
+
     }
 }
