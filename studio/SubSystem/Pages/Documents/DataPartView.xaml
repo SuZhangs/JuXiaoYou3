@@ -70,9 +70,13 @@
         </DockPanel>
 
 
-        <ScrollViewer Grid.Column="1">
-            <ItemsControl ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
-                   Margin="32 0" />
+        <ScrollViewer Grid.Column="1"
+                      Focusable="False"
+                      IsTabStop="False">
+            <ItemsControl HorizontalAlignment="Left"
+                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
+                          Margin="32 0"
+                          Width="480"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
