@@ -783,7 +783,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "保存成功！",
             };
         }
-
+        public static string OperationOfAutoSaveIsSuccessful => GetText("text.OperationOfAutoSaveIsSuccessful");
         public static string OperationOfAddIsSuccessful => GetText("text.OperationOfAddIsSuccessful");
         public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");

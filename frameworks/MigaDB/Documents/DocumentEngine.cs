@@ -156,7 +156,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// 更新文档
         /// </summary>
         /// <param name="document">指定要更新的文档</param>
-        public void UpdateDocument(Document document)
+        public void UpdateDocument(Document document, DocumentCache cache)
         {
             if (document is null)
             {
@@ -179,28 +179,12 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
-            var cache = DocumentCacheDB.FindById(document.Id);
-
-            //
-            // 空检查
-            if (cache is null)
-            {
-                return;
-            }
-
-            cache.Name           = document.Name;
-            cache.Intro          = document.Intro;
-            cache.Avatar         = document.Avatar;
-            cache.Version        = document.Version;
-            cache.IsDeleted      = false;
-            cache.TimeOfModified = DateTime.Now;
-
             Modified();
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
         }
 
-
+        
         /// <summary>
         /// 更新文档
         /// </summary>
@@ -211,17 +195,17 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             {
                 return;
             }
-
+        
             if (string.IsNullOrEmpty(cache.Id))
             {
                 return;
             }
-
+        
             if (!DocumentCacheDB.HasID(cache.Id))
             {
                 return;
             }
-
+        
             Modified();
             DocumentCacheDB.Update(cache);
         }

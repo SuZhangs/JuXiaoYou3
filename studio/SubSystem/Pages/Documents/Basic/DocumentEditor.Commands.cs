@@ -33,8 +33,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
         private void SaveDocumentImpl()
         {
+            DocumentEngine.UpdateDocument(_document, _cache);
             SetDirtyState(false);
-            Successful(SubSystemString.OperationOfSaveIsSuccessful);
+            Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
         }
         
         private async Task AddModulePartImpl()
