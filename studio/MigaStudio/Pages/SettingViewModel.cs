@@ -23,18 +23,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             ComboBox<MainTheme>(ConstantValues.Setting_MainTheme, 
                 BasicAppSetting.Theme,
-                x => BasicAppSetting.Theme = x,
+                x =>
+                {
+                    BasicAppSetting.Theme = x;
+                    Save();
+                },
                 ConstantValues.Themes);
             
             ComboBox<CultureArea>(ConstantValues.Setting_Language,  
                 BasicAppSetting.Language,
-                x => BasicAppSetting.Language = x,
+                x =>
+                {
+                    BasicAppSetting.Language = x;
+                    Save();
+                },
                 ConstantValues.Languages);
+        }
+
+        private void Save()
+        {
+            ForestApp.SaveBasicSetting(BasicAppSetting);
         }
 
         public sealed override void Stop()
         {
-            ForestApp.SaveBasicSetting(BasicAppSetting);
         }
 
         protected BasicAppSetting BasicAppSetting { get; }
