@@ -15,7 +15,8 @@
 
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
                   Accent="{f:Brush HighlightA3}"
-                  CancelCommand="{Binding CancelCommand}">
+                  CancelCommand="{Binding CancelCommand}"
+                  Purpose="Notification">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

@@ -553,6 +553,54 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="Purpose" Value="Notification">
+                <Setter Property="CancelButtonText" Value="{x:Static f:Language.CompleteText}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type c:DialogPage}">
+                            <Border Background="{f:BackgroundBrush}"
+                                    CornerRadius="10"
+                                    BorderThickness="0 4 0 0"
+                                    BorderBrush="{TemplateBinding Accent}"
+                                    Padding="16">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 标题 -->
+                                    <TextBlock Grid.Row="0"
+                                               Foreground="{TemplateBinding Accent}"
+                                               Text="{TemplateBinding Title}"
+                                               Style="{StaticResource TextBlock.DialogTitle}" />
+
+                                    <ContentPresenter x:Name="PART_Content"
+                                                      Grid.Row="1"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      SnapsToDevicePixels="True"
+                                                      RecognizesAccessKey="False" />
+                                    <b:DialogButton Grid.Row="2"
+                                                    Height="48"
+                                                    Icon="{StaticResource FeatherIcon.Checked}"
+                                                    IconSize="29"
+                                                    IsDefault="True"
+                                                    Content="{TemplateBinding CancelButtonText}"
+                                                    Command="{TemplateBinding CancelCommand}"
+                                                    Purpose="CallToAction" />
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
     </Style>
 
