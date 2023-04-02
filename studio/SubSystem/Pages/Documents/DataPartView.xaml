@@ -65,7 +65,7 @@
                                 ShowText="True" />
             </UniformGrid>
 
-            <f:ListBox ItemsSource="{Binding ModuleParts,Mode=OneWay}"
+            <f:ListBox ItemsSource="{Binding ModuleParts,Mode=OneWay,IsAsync=True}"
                        SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}" />
         </DockPanel>
 
@@ -74,7 +74,7 @@
                       Focusable="False"
                       IsTabStop="False">
             <ItemsControl HorizontalAlignment="Left"
-                          ItemsSource="{Binding ContentBlocks,Mode=OneWay}"
+                          ItemsSource="{Binding ContentBlocks,Mode=OneWay,IsAsync=True}"                          
                           Margin="32 0"
                           Width="480"/>
         </ScrollViewer>
