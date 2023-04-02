@@ -168,44 +168,49 @@
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         Palette="Info" />
 
-                        <studio:ActionButton Margin="8">
+                        <studio:ActionButton Margin="8"
+                                             Command="{Binding SetCharacterManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
                                            Text="人设模板"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="{Binding Character.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
-                        <studio:ActionButton Margin="8">
+                        <studio:ActionButton Margin="8"
+                                             Command="{Binding SetGeographyManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
                                            Text="地图模板"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="{Binding Geography.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
-                        <studio:ActionButton Margin="8">
+                        <studio:ActionButton Margin="8"
+                                             Command="{Binding SetItemManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="物品模板"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="{Binding Item.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
-                        <studio:ActionButton Margin="8">
+                        <studio:ActionButton Margin="8"
+                                             Command="{Binding SetAbilityManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="能力"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="{Binding Ability.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
-                        <studio:ActionButton Margin="8">
+                        <studio:ActionButton Margin="8"
+                                             Command="{Binding SetOtherManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="其他模板"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人物"/>
+                                           Text="{Binding Other.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
                     </StackPanel>

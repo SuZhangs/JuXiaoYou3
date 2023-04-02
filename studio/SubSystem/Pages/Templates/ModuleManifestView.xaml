@@ -36,6 +36,13 @@
                                         Command="{Binding AddManifestCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
+                        
+                        <ftk:ToolButton f:Language.Id="global.edit"
+                                        Content="添加"
+                                        Command="{Binding EditManifestCommand}"
+                                        CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
 
                         <ftk:ToolButton f:Language.Id="global.remove"
                                         Content="删除"

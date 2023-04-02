@@ -22,10 +22,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                            .Get<ModuleManifestProperty>();
             
             
-            AddManifestCommand          = AsyncCommand(AddManifestImpl);
-            RemoveManifestCommand       = AsyncCommand<ModuleManifest>(RemoveManifestImpl, x => x is not null);
-            AddTemplateCommand          = AsyncCommand(AddTemplateImpl);
-            RemoveTemplateCommand       = Command<ModuleTemplateCache>(RemoveTemplateImpl);
+            AddManifestCommand    = AsyncCommand(AddManifestImpl);
+            EditManifestCommand   = AsyncCommand<ModuleManifest>(EditManifestImpl, x => x is not null);
+            RemoveManifestCommand = AsyncCommand<ModuleManifest>(RemoveManifestImpl, x => x is not null);
+            AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
+            RemoveTemplateCommand = Command<ModuleTemplateCache>(RemoveTemplateImpl);
         }
 
         private void Save()
@@ -69,6 +70,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             };
             
             Manifests.Add(manifest);
+            Save();
+        }
+        
+        private async Task EditManifestImpl(ModuleManifest manifest)
+        {
+            if (manifest is null)
+            {
+                return;
+            }
+
+            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            manifest.Name = r.Value;
             Save();
         }
         
@@ -211,6 +230,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddManifestCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<ModuleManifest> EditManifestCommand { get; }
+        
+        
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddTemplateCommand { get; }
         

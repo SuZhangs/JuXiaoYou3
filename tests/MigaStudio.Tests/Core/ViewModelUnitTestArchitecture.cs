@@ -35,6 +35,14 @@ namespace MigaStudio.Tests.Core
             LogManager.Configuration = config;
             return LogManager.GetLogger("App");
         }
+        
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext context)
+        {
+            //
+            // 初始化
+            ViewModelUnitTestArchitecture.Initialize(Xaml.Container);
+        }
 
         public static void Initialize(IContainer container)
         {
@@ -79,6 +87,23 @@ namespace MigaStudio.Tests.Core
         public static void UnitTest(ViewModelBase vm)
         {
             ConstructorUnitTest(vm);
+            LifetimeControl(vm);
+        }
+        
+        private static void LifetimeControl(IViewModel vm)
+        {
+            vm.Start();
+            vm.Start();
+            vm.Start();
+            vm.Suspend();
+            vm.Suspend();
+            vm.Suspend();
+            vm.Resume();
+            vm.Resume();
+            vm.Resume();
+            vm.Stop();
+            vm.Stop();
+            vm.Stop();
         }
 
         private static void ConstructorUnitTest(ViewModelBase vm)
