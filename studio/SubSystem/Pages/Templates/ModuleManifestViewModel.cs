@@ -168,6 +168,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 SetValue(ref _selectedManifest, value);
                 RemoveManifestCommand.NotifyCanExecuteChanged();
+                EditManifestCommand.NotifyCanExecuteChanged();
             }
         }
 

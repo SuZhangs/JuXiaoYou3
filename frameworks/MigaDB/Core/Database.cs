@@ -1,12 +1,14 @@
-﻿using Acorisoft.FutureGL.MigaDB.Utils;
+﻿using System.Collections.Concurrent;
+using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {
     public class Database : Disposable, IDatabase, IObjectCollection, IDisposableCollector
     {
-        private readonly string _databaseDirectory;
-        private readonly string _databaseFileName;
-        private readonly string _databaseIndexFileName;
+        private readonly string                     _databaseDirectory;
+        private readonly string                     _databaseFileName;
+        private readonly string                     _databaseIndexFileName;
+        private readonly ConcurrentDictionary<string, object> _cache;
 
         private readonly  LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
@@ -17,6 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public Database(LiteDatabase kernel, string root, string fileName, string indexFileName, DatabaseMode mode)
         {
             _collector             = new DisposableCollector();
+            _cache                 = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _databaseDirectory     = root;
             _databaseFileName      = fileName;
@@ -30,6 +33,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         internal Database(LiteDatabase kernel)
         {
             _collector             = new DisposableCollector();
+            _cache                 = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _props                 = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
             _databaseDirectory     = AppDomain.CurrentDomain.BaseDirectory;
@@ -102,14 +106,21 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public T Get<T>() where T : class
         {
             var key = typeof(T).FullName;
-            var document = _props.FindById(key)?.AsDocument;
-            return document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
+
+            if (!_cache.TryGetValue(key, out var obj))
+            {
+                var document = _props.FindById(key)?.AsDocument;
+                obj = document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
+                _cache.TryAdd(key, obj);
+            }
+            
+            return (T)obj;
         }
 
         public bool Has<T>() where T : class
         {
             var key = typeof(T).FullName;
-            return _props.HasID(key);
+            return _cache.ContainsKey(key) || _props.HasID(key);
         }
 
         public T Upsert<T>(T instance) where T : class
@@ -128,10 +139,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             var key = typeof(T).FullName;
             if (instance is null)
                 return default(T);
-
+            
             var document = BsonMapper.Global.Serialize(instance).AsDocument;
             document[Constants.LiteDB_IdField] = key;
             _props.Upsert(document);
+            _cache.TryAdd(key, instance);
             return instance;
         }
 

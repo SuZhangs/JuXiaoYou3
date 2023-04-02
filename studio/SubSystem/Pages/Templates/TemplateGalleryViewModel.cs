@@ -269,8 +269,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task ManageManifestImpl()
         {
-            await DialogService()
-                .Dialog(new ModuleManifestViewModel());
+            await DialogService().Dialog(new ModuleManifestViewModel());
         }
 
         private async Task<ModuleManifest> PickModuleManifestImpl()

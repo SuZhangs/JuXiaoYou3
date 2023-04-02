@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 DocumentType dt    => GetDocumentType(dt),
                 FilteringOption fo => GetFilteringOption(fo),
                 OrderingOption oo  => GetOrderingOption(oo),
-                _                  => string.Empty
+                _                  => value?.ToString(),
             };
         }
 
@@ -86,7 +86,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 },
             };
         }
-
 
         private static string GetDocumentType(DocumentType type)
         {
