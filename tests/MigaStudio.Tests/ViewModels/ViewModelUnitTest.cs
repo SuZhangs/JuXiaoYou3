@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
@@ -58,8 +59,7 @@ namespace MigaStudio.Tests.ViewModels
 
         #endregion
         
-
-
+        
         #region TemplateViewModels
 
         
@@ -120,6 +120,19 @@ namespace MigaStudio.Tests.ViewModels
         public void DocumentGalleryFixture()
         {
             ViewModelUnitTestArchitecture.UnitTest(new DocumentGalleryViewModel());
+        }
+        
+        [Obsolete("不适合自动化测试，改为人工测试")]
+        public void SettingFixture()
+        {
+            ViewModelUnitTestArchitecture.UnitTest(new SettingViewModel());
+        }
+        
+        
+        [TestMethod]
+        public void HomeFixture()
+        {
+            ViewModelUnitTestArchitecture.UnitTest(new HomeViewModel());
         }
     }
 }

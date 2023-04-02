@@ -3,6 +3,7 @@ using System.Reflection;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -63,6 +64,7 @@ namespace MigaStudio.Tests.Core
             dbMgr.LoadAsync("C:\\")
                  .GetAwaiter()
                  .GetResult();
+            Xaml.Use<BasicAppSetting>(new BasicAppSetting());
         }
         
         public class PropertyNullable
