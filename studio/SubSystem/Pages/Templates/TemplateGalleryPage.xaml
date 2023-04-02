@@ -7,6 +7,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;assembly=MigaDB"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:studio="urn:acorisoft/studio"
                      mc:Ignorable="d"
@@ -93,10 +94,10 @@
                     <f:ListBox SelectedItem="{Binding SelectedTemplate,Mode=TwoWay}"
                                ItemsSource="{Binding TemplateCollection,Mode=OneWay,IsAsync=True}">
                         <f:ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="14"
-                                           Margin="6"
-                                           Text="{Binding Name}" />
+                            <DataTemplate DataType="{x:Type thisModel:ModuleTemplateCache}">
+                                <DockPanel Margin="6">
+                                    <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                                </DockPanel>
                             </DataTemplate>
                         </f:ListBox.ItemTemplate>
                     </f:ListBox>

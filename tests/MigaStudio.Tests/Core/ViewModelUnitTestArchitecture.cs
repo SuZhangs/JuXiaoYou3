@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using DryIoc;
 using NLog;
 using NLog.Config;
@@ -65,6 +66,7 @@ namespace MigaStudio.Tests.Core
                  .GetAwaiter()
                  .GetResult();
             Xaml.Use<BasicAppSetting>(new BasicAppSetting());
+            Xaml.Use<AutoSaveService, IAutoSaveService>(new AutoSaveService());
         }
         
         public class PropertyNullable

@@ -114,8 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             
             Save();
         }
-        
-        
+
         private async Task AddTemplateImpl()
         {
             var ds       = DialogService();

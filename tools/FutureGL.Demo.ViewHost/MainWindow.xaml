@@ -8,7 +8,6 @@
                  xmlns:f="urn:acorisoft/forest/ui"
                  xmlns:fs="urn:acorisoft/forest/shell"
                  mc:Ignorable="d"
-                 FontFamily="{StaticResource HeiTi}"
                  ExtendToTitleBar="True"
                  MinWidth="1280"
                  MinHeight="720">

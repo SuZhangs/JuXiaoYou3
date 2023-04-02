@@ -27,12 +27,15 @@ namespace Acorisoft.FutureGL.MigaDB.Data
             }
         }
         
+        [Obsolete]
         public PreviewManifest GetPreviewManifest(DocumentType type)
         {
             return DefaultPreviews.TryGetValue(type, out var manifest) ? manifest : null;
         }
 
         public Dictionary<DocumentType, ModuleManifest> DefaultManifests { get; init; }
+        
+        [Obsolete]
         public Dictionary<DocumentType, PreviewManifest> DefaultPreviews { get; init; }
         public ObservableCollection<ModuleManifest> Manifests { get; init; }
     }

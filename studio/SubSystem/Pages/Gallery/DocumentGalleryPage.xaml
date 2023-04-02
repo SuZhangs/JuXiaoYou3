@@ -47,7 +47,6 @@
                     </Border>
 
                     <TextBlock FontSize="14"
-                               FontFamily="{StaticResource HeiTi}"
                                Margin="0 8 0 0"
                                HorizontalAlignment="Center"
                                Text="{Binding Name,Mode=OneWay}" />

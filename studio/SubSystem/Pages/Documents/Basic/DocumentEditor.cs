@@ -70,6 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     SaveDocumentImpl();
                 })
                 .DisposeWith(Collector);
+            
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
@@ -99,11 +100,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             SelectedSubView = InternalSubViews.FirstOrDefault();
         }
 
-        protected static void AddSubView<TView>(ICollection<HeaderedSubView> collection, string id, bool caching = true) where TView : FrameworkElement
+        protected static void AddSubView<TView>(ICollection<HeaderedSubView> collection, string id) where TView : FrameworkElement
         {
             collection.Add(new HeaderedSubView
             {
-                Caching = caching,
                 Name    = Language.GetText(id),
                 Type    = typeof(TView)
             });

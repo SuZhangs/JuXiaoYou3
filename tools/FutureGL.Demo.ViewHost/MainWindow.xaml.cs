@@ -25,13 +25,19 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
         public MainWindow()
         {
             InitializeComponent();
-            Xaml.Get<IWindowEventBroadcast>().Keys.Subscribe(x =>
+            Xaml.Get<IWindowEventBroadcast>()
+                .Keys
+                .Subscribe(x =>
             {
                 if (x.Args.Key == Key.F1)
                 {
                     Drawer.IsLeftOpen = true;
                 }
             });
+            
+            
         }
+
+        public static int[] Array { get; } = Enumerable.Range(1, 300).ToArray();
     }
 }

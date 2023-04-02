@@ -14,7 +14,6 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
         public ContentHostView()
         {
             InitializeComponent();
-            this.Loaded += OnLoaded;
         }
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
