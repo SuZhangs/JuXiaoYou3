@@ -363,39 +363,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private void ShiftUpBlockImpl(ModuleBlockEditUI element)
         {
-            if (element is null)
-            {
-                return;
-            }
-
-            var targetIndex = Blocks.IndexOf(element);
-
-            if (targetIndex <= 0)
-            {
-                return;
-            }
-
-            Blocks.Move(targetIndex, targetIndex - 1);
-            RaiseUpdated(nameof(PreviewBlocks));
+            Blocks.ShiftUp(element, () => RaiseUpdated(nameof(PreviewBlocks)));
         }
 
         private void ShiftDownBlockImpl(ModuleBlockEditUI element)
         {
-            if (element is null)
-            {
-                return;
-            }
-
-            var targetIndex = Blocks.IndexOf(element);
-
-            if (targetIndex < 0 ||
-                targetIndex >= Blocks.Count - 1)
-            {
-                return;
-            }
-
-            Blocks.Move(targetIndex, targetIndex + 1);
-            RaiseUpdated(nameof(PreviewBlocks));
+            Blocks.ShiftDown(element, () => RaiseUpdated(nameof(PreviewBlocks)));
         }
 
         private async Task RemoveAllBlockImpl()

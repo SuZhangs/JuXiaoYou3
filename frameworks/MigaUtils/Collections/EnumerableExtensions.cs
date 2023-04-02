@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaUtils.Collections
+﻿using System.Collections.ObjectModel;
+
+namespace Acorisoft.FutureGL.MigaUtils.Collections
 {
     public static class EnumerableExtensions
     {
@@ -43,6 +45,64 @@
                     collection.Add(item);
                 }
             }
+        }
+
+        public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action<T, int, int> callback)
+        {
+            if (ReferenceEquals(target, default(T)))
+            {
+                return;
+            }
+
+            if (source is null)
+            {
+                return;
+            }
+
+            var index = source.IndexOf(target);
+
+            if (index < 1)
+            {
+                return;
+            }
+            
+            source.Move(index, index - 1);
+            
+            callback?.Invoke(target, index, index - 1);
+        }
+        
+        public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action callback)
+        {
+            ShiftUp(source, target, (_, _, _) => callback?.Invoke()); 
+        }
+        
+        public static void ShiftDown<T>(this ObservableCollection<T> source, T target, Action callback)
+        {
+            ShiftDown(source, target, (_, _, _) => callback?.Invoke());
+        }
+        
+        public static void ShiftDown<T>(this ObservableCollection<T> source, T target, Action<T, int, int> callback)
+        {
+            if (ReferenceEquals(target, default(T)))
+            {
+                return;
+            }
+
+            if (source is null)
+            {
+                return;
+            }
+
+            var index = source.IndexOf(target);
+
+            if (index >= source.Count - 1)
+            {
+                return;
+            }
+            
+            source.Move(index, index + 1);
+            
+            callback?.Invoke(target, index, index + 1);
         }
     }
 }

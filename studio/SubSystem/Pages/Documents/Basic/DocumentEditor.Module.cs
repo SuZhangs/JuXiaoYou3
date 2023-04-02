@@ -216,12 +216,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         
         private void ShiftDownModulePartImpl(PartOfModule module)
         {
-            var mpI = ModuleParts.IndexOf(module);
-            if(mpI > ModuleParts.Count - 1)return;
-            ModuleParts.Move(mpI, mpI + 1);
-            module.Index = mpI + 1;
-            
-            ResortModuleParts();
+            ModuleParts.ShiftDown(module, (_, _, _) => ResortModuleParts());
         }
 
         private void ResortModuleParts()
@@ -237,13 +232,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         
         private void ShiftUpModulePartImpl(PartOfModule module)
         {
-            
-            var mpI = ModuleParts.IndexOf(module);
-            if(mpI <= 0)return;
-            ModuleParts.Move(mpI, mpI - 1);
-            module.Index = mpI - 1;
-            
-            ResortModuleParts();
+            ModuleParts.ShiftUp(module, (_, _, _) => ResortModuleParts());
         }
 
         private void AddModules(IEnumerable<PartOfModule> modules)
