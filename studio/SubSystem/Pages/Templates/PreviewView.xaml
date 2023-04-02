@@ -8,7 +8,8 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:IPreviewBlockViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:IPreviewBlockViewModel}, IsDesignTimeCreatable=True}"
+             Padding="16">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +18,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        
         <StackPanel>
             <TextBlock FontSize="32"
                        Text="{Binding PreviewName,Mode=OneWay}" />
@@ -37,7 +37,7 @@
                        Text="{Binding PreviewIntro,Mode=OneWay}" />
         
             <ItemsControl Margin="0 12"
-                          ItemsSource="{Binding PreviewBlocks,Mode=OneWay}" />
+                          ItemsSource="{Binding PreviewBlocks,Mode=OneWay,IsAsync=True}" />
         </StackPanel>
         <Border Background="Transparent"/>
     </Grid>

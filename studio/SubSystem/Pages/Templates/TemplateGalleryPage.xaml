@@ -97,7 +97,7 @@
 
                     <!-- 所有模组-->
                     <f:ListBox SelectedItem="{Binding SelectedTemplate,Mode=TwoWay}"
-                               ItemsSource="{Binding TemplateCollection,Mode=OneWay}">
+                               ItemsSource="{Binding TemplateCollection,Mode=OneWay,IsAsync=True}">
                         <f:ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock FontSize="14"
@@ -116,7 +116,7 @@
                              Header="喵喵咒语"
                              Padding="16 10">
                 <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay}">
+                    <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />
