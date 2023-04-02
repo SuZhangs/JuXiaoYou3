@@ -106,6 +106,17 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
         }
 
+        public bool Has<T>() where T : class
+        {
+            var key = typeof(T).FullName;
+            return _props.HasID(key);
+        }
+
+        public T Upsert<T>(T instance) where T : class
+        {
+            return Has<T>() ? Get<T>() : Set<T>(instance);
+        }
+
         /// <summary>
         /// 设置值。
         /// </summary>

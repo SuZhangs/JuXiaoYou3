@@ -9,15 +9,15 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public void Maintain(IDatabase database)
         {
             var timeOfBoth = DateTime.Now;
-            
-            database.Set<ModuleManifestProperty>(new ModuleManifestProperty
+
+            database.Upsert<ModuleManifestProperty>(new ModuleManifestProperty
             {
-                Manifests = new ObservableCollection<ModuleManifest>(),
+                Manifests        = new ObservableCollection<ModuleManifest>(),
                 DefaultManifests = new Dictionary<DocumentType, ModuleManifest>(),
-                DefaultPreviews = new Dictionary<DocumentType, PreviewManifest>()
+                DefaultPreviews  = new Dictionary<DocumentType, PreviewManifest>()
             });
             
-            database.Set<DatabaseVersion>(new DatabaseVersion
+            database.Upsert<DatabaseVersion>(new DatabaseVersion
             {
                 TimeOfModified = timeOfBoth,
                 TimeOfCreated  = timeOfBoth,

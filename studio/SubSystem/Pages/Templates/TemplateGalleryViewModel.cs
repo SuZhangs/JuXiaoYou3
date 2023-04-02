@@ -6,12 +6,15 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
 using NLog;
+// ReSharper disable MemberCanBeMadeStatic.Local
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
@@ -37,18 +40,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             TemplateEngine = Xaml.Get<IDatabaseManager>()
                                  .GetEngine<TemplateEngine>();
 
-            _sorter               = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
-            _reader               = new DataPartReader();
-            Source                = new SourceList<ModuleTemplateCache>();
-            MetadataCollection    = new ObservableCollection<MetadataCache>();
-            Blocks                = new ObservableCollection<ModuleBlock>();
-            ApprovalRequired      = false;
-            ManageManifestCommand = AsyncCommand(ManageManifestImpl);
-            AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
-            ImportTemplateCommand = AsyncCommand(ImportTemplateImpl);
-            ExportTemplateCommand = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
-            RemoveTemplateCommand = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
-            PreviewCommand        = Command(() => IsPreview = true, () => SelectedTemplate is not null);
+            Property = Xaml.Get<IDatabaseManager>()
+                           .Database
+                           .CurrentValue
+                           .Get<ModuleManifestProperty>();
+
+            _sorter                     = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
+            _reader                     = new DataPartReader();
+            Source                      = new SourceList<ModuleTemplateCache>();
+            MetadataCollection          = new ObservableCollection<MetadataCache>();
+            Blocks                      = new ObservableCollection<ModuleBlock>();
+            ApprovalRequired            = false;
+            ManageManifestCommand       = AsyncCommand(ManageManifestImpl);
+            AddTemplateCommand          = AsyncCommand(AddTemplateImpl);
+            ImportTemplateCommand       = AsyncCommand(ImportTemplateImpl);
+            ExportTemplateCommand       = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
+            RemoveTemplateCommand       = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
+            PreviewCommand              = Command(() => IsPreview            = true, () => SelectedTemplate is not null);
+            SetAbilityManifestCommand   = AsyncCommand(async () => Ability   = await PickModuleManifestImpl());
+            SetCharacterManifestCommand = AsyncCommand(async () => Character = await PickModuleManifestImpl());
+            SetGeographyManifestCommand = AsyncCommand(async () => Geography = await PickModuleManifestImpl());
+            SetItemManifestCommand      = AsyncCommand(async () => Item      = await PickModuleManifestImpl());
+            SetOtherManifestCommand     = AsyncCommand(async () => Other     = await PickModuleManifestImpl());
 
             Source.Connect()
                   .Filter(_sorter)
@@ -62,6 +75,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         {
             TemplateEngine.Activate();
             Refresh();
+        }
+
+
+        private void Save()
+        {
+            Xaml.Get<IDatabaseManager>()
+                .Database
+                .CurrentValue
+                .Set(Property);
         }
 
         private async Task AddTemplateImpl()
@@ -114,8 +136,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             else
             {
-                Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount)); }
-            
+                Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+            }
+
             Refresh();
         }
 
@@ -147,7 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 {
                     SelectedTemplate = null;
                 }
-                
+
                 Refresh();
             }
         }
@@ -202,6 +225,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
             }
+
             Refresh();
         }
 
@@ -211,6 +235,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 return;
             }
+
             var savedlg = new SaveFileDialog
             {
                 FileName = SelectedTemplate.Name,
@@ -227,7 +252,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 var fileName = savedlg.FileName;
                 var ms       = Xaml.CaptureToBuffer(target);
                 var template = TemplateEngine.TemplateDB.FindById(_selectedTemplate.Id);
-                var payload = JSON.Serialize(template);
+                var payload  = JSON.Serialize(template);
 
 
                 await PNG.Write(fileName, payload, ms);
@@ -245,7 +270,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task ManageManifestImpl()
         {
             await DialogService()
-                      .Dialog(new ModuleManifestViewModel());
+                .Dialog(new ModuleManifestViewModel());
+        }
+
+        private async Task<ModuleManifest> PickModuleManifestImpl()
+        {
+            var r = await SubSystem.OptionSelection<ModuleManifest>(
+                Language.GetText("global.select"),
+                null,
+                Property.Manifests
+                        .Cast<object>()
+                        .ToArray());
+
+            return r.IsFinished ? r.Value : null;
         }
 
         public void Refresh()
@@ -266,6 +303,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             get => _isPreview;
             set => SetValue(ref _isPreview, value);
         }
+
         /// <summary>
         /// 获取或设置 <see cref="SelectedTemplate"/> 属性。
         /// </summary>
@@ -275,12 +313,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _selectedTemplate, value);
-                
+
                 RaiseUpdated(nameof(PreviewIntro));
                 RaiseUpdated(nameof(PreviewContractList));
                 RaiseUpdated(nameof(PreviewAuthorList));
                 RaiseUpdated(nameof(PreviewName));
-                
+
                 if (_selectedTemplate is null)
                 {
                     return;
@@ -300,7 +338,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
-        
+
         public string PreviewIntro => SubSystemString.GetIntro(SelectedTemplate?.Intro);
         public string PreviewContractList => SubSystemString.GetContractList(SelectedTemplate?.ContractList);
         public string PreviewAuthorList => SubSystemString.GetAuthor(SelectedTemplate?.AuthorList);
@@ -319,6 +357,63 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
+
+        public ModuleManifestProperty Property { get; }
+
+        public ModuleManifest Ability
+        {
+            get => Property.GetModuleManifest(DocumentType.AbilityDocument);
+            set
+            {
+                Property.SetModuleManifest(DocumentType.AbilityDocument, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
+
+        public ModuleManifest Character
+        {
+            get => Property.GetModuleManifest(DocumentType.CharacterDocument);
+            set
+            {
+                Property.SetModuleManifest(DocumentType.CharacterDocument, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
+
+        public ModuleManifest Geography
+        {
+            get => Property.GetModuleManifest(DocumentType.GeographyDocument);
+            set
+            {
+                Property.SetModuleManifest(DocumentType.GeographyDocument, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
+
+        public ModuleManifest Item
+        {
+            get => Property.GetModuleManifest(DocumentType.ItemDocument);
+            set
+            {
+                Property.SetModuleManifest(DocumentType.ItemDocument, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
+
+        public ModuleManifest Other
+        {
+            get => Property.GetModuleManifest(DocumentType.OtherDocument);
+            set
+            {
+                Property.SetModuleManifest(DocumentType.OtherDocument, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlock> Blocks { get; }
@@ -345,10 +440,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand PreviewCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ManageManifestCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }
 
@@ -357,5 +452,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ImportTemplateCommand { get; }
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SetAbilityManifestCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SetCharacterManifestCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SetGeographyManifestCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SetItemManifestCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SetOtherManifestCommand { get; }
+
+
+        public RelayCommand SetAbilityPreviewManifestCommand { get; }
+        public RelayCommand SetCharacterPreviewManifestCommand { get; }
+        public RelayCommand SetGeographyPreviewManifestCommand { get; }
+        public RelayCommand SetItemPreviewManifestCommand { get; }
+        public RelayCommand SetOtherPreviewManifestCommand { get; }
     }
 }

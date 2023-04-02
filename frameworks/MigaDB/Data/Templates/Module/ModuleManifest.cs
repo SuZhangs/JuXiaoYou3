@@ -32,5 +32,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             get => _name;
             set => SetValue(ref _name, value);
         }
+
+        public sealed override string ToString() => Name;
     }
 }

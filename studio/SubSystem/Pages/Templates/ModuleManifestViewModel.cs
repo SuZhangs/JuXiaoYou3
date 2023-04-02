@@ -20,13 +20,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                            .Database
                            .CurrentValue
                            .Get<ModuleManifestProperty>();
+            
+            
             AddManifestCommand          = AsyncCommand(AddManifestImpl);
             RemoveManifestCommand       = AsyncCommand<ModuleManifest>(RemoveManifestImpl, x => x is not null);
-            SetAbilityManifestCommand   = Command<ModuleManifest>(x => Ability   = x);
-            SetCharacterManifestCommand = Command<ModuleManifest>(x => Character = x);
-            SetGeographyManifestCommand = Command<ModuleManifest>(x => Geography = x);
-            SetItemManifestCommand      = Command<ModuleManifest>(x => Item      = x);
-            SetOtherManifestCommand     = Command<ModuleManifest>(x => Other     = x);
+            AddTemplateCommand          = AsyncCommand(AddTemplateImpl);
+            RemoveTemplateCommand       = Command<ModuleTemplateCache>(RemoveTemplateImpl);
         }
 
         private void Save()
@@ -94,6 +93,51 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 await Warning(Language.GetText("text.defaultManifestHasBeenRemoved"));
             }
             
+            Save();
+        }
+        
+        
+        private async Task AddTemplateImpl()
+        {
+            var ds       = DialogService();
+            var template = _selectedManifest.Templates;
+            var hash = template .Select(x => x.Id)
+                                        .ToHashSet();
+            var r = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RouteEventArgs
+            {
+                Args = new object[]
+                {
+                    Xaml.Get<IDatabaseManager>()
+                        .GetEngine<TemplateEngine>()
+                        .TemplateCacheDB
+                        .FindAll()
+                        .Where(x => !hash.Contains(x.Id))
+                        .ToArray()
+                }
+            });
+            
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            template.AddRange(r.Value);
+            Save();
+        }
+        
+        private void RemoveTemplateImpl(ModuleTemplateCache template)
+        {
+            if (template is null)
+            {
+                return;
+            }
+
+            if (_selectedManifest is null)
+            {
+                return;
+            }
+            
+            SelectedManifest.Templates.Remove(template);
             Save();
         }
 
@@ -167,20 +211,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddManifestCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddTemplateCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ModuleManifest> RemoveManifestCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<ModuleManifest> SetAbilityManifestCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<ModuleManifest> SetCharacterManifestCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<ModuleManifest> SetGeographyManifestCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<ModuleManifest> SetItemManifestCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<ModuleManifest> SetOtherManifestCommand { get; }
+        public RelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }
 
     }
 }

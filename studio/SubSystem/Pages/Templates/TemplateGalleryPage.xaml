@@ -8,6 +8,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
+                     xmlns:studio="urn:acorisoft/studio"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:TemplateGalleryViewModel}, IsDesignTimeCreatable=True}">
@@ -63,13 +64,6 @@
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />
-                        
-                        <ftk:ToolButton f:Language.Id="global.setting"
-                                        Content="设置"
-                                        Command="{Binding ManageManifestCommand}"
-                                        Icon="{StaticResource IC.Save}"
-                                        IsFilled="True"
-                                        ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
 
@@ -110,38 +104,113 @@
             </f:ForestSection>
 
             <!-- 侧栏-->
-            <f:ForestSection f:Language.Id="global.metadata"
-                             Grid.Column="1"
-                             Margin="16 0"
+            <ftk:TabControl Grid.Column="1"
+                            Padding="0 16 0 0">
+                <ftk:TabItem f:Language.Id="global.metadata"
                              Header="喵喵咒语"
-                             Padding="16 10">
-                <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush="{f:Brush BorderBrush}"
+                             Padding="16 11">
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel ItemWidth="144"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="{f:Brush BorderBrush}"
                                         BorderThickness="1"
                                         CornerRadius="3"
                                         Margin="4"
                                         Padding="8">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Top"
+                                        <DockPanel>
+                                            <TextBlock DockPanel.Dock="Top"
                                                    FontSize="16"
                                                    FontWeight="Bold"
-                                                   Text="{Binding Name}" />
-                                        <TextBlock Text="{Binding MetadataName}" />
-                                    </DockPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </f:ForestSection>
+                                                   Text="{Binding Name}"
+                                                       TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Text="{Binding MetadataName}" 
+                                                       TextTrimming="CharacterEllipsis"/>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </ftk:TabItem>
+
+                <ftk:TabItem f:Language.Id="global.defaultValue"
+                             Header="默认模板"
+                             Padding="16 11">
+                    <StackPanel>
+                        <Border Background="{f:Brush BackgroundLevel3}"
+                                BorderBrush="{f:Brush Info200}"
+                                BorderThickness="3 1 1 1"
+                                CornerRadius="3"
+                                Margin="8"
+                                Padding="16">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="14" 
+                                                  Direction="270" 
+                                                  Opacity="0.32"
+                                                  ShadowDepth="1.5"
+                                                  Color="{f:Color Info200}" />
+                            </Border.Effect>
+                            <TextBlock Text="默认模板可以在创建设定的时候自动添加设定模板！"/>
+                        </Border>
+
+
+
+                        <f:CallToAction f:Language.Id="global.setting"
+                                        Content="添加模板"
+                                        Command="{Binding ManageManifestCommand}"
+                                        Margin="8"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        Palette="Info" />
+
+                        <studio:ActionButton Margin="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人设模板"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                            </DockPanel>
+                        </studio:ActionButton>
+                        <studio:ActionButton Margin="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="地图模板"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                            </DockPanel>
+                        </studio:ActionButton>
+                        <studio:ActionButton Margin="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                            </DockPanel>
+                        </studio:ActionButton>
+                        <studio:ActionButton Margin="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                            </DockPanel>
+                        </studio:ActionButton>
+                        <studio:ActionButton Margin="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Text="人物"/>
+                            </DockPanel>
+                        </studio:ActionButton>
+                    </StackPanel>
+                </ftk:TabItem>
+            </ftk:TabControl>
         </Grid>
         <f:Drawer.RightContent>
             <f:ForestSection f:Language.Id="global.preview"
