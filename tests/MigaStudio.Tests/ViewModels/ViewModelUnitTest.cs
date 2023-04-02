@@ -8,6 +8,14 @@ namespace MigaStudio.Tests.ViewModels
     [TestClass, TestCategory("ViewModels")]
     public class ViewModelUnitTest
     {
+        
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext context)
+        {
+            //
+            // 初始化
+            ViewModelUnitTestArchitecture.Initialize(Xaml.Container);
+        }
 
         #region DocumentViewModels
 
@@ -49,6 +57,7 @@ namespace MigaStudio.Tests.ViewModels
         }
 
         #endregion
+        
 
 
         #region TemplateViewModels

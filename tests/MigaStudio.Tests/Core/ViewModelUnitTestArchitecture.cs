@@ -35,14 +35,6 @@ namespace MigaStudio.Tests.Core
             LogManager.Configuration = config;
             return LogManager.GetLogger("App");
         }
-        
-        [AssemblyInitialize]
-        public static void AssemblyInitialize(TestContext context)
-        {
-            //
-            // 初始化
-            ViewModelUnitTestArchitecture.Initialize(Xaml.Container);
-        }
 
         public static void Initialize(IContainer container)
         {
