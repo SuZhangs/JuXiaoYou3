@@ -18,7 +18,6 @@
          <Style x:Key="MainTitleTemplate" TargetType="TextBlock">
              <Setter Property="FontSize" Value="18"/>
              <Setter Property="FontWeight" Value="Bold"/>
-             <Setter Property="FontFamily" Value="{StaticResource HeiTi}"/>
             <Setter Property="Margin" Value="0 8"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>

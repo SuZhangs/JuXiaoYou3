@@ -12,6 +12,7 @@
                  xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                  mc:Ignorable="d"
                  FontWeight="Light"
+                 FontSize="14"
                  Title="MainWindow"
                  MinWidth="1280"
                  MinHeight="720"
