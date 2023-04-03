@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public class DetailViewModel : ViewModelBase
+    public class CharacterRelationPartViewModel
     {
         /// <summary>
         /// 编辑器
@@ -22,6 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// <summary>
         /// 
         /// </summary>
-        public PartOfDetail Detail { get; init; }
+        public PartOfRel Detail { get; init; }
     }
 }

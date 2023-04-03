@@ -20,5 +20,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         public string Name { get; init; }
         public Type Type { get; init; }
         public FrameworkElement SubView { get; set; }
+        
     }
 }

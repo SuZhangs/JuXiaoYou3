@@ -109,27 +109,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="DetailPart"/> 属性。
-        /// </summary>
-        public IPartOfDetailUI DetailPart
-        {
-            get => _detailPartOfDetail;
-            private set => SetValue(ref _detailPartOfDetail, value);
-        }
-
-        /// <summary>
-        /// 获取或设置 <see cref="SelectedDetailPart"/> 属性。
-        /// </summary>
-        public IPartOfDetail SelectedDetailPart
-        {
-            get => _selectedDetailPart;
-            set
-            {
-                SetValue(ref _selectedDetailPart, value);
-            }
-        }
-
-        /// <summary>
         /// 自定义部件
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>

@@ -36,6 +36,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 new PartOfRel()
             };
         }
+
+        private FrameworkElement CreateDetailPartView(IPartOfDetail part)
+        {
+            if (part is PartOfAlbum album)
+            {
+                return new AlbumPartView
+                {
+                    DataContext = new AlbumPartViewModel
+                    {
+                        EditorViewModel = this,
+                        Detail = album,
+                        Document = _document,
+                        DocumentCache = _cache,
+                    }
+                };
+            }
+
+            if (part is PartOfPlaylist playlist)
+            {
+                return new PlaylistPartView
+                {
+                    DataContext = new PlaylistPartViewModel
+                    {
+                        EditorViewModel = this,
+                        Detail          = playlist,
+                        Document        = _document,
+                        DocumentCache   = _cache,
+                    }
+                };
+            }
+            
+            if (part is PartOfRel rel)
+            {
+                return new CharacterRelationPartView
+                {
+                    DataContext = new CharacterRelationPartViewModel
+                    {
+                        EditorViewModel = this,
+                        Detail          = rel,
+                        Document        = _document,
+                        DocumentCache   = _cache,
+                    }
+                };
+            }
+
+
+            return null;
+        }
         
         private async Task AddDetailPartImpl()
         {
@@ -103,7 +151,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             DetailParts.ShiftUp(module, (_, _, _) => ResortDetailPart());
         }
-        
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="DetailPart"/> 属性。
+        /// </summary>
+        public FrameworkElement DetailPart
+        {
+            get => _detailPartOfDetail;
+            private set => SetValue(ref _detailPartOfDetail, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedDetailPart"/> 属性。
+        /// </summary>
+        public object SelectedDetailPart
+        {
+            get => _selectedDetailPart;
+            set
+            {
+                SetValue(ref _selectedDetailPart, value);
+
+                if (_selectedDetailPart is IPartOfDetail detail)
+                {
+                    DetailPart = CreateDetailPartView(detail);
+                }
+                else
+                {
+                    DetailPart = value as FrameworkElement;
+                }
+            }
+        }
         
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddDetailPartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<IPartOfDetail> ShiftUpDetailPartCommand { get; }

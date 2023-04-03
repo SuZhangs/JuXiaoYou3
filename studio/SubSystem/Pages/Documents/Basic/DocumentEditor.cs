@@ -40,8 +40,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         //                                                  ------------------
         private HeaderedSubView  _selectedSubView;    // SubViews
         private FrameworkElement _subView;            // ------------------
-        private IPartOfDetail    _selectedDetailPart; // Detail
-        private IPartOfDetailUI  _detailPartOfDetail; // ------------------
+        private object    _selectedDetailPart; // Detail
+        private FrameworkElement _detailPartOfDetail; // ------------------
         private PartOfBasic      _basicPart;
         private Document         _document;           // Document
         private DocumentCache    _cache;              //------------------

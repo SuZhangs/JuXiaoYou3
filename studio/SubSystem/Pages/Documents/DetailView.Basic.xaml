@@ -14,14 +14,18 @@
     <UserControl.Resources>
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
     </UserControl.Resources>
-    <f:ShadowTabControl>
-        <f:ShadowTabControl.ItemsSource>
-            <CompositeCollection>
-                <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=TwoWay}"/>
-                <f:ShadowTabItem Header="部件管理">
-                    <this:DetailPartSettingView/>
-                </f:ShadowTabItem>
-            </CompositeCollection>
-        </f:ShadowTabControl.ItemsSource>
-    </f:ShadowTabControl>
+    <DockPanel>
+        <f:ShadowListBox DockPanel.Dock="Top">
+            <f:ShadowListBox.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=TwoWay}"/>
+                    <f:ShadowListBoxItem>
+                        <this:DetailPartSettingView/>
+                    </f:ShadowListBoxItem>
+                </CompositeCollection>
+            </f:ShadowListBox.ItemsSource>
+        </f:ShadowListBox>
+        
+        <ContentControl Content="{Binding DetailPart,Mode=OneWay}"/>
+    </DockPanel>
 </UserControl>
