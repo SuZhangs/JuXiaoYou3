@@ -4,9 +4,9 @@
     {
         public PartOfAlbum()
         {
-            Id = "__Album";
+            Id = Constants.IdOfAlbumPart;
         }
-
+        
 
         public sealed override bool Removable => true;
     }

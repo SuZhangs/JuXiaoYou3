@@ -19,10 +19,9 @@
         internal const int MaxVersion   = 512;
 
 
-        internal const string IdOfAlbumPart        = "__Album";
-        internal const string IdOfAvatarPart       = "__Album";
-        internal const string IdOfPlaylistPart     = "__Playlist";
-        internal const string IdOfRelationshipPart = "__Album";
+        internal const string IdOfAlbumPart                  = "__Album";
+        internal const string IdOfPlaylistPart               = "__Playlist";
+        internal const string IdOfRelationship_CharacterPart = "__Relationship_Character";
 
 
         /*
@@ -33,7 +32,7 @@
         internal const string Name_FileTable            = "file";
         internal const string Name_MusicTable           = "file_music";
         internal const string Name_Directory            = "dir";
-        internal const string Name_Concept            = "concept";
+        internal const string Name_Concept              = "concept";
         internal const string Name_Keyword              = "keywords";
         internal const string Name_ModuleTemplate       = "module";
         internal const string Name_Cache_ModuleTemplate = "idx_module";

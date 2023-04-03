@@ -4,7 +4,7 @@
     {
         public PartOfRel()
         {
-            Id = "__Relationship_Character";
+            Id = Constants.IdOfRelationship_CharacterPart;
         }
 
 

@@ -3,6 +3,11 @@
     public class PartOfDetail : DataPart, IPartOfDetail
     {
         /// <summary>
+        /// 部件类型
+        /// </summary>
+        public string Name { get; init; }
+        
+        /// <summary>
         /// 数据
         /// </summary>
         public List<IPartOfDetailData> Datas { get; init; }
@@ -21,10 +26,17 @@
         /// 是否可移除
         /// </summary>
         public bool Removable { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
     
-    public abstract class PartOfDetailPlaceHolder : DataPart, IPartOfDetail
+    public abstract class PartOfDetailPlaceHolder : DataPart, IPartOfDetail, IGlobalizationTextSupport
     {
+        public string GetLanguageId() => Id;
+        
         /// <summary>
         /// 索引号 
         /// </summary>

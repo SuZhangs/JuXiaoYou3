@@ -22,8 +22,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 DocumentType dt    => GetDocumentType(dt),
                 FilteringOption fo => GetFilteringOption(fo),
                 OrderingOption oo  => GetOrderingOption(oo),
-                _                  => value?.ToString(),
+                _                  => GetText(value),
             };
+        }
+
+        private static string GetText(object value)
+        {
+            if (value is IGlobalizationTextSupport gts)
+            {
+                return Language.GetText(gts.GetLanguageId());
+            }
+
+            return value?.ToString();
         }
 
         private static string GetFilteringOption(FilteringOption value)

@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        private static object[] CreateDetailPart()
+        private static IEnumerable<object> CreateDetailPart()
         {
             return new object[]
             {
