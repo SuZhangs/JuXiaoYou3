@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// <param name="options">所有选项</param>
         /// <typeparam name="TOption">选项类型</typeparam>
         /// <returns>返回一个操作结果</returns>
-        public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, object[] options)
+        public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, IEnumerable<object> options)
         {
             var optionVM = Xaml.GetViewModel<OptionSelectionViewModel>();
             var parameter = new RouteEventArgs

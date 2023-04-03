@@ -802,6 +802,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string AddKeywordTitle => GetText("text.AddKeyword");
         public static string EditNameTitle => GetText("text.editName");
         public static string EditValueTitle => GetText("text.editValue");
+        public static string SelectTitle => GetText("global.select");
 
         public static string ImageProcessing
         {

@@ -12,8 +12,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void OnStart(RouteEventArgs parameter)
         {
             _selected = parameter.Args[0];
-            var array  = parameter.Args[1] as Array;
-            _options = array?.Cast<object>();
+            var array  = parameter.Args[1] as IEnumerable<object>;
+            _options = array;
         }
 
         protected override bool IsCompleted() => _options.Contains(_selected);

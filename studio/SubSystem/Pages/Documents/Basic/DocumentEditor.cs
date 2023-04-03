@@ -66,35 +66,38 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)
-                .Subscribe(_ =>
-                {
-                    SaveDocumentImpl();
-                })
+                .Subscribe(_ => { SaveDocumentImpl(); })
                 .DisposeWith(Collector);
-            
+
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
-            ChangeAvatarCommand     = AsyncCommand(ChangeAvatarImpl);
-            
+            ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
+
             AddModulePartCommand       = AsyncCommand(AddModulePartImpl);
-            RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl,HasModulePart);
+            RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl, HasItem);
             UpgradeModulePartCommand   = Command(UpgradeModulePartImpl);
-            ShiftUpModulePartCommand   = Command<PartOfModule>(ShiftUpModulePartImpl, NotFirstModulePart);
-            ShiftDownModulePartCommand = Command<PartOfModule>(ShiftDownModulePartImpl, NotLastModulePart);
-            
-            AddKeywordCommand       = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand    = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            ShiftUpModulePartCommand   = Command<PartOfModule>(ShiftUpModulePartImpl, x => NotFirstItem(ModuleParts, x));
+            ShiftDownModulePartCommand = Command<PartOfModule>(ShiftDownModulePartImpl, x => NotLastItem(ModuleParts, x));
+
+
+            AddDetailPartCommand       = AsyncCommand(AddDetailPartImpl);
+            RemoveDetailPartCommand    = AsyncCommand<IPartOfDetail>(RemoveDetailPartImpl, HasItem);
+            ShiftUpDetailPartCommand   = Command<IPartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
+            ShiftDownDetailPartCommand = Command<IPartOfDetail>(ShiftDownDetailPartImpl, x => NotFirstItem(DetailParts, x));
+
+            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
+            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();
         }
 
         private bool HasModulePart(PartOfModule module) => module is not null;
         private bool NotLastModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) < ModuleParts.Count - 1;
         private bool NotFirstModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) > 0;
-        
+
         private void Initialize()
         {
             CreateSubViews(InternalSubViews);
@@ -105,8 +108,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             collection.Add(new HeaderedSubView
             {
-                Name    = Language.GetText(id),
-                Type    = typeof(TView)
+                Name = Language.GetText(id),
+                Type = typeof(TView)
             });
         }
 
@@ -118,7 +121,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         #region OnLoad
 
-        
         private void LoadDocumentImpl()
         {
             AddDataPart();
@@ -156,7 +158,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             if (_basicPart is null)
             {
-                _basicPart = new PartOfBasic{ Buckets = new Dictionary<string, string>()};
+                _basicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
                 _document.Parts.Add(_basicPart);
                 Name   = _cache.Name;
                 Gender = Language.GetText("global.DefaultGender");
@@ -165,7 +167,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void AddMetadata()
         {
-            
             foreach (var metadata in _basicPart.Buckets)
             {
                 UpsertMetadata(metadata.Key, metadata.Value);
@@ -183,17 +184,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void MaintainDetailPart()
         {
-            
         }
 
         private void Reorder()
         {
         }
-        
+
         #endregion
 
         #region OnCreate
-        
+
         private void CreateDocumentImpl()
         {
             var document = new Document
@@ -223,7 +223,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                                           .Get<ModuleManifestProperty>()
                                           .GetModuleManifest(Type);
 
-            if ( Type != manifest?.Type)
+            if (Type != manifest?.Type)
             {
                 return;
             }
@@ -251,7 +251,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 DocumentEngine,
                 KeywordEngine,
             };
-            
+
             foreach (var engine in engines)
             {
                 if (!engine.Activated)

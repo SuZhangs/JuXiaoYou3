@@ -275,11 +275,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task<ModuleManifest> PickModuleManifestImpl()
         {
             var r = await SubSystem.OptionSelection<ModuleManifest>(
-                Language.GetText("global.select"),
+                SubSystemString.SelectTitle,
                 null,
-                Property.Manifests
-                        .Cast<object>()
-                        .ToArray());
+                Property.Manifests);
 
             return r.IsFinished ? r.Value : null;
         }

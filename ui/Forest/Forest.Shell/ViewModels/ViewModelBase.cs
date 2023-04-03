@@ -55,7 +55,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             _commandMapping = new List<IRelayCommand>(8);
             Collector       = new DisposableCollector(8);
         }
-        
+
+
+        protected static bool HasItem<T>(T item) where T : class
+            => item is not null;
+        protected static bool NotLastItem<T>(IList<T> collection, T item)  where T : class
+            => item is not null && collection.IndexOf(item) < collection.Count - 1;
+        protected static bool NotFirstItem<T>(IList<T> collection, T item)  where T : class
+            => item is not null && collection.IndexOf(item) > 0;
         
         #region Notify
 

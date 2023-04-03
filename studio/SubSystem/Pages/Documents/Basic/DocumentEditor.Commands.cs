@@ -137,12 +137,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand OpenDocumentCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand NewDocumentCommand { get; }
         
-        
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<IPartOfDetail> ShiftUpDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<IPartOfDetail> ShiftDownDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<IPartOfDetail> RemoveDetailPartCommand { get; }
-        
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddModulePartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public RelayCommand UpgradeModulePartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
