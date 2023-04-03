@@ -113,7 +113,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             KeywordEngine.AddKeyword(r.Value);
             Keywords.Add(r.Value);
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
         private async Task RemoveKeywordImpl(string item)
@@ -129,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
 
             Keywords.Remove(item);
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
 

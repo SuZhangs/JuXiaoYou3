@@ -39,8 +39,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             Id = "__Detail_Setting";
         }
-        
-        public override bool Removable => false;
     }
 
     public abstract partial class DocumentEditorVMBase : TabViewModel
@@ -67,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             ContentBlocks          = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews       = new ObservableCollection<HeaderedSubView>();
             SubViews               = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
-            DetailParts            = new ObservableCollection<IPartOfDetail>();
+            DetailParts            = new ObservableCollection<PartOfDetail>();
             InvisibleDataParts     = new ObservableCollection<DataPart>();
             ModuleParts            = new ObservableCollection<PartOfModule>();
             PreviewBlocks          = new ObservableCollection<PreviewBlock>();
@@ -97,9 +95,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
 
             AddDetailPartCommand       = AsyncCommand(AddDetailPartImpl);
-            RemoveDetailPartCommand    = AsyncCommand<IPartOfDetail>(RemoveDetailPartImpl, HasItem);
-            ShiftUpDetailPartCommand   = Command<IPartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
-            ShiftDownDetailPartCommand = Command<IPartOfDetail>(ShiftDownDetailPartImpl, x => NotFirstItem(DetailParts, x));
+            RemoveDetailPartCommand    = AsyncCommand<PartOfDetail>(RemoveDetailPartImpl, HasItem);
+            ShiftUpDetailPartCommand   = Command<PartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
+            ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotFirstItem(DetailParts, x));
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
@@ -151,22 +149,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             foreach (var part in _document.Parts
                                           .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
             {
-                if (part is PartOfBasic pob)
-                {
-                    _basicPart = pob;
-                }
-                else if (part is PartOfModule pom)
-                {
-                    ModuleParts.Add(pom);
-                }
-                else if (part is IPartOfDetail pod)
-                {
-                    DetailParts.Add(pod);
-                }
-                else if (part is PartOfManifest)
-                {
-                    InvisibleDataParts.Add(part);
-                }
+                AddDataPart(part);
+            }
+        }
+
+        private void AddDataPart(DataPart part)
+        {
+            if (part is PartOfBasic pob)
+            {
+                _basicPart = pob;
+            }
+            else if (part is PartOfModule pom)
+            {
+                ModuleParts.Add(pom);
+            }
+            else if (part is PartOfDetail pod)
+            {
+                DetailParts.Add(pod);
+            }
+            else if (part is PartOfManifest)
+            {
+                InvisibleDataParts.Add(part);
             }
         }
 

@@ -6,8 +6,5 @@
         {
             Id = Constants.IdOfRelationship_CharacterPart;
         }
-
-
-        public sealed override bool Removable => false;
     }
 }

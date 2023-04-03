@@ -6,8 +6,5 @@
         {
             Id = Constants.IdOfPlaylistPart;
         }
-
-
-        public sealed override bool Removable => true;
     }
 }

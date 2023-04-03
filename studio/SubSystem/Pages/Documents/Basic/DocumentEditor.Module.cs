@@ -210,7 +210,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             else
             {
-                SetDirtyState(true);
+                SetDirtyState();
                 Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
             }
         }
@@ -228,7 +228,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             ShiftDownModulePartCommand.NotifyCanExecuteChanged();
             ShiftUpModulePartCommand.NotifyCanExecuteChanged();
-            SetDirtyState(true);
+            SetDirtyState();
         }
         
         

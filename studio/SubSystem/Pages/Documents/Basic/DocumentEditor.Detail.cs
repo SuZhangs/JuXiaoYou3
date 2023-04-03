@@ -92,6 +92,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             return null;
         }
+
+        protected void AddDetailPart(PartOfDetail part)
+        {
+            part.Index = DetailParts.Count;
+            DetailParts.Add(part);
+            _document.Parts.Add(part);
+        }
         
         private async Task AddDetailPartImpl()
         {
@@ -100,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             var iterator = CreateDetailPart().Where(x => !hash.Contains(x.GetType()));
             
-            var r = await SubSystem.OptionSelection<IPartOfDetail>(
+            var r = await SubSystem.OptionSelection<PartOfDetail>(
                 SubSystemString.SelectTitle,
                 null, 
                 iterator);
@@ -109,17 +116,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-
-            var part = r.Value;
-            part.Index = DetailParts.Count;
-            DetailParts.Add(part);
             
+            var part = r.Value;
+            AddDetailPart(part);
             
             //
             //
             Successful(SubSystemString.OperationOfAddIsSuccessful);
             ResortDetailPart();
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
         private void ResortDetailPart()
@@ -130,10 +135,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
             ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
-        private async Task RemoveDetailPartImpl(IPartOfDetail part)
+        private async Task RemoveDetailPartImpl(PartOfDetail part)
         {
             if (part is null)
             {
@@ -147,15 +152,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             DetailParts.Remove(part);
             ResortDetailPart();
-            SetDirtyState(true);
+            SetDirtyState();
         }
         
-        private void ShiftDownDetailPartImpl(IPartOfDetail module)
+        private void ShiftDownDetailPartImpl(PartOfDetail module)
         {
             DetailParts.ShiftDown(module, (_, _, _) => ResortDetailPart());
         }
         
-        private void ShiftUpDetailPartImpl(IPartOfDetail module)
+        private void ShiftUpDetailPartImpl(PartOfDetail module)
         {
             DetailParts.ShiftUp(module, (_, _, _) => ResortDetailPart());
         }
@@ -192,8 +197,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
         
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<IPartOfDetail> ShiftUpDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<IPartOfDetail> ShiftDownDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<IPartOfDetail> RemoveDetailPartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftUpDetailPartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftDownDetailPartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfDetail> RemoveDetailPartCommand { get; }
     }
 }

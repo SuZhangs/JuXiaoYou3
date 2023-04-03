@@ -179,7 +179,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 {
                     ModuleParts.Add(module);
                 }
-                else if (part is IPartOfDetail custom)
+                else if (part is PartOfDetail custom)
                 {
                     DetailParts.Add(custom);
                 }

@@ -7,7 +7,5 @@
             Id = Constants.IdOfAlbumPart;
         }
         
-
-        public sealed override bool Removable => true;
     }
 }

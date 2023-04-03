@@ -113,7 +113,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<IPartOfDetail> DetailParts { get; }
+        public ObservableCollection<PartOfDetail> DetailParts { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<DataPart> InvisibleDataParts { get; }

@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfNickName, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -78,7 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfAge, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -90,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfRace, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -101,7 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfCountry, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -112,7 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfWeight, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -123,7 +123,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfHeight, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -135,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfBirth, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -147,7 +147,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 UpsertMetadata(MetaNameOfGender, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -160,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 UpsertMetadata(MetaNameOfIntro, value);
                 _document.Intro = value;
                 _cache.Intro    = value;
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }
@@ -179,8 +179,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 _document.Avatar = value;
                 _cache.Avatar    = value;
                 UpsertMetadata(MetaNameOfAvatar, value);
-                SetDirtyState(true);
-                RaiseUpdated(nameof(Avatar));
+                SetDirtyState();
+                RaiseUpdated();
             }
         }
 
@@ -197,7 +197,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 _document.Name = value;
                 _cache.Name    = value;
                 UpsertMetadata(MetaNameOfName, value);
-                SetDirtyState(true);
+                SetDirtyState();
                 RaiseUpdated();
             }
         }

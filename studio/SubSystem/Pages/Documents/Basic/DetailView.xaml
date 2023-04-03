@@ -6,22 +6,36 @@
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <thisConverters:TranslationConverter x:Key="Translation" />
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
     </UserControl.Resources>
     <DockPanel>
-        <f:ShadowListBox DockPanel.Dock="Top">
+        <f:ShadowListBox DockPanel.Dock="Top"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <f:ShadowListBox.ItemsSource>
                 <CompositeCollection>
                     <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=TwoWay}"/>
                     <thisVM:DetailPartSettingPlaceHolder/>
                 </CompositeCollection>
             </f:ShadowListBox.ItemsSource>
+            <f:ShadowListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </f:ShadowListBox.ItemsPanel>
+            <f:ShadowListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource Translation}}"
+                               VerticalAlignment="Center"/>
+                </DataTemplate>
+            </f:ShadowListBox.ItemTemplate>
         </f:ShadowListBox>
         
         <ContentControl Content="{Binding DetailPart,Mode=OneWay}"/>
