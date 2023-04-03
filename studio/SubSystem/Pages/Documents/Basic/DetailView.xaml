@@ -19,9 +19,7 @@
             <f:ShadowListBox.ItemsSource>
                 <CompositeCollection>
                     <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=TwoWay}"/>
-                    <f:ShadowListBoxItem>
-                        <this:DetailPartSettingView/>
-                    </f:ShadowListBoxItem>
+                    <thisVM:DetailPartSettingPlaceHolder/>
                 </CompositeCollection>
             </f:ShadowListBox.ItemsSource>
         </f:ShadowListBox>

@@ -81,6 +81,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 };
             }
 
+            if (part is DetailPartSettingPlaceHolder)
+            {
+                return new DetailPartSettingView
+                {
+                    DataContext = this
+                };
+            }
+
 
             return null;
         }

@@ -33,6 +33,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
     }
 
+    public class DetailPartSettingPlaceHolder : PartOfDetailPlaceHolder
+    {
+        public DetailPartSettingPlaceHolder()
+        {
+            Id = "__Detail_Setting";
+        }
+        
+        public override bool Removable => false;
+    }
+
     public abstract partial class DocumentEditorVMBase : TabViewModel
     {
         //
