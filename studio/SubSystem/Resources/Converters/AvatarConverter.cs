@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             _engine ??= Xaml.Get<IDatabaseManager>()
                             .GetEngine<ImageEngine>();
             var ms = _engine.Get(avatar);
-            var img = Xaml.FromStream(ms, 256, 256);
+            var img = Xaml.FromStream(ms, 1920, 1080);
             return img;
         }
 

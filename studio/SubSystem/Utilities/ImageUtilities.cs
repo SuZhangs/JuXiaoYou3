@@ -30,7 +30,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
     public class ImageUtilities
     {
         public const string AvatarPattern    = "avatar_{0}.png";
-        public const string ThumbnailPattern = "thumb_{0}.png";
+        public const string ImagePattern = "{0}.png";
+        public const string ThumbnailPattern = "thumb_{0}";
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
         
@@ -138,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             if (engine.HasFile(md5))
             {
                 var fr = engine.Records.FindById(md5);
-                source = fr.Uri;
+                source    = string.Format(ImagePattern,fr.Uri);
                 thumbnail = string.Format(ThumbnailPattern, source);
                 return Op<Tuple<string, string>>.Success(new Tuple<string, string>(source, thumbnail));
             }
@@ -166,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Array.Copy(buffer, thumbnailBuffer, buffer.Length);
             }
             
-            source    = ID.Get();
+            source    = string.Format(ImagePattern, ID.Get());
             thumbnail = string.Format(ThumbnailPattern, source);
             engine.AddFile(new FileRecord
             {

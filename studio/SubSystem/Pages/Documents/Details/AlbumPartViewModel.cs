@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -20,11 +23,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
     public class AlbumPartViewModel : ViewModelBase
     {
+        private readonly Subject<Album> _threadSafeAdding;
+        
         public AlbumPartViewModel()
         {
             Collection            = new ObservableCollection<Album>();
             ImageEngine = Xaml.Get<IDatabaseManager>()
                               .GetEngine<ImageEngine>();
+            _threadSafeAdding     = new Subject<Album>().DisposeWith(Collector);
+            _threadSafeAdding.ObserveOn(Scheduler)
+                             .Subscribe(x =>
+                             {
+                                 Collection.Add(x);
+                             })
+                             .DisposeWith(Collector);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
@@ -67,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                                 Source    = source,
                                 Thumbnail = thumbnail
                             };
-                            Dispatcher.CurrentDispatcher.Invoke(() => Collection.Add(album));
+                            _threadSafeAdding.OnNext(album);
                         }
                         catch (Exception ex)
                         {
@@ -80,6 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             //
             //
+            SelectedAlbum ??= Collection.FirstOrDefault();
             Successful(SubSystemString.OperationOfAddIsSuccessful);
             Save();
         }
@@ -168,6 +181,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public ObservableCollection<Album> Collection { get; init; }
 
         public ImageEngine ImageEngine { get; }
+        private Album _selectedAlbum;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedAlbum"/> 属性。
+        /// </summary>
+        public Album SelectedAlbum
+        {
+            get => _selectedAlbum;
+            set
+            {
+                SetValue(ref _selectedAlbum, value);
+                RemoveAlbumCommand.NotifyCanExecuteChanged();
+                ShiftDownAlbumCommand.NotifyCanExecuteChanged();
+                ShiftUpAlbumCommand.NotifyCanExecuteChanged();
+                RemoveAlbumCommand.NotifyCanExecuteChanged();
+            }
+        }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddAlbumCommand { get; }

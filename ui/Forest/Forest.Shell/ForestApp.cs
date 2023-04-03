@@ -177,7 +177,7 @@ namespace Acorisoft.FutureGL.Forest
             var logfile = new FileTarget("logfile")
             {
                 FileName = appModel.Logs + "/${shortdate}.log",
-                Layout   = "${level} ${date:HH:mm:ss} | ${message}  ${exception} ${event-properties:myProperty}"
+                Layout   = "${level} ${date:HH\\:mm\\:ss} | ${message}  ${exception} ${event-properties:myProperty}"
             };
 
             config.AddRule(LogLevel.Warn, LogLevel.Fatal, logfile);

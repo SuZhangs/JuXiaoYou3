@@ -27,40 +27,59 @@
             <ftk:ToolButton f:Language.Id="global.Remove"
                             Content="删除"
                             Command="{Binding RemoveAlbumCommand}"
-                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
             
             <ftk:ToolButton f:Language.Id="global.Up"
                             Content="上移"
                             Command="{Binding ShiftUpAlbumCommand}"
-                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
             
             <ftk:ToolButton f:Language.Id="global.Down"
                             Content="下移"
                             Command="{Binding ShiftDownAlbumCommand}"
-                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Preview"
                             Content="预览"
                             Command="{Binding OpenAlbumCommand}"
-                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
         </StackPanel>
-        
-        <gu:FlipView x:Name="Image"
-                     ItemsSource="{Binding Collection,Mode=OneWay}">
-            <gu:FlipView.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:Album}">
-                    <Image Stretch="Uniform"
-                           Source="{Binding Thumbnail,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
-                </DataTemplate>
-            </gu:FlipView.ItemTemplate>
-        </gu:FlipView>
+
+        <DockPanel>
+            <f:ListBox DockPanel.Dock="Right"
+                       ItemsSource="{Binding Collection,Mode=OneWay}"
+                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:Album}">
+                        <TextBlock Margin="8"
+                                   Text="{Binding Source}"
+                                   TextTrimming="CharacterEllipsis"
+                                   VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </f:ListBox>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                          VerticalScrollBarVisibility="Visible"
+                          Padding="12">
+                <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate DataType="{x:Type local:Album}">
+                            <Image Stretch="None"
+                                   Source="{Binding Thumbnail,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </ScrollViewer>
+            
+        </DockPanel>
     </DockPanel>
 </UserControl>
