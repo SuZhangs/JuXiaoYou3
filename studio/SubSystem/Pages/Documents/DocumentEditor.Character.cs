@@ -18,12 +18,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         
         protected override void OnCreateDocument(Document document)
         {
-            AddDetailPart(new PartOfRel());
-            AddDetailPart(new PartOfAlbum());
-            AddDetailPart(new PartOfPlaylist());
             document.Parts.Add(new PartOfRel());
-            document.Parts.Add(new PartOfAlbum());
-            document.Parts.Add(new PartOfPlaylist());
+            document.Parts.Add(new PartOfAlbum{ DataBags    = new Dictionary<string, string>()});
+            document.Parts.Add(new PartOfPlaylist{ DataBags = new Dictionary<string, string>()});
         }
     }
 }

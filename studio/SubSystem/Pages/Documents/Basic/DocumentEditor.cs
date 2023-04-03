@@ -97,16 +97,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddDetailPartCommand       = AsyncCommand(AddDetailPartImpl);
             RemoveDetailPartCommand    = AsyncCommand<PartOfDetail>(RemoveDetailPartImpl, HasItem);
             ShiftUpDetailPartCommand   = Command<PartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
-            ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotFirstItem(DetailParts, x));
+            ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             Initialize();
         }
-
-        private bool HasModulePart(PartOfModule module) => module is not null;
-        private bool NotLastModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) < ModuleParts.Count - 1;
-        private bool NotFirstModulePart(PartOfModule module) => module is not null && ModuleParts.IndexOf(module) > 0;
 
         private void Initialize()
         {

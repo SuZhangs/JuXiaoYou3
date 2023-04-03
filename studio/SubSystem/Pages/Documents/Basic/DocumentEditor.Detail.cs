@@ -105,7 +105,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             var hash = DetailParts.Select(x => x.GetType())
                                   .ToHashSet();
 
-            var iterator = CreateDetailPart().Where(x => !hash.Contains(x.GetType()));
+            var iterator = CreateDetailPart().Where(x => !hash.Contains(x.GetType()))
+                                             .ToArray();
+
+            if (iterator.Length == 0)
+            {
+                await Warning(SubSystemString.NoMoreData);
+                return;
+            }
             
             var r = await SubSystem.OptionSelection<PartOfDetail>(
                 SubSystemString.SelectTitle,
@@ -133,8 +140,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 DetailParts[i].Index = i;
             }
-            ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
+
+            RemoveDetailPartCommand.NotifyCanExecuteChanged();
             ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
+            ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
             SetDirtyState();
         }
 
@@ -195,7 +204,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
             }
         }
-        
+
+        private PartOfDetail _selectedDetailPartInDocument;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedDetailPartInDocument"/> 属性。
+        /// </summary>
+        public PartOfDetail SelectedDetailPartInDocument
+        {
+            get => _selectedDetailPartInDocument;
+            set
+            {
+                SetValue(ref _selectedDetailPartInDocument, value);
+                RemoveDetailPartCommand.NotifyCanExecuteChanged();
+                ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
+                ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
+            }
+        }
+
         [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddDetailPartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftUpDetailPartCommand { get; }
         [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftDownDetailPartCommand { get; }

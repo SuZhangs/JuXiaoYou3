@@ -6,5 +6,10 @@
         {
             Id = Constants.IdOfPlaylistPart;
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, string> DataBags { get; init; }
     }
 }

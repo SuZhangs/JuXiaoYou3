@@ -59,11 +59,6 @@
         /// 是否为占位符
         /// </summary>
         public sealed override bool IsDeclaration => true;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Dictionary<string, string> DataBags { get; init; }
 
         /// <summary>
         /// 是否可移除

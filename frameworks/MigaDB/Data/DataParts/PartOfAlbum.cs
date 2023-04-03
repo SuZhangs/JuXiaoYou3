@@ -7,5 +7,10 @@
             Id = Constants.IdOfAlbumPart;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, string> DataBags { get; init; }
+        
     }
 }

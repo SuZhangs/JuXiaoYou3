@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             var opendlg = new VistaOpenFileDialog
             {
-                Filter      = "音乐文件|*.wav;*.mp3",
+                Filter      = SubSystemString.ImageFilter,
                 Multiselect = true
             };
 

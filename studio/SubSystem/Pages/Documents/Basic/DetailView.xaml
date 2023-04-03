@@ -7,6 +7,7 @@
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:part="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
@@ -18,10 +19,11 @@
     </UserControl.Resources>
     <DockPanel>
         <f:ShadowListBox DockPanel.Dock="Top"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         SelectedItem="{Binding SelectedDetailPart,Mode=TwoWay}">
             <f:ShadowListBox.ItemsSource>
                 <CompositeCollection>
-                    <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=TwoWay}"/>
+                    <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DetailParts,Mode=OneWay}"/>
                     <thisVM:DetailPartSettingPlaceHolder/>
                 </CompositeCollection>
             </f:ShadowListBox.ItemsSource>
@@ -31,7 +33,7 @@
                 </ItemsPanelTemplate>
             </f:ShadowListBox.ItemsPanel>
             <f:ShadowListBox.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type part:PartOfDetail}">
                     <TextBlock Text="{Binding Converter={StaticResource Translation}}"
                                VerticalAlignment="Center"/>
                 </DataTemplate>

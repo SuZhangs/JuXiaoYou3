@@ -846,5 +846,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
             };
         }
+
+        public static string NoMoreData => GetText("text.noMoreData");
     }
 }
