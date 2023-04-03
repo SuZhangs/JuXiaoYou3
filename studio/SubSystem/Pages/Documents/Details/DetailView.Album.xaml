@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
@@ -58,23 +59,23 @@
                        ItemsSource="{Binding Collection,Mode=OneWay}"
                        SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type local:Album}">
+                    <DataTemplate DataType="{x:Type m:Album}">
                         <TextBlock Margin="8"
-                                   Text="{Binding Source}"
+                                   Text="{Binding }"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </f:ListBox>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Visible"
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Visible"
                           Padding="12">
                 <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
                     <ContentControl.ContentTemplate>
-                        <DataTemplate DataType="{x:Type local:Album}">
-                            <Image Stretch="None"
-                                   Source="{Binding Thumbnail,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
+                        <DataTemplate DataType="{x:Type m:Album}">
+                            <Image Stretch="UniformToFill"
+                                   Source="{Binding Source,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
                         </DataTemplate>
                     </ContentControl.ContentTemplate>
                 </ContentControl>

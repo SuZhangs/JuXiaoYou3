@@ -15,12 +15,6 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public class Album : StorageUIObject
-    {
-        public string Thumbnail { get; init; }
-        public string Source { get; init; }
-    }
-
     public class AlbumPartViewModel : ViewModelBase
     {
         private readonly Subject<Album> _threadSafeAdding;
@@ -72,14 +66,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                         try
                         {
                             var r = await ImageUtilities.Thumbnail(ImageEngine, fileName);
-                            var (source, thumbnail) = r.Value;
-                            var album = new Album
-                            {
-                                Id        = ID.Get(),
-                                Source    = source,
-                                Thumbnail = thumbnail
-                            };
-                            _threadSafeAdding.OnNext(album);
+                            var thumbnail = r.Value;
+                            _threadSafeAdding.OnNext(thumbnail);
                         }
                         catch (Exception ex)
                         {

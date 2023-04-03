@@ -1,13 +1,8 @@
-﻿using System;
-using System.Buffers;
-using System.IO;
-using System.Security.Cryptography;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.IO;
+using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Ookii.Dialogs.Wpf;
 using SixLabors.ImageSharp;
@@ -27,11 +22,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public MemoryStream Buffer { get; init; }
     }
 
-    public class ImageUtilities
+
+    public class Album : StorageObject
+    {
+            
+        public string Source { get; init; }
+        public int Width { get; init; }
+        public int Height { get; init; }
+    }
+    
+    public static class ImageUtilities
     {
         public const string AvatarPattern    = "avatar_{0}.png";
-        public const string ImagePattern = "{0}.png";
-        public const string ThumbnailPattern = "thumb_{0}";
+        public const string ThumbnailWithSizePattern = "{0}_{1}_{2}";
+        public const string ThumbnailPattern = "thumb_{0}.png";
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
         
@@ -54,10 +58,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             //
             using (var session = Xaml.Get<IBusyService>().CreateSession())
             {
-                var buffer = await File.ReadAllBytesAsync(fileName);
-                var origin = new MemoryStream(buffer);
-                var result = (MemoryStream)null;
-                var image  = Image.Load<Rgba32>(buffer);
+                var          buffer = await File.ReadAllBytesAsync(fileName);
+                var          origin = new MemoryStream(buffer);
+                MemoryStream result;
+                var          image = Image.Load<Rgba32>(buffer);
 
 
                 if (image.Width < 32 || image.Height < 32)
@@ -125,39 +129,46 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
         }
 
-
-        public static async Task<Op<Tuple<string, string>>> Thumbnail(ImageEngine engine, string fileName)
+        public static async Task<Op<Album>> Thumbnail(ImageEngine engine, string fileName)
         {
             var    buffer = await File.ReadAllBytesAsync(fileName);
             byte[] thumbnailBuffer;
             var    raw   = Pool.MD5.ComputeHash(buffer);
             var    md5   = Convert.ToBase64String(raw);
             var    image = Image.Load<Rgba32>(buffer);
-            string source;
             string thumbnail;
 
             if (engine.HasFile(md5))
             {
-                var fr = engine.Records.FindById(md5);
-                source    = string.Format(ImagePattern,fr.Uri);
-                thumbnail = string.Format(ThumbnailPattern, source);
-                return Op<Tuple<string, string>>.Success(new Tuple<string, string>(source, thumbnail));
+                var fr  = engine.Records.FindById(md5);
+                var src = fr.Uri
+                            .Split('_');
+                thumbnail = string.Format(ThumbnailPattern, src[0]);
+                return Op<Album>.Success(new Album
+                {
+                     Source = thumbnail,
+                     Width = int.Parse(src[1]),
+                     Height = int.Parse(src[2])
+                });
             }
 
             if (image.Width < 32 || image.Height < 32)
             {
-                buffer = null;
-                return Op<Tuple<string, string>>.Failed("图片过小");
+                return Op<Album>.Failed("图片过小");
             }
 
 
-            var horizontal = image.Width > 1280;
+            var w          = image.Width;
+            var h          = image.Height;
+            var horizontal = w > 1280;
 
-            if (horizontal || image.Height > 720)
+            if (horizontal || h > 720)
             {
                 var scale = horizontal ? 1280d / image.Width : 720d / image.Height;
+                h = (int)(image.Height * scale);
+                w = (int)(image.Width * scale);
                 var ms    = new MemoryStream();
-                image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+                image.Mutate(x => { x.Resize(new Size(w, h)); });
                 image.SaveAsPng(ms);
                 thumbnailBuffer = ms.GetBuffer();
             }
@@ -167,18 +178,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Array.Copy(buffer, thumbnailBuffer, buffer.Length);
             }
             
-            source    = string.Format(ImagePattern, ID.Get());
-            thumbnail = string.Format(ThumbnailPattern, source);
+            thumbnail = string.Format(ThumbnailPattern, ID.Get());
             engine.AddFile(new FileRecord
             {
-                Id = md5,
-                Uri = source,
+                Id   = md5,
+                Uri  = string.Format(ThumbnailWithSizePattern, thumbnail, w, h),
                 Type = ResourceType.Image
             });
 
-            engine.Write(source, buffer);
             engine.Write(thumbnail, thumbnailBuffer);
-            return Op<Tuple<string, string>>.Success(new Tuple<string, string>(source, thumbnail));
+            return Op<Album>.Success(new Album
+            {
+                Source = thumbnail,
+                Width = w,
+                Height = h
+            });
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using NLog.Targets.Wrappers;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
@@ -80,12 +81,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             var img = Xaml.FromStream(ms, 1920, 1080);
             return img;
         }
+        private static ImageSource Caching(string avatar, int w, int h)
+        {
+            _engine ??= Xaml.Get<IDatabaseManager>()
+                            .GetEngine<ImageEngine>();
+            var ms  = _engine.Get(avatar);
+            var img = Xaml.FromStream(ms, w, h);
+            return img;
+        }
+        
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is null)
             {
                 return null;
+            }
+
+            if (value is Album a)
+            {
+                return Caching(a.Source, a.Width, a.Width);
             }
             
             var avatar = value.ToString();
