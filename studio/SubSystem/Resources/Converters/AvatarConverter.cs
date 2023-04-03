@@ -100,7 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
             if (value is Album a)
             {
-                return Caching(a.Source, a.Width, a.Width);
+                return Caching(a.Source, a.Width, a.Height);
             }
             
             var avatar = value.ToString();

@@ -61,24 +61,24 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type m:Album}">
                         <TextBlock Margin="8"
-                                   Text="{Binding }"
+                                   Text="{Binding Source}"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </f:ListBox>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                          VerticalScrollBarVisibility="Visible"
-                          Padding="12">
-                <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
-                    <ContentControl.ContentTemplate>
-                        <DataTemplate DataType="{x:Type m:Album}">
-                            <Image Stretch="UniformToFill"
-                                   Source="{Binding Source,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
-                        </DataTemplate>
-                    </ContentControl.ContentTemplate>
-                </ContentControl>
+            <ScrollViewer Padding="12">
+                <Viewbox>
+                    <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate DataType="{x:Type m:Album}">
+                                <Image Stretch="None"
+                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </Viewbox>
             </ScrollViewer>
             
         </DockPanel>

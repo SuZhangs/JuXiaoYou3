@@ -397,7 +397,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
                 Color       = _highlight2.Color,
                 ShadowDepth = 4.5d,
                 BlurRadius  = 14,
-                Opacity     = 0.42d,
+                Opacity     = 0.2d,
                 Direction   = 270
             };
         }

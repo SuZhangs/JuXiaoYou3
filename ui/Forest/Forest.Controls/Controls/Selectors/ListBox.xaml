@@ -379,7 +379,7 @@
                 <ControlTemplate TargetType="{x:Type s1:ShadowListBoxItem}">
                     <Border x:Name="PART_Bd"
                             CornerRadius="16"
-                            Margin="16"
+                            Margin="10"
                             Padding="16"
                             SnapsToDevicePixels="True"
                             UseLayoutRounding="True">
@@ -391,7 +391,6 @@
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                               Focusable="False"
-                                              Margin="8 0 0 0"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>

@@ -160,11 +160,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             var w          = image.Width;
             var h          = image.Height;
-            var horizontal = w > 1280;
+            var horizontal = w > 1920;
 
-            if (horizontal || h > 720)
+            if (horizontal || h > 1080)
             {
-                var scale = horizontal ? 1280d / image.Width : 720d / image.Height;
+                var scale = horizontal ? 1920d / image.Width : 1920d / image.Height;
                 h = (int)(image.Height * scale);
                 w = (int)(image.Width * scale);
                 var ms    = new MemoryStream();
@@ -177,12 +177,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 thumbnailBuffer = new byte[buffer.Length];
                 Array.Copy(buffer, thumbnailBuffer, buffer.Length);
             }
-            
-            thumbnail = string.Format(ThumbnailPattern, ID.Get());
+
+            var id = ID.Get();
+            thumbnail = string.Format(ThumbnailPattern, id);
             engine.AddFile(new FileRecord
             {
                 Id   = md5,
-                Uri  = string.Format(ThumbnailWithSizePattern, thumbnail, w, h),
+                Uri  = string.Format(ThumbnailWithSizePattern, id, w, h),
                 Type = ResourceType.Image
             });
 

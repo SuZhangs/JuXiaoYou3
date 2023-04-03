@@ -31,8 +31,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             return new object[]
             {
-                new PartOfAlbum(),
-                new PartOfPlaylist(),
+                new PartOfAlbum { DataBags    = new Dictionary<string, string>() },
+                new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
                 new PartOfRel()
             };
         }
@@ -46,9 +46,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     DataContext = new AlbumPartViewModel
                     {
                         EditorViewModel = this,
-                        Detail = album,
-                        Document = _document,
-                        DocumentCache = _cache,
+                        Detail          = album,
+                        Document        = _document,
+                        DocumentCache   = _cache,
                     }
                 };
             }
@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     }
                 };
             }
-            
+
             if (part is PartOfRel rel)
             {
                 return new CharacterRelationPartView
@@ -99,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             DetailParts.Add(part);
             _document.Parts.Add(part);
         }
-        
+
         private async Task AddDetailPartImpl()
         {
             var hash = DetailParts.Select(x => x.GetType())
@@ -113,20 +113,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 await Warning(SubSystemString.NoMoreData);
                 return;
             }
-            
+
             var r = await SubSystem.OptionSelection<PartOfDetail>(
                 SubSystemString.SelectTitle,
-                null, 
+                null,
                 iterator);
 
             if (!r.IsFinished)
             {
                 return;
             }
-            
+
             var part = r.Value;
             AddDetailPart(part);
-            
+
             //
             //
             Successful(SubSystemString.OperationOfAddIsSuccessful);
@@ -149,7 +149,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private async Task RemoveDetailPartImpl(PartOfDetail part)
         {
-            if (part is null)
+            if (part is null ||
+                !part.Removable)
             {
                 return;
             }
@@ -163,12 +164,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             ResortDetailPart();
             SetDirtyState();
         }
-        
+
         private void ShiftDownDetailPartImpl(PartOfDetail module)
         {
             DetailParts.ShiftDown(module, (_, _, _) => ResortDetailPart());
         }
-        
+
         private void ShiftUpDetailPartImpl(PartOfDetail module)
         {
             DetailParts.ShiftUp(module, (_, _, _) => ResortDetailPart());
@@ -197,6 +198,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 if (_selectedDetailPart is IPartOfDetail detail)
                 {
                     DetailPart = CreateDetailPartView(detail);
+                    (DetailPart.DataContext as ViewModelBase)?.Start();
                 }
                 else
                 {
@@ -222,9 +224,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftUpDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfDetail> ShiftDownDetailPartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfDetail> RemoveDetailPartCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddDetailPartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfDetail> ShiftUpDetailPartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfDetail> ShiftDownDetailPartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<PartOfDetail> RemoveDetailPartCommand { get; }
     }
 }

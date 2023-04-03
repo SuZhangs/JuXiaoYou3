@@ -38,6 +38,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             OpenAlbumCommand      = AsyncCommand<Album>(OpenAlbumImpl, HasItem);
         }
 
+        public override void Start()
+        {
+            if (Detail.DataBags.ContainsKey(Data))
+            {
+                var payload = Detail.DataBags[Data];
+                var list    = JSON.FromJson<ObservableCollection<Album>>(payload);
+                Collection.AddRange(list);
+            }
+            base.Start();
+        }
+
         private async Task AddAlbumImpl()
         {
             var opendlg = new VistaOpenFileDialog

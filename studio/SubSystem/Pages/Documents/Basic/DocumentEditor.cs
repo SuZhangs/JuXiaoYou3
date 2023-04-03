@@ -95,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
 
             AddDetailPartCommand       = AsyncCommand(AddDetailPartImpl);
-            RemoveDetailPartCommand    = AsyncCommand<PartOfDetail>(RemoveDetailPartImpl, HasItem);
+            RemoveDetailPartCommand    = AsyncCommand<PartOfDetail>(RemoveDetailPartImpl, x => HasItem(x) && !x.Removable);
             ShiftUpDetailPartCommand   = Command<PartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
