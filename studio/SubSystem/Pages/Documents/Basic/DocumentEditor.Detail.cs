@@ -5,6 +5,7 @@ using System.Drawing.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -141,9 +142,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 DetailParts[i].Index = i;
             }
 
-            RemoveDetailPartCommand.NotifyCanExecuteChanged();
-            ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
-            ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
+            Dispatcher.CurrentDispatcher.Invoke(() => SelectedDetailPartInDocument = null);
             SetDirtyState();
         }
 

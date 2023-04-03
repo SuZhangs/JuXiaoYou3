@@ -51,17 +51,20 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         {
             if (ShowText)
             {
+                _content.ClearValue(TextElement.ForegroundProperty);
                 _content.SetValue(TextElement.ForegroundProperty, foreground);
             }
             
             if (IsFilled)
             {
                 _icon.StrokeThickness = 0;
+                _icon.ClearValue(Path.FillProperty);
                 _icon.Fill            = foreground;
             }
             else
             {
                 _icon.StrokeThickness = 1;
+                _icon.ClearValue(Path.StrokeProperty);
                 _icon.Stroke          = foreground;
             }
         }
@@ -77,6 +80,7 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToHighlight1State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _backgroundBrush ??= new SolidColorBrush(Colors.Transparent);
             _foregroundBrush           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
             _backgroundHighlight1Brush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay100]);
 
@@ -137,9 +141,10 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
-            _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
+            _backgroundBrush = new SolidColorBrush(Colors.Transparent);
+            _foregroundDisabledBrush = new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
 
+            _bd.Background = _backgroundBrush;
             SetForeground(_foregroundDisabledBrush);
         }
 

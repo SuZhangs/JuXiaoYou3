@@ -17,7 +17,7 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
@@ -98,12 +98,12 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 
@@ -115,7 +115,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnUnchecked(sender, e);
@@ -129,7 +129,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnChecked(sender, e);
@@ -198,12 +198,12 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 
@@ -215,7 +215,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnUnchecked(sender, e);
@@ -229,7 +229,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnChecked(sender, e);
@@ -299,12 +299,12 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 
@@ -380,12 +380,12 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 
@@ -397,7 +397,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnUnchecked(sender, e);
@@ -411,7 +411,7 @@
             }
             else
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
             
             OnChecked(sender, e);

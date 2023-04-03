@@ -567,12 +567,12 @@
 
             if (oldValue && !newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Disabled);
+                StateMachine.NextState(VisualState.Inactive);
             }
 
             if (!oldValue && newValue)
             {
-                StateMachine.NextState(VisualStateTrigger.Back);
+                StateMachine.NextState(VisualState.Normal);
             }
         }
 
