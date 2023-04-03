@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -66,7 +67,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)
-                .Subscribe(_ => { SaveDocumentImpl(); })
+                .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
 
             DatabaseManager = dbMgr;
@@ -76,6 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
             ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
+            SaveDocumentCommand = Command(Save);
 
             AddModulePartCommand       = AsyncCommand(AddModulePartImpl);
             RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl, HasItem);
@@ -102,6 +104,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             CreateSubViews(InternalSubViews);
             SelectedSubView = InternalSubViews.FirstOrDefault();
+            
+            //
+            // 添加绑定
+            AddKeyBinding(ModifierKeys.Control, Key.S, Save);
         }
 
         protected static void AddSubView<TView>(ICollection<HeaderedSubView> collection, string id) where TView : FrameworkElement
@@ -295,6 +301,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             SelectedSubView    = InternalSubViews.FirstOrDefault();
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
+            
+            //
+            // TODO:数据恢复
+            
             base.Resume();
         }
 
@@ -308,7 +318,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         #region SetDirtyState
 
-        protected void SetDirtyState(bool state)
+        public void SetDirtyState(bool state = true)
         {
             _dirtyState = state;
 

@@ -19,6 +19,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return Xaml.Get<IDialogService>()
                        .Dialog<DocumentCache, NewDocumentWizardViewModel>();
         }
+        
+        public static async Task ImageView(string fileName)
+        {
+            await Xaml.Get<IDialogService>()
+                       .Dialog(new ImageViewModel(),new RouteEventArgs
+                       {
+                           Args = new []
+                           {
+                               fileName
+                           }
+                       });
+        }
 
         /// <summary>
         /// 选择选项视图
@@ -63,6 +75,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static void InstallViews()
         {
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
+            Xaml.InstallView<ImageView, ImageViewModel>();
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
 

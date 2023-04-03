@@ -4,6 +4,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
 {
     public static class EnumerableExtensions
     {
+        private static void Empty<T>(T a, int b, int c){}
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> handler)
         {
             if (collection is null)
@@ -69,6 +70,16 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             source.Move(index, index - 1);
             
             callback?.Invoke(target, index, index - 1);
+        }
+        
+        public static void ShiftDown<T>(this ObservableCollection<T> source, T target)
+        {
+            ShiftDown(source, target, Empty); 
+        }
+        
+        public static void ShiftUp<T>(this ObservableCollection<T> source, T target)
+        {
+            ShiftUp(source, target, Empty); 
         }
         
         public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action callback)

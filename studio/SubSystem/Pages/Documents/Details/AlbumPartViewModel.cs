@@ -1,9 +1,147 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Models;
+using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
+using Acorisoft.FutureGL.MigaUtils.Foundation;
+using CommunityToolkit.Mvvm.Input;
+using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
+    public class Album : StorageUIObject
+    {
+        public string Thumbnail { get; init; }
+        public string Source { get; init; }
+    }
+
     public class AlbumPartViewModel : ViewModelBase
     {
+        public AlbumPartViewModel()
+        {
+            Collection            = new ObservableCollection<Album>();
+            ImageEngine = Xaml.Get<IDatabaseManager>()
+                              .GetEngine<ImageEngine>();
+            AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
+            RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
+            ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
+            ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
+            OpenAlbumCommand      = AsyncCommand<Album>(OpenAlbumImpl, HasItem);
+        }
+
+        private async Task AddAlbumImpl()
+        {
+            var opendlg = new VistaOpenFileDialog
+            {
+                Filter      = "音乐文件|*.wav;*.mp3",
+                Multiselect = true
+            };
+
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            using (var session = Xaml.Get<IBusyService>()
+                                     .CreateSession())
+            {
+                session.Update(SubSystemString.ImageProcessing);
+
+                await Task.Run(async () =>
+                {
+                    await Task.Delay(300);
+
+                    foreach (var fileName in opendlg.FileNames)
+                    {
+                        try
+                        {
+                            var r = await ImageUtilities.Thumbnail(ImageEngine, fileName);
+                            var (source, thumbnail) = r.Value;
+                            var album = new Album
+                            {
+                                Id        = ID.Get(),
+                                Source    = source,
+                                Thumbnail = thumbnail
+                            };
+                            Dispatcher.CurrentDispatcher.Invoke(() => Collection.Add(album));
+                        }
+                        catch (Exception ex)
+                        {
+                            Error(ex.Message.SubString());
+                        }
+                    }
+                });
+            }
+
+
+            //
+            //
+            Successful(SubSystemString.OperationOfAddIsSuccessful);
+            Save();
+        }
+
+
+        private async Task RemoveAlbumImpl(Album part)
+        {
+            if (part is null)
+            {
+                return;
+            }
+
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            Collection.Remove(part);
+            Save();
+        }
+
+        private async Task OpenAlbumImpl(Album part)
+        {
+            if (part is null)
+            {
+                return;
+            }
+
+            var fileName = ImageEngine.GetFileName(part.Source);
+            await SubSystem.ImageView(fileName);
+        }
+
+        private void ShiftDownAlbumImpl(Album album)
+        {
+            Collection.ShiftDown(album);
+            Save();
+        }
+
+        private void ShiftUpAlbumImpl(Album album)
+        {
+            Collection.ShiftUp(album);
+            Save();
+        }
+
+        private void Save()
+        {
+            var payload = JSON.Serialize(Collection);
+
+            if (Detail.DataBags.ContainsKey(Data))
+            {
+                Detail.DataBags[Data] = payload;
+            }
+            else
+            {
+                Detail.DataBags.Add(Data, payload);
+            }
+
+            EditorViewModel.SetDirtyState();
+        }
+
+        private const string Data = "_d";
+
         /// <summary>
         /// 编辑器
         /// </summary>
@@ -23,5 +161,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// 
         /// </summary>
         public PartOfAlbum Detail { get; init; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<Album> Collection { get; init; }
+
+        public ImageEngine ImageEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddAlbumCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<Album> ShiftUpAlbumCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<Album> ShiftDownAlbumCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<Album> OpenAlbumCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<Album> RemoveAlbumCommand { get; }
     }
 }

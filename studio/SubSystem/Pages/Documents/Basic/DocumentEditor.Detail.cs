@@ -111,7 +111,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             //
             Successful(SubSystemString.OperationOfAddIsSuccessful);
             ResortDetailPart();
-            SaveDocumentImpl();
+            SetDirtyState(true);
         }
 
         private void ResortDetailPart()
@@ -122,6 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
             ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
+            SetDirtyState(true);
         }
 
         private async Task RemoveDetailPartImpl(IPartOfDetail part)
@@ -138,15 +139,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             DetailParts.Remove(part);
             ResortDetailPart();
-            SaveDocumentImpl();
+            SetDirtyState(true);
         }
         
         private void ShiftDownDetailPartImpl(IPartOfDetail module)
         {
             DetailParts.ShiftDown(module, (_, _, _) => ResortDetailPart());
         }
-
-
+        
         private void ShiftUpDetailPartImpl(IPartOfDetail module)
         {
             DetailParts.ShiftUp(module, (_, _, _) => ResortDetailPart());

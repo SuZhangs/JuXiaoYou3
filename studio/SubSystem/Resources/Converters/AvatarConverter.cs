@@ -67,4 +67,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             throw new NotSupportedException();
         }
     }
+
+    public class ImageConverter : IValueConverter
+    {
+        private static          ImageEngine                               _engine;
+
+        private static ImageSource Caching(string avatar)
+        {
+            _engine ??= Xaml.Get<IDatabaseManager>()
+                            .GetEngine<ImageEngine>();
+            var ms = _engine.Get(avatar);
+            var img = Xaml.FromStream(ms, 256, 256);
+            return img;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is null)
+            {
+                return null;
+            }
+            
+            var avatar = value.ToString();
+            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
+        }
+
+        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }

@@ -12,6 +12,7 @@ using DynamicData;
 using DynamicData.Kernel;
 using Microsoft.Win32;
 using NLog;
+using Ookii.Dialogs.Wpf;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 
@@ -133,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 if (!r) return;
             }
 
-            var opendlg = new OpenFileDialog
+            var opendlg = new VistaOpenFileDialog
             {
                 Filter = SubSystemString.ModuleFilter
             };
@@ -207,7 +208,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             // 2) 选择文件
             // 3) 打开文件并赋值
 
-            var savedlg = new SaveFileDialog
+            var savedlg = new VistaSaveFileDialog
             {
                 FileName = PreviewName,
                 Filter   = SubSystemString.ModuleFilter

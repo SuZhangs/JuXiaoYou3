@@ -29,6 +29,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
     public class ImageUtilities
     {
+        public const string AvatarPattern    = "avatar_{0}.png";
+        public const string ThumbnailPattern = "thumb_{0}.png";
+
+        public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
+        
         public static async Task<ImageOpResult> Avatar()
         {
             var opendlg = new VistaOpenFileDialog
@@ -49,8 +54,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             using (var session = Xaml.Get<IBusyService>().CreateSession())
             {
                 var buffer = await File.ReadAllBytesAsync(fileName);
-                var origin     = new MemoryStream(buffer);
-                var result    = (MemoryStream)null;
+                var origin = new MemoryStream(buffer);
+                var result = (MemoryStream)null;
                 var image  = Image.Load<Rgba32>(buffer);
 
 
@@ -74,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                             session.Update(SubSystemString.ImageProcessing);
                             var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
                             image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
-                            
+
                             // rewrite
                             origin = new MemoryStream();
                             image.SaveAsPng(origin);
@@ -102,8 +107,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     result = r.Value;
                     result.Seek(0, SeekOrigin.Begin);
                 }
-                
-                
+
+
                 origin.Dispose();
                 result = new MemoryStream();
                 await image.SaveAsPngAsync(result);
@@ -117,6 +122,62 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     FileName   = opendlg.FileName
                 };
             }
+        }
+
+
+        public static async Task<Op<Tuple<string, string>>> Thumbnail(ImageEngine engine, string fileName)
+        {
+            var    buffer = await File.ReadAllBytesAsync(fileName);
+            byte[] thumbnailBuffer;
+            var    raw   = Pool.MD5.ComputeHash(buffer);
+            var    md5   = Convert.ToBase64String(raw);
+            var    image = Image.Load<Rgba32>(buffer);
+            string source;
+            string thumbnail;
+
+            if (engine.HasFile(md5))
+            {
+                var fr = engine.Records.FindById(md5);
+                source = fr.Uri;
+                thumbnail = string.Format(ThumbnailPattern, source);
+                return Op<Tuple<string, string>>.Success(new Tuple<string, string>(source, thumbnail));
+            }
+
+            if (image.Width < 32 || image.Height < 32)
+            {
+                buffer = null;
+                return Op<Tuple<string, string>>.Failed("图片过小");
+            }
+
+
+            var horizontal = image.Width > 1280;
+
+            if (horizontal || image.Height > 720)
+            {
+                var scale = horizontal ? 1280d / image.Width : 720d / image.Height;
+                var ms    = new MemoryStream();
+                image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+                image.SaveAsPng(ms);
+                thumbnailBuffer = ms.GetBuffer();
+            }
+            else
+            {
+                thumbnailBuffer = new byte[buffer.Length];
+                Array.Copy(buffer, thumbnailBuffer, buffer.Length);
+            }
+            
+            source    = ID.Get();
+            thumbnail = string.Format(ThumbnailPattern, source);
+            engine.AddFile(new FileRecord
+            {
+                Id = md5,
+                Uri = source,
+                Type = ResourceType.Image
+            });
+
+            engine.Write(source, buffer);
+            engine.Write(thumbnail, thumbnailBuffer);
+            return Op<Tuple<string, string>>.Success(new Tuple<string, string>(source, thumbnail));
         }
     }
 }

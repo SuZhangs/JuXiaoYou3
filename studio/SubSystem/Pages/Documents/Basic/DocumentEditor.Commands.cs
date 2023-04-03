@@ -31,13 +31,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        private void SaveDocumentImpl()
+        public void Save()
         {
             DocumentEngine.UpdateDocument(_document, _cache);
             SetDirtyState(false);
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
         }
-        
+
 
         /// <summary>
         /// 
@@ -45,12 +45,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private async Task ChangeAvatarImpl()
         {
             var r = await ImageUtilities.Avatar();
-            
+
             if (!r.IsFinished)
             {
                 return;
             }
-            
+
             if (!r.IsFinished)
             {
                 return;
@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             else
             {
-                avatar = $"avatar_{ID.Get()}.png";
+                avatar = ImageUtilities.GetAvatarName();
                 buffer.Seek(0, SeekOrigin.Begin);
                 ImageEngine.WriteAvatar(buffer, avatar);
 
@@ -84,7 +84,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             Avatar = avatar;
         }
-        
+
         //---------------------------------------------
         //
         // Keywords
@@ -110,7 +110,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 await Warning(Language.ContentDuplicatedText);
                 return;
             }
-            
+
             KeywordEngine.AddKeyword(r.Value);
             Keywords.Add(r.Value);
             SetDirtyState(true);
@@ -122,6 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
+
             if (!Keywords.Remove(item))
             {
                 return;
@@ -130,21 +131,40 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Keywords.Remove(item);
             SetDirtyState(true);
         }
-        
-        
-        [NullCheck(UniTestLifetime.Constructor)]public AsyncRelayCommand ChangeAvatarCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand SaveDocumentCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand OpenDocumentCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand NewDocumentCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand UpgradeModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public RelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<PartOfModule> RemoveModulePartCommand { get; }
-        
-        
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand AddKeywordCommand { get; }
-        [NullCheck(UniTestLifetime.Constructor)] public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ChangeAvatarCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand SaveDocumentCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand OpenDocumentCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand NewDocumentCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand UpgradeModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<PartOfModule> RemoveModulePartCommand { get; }
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddKeywordCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
     }
 }

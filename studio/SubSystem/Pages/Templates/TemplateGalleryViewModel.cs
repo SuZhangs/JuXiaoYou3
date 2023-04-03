@@ -14,6 +14,8 @@ using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
 using NLog;
+using Ookii.Dialogs.Wpf;
+
 // ReSharper disable MemberCanBeMadeStatic.Local
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
@@ -88,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task AddTemplateImpl()
         {
-            var opendlg = new OpenFileDialog
+            var opendlg = new VistaOpenFileDialog
             {
                 Filter      = SubSystemString.ModuleFilter,
                 Multiselect = true
@@ -177,7 +179,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task ImportTemplateImpl()
         {
-            var opendlg = new OpenFileDialog
+            var opendlg = new VistaOpenFileDialog
             {
                 Filter      = SubSystemString.ModuleFilter,
                 Multiselect = true

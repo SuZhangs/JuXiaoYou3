@@ -4,9 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="300" 
+             d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type local:AlbumPartViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <thisConverters:ImageConverter x:Key="ImageConverter"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal">
+            <ftk:ToolButton f:Language.Id="global.Add"
+                            Content="添加"
+                            Command="{Binding AddAlbumCommand}"
+                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            ShowText="True" />
+            
+            <ftk:ToolButton f:Language.Id="global.Remove"
+                            Content="删除"
+                            Command="{Binding RemoveAlbumCommand}"
+                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.MinusCircle}"
+                            ShowText="True" />
+            
+            <ftk:ToolButton f:Language.Id="global.Up"
+                            Content="上移"
+                            Command="{Binding ShiftUpAlbumCommand}"
+                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowUp}"
+                            ShowText="True" />
+            
+            <ftk:ToolButton f:Language.Id="global.Down"
+                            Content="下移"
+                            Command="{Binding ShiftDownAlbumCommand}"
+                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowDown}"
+                            ShowText="True" />
+
+            <ftk:ToolButton f:Language.Id="global.Preview"
+                            Content="预览"
+                            Command="{Binding OpenAlbumCommand}"
+                            CommandParameter="{Binding ElementName=Image,Path=SelectedItem,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.Upload}"
+                            ShowText="True" />
+        </StackPanel>
         
-    </Grid>
+        <gu:FlipView x:Name="Image"
+                     ItemsSource="{Binding Collection,Mode=OneWay}">
+            <gu:FlipView.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:Album}">
+                    <Image Stretch="Uniform"
+                           Source="{Binding Thumbnail,Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
+                </DataTemplate>
+            </gu:FlipView.ItemTemplate>
+        </gu:FlipView>
+    </DockPanel>
 </UserControl>

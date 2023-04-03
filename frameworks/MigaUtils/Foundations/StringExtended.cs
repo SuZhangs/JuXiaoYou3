@@ -4,6 +4,17 @@ namespace Acorisoft.FutureGL.MigaUtils.Foundation
 
     public static class StringExtended
     {
+        public static string SubString(this string source, int maxLength = 100)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return string.Empty;
+            }
+
+            var length = Math.Min(maxLength, source.Length);
+            return source[..length];
+        }
+        
         public static bool EqualsWithIgnoreCase(this string src, string dst)
         {
             return !string.IsNullOrEmpty(dst) && string.Equals(src, dst, StringComparison.OrdinalIgnoreCase);

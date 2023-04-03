@@ -24,6 +24,7 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Acorisoft.FutureGL.MigaStudio.Resources.Services;
+using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {
@@ -156,7 +157,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         private async Task AddMusicToPlaylistImpl()
         {
-            var opendlg = new OpenFileDialog
+            var opendlg = new VistaOpenFileDialog
             {
                 Filter      = "音乐文件|*.wav;*.mp3",
                 Multiselect = true

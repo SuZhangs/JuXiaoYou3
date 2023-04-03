@@ -57,7 +57,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 return;
             }
 
-            if (resource is null)
+            if (string.IsNullOrEmpty(resource))
             {
                 return;
             }
@@ -67,6 +67,25 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             
             ms.Seek(0, SeekOrigin.Begin);
             ms.CopyTo(fs);
+            fs.Dispose();
+        }
+        
+        
+
+        public void Write(string resource, byte[] buffer)
+        {
+            if (buffer is null || buffer.Length == 0)
+            {
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(resource))
+            {
+                return;
+            }
+            var dst = Path.Combine(FullDirectory, resource);
+            var fs  = new FileStream(dst, FileMode.Create, FileAccess.Write);
+            fs.Write(buffer);
             fs.Dispose();
         }
         

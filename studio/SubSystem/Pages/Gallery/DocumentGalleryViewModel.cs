@@ -163,7 +163,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
             else
             {
-                avatar = $"avatar_{ID.Get()}.png";
+                avatar = ImageUtilities.GetAvatarName();
                 buffer.Seek(0, SeekOrigin.Begin);
                 ImageEngine.WriteAvatar(buffer, avatar);
 
