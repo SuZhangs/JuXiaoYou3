@@ -19,6 +19,12 @@
         internal const int MaxVersion   = 512;
 
 
+        internal const string IdOfAlbumPart        = "__Album";
+        internal const string IdOfAvatarPart       = "__Album";
+        internal const string IdOfPlaylistPart     = "__Playlist";
+        internal const string IdOfRelationshipPart = "__Album";
+
+
         /*
          * Database Engine Fields
          * 数据库引擎字段

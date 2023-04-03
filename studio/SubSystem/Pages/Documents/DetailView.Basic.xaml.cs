@@ -2,9 +2,9 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public partial class CharacterDetailView : UserControl
+    public partial class DetailPartView : UserControl
     {
-        public CharacterDetailView()
+        public DetailPartView()
         {
             InitializeComponent();
         }

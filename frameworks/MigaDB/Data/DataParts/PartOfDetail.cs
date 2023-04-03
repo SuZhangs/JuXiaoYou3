@@ -36,6 +36,11 @@
         public bool IsDeclaration => true;
         
         /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, string> DataBags { get; init; }
+
+        /// <summary>
         /// 是否可移除
         /// </summary>
         public abstract bool Removable { get; }

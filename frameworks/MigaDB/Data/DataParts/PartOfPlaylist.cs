@@ -1,10 +1,10 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class PartOfPlaylist: PartOfDetailPlaceHolder
+    public class PartOfPlaylist : PartOfDetailPlaceHolder
     {
         public PartOfPlaylist()
         {
-            Id = "__Playlist";
+            Id = Constants.IdOfPlaylistPart;
         }
 
 

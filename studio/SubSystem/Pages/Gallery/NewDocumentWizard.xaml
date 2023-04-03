@@ -17,7 +17,7 @@
              Height="450"
              Width="480">
     <UserControl.Resources>
-        <thisConverters:TranslationConverter x:Key="Translation" />
+        <thisConverters:DocumentTypeConverter x:Key="Translation" />
     </UserControl.Resources>
     <Border Background="{f:BackgroundBrush}"
             CornerRadius="10"

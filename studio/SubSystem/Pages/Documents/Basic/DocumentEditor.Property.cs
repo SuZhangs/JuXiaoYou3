@@ -126,13 +126,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             set
             {
                 SetValue(ref _selectedDetailPart, value);
-
-                if (_selectedDetailPart is null)
-                {
-                    return;
-                }
-
-                DetailPart = CustomDataPartUIFactory.GetUI(_selectedDetailPart, this);
             }
         }
 

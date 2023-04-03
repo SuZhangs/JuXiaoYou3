@@ -24,6 +24,7 @@ using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
+using DynamicData.Binding;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -120,6 +121,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         
         private void LoadDocumentImpl()
         {
+            AddDataPart();
+            AddBasicPart();
+            AddMetadata();
+            MaintainDetailPart();
+            Reorder();
+        }
+
+        private void AddDataPart()
+        {
             foreach (var part in _document.Parts
                                           .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
             {
@@ -140,12 +150,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     InvisibleDataParts.Add(part);
                 }
             }
-
-            CheckDataPart();
-            TrackDataPartAndMetadata();
         }
 
-        private void CheckDataPart()
+        private void AddBasicPart()
         {
             if (_basicPart is null)
             {
@@ -156,7 +163,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
-        private void TrackDataPartAndMetadata()
+        private void AddMetadata()
         {
             
             foreach (var metadata in _basicPart.Buckets)
@@ -173,6 +180,63 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
             }
         }
+
+        private void MaintainDetailPart()
+        {
+            
+        }
+
+        private void Reorder()
+        {
+        }
+        
+        #endregion
+
+        #region OnCreate
+        
+        private void CreateDocumentImpl()
+        {
+            var document = new Document
+            {
+                Id        = ID.Get(),
+                Name      = _cache.Name,
+                Version   = 1,
+                Removable = true,
+                Type      = Type,
+                Parts     = new DataPartCollection(),
+                Metas     = new MetadataCollection(),
+            };
+
+            //
+            //
+            _document = document;
+            CreateDocumentFromManifest(document);
+            OnCreateDocument(document);
+
+            DocumentEngine.AddDocument(document);
+        }
+
+        private void CreateDocumentFromManifest(Document document)
+        {
+            var manifest = DatabaseManager.Database
+                                          .CurrentValue
+                                          .Get<ModuleManifestProperty>()
+                                          .GetModuleManifest(Type);
+
+            if ( Type != manifest?.Type)
+            {
+                return;
+            }
+
+            var iterators = manifest.Templates
+                                    .Select(x => TemplateEngine.CreateModule(x));
+
+            //
+            //
+            document.Parts.AddRange(iterators);
+        }
+
+        protected abstract void OnCreateDocument(Document document);
 
         #endregion
 
@@ -196,50 +260,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
             }
         }
-
-        private void CreateDocumentImpl()
-        {
-            var document = new Document
-            {
-                Id        = ID.Get(),
-                Name      = _cache.Name,
-                Version   = 1,
-                Removable = true,
-                Type      = Type,
-                Parts     = new DataPartCollection(),
-                Metas     = new MetadataCollection(),
-            };
-
-            //
-            //
-            _document = document;
-            CreateDocumentWithManifest(document);
-            OnCreateDocument(document);
-
-            DocumentEngine.AddDocument(document);
-        }
-
-        private void CreateDocumentWithManifest(Document document)
-        {
-            var manifest = DatabaseManager.Database
-                                          .CurrentValue
-                                          .Get<ModuleManifestProperty>()
-                                          .GetModuleManifest(Type);
-
-            if ( Type != manifest?.Type)
-            {
-                return;
-            }
-
-            var iterators = manifest.Templates
-                                    .Select(x => TemplateEngine.CreateModule(x));
-
-            //
-            //
-            document.Parts.AddRange(iterators);
-        }
-
-        protected abstract void OnCreateDocument(Document document);
 
         protected override void OnStart(NavigationParameter parameter)
         {

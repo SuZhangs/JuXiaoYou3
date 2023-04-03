@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Basic");
             AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
-            AddSubView<CharacterDetailView>(collection, "text.DocumentEditor.Detail");
+            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
             AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Inspiration");
             AddSubView<ShareView>(collection, "text.DocumentEditor.Preview");
         }

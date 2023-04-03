@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return Xaml.Get<IDialogService>()
                        .Dialog<DocumentCache, NewDocumentWizardViewModel>();
         }
-        
+
         /// <summary>
         /// 选择选项视图
         /// </summary>
@@ -39,12 +39,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     options
                 }
             };
-            
+
             optionVM.Title = title;
             return Xaml.Get<IDialogService>()
                        .Dialog<TOption>(optionVM, parameter);
         }
-        
+
         public static void InstallLanguages()
         {
             var fileName = Language.Culture switch
@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 CultureArea.Russian  => "SubSystem.ru.ini",
                 _                    => "SubSystem.cn.ini",
             };
-            
+
             Language.AppendLanguageSource(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages", fileName));
         }
 
@@ -69,14 +69,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
             Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
 
+            Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();
             Xaml.InstallView<ModuleSelectorView, ModuleSelectorViewModel>();
             Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, ItemDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<GeographyEditorPage, GeographyDocumentViewModel>();
-            
-            
+
+
             Xaml.InstallView<EditBlockView, EditBlockViewModel>();
             Xaml.InstallView<NewBlockView, NewBlockViewModel>();
             Xaml.InstallView<NewElementView, NewElementViewModel>();
