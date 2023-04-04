@@ -9,7 +9,7 @@ using Acorisoft.FutureGL.MigaUtils;
 using GongSolutions.Wpf.DragDrop;
 using NAudio.Wave;
 
-namespace Acorisoft.FutureGL.MigaStudio.Resources.Services
+namespace Acorisoft.FutureGL.MigaStudio.Services
 {
 
     

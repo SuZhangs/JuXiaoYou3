@@ -23,7 +23,7 @@ using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
-using Acorisoft.FutureGL.MigaStudio.Resources.Services;
+using Acorisoft.FutureGL.MigaStudio.Services;
 using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
