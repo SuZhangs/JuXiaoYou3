@@ -4,9 +4,83 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Services;assembly=MigaDB"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
-    </Grid>
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type local:PlaylistPartViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <thisConverters:AlbumConverter x:Key="AlbumConverter"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal">
+            <ftk:ToolButton f:Language.Id="global.Add"
+                            Content="添加"
+                            Command="{Binding AddMusicCommand}"
+                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            ShowText="True" />
+
+            <ftk:ToolButton f:Language.Id="global.Remove"
+                            Content="删除"
+                            Command="{Binding RemoveMusicCommand}"
+                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.MinusCircle}"
+                            ShowText="True" />
+
+            <ftk:ToolButton f:Language.Id="global.Up"
+                            Content="上移"
+                            Command="{Binding ShiftUpMusicCommand}"
+                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowUp}"
+                            ShowText="True" />
+
+            <ftk:ToolButton f:Language.Id="global.Down"
+                            Content="下移"
+                            Command="{Binding ShiftDownMusicCommand}"
+                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowDown}"
+                            ShowText="True" />
+
+            <ftk:ToolButton f:Language.Id="global.Preview"
+                            Content="预览"
+                            Command="{Binding PlayMusicCommand}"
+                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.Upload}"
+                            ShowText="True" />
+        </StackPanel>
+
+        <DockPanel>
+            <f:ListBox DockPanel.Dock="Right"
+                       ItemsSource="{Binding Collection,Mode=OneWay}"
+                       SelectedItem="{Binding SelectedMusic,Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type m:Music}">
+                        <TextBlock Margin="8"
+                                   Text="{Binding Name}"
+                                   TextTrimming="CharacterEllipsis"
+                                   VerticalAlignment="Center" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </f:ListBox>
+
+            <ScrollViewer Padding="12">
+                <Viewbox>
+                    <ContentControl Content="{Binding SelectedMusic,Mode=OneWay}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate DataType="{x:Type m:Music}">
+                                <Image Stretch="None"
+                                       Source="{Binding Cover,Mode=OneWay, Converter={StaticResource AlbumConverter}}" />
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </Viewbox>
+            </ScrollViewer>
+
+        </DockPanel>
+    </DockPanel>
 </UserControl>

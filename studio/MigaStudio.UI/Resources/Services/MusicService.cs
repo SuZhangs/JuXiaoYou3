@@ -77,6 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
         private readonly ObservableProperty<TimeSpan> _durationStream;
         private readonly ObservableProperty<Music>    _targetStream;
         private readonly ObservableProperty<Playlist> _playlistStream;
+        private readonly ObservableProperty<bool>     _stateStream;
 
         public MusicService()
         {
@@ -86,10 +87,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
             _positionStream         =  new ObservableProperty<TimeSpan>(TimeSpan.Zero);
             _targetStream           =  new ObservableProperty<Music>(null);
             _playlistStream         =  new ObservableProperty<Playlist>(null);
-            Mode                    =  PlayMode.Sequence;
+            _stateStream            =  new ObservableProperty<bool>();
             _timer                  =  new Timer(DurationPushHandler, null, 0, 1000);
             _device                 =  new WaveOutEvent();
             _device.PlaybackStopped += OnDevicePlayStopped;
+            Mode                    =  PlayMode.Sequence;
         }
 
         void Update(TimeSpan time, PlaybackState state, Music item, int index)
@@ -99,6 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
             _item          = item;
             _currentIndex2 = index;
             _handler.OnNext(new Tuple<TimeSpan, PlaybackState, Music, int>(_currentTime, _currentState, _item, _currentIndex2));
+            _stateStream.SetValue(state == PlaybackState.Playing);
         }
 
         private void DurationPushHandler(object state)
@@ -387,6 +390,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
         protected override void ReleaseManagedResources()
         {
             Stop();
+            _stateStream.Dispose();
             _timer.Dispose();
             _playlistStream.Dispose();
             _positionStream.Dispose();
@@ -406,6 +410,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
 
         public IObservableProperty<Music> Music => _targetStream;
         public IObservableProperty<Playlist> Playlist => _playlistStream;
+        public IObservableProperty<bool> IsPlaying => _stateStream;
 
         public IObservable<Tuple<TimeSpan, PlaybackState, Music, int>> State => _handler;
 

@@ -804,7 +804,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string EditValueTitle => GetText("text.editValue");
         public static string SelectTitle => GetText("global.select");
 
-        public static string ImageProcessing
+        public static string Processing
         {
             // TODO: 翻译
             get => Language.Culture switch

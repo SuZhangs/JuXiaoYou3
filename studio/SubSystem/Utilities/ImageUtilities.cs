@@ -81,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     {
                         await Task.Run(() =>
                         {
-                            session.Update(SubSystemString.ImageProcessing);
+                            session.Update(SubSystemString.Processing);
                             var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
                             image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
 

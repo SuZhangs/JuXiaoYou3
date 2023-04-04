@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             using (var session = Xaml.Get<IBusyService>()
                                      .CreateSession())
             {
-                session.Update(SubSystemString.ImageProcessing);
+                session.Update(SubSystemString.Processing);
 
                 await Task.Run(async () =>
                 {
