@@ -418,8 +418,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 移除标签页
         /// </summary>
         public AsyncRelayCommand<ITabViewModel> RemoveTabCommand { get; }
-        
-        
+
+
+        public GlobalStudioContext Context => _context;
 
         internal static string CloseTabItemCaption
         {

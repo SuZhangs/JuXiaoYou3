@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         /// <summary>
         /// 所有添加的世界古纳
         /// </summary>
-        public HashSet<RepositoryCache> Repositories { get; init; }
+        public ObservableCollection<RepositoryCache> Repositories { get; init; }
 
         /// <summary>
         /// 最后一次打开的世界观

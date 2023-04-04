@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
-using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.UI;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -17,9 +12,9 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
-using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
 using NLog;
+// ReSharper disable UnusedParameter.Local
 
 namespace Acorisoft.FutureGL.MigaStudio
 {
@@ -108,7 +103,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 () => new RepositorySetting
                 {
                     LastRepository = null,
-                    Repositories   = new HashSet<RepositoryCache>()
+                    Repositories   = new ObservableCollection<RepositoryCache>()
                 });
 
             //

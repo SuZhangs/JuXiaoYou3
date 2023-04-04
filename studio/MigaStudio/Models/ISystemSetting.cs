@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
@@ -27,8 +28,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
                 return;
             }
 
+            var r = RepositorySetting.Repositories;
             RepositorySetting.LastRepository = cache.Path;
-            RepositorySetting.Repositories.Add(cache);
+
+            if (r.Any(x => x.Path == cache.Path))
+            {
+                return;
+            }
+            
+            if (r.Count >= 32)
+            {
+                r.RemoveAt(r.Count - 1);
+            }
+            
+            r.Add(cache);
             await SaveAsync();
         }
         

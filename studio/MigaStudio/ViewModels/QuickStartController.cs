@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
-using System.Windows;
 using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
@@ -25,8 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             CreateCommand      = AsyncCommand(CreateImpl, CanCreate, true);
             OpenCommand        = AsyncCommand(OpenImpl);
-            SelectIconCommand  = AsyncCommand(SelectIconImpl);
-            SelectCoverCommand = AsyncCommand(SelectCoverImpl);
             UpgradeCommand     = AsyncCommand(UpgradeImpl);
         }
 
@@ -38,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var opendlg = new VistaFolderBrowserDialog();
 
-            if (opendlg.ShowDialog(Application.Current.MainWindow) != true)
+            if (opendlg.ShowDialog() != true)
             {
                 return;
             }
@@ -69,29 +64,63 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     OpenCount = 1
                 };
 
-                await Xaml.Get<ISystemSetting>().AddRepository(cache);
+                await Xaml.Get<ISystemSetting>()
+                          .AddRepository(cache);
+
+                Context.SwitchController(Context.MainController);                
             }
             else
             {
                 var reason = result.Reason;
+                await Warning(SubSystemString.GetDatabaseResult(reason));
             }
         }
 
         private async Task OpenImpl()
         {
+            var opendlg = new VistaFolderBrowserDialog();
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            var folder = opendlg.SelectedPath;
+            var dbMgr  = Xaml.Get<IDatabaseManager>();
+            
+            var result = await dbMgr.LoadAsync(folder);
+
+            if (result.IsFinished)
+            {
+                var property = dbMgr.Property
+                                    .CurrentValue;
+                
+                var cache = new RepositoryCache
+                {
+                    Id        = property.Id,
+                    Name      = Name,
+                    Author    = Author,
+                    Intro     = property.Intro,
+                    Path      = folder,
+                    OpenCount = 1
+                };
+
+                await Xaml.Get<ISystemSetting>()
+                          .AddRepository(cache);
+
+                Context.SwitchController(Context.MainController);
+            }
+            else
+            {
+                var reason = result.Reason;
+                await Warning(SubSystemString.GetDatabaseResult(reason));
+            }
         }
 
         private async Task UpgradeImpl()
         {
         }
 
-        private async Task SelectIconImpl()
-        {
-        }
-
-        private async Task SelectCoverImpl()
-        {
-        }
 
         /// <summary>
         /// 获取或设置 <see cref="Cover"/> 属性。
@@ -148,8 +177,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             set => SetValue(ref _icon, value);
         }
 
-        public AsyncRelayCommand SelectCoverCommand { get; }
-        public AsyncRelayCommand SelectIconCommand { get; }
         public AsyncRelayCommand CreateCommand { get; }
         public AsyncRelayCommand OpenCommand { get; }
         public AsyncRelayCommand UpgradeCommand { get; }

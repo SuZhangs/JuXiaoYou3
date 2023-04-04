@@ -1,16 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.ViewModels;
-using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Pages;
-using Acorisoft.FutureGL.MigaStudio.Views;
-using CommunityToolkit.Mvvm.Input;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
