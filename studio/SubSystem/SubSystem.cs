@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
 using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 
@@ -90,6 +91,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<GeographyEditorPage, GeographyDocumentViewModel>();
 
+            Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 
             Xaml.InstallView<EditBlockView, EditBlockViewModel>();
             Xaml.InstallView<NewBlockView, NewBlockViewModel>();

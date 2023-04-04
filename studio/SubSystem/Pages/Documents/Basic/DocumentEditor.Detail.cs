@@ -72,7 +72,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return new CharacterRelshipPartView
                 {
-                    DataContext = new CharacterRelationPartViewModel
+                    DataContext = new CharacterRelPartViewModel
                     {
                         EditorViewModel = this,
                         Detail          = rel,

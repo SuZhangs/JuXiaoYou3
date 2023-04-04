@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public class CharacterRelationPartViewModel
+    public class CharacterRelPartViewModel
     {
         /// <summary>
         /// 编辑器
