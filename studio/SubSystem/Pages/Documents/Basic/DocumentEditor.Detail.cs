@@ -70,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             if (part is PartOfRel rel)
             {
-                return new CharacterRelationPartView
+                return new CharacterRelshipPartView
                 {
                     DataContext = new CharacterRelationPartViewModel
                     {

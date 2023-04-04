@@ -83,7 +83,7 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Pages\Documents\Details\DetailView.CharacterRelation.xaml">
+      <Page Update="Pages\Documents\Details\DetailView.CharacterRel.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
@@ -178,6 +178,10 @@
 
     <ItemGroup>
       <EmbeddedResource Remove="ViewModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages\Tools" />
     </ItemGroup>
 
 </Project>
