@@ -24,6 +24,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             }
 
             var ms = _engine.Get(album);
+            if (ms is null)
+            {
+                return _album;
+            }
             return Xaml.FromStream(ms, 256, 256);
         }
 

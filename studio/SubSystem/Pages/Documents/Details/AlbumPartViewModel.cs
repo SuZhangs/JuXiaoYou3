@@ -29,6 +29,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                              .Subscribe(x =>
                              {
                                  Collection.Add(x);
+                                 SelectedAlbum ??= Collection.FirstOrDefault();
+                                 Successful(SubSystemString.OperationOfAddIsSuccessful);
+                                 Save();
                              })
                              .DisposeWith(Collector);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
@@ -87,13 +90,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                     }
                 });
             }
-
-
-            //
-            //
-            SelectedAlbum ??= Collection.FirstOrDefault();
-            Successful(SubSystemString.OperationOfAddIsSuccessful);
-            Save();
         }
 
 
@@ -194,7 +190,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 RemoveAlbumCommand.NotifyCanExecuteChanged();
                 ShiftDownAlbumCommand.NotifyCanExecuteChanged();
                 ShiftUpAlbumCommand.NotifyCanExecuteChanged();
-                RemoveAlbumCommand.NotifyCanExecuteChanged();
+                OpenAlbumCommand.NotifyCanExecuteChanged();
             }
         }
 

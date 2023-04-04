@@ -184,7 +184,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                     var tag       = musicFile.GetTag(TagTypes.Id3v2);
                     var cover     = Path.GetFileNameWithoutExtension(fileName) + ".png";
 
-                    if (tag.Pictures is not null)
+                    if (tag.Pictures is not null && tag.Pictures?.Length > 0)
                     {
                         var pic = tag.Pictures.First();
                         cover = Path.GetFileNameWithoutExtension(fileName) + ".png";

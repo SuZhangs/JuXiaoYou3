@@ -141,9 +141,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 DetailParts[i].Index = i;
             }
-
-            Dispatcher.CurrentDispatcher.Invoke(() => SelectedDetailPartInDocument = null);
             SetDirtyState();
+            
+            RemoveDetailPartCommand.NotifyCanExecuteChanged();
+            ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
+            ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
         }
 
         private async Task RemoveDetailPartImpl(PartOfDetail part)
@@ -159,6 +161,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
+            if (ReferenceEquals(SelectedDetailPart, part))
+            {
+                SelectedDetailPart           = null;
+                SelectedDetailPartInDocument = null;
+            }
+            
             DetailParts.Remove(part);
             ResortDetailPart();
             SetDirtyState();

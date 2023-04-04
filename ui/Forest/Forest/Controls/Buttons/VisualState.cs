@@ -24,6 +24,10 @@
             {
                 StateMachine.NextState(VisualState.Normal);
             }
+
+            MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            Focus();
+            InvalidateVisual();
         }
 
 

@@ -31,7 +31,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                               .GetEngine<MusicEngine>();
             _threadSafeAdding = new Subject<Music>().DisposeWith(Collector);
             _threadSafeAdding.ObserveOn(Scheduler)
-                             .Subscribe(x => { Collection.Add(x); })
+                             .Subscribe(x =>
+                             {
+                                 Collection.Add(x);
+                                 
+                                 //
+                                 //
+                                 SelectedMusic ??= Collection.FirstOrDefault();
+                                 Successful(SubSystemString.OperationOfAddIsSuccessful);
+                                 Save();
+                             })
                              .DisposeWith(Collector);
             AddMusicCommand       = AsyncCommand(AddMusicImpl);
             RemoveMusicCommand    = AsyncCommand<Music>(RemoveMusicImpl, HasItem);
@@ -90,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                             var tag       = musicFile.GetTag(TagTypes.Id3v2);
                             var cover     = Path.GetFileNameWithoutExtension(fileName) + ".png";
 
-                            if (tag.Pictures is not null)
+                            if (tag.Pictures is not null && tag.Pictures?.Length > 0)
                             {
                                 var pic = tag.Pictures.First();
                                 cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
@@ -117,11 +126,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 });
             }
             
-            //
-            //
-            SelectedMusic ??= Collection.FirstOrDefault();
-            Successful(SubSystemString.OperationOfAddIsSuccessful);
-            Save();
         }
 
 
@@ -158,28 +162,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
             var ms = Xaml.Get<MusicService>();
-            var hash = ms.Playlist
-                         .CurrentValue
-                         .Items
-                         .Select(x => x.Id)
-                         .ToHashSet();
-
-            var noAddedValue = Collection.Where(x => !hash.Contains(x.Id));
 
             if (ms.IsPlaying
                   .CurrentValue)
             {
+                var hash = ms.Playlist
+                             .CurrentValue
+                             .Items
+                             .Select(x => x.Id)
+                             .ToHashSet();
+                
+                var noAddedValue = Collection.Where(x => !hash.Contains(x.Id));
+
                 ms.Playlist
                   .CurrentValue
                   .Items
                   .AddRange(noAddedValue);
+                
+                ms.Play(part);
             }
             else
             {
                 ms.SetPlaylist(new Playlist
                 {
                     Name = EditorViewModel.Name,
-                    Items = new ObservableCollection<Music>(noAddedValue)
+                    Items = new ObservableCollection<Music>(Collection)
                 }, true);
             }
         }
@@ -261,7 +268,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 RemoveMusicCommand.NotifyCanExecuteChanged();
                 ShiftDownMusicCommand.NotifyCanExecuteChanged();
                 ShiftUpMusicCommand.NotifyCanExecuteChanged();
-                RemoveMusicCommand.NotifyCanExecuteChanged();
+                PlayMusicCommand.NotifyCanExecuteChanged();
             }
         }
 
