@@ -268,7 +268,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type t:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+    <Style TargetType="{x:Type t:ToolButton}">
         <Setter Property="ShowText" Value="False" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -278,7 +278,7 @@
         <Setter Property="Width" Value="36" />
         <Setter Property="Height" Value="36" />
         <Setter Property="IsFilled" Value="False" />
-        <Setter Property="IconSize" Value="17" />
+        <Setter Property="IconSize"  Value="17" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type t:ToolButton}">

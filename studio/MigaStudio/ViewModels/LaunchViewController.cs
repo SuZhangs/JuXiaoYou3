@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -29,17 +30,36 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
             });
             
-            Job(SubSystemString.GetText("text.launch.openDatabase"), x =>
+            Job(SubSystemString.GetText("text.launch.openDatabase"), x => OpenDatabaseImpl((GlobalStudioContext)x));
+        }
+
+        private void OpenDatabaseImpl(GlobalStudioContext context)
+        {
+            var setting = Xaml.Get<SystemSetting>()
+                              .RepositorySetting;
+
+            if (string.IsNullOrEmpty(setting.LastRepository))
             {
-                var dr = Xaml.Get<IDatabaseManager>()
-                             .LoadAsync(@"C:\Users\Administrator\Documents\我的世界观\Juxiaoyou3")
-                             .GetAwaiter()
-                             .GetResult();
-                if (dr.IsFinished)
-                {
-                    ((GlobalStudioContext)x).IsDatabaseOpen = true;
-                }
-            });
+                return;
+            }
+
+            var dr = Xaml.Get<IDatabaseManager>()
+                         .LoadAsync(setting.LastRepository)
+                         .GetAwaiter()
+                         .GetResult();
+            
+            if (dr.IsFinished)
+            {
+                context.IsDatabaseOpen = true;
+            }
+            else
+            {
+                Xaml.Get<IDialogService>()
+                    .Notify(
+                        CriticalLevel.Warning,
+                        Language.NotifyText,
+                        SubSystemString.GetDatabaseResult(dr.Reason));
+            }
         }
 
         protected override void OnStartup(RouteEventArgs arg)
