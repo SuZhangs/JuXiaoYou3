@@ -38,6 +38,7 @@
     <ItemGroup>
       <PackageReference Include="DryIoc.dll" Version="4.8.2" />
       <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+      <PackageReference Include="GraphShape.Controls" Version="1.2.2" />
       <PackageReference Include="NAudio" Version="2.1.0" />
       <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
       <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
