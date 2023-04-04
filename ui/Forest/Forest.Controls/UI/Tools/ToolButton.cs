@@ -49,24 +49,24 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
 
         protected override void SetForeground(Brush foreground)
         {
-            if (ShowText)
-            {
-                _content.ClearValue(TextElement.ForegroundProperty);
-                _content.SetValue(TextElement.ForegroundProperty, foreground);
-            }
-            
-            if (IsFilled)
-            {
-                _icon.StrokeThickness = 0;
-                _icon.ClearValue(Path.FillProperty);
-                _icon.Fill            = foreground;
-            }
-            else
-            {
-                _icon.StrokeThickness = 1;
-                _icon.ClearValue(Path.StrokeProperty);
-                _icon.Stroke          = foreground;
-            }
+            // if (ShowText)
+            // {
+            //     _content.ClearValue(TextElement.ForegroundProperty);
+            //     _content.SetValue(TextElement.ForegroundProperty, foreground);
+            // }
+            //
+            // if (IsFilled)
+            // {
+            //     _icon.StrokeThickness = 0;
+            //     _icon.ClearValue(Path.FillProperty);
+            //     _icon.Fill            = foreground;
+            // }
+            // else
+            // {
+            //     _icon.StrokeThickness = 1;
+            //     _icon.ClearValue(Path.StrokeProperty);
+            //     _icon.Stroke          = foreground;
+            // }
         }
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
