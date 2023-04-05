@@ -2,7 +2,7 @@
 {
     public class OtherDocumentViewModel: DocumentEditorVMBase
     {
-        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
+        protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
             AddSubView<OtherBasicView>(collection, "text.DocumentEditor.Basic");
             AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");

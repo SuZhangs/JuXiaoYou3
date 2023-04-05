@@ -13,9 +13,9 @@ using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class AlbumPartViewModel : ViewModelBase
+    public class AlbumPartViewModel : KeyValueViewModel
     {
         private readonly Subject<Album> _threadSafeAdding;
         
@@ -49,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 var list    = JSON.FromJson<ObservableCollection<Album>>(payload);
                 Collection.AddRange(list);
             }
+            
             base.Start();
         }
 
@@ -135,16 +136,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private void Save()
         {
             var payload = JSON.Serialize(Collection);
-
-            if (Detail.DataBags.ContainsKey(Data))
-            {
-                Detail.DataBags[Data] = payload;
-            }
-            else
-            {
-                Detail.DataBags.Add(Data, payload);
-            }
-
+            base[Data, Detail.DataBags] = payload;
             EditorViewModel.SetDirtyState();
         }
 
@@ -153,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// <summary>
         /// 编辑器
         /// </summary>
-        public DocumentEditorVMBase EditorViewModel { get; init; }
+        public DocumentEditorBase EditorViewModel { get; init; }
 
         /// <summary>
         /// 文档

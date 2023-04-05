@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class KeyValueViewModel : ViewModelBase
     {

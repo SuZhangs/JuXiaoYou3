@@ -7,15 +7,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     partial class DocumentEditorBase
     {
         private SubViewBase _selectedSubView;
-        
-        protected static void AddSubView<TView>(ICollection<HeaderedSubView> collection, string id) where TView : FrameworkElement
-        {
-            collection.Add(new HeaderedSubView
-            {
-                Name = Language.GetText(id),
-                Type = typeof(TView)
-            });
-        }
 
         /// <summary>
         /// 创建子页面
@@ -36,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public FrameworkElement SubView
         {
             get => _subView;
-            private set => SetValue(ref _subView, value);
+            protected set => SetValue(ref _subView, value);
         }
 
         /// <summary>
