@@ -74,7 +74,8 @@
                         <!-- 消息部分 -->
                         <Border x:Name="PART_MsgMask"
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Stretch"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 32 0"
                                 Visibility="Collapsed"
                                 KeyboardNavigation.ControlTabNavigation="Cycle"
                                 KeyboardNavigation.DirectionalNavigation="Cycle"
@@ -82,7 +83,8 @@
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="32" Opacity="0.45" />
                             </Border.Effect>
-                            <ContentPresenter x:Name="MSG" Content="{TemplateBinding Message}" />
+                            <ContentPresenter x:Name="MSG" 
+                                              Content="{TemplateBinding Message}" />
                         </Border>
 
 
@@ -357,7 +359,7 @@
                             Padding="24 16"
                             SnapsToDevicePixels="True"
                             UseLayoutRounding="True"
-                            Width="480"
+                            Width="384"
                             Height="64">
                         <DockPanel>
                             <Path x:Name="Icon"
@@ -400,7 +402,7 @@
                             Padding="24 16"
                             SnapsToDevicePixels="True"
                             UseLayoutRounding="True"
-                            Width="480"
+                            Width="384"
                             Height="64">
                         <DockPanel>
                             <Image x:Name="Icon"

@@ -292,8 +292,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return false;
             }
 
-            if (_DataPartTrackerOfId.TryAdd(module.Id, module) &&
-                _DataPartTrackerOfType.TryAdd(module.GetType(), module))
+            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
             {
                 module.Index = ModuleParts.Count;
                 ModuleParts.Add(module);

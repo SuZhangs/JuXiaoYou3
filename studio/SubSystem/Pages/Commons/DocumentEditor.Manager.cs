@@ -102,6 +102,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private void AddMetadata(Metadata metadata)
         {
+            if(metadata is null)
+            {
+                return;
+            }
+
             if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
             {
                 metadataIndex[Document.Metas] = metadata.Value;
@@ -112,11 +117,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 var checkedIndex = Document.Metas.Count;
                 
                 Document.Metas.Add(metadata);
-
-                if (checkedIndex != _currentIndex)
-                {
-                    throw new InvalidOperationException("thread-not safe");
-                }
                 
                 var index = new MetadataIndexCache
                 {
@@ -136,18 +136,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             if (_MetadataTrackerByName.TryGetValue(metadata, out var cache))
             {
-                _MetadataTrackerByName.Remove(metadata);
                 Document.Metas.RemoveAt(cache.Index);
+                _MetadataTrackerByName.Remove(metadata);
             }
         }
 
         private void RemoveMetadata(Metadata metadata)
         {
-            if (_MetadataTrackerByName.TryGetValue(metadata.Name, out var cache))
-            {
-                _MetadataTrackerByName.Remove(metadata.Name);
-                Document.Metas.RemoveAt(cache.Index);
-            }
+            RemoveMetadata(metadata.Name);
         }
 
         private void ClearMetadata()
