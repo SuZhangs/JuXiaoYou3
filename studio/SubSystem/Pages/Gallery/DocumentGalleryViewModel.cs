@@ -400,5 +400,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         #endregion
 
         #endregion
+        
+        public override bool Uniqueness => true;
     }
 }
