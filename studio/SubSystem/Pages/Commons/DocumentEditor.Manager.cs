@@ -9,6 +9,7 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -161,31 +162,153 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return _DataPartTrackerOfId.TryGetValue(id, out var module) ? (PartOfModule)module : null;
         }
         
-        //
-        // DocumentManager Part
-        protected void OpenDocument(Document document)
-        {
-            //
-            // Clear
-            SelectedDetailPart = null;
-            ModuleParts.Clear();
-            InvisibleDataParts.Clear();
+        
+        #region OnLoad
 
-            foreach (var part in document.Parts)
+        private void LoadDocumentImpl()
+        {
+            AddDataPartIntern();
+            AddMetadataIntern();
+            MaintainDataPartManifest();
+            Reorder();
+        }
+
+        private void AddDataPartIntern()
+        {
+            foreach (var part in Document.Parts
+                                         .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
             {
-                if (part is PartOfModule module)
+                AddDataPart(part);
+            }
+        }
+
+        private void AddDataPart(DataPart part)
+        {
+            if (part is PartOfModule pom)
+            {
+                ModuleParts.Add(pom);
+            }
+
+            if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
+            {
+                if (part is PartOfBasic pob)
                 {
-                    ModuleParts.Add(module);
+                    _basicPart = pob;
                 }
-                else if (part is PartOfDetail custom)
+                else if (part is PartOfDetail pod)
                 {
-                    DetailParts.Add(custom);
+                    DetailParts.Add(pod);
                 }
-                else
+                else if (part is PartOfManifest)
                 {
                     InvisibleDataParts.Add(part);
                 }
             }
+        }
+
+        private void AddMetadataIntern()
+        {
+            foreach (var metadata in _basicPart.Buckets)
+            {
+                UpsertMetadata(metadata.Key, metadata.Value);
+            }
+
+            foreach (var module in ModuleParts)
+            {
+                foreach (var block in module.Blocks
+                                            .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+                {
+                    AddMetadata(block.ExtractMetadata());
+                }
+            }
+        }
+
+        private void MaintainDataPartManifest()
+        {
+            //
+            // 检查当前打开的文档是否缺失指定的DataPart
+
+            if (_basicPart is null)
+            {
+                _basicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
+                Document.Parts.Add(_basicPart);
+                Name   = Cache.Name;
+                Gender = Language.GetText("global.DefaultGender");
+            }
+
+            IsDataPartExistence(Document);
+        }
+
+        protected abstract void IsDataPartExistence(Document document);
+
+        private void Reorder()
+        {
+            // TODO:
+        }
+
+        #endregion
+
+        #region OnCreate
+
+        private void CreateDocumentImpl()
+        {
+            var document = new Document
+            {
+                Id        = ID.Get(),
+                Name      = Cache.Name,
+                Version   = 1,
+                Removable = true,
+                Type      = Type,
+                Parts     = new DataPartCollection(),
+                Metas     = new MetadataCollection(),
+            };
+
+            //
+            //
+            Document = document;
+            CreateDocumentFromManifest(document);
+            OnCreateDocument(document);
+
+            DocumentEngine.AddDocument(document);
+        }
+
+        private void CreateDocumentFromManifest(Document document)
+        {
+            var manifest = DatabaseManager.Database
+                                          .CurrentValue
+                                          .Get<ModuleManifestProperty>()
+                                          .GetModuleManifest(Type);
+
+            if (Type != manifest?.Type)
+            {
+                return;
+            }
+
+            var iterators = manifest.Templates
+                                    .Select(x => TemplateEngine.CreateModule(x));
+
+            //
+            //
+            document.Parts.AddRange(iterators);
+        }
+
+        protected abstract void OnCreateDocument(Document document);
+
+        #endregion
+        
+        //
+        // DocumentManager Part
+        protected void Open()
+        {
+            if (Document is null)
+            {
+                //
+                // 创建文档
+                CreateDocumentImpl();
+            }
+
+            // 加载文档
+            LoadDocumentImpl();
         }
     }
 }

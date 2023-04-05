@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
@@ -307,6 +309,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return false;
         }
         
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
+        /// </summary>
+        public PartOfModule SelectedModulePart
+        {
+            get => _selectedModulePart;
+            set
+            {
+                SetValue(ref _selectedModulePart, value);
+
+                if (_selectedModulePart is null)
+                {
+                    ContentBlocks.Clear();
+                }
+                else
+                {
+                    var selector = _selectedModulePart.Blocks
+                                                      .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
+                    ContentBlocks.AddRange(selector, true);
+                    RemoveModulePartCommand.NotifyCanExecuteChanged();
+                    ShiftDownModulePartCommand.NotifyCanExecuteChanged();
+                    ShiftUpModulePartCommand.NotifyCanExecuteChanged();
+                }
+            }
+        }
+        
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PartOfModule> ModuleParts { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<ModuleBlockDataUI> ContentBlocks { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddModulePartCommand { get; }

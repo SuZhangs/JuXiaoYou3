@@ -29,6 +29,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
+        private PartOfDetail _selectedDetailPartInDocument;
+        
         protected virtual IEnumerable<object> CreateDetailPartList()
         {
             return new object[]
@@ -162,7 +164,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        private PartOfDetail _selectedDetailPartInDocument;
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedDetailPartInDocument"/> 属性。
@@ -178,6 +179,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
             }
         }
+        
+        /// <summary>
+        /// 自定义部件
+        /// </summary>
+        /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PartOfDetail> DetailParts { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddDetailPartCommand { get; }
