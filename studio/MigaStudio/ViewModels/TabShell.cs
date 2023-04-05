@@ -30,6 +30,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             New<UniverseViewModel>();
             New<DocumentGalleryViewModel>();
             New<CharacterRelationshipViewModel>();
+            OpenDocument<CharacterDocumentViewModel>(new DocumentCache
+            {
+                Name           = "Test",
+                Type           = DocumentType.CharacterDocument,
+                TimeOfCreated  = DateTime.Today,
+                TimeOfModified = DateTime.Now,
+                Removable      = false,
+                IsDeleted      = false,
+                Version        = 1,
+                Keywords       = new ObservableCollection<string>(),
+                Id             = ID.Get()
+            });
         }
 
         protected override void RequireStartupTabViewModel()

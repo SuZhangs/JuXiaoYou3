@@ -168,8 +168,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private void LoadDocumentImpl()
         {
             AddDataPartIntern();
-            AddMetadataIntern();
             MaintainDataPartManifest();
+            AddMetadataIntern();
             Reorder();
         }
 
