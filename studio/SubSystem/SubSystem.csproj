@@ -180,8 +180,4 @@
       <EmbeddedResource Remove="ViewModels\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\Universe" />
-    </ItemGroup>
-
 </Project>

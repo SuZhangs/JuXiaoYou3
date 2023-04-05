@@ -1,9 +1,13 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
 {
-    public class HeaderedSubView : SubViewBase
+    public abstract class HierarchicalViewNode : SubViewBase
+    {
+        
+    }
+
+    public sealed class HierarchicalSubView : HierarchicalViewNode
     {
         public void Create(object dataContext)
         {
@@ -19,6 +23,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         }
         public Type Type { get; init; }
         public FrameworkElement SubView { get; set; }
+    }
+
+    public sealed class HierarchicalViewFolder : HierarchicalViewNode
+    {
         
     }
 }
