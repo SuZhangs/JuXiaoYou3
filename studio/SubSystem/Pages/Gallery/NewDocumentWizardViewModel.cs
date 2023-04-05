@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         private                 string       _name;
         private                 ImageSource  _avatar;
         private                 MemoryStream _buffer;
-        private static          DocumentType _type = DocumentType.CharacterDocument;
+        private static          DocumentType _type = DocumentType.Character;
 
         public NewDocumentWizardViewModel()
         {

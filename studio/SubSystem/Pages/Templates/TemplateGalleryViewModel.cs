@@ -361,10 +361,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModuleManifest Ability
         {
-            get => Property.GetModuleManifest(DocumentType.AbilityDocument);
+            get => Property.GetModuleManifest(DocumentType.Ability);
             set
             {
-                Property.SetModuleManifest(DocumentType.AbilityDocument, value);
+                Property.SetModuleManifest(DocumentType.Ability, value);
                 RaiseUpdated();
                 Save();
             }
@@ -372,10 +372,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModuleManifest Character
         {
-            get => Property.GetModuleManifest(DocumentType.CharacterDocument);
+            get => Property.GetModuleManifest(DocumentType.Character);
             set
             {
-                Property.SetModuleManifest(DocumentType.CharacterDocument, value);
+                Property.SetModuleManifest(DocumentType.Character, value);
                 RaiseUpdated();
                 Save();
             }
@@ -383,10 +383,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModuleManifest Geography
         {
-            get => Property.GetModuleManifest(DocumentType.GeographyDocument);
+            get => Property.GetModuleManifest(DocumentType.Geography);
             set
             {
-                Property.SetModuleManifest(DocumentType.GeographyDocument, value);
+                Property.SetModuleManifest(DocumentType.Geography, value);
                 RaiseUpdated();
                 Save();
             }
@@ -394,10 +394,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModuleManifest Item
         {
-            get => Property.GetModuleManifest(DocumentType.ItemDocument);
+            get => Property.GetModuleManifest(DocumentType.Item);
             set
             {
-                Property.SetModuleManifest(DocumentType.ItemDocument, value);
+                Property.SetModuleManifest(DocumentType.Item, value);
                 RaiseUpdated();
                 Save();
             }
@@ -405,10 +405,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModuleManifest Other
         {
-            get => Property.GetModuleManifest(DocumentType.OtherDocument);
+            get => Property.GetModuleManifest(DocumentType.Other);
             set
             {
-                Property.SetModuleManifest(DocumentType.OtherDocument, value);
+                Property.SetModuleManifest(DocumentType.Other, value);
                 RaiseUpdated();
                 Save();
             }

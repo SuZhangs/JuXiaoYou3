@@ -101,22 +101,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             return type switch
             {
-                DocumentType.CharacterDocument => Language.Culture switch
+                DocumentType.Character => Language.Culture switch
                 {
                     CultureArea.Chinese => "人物",
                     _                   => "Character"
                 },
-                DocumentType.AbilityDocument => Language.Culture switch
+                DocumentType.Ability => Language.Culture switch
                 {
                     CultureArea.Chinese => "能力",
                     _                   => "Ability"
                 },
-                DocumentType.GeographyDocument => Language.Culture switch
+                DocumentType.Geography => Language.Culture switch
                 {
                     CultureArea.Chinese => "地图",
                     _                   => "Geography"
                 },
-                DocumentType.ItemDocument => Language.Culture switch
+                DocumentType.Item => Language.Culture switch
                 {
                     CultureArea.Chinese => "物品",
                     _                   => "Item"

@@ -1,0 +1,109 @@
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Universe.DocumentEditorPage"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+                     xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
+                     mc:Ignorable="d"
+                     d:DesignHeight="300" d:DesignWidth="300"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}"
+                     UseLayoutRounding="True"
+                     SnapsToDevicePixels="True">
+    <UserControl.Resources>
+        <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+
+        <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
+    </UserControl.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Left"
+                Background="{f:BackgroundBrush}"
+                CornerRadius="3"
+                Width="320"
+                Padding="32">
+            <StackPanel>
+
+                <!-- 头像 -->
+                <f:LooklessButton Command="{Binding ChangeAvatarCommand}"
+                                  Height="192"
+                                  Width="192">
+                    <Border>
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
+                </f:LooklessButton>
+
+                <!-- 名字 -->
+                <Border Height="96">
+                    <TextBlock FontSize="24"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0 16 0 0"
+                               Text="{Binding Name,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis" />
+
+                </Border>
+
+                <!-- 操作 -->
+                <UniformGrid Columns="3"
+                             Height="48">
+
+                    <ftk:ToolButton f:Language.Id="global.new"
+                                    Content="新建"
+                                    Icon="{StaticResource IC.File}"
+                                    IsFilled="True"
+                                    ShowText="True" />
+
+                    <ftk:ToolButton f:Language.Id="global.open"
+                                    Content="打开"
+                                    Icon="{StaticResource IC.Folder}"
+                                    IsFilled="True"
+                                    ShowText="True" />
+                    <ftk:ToolButton f:Language.Id="global.save"
+                                    Content="保存"
+                                    Icon="{StaticResource IC.Save}"
+                                    IsFilled="True"
+                                    ShowText="True" />
+                </UniformGrid>
+
+
+                <!-- 名字 -->
+                <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                           Height="280"
+                           ItemsSource="{Binding SubViews}"
+                           SelectedItem="{Binding SelectedSubView,Mode=TwoWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type thisSubView:HeaderedSubView}">
+                            <TextBlock Margin="16 4"
+                                       Text="{Binding Name}" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </StackPanel>
+        </Border>
+
+
+        <Border Background="{f:Brush BackgroundLevel2}"
+                Margin="16 0 0 0"
+                Padding="16"
+                Effect="{StaticResource ShadowEffect2}">
+            <ContentControl Content="{Binding SubView,Mode=OneWay}"
+                            DataContext="{Binding}" />
+        </Border>
+    </DockPanel>
+</f:ForestUserControl>

@@ -7,11 +7,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
     {
         public static readonly DocumentType[] DocumentTypes = new[]
         {
-            DocumentType.CharacterDocument,
-            DocumentType.GeographyDocument,
-            DocumentType.AbilityDocument,
-            DocumentType.ItemDocument,
-            DocumentType.OtherDocument
+            DocumentType.Character,
+            DocumentType.Geography,
+            DocumentType.Ability,
+            DocumentType.Item,
+            DocumentType.Other
         };
     }
 }

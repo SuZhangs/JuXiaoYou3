@@ -10,23 +10,23 @@ namespace Acorisoft.FutureGL.MigaStudio
     {
         public static readonly DocumentType[] DocumentTypes = new[]
         {
-            DocumentType.CharacterDocument,
-            DocumentType.AbilityDocument,
-            DocumentType.GeographyDocument,
-            DocumentType.ItemDocument,
-            DocumentType.OtherDocument,
-            DocumentType.MysteryDocument,
+            DocumentType.Character,
+            DocumentType.Ability,
+            DocumentType.Geography,
+            DocumentType.Item,
+            DocumentType.Other,
+            DocumentType.Universe,
         };
 
         public static readonly DocumentType[] DocumentGalleryTypes = new[]
         {
             DocumentType.None,
-            DocumentType.CharacterDocument,
-            DocumentType.AbilityDocument,
-            DocumentType.GeographyDocument,
-            DocumentType.ItemDocument,
-            DocumentType.OtherDocument,
-            DocumentType.MysteryDocument,
+            DocumentType.Character,
+            DocumentType.Ability,
+            DocumentType.Geography,
+            DocumentType.Item,
+            DocumentType.Other,
+            DocumentType.Universe,
         };
 
         public static string GetText(string id) => Language.GetText(id);
@@ -572,7 +572,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     CultureArea.Korean   => "Document",
                     _                    => "Document",
                 },
-                DocumentType.CharacterDocument => Language.Culture switch
+                DocumentType.Character => Language.Culture switch
                 {
                     CultureArea.Chinese  => "人设",
                     CultureArea.French   => "Character",
@@ -581,7 +581,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     CultureArea.Korean   => "Character",
                     _                    => "Character",
                 },
-                DocumentType.ItemDocument => Language.Culture switch
+                DocumentType.Item => Language.Culture switch
                 {
                     CultureArea.Chinese  => "物品",
                     CultureArea.French   => "Item",
@@ -590,7 +590,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     CultureArea.Korean   => "Item",
                     _                    => "Item",
                 },
-                DocumentType.AbilityDocument => Language.Culture switch
+                DocumentType.Ability => Language.Culture switch
                 {
                     CultureArea.Chinese  => "能力",
                     CultureArea.French   => "Ability",
@@ -599,7 +599,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     CultureArea.Korean   => "Ability",
                     _                    => "Ability",
                 },
-                DocumentType.GeographyDocument => Language.Culture switch
+                DocumentType.Geography => Language.Culture switch
                 {
                     CultureArea.Chinese  => "地图",
                     CultureArea.French   => "Geography",
@@ -608,7 +608,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     CultureArea.Korean   => "Geography",
                     _                    => "Geography",
                 },
-                DocumentType.MysteryDocument => Language.Culture switch
+                DocumentType.Universe => Language.Culture switch
                 {
                     CultureArea.Chinese  => "世界观",
                     CultureArea.French   => "Mystery",
@@ -618,7 +618,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                     _                    => "Mystery",
                 },
 
-                DocumentType.OtherDocument => Language.Culture switch
+                DocumentType.Other => Language.Culture switch
                 {
                     CultureArea.Chinese  => "其他",
                     CultureArea.French   => "Other",

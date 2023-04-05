@@ -565,12 +565,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
         {
             return kind switch
             {
-                DocumentKind.Assets    => DocumentType.ItemDocument,
-                DocumentKind.Character => DocumentType.CharacterDocument,
-                DocumentKind.Skills    => DocumentType.AbilityDocument,
-                DocumentKind.Materials => DocumentType.ItemDocument,
-                DocumentKind.Map       => DocumentType.GeographyDocument,
-                _                      => DocumentType.OtherDocument,
+                DocumentKind.Assets    => DocumentType.Item,
+                DocumentKind.Character => DocumentType.Character,
+                DocumentKind.Skills    => DocumentType.Ability,
+                DocumentKind.Materials => DocumentType.Item,
+                DocumentKind.Map       => DocumentType.Geography,
+                _                      => DocumentType.Other,
             };
         }
 

@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             _metaHashSet             =  new HashSet<string>();
             Id                       =  ID.Get();
             Version                  =  1;
-            ForType                  =  DocumentType.CharacterDocument;
+            ForType                  =  DocumentType.Character;
             Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
             MetadataList             =  new ObservableCollection<MetadataCache>();
             OpenPreviewPaneCommand   =  new RelayCommand(() => IsPreviewPaneOpen = true);

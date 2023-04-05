@@ -2,14 +2,15 @@
 {
     public enum DocumentType : int
     {
-        None              = 0,
-        Document          = 0x0100,
-        CharacterDocument = Document + 0x001,
-        AbilityDocument   = Document + 0x002,
-        GeographyDocument = Document + 0x004,
-        ItemDocument      = Document + 0x008,
-        OtherDocument     = Document + 0x010,
-        MysteryDocument   = Document + 0x020,
+        None      = 0,
+        Document  = 0x0100,
+        Character = Document + 0x001,
+        Ability   = Document + 0x002,
+        Geography = Document + 0x004,
+        Item      = Document + 0x008,
+        Other     = Document + 0x010,
+        Universe  = Document + 0x0200,
+        World     = Universe + 0x001,
         Compose,
     }
 }

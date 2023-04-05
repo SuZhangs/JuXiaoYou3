@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             OpenDocument<CharacterDocumentViewModel>(new DocumentCache
             {
                 Name           = "Test",
-                Type           = DocumentType.CharacterDocument,
+                Type           = DocumentType.Character,
                 TimeOfCreated  = DateTime.Today,
                 TimeOfModified = DateTime.Now,
                 Removable      = false,
