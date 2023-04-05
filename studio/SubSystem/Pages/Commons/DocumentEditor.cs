@@ -58,6 +58,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             _sync                  = new object();
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
+            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
+            _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
+            
             ContentBlocks          = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews       = new ObservableCollection<SubViewBase>();
             SubViews               = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
@@ -65,7 +68,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             InvisibleDataParts     = new ObservableCollection<DataPart>();
             ModuleParts            = new ObservableCollection<PartOfModule>();
             PreviewBlocks          = new ObservableCollection<PreviewBlock>();
-            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             Xaml.Get<IAutoSaveService>()

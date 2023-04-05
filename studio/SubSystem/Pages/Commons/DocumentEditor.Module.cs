@@ -6,11 +6,14 @@ using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.Miga.Doc.Parts;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
+        private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
+        private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
         
         private async Task AddModulePartImpl()
         {
@@ -303,5 +306,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             return false;
         }
+        
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand UpgradeModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfModule> ShiftUpModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PartOfModule> ShiftDownModulePartCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<PartOfModule> RemoveModulePartCommand { get; }
     }
 }
