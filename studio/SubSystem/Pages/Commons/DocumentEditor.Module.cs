@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
         private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
-        
+
         private async Task AddModulePartImpl()
         {
             //
@@ -24,17 +24,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var availableModules = TemplateEngine.TemplateCacheDB
                                                  .FindAll()
                                                  .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
-            
+
             //
             // 返回用户选择的模组
             var moduleCaches = await DialogService()
-                                         .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RouteEventArgs
-                                         {
-                                             Args = new object[]
-                                             {
-                                                 availableModules
-                                             }
-                                         });
+                .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RouteEventArgs
+                {
+                    Args = new object[]
+                    {
+                        availableModules
+                    }
+                });
 
             if (!moduleCaches.IsFinished)
             {
@@ -49,18 +49,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task RemoveModulePartImpl(PartOfModule module)
         {
+            if (module is null)
+            {
+                return;
+            }
+
             if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
-            
+
             //
             // 删除当前内容
             if (ReferenceEquals(SelectedModulePart, module))
             {
                 SelectedModulePart = null;
             }
-            
+
             //
             // 删除Metadata
             foreach (var block in module.Blocks
@@ -68,14 +73,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 RemoveMetadata(block.ExtractMetadata());
             }
-            
-            
+
+            RemoveModulePart(module);
             ResortModuleParts();
         }
 
-        private bool CanUpgrade(PartOfModule module,out ModuleTemplate template)
+        private void RemoveModulePart(PartOfModule module)
         {
-            var id                      = module.Id;
+            Document.Parts.Remove(module);
+            ModuleParts.Remove(module);
+            _DataPartTrackerOfId.Remove(module.Id);
+            _DataPartTrackerOfType.Remove(module.GetType());
+        }
+
+        private bool CanUpgrade(PartOfModule module, out ModuleTemplate template)
+        {
+            var id = module.Id;
             var maybeNewVersionTemplate = TemplateEngine.TemplateDB
                                                         .FindById(id);
 
@@ -92,17 +105,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void UpgradeModule(
             PartOfModule oldModule,
-            PartOfModule newModule, 
-            IList<ModuleBlock> added, 
+            PartOfModule newModule,
+            IList<ModuleBlock> added,
             IList<ModuleBlock> removed,
             IList<ModuleBlock> modified)
         {
-            
             //
             // 以oldModule作为基准
             var hashSet = oldModule.Blocks
                                    .ToDictionary(x => x.Id, x => x);
-            
+
             //
             //
 
@@ -120,7 +132,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 hashSet.Remove(newModule.Id);
             }
 
-            
+
             //
             // 删除Block
             foreach (var removedBlock in oldModule.Blocks.Where(x => hashSet.ContainsKey(x.Id)))
@@ -129,7 +141,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     continue;
                 }
-                
+
                 RemoveMetadata(removedBlock.Metadata);
             }
 
@@ -139,7 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     continue;
                 }
-                
+
                 AddMetadata(addedBlock.ExtractMetadata());
             }
 
@@ -153,12 +165,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     // 内容复制
                     oldBlock.CopyTo(newBlock);
                 }
-                
+
                 //
                 //
                 AddMetadata(newBlock.ExtractMetadata());
             }
-            
+
             added.Clear();
             removed.Clear();
             modified.Clear();
@@ -171,7 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var modifiedCollection = new List<ModuleBlock>(32);
             var addedCollection    = new List<ModuleBlock>(32);
             var removedCollection  = new List<ModuleBlock>(32);
-            
+
             foreach (var module in ModuleParts)
             {
                 if (CanUpgrade(module, out var template))
@@ -182,7 +194,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                           .CreateModule(template);
                     UpgradeModule(
                         module,
-                        newModule, 
+                        newModule,
                         addedCollection,
                         removedCollection,
                         modifiedCollection);
@@ -203,7 +215,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     {
                         SelectedModulePart = newModule;
                     }
-                    
+
                     upgradeCount++;
                 }
 
@@ -220,7 +232,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
             }
         }
-        
+
         private void ShiftDownModulePartImpl(PartOfModule module)
         {
             ModuleParts.ShiftDown(module, (_, _, _) => ResortModuleParts());
@@ -232,12 +244,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 ModuleParts[i].Index = i;
             }
+
             ShiftDownModulePartCommand.NotifyCanExecuteChanged();
             ShiftUpModulePartCommand.NotifyCanExecuteChanged();
             SetDirtyState();
         }
-        
-        
+
+
         private void ShiftUpModulePartImpl(PartOfModule module)
         {
             ModuleParts.ShiftUp(module, (_, _, _) => ResortModuleParts());
@@ -251,7 +264,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             var result = 0;
-            
+
             foreach (var module in modules)
             {
                 if (AddModule(module))
@@ -271,15 +284,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Successful(SubSystemString.OperationOfAddIsSuccessful);
             }
         }
-        
+
         private bool AddModule(PartOfModule module)
         {
             if (module is null)
             {
                 return false;
             }
-            
-            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
+
+            if (_DataPartTrackerOfId.TryAdd(module.Id, module) &&
+                _DataPartTrackerOfType.TryAdd(module.GetType(), module))
             {
                 module.Index = ModuleParts.Count;
                 ModuleParts.Add(module);
@@ -288,7 +302,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     var block    = module.Blocks[i];
                     var metadata = block.Metadata;
-                    
+
                     if (string.IsNullOrEmpty(metadata))
                     {
                         continue;
@@ -303,12 +317,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         AddMetadata(block.ExtractMetadata());
                     }
                 }
+
                 return true;
             }
 
             return false;
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
         /// </summary>
@@ -334,8 +349,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             }
         }
-        
-        
+
+
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<PartOfModule> ModuleParts { get; }
 
@@ -344,7 +359,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddModulePartCommand { get; }
 

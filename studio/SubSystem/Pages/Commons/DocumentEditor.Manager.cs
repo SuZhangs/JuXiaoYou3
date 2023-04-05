@@ -157,12 +157,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
 
-        private PartOfModule GetModuleById(string id)
-        {
-            return _DataPartTrackerOfId.TryGetValue(id, out var module) ? (PartOfModule)module : null;
-        }
-        
-        
         #region OnLoad
 
         private void LoadDocumentImpl()
