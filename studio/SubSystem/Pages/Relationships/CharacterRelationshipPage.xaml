@@ -4,12 +4,162 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterRelationshipViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ImageBrush x:Key="Avatar_1" ImageSource="D:\企划\橘小柚\社区\美术\罗易斯_1.png"/>
+        <ImageBrush x:Key="Avatar_2" ImageSource="D:\企划\橘小柚\社区\美术\罗易斯_2.png"/>
+    </UserControl.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="384" />
+        </Grid.ColumnDefinitions>
+
+        <f:ForestSection Header="人物关系"
+                         Margin="16 10">
+            <f:ForestSection.ToolBar>
+                <StackPanel HorizontalAlignment="Right"
+                            Margin="0 0 0 4"
+                            Orientation="Horizontal">
+                    <ftk:ToolButton Content="添加"
+                                    ShowText="True"/>
+                    <ftk:ToolButton Content="删除"
+                                    ShowText="True"/>
+                    <ftk:ToolButton Content="导入"
+                                    ShowText="True"/>
+
+                    <ftk:DropDownButton>
+                        <ftk:DropDownButton.ContextMenu>
+                            <f:ContextMenu>
+                                <f:MenuItem Header="圆形视角 "/>
+                            </f:ContextMenu>
+                        </ftk:DropDownButton.ContextMenu>
+                    </ftk:DropDownButton>
+                </StackPanel>
+            </f:ForestSection.ToolBar>
+        </f:ForestSection>
+
+        <ftk:TabControl Grid.Column="1"
+                        Margin="8 16">
+            <ftk:TabItem Header="信息"
+                         Padding="16 8">
+                <Grid Margin="0 8 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="128" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <Border BorderBrush="{f:Brush AdaptiveLevel2}"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="8">
+                        <DockPanel>
+                            <Border Background="{StaticResource Avatar_1}"
+                                    CornerRadius="64"
+                                    Margin="0 8 0 0"
+                                    Height="64"
+                                    Width="64"
+                                    VerticalAlignment="Top"/>
+
+                            <DockPanel Margin="16 8"
+                                       VerticalAlignment="Top">
+                                <TextBlock DockPanel.Dock="Top"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 0 0 8"
+                                           Text="角色名"/>
+                                <TextBlock DockPanel.Dock="Top"
+                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           FontSize="14"
+                                           Text="这是角色的简介,做一些长文字的简介然后看看文本裁切的效果。接下来是一堆废话ANJAHSDAJHDAUKDHAUIDHASU奥术大师大所多大家说的哈哈大"
+                                           TextWrapping="Wrap"
+                                           TextTrimming="CharacterEllipsis"/>
+                            </DockPanel>
+                        </DockPanel>
+                    </Border>
+
+                    <StackPanel Grid.Row="1"
+                                Margin="0 8">
+
+                        <Border BorderBrush="{f:Brush AdaptiveLevel2}"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="8">
+                            <DockPanel>
+                                <Border Background="{StaticResource Avatar_2}"
+                                    CornerRadius="64"
+                                    Margin="0 8 0 0"
+                                    Height="48"
+                                    Width="48"
+                                    VerticalAlignment="Top"/>
+
+                                <DockPanel Margin="16 8"
+                                           VerticalAlignment="Top">
+                                    <TextBlock DockPanel.Dock="Top"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 0 0 8"
+                                           Text="角色名"/>
+                                    <TextBlock DockPanel.Dock="Top"
+                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           FontSize="14"
+                                           Text="这是角色的简介,做一些长文字的简介然后看看文本裁切的效果。接下来是一堆废话ANJAHSDAJHDAUKDHAUIDHASU奥术大师大所多大家说的哈哈大"
+                                           TextWrapping="Wrap"
+                                           TextTrimming="CharacterEllipsis"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </Border>
+
+                    </StackPanel>
+                </Grid>
+            </ftk:TabItem>
+            <ftk:TabItem Header="关系"
+                         Padding="16 8">
+                <StackPanel Margin="0 16 0 0">
+                    <Border BorderBrush="{f:Brush BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Column="0"
+                                    Background="{StaticResource Avatar_1}"
+                                    CornerRadius="96"
+                                    Margin="8"
+                                    Height="64"
+                                    Width="64"/>
+
+                            <Rectangle Grid.Column="1"
+                                  Stroke="Gray"
+                                  StrokeThickness="1"
+                                  Height="2"/>
+
+                            <Border Grid.Column="2"
+                                    Background="{StaticResource Avatar_1}"
+                                    CornerRadius="96"
+                                    Margin="8"
+                                    Height="64"
+                                    Width="64"/>
+
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ftk:TabItem>
+
+            <ftk:TabItem Header="信息"
+                         Padding="16 8">
+
+            </ftk:TabItem>
+        </ftk:TabControl>
     </Grid>
 </f:ForestUserControl>

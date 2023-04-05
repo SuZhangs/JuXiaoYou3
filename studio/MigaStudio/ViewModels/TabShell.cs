@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -40,6 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 Keywords = new ObservableCollection<string>(),
                 Id = ID.Get()
             });
+            New<CharacterRelationshipViewModel>();
         }
 
         protected override void RequireStartupTabViewModel()
