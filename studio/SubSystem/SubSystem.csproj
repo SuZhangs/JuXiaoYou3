@@ -181,7 +181,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\Tools" />
+      <Folder Include="Pages\Universe" />
     </ItemGroup>
 
 </Project>

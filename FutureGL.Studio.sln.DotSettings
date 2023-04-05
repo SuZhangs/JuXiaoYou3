@@ -76,10 +76,10 @@
 namespace $NAMESPACE$&#xD;
 {&#xD;
 
-    [Connected(View = typeof($CLASS$), ViewModel = typeof($CLASS$Model))]&#xD;
-    public partial class $CLASS$ &#xD;
+    [Connected(View = typeof($CLASS$Page), ViewModel = typeof($CLASS$ViewModel))]&#xD;
+    public partial class $CLASS$Page &#xD;
     {&#xD;
-        public $CLASS$()&#xD;
+        public $CLASS$Page()&#xD;
         {&#xD;
             InitializeComponent();&#xD;
         }&#xD;
@@ -87,7 +87,7 @@ namespace $NAMESPACE$&#xD;
 }&#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1D53CE9255A65D468F1C0CC3391F75A4/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1D53CE9255A65D468F1C0CC3391F75A4/Text/@EntryValue">&lt;f:ForestUserControl x:Class="$NAMESPACE$.$CLASS$"
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1D53CE9255A65D468F1C0CC3391F75A4/Text/@EntryValue">&lt;f:ForestUserControl x:Class="$NAMESPACE$.$CLASS$Page"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -97,7 +97,7 @@ namespace $NAMESPACE$&#xD;
              xmlns:thisVM="clr-namespace:$NAMESPACE$"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:$CLASS$Model}, IsDesignTimeCreatable=True}"&gt;
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:$CLASS$ViewModel}, IsDesignTimeCreatable=True}"&gt;
     &lt;Grid&gt;
 	    $END$
     &lt;/Grid&gt;
