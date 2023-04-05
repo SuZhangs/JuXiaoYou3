@@ -24,6 +24,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected abstract void CreateSubViews(ICollection<SubViewBase> collection);
         
         /// <summary>
+        /// 当子页面创建时
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected abstract void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue);
+        
+        /// <summary>
         /// 获取或设置 <see cref="SubView"/> 属性。
         /// </summary>
         public FrameworkElement SubView

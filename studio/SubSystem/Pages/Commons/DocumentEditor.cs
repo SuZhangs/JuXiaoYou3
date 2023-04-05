@@ -175,7 +175,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         #endregion
 
-        protected abstract void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue);
 
         #region SetDirtyState
 
