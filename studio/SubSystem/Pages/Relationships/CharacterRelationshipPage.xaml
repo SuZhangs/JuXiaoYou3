@@ -11,8 +11,8 @@
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterRelationshipViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <ImageBrush x:Key="Avatar_1" ImageSource="D:\企划\橘小柚\社区\美术\罗易斯_1.png"/>
-        <ImageBrush x:Key="Avatar_2" ImageSource="D:\企划\橘小柚\社区\美术\罗易斯_2.png"/>
+        <ImageBrush x:Key="Avatar_1" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_1.png"/>
+        <ImageBrush x:Key="Avatar_2" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_2.png"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

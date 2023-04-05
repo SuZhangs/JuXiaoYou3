@@ -134,9 +134,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private void LoadDocumentImpl()
         {
             AddDataPart();
-            AddBasicPart();
             AddMetadata();
-            MaintainDetailPart();
+            MaintainDataPartManifest();
             Reorder();
         }
 
@@ -151,32 +150,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private void AddDataPart(DataPart part)
         {
-            if (part is PartOfBasic pob)
-            {
-                _basicPart = pob;
-            }
-            else if (part is PartOfModule pom)
+            if (part is PartOfModule pom)
             {
                 ModuleParts.Add(pom);
             }
-            else if (part is PartOfDetail pod)
+            
+            if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
             {
-                DetailParts.Add(pod);
-            }
-            else if (part is PartOfManifest)
-            {
-                InvisibleDataParts.Add(part);
-            }
-        }
-
-        private void AddBasicPart()
-        {
-            if (_basicPart is null)
-            {
-                _basicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
-                _document.Parts.Add(_basicPart);
-                Name   = _cache.Name;
-                Gender = Language.GetText("global.DefaultGender");
+                if (part is PartOfBasic pob)
+                {
+                    _basicPart = pob;
+                }
+                else if (part is PartOfDetail pod)
+                {
+                    DetailParts.Add(pod);
+                }
+                else if (part is PartOfManifest)
+                {
+                    InvisibleDataParts.Add(part);
+                }
             }
         }
 
@@ -197,12 +189,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
-        private void MaintainDetailPart()
+        private void MaintainDataPartManifest()
         {
+            //
+            // 检查当前打开的文档是否缺失指定的DataPart
+
+            if (_basicPart is null)
+            {
+                _basicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
+                _document.Parts.Add(_basicPart);
+                Name   = _cache.Name;
+                Gender = Language.GetText("global.DefaultGender");
+            }
+            
+            IsDataPartExistence(_document);
         }
+
+        protected abstract void IsDataPartExistence(Document document);
 
         private void Reorder()
         {
+            // TODO:
         }
 
         #endregion

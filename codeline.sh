@@ -1,2 +1,2 @@
-cloc 5314755 --report-file 5314755.txt
+cloc 812bbc4 --report-file 812bbc4.txt
 read -n 1

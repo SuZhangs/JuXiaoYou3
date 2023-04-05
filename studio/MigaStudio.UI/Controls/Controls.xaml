@@ -65,6 +65,8 @@
                                   Margin="0 0 14 0" 
                                   Height="{TemplateBinding IconSize}" 
                                   Width="{TemplateBinding IconSize}" 
+                                  Stroke="{f:ForegroundBrush}"
+                                  StrokeThickness="1"
                                   Stretch="Uniform" 
                                   Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6" 
                                   HorizontalAlignment="Center"
@@ -80,19 +82,13 @@
                         </Trigger>
                         <Trigger Property="IsFilled" Value="True">
                             <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
-                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
                             <Setter Property="StrokeThickness" Value="0" TargetName="ControlIcon" />
-                            <Setter Property="StrokeThickness" Value="0" TargetName="ChevronIcon" />
                             <Setter Property="Stroke" Value="{x:Null}" TargetName="ControlIcon" />
-                            <Setter Property="Stroke" Value="{x:Null}" TargetName="ChevronIcon" />
                         </Trigger>
                         <Trigger Property="IsFilled" Value="False">
                             <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
-                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="ChevronIcon" />
                             <Setter Property="StrokeThickness" Value="1" TargetName="ControlIcon" />
-                            <Setter Property="StrokeThickness" Value="1" TargetName="ChevronIcon" />
                             <Setter Property="Fill" Value="{x:Null}" TargetName="ControlIcon" />
-                            <Setter Property="Fill" Value="{x:Null}" TargetName="ChevronIcon" />
                         </Trigger>
 
                         <MultiTrigger>
@@ -113,7 +109,6 @@
                             <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
                             <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
                             <Setter TargetName="ControlIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
-                            <Setter TargetName="ChevronIcon" Value="{f:Brush ForegroundDisabled}" Property="Fill" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

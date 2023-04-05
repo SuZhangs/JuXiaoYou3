@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, ItemDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
-            Xaml.InstallView<GeographyEditorPage, GeographyDocumentViewModel>();
+            Xaml.InstallView<DocumentEditorPage, GeographyDocumentViewModel>();
 
             Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 

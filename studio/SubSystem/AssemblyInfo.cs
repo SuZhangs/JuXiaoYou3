@@ -13,6 +13,8 @@ global using Acorisoft.FutureGL.MigaStudio.Models.DataParts;
 global using Acorisoft.FutureGL.MigaStudio.Models.Modules;
 global using Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels;
 global using Acorisoft.FutureGL.MigaStudio.ViewModels;
+global using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+global using Acorisoft.FutureGL.MigaStudio.Models;
 
 global using Acorisoft.FutureGL.MigaUtils;
 global using Acorisoft.FutureGL.MigaUtils.Collections;

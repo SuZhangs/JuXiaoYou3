@@ -70,7 +70,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
         
         private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
-        
+        private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
+
         [NullCheck(UniTestLifetime.Constructor)] private readonly object                                 _sync;
         [NullCheck(UniTestLifetime.Constructor)] private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
 

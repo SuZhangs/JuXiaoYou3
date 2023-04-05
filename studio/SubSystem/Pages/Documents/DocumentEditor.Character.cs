@@ -22,5 +22,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             document.Parts.Add(new PartOfPlaylist{ DataBags = new Dictionary<string, string>()});
             document.Parts.Add(new PartOfRel());
         }
+
+        protected override void IsDataPartExistence(Document document)
+        {
+            
+        }
     }
 }

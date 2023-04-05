@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     partial class DocumentEditorVMBase
     {
-        private static IEnumerable<object> CreateDetailPart()
+        protected virtual IEnumerable<object> CreateDetailPartList()
         {
             return new object[]
             {
@@ -106,8 +106,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             var hash = DetailParts.Select(x => x.GetType())
                                   .ToHashSet();
 
-            var iterator = CreateDetailPart().Where(x => !hash.Contains(x.GetType()))
-                                             .ToArray();
+            var iterator = CreateDetailPartList().Where(x => !hash.Contains(x.GetType()))
+                                                 .ToArray();
 
             if (iterator.Length == 0)
             {
@@ -141,8 +141,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 DetailParts[i].Index = i;
             }
+
             SetDirtyState();
-            
+
             RemoveDetailPartCommand.NotifyCanExecuteChanged();
             ShiftUpDetailPartCommand.NotifyCanExecuteChanged();
             ShiftDownDetailPartCommand.NotifyCanExecuteChanged();
@@ -166,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 SelectedDetailPart           = null;
                 SelectedDetailPartInDocument = null;
             }
-            
+
             DetailParts.Remove(part);
             ResortDetailPart();
             SetDirtyState();
