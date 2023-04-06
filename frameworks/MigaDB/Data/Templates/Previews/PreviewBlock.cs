@@ -22,6 +22,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
     public sealed class RarityPreviewBlock : PreviewBlock
     {
+        public double Scale { get; init; }
         public string ValueSourceID { get; set; }
     }
 

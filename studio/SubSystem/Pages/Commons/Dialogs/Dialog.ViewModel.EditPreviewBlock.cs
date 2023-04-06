@@ -77,6 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 MetadataKind.Switch     => CreateSwitch(blockCollection),
                 MetadataKind.Color      => CreateColor(blockCollection),
                 MetadataKind.Likability => CreateLikability(blockCollection),
+                MetadataKind.Rate       => CreateRate(blockCollection),
                 _                       => throw new InvalidOperationException(),
             };
         }
@@ -142,9 +143,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
+                var scale = 1;
+                if (x is INumberBlock number)
+                {
+                    scale = 100 / number.Maximum;
+                }
+
                 return new PreviewProgressData
                 {
                     Name          = x.Name,
+                    Scale         = scale,
                     ValueSourceID = useID ? x.Id : x.Metadata,
                     IsMetadata    = !useID
                 };
@@ -156,9 +164,40 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
+                var scale = 1;
+
+                if (x is INumberBlock number)
+                {
+                    scale = 100 / number.Maximum;
+                }
+
                 return new PreviewLikabilityData
                 {
                     Name          = x.Name,
+                    Scale         = scale,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
+            });
+        }
+        
+        
+        private static IEnumerable<IPreviewBlockData> CreateRate(IEnumerable<ModuleBlock> blockCollection)
+        {
+            return blockCollection.Select(x =>
+            {
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                var scale = 1;
+
+                if (x is INumberBlock number)
+                {
+                    scale = 100 / number.Maximum;
+                }
+
+                return new PreviewRateData
+                {
+                    Name          = x.Name,
+                    Scale         = scale,
                     ValueSourceID = useID ? x.Id : x.Metadata,
                     IsMetadata    = !useID
                 };

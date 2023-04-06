@@ -10,6 +10,7 @@
         Switch,
         Progress,
         Likability,
+        Rate,
         Rarity,
         RadarChart,
         HistogramChart,

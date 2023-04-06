@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaStudio.Controls.Models;
@@ -20,6 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 PreviewProgressData ppd => new PreviewBlockProgressDataUI(ppd),
                 PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
                 PreviewLikabilityData pld => new PreviewBlockLikabilityDataUI(pld),
+                PreviewColorData pld => new PreviewBlockColorDataUI(pld),
                 _ => throw new InvalidOperationException("没有这种数据")
             };
         }
@@ -118,16 +120,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockRateDataUI(IPreviewBlockData value) : base(value)
+        public PreviewBlockRateDataUI(PreviewRateData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
+            Scale    = value.Scale;
         }
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             MetadataValue = GetNumberValue(metadataTracker, blockTracker);
-            Value         = MetadataValue / 5;
+            Value         = (int)(MetadataValue * Scale);
         }
+        
+        public double Scale { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="MetadataValue"/> 属性。
@@ -154,16 +159,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockLikabilityDataUI(IPreviewBlockData value) : base(value)
+        public PreviewBlockLikabilityDataUI(PreviewLikabilityData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
+            Scale    = value.Scale;
         }
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             MetadataValue = GetNumberValue(metadataTracker, blockTracker);
-            Value         = MetadataValue / 5;
+            Value         = (int)(MetadataValue * Scale);
         }
+        public double Scale { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="MetadataValue"/> 属性。
@@ -227,18 +234,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockProgressDataUI(IPreviewBlockData value) : base(value)
+        public PreviewBlockProgressDataUI(PreviewProgressData value) : base(value)
         {
-            Name          = value.Name;
-            Metadata      = value.ValueSourceID;
+            Name     = value.Name;
+            Metadata = value.ValueSourceID;
+            Scale    = value.Scale;
         }
 
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             MetadataValue = GetNumberValue(metadataTracker, blockTracker);
-            Value         = MetadataValue > 100 ? MetadataValue / 100 : MetadataValue;
+            Value         = (int)(MetadataValue * Scale);
         }
-
+        public double Scale { get; }
         /// <summary>
         /// 获取或设置 <see cref="MetadataValue"/> 属性。
         /// </summary>
@@ -252,6 +260,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         /// 获取或设置 <see cref="Value"/> 属性。
         /// </summary>
         public int Value
+        {
+            get => _value;
+            set => SetValue(ref _value, value);
+        }
+    }
+    
+    public sealed class PreviewBlockColorDataUI : PreviewBlockDataUI
+    {
+        private Color _value;
+        
+        public PreviewBlockColorDataUI(IPreviewBlockData value) : base(value)
+        {
+            Name     = value.Name;
+            Metadata = value.ValueSourceID;
+        }
+
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            Value = Xaml.FromHex(GetStringValue(metadataTracker, blockTracker));
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Value"/> 属性。
+        /// </summary>
+        public Color Value
         {
             get => _value;
             set => SetValue(ref _value, value);

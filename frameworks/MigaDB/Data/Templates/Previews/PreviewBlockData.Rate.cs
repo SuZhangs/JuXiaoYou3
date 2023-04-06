@@ -6,8 +6,7 @@
         /// 
         /// </summary>
         public string Name { get; init; }
-        
-        
+        public double Scale { get; init; }
         public string ValueSourceID { get; init; }
         public bool IsMetadata { get; init; }
     }
@@ -18,8 +17,7 @@
         /// 
         /// </summary>
         public string Name { get; init; }
-        
-        
+        public double Scale { get; init; }
         public string ValueSourceID { get; init; }
         public bool IsMetadata { get; init; }
     }

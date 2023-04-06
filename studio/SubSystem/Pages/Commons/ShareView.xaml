@@ -45,68 +45,80 @@
                                     <TextBlock Height="32"
                                                Text="{Binding}"
                                                Padding="0 6"
-                                               VerticalAlignment="Center"/>
+                                               VerticalAlignment="Center" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
 
                         <ItemsControl Grid.Column="1"
                                       HorizontalAlignment="Right"
-                                      ItemsSource="{Binding DataLists,Mode=OneWay}"/>
+                                      ItemsSource="{Binding DataLists,Mode=OneWay}" />
 
                         <Border Background="Transparent"
-                                Grid.ColumnSpan="2"/>
+                                Grid.ColumnSpan="2" />
                     </Grid>
                 </DockPanel>
             </Border>
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockTextDataUI}">
             <TextBlock Text="{Binding Value,Mode=OneWay}"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
         </DataTemplate>
-        
-        
+
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockProgressDataUI}">
-            <ProgressBar Value="{Binding Value,Mode=OneWay}"
+            <ProgressBar Height="14"
+                         Value="{Binding Value,Mode=OneWay}"
+                         Margin="0 9"
                          Minimum="0"
-                         Maximum="100"/>
+                         Maximum="100"
+                         MinWidth="96"
+                         VerticalAlignment="Center"/>
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockSwitchDataUI}">
             <f:ToggleSwitch Height="32"
                             IsChecked="{Binding Value,Mode=OneWay}"
-                            VerticalAlignment="Center"/>
+                            VerticalAlignment="Center" />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockRateDataUI}">
             <studio:RatingControl Maximum="5"
-                                  Value="{Binding Value,Mode=OneWay}"/>
+                                  Value="{Binding Value,Mode=OneWay}" />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockLikabilityDataUI}">
             <studio:FavoriteControl Maximum="5"
-                                    Value="{Binding Value,Mode=OneWay}"/>
+                                    Value="{Binding Value,Mode=OneWay}" />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockStarDataUI}">
             <studio:SwitchOnControl DockPanel.Dock="Right"
                                     Foreground="#FFC107"
                                     Icon="{StaticResource FeatherIcon.Star}"
                                     IsChecked="{Binding Value,Mode=OneWay}" />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockHeartDataUI}">
             <studio:SwitchOnControl DockPanel.Dock="Right"
                                     Foreground="#FF6699"
                                     Icon="{StaticResource FeatherIcon.Heart}"
                                     IsChecked="{Binding Value,Mode=OneWay}" />
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockDegreeDataUI}">
             <studio:DegreeControl DockPanel.Dock="Right"
                                   Maximum="5"
                                   Value="{Binding Value,Mode=OneWay}" />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockColorDataUI}">
+            <Border DockPanel.Dock="Right"
+                    Background="{Binding Value}"
+                    CornerRadius="3"
+                    Height="32"
+                    Width="32" />
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
@@ -116,7 +128,7 @@
                             Command="{Binding AddPreviewBlockCommand}"
                             Icon="{StaticResource FeatherIcon.Plus}"
                             ShowText="True" />
-            
+
             <ftk:ToolButton Content="删除"
                             Icon="{StaticResource FeatherIcon.Trash}"
                             ShowText="True" />
@@ -139,13 +151,15 @@
             </ftk:DropDownButton>
         </WrapPanel>
 
-        <ItemsControl Margin="0 16 0 0"
-                      ItemsSource="{Binding PreviewBlocks,Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer Margin="0 16 0 0"
+                      Padding="8 0">
+            <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>
