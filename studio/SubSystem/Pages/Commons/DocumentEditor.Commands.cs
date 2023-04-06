@@ -11,6 +11,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -33,6 +34,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public void Save()
         {
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+            var mmp = db.Get<ModuleManifestProperty>();
+            mmp.SetPreviewManifest(Type, PreviewPart);
+            db.Set(mmp);
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);

@@ -53,6 +53,9 @@
                         <ItemsControl Grid.Column="1"
                                       HorizontalAlignment="Right"
                                       ItemsSource="{Binding DataLists,Mode=OneWay}"/>
+
+                        <Border Background="Transparent"
+                                Grid.ColumnSpan="2"/>
                     </Grid>
                 </DockPanel>
             </Border>
@@ -136,7 +139,8 @@
             </ftk:DropDownButton>
         </WrapPanel>
 
-        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}">
+        <ItemsControl Margin="0 16 0 0"
+                      ItemsSource="{Binding PreviewBlocks,Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>

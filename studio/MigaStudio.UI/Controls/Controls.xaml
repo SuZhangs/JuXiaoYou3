@@ -332,10 +332,10 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel1}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="{f:Brush AdaptiveLevel3}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
