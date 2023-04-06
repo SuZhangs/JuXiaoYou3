@@ -9,9 +9,43 @@
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Previews"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorBase}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type thisModel:GroupingPreviewBlockUI}">
+            <Border Background="{f:Brush BackgroundLevel1}"
+                    CornerRadius="6"
+                    Effect="{StaticResource MenuItem.ShadowEffect}"
+                    Height="256"
+                    Margin="4"
+                    Width="192">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top"
+                            Background="{f:Brush BackgroundLevel3}"
+                            Padding="16 8">
+                        <TextBlock FontSize="15"
+                                   FontWeight="Bold"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </Border>
+
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl Grid.Column="0"
+                                      ItemsSource="{Binding NameLists,Mode=OneWay}"/>
+
+                        <ItemsControl Grid.Column="1"
+                                      ItemsSource="{Binding DataLists,Mode=OneWay}"/>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
@@ -41,6 +75,12 @@
             </ftk:DropDownButton>
         </WrapPanel>
 
-        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}"/>
+        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </DockPanel>
 </UserControl>

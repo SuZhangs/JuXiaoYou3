@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -8,6 +9,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public EditChartPreviewBlockView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel<ModuleSelectorViewModel>().TargetElement = Collection;
+            base.OnLoaded(sender, e);
         }
     }
 }
