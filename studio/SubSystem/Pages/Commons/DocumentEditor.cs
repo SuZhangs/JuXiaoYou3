@@ -102,6 +102,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             AddPreviewBlockCommand              = AsyncCommand(AddPreviewBlockImpl);
             RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl, HasItem);
             RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
+            EditPreviewBlockCommand             = AsyncCommand<PreviewBlockUI>(EditPreviewBlockImpl, HasItem);
+            ShiftUpPreviewBlockCommand          = Command<PreviewBlockUI>(ShiftUpPreviewBlockImpl, x => NotFirstItem(PreviewBlocks, x));
+            ShiftDownPreviewBlockCommand        = Command<PreviewBlockUI>(ShiftDownPreviewBlockImpl, x => NotLastItem(PreviewBlocks, x));
             ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);
             ExportPreviewBlockAsPictureCommand  = AsyncCommand(ExportPreviewBlockAsPictureImpl);
             ExportPreviewBlockAsMarkdownCommand = AsyncCommand(ExportPreviewBlockAsMarkdownImpl);

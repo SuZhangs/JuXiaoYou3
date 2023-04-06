@@ -1,35 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing.Design;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Printing;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Data.Keywords;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Models.Previews;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
-using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -45,9 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             var b = r.Value;
-            var db = Xaml.Get<IDatabaseManager>()
-                         .Database
-                         .CurrentValue;
 
             if (!await ContinueNamingImpl(b))
             {
@@ -63,10 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             PreviewPart.Blocks.Add(b);
             PreviewBlocks.Add(PreviewBlockUI.GetUI(b));
-
-            var mmp = db.Get<ModuleManifestProperty>();
-            mmp.SetPreviewManifest(Type, PreviewPart);
-            db.Set(mmp);
+            SavePreviewPart();
             RefreshPreviewBlockImp();
         }
 
@@ -129,6 +100,57 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return false;
         }
 
+        private void SavePreviewPart()
+        {
+            
+            
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+            var mmp = db.Get<ModuleManifestProperty>();
+            mmp.SetPreviewManifest(Type, PreviewPart);
+            db.Set(mmp);
+        }
+
+        private async Task EditPreviewBlockImpl(PreviewBlockUI block)
+        {
+            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            block.Name = r.Value;
+            SavePreviewPart();
+        }
+        
+        private void ShiftUpPreviewBlockImpl(PreviewBlockUI block)
+        {
+            
+            PreviewBlocks.ShiftUp(block);
+            PreviewPart.Blocks.ShiftUp(block.BaseSource);
+            reSortPreviewBlocksImpl();
+        }
+        
+        private void ShiftDownPreviewBlockImpl(PreviewBlockUI block)
+        {
+            PreviewBlocks.ShiftDown(block);
+            PreviewPart.Blocks.ShiftDown(block.BaseSource);
+            reSortPreviewBlocksImpl();
+        }
+        
+        private void reSortPreviewBlocksImpl()
+        {
+            for (var i = 0; i < PreviewBlocks.Count; i++)
+            {
+                PreviewBlocks[i].BaseSource
+                                .Index = i;
+                PreviewPart.Blocks[i].Index = i;
+            }
+            SavePreviewPart();
+        }
+        
         private async Task ExportPreviewBlockAsPictureImpl()
         {
         }
@@ -143,6 +165,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task RemovePreviewBlockImpl(PreviewBlockUI block)
         {
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            PreviewBlocks.Remove(block);
+            PreviewPart.Blocks.Remove(block.BaseSource);
+            SavePreviewPart();
         }
 
         private void RefreshPreviewBlockImp()
@@ -179,6 +209,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<PreviewBlockUI> EditPreviewBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PreviewBlockUI> ShiftUpPreviewBlockCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<PreviewBlockUI> ShiftDownPreviewBlockCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<PreviewBlockUI> RemovePreviewBlockCommand { get; }

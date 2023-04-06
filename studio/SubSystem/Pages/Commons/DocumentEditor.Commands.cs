@@ -34,12 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public void Save()
         {
-            var db = Xaml.Get<IDatabaseManager>()
-                         .Database
-                         .CurrentValue;
-            var mmp = db.Get<ModuleManifestProperty>();
-            mmp.SetPreviewManifest(Type, PreviewPart);
-            db.Set(mmp);
+            SavePreviewPart();
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);

@@ -45,7 +45,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
         public abstract void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker);
 
-        public string Name { get; protected init; }
+        private string _name;
+
+        /// <summary>
+        /// 获取或设置 <see cref="Name"/> 属性。
+        /// </summary>
+        public string Name
+        {
+            get => _name;
+            set => SetValue(ref _name, value);
+        }
         public PreviewBlock BaseSource { get; protected init; }
     }
 
