@@ -14,22 +14,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public static Task<Op<object>> Edit(GroupingPreviewBlock hb, DataPartCollection dataPartCollection)
         {
-
             var blockCollection = new List<ModuleBlock>(64);
             var blocks = dataPartCollection.Where(x => x is PartOfModule)
-                                            .Cast<PartOfModule>()
-                                            .Select(x => x.Blocks)
-                                            .SelectMany(x => x)
-                                            .ToArray();
-            
+                                           .Cast<PartOfModule>()
+                                           .Select(x => x.Blocks)
+                                           .SelectMany(x => x)
+                                           .ToArray();
+
             var simpleBlock = blocks.Where(x => x is not GroupBlock)
                                     .Where(x => x.ExtractType == hb.Type);
-            
+
             var blockInGroup = blocks.Where(x => x is GroupBlock)
                                      .Cast<GroupBlock>()
                                      .SelectMany(x => x.Items)
                                      .Where(x => x.ExtractType == hb.Type);
-                                     
+
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
@@ -70,97 +69,128 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             return Block.Type switch
             {
-                MetadataKind.Text     => CreateText(blockCollection),
-                MetadataKind.Degree   => CreateDegree(blockCollection),
-                MetadataKind.Star     => CreateStar(blockCollection),
-                MetadataKind.Heart    => CreateHeart(blockCollection),
-                MetadataKind.Progress => CreateProgress(blockCollection),
-                MetadataKind.Switch   => CreateSwitch(blockCollection),
-                MetadataKind.Color    => CreateColor(blockCollection),
+                MetadataKind.Text       => CreateText(blockCollection),
+                MetadataKind.Degree     => CreateDegree(blockCollection),
+                MetadataKind.Star       => CreateStar(blockCollection),
+                MetadataKind.Heart      => CreateHeart(blockCollection),
+                MetadataKind.Progress   => CreateProgress(blockCollection),
+                MetadataKind.Switch     => CreateSwitch(blockCollection),
+                MetadataKind.Color      => CreateColor(blockCollection),
                 MetadataKind.Likability => CreateLikability(blockCollection),
-                _                     => throw new InvalidOperationException(),
+                _                       => throw new InvalidOperationException(),
             };
         }
 
         private static IEnumerable<IPreviewBlockData> CreateText(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewTextData
+            return blockCollection.Select(x =>
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewTextData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
         private static IEnumerable<IPreviewBlockData> CreateDegree(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewDegreeData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewDegreeData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
         private static IEnumerable<IPreviewBlockData> CreateStar(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewStarData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewStarData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
         private static IEnumerable<IPreviewBlockData> CreateHeart(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewHeartData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewHeartData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
         private static IEnumerable<IPreviewBlockData> CreateProgress(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewProgressData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewProgressData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
-        
+
         private static IEnumerable<IPreviewBlockData> CreateLikability(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewLikabilityData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewLikabilityData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
         private static IEnumerable<IPreviewBlockData> CreateSwitch(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewSwitchData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewSwitchData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
-        
-        
+
 
         private static IEnumerable<IPreviewBlockData> CreateColor(IEnumerable<ModuleBlock> blockCollection)
         {
-            return blockCollection.Select(x => new PreviewColorData
+            return blockCollection.Select(x =>
             {
-                Name          = x.Name,
-                ValueSourceID = x.Metadata,
-                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
+                var useID = string.IsNullOrEmpty(x.Metadata);
+                return new PreviewColorData
+                {
+                    Name          = x.Name,
+                    ValueSourceID = useID ? x.Id : x.Metadata,
+                    IsMetadata    = !useID
+                };
             });
         }
 
