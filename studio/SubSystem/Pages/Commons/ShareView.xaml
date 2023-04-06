@@ -15,6 +15,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorBase}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        
         <DataTemplate DataType="{x:Type thisModel:GroupingPreviewBlockUI}">
             <Border Background="{f:Brush BackgroundLevel1}"
                     CornerRadius="6"
@@ -22,6 +23,14 @@
                     Height="256"
                     Margin="4"
                     Width="256">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="编辑"/>
+                        <f:MenuItem Header="上移"/>
+                        <f:MenuItem Header="下移"/>
+                        <f:MenuItem Header="删除"/>
+                    </f:ContextMenu>
+                </Border.ContextMenu>
                 <DockPanel>
                     <Border DockPanel.Dock="Top"
                             Background="{f:Brush BackgroundLevel3}"
@@ -69,7 +78,15 @@
                     Effect="{StaticResource MenuItem.ShadowEffect}"
                     Height="256"
                     Margin="4"
-                    Width="240">
+                    Width="256">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="编辑"/>
+                        <f:MenuItem Header="上移"/>
+                        <f:MenuItem Header="下移"/>
+                        <f:MenuItem Header="删除"/>
+                    </f:ContextMenu>
+                </Border.ContextMenu>
                 <DockPanel>
                     <Border DockPanel.Dock="Top"
                             Background="{f:Brush BackgroundLevel3}"
