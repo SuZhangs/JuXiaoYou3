@@ -13,7 +13,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            ViewModel<ModuleSelectorViewModel>().TargetElement = Collection;
             base.OnLoaded(sender, e);
         }
     }
