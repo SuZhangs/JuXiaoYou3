@@ -74,6 +74,7 @@
     /// </summary>
     public class DegreeBlock : ModuleBlock, IDegreeBlock, IMetadataNumericSource
     {
+        public override string GetLanguageId() => "__Degree";
         public int GetValue() => Value;
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

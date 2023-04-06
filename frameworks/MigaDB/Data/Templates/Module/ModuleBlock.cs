@@ -89,7 +89,7 @@
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
-    public abstract class ModuleBlock : StorageObject
+    public abstract class ModuleBlock : StorageObject, IGlobalizationTextSupport
     {
         public bool CompareTemplate(ModuleBlock block)
         {
@@ -104,6 +104,7 @@
 
         protected abstract bool CompareTemplateOverride(ModuleBlock block);
         protected abstract bool CompareValueOverride(ModuleBlock block);
+        public abstract string GetLanguageId();
 
         protected static bool IsEmptyOrEquals(string AValue, string BValue)
         {

@@ -1,0 +1,137 @@
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+{
+    public class EditStringPreviewBlockViewModel : ExplicitDialogVM
+    {
+        public class FakeModuleBlock : ModuleBlock, IMetadataTextSource
+        {
+            protected override bool CompareTemplateOverride(ModuleBlock block)
+            {
+                return true;
+            }
+
+            protected override bool CompareValueOverride(ModuleBlock block)
+            {
+                return true;
+            }
+
+            public override string GetLanguageId()
+            {
+                return Name;
+            }
+
+            public override Metadata ExtractMetadata()
+            {
+                return new Metadata
+                {
+                    Name       = Name,
+                    Value      = string.Empty,
+                    Parameters = string.Empty,
+                    Type       = MetadataKind.Text
+                };
+            }
+
+            public override bool CopyTo(ModuleBlock newBlock)
+            {
+                return true;
+            }
+
+            public override void ClearValue()
+            {
+                
+            }
+
+            public override MetadataKind? ExtractType => MetadataKind.Text;
+
+            public string GetValue() => string.Empty;
+        }
+
+
+        public static Task<Op<object>> Edit(StringPreviewBlock hb, DataPartCollection dataPartCollection)
+        {
+            var blockCollection = new List<ModuleBlock>(64);
+            var blocks = dataPartCollection.Where(x => x is PartOfModule)
+                                           .Cast<PartOfModule>()
+                                           .Select(x => x.Blocks)
+                                           .SelectMany(x => x)
+                                           .ToArray();
+
+            var simpleBlock = blocks.Where(x => x is not GroupBlock)
+                                    .Where(x => x.ExtractType == MetadataKind.Text);
+
+            var blockInGroup = blocks.Where(x => x is GroupBlock)
+                                     .Cast<GroupBlock>()
+                                     .SelectMany(x => x.Items)
+                                     .Where(x => x.ExtractType == MetadataKind.Text);
+
+            var fakeBlocks = dataPartCollection.OfType<PartOfBasic>()
+                                               .SelectMany(x => x.Buckets)
+                                               .Select(x => new FakeModuleBlock
+                                               {
+                                                   Id       = x.Key,
+                                                   Metadata = x.Key,
+                                                   Name     = Language.GetText(x.Key)
+                                               });
+            blockCollection.AddRange(fakeBlocks);
+
+            blockCollection.AddRange(blockInGroup);
+            blockCollection.AddRange(simpleBlock);
+            return Xaml.Get<IDialogService>()
+                       .Dialog(new EditPreviewBlockViewModel(), new RouteEventArgs
+                       {
+                           Args = new object[]
+                           {
+                               hb,
+                               blockCollection,
+                           }
+                       });
+        }
+
+        protected override bool IsCompleted() => true;
+
+        protected override void OnStart(RouteEventArgs parameter)
+        {
+            Block = parameter.Args[0] as StringPreviewBlock;
+            var array = parameter.Args[1] as IEnumerable<ModuleBlock>;
+            Templates.AddRange(array, true);
+        }
+
+        protected override void Finish()
+        {
+            if (SelectedBlock is null)
+            {
+                return;
+            }
+
+            var r = SelectedBlock;
+            
+            
+            var spb = Block;
+            spb.ValueSourceID = r.Metadata;
+        }
+
+        protected override string Failed()
+        {
+            return string.Empty;
+        }
+
+        private ModuleBlock _selectedBlock;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedBlock"/> 属性。
+        /// </summary>
+        public ModuleBlock SelectedBlock
+        {
+            get => _selectedBlock;
+            set => SetValue(ref _selectedBlock, value);
+        }
+
+        public StringPreviewBlock Block { get; private set; }
+        public ObservableCollection<ModuleBlock> Templates { get; } = new ObservableCollection<ModuleBlock>();
+    }
+}

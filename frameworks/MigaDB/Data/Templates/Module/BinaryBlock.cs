@@ -46,6 +46,9 @@
     public class BinaryBlock : ModuleBlock, IBinaryBlock, IHeaderlessBlock, IMetadataBooleanSource
     {
         public bool GetValue() => Value;
+
+        public override string GetLanguageId() => "__Binary";
+
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var bb = (BinaryBlock)block;

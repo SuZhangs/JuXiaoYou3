@@ -18,10 +18,17 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
         public bool IsMetadata { get; init; }
         public MetadataKind Type { get; init; }
+        
+        public sealed override string ToString()
+        {
+            return Name;
+        }
+
     }
 
     public sealed class RarityPreviewBlock : PreviewBlock
     {
+
         public double Scale { get; init; }
         public string ValueSourceID { get; set; }
     }

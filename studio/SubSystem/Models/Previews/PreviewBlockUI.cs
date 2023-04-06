@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Models;
+using Acorisoft.FutureGL.MigaUtils.Foundation;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 {
@@ -34,7 +35,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 {
                     Source = rpb2
                 },
-                _ => null
+                StringPreviewBlock sp => new StringPreviewBlockUI
+                {
+                    Source = sp
+                },
+                _                     => null
             };
         }
 
@@ -92,6 +97,39 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
         public ObservableCollection<string> NameLists { get; private init; }
         public ObservableCollection<PreviewBlockDataUI> DataLists { get; private init; }
+    }
+    
+    public class StringPreviewBlockUI : PreviewBlockUI
+    {
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            Value = metadataTracker(ValueSource)?.Value
+                                                .SubString(200);
+        }
+
+        public StringPreviewBlock Source
+        {
+            get => (StringPreviewBlock)BaseSource;
+            init
+            {
+                BaseSource  = value;
+                Name        = value.Name;
+                ValueSource = value.ValueSourceID;
+            }
+        }
+
+        private string _value;
+
+        public string ValueSource { get; init; }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="Value"/> 属性。
+        /// </summary>
+        public string Value
+        {
+            get => _value;
+            set => SetValue(ref _value, value);
+        }
     }
 
     public class HistogramPreviewBlockUI : PreviewBlockUI

@@ -44,16 +44,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var b  = r.Value;
+            var b = r.Value;
             var db = Xaml.Get<IDatabaseManager>()
                          .Database
                          .CurrentValue;
-            
+
             if (!await ContinueNamingImpl(b))
             {
                 return;
             }
-            
+
             if (!await ContinueEditImpl(b))
             {
                 return;
@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 return false;
             }
-            
+
             var r1 = await StringViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r1.IsFinished)
@@ -94,9 +94,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 var r1 = await EditPreviewBlockViewModel.Edit(hb, Document.Parts);
                 return r1.IsFinished;
-
             }
-            
+
             if (b is RarityPreviewBlock rarity)
             {
                 var r1 = await SubSystem.OptionSelection<ModuleBlock>(
@@ -110,12 +109,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                             .Where(x => !string.IsNullOrEmpty(x.Metadata) && x is not GroupBlock)
                             .Where(x => x is NumberBlock or SingleLineBlock or RateBlock));
 
-                rarity.Name     = r1.Value.Name;
+                rarity.Name          = r1.Value.Name;
                 rarity.ValueSourceID = r1.Value.Metadata;
                 return r1.IsFinished;
             }
-            
-            if(b is ChartPreviewBlock rp)
+
+            if (b is StringPreviewBlock sp)
+            {
+                var r1 = await EditStringPreviewBlockViewModel.Edit(sp, Document.Parts);
+                return r1.IsFinished;
+            }
+
+            if (b is ChartPreviewBlock rp)
             {
                 var r1 = await EditChartPreviewBlockViewModel.Edit(rp, Document.Parts);
                 return r1.IsFinished;
@@ -171,7 +176,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ExportPreviewBlockAsMarkdownCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<PreviewBlockUI> EditPreviewBlockCommand { get; }
 

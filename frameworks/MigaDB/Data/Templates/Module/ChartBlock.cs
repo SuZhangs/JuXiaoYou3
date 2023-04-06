@@ -139,6 +139,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class RadarBlock : ChartBlock
     {
+        public override string GetLanguageId() => "__Radar";
         public override Metadata ExtractMetadata()
         {
             return new Metadata
@@ -159,6 +160,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class HistogramBlock : ChartBlock
     {
+        public override string GetLanguageId() => "__Histogram";
         public override Metadata ExtractMetadata()
         {
             return new Metadata

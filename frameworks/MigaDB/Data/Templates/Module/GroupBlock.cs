@@ -19,6 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 
     public class GroupBlock : ModuleBlock, IGroupBlock
     {
+        public override string GetLanguageId() => "__Group";
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             if (block is not GroupBlock gb)

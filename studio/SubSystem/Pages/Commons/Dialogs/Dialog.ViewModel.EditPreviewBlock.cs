@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using Acorisoft.Miga.Doc.Parts;
 using TagLib.Riff;
 using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
@@ -12,6 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class EditPreviewBlockViewModel : ExplicitDialogVM
     {
+        
         public static Task<Op<object>> Edit(GroupingPreviewBlock hb, DataPartCollection dataPartCollection)
         {
             var blockCollection = new List<ModuleBlock>(64);
@@ -41,6 +43,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                            }
                        });
         }
+        
+        
 
         protected override bool IsCompleted() => true;
 
@@ -248,7 +252,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             get => _targetElement;
             set => SetValue(ref _targetElement, value);
         }
-
+        
         public GroupingPreviewBlock Block { get; private set; }
         public ObservableCollection<ModuleBlock> Templates { get; } = new ObservableCollection<ModuleBlock>();
     }

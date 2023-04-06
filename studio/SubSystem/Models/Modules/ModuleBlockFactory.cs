@@ -462,7 +462,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     Type  = kind,
                     ChartType = ChartType.Radar
                 },
-
+                MetadataKind.String => new StringPreviewBlock
+                {
+                    Id = ID.Get(),
+                },
                 MetadataKind.Audio     => null,
                 MetadataKind.File      => null,
                 MetadataKind.Video     => null,

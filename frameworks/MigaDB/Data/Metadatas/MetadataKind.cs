@@ -2,6 +2,8 @@
 {
     public enum MetadataKind : int
     {
+        String,
+        Service,
         Text,
         Color,
         Degree,
