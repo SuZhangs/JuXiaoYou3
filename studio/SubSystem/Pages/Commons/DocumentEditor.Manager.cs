@@ -99,6 +99,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             AddMetadata(metadata);
             
         }
+
+        private Metadata GetMetadataById(string metadata)
+        {
+            return _MetadataTrackerByName.TryGetValue(metadata, out var v) ? v.Source : null;
+        }
         
         private void AddMetadata(Metadata metadata)
         {

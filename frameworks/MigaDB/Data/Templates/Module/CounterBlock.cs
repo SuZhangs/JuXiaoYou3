@@ -39,8 +39,10 @@
         int Minimum { get; set; }
     }
     
-    public abstract class CounterBlock : ModuleBlock, ICounterBlock
+    public abstract class CounterBlock : ModuleBlock, ICounterBlock, IMetadataNumericSource
     {
+        public int GetValue() => Value;
+        
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var bb = (CounterBlock)block;

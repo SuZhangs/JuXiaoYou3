@@ -14,9 +14,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
-        private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
+        private readonly Dictionary<string, DataPart>             _DataPartTrackerOfId;
+        private readonly Dictionary<Type, DataPart>               _DataPartTrackerOfType;
+        private readonly Dictionary<string, ModuleBlock>          _BlockTrackerOfId;
 
+        private ModuleBlock GetBlockById(string id)
+        {
+            return _BlockTrackerOfId.TryGetValue(id, out var b) ? b : null;
+        }
+        
         private async Task AddModulePartImpl()
         {
             //
@@ -46,6 +52,82 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddModules(module);
         }
+        
+
+        private void AddModules(IEnumerable<PartOfModule> modules)
+        {
+            if (modules is null)
+            {
+                return;
+            }
+
+            var result = 0;
+
+            foreach (var module in modules)
+            {
+                if (AddModule(module))
+                {
+                    Document.Parts.Add(module);
+                    result++;
+                }
+            }
+
+            ResortModuleParts();
+            if (result == 0)
+            {
+                Warning(SubSystemString.NoChange);
+            }
+            else
+            {
+                Successful(SubSystemString.OperationOfAddIsSuccessful);
+            }
+        }
+
+        private bool AddModule(PartOfModule module)
+        {
+            if (module is null)
+            {
+                return false;
+            }
+
+            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
+            {
+                module.Index = ModuleParts.Count;
+                ModuleParts.Add(module);
+
+                for (var i = 0; i < module.Blocks.Count; i++)
+                {
+                    var block    = module.Blocks[i];
+                    var metadata = block.Metadata;
+
+                    if (!_BlockTrackerOfId.TryAdd(block.Id, block))
+                    {
+                        SensitiveOperation($"模组:{module.Name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
+                            .GetAwaiter()
+                            .GetResult();
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(metadata))
+                    {
+                        continue;
+                    }
+
+                    if (_MetadataTrackerByName.ContainsKey(metadata))
+                    {
+                        module.Blocks.RemoveAt(i);
+                    }
+                    else
+                    {
+                        AddMetadata(block.ExtractMetadata());
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
 
         private async Task RemoveModulePartImpl(PartOfModule module)
         {
@@ -68,10 +150,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             //
             // 删除Metadata
-            foreach (var block in module.Blocks
-                                        .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+            foreach (var block in module.Blocks)
             {
-                RemoveMetadata(block.ExtractMetadata());
+                _BlockTrackerOfId.Remove(block.Id);
+                
+                if(!string.IsNullOrEmpty(block.Metadata))
+                    RemoveMetadata(block.ExtractMetadata());
             }
 
             RemoveModulePart(module);
@@ -254,73 +338,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private void ShiftUpModulePartImpl(PartOfModule module)
         {
             ModuleParts.ShiftUp(module, (_, _, _) => ResortModuleParts());
-        }
-
-        private void AddModules(IEnumerable<PartOfModule> modules)
-        {
-            if (modules is null)
-            {
-                return;
-            }
-
-            var result = 0;
-
-            foreach (var module in modules)
-            {
-                if (AddModule(module))
-                {
-                    Document.Parts.Add(module);
-                    result++;
-                }
-            }
-
-            ResortModuleParts();
-            if (result == 0)
-            {
-                Warning(SubSystemString.NoChange);
-            }
-            else
-            {
-                Successful(SubSystemString.OperationOfAddIsSuccessful);
-            }
-        }
-
-        private bool AddModule(PartOfModule module)
-        {
-            if (module is null)
-            {
-                return false;
-            }
-
-            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
-            {
-                module.Index = ModuleParts.Count;
-                ModuleParts.Add(module);
-
-                for (var i = 0; i < module.Blocks.Count; i++)
-                {
-                    var block    = module.Blocks[i];
-                    var metadata = block.Metadata;
-
-                    if (string.IsNullOrEmpty(metadata))
-                    {
-                        continue;
-                    }
-
-                    if (_MetadataTrackerByName.ContainsKey(metadata))
-                    {
-                        module.Blocks.RemoveAt(i);
-                    }
-                    else
-                    {
-                        AddMetadata(block.ExtractMetadata());
-                    }
-                }
-
-                return true;
-            }
-
-            return false;
         }
 
         /// <summary>

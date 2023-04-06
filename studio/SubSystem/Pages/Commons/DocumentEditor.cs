@@ -60,6 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
             _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
+            _BlockTrackerOfId      = new Dictionary<string, ModuleBlock>(StringComparer.OrdinalIgnoreCase);
             
             ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews   = new ObservableCollection<SubViewBase>();

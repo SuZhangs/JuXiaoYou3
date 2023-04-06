@@ -32,8 +32,9 @@
     /// <summary>
     /// 表示数字内容块。
     /// </summary>
-    public class NumberBlock : ModuleBlock, INumberBlock
+    public class NumberBlock : ModuleBlock, INumberBlock, IMetadataNumericSource
     {
+        public int GetValue() => Value;
                 
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {

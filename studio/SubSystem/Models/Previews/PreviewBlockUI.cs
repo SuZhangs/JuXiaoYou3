@@ -21,11 +21,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 },
                 ChartPreviewBlock cpb => cpb.ChartType switch
                 {
-                   ChartType.Histogram => new HistogramPreviewBlockUI
+                    ChartType.Histogram => new HistogramPreviewBlockUI
                     {
                         Source = cpb
                     },
-                   ChartType.Radar =>  new RadarPreviewBlockUI
+                    ChartType.Radar => new RadarPreviewBlockUI
                     {
                         Source = cpb
                     }
@@ -38,7 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             };
         }
 
-        public abstract void Update(MetadataCollection metadataCollection);
+        public abstract void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker);
 
         public string Name { get; protected init; }
         public PreviewBlock BaseSource { get; protected init; }
@@ -46,7 +46,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
     public class RarityPreviewBlockUI : PreviewBlockUI
     {
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             // TODO:
         }
@@ -57,19 +57,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             init
             {
                 BaseSource = value;
-                Metadata   = value.Metadata;
+                Metadata   = value.ValueSourceID;
             }
         }
+
         public string Metadata { get; init; }
     }
 
     public class GroupingPreviewBlockUI : PreviewBlockUI
-    {       
-        public override void Update(MetadataCollection metadataCollection)
+    {
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            DataLists.ForEach(x => x.Update(metadataCollection));
+            DataLists.ForEach(x => x.Update(metadataTracker, blockTracker));
         }
-        
+
         public GroupingPreviewBlock Source
         {
             get => (GroupingPreviewBlock)BaseSource;
@@ -93,33 +94,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
     public class HistogramPreviewBlockUI : PreviewBlockUI
     {
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var unparsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                                  ?.Value;
-            MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
-                out var axis,
-                out var value,
-                out var fallback,
-                out var max,
-                out var min,
-                out var color);
+            var block = (ChartBlock)blockTracker(ValueSource);
 
-            Contract.Assert(value.Length != fallback.Length);
-
-            for (var i = 0; i < value.Length;i++)
+            if (BaseSource.IsMetadata)
             {
-                if (value[i] < 0)
-                {
-                    value[i] = fallback[i];
-                }
-
-                value[i] = Math.Clamp(value[i], min, max);
+                var unparsedValue = metadataTracker(ValueSource)?.Value;
+                MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
+                    out var axis,
+                    out var value,
+                    out _,
+                    out _,
+                    out _,
+                    out var color);
+                Color = color;
+                Axis.AddRange(axis, true);
+                Value.AddRange(value, true);
             }
-
-            Color = color;
-            Axis.AddRange(axis, true);
-            Value.AddRange(value, true);
+            else
+            {
+                Color = block.Color;
+                Axis.AddRange(block.Axis, true);
+                Value.AddRange(block.Value, true);
+            }
         }
 
         public ChartPreviewBlock Source
@@ -127,15 +125,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             get => (ChartPreviewBlock)BaseSource;
             init
             {
-                BaseSource = value;
-                Metadata   = value.Metadata;
-                Color      = "#007ACC";
-                Value      = new List<int>();
-                Axis       = new List<string>();
+                BaseSource  = value;
+                ValueSource = value.ValueSourceID;
+                Color       = "#007ACC";
+                Value       = new List<int>();
+                Axis        = new List<string>();
             }
         }
-        
-        public string Metadata { get; init; }
+
+        public string ValueSource { get; init; }
         public string Color { get; private set; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
@@ -143,33 +141,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
     public class RadarPreviewBlockUI : PreviewBlockUI
     {
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var unparsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                                  ?.Value;
-            MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
-                out var axis,
-                out var value,
-                out var fallback,
-                out var max,
-                out var min,
-                out var color);
+            var block = (ChartBlock)blockTracker(ValueSource);
 
-            Contract.Assert(value.Length != fallback.Length);
-
-            for (var i = 0; i < value.Length;i++)
+            if (BaseSource.IsMetadata)
             {
-                if (value[i] < 0)
-                {
-                    value[i] = fallback[i];
-                }
-
-                value[i] = Math.Clamp(value[i], min, max);
+                var unparsedValue = metadataTracker(ValueSource)?.Value;
+                MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
+                    out var axis,
+                    out var value,
+                    out _,
+                    out _,
+                    out _,
+                    out var color);
+                Color = color;
+                Axis.AddRange(axis, true);
+                Value.AddRange(value, true);
             }
-
-            Color = color;
-            Axis.AddRange(axis, true);
-            Value.AddRange(value, true);
+            else
+            {
+                Color = block.Color;
+                Axis.AddRange(block.Axis, true);
+                Value.AddRange(block.Value, true);
+            }
         }
 
         public ChartPreviewBlock Source
@@ -177,15 +172,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             get => (ChartPreviewBlock)BaseSource;
             init
             {
-                BaseSource = value;
-                Metadata   = value.Metadata;
-                Color      = "#007ACC";
-                Value      = new List<int>();
-                Axis       = new List<string>();
+                BaseSource  = value;
+                ValueSource = value.ValueSourceID;
+                Color       = "#007ACC";
+                Value       = new List<int>();
+                Axis        = new List<string>();
             }
         }
-        
-        public string Metadata { get; init; }
+
+        public string ValueSource { get; init; }
         public string Color { get; private set; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }

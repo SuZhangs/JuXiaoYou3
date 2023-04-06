@@ -606,6 +606,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             MetadataKind.Star,
             MetadataKind.Switch,
             MetadataKind.Progress,
+            MetadataKind.Likability,
             MetadataKind.Rarity,
         };
 

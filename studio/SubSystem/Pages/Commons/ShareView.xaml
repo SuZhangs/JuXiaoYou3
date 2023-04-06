@@ -16,6 +16,7 @@
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
             <ftk:ToolButton Content="添加"
+                            Command="{Binding AddPreviewBlockCommand}"
                             Icon="{StaticResource FeatherIcon.Plus}"
                             ShowText="True" />
             
@@ -40,6 +41,6 @@
             </ftk:DropDownButton>
         </WrapPanel>
 
-        <ItemsControl />
+        <ItemsControl ItemsSource="{Binding PreviewBlocks,Mode=OneWay}"/>
     </DockPanel>
 </UserControl>

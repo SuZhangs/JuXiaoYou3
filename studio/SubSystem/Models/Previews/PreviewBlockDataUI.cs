@@ -19,15 +19,44 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 PreviewHeartData phd => new PreviewBlockHeartDataUI(phd),
                 PreviewProgressData ppd => new PreviewBlockProgressDataUI(ppd),
                 PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
+                PreviewLikabilityData pld => new PreviewBlockLikablityDataUI(pld),
                 _ => throw new InvalidOperationException("没有这种数据")
             };
         }
 
-        public virtual void Update(MetadataCollection metadataCollection)
+        protected PreviewBlockDataUI(IPreviewBlockData data) => IsMetadata = data.IsMetadata;
+
+        public virtual void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             
         }
+
+        public bool GetBooleanValue(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            if (IsMetadata)
+            {
+                return bool.TryParse(metadataTracker(Metadata)?.Value, out var n) && n;
+            }
+            
+            return ((IMetadataBooleanSource)blockTracker(Metadata))?.GetValue() ?? false;
+        }
         
+        public int GetNumberValue(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            if (IsMetadata)
+            {
+                return int.TryParse(metadataTracker(Metadata)?.Value, out var n) ? n : 0;
+            }
+            
+            return ((IMetadataNumericSource)blockTracker(Metadata))?.GetValue() ?? 0;
+        }
+        
+        public string GetStringValue(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            return IsMetadata ? metadataTracker(Metadata)?.Value : ((IMetadataTextSource)blockTracker(Metadata))?.GetValue();
+        }
+        
+        public bool IsMetadata { get; }
         public string Metadata { get; protected init; }
         public string Name { get; init; }
     }
@@ -36,18 +65,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         private bool _value;
         
-        public PreviewBlockStarDataUI(IPreviewBlockData value)
+        public PreviewBlockStarDataUI(IPreviewBlockData value) : base(value)
         {
             Name     = value.Name;
-            Metadata = value.Metadata;
+            Metadata = value.ValueSourceID;
 
         }
 
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var v = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                              ?.Value;
-            Value = bool.TryParse(v, out var n) && n;
+            Value = GetBooleanValue(metadataTracker, blockTracker);
         }
 
         /// <summary>
@@ -64,18 +91,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         private bool _value;
         
-        public PreviewBlockSwitchDataUI(PreviewSwitchData value)
+        public PreviewBlockSwitchDataUI(PreviewSwitchData value) : base(value)
         {
             Name     = value.Name;
-            Metadata = value.Metadata;
+            Metadata = value.ValueSourceID;
         }
 
 
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var v = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                      ?.Value;
-            Value = bool.TryParse(v, out var n) && n;
+            Value = GetBooleanValue(metadataTracker, blockTracker);
         }
 
         /// <summary>
@@ -93,21 +118,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockRateDataUI(IPreviewBlockData value)
+        public PreviewBlockRateDataUI(IPreviewBlockData value) : base(value)
         {
             Name     = value.Name;
-            Metadata = value.Metadata;
+            Metadata = value.ValueSourceID;
         }
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            if (metadataCollection is null)
-            {
-                return;
-            }
-            
-            var unParsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                                  ?.Value;
-            MetadataValue = int.TryParse(unParsedValue, out var n) ? n : 0;
+            MetadataValue = GetNumberValue(metadataTracker, blockTracker);
+            Value         = MetadataValue / 5;
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="MetadataValue"/> 属性。
+        /// </summary>
+        public int MetadataValue
+        {
+            get => _metadataValue;
+            set => SetValue(ref _metadataValue, value);
+        }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="Value"/> 属性。
+        /// </summary>
+        public int Value
+        {
+            get => _value;
+            set => SetValue(ref _value, value);
+        }
+    }
+    
+    
+    public sealed class PreviewBlockLikablityDataUI : PreviewBlockDataUI
+    {
+        private int _value;
+        private int _metadataValue;
+        
+        public PreviewBlockLikablityDataUI(IPreviewBlockData value) : base(value)
+        {
+            Name     = value.Name;
+            Metadata = value.ValueSourceID;
+        }
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
+        {
+            MetadataValue = GetNumberValue(metadataTracker, blockTracker);
             Value         = MetadataValue / 5;
         }
 
@@ -135,23 +189,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockDegreeDataUI(IPreviewBlockData value)
+        public PreviewBlockDegreeDataUI(IPreviewBlockData value) : base(value)
         {
             Name          = value.Name;
-            Metadata      = value.Metadata;
+            Metadata      = value.ValueSourceID;
         }
         
         
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            if (metadataCollection is null)
-            {
-                return;
-            }
-            
-            var unParsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                                  ?.Value;
-            MetadataValue = int.TryParse(unParsedValue, out var n) ? n : 0;
+            MetadataValue = GetNumberValue(metadataTracker, blockTracker);
             Value         = MetadataValue / 5;
         }
         
@@ -180,22 +227,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockProgressDataUI(IPreviewBlockData value)
+        public PreviewBlockProgressDataUI(IPreviewBlockData value) : base(value)
         {
             Name          = value.Name;
-            Metadata      = value.Metadata;
+            Metadata      = value.ValueSourceID;
         }
 
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            if (metadataCollection is null)
-            {
-                return;
-            }
-            
-            var unParsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                                  ?.Value;
-            MetadataValue = int.TryParse(unParsedValue, out var n) ? n : 0;
+            MetadataValue = GetNumberValue(metadataTracker, blockTracker);
             Value         = MetadataValue / 5;
         }
 
@@ -222,21 +262,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         private string _value;
         
-        public PreviewBlockTextDataUI(IPreviewBlockData value)
+        public PreviewBlockTextDataUI(IPreviewBlockData value) : base(value)
         {
             Name     = value.Name;
-            Metadata = value.Metadata;
+            Metadata = value.ValueSourceID;
         }
 
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            if (metadataCollection is null)
-            {
-                return;
-            }
-            
-            Value = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                      ?.Value;
+            Value = GetStringValue(metadataTracker, blockTracker);
         }
 
         /// <summary>
@@ -253,18 +287,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         private bool _value;
         
-        public PreviewBlockHeartDataUI(IPreviewBlockData value)
+        public PreviewBlockHeartDataUI(IPreviewBlockData value) : base(value)
         {
             Name     = value.Name;
-            Metadata = value.Metadata;
+            Metadata = value.ValueSourceID;
         }
 
 
-        public override void Update(MetadataCollection metadataCollection)
+        public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var v = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
-                                      ?.Value;
-            Value = bool.TryParse(v, out var n) && n;
+            Value = GetBooleanValue(metadataTracker, blockTracker);
         }
 
         /// <summary>

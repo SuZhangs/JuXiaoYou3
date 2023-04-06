@@ -70,8 +70,9 @@
     /// <summary>
     /// 表示开关内容块。
     /// </summary>
-    public sealed class SwitchBlock : OptionBlock
+    public sealed class SwitchBlock : OptionBlock, IMetadataBooleanSource
     {
+        public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
         {
@@ -87,8 +88,9 @@
     /// <summary>
     /// 表示红心内容块。原来的Favorite
     /// </summary>
-    public sealed class HeartBlock : OptionBlock
+    public sealed class HeartBlock : OptionBlock, IMetadataBooleanSource
     {
+        public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
         {
@@ -105,8 +107,9 @@
     /// <summary>
     /// 表示星星内容块。原来的Talent
     /// </summary>
-    public sealed class StarBlock : OptionBlock
+    public sealed class StarBlock : OptionBlock, IMetadataBooleanSource
     {
+        public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
         {

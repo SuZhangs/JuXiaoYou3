@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using TagLib.Riff;
 using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
@@ -13,13 +14,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
     {
         public static Task<Op<object>> Edit(GroupingPreviewBlock hb, DataPartCollection dataPartCollection)
         {
-            var blockCollection = dataPartCollection.Where(x => x is PartOfModule)
-                                                       .Cast<PartOfModule>()
-                                                       .Select(x => x.Blocks)
-                                                       .SelectMany(x => x)
-                                                       .Where(x => !string.IsNullOrEmpty(x.Metadata) && x is not GroupBlock)
-                                                       .Where(x => x.ExtractMetadata()
-                                                                    .Type == hb.Type);
+
+            var blockCollection = new List<ModuleBlock>(64);
+            var blocks = dataPartCollection.Where(x => x is PartOfModule)
+                                            .Cast<PartOfModule>()
+                                            .Select(x => x.Blocks)
+                                            .SelectMany(x => x)
+                                            .ToArray();
+            
+            var simpleBlock = blocks.Where(x => x is not GroupBlock && !string.IsNullOrEmpty(x.Metadata))
+                                    .Where(x => x.ExtractMetadata().Type == hb.Type);
+            var blockInGroup = blocks.Where(x => x is GroupBlock)
+                                     .Cast<GroupBlock>()
+                                     .SelectMany(x => x.Items)
+                                     .Where(x => x.ExtractMetadata().Type == hb.Type);
+                                     
+            blockCollection.AddRange(blockInGroup);
+            blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
                        .Dialog(new EditPreviewBlockViewModel(), new RouteEventArgs
                        {
@@ -30,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
                            }
                        });
         }
-        
+
         protected override bool IsCompleted() => true;
 
         protected override void OnStart(RouteEventArgs parameter)
@@ -65,6 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
                 MetadataKind.Progress => CreateProgress(blockCollection),
                 MetadataKind.Switch   => CreateSwitch(blockCollection),
                 MetadataKind.Color    => CreateColor(blockCollection),
+                MetadataKind.Likability => CreateLikability(blockCollection),
                 _                     => throw new InvalidOperationException(),
             };
         }
@@ -74,43 +86,52 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
             return blockCollection.Select(x => new PreviewTextData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
-        
+
         private static IEnumerable<IPreviewBlockData> CreateDegree(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x => new PreviewDegreeData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
-        
+
         private static IEnumerable<IPreviewBlockData> CreateStar(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x => new PreviewStarData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
-        
+
         private static IEnumerable<IPreviewBlockData> CreateHeart(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x => new PreviewHeartData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
-        
+
         private static IEnumerable<IPreviewBlockData> CreateProgress(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x => new PreviewProgressData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
+            });
+        }
+        
+        private static IEnumerable<IPreviewBlockData> CreateLikability(IEnumerable<ModuleBlock> blockCollection)
+        {
+            return blockCollection.Select(x => new PreviewLikabilityData
+            {
+                Name          = x.Name,
+                ValueSourceID = x.Metadata
             });
         }
 
@@ -119,17 +140,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
             return blockCollection.Select(x => new PreviewSwitchData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
+        
+        
+
         private static IEnumerable<IPreviewBlockData> CreateColor(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x => new PreviewColorData
             {
                 Name     = x.Name,
-                Metadata = x.Metadata
+                ValueSourceID = x.Metadata
             });
         }
+
         protected override string Failed()
         {
             return string.Empty;

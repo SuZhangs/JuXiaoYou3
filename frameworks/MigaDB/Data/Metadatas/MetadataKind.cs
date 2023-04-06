@@ -9,6 +9,7 @@
         Star,
         Switch,
         Progress,
+        Likability,
         Rarity,
         RadarChart,
         HistogramChart,

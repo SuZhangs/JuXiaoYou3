@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Models.Previews;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -25,7 +26,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected override void IsDataPartExistence(Document document)
         {
-            
         }
     }
 }

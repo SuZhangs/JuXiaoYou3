@@ -87,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// <summary>
     /// 
     /// </summary>
-    public sealed class SequenceBlock : MonoSelectorBlock
+    public sealed class SequenceBlock : MonoSelectorBlock, IMetadataTextSource
     {
         
         public sealed override Metadata ExtractMetadata()
@@ -99,5 +99,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 Type  = MetadataKind.Text,
             };
         }
+
+        public string GetValue() => Value;
     }
 }

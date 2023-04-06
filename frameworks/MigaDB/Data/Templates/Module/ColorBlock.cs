@@ -27,8 +27,10 @@
     /// <summary>
     /// 表示颜色内容块。
     /// </summary>
-    public class ColorBlock : ModuleBlock, IColorBlock, IModuleBlock<string>
+    public class ColorBlock : ModuleBlock, IColorBlock, IModuleBlock<string>, IMetadataTextSource
     {
+        public string GetValue() => Value;
+        
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var bb = (ColorBlock)block;

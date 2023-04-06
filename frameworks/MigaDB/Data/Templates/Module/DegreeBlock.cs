@@ -72,8 +72,10 @@
     /// <summary>
     /// 表示程度内容块。
     /// </summary>
-    public class DegreeBlock : ModuleBlock, IDegreeBlock
+    public class DegreeBlock : ModuleBlock, IDegreeBlock, IMetadataNumericSource
     {
+        public int GetValue() => Value;
+        
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var bb = (DegreeBlock)block;
@@ -111,7 +113,7 @@
             {
                 Name  = Metadata,
                 Value = Value.ToString(),
-                Type  = MetadataKind.Switch,
+                Type  = MetadataKind.Degree,
             };
         }
         

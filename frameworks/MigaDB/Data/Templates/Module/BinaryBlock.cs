@@ -43,8 +43,9 @@
     /// <summary>
     /// 表示两极内容块。
     /// </summary>
-    public class BinaryBlock : ModuleBlock, IBinaryBlock, IHeaderlessBlock
+    public class BinaryBlock : ModuleBlock, IBinaryBlock, IHeaderlessBlock, IMetadataBooleanSource
     {
+        public bool GetValue() => Value;
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var bb = (BinaryBlock)block;

@@ -43,8 +43,9 @@
     /// <summary>
     /// 表示多行内容块。
     /// </summary>
-    public class MultiLineBlock : ModuleBlock, IMultiLineBlock
+    public class MultiLineBlock : ModuleBlock, IMultiLineBlock, IMetadataTextSource
     {
+        public string GetValue() => Value.SubString(200);
         
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {

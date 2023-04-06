@@ -33,8 +33,9 @@
     /// <summary>
     /// 表示单行内容块。
     /// </summary>
-    public class SingleLineBlock : ModuleBlock, ISingleLineBlock
+    public class SingleLineBlock : ModuleBlock, ISingleLineBlock, IMetadataTextSource
     {
+        public string GetValue() => Value.SubString(200);
         
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {

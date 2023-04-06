@@ -111,7 +111,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                             .Where(x => x is NumberBlock or SingleLineBlock or RateBlock));
 
                 rarity.Name     = r1.Value.Name;
-                rarity.Metadata = r1.Value.Metadata;
+                rarity.ValueSourceID = r1.Value.Metadata;
                 return r1.IsFinished;
             }
             
@@ -144,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             //
             // 更新
-            PreviewBlocks.ForEach(x => x.Update(Document.Metas));
+            PreviewBlocks.ForEach(x => x.Update(GetMetadataById, GetBlockById));
         }
 
         /// <summary>

@@ -16,12 +16,13 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
             set => SetValue(ref _name, value);
         }
 
+        public bool IsMetadata { get; init; }
         public MetadataKind Type { get; init; }
     }
 
     public sealed class RarityPreviewBlock : PreviewBlock
     {
-        public string Metadata { get; set; }
+        public string ValueSourceID { get; set; }
     }
 
     public sealed class GroupingPreviewBlock : PreviewBlock
@@ -31,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
     public sealed class ChartPreviewBlock : PreviewBlock
     {
-        public string Metadata { get; set; }
+        public string ValueSourceID { get; set; }
         public ChartType ChartType { get; init; }
     }
 }
