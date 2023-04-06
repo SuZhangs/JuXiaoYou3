@@ -10,6 +10,13 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             var timeOfBoth = DateTime.Now;
 
+            database.Upsert<DatabaseProperty>(new DatabaseProperty
+            {
+                Author      = "Test",
+                Name        = "Test",
+                ForeignName = "Test"
+            });
+
             database.Upsert<ModuleManifestProperty>(new ModuleManifestProperty
             {
                 Manifests        = new ObservableCollection<ModuleManifest>(),
