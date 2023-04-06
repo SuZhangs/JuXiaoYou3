@@ -160,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             AddDataPartIntern();
             MaintainDataPartManifest();
             AddMetadataIntern();
-            Reorder();
+            Final();
         }
 
         private void AddDataPartIntern()
@@ -237,9 +237,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected abstract void IsDataPartExistence(Document document);
 
-        private void Reorder()
+        private void Final()
         {
-            // TODO:
+            //
+            // 打开 PreviewPart
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+            
+            PreviewPart = db.Get<ModuleManifestProperty>()
+                              .GetPreviewManifest(Type, x => db.Set(x));
         }
 
         #endregion

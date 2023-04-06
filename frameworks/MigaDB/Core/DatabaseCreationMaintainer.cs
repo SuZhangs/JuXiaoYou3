@@ -20,7 +20,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             database.Upsert<ModuleManifestProperty>(new ModuleManifestProperty
             {
                 Manifests        = new ObservableCollection<ModuleManifest>(),
-                DefaultManifests = new Dictionary<DocumentType, string>()
+                DefaultManifests = new Dictionary<DocumentType, string>(),
+                DefaultPreviewManifest = new Dictionary<DocumentType, PartOfPreview>()
             });
             
             database.Upsert<DatabaseVersion>(new DatabaseVersion

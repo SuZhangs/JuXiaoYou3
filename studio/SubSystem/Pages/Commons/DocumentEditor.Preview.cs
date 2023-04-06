@@ -30,7 +30,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
+        private async Task AddPreviewBlockImpl()
+        {
+            
+        }
         
+        private async Task ExportPreviewBlockAsPictureImpl()
+        {
+            
+        }
+        
+        private async Task ExportPreviewBlockAsPdfImpl()
+        {
+            
+        }
+        
+        private async Task ExportPreviewBlockAsMarkdownImpl()
+        {
+            
+        }
+        
+        private async Task RemovePreviewBlockImpl(PreviewBlockUI block)
+        {
+            
+        }
+
+        private void RefreshPreviewBlockImp()
+        {
+            
+        }
+
         /// <summary>
         /// 自定义部件
         /// </summary>

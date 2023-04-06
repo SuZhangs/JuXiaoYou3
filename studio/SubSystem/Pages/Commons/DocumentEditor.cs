@@ -97,6 +97,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftUpDetailPartCommand   = Command<PartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
+            
+            AddPreviewBlockCommand              = AsyncCommand(AddDetailPartImpl);
+            RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl, HasItem);
+            RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
+            ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);
+            ExportPreviewBlockAsPictureCommand  = AsyncCommand(ExportPreviewBlockAsPictureImpl);
+            ExportPreviewBlockAsMarkdownCommand = AsyncCommand(ExportPreviewBlockAsMarkdownImpl);
+            
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
             
@@ -151,6 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
+            PreviewBlocks.AddRange(PreviewPart.Blocks.Select(PreviewBlockUI.GetUI), true);
             base.OnStart();
         }
 
@@ -161,16 +170,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             SelectedSubView    = InternalSubViews.FirstOrDefault();
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
+            PreviewBlocks.AddRange(PreviewPart.Blocks.Select(PreviewBlockUI.GetUI), true);
 
             //
             // TODO:数据恢复
-
             base.Resume();
         }
 
         public override void Suspend()
         {
             InternalSubViews.Clear();
+            PreviewBlocks.Clear();
             base.Suspend();
         }
 
