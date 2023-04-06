@@ -2,7 +2,7 @@
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class EditChartPreviewBlockViewModel : DialogViewModel
     {

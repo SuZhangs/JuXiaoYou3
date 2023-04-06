@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaStudio.Models.Previews;
 using TagLib.Riff;
 using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class EditPreviewBlockViewModel : ExplicitDialogVM
     {
