@@ -64,6 +64,7 @@
                 Type  = MetadataKind.Color,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Color;
         
         /// <summary>
         /// 清除当前值。

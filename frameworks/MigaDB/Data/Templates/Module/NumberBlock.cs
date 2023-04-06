@@ -75,6 +75,7 @@
                 Parameters = MetadataProcessor.NumberBaseFormatted(Maximum, Minimum, value)
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Progress;
         
         /// <summary>
         /// 清除当前值。

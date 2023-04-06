@@ -150,5 +150,7 @@
         /// 提示，可以是Markdown
         /// </summary>
         public string ToolTips { get; set; }
+        
+        public abstract MetadataKind? ExtractType { get; }
     }
 }

@@ -81,6 +81,8 @@
             return false;
         }
 
+        public sealed override MetadataKind? ExtractType => MetadataKind.Switch;
+
         /// <summary>
         /// 清除当前值。
         /// </summary>

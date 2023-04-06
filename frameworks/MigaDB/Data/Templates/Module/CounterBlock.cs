@@ -108,6 +108,7 @@
                 Type  = MetadataKind.Heart,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Heart;
     }
     
     public class RateBlock : CounterBlock
@@ -122,5 +123,6 @@
                 Type  = MetadataKind.Star,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Star;
     }
 }

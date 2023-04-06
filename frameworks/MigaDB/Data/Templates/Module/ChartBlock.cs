@@ -151,6 +151,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         }
 
         public override ChartType ChartType => ChartType.Radar;
+        public sealed override MetadataKind? ExtractType => MetadataKind.RadarChart;
     }
 
     /// <summary>
@@ -169,6 +170,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             };
         }
         
+        public sealed override MetadataKind? ExtractType => MetadataKind.HistogramChart;
         public override ChartType ChartType => ChartType.Histogram;
     }
 }

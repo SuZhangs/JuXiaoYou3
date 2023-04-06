@@ -91,5 +91,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         }
 
         public List<ModuleBlock> Items { get; init; }
+        public sealed override MetadataKind? ExtractType => null;
     }
 }

@@ -83,6 +83,7 @@
                 Type  = MetadataKind.Switch,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Switch;
     }
 
     /// <summary>
@@ -101,6 +102,7 @@
                 Type  = MetadataKind.Heart,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Heart;
     }
 
 
@@ -120,5 +122,6 @@
                 Type  = MetadataKind.Star,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Star;
     }
 }

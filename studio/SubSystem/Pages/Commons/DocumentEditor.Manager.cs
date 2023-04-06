@@ -107,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private void AddMetadata(Metadata metadata)
         {
-            if(metadata is null)
+            if(metadata is null || !string.IsNullOrEmpty(metadata.Name))
             {
                 return;
             }
@@ -148,6 +148,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void RemoveMetadata(Metadata metadata)
         {
+            if (metadata is null || string.IsNullOrEmpty(metadata.Name))
+            {
+                return;
+            }
             RemoveMetadata(metadata.Name);
         }
 

@@ -101,5 +101,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         }
 
         public string GetValue() => Value;
+        public sealed override MetadataKind? ExtractType => MetadataKind.Text;
     }
 }

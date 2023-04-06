@@ -108,5 +108,6 @@
         /// 字数限制，如果值为-1，则表示没有限制。
         /// </summary>
         public int CharacterLimited { get; init; }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Text;
     }
 }

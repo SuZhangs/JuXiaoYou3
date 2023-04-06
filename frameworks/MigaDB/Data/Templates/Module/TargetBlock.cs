@@ -98,9 +98,7 @@
             TargetSource    = string.Empty;
             TargetThumbnail = string.Empty;
         }
-        
-        
-        
+
         /// <summary>
         /// 数据的名字
         /// </summary>
@@ -131,6 +129,7 @@
                 Parameters = TargetSource
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Audio;
     }
     
     public sealed class VideoBlock : TargetBlock
@@ -146,6 +145,7 @@
                 Parameters = TargetSource
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Video;
     }
     
     public sealed class MusicBlock : TargetBlock
@@ -161,6 +161,7 @@
                 Parameters = TargetSource
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Music;
     }
     
     public sealed class ImageBlock : TargetBlock
@@ -176,6 +177,7 @@
                 Parameters = TargetSource
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Image;
     }
     
     public sealed class FileBlock : TargetBlock
@@ -191,6 +193,7 @@
                 Parameters = TargetSource
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.File;
     }
     
     public sealed class ReferenceBlock : TargetBlock, IReferenceBlock
@@ -212,6 +215,7 @@
         /// 数据来源
         /// </summary>
         public ReferenceSource DataSource { get; init; }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Reference;
         
         
         public override Metadata ExtractMetadata()

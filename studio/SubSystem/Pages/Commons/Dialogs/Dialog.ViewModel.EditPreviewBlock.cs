@@ -22,12 +22,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
                                             .SelectMany(x => x)
                                             .ToArray();
             
-            var simpleBlock = blocks.Where(x => x is not GroupBlock && !string.IsNullOrEmpty(x.Metadata))
-                                    .Where(x => x.ExtractMetadata().Type == hb.Type);
+            var simpleBlock = blocks.Where(x => x is not GroupBlock)
+                                    .Where(x => x.ExtractType == hb.Type);
+            
             var blockInGroup = blocks.Where(x => x is GroupBlock)
                                      .Cast<GroupBlock>()
                                      .SelectMany(x => x.Items)
-                                     .Where(x => x.ExtractMetadata().Type == hb.Type);
+                                     .Where(x => x.ExtractType == hb.Type);
                                      
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
@@ -86,7 +87,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
             return blockCollection.Select(x => new PreviewTextData
             {
                 Name     = x.Name,
-                ValueSourceID = x.Metadata
+                ValueSourceID = x.Metadata,
+                IsMetadata = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 
@@ -94,8 +96,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewDegreeData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 
@@ -103,8 +106,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewStarData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 
@@ -112,8 +116,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewHeartData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 
@@ -121,8 +126,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewProgressData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
         
@@ -131,7 +137,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
             return blockCollection.Select(x => new PreviewLikabilityData
             {
                 Name          = x.Name,
-                ValueSourceID = x.Metadata
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 
@@ -139,8 +146,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewSwitchData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
         
@@ -150,8 +158,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
         {
             return blockCollection.Select(x => new PreviewColorData
             {
-                Name     = x.Name,
-                ValueSourceID = x.Metadata
+                Name          = x.Name,
+                ValueSourceID = x.Metadata,
+                IsMetadata    = !string.IsNullOrEmpty(x.Metadata)
             });
         }
 

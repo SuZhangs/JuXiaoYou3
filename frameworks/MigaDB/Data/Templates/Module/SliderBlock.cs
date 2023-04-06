@@ -46,6 +46,7 @@
             };
         }
         
+        public sealed override MetadataKind? ExtractType => MetadataKind.Progress;
         /// <summary>
         /// 清除当前值。
         /// </summary>

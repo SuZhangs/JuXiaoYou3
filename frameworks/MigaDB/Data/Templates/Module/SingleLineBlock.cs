@@ -71,6 +71,7 @@
                 Type  = MetadataKind.Text,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Text;
         
         /// <summary>
         /// 清除当前值。

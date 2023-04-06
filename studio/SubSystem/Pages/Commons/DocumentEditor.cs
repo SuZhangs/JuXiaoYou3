@@ -99,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
             
-            AddPreviewBlockCommand              = AsyncCommand(AddDetailPartImpl);
+            AddPreviewBlockCommand              = AsyncCommand(AddPreviewBlockImpl);
             RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl, HasItem);
             RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
             ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);

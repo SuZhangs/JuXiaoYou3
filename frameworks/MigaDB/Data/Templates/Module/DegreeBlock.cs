@@ -116,6 +116,7 @@
                 Type  = MetadataKind.Degree,
             };
         }
+        public sealed override MetadataKind? ExtractType => MetadataKind.Degree;
         
         /// <summary>
         /// 清除当前值。
