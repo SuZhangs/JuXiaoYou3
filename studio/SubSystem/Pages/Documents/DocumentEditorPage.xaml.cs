@@ -42,22 +42,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             if (editor is CharacterDocumentViewModel)
             {
                 SubViews.Add(new CharacterBasicView());
-                SubViews.Add(new DocumentDataPartView());
+                SubViews.Add(new CharacterInspirationView());
             }
             else if (editor is AbilityDocumentViewModel)
             {
                 SubViews.Add(new AbilityBasicView());
-                SubViews.Add(new DocumentDataPartView());
+                SubViews.Add(new CharacterInspirationView());
             }
             else if (editor is ItemDocumentViewModel)
             {
                 SubViews.Add(new ItemBasicView());
-                SubViews.Add(new DocumentDataPartView());
+                SubViews.Add(new CharacterInspirationView());
             }
             else if (editor is OtherDocumentViewModel)
             {
                 SubViews.Add(new OtherBasicView());
-                SubViews.Add(new DocumentDataPartView());
+                SubViews.Add(new CharacterInspirationView());
             }
         }
 
