@@ -15,7 +15,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorBase}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        
+        <thisVM:DocumentEditorBaseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
         <DataTemplate DataType="{x:Type thisModel:GroupingPreviewBlockUI}">
             <Border Background="{f:Brush BackgroundLevel1}"
                     CornerRadius="6"
@@ -25,10 +25,18 @@
                     Width="256">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="编辑"/>
-                        <f:MenuItem Header="上移"/>
-                        <f:MenuItem Header="下移"/>
-                        <f:MenuItem Header="删除"/>
+                        <f:MenuItem Header="编辑"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="删除"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
                     </f:ContextMenu>
                 </Border.ContextMenu>
                 <DockPanel>
@@ -81,10 +89,18 @@
                     Width="256">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="编辑"/>
-                        <f:MenuItem Header="上移"/>
-                        <f:MenuItem Header="下移"/>
-                        <f:MenuItem Header="删除"/>
+                        <f:MenuItem Header="编辑"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
+                        <f:MenuItem Header="删除"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePreviewBlockCommand}"
+                                    CommandParameter="{Binding}"/>
                     </f:ContextMenu>
                 </Border.ContextMenu>
                 <DockPanel>

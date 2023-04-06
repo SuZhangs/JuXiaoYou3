@@ -113,7 +113,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         private async Task EditPreviewBlockImpl(PreviewBlockUI block)
-        {
+        {            
+            if (block is null)
+            {
+                return;
+            }
             var r = await StringViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r.IsFinished)
@@ -127,14 +131,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private void ShiftUpPreviewBlockImpl(PreviewBlockUI block)
         {
-            
+            if (block is null)
+            {
+                return;
+            }
             PreviewBlocks.ShiftUp(block);
             PreviewPart.Blocks.ShiftUp(block.BaseSource);
             reSortPreviewBlocksImpl();
         }
         
         private void ShiftDownPreviewBlockImpl(PreviewBlockUI block)
-        {
+        {            
+            if (block is null)
+            {
+                return;
+            }
             PreviewBlocks.ShiftDown(block);
             PreviewPart.Blocks.ShiftDown(block.BaseSource);
             reSortPreviewBlocksImpl();
@@ -165,6 +176,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task RemovePreviewBlockImpl(PreviewBlockUI block)
         {
+            if (block is null)
+            {
+                return;
+            }
+            
             if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
             {
                 return;

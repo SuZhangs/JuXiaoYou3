@@ -37,7 +37,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Id = "__Detail_Setting";
         }
     }
-
+    public class DocumentEditorBaseViewModelProxy : BindingProxy<DocumentEditorBase>
+    {
+    }
     public abstract partial class DocumentEditorBase : TabViewModel
     {
         //
@@ -100,11 +102,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             
             AddPreviewBlockCommand              = AsyncCommand(AddPreviewBlockImpl);
-            RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl, HasItem);
+            RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl);
             RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
-            EditPreviewBlockCommand             = AsyncCommand<PreviewBlockUI>(EditPreviewBlockImpl, HasItem);
-            ShiftUpPreviewBlockCommand          = Command<PreviewBlockUI>(ShiftUpPreviewBlockImpl, x => NotFirstItem(PreviewBlocks, x));
-            ShiftDownPreviewBlockCommand        = Command<PreviewBlockUI>(ShiftDownPreviewBlockImpl, x => NotLastItem(PreviewBlocks, x));
+            EditPreviewBlockCommand             = AsyncCommand<PreviewBlockUI>(EditPreviewBlockImpl);
+            ShiftUpPreviewBlockCommand          = Command<PreviewBlockUI>(ShiftUpPreviewBlockImpl);
+            ShiftDownPreviewBlockCommand        = Command<PreviewBlockUI>(ShiftDownPreviewBlockImpl);
             ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);
             ExportPreviewBlockAsPictureCommand  = AsyncCommand(ExportPreviewBlockAsPictureImpl);
             ExportPreviewBlockAsMarkdownCommand = AsyncCommand(ExportPreviewBlockAsMarkdownImpl);

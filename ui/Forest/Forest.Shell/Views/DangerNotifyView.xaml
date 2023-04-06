@@ -52,8 +52,7 @@
 
             <ScrollViewer Grid.Row="2"
                           Margin="16"
-                          Padding="16"
-                          Style="{StaticResource UiScrollViewer}">
+                          Padding="16">
                 <TextBlock FontSize="16"
                            HorizontalAlignment="Center"
                            Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
