@@ -6,9 +6,11 @@ using System.Linq;
 using System.Printing;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
@@ -42,16 +44,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var b = r.Value;
-            var db = Xaml.Get<IDatabaseManager>()
-                         .Database
-                         .CurrentValue;
+            var b  = r.Value;
 
             if (b is null)
             {
                 return;
             }
+            
+            var r1 = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
 
+            if (!r1.IsFinished)
+            {
+                return;
+            }
+
+            b.Name = r1.Value;
             var finished = await ContinueEditImpl(b);
             
             if (!finished)
@@ -74,32 +84,38 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             if (b is GroupingPreviewBlock hb)
             {
-                var r1 = await EditPreviewBlockViewModel.Edit(hb, Document.Metas);
+                var r1 = await EditPreviewBlockViewModel.Edit(hb, Document.Parts);
                 return r1.IsFinished;
 
             }
             
             if (b is RarityPreviewBlock rarity)
             {
-                var r1 = await SubSystem.OptionSelection<Metadata>(
+                var r1 = await SubSystem.OptionSelection<ModuleBlock>(
                     SubSystemString.SelectTitle,
                     null,
-                    Document.Metas
-                            .Where(x => x.Type == MetadataKind.Text));
+                    Document.Parts
+                            .Where(x => x is PartOfModule)
+                            .Cast<PartOfModule>()
+                            .Select(x => x.Blocks)
+                            .SelectMany(x => x)
+                            .Where(x => !string.IsNullOrEmpty(x.Metadata) && x is not GroupBlock)
+                            .Where(x => x is NumberBlock or SingleLineBlock or RateBlock));
 
-                rarity.Metadata = r1.Value.Name;
+                rarity.Name     = r1.Value.Name;
+                rarity.Metadata = r1.Value.Metadata;
                 return r1.IsFinished;
             }
             
             if(b is RadarPreviewBlock rp)
             {
-                var r1 = await EditChartPreviewBlockViewModel.Edit(rp, Document.Metas);
+                var r1 = await EditChartPreviewBlockViewModel.Edit(rp, Document.Parts);
                 return r1.IsFinished;
             }
             
             if(b is HistogramPreviewBlock hp)
             {
-                var r1 = await EditChartPreviewBlockViewModel.Edit(hp, Document.Metas);
+                var r1 = await EditChartPreviewBlockViewModel.Edit(hp, Document.Parts);
                 return r1.IsFinished;
             }
 
