@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Windows.Forms;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Models;
 
@@ -16,13 +19,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 {
                     Source = gpb
                 },
-                HistogramPreviewBlock hpb => new HistogramPreviewBlockUI
+                ChartPreviewBlock cpb => cpb.ChartType switch
                 {
-                    Source = hpb
-                },
-                RadarPreviewBlock rpb => new RadarPreviewBlockUI
-                {
-                    Source = rpb
+                   ChartType.Histogram => new HistogramPreviewBlockUI
+                    {
+                        Source = cpb
+                    },
+                   ChartType.Radar =>  new RadarPreviewBlockUI
+                    {
+                        Source = cpb
+                    }
                 },
                 RarityPreviewBlock rpb2 => new RarityPreviewBlockUI()
                 {
@@ -88,24 +94,48 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         public override void Update(MetadataCollection metadataCollection)
         {
-            
+            var unparsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
+                                                  ?.Value;
+            MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
+                out var axis,
+                out var value,
+                out var fallback,
+                out var max,
+                out var min,
+                out var color);
+
+            Contract.Assert(value.Length != fallback.Length);
+
+            for (var i = 0; i < value.Length;i++)
+            {
+                if (value[i] < 0)
+                {
+                    value[i] = fallback[i];
+                }
+
+                value[i] = Math.Clamp(value[i], min, max);
+            }
+
+            Color = color;
+            Axis.AddRange(axis, true);
+            Value.AddRange(value, true);
         }
 
-        public HistogramPreviewBlock Source
+        public ChartPreviewBlock Source
         {
-            get => (HistogramPreviewBlock)BaseSource;
+            get => (ChartPreviewBlock)BaseSource;
             init
             {
                 BaseSource = value;
                 Metadata   = value.Metadata;
-                Color      = value.Color ?? "#007ACC";
-                Value      = value.Value ?? new List<int>();
-                Axis       = value.Axis ?? new List<string>();
+                Color      = "#007ACC";
+                Value      = new List<int>();
+                Axis       = new List<string>();
             }
         }
         
         public string Metadata { get; init; }
-        public string Color { get; init; }
+        public string Color { get; private set; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
     }
@@ -114,25 +144,48 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     {
         public override void Update(MetadataCollection metadataCollection)
         {
-            // TODO:
+            var unparsedValue = metadataCollection.FirstOrDefault(x => x.Name == Metadata)
+                                                  ?.Value;
+            MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
+                out var axis,
+                out var value,
+                out var fallback,
+                out var max,
+                out var min,
+                out var color);
+
+            Contract.Assert(value.Length != fallback.Length);
+
+            for (var i = 0; i < value.Length;i++)
+            {
+                if (value[i] < 0)
+                {
+                    value[i] = fallback[i];
+                }
+
+                value[i] = Math.Clamp(value[i], min, max);
+            }
+
+            Color = color;
+            Axis.AddRange(axis, true);
+            Value.AddRange(value, true);
         }
-        
-        public RadarPreviewBlock Source
+
+        public ChartPreviewBlock Source
         {
-            get => (RadarPreviewBlock)BaseSource;
+            get => (ChartPreviewBlock)BaseSource;
             init
             {
                 BaseSource = value;
                 Metadata   = value.Metadata;
-                Color      = value.Color ?? "#007ACC";
-                Value      = value.Value ?? new List<int>();
-                Axis       = value.Axis ?? new List<string>();
+                Color      = "#007ACC";
+                Value      = new List<int>();
+                Axis       = new List<string>();
             }
         }
-
-
+        
         public string Metadata { get; init; }
-        public string Color { get; init; }
+        public string Color { get; private set; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
     }

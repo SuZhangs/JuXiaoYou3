@@ -96,6 +96,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return false;
         }
         
+        public abstract ChartType ChartType { get; }
+        
         /// <summary>
         /// 清除当前值。
         /// </summary>
@@ -147,6 +149,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
         }
+
+        public override ChartType ChartType => ChartType.Radar;
     }
 
     /// <summary>
@@ -164,5 +168,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
                 Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
         }
+        
+        public override ChartType ChartType => ChartType.Histogram;
     }
 }

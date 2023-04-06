@@ -6,12 +6,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
 {
     public class EditChartPreviewBlockViewModel : DialogViewModel
     {
-        public static Task<Op> Edit(HistogramPreviewBlock hb, DataPartCollection dataPartCollection)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public static Task<Op> Edit(RadarPreviewBlock hb, DataPartCollection dataPartCollection)
+        public static Task<Op> Edit(ChartPreviewBlock cb, DataPartCollection dataPartCollection)
         {
             throw new NotImplementedException();
         }

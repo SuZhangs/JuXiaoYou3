@@ -37,6 +37,14 @@
             Pool.ReturnStringBuilder(sb);
             return v;
         }
+
+        private static int[] Parse(string value)
+        {
+            return value.Split(ListSeparator)
+                        .Select(x => int.TryParse(x, out var n) ? n : 10)
+                        .ToArray();
+        }
+
         public static string ChartBaseFormatted(
             IEnumerable<string> axis, 
             IEnumerable<int> value, 
@@ -50,6 +58,25 @@
             var c = Combine(fallback.Select(x => x.ToString()));
 
             return string.Format(ChartBasePattern, maximum, minimum, color, a, b, c);
+        }
+
+        public static void ExtractChartBaseFormatted(
+            string raw,
+            out string[] axis,
+            out int[] value,
+            out int[] fallback,
+            out int maximum,
+            out int minimum,
+            out string color)
+        {
+            var values = raw.Split(',');
+            axis     = values[0].Split(',').
+                                 ToArray();
+            value    = Parse(values[1]);
+            fallback = Parse(values[2]);
+            maximum  = int.TryParse(values[3], out var n) ? n : 10;
+            minimum  = int.TryParse(values[4], out  n) ? n : 0;
+            color    = values[5];
         }
 
         public static string NumberBaseFormatted(int max, int min, int value)

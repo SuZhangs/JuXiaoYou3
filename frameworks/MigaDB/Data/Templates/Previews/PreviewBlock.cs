@@ -29,19 +29,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
         public ObservableCollection<IPreviewBlockData> DataLists { get; init; }
     }
 
-    public sealed class HistogramPreviewBlock : PreviewBlock
+    public sealed class ChartPreviewBlock : PreviewBlock
     {
-        public string Metadata { get; init; }
-        public string Color { get; init; }
-        public List<string> Axis { get; init; }
-        public List<int> Value { get; init; }
-    }
-
-    public sealed class RadarPreviewBlock : PreviewBlock
-    {
-        public string Metadata { get; init; }
-        public string Color { get; init; }
-        public List<string> Axis { get; init; }
-        public List<int> Value { get; init; }
+        public string Metadata { get; set; }
+        public ChartType ChartType { get; init; }
     }
 }

@@ -45,26 +45,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             var b  = r.Value;
-
-            if (b is null)
-            {
-                return;
-            }
-            
-            var r1 = await StringViewModel.String(SubSystemString.EditNameTitle);
             var db = Xaml.Get<IDatabaseManager>()
                          .Database
                          .CurrentValue;
-
-            if (!r1.IsFinished)
+            
+            if (!await ContinueNamingImpl(b))
             {
                 return;
             }
-
-            b.Name = r1.Value;
-            var finished = await ContinueEditImpl(b);
             
-            if (!finished)
+            if (!await ContinueEditImpl(b))
             {
                 return;
             }
@@ -78,6 +68,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             mmp.SetPreviewManifest(Type, PreviewPart);
             db.Set(mmp);
             RefreshPreviewBlockImp();
+        }
+
+        private async Task<bool> ContinueNamingImpl(PreviewBlock b)
+        {
+            if (b is null)
+            {
+                return false;
+            }
+            
+            var r1 = await StringViewModel.String(SubSystemString.EditNameTitle);
+
+            if (!r1.IsFinished)
+            {
+                return false;
+            }
+
+            b.Name = r1.Value;
+            return true;
         }
 
         private async Task<bool> ContinueEditImpl(PreviewBlock b)
@@ -169,6 +177,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ExportPreviewBlockAsMarkdownCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<PreviewBlockUI> EditPreviewBlockCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<PreviewBlockUI> RemovePreviewBlockCommand { get; }
