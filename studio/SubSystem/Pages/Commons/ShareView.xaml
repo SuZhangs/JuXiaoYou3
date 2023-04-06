@@ -9,6 +9,7 @@
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Previews"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
@@ -24,6 +25,7 @@
                 <DockPanel>
                     <Border DockPanel.Dock="Top"
                             Background="{f:Brush BackgroundLevel3}"
+                            CornerRadius="6 6 0 0"
                             Padding="16 8">
                         <TextBlock FontSize="15"
                                    FontWeight="Bold"
@@ -45,6 +47,51 @@
                 </DockPanel>
             </Border>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockTextDataUI}">
+            <TextBlock Text="{Binding Value}"/>
+        </DataTemplate>
+        
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockProgressDataUI}">
+            <ProgressBar Value="{Binding Value}"
+                         Minimum="0"
+                         Maximum="100"/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockSwitchDataUI}">
+            <f:ToggleSwitch IsChecked="{Binding Value}"/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockRateDataUI}">
+            <studio:RatingControl Maximum="5"
+                                  Value="{Binding Value}"/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockLikabilityDataUI}">
+            <studio:FavoriteControl Maximum="5"
+                                    Value="{Binding Value}"/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockStarDataUI}">
+            <studio:SwitchOnControl DockPanel.Dock="Right"
+                                    Foreground="#FFC107"
+                                    Icon="{StaticResource FeatherIcon.Star}"
+                                    IsChecked="{Binding Value}" />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockHeartDataUI}">
+            <studio:SwitchOnControl DockPanel.Dock="Right"
+                                    Foreground="#FF6699"
+                                    Icon="{StaticResource FeatherIcon.Heart}"
+                                    IsChecked="{Binding Value,Mode=TwoWay}" />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type thisModel:PreviewBlockDegreeDataUI}">
+            <studio:DegreeControl DockPanel.Dock="Right"
+                                  Maximum="5"
+                                  Value="{Binding Value,Mode=TwoWay}" />
+        </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top"
@@ -59,6 +106,7 @@
                             ShowText="True" />
 
             <ftk:ToolButton Content="刷新"
+                            Command="{Binding RefreshPreviewBlockCommand}"
                             Icon="{StaticResource FeatherIcon.Refresh}"
                             ShowText="True" />
 

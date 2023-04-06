@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 PreviewHeartData phd => new PreviewBlockHeartDataUI(phd),
                 PreviewProgressData ppd => new PreviewBlockProgressDataUI(ppd),
                 PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
-                PreviewLikabilityData pld => new PreviewBlockLikablityDataUI(pld),
+                PreviewLikabilityData pld => new PreviewBlockLikabilityDataUI(pld),
                 _ => throw new InvalidOperationException("没有这种数据")
             };
         }
@@ -149,12 +149,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     }
     
     
-    public sealed class PreviewBlockLikablityDataUI : PreviewBlockDataUI
+    public sealed class PreviewBlockLikabilityDataUI : PreviewBlockDataUI
     {
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockLikablityDataUI(IPreviewBlockData value) : base(value)
+        public PreviewBlockLikabilityDataUI(IPreviewBlockData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -236,7 +236,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             MetadataValue = GetNumberValue(metadataTracker, blockTracker);
-            Value         = MetadataValue / 5;
+            Value         = MetadataValue > 100 ? MetadataValue / 100 : MetadataValue;
         }
 
         /// <summary>
