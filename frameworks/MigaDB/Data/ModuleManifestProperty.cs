@@ -7,7 +7,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data
     {
         public ModuleManifest GetModuleManifest(DocumentType type)
         {
-            return DefaultManifests.TryGetValue(type, out var manifest) ? manifest : null;
+            return DefaultManifests.ContainsKey(type) ? 
+                Manifests.FirstOrDefault(x => x.Id == DefaultManifests[type]) :
+                null;
         }
         
         public void SetModuleManifest(DocumentType type, ModuleManifest manifest)
@@ -19,24 +21,17 @@ namespace Acorisoft.FutureGL.MigaDB.Data
 
             if (DefaultManifests.ContainsKey(type))
             {
-                DefaultManifests[type] = manifest;
+                DefaultManifests[type] = manifest.Id;
             }
             else
             {
-                DefaultManifests.Add(type, manifest);
+                DefaultManifests.Add(type, manifest.Id);
             }
         }
-        
-        [Obsolete]
-        public PreviewManifest GetPreviewManifest(DocumentType type)
-        {
-            return DefaultPreviews.TryGetValue(type, out var manifest) ? manifest : null;
-        }
 
-        public Dictionary<DocumentType, ModuleManifest> DefaultManifests { get; init; }
+        public Dictionary<DocumentType, string> DefaultManifests { get; init; }
         
-        [Obsolete]
-        public Dictionary<DocumentType, PreviewManifest> DefaultPreviews { get; init; }
+        
         public ObservableCollection<ModuleManifest> Manifests { get; init; }
     }
 }
