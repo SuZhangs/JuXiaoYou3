@@ -7,9 +7,6 @@
         /// </summary>
         public string Name { get; init; }
         
-        /// <summary>
-        /// Clamp to 0-5
-        /// </summary>
-        public string Value { get; init; }
+        public string Metadata { get; init; }
     }
 }

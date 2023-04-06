@@ -5,6 +5,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
     public abstract class PreviewBlock : StorageUIObject
     {
         private string _name;
+        public int Index { get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
@@ -14,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
             get => _name;
             set => SetValue(ref _name, value);
         }
-        
+
         public MetadataKind Type { get; init; }
     }
 
@@ -27,14 +28,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
     {
         public ObservableCollection<IPreviewBlockData> DataLists { get; init; }
     }
-    
+
     public sealed class HistogramPreviewBlock : PreviewBlock
     {
         public string Color { get; init; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
     }
-    
+
     public sealed class RadarPreviewBlock : PreviewBlock
     {
         public string Color { get; init; }
