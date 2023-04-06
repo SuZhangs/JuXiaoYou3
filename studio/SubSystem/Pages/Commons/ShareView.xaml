@@ -193,10 +193,6 @@
                             Icon="{StaticResource FeatherIcon.Plus}"
                             ShowText="True" />
 
-            <ftk:ToolButton Content="删除"
-                            Icon="{StaticResource FeatherIcon.Trash}"
-                            ShowText="True" />
-
             <ftk:ToolButton Content="刷新"
                             Command="{Binding RefreshPreviewBlockCommand}"
                             Icon="{StaticResource FeatherIcon.Refresh}"
