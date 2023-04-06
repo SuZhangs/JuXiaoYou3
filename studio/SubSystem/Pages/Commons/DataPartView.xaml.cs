@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public partial class DataPartView : UserControl
     {
