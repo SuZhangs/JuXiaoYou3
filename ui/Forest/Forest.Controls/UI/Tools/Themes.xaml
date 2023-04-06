@@ -382,5 +382,119 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type t:DropDownButton}" BasedOn="{StaticResource ClearStyle.ToolButton}"/>
+
+    <Style TargetType="{x:Type t:DropDownButton}">
+        <Setter Property="ShowText" Value="False" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="IsFilled" Value="False" />
+        <Setter Property="IconSize"  Value="17" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type t:DropDownButton}">
+                    <Border x:Name="PART_Bd"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <Path x:Name="PART_Icon"
+                              Data="{TemplateBinding Icon}"
+                              Stroke="#4F5B66"
+                              StrokeThickness="1"
+                              Stretch="Uniform"
+                              Width="{TemplateBinding IconSize}"
+                              Height="{TemplateBinding IconSize}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsFilled" Value="True">
+                            <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="PART_Icon"/>
+                        </Trigger>
+
+                        <Trigger Property="IsFilled" Value="False">
+                            <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="PART_Icon"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Fill" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="IsFilled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Stroke" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ShowText" Value="True">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type t:DropDownButton}">
+                            <Border x:Name="PART_Bd"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    Padding="{TemplateBinding Padding}">
+                                <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                    <Path x:Name="PART_Icon"
+                                          Data="{TemplateBinding Icon}"
+                                          Stretch="Uniform"
+                                          Margin="0 0 8 0"
+                                          Width="{TemplateBinding IconSize}"
+                                          Height="{TemplateBinding IconSize}" />
+
+                                    <ContentPresenter x:Name="PART_Content"
+                                                      TextElement.FontSize="14"
+                                                      TextElement.Foreground="{f:ForegroundBrush}"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center" />
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsFilled" Value="True">
+                                    <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="PART_Icon"/>
+                                </Trigger>
+
+                                <Trigger Property="IsFilled" Value="False">
+                                    <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="PART_Icon"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="False"/>
+                                        <Condition Property="IsFilled" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Content"/>
+                                    <Setter Property="Fill" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="False"/>
+                                        <Condition Property="IsFilled" Value="False"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Content"/>
+                                    <Setter Property="Stroke" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
