@@ -31,6 +31,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
     public sealed class HistogramPreviewBlock : PreviewBlock
     {
+        public string Metadata { get; init; }
         public string Color { get; init; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }
@@ -38,6 +39,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
     public sealed class RadarPreviewBlock : PreviewBlock
     {
+        public string Metadata { get; init; }
         public string Color { get; init; }
         public List<string> Axis { get; init; }
         public List<int> Value { get; init; }

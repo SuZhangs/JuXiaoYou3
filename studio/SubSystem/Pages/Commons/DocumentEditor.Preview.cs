@@ -124,6 +124,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void RefreshPreviewBlockImp()
         {
+            //
+            // 更新
+            PreviewBlocks.ForEach(x => x.Update(Document.Metas));
         }
 
         /// <summary>
