@@ -17,7 +17,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             return value switch
             {
-                MainTheme mt       => GetMainTheme(mt),
                 CultureArea ca     => GetCultureArea(ca),
                 DocumentType dt    => GetDocumentType(dt),
                 FilteringOption fo => GetFilteringOption(fo),
@@ -31,6 +30,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             if (value is IGlobalizationTextSupport gts)
             {
                 return Language.GetText(gts.GetLanguageId());
+            }
+
+            if (value is Enum @enum)
+            {
+                return Language.GetEnum(@enum);
             }
 
             return value?.ToString();

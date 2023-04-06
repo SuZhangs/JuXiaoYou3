@@ -16,6 +16,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
         }
     }
 
+    public sealed class RarityPreviewBlock : PreviewBlock
+    {
+        
+    }
+
     public sealed class GroupingPreviewBlock : PreviewBlock
     {
         public ObservableCollection<IPreviewBlockData> DataLists { get; init; }

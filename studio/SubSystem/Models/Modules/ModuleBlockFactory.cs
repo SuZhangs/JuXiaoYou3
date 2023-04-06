@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Acorisoft.FutureGL.Forest.Controls.Selectors;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.Miga.Doc.Documents;
@@ -377,7 +379,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 _                             => throw new ArgumentOutOfRangeException(nameof(block), block, null)
             };
         }
-
+        
+        
         public static ModuleBlock GetBlock(BlockType kind)
         {
             ModuleBlock b = kind switch
@@ -435,6 +438,43 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             }
 
             return b;
+        }
+
+        public static PreviewBlock GetPreviewBlock(MetadataKind kind)
+        {
+            return kind switch
+            {
+                MetadataKind.Rarity  => new RarityPreviewBlock
+                {
+                    Id = ID.Get(),
+                },
+                MetadataKind.HistogramChart     => new HistogramPreviewBlock
+                {
+                    Id = ID.Get(),
+                    Axis = new List<string>(),
+                    Value = new List<int>(),
+                    Color = "#007ACC"
+                },
+                MetadataKind.RadarChart => new RadarPreviewBlock
+                {
+                    Id    = ID.Get(),
+                    Axis  = new List<string>(),
+                    Value = new List<int>(),
+                    Color = "#007ACC"
+                },
+
+                MetadataKind.Audio     => null,
+                MetadataKind.File      => null,
+                MetadataKind.Video     => null,
+                MetadataKind.Music     => null,
+                MetadataKind.Image     => null,
+                MetadataKind.Reference => null,
+                _                      => new GroupingPreviewBlock
+                {
+                    Id = ID.Get(),
+                    DataLists = new ObservableCollection<IPreviewBlockData>()
+                }
+            };
         }
 
         public static ModuleBlockEditUI GetEditUI(BlockType kind)
@@ -554,6 +594,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
         {
             BlockType.Histogram,
             BlockType.Radar,
+        };
+        
+        public static readonly MetadataKind[] BasicMetadataKinds = new[]
+        {
+            MetadataKind.Text,
+            MetadataKind.Color,
+            MetadataKind.Degree,
+            MetadataKind.Heart,
+            MetadataKind.Star,
+            MetadataKind.Switch,
+            MetadataKind.Progress,
+            MetadataKind.Rarity,
+        };
+
+        public static readonly MetadataKind[] ChartMetadataKinds = new[]
+        {
+            MetadataKind.HistogramChart,
+            MetadataKind.RadarChart,
         };
 
 

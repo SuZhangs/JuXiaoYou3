@@ -15,6 +15,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         [BsonId]
         public string Id { get; init; }
         
+        /// <summary>
+        /// 类型
+        /// </summary>
         public DocumentType Type { get; init; }
 
         /// <summary>

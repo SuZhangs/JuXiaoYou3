@@ -103,7 +103,7 @@
             {
                 Name  = Metadata,
                 Value = Value.ToString(),
-                Type  = MetadataKind.Likability,
+                Type  = MetadataKind.Heart,
             };
         }
     }
@@ -117,7 +117,7 @@
             {
                 Name  = Metadata,
                 Value = Value.ToString(),
-                Type  = MetadataKind.Rate,
+                Type  = MetadataKind.Star,
             };
         }
     }

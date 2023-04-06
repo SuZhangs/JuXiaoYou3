@@ -23,12 +23,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                 {
                     Source = rpb
                 },
+                RarityPreviewBlock rpb2 => new RarityPreviewBlockUI()
+                {
+                    Source = rpb2
+                },
                 _ => null
             };
         }
 
         public string Name { get; protected init; }
         public PreviewBlock BaseSource { get; protected init; }
+    }
+
+    public class RarityPreviewBlockUI : PreviewBlockUI
+    {
+        public RarityPreviewBlock Source
+        {
+            get => (RarityPreviewBlock)BaseSource;
+            init
+            {
+                BaseSource = value;
+            }
+        }
     }
 
     public class GroupingPreviewBlockUI : PreviewBlockUI

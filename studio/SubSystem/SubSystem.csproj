@@ -149,6 +149,11 @@
       <Page Update="Pages\Commons\Dialogs\Dialog.ModuleSelectorView.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
+      <Page Update="Pages\Commons\Dialogs\Dialog.NewPreviewBlockView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
