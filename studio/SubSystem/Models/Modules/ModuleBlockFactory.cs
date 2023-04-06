@@ -447,17 +447,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 MetadataKind.Rarity  => new RarityPreviewBlock
                 {
                     Id = ID.Get(),
+                    Type = kind,
                 },
                 MetadataKind.HistogramChart     => new HistogramPreviewBlock
                 {
-                    Id = ID.Get(),
-                    Axis = new List<string>(),
+                    Id    = ID.Get(),
+                    Type  = kind,
+                    Axis  = new List<string>(),
                     Value = new List<int>(),
                     Color = "#007ACC"
                 },
                 MetadataKind.RadarChart => new RadarPreviewBlock
                 {
                     Id    = ID.Get(),
+                    Type  = kind,
                     Axis  = new List<string>(),
                     Value = new List<int>(),
                     Color = "#007ACC"
@@ -471,7 +474,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 MetadataKind.Reference => null,
                 _                      => new GroupingPreviewBlock
                 {
-                    Id = ID.Get(),
+                    Id        = ID.Get(),
+                    Type      = kind,
                     DataLists = new ObservableCollection<IPreviewBlockData>()
                 }
             };

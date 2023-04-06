@@ -29,6 +29,23 @@ namespace Acorisoft.FutureGL.MigaDB.Data
                 DefaultManifests.Add(type, manifest.Id);
             }
         }
+        
+        public void SetPreviewManifest(DocumentType type, PartOfPreview manifest)
+        {
+            if (manifest is null)
+            {
+                return;
+            }
+
+            if (DefaultPreviewManifest.ContainsKey(type))
+            {
+                DefaultPreviewManifest[type] = manifest;
+            }
+            else
+            {
+                DefaultPreviewManifest.Add(type, manifest);
+            }
+        }
 
         public PartOfPreview GetPreviewManifest(DocumentType type, Action<ModuleManifestProperty> callback)
         {

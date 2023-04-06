@@ -14,11 +14,13 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
             get => _name;
             set => SetValue(ref _name, value);
         }
+        
+        public MetadataKind Type { get; init; }
     }
 
     public sealed class RarityPreviewBlock : PreviewBlock
     {
-        
+        public string Metadata { get; set; }
     }
 
     public sealed class GroupingPreviewBlock : PreviewBlock
