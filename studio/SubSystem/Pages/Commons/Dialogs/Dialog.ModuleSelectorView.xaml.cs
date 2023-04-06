@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     [Connected(View = typeof(ModuleSelectorView), ViewModel = typeof(ModuleSelectorViewModel))]
     public partial class ModuleSelectorView

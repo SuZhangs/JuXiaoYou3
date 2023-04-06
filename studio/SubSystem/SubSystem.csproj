@@ -113,16 +113,6 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Pages\Documents\Dialogs\Dialog.DetailPartSelectorView.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="Pages\Documents\Dialogs\Dialog.ModuleSelectorView.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
       <Page Update="Pages\Documents\Details\DetailView.Setting.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
@@ -152,6 +142,12 @@
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Pages\Commons\Dialogs\Dialog.DetailPartSelectorView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+      <Page Update="Pages\Commons\Dialogs\Dialog.ModuleSelectorView.xaml">
+        <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>
 

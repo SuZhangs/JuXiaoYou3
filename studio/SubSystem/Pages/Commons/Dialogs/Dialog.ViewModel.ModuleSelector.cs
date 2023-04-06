@@ -2,7 +2,7 @@
 using System.Linq;
 using Acorisoft.FutureGL.Forest.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class ModuleSelectorViewModel : ExplicitDialogVM
     {
