@@ -56,6 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             get => (RarityPreviewBlock)BaseSource;
             init
             {
+                Name = value.Name;
                 BaseSource = value;
                 Metadata   = value.ValueSourceID;
             }
@@ -77,6 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             init
             {
                 BaseSource = value;
+                Name = value.Name;
                 NameLists  = new ObservableCollection<string>();
                 DataLists  = new ObservableCollection<PreviewBlockDataUI>();
 
@@ -126,6 +128,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             init
             {
                 BaseSource  = value;
+                Name = value.Name;
                 ValueSource = value.ValueSourceID;
                 Color       = "#007ACC";
                 Value       = new List<int>();
@@ -173,6 +176,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             init
             {
                 BaseSource  = value;
+                Name = value.Name;
                 ValueSource = value.ValueSourceID;
                 Color       = "#007ACC";
                 Value       = new List<int>();

@@ -120,9 +120,9 @@
             {
                 Name  = Metadata,
                 Value = Value.ToString(),
-                Type  = MetadataKind.Star,
+                Type  = MetadataKind.Rarity,
             };
         }
-        public sealed override MetadataKind? ExtractType => MetadataKind.Star;
+        public sealed override MetadataKind? ExtractType => MetadataKind.Rarity;
     }
 }

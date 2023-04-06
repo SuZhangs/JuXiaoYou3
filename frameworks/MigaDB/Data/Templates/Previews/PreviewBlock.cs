@@ -25,6 +25,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
         public string ValueSourceID { get; set; }
     }
 
+    public sealed class StringPreviewBlock : PreviewBlock
+    {
+        public string ValueSourceID { get; set; }
+    }
+
     public sealed class GroupingPreviewBlock : PreviewBlock
     {
         public ObservableCollection<IPreviewBlockData> DataLists { get; init; }

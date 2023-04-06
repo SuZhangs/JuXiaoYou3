@@ -107,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private void AddMetadata(Metadata metadata)
         {
-            if(metadata is null || !string.IsNullOrEmpty(metadata.Name))
+            if(metadata is null || string.IsNullOrEmpty(metadata.Name))
             {
                 return;
             }

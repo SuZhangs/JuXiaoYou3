@@ -94,20 +94,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 module.Index = ModuleParts.Count;
                 ModuleParts.Add(module);
+                AddBlock(module.Name, module.Blocks);
 
-                for (var i = 0; i < module.Blocks.Count; i++)
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AddBlock(string name, IList<ModuleBlock> blocks)
+        {
+            for (var i = 0; i < blocks.Count; i++)
+            {
+                var block    = blocks[i];
+                var metadata = block.Metadata;
+
+                if (block is GroupBlock gb)
                 {
-                    var block    = module.Blocks[i];
-                    var metadata = block.Metadata;
-
+                    AddBlock(gb.Name, gb.Items);
+                }
+                else
+                {
                     if (!_BlockTrackerOfId.TryAdd(block.Id, block))
                     {
-                        SensitiveOperation($"模组:{module.Name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
+                        SensitiveOperation($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
                             .GetAwaiter()
                             .GetResult();
                         continue;
                     }
-
+                
                     if (string.IsNullOrEmpty(metadata))
                     {
                         continue;
@@ -115,18 +130,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
                     if (_MetadataTrackerByName.ContainsKey(metadata))
                     {
-                        module.Blocks.RemoveAt(i);
+                        blocks.RemoveAt(i);
                     }
                     else
                     {
                         AddMetadata(block.ExtractMetadata());
                     }
                 }
-
-                return true;
             }
-
-            return false;
         }
 
         private async Task RemoveModulePartImpl(PartOfModule module)
@@ -152,10 +163,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             // 删除Metadata
             foreach (var block in module.Blocks)
             {
-                _BlockTrackerOfId.Remove(block.Id);
-                
-                if(!string.IsNullOrEmpty(block.Metadata))
-                    RemoveMetadata(block.ExtractMetadata());
+                if (block is GroupBlock g)
+                {
+                    foreach (var b in g.Items)
+                    {
+                        _BlockTrackerOfId.Remove(b.Id);
+                        if(!string.IsNullOrEmpty(block.Metadata))
+                            RemoveMetadata(b.ExtractMetadata());
+                    }
+                }
+                else
+                {
+                    _BlockTrackerOfId.Remove(block.Id);
+                    if(!string.IsNullOrEmpty(block.Metadata))
+                        RemoveMetadata(block.ExtractMetadata());
+                }
             }
 
             RemoveModulePart(module);

@@ -321,7 +321,7 @@
                               Height="24"
                               HorizontalAlignment="Center"
                               Stretch="Uniform"
-                              Stroke="{f:Brush AdaptiveLevel3}"
+                              Stroke="Gray"
                               StrokeThickness="1"
                               Width="24"
                               VerticalAlignment="Center"/>
