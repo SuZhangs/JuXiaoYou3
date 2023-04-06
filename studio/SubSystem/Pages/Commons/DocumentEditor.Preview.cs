@@ -115,15 +115,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return r1.IsFinished;
             }
             
-            if(b is RadarPreviewBlock rp)
+            if(b is ChartPreviewBlock rp)
             {
                 var r1 = await EditChartPreviewBlockViewModel.Edit(rp, Document.Parts);
-                return r1.IsFinished;
-            }
-            
-            if(b is HistogramPreviewBlock hp)
-            {
-                var r1 = await EditChartPreviewBlockViewModel.Edit(hp, Document.Parts);
                 return r1.IsFinished;
             }
 

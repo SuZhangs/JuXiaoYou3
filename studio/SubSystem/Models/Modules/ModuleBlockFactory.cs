@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Acorisoft.FutureGL.Forest.Controls.Selectors;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
 using Acorisoft.FutureGL.MigaDB.Utils;
@@ -449,21 +450,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     Id = ID.Get(),
                     Type = kind,
                 },
-                MetadataKind.HistogramChart     => new HistogramPreviewBlock
+                MetadataKind.HistogramChart     => new ChartPreviewBlock
                 {
-                    Id    = ID.Get(),
-                    Type  = kind,
-                    Axis  = new List<string>(),
-                    Value = new List<int>(),
-                    Color = "#007ACC"
+                    Id        = ID.Get(),
+                    Type      = kind,
+                    ChartType = ChartType.Histogram
                 },
-                MetadataKind.RadarChart => new RadarPreviewBlock
+                MetadataKind.RadarChart => new ChartPreviewBlock
                 {
                     Id    = ID.Get(),
                     Type  = kind,
-                    Axis  = new List<string>(),
-                    Value = new List<int>(),
-                    Color = "#007ACC"
+                    ChartType = ChartType.Radar
                 },
 
                 MetadataKind.Audio     => null,
