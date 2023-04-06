@@ -32,7 +32,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
-                  Accent="Indigo"
+                  Accent="{f:Brush HighlightA3}"
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
         <Grid>

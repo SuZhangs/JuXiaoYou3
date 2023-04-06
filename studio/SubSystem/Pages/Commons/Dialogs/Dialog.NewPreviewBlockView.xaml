@@ -31,13 +31,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
-                  Accent="Indigo"
+                  Accent="{f:Brush HighlightA3}"
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
         
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
