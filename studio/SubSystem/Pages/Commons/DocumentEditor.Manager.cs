@@ -183,7 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 if (part is PartOfBasic pob)
                 {
-                    _basicPart = pob;
+                    BasicPart = pob;
                 }
                 else if (part is PartOfDetail pod)
                 {
@@ -198,7 +198,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void AddMetadataIntern()
         {
-            foreach (var metadata in _basicPart.Buckets)
+            foreach (var metadata in BasicPart.Buckets)
             {
                 UpsertMetadata(metadata.Key, metadata.Value);
             }
@@ -218,12 +218,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             // 检查当前打开的文档是否缺失指定的DataPart
 
-            if (_basicPart is null)
+            if (BasicPart is null)
             {
-                _basicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
-                Document.Parts.Add(_basicPart);
+                BasicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
+                Document.Parts.Add(BasicPart);
                 Name   = Cache.Name;
                 Gender = Language.GetText("global.DefaultGender");
+            }
+
+            if (PreviewPart is null)
+            {
+                PreviewPart = new PartOfPreview { Blocks = new ObservableCollection<PreviewBlock>() };
+                Document.Parts.Add(PreviewPart);
             }
 
             IsDataPartExistence(Document);

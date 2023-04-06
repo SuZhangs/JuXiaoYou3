@@ -20,6 +20,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Models.Previews;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
@@ -30,5 +31,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     partial class DocumentEditorBase
     {
         
+        /// <summary>
+        /// 自定义部件
+        /// </summary>
+        /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
+        [NullCheck(UniTestLifetime.Constructor)]
+        public PartOfPreview PreviewPart { get; private set; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<PreviewBlockUI> PreviewBlocks { get; init; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddPreviewBlockCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand RefreshPreviewBlockCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ExportPreviewBlockAsPdfCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ExportPreviewBlockAsPictureCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ExportPreviewBlockAsMarkdownCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<PreviewBlockUI> RemovePreviewBlockCommand { get; }
     }
 }

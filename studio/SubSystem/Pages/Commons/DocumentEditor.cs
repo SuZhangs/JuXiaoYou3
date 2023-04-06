@@ -22,6 +22,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Models.Previews;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -47,7 +48,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private   FrameworkElement _subView;            // ------------------
         private   object           _selectedDetailPart; // Detail
         private   FrameworkElement _detailPartOfDetail; // ------------------
-        private   PartOfBasic      _basicPart;
         protected Document         Document;            // Document
         protected DocumentCache    Cache;               //------------------
         private   PartOfModule     _selectedModulePart; // Module
@@ -61,13 +61,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
             
-            ContentBlocks          = new ObservableCollection<ModuleBlockDataUI>();
-            InternalSubViews       = new ObservableCollection<SubViewBase>();
-            SubViews               = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
-            DetailParts            = new ObservableCollection<PartOfDetail>();
-            InvisibleDataParts     = new ObservableCollection<DataPart>();
-            ModuleParts            = new ObservableCollection<PartOfModule>();
-            PreviewBlocks          = new ObservableCollection<PreviewBlock>();
+            ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
+            InternalSubViews   = new ObservableCollection<SubViewBase>();
+            SubViews           = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
+            DetailParts        = new ObservableCollection<PartOfDetail>();
+            InvisibleDataParts = new ObservableCollection<DataPart>();
+            ModuleParts        = new ObservableCollection<PartOfModule>();
+            PreviewBlocks      = new ObservableCollection<PreviewBlockUI>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             Xaml.Get<IAutoSaveService>()
@@ -99,6 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            
             Initialize();
         }
 

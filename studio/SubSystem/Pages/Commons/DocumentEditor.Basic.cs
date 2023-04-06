@@ -18,37 +18,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private string GetOrAddMetadata(string name)
         {
-            if (_basicPart.Buckets.TryGetValue(name, out var value))
+            if (BasicPart.Buckets.TryGetValue(name, out var value))
             {
                 return value;
             }
 
             value = string.Empty;
-            _basicPart.Buckets.TryAdd(name, value);
+            BasicPart.Buckets.TryAdd(name, value);
             return value;
         }
 
         private string GetOrAddMetadata(string name, string defaultValue)
         {
-            if (_basicPart.Buckets.TryGetValue(name, out var value))
+            if (BasicPart.Buckets.TryGetValue(name, out var value))
             {
                 return value;
             }
 
             value = defaultValue;
-            _basicPart.Buckets.TryAdd(name, value);
+            BasicPart.Buckets.TryAdd(name, value);
             return value;
         }
 
         private void UpsertMetadata(string name, string value)
         {
-            if (_basicPart.Buckets.ContainsKey(name))
+            if (BasicPart.Buckets.ContainsKey(name))
             {
-                _basicPart.Buckets[name] = value;
+                BasicPart.Buckets[name] = value;
             }
             else
             {
-                _basicPart.Buckets.Add(name, value);
+                BasicPart.Buckets.Add(name, value);
             }
 
             AddMetadata(new Metadata
@@ -151,7 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 RaiseUpdated();
             }
         }
-        
+
         public string Intro
         {
             get => GetOrAddMetadata(MetaNameOfIntro);
@@ -201,5 +201,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 RaiseUpdated();
             }
         }
+
+        public PartOfBasic BasicPart { get; private set; }
     }
 }

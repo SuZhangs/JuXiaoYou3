@@ -357,9 +357,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<ModuleBlockDataUI> ContentBlocks { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<PreviewBlock> PreviewBlocks { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddModulePartCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
