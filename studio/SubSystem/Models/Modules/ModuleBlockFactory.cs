@@ -613,8 +613,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             MetadataKind.Rarity,
         };
 
-        public static readonly MetadataKind[] ChartMetadataKinds = new[]
+        public static readonly MetadataKind[] AdvancedMetadataKinds = new[]
         {
+            MetadataKind.String,
+            /* MetadataKind.Service, */
             MetadataKind.HistogramChart,
             MetadataKind.RadarChart,
         };

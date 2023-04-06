@@ -89,7 +89,7 @@
     /// <summary>
     /// 表示一个模组内容块。
     /// </summary>
-    public abstract class ModuleBlock : StorageObject, IGlobalizationTextSupport
+    public abstract class ModuleBlock : StorageObject
     {
         public bool CompareTemplate(ModuleBlock block)
         {
@@ -153,5 +153,10 @@
         public string ToolTips { get; set; }
         
         public abstract MetadataKind? ExtractType { get; }
+
+        public sealed override string ToString()
+        {
+            return Name;
+        }
     }
 }

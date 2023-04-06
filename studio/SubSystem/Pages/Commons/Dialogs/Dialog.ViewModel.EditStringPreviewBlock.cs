@@ -82,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
-                       .Dialog(new EditPreviewBlockViewModel(), new RouteEventArgs
+                       .Dialog(new EditStringPreviewBlockViewModel(), new RouteEventArgs
                        {
                            Args = new object[]
                            {

@@ -21,7 +21,7 @@
                     Effect="{StaticResource MenuItem.ShadowEffect}"
                     Height="256"
                     Margin="4"
-                    Width="240">
+                    Width="256">
                 <DockPanel>
                     <Border DockPanel.Dock="Top"
                             Background="{f:Brush BackgroundLevel3}"
@@ -35,17 +35,18 @@
 
                     <Grid Margin="16">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="96" />
+                            <ColumnDefinition Width="128" />
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <ItemsControl Grid.Column="0"
                                       ItemsSource="{Binding NameLists,Mode=OneWay}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Height="32"
-                                               Text="{Binding}"
-                                               Padding="0 6"
-                                               VerticalAlignment="Center" />
+                                    <Border Height="32">
+                                        <TextBlock Text="{Binding}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" />
+                                    </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -54,6 +55,35 @@
                                       HorizontalAlignment="Right"
                                       ItemsSource="{Binding DataLists,Mode=OneWay}" />
 
+                        <Border Background="Transparent"
+                                Grid.ColumnSpan="2" />
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+
+
+        <DataTemplate DataType="{x:Type thisModel:StringPreviewBlockUI}">
+            <Border Background="{f:Brush BackgroundLevel1}"
+                    CornerRadius="6"
+                    Effect="{StaticResource MenuItem.ShadowEffect}"
+                    Height="256"
+                    Margin="4"
+                    Width="240">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top"
+                            Background="{f:Brush BackgroundLevel3}"
+                            CornerRadius="6 6 0 0"
+                            Padding="16 8">
+                        <TextBlock FontSize="15"
+                                   FontWeight="Bold"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </Border>
+
+                    <Grid Margin="16">
+                        <TextBlock Text="{Binding Value}"
+                                   TextWrapping="Wrap"/>
                         <Border Background="Transparent"
                                 Grid.ColumnSpan="2" />
                     </Grid>
@@ -115,10 +145,11 @@
 
         <DataTemplate DataType="{x:Type thisModel:PreviewBlockColorDataUI}">
             <Border DockPanel.Dock="Right"
-                    Background="{Binding Value}"
+                    Background="{Binding Value, Mode=OneWay}"
                     CornerRadius="3"
-                    Height="32"
-                    Width="32" />
+                    Margin="4"
+                    Height="24"
+                    Width="24" />
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>

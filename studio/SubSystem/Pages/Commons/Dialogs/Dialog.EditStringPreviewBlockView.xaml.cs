@@ -11,10 +11,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             InitializeComponent();
         }
 
-        protected override void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel<EditPreviewBlockViewModel>().TargetElement = Collection;
-            base.OnLoaded(sender, e);
-        }
     }
 }

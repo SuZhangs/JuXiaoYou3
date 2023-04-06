@@ -29,7 +29,7 @@
     /// </summary>
     public class ColorBlock : ModuleBlock, IColorBlock, IModuleBlock<string>, IMetadataTextSource
     {
-        public string GetValue() => Value;
+        public string GetValue() => string.IsNullOrEmpty(Value) ? Fallback : Value;
         public override string GetLanguageId() => "__Color";
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

@@ -28,7 +28,7 @@
                   CompletedCommand="{Binding CompletedCommand}">
         <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    ItemsSource="{Binding Templates}"
-                   SelectionMode="Multiple"
+                   SelectedItem="{Binding SelectedBlock,Mode=TwoWay}"
                    x:Name="Collection">
             <f:ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

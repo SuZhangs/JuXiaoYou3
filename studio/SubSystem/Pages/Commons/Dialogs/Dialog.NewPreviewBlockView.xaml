@@ -34,31 +34,36 @@
                   Accent="{f:Brush HighlightA3}"
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
-        
+
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
 
             <!-- 选项 -->
             <f:TreeView Grid.Column="0"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
-                <f:TreeViewItem Header="基础块" 
+                <f:TreeViewItem f:Language.Id="__GroupPreview"
+                                Header="分组预览" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicMetadataKinds}"/>
-                <f:TreeViewItem Header="图表块" 
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicMetadataKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="0 8"
+                                       ItemWidth="230"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem>
+                <f:TreeViewItem f:Language.Id="__ComplexPreview"
+                                Header="复杂预览" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartMetadataKinds}"/>
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedMetadataKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="0 8"
+                                       ItemWidth="230"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem>
             </f:TreeView>
-
-            <!-- 预览 -->
-            <f:StretchPanel Grid.Column="1">
-                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                <Border Background="{x:Static f:Xaml.Transparent}"/>
-            </f:StretchPanel>
         </Grid>
     </f:DialogPage>
 </f:ForestUserControl>

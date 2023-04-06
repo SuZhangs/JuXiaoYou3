@@ -268,7 +268,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     
     public sealed class PreviewBlockColorDataUI : PreviewBlockDataUI
     {
-        private Color _value;
+        private SolidColorBrush _value;
         
         public PreviewBlockColorDataUI(IPreviewBlockData value) : base(value)
         {
@@ -278,13 +278,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
 
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            Value = Xaml.FromHex(GetStringValue(metadataTracker, blockTracker));
+            var raw = GetStringValue(metadataTracker, blockTracker);
+            var color = Xaml.FromHex(raw);
+            Value = new SolidColorBrush(color);
         }
 
         /// <summary>
         /// 获取或设置 <see cref="Value"/> 属性。
         /// </summary>
-        public Color Value
+        public SolidColorBrush Value
         {
             get => _value;
             set => SetValue(ref _value, value);
