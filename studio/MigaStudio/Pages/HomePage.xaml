@@ -21,20 +21,11 @@
         <thisConverters:MainFeatureConverter x:Key="NameConverter"/>
     </UserControl.Resources>
     <DockPanel Margin="16">
-
         <f:ListBox DockPanel.Dock="Left"
                    f:XamlAssist.GroupName="GroupId"
-                   SelectedItem="{Binding SelectedFeature,Mode=TwoWay}">
-            <f:ListBox.ItemsSource>
-                <CompositeCollection>
-                    <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.Features,Mode=OneWay}" />
-                    <ftk:ToolButton Content="{f:Language global.Setting}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.GotoPageCommand,Mode=OneWay}"
-                                    CommandParameter="{x:Type local:SettingViewModel}"
-                                    Icon="{StaticResource FeatherIcon.Settings}"
-                                    ShowText="True" />
-                </CompositeCollection>
-            </f:ListBox.ItemsSource>
+                   SelectedItem="{Binding SelectedFeature,Mode=TwoWay}"
+                   ItemsSource="{Binding Features,Mode=OneWay}"
+                   Width="320">
             <f:ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">
                     <TextBlock Margin="4"
@@ -50,10 +41,10 @@
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
                                         <DockPanel>
                                             <TextBlock DockPanel.Dock="Top"
-                                                       Text="{Binding Converter={StaticResource NameConverter}}"
+                                                       Text="{Binding Name, Converter={StaticResource NameConverter}}"
                                                        VerticalAlignment="Center"
                                                        Margin="5,0,0,0" />
-                                            <ItemsPresenter />
+                                            <ItemsPresenter Margin="24 8"/>
                                         </DockPanel>
                                     </ControlTemplate>
                                 </Setter.Value>

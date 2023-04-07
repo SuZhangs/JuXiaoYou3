@@ -41,6 +41,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Geography", DocumentType.Geography);
             CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Item", DocumentType.Item);
             CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Other", DocumentType.Other);
+            CreateGalleryFeature<UniverseViewModel>("global.compose", "global.compose", null);
+            CreateGalleryFeature<UniverseViewModel>("global.service", "global.service", null);
+            CreateGalleryFeature<UniverseViewModel>("global.universe", "global.universe", null);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)
