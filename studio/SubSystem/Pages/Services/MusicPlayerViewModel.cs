@@ -24,6 +24,7 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Acorisoft.FutureGL.MigaStudio.Services;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
@@ -168,46 +169,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
                 return;
             }
 
-            foreach (var fileName in opendlg.FileNames)
-            {
-                Music music;
-                var   fileName1 = Path.GetFileNameWithoutExtension(fileName) + ".mp3";
-
-                if (MusicEngine.HasFile(fileName1))
-                {
-                    music = MusicEngine.GetFile(fileName1);
-                }
-                else
-                {
-                    var file      = File.Create(fileName);
-                    var musicFile = (AudioFile)file;
-                    var tag       = musicFile.GetTag(TagTypes.Id3v2);
-                    var cover     = Path.GetFileNameWithoutExtension(fileName) + ".png";
-
-                    if (tag.Pictures is not null && tag.Pictures?.Length > 0)
-                    {
-                        var pic = tag.Pictures.First();
-                        cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
-                        await MusicEngine.WriteAlbum(pic.Data.Data, cover);
-                    }
-
-
-                    music = new Music
-                    {
-                        Id     = fileName1,
-                        Path   = fileName,
-                        Name   = tag.Title,
-                        Author = tag.FirstPerformer,
-                        Cover  = cover
-                    };
-
-                    MusicEngine.AddFile(music);
-                }
-
-                //
-                //
-                Playlist.Items.Add(music);
-            }
+            await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, x => Playlist.Items.Add(x));
         }
 
         private void RemoveMusicFromPlaylistImpl(Music item)
