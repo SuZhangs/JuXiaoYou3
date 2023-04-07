@@ -23,6 +23,25 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Outboards        = new ObservableCollection<ITabViewModel>();
             AddTabCommand    = new RelayCommand<object>(AddTabImpl);
             RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
+            
+        }
+
+        /// <summary>
+        /// 接收Windows参数
+        /// </summary>
+        /// <param name="windowKeyEventArgs">键盘参数</param>
+        public void SetWindowEvent(WindowKeyEventArgs windowKeyEventArgs)
+        {
+            CurrentViewModel?.SetWindowEvent(windowKeyEventArgs);
+        }
+
+        /// <summary>
+        /// 接收Windows参数
+        /// </summary>
+        /// <param name="windowKeyEventArgs">拖拽参数</param>
+        public void SetWindowEvent(WindowDragDropArgs windowKeyEventArgs)
+        {
+            CurrentViewModel?.SetWindowEvent(windowKeyEventArgs);
         }
 
         #region AddTab / RemoveTab

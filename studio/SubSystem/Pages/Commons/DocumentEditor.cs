@@ -173,12 +173,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Resume()
         {
-            InternalSubViews.Clear();
             CreateSubViews(InternalSubViews);
-            SelectedSubView    = InternalSubViews.FirstOrDefault();
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
-            PreviewBlocks.AddRange(PreviewPart.Blocks.Select(PreviewBlockUI.GetUI), true);
 
             //
             // TODO:数据恢复
@@ -187,8 +184,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Suspend()
         {
-            InternalSubViews.Clear();
-            PreviewBlocks.Clear();
             base.Suspend();
         }
 

@@ -82,6 +82,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             ThreadPool.QueueUserWorkItem(_ => AsyncJobProcess());
         }
 
+        public void SetWindowEvent(WindowKeyEventArgs e)
+        {
+        }
+
+        public void SetWindowEvent(WindowDragDropArgs e)
+        {
+        }
+        
         /// <summary>
         /// 获取或设置 <see cref="Caption"/> 属性。
         /// </summary>

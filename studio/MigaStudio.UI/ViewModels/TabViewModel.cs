@@ -1,5 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Acorisoft.FutureGL.Forest.Inputs;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
@@ -18,6 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected TabViewModel()
         {
             ApprovalRequired = true;
+            KeyInputs        = new List<KeyInput>(8);
         }
 
         private static string Unsave
@@ -127,6 +131,87 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             vm.Startup(NavigationParameter.OpenDocument(cache, Controller).Params);
             Controller.Start(vm);
         }
+
+        #endregion
+
+        #region WindowEventArgs
+
+        /// <summary>
+        /// 接收Windows参数
+        /// </summary>
+        /// <param name="e">键盘参数</param>
+        public void SetWindowEvent(WindowKeyEventArgs e)
+        {
+            OnKeyDown(e);
+        }
+
+        /// <summary>
+        /// 接收Windows参数
+        /// </summary>
+        /// <param name="e">拖拽参数</param>
+        public void SetWindowEvent(WindowDragDropArgs e)
+        {
+            // TODO:
+        }
+
+        #endregion
+
+        #region KeyboardBinding
+
+        private void OnKeyDown(WindowKeyEventArgs e)
+        {
+            if (KeyInputs.Count == 0)
+            {
+                return;
+            }
+
+            var modifier = e.Args.KeyboardDevice.Modifiers;
+            var key      = e.Args.Key;
+
+            foreach (var input in KeyInputs)
+            {
+                if (input.Modifiers == ModifierKeys.None && key == input.Key)
+                {
+                    input.Expression?.Invoke();
+                }
+                else if (key == input.Key && modifier == input.Modifiers)
+                {
+                    input.Expression?.Invoke();
+                }
+            }
+        }
+
+        protected void AddKeyBinding(Key key, Action expression)
+        {
+            if (expression is null)
+            {
+                return;
+            }
+
+            KeyInputs.Add(new KeyInput
+            {
+                Key        = key,
+                Modifiers  = ModifierKeys.None,
+                Expression = expression
+            });
+        }
+
+        protected void AddKeyBinding(ModifierKeys modifier, Key key, Action expression)
+        {
+            if (expression is null)
+            {
+                return;
+            }
+
+            KeyInputs.Add(new KeyInput
+            {
+                Key        = key,
+                Modifiers  = modifier,
+                Expression = expression
+            });
+        }
+
+        protected List<KeyInput> KeyInputs { get; }
 
         #endregion
 

@@ -1,4 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -12,8 +14,27 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected TabBaseAppViewModel()
         {
             ApplicationModel = Xaml.Get<ApplicationModel>();
+            
+            var web = Xaml.Get<IWindowEventBroadcast>();
+            
+            web.Keys
+               .Subscribe(OnWindowEventRouting)
+               .DisposeWith(Collector);
+            web.Drags
+               .Subscribe(OnWindowEventRouting)
+               .DisposeWith(Collector);
         }
-        
+
+        private void OnWindowEventRouting(WindowKeyEventArgs e)
+        {
+            CurrentController?.SetWindowEvent(e);
+        }
+
+        private void OnWindowEventRouting(WindowDragDropArgs e)
+        {
+            CurrentController?.SetWindowEvent(e);
+        }
+
         protected void OnInitialize()
         {
             _initialized = true;
@@ -31,18 +52,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 StartOverride();
             }
-            
         }
 
         protected virtual void StartOverride()
         {
-            
         }
 
         protected virtual void OnControllerChanged(IViewController oldController, IViewController newController)
         {
         }
-        
+
         /// <summary>
         /// 应用程序模型
         /// </summary>
@@ -68,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             set
             {
                 OnControllerChanged(_currentController, value);
-                
+
                 SetValue(ref _currentController, value);
             }
         }

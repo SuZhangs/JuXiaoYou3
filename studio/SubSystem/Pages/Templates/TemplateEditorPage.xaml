@@ -114,7 +114,7 @@
                                               Header="名字"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                        <f:HeaderedSingleLine f:Language.Id="global.mystery"
+                        <f:HeaderedSingleLine f:Language.Id="global.universe"
                                               Margin="0 8"
                                               Header="世界观名字"
                                               Text="{Binding For,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

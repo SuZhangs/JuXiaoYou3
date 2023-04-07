@@ -46,8 +46,8 @@
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
-            <ftk:ToolButton f:Language.Id="global.Preview"
-                            Content="预览"
+            <ftk:ToolButton f:Language.Id="global.Play"
+                            Content="播放"
                             Command="{Binding PlayMusicCommand}"
                             CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.Upload}"
