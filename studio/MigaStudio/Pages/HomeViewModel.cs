@@ -21,9 +21,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     public class HomeViewModel : TabViewModel
     {
         private readonly Subject<ViewModelBase> _onStart;
+
         public HomeViewModel()
         {
-            _onStart          = new Subject<ViewModelBase>();
+            _onStart = new Subject<ViewModelBase>();
             _onStart.ObserveOn(Scheduler)
                     .Subscribe(x => SelectedViewModel = x)
                     .DisposeWith(Collector);
@@ -35,15 +36,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            CreateGalleryFeature<UniverseViewModel>("global.universe", "__Universe", null);
-            CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Character", DocumentType.Character);
-            CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Ability", DocumentType.Ability);
-            CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Geography", DocumentType.Geography);
-            CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Item", DocumentType.Item);
-            CreateDocumentGalleryFeature<DocumentGalleryViewModel>("__Other", DocumentType.Other);
-            CreateGalleryFeature<UniverseViewModel>("global.compose", "global.compose", null);
-            CreateGalleryFeature<UniverseViewModel>("global.service", "global.service", null);
-            CreateGalleryFeature<UniverseViewModel>("global.universe", "global.universe", null);
+            const string Setting   = "global.setting";
+            const string StartUp   = "global.startup";
+            const string Documents = "global.documents";
+            const string Compose   = "global.compose";
+            const string Service   = "global.service";
+            const string Tools     = "global.tools";
+            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Home", null);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
+            CreateGalleryFeature<UniverseViewModel>(Compose, Compose, null);
+            CreateGalleryFeature<UniverseViewModel>(Service, Service, null);
+            CreateGalleryFeature<UniverseViewModel>(Tools, Tools, null);
+            CreatePageFeature<SettingViewModel>(Setting, Setting, null);
+        }
+
+        private void CreatePageFeature<T>(string group, string name, params object[] e)
+        {
+            var f = new MainFeature
+            {
+                GroupId   = group,
+                NameId    = name,
+                IsGallery = false,
+                ViewModel = typeof(T),
+                Parameter = e
+            };
+            Features.Add(f);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)
@@ -59,11 +81,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
 
-        private void CreateDocumentGalleryFeature<T>(string name, DocumentType e)
-        {
-            CreateGalleryFeature<T>("global.documents", name, e);
-        }
-
 
         private async Task RunFeature(MainFeature feature)
         {
@@ -74,14 +91,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             if (feature.IsDialog)
             {
-
                 await DialogService().Dialog(Xaml.GetViewModel<IDialogViewModel>(feature.ViewModel));
                 return;
             }
 
-            var vm = feature.IsGallery ? feature.Gallery : feature.ViewModel;
-            var vm1 = Controller.Start(vm, feature.Parameter);
-            _onStart.OnNext(vm1);
+            if (feature.IsGallery)
+            {
+                var vm = Controller.Start(feature.Gallery, feature.Parameter);
+                _onStart.OnNext(vm);
+                return;
+            }
+
+            Controller.New(feature.ViewModel);
         }
 
         private void GotoPageImpl(Type type)
@@ -95,8 +116,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 .Dialog(Xaml.GetViewModel<IDialogViewModel>(type));
         }
 
-        private MainFeature _selectedFeature;
-        private ViewModelBase      _selectedViewModel;
+        private MainFeature   _selectedFeature;
+        private ViewModelBase _selectedViewModel;
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedViewModel\"/> 属性。
@@ -106,6 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             get => _selectedViewModel;
             set => SetValue(ref _selectedViewModel, value);
         }
+
         /// <summary>
         /// 获取或设置 <see cref="SelectedFeature"/> 属性。
         /// </summary>
