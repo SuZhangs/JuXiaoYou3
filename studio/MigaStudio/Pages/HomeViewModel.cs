@@ -36,7 +36,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            const string Setting   = "global.setting";
             const string StartUp   = "global.startup";
             const string Documents = "global.documents";
             const string Compose   = "global.compose";
@@ -44,28 +43,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             const string Tools     = "global.tools";
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Home", null);
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, Compose, null);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, Service, null);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, Tools, null);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
-            CreateGalleryFeature<UniverseViewModel>(Compose, Compose, null);
-            CreateGalleryFeature<UniverseViewModel>(Service, Service, null);
-            CreateGalleryFeature<UniverseViewModel>(Tools, Tools, null);
-            CreatePageFeature<SettingViewModel>(Setting, Setting, null);
-        }
-
-        private void CreatePageFeature<T>(string group, string name, params object[] e)
-        {
-            var f = new MainFeature
-            {
-                GroupId   = group,
-                NameId    = name,
-                IsGallery = false,
-                ViewModel = typeof(T),
-                Parameter = e
-            };
-            Features.Add(f);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)
@@ -74,8 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 GroupId   = group,
                 NameId    = name,
-                IsGallery = true,
-                Gallery   = typeof(T),
+                ViewModel   = typeof(T),
                 Parameter = e
             };
             Features.Add(f);
@@ -95,14 +79,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (feature.IsGallery)
-            {
-                var vm = Controller.Start(feature.Gallery, feature.Parameter);
-                _onStart.OnNext(vm);
-                return;
-            }
-
-            Controller.New(feature.ViewModel);
+            
+            var vm = Controller.Start(feature.ViewModel, feature.Parameter);
+            _onStart.OnNext(vm);
         }
 
         private void GotoPageImpl(Type type)
