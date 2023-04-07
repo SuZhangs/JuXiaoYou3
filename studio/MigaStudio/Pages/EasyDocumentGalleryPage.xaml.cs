@@ -3,7 +3,7 @@
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
 
-    [Connected(View = typeof(SimpleDocumentGalleryPage), ViewModel = typeof(SimpleGalleryViewModel))]
+    [Connected(View = typeof(SimpleDocumentGalleryPage), ViewModel = typeof(EasyDocumentGalleryViewModel))]
     public partial class SimpleDocumentGalleryPage
     {
         public SimpleDocumentGalleryPage()

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class SimpleGalleryViewModel : TabViewModel
+    public class EasyDocumentGalleryViewModel : TabViewModel
     {
         
     }
