@@ -47,13 +47,15 @@
         }
     }
     
-    public abstract class PartOfDetailPlaceHolder : PartOfDetail, IPartOfDetail, IGlobalizationTextSupport
+    public abstract class PartOfDetailPlaceHolder : PartOfDetail, IPartOfDetail, ITextService
     {
+        public bool UseLanguageService() => true;
+        
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetLanguageId() => Id;
+        public string GetTextSource() => Id;
 
         /// <summary>
         /// 是否为占位符

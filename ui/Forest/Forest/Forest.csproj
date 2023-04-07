@@ -43,4 +43,8 @@
       <Resource Include="Effects\Bitmaps\GrayBitmapEffect.ps" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\frameworks\MigaUtils\MigaUtils.csproj" />
+    </ItemGroup>
+
 </Project>

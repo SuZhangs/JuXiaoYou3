@@ -126,6 +126,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             if (ms.IsPlaying
                   .CurrentValue)
             {
+
+                if (ms.Music.CurrentValue == part)
+                {
+                    return;
+                }
+
                 var hash = ms.Playlist
                              .CurrentValue
                              .Items

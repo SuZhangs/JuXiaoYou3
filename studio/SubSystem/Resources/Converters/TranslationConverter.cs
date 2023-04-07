@@ -27,9 +27,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
         private static string GetText(object value)
         {
-            if (value is IGlobalizationTextSupport gts)
+            if (value is ITextService txtSrv)
             {
-                return Language.GetText(gts.GetLanguageId());
+                var txtSrc = txtSrv.GetTextSource();
+                return txtSrv.UseLanguageService() ?  Language.GetText(txtSrc) : txtSrc;
             }
 
             if (value is Enum @enum)
