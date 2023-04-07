@@ -5,25 +5,78 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
+                   xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                   xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                   xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
                      mc:Ignorable="d"
                      d:DesignHeight="300"
                      d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EasyDocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+
+        <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+
+        <DataTemplate DataType="{x:Type doc:DocumentCache}">
+            <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectDocumentCommand}"
+                            CommandParameter="{Binding}"
+                            Margin="4"
+                            Padding="8">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="84"
+                            Width="84">
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <TextBlock FontSize="14"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}" />
+                </DockPanel>
+            </f:SimpleButton>
+        </DataTemplate>
+    </UserControl.Resources>
     <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
         <f:ForestSection.ToolBar>
             <StackPanel HorizontalAlignment="Right"
                         Margin="0 0 0 4"
                         Orientation="Horizontal">
                 <ftk:ToolButton Content="添加"
-                                Icon="{StaticResource FeatherIcon.Plus}"
-                                ShowText="True"/>
-                <ftk:ToolButton Content="添加"
+                                Command="{Binding NewDocumentCommand}"
                                 Icon="{StaticResource FeatherIcon.Plus}"
                                 ShowText="True"/>
             </StackPanel>
         </f:ForestSection.ToolBar>
+
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal">
+                
+            </StackPanel>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </f:ForestSection>
 </f:ForestUserControl>

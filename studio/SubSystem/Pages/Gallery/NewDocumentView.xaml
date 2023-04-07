@@ -19,30 +19,18 @@
     <UserControl.Resources>
         <thisConverters:DocumentTypeConverter x:Key="Translation" />
     </UserControl.Resources>
-    <Border Background="{f:BackgroundBrush}"
-            CornerRadius="10"
-            BorderThickness="0 4 0 0"
-            BorderBrush="{f:Brush HighlightA3}"
-            Padding="16">
+    <f:DialogPage Background="{f:BackgroundBrush}"
+                  Accent="{f:Brush HighlightA3}"
+                  Title="{Binding Title}"
+                  CancelCommand="{Binding CancelCommand}"
+                  CompletedCommand="{Binding CompletedCommand}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!-- 标题 -->
-            <TextBlock Grid.Row="0"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="{f:Brush HighlightA3}"
-                       HorizontalAlignment="Center"
-                       Margin="0 16 0 0"
-                       Text="{thisMarkups:Text dialog.title.NewDocumentWizard}"
-                       VerticalAlignment="Top" />
-
-            <Grid Grid.Row="1"
-                  Margin="16">
+            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="128" />
                     <RowDefinition Height="Auto" />
@@ -64,16 +52,17 @@
                     </Border>
                 </f:LooklessButton>
 
-                <ui:TextBox Grid.Row="1"
-                            Margin="48 24"
-                            PlaceholderText="{thisMarkups:Text text.name}"
-                            Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <f:HeaderedSingleLine Grid.Row="1"
+                                        Margin="48 24"
+                                        Header="{f:Language text.name}"
+                                        Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                 <f:ListBox Grid.Row="2"
                            HorizontalAlignment="Center"
                            Margin="0 8 0 0"
                            ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
-                           SelectedItem="{Binding Type,Mode=TwoWay}">
+                           SelectedItem="{Binding Type,Mode=TwoWay}"
+                           Visibility="{Binding Visibility}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center"
@@ -88,27 +77,6 @@
                     </ListBox.ItemsPanel>
                 </f:ListBox>
             </Grid>
-
-            <!-- 按钮 -->
-            <UniformGrid Grid.Row="2"
-                         Columns="2"
-                         HorizontalAlignment="Right"
-                         Height="48"
-                         Margin="16"
-                         Rows="1"
-                         Width="280">
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
-                                IconSize="29"
-                                IsDefault="True"
-                                Content="{x:Static f:Language.ConfirmText}"
-                                Command="{Binding CompletedCommand}"
-                                Purpose="CallToAction" />
-
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
-                                Content="{x:Static f:Language.CancelText}"
-                                Command="{Binding CancelCommand}"
-                                Purpose="Close" />
-            </UniformGrid>
         </Grid>
-    </Border>
+    </f:DialogPage>
 </f:ForestUserControl>

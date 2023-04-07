@@ -16,6 +16,8 @@ using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
+    public class EasyDocumentGalleryViewModelProxy : BindingProxy<EasyDocumentGalleryViewModel>{}
+    
     public class EasyDocumentGalleryViewModel : GalleryViewModel<DocumentCache>
     {
         private int _version;
@@ -43,15 +45,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void OnDocumentSourceChanged()
         {
             var count        = DocumentSource.Count;
-            var maxPageCount = (count + 29) / 30;
+            TotalPageCount = ((count == 0 ? 1 : count) + 29) / 30;
 
-            if (maxPageCount == 1)
+            if (TotalPageCount == 1)
             {
                 PageIndex = 1;
             }
             else
             {
-                PageIndex = Math.Clamp(PageIndex, 1, maxPageCount);
+                PageIndex = Math.Clamp(
+                    PageIndex,
+                    1,
+                    Math.Min(TotalPageCount, PageCountLimited));
             }
             
             JumpPage(PageIndex);
@@ -82,7 +87,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             await DocumentUtilities.AddDocument(DocumentEngine, Type, x =>
             {
-                
+                DocumentSource.Add(x);
+                Collection.Add(x);
             });
         }
 
@@ -108,7 +114,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            DocumentUtilities.RemoveDocument(DocumentEngine, cache, x => { Successful(SubSystemString.OperationOfRemoveIsSuccessful); });
+            DocumentUtilities.RemoveDocument(DocumentEngine, cache, x =>
+            {
+                DocumentSource.Remove(x);
+                Collection.Remove(x);
+                Successful(SubSystemString.OperationOfRemoveIsSuccessful);
+            });
         }
 
         [NullCheck(UniTestLifetime.Constructor)]

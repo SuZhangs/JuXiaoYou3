@@ -292,7 +292,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected void JumpPage(int index)
         {
-            if (index < 0 || index >= TotalPageCount)
+            if (index < 0 || index > TotalPageCount)
             {
                 return;
             }
