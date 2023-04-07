@@ -173,7 +173,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Resume()
         {
-            CreateSubViews(InternalSubViews);
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
 

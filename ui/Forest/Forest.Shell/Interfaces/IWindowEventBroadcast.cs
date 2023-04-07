@@ -96,7 +96,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
-            if(e.IsRepeat) 
+            if(e.IsRepeat || e.Key == Key.CapsLock) 
             { 
                 return; 
             }
