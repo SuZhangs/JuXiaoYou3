@@ -65,17 +65,20 @@
 
                     <ftk:ToolButton f:Language.Id="global.new"
                                     Content="新建"
+                                    Command="{Binding NewDocumentCommand}"
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True" />
 
                     <ftk:ToolButton f:Language.Id="global.open"
                                     Content="打开"
+                                    Command="{Binding OpenDocumentCommand}"
                                     Icon="{StaticResource IC.Folder}"
                                     IsFilled="True"
                                     ShowText="True" />
                     <ftk:ToolButton f:Language.Id="global.save"
                                     Content="保存"
+                                    Command="{Binding SaveDocumentCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
                                     ShowText="True" />

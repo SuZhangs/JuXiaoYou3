@@ -19,6 +19,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class PlaylistPartViewModel : KeyValueViewModel
     {
+        private const    string         Data     = "_d";
+        public const     string         Option_1 = "_o";
         private readonly Subject<Music> _threadSafeAdding;
 
         public PlaylistPartViewModel()
@@ -167,9 +169,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             base[Data, Detail.DataBags] = payload;
             EditorViewModel.SetDirtyState();
         }
-
-        private const string Data     = "_d";
-        public const  string Option_1 = "_o";
 
 
         public bool AutoPlay

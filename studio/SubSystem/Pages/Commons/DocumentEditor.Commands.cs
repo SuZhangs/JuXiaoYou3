@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
@@ -23,6 +24,7 @@ using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
@@ -85,6 +87,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             Avatar = avatar;
+        }
+
+        private void NewDocumentImpl()
+        {
+            OnNewDocument();
+        }
+
+        protected virtual void OnNewDocument()
+        {
+
         }
 
         //---------------------------------------------

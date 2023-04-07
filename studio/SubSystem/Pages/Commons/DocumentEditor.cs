@@ -37,22 +37,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Id = "__Detail_Setting";
         }
     }
+
     public class DocumentEditorBaseViewModelProxy : BindingProxy<DocumentEditorBase>
     {
     }
+
     public abstract partial class DocumentEditorBase : TabViewModel
     {
         //
         // Fields
         //
-        //                                                  ------------------
-            // SubViews
-        private   FrameworkElement _subView;            // ------------------
-        private   object           _selectedDetailPart; // Detail
-        private   FrameworkElement _detailPartOfDetail; // ------------------
-        protected Document         Document;            // Document
-        protected DocumentCache    Cache;               //------------------
-        private   PartOfModule     _selectedModulePart; // Module
+        //                                                  
+        // SubViews
+        private   FrameworkElement _subView;
+        private   object           _selectedDetailPart;
+        private   FrameworkElement _detailPartOfDetail;
+        protected Document         Document;
+        protected DocumentCache    Cache;
+        private   PartOfModule     _selectedModulePart;
         private   bool             _dirtyState;
 
 
@@ -63,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
             _BlockTrackerOfId      = new Dictionary<string, ModuleBlock>(StringComparer.OrdinalIgnoreCase);
-            
+
             ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
             InternalSubViews   = new ObservableCollection<SubViewBase>();
             SubViews           = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
@@ -100,7 +102,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftUpDetailPartCommand   = Command<PartOfDetail>(ShiftUpDetailPartImpl, x => NotFirstItem(DetailParts, x));
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
-            
+
             AddPreviewBlockCommand              = AsyncCommand(AddPreviewBlockImpl);
             RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl);
             RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
@@ -110,10 +112,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);
             ExportPreviewBlockAsPictureCommand  = AsyncCommand(ExportPreviewBlockAsPictureImpl);
             ExportPreviewBlockAsMarkdownCommand = AsyncCommand(ExportPreviewBlockAsMarkdownImpl);
-            
+
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
-            
+
             Initialize();
         }
 
