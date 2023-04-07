@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <typeparam name="TViewModel">视图模型类型</typeparam>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        Task<Op<T>> Dialog<T, TViewModel>(RouteEventArgs parameter) where TViewModel : IDialogViewModel;
+        Task<Op<T>> Dialog<T, TViewModel>(RoutingEventArgs parameter) where TViewModel : IDialogViewModel;
         
         /// <summary>
         /// 弹出对话框
@@ -51,7 +51,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel, RouteEventArgs parameter) where TViewModel : IDialogViewModel;
+        Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel, RoutingEventArgs parameter) where TViewModel : IDialogViewModel;
         
         /// <summary>
         /// 弹出对话框
@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        Task<Op<T>> Dialog<T>(IDialogViewModel viewModel, RouteEventArgs parameter);
+        Task<Op<T>> Dialog<T>(IDialogViewModel viewModel, RoutingEventArgs parameter);
         
         /// <summary>
         /// 弹出对话框
@@ -83,7 +83,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        Task<Op<object>> Dialog(IDialogViewModel viewModel, RouteEventArgs parameter);
+        Task<Op<object>> Dialog(IDialogViewModel viewModel, RoutingEventArgs parameter);
 
         /// <summary>
         /// 关闭所有对话框

@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static async Task ImageView(string fileName)
         {
             await Xaml.Get<IDialogService>()
-                       .Dialog(new ImageViewModel(),new RouteEventArgs
+                       .Dialog(new ImageViewModel(),new RoutingEventArgs
                        {
                            Args = new []
                            {
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, IEnumerable<object> options)
         {
             var optionVM = Xaml.GetViewModel<OptionSelectionViewModel>();
-            var parameter = new RouteEventArgs
+            var parameter = new RoutingEventArgs
             {
                 Args = new object[]
                 {

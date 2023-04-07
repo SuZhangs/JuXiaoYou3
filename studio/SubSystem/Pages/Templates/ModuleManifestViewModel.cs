@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            var r1 = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RouteEventArgs
+            var r1 = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RoutingEventArgs
             {
                 Args = new object[]
                 {
@@ -121,7 +121,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             var template = _selectedManifest.Templates;
             var hash = template .Select(x => x.Id)
                                         .ToHashSet();
-            var r = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RouteEventArgs
+            var r = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new RoutingEventArgs
             {
                 Args = new object[]
                 {

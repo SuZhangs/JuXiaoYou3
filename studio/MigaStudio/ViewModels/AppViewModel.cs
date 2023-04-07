@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class AppViewModel : TabBaseAppViewModel
     {
         private readonly GlobalStudioContext _context;
-        private readonly RouteEventArgs           _parameter;
+        private readonly RoutingEventArgs           _parameter;
 
         public AppViewModel()
         {
@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 ControllerSetter = x => CurrentController = x
             };
             
-            _parameter = new RouteEventArgs
+            _parameter = new RoutingEventArgs
             {
                 Args = new object[]
                 {

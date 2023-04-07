@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.Forest.Views
     {
         private string     _text;
 
-        protected override void OnStart(RouteEventArgs parameter)
+        protected override void OnStart(RoutingEventArgs parameter)
         {
             Title = parameter.Args[0]?.ToString();
             base.OnStart(parameter);
@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
         
         public static Task<Op<string>> String(string title) => DialogService()
-                                                       .Dialog<string>(new StringViewModel(), new RouteEventArgs
+                                                       .Dialog<string>(new StringViewModel(), new RoutingEventArgs
                                                        {
                                                            Args = new []{ title }
                                                        });

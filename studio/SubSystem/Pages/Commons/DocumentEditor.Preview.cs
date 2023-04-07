@@ -74,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     null,
                     Document.Parts
                             .Where(x => x is PartOfModule)
-                            .Cast<PartOfModule>()
+                            .OfType<PartOfModule>()
                             .Select(x => x.Blocks)
                             .SelectMany(x => x)
                             .Where(x => !string.IsNullOrEmpty(x.Metadata) && x is not GroupBlock)

@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             // 返回用户选择的模组
             var moduleCaches = await DialogService()
-                .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RouteEventArgs
+                .Dialog<IEnumerable<ModuleTemplateCache>>(new ModuleSelectorViewModel(), new RoutingEventArgs
                 {
                     Args = new object[]
                     {

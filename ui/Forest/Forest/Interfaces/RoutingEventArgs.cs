@@ -3,7 +3,7 @@
     /// <summary>
     /// 参数
     /// </summary>
-    public class RouteEventArgs : Parameter
+    public class RoutingEventArgs : Parameter
     {
         
         /// <summary>

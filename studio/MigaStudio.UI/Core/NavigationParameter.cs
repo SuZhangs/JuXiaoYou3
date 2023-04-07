@@ -8,7 +8,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 {
     public class NavigationParameter
     {
-        private NavigationParameter(RouteEventArgs args)
+        private NavigationParameter(RoutingEventArgs args)
         {
             Params = args;
         }
@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter Empty()
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter NewPage(string id, ITabViewController controller)
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter OpenDocument(IDataCache cache, ITabViewController controller)
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -81,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter OpenFile(string fileName, ITabViewController controller)
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -101,7 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter OpenFile(string fileName, Parameter parameter, ITabViewController controller)
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -121,7 +121,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static NavigationParameter NewPage(ITabViewModel viewModel, ITabViewController controller)
         {
-            var args = new RouteEventArgs
+            var args = new RoutingEventArgs
             {
                 Args = new object[8]
             };
@@ -133,13 +133,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                     Guid.NewGuid().ToString("N"): viewModel.PageId;
             return new NavigationParameter(args);
         }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="viewModel">视图模型</param>
+        /// <param name="controller">控制器</param>
+        /// <param name="parameters">控制器</param>
+        /// <returns>返回一个新的导航参数。</returns>
+        public static NavigationParameter NewPage(ITabViewModel viewModel, ITabViewController controller, object[] parameters)
+        {
+            var args = new RoutingEventArgs
+            {
+                Args = new object[2 + (parameters?.Length ?? 0)]
+            };
+
+            args.Args[0] = controller;
+            args.Args[1] = viewModel.Uniqueness ? 
+                viewModel.GetType().FullName : 
+                string.IsNullOrEmpty(viewModel.PageId) ? 
+                    Guid.NewGuid().ToString("N"): viewModel.PageId;
+            return new NavigationParameter(args);
+        }
 
         /// <summary>
         /// 从一个常规的视图参数中创建
         /// </summary>
         /// <param name="parameter">视图参数</param>
         /// <returns>返回一个新的导航参数。</returns>
-        public static NavigationParameter FromParameter(RouteEventArgs parameter)
+        public static NavigationParameter FromParameter(RoutingEventArgs parameter)
         {
             return new NavigationParameter(parameter);
         }
@@ -168,6 +190,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <summary>
         /// 参数
         /// </summary>
-        public RouteEventArgs Params { get; }
+        public RoutingEventArgs Params { get; }
     }
 }

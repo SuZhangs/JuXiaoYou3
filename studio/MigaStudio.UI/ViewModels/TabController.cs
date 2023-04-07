@@ -164,12 +164,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
         }
         
-        protected virtual void OnStart(RouteEventArgs arg)
+        protected virtual void OnStart(RoutingEventArgs arg)
         {
             
         }
 
-        protected sealed override void OnStartup(RouteEventArgs arg)
+        protected sealed override void OnStartup(RoutingEventArgs arg)
         {
             _context = arg.Args[0] as GlobalStudioContext;
             OnStart(arg);
@@ -293,6 +293,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
             vm.Startup(NavigationParameter.NewPage(vm, this).Params);
             Start(vm);
+            return vm;
+        }
+        
+        /// <summary>
+        /// 打开视图模型
+        /// </summary>
+        /// <param name="viewModel">指定要打开的视图模型类型</param>
+        /// <param name="parameters">指定要打开的视图模型类型</param>
+        /// <returns>返回一个新的实例。</returns>
+        public TabViewModel Start(Type viewModel, object[] parameters) 
+        {
+            var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
+            vm.Startup(NavigationParameter.NewPage(vm, this, parameters).Params);
             return vm;
         }
 

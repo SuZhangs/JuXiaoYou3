@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// 表示参数传递。
         /// </summary>
         /// <param name="arg">视图参数</param>
-        void Startup(RouteEventArgs arg);
+        void Startup(RoutingEventArgs arg);
 
         /// <summary>
         /// 表示挂起

@@ -95,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="arg"></param>
-        protected sealed override void OnStartup(RouteEventArgs arg)
+        protected sealed override void OnStartup(RoutingEventArgs arg)
         {
             var np = NavigationParameter.FromParameter(arg);
             PageId     = np.Id;

@@ -6,7 +6,12 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ListBox), new FrameworkPropertyMetadata(typeof(ListBox)));
         }
-        
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is FrameworkElement || base.IsItemItsOwnContainerOverride(item);
+        }
+
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new ListBoxItem();

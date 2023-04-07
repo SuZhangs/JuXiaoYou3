@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var blockCollection = new List<ModuleBlock>(64);
             var blocks = dataPartCollection.Where(x => x is PartOfModule)
-                                           .Cast<PartOfModule>()
+                                           .OfType<PartOfModule>()
                                            .Select(x => x.Blocks)
                                            .SelectMany(x => x)
                                            .ToArray();
@@ -65,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                     .Where(x => x.ExtractType == MetadataKind.Text);
 
             var blockInGroup = blocks.Where(x => x is GroupBlock)
-                                     .Cast<GroupBlock>()
+                                     .OfType<GroupBlock>()
                                      .SelectMany(x => x.Items)
                                      .Where(x => x.ExtractType == MetadataKind.Text);
 
@@ -82,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
-                       .Dialog(new EditStringPreviewBlockViewModel(), new RouteEventArgs
+                       .Dialog(new EditStringPreviewBlockViewModel(), new RoutingEventArgs
                        {
                            Args = new object[]
                            {
@@ -94,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override bool IsCompleted() => true;
 
-        protected override void OnStart(RouteEventArgs parameter)
+        protected override void OnStart(RoutingEventArgs parameter)
         {
             Block = parameter.Args[0] as StringPreviewBlock;
             var array = parameter.Args[1] as IEnumerable<ModuleBlock>;

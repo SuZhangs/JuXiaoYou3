@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private double _posX;
         private double _posY;
 
-        protected override void OnStart(RouteEventArgs parameter)
+        protected override void OnStart(RoutingEventArgs parameter)
         {
             if (parameter.Args[0] is Image<Rgba32> img &&
                 parameter.Args[1] is MemoryStream ms)

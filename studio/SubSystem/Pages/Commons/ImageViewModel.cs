@@ -4,7 +4,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class ImageViewModel : DialogViewModel
     {
-        protected override void OnStart(RouteEventArgs parameter)
+        protected override void OnStart(RoutingEventArgs parameter)
         {
             var fileName = parameter.Args[0]?.ToString();
             base.OnStart(parameter);

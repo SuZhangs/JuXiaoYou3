@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected sealed override void OnStartup(RouteEventArgs parameter)
+        protected sealed override void OnStartup(RoutingEventArgs parameter)
         {
             if (parameter is null)
             {
@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 传递参数。
         /// </summary>
         /// <param name="parameter">指定要传递的参数。</param>
-        protected virtual void OnStart(RouteEventArgs parameter)
+        protected virtual void OnStart(RoutingEventArgs parameter)
         {
         }
 
