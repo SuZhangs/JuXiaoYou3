@@ -59,13 +59,23 @@
                                 Command="{Binding NewDocumentCommand}"
                                 Icon="{StaticResource FeatherIcon.Plus}"
                                 ShowText="True"/>
+
+                <ftk:ToolButton Content="排序"
+                                Icon="{StaticResource FeatherIcon.Filter}"
+                                ShowText="True"/>
+                <ftk:ToolButton Content="帮助"
+                                
+                                Icon="{StaticResource FeatherIcon.Tools}"
+                                ShowText="True"/>
             </StackPanel>
         </f:ForestSection.ToolBar>
 
         <DockPanel>
             <StackPanel DockPanel.Dock="Top"
                         Orientation="Horizontal">
-                
+
+                <f:SingleLine Width="128"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"/>
             </StackPanel>
 
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
