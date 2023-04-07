@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaStudio.Services;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -45,6 +48,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             };
             OnInitialize(_context);
             Controller        = shell;
+        }
+
+        protected override bool OnKeyDown(WindowKeyEventArgs e)
+        {
+            if (e.Args.Key == Key.F5)
+            {
+                Xaml.Get<MusicService>()
+                    .PlayOrPause();
+                return true;
+            }
+            return base.OnKeyDown(e);
         }
 
         protected sealed override void OnControllerChanged(IViewController oldController, IViewController newController)

@@ -83,10 +83,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
                 View      = typeof(TSplash),
                 ViewModel = typeof(TSplashController)
             });
-
-            //
-            // 创建Shell
-            Xaml.Use<TViewModel>(GetShell());
             base.RegisterFrameworkServices(logger, appModel, container);
         }
     }

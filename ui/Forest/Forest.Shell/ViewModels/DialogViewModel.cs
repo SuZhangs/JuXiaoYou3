@@ -13,16 +13,22 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         protected readonly DialogTaskSource Wait;
         protected          Action           CloseAction;
         private            string           _title;
+        protected          IDisposable      WindowEventBroadcastDisposable;
 
         protected DialogViewModel()
         {
-            Xaml.Get<IWindowEventBroadcast>()
-                .Keys
-                .Subscribe(OnKeyboardInput)
-                .DisposeWith(Collector);
+            WindowEventBroadcastDisposable =Xaml.Get<IWindowEventBroadcast>()
+                                              .Keys
+                                              .Subscribe(OnKeyboardInput);
 
             CancelCommand = new RelayCommand(Cancel);
             Wait          = new DialogTaskSource();
+        }
+
+        public override void Stop()
+        {
+            WindowEventBroadcastDisposable.Dispose();
+            base.Stop();
         }
 
         protected virtual void OnKeyboardInput(WindowKeyEventArgs e)

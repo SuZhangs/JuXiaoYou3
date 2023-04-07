@@ -218,6 +218,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
             }
         }
 
+        public void PlayOrPause()
+        {
+            if (_device.PlaybackState == PlaybackState.Playing)
+            {
+                Pause();
+            }
+            else
+            {
+                Play();
+            }
+        }
+
         /// <summary>
         /// 播放
         /// </summary>
@@ -273,6 +285,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Services
             if (_device.PlaybackState == PlaybackState.Playing)
             {
                 _device.Pause();
+                var music = _playlistStream.CurrentValue.Items[_currentIndex];
+                Update(_reader.TotalTime, PlaybackState.Paused, music, _currentIndex);
             }
         }
 

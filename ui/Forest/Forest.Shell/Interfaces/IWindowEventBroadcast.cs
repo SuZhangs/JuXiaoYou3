@@ -91,15 +91,15 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            _keys.OnNext(new WindowKeyEventArgs
-            {
-                Args = e,
-                IsDown = true,
-            });
+
         }
         
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
+            if(e.IsRepeat) 
+            { 
+                return; 
+            }
             _keys.OnNext(new WindowKeyEventArgs
             {
                 Args   = e,

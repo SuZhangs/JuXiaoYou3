@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -61,8 +62,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public override int GetHashCode()
         {
-            return PageId?.GetHashCode() ?? base.GetHashCode();
+            return GetId();
         }
+        
+        private int GetId() => string.IsNullOrEmpty(PageId) ? base.GetHashCode() : PageId.GetHashCode();
 
         #endregion
 
@@ -160,7 +163,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void OnKeyDown(WindowKeyEventArgs e)
         {
-            if (KeyInputs.Count == 0)
+            if (KeyInputs.Count == 0 || e.IsDown)
             {
                 return;
             }
@@ -264,9 +267,5 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <see cref="Uniqueness"/> 属性用来表示是否唯一，这个唯一是按照类型来算的。如果这个值为true，那么只能存在一个打开的类型。
         /// </remarks>
         public virtual bool Uniqueness => false;
-
-        /// <summary>
-        /// 是否已经初始化
-        /// </summary>
     }
 }

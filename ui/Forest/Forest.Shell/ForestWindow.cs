@@ -53,7 +53,9 @@ namespace Acorisoft.FutureGL.Forest
                 if (Xaml.IsRegistered<IWindowEventBroadcast>())
                 {
                     _skip   = false;
-                    _tunnel = Xaml.Get<IWindowEventBroadcast>().PropertyTunnel.WindowState;
+                    _tunnel = Xaml.Get<IWindowEventBroadcast>()
+                                  .PropertyTunnel
+                                  .WindowState;
                 }
                 _skip = true;
             }

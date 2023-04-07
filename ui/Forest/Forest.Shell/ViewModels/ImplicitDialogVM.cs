@@ -73,18 +73,14 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         public RelayCommand CompletedCommand { get; }
     }
 
-    public abstract class BooleanDialogVM : ImplicitDialogVM, IObserver<WindowKeyEventArgs>
+    public abstract class BooleanDialogVM : ImplicitDialogVM
     {
         private string      _completeButtonText;
         private string      _cancelButtonText;
-        private IDisposable _disposable;
-
         #region Lifetime
 
         public sealed override void Start()
         {
-            var web = Xaml.Get<IWindowEventBroadcast>();
-            _disposable = web.Keys.Subscribe(this);
             StartOverride();
             base.Start();
         }
@@ -92,22 +88,16 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         public sealed override void Resume()
         {
             var web = Xaml.Get<IWindowEventBroadcast>();
-            _disposable = web.Keys.Subscribe(this);
+            WindowEventBroadcastDisposable = web.Keys.Subscribe(OnKeyboardInput);
             base.Resume();
         }
 
         public sealed override void Suspend()
         {
-            _disposable?.Dispose();
+            WindowEventBroadcastDisposable?.Dispose();
             base.Suspend();
         }
-
-        public sealed override void Stop()
-        {
-            _disposable?.Dispose();
-            base.Stop();
-        }
-
+        
         internal virtual void StartOverride()
         {
         }
@@ -116,22 +106,15 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #region IObserver<WindowKeyEventArgs>
 
-        void IObserver<WindowKeyEventArgs>.OnCompleted()
+        
+        protected override void OnKeyboardInput(WindowKeyEventArgs e)
         {
-        }
-
-        void IObserver<WindowKeyEventArgs>.OnError(Exception error)
-        {
-        }
-
-        void IObserver<WindowKeyEventArgs>.OnNext(WindowKeyEventArgs value)
-        {
-            if (!value.IsDown && IsFireCancelFromKeyEvent(value))
+            if (!e.IsDown && IsFireCancelFromKeyEvent(e))
             {
                 Cancel();
             }
         }
-
+        
         protected virtual bool IsFireCancelFromKeyEvent(WindowKeyEventArgs value) => value.Args.Key == Key.Escape;
 
         #endregion

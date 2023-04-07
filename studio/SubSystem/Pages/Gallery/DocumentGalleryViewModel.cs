@@ -33,11 +33,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         public DocumentGalleryViewModel()
         {
-            Xaml.Get<IWindowEventBroadcast>()
-                .Keys
-                .Subscribe(OnKeyPress)
-                .DisposeWith(Collector);
-
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
@@ -232,24 +227,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
 
 
-
-        #endregion
-
-        #region Inputs
-
-        
-        private async void OnKeyPress(WindowKeyEventArgs arg)
-        {
-            var keyArg = arg.Args;
-            if (!arg.IsDown)
-            {
-                if (keyArg.Key == Key.N &&
-                    keyArg.KeyboardDevice.Modifiers == ModifierKeys.Control)
-                {
-                    await NewDocumentImpl();
-                }
-            }
-        }
 
         #endregion
 

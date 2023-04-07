@@ -20,14 +20,28 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             web.Keys
                .Subscribe(OnWindowEventRouting)
                .DisposeWith(Collector);
+            
             web.Drags
                .Subscribe(OnWindowEventRouting)
                .DisposeWith(Collector);
         }
 
+        protected virtual bool OnKeyDown(WindowKeyEventArgs e)
+        {
+            return false;
+        }
+
         private void OnWindowEventRouting(WindowKeyEventArgs e)
         {
-            CurrentController?.SetWindowEvent(e);
+            if (e.IsDown || e.Args.IsRepeat)
+            {
+                return;
+            }
+
+            if (!OnKeyDown(e))
+            {
+                CurrentController?.SetWindowEvent(e);
+            }
         }
 
         private void OnWindowEventRouting(WindowDragDropArgs e)
