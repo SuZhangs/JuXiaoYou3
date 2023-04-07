@@ -152,6 +152,24 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
             DocumentCacheDB.Update(cache);
         }
+        
+        
+        /// <summary>
+        /// 移除文档
+        /// </summary>
+        /// <param name="cache">指定要移除的文档</param>
+        public void RemoveDocumentCache(DocumentCache cache)
+        {
+            if (cache is null)
+            {
+                return;
+            }
+
+            cache.IsDeleted      = true;
+            cache.TimeOfModified = DateTime.Now;
+            DocumentCacheDB.Update(cache);
+            Modified();
+        }
 
         /// <summary>
         /// 更新文档
@@ -211,6 +229,23 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
             DocumentCacheDB.Update(cache);
         }
+        
+        /// <summary>
+        /// 获得指定的文档
+        /// </summary>
+        public IEnumerable<DocumentCache> GetDocuments()
+        {
+            return DocumentCacheDB.FindAll();
+        }
+        
+        /// <summary>
+        /// 获得指定的文档
+        /// </summary>
+        /// <param name="type">指定的文档id</param>
+        public IEnumerable<DocumentCache> GetDocuments(DocumentType type)
+        {
+            return DocumentCacheDB.Find(x => x.Type == type);
+        }
 
         /// <summary>
         /// 获得指定的文档
@@ -220,6 +255,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             return DocumentDB.FindById(id);
         }
+        
 
         /// <summary>
         /// 获得指定的文档

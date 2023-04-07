@@ -18,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static Task<Op<DocumentCache>> NewDocumentWizard()
         {
             return Xaml.Get<IDialogService>()
-                       .Dialog<DocumentCache, NewDocumentWizardViewModel>();
+                       .Dialog<DocumentCache, NewDocumentViewModel>();
         }
 
         public static async Task ImageView(string fileName)
@@ -80,7 +80,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
 
-            Xaml.InstallView<NewDocumentWizard, NewDocumentWizardViewModel>();
+            Xaml.InstallView<NewDocumentView, NewDocumentViewModel>();
             Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
 
             Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();

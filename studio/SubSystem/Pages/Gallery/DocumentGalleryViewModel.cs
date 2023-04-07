@@ -80,41 +80,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
 
         #endregion
-
-
+        
         #region Document
 
         private static bool HasDocument(IDataCache cache) => cache is not null;
 
         private async Task NewDocumentImpl()
         {
-            var wizard = await SubSystem.NewDocumentWizard();
-
-            if (!wizard.IsFinished)
-            {
-                return;
-            }
-
-            var cache  = wizard.Value;
-            var result = DocumentEngine.AddDocumentCache(cache);
-
-            if (!result.IsFinished)
-            {
-                await Xaml.Get<IBuiltinDialogService>()
-                          .Notify(CriticalLevel.Warning,
-                              SubSystemString.Notify,
-                              SubSystemString.GetEngineResult(result.Reason));
-            }
-            else
-            {
-                await Xaml.Get<IBuiltinDialogService>().Notify(
-                    CriticalLevel.Success,
-                    SubSystemString.Notify,
-                    SubSystemString.OperationOfAddIsSuccessful);
-
-                Update();
-                Refresh();
-            }
+            
         }
 
 

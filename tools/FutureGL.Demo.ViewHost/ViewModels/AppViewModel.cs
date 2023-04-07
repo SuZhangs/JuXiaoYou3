@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.ViewModels
             return new[]
             {
                 typeof(AppViewModel).Assembly,
-                Assembly.GetAssembly(typeof(NewDocumentWizardViewModel)),
+                Assembly.GetAssembly(typeof(NewDocumentViewModel)),
             };
         }
 

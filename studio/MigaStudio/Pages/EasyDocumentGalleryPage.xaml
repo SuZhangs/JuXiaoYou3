@@ -3,13 +3,27 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"
-                     d:DesignHeight="300" d:DesignWidth="300"
+                     d:DesignHeight="300"
+                     d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EasyDocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
+        <f:ForestSection.ToolBar>
+            <StackPanel HorizontalAlignment="Right"
+                        Margin="0 0 0 4"
+                        Orientation="Horizontal">
+                <ftk:ToolButton Content="添加"
+                                Icon="{StaticResource FeatherIcon.Plus}"
+                                ShowText="True"/>
+                <ftk:ToolButton Content="添加"
+                                Icon="{StaticResource FeatherIcon.Plus}"
+                                ShowText="True"/>
+            </StackPanel>
+        </f:ForestSection.ToolBar>
+    </f:ForestSection>
 </f:ForestUserControl>

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -17,18 +18,57 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public class NewDocumentWizardViewModel : ImplicitDialogVM
+    public class NewDocumentViewModel : ImplicitDialogVM
     {
-        private                 string       _name;
-        private                 ImageSource  _avatar;
-        private                 MemoryStream _buffer;
-        private static          DocumentType _type = DocumentType.Character;
+        private        string       _name;
+        private        ImageSource  _avatar;
+        private        MemoryStream _buffer;
+        private static DocumentType _type = DocumentType.Character;
+        private        Visibility       _visibility;
 
-        public NewDocumentWizardViewModel()
+        /// <summary>
+        /// 获取或设置 <see cref="Visibility"/> 属性。
+        /// </summary>
+        public Visibility Visibility
+        {
+            get => _visibility;
+            set => SetValue(ref _visibility, value);
+        }
+
+        public NewDocumentViewModel()
         {
             SetAvatarCommand = new AsyncRelayCommand(SetAvatarImpl);
         }
 
+        protected override void OnStart(RoutingEventArgs parameter)
+        {
+            var p = parameter.Parameter;
+            var a = p.Args;
+
+            if (a[0] is DocumentType type)
+            {
+                Type       = type;
+                Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Visibility = Visibility.Visible;
+            }
+        }
+
+        public static Task<Op<DocumentCache>> New()
+        {
+            return DialogService().Dialog<DocumentCache, NewDocumentViewModel>();
+        }
+        
+        public static Task<Op<DocumentCache>> New(DocumentType type)
+        {
+            return DialogService().Dialog<DocumentCache, NewDocumentViewModel>(new Parameter
+            {
+                Args = new object[] { type }
+            });
+        }
+        
         private async Task SetAvatarImpl()
         {
             //

@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Models/Modules/ModuleBlockDataTemplates.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/DataTemplates/ModuleBlockDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <thisConverters:BlockNameConverter x:Key="Name"/>
