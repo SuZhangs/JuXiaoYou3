@@ -17,7 +17,7 @@
         <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
     </UserControl.Resources>
     <f:Drawer IsRightOpen="{Binding IsPreview,Mode=TwoWay}">
-        <Grid Margin="8 16">
+        <Grid Margin="8 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="384" />
@@ -105,8 +105,7 @@
             </f:ForestSection>
 
             <!-- 侧栏-->
-            <ftk:TabControl Grid.Column="1"
-                            Padding="0 16 0 0">
+            <ftk:TabControl Grid.Column="1">
                 <ftk:TabItem f:Language.Id="global.metadata"
                              Header="喵喵咒语"
                              Padding="16 11">
