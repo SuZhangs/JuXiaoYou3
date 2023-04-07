@@ -44,7 +44,7 @@
         </f:Drawer.RightContent>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="384" />
+                <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <ftk:TabControl Margin="0 0 16 0">
@@ -76,11 +76,11 @@
                                         ShowText="True" />
                             
                             <ftk:ToolButton f:Language.Id="global.refresh"
-                                        Content="刷新"
-                                        Command="{Binding SaveTemplateCommand}"
-                                        CommandParameter="{Binding ElementName=Canvas}"
-                                        Icon="{StaticResource FeatherIcon.Refresh}"
-                                        ShowText="True" />
+                                            Content="刷新"
+                                            Command="{Binding SaveTemplateCommand}"
+                                            CommandParameter="{Binding ElementName=Canvas}"
+                                            Icon="{StaticResource FeatherIcon.Refresh}"
+                                            ShowText="True" />
                         </StackPanel>
 
                         <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"

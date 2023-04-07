@@ -25,7 +25,7 @@
                    f:XamlAssist.GroupName="GroupId"
                    SelectedItem="{Binding SelectedFeature,Mode=TwoWay}"
                    ItemsSource="{Binding Features,Mode=OneWay}"
-                   Width="320">
+                   Width="280">
             <f:ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">
                     <TextBlock Margin="4"

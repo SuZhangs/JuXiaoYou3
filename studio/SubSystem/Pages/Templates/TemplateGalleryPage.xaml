@@ -20,7 +20,7 @@
         <Grid Margin="8 16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="480" />
+                <ColumnDefinition Width="384" />
             </Grid.ColumnDefinitions>
             <f:ForestSection Grid.Column="0"
                              Header="模组"
@@ -114,21 +114,21 @@
                         <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemWidth="144"/>
+                                    <WrapPanel ItemWidth="184"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="{f:Brush BorderBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="3"
-                                        Margin="4"
-                                        Padding="8">
+                                            BorderThickness="1"
+                                            CornerRadius="3"
+                                            Margin="4"
+                                            Padding="8">
                                         <DockPanel>
                                             <TextBlock DockPanel.Dock="Top"
-                                                   FontSize="16"
-                                                   FontWeight="Bold"
-                                                   Text="{Binding Name}"
+                                                       FontSize="16"
+                                                       FontWeight="Bold"
+                                                       Text="{Binding Name}"
                                                        TextTrimming="CharacterEllipsis" />
                                             <TextBlock Text="{Binding MetadataName}" 
                                                        TextTrimming="CharacterEllipsis"/>
