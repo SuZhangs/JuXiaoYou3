@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
-                       .Dialog(new EditPreviewBlockViewModel(), new RoutingEventArgs
+                       .Dialog(new EditPreviewBlockViewModel(), new Parameter
                        {
                            Args = new object[]
                            {
@@ -50,8 +50,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            Block = parameter.Args[0] as GroupingPreviewBlock;
-            var array = parameter.Args[1] as IEnumerable<ModuleBlock>;
+            var param = parameter.Parameter;
+            Block = param.Args[0] as GroupingPreviewBlock;
+            var array = param.Args[1] as IEnumerable<ModuleBlock>;
             Templates.AddRange(array, true);
         }
 

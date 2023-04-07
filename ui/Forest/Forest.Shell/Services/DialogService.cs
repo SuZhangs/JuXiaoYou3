@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.Forest.Services
         }
 
         #region IDialogAmbientService
-        
+
         /// <summary>
         /// 通知对话框
         /// </summary>
@@ -371,12 +371,17 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <typeparam name="TViewModel">视图模型类型</typeparam>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<T>> Dialog<T, TViewModel>() where TViewModel : IDialogViewModel
-            => _host.ShowDialog<T>(Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>(), new RoutingEventArgs());
+        {
+            var vm = Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>();
+            return _host.ShowDialog<T>(vm, RoutingEventArgs.Empty);
+        }
 
         public Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel) where TViewModel : IDialogViewModel
-            => _host.ShowDialog<T>(viewModel, new RoutingEventArgs{ Args = new object[8]});
-        
-        
+        {
+            return _host.ShowDialog<T>(viewModel, RoutingEventArgs.Empty);
+        }
+
+
         /// <summary>
         /// 弹出对话框
         /// </summary>
@@ -384,10 +389,14 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <typeparam name="TViewModel">视图模型类型</typeparam>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Op<T>> Dialog<T, TViewModel>(RoutingEventArgs parameter) where TViewModel : IDialogViewModel
+        public Task<Op<T>> Dialog<T, TViewModel>(Parameter parameter) where TViewModel : IDialogViewModel
         {
-           return _host.ShowDialog<T>(Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>(), parameter);
-        } 
+            var vm = Xaml.GetViewModel<TViewModel>() ?? Classes.CreateInstance<TViewModel>();
+            return _host.ShowDialog<T>(vm, new RoutingEventArgs
+            {
+                Parameter = parameter
+            });
+        }
 
         /// <summary>
         /// 弹出对话框
@@ -397,8 +406,13 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel, RoutingEventArgs parameter) where TViewModel : IDialogViewModel
-            => _host.ShowDialog<T>(viewModel, parameter);
+        public Task<Op<T>> Dialog<T, TViewModel>(TViewModel viewModel, Parameter parameter) where TViewModel : IDialogViewModel
+        {
+            return _host.ShowDialog<T>(viewModel, new RoutingEventArgs
+            {
+                Parameter = parameter
+            });
+        }
 
         /// <summary>
         /// 弹出对话框
@@ -407,7 +421,9 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<T>> Dialog<T>(IDialogViewModel viewModel)
-            => _host.ShowDialog<T>(viewModel, new RoutingEventArgs{ Args = new object[8]});
+        {
+            return _host.ShowDialog<T>(viewModel, RoutingEventArgs.Empty);
+        }
 
         /// <summary>
         /// 弹出对话框
@@ -416,8 +432,13 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Op<T>> Dialog<T>(IDialogViewModel viewModel, RoutingEventArgs parameter)
-            => _host.ShowDialog<T>(viewModel, parameter);
+        public Task<Op<T>> Dialog<T>(IDialogViewModel viewModel, Parameter parameter)
+        {
+            return _host.ShowDialog<T>(viewModel, new RoutingEventArgs
+            {
+                Parameter = parameter
+            });
+        }
 
         /// <summary>
         /// 弹出对话框
@@ -425,7 +446,9 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <returns>返回一个可等待的任务</returns>
         public Task<Op<object>> Dialog(IDialogViewModel viewModel)
-            => _host.ShowDialog(viewModel, new RoutingEventArgs{ Args = new object[8]});
+        {
+            return _host.ShowDialog(viewModel, RoutingEventArgs.Empty);
+        }
 
         /// <summary>
         /// 弹出对话框
@@ -433,10 +456,15 @@ namespace Acorisoft.FutureGL.Forest.Services
         /// <param name="viewModel">视图模型实例</param>
         /// <param name="parameter">参数</param>
         /// <returns>返回一个可等待的任务</returns>
-        public Task<Op<object>> Dialog(IDialogViewModel viewModel, RoutingEventArgs parameter)
-            => _host.ShowDialog(viewModel, parameter);
+        public Task<Op<object>> Dialog(IDialogViewModel viewModel, Parameter parameter)
+        {
+            return _host.ShowDialog(viewModel, new RoutingEventArgs
+            {
+                Parameter = parameter
+            });
+        }
 
-        
+
         public void CloseAll() => _host.CloseDialog();
         public bool IsOpened() => _host.IsDialogOpened();
         public bool IsOpened(IDialogViewModel viewModel) => _host.IsDialogOpened(viewModel);

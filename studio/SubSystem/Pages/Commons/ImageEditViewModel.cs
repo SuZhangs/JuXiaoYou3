@@ -24,8 +24,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            if (parameter.Args[0] is Image<Rgba32> img &&
-                parameter.Args[1] is MemoryStream ms)
+            var args = parameter.Parameter.Args;
+            if (args[0] is Image<Rgba32> img &&
+                args[1] is MemoryStream ms)
             {
                 ms.Seek(0, SeekOrigin.Begin);
 

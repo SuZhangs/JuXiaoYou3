@@ -97,13 +97,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <param name="arg"></param>
         protected sealed override void OnStartup(RoutingEventArgs arg)
         {
-            var np = NavigationParameter.FromParameter(arg);
-            PageId     = np.Id;
-            Controller = (TabController)np.Controller;
-            OnStart(np);
+            PageId     = arg.Id;
+            Controller = (TabController)arg.Controller;
+            OnStart(arg.Parameter ?? Parameter.Empty);
         }
 
-        protected virtual void OnStart(NavigationParameter parameter)
+        protected virtual void OnStart(Parameter parameter)
         {
         }
 
@@ -118,7 +117,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Startup(NavigationParameter.NewPage(vm, Controller).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, Controller));
             Controller.Start(vm);
             return vm;
         }
@@ -131,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public void New<TViewModel>(IDataCache cache) where TViewModel : TabViewModel
         {
             var vm = Xaml.Get<TViewModel>();
-            vm.Startup(NavigationParameter.OpenDocument(cache, Controller).Params);
+            vm.Startup(NavigationParameter.OpenDocument(cache, Controller));
             Controller.Start(vm);
         }
 

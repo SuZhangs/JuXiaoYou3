@@ -151,11 +151,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        protected override void OnStart(NavigationParameter parameter)
+        protected override void OnStart(Parameter parameter)
         {
             ActivateAllEngines();
-            Cache    = (DocumentCache)parameter.Index;
-            Document = DocumentEngine.GetDocument(parameter.Id);
+            Cache    = (DocumentCache)parameter.Args[0];
+            Document = DocumentEngine.GetDocument(Cache.Id);
             Type     = Cache.Type;
 
             Open();

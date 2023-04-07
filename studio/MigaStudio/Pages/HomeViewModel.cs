@@ -83,7 +83,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             
-            var vm = Controller.Start(feature.ViewModel, feature.Parameter);
+            var vm = Controller.Start(feature.ViewModel, new Parameter
+            {
+                Args = feature.Parameter
+            });
             _onStart.OnNext(vm);
         }
 

@@ -41,9 +41,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             _parameter = new RoutingEventArgs
             {
-                Args = new object[]
+                Parameter = new Parameter
                 {
-                    _context
+                    Args = new object[]
+                    {
+                        _context
+                    }
                 }
             };
             OnInitialize(_context);

@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            var array = parameter.Args[0] as IEnumerable<ModuleTemplateCache>;
+            var array = parameter.Parameter.Args[0] as IEnumerable<ModuleTemplateCache>;
             Templates.AddRange(array, true);
         }
 

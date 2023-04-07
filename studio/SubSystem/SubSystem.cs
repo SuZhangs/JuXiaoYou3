@@ -20,17 +20,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return Xaml.Get<IDialogService>()
                        .Dialog<DocumentCache, NewDocumentWizardViewModel>();
         }
-        
+
         public static async Task ImageView(string fileName)
         {
             await Xaml.Get<IDialogService>()
-                       .Dialog(new ImageViewModel(),new RoutingEventArgs
-                       {
-                           Args = new []
-                           {
-                               fileName
-                           }
-                       });
+                      .Dialog(new ImageViewModel(), new Parameter
+                      {
+                          Args = new[]
+                          {
+                              fileName
+                          }
+                      });
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, IEnumerable<object> options)
         {
             var optionVM = Xaml.GetViewModel<OptionSelectionViewModel>();
-            var parameter = new RoutingEventArgs
+            var parameter = new Parameter
             {
                 Args = new object[]
                 {

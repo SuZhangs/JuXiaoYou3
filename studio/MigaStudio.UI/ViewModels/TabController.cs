@@ -171,7 +171,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected sealed override void OnStartup(RoutingEventArgs arg)
         {
-            _context = arg.Args[0] as GlobalStudioContext;
+            _context = arg.Parameter
+                          .Args[0] as GlobalStudioContext;
             OnStart(arg);
         }
 
@@ -291,7 +292,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TabViewModel New(Type viewModel) 
         {
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
-            vm.Startup(NavigationParameter.NewPage(vm, this).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, this));
             Start(vm);
             return vm;
         }
@@ -300,12 +301,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 打开视图模型
         /// </summary>
         /// <param name="viewModel">指定要打开的视图模型类型</param>
-        /// <param name="parameters">指定要打开的视图模型类型</param>
+        /// <param name="parameter">指定要打开的视图模型类型</param>
         /// <returns>返回一个新的实例。</returns>
-        public TabViewModel Start(Type viewModel, object[] parameters) 
+        public TabViewModel Start(Type viewModel, Parameter parameter) 
         {
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
-            vm.Startup(NavigationParameter.NewPage(vm, this, parameters).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
             return vm;
         }
 
@@ -317,7 +318,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel New<TViewModel>() where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Startup(NavigationParameter.NewPage(vm, this).Params);
+            vm.Startup(NavigationParameter.NewPage(vm, this));
             Start(vm);
             return vm;
         }
@@ -330,7 +331,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public TViewModel OpenDocument<TViewModel>(IDataCache cache)where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Startup(NavigationParameter.OpenDocument(cache, this).Params);
+            vm.Startup(NavigationParameter.OpenDocument(cache, this));
             Start(vm);
             return vm;
         }
@@ -349,7 +350,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
             
             var vm1 = Xaml.GetViewModel<TViewModel>();
-            vm1.Startup(NavigationParameter.NewPage(vm, this).Params);
+            vm1.Startup(NavigationParameter.NewPage(vm, this));
             Start(vm1);
             return vm1;
         }
@@ -367,7 +368,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             if (string.IsNullOrEmpty(viewModel.PageId))
             {
-                viewModel.Startup(NavigationParameter.NewPage(viewModel, this).Params);
+                viewModel.Startup(NavigationParameter.NewPage(viewModel, this));
             }
 
             var unifiedKey = viewModel.Uniqueness ? viewModel.GetType().FullName : viewModel.PageId;

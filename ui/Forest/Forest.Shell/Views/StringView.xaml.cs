@@ -19,7 +19,8 @@ namespace Acorisoft.FutureGL.Forest.Views
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            Title = parameter.Args[0]?.ToString();
+            var param = parameter.Parameter;
+            Title = param.Args[0]?.ToString();
             base.OnStart(parameter);
         }
 
@@ -35,7 +36,6 @@ namespace Acorisoft.FutureGL.Forest.Views
             return "值为空";
         }
 
-
         /// <summary>
         /// 获取或设置 <see cref="Text"/> 属性。
         /// </summary>
@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
         
         public static Task<Op<string>> String(string title) => DialogService()
-                                                       .Dialog<string>(new StringViewModel(), new RoutingEventArgs
+                                                       .Dialog<string>(new StringViewModel(), new Parameter
                                                        {
                                                            Args = new []{ title }
                                                        });

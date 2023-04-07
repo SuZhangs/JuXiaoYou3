@@ -14,12 +14,12 @@ namespace Acorisoft.FutureGL.Forest.Services
         public void Route<TViewModel>(RoutingEventArgs parameter) where TViewModel : IViewModel
         {
             var viewModel = Xaml.GetViewModel<TViewModel>();
-            Route(viewModel, new RoutingEventArgs());
+            Route(viewModel, RoutingEventArgs.Empty);
         }
 
         public void Route(IViewModel viewModel)
         {
-            Route(viewModel, new RoutingEventArgs { Args = new object[8] });
+            Route(viewModel, RoutingEventArgs.Empty);
         }
 
         public void Route(IViewModel viewModel, RoutingEventArgs parameter)

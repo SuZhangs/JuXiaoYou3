@@ -12,7 +12,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            Block = parameter.Args[0] as ModuleBlockEditUI;
+            Block = parameter.Parameter
+                             .Args[0] as ModuleBlockEditUI;
             base.OnStart(parameter);
         }
 
@@ -27,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         public static Task<Op<ModuleBlockEditUI>> Edit(ModuleBlockEditUI element)
         {
-            return DialogService().Dialog<ModuleBlockEditUI>(new EditBlockViewModel(), new RoutingEventArgs
+            return DialogService().Dialog<ModuleBlockEditUI>(new EditBlockViewModel(), new Parameter
                        {
                            Args = new object[]
                            {

@@ -31,9 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
             });
 
 
-            container.Use<ViewServiceAdapter,
-                IViewServiceAdapter,
-                IViewServiceAmbient>(new ViewServiceAdapter());
+            container.Use<ViewServiceAdapter,IViewServiceAmbient>(new ViewServiceAdapter());
 
             //
             // 创建Shell

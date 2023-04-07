@@ -6,7 +6,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            var fileName = parameter.Args[0]?.ToString();
+            var fileName = parameter.Parameter
+                                    .Args[0]
+                                    ?.ToString();
             base.OnStart(parameter);
         }
     }

@@ -94,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     }
 
                     var r = await Xaml.Get<IDialogService>()
-                                      .Dialog<MemoryStream, ImageEditViewModel>(new RoutingEventArgs
+                                      .Dialog<MemoryStream, ImageEditViewModel>(new Parameter
                                       {
                                           Args = new object[]
                                           {
