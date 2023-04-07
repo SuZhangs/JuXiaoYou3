@@ -14,47 +14,48 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:PlaylistPartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:AlbumConverter x:Key="AlbumConverter"/>
+        <thisConverters:AlbumConverter x:Key="AlbumConverter" />
     </UserControl.Resources>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top"
-                    Orientation="Horizontal">
-            <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="添加"
-                            Command="{Binding AddMusicCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Remove"
-                            Content="删除"
-                            Command="{Binding RemoveMusicCommand}"
-                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.MinusCircle}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Up"
-                            Content="上移"
-                            Command="{Binding ShiftUpMusicCommand}"
-                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.ArrowUp}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Down"
-                            Content="下移"
-                            Command="{Binding ShiftDownMusicCommand}"
-                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.ArrowDown}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Play"
-                            Content="播放"
-                            Command="{Binding PlayMusicCommand}"
-                            CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.Upload}"
-                            ShowText="True" />
-        </StackPanel>
-
+        <f:LooklessButton DockPanel.Dock="Top"
+                          Command="{Binding PlayMusicCommand}"
+                          CommandParameter="{Binding SelectedMusic,Mode=OneWay}">
+            <ContentControl Content="{Binding SelectedMusic,Mode=OneWay}"
+                            Height="256"
+                            Width="256">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type m:Music}">
+                        <Image Stretch="Uniform"
+                               Source="{Binding Cover,Mode=OneWay, Converter={StaticResource AlbumConverter}}" />
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+        </f:LooklessButton>
+        
         <DockPanel>
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal">
+                <ftk:ToolButton f:Language.Id="global.Add"
+                                Content="添加"
+                                Command="{Binding AddMusicCommand}"
+                                Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                ShowText="True" />
+
+                <ftk:ToolButton f:Language.Id="global.Remove"
+                                Content="删除"
+                                Command="{Binding RemoveMusicCommand}"
+                                CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                                Icon="{StaticResource FeatherIcon.MinusCircle}"
+                                ShowText="True" />
+
+                <ftk:ToolButton f:Language.Id="global.Play"
+                                Content="播放"
+                                Command="{Binding PlayMusicCommand}"
+                                CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                                Icon="{StaticResource FeatherIcon.Upload}"
+                                ShowText="True" />
+            </StackPanel>
+
             <f:ListBox DockPanel.Dock="Right"
                        ItemsSource="{Binding Collection,Mode=OneWay}"
                        SelectedItem="{Binding SelectedMusic,Mode=TwoWay}">
@@ -66,21 +67,12 @@
                                    VerticalAlignment="Center" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="256" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
             </f:ListBox>
-
-            <ScrollViewer Padding="12">
-                <Viewbox>
-                    <ContentControl Content="{Binding SelectedMusic,Mode=OneWay}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Music}">
-                                <Image Stretch="None"
-                                       Source="{Binding Cover,Mode=OneWay, Converter={StaticResource AlbumConverter}}" />
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </Viewbox>
-            </ScrollViewer>
-
         </DockPanel>
     </DockPanel>
 </UserControl>

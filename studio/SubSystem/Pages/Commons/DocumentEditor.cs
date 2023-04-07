@@ -173,9 +173,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Resume()
         {
-            SelectedDetailPart = DetailParts.FirstOrDefault();
-            SelectedModulePart = ModuleParts.FirstOrDefault();
-
             //
             // TODO:数据恢复
             base.Resume();
