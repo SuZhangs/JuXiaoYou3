@@ -1,25 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Services;
-using Acorisoft.FutureGL.MigaStudio.Utilities;
-using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 using TagLib;
 using TagLib.Mpeg;
 using File = TagLib.File;
+// ReSharper disable ConvertToUsingDeclaration
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class PlaylistPartViewModel : KeyValueViewModel
     {
@@ -47,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             RemoveMusicCommand    = AsyncCommand<Music>(RemoveMusicImpl, HasItem);
             ShiftUpMusicCommand   = Command<Music>(ShiftUpMusicImpl, HasItem);
             ShiftDownMusicCommand = Command<Music>(ShiftDownMusicImpl, HasItem);
-            PlayMusicCommand      = AsyncCommand<Music>(PlayMusicImpl, HasItem);
+            PlayMusicCommand      = Command<Music>(PlayMusicImpl, HasItem);
         }
 
         public override void Start()
@@ -156,7 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Save();
         }
 
-        private async Task PlayMusicImpl(Music part)
+        private void PlayMusicImpl(Music part)
         {
             if (part is null)
             {
@@ -207,16 +202,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private void Save()
         {
             var payload = JSON.Serialize(Collection);
-
-            if (Detail.DataBags.ContainsKey(Data))
-            {
-                Detail.DataBags[Data] = payload;
-            }
-            else
-            {
-                Detail.DataBags.Add(Data, payload);
-            }
-
+            base[Data, Detail.DataBags] = payload;
             EditorViewModel.SetDirtyState();
         }
 
@@ -237,7 +223,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// <summary>
         /// 编辑器
         /// </summary>
-        public DocumentEditorVMBase EditorViewModel { get; init; }
+        public DocumentEditorBase EditorViewModel { get; init; }
 
         /// <summary>
         /// 文档
@@ -283,7 +269,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public RelayCommand<Music> ShiftDownMusicCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Music> PlayMusicCommand { get; }
+        public RelayCommand<Music> PlayMusicCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Music> RemoveMusicCommand { get; }

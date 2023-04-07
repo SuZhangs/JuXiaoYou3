@@ -468,6 +468,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand SetOtherManifestCommand { get; }
 
+        public override bool Removable => false;
+        public override bool Uniqueness => true;
 
         public RelayCommand SetAbilityPreviewManifestCommand { get; }
         public RelayCommand SetCharacterPreviewManifestCommand { get; }

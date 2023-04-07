@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class CharacterRelPartViewModel
     {

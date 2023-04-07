@@ -211,7 +211,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             var savedlg = new VistaSaveFileDialog
             {
                 FileName = PreviewName,
-                Filter   = SubSystemString.ModuleFilter
+                Filter   = SubSystemString.ModuleFilter,
+                AddExtension = true,
+                DefaultExt = "*.png"
             };
 
             if (savedlg.ShowDialog() != true)
