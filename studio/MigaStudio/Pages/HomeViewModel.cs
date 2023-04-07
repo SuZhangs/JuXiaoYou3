@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -44,13 +45,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Home", null);
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
             CreateGalleryFeature<UniverseViewModel>(StartUp, Compose, null);
-            CreateGalleryFeature<UniverseViewModel>(StartUp, Service, null);
-            CreateGalleryFeature<UniverseViewModel>(StartUp, Tools, null);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
+            CreateGalleryFeature<UniverseViewModel>(Tools, Service, null);
+            CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel", null);
+            CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel", null);
+            CreateGalleryFeature<UniverseViewModel>(Tools, Tools, null);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)
