@@ -22,6 +22,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     public class HomeViewModel : TabViewModel
     {
         private readonly Subject<ViewModelBase> _onStart;
+        private          MainFeature            _selectedFeature;
+        private          ViewModelBase          _selectedViewModel;
 
         public HomeViewModel()
         {
@@ -106,24 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task RunFeature(MainFeature feature)
         {
-            if (feature is null)
-            {
-                return;
-            }
-
-            if (feature.IsDialog)
-            {
-                await DialogService().Dialog(Xaml.GetViewModel<IDialogViewModel>(feature.ViewModel));
-                return;
-            }
-
-            
-            var vm = Controller.Start(feature.ViewModel, new Parameter
-            {
-                Args = feature.Parameter
-            });
-            feature.Cache ??= vm;
-            _onStart.OnNext(feature.Cache);
+            await MainFeature.Run(feature, DialogService, Controller, _onStart);
         }
 
         private void GotoPageImpl(Type type)
@@ -137,8 +122,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 .Dialog(Xaml.GetViewModel<IDialogViewModel>(type));
         }
 
-        private MainFeature   _selectedFeature;
-        private ViewModelBase _selectedViewModel;
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedViewModel\"/> 属性。
