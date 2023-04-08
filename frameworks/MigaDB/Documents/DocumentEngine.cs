@@ -104,11 +104,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return EngineResult.Failed(EngineFailedReason.InputDataError);
             }
 
-            if (DocumentDB.HasID(document.Id) ||
-                DocumentCacheDB.HasID(document.Id))
-            {
-                return EngineResult.Failed(EngineFailedReason.Duplicated);
-            }
             
             DocumentDB.Insert(document);
 
