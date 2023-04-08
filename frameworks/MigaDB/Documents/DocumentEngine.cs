@@ -104,7 +104,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return EngineResult.Failed(EngineFailedReason.InputDataError);
             }
 
-            
+            if (!DocumentCacheDB.HasID(document.Id))
+            {
+                return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
+            }
+
             DocumentDB.Insert(document);
 
             //
