@@ -41,9 +41,9 @@
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
                                         <DockPanel>
                                             <TextBlock DockPanel.Dock="Top"
+                                                       FontWeight="Bold"
                                                        Text="{Binding Name, Converter={StaticResource NameConverter}}"
-                                                       VerticalAlignment="Center"
-                                                       Margin="5,0,0,0" />
+                                                       VerticalAlignment="Center" />
                                             <ItemsPresenter Margin="24 8"/>
                                         </DockPanel>
                                     </ControlTemplate>

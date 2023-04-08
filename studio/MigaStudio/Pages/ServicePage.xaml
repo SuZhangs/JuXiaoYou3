@@ -17,7 +17,7 @@
         <this:ServiceViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:MainFeatureConverter x:Key="NameConverter" />
     </UserControl.Resources>
-    <Grid>
+    <f:ForestIsland Header="服务">
         <ItemsControl ItemsSource="{Binding Features,Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">
@@ -35,5 +35,5 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-    </Grid>
+    </f:ForestIsland>
 </f:ForestUserControl>
