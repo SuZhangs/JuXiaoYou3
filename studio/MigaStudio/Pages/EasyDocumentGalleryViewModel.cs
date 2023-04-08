@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
@@ -25,6 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
+            KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
             _version        = DocumentEngine.Version;
 
             SelectedDocumentCommand     = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
@@ -37,6 +40,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             ChangeDocumentCommand       = AsyncCommand<DocumentCache>(ChangeDocumentImpl);
             RemoveDocumentCommand       = AsyncCommand<DocumentCache>(RemoveDocumentImpl);
             OpenDocumentCommand         = Command<DocumentCache>(OpenDocumentImpl);
+            AddKeywordCommand           = AsyncCommand(AddKeywordImpl);
+            RemoveKeywordCommand        = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
         }
 
         protected override void OnRequestComputePageCount()
@@ -66,6 +71,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             Type = (DocumentType)parameter.Args[0];
             base.OnStart(parameter);
+        }
+
+        public override void Resume()
+        {
+            base.Resume();
+
+            if (SelectedItem is not null)
+            {
+                SelectedItem = DocumentUtilities.UpdateDocument(
+                    DocumentEngine,
+                    SelectedItem.Id, 
+                    DataSource,
+                    Collection);
+            }
         }
 
         protected sealed override bool NeedDataSourceSynchronize()
@@ -126,12 +145,39 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 Successful(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
+        private async Task AddKeywordImpl()
+        {
+            await DocumentUtilities.AddKeyword(SelectedItem.Keywords,
+                KeywordEngine,
+                SetDirtyState,
+                Warning);
+        }
+
+        private async Task RemoveKeywordImpl(string item)
+        {
+            await DocumentUtilities.RemoveKeyword(
+                item, 
+                SelectedItem.Keywords, 
+                KeywordEngine, 
+                SetDirtyState, 
+                DangerousOperation);
+        }
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand AddKeywordCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ImageEngine ImageEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public KeywordEngine KeywordEngine { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public IDatabaseManager DatabaseManager { get; }

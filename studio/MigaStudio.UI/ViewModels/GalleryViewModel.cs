@@ -87,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             base.OnStart();
         }
 
-        public sealed override void Resume()
+        public override void Resume()
         {
             if (NeedDataSourceSynchronize())
             {

@@ -4,16 +4,16 @@
     {
         public void AddKeyword(string keyword)
         {
-            KeywordDB.Upsert(new Keyword
-            {
-                Id = keyword,
-                Value = keyword
-            });
+            // KeywordDB.Upsert(new Keyword
+            // {
+            //     Id = keyword,
+            //     Value = keyword
+            // });
         }
         
         public void RemoveKeyword(string keyword)
         {
-            KeywordDB.Delete(keyword);
+            // KeywordDB.Delete(keyword);
         }
         
         protected override void OnDatabaseOpening(DatabaseSession session)

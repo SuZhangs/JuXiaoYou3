@@ -199,7 +199,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
-            Modified();
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
         }
@@ -226,7 +225,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
         
-            Modified();
             DocumentCacheDB.Update(cache);
         }
         
@@ -285,7 +283,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             DocumentCacheDB.DeleteMany(x => x.IsDeleted);
             DocumentDB.DeleteMany(x => markAsDeletedDocumentCache.Contains(x.Id));
 
-            Modified();
+            if(markAsDeletedDocumentCache.Count > 0)
+                Modified();
         }
 
         /// <summary>

@@ -92,10 +92,104 @@
         </f:ForestSection>
 
         <f:Drawer.RightContent>
-            <f:ForestIsland Header="{f:Language global.Edit}" 
-                            Width="480">
-                
-            </f:ForestIsland>
+            <Border Background="{f:BackgroundBrush}"
+                    Padding="16"
+                    Width="420">
+                <StackPanel>
+                    <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="128"
+                            Width="128">
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="SelectedItem.Avatar" Mode="OneWay" />
+                                        <Binding Path="SelectedItem.Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
+
+
+                    <TextBlock FontSize="18"
+                               FontWeight="Bold"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding SelectedItem.Name,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               MaxHeight="96" />
+
+                    <UniformGrid Columns="4">
+                        <ftk:ToolButton Content="编辑"
+                                        Icon="{StaticResource FeatherIcon.Edit}"
+                                        Command="{Binding OpenDocumentCommand}"
+                                        CommandParameter="{Binding SelectedItem,Mode=OneWay}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="锁定"
+                                        Command="{Binding LockOrUnlockDocumentCommand}"
+                                        CommandParameter="{Binding SelectedItem,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Lock}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="删除"
+                                        Command="{Binding RemoveDocumentCommand}"
+                                        CommandParameter="{Binding SelectedItem,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Edit}"
+                                        ShowText="True" />
+                    </UniformGrid>
+
+                    <f:ForestSection Header="标签"
+                                    Margin="0 16 0 0">
+                        <f:ForestSection.ToolBar>
+                            <ftk:ToolButton Content="添加"
+                                            Command="{Binding RemoveDocumentCommand}"
+                                            CommandParameter="{Binding SelectedItem,Mode=OneWay}"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 0 0 4"
+                                            Icon="{StaticResource FeatherIcon.Plus}"
+                                            ShowText="True" />
+                        </f:ForestSection.ToolBar>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding SelectedItem.Keywords,Mode=OneWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{f:Brush HighlightA4}"
+                                                CornerRadius="3"
+                                                Margin="4"
+                                                Padding="8">
+                                            <DockPanel>
+                                                <f:LooklessButton DockPanel.Dock="Right"
+                                                                  Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveKeywordCommand}"
+                                                                  CommandParameter="{Binding}"
+                                                                  Height="28"
+                                                                  Width="28">
+                                                    <Path Data="{StaticResource FeatherIcon.Close}"
+                                                          Stroke="{f:Brush ForegroundInHighlight}"
+                                                          StrokeThickness="1"
+                                                          Stretch="Uniform"
+                                                          Height="11"
+                                                          Width="11" />
+                                                </f:LooklessButton>
+
+                                                <TextBlock Foreground="{f:Brush ForegroundInHighlight}"
+                                                           FontSize="14"
+                                                           Text="{Binding}"
+                                                           VerticalAlignment="Center" />
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </f:ForestSection>
+                </StackPanel>
+            </Border>
         </f:Drawer.RightContent>
     </f:Drawer>
 </f:ForestUserControl>

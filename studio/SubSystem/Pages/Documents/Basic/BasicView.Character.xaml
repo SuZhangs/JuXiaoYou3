@@ -126,8 +126,8 @@
                                               Stroke="{f:Brush ForegroundInHighlight}"
                                               StrokeThickness="1"
                                               Stretch="Uniform"
-                                              Height="13"
-                                              Width="13" />
+                                              Height="11"
+                                              Width="11" />
                                     </f:LooklessButton>
 
                                     <TextBlock Foreground="{f:Brush ForegroundInHighlight}"

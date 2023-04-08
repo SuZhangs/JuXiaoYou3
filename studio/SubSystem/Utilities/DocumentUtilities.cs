@@ -1,15 +1,73 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Views;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
+using CommunityToolkit.Mvvm.Input;
+using ImTools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public static class DocumentUtilities
     {
+        public static async Task AddKeyword(
+            IList<string> Keywords,
+            KeywordEngine KeywordEngine,
+            Action<bool> SetDirtyState,
+            Func<string, Task> Warning)
+        {
+            if (Keywords.Count >= 32)
+            {
+                await Warning(SubSystemString.KeywordTooMany);
+            }
+
+            var hash = Keywords.ToHashSet();
+            var r    = await StringViewModel.String(SubSystemString.AddKeywordTitle);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            if (!hash.Add(r.Value))
+            {
+                await Warning(Language.ContentDuplicatedText);
+                return;
+            }
+
+            KeywordEngine.AddKeyword(r.Value);
+            Keywords.Add(r.Value);
+            SetDirtyState(true);
+        }
+
+        public static async Task RemoveKeyword(
+            string item,
+            IList<string> Keywords,
+            KeywordEngine KeywordEngine,
+            Action<bool> SetDirtyState,
+            Func<string, Task<bool>> DangerousOperation)
+        {
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            if (!Keywords.Remove(item))
+            {
+                return;
+            }
+
+            Keywords.Remove(item);
+            KeywordEngine.RemoveKeyword(item);
+            SetDirtyState(true);
+        }
+
         public static async Task AddDocument(DocumentEngine engine, Action<DocumentCache> callback)
         {
             var result = await NewDocumentViewModel.New();
@@ -19,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            var cache  = result.Value;
+            var cache   = result.Value;
             var result1 = engine.AddDocumentCache(cache);
 
             if (!result.IsFinished)
@@ -29,10 +87,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                               SubSystemString.Notify,
                               SubSystemString.GetEngineResult(result1.Reason));
             }
-            
+
             callback?.Invoke(cache);
         }
-        
+
         public static async Task AddDocument(DocumentEngine engine, DocumentType type, Action<DocumentCache> callback)
         {
             var result = await NewDocumentViewModel.New(type);
@@ -52,21 +110,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                               SubSystemString.Notify,
                               SubSystemString.GetEngineResult(result1.Reason));
             }
-            
+
             callback?.Invoke(cache);
         }
-        
-        
-        public static async Task EditDocument(DocumentEngine engine, ImageEngine imageEngine, DocumentCache cache, Action<DocumentCache> callback)
+
+        public static DocumentCache UpdateDocument(DocumentEngine engine, string id, IList<DocumentCache> sourceA, IList<DocumentCache> sourceB)
         {
-            if (cache is null)
+            if (sourceA is null ||
+                sourceB is null ||
+                engine is null ||
+                string.IsNullOrEmpty(id))
             {
-                return;
+                return null;
             }
 
-            
+            var indexA = sourceA.IndexOf(x => x.Id == id);
+            var indexB = sourceB.IndexOf(x => x.Id == id);
+
+            var inside = engine.DocumentCacheDB.FindById(id);
+
+            if (inside is null)
+            {
+                return null;
+            }
+
+            sourceA[indexA] = inside;
+            sourceB[indexB] = inside;
+            return inside;
         }
-        
+
         public static void OpenDocument(TabController controller, DocumentCache cache)
         {
             if (cache is null || controller is null)
@@ -114,8 +186,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task ChangedDocument(DocumentEngine engine, ImageEngine imageEngine, DocumentCache cache, Action<DocumentCache> callback)
         {
-            if (cache is null || 
-                engine is null || 
+            if (cache is null ||
+                engine is null ||
                 imageEngine is null)
             {
                 return;
@@ -164,7 +236,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 return;
             }
-            
+
             var document = engine.DocumentDB.FindById(cache.Id);
 
             if (document is null)
@@ -176,7 +248,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 document.Name   = cache.Name;
                 document.Avatar = cache.Avatar;
                 document.Intro  = cache.Intro;
-                engine.UpdateDocument(document,cache);
+                engine.UpdateDocument(document, cache);
             }
         }
 
@@ -186,7 +258,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 return;
             }
-            
+
             engine.RemoveDocumentCache(cache);
             callback?.Invoke(cache);
         }

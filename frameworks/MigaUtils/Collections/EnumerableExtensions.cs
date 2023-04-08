@@ -5,6 +5,34 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
     public static class EnumerableExtensions
     {
         private static void Empty<T>(T a, int b, int c){}
+
+        public static int IndexOf<T>(this IEnumerable<T> collection, Predicate<T> predicate)
+        {
+            if (predicate is null)
+            {
+                return -1;
+            }
+
+            if (collection is null)
+            {
+                return -1;
+            }
+
+            var i = 0;
+            
+            foreach (var item in collection)
+            {
+                if (predicate(item))
+                {
+                    return i;
+                }
+
+                i++;
+            }
+
+            return -1;
+        }
+        
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> handler)
         {
             if (collection is null)
