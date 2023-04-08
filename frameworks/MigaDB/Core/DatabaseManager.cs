@@ -653,7 +653,13 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回指定的引擎类型（如果存在），否则返回null。</returns>
         public TEngine GetEngine<TEngine>() where TEngine : IDataEngine
         {
-            return Container.Resolve<TEngine>();
+            var engine = Container.Resolve<TEngine>();
+            if (!engine.Activated)
+            {
+                engine.Activate();
+            }
+
+            return engine;
         }
 
         /// <summary>
