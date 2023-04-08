@@ -90,5 +90,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         }
         
         public ILiteCollection<FileRecord> Records { get; private set; }
+
+        public static string GetAvatarUri() => $"avatar_{ID.Get()}.png";
     }
 }

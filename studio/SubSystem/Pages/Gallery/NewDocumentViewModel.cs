@@ -20,21 +20,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
     public class NewDocumentViewModel : ImplicitDialogVM
     {
+        private        bool         _selectedAvatar;
         private        string       _name;
         private        ImageSource  _avatar;
         private        MemoryStream _buffer;
         private static DocumentType _type = DocumentType.Character;
-        private        Visibility       _visibility;
-
-        /// <summary>
-        /// 获取或设置 <see cref="Visibility"/> 属性。
-        /// </summary>
-        public Visibility Visibility
-        {
-            get => _visibility;
-            set => SetValue(ref _visibility, value);
-        }
-
+        private        Visibility   _visibility;
         public NewDocumentViewModel()
         {
             SetAvatarCommand = new AsyncRelayCommand(SetAvatarImpl);
@@ -86,8 +77,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             //
             try
             {
-                Avatar  = Xaml.FromStream(op.Buffer, 256, 256);
-                _buffer = op.Buffer;
+                Avatar          = Xaml.FromStream(op.Buffer, 256, 256);
+                _buffer         = op.Buffer;
+                _selectedAvatar = true;
             }
             catch
             {
@@ -101,7 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             return !string.IsNullOrEmpty(Name);
         }
 
-        protected override void Finish()
+        private string ApplyAvatar()
         {
             var dm = Xaml.Get<IDatabaseManager>();
 
@@ -113,42 +105,39 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                     CriticalLevel.Warning,
                     SubSystemString.Notify,
                     SubSystemString.GetDatabaseResult(DatabaseFailedReason.DatabaseNotOpen));
-                return;
+                return string.Empty;
             }
 
             var    ie  = dm.GetEngine<ImageEngine>();
             var    raw = Pool.MD5.ComputeHash(_buffer);
             var    md5 = Convert.ToBase64String(raw);
-            string avatar;
             
             if (ie.HasFile(md5))
             {
                 var fr = ie.Records.FindById(md5);
-                avatar = fr.Uri;
+                return fr.Uri;
             }
-            else
+
+            var avatar = ImageEngine.GetAvatarUri();
+            ie.WriteAvatar(_buffer, avatar);
+
+            var record = new FileRecord
             {
-                avatar = $"avatar_{ID.Get()}.png";
-                ie.WriteAvatar(_buffer, avatar);
+                Id   = md5,
+                Uri  = avatar,
+                Type = ResourceType.Image
+            };
 
-                var record = new FileRecord
-                {
-                    Id   = md5,
-                    Uri  = avatar,
-                    Type = ResourceType.Image
-                };
+            ie.AddFile(record);
+            return avatar;
+        }
 
-                ie.AddFile(record);
-            }
-            
-
-            //
-            // 写入图片，不做去重处理
-
+        protected override void Finish()
+        {
             var document = new DocumentCache
             {
                 Id             = ID.Get(),
-                Avatar         = avatar,
+                Avatar         = _selectedAvatar ? ApplyAvatar() : null,
                 Keywords       = new ObservableCollection<string>(),
                 Name           = _name,
                 Removable      = false,
@@ -165,6 +154,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         protected override string Failed()
         {
             return SubSystemString.EmptyName;
+        }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="Visibility"/> 属性。
+        /// </summary>
+        public Visibility Visibility
+        {
+            get => _visibility;
+            set => SetValue(ref _visibility, value);
         }
 
         /// <summary>
