@@ -157,7 +157,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
         
         /// <summary>
-        /// 获取或设置 <see cref="Visibility"/> 属性。
+        /// 是否隐藏
         /// </summary>
         public Visibility Visibility
         {
@@ -166,7 +166,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Type"/> 属性。
+        /// 文档类型
         /// </summary>
         public DocumentType Type
         {
@@ -175,7 +175,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Avatar"/> 属性。
+        /// 头像
         /// </summary>
         public ImageSource Avatar
         {
@@ -184,7 +184,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Name"/> 属性。
+        /// 名字
         /// </summary>
         public string Name
         {
