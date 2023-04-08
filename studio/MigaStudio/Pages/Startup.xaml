@@ -4,12 +4,56 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:fs="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:StartupViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="256" />
+                <RowDefinition Height="256" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="12"
+                    Padding="32">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#bec936" Offset="0"/>
+                        <GradientStop Color="#ffab12" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <TextBlock Foreground="{f:Brush ForegroundInAdaptive}"
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Text="橘小柚（JuXiaoYou）"/>
+                </Grid>
+            </Border>
+
+            <DockPanel Grid.Row="1"
+                       Margin="0 16 0 0">
+                <f:SpacingStackPanel DockPanel.Dock="Right"
+                                     Gap="8"
+                                     Width="384">
+                    <fs:ActionButton Content="浏览教程"/>
+                    <fs:ActionButton Content="反馈BUG"/>
+                    <fs:ActionButton Content="赞助我们"/>
+                    <fs:ActionButton Content="联系我们"/>
+                </f:SpacingStackPanel>
+                
+                <f:SpacingStackPanel DockPanel.Dock="Left"
+                                     Orientation="Horizontal"
+                                     Gap="8">
+                    <fs:ActionButton Content="浏览教程"/>
+                    <fs:ActionButton Content="反馈BUG"/>
+                    <fs:ActionButton Content="赞助我们"/>
+                    <fs:ActionButton Content="联系我们"/>
+                </f:SpacingStackPanel>
+            </DockPanel>
+        </Grid>
+    </ScrollViewer>
 </f:ForestUserControl>

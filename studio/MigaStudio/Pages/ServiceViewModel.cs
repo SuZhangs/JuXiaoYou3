@@ -39,6 +39,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             const string Service   = "global.service";
             const string Tools     = "global.tools";
             CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__MusicPlayer", null);
+            CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__ColorService", null);
+            CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__RankService", null);
+            CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__CompareService", null);
         }
         
         private void CreateDialogFeature<T>(string group, string name, params object[] e)
