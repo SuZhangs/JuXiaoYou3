@@ -125,6 +125,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             Collection.AddRange(DataSource.Skip(skipElementCounts)
                                           .Take(minPageItemCount), true);
+            NextPageCommand.NotifyCanExecuteChanged();
+            LastPageCommand.NotifyCanExecuteChanged();
         }
         
         /// <summary>

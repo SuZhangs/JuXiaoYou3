@@ -5,23 +5,23 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
-                   xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
+                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
-                   xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
-                   xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                     xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
                      mc:Ignorable="d"
                      d:DesignHeight="300"
                      d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EasyDocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
 
-        <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+        <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
-            <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectDocumentCommand}"
+            <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectedDocumentCommand}"
                             CommandParameter="{Binding}"
                             Margin="4"
                             Padding="8">
@@ -50,43 +50,52 @@
             </f:SimpleButton>
         </DataTemplate>
     </UserControl.Resources>
-    <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
-        <f:ForestSection.ToolBar>
-            <StackPanel HorizontalAlignment="Right"
-                        Margin="0 0 0 4"
-                        Orientation="Horizontal">
-                <ftk:ToolButton Content="添加"
-                                Command="{Binding NewDocumentCommand}"
-                                Icon="{StaticResource FeatherIcon.Plus}"
-                                ShowText="True"/>
+    <f:Drawer IsRightOpen="{Binding IsPropertyPaneOpen,Mode=TwoWay}">
+        <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
+            <f:ForestSection.ToolBar>
+                <StackPanel HorizontalAlignment="Right"
+                            Margin="0 0 0 4"
+                            Orientation="Horizontal">
+                    <ftk:ToolButton Content="添加"
+                                    Command="{Binding NewDocumentCommand}"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    ShowText="True" />
 
-                <ftk:ToolButton Content="排序"
-                                Icon="{StaticResource FeatherIcon.Filter}"
-                                ShowText="True"/>
-                <ftk:ToolButton Content="帮助"
-                                
-                                Icon="{StaticResource FeatherIcon.Tools}"
-                                ShowText="True"/>
-            </StackPanel>
-        </f:ForestSection.ToolBar>
+                    <ftk:ToolButton Content="排序"
+                                    Icon="{StaticResource FeatherIcon.Filter}"
+                                    ShowText="True" />
+                    <ftk:ToolButton Content="帮助"
 
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top"
-                        Orientation="Horizontal">
+                                    Icon="{StaticResource FeatherIcon.Tools}"
+                                    ShowText="True" />
+                </StackPanel>
+            </f:ForestSection.ToolBar>
 
-                <f:SingleLine Width="128"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}"/>
-            </StackPanel>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"
+                            Orientation="Horizontal">
 
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
-        </DockPanel>
-    </f:ForestSection>
+                    <f:SingleLine Width="128" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}" />
+                </StackPanel>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </f:ForestSection>
+
+        <f:Drawer.RightContent>
+            <f:ForestIsland Header="{f:Language global.Edit}" 
+                            Width="480">
+                
+            </f:ForestIsland>
+        </f:Drawer.RightContent>
+    </f:Drawer>
 </f:ForestUserControl>

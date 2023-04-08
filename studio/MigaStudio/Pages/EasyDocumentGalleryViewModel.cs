@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -20,19 +16,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     
     public class EasyDocumentGalleryViewModel : GalleryViewModel<DocumentCache>
     {
-        private int _version;
+        private int  _version;
+        private bool _isPropertyPaneOpen;
         
         public EasyDocumentGalleryViewModel()
         {
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
+            ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             _version        = DocumentEngine.Version;
 
-            NewDocumentCommand    = AsyncCommand(NewDocumentImpl);
-            RemoveDocumentCommand = AsyncCommand<DocumentCache>(RemoveDocumentImpl);
-            OpenDocumentCommand   = AsyncCommand<DocumentCache>(OpenDocumentImpl);
-            EditDocumentCommand   = AsyncCommand<DocumentCache>(EditDocumentImpl);
+            SelectedDocumentCommand     = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
+            {
+                SelectedItem       = x;
+                IsPropertyPaneOpen = true;
+            });
+            NewDocumentCommand          = AsyncCommand(NewDocumentImpl);
+            LockOrUnlockDocumentCommand = Command<DocumentCache>(LockOrUnlockDocumentImpl);
+            ChangeDocumentCommand       = AsyncCommand<DocumentCache>(ChangeDocumentImpl);
+            RemoveDocumentCommand       = AsyncCommand<DocumentCache>(RemoveDocumentImpl);
+            OpenDocumentCommand         = Command<DocumentCache>(OpenDocumentImpl);
         }
 
         protected override void OnRequestComputePageCount()
@@ -84,18 +88,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
             });
         }
-
-        private async Task EditDocumentImpl(DocumentCache cache)
+        
+        private async Task ChangeDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.AddDocument(DocumentEngine, Type, x =>
+            await DocumentUtilities.ChangedDocument(DocumentEngine, ImageEngine, cache, _ =>
             {
-                
+                Successful(SubSystemString.OperationOfSaveIsSuccessful);
             });
         }
-
-        private async Task OpenDocumentImpl(DocumentCache cache)
+        
+        private void LockOrUnlockDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.AddDocument(DocumentEngine, Type, x => { });
+            DocumentUtilities.LockOrUnlock(DocumentEngine, cache);
+        }
+
+        private void OpenDocumentImpl(DocumentCache cache)
+        {
+            DocumentUtilities.OpenDocument(Controller, cache);
         }
 
         private async Task RemoveDocumentImpl(DocumentCache cache)
@@ -122,9 +131,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public DocumentEngine DocumentEngine { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public TemplateEngine TemplateEngine { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
         public ImageEngine ImageEngine { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
@@ -132,16 +138,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<DocumentCache> SelectedDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<DocumentCache> ChangeDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<DocumentCache> LockOrUnlockDocumentCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<DocumentCache> EditDocumentCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<DocumentCache> OpenDocumentCommand { get; }
+        public RelayCommand<DocumentCache> OpenDocumentCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<DocumentCache> RemoveDocumentCommand { get; }
 
         public DocumentType Type { get; private set; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsPropertyPaneOpen"/> 属性。
+        /// </summary>
+        public bool IsPropertyPaneOpen
+        {
+            get => _isPropertyPaneOpen;
+            set => SetValue(ref _isPropertyPaneOpen, value);
+        }
     }
 }
