@@ -1,12 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaStudio.Models.Previews;
-using Acorisoft.Miga.Doc.Parts;
-using TagLib.Riff;
 using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -10,9 +9,7 @@ using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
-using TagLib;
-using TagLib.Mpeg;
-using File = TagLib.File;
+
 // ReSharper disable ConvertToUsingDeclaration
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons

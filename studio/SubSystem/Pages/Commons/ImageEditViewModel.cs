@@ -1,15 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Models;
-using Acorisoft.FutureGL.MigaStudio.Utilities;
+﻿using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using Size = SixLabors.ImageSharp.Size;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {

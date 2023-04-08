@@ -84,14 +84,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private static bool HasElement<T>(T element) where T : class => element is not null;
 
-        private void SetDirtyState(bool value)
-        {
-            _dirty           = value;
-            ApprovalRequired = value;
-            UpdateTitle();
-        }
-
-        private void UpdateTitle()
+        
+        protected override void OnDirtyStateChanged(bool state)
         {
             var name = string.IsNullOrEmpty(Name) ? Id : Name;
             SetTitle(name, _dirty);
@@ -509,7 +503,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _name, value);
-                UpdateTitle();
+                SetDirtyState();
                 RaiseUpdated(nameof(PreviewName));
             }
         }

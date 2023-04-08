@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     [Connected(View = typeof(NewPreviewBlockView), ViewModel = typeof(NewPreviewBlockViewModel))]
     public partial class NewPreviewBlockView

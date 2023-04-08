@@ -27,8 +27,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
-            DocumentSource  = new List<DocumentCache>(128);
-            Collection      = new ObservableCollection<DocumentCache>();
             _version        = DocumentEngine.Version;
 
             NewDocumentCommand    = AsyncCommand(NewDocumentImpl);
@@ -37,14 +35,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             EditDocumentCommand   = AsyncCommand<DocumentCache>(EditDocumentImpl);
         }
 
-        protected sealed override void OnPageRequest(int index)
+        protected override void OnRequestComputePageCount()
         {
-            PageRequest(DocumentSource, Collection, index);
-        }
-
-        private void OnDocumentSourceChanged()
-        {
-            var count        = DocumentSource.Count;
+            var count = DataSource.Count;
             TotalPageCount = ((count == 0 ? 1 : count) + 29) / 30;
 
             if (TotalPageCount == 1)
@@ -58,43 +51,46 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     1,
                     Math.Min(TotalPageCount, PageCountLimited));
             }
-            
-            JumpPage(PageIndex);
         }
 
-        protected override void OnStart(Parameter parameter)
+        protected sealed override void OnRequestDataSourceSynchronize(IList<DocumentCache> dataSource)
+        {
+            dataSource.AddRange(DocumentEngine.GetDocuments(Type));
+        }
+
+        protected sealed override void OnStart(Parameter parameter)
         {
             Type = (DocumentType)parameter.Args[0];
-            DocumentSource.AddRange(DocumentEngine.GetDocuments(Type));
-            OnDocumentSourceChanged();
             base.OnStart(parameter);
         }
 
-        public override void Resume()
+        protected sealed override bool NeedDataSourceSynchronize()
         {
             if (_version != DocumentEngine.Version)
             {
                 _version = DocumentEngine.Version;
-                DocumentSource.Clear();
-                DocumentSource.AddRange(DocumentEngine.GetDocuments(Type));
-                OnDocumentSourceChanged();
+                return true;
             }
-            
-            base.Resume();
+
+            return false;
         }
 
         private async Task NewDocumentImpl()
         {
             await DocumentUtilities.AddDocument(DocumentEngine, Type, x =>
             {
-                DocumentSource.Add(x);
+                DataSource.Add(x);
                 Collection.Add(x);
+                
             });
         }
 
         private async Task EditDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.AddDocument(DocumentEngine, Type, x => { });
+            await DocumentUtilities.AddDocument(DocumentEngine, Type, x =>
+            {
+                
+            });
         }
 
         private async Task OpenDocumentImpl(DocumentCache cache)
@@ -116,17 +112,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             DocumentUtilities.RemoveDocument(DocumentEngine, cache, x =>
             {
-                DocumentSource.Remove(x);
+                DataSource.Remove(x);
                 Collection.Remove(x);
                 Successful(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public List<DocumentCache> DocumentSource { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<DocumentCache> Collection { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }

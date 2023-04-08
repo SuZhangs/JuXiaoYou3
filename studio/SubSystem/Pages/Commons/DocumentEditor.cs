@@ -1,32 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing.Design;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Models.Previews;
-using Acorisoft.FutureGL.MigaUtils.Collections;
-using CommunityToolkit.Mvvm.Input;
-using DynamicData;
-using DynamicData.Binding;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -55,7 +37,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected Document         Document;
         protected DocumentCache    Cache;
         private   PartOfModule     _selectedModulePart;
-        private   bool             _dirtyState;
 
 
         protected DocumentEditorBase()
@@ -186,20 +167,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         #endregion
 
 
-        #region SetDirtyState
-
-        public void SetDirtyState(bool state = true)
+       
+        protected override void OnDirtyStateChanged(bool state)
         {
-            _dirtyState = state;
-
             if (state)
             {
                 SetTitle(Document.Name, true);
             }
-
-            ApprovalRequired = state;
         }
-
-        #endregion
     }
 }

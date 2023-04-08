@@ -21,6 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private string _title;
         private bool   _isPinned;
+        private bool   _dirtyState;
 
 
         protected TabViewModel()
@@ -46,7 +47,22 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             Title = useUnsavePattern ? string.Format(Unsave, title) : title;
         }
+        
+        #region SetDirtyState
 
+        protected virtual void OnDirtyStateChanged(bool state)
+        {
+            
+        }
+
+        public void SetDirtyState(bool state = true)
+        {
+            _dirtyState = state;
+            OnDirtyStateChanged(state);
+            ApprovalRequired = state;
+        }
+
+        #endregion
 
         #region Override
 
@@ -270,92 +286,5 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <see cref="Uniqueness"/> 属性用来表示是否唯一，这个唯一是按照类型来算的。如果这个值为true，那么只能存在一个打开的类型。
         /// </remarks>
         public virtual bool Uniqueness => false;
-    }
-    
-    public abstract class GalleryViewModel<TItem> : TabViewModel where TItem : class
-    {
-        protected const int MaxItemCount     = 30;
-        protected const int PageCountLimited = 512;
-
-        protected GalleryViewModel()
-        {
-            
-            NextPageCommand = Command(NextPageImpl, CanNextPage);
-            LastPageCommand = Command(LastPageImpl, CanLastPage);
-        }
-        
-        #region Last / Next
-
-        private bool CanNextPage() => _pageIndex + 1 < TotalPageCount;
-
-        private bool CanLastPage() => _pageIndex > 1;
-
-        protected void JumpPage(int index)
-        {
-            if (index < 0 || index > TotalPageCount)
-            {
-                return;
-            }
-
-            PageIndex = index;
-            OnPageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
-        }
-
-        private void NextPageImpl()
-        {
-            PageIndex++;
-            OnPageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
-        }
-
-        private void LastPageImpl()
-        {
-            PageIndex--;
-            OnPageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 页面跳转请求
-        /// </summary>
-        /// <param name="index">页面索引，从1-1024.</param>
-        protected abstract void OnPageRequest(int index);
-        
-        protected static void PageRequest(IList<TItem> source, ICollection<TItem> target, int index)
-        {
-            if (source.Count == 0)
-            {
-                return;
-            }
-            var skipElementCounts = (index - 1) * 30;
-            var minPageItemCount  = Math.Clamp(source.Count - skipElementCounts, 0, MaxItemCount);
-
-            target.AddRange(source.Skip(skipElementCounts)
-                                  .Take(minPageItemCount), true);
-        }
-
-        private int _pageIndex;
-        public int TotalPageCount { get; protected set; }
-
-        /// <summary>
-        /// 获取或设置 <see cref="PageIndex"/> 属性。
-        /// </summary>
-        public int PageIndex
-        {
-            get => _pageIndex;
-            set => SetValue(ref _pageIndex, value);
-        }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand NextPageCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand LastPageCommand { get; }
     }
 }

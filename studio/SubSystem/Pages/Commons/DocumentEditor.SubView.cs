@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {

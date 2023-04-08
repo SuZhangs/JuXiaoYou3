@@ -1,13 +1,6 @@
-﻿using System.Collections;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
-using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons

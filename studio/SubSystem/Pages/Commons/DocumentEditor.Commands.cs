@@ -1,34 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Drawing.Design;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.Forest.Views;
-using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
-using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {

@@ -1,6 +1,4 @@
-﻿using SixLabors.ImageSharp.Processing.Processors.Filters;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class ImageViewModel : DialogViewModel
     {
