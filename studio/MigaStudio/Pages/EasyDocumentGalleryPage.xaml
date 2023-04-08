@@ -115,13 +115,14 @@
 
                     <TextBlock FontSize="18"
                                FontWeight="Bold"
-                               Margin="0 8 0 0"
+                               Margin="0 8"
                                HorizontalAlignment="Center"
                                Text="{Binding SelectedItem.Name,Mode=OneWay}"
                                TextWrapping="Wrap"
                                MaxHeight="96" />
 
-                    <UniformGrid Columns="4">
+                    <UniformGrid Columns="4"
+                                 Margin="0 8">
                         <ftk:ToolButton Content="编辑"
                                         Icon="{StaticResource FeatherIcon.Edit}"
                                         Command="{Binding OpenDocumentCommand}"
@@ -143,7 +144,7 @@
                                     Margin="0 16 0 0">
                         <f:ForestSection.ToolBar>
                             <ftk:ToolButton Content="添加"
-                                            Command="{Binding RemoveDocumentCommand}"
+                                            Command="{Binding AddKeywordCommand}"
                                             CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                             HorizontalAlignment="Right"
                                             Margin="0 0 0 4"

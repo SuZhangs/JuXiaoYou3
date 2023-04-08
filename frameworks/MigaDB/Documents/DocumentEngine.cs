@@ -194,7 +194,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             }
 
             if (!DocumentDB.HasID(document.Id) ||
-                !DocumentCacheDB.HasID(document.Id))
+                !DocumentCacheDB.HasID(cache.Id))
             {
                 return;
             }

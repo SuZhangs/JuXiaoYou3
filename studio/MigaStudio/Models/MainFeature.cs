@@ -9,6 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         public string NameId { get; init; }
         public bool IsDialog { get; init; }
         public Type ViewModel { get; init; }
+        public ViewModelBase Cache { get; set; }
         public object[] Parameter { get; init; }
     }
 }

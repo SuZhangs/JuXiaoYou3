@@ -68,6 +68,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
 
+        public override void OnStart()
+        {
+            foreach (var feature in Features)
+            {
+                feature.Cache?.Start();
+            }
+        }
+
+        public override void Stop()
+        {
+            foreach (var feature in Features)
+            {
+                feature.Cache?.Stop();
+            }
+        }
+
+        public override void Suspend()
+        {
+            foreach (var feature in Features)
+            {
+                feature.Cache?.Suspend();
+            }
+            base.Suspend();
+        }
+
+        public override void Resume()
+        {
+            foreach (var feature in Features)
+            {
+                feature.Cache?.Resume();
+            }
+            
+            base.Resume();
+        }
+
 
         private async Task RunFeature(MainFeature feature)
         {
@@ -87,7 +122,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 Args = feature.Parameter
             });
-            _onStart.OnNext(vm);
+            feature.Cache ??= vm;
+            _onStart.OnNext(feature.Cache);
         }
 
         private void GotoPageImpl(Type type)

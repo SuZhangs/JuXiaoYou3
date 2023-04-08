@@ -134,8 +134,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return null;
             }
 
-            sourceA[indexA] = inside;
-            sourceB[indexB] = inside;
+            if(indexA > -1) sourceA[indexA] = inside;
+            if (indexB > -1) sourceB[indexB] = inside;
             return inside;
         }
 

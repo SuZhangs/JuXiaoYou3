@@ -248,7 +248,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var document = new Document
             {
-                Id        = ID.Get(),
+                Id        = Cache.Id,
                 Name      = Cache.Name,
                 Version   = 1,
                 Removable = true,
