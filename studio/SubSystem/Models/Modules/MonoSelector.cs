@@ -9,7 +9,6 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
-using Wpf.Ui.Controls;
 
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
 
