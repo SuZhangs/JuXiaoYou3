@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
@@ -147,7 +148,9 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             //
             // 移除所有对象
-            await _databaseManager.CloseAsync();
+            Task.Run(async () => await _databaseManager.CloseAsync())
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }

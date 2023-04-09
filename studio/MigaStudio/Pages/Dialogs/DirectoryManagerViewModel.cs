@@ -25,7 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
     public class DirectoryManagerViewModel : DialogViewModel
     {
-        private readonly Subject<ValueTuple<long, long, EngineCounter[]>> _subject;
+        private readonly Subject<ValueTuple<long, long,long, EngineCounter[]>> _subject;
 
         public DirectoryManagerViewModel()
         {
@@ -63,11 +63,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 Directory = Application.Directory
             };
 
-            _subject = new Subject<(long, long, EngineCounter[])>();
+            _subject = new Subject<(long, long,long, EngineCounter[])>();
             _subject.ObserveOn(Scheduler)
                     .Subscribe(x =>
                     {
-                        var (app, log, engines) = x;
+                        var (app, log, db, engines) = x;
                         Application.Size        = app;
                         Logs.Size               = log;
                         Self.Size               = Logs.Size + Application.Size;
@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                         //
                         //
                         Database.Counters.AddRange(engines, true);
-                        Database.Size = engines.Sum(e => e.Size);
+                        Database.Size = engines.Sum(e => e.Size) + db;
                         foreach (var engine in engines)
                         {
                             engine.Percent = engine.Size / (double)Database.Size * 100;
@@ -117,12 +117,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                       Name      = Language.GetText(x.GetTextSource())
                                   })
                                   .ToArray();
+                var databaseDirSize = await IOSystemUtilities.GetFolderSize(Database.Directory, false);
                 foreach (var engine in engines)
                 {
                     engine.Size = await IOSystemUtilities.GetFolderSize(engine.Directory, false);
                 }
 
-                _subject.OnNext(new ValueTuple<long, long, EngineCounter[]>(appSize, logSize, engines));
+                _subject.OnNext(new ValueTuple<long, long,long, EngineCounter[]>(appSize, logSize,databaseDirSize, engines));
             });
         }
 

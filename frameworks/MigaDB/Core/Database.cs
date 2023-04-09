@@ -76,6 +76,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
         protected override void ReleaseManagedResources()
         {
+            _database.Checkpoint();
+            _database.Checkpoint();
             _database.Dispose();
             _collector.Dispose();
         }
