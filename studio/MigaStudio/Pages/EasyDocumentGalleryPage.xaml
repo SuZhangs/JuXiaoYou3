@@ -72,7 +72,7 @@
                                     <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
                                     </f:MenuItem.CommandParameter>
-                                </MenuItem>
+                                </f:MenuItem>
                                 <f:MenuItem Header="{f:Language global.descendingByName}"
                                             Command="{Binding SetOrderByMethodCommand}">
                                     <f:MenuItem.CommandParameter>
