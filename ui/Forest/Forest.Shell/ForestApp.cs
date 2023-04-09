@@ -3,6 +3,7 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -26,32 +27,32 @@ namespace Acorisoft.FutureGL.Forest
                     new BindingInfo
                     {
                         ViewModel = typeof(DangerViewModel),
-                        View = typeof(DangerView)
+                        View      = typeof(DangerView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(WarningViewModel),
-                        View = typeof(WarningView)
+                        View      = typeof(WarningView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(SuccessViewModel),
-                        View = typeof(SuccessView)
+                        View      = typeof(SuccessView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(InfoViewModel),
-                        View = typeof(InfoView)
+                        View      = typeof(InfoView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(ObsoleteViewModel),
-                        View = typeof(ObsoleteView)
+                        View      = typeof(ObsoleteView)
                     },
                     new BindingInfo
                     {
                         ViewModel = typeof(StringViewModel),
-                        View = typeof(StringView)
+                        View      = typeof(StringView)
                     },
                     new BindingInfo
                     {
@@ -66,24 +67,38 @@ namespace Acorisoft.FutureGL.Forest
                 };
             }
         }
-        
+
         private readonly string BasicSettingFileName;
 
         protected ForestApp() : this("main.json")
         {
-            
+            Current.DispatcherUnhandledException       += OnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         }
-        
+
+        private void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+#if RELEASE
+            e.Handled = true;
+#endif
+            Logger.Error(e.Exception);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Logger.Error(e.ExceptionObject);
+        }
+
         protected ForestApp(string fileName)
         {
             BasicSettingFileName = fileName;
-            
+
             //
             // 初始化
             Initialize();
         }
 
-        protected static void InstallView<TView, TViewModel>() where TView:ForestUserControl  where TViewModel : ViewModelBase, IViewModel
+        protected static void InstallView<TView, TViewModel>() where TView : ForestUserControl where TViewModel : ViewModelBase, IViewModel
         {
             Xaml.InstallView(new BindingInfo
             {
@@ -95,12 +110,11 @@ namespace Acorisoft.FutureGL.Forest
         private void Initialize()
         {
             var (logger, appModel) = RegisterFrameworkServicesIntern(Xaml.Container);
-            RegisterServices(logger,appModel, Xaml.Container);
+            RegisterServices(logger, appModel, Xaml.Container);
             Xaml.InstallViewFromSourceGenerator();
             RegisterViews(logger, Xaml.Container);
         }
-        
-        
+
 
         /*
          * 生命周期:
@@ -132,7 +146,6 @@ namespace Acorisoft.FutureGL.Forest
         #region RegisterFrameworkServices
 
         #region Configure Methods
-        
 
         /// <summary>
         /// 获得主题
@@ -148,18 +161,17 @@ namespace Acorisoft.FutureGL.Forest
         {
             var fileName = Language.Culture switch
             {
-                CultureArea.English => "en.ini",
-                CultureArea.French => "fr.ini",
+                CultureArea.English  => "en.ini",
+                CultureArea.French   => "fr.ini",
                 CultureArea.Japanese => "jp.ini",
-                CultureArea.Korean => "kr.ini",
-                CultureArea.Russian => "ru.ini",
-                _ => "cn.ini",
+                CultureArea.Korean   => "kr.ini",
+                CultureArea.Russian  => "ru.ini",
+                _                    => "cn.ini",
             };
 
             return Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages"), fileName);
         }
 
-        
 
         /// <summary>
         /// 配置日志工具
@@ -173,7 +185,7 @@ namespace Acorisoft.FutureGL.Forest
             {
                 Layout = "【${level}】 ${date:HH:mm:ss} ${message}"
             };
-            
+
             var logfile = new FileTarget("logfile")
             {
                 FileName = appModel.Logs + "/${shortdate}.log",
@@ -199,12 +211,11 @@ namespace Acorisoft.FutureGL.Forest
 
             return new ApplicationModel
             {
-                Logs = Path.Combine(domain, "Logs"),
+                Logs     = Path.Combine(domain, "Logs"),
                 Settings = Path.Combine(domain, "UserData"),
             }.Initialize();
         }
-        
-        
+
         #endregion
 
         private void SaveBasicSettingImpl(BasicAppSetting setting)
@@ -212,8 +223,8 @@ namespace Acorisoft.FutureGL.Forest
             JSON.WriteSetting(Path.Combine(AppModel.Settings, BasicSettingFileName), Xaml.Get<BasicAppSetting>());
         }
 
-        public static void SaveBasicSetting(BasicAppSetting setting) => ((ForestApp)Current).SaveBasicSettingImpl(setting); 
-        
+        public static void SaveBasicSetting(BasicAppSetting setting) => ((ForestApp)Current).SaveBasicSettingImpl(setting);
+
         /// <summary>
         /// 注册框架服务。
         /// </summary>
@@ -221,7 +232,7 @@ namespace Acorisoft.FutureGL.Forest
         private (ILogger, ApplicationModel) RegisterFrameworkServicesIntern(IContainer container)
         {
             var appModel = ConfigureDirectory();
-            var logger = ConfigureLogger(appModel);
+            var logger   = ConfigureLogger(appModel);
 
             //
             //
@@ -235,7 +246,7 @@ namespace Acorisoft.FutureGL.Forest
                 () => new BasicAppSetting
                 {
                     Language = CultureArea.Chinese,
-                    Theme = MainTheme.Light
+                    Theme    = MainTheme.Light
                 });
 
             //
@@ -272,12 +283,10 @@ namespace Acorisoft.FutureGL.Forest
 
         protected virtual void RegisterFrameworkServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            
         }
 
         #endregion
-        
-        
+
 
         /// <summary>
         /// 注册服务。
@@ -293,10 +302,9 @@ namespace Acorisoft.FutureGL.Forest
         /// <param name="logger">日志工具。</param>
         /// <param name="container">服务容器。</param>
         protected abstract void RegisterViews(ILogger logger, IContainer container);
-        
+
         #region RegisterContextServices
 
-        
         /// <summary>
         /// 注册上下文依赖的服务。
         /// </summary>
@@ -312,7 +320,6 @@ namespace Acorisoft.FutureGL.Forest
 
         protected virtual void RegisterContextServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            
         }
 
         #endregion
@@ -325,12 +332,13 @@ namespace Acorisoft.FutureGL.Forest
             StartupOverride(e);
             base.OnStartup(e);
         }
-        
-        protected virtual void StartupOverride(StartupEventArgs e){}
+
+        protected virtual void StartupOverride(StartupEventArgs e)
+        {
+        }
 
         protected virtual void RegisterResourceDictionary(ResourceDictionary appResDict)
         {
-            
         }
 
         #endregion
@@ -338,13 +346,12 @@ namespace Acorisoft.FutureGL.Forest
 
         #region OnExit
 
-        
         protected sealed override void OnExit(ExitEventArgs e)
         {
             //
             // 重载
             OnExitOverride(e);
-            
+
             //
             // 注意，当容器释放之后，程序将不可恢复。
             Xaml.Container
@@ -352,14 +359,16 @@ namespace Acorisoft.FutureGL.Forest
 
             base.OnExit(e);
         }
-        
-        protected virtual void OnExitOverride(ExitEventArgs e){}
+
+        protected virtual void OnExitOverride(ExitEventArgs e)
+        {
+        }
 
         #endregion
 
         #endregion
-        
-        
+
+
         public ILogger Logger { get; private set; }
         public ApplicationModel AppModel { get; private set; }
     }

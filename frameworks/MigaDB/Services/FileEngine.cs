@@ -2,12 +2,16 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {
-    public abstract class FileEngine : DataEngine, IFileEngine
+    public abstract class FileEngine : DataEngine, IFileEngine, ITextService
     {
         protected FileEngine(string folderName)
         {
             BaseDirectory = folderName;
         }
+        
+        public bool UseLanguageService() => true;
+
+        public string GetTextSource() => $"__{GetType().Name}";
 
         public string GetFileName(string id) => Path.Combine(FullDirectory, id);
 

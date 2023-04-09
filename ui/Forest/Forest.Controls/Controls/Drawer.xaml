@@ -493,6 +493,7 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="BorderThickness" Value="0 4 0 0" />
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Padding" Value="0 8" />
@@ -503,7 +504,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type c:DialogPage}">
-                            <Border Background="{f:BackgroundBrush}"
+                            <Border Background="{TemplateBinding Background}"
                                     CornerRadius="10"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{TemplateBinding Accent}"
@@ -561,7 +562,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type c:DialogPage}">
-                            <Border Background="{f:BackgroundBrush}"
+                            <Border Background="{TemplateBinding Background}"
                                     CornerRadius="10"
                                     BorderThickness="0 4 0 0"
                                     BorderBrush="{TemplateBinding Accent}"

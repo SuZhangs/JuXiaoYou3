@@ -50,6 +50,25 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
                 handler(item);
             }
         }
+        
+        public static void AddRange<T>(this Queue<T> collection, IEnumerable<T> target, bool clear = false)
+        {
+            if (collection is null)
+            {
+                return;
+            }
+            
+            if (clear)
+            {
+                collection.Clear();
+            }
+
+            
+            foreach (var item in target)
+            {
+                collection.Enqueue(item);
+            }
+        }
 
         public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> target, bool clear = false)
         {

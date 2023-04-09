@@ -62,7 +62,7 @@
 
                             <Path x:Name="ChevronIcon" 
                                   Grid.Column="2"
-                                  Margin="0 0 14 0" 
+                                  Margin="14 0 0 0" 
                                   Height="{TemplateBinding IconSize}" 
                                   Width="{TemplateBinding IconSize}" 
                                   Stroke="{f:ForegroundBrush}"

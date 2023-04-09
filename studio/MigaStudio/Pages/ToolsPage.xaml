@@ -3,13 +3,37 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:model="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ToolsViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <UserControl.Resources>
+        <this:ToolsViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+        <thisConverters:MainFeatureConverter x:Key="NameConverter" />
+    </UserControl.Resources>
+    <f:ForestIsland Header="工具">
+        <ItemsControl ItemsSource="{Binding Features,Mode=OneWay}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:MainFeature}">
+                    <ftk:ToolButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RunFeatureCommand}"
+                                    CommandParameter="{Binding}"
+                                    Margin="16 8"
+                                    Icon="{StaticResource FeatherIcon.Tools}"
+                                    Content="{Binding Converter={StaticResource NameConverter}}"
+                                    ShowText="True" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </f:ForestIsland>
 </f:ForestUserControl>
