@@ -32,20 +32,20 @@
                                 Orientation="Horizontal">
 
                         <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="添加"
+                                        Content="{f:Language global.add}"
                                         Command="{Binding AddManifestCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
                         
                         <ftk:ToolButton f:Language.Id="global.edit"
-                                        Content="添加"
+                                        Content="{f:Language global.add}"
                                         Command="{Binding EditManifestCommand}"
                                         CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
                         <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="删除"
+                                        Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveManifestCommand}"
                                         CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
@@ -70,13 +70,13 @@
                                 Orientation="Horizontal">
 
                         <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="添加"
+                                        Content="{f:Language global.add}"
                                         Command="{Binding AddTemplateCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
                         <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="删除"
+                                        Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Items,Path=SelectedItem,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"

@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -44,9 +45,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             RemoveKeywordCommand        = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
         }
 
-        protected override void OnRequestComputePageCount()
+        protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
         {
-            var count = DataSource.Count;
+            var count = dataSource.Count;
             TotalPageCount = ((count == 0 ? 1 : count) + 29) / 30;
 
             if (TotalPageCount == 1)
@@ -60,6 +61,51 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     1,
                     Math.Min(TotalPageCount, PageCountLimited));
             }
+        }
+
+        protected override IList<DocumentCache> BuildDefaultExpression(IEnumerable<DocumentCache> dataSource, OrderByMethods sorting)
+        {
+            if (sorting == OrderByMethods.AscendingByName)
+            {
+                return dataSource.OrderBy(x => x.Name)
+                                 .ToList();
+            }
+            
+            if (sorting == OrderByMethods.DescendingByName)
+            {
+                return dataSource.OrderByDescending(x => x.Name)
+                                 .ToList();
+            }
+
+            if (sorting == OrderByMethods.AscendingByTimeOfCreated)
+            {
+                return dataSource.OrderBy(x => x.TimeOfCreated)
+                                 .ToList();
+            }
+
+            if (sorting == OrderByMethods.DescendingByTimeOfCreated)
+            {
+                
+                return dataSource.OrderByDescending(x => x.TimeOfCreated)
+                                 .ToList();
+            }
+
+            if (sorting == OrderByMethods.AscendingByTimeOfModified)
+            {
+                
+                return dataSource.OrderBy(x => x.TimeOfModified)
+                                 .ToList();
+            }
+
+            return dataSource.OrderByDescending(x => x.TimeOfModified)
+                             .ToList();
+        }
+
+
+        protected override IList<DocumentCache> BuildFilteringExpression(IList<DocumentCache> dataSource, string keyword, OrderByMethods sorting)
+        {
+            var filteredSource = dataSource.Where(x => x.Name.Contains(keyword));
+            return BuildDefaultExpression(filteredSource, sorting);
         }
 
         protected sealed override void OnRequestDataSourceSynchronize(IList<DocumentCache> dataSource)

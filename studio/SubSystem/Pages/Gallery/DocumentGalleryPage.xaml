@@ -149,11 +149,11 @@
                         <StackPanel Grid.Column="1"
                                         HorizontalAlignment="Right"
                                         Orientation="Horizontal">
-                            <ftk:ToolButton Content="添加"
+                            <ftk:ToolButton Content="{f:Language global.add}"
                                             Icon="{StaticResource FeatherIcon.Plus}"
                                             ShowText="True"/>
 
-                            <ftk:ToolButton Content="删除"
+                            <ftk:ToolButton Content="{f:Language global.Remove}"
                                             Icon="{StaticResource FeatherIcon.Trash}"
                                             ShowText="True"/>
 

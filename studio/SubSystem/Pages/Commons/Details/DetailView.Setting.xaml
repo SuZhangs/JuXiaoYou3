@@ -21,13 +21,13 @@
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
             <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="添加"
+                            Content="{f:Language global.add}"
                             Command="{Binding AddDetailPartCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Remove"
-                            Content="删除"
+                            Content="{f:Language global.Remove}"
                             Command="{Binding RemoveDetailPartCommand}"
                             CommandParameter="{Binding SelectedDetailPartInDocument,Mode=TwoWay}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"

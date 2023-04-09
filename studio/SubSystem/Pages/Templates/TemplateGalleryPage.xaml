@@ -32,14 +32,14 @@
                                 Orientation="Horizontal">
 
                         <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="添加"
+                                        Content="{f:Language global.add}"
                                         Command="{Binding AddTemplateCommand}"
                                         Icon="{StaticResource IC.File}"
                                         IsFilled="True"
                                         ShowText="True" />
 
                         <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="删除"
+                                        Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveTemplateCommand}"
                                         CommandParameter="{Binding SelectedTemplate,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"

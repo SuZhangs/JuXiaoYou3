@@ -133,7 +133,7 @@
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
-            <ftk:ToolButton Content="添加"
+            <ftk:ToolButton Content="{f:Language global.add}"
                             Command="{Binding AddPreviewBlockCommand}"
                             Icon="{StaticResource FeatherIcon.Plus}"
                             ShowText="True" />

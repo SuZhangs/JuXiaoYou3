@@ -26,9 +26,9 @@
                 <StackPanel HorizontalAlignment="Right"
                             Margin="0 0 0 4"
                             Orientation="Horizontal">
-                    <ftk:ToolButton Content="添加"
+                    <ftk:ToolButton Content="{f:Language global.add}"
                                     ShowText="True"/>
-                    <ftk:ToolButton Content="删除"
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
                                     ShowText="True"/>
                     <ftk:ToolButton Content="导入"
                                     ShowText="True"/>

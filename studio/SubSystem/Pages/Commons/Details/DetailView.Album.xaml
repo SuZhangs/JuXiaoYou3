@@ -20,13 +20,13 @@
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
             <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="添加"
+                            Content="{f:Language global.add}"
                             Command="{Binding AddAlbumCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
             
             <ftk:ToolButton f:Language.Id="global.Remove"
-                            Content="删除"
+                            Content="{f:Language global.Remove}"
                             Command="{Binding RemoveAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"

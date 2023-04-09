@@ -8,6 +8,7 @@
                      xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models;assembly=MigaStudio.UI"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
@@ -56,39 +57,74 @@
                 <StackPanel HorizontalAlignment="Right"
                             Margin="0 0 0 4"
                             Orientation="Horizontal">
-                    <ftk:ToolButton Content="添加"
+                    <ftk:ToolButton Content="{f:Language global.add}"
                                     Command="{Binding NewDocumentCommand}"
                                     Icon="{StaticResource FeatherIcon.Plus}"
                                     ShowText="True" />
 
-                    <ftk:ToolButton Content="排序"
-                                    Icon="{StaticResource FeatherIcon.Filter}"
-                                    ShowText="True" />
-                    <ftk:ToolButton Content="帮助"
+                    <ftk:DropDownButton Content="{f:Language global.orderBy}"
+                                        Icon="{StaticResource FeatherIcon.Filter}"
+                                        ShowText="True">
+                        <ftk:DropDownButton.ContextMenu>
+                            <f:ContextMenu>
+                                <MenuItem Header="{f:Language global.ascendingByName}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                                <MenuItem Header="{f:Language global.descendingByName}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>DescendingByName</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                                <MenuItem Header="{f:Language global.ascendingByTimeOfCreated}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>AscendingByTimeOfCreated</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                                <MenuItem Header="{f:Language global.descendingByTimeOfCreated}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>DescendingByTimeOfCreated</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                                <MenuItem Header="{f:Language global.ascendingByTimeOfModified}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>AscendingByTimeOfModified</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                                <MenuItem Header="{f:Language global.descendingByTimeOfModified}"
+                                          Command="{Binding SetOrderByMethodCommand}">
+                                    <MenuItem.CommandParameter>
+                                        <thisModel:OrderByMethods>DescendingByTimeOfModified</thisModel:OrderByMethods>
+                                    </MenuItem.CommandParameter>
+                                </MenuItem>
+                            </f:ContextMenu>
+                        </ftk:DropDownButton.ContextMenu>
+                    </ftk:DropDownButton>
 
-                                    Icon="{StaticResource FeatherIcon.Tools}"
+                    <f:SingleLine Text="{Binding FilterString,Mode=TwoWay}"
+                                  Width="192" />
+
+                    <ftk:ToolButton Content="{f:Language global.search}"
+                                    Command="{Binding SearchPageCommand}"
+                                    Icon="{StaticResource FeatherIcon.Search}"
                                     ShowText="True" />
                 </StackPanel>
             </f:ForestSection.ToolBar>
-
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top"
-                            Orientation="Horizontal">
-
-                    <f:SingleLine Width="128" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Search}" />
-                </StackPanel>
-
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </DockPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
         </f:ForestSection>
 
         <f:Drawer.RightContent>
@@ -133,7 +169,7 @@
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Lock}"
                                         ShowText="True" />
-                        <ftk:ToolButton Content="删除"
+                        <ftk:ToolButton Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Edit}"
@@ -141,9 +177,9 @@
                     </UniformGrid>
 
                     <f:ForestSection Header="标签"
-                                    Margin="0 16 0 0">
+                                     Margin="0 16 0 0">
                         <f:ForestSection.ToolBar>
-                            <ftk:ToolButton Content="添加"
+                            <ftk:ToolButton Content="{f:Language global.add}"
                                             Command="{Binding AddKeywordCommand}"
                                             CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                             HorizontalAlignment="Right"
