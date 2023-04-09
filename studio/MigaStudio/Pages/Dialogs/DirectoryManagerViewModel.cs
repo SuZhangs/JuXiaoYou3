@@ -19,8 +19,10 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class DirectoryManagerViewModelProxy : BindingProxy<DirectoryManagerViewModel>{}
-    
+    public class DirectoryManagerViewModelProxy : BindingProxy<DirectoryManagerViewModel>
+    {
+    }
+
     public class DirectoryManagerViewModel : DialogViewModel
     {
         private readonly Subject<ValueTuple<long, long, EngineCounter[]>> _subject;
@@ -36,7 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                 .DatabaseDirectory,
                 Name = Language.GetText("__Universe"),
             };
-            
+
             Application = new FolderCounter
             {
                 Directory = AppDomain.CurrentDomain.BaseDirectory,
@@ -49,7 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                 .Logs,
                 Name = Language.GetText("global.logs")
             };
-            
+
             Self = new DatabaseCounter
             {
                 Name = Language.GetText("global.appSelf"),
@@ -57,7 +59,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 {
                     Application,
                     Logs
-                }
+                },
+                Directory = Application.Directory
             };
 
             _subject = new Subject<(long, long, EngineCounter[])>();
@@ -70,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                         Self.Size               = Logs.Size + Application.Size;
                         Application.Percent     = Application.Size / (double)Self.Size * 100;
                         Logs.Percent            = Logs.Size / (double)Self.Size * 100;
-                        
+
                         //
                         //
                         Database.Counters.AddRange(engines, true);
@@ -87,8 +90,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 Process.Start(new ProcessStartInfo
                 {
                     UseShellExecute = true,
-                    FileName = "explorer.exe",
-                    Arguments = x.Directory
+                    FileName        = "explorer.exe",
+                    Arguments       = x.Directory
                 });
             });
         }
@@ -125,8 +128,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public DatabaseCounter Database { get; }
-        
-        
+
+
         [NullCheck(UniTestLifetime.Constructor)]
         public DatabaseCounter Self { get; }
 
@@ -138,8 +141,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RefreshCommand { get; }
-        
-        
+
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<FolderCounter> OpenCommand { get; }
     }
