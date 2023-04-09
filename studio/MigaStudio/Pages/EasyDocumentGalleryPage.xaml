@@ -67,42 +67,42 @@
                                         ShowText="True">
                         <ftk:DropDownButton.ContextMenu>
                             <f:ContextMenu>
-                                <MenuItem Header="{f:Language global.ascendingByName}"
+                                <f:MenuItem Header="{f:Language global.ascendingByName}"
                                           Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
+                                    </f:MenuItem.CommandParameter>
                                 </MenuItem>
-                                <MenuItem Header="{f:Language global.descendingByName}"
-                                          Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                <f:MenuItem Header="{f:Language global.descendingByName}"
+                                            Command="{Binding SetOrderByMethodCommand}">
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>DescendingByName</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
-                                </MenuItem>
-                                <MenuItem Header="{f:Language global.ascendingByTimeOfCreated}"
-                                          Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                    </f:MenuItem.CommandParameter>
+                                </f:MenuItem>
+                                <f:MenuItem Header="{f:Language global.ascendingByTimeOfCreated}"
+                                            Command="{Binding SetOrderByMethodCommand}">
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>AscendingByTimeOfCreated</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
-                                </MenuItem>
-                                <MenuItem Header="{f:Language global.descendingByTimeOfCreated}"
-                                          Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                    </f:MenuItem.CommandParameter>
+                                </f:MenuItem>
+                                <f:MenuItem Header="{f:Language global.descendingByTimeOfCreated}"
+                                            Command="{Binding SetOrderByMethodCommand}">
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>DescendingByTimeOfCreated</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
-                                </MenuItem>
-                                <MenuItem Header="{f:Language global.ascendingByTimeOfModified}"
-                                          Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                    </f:MenuItem.CommandParameter>
+                                </f:MenuItem>
+                                <f:MenuItem Header="{f:Language global.ascendingByTimeOfModified}"
+                                            Command="{Binding SetOrderByMethodCommand}">
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>AscendingByTimeOfModified</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
-                                </MenuItem>
-                                <MenuItem Header="{f:Language global.descendingByTimeOfModified}"
-                                          Command="{Binding SetOrderByMethodCommand}">
-                                    <MenuItem.CommandParameter>
+                                    </f:MenuItem.CommandParameter>
+                                </f:MenuItem>
+                                <f:MenuItem Header="{f:Language global.descendingByTimeOfModified}"
+                                            Command="{Binding SetOrderByMethodCommand}">
+                                    <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>DescendingByTimeOfModified</thisModel:OrderByMethods>
-                                    </MenuItem.CommandParameter>
-                                </MenuItem>
+                                    </f:MenuItem.CommandParameter>
+                                </f:MenuItem>
                             </f:ContextMenu>
                         </ftk:DropDownButton.ContextMenu>
                     </ftk:DropDownButton>
