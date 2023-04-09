@@ -33,11 +33,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            const string StartUp   = "global.startup";
-            const string Documents = "global.documents";
-            const string Compose   = "global.compose";
-            const string Service   = "global.service";
-            const string Tools     = "global.tools";
             CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__MusicPlayer", null);
             CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__ColorService", null);
             CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__RankService", null);

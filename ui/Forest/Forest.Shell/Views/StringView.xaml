@@ -10,9 +10,9 @@
                      d:DesignHeight="384"
                      d:DesignWidth="480"
                      d:DataContext="{d:DesignInstance Type={x:Type local:StringViewModel},IsDesignTimeCreatable = True}"
-             Width="480"
-                     Height="320"
-             MinHeight="320"
+                     Width="420"
+                     Height="256"
+                     MinHeight="280"
                      MaxHeight="384">
     <UserControl.Resources>
         <ResourceDictionary>

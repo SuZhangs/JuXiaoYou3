@@ -1,2 +1,2 @@
-cloc dcc30c7 --report-file dcc30c7.txt
+cloc 2a0093a --report-file 2a0093a.txt
 read -n 1
