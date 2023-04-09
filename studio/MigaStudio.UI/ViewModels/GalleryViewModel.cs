@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             NextPageCommand         = Command(NextPageImpl, CanNextPage);
             LastPageCommand         = Command(LastPageImpl, CanLastPage);
             SearchPageCommand       = Command(SearchPageImpl);
-            SetOrderByMethodCommand = Command<OrderByMethods>(x => OrderOption = x);
+            SetOrderByMethodCommand = Command<OrderByMethods>(OrderPageImpl);
         }
 
         #region Last / Next
@@ -68,8 +68,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #endregion
 
-        #region SearchPage
+        #region Filter / Order
 
+        private void OrderPageImpl(OrderByMethods option)
+        {
+            OrderOption = option;
+            PageRequest(PageIndex);
+        }
+        
         private void SearchPageImpl()
         {
             if (string.IsNullOrEmpty(FilterString))
@@ -169,8 +175,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var skipElementCounts = (index - 1) * 30;
             var minPageItemCount  = Math.Clamp(unsortedDataSource.Count - skipElementCounts, 0, MaxItemCount);
 
-            Collection.AddRange(DataSource.Skip(skipElementCounts)
-                                          .Take(minPageItemCount), true);
+            Collection.AddRange(unsortedDataSource.Skip(skipElementCounts)
+                                                  .Take(minPageItemCount), true);
             NextPageCommand.NotifyCanExecuteChanged();
             LastPageCommand.NotifyCanExecuteChanged();
         }
