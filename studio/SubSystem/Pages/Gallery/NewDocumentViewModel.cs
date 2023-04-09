@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             if (a[0] is DocumentType type)
             {
                 Type       = type;
-                Visibility = Visibility.Hidden;
+                Visibility = Visibility.Collapsed;
             }
             else
             {

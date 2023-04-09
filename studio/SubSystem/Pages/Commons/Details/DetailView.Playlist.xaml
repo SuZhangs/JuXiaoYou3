@@ -20,16 +20,18 @@
         <f:LooklessButton DockPanel.Dock="Top"
                           Command="{Binding PlayMusicCommand}"
                           CommandParameter="{Binding SelectedMusic,Mode=OneWay}">
-            <ContentControl Content="{Binding SelectedMusic,Mode=OneWay}"
-                            Height="256"
-                            Width="256">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate DataType="{x:Type m:Music}">
-                        <Image Stretch="Uniform"
-                               Source="{Binding Cover,Mode=OneWay, Converter={StaticResource AlbumConverter}}" />
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+            <Image Stretch="Uniform"
+                   Height="256"
+                   Width="256">
+                <Image.Source>
+                    <PriorityBinding>
+                        <Binding Path="SelectedMusic.Cover"
+                                 Mode="OneWay"
+                                 Converter="{StaticResource AlbumConverter}"/>
+                        <Binding Path="DefaultAlbum"/>
+                    </PriorityBinding>
+                </Image.Source>
+            </Image>
         </f:LooklessButton>
         
         <DockPanel>
@@ -52,7 +54,9 @@
                                 Content="播放"
                                 Command="{Binding PlayMusicCommand}"
                                 CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
-                                Icon="{StaticResource FeatherIcon.Upload}"
+                                Icon="{StaticResource IC.Play}"
+                                IconSize="19"
+                                IsFilled="True"
                                 ShowText="True" />
             </StackPanel>
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Services;
@@ -16,9 +17,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class PlaylistPartViewModel : KeyValueViewModel
     {
-        private const    string         Data     = "_d";
-        public const     string         Option_1 = "_o";
-        private readonly Subject<Music> _threadSafeAdding;
+        private const string Data     = "_d";
+        private const string Option_1 = "_o";
+        
+        private readonly        Subject<Music> _threadSafeAdding;
+        private static readonly DrawingImage   MusicDrawing;
+        private                 Music          _selectedMusic;
+
+        static PlaylistPartViewModel()
+        {
+            var music = Geometry.Parse("F1 M24,24z M0,0z M22,2L6,2 6,18 22,18 22,2z M18,7L15,7 15,12.5A2.5,2.5,0,0,1,10,12.5A2.5,2.5,0,0,1,12.5,10C13.07,10,13.58,10.19,14,10.51L14,5 18,5 18,7z M4,6L2,6 2,22 18,22 18,20 4,20 4,6z");
+            var drawing = new GeometryDrawing
+            {
+                Geometry = music,
+                Brush    = new SolidColorBrush(Colors.Gray)
+            };
+            MusicDrawing = new DrawingImage
+            {
+                Drawing = drawing,
+            };
+        }
 
         public PlaylistPartViewModel()
         {
@@ -205,8 +223,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<Music> Collection { get; init; }
 
         public MusicEngine MusicEngine { get; }
-        private Music _selectedMusic;
-
+        /// <summary>
+        /// 获取或设置 <see cref="DefaultAlbum"/> 属性。
+        /// </summary>
+        public ImageSource DefaultAlbum
+        {
+            get => MusicDrawing;
+            set
+            {
+            }
+        }
         /// <summary>
         /// 获取或设置 <see cref="SelectedMusic"/> 属性。
         /// </summary>

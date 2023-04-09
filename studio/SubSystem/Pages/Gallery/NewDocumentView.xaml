@@ -14,7 +14,8 @@
              d:DesignHeight="480"
              d:DesignWidth="768"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewDocumentViewModel}, IsDesignTimeCreatable=True}"
-             Height="450"
+             Height="420"
+                     MinHeight="420"
              Width="480">
     <UserControl.Resources>
         <thisConverters:DocumentTypeConverter x:Key="Translation" />
@@ -24,58 +25,51 @@
                   Title="{Binding Title}"
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
-        <Grid>
+
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
+                <RowDefinition Height="128" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="128" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
 
-
-                <f:LooklessButton Command="{Binding SetAvatarCommand}"
+            <f:LooklessButton Command="{Binding SetAvatarCommand}"
                                   Height="128"
                                   Width="128">
-                    <Border Background="Gray"
+                <Border Background="Gray"
                             CornerRadius="12">
-                        <Border CornerRadius="12">
-                            <Border.Background>
-                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay}" />
-                            </Border.Background>
-                        </Border>
+                    <Border CornerRadius="12">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay}" />
+                        </Border.Background>
                     </Border>
-                </f:LooklessButton>
+                </Border>
+            </f:LooklessButton>
 
-                <f:HeaderedSingleLine Grid.Row="1"
+            <f:HeaderedSingleLine Grid.Row="1"
                                         Margin="48 24"
                                         Header="{f:Language text.name}"
                                         Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                <f:ListBox Grid.Row="2"
-                           HorizontalAlignment="Center"
-                           Margin="0 8 0 0"
-                           ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
-                           SelectedItem="{Binding Type,Mode=TwoWay}"
-                           Visibility="{Binding Visibility}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock HorizontalAlignment="Center"
-                                       Text="{Binding Converter={StaticResource Translation}}"
-                                       Width="48" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </f:ListBox>
-            </Grid>
+            <f:ListBox Grid.Row="2"
+                       HorizontalAlignment="Center"
+                       ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
+                       SelectedItem="{Binding Type,Mode=TwoWay}"
+                       Visibility="{Binding Visibility}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Margin="8 4"
+                                   Text="{Binding Converter={StaticResource Translation}}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </f:ListBox>
         </Grid>
     </f:DialogPage>
 </f:ForestUserControl>

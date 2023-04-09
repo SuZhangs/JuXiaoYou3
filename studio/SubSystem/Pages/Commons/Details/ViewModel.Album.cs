@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -15,6 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     public class AlbumPartViewModel : KeyValueViewModel
     {
         private readonly Subject<Album> _threadSafeAdding;
+
         
         public AlbumPartViewModel()
         {
@@ -165,7 +167,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<Album> Collection { get; init; }
 
         public ImageEngine ImageEngine { get; }
-        private Album _selectedAlbum;
+        private Album  _selectedAlbum;
+
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedAlbum"/> 属性。
