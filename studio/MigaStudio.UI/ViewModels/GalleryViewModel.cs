@@ -78,12 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         public void SearchPage()
         {
-            if (string.IsNullOrEmpty(FilterString))
-            {
-                IsFiltering = false;
-            }
-            
-            IsFiltering = true;
+            IsFiltering = !string.IsNullOrEmpty(FilterString);
             PageRequest(PageIndex);
         }
 
@@ -205,7 +200,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public string FilterString
         {
             get => _filterString;
-            set => SetValue(ref _filterString, value);
+            set
+            {
+                SetValue(ref _filterString, value);
+                SearchPage();
+            }
         }
 
         /// <summary>

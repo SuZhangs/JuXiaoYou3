@@ -11,17 +11,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             InitializeComponent();
         }
 
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var text = (TextBox)sender;
-
-            if (string.IsNullOrEmpty(text.Text))
-            {
-                var vm = ViewModel<DocumentGalleryViewModel>();
-                vm.IsFiltering = false;
-                vm.SearchPage();
-            }
-        }
 
         private void SearchPage_OnKeyUp(object sender, KeyEventArgs e)
         {

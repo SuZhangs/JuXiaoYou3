@@ -192,7 +192,7 @@
                                 </ftk:ToolButton.Icon>
                             </ftk:ToolButton>
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
 
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               VerticalAlignment="Center"
@@ -206,9 +206,9 @@
 
                                 <TextBlock x:Name="PART_Watermark"
                                            FontSize="{TemplateBinding FontSize}"
-                                           Foreground="{f:Brush ForegroundInAdaptive}"
+                                           Foreground="{f:Brush ForegroundLevel3}"
                                            Text="{TemplateBinding Watermark}"
-                                           Margin="{TemplateBinding Padding}"
+                                           Margin="8 4"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            Visibility="Collapsed" />
@@ -217,7 +217,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasText" Value="True">
-                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Close"></Setter>
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Close"/>
+                        </Trigger>
+                        <Trigger Property="HasText" Value="False">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Watermark"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

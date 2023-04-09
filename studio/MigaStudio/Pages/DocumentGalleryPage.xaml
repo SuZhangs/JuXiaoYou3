@@ -107,10 +107,11 @@
                         </ftk:DropDownButton.ContextMenu>
                     </ftk:DropDownButton>
 
-                    <f:ClosableSingleLine Margin="8 0"
-                                          Text="{Binding FilterString,Mode=TwoWay}"
-                                          TextChanged="OnTextChanged"
+                    <f:ClosableSingleLine f:XamlAssist.IsDeferred="True"
+                                          f:XamlAssist.Text="{Binding FilterString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Margin="8 0"
                                           KeyUp="SearchPage_OnKeyUp"
+                                          Watermark="{f:Language global.search}"
                                           Width="192" />
 
                     <ftk:ToolButton Content="{f:Language global.search}"
