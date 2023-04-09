@@ -23,6 +23,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var availableModules = TemplateEngine.TemplateCacheDB
                                                  .FindAll()
                                                  .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
+            if(!availableModules.Any() )
+            {
+                Warning("你已经添加了所有模组！");
+                return;
+            }
 
             //
             // 返回用户选择的模组
@@ -66,14 +71,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             ResortModuleParts();
-            if (result == 0)
-            {
-                Warning(SubSystemString.NoChange);
-            }
-            else
-            {
-                Successful(SubSystemString.OperationOfAddIsSuccessful);
-            }
         }
 
         private bool AddModule(PartOfModule module)
