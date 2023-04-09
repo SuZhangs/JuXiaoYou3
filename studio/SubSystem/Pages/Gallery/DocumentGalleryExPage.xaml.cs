@@ -3,9 +3,9 @@ using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public partial class DocumentGalleryPage:ForestUserControl 
+    public partial class DocumentGalleryExPage:ForestUserControl 
     {
-        public DocumentGalleryPage()
+        public DocumentGalleryExPage()
         {
             InitializeComponent();
         }

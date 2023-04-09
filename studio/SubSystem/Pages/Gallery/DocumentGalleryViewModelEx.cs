@@ -21,7 +21,7 @@ using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 {
-    public class DocumentGalleryViewModel : TabViewModel
+    public class DocumentGalleryViewModelEx : TabViewModel
     {
         private const int MaxCountPerPage     = 40;
         private const int MaxCountPerPageMask = 39;
@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         private readonly ReadOnlyObservableCollection<IDataCache> _collection;
 
-        public DocumentGalleryViewModel()
+        public DocumentGalleryViewModelEx()
         {
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;

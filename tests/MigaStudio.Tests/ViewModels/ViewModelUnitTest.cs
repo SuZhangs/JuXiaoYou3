@@ -120,7 +120,7 @@ namespace MigaStudio.Tests.ViewModels
         [TestMethod]
         public void DocumentGalleryFixture()
         {
-            ViewModelUnitTestArchitecture.UnitTest(new DocumentGalleryViewModel());
+            ViewModelUnitTestArchitecture.UnitTest(new DocumentGalleryViewModelEx());
         }
         
         [Obsolete("不适合自动化测试，改为人工测试")]

@@ -10,14 +10,14 @@ namespace MigaStudio.Tests.ViewModels
         /// </summary>
         public void ConstructorUnitTest()
         {
-            var vm = new DocumentGalleryViewModel();
+            var vm = new DocumentGalleryViewModelEx();
             
             Core.ViewModelUnitTestArchitecture.AssertAllPropertyWasNotNull(vm);
         }
         
         public void FirstStart_PageIndexShouldBeOne()
         {
-            var gallery = new DocumentGalleryViewModel();
+            var gallery = new DocumentGalleryViewModelEx();
             Assert.AreEqual(gallery.PageIndex, 1);
         }
     }

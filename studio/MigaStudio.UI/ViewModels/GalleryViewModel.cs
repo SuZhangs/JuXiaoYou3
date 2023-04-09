@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             Collection              = new ObservableCollection<TEntity>();
             NextPageCommand         = Command(NextPageImpl, CanNextPage);
             LastPageCommand         = Command(LastPageImpl, CanLastPage);
-            SearchPageCommand       = Command(SearchPageImpl);
+            SearchPageCommand       = Command(SearchPage);
             SetOrderByMethodCommand = Command<OrderByMethods>(OrderPageImpl);
         }
 
@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             PageRequest(PageIndex);
         }
         
-        private void SearchPageImpl()
+        public void SearchPage()
         {
             if (string.IsNullOrEmpty(FilterString))
             {

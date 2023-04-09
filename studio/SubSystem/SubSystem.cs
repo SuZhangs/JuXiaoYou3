@@ -81,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
 
             Xaml.InstallView<NewDocumentView, NewDocumentViewModel>();
-            Xaml.InstallView<DocumentGalleryPage, DocumentGalleryViewModel>();
+            Xaml.InstallView<DocumentGalleryExPage, DocumentGalleryViewModelEx>();
 
             Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();
             Xaml.InstallView<NewPreviewBlockView, NewPreviewBlockViewModel>();

@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.SimpleDocumentGalleryPage"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.DocumentGalleryPage"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,7 +15,7 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300"
                      d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:EasyDocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
 
         <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
@@ -68,7 +68,7 @@
                         <ftk:DropDownButton.ContextMenu>
                             <f:ContextMenu>
                                 <f:MenuItem Header="{f:Language global.ascendingByName}"
-                                          Command="{Binding SetOrderByMethodCommand}">
+                                            Command="{Binding SetOrderByMethodCommand}">
                                     <f:MenuItem.CommandParameter>
                                         <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
                                     </f:MenuItem.CommandParameter>
@@ -107,8 +107,11 @@
                         </ftk:DropDownButton.ContextMenu>
                     </ftk:DropDownButton>
 
-                    <f:SingleLine Text="{Binding FilterString,Mode=TwoWay}"
-                                  Width="192" />
+                    <f:ClosableSingleLine Margin="8 0"
+                                          Text="{Binding FilterString,Mode=TwoWay}"
+                                          TextChanged="OnTextChanged"
+                                          KeyUp="SearchPage_OnKeyUp"
+                                          Width="192" />
 
                     <ftk:ToolButton Content="{f:Language global.search}"
                                     Command="{Binding SearchPageCommand}"
@@ -130,7 +133,7 @@
         <f:Drawer.RightContent>
             <Border Background="{f:BackgroundBrush}"
                     Padding="16"
-                    Width="420">
+                    Width="320">
                 <StackPanel>
                     <Border DockPanel.Dock="Top"
                             CornerRadius="64"
@@ -157,13 +160,13 @@
                                TextWrapping="Wrap"
                                MaxHeight="96" />
 
-                    <UniformGrid Columns="4"
+                    <UniformGrid Columns="3"
                                  Margin="0 8">
-                        <ftk:ToolButton Content="编辑"
+                        <f:CallToAction Content="编辑"
                                         Icon="{StaticResource FeatherIcon.Edit}"
                                         Command="{Binding OpenDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
-                                        ShowText="True" />
+                                        Palette="HighlightPalette1" />
                         <ftk:ToolButton Content="锁定"
                                         Command="{Binding LockOrUnlockDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
@@ -172,11 +175,12 @@
                         <ftk:ToolButton Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Edit}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
                     </UniformGrid>
 
-                    <f:ForestSection Header="标签"
+                    <f:ForestSection HeaderBrush="{f:Brush BackgroundLevel5}"
+                                     Header="标签"
                                      Margin="0 16 0 0">
                         <f:ForestSection.ToolBar>
                             <ftk:ToolButton Content="{f:Language global.add}"
@@ -196,23 +200,20 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="{f:Brush HighlightA4}"
+                                        <Border Background="{f:Brush SlateGray100}"
                                                 CornerRadius="3"
                                                 Margin="4"
-                                                Padding="8">
+                                                Padding="16 4 4 4">
                                             <DockPanel>
-                                                <f:LooklessButton DockPanel.Dock="Right"
-                                                                  Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveKeywordCommand}"
-                                                                  CommandParameter="{Binding}"
-                                                                  Height="28"
-                                                                  Width="28">
-                                                    <Path Data="{StaticResource FeatherIcon.Close}"
-                                                          Stroke="{f:Brush ForegroundInHighlight}"
-                                                          StrokeThickness="1"
-                                                          Stretch="Uniform"
-                                                          Height="11"
-                                                          Width="11" />
-                                                </f:LooklessButton>
+                                                <ftk:ToolButton DockPanel.Dock="Right"
+                                                                Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveKeywordCommand}"
+                                                                CommandParameter="{Binding}"
+                                                                Margin="8 0 0 0"
+                                                                Icon="{StaticResource FeatherIcon.Close}"
+                                                                IconSize="11"
+                                                                Height="28"
+                                                                Width="28" />
+
 
                                                 <TextBlock Foreground="{f:Brush ForegroundInHighlight}"
                                                            FontSize="14"

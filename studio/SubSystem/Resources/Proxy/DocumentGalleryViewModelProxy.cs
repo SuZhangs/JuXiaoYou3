@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Proxy
 {
-    public sealed class DocumentGalleryViewModelProxy : BindingProxy<DocumentGalleryViewModel>
+    public sealed class DocumentGalleryViewModelProxy : BindingProxy<DocumentGalleryViewModelEx>
     {
         
     }

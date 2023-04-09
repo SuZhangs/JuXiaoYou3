@@ -15,14 +15,14 @@ using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class EasyDocumentGalleryViewModelProxy : BindingProxy<EasyDocumentGalleryViewModel>{}
+    public class EasyDocumentGalleryViewModelProxy : BindingProxy<DocumentGalleryViewModel>{}
     
-    public class EasyDocumentGalleryViewModel : GalleryViewModel<DocumentCache>
+    public class DocumentGalleryViewModel : GalleryViewModel<DocumentCache>
     {
         private int  _version;
         private bool _isPropertyPaneOpen;
         
-        public EasyDocumentGalleryViewModel()
+        public DocumentGalleryViewModel()
         {
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager = dbMgr;

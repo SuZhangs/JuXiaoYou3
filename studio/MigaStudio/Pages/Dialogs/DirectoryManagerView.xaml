@@ -88,18 +88,24 @@
                          Content="{Binding Database}" />
             <ftk:TabItem Header="{f:Language global.Help}"
                          Padding="16 8">
-                <StackPanel>
-                    <fs:ActionButton Margin="0 4"
+                <UniformGrid Columns="2"
+                             Rows="2"
+                             Height="160"
+                             VerticalAlignment="Top">
+                    <fs:ActionButton Margin="4"
                                      Content="普通BUG反馈"
-                                     Padding="16 24"/>
-                    
-                    <fs:ActionButton Margin="0 4"
+                                     Padding="24"/>
+
+                    <fs:ActionButton Margin="4"
                                      Content="特殊BUG反馈"
-                                     Padding="16 24"/>
-                    <fs:ActionButton Margin="0 4"
+                                     Padding="24"/>
+                    <fs:ActionButton Margin="4"
                                      Content="离谱BUG反馈"
-                                     Padding="16 24"/>
-                </StackPanel>
+                                     Padding="24"/>
+                    <fs:ActionButton Margin="4"
+                                     Content="如何反馈？"
+                                     Padding="24"/>
+                </UniformGrid>
             </ftk:TabItem>
         </ftk:TabControl>
     </f:DialogPage>

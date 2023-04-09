@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using System.Windows;
 using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using CommunityToolkit.Mvvm.Input;
 
@@ -21,7 +18,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
     public class HomeViewModel : TabViewModel
     {
+        private const    string                 StartUp   = "global.startup";
+        private const    string                 Documents = "global.documents";
+        private const    string                 Compose   = "global.compose";
+        private const    string                 Service   = "global.service";
+        private const    string                 Tools     = "global.tools";
+        private const    string                 Home      = "__Home";
         private readonly Subject<ViewModelBase> _onStart;
+        
         private          MainFeature            _selectedFeature;
         private          ViewModelBase          _selectedViewModel;
 
@@ -39,19 +43,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            const string StartUp   = "global.startup";
-            const string Documents = "global.documents";
-            const string Compose   = "global.compose";
-            const string Service   = "global.service";
-            const string Tools     = "global.tools";
-            CreateGalleryFeature<StartupViewModel>(StartUp, "__Home", null);
+            CreateGalleryFeature<StartupViewModel>(StartUp, Home, null);
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
-            CreateGalleryFeature<EasyComposeGalleryViewModel>(StartUp, Compose, null);
-            CreateGalleryFeature<EasyDocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
-            CreateGalleryFeature<EasyDocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
-            CreateGalleryFeature<EasyDocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
-            CreateGalleryFeature<EasyDocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
-            CreateGalleryFeature<EasyDocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
+            CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, Compose, null);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
             CreateGalleryFeature<ServiceViewModel>(Tools, Service, null);
             CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel", null);
             CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel", null);
@@ -76,6 +75,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 feature.Cache?.Start();
             }
+
+            SelectedFeature = Features.FirstOrDefault(x => x.NameId == Home);
         }
 
         public override void Stop()
@@ -116,15 +117,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Controller.New(type);
         }
 
-        private async Task GotoDialogImpl(Type type)
-        {
-            await DialogService()
-                .Dialog(Xaml.GetViewModel<IDialogViewModel>(type));
-        }
-
 
         /// <summary>
-        /// 获取或设置 <see cref="SelectedViewModel\"/> 属性。
+        /// 获取或设置 <see cref="SelectedViewModel"/> 属性。
         /// </summary>
         public ViewModelBase SelectedViewModel
         {

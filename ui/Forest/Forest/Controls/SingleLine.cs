@@ -19,7 +19,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
         private       SolidColorBrush _foreground;
         private       SolidColorBrush _backgroundHighlight1;
         private       SolidColorBrush _backgroundHighlight2;
-        private       SolidColorBrush _foregroundHighlight;
         private       SolidColorBrush _backgroundDisabled;
         private       SolidColorBrush _foregroundDisabled;
 
@@ -47,7 +46,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
             _background           = null;
             _foreground           = null;
             _backgroundHighlight1 = null;
-            _foregroundHighlight  = null;
             _backgroundHighlight2 = null;
             _backgroundDisabled   = null;
             _foregroundDisabled   = null;
@@ -184,8 +182,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 typeof(HeaderedSingleLine),
                 new PropertyMetadata(default(DataTemplateSelector)));
         }
-        
-        
+
         private       Storyboard      _storyboard;
         private       SolidColorBrush _borderBrush;
         private       SolidColorBrush _background;
@@ -355,5 +352,41 @@ namespace Acorisoft.FutureGL.Forest.Controls
             get => (object)GetValue(HeaderProperty);
             set => SetValue(HeaderProperty, value);
         }   
+    }
+
+    [TemplatePart(Name = "PART_Close")]
+    public class ClosableSingleLine : HeaderedSingleLine
+    {
+        private const string CloseButtonName = "PART_Close";
+        private       Button _close;
+
+        static ClosableSingleLine()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ClosableSingleLine), new FrameworkPropertyMetadata(typeof(ClosableSingleLine)));
+        }
+        
+        protected override void OnApplyTemplateOverride()
+        {
+            _close = GetTemplateChild(CloseButtonName) as Button;
+
+
+            if (_close is null)
+            {
+                return;
+            }
+            
+            _close.Click += OnClearText;
+        }
+
+        protected override void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            base.OnUnloaded(sender, e);
+            _close.Click -= OnClearText;
+        }
+
+        private void OnClearText(object sender, RoutedEventArgs e)
+        {
+            SetCurrentValue(TextProperty, string.Empty);
+        }
     }
 }
