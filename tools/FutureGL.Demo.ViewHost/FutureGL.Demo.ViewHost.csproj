@@ -22,8 +22,4 @@
       <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="WPF-UI" Version="3.0.0-preview.1" />
-    </ItemGroup>
-
 </Project>
