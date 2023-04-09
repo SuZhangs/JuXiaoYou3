@@ -86,6 +86,21 @@
             <ftk:TabItem Header="{Binding Database.Name}"
                          Padding="16 8"
                          Content="{Binding Database}" />
+            <ftk:TabItem Header="{f:Language global.Help}"
+                         Padding="16 8">
+                <StackPanel>
+                    <fs:ActionButton Margin="0 4"
+                                     Content="普通BUG反馈"
+                                     Padding="16 24"/>
+                    
+                    <fs:ActionButton Margin="0 4"
+                                     Content="特殊BUG反馈"
+                                     Padding="16 24"/>
+                    <fs:ActionButton Margin="0 4"
+                                     Content="离谱BUG反馈"
+                                     Padding="16 24"/>
+                </StackPanel>
+            </ftk:TabItem>
         </ftk:TabControl>
     </f:DialogPage>
 </f:ForestUserControl>
