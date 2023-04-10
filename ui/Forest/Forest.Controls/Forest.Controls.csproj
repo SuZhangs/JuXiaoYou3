@@ -5,36 +5,16 @@
         <Nullable>disable</Nullable>
         <RootNamespace>Acorisoft.FutureGL.Forest</RootNamespace>
         <OutDir>../../../Builds/Forest</OutDir>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
         <UseWPF>true</UseWPF>
-        <Configurations>Debug;Release;NUGET</Configurations>
-        <Platforms>AnyCPU;x86</Platforms>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x86;x64</Platforms>
+        <Title>Forest</Title>
+        <Description>Forest是一个UI框架，用于JuXiaoYou</Description>
+        <Copyright>All copy reserved by Luoyisi</Copyright>
+        <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
+        <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
+        <PackageIcon>ico.png</PackageIcon>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\Forest\Forest.csproj" />
     </ItemGroup>

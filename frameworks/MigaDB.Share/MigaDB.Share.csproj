@@ -6,10 +6,9 @@
 		<Nullable>disable</Nullable>
 		<OutDir>../../Builds/Base</OutDir>
 		<RootNamespace>Acorisoft.FutureGL.MigaDB</RootNamespace>
-		<GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
 		<PackageId>MigaDB.Share</PackageId>
 		<Authors>Luoyisi</Authors>
-		<Configurations>DEBUG;RELEASE;NUGET</Configurations>
+		<Platforms>AnyCPU;x86;x64</Platforms>
 		<Platforms>x86</Platforms>
 		<Title>MigaDB</Title>
 		<Description>可公开的文档层Api</Description>

@@ -5,10 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <OutDir>../../Builds/Base</OutDir>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
         <RootNamespace>Acorisoft.FutureGL.MigaUtils</RootNamespace>
-        <Configurations>Debug;Release;NUGET</Configurations>
-        <Platforms>AnyCPU;x86</Platforms>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x86;x64</Platforms>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|AnyCPU'">

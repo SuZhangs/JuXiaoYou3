@@ -8,7 +8,7 @@
         <OutDir>../../Builds/Base</OutDir>
         <LangVersion>8</LangVersion>
         <IsRoslynComponent>True</IsRoslynComponent>
-        <Platforms>AnyCPU;x86</Platforms>
+        <Platforms>AnyCPU;x86;x64</Platforms>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

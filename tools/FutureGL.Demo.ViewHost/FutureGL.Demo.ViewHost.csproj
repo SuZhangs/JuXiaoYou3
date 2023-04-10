@@ -6,7 +6,7 @@
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF><OutDir>../../Builds/Tools/prototype</OutDir>
         <RootNamespace>Acorisoft.FutureGL.Demo.ViewHost</RootNamespace>
-        <Platforms>AnyCPU;x86</Platforms>
+        <Platforms>AnyCPU;x86;x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

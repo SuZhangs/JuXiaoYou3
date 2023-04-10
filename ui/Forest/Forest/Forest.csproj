@@ -4,28 +4,19 @@
         <Nullable>disable</Nullable>
         <RootNamespace>Acorisoft.FutureGL.Forest</RootNamespace>
         <OutDir>../../../Builds/Forest</OutDir>
-        <GeneratePackageOnBuild Condition="'$(Configuration)'=='NUGET'">True</GeneratePackageOnBuild>
         <UseWPF>true</UseWPF>
-        <Configurations>Debug;Release;NUGET</Configurations>
-        <Platforms>AnyCPU;x86</Platforms>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-      <LangVersion>preview</LangVersion>
+        <Configurations>Debug;Release</Configurations>
+        <Authors>罗易斯（Luoyisi）</Authors>
+        <Platforms>AnyCPU;x86;x64</Platforms>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.beta1</FileVersion>
+        <NeutralLanguage>zh</NeutralLanguage>
+        <Title>Forest</Title>
+        <Description>Forest是一个UI框架，用于JuXiaoYou</Description>
+        <Copyright>All copy reserved by Luoyisi</Copyright>
+        <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
+        <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
+        <PackageIcon>ico.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -41,6 +32,10 @@
     <ItemGroup>
       <None Remove="Effects\Bitmaps\GrayBitmapEffect.ps" />
       <Resource Include="Effects\Bitmaps\GrayBitmapEffect.ps" />
+      <None Update="ico.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
