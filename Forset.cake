@@ -5,6 +5,7 @@ var buildCore = "./ui/Forest/Forest/Forest.csproj";
 var buildControl = "./ui/Forest/Forest.Controls/Forest.Controls.csproj";
 var buildShell = "./ui/Forest/Forest.Shell/Forest.Shell.csproj";
 var outputDur = "./Builds/Nuget";
+var testDir = "./tests/Forest.Tests/Forest.Tests.csproj";
 #tool nuget:?package=NuGet.CommandLine&version=5.9.1
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -39,17 +40,7 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    DotNetTest(buildCore, new DotNetTestSettings
-    {
-        Configuration = configuration,
-        NoBuild = true,
-    });
-    DotNetTest(buildControl, new DotNetTestSettings
-    {
-        Configuration = configuration,
-        NoBuild = true,
-    });
-    DotNetTest(buildShell, new DotNetTestSettings
+    DotNetTest(testDir, new DotNetTestSettings()
     {
         Configuration = configuration,
         NoBuild = true,
@@ -57,8 +48,15 @@ Task("Test")
 });
 
 
-Task("Pack")
+Task("Versioning")
     .IsDependentOn("Test")
+    .Does(() =>
+{
+
+});
+
+Task("Pack")
+    .IsDependentOn("Versioning")
     .Does(() =>
 {
     NuGetPack(buildCore, new NuGetPackSettings
