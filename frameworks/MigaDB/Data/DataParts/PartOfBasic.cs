@@ -4,7 +4,7 @@
     {
         public PartOfBasic()
         {
-            Id = "__Basic";
+            Id = Constants.PartOfBasic;
         }
         public Dictionary<string, string> Buckets { get; init; }
     }

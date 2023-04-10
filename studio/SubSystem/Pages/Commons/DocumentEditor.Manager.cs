@@ -4,7 +4,7 @@ using System.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -217,10 +217,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Gender = Language.GetText("global.DefaultGender");
             }
 
-            if (PreviewPart is null)
+            if (PresentationPart is null)
             {
-                PreviewPart = new PartOfPreview { Blocks = new ObservableCollection<PreviewBlock>() };
-                Document.Parts.Add(PreviewPart);
+                PresentationPart = new PartOfPresentation { Blocks = new ObservableCollection<Presentation>() };
+                Document.Parts.Add(PresentationPart);
             }
 
             IsDataPartExistence(Document);
@@ -231,13 +231,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private void Final()
         {
             //
-            // 打开 PreviewPart
+            // 打开 PresentationPart
             var db = Xaml.Get<IDatabaseManager>()
                          .Database
                          .CurrentValue;
             
-            PreviewPart = db.Get<ModuleManifestProperty>()
-                              .GetPreviewManifest(Type, x => db.Set(x));
+            PresentationPart = db.Get<ModuleManifestProperty>()
+                              .GetPresentationManifest(Type, x => db.Set(x));
         }
 
         #endregion

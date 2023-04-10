@@ -59,7 +59,7 @@
                 </f:ListBox>
             </f:ForestSection>
 
-            <f:ForestSection f:Language.Id="global.Preview"
+            <f:ForestSection f:Language.Id="global.Presentation"
                              Grid.Column="1"
                              Header="预览"
                              Margin="32 0 8 0">

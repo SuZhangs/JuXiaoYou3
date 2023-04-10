@@ -16,7 +16,7 @@
     <UserControl.Resources>
         <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
     </UserControl.Resources>
-    <f:Drawer IsRightOpen="{Binding IsPreview,Mode=TwoWay}">
+    <f:Drawer IsRightOpen="{Binding IsPresentation,Mode=TwoWay}">
         <Grid Margin="8 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -47,7 +47,7 @@
                         
                         <ftk:ToolButton f:Language.Id="global.preview"
                                         Content="预览"
-                                        Command="{Binding PreviewCommand}"
+                                        Command="{Binding PresentationCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
                                         ShowText="True" />
                         
@@ -225,7 +225,7 @@
                 <ScrollViewer Margin="0 16 0 0">
                     <Border x:Name="Canvas"
                             Background="{f:BackgroundBrush}">
-                        <thisVM:PreviewView/>
+                        <thisVM:PresentationView/>
                     </Border>
                 </ScrollViewer>
             </f:ForestSection>

@@ -2,17 +2,17 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    [Connected(View = typeof(EditPreviewBlockView), ViewModel = typeof(EditPreviewBlockViewModel))]
-    public partial class EditPreviewBlockView
+    [Connected(View = typeof(EditPresentationView), ViewModel = typeof(EditPresentationViewModel))]
+    public partial class EditPresentationView
     {
-        public EditPreviewBlockView()
+        public EditPresentationView()
         {
             InitializeComponent();
         }
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            ViewModel<EditPreviewBlockViewModel>().TargetElement = Collection;
+            ViewModel<EditPresentationViewModel>().TargetElement = Collection;
             base.OnLoaded(sender, e);
         }
     }

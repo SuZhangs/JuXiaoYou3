@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {
@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             {
                 Manifests        = new ObservableCollection<ModuleManifest>(),
                 DefaultManifests = new Dictionary<DocumentType, string>(),
-                DefaultPreviewManifest = new Dictionary<DocumentType, PartOfPreview>()
+                DefaultPresentationManifest = new Dictionary<DocumentType, PartOfPresentation>()
             });
             
             database.Upsert<DatabaseVersion>(new DatabaseVersion

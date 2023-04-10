@@ -1,32 +1,31 @@
-﻿using System.Linq;
+﻿
 using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaStudio.Controls.Models;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 // ReSharper disable IdentifierTypo
 
-namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
+namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
 {
-    public abstract class PreviewBlockDataUI : ObservableObject
+    public abstract class PresentationDataUI : ObservableObject
     {
-        public static PreviewBlockDataUI GetDataUI(IPreviewBlockData value)
+        public static PresentationDataUI GetDataUI(IPresentationData value)
         {
             return value switch
             {
-                PreviewTextData ptd => new PreviewBlockTextDataUI(ptd),
-                PreviewDegreeData pdd => new PreviewBlockDegreeDataUI(pdd),
-                PreviewStarData psd1 => new PreviewBlockStarDataUI(psd1),
-                PreviewSwitchData psd2 => new PreviewBlockSwitchDataUI(psd2),
-                PreviewHeartData phd => new PreviewBlockHeartDataUI(phd),
-                PreviewProgressData ppd => new PreviewBlockProgressDataUI(ppd),
-                PreviewRateData  prd => new PreviewBlockRateDataUI(prd),
-                PreviewLikabilityData pld => new PreviewBlockLikabilityDataUI(pld),
-                PreviewColorData pld => new PreviewBlockColorDataUI(pld),
+                PresentationTextData ptd => new PresentationTextDataUI(ptd),
+                PresentationDegreeData pdd => new PresentationDegreeDataUI(pdd),
+                PresentationStarData psd1 => new PresentationStarDataUI(psd1),
+                PresentationSwitchData psd2 => new PresentationSwitchDataUI(psd2),
+                PresentationHeartData phd => new PresentationHeartDataUI(phd),
+                PresentationProgressData ppd => new PresentationProgressDataUI(ppd),
+                PresentationRateData  prd => new PresentationRateDataUI(prd),
+                PresentationLikabilityData pld => new PresentationLikabilityDataUI(pld),
+                PresentationColorData pld => new PresentationColorDataUI(pld),
                 _ => throw new InvalidOperationException("没有这种数据")
             };
         }
 
-        protected PreviewBlockDataUI(IPreviewBlockData data) => IsMetadata = data.IsMetadata;
+        protected PresentationDataUI(IPresentationData data) => IsMetadata = data.IsMetadata;
 
         public virtual void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
@@ -63,11 +62,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         public string Name { get; init; }
     }
 
-    public sealed class PreviewBlockStarDataUI : PreviewBlockDataUI
+    public sealed class PresentationStarDataUI : PresentationDataUI
     {
         private bool _value;
         
-        public PreviewBlockStarDataUI(IPreviewBlockData value) : base(value)
+        public PresentationStarDataUI(IPresentationData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -89,11 +88,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
     
-    public sealed class PreviewBlockSwitchDataUI : PreviewBlockDataUI
+    public sealed class PresentationSwitchDataUI : PresentationDataUI
     {
         private bool _value;
         
-        public PreviewBlockSwitchDataUI(PreviewSwitchData value) : base(value)
+        public PresentationSwitchDataUI(IPresentationData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -115,12 +114,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
     
-    public sealed class PreviewBlockRateDataUI : PreviewBlockDataUI
+    public sealed class PresentationRateDataUI : PresentationDataUI
     {
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockRateDataUI(PreviewRateData value) : base(value)
+        public PresentationRateDataUI(PresentationRateData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -154,12 +153,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
     }
     
     
-    public sealed class PreviewBlockLikabilityDataUI : PreviewBlockDataUI
+    public sealed class PresentationLikabilityDataUI : PresentationDataUI
     {
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockLikabilityDataUI(PreviewLikabilityData value) : base(value)
+        public PresentationLikabilityDataUI(PresentationLikabilityData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -191,12 +190,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
 
-    public sealed class PreviewBlockDegreeDataUI : PreviewBlockDataUI
+    public sealed class PresentationDegreeDataUI : PresentationDataUI
     {
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockDegreeDataUI(IPreviewBlockData value) : base(value)
+        public PresentationDegreeDataUI(IPresentationData value) : base(value)
         {
             Name          = value.Name;
             Metadata      = value.ValueSourceID;
@@ -229,12 +228,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
     
-    public sealed class PreviewBlockProgressDataUI : PreviewBlockDataUI
+    public sealed class PresentationProgressDataUI : PresentationDataUI
     {
         private int _value;
         private int _metadataValue;
         
-        public PreviewBlockProgressDataUI(PreviewProgressData value) : base(value)
+        public PresentationProgressDataUI(PresentationProgressData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -266,11 +265,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
     
-    public sealed class PreviewBlockColorDataUI : PreviewBlockDataUI
+    public sealed class PresentationColorDataUI : PresentationDataUI
     {
         private SolidColorBrush _value;
         
-        public PreviewBlockColorDataUI(IPreviewBlockData value) : base(value)
+        public PresentationColorDataUI(IPresentationData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -293,11 +292,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
     
-    public sealed class PreviewBlockTextDataUI : PreviewBlockDataUI
+    public sealed class PresentationTextDataUI : PresentationDataUI
     {
         private string _value;
         
-        public PreviewBlockTextDataUI(IPreviewBlockData value) : base(value)
+        public PresentationTextDataUI(IPresentationData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;
@@ -318,11 +317,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
 
-    public sealed class PreviewBlockHeartDataUI : PreviewBlockDataUI
+    public sealed class PresentationHeartDataUI : PresentationDataUI
     {
         private bool _value;
         
-        public PreviewBlockHeartDataUI(IPreviewBlockData value) : base(value)
+        public PresentationHeartDataUI(IPresentationData value) : base(value)
         {
             Name     = value.Name;
             Metadata = value.ValueSourceID;

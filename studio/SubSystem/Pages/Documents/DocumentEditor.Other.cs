@@ -8,7 +8,7 @@
             AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
             AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
             AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Inspiration");
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Preview");
+            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
         }
 
         protected override IEnumerable<object> CreateDetailPartList()

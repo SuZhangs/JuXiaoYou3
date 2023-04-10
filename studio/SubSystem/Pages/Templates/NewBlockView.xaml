@@ -60,7 +60,7 @@
 
             <!-- 预览 -->
             <f:StretchPanel Grid.Column="1">
-                <ContentControl Content="{Binding PreviewItem,Mode=OneWay}"
+                <ContentControl Content="{Binding PresentationItem,Mode=OneWay}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                 <Border Background="{x:Static f:Xaml.Transparent}"/>

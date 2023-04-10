@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class EditPreviewBlockViewModel : ExplicitDialogVM
+    public class EditPresentationViewModel : ExplicitDialogVM
     {
         
-        public static Task<Op<object>> Edit(GroupingPreviewBlock hb, DataPartCollection dataPartCollection)
+        public static Task<Op<object>> Edit(GroupingPresentation hb, DataPartCollection dataPartCollection)
         {
             var blockCollection = new List<ModuleBlock>(64);
             var blocks = dataPartCollection.Where(x => x is PartOfModule)
@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
-                       .Dialog(new EditPreviewBlockViewModel(), new Parameter
+                       .Dialog(new EditPresentationViewModel(), new Parameter
                        {
                            Args = new object[]
                            {
@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void OnStart(RoutingEventArgs parameter)
         {
             var param = parameter.Parameter;
-            Block = param.Args[0] as GroupingPreviewBlock;
+            Block = param.Args[0] as GroupingPresentation;
             var array = param.Args[1] as IEnumerable<ModuleBlock>;
             Templates.AddRange(array, true);
         }
@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                  .AddRange(Create(r));
         }
 
-        private IEnumerable<IPreviewBlockData> Create(IEnumerable<ModuleBlock> blockCollection)
+        private IEnumerable<IPresentationData> Create(IEnumerable<ModuleBlock> blockCollection)
         {
             return Block.Type switch
             {
@@ -83,12 +83,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             };
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateText(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateText(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewTextData
+                return new PresentationTextData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -97,12 +97,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateDegree(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateDegree(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewDegreeData
+                return new PresentationDegreeData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -111,12 +111,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateStar(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateStar(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewStarData
+                return new PresentationStarData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -125,12 +125,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateHeart(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateHeart(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewHeartData
+                return new PresentationHeartData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -139,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateProgress(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateProgress(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
@@ -150,7 +150,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     scale = 100 / number.Maximum;
                 }
 
-                return new PreviewProgressData
+                return new PresentationProgressData
                 {
                     Name          = x.Name,
                     Scale         = scale,
@@ -160,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateLikability(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateLikability(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
@@ -172,7 +172,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     scale = 100 / number.Maximum;
                 }
 
-                return new PreviewLikabilityData
+                return new PresentationLikabilityData
                 {
                     Name          = x.Name,
                     Scale         = scale,
@@ -183,7 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
         
         
-        private static IEnumerable<IPreviewBlockData> CreateRate(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateRate(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
@@ -195,7 +195,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     scale = 100 / number.Maximum;
                 }
 
-                return new PreviewRateData
+                return new PresentationRateData
                 {
                     Name          = x.Name,
                     Scale         = scale,
@@ -205,12 +205,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             });
         }
 
-        private static IEnumerable<IPreviewBlockData> CreateSwitch(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateSwitch(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewSwitchData
+                return new PresentationSwitchData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -220,12 +220,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
 
-        private static IEnumerable<IPreviewBlockData> CreateColor(IEnumerable<ModuleBlock> blockCollection)
+        private static IEnumerable<IPresentationData> CreateColor(IEnumerable<ModuleBlock> blockCollection)
         {
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                return new PreviewColorData
+                return new PresentationColorData
                 {
                     Name          = x.Name,
                     ValueSourceID = useID ? x.Id : x.Metadata,
@@ -250,7 +250,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set => SetValue(ref _targetElement, value);
         }
         
-        public GroupingPreviewBlock Block { get; private set; }
+        public GroupingPresentation Block { get; private set; }
         public ObservableCollection<ModuleBlock> Templates { get; } = new ObservableCollection<ModuleBlock>();
     }
 }

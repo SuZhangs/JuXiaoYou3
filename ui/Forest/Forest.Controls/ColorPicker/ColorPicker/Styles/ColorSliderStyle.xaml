@@ -24,7 +24,7 @@
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="PreviewColorSliderTemplate" TargetType="{x:Type local:PreviewColorSlider}">
+    <ControlTemplate x:Key="PresentationColorSliderTemplate" TargetType="{x:Type local:PreviewColorSlider}">
         <Border x:Name="border" CornerRadius="5" 
                 BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                 SnapsToDevicePixels="True">
@@ -81,12 +81,12 @@
     </ControlTemplate>
 
     <Style TargetType="{x:Type ui:HsvColorSlider}">
-        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
+        <Setter Property="Template" Value="{StaticResource PresentationColorSliderTemplate}" />
     </Style>
     <Style TargetType="{x:Type ui:RgbColorSlider}">
-        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
+        <Setter Property="Template" Value="{StaticResource PresentationColorSliderTemplate}" />
     </Style>
     <Style TargetType="{x:Type ui:HslColorSlider}">
-        <Setter Property="Template" Value="{StaticResource PreviewColorSliderTemplate}" />
+        <Setter Property="Template" Value="{StaticResource PresentationColorSliderTemplate}" />
     </Style>
 </ResourceDictionary>

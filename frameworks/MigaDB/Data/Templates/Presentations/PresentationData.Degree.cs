@@ -1,6 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
 {
-    public class PreviewDegreeData : ObservableObject, IPreviewBlockData
+    public class PresentationDegreeData : ObservableObject, IPresentationData
     {
         /// <summary>
         /// 

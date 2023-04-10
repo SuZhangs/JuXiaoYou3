@@ -20,7 +20,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class TemplateGalleryViewModel : TabViewModel, IPreviewBlockViewModel
+    public class TemplateGalleryViewModel : TabViewModel, IPresentationViewModel
     {
         private const string FileNotExists = "text.FileNotFound";
 
@@ -35,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private DocumentType        _type;
         private ModuleTemplateCache _selectedTemplate;
-        private bool                _isPreview;
+        private bool                _isPresentation;
 
         public TemplateGalleryViewModel()
         {
@@ -58,7 +58,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             ImportTemplateCommand       = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand       = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand       = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
-            PreviewCommand              = Command(() => IsPreview            = true, () => SelectedTemplate is not null);
+            PresentationCommand              = Command(() => IsPresentation            = true, () => SelectedTemplate is not null);
             SetAbilityManifestCommand   = AsyncCommand(async () => Ability   = await PickModuleManifestImpl());
             SetCharacterManifestCommand = AsyncCommand(async () => Character = await PickModuleManifestImpl());
             SetGeographyManifestCommand = AsyncCommand(async () => Geography = await PickModuleManifestImpl());
@@ -295,12 +295,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="IsPreview"/> 属性。
+        /// 获取或设置 <see cref="IsPresentation"/> 属性。
         /// </summary>
-        public bool IsPreview
+        public bool IsPresentation
         {
-            get => _isPreview;
-            set => SetValue(ref _isPreview, value);
+            get => _isPresentation;
+            set => SetValue(ref _isPresentation, value);
         }
 
         /// <summary>
@@ -313,10 +313,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 SetValue(ref _selectedTemplate, value);
 
-                RaiseUpdated(nameof(PreviewIntro));
-                RaiseUpdated(nameof(PreviewContractList));
-                RaiseUpdated(nameof(PreviewAuthorList));
-                RaiseUpdated(nameof(PreviewName));
+                RaiseUpdated(nameof(PresentationIntro));
+                RaiseUpdated(nameof(PresentationContractList));
+                RaiseUpdated(nameof(PresentationAuthorList));
+                RaiseUpdated(nameof(PresentationName));
 
                 if (_selectedTemplate is null)
                 {
@@ -330,18 +330,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 }
 
                 ExportTemplateCommand.NotifyCanExecuteChanged();
-                PreviewCommand.NotifyCanExecuteChanged();
+                PresentationCommand.NotifyCanExecuteChanged();
                 RemoveTemplateCommand.NotifyCanExecuteChanged();
                 Blocks.AddRange(template.Blocks, true);
-                RaiseUpdated(nameof(PreviewBlocks));
+                RaiseUpdated(nameof(Presentations));
             }
         }
 
 
-        public string PreviewIntro => SubSystemString.GetIntro(SelectedTemplate?.Intro);
-        public string PreviewContractList => SubSystemString.GetContractList(SelectedTemplate?.ContractList);
-        public string PreviewAuthorList => SubSystemString.GetAuthor(SelectedTemplate?.AuthorList);
-        public string PreviewName => SubSystemString.GetName(SelectedTemplate?.Name);
+        public string PresentationIntro => SubSystemString.GetIntro(SelectedTemplate?.Intro);
+        public string PresentationContractList => SubSystemString.GetContractList(SelectedTemplate?.ContractList);
+        public string PresentationAuthorList => SubSystemString.GetAuthor(SelectedTemplate?.AuthorList);
+        public string PresentationName => SubSystemString.GetName(SelectedTemplate?.Name);
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
@@ -417,7 +417,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlock> Blocks { get; }
 
-        public IEnumerable<ModuleBlockDataUI> PreviewBlocks => Blocks.Select(ModuleBlockFactory.GetDataUI);
+        public IEnumerable<ModuleBlockDataUI> Presentations => Blocks.Select(ModuleBlockFactory.GetDataUI);
 
         [NullCheck(UniTestLifetime.Constructor)]
         public SourceList<ModuleTemplateCache> Source { get; }
@@ -438,7 +438,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public AsyncRelayCommand AddTemplateCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand PreviewCommand { get; }
+        public RelayCommand PresentationCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ManageManifestCommand { get; }
@@ -471,10 +471,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public override bool Removable => false;
         public override bool Uniqueness => true;
 
-        public RelayCommand SetAbilityPreviewManifestCommand { get; }
-        public RelayCommand SetCharacterPreviewManifestCommand { get; }
-        public RelayCommand SetGeographyPreviewManifestCommand { get; }
-        public RelayCommand SetItemPreviewManifestCommand { get; }
-        public RelayCommand SetOtherPreviewManifestCommand { get; }
+        public RelayCommand SetAbilityPresentationManifestCommand { get; }
+        public RelayCommand SetCharacterPresentationManifestCommand { get; }
+        public RelayCommand SetGeographyPresentationManifestCommand { get; }
+        public RelayCommand SetItemPresentationManifestCommand { get; }
+        public RelayCommand SetOtherPresentationManifestCommand { get; }
     }
 }

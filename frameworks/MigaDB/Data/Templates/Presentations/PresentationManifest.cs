@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
 {
-    public class PreviewManifest : StorageUIObject
+    public class PresentationManifest : StorageUIObject
     {
         private string _name;
 
@@ -15,6 +15,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
             set => SetValue(ref _name, value);
         }
         
-        public ObservableCollection<PreviewBlock> Blocks { get; init; }
+        public ObservableCollection<Presentation> Blocks { get; init; }
     }
 }

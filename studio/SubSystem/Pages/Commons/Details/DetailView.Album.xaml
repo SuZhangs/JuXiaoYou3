@@ -46,7 +46,7 @@
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
-            <ftk:ToolButton f:Language.Id="global.Preview"
+            <ftk:ToolButton f:Language.Id="global.Presentation"
                             Content="预览"
                             Command="{Binding OpenAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"

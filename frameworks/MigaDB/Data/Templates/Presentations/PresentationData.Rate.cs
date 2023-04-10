@@ -1,6 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
 {
-    public class PreviewRateData : ObservableObject, IPreviewBlockData
+    public class PresentationRateData : ObservableObject, IPresentationData
     {
         /// <summary>
         /// 
@@ -11,7 +11,7 @@
         public bool IsMetadata { get; init; }
     }
     
-    public class PreviewLikabilityData : ObservableObject, IPreviewBlockData
+    public class PresentationLikabilityData : ObservableObject, IPresentationData
     {
         /// <summary>
         /// 

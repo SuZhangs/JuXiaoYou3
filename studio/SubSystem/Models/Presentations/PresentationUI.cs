@@ -4,38 +4,38 @@ using System.Linq;
 using System.Windows.Forms;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 
-namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
+namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
 {
-    public abstract class PreviewBlockUI : StorageUIObject
+    public abstract class PresentationUI : StorageUIObject
     {
-        public static PreviewBlockUI GetUI(PreviewBlock block)
+        public static PresentationUI GetUI(Presentation block)
         {
             return block switch
             {
-                GroupingPreviewBlock gpb => new GroupingPreviewBlockUI
+                GroupingPresentation gpb => new GroupingPresentationUI
                 {
                     Source = gpb
                 },
-                ChartPreviewBlock cpb => cpb.ChartType switch
+                ChartPresentation cpb => cpb.ChartType switch
                 {
-                    ChartType.Histogram => new HistogramPreviewBlockUI
+                    ChartType.Histogram => new HistogramPresentationUI
                     {
                         Source = cpb
                     },
-                    ChartType.Radar => new RadarPreviewBlockUI
+                    ChartType.Radar => new RadarPresentationUI
                     {
                         Source = cpb
                     }
                 },
-                RarityPreviewBlock rpb2 => new RarityPreviewBlockUI()
+                RarityPresentation rpb2 => new RarityPresentationUI()
                 {
                     Source = rpb2
                 },
-                StringPreviewBlock sp => new StringPreviewBlockUI
+                StringPresentation sp => new StringPresentationUI
                 {
                     Source = sp
                 },
@@ -55,19 +55,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             get => _name;
             set => SetValue(ref _name, value);
         }
-        public PreviewBlock BaseSource { get; protected init; }
+        public Presentation BaseSource { get; protected init; }
     }
 
-    public class RarityPreviewBlockUI : PreviewBlockUI
+    public class RarityPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             // TODO:
         }
 
-        public RarityPreviewBlock Source
+        public RarityPresentation Source
         {
-            get => (RarityPreviewBlock)BaseSource;
+            get => (RarityPresentation)BaseSource;
             init
             {
                 Name = value.Name;
@@ -79,36 +79,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         public string Metadata { get; init; }
     }
 
-    public class GroupingPreviewBlockUI : PreviewBlockUI
+    public class GroupingPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             DataLists.ForEach(x => x.Update(metadataTracker, blockTracker));
         }
 
-        public GroupingPreviewBlock Source
+        public GroupingPresentation Source
         {
-            get => (GroupingPreviewBlock)BaseSource;
+            get => (GroupingPresentation)BaseSource;
             init
             {
                 BaseSource = value;
                 Name = value.Name;
                 NameLists  = new ObservableCollection<string>();
-                DataLists  = new ObservableCollection<PreviewBlockDataUI>();
+                DataLists  = new ObservableCollection<PresentationDataUI>();
 
                 foreach (var data in value.DataLists)
                 {
                     NameLists.Add(data.Name);
-                    DataLists.Add(PreviewBlockDataUI.GetDataUI(data));
+                    DataLists.Add(PresentationDataUI.GetDataUI(data));
                 }
             }
         }
 
         public ObservableCollection<string> NameLists { get; private init; }
-        public ObservableCollection<PreviewBlockDataUI> DataLists { get; private init; }
+        public ObservableCollection<PresentationDataUI> DataLists { get; private init; }
     }
     
-    public class StringPreviewBlockUI : PreviewBlockUI
+    public class StringPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
@@ -116,9 +116,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
                                                 .SubString(200);
         }
 
-        public StringPreviewBlock Source
+        public StringPresentation Source
         {
-            get => (StringPreviewBlock)BaseSource;
+            get => (StringPresentation)BaseSource;
             init
             {
                 BaseSource  = value;
@@ -141,7 +141,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         }
     }
 
-    public class HistogramPreviewBlockUI : PreviewBlockUI
+    public class HistogramPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
@@ -169,9 +169,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             }
         }
 
-        public ChartPreviewBlock Source
+        public ChartPresentation Source
         {
-            get => (ChartPreviewBlock)BaseSource;
+            get => (ChartPresentation)BaseSource;
             init
             {
                 BaseSource  = value;
@@ -189,7 +189,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
         public List<int> Value { get; init; }
     }
 
-    public class RadarPreviewBlockUI : PreviewBlockUI
+    public class RadarPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
@@ -217,9 +217,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Previews
             }
         }
 
-        public ChartPreviewBlock Source
+        public ChartPresentation Source
         {
-            get => (ChartPreviewBlock)BaseSource;
+            get => (ChartPresentation)BaseSource;
             init
             {
                 BaseSource  = value;

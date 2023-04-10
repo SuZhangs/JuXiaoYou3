@@ -2,10 +2,10 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    [Connected(View = typeof(EditChartPreviewBlockView), ViewModel = typeof(EditChartPreviewBlockViewModel))]
-    public partial class EditChartPreviewBlockView
+    [Connected(View = typeof(EditChartPresentationView), ViewModel = typeof(EditChartPresentationViewModel))]
+    public partial class EditChartPresentationView
     {
-        public EditChartPreviewBlockView()
+        public EditChartPresentationView()
         {
             InitializeComponent();
         }

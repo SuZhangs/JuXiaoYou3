@@ -2,12 +2,12 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public interface IPreviewBlockViewModel
+    public interface IPresentationViewModel
     {
-        public string PreviewIntro { get; }
-        public string PreviewContractList { get; }
-        public string PreviewAuthorList { get; }
-        public string PreviewName { get; }
-        public IEnumerable<ModuleBlockDataUI> PreviewBlocks { get; }
+        public string PresentationIntro { get; }
+        public string PresentationContractList { get; }
+        public string PresentationAuthorList { get; }
+        public string PresentationName { get; }
+        public IEnumerable<ModuleBlockDataUI> Presentations { get; }
     }
 }

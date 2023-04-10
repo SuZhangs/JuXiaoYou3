@@ -126,7 +126,7 @@
                         </TextBlock.Text>
                     </TextBlock>
 
-                    <Border x:Name="Preview"
+                    <Border x:Name="Presentation"
                             Height="128"
                             Width="128">
                     </Border>

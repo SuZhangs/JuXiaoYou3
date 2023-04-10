@@ -646,7 +646,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         #endregion
         
 
-        #region ModuleBlockPreview Translate
+        #region ModuleBlockPresentation Translate
 
         // TODO: 翻译
         internal static string GetName(string value)

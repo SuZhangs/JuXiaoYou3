@@ -68,7 +68,7 @@ namespace ColorPicker.UserControls
             Value = MathHelper.Clamp(angle, 0, 360);
         }
 
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
+        private void OnPresentationMouseWheel(object sender, MouseWheelEventArgs args)
         {
             Value = MathHelper.Mod(Value + SmallChange * args.Delta / 120, 360);
             args.Handled = true;

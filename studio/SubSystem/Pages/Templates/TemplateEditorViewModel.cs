@@ -18,7 +18,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class TemplateEditorViewModel : TabViewModel, IPreviewBlockViewModel
+    public class TemplateEditorViewModel : TabViewModel, IPresentationViewModel
     {
         [NullCheck(UniTestLifetime.Constructor)]
         private readonly HashSet<string> _metaHashSet;
@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             ForType                  =  DocumentType.Character;
             Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
             MetadataList             =  new ObservableCollection<MetadataCache>();
-            OpenPreviewPaneCommand   =  new RelayCommand(() => IsPreviewPaneOpen = true);
+            OpenPresentationPaneCommand   =  new RelayCommand(() => IsPresentationPaneOpen = true);
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
@@ -156,7 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 ForType       = template.ForType;
 
                 SetDirtyState(false);
-                RaiseUpdated(nameof(PreviewBlocks));
+                RaiseUpdated(nameof(Presentations));
                 Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
                 MetadataList.AddRange(template.MetadataList, true);
             }
@@ -204,7 +204,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             var savedlg = new VistaSaveFileDialog
             {
-                FileName = PreviewName,
+                FileName = PresentationName,
                 Filter   = SubSystemString.ModuleFilter,
                 AddExtension = true,
                 DefaultExt = "*.png"
@@ -323,7 +323,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             var element = r.Value;
             Blocks.Add(element);
             await EditBlockViewModel.Edit(element);
-            RaiseUpdated(nameof(PreviewBlocks));
+            RaiseUpdated(nameof(Presentations));
             DetectAll();
             SetDirtyState(true);
         }
@@ -331,7 +331,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task EditBlockImpl(ModuleBlockEditUI element)
         {
             var r = await EditBlockViewModel.Edit(element);
-            RaiseUpdated(nameof(PreviewBlocks));
+            RaiseUpdated(nameof(Presentations));
 
             if (!r.IsFinished)
             {
@@ -353,19 +353,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
 
             Blocks.Remove(element);
-            RaiseUpdated(nameof(PreviewBlocks));
+            RaiseUpdated(nameof(Presentations));
             DetectAll();
             SetDirtyState(true);
         }
 
         private void ShiftUpBlockImpl(ModuleBlockEditUI element)
         {
-            Blocks.ShiftUp(element, () => RaiseUpdated(nameof(PreviewBlocks)));
+            Blocks.ShiftUp(element, () => RaiseUpdated(nameof(Presentations)));
         }
 
         private void ShiftDownBlockImpl(ModuleBlockEditUI element)
         {
-            Blocks.ShiftDown(element, () => RaiseUpdated(nameof(PreviewBlocks)));
+            Blocks.ShiftDown(element, () => RaiseUpdated(nameof(Presentations)));
         }
 
         private async Task RemoveAllBlockImpl()
@@ -380,7 +380,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             //
             // 清空
             Blocks.Clear();
-            RaiseUpdated(nameof(PreviewBlocks));
+            RaiseUpdated(nameof(Presentations));
             MetadataList.Clear();
             SetDirtyState(true);
         }
@@ -404,10 +404,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public FrameworkElement Canvas { get; set; }
 
-        public string PreviewIntro => SubSystemString.GetIntro(_intro);
-        public string PreviewContractList => SubSystemString.GetContractList(_contractList);
-        public string PreviewAuthorList => SubSystemString.GetAuthor(_authorList);
-        public string PreviewName => SubSystemString.GetName($"{_name}({_for})");
+        public string PresentationIntro => SubSystemString.GetIntro(_intro);
+        public string PresentationContractList => SubSystemString.GetContractList(_contractList);
+        public string PresentationAuthorList => SubSystemString.GetAuthor(_authorList);
+        public string PresentationName => SubSystemString.GetName($"{_name}({_for})");
 
         /// <summary>
         /// 世界观
@@ -418,7 +418,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _for, value);
-                RaiseUpdated(nameof(PreviewName));
+                RaiseUpdated(nameof(PresentationName));
             }
         }
 
@@ -440,7 +440,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _intro, value);
-                RaiseUpdated(nameof(PreviewIntro));
+                RaiseUpdated(nameof(PresentationIntro));
             }
         }
 
@@ -477,7 +477,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _contractList, value);
-                RaiseUpdated(nameof(PreviewContractList));
+                RaiseUpdated(nameof(PresentationContractList));
             }
         }
 
@@ -490,7 +490,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _authorList, value);
-                RaiseUpdated(nameof(PreviewAuthorList));
+                RaiseUpdated(nameof(PresentationAuthorList));
             }
         }
 
@@ -504,7 +504,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 SetValue(ref _name, value);
                 SetDirtyState();
-                RaiseUpdated(nameof(PreviewName));
+                RaiseUpdated(nameof(PresentationName));
             }
         }
 
@@ -524,15 +524,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
-        private bool _isPreviewPaneOpen;
+        private bool _isPresentationPaneOpen;
 
         /// <summary>
-        /// 获取或设置 <see cref="IsPreviewPaneOpen"/> 属性。
+        /// 获取或设置 <see cref="IsPresentationPaneOpen"/> 属性。
         /// </summary>
-        public bool IsPreviewPaneOpen
+        public bool IsPresentationPaneOpen
         {
-            get => _isPreviewPaneOpen;
-            set => SetValue(ref _isPreviewPaneOpen, value);
+            get => _isPresentationPaneOpen;
+            set => SetValue(ref _isPresentationPaneOpen, value);
         }
 
         /// <summary>
@@ -541,7 +541,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
 
-        public IEnumerable<ModuleBlockDataUI> PreviewBlocks => Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
+        public IEnumerable<ModuleBlockDataUI> Presentations => Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NewTemplateCommand { get; }
@@ -571,7 +571,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public AsyncRelayCommand RemoveAllBlockCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand OpenPreviewPaneCommand { get; }
+        public RelayCommand OpenPresentationPaneCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RefreshMetadataListCommand { get; }

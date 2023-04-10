@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Commons.NewPreviewBlockView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Commons.NewPresentationView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,7 +13,7 @@
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewPreviewBlockViewModel}, IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewPresentationViewModel}, IsDesignTimeCreatable=True}"
                      Height="540"
                      Width="768">
     <UserControl.Resources>
@@ -41,7 +41,7 @@
             <f:TreeView Grid.Column="0"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
-                <f:TreeViewItem f:Language.Id="__GroupPreview"
+                <f:TreeViewItem f:Language.Id="__GroupPresentation"
                                 Header="分组预览" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicMetadataKinds}">
@@ -52,7 +52,7 @@
                         </ItemsPanelTemplate>
                     </f:TreeViewItem.ItemsPanel>
                 </f:TreeViewItem>
-                <f:TreeViewItem f:Language.Id="__ComplexPreview"
+                <f:TreeViewItem f:Language.Id="__ComplexPresentation"
                                 Header="复杂预览" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedMetadataKinds}">

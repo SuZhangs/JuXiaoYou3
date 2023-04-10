@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class EditStringPreviewBlockViewModel : ExplicitDialogVM
+    public class EditStringPresentationViewModel : ExplicitDialogVM
     {
         public class FakeModuleBlock : ModuleBlock, IMetadataTextSource
         {
@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
 
-        public static Task<Op<object>> Edit(StringPreviewBlock hb, DataPartCollection dataPartCollection)
+        public static Task<Op<object>> Edit(StringPresentation hb, DataPartCollection dataPartCollection)
         {
             var blockCollection = new List<ModuleBlock>(64);
             var blocks = dataPartCollection.Where(x => x is PartOfModule)
@@ -82,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             blockCollection.AddRange(blockInGroup);
             blockCollection.AddRange(simpleBlock);
             return Xaml.Get<IDialogService>()
-                       .Dialog(new EditStringPreviewBlockViewModel(), new Parameter
+                       .Dialog(new EditStringPresentationViewModel(), new Parameter
                        {
                            Args = new object[]
                            {
@@ -97,7 +97,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void OnStart(RoutingEventArgs parameter)
         {
             var param = parameter.Parameter;
-            Block = param.Args[0] as StringPreviewBlock;
+            Block = param.Args[0] as StringPresentation;
             var array = param.Args[1] as IEnumerable<ModuleBlock>;
             Templates.AddRange(array, true);
         }
@@ -132,7 +132,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set => SetValue(ref _selectedBlock, value);
         }
 
-        public StringPreviewBlock Block { get; private set; }
+        public StringPresentation Block { get; private set; }
         public ObservableCollection<ModuleBlock> Templates { get; } = new ObservableCollection<ModuleBlock>();
     }
 }

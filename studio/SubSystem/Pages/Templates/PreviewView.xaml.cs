@@ -2,9 +2,9 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public partial class PreviewView : UserControl
+    public partial class PresentationView : UserControl
     {
-        public PreviewView()
+        public PresentationView()
         {
             InitializeComponent();
         }

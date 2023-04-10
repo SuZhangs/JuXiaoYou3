@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             DetailParts        = new ObservableCollection<PartOfDetail>();
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleParts        = new ObservableCollection<PartOfModule>();
-            PreviewBlocks      = new ObservableCollection<PreviewBlockUI>();
+            Presentations      = new ObservableCollection<PresentationUI>();
 
             var dbMgr = Xaml.Get<IDatabaseManager>();
             Xaml.Get<IAutoSaveService>()
@@ -84,15 +84,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
 
-            AddPreviewBlockCommand              = AsyncCommand(AddPreviewBlockImpl);
-            RemovePreviewBlockCommand           = AsyncCommand<PreviewBlockUI>(RemovePreviewBlockImpl);
-            RefreshPreviewBlockCommand          = Command(RefreshPreviewBlockImp);
-            EditPreviewBlockCommand             = AsyncCommand<PreviewBlockUI>(EditPreviewBlockImpl);
-            ShiftUpPreviewBlockCommand          = Command<PreviewBlockUI>(ShiftUpPreviewBlockImpl);
-            ShiftDownPreviewBlockCommand        = Command<PreviewBlockUI>(ShiftDownPreviewBlockImpl);
-            ExportPreviewBlockAsPdfCommand      = AsyncCommand(ExportPreviewBlockAsPdfImpl);
-            ExportPreviewBlockAsPictureCommand  = AsyncCommand(ExportPreviewBlockAsPictureImpl);
-            ExportPreviewBlockAsMarkdownCommand = AsyncCommand(ExportPreviewBlockAsMarkdownImpl);
+            AddPresentationCommand              = AsyncCommand(AddPresentationImpl);
+            RemovePresentationCommand           = AsyncCommand<PresentationUI>(RemovePresentationImpl);
+            RefreshPresentationCommand          = Command(RefreshPresentationImp);
+            EditPresentationCommand             = AsyncCommand<PresentationUI>(EditPresentationImpl);
+            ShiftUpPresentationCommand          = Command<PresentationUI>(ShiftUpPresentationImpl);
+            ShiftDownPresentationCommand        = Command<PresentationUI>(ShiftDownPresentationImpl);
+            ExportPresentationAsPdfCommand      = AsyncCommand(ExportPresentationAsPdfImpl);
+            ExportPresentationAsPictureCommand  = AsyncCommand(ExportPresentationAsPictureImpl);
+            ExportPresentationAsMarkdownCommand = AsyncCommand(ExportPresentationAsMarkdownImpl);
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
@@ -148,7 +148,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
-            PreviewBlocks.AddRange(PreviewPart.Blocks.Select(PreviewBlockUI.GetUI), true);
+            Presentations.AddRange(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
             base.OnStart();
         }
 

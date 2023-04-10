@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
+using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -9,9 +9,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     // 1) 部分ModuleBlockDataUI需要最小宽度和高度
     // 2) 实现CardAction的替代
     // 3) 实现其他控件的替代
-    public class NewPreviewBlockViewModel : ExplicitDialogVM
+    public class NewPresentationViewModel : ExplicitDialogVM
     {
-        private PreviewBlockUI _previewItem;
+        private PresentationUI _previewItem;
         private object       _maybeMetadataKind;
         private MetadataKind _type;
 
@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 SetValue(ref _type, value);
-                PreviewItem = PreviewBlockUI.GetUI(ModuleBlockFactory.GetPreviewBlock(_type));
+                PresentationItem = PresentationUI.GetUI(ModuleBlockFactory.GetPresentation(_type));
                 CompletedCommand.NotifyCanExecuteChanged();
             }
         }
@@ -47,25 +47,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="PreviewItem"/> 属性。
+        /// 获取或设置 <see cref="PresentationItem"/> 属性。
         /// </summary>
-        public PreviewBlockUI PreviewItem
+        public PresentationUI PresentationItem
         {
             get => _previewItem;
             set => SetValue(ref _previewItem, value);
         }
 
-        public static Task<Op<PreviewBlock>> New()
+        public static Task<Op<Presentation>> New()
         {
             return DialogService()
-                .Dialog<PreviewBlock>(new NewPreviewBlockViewModel());
+                .Dialog<Presentation>(new NewPresentationViewModel());
         }
 
         protected override bool IsCompleted() => _previewItem is not null;
 
         protected override void Finish()
         {
-            Result = ModuleBlockFactory.GetPreviewBlock(_type);
+            Result = ModuleBlockFactory.GetPresentation(_type);
         }
 
         protected override string Failed() => "未选择";

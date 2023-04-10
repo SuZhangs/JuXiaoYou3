@@ -1,9 +1,9 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    [Connected(View = typeof(EditStringPreviewBlockView), ViewModel = typeof(EditStringPreviewBlockViewModel))]
-    public partial class EditStringPreviewBlockView
+    [Connected(View = typeof(EditStringPresentationView), ViewModel = typeof(EditStringPresentationViewModel))]
+    public partial class EditStringPresentationView
     {
-        public EditStringPreviewBlockView()
+        public EditStringPresentationView()
         {
             InitializeComponent();
         }

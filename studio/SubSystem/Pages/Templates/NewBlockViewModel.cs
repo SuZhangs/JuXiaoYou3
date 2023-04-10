@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             set
             {
                 SetValue(ref _type, value);
-                PreviewItem = ModuleBlockFactory.GetDataUI(ModuleBlockFactory.GetBlock(value));
+                PresentationItem = ModuleBlockFactory.GetDataUI(ModuleBlockFactory.GetBlock(value));
                 CompletedCommand.NotifyCanExecuteChanged();
             }
         }
@@ -52,9 +52,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="PreviewItem"/> 属性。
+        /// 获取或设置 <see cref="PresentationItem"/> 属性。
         /// </summary>
-        public IModuleBlockDataUI PreviewItem
+        public IModuleBlockDataUI PresentationItem
         {
             get => _previewItem;
             set => SetValue(ref _previewItem, value);

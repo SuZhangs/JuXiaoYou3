@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
             AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
             AddSubView<CharacterInspirationView>(collection, "text.DocumentEditor.Inspiration");
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Preview");
+            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
         }
         
         

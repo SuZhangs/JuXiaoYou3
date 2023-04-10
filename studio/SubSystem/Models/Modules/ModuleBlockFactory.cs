@@ -6,7 +6,7 @@ using Acorisoft.FutureGL.Forest.Controls.Selectors;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.Miga.Doc.Documents;
@@ -441,28 +441,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             return b;
         }
 
-        public static PreviewBlock GetPreviewBlock(MetadataKind kind)
+        public static Presentation GetPresentation(MetadataKind kind)
         {
             return kind switch
             {
-                MetadataKind.Rarity  => new RarityPreviewBlock
+                MetadataKind.Rarity  => new RarityPresentation
                 {
                     Id = ID.Get(),
                     Type = kind,
                 },
-                MetadataKind.HistogramChart     => new ChartPreviewBlock
+                MetadataKind.HistogramChart     => new ChartPresentation
                 {
                     Id        = ID.Get(),
                     Type      = kind,
                     ChartType = ChartType.Histogram
                 },
-                MetadataKind.RadarChart => new ChartPreviewBlock
+                MetadataKind.RadarChart => new ChartPresentation
                 {
                     Id    = ID.Get(),
                     Type  = kind,
                     ChartType = ChartType.Radar
                 },
-                MetadataKind.String => new StringPreviewBlock
+                MetadataKind.String => new StringPresentation
                 {
                     Id = ID.Get(),
                 },
@@ -472,11 +472,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                 MetadataKind.Music     => null,
                 MetadataKind.Image     => null,
                 MetadataKind.Reference => null,
-                _                      => new GroupingPreviewBlock
+                _                      => new GroupingPresentation
                 {
                     Id        = ID.Get(),
                     Type      = kind,
-                    DataLists = new ObservableCollection<IPreviewBlockData>()
+                    DataLists = new ObservableCollection<IPresentationData>()
                 }
             };
         }

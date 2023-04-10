@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaDB.Data
@@ -30,33 +30,33 @@ namespace Acorisoft.FutureGL.MigaDB.Data
             }
         }
         
-        public void SetPreviewManifest(DocumentType type, PartOfPreview manifest)
+        public void SetPresentationManifest(DocumentType type, PartOfPresentation manifest)
         {
             if (manifest is null)
             {
                 return;
             }
 
-            if (DefaultPreviewManifest.ContainsKey(type))
+            if (DefaultPresentationManifest.ContainsKey(type))
             {
-                DefaultPreviewManifest[type] = manifest;
+                DefaultPresentationManifest[type] = manifest;
             }
             else
             {
-                DefaultPreviewManifest.Add(type, manifest);
+                DefaultPresentationManifest.Add(type, manifest);
             }
         }
 
-        public PartOfPreview GetPreviewManifest(DocumentType type, Action<ModuleManifestProperty> callback)
+        public PartOfPresentation GetPresentationManifest(DocumentType type, Action<ModuleManifestProperty> callback)
         {
-            if (!DefaultPreviewManifest.TryGetValue(type, out var pop))
+            if (!DefaultPresentationManifest.TryGetValue(type, out var pop))
             {
-                pop = new PartOfPreview
+                pop = new PartOfPresentation
                 {
                     Id     = ID.Get(),
-                    Blocks = new ObservableCollection<PreviewBlock>()
+                    Blocks = new ObservableCollection<Presentation>()
                 };
-                DefaultPreviewManifest.Add(type, pop);
+                DefaultPresentationManifest.Add(type, pop);
                 callback?.Invoke(this);
             }
 
@@ -64,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data
         }
 
         public Dictionary<DocumentType, string> DefaultManifests { get; init; }
-        public Dictionary<DocumentType, PartOfPreview> DefaultPreviewManifest { get; init; }
+        public Dictionary<DocumentType, PartOfPresentation> DefaultPresentationManifest { get; init; }
 
         public ObservableCollection<ModuleManifest> Manifests { get; init; }
     }

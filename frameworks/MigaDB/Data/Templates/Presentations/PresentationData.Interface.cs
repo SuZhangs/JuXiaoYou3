@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
 {
-    public interface IPreviewBlockData : INotifyPropertyChanged
+    public interface IPresentationData : INotifyPropertyChanged
     {
         string Name { get; }
         string ValueSourceID { get; }

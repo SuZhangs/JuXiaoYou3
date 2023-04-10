@@ -84,10 +84,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentGalleryExPage, DocumentGalleryViewModelEx>();
 
             Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();
-            Xaml.InstallView<NewPreviewBlockView, NewPreviewBlockViewModel>();
-            Xaml.InstallView<EditPreviewBlockView, EditPreviewBlockViewModel>();
-            Xaml.InstallView<EditStringPreviewBlockView, EditStringPreviewBlockViewModel>();
-            Xaml.InstallView<EditChartPreviewBlockView, EditChartPreviewBlockViewModel>();
+            Xaml.InstallView<NewPresentationView, NewPresentationViewModel>();
+            Xaml.InstallView<EditPresentationView, EditPresentationViewModel>();
+            Xaml.InstallView<EditStringPresentationView, EditStringPresentationViewModel>();
+            Xaml.InstallView<EditChartPresentationView, EditChartPresentationViewModel>();
             Xaml.InstallView<ModuleSelectorView, ModuleSelectorViewModel>();
             Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();

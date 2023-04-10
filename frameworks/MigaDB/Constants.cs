@@ -22,6 +22,8 @@
         internal const string IdOfAlbumPart                  = "__Album";
         internal const string IdOfPlaylistPart               = "__Playlist";
         internal const string IdOfRelationship_CharacterPart = "__Relationship_Character";
+        internal const string PartOfBasic                    = "__Basic";
+        internal const string PartOfPresentation             = "__Presentation";
 
 
         /*

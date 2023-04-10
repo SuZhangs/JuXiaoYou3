@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
+namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
 {
-    public abstract class PreviewBlock : StorageUIObject
+    public abstract class Presentation : StorageUIObject
     {
         private string _name;
         public int Index { get; set; }
@@ -26,24 +26,24 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Previews
 
     }
 
-    public sealed class RarityPreviewBlock : PreviewBlock
+    public sealed class RarityPresentation : Presentation
     {
 
         public double Scale { get; init; }
         public string ValueSourceID { get; set; }
     }
 
-    public sealed class StringPreviewBlock : PreviewBlock
+    public sealed class StringPresentation : Presentation
     {
         public string ValueSourceID { get; set; }
     }
 
-    public sealed class GroupingPreviewBlock : PreviewBlock
+    public sealed class GroupingPresentation : Presentation
     {
-        public ObservableCollection<IPreviewBlockData> DataLists { get; init; }
+        public ObservableCollection<IPresentationData> DataLists { get; init; }
     }
 
-    public sealed class ChartPreviewBlock : PreviewBlock
+    public sealed class ChartPresentation : Presentation
     {
         public string ValueSourceID { get; set; }
         public ChartType ChartType { get; init; }

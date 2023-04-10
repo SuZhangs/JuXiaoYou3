@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Previews;
-using Acorisoft.FutureGL.MigaStudio.Models.Previews;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
+using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private async Task AddPreviewBlockImpl()
+        private async Task AddPresentationImpl()
         {
-            var r = await NewPreviewBlockViewModel.New();
+            var r = await NewPresentationViewModel.New();
 
             if (!r.IsFinished)
             {
@@ -35,13 +35,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             //
             //
-            PreviewPart.Blocks.Add(b);
-            PreviewBlocks.Add(PreviewBlockUI.GetUI(b));
-            SavePreviewPart();
-            RefreshPreviewBlockImp();
+            PresentationPart.Blocks.Add(b);
+            Presentations.Add(PresentationUI.GetUI(b));
+            SavePresentationPart();
+            RefreshPresentationImp();
         }
 
-        private async Task<bool> ContinueNamingImpl(PreviewBlock b)
+        private async Task<bool> ContinueNamingImpl(Presentation b)
         {
             if (b is null)
             {
@@ -59,15 +59,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return true;
         }
 
-        private async Task<bool> ContinueEditImpl(PreviewBlock b)
+        private async Task<bool> ContinueEditImpl(Presentation b)
         {
-            if (b is GroupingPreviewBlock hb)
+            if (b is GroupingPresentation hb)
             {
-                var r1 = await EditPreviewBlockViewModel.Edit(hb, Document.Parts);
+                var r1 = await EditPresentationViewModel.Edit(hb, Document.Parts);
                 return r1.IsFinished;
             }
 
-            if (b is RarityPreviewBlock rarity)
+            if (b is RarityPresentation rarity)
             {
                 var r1 = await SubSystem.OptionSelection<ModuleBlock>(
                     SubSystemString.SelectTitle,
@@ -85,22 +85,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return r1.IsFinished;
             }
 
-            if (b is StringPreviewBlock sp)
+            if (b is StringPresentation sp)
             {
-                var r1 = await EditStringPreviewBlockViewModel.Edit(sp, Document.Parts);
+                var r1 = await EditStringPresentationViewModel.Edit(sp, Document.Parts);
                 return r1.IsFinished;
             }
 
-            if (b is ChartPreviewBlock rp)
+            if (b is ChartPresentation rp)
             {
-                var r1 = await EditChartPreviewBlockViewModel.Edit(rp, Document.Parts);
+                var r1 = await EditChartPresentationViewModel.Edit(rp, Document.Parts);
                 return r1.IsFinished;
             }
 
             return false;
         }
 
-        private void SavePreviewPart()
+        private void SavePresentationPart()
         {
             
             
@@ -108,11 +108,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                          .Database
                          .CurrentValue;
             var mmp = db.Get<ModuleManifestProperty>();
-            mmp.SetPreviewManifest(Type, PreviewPart);
+            mmp.SetPresentationManifest(Type, PresentationPart);
             db.Set(mmp);
         }
 
-        private async Task EditPreviewBlockImpl(PreviewBlockUI block)
+        private async Task EditPresentationImpl(PresentationUI block)
         {            
             if (block is null)
             {
@@ -126,55 +126,55 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             block.Name = r.Value;
-            SavePreviewPart();
+            SavePresentationPart();
         }
         
-        private void ShiftUpPreviewBlockImpl(PreviewBlockUI block)
+        private void ShiftUpPresentationImpl(PresentationUI block)
         {
             if (block is null)
             {
                 return;
             }
-            PreviewBlocks.ShiftUp(block);
-            PreviewPart.Blocks.ShiftUp(block.BaseSource);
-            reSortPreviewBlocksImpl();
+            Presentations.ShiftUp(block);
+            PresentationPart.Blocks.ShiftUp(block.BaseSource);
+            reSortPresentationsImpl();
         }
         
-        private void ShiftDownPreviewBlockImpl(PreviewBlockUI block)
+        private void ShiftDownPresentationImpl(PresentationUI block)
         {            
             if (block is null)
             {
                 return;
             }
-            PreviewBlocks.ShiftDown(block);
-            PreviewPart.Blocks.ShiftDown(block.BaseSource);
-            reSortPreviewBlocksImpl();
+            Presentations.ShiftDown(block);
+            PresentationPart.Blocks.ShiftDown(block.BaseSource);
+            reSortPresentationsImpl();
         }
         
-        private void reSortPreviewBlocksImpl()
+        private void reSortPresentationsImpl()
         {
-            for (var i = 0; i < PreviewBlocks.Count; i++)
+            for (var i = 0; i < Presentations.Count; i++)
             {
-                PreviewBlocks[i].BaseSource
+                Presentations[i].BaseSource
                                 .Index = i;
-                PreviewPart.Blocks[i].Index = i;
+                PresentationPart.Blocks[i].Index = i;
             }
-            SavePreviewPart();
+            SavePresentationPart();
         }
         
-        private async Task ExportPreviewBlockAsPictureImpl()
+        private async Task ExportPresentationAsPictureImpl()
         {
         }
 
-        private async Task ExportPreviewBlockAsPdfImpl()
+        private async Task ExportPresentationAsPdfImpl()
         {
         }
 
-        private async Task ExportPreviewBlockAsMarkdownImpl()
+        private async Task ExportPresentationAsMarkdownImpl()
         {
         }
 
-        private async Task RemovePreviewBlockImpl(PreviewBlockUI block)
+        private async Task RemovePresentationImpl(PresentationUI block)
         {
             if (block is null)
             {
@@ -186,16 +186,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            PreviewBlocks.Remove(block);
-            PreviewPart.Blocks.Remove(block.BaseSource);
-            SavePreviewPart();
+            Presentations.Remove(block);
+            PresentationPart.Blocks.Remove(block.BaseSource);
+            SavePresentationPart();
         }
 
-        private void RefreshPreviewBlockImp()
+        private void RefreshPresentationImp()
         {
             //
             // 更新
-            PreviewBlocks.ForEach(x => x.Update(GetMetadataById, GetBlockById));
+            Presentations.ForEach(x => x.Update(GetMetadataById, GetBlockById));
         }
 
         /// <summary>
@@ -203,36 +203,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// </summary>
         /// <remarks>自定义部件会出现在【设定】-【基础信息】当中，用户可以添加删除部件、调整部件顺序。</remarks>
         [NullCheck(UniTestLifetime.Constructor)]
-        public PartOfPreview PreviewPart { get; private set; }
+        public PartOfPresentation PresentationPart { get; private set; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<PreviewBlockUI> PreviewBlocks { get; init; }
+        public ObservableCollection<PresentationUI> Presentations { get; init; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddPreviewBlockCommand { get; }
+        public AsyncRelayCommand AddPresentationCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand RefreshPreviewBlockCommand { get; }
+        public RelayCommand RefreshPresentationCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand ExportPreviewBlockAsPdfCommand { get; }
+        public AsyncRelayCommand ExportPresentationAsPdfCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand ExportPreviewBlockAsPictureCommand { get; }
+        public AsyncRelayCommand ExportPresentationAsPictureCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand ExportPreviewBlockAsMarkdownCommand { get; }
+        public AsyncRelayCommand ExportPresentationAsMarkdownCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<PreviewBlockUI> EditPreviewBlockCommand { get; }
+        public AsyncRelayCommand<PresentationUI> EditPresentationCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<PreviewBlockUI> ShiftUpPreviewBlockCommand { get; }
+        public RelayCommand<PresentationUI> ShiftUpPresentationCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<PreviewBlockUI> ShiftDownPreviewBlockCommand { get; }
+        public RelayCommand<PresentationUI> ShiftDownPresentationCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<PreviewBlockUI> RemovePreviewBlockCommand { get; }
+        public AsyncRelayCommand<PresentationUI> RemovePresentationCommand { get; }
     }
 }

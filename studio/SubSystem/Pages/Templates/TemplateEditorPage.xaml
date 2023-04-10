@@ -29,7 +29,7 @@
             </TextBlock>
         </DataTemplate>
     </UserControl.Resources>
-    <f:Drawer IsRightOpen="{Binding IsPreviewPaneOpen,Mode=TwoWay}">
+    <f:Drawer IsRightOpen="{Binding IsPresentationPaneOpen,Mode=TwoWay}">
         <f:Drawer.RightContent>
             <Border Background="{f:BackgroundBrush}"
                     Width="640">
@@ -37,7 +37,7 @@
                     <Border x:Name="Canvas"
                             Padding="32"
                             Background="{f:BackgroundBrush}">
-                        <thisVM:PreviewView/>
+                        <thisVM:PresentationView/>
                     </Border>
                 </ScrollViewer>
             </Border>
@@ -198,7 +198,7 @@
                                 Orientation="Horizontal">
                         <ftk:ToolButton f:Language.Id="global.preview"
                                         Content="预览"
-                                        Command="{Binding OpenPreviewPaneCommand}"
+                                        Command="{Binding OpenPresentationPaneCommand}"
                                         Icon="{StaticResource FeatherIcon.Camera}"
                                         ShowText="True" />
 

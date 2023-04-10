@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Templates.PreviewView"
+﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Templates.PresentationView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Templates"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:IPreviewBlockViewModel}, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:IPresentationViewModel}, IsDesignTimeCreatable=True}"
              Padding="16">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,24 +20,24 @@
     <Grid>
         <StackPanel>
             <TextBlock FontSize="32"
-                       Text="{Binding PreviewName,Mode=OneWay}" />
+                       Text="{Binding PresentationName,Mode=OneWay}" />
             <TextBlock FontSize="14"
                        Foreground="{f:Brush ForegroundLevel2}"
                        Margin="0 4"
-                       Text="{Binding PreviewAuthorList,Mode=OneWay}" />
+                       Text="{Binding PresentationAuthorList,Mode=OneWay}" />
             <TextBlock FontSize="14"
                        Foreground="{f:Brush ForegroundLevel2}"
                        Margin="0 4"
-                       Text="{Binding PreviewContractList,Mode=OneWay}" />
+                       Text="{Binding PresentationContractList,Mode=OneWay}" />
             <TextBlock FontSize="14"
                        Foreground="{f:Brush ForegroundLevel2}"
                        MaxHeight="96"
                        Margin="0 4"
                        TextTrimming="CharacterEllipsis"
-                       Text="{Binding PreviewIntro,Mode=OneWay}" />
+                       Text="{Binding PresentationIntro,Mode=OneWay}" />
         
             <ItemsControl Margin="0 12"
-                          ItemsSource="{Binding PreviewBlocks,Mode=OneWay,IsAsync=True}" />
+                          ItemsSource="{Binding Presentations,Mode=OneWay,IsAsync=True}" />
         </StackPanel>
         <Border Background="Transparent"/>
     </Grid>

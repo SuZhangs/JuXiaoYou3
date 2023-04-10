@@ -11,7 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public void Save()
         {
-            SavePreviewPart();
+            SavePresentationPart();
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
