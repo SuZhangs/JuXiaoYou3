@@ -42,6 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gists", "Gists", "{6399E2E1
 		gists\avatar-binding.md = gists\avatar-binding.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5A7A0-8D0B-42A2-9AF5-CB9133FE7AE2}"
+	ProjectSection(SolutionItems) = preProject
+		Forset.cake = Forset.cake
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
