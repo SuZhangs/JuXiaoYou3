@@ -45,6 +45,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5A7A0-8D0B-42A2-9AF5-CB9133FE7AE2}"
 	ProjectSection(SolutionItems) = preProject
 		Forset.cake = Forset.cake
+		ProjectVersion.cake = ProjectVersion.cake
 		JuXiaoYou-Dev.cake = JuXiaoYou-Dev.cake
 		JuXiaoYou-Patch.cake = JuXiaoYou-Patch.cake
 		JuXiaoYou-Stable-x64.cake = JuXiaoYou-Stable-x64.cake

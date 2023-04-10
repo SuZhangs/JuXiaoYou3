@@ -51,15 +51,8 @@ Task("Test")
     // });
 });
 
-Task("Versioning")
-    .IsDependentOn("Test")
-    .Does(() =>
-{
-
-});
-
 Task("Pack")
-    .IsDependentOn("Versioning")
+    .IsDependentOn("Test")
     .Does(() =>
 {
     //
