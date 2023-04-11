@@ -5,11 +5,13 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
+        [NullCheck(UniTestLifetime.Constructor)] private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
         private class MetadataIndexCache
         {
             private int _index;
@@ -52,10 +54,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        [NullCheck(UniTestLifetime.Constructor)] private readonly object                                 _sync;
-        [NullCheck(UniTestLifetime.Constructor)] private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
+        #region Metadata
 
-        private int _currentIndex;
         
         protected void OnModuleBlockValueChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
         {
@@ -112,10 +112,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 };
                 
                 _MetadataTrackerByName.Add(metadata.Name, index);
-                    
-                //
-                // 自增
-                Interlocked.Increment(ref _currentIndex);
             }
         }
         
@@ -144,50 +140,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
 
+        #endregion
+
         #region OnLoad
 
         private void LoadDocumentImpl()
         {
-            AddDataPartIntern();
-            MaintainDataPartManifest();
-            AddMetadataIntern();
-            Final();
+            AddDataPartWhenDocumentOpening();
+            IsDataPartExistence();
+            AddMetadataWhenDocumentOpening();
+            GetDataPartFromDatabase();
         }
 
-        private void AddDataPartIntern()
+        private void AddDataPartWhenDocumentOpening()
         {
-            foreach (var part in Document.Parts
-                                         .Where(part => _DataPartTrackerOfId.TryAdd(part.Id, part)))
+            foreach (var part in Document.Parts)
             {
-                AddDataPart(part);
+                if (!string.IsNullOrEmpty(part.Id) && _DataPartTrackerOfId.TryAdd(part.Id, part))
+                {
+                    Xaml.Get<ILogger>()
+                        .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
+                    continue;
+                }
+                
+                if (part is PartOfModule pom)
+                {
+                    ModuleParts.Add(pom);
+                    continue;
+                }
+
+                if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
+                {
+                    if (part is PartOfBasic pob)
+                    {
+                        BasicPart = pob;
+                    }
+                    else if (part is PartOfDetail pod)
+                    {
+                        DetailParts.Add(pod);
+                    }
+                    else if (part is PartOfManifest)
+                    {
+                        InvisibleDataParts.Add(part);
+                    }
+                }
             }
         }
 
-        private void AddDataPart(DataPart part)
-        {
-            if (part is PartOfModule pom)
-            {
-                ModuleParts.Add(pom);
-            }
-
-            if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
-            {
-                if (part is PartOfBasic pob)
-                {
-                    BasicPart = pob;
-                }
-                else if (part is PartOfDetail pod)
-                {
-                    DetailParts.Add(pod);
-                }
-                else if (part is PartOfManifest)
-                {
-                    InvisibleDataParts.Add(part);
-                }
-            }
-        }
-
-        private void AddMetadataIntern()
+        private void AddMetadataWhenDocumentOpening()
         {
             foreach (var metadata in BasicPart.Buckets)
             {
@@ -204,7 +204,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        private void MaintainDataPartManifest()
+        private void IsDataPartExistence()
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
@@ -216,19 +216,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Name   = Cache.Name;
                 Gender = Language.GetText("global.DefaultGender");
             }
-
-            if (PresentationPart is null)
-            {
-                PresentationPart = new PartOfPresentation { Blocks = new ObservableCollection<Presentation>() };
-                Document.Parts.Add(PresentationPart);
-            }
-
+            
+            //
+            // 检查部件的缺失
             IsDataPartExistence(Document);
         }
 
         protected abstract void IsDataPartExistence(Document document);
 
-        private void Final()
+        private void GetDataPartFromDatabase()
         {
             //
             // 打开 PresentationPart

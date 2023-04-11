@@ -41,7 +41,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected DocumentEditorBase()
         {
-            _sync                  = new object();
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
             _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
