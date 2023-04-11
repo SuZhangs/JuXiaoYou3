@@ -11,7 +11,10 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditPlainTextViewModel}, IsDesignTimeCreatable=True}"
                      Height="300"
                      Width="300">
-    <Grid>
-        
-    </Grid>
+    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+                  Title="{Binding Title}">
+        <f:MultiLine Text="{Binding Content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            
+        </f:MultiLine>
+    </f:DialogPage>
 </f:ForestUserControl>
