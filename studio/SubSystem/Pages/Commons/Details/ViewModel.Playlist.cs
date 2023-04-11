@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
+using NLog;
 using Ookii.Dialogs.Wpf;
 
 // ReSharper disable ConvertToUsingDeclaration
@@ -47,8 +48,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _threadSafeAdding.ObserveOn(Scheduler)
                              .Subscribe(x =>
                              {
-                                 Collection.Add(x);
+                                 if (Collection.Any(y => y.Id == x.Id))
+                                 {
+                                     Warning(Language.ItemDuplicatedText);
+                                     return;
+                                 }
                                  
+                                 Collection.Add(x);
+                                 Detail!.Items.Add(x);
                                  //
                                  //
                                  SelectedMusic ??= Collection.FirstOrDefault();
@@ -65,14 +72,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Start()
         {
-            if (Detail.DataBags.ContainsKey(Data))
-            {
-                var payload = Detail.DataBags[Data];
-                var list    = JSON.FromJson<ObservableCollection<Music>>(payload);
-                Collection.AddRange(list);
-            }
-
             base.Start();
+            
+            if (Detail.Items is null)
+            {
+                Xaml.Get<ILogger>()
+                    .Warn("PartOfAlbum为空");
+                return;
+            }
+            
+            Collection.AddRange(Detail.Items);
         }
 
         private async Task AddMusicImpl()
@@ -96,7 +105,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 await Task.Run(async () =>
                 {
                     await Task.Delay(300);
-                    
                     await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, x => _threadSafeAdding.OnNext(x));
                 });
             }
@@ -186,18 +194,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void Save()
         {
-            var payload = JSON.Serialize(Collection);
-            base[Data, Detail.DataBags] = payload;
             EditorViewModel.SetDirtyState();
         }
 
 
         public bool AutoPlay
         {
-            get => bool.TryParse(this[Option_1, Detail.DataBags], out var n) && n;
+            get => Detail.AutoPlay;
             set
             {
-                this[Option_1, Detail.DataBags] = value.ToString();
+                Detail.AutoPlay = value;
                 RaiseUpdated();
             }
         }

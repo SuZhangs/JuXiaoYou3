@@ -7,9 +7,11 @@
             Id = Constants.IdOfPlaylistPart;
         }
         
+        public bool AutoPlay { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<string, string> DataBags { get; init; }
+        public List<Music> Items { get; init; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.MigaDB.Services;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -15,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return new object[]
             {
                 new PartOfAlbum { Items       = new List<Album>()},
-                new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
+                new PartOfPlaylist { Items = new List<Music>() },
                 new PartOfRel()
             };
         }

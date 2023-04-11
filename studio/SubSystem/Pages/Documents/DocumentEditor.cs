@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Acorisoft.FutureGL.MigaDB.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -21,8 +22,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             return new object[]
             {
-                new PartOfAlbum { Items       = new List<Album>() },
-                new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
+                new PartOfAlbum { Items    = new List<Album>() },
+                new PartOfPlaylist { Items = new List<Music>() },
                 new PartOfApprise{ },
                 new PartOfRel()
             };

@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
+using NLog;
 using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -27,8 +28,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _threadSafeAdding.ObserveOn(Scheduler)
                              .Subscribe(x =>
                              {
+                                 if (Collection.Any(y => y.Source == x.Source))
+                                 {
+                                     Warning(Language.ItemDuplicatedText);
+                                     return;
+                                 }
                                  Collection.Add(x);
-                                 Detail.Items.Add(x);
+                                 Detail!.Items.Add(x);
                                  SelectedAlbum ??= Collection.FirstOrDefault();
                                  Successful(SubSystemString.OperationOfAddIsSuccessful);
                                  Save();
@@ -43,8 +49,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Start()
         {
-            Collection.AddRange(Detail.Items);
             base.Start();
+            
+            if (Detail.Items is null)
+            {
+                Xaml.Get<ILogger>()
+                    .Warn("PartOfAlbum为空");
+                return;
+            }
+            Collection.AddRange(Detail.Items);
         }
 
         private async Task AddAlbumImpl()
