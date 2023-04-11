@@ -788,7 +788,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
-        public static string Notify => GetText("dialog.title.notify");
+        public static string Notify => GetText("text.notify");
         public static string NoChange => GetText("text.noChange");
         public static string BadImage => GetText("text.notimage");
         public static string BadModule => GetText("text.notModule");
