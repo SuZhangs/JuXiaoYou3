@@ -15,7 +15,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class PlaylistPartViewModel : ViewModelBase
+    public class PlaylistPartViewModel : DetailViewModel<PartOfPlaylist>
     {
         private readonly        Subject<Music> _threadSafeAdding;
         private static readonly DrawingImage   MusicDrawing;
@@ -205,11 +205,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         /// <summary>
-        /// 编辑器
-        /// </summary>
-        public DocumentEditorBase Owner { get; init; }
-
-        /// <summary>
         /// 
         /// </summary>
         public ObservableCollection<Music> Collection { get; init; }
@@ -257,10 +252,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Music> RemoveMusicCommand { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PartOfPlaylist Detail { get; init; }
     }
 }

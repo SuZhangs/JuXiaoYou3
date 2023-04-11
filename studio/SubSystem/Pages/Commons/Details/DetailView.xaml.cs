@@ -9,4 +9,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             InitializeComponent();
         }
     }
+
+    public abstract class DetailViewModel<TDetail> : ViewModelBase where TDetail : PartOfDetail
+    {
+        public TDetail Detail { get; init; }
+        public DocumentEditorBase Owner { get; init; }
+    }
 }
