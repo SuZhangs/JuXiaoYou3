@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     public interface IPresentationViewModel
     {

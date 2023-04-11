@@ -126,8 +126,9 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                 }
                 catch (Exception e)
                 {
-                    //
-                    throw;
+                    _notification?.Session
+                                 .Logger
+                                 .Warn(e.Message);
                 }
             }
 

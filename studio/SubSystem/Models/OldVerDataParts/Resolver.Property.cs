@@ -208,12 +208,12 @@ namespace Acorisoft.Miga.Xml
         
         public virtual void Assign(PropertySetter proxy, object targetInstance, string value)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public virtual void Assign(PropertySetter proxy, object targetInstance, object value)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
 

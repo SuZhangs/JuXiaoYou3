@@ -29,7 +29,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                     ChartType.Radar => new RadarPresentationUI
                     {
                         Source = cpb
-                    }
+                    },
+                    _ => throw new InvalidOperationException()
                 },
                 RarityPresentation rpb2 => new RarityPresentationUI()
                 {

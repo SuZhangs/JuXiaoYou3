@@ -832,6 +832,33 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "模组文件|*.png",
             };
         }
+        
+        
+        public static string PdfFilter
+        {
+            // TODO: 翻译
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "PDF File|*.pdf",
+                CultureArea.French   => "PDF File|*.pdf",
+                CultureArea.Japanese => "PDF File|*.pdf",
+                CultureArea.Korean   => "PDF File|*.pdf",
+                CultureArea.Russian  => "PDF File|*.pdf",
+                _                    => "PDF文件|*.pdf",
+            };
+        }
+        public static string MarkdownFilter
+        {
+            // TODO: 翻译
+            get => Language.Culture switch
+            {
+                CultureArea.Chinese  => "Markdown文件|*.md",
+                CultureArea.French   => "PDF File|*.pdf",
+                CultureArea.Japanese => "PDF File|*.pdf",
+                CultureArea.Korean   => "PDF File|*.pdf",
+                _                    => "PDF File|*.pdf",
+            };
+        }
 
         public static string ImageFilter
         {

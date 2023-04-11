@@ -5,7 +5,6 @@ using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates

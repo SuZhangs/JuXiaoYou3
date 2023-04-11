@@ -8,7 +8,6 @@ using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;

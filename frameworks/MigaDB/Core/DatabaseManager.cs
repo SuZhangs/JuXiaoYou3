@@ -336,6 +336,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                     DebugMode     = false,
                     Database      = database,
                     RootDirectory = directory,
+                    Logger =  _logger
                 }
             });
 

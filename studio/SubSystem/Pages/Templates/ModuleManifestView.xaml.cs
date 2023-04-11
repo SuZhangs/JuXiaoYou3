@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     [Connected(View = typeof(ModuleManifestView), ViewModel = typeof(ModuleManifestViewModel))]
     public partial class ModuleManifestView

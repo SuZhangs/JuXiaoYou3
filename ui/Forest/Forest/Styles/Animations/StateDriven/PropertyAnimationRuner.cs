@@ -79,8 +79,6 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
         public Dictionary<VisualState, T> Mapper { get; init; }
     }
 
-    //
-    // TODO: 添加动画都在这里加
     public sealed class ColorAnimationRuner : PropertyAnimationRuner<Color?>
     {
         protected override AnimationTimeline CreateTimeline(Color? from, Color? to, Duration duration)
@@ -111,7 +109,6 @@ namespace Acorisoft.FutureGL.Forest.Styles.Animations
     {
         protected override AnimationTimeline CreateTimeline(object from, object to, Duration duration)
         {
-            // TODO:
             return null;
         }
     }

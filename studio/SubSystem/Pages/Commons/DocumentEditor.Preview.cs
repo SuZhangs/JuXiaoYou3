@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -164,14 +165,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private async Task ExportPresentationAsPictureImpl()
         {
+            var savedlg = FileIO.Save(SubSystemString.ImageFilter, "*.png");
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
         }
 
         private async Task ExportPresentationAsPdfImpl()
         {
+            var savedlg = FileIO.Save(SubSystemString.PdfFilter, "*.pdf");
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
         }
 
         private async Task ExportPresentationAsMarkdownImpl()
         {
+            var savedlg = FileIO.Save(SubSystemString.MarkdownFilter, "*.md");
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
         }
 
         private async Task RemovePresentationImpl(PresentationUI block)

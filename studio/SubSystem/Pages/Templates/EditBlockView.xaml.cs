@@ -1,7 +1,4 @@
-﻿using System.Windows.Controls;
-using Acorisoft.FutureGL.Forest.Attributes;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     [Connected(View = typeof(EditBlockView), ViewModel = typeof(EditBlockViewModel))]
     public partial class EditBlockView

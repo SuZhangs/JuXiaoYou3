@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
-using DynamicData.Kernel;
-using Microsoft.Win32;
 using NLog;
 using Ookii.Dialogs.Wpf;
 
@@ -23,27 +17,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         private readonly HashSet<string> _metaHashSet;
 
-        private string       _name;
-        private string       _authorList;
-        private string       _contractList;
-        private int          _version;
-        private string       _organizations;
-        private string       _intro;
-        private DocumentType _forType;
-        private string       _for;
-        private string       _id;
-        private bool         _dirty;
+        private          string       _name;
+        private          string       _authorList;
+        private          string       _contractList;
+        private          int          _version;
+        private          string       _organizations;
+        private          string       _intro;
+        private          DocumentType _forType;
+        private          string       _for;
+        private          string       _id;
+        private  bool         _dirty;
 
 
         public TemplateEditorViewModel()
         {
-            _metaHashSet             =  new HashSet<string>();
-            Id                       =  ID.Get();
-            Version                  =  1;
-            ForType                  =  DocumentType.Character;
-            Blocks                   =  new ObservableCollection<ModuleBlockEditUI>();
-            MetadataList             =  new ObservableCollection<MetadataCache>();
-            OpenPresentationPaneCommand   =  new RelayCommand(() => IsPresentationPaneOpen = true);
+            _metaHashSet                = new HashSet<string>();
+            Id                          = ID.Get();
+            Version                     = 1;
+            ForType                     = DocumentType.Character;
+            Blocks                      = new ObservableCollection<ModuleBlockEditUI>();
+            MetadataList                = new ObservableCollection<MetadataCache>();
+            OpenPresentationPaneCommand = new RelayCommand(() => IsPresentationPaneOpen = true);
 
             NewTemplateCommand         = Command(NewTemplateImpl);
             OpenTemplateCommand        = AsyncCommand(OpenTemplateImpl);
@@ -88,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         protected override void OnDirtyStateChanged(bool state)
         {
             var name = string.IsNullOrEmpty(Name) ? Id : Name;
+            _dirty = state;
             SetTitle(name, _dirty);
         }
 
@@ -202,13 +197,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             // 2) 选择文件
             // 3) 打开文件并赋值
 
-            var savedlg = new VistaSaveFileDialog
-            {
-                FileName = PresentationName,
-                Filter   = SubSystemString.ModuleFilter,
-                AddExtension = true,
-                DefaultExt = "*.png"
-            };
+            var savedlg = FileIO.Save(SubSystemString.ModuleFilter, "*.png", PresentationName);
 
             if (savedlg.ShowDialog() != true)
             {
@@ -325,7 +314,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             await EditBlockViewModel.Edit(element);
             RaiseUpdated(nameof(Presentations));
             DetectAll();
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
         private async Task EditBlockImpl(ModuleBlockEditUI element)
@@ -339,7 +328,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
 
             DetectAll();
-            SetDirtyState(true);
+            SetDirtyState();
             Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
@@ -355,7 +344,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Blocks.Remove(element);
             RaiseUpdated(nameof(Presentations));
             DetectAll();
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
         private void ShiftUpBlockImpl(ModuleBlockEditUI element)
@@ -382,7 +371,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Blocks.Clear();
             RaiseUpdated(nameof(Presentations));
             MetadataList.Clear();
-            SetDirtyState(true);
+            SetDirtyState();
         }
 
         #endregion
@@ -539,7 +528,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         /// 模组内容块集合。
         /// </summary>
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<ModuleBlockEditUI> Blocks { get; init; }
+        public ObservableCollection<ModuleBlockEditUI> Blocks { get; }
 
         public IEnumerable<ModuleBlockDataUI> Presentations => Blocks.Select(x => ModuleBlockFactory.GetDataUI(x.CreateInstance()));
 

@@ -25,7 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                                  .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
             if(!availableModules.Any() )
             {
-                Warning("你已经添加了所有模组！");
+                await Warning("你已经添加了所有模组！");
                 return;
             }
 

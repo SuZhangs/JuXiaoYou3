@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Core;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {
@@ -18,5 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// 根目录
         /// </summary>
         public string RootDirectory { get; init; }
+
+        public ILogger Logger { get; init; }
     }
 }

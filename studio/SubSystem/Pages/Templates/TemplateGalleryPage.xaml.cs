@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
 
     [Connected(View = typeof(TemplateGalleryPage), ViewModel = typeof(TemplateGalleryViewModel))]
