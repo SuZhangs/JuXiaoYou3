@@ -46,33 +46,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             });
         }
 
-        protected sealed override FrameworkElement CreateDetailPartView(IPartOfDetail part)
-        {
-            if (part is PartOfAlbum album)
-            {
-                return new AlbumPartView
-                {
-                    DataContext = new AlbumPartViewModel
-                    {
-                        EditorViewModel = this,
-                        Detail          = album,
-                        Document        = Document,
-                        DocumentCache   = Cache,
-                    }
-                };
-            }
-
-            if (part is DetailPartSettingPlaceHolder)
-            {
-                return new DetailPartSettingView
-                {
-                    DataContext = this
-                };
-            }
-
-            return null;
-        }
-
         protected sealed override void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue)
         {
             if (newValue is not HeaderedSubView subView)

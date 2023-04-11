@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -20,8 +21,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 new PartOfRel()
             };
         }
-
-        protected abstract FrameworkElement CreateDetailPartView(IPartOfDetail part);
 
         protected void AddDetailPart(PartOfDetail part)
         {
@@ -134,7 +133,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
                 if (_selectedDetailPart is IPartOfDetail detail)
                 {
-                    DetailPart = CreateDetailPartView(detail);
+                    DetailPart = ViewMapper.GetView(this, detail);
                     (DetailPart.DataContext as ViewModelBase)?.Start();
                 }
                 else

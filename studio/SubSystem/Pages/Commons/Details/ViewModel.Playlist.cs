@@ -5,7 +5,6 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
@@ -16,11 +15,8 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class PlaylistPartViewModel : KeyValueViewModel
+    public class PlaylistPartViewModel : ViewModelBase
     {
-        private const string Data     = "_d";
-        private const string Option_1 = "_o";
-        
         private readonly        Subject<Music> _threadSafeAdding;
         private static readonly DrawingImage   MusicDrawing;
         private                 Music          _selectedMusic;
@@ -174,7 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 ms.SetPlaylist(new Playlist
                 {
-                    Name = EditorViewModel.Name,
+                    Name = Owner.Name,
                     Items = new ObservableCollection<Music>(Collection)
                 }, true);
             }
@@ -194,7 +190,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void Save()
         {
-            EditorViewModel.SetDirtyState();
+            Owner.SetDirtyState();
         }
 
 
@@ -211,17 +207,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// <summary>
         /// 编辑器
         /// </summary>
-        public DocumentEditorBase EditorViewModel { get; init; }
-
-        /// <summary>
-        /// 文档
-        /// </summary>
-        public Document Document { get; init; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DocumentCache DocumentCache { get; init; }
+        public DocumentEditorBase Owner { get; init; }
 
         /// <summary>
         /// 
@@ -229,12 +215,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<Music> Collection { get; init; }
 
         public MusicEngine MusicEngine { get; }
+        
         /// <summary>
         /// 获取或设置 <see cref="DefaultAlbum"/> 属性。
         /// </summary>
         public ImageSource DefaultAlbum
         {
             get => MusicDrawing;
+            // ReSharper disable once ValueParameterNotUsed
             set
             {
             }

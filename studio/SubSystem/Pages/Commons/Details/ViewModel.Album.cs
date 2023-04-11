@@ -14,7 +14,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class AlbumPartViewModel : KeyValueViewModel
+    public class AlbumPartViewModel : ViewModelBase
     {
         private readonly Subject<Album> _threadSafeAdding;
 
@@ -143,23 +143,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void Save()
         {
-            EditorViewModel.SetDirtyState();
+            Owner.SetDirtyState();
         }
 
         /// <summary>
         /// 编辑器
         /// </summary>
-        public DocumentEditorBase EditorViewModel { get; init; }
-
-        /// <summary>
-        /// 文档
-        /// </summary>
-        public Document Document { get; init; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DocumentCache DocumentCache { get; init; }
+        public DocumentEditorBase Owner { get; init; }
 
         /// <summary>
         /// 

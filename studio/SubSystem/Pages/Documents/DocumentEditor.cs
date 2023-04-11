@@ -30,61 +30,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             };
         }
 
-        protected sealed override FrameworkElement CreateDetailPartView(IPartOfDetail part)
-        {
-            if (part is PartOfAlbum album)
-            {
-                return new AlbumPartView
-                {
-                    DataContext = new AlbumPartViewModel
-                    {
-                        EditorViewModel = this,
-                        Detail          = album,
-                        Document        = Document,
-                        DocumentCache   = Cache,
-                    }
-                };
-            }
-
-            if (part is PartOfPlaylist playlist)
-            {
-                return new PlaylistPartView
-                {
-                    DataContext = new PlaylistPartViewModel
-                    {
-                        EditorViewModel = this,
-                        Detail          = playlist,
-                        Document        = Document,
-                        DocumentCache   = Cache,
-                    }
-                };
-            }
-
-            if (part is PartOfRel rel)
-            {
-                return new CharacterRelshipPartView
-                {
-                    DataContext = new CharacterRelPartViewModel
-                    {
-                        EditorViewModel = this,
-                        Detail          = rel,
-                        Document        = Document,
-                        DocumentCache   = Cache,
-                    }
-                };
-            }
-
-            if (part is DetailPartSettingPlaceHolder)
-            {
-                return new DetailPartSettingView
-                {
-                    DataContext = this
-                };
-            }
-
-            return null;
-        }
-
         protected sealed override void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue)
         {
             if (newValue is not HeaderedSubView subView)

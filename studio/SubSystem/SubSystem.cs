@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
@@ -103,6 +104,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
             Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
             Xaml.InstallView<ModuleManifestView, ModuleManifestViewModel>();
+            
+            ViewMapper.Initialize();
         }
     }
 }
