@@ -600,7 +600,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             //
             // 写入文件
-            await JSON.ToFileAsync(_property.CurrentValue, _database.CurrentValue.DatabaseIndexFileName);
+            if (_property.CurrentValue is not null)
+            {
+                await JSON.ToFileAsync(_property.CurrentValue, _database.CurrentValue.DatabaseIndexFileName);
+            }
 
             //
             // 关闭
