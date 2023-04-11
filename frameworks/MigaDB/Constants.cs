@@ -22,8 +22,13 @@
         internal const string IdOfAlbumPart                  = "__Album";
         internal const string IdOfPlaylistPart               = "__Playlist";
         internal const string IdOfRelationship_CharacterPart = "__Relationship_Character";
-        internal const string PartOfBasic                    = "__Basic";
-        internal const string PartOfPresentation             = "__Presentation";
+        internal const string IdOfBasicPart                  = "__Basic";
+        internal const string IdOfPresentationPart           = "__Presentation";
+        internal const string IdOfSurveyPart                 = "__Survey";
+        internal const string IdOfPrototypePart              = "__Prototype";
+        internal const string IdOfStickyNote                 = "__StickyNote";
+        internal const string IdOfSentence                   = "__Sentence";
+        internal const string IdOfApprise                    = "__Apprise";
 
 
         /*

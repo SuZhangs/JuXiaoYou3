@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
     {
         public PartOfPresentation()
         {
-            Id = Constants.PartOfPresentation;
+            Id = Constants.IdOfPresentationPart;
         }
         
         /// <summary>

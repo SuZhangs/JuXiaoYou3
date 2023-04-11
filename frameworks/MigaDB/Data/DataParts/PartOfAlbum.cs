@@ -1,5 +1,13 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
+    public class Album : StorageObject
+    {
+            
+        public string Source { get; init; }
+        public int Width { get; init; }
+        public int Height { get; init; }
+    }
+    
     public class PartOfAlbum : PartOfDetailPlaceHolder
     {
         public PartOfAlbum()
@@ -10,7 +18,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<string, string> DataBags { get; init; }
+        public List<Album> Items { get; init; }
         
     }
 }

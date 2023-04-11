@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             return new object[]
             {
-                new PartOfAlbum { DataBags    = new Dictionary<string, string>() },
+                new PartOfAlbum { Items       = new List<Album>()},
                 new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
                 new PartOfRel()
             };

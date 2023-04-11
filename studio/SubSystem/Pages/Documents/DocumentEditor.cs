@@ -17,6 +17,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             });
         }
 
+        protected override IEnumerable<object> CreateDetailPartList()
+        {
+            return new object[]
+            {
+                new PartOfAlbum { Items       = new List<Album>() },
+                new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
+                new PartOfApprise{ },
+                new PartOfRel()
+            };
+        }
+
         protected sealed override FrameworkElement CreateDetailPartView(IPartOfDetail part)
         {
             if (part is PartOfAlbum album)

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"

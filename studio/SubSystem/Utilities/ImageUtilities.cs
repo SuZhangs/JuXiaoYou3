@@ -22,14 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public MemoryStream Buffer { get; init; }
     }
 
-
-    public class Album : StorageObject
-    {
-            
-        public string Source { get; init; }
-        public int Width { get; init; }
-        public int Height { get; init; }
-    }
     
     public static class ImageUtilities
     {

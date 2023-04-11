@@ -42,13 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Start()
         {
-            if (Detail.DataBags.ContainsKey(Data))
-            {
-                var payload = Detail.DataBags[Data];
-                var list    = JSON.FromJson<ObservableCollection<Album>>(payload);
-                Collection.AddRange(list);
-            }
-            
+            Collection.AddRange(Detail.Items);
             base.Start();
         }
 
@@ -134,12 +128,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void Save()
         {
-            var payload = JSON.Serialize(Collection);
-            base[Data, Detail.DataBags] = payload;
             EditorViewModel.SetDirtyState();
         }
-
-        private const string Data = "_d";
 
         /// <summary>
         /// 编辑器

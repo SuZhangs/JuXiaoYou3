@@ -15,14 +15,14 @@
         {
             return new object[]
             {
-                new PartOfAlbum { DataBags    = new Dictionary<string, string>() },
+                new PartOfAlbum { Items       = new List<Album>() },
                 new PartOfPlaylist { DataBags = new Dictionary<string, string>() },
             };
         }
 
         protected override void OnCreateDocument(Document document)
         {
-            document.Parts.Add(new PartOfAlbum{ DataBags    = new Dictionary<string, string>()});
+            document.Parts.Add(new PartOfAlbum{ Items       = new List<Album>()});
             document.Parts.Add(new PartOfPlaylist{ DataBags = new Dictionary<string, string>()});
         }
 
