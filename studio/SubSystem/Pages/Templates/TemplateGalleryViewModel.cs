@@ -8,6 +8,7 @@ using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.Miga.Doc.Parts;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
@@ -89,11 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task AddTemplateImpl()
         {
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter      = SubSystemString.ModuleFilter,
-                Multiselect = true
-            };
+            var opendlg = FileIO.Open(SubSystemString.ModuleFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -178,11 +175,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task ImportTemplateImpl()
         {
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter      = SubSystemString.ModuleFilter,
-                Multiselect = true
-            };
+            var opendlg = FileIO.Open(SubSystemString.ModuleFilter);
 
             if (opendlg.ShowDialog() != true)
             {

@@ -853,10 +853,23 @@ namespace Acorisoft.FutureGL.MigaStudio
             get => Language.Culture switch
             {
                 CultureArea.Chinese  => "Markdown文件|*.md",
-                CultureArea.French   => "PDF File|*.pdf",
-                CultureArea.Japanese => "PDF File|*.pdf",
-                CultureArea.Korean   => "PDF File|*.pdf",
-                _                    => "PDF File|*.pdf",
+                CultureArea.French   => "Markdown File|*.md",
+                CultureArea.Japanese => "Markdown File|*.md",
+                CultureArea.Korean   => "Markdown File|*.md",
+                _                    => "Markdown File|*.md",
+            };
+        }
+        
+        public static string MusicFilter
+        {
+            // TODO: 翻译
+            get => Language.Culture switch
+            {
+                CultureArea.Chinese  => "Music File|*.wav;*.mp3",
+                CultureArea.French   => "Music File|*.wav;*.mp3",
+                CultureArea.Japanese => "Music File|*.wav;*.mp3",
+                CultureArea.Korean   => "Music File|*.wav;*.mp3",
+                _                    => "音乐文件|*.wav;*.mp3",
             };
         }
 

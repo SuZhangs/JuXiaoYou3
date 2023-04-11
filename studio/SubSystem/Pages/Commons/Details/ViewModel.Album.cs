@@ -11,12 +11,14 @@ using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
 using NLog;
 using Ookii.Dialogs.Wpf;
+using TagLib.Asf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class AlbumPartViewModel : DetailViewModel<PartOfAlbum>
     {
         private readonly Subject<Album> _threadSafeAdding;
+        private          Album          _selectedAlbum;
 
         
         public AlbumPartViewModel()
@@ -62,12 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task AddAlbumImpl()
         {
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter      = SubSystemString.ImageFilter,
-                Multiselect = true
-            };
-
+            var opendlg = FileIO.Open(SubSystemString.ImageFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -99,7 +96,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 });
             }
         }
-
 
         private async Task RemoveAlbumImpl(Album part)
         {
@@ -152,7 +148,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<Album> Collection { get; init; }
 
         public ImageEngine ImageEngine { get; }
-        private Album  _selectedAlbum;
 
 
         /// <summary>

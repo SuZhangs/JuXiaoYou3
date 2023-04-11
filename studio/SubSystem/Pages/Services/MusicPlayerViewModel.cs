@@ -158,12 +158,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         private async Task AddMusicToPlaylistImpl()
         {
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter      = "音乐文件|*.wav;*.mp3",
-                Multiselect = true
-            };
-
+            var opendlg = FileIO.Open(SubSystemString.MusicFilter, true);
             if (opendlg.ShowDialog() != true)
             {
                 return;

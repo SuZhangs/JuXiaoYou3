@@ -33,11 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         
         public static async Task<ImageOpResult> Avatar()
         {
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter      = SubSystemString.ImageFilter,
-                Multiselect = false
-            };
+            var opendlg = FileIO.Open(SubSystemString.ImageFilter);
 
             if (opendlg.ShowDialog() != true)
             {

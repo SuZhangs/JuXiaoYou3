@@ -14,5 +14,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 DefaultExt   = defaultExt
             };
         }
+
+        public static VistaOpenFileDialog Open(string filter, bool multiselect = false)
+        {
+           return new VistaOpenFileDialog
+            {
+                Filter      = filter,
+                Multiselect = multiselect
+            };
+        }
     }
 }

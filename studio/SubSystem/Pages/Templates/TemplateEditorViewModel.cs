@@ -123,10 +123,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 if (!r) return;
             }
 
-            var opendlg = new VistaOpenFileDialog
-            {
-                Filter = SubSystemString.ModuleFilter
-            };
+            var opendlg = FileIO.Open(SubSystemString.ModuleFilter);
 
             if (opendlg.ShowDialog() != true)
             {
