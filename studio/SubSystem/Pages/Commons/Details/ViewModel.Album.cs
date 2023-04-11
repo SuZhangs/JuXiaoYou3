@@ -28,6 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                              .Subscribe(x =>
                              {
                                  Collection.Add(x);
+                                 Detail.Items.Add(x);
                                  SelectedAlbum ??= Collection.FirstOrDefault();
                                  Successful(SubSystemString.OperationOfAddIsSuccessful);
                                  Save();
@@ -100,6 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             Collection.Remove(part);
+            Detail.Items.Remove(part);
             Save();
         }
 
