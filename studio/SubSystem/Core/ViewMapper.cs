@@ -66,6 +66,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             }; 
         }
         
+        private static UserControl GetStickyNote(DocumentEditorBase owner, object instance)
+        {
+            return new StickyNotePartView
+            {
+                DataContext = new StickyNotePartViewModel
+                {
+                    Owner  = owner,
+                    Detail =  (PartOfStickyNote)instance,
+                }
+            }; 
+        }
+        
         private static UserControl GetSentenceView(DocumentEditorBase owner, object instance)
         {
             return new SentencePartView
@@ -121,6 +133,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Add<PartOfSentence>(GetSentenceView);
             Add<PartOfPrototype>(GetPrototypeView);
             Add<PartOfApprise>(GetAppriseView);
+            Add<PartOfStickyNote>(GetStickyNote);
             Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
         }
 
