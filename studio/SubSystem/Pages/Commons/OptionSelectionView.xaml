@@ -9,8 +9,8 @@
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
-             Width="400"
-             Height="300"
+             Width="480"
+             Height="320"
              d:DesignHeight="300"
              d:DesignWidth="400"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:OptionSelectionViewModel}, IsDesignTimeCreatable=True}">
@@ -18,56 +18,25 @@
         <thisConverters:TranslationConverter x:Key="Translation" />
     </UserControl.Resources>
 
-    <Border Background="{f:BackgroundBrush}"
-            CornerRadius="10"
-            BorderThickness="0 4 0 0"
-            BorderBrush="{f:Brush HighlightA3}"
-            Padding="16">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="54" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <f:DialogPage Accent="{f:Brush HighlightA3}"
+                  Title="{Binding Title}"
+                  CompletedCommand="{Binding CompletedCommand}"
+                  CancelCommand="{Binding CancelCommand}">
 
-            <!-- 标题 -->
-            <TextBlock Grid.Row="0"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="{f:Brush HighlightA3}"
-                       HorizontalAlignment="Center"
-                       Margin="0 16 0 8"
-                       Text="{Binding Title}"
-                       VerticalAlignment="Top" />
-
-            <f:ListBox Grid.Row="1"
+        <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                        SelectedItem="{Binding Selected,Mode=TwoWay}"
                        ItemsSource="{Binding Options,Mode=OneWay}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </f:ListBox>
-
-            <!-- 按钮 -->
-            <UniformGrid Grid.Row="2"
-                         Columns="2"
-                         Height="48"
-                         Margin="0 0 0 16"
-                         Rows="1">
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
-                                IconSize="29"
-                                IsDefault="True"
-                                Content="{x:Static f:Language.ConfirmText}"
-                                Command="{Binding CompletedCommand}"
-                                Purpose="CallToAction" />
-
-                <f:DialogButton Icon="{StaticResource FeatherIcon.Close}"
-                                Content="{x:Static f:Language.CancelText}"
-                                Command="{Binding CancelCommand}"
-                                Purpose="Close" />
-            </UniformGrid>
-        </Grid>
-    </Border>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="8 4"
+                                   Text="{Binding Converter={StaticResource Translation}}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <f:ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="210"/>
+                </ItemsPanelTemplate>
+            </f:ListBox.ItemsPanel>
+        </f:ListBox>
+    </f:DialogPage>
 </f:ForestUserControl>

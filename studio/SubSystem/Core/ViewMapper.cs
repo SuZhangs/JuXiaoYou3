@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
@@ -18,62 +19,108 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Mappings.TryAdd(typeof(T), expression);
         }
 
-        private static T Cast<T>(object instance) where T : class
-        {
-            return (T)instance;
-        }
-
         private static UserControl GetAlbumView(DocumentEditorBase owner, object instance)
         {
-            var vm = Cast<PartOfAlbum>(instance);
             return new AlbumPartView
             {
                 DataContext = new AlbumPartViewModel
                 {
                     Owner         = owner,
-                    Detail        = vm,
+                    Detail        =  (PartOfAlbum)instance,
                 }
-            }; 
+            };
         }
         
         private static UserControl GetPlaylistView(DocumentEditorBase owner, object instance)
         {
-            var vm = Cast<PartOfPlaylist>(instance);
             return new PlaylistPartView
             {
                 DataContext = new PlaylistPartViewModel
                 {
                     Owner  = owner,
-                    Detail = vm,
+                    Detail =  (PartOfPlaylist)instance,
                 }
             }; 
         }
         private static UserControl GetCharacterRel(DocumentEditorBase owner, object instance)
         {
-            var vm = Cast<PartOfRel>(instance);
             return new CharacterRelshipPartView
             {
                 DataContext = new CharacterRelPartViewModel
                 {
                     Owner  = (DocumentEditorVMBase)owner,
-                    Detail = vm,
+                    Detail =  (PartOfRel)instance,
+                }
+            }; 
+        }
+        
+        private static UserControl GetSurvey(DocumentEditorBase owner, object instance)
+        {
+            return new SurveyPartView
+            {
+                DataContext = new SurveyPartViewModel
+                {
+                    Owner  = owner,
+                    Detail =  (PartOfSurvey)instance,
+                }
+            }; 
+        }
+        
+        private static UserControl GetSentenceView(DocumentEditorBase owner, object instance)
+        {
+            return new SentencePartView
+            {
+                DataContext = new SentencePartViewModel
+                {
+                    Owner  = owner,
+                    Detail =  (PartOfSentence)instance,
+                }
+            }; 
+        }
+        
+        private static UserControl GetPrototypeView(DocumentEditorBase owner, object instance)
+        {
+            return new PrototypePartView
+            {
+                DataContext = new PrototypePartViewModel
+                {
+                    Owner = owner,
+                    Detail = (PartOfPrototype)instance
+                }
+            }; 
+        }
+        
+        private static UserControl GetAppriseView(DocumentEditorBase owner, object instance)
+        {
+            return new ApprisePartView
+            {
+                DataContext = new ApprisePartViewModel
+                {
+                    Owner = owner,
+                    Detail = (PartOfApprise)instance
                 }
             }; 
         }
         
         private static UserControl GetDetailSetting(DocumentEditorBase owner, object instance)
         {
-            return new PlaylistPartView
+            return new DetailPartSettingView
             {
                 DataContext = owner
             }; 
         }
+        
+        
         
         public static void Initialize()
         {
             Add<PartOfAlbum>(GetAlbumView);
             Add<PartOfPlaylist>(GetPlaylistView);
             Add<PartOfRel>(GetCharacterRel);
+            Add<PartOfSurvey>(GetSurvey);
+            Add<PartOfSentence>(GetSentenceView);
+            Add<PartOfPrototype>(GetPrototypeView);
+            Add<PartOfApprise>(GetAppriseView);
             Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
         }
 
