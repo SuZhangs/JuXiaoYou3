@@ -1,20 +1,25 @@
 ﻿using System.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using NLog;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
+    public class StickyNotePartViewModelProxy : BindingProxy<StickyNotePartViewModel>
+    {
+    }
+
     public class StickyNotePartViewModel : DetailViewModel<PartOfStickyNote>
     {
         public StickyNotePartViewModel()
         {
             Collection       = new ObservableCollection<StickyNote>();
-            AddCommand       = Command(AddImpl);
+            AddCommand       = AsyncCommand(AddImpl);
             RemoveCommand    = AsyncCommand<StickyNote>(RemoveImpl, HasItem);
             ShiftUpCommand   = Command<StickyNote>(ShiftUpImpl, HasItem);
             ShiftDownCommand = Command<StickyNote>(ShiftDownImpl, HasItem);
@@ -35,13 +40,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details
             Collection.AddRange(Detail.Items);
         }
 
-        private void AddImpl()
+        private async Task AddImpl()
         {
-            Collection.Add(new StickyNote
+            var title = await StringViewModel.String(SubSystemString.EditNameTitle);
+
+            if (!title.IsFinished)
             {
-                Id            = ID.Get(),
-                TimeOfCreated = DateTime.Now
-            });
+                return;
+            }
+
+            var now = DateTime.Now;
+            var item = new StickyNote
+            {
+                Id             = ID.Get(),
+                Title          = title.Value,
+                TimeOfCreated  = now,
+                TimeOfModified = now
+            };
+            Collection.Add(item);
+            Detail.Items.Add(item);
         }
 
         private async Task RemoveImpl(StickyNote stickyNote)
@@ -75,12 +92,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details
         private void ShiftDownImpl(StickyNote stickyNote)
         {
             Collection.ShiftDown(stickyNote);
+            Detail.Items.ShiftDown(stickyNote);
             Save();
         }
 
         private void ShiftUpImpl(StickyNote stickyNote)
         {
             Collection.ShiftUp(stickyNote);
+            Detail.Items.ShiftUp(stickyNote);
             Save();
         }
 
@@ -95,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details
         public ObservableCollection<StickyNote> Collection { get; init; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand AddCommand { get; }
+        public AsyncRelayCommand AddCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<StickyNote> ShiftUpCommand { get; }

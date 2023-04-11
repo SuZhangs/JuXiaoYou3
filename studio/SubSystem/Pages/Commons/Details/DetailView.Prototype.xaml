@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Commons.Details.PrototypePartView"
+﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Commons.PrototypePartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,28 +28,28 @@
             <ftk:ToolButton f:Language.Id="global.Remove"
                             Content="{f:Language global.Remove}"
                             Command="{Binding RemoveAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Up"
                             Content="上移"
                             Command="{Binding ShiftUpAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Down"
                             Content="下移"
                             Command="{Binding ShiftDownAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Presentation"
                             Content="预览"
                             Command="{Binding OpenAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
         </StackPanel>

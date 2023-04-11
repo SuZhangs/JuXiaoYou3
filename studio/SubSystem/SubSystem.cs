@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
@@ -89,6 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<EditPresentationView, EditPresentationViewModel>();
             Xaml.InstallView<EditStringPresentationView, EditStringPresentationViewModel>();
             Xaml.InstallView<EditChartPresentationView, EditChartPresentationViewModel>();
+            Xaml.InstallView<EditPlainTextView, EditPlainTextViewModel>();
             Xaml.InstallView<ModuleSelectorView, ModuleSelectorViewModel>();
             Xaml.InstallView<DocumentEditorPage, AbilityDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, CharacterDocumentViewModel>();

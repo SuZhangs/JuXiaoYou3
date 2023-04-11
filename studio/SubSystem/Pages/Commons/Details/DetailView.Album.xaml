@@ -28,28 +28,28 @@
             <ftk:ToolButton f:Language.Id="global.Remove"
                             Content="{f:Language global.Remove}"
                             Command="{Binding RemoveAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
             
             <ftk:ToolButton f:Language.Id="global.Up"
                             Content="上移"
                             Command="{Binding ShiftUpAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
             
             <ftk:ToolButton f:Language.Id="global.Down"
                             Content="下移"
                             Command="{Binding ShiftDownAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
             <ftk:ToolButton f:Language.Id="global.Presentation"
                             Content="预览"
                             Command="{Binding OpenAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
         </StackPanel>

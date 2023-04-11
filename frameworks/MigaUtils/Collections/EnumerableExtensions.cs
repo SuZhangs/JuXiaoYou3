@@ -32,6 +32,9 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
 
             return -1;
         }
+
+        #region ForEach
+
         
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> handler)
         {
@@ -50,7 +53,13 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
                 handler(item);
             }
         }
+
+        #endregion
+
+        #region AddRange
+
         
+
         public static void AddRange<T>(this Queue<T> collection, IEnumerable<T> target, bool clear = false)
         {
             if (collection is null)
@@ -94,6 +103,56 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
                 }
             }
         }
+        
+        #endregion
+
+        #region ShiftUp
+
+                
+        public static void ShiftUp<T>(this ObservableCollection<T> source, T target)
+        {
+            ShiftUp(source, target, Empty); 
+        }
+        
+        public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action callback)
+        {
+            ShiftUp(source, target, (_, _, _) => callback?.Invoke()); 
+        }
+        
+        public static void ShiftUp<T>(this List<T> source, T target)
+        {
+            ShiftUp(source, target, Empty); 
+        }
+        
+        public static void ShiftUp<T>(this List<T> source, T target, Action callback)
+        {
+            ShiftUp(source, target, (_, _, _) => callback?.Invoke()); 
+        }
+
+        public static void ShiftUp<T>(this List<T> source, T target, Action<T, int, int> callback)
+        {
+            if (ReferenceEquals(target, default(T)))
+            {
+                return;
+            }
+
+            if (source is null)
+            {
+                return;
+            }
+
+            var index = source.IndexOf(target);
+
+
+            if (index < 1)
+            {
+                return;
+            }
+            
+            source.RemoveAt(index);
+            source.Insert(index - 1, target);
+            callback?.Invoke(target, index, index - 1);
+        }
 
         public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action<T, int, int> callback)
         {
@@ -119,25 +178,55 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             callback?.Invoke(target, index, index - 1);
         }
         
+        #endregion
+
+        #region ShiftDown
+
         public static void ShiftDown<T>(this ObservableCollection<T> source, T target)
         {
             ShiftDown(source, target, Empty); 
         }
         
-        public static void ShiftUp<T>(this ObservableCollection<T> source, T target)
+        public static void ShiftDown<T>(this List<T> source, T target)
         {
-            ShiftUp(source, target, Empty); 
+            ShiftDown(source, target, Empty); 
         }
         
-        public static void ShiftUp<T>(this ObservableCollection<T> source, T target, Action callback)
+        public static void ShiftDown<T>(this List<T> source, T target, Action callback)
         {
-            ShiftUp(source, target, (_, _, _) => callback?.Invoke()); 
+            ShiftDown(source, target, (_, _, _) => callback?.Invoke());
         }
         
         public static void ShiftDown<T>(this ObservableCollection<T> source, T target, Action callback)
         {
             ShiftDown(source, target, (_, _, _) => callback?.Invoke());
         }
+
+        public static void ShiftDown<T>(this List<T> source, T target, Action<T, int, int> callback)
+        {
+            if (ReferenceEquals(target, default(T)))
+            {
+                return;
+            }
+
+            if (source is null)
+            {
+                return;
+            }
+
+            var index = source.IndexOf(target);
+
+            if (index >= source.Count - 1)
+            {
+                return;
+            }
+            
+            source.RemoveAt(index);
+            source.Insert(index + 1, target);
+            callback?.Invoke(target, index, index + 1);
+        }
+        
+        
         
         public static void ShiftDown<T>(this ObservableCollection<T> source, T target, Action<T, int, int> callback)
         {
@@ -162,5 +251,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             
             callback?.Invoke(target, index, index + 1);
         }
+        
+        #endregion
     }
 }
