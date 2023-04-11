@@ -156,7 +156,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             foreach (var part in Document.Parts)
             {
-                if (!string.IsNullOrEmpty(part.Id) && _DataPartTrackerOfId.TryAdd(part.Id, part))
+                if (!string.IsNullOrEmpty(part.Id) &&
+                    !_DataPartTrackerOfId.TryAdd(part.Id, part))
                 {
                     Xaml.Get<ILogger>()
                         .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
