@@ -13,20 +13,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
         
         
-
-        protected override IEnumerable<object> CreateDetailPartList()
-        {
-            return new object[]
-            {
-                new PartOfAlbum { Items    = new List<Album>() },
-                new PartOfPlaylist { Items = new List<Music>() },
-            };
-        }
-        
         protected override void OnCreateDocument(Document document)
         {
             document.Parts.Add(new PartOfAlbum{ Items     = new List<Album>()});
-            document.Parts.Add(new PartOfPlaylist { Items = new List<Music>() });
         }
 
         protected override void IsDataPartExistence(Document document)

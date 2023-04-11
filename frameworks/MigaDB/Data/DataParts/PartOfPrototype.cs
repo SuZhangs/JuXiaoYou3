@@ -6,10 +6,11 @@
         {
             Id = Constants.IdOfPrototypePart;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Dictionary<string, string> DataBags { get; init; }
+
+        public List<Prototype> Items { get; set; }
+    }
+
+    public class Prototype : StorageUIObject
+    {
     }
 }

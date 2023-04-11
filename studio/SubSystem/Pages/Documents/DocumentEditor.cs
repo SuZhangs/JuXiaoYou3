@@ -22,10 +22,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             return new object[]
             {
-                new PartOfAlbum { Items    = new List<Album>() },
-                new PartOfPlaylist { Items = new List<Music>() },
-                new PartOfApprise{ },
-                new PartOfRel()
+                new PartOfAlbum { Items      = new List<Album>() },
+                new PartOfPlaylist { Items   = new List<Music>() },
+                new PartOfStickyNote { Items = new List<StickyNote>() },
+                new PartOfPrototype { Items  = new List<Prototype>() },
+                new PartOfSurvey { Items     = new List<SurveySet>() },
             };
         }
 

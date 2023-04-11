@@ -67,10 +67,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
         {
             Id = Constants.IdOfSurveyPart;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<SurveySet> DataBags { get; init; }
+
+        public List<SurveySet> Items { get; set; }
     }
 }

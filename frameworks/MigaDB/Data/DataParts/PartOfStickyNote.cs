@@ -6,10 +6,11 @@
         {
             Id = Constants.IdOfStickyNote;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Dictionary<string, string> DataBags { get; init; }
+
+        public List<StickyNote> Items { get; set; }
+    }
+
+    public class StickyNote : StorageUIObject
+    {
     }
 }
