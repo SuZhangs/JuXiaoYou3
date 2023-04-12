@@ -18,18 +18,18 @@
         <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type m:StickyNote}">
-            <f:LooklessButton Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
-                              CommandParameter="{Binding}"
+            <Border Background="{f:Brush BackgroundLevel3}"
+                        CornerRadius="6"
                               Margin="4"
+                        Padding="16"
                               Height="160"
                               Width="500">
-                <f:LooklessButton.ContextMenu>
+                <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem f:Language.Id="global.Remove"
-                                    Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
+                        <f:MenuItem Header="{f:Language global.Edit}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                                    Icon="{StaticResource FeatherIcon.Edit}" />
 
                         <f:MenuItem f:Language.Id="global.Up"
                                     Header="上移"
@@ -42,47 +42,50 @@
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                        <Separator/>
+
+                        <f:MenuItem f:Language.Id="global.Remove"
+                                    Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
                     </f:ContextMenu>
-                </f:LooklessButton.ContextMenu>
-                <Border Background="{f:Brush BackgroundLevel3}"
-                        CornerRadius="6"
-                        Padding="16">
-                    <StackPanel>
-                        <TextBlock FontSize="20"
+                </Border.ContextMenu>
+                <StackPanel>
+                    <TextBlock FontSize="20"
                                    FontWeight="Bold"
                                    Text="{Binding Title,Mode=OneWay}" />
-                        <TextBlock FontSize="13"
+                    <TextBlock FontSize="13"
                                    Foreground="{f:Brush ForegroundLevel3}"
                                    Margin="0 8"
                                    Text="{Binding Id,Mode=OneWay}" />
-                        <UniformGrid Columns="3"
+                    <UniformGrid Columns="3"
                                      Margin="0 4">
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Top"
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="创建时间" />
-                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
                                            Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                            </DockPanel>
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Top"
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="修改时间" />
-                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
                                            Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                            </DockPanel>
-                            <DockPanel>
+                        </DockPanel>
+                        <DockPanel>
 
-                                <TextBlock DockPanel.Dock="Top"
+                            <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="长度" />
-                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
                                            Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
-                            </DockPanel>
-                        </UniformGrid>
-                    </StackPanel>
-                </Border>
-            </f:LooklessButton>
+                        </DockPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>

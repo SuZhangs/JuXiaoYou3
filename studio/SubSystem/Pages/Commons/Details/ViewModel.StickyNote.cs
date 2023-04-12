@@ -20,10 +20,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             Collection       = new ObservableCollection<StickyNote>();
             AddCommand       = AsyncCommand(AddImpl);
-            RemoveCommand    = AsyncCommand<StickyNote>(RemoveImpl, HasItem);
-            ShiftUpCommand   = Command<StickyNote>(ShiftUpImpl, HasItem);
-            ShiftDownCommand = Command<StickyNote>(ShiftDownImpl, HasItem);
-            OpenCommand      = AsyncCommand<StickyNote>(OpenImpl, HasItem);
+            RemoveCommand    = AsyncCommand<StickyNote>(RemoveImpl);
+            ShiftUpCommand   = Command<StickyNote>(ShiftUpImpl);
+            ShiftDownCommand = Command<StickyNote>(ShiftDownImpl);
+            OpenCommand      = AsyncCommand<StickyNote>(OpenImpl);
         }
 
         public override void Start()
@@ -91,6 +91,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void ShiftDownImpl(StickyNote stickyNote)
         {
+            if (stickyNote is null)
+            {
+                return;
+            }
+
             Collection.ShiftDown(stickyNote);
             Detail.Items.ShiftDown(stickyNote);
             Save();
@@ -98,6 +103,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void ShiftUpImpl(StickyNote stickyNote)
         {
+            if (stickyNote is null)
+            {
+                return;
+            }
+
             Collection.ShiftUp(stickyNote);
             Detail.Items.ShiftUp(stickyNote);
             Save();

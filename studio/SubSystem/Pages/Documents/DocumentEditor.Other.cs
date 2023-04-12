@@ -7,7 +7,7 @@
             AddSubView<OtherBasicView>(collection, "text.DocumentEditor.Basic");
             AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
             AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
-            AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Inspiration");
+           // AddSubView<InspirationView>(collection, "text.DocumentEditor.Inspiration");
             AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
         }
 
