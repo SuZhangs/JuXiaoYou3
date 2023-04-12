@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
@@ -20,9 +21,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public QuickStartController()
         {
-            CreateCommand      = AsyncCommand(CreateImpl, CanCreate, true);
-            OpenCommand        = AsyncCommand(OpenImpl);
-            UpgradeCommand     = AsyncCommand(UpgradeImpl);
+            CreateCommand  = AsyncCommand(CreateImpl, CanCreate, true);
+            OpenCommand    = AsyncCommand(OpenImpl);
+            UpgradeCommand = AsyncCommand(UpgradeImpl);
+            RepairCommand  = AsyncCommand(RepairImpl);
+        }
+
+        private static async Task RepairImpl()
+        {
+            await DialogService().Dialog(new RepairToolViewModel());
         }
 
         private bool CanCreate() => !string.IsNullOrEmpty(Author) &&
@@ -179,6 +186,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public AsyncRelayCommand CreateCommand { get; }
         public AsyncRelayCommand OpenCommand { get; }
+        public AsyncRelayCommand RepairCommand { get; }
         public AsyncRelayCommand UpgradeCommand { get; }
         public sealed override string Id => "::Quick";
     }

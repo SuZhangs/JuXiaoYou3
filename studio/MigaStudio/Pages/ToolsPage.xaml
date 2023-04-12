@@ -11,6 +11,7 @@
                      xmlns:model="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
+                     Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ToolsViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>

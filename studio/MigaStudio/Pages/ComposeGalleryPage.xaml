@@ -7,6 +7,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"
+                     Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ComposeGalleryViewModel}, IsDesignTimeCreatable=True}">
     <Grid>

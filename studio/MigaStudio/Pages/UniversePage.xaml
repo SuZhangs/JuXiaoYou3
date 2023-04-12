@@ -7,7 +7,8 @@
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
-                     mc:Ignorable="d"
+                     mc:Ignorable="d"                    
+                     Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -15,7 +16,7 @@
             <Setter Property="Padding" Value="8 6" />
         </Style>
     </UserControl.Resources>
-    <Grid Margin="16">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320" />
             <ColumnDefinition Width="320" />

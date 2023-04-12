@@ -22,7 +22,6 @@
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style x:Key="SubTitleTemplate" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource SongTi}" />
             <Setter Property="LineHeight" Value="18" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
@@ -72,46 +71,52 @@
                 <f:ForestSection f:Language.Id="global.start"
                                  DockPanel.Dock="Top"
                                  Header="开始"
-                                     Margin="0 0 0 16">
+                                 Margin="0 0 0 16">
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
-                                        Orientation="Horizontal"
-                                        Margin="0 0 0 4">
+                                    Orientation="Horizontal"
+                                    Margin="0 0 0 4">
                             <ftk:ToolButton f:Language.Id="global.new"
-                                 Content="新建"
+                                            Content="新建"
                                             Command="{Binding CreateCommand}"
                                             Icon="{StaticResource FeatherIcon.File}"
-                                                ShowText="True"
-                                                Margin="0 4" />
+                                            ShowText="True"
+                                            Margin="0 4" />
 
                             <ftk:ToolButton f:Language.Id="global.open"
-                                 Content="打开"
+                                            Content="打开"
                                             Command="{Binding OpenCommand}"
                                             Icon="{StaticResource FeatherIcon.Folder}"
-                                            Margin="0 4" 
-                                            ShowText="True"/>
+                                            Margin="0 4"
+                                            ShowText="True" />
 
                             <ftk:ToolButton f:Language.Id="global.import"
                                             Content="导入"
-                                            Command="{Binding NewBrushCommand}"
                                             Icon="{StaticResource FeatherIcon.Upload}"
-                                            Margin="0 4" 
-                                            ShowText="True"/>
+                                            Margin="0 4"
+                                            ShowText="True" />
+                            
+                            <ftk:ToolButton f:Language.Id="global.repair"
+                                            Content="修复"
+                                            Command="{Binding RepairCommand}"
+                                            Icon="{StaticResource FeatherIcon.Upload}"
+                                            Margin="0 4"
+                                            ShowText="True" />
                         </StackPanel>
                     </f:ForestSection.ToolBar>
                     <StackPanel Margin="0 8 0 0">
                         <f:HeaderedSingleLine f:Language.Id="global.Name"
                                               Header="名字"
                                               Margin="0 6"
-                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine f:Language.Id="global.Author"
                                               Header="作者"
                                               Margin="0 6"
-                                              Text="{Binding Author,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                              Text="{Binding Author,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine f:Language.Id="global.foreignName"
                                               Header="外文名（可随意填写）"
                                               Margin="0 6"
-                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </f:ForestSection>
 
@@ -158,6 +163,6 @@
         </DockPanel>
 
         <fs:TitleBar VerticalAlignment="Top"
-                     HorizontalAlignment="Right"/>
+                     HorizontalAlignment="Right" />
     </Grid>
 </f:ForestUserControl>

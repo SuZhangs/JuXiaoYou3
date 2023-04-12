@@ -16,8 +16,9 @@
     <UserControl.Resources>
         <thisConverters:DocumentTypeConverter x:Key="DocumentTypeName" />
     </UserControl.Resources>
-    <f:Drawer IsRightOpen="{Binding IsPresentation,Mode=TwoWay}">
-        <Grid Margin="8 0">
+    <f:Drawer IsRightOpen="{Binding IsPresentation,Mode=TwoWay}"
+              Padding="16">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="384" />

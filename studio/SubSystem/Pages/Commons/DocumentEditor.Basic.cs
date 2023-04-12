@@ -23,6 +23,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return value;
             }
 
+            if (_MetadataTrackerByName.TryGetValue(name, out var metadata))
+            {
+                if (!string.IsNullOrEmpty(metadata.Value))
+                {
+                    BasicPart.Buckets.TryAdd(name, metadata.Value);
+                    return metadata.Value;
+                }
+            }
+
             value = string.Empty;
             BasicPart.Buckets.TryAdd(name, value);
             return value;

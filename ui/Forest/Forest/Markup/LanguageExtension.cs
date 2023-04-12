@@ -6,8 +6,6 @@ namespace Acorisoft.FutureGL.Forest.Markup
 {
     public class LanguageExtension : MarkupExtension
     {
-        private object _value;
-        
         public LanguageExtension(){}
         public LanguageExtension(string key) => Key = key;
 

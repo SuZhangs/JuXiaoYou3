@@ -4,6 +4,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"
@@ -11,7 +12,20 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:RepairToolViewModel}, IsDesignTimeCreatable=True}"
                      Height="300"
                      Width="300">
-    <Grid>
-        
-    </Grid>
+    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+                  Purpose="Notification">
+        <WrapPanel>
+            <ftk:ToolButton Content="关闭后台的橘小柚"
+                            Command="{Binding KillProcessCommand}"
+                            Icon="{StaticResource FeatherIcon.Tools}"
+                            Margin="8"
+                            ShowText="True"/>
+            
+            <ftk:ToolButton Content="添加快捷方式"
+                            Command="{Binding CreateShortcutCommand}"
+                            Icon="{StaticResource FeatherIcon.Tools}"
+                            Margin="8"
+                            ShowText="True"/>
+        </WrapPanel>
+    </f:DialogPage>
 </f:ForestUserControl>

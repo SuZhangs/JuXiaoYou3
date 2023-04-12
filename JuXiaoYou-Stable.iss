@@ -24,8 +24,8 @@ LicenseFile=E:\发行\橘小柚\License\EULA.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=E:\发行\橘小柚\Publish
-OutputBaseFilename=JuXiaoYou
-SetupIconFile=F:\Repository\JuXiaoYou\assets\ico_2.ico
+OutputBaseFilename=JuXiaoYou        
+SetupIconFile=E:\Repository\JuXiaoYou\assets\ico_2.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

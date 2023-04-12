@@ -25,7 +25,7 @@ LicenseFile=E:\发行\橘小柚\License\EULA.txt
 ;PrivilegesRequired=lowest
 OutputDir=E:\发行\橘小柚\Publish
 OutputBaseFilename=JuXiaoYou
-SetupIconFile=F:\Repository\JuXiaoYou\assets\ico_2.ico
+SetupIconFile=E:\Repository\JuXiaoYou\assets\ico_2.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -39,8 +39,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "E:\发行\橘小柚\dependencies\.Net5-x86.exe"; DestDir: "{app}"; Flags: dontcopy noencryption
-Source: "E:\发行\橘小柚\3.0-Dev\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\发行\橘小柚\3.0-Dev\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\发行\橘小柚\3.0-Patch\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\发行\橘小柚\3.0-Patch\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

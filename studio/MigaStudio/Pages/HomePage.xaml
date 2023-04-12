@@ -20,11 +20,12 @@
         <local:HomeViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:MainFeatureConverter x:Key="NameConverter"/>
     </UserControl.Resources>
-    <DockPanel Margin="16">
+    <DockPanel>
         <f:ListBox DockPanel.Dock="Left"
                    f:XamlAssist.GroupName="GroupId"
                    SelectedItem="{Binding SelectedFeature,Mode=TwoWay}"
                    ItemsSource="{Binding Features,Mode=OneWay}"
+                   Margin="16"
                    Width="280">
             <f:ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">

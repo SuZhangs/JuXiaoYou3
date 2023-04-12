@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data
                 return;
             }
 
+            manifest.Type = type;
             if (DefaultManifests.ContainsKey(type))
             {
                 DefaultManifests[type] = manifest.Id;

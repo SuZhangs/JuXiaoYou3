@@ -29,7 +29,8 @@
             </TextBlock>
         </DataTemplate>
     </UserControl.Resources>
-    <f:Drawer IsRightOpen="{Binding IsPresentationPaneOpen,Mode=TwoWay}">
+    <f:Drawer IsRightOpen="{Binding IsPresentationPaneOpen,Mode=TwoWay}"
+              Padding="16">
         <f:Drawer.RightContent>
             <Border Background="{f:BackgroundBrush}"
                     Width="640">

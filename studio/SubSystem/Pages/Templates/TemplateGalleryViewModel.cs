@@ -175,7 +175,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task ImportTemplateImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.ModuleFilter);
+            var opendlg = FileIO.Open(SubSystemString.ModuleFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {

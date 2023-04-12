@@ -51,7 +51,8 @@
             </f:SimpleButton>
         </DataTemplate>
     </UserControl.Resources>
-    <f:Drawer IsRightOpen="{Binding IsPropertyPaneOpen,Mode=TwoWay}">
+    <f:Drawer IsRightOpen="{Binding IsPropertyPaneOpen,Mode=TwoWay}"
+              Padding="16">
         <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
             <f:ForestSection.ToolBar>
                 <StackPanel HorizontalAlignment="Right"
