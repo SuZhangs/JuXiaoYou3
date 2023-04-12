@@ -163,6 +163,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
             
             item.Items.Add(r.Value);
+            if(ReferenceEquals(SelectedSurveySet, item))
+            {
+                SelectedSurveySet.Items.Add(r.Value);
+            }
             Save();
         }
 
