@@ -33,7 +33,7 @@
                 </Image.Source>
             </Image>
         </f:LooklessButton>
-        
+
         <DockPanel>
             <StackPanel DockPanel.Dock="Top"
                         Orientation="Horizontal">
@@ -58,9 +58,20 @@
                                 IconSize="19"
                                 IsFilled="True"
                                 ShowText="True" />
+
+
+                <ftk:ToolButton f:Language.Id="global.Pause"
+                                Content="暂停"
+                                Command="{Binding PauseMusicCommand}"
+                                Icon="{StaticResource IC.Play}"
+                                IconSize="19"
+                                IsFilled="True"
+                                ShowText="True" />
+
             </StackPanel>
 
             <f:ListBox DockPanel.Dock="Right"
+                       Margin="0 8 0 0"
                        ItemsSource="{Binding Collection,Mode=OneWay}"
                        SelectedItem="{Binding SelectedMusic,Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>

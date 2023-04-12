@@ -64,16 +64,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Avatar = avatar;
         }
 
-        private void NewDocumentImpl()
+        //
+        //
+        private async Task NewDocumentImpl()
         {
-            OnNewDocument();
+           var cache = await DocumentUtilities.AddDocument(DocumentEngine);
+
+           if (!cache.IsFinished)
+           {
+               return;
+           }
+           
+           //
+           //
+           DocumentUtilities.OpenDocument(Controller, cache.Value);
         }
 
-        protected virtual void OnNewDocument()
+
+        private async Task OpenDocumentImpl()
         {
-
+            
         }
-
+        
         //---------------------------------------------
         //
         // Keywords

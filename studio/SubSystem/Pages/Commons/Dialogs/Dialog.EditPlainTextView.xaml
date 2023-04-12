@@ -9,8 +9,8 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditPlainTextViewModel}, IsDesignTimeCreatable=True}"
-                     Height="420"
-                     Width="640">
+                     Height="540"
+                     Width="768">
     <f:DialogPage CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}"
                   Purpose="Notification">

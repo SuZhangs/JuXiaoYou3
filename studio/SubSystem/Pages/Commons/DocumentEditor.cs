@@ -69,6 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
             SaveDocumentCommand = Command(Save);
+            NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
 
             AddModulePartCommand       = AsyncCommand(AddModulePartImpl);
             RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl, HasItem);

@@ -76,6 +76,7 @@
                                     Icon="{StaticResource IC.Folder}"
                                     IsFilled="True"
                                     ShowText="True" />
+                    
                     <ftk:ToolButton f:Language.Id="global.save"
                                     Content="保存"
                                     Command="{Binding SaveDocumentCommand}"

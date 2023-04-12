@@ -64,6 +64,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftUpMusicCommand   = Command<Music>(ShiftUpMusicImpl, HasItem);
             ShiftDownMusicCommand = Command<Music>(ShiftDownMusicImpl, HasItem);
             PlayMusicCommand      = Command<Music>(PlayMusicImpl, HasItem);
+            PauseMusicCommand = Command(PauseMusicImpl, () => Xaml.Get<MusicService>()
+                                                                  .IsPlaying
+                                                                  .CurrentValue);
         }
 
         public override void Start()
@@ -171,6 +174,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }, true);
             }
         }
+        
+        
+        private void PauseMusicImpl()
+        {
+            var ms = Xaml.Get<MusicService>();
+
+            if (ms.IsPlaying
+                  .CurrentValue)
+            {
+                ms.Pause();
+            }
+        }
 
         private void ShiftDownMusicImpl(Music album)
         {
@@ -231,6 +246,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 ShiftDownMusicCommand.NotifyCanExecuteChanged();
                 ShiftUpMusicCommand.NotifyCanExecuteChanged();
                 PlayMusicCommand.NotifyCanExecuteChanged();
+                PauseMusicCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -245,6 +261,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Music> PlayMusicCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand PauseMusicCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Music> RemoveMusicCommand { get; }

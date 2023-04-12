@@ -44,14 +44,16 @@
                                     Icon="{StaticResource FeatherIcon.ArrowDown}" />
                     </f:ContextMenu>
                 </f:LooklessButton.ContextMenu>
-                <Border Background="{f:Brush BackgroundLevel4}"
+                <Border Background="{f:Brush BackgroundLevel3}"
                         CornerRadius="6"
                         Padding="16">
                     <StackPanel>
                         <TextBlock FontSize="20"
                                    FontWeight="Bold"
                                    Text="{Binding Title,Mode=OneWay}" />
-                        <TextBlock Margin="0 8"
+                        <TextBlock FontSize="13"
+                                   Foreground="{f:Brush ForegroundLevel3}"
+                                   Margin="0 8"
                                    Text="{Binding Id,Mode=OneWay}" />
                         <UniformGrid Columns="3"
                                      Margin="0 4">
@@ -59,20 +61,23 @@
                                 <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="创建时间" />
-                                <TextBlock Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
                             </DockPanel>
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="修改时间" />
-                                <TextBlock Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
                             </DockPanel>
                             <DockPanel>
 
                                 <TextBlock DockPanel.Dock="Top"
                                            Margin="0 8"
                                            Text="长度" />
-                                <TextBlock Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
+                                <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
                             </DockPanel>
                         </UniformGrid>
                     </StackPanel>

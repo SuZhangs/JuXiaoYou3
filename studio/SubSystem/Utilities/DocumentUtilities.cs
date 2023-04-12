@@ -70,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task AddDocument(DocumentEngine engine, Action<DocumentCache> callback)
         {
-            var result = await NewDocumentViewModel.New();
+            var result = await AddDocument(engine);
 
             if (!result.IsFinished)
             {
@@ -78,14 +78,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
 
             var cache   = result.Value;
-            var result1 = engine.AddDocumentCache(cache);
 
             if (!result.IsFinished)
             {
                 await Xaml.Get<IBuiltinDialogService>()
                           .Notify(CriticalLevel.Warning,
                               SubSystemString.Notify,
-                              SubSystemString.GetEngineResult(result1.Reason));
+                              result.Reason);
             }
 
             callback?.Invoke(cache);
@@ -93,7 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task AddDocument(DocumentEngine engine, DocumentType type, Action<DocumentCache> callback)
         {
-            var result = await NewDocumentViewModel.New(type);
+            var result = await AddDocument(engine, type);
 
             if (!result.IsFinished)
             {
@@ -101,17 +100,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
 
             var cache   = result.Value;
-            var result1 = engine.AddDocumentCache(cache);
 
             if (!result.IsFinished)
             {
                 await Xaml.Get<IBuiltinDialogService>()
                           .Notify(CriticalLevel.Warning,
                               SubSystemString.Notify,
-                              SubSystemString.GetEngineResult(result1.Reason));
+                              result.Reason);
             }
 
             callback?.Invoke(cache);
+        }
+        
+        public static async Task<Op<DocumentCache>> AddDocument(DocumentEngine engine)
+        {
+            var result = await NewDocumentViewModel.New();
+
+            if (!result.IsFinished)
+            {
+                return Op<DocumentCache>.Failed("未选择");
+            }
+
+            var cache   = result.Value;
+            var result1 = engine.AddDocumentCache(cache);
+
+            return !result.IsFinished ? 
+                Op<DocumentCache>.Failed(Language.GetEnum(result1.Reason)) :
+                Op<DocumentCache>.Success(cache);
+        }
+        
+        public static async Task<Op<DocumentCache>> AddDocument(DocumentEngine engine, DocumentType type)
+        {
+            var result = await NewDocumentViewModel.New(type);
+
+            if (!result.IsFinished)
+            {
+                return Op<DocumentCache>.Failed("未选择");
+            }
+
+            var cache   = result.Value;
+            var result1 = engine.AddDocumentCache(cache);
+
+            return !result.IsFinished ? 
+                Op<DocumentCache>.Failed(Language.GetEnum(result1.Reason)) :
+                Op<DocumentCache>.Success(cache);
         }
 
         public static DocumentCache UpdateDocument(DocumentEngine engine, string id, IList<DocumentCache> sourceA, IList<DocumentCache> sourceB)
