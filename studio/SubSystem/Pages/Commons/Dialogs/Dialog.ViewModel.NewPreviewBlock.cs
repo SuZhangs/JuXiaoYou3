@@ -25,7 +25,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 SetValue(ref _type, value);
                 PresentationItem = PresentationUI.GetUI(ModuleBlockFactory.GetPresentation(_type));
-                CompletedCommand.NotifyCanExecuteChanged();
             }
         }
 

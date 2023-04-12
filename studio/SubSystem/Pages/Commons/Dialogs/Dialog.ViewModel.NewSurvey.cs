@@ -128,16 +128,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public string Intro
         {
             get => _intro;
-            set => SetValue(ref _intro, value);
+            set
+            {
+                SetValue(ref _intro, value);
+            }
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
         {
             get => _name;
-            set => SetValue(ref _name, value);
+            set
+            {
+                SetValue(ref _name, value);
+            }
         }
     }
 }

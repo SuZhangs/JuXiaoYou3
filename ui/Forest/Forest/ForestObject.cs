@@ -18,10 +18,10 @@ namespace Acorisoft.FutureGL.Forest
         protected internal void RaiseUpdated([CallerMemberName] string propertyName = null)
         {
             PropertyChangedHandler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            OnPropertyChanged(propertyName);
+            OnPropertyValueChanged(propertyName);
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyValueChanged(string propertyName)
         {
             
         }

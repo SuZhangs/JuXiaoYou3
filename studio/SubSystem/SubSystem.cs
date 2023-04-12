@@ -87,6 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();
             Xaml.InstallView<NewPresentationView, NewPresentationViewModel>();
+            Xaml.InstallView<NewSurveyView, NewSurveyViewModel>();
             Xaml.InstallView<EditPresentationView, EditPresentationViewModel>();
             Xaml.InstallView<EditStringPresentationView, EditStringPresentationViewModel>();
             Xaml.InstallView<EditChartPresentationView, EditChartPresentationViewModel>();

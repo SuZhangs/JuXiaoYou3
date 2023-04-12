@@ -14,38 +14,113 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:SurveyPartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageConverter x:Key="ImageConverter"/>
-        <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
-        <DataTemplate DataType="{x:Type m:StickyNote}">
-            <Border Background="{f:BackgroundBrush}">
+        <thisConverters:ImageConverter x:Key="ImageConverter" />
+        <local:SurveyPartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+
+        <DataTemplate DataType="{x:Type m:SurveySet}">
+            <Border Background="Transparent"
+                    CornerRadius="6"
+                    Margin="4"
+                    Padding="16"
+                    Height="128"
+                    Width="320">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-
-                        <f:MenuItem f:Language.Id="global.Remove"
-                            Header="{f:Language global.Remove}"
-                            Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                        <f:MenuItem Header="{f:Language global.Add}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.AddSurveyCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Edit}" />
+                        
+                        <f:MenuItem Header="{f:Language global.Edit}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.EditSurveySetCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Edit}" />
 
                         <f:MenuItem f:Language.Id="global.Up"
-                            Header="上移"
-                            Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowUp}" />
+                                    Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpSurveySetCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
 
                         <f:MenuItem f:Language.Id="global.Down"
-                            Header="下移"
-                            Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowDown}"/>
+                                    Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownSurveySetCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                        <Separator/>
 
-                        <f:MenuItem f:Language.Id="global.Presentation"
-                            Header="预览"
-                            Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.Upload}" />
+                        <f:MenuItem f:Language.Id="global.Remove"
+                                    Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveSurveySetCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
                     </f:ContextMenu>
                 </Border.ContextMenu>
+                <StackPanel>
+                    <TextBlock FontSize="20"
+                               FontWeight="Bold"
+                               Text="{Binding Name,Mode=OneWay}" />
+                    <TextBlock FontSize="13"
+                               Margin="0 8"
+                               Text="{Binding Intro,Mode=OneWay}"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type m:Survey}">
+            <Border Background="{f:Brush BackgroundLevel3}"
+                        CornerRadius="6"
+                              Margin="4"
+                        Padding="16"
+                              Height="160"
+                              Width="500">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Header="{f:Language global.Edit}"
+                                        Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.EditSurveyCommand}"
+                                        CommandParameter="{Binding}"
+                                        Icon="{StaticResource FeatherIcon.Edit}" />
+
+                            <f:MenuItem f:Language.Id="global.Up"
+                                        Header="上移"
+                                        Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpSurveyCommand}"
+                                        CommandParameter="{Binding}"
+                                        Icon="{StaticResource FeatherIcon.ArrowUp}" />
+
+                            <f:MenuItem f:Language.Id="global.Down"
+                                        Header="下移"
+                                        Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownSurveyCommand}"
+                                        CommandParameter="{Binding}"
+                                        Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                            <Separator/>
+
+                            <f:MenuItem f:Language.Id="global.Remove"
+                                        Header="{f:Language global.Remove}"
+                                        Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveSurveyCommand}"
+                                        CommandParameter="{Binding}"
+                                        Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                        </f:ContextMenu>
+                    </f:ContextMenu>
+                </Border.ContextMenu>
+                <Expander>
+                    <Expander.Header>
+                        <StackPanel>
+                            <TextBlock FontSize="20"
+                                   FontWeight="Bold"
+                                   Text="{Binding Title,Mode=OneWay}" />
+                            <TextBlock FontSize="13"
+                                   Foreground="{f:Brush ForegroundLevel3}"
+                                   Margin="0 8"
+                                   Text="{Binding Id,Mode=OneWay}" />
+                        </StackPanel>
+                    </Expander.Header>
+                    <f:HeaderedMultiLine Header="答案"
+                                         Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        
+                    </f:HeaderedMultiLine>
+                </Expander>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
@@ -54,37 +129,20 @@
                     Orientation="Horizontal">
             <ftk:ToolButton f:Language.Id="global.Add"
                             Content="{f:Language global.add}"
-                            Command="{Binding AddCommand}"
+                            Command="{Binding AddSurveySetCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
 
         </StackPanel>
 
         <DockPanel>
-            <f:ListBox DockPanel.Dock="Right"
-                       ItemsSource="{Binding Sets,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Album}">
-                        <TextBlock Margin="8"
-                                   Text="{Binding Source}"
-                                   TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </f:ListBox>
-
-            <ScrollViewer Padding="12">
-                <Viewbox>
-                    <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Album}">
-                                <Image Stretch="None"
-                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </Viewbox>
+            <f:ListBox ItemsSource="{Binding Sets,Mode=OneWay}"
+                       SelectedItem="{Binding SelectedSurveySet,Mode=TwoWay}"
+                       Width="384"/>
+            
+            <ScrollViewer Margin="0 16 0 0">
+                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ItemsSource="{Binding Surveys,Mode=OneWay}"/>
             </ScrollViewer>
         </DockPanel>
     </DockPanel>

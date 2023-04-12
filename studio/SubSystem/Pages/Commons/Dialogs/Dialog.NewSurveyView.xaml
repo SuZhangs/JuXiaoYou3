@@ -9,7 +9,7 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewSurveyViewModel}, IsDesignTimeCreatable=True}"
-                     Height="540"
+                     Height="480"
                      Width="768">
 
     <f:DialogPage BorderThickness="0"
@@ -19,10 +19,14 @@
        <DockPanel>
            <f:HeaderedSingleLine DockPanel.Dock="Top"
                                  Header="标题"
-                                 Height="96">
+                                 Height="64"
+                                 Margin="0 8"
+                                 Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                
            </f:HeaderedSingleLine>
-           <f:HeaderedMultiLine Header="简介"/>
+            <f:HeaderedMultiLine Header="简介"
+                                 Margin="0 8"
+                                 Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
        </DockPanel>
     </f:DialogPage>
 </f:ForestUserControl>

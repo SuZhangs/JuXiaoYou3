@@ -241,7 +241,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             
         }
 
-        protected override void OnPropertyChanged(string propertyName)
+        protected sealed override void OnPropertyValueChanged(string propertyName)
         {
             foreach (var command in _commandMapping)
             {

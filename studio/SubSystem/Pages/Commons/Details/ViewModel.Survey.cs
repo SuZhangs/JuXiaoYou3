@@ -18,13 +18,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Sets                      = new ObservableCollection<SurveySet>();
             Surveys                   = new ObservableCollection<Survey>();
             AddSurveySetCommand       = AsyncCommand(AddSurveySetImpl);
-            AddSurveyCommand          = AsyncCommand(AddSurveyImpl);
+            AddSurveyCommand          = AsyncCommand<SurveySet>(AddSurveyImpl);
             ShiftUpSurveySetCommand   = Command<SurveySet>(ShiftUpSurveySetImpl);
             ShiftUpSurveyCommand      = Command<Survey>(ShiftUpSurveyImpl);
             ShiftDownSurveySetCommand = Command<SurveySet>(ShiftDownSurveySetImpl);
             ShiftDownSurveyCommand    = Command<Survey>(ShiftDownSurveyImpl);
+            EditSurveySetCommand      = AsyncCommand<SurveySet>(EditSurveySetImpl);
+            EditSurveyCommand         = AsyncCommand<Survey>(EditSurveyImpl);
             RemoveSurveySetCommand    = AsyncCommand<SurveySet>(RemoveSurveySetImpl);
             RemoveSurveyCommand       = AsyncCommand<Survey>(RemoveSurveyImpl);
+        }
+        
+        private async Task EditSurveyImpl(Survey item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            var r = await NewSurveyViewModel.Edit(item);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+            
+            Save();
+        }
+
+        private async Task EditSurveySetImpl(SurveySet item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            
+            var r = await NewSurveyViewModel.Edit(item);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+            
+            Save();
         }
 
         private async Task RemoveSurveyImpl(Survey item)
@@ -116,7 +153,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Save();
         }
 
-        private async Task AddSurveyImpl()
+        private async Task AddSurveyImpl(SurveySet item)
         {
             var r = await NewSurveyViewModel.New();
             
@@ -125,8 +162,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
             
-            SelectedSurveySet.Items.Add(r.Value);
-            Surveys.Add(r.Value);
+            item.Items.Add(r.Value);
             Save();
         }
 
@@ -193,7 +229,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public AsyncRelayCommand AddSurveySetCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddSurveyCommand { get; }
+        public AsyncRelayCommand<SurveySet> AddSurveyCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<SurveySet> ShiftUpSurveySetCommand { get; }
@@ -203,13 +239,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<SurveySet> ShiftDownSurveySetCommand { get; }
+        
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Survey> ShiftDownSurveyCommand { get; }
-
+        
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<SurveySet> RemoveSurveySetCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Survey> RemoveSurveyCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<SurveySet> EditSurveySetCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<Survey> EditSurveyCommand { get; }
     }
 }

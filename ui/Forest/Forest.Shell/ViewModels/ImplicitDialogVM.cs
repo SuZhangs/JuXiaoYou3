@@ -159,7 +159,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     {
         protected ExplicitDialogVM()
         {
-            CompletedCommand = new RelayCommand(Complete, IsCompleted);
+            CompletedCommand = Command(Complete, IsCompleted, true);
         }
 
         protected void Complete()
