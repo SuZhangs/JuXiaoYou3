@@ -24,6 +24,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
             get => _name;
             set => SetValue(ref _name, value);
         }
+        
         public ObservableCollection<Survey> Items { get; init; }
     }
 

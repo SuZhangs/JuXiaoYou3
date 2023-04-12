@@ -40,9 +40,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Result = Block;
         }
 
-        protected override string Failed()
-        {
-            return string.Empty;
-        }
+        protected override string Failed() => SubSystemString.Unknown;
     }
 }

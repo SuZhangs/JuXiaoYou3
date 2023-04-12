@@ -26,10 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                   .ToArray();
         }
 
-        protected override string Failed()
-        {
-            return string.Empty;
-        }
+        protected override string Failed() => SubSystemString.Unknown;
 
         private ListBox _targetElement;
 

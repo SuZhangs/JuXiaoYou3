@@ -62,7 +62,7 @@
 
         <DockPanel>
             <f:ListBox DockPanel.Dock="Right"
-                       ItemsSource="{Binding Collection,Mode=OneWay}"
+                       ItemsSource="{Binding Sets,Mode=OneWay}"
                        SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type m:Album}">

@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Result = ms;
         }
 
-        protected override string Failed() => string.Empty;
+        protected override string Failed() => SubSystemString.Unknown;
 
         /// <summary>
         /// 目标图片

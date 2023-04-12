@@ -795,6 +795,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string ImageTooSmall => GetText("text.ImageTooSmall");
         public static string ImageTooBig => GetText("text.ImageTooBig");
         public static string EmptyName => GetText("text.EmptyName");
+        public static string EmptyIntro => GetText("text.EmptyIntro");
         public static string EmptyAuthor => GetText("text.EmptyAuthor");
         public static string EmptyValue => GetText("text.EmptyValue");
         public static string EmptyFor => GetText("text.EmptyFor");
@@ -803,6 +804,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string EditNameTitle => GetText("text.editName");
         public static string EditValueTitle => GetText("text.editValue");
         public static string SelectTitle => GetText("global.select");
+        public static string Unknown => GetText("text.UnknownException ");
 
         public static string Processing
         {

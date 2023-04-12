@@ -151,10 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             Result = document;
         }
 
-        protected override string Failed()
-        {
-            return SubSystemString.EmptyName;
-        }
+        protected override string Failed() => SubSystemString.Unknown;
         
         /// <summary>
         /// 是否隐藏

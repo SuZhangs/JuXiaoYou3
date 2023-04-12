@@ -65,6 +65,6 @@
         /// <summary>
         /// 是否可移除
         /// </summary>
-        public sealed override bool Removable => false;
+        public sealed override bool Removable => true;
     }
 }

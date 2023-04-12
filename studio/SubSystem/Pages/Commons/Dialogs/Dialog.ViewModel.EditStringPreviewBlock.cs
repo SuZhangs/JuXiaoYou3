@@ -116,10 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             spb.ValueSourceID = r.Metadata;
         }
 
-        protected override string Failed()
-        {
-            return string.Empty;
-        }
+        protected override string Failed() => SubSystemString.Unknown;
 
         private ModuleBlock _selectedBlock;
 
