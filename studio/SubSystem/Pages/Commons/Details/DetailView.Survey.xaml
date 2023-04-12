@@ -21,7 +21,7 @@
             <Border Background="Transparent"
                     CornerRadius="6"
                     Margin="4"
-                    Padding="16">
+                    Padding="16 8">
                 <Border.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="{f:Language global.Add}"
@@ -58,8 +58,9 @@
                     <TextBlock FontSize="20"
                                FontWeight="Bold"
                                Text="{Binding Name,Mode=OneWay}" />
+                    
                     <TextBlock FontSize="13"
-                               Margin="0 8"
+                               Margin="0 8 0 0"
                                Text="{Binding Intro,Mode=OneWay}"
                                TextWrapping="Wrap" />
                 </StackPanel>
@@ -103,9 +104,11 @@
                         <TextBlock DockPanel.Dock="Top"
                                    FontSize="13"
                                        Foreground="{f:Brush ForegroundLevel3}"
-                                       Margin="0 8"
-                                       Text="{Binding Id,Mode=OneWay}" />
+                                       Margin="0 16 0 8"
+                                       Text="{Binding Intro,Mode=OneWay}"
+                                   TextWrapping="Wrap"/>
                         <f:HeaderedMultiLine Header="答案"
+                                             Margin="0 8"
                                          Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
 
                         </f:HeaderedMultiLine>
@@ -128,7 +131,7 @@
         <DockPanel>
             <f:ListBox ItemsSource="{Binding Sets,Mode=OneWay}"
                        SelectedItem="{Binding SelectedSurveySet,Mode=TwoWay}"
-                       Width="384" />
+                       Width="320" />
 
             <ScrollViewer Margin="16 0 0 0">
                 <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"

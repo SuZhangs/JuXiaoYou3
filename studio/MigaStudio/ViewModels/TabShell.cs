@@ -27,7 +27,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
-            New<CharacterRelationshipViewModel>();
         }
 
         protected override void RequireStartupTabViewModel()

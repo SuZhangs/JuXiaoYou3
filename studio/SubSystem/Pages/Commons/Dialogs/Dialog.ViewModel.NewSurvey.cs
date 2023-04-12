@@ -6,9 +6,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         private string _name;
         private string _intro;
-        
-        protected override bool IsCompleted() => !string.IsNullOrEmpty(Name) &&
-                                                 !string.IsNullOrEmpty(Intro);
+
+        protected override bool IsCompleted()
+        {
+            if (Source is null)
+            {
+                return !string.IsNullOrEmpty(Name) &&
+                       !string.IsNullOrEmpty(Intro);
+            }
+
+            return true;
+        }
 
         public static Task<Op<SurveySet>> NewSet()
         {
@@ -20,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             });
         }
-        
+
         public static Task<Op<Survey>> New()
         {
             return DialogService().Dialog<Survey, NewSurveyViewModel>(new NewSurveyViewModel(), new Parameter
@@ -34,7 +42,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public static Task<Op<SurveySet>> Edit(SurveySet set)
         {
-            
             return DialogService().Dialog<SurveySet, NewSurveyViewModel>(new NewSurveyViewModel(), new Parameter
             {
                 Args = new[]
@@ -44,10 +51,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             });
         }
-        
+
         public static Task<Op<Survey>> Edit(Survey item)
         {
-            
             return DialogService().Dialog<Survey, NewSurveyViewModel>(new NewSurveyViewModel(), new Parameter
             {
                 Args = new[]
@@ -62,8 +68,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var p = parameter.Parameter;
             var a = p.Args;
-            IsSet  = (bool)a[0];
-            Source = a.Length > 1 ? a[1] : null;
+            IsSet = (bool)a[0];
+
+            if (a.Length > 1 && a[1] is not null)
+            {
+                Source = a[1];
+
+                if (Source is SurveySet ss)
+                {
+                    Name  = ss.Name;
+                    Intro = ss.Intro;
+                }
+
+                if (Source is Survey s)
+                {
+                    Name  = s.Name;
+                    Intro = s.Intro;
+                }
+            }
         }
 
         protected override void Finish()
@@ -75,7 +97,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Result   = Source;
                 return;
             }
-            
+
             if (Source is Survey s)
             {
                 s.Intro = Intro;
@@ -92,7 +114,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     Items = new ObservableCollection<Survey>(),
                     Name  = Name,
                     Intro = Intro,
-
                 };
             }
             else
@@ -120,6 +141,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// 源
         /// </summary>
         public object Source { get; private set; }
+
         public bool IsSet { get; private set; }
 
         /// <summary>
@@ -128,10 +150,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public string Intro
         {
             get => _intro;
-            set
-            {
-                SetValue(ref _intro, value);
-            }
+            set { SetValue(ref _intro, value); }
         }
 
         /// <summary>
@@ -140,10 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public string Name
         {
             get => _name;
-            set
-            {
-                SetValue(ref _name, value);
-            }
+            set { SetValue(ref _name, value); }
         }
     }
 }
