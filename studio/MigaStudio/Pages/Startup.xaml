@@ -39,21 +39,24 @@
                        Margin="0 16 0 0">
                 <f:SpacingStackPanel DockPanel.Dock="Right"
                                      Gap="8"
-                                     Width="384">
+                                     Width="320">
                     <fs:ActionButton Content="浏览教程"/>
                     <fs:ActionButton Content="反馈BUG"/>
                     <fs:ActionButton Content="赞助我们"/>
                     <fs:ActionButton Content="联系我们"/>
                 </f:SpacingStackPanel>
                 
-                <f:SpacingStackPanel DockPanel.Dock="Left"
-                                     Orientation="Horizontal"
-                                     Gap="8">
-                    <fs:ActionButton Content="浏览教程"/>
-                    <fs:ActionButton Content="反馈BUG"/>
-                    <fs:ActionButton Content="赞助我们"/>
-                    <fs:ActionButton Content="联系我们"/>
-                </f:SpacingStackPanel>
+                <WrapPanel DockPanel.Dock="Left"
+                           Orientation="Horizontal">
+                    <fs:ActionButton Content="浏览教程"
+                                     Margin="4"/>
+                    <fs:ActionButton Content="反馈BUG"
+                                     Margin="4"/>
+                    <fs:ActionButton Content="赞助我们"
+                                     Margin="4"/>
+                    <fs:ActionButton Content="联系我们"
+                                     Margin="4"/>
+                </WrapPanel>
             </DockPanel>
         </Grid>
     </ScrollViewer>
