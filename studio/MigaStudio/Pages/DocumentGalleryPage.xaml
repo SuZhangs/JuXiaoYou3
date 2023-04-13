@@ -20,6 +20,9 @@
 
         <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+        <thisConverters:LockStateConverter x:Key="LockStateConverter"
+                                           Lock="{StaticResource FeatherIcon.Lock}"
+                                           Unlock="{StaticResource FeatherIcon.Unlock}" />
 
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectedDocumentCommand}"
@@ -172,8 +175,9 @@
                         <ftk:ToolButton Content="锁定"
                                         Command="{Binding LockOrUnlockDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Lock}"
+                                        Icon="{Binding SelectedItem.IsLocked,Mode=TwoWay,Converter={StaticResource LockStateConverter}}"
                                         ShowText="True" />
+                        
                         <ftk:ToolButton Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"

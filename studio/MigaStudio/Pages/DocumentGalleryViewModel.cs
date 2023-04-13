@@ -179,6 +179,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
+            if (cache.IsDeleted)
+            {
+                return;
+            }
+
+            if (cache.IsLocked)
+            {
+                await Warning(SubSystemString.CannotDelete);
+                return;
+            }
+
             if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
             {
                 return;

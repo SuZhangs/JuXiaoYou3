@@ -779,7 +779,8 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string EditNameTitle => GetText("text.editName");
         public static string EditValueTitle => GetText("text.editValue");
         public static string SelectTitle => GetText("global.select");
-        public static string Unknown => GetText("text.UnknownException ");
+        public static string Unknown => GetText("text.UnknownException");
+        public static string CannotDelete => GetText("text.CannotDelete");
 
         public static string Processing
         {
