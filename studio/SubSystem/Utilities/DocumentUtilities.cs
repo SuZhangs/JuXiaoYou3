@@ -302,7 +302,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            cache.IsLocked = !cache.IsDeleted;
+            cache.IsLocked = !cache.IsLocked;
             engine.UpdateDocument(cache);
         }
     }

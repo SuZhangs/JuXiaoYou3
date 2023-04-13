@@ -23,7 +23,9 @@
         <thisConverters:LockStateConverter x:Key="LockStateConverter"
                                            Lock="{StaticResource FeatherIcon.Lock}"
                                            Unlock="{StaticResource FeatherIcon.Unlock}" />
-
+        <thisConverters:LockStateNameConverter x:Key="LockStateNameConverter"
+                                               Lock="{f:Language global.unlock}"
+                                               Unlock="{f:Language global.lock}" />
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectedDocumentCommand}"
                             CommandParameter="{Binding}"
@@ -172,7 +174,7 @@
                                         Command="{Binding OpenDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                         Palette="HighlightPalette1" />
-                        <ftk:ToolButton Content="锁定"
+                        <ftk:ToolButton Content="{Binding SelectedItem.IsLocked, Mode=OneWay,Converter={StaticResource LockStateNameConverter}}"
                                         Command="{Binding LockOrUnlockDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                         Icon="{Binding SelectedItem.IsLocked,Mode=TwoWay,Converter={StaticResource LockStateConverter}}"
