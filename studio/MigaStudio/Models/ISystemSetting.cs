@@ -21,6 +21,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
             await JSON.ToFileAsync(RepositorySetting, RepositorySettingFileName);
         }
 
+        public void Save()
+        {
+            JSON.ToFile(RepositorySetting, RepositorySettingFileName);
+        }
+
         public async Task AddRepository(RepositoryCache cache)
         {
             if (cache is null)

@@ -19,7 +19,6 @@
     <UserControl.Resources>
         <thisVM:DirectoryManagerViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <DataTemplate DataType="{x:Type thisModels:FolderCounter}">
-
             <fs:ActionButton BorderThickness="0"
                              CornerRadius="12"
                              Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenCommand}"

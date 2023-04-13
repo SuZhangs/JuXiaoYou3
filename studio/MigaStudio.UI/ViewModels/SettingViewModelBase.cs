@@ -10,6 +10,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             Items = new ObservableCollection<ISettingItem>();
         }
+        
+
 
         protected ISettingItem Text(string id, string defaultValue, Action<string> callback)
         {
