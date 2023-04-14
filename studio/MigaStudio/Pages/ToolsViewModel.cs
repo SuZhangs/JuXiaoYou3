@@ -35,6 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             CreateDialogFeature<DirectoryManagerViewModel>(string.Empty, "__DirectoryStatistic", null);
             CreateDialogFeature<RepairToolViewModel>(string.Empty, "global.repair", null);
+            CreateDialogFeature<KeywordViewModel>(string.Empty, "__Keywords", null);
         }
 
         private void CreateDialogFeature<T>(string group, string name, params object[] e)
