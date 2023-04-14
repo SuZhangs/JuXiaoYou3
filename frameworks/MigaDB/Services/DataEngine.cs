@@ -150,15 +150,4 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// </summary>
         public bool Activated { get; private set; }
     }
-    
-    
-    public abstract class ConceptDataEngine : DataEngine, IConceptProvider
-    {
-        /// <summary>
-        /// 聚合文档
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public abstract UnifiedItem Aggregate(string id);
-    }
 }

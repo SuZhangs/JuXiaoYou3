@@ -5,7 +5,7 @@ using static Acorisoft.FutureGL.MigaDB.Constants;
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     [ConceptProvider]
-    public class ComposeEngine : DataEngine, IConceptProvider
+    public class ComposeEngine : KnowledgeEngine
     {
 
         public void AddCompose(Compose document)
@@ -19,25 +19,24 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         public void UpdateCompose(Compose document)
         {
         }
-        
-        protected override void OnDatabaseOpening(DatabaseSession session)
+
+        public override Knowledge GetKnowledge(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnDatabaseOpeningOverride(DatabaseSession session)
         {
             var database = session.Database;
             ComposeDB       = database.GetCollection<Compose>(Name_Compose);
             ComposeCacheDB  = database.GetCollection<ComposeCache>(Name_Cache_Compose);
         }
 
-        protected override void OnDatabaseClosing()
+        protected override void OnDatabaseClosingOverride()
         {
             ComposeDB       = null;
             ComposeCacheDB  = null;
         }
-
-        public UnifiedItem Aggregate(string id)
-        {
-            throw new NotImplementedException();
-        }
-        
 
 
         /// <summary>

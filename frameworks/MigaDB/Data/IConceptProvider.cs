@@ -2,6 +2,9 @@
 {
     public interface IConceptProvider
     {
-        UnifiedItem Aggregate(string id);
+        Knowledge GetKnowledge(string id);
+        IEnumerable<Concept> GetConcepts();
+        IEnumerable<Concept> GetConcepts(Predicate<Concept> predicate);
+        Concept GetConcept(string id);
     }
 }

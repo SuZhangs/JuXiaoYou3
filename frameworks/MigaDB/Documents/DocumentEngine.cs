@@ -7,16 +7,16 @@ using static Acorisoft.FutureGL.MigaDB.Constants;
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     [ConceptProvider]
-    public class DocumentEngine : DataEngine, IConceptProvider
+    public class DocumentEngine : KnowledgeEngine
     {
-        protected override void OnDatabaseOpening(DatabaseSession session)
+        protected override void OnDatabaseOpeningOverride(DatabaseSession session)
         {
             var database = session.Database;
             DocumentDB      = database.GetCollection<Document>(Name_Document);
             DocumentCacheDB = database.GetCollection<DocumentCache>(Name_Cache_Document);
         }
 
-        protected override void OnDatabaseClosing()
+        protected override void OnDatabaseClosingOverride()
         {
             DocumentDB      = null;
             DocumentCacheDB = null;
@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
         
 
-        public UnifiedItem Aggregate(string id)
+        public override Knowledge GetKnowledge(string id)
         {
             var cache = DocumentCacheDB.FindById(id);
 
@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return null;
             }
 
-            return new UnifiedItem
+            return new Knowledge
             {
                 Id     = cache.Id,
                 Name   = cache.Name,
@@ -66,6 +66,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             }
 
 
+            AddConcept(document.Id, document.Name, DataEngineType.DocumentEngine);
             DocumentCacheDB.Insert(document);
 
             //
@@ -149,6 +150,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
 
             Modified();
+            RemoveConcept(document.Id);
             DocumentCacheDB.Update(cache);
         }
         
@@ -167,6 +169,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             cache.IsDeleted      = true;
             cache.TimeOfModified = DateTime.Now;
             DocumentCacheDB.Update(cache);
+            RemoveConcept(cache.Id);
             Modified();
         }
 
@@ -198,6 +201,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
+            AddConcept(document.Id, document.Name, DataEngineType.DocumentEngine);
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
         }
@@ -224,6 +228,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
         
+            AddConcept(cache.Id, cache.Name, DataEngineType.DocumentEngine);
             DocumentCacheDB.Update(cache);
         }
         

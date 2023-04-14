@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data
 {
-    public class UnifiedItem : StorageObject
+    public class Knowledge : StorageObject
     {
         public string Avatar { get; init; }
         public string Name { get; init; }
