@@ -3,6 +3,7 @@ using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Concepts;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using static Acorisoft.FutureGL.MigaDB.Constants;
+// ReSharper disable ClassNeverInstantiated.Global
 
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
