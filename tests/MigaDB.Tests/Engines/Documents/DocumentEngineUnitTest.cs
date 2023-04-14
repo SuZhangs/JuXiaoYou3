@@ -27,11 +27,11 @@ namespace MigaDB.Tests.Engines.Documents
             
             
             er = engine.AddDocument(new Document{ Id = "1", Metas = new MetadataCollection()});
-            Assert.IsTrue(er.Reason == EngineFailedReason.ParameterDataError);
+            Assert.IsTrue(er.Reason == EngineFailedReason.InputDataError);
             
             
             er = engine.AddDocument(new Document{ Id = "1", Parts = new DataPartCollection()});
-            Assert.IsTrue(er.Reason == EngineFailedReason.ParameterDataError);
+            Assert.IsTrue(er.Reason == EngineFailedReason.InputDataError);
 
             var docA = new Document { Id = "A", Metas = new MetadataCollection(), Parts = new DataPartCollection() };
             var docB = new Document { Id = "A", Metas = new MetadataCollection(), Parts = new DataPartCollection() };

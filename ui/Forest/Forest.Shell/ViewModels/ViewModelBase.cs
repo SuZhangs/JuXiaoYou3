@@ -270,11 +270,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         {
             if (_initialized)
             {
-#if DEBUG
-                throw new InvalidOperationException();
-#else
                 return;
-#endif
             }
 
             _initialized      = true;

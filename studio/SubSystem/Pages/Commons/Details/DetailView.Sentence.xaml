@@ -12,75 +12,102 @@
              mc:Ignorable="d"
              d:DesignHeight="300" 
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type local:AlbumPartViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type local:SentencePartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageConverter x:Key="ImageConverter"/>
+        <thisConverters:ImageConverter x:Key="ImageConverter" />
+        <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+
+        <DataTemplate DataType="{x:Type m:StickyNote}">
+            <Border Background="{f:Brush BackgroundLevel3}"
+                        CornerRadius="6"
+                              Margin="4"
+                        Padding="16"
+                              Height="160"
+                              Width="500">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="{f:Language global.Edit}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Edit}" />
+
+                        <f:MenuItem f:Language.Id="global.Up"
+                                    Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
+
+                        <f:MenuItem f:Language.Id="global.Down"
+                                    Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                        <Separator/>
+
+                        <f:MenuItem f:Language.Id="global.Remove"
+                                    Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                    </f:ContextMenu>
+                </Border.ContextMenu>
+                <StackPanel>
+                    <TextBlock FontSize="20"
+                                   FontWeight="Bold"
+                                   Text="{Binding Title,Mode=OneWay}" />
+                    <TextBlock FontSize="13"
+                                   Foreground="{f:Brush ForegroundLevel3}"
+                                   Margin="0 8"
+                                   Text="{Binding Id,Mode=OneWay}" />
+                    <UniformGrid Columns="3"
+                                     Margin="0 4">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
+                                           Margin="0 8"
+                                           Text="创建时间" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
+                                           Margin="0 8"
+                                           Text="修改时间" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                        </DockPanel>
+                        <DockPanel>
+
+                            <TextBlock DockPanel.Dock="Top"
+                                           Margin="0 8"
+                                           Text="长度" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                           Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
+                        </DockPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
             <ftk:ToolButton f:Language.Id="global.Add"
                             Content="{f:Language global.add}"
-                            Command="{Binding AddAlbumCommand}"
+                            Command="{Binding AddCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
 
-            <ftk:ToolButton f:Language.Id="global.Remove"
-                            Content="{f:Language global.Remove}"
-                            Command="{Binding RemoveAlbumCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.MinusCircle}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Up"
-                            Content="上移"
-                            Command="{Binding ShiftUpAlbumCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowUp}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Down"
-                            Content="下移"
-                            Command="{Binding ShiftDownAlbumCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowDown}"
-                            ShowText="True" />
-
-            <ftk:ToolButton f:Language.Id="global.Presentation"
-                            Content="预览"
-                            Command="{Binding OpenAlbumCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.Upload}"
-                            ShowText="True" />
         </StackPanel>
 
-        <DockPanel>
-            <f:ListBox DockPanel.Dock="Right"
-                       ItemsSource="{Binding Collection,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Album}">
-                        <TextBlock Margin="8"
-                                   Text="{Binding Source}"
-                                   TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </f:ListBox>
-
-            <ScrollViewer Padding="12">
-                <Viewbox>
-                    <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Album}">
-                                <Image Stretch="None"
-                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </Viewbox>
-            </ScrollViewer>
-
-        </DockPanel>
+        <ScrollViewer Margin="0 16 0 0">
+            <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ItemsSource="{Binding Collection,Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

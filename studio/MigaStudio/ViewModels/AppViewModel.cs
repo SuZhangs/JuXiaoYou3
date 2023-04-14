@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Markup;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
 
 // ReSharper disable ClassNeverInstantiated.Global
@@ -13,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class AppViewModel : TabBaseAppViewModel
     {
         private readonly GlobalStudioContext _context;
-        private readonly RoutingEventArgs           _parameter;
+        private readonly RoutingEventArgs    _parameter;
 
         public AppViewModel()
         {
@@ -24,7 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             _context = new GlobalStudioContext
             {
                 MainController = shell,
-                Controllers = new  ITabViewController[]
+                Controllers = new ITabViewController[]
                 {
                     shell,
                     launch,
@@ -35,10 +37,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     { shell.Id, shell },
                     { launch.Id, launch },
                     { quick.Id, quick },
+                    { IdOfVisitorController, new VisitorController() },
+                    { IdOfStoryboardController, new StoryboardController() },
+                    { IdOfInspirationController, new InspirationController() },
                 },
                 ControllerSetter = x => CurrentController = x
             };
-            
+
             _parameter = new RoutingEventArgs
             {
                 Parameter = new Parameter
@@ -50,17 +55,37 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 }
             };
             OnInitialize(_context);
-            Controller        = shell;
+            Controller = shell;
         }
 
         protected override bool OnKeyDown(WindowKeyEventArgs e)
         {
-            if (e.Args.Key == Key.F5)
+            var key = e.Args.Key;
+
+            switch (key)
             {
-                Xaml.Get<MusicService>()
-                    .PlayOrPause();
-                return true;
+                case Key.F1:
+                    ((TabController)Controller).New<SettingViewModel>();
+                    return true;
+                case Key.F5:
+                    Xaml.Get<MusicService>()
+                        .PlayOrPause();
+                    return true;
+                case Key.F6:
+                    Xaml.Get<MusicService>()
+                        .PlayLast();
+                    return true;
+                case Key.F7:
+                    Xaml.Get<MusicService>()
+                        .PlayNext();
+                    return true;
+                case Key.F12:
+                    ModeSwitchViewModel.Switch(_context);
+                    return true;
+                default:
+                    break;
             }
+
             return base.OnKeyDown(e);
         }
 
@@ -70,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 return;
             }
-            
+
             newController.Startup(_parameter);
             newController.Start();
         }
@@ -79,5 +104,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             CurrentController = _context.Controllers.First(x => x is LaunchViewController);
         }
+
+        public const string IdOfQuickStartController  = "__Quick";
+        public const string IdOfStoryboardController  = "__Storyboard";
+        public const string IdOfLaunchController      = "__Launch";
+        public const string IdOfInspirationController = "__Inspiration";
+        public const string IdOfVisitorController     = "__Visitor";
+        public const string IdOfTabShellController    = "__Main";
     }
 }

@@ -3,6 +3,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Models;
+using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {

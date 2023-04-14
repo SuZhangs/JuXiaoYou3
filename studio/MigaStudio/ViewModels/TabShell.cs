@@ -27,6 +27,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
+            
+            #if DEBUG
+            New<CharacterRelationshipViewModel>();
+            #endif
         }
 
         protected override void RequireStartupTabViewModel()
@@ -34,7 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             New<HomeViewModel>();
         }
 
-        public sealed override string Id => "::Main";
+        public sealed override string Id => AppViewModel.IdOfTabShellController;
 
         /// <summary>
         /// 用于绑定的<see cref="WindowState"/> 属性。
