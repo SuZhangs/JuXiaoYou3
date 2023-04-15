@@ -78,7 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public ObservableCollection<MainFeature> Features { get; init; }
 
         /// <summary>
-        /// 获取或设置 <see cref="SelectedViewModel\"/> 属性。
+        /// 获取或设置 <see cref="SelectedViewModel"/> 属性。
         /// </summary>
         public ViewModelBase SelectedViewModel
         {
