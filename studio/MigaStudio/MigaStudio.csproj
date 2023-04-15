@@ -74,11 +74,6 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
-        <Page Update="Pages\Dialogs\DirectoryManagerView.xaml">
-            <Generator>MSBuild:Compile</Generator>
-            <XamlRuntime>Wpf</XamlRuntime>
-            <SubType>Designer</SubType>
-        </Page>
         <Page Update="Pages\Dialogs\RepairToolView.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
@@ -105,6 +100,16 @@
           <SubType>Designer</SubType>
         </Page>
         <Page Update="Pages\Services\RankServicePage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Pages\Tools\BookmarkPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Pages\Dialogs\DirectoryManagerView.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>

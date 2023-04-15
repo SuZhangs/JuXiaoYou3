@@ -77,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             //
             // TODO: 安装语言
             SubSystem.InstallLanguages();
-            TemplateSystem.InstallLanguages();
+            // TemplateSystem.InstallLanguages();
             
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
                 DatabaseManager.GetDefaultDatabaseManager(
@@ -140,7 +140,7 @@ namespace Acorisoft.FutureGL.MigaStudio
             //
             // TODO: 安装视图
             SubSystem.InstallViews();
-            TemplateSystem.InstallViews();
+            // TemplateSystem.InstallViews();
         }
 
 
