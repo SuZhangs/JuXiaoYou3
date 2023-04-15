@@ -34,9 +34,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void Initialize()
         {
             CreateDialogFeature<MusicPlayerViewModel>(string.Empty, "__MusicPlayer", null);
-            CreateDialogFeature<ColorServiceViewModel>(string.Empty, "__ColorService", null);
-            CreateDialogFeature<RankServiceViewModel>(string.Empty, "__RankService", null);
-            CreateDialogFeature<CompareServiceViewModel>(string.Empty, "__CompareService", null);
+            CreatePageFeature<ColorServiceViewModel>(string.Empty, "__ColorService", null);
+            CreatePageFeature<RankServiceViewModel>(string.Empty, "__RankService", null);
+            CreatePageFeature<CompareServiceViewModel>(string.Empty, "__CompareService", null);
         }
         
         private void CreateDialogFeature<T>(string group, string name, params object[] e)
@@ -52,14 +52,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
 
-        private void CreateGalleryFeature<T>(string group, string name, params object[] e)
+        private void CreatePageFeature<T>(string group, string name, params object[] e)
         {
             var f = new MainFeature
             {
                 GroupId   = group,
                 NameId    = name,
                 ViewModel = typeof(T),
-                IsDialog = true,
+                IsDialog = false,
+                IsGallery = false,
                 Parameter = e
             };
             Features.Add(f);

@@ -24,18 +24,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
                 return;
             }
 
-            
             var vm = Controller.Start(feature.ViewModel, new Parameter
             {
                 Args = feature.Parameter
             });
+            
             feature.Cache ??= vm;
-            onStart.OnNext(feature.Cache);
+            
+            if (feature.IsGallery)
+            {
+                onStart.OnNext(feature.Cache);
+                return;
+            }
+
+            Controller.Start(vm);
         }
         
         public string GroupId { get; init; }
         public string NameId { get; init; }
         public bool IsDialog { get; init; }
+        public bool IsGallery { get; init; }
         public Type ViewModel { get; init; }
         public ViewModelBase Cache { get; set; }
         public object[] Parameter { get; init; }

@@ -35,8 +35,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             CreateDialogFeature<DirectoryManagerViewModel>(string.Empty, "__DirectoryStatistic", null);
             CreateDialogFeature<RepairToolViewModel>(string.Empty, "global.repair", null);
-            CreateDialogFeature<KeywordViewModel>(string.Empty, "__Keywords", null);
-            CreateDialogFeature<BookmarkViewModel>(string.Empty, "__Bookmark", null);
+            CreatePageFeature<KeywordViewModel>(string.Empty, "__Keywords", null);
+            CreatePageFeature<BookmarkViewModel>(string.Empty, "__Bookmark", null);
         }
 
         private void CreateDialogFeature<T>(string group, string name, params object[] e)
@@ -47,19 +47,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 NameId    = name,
                 ViewModel = typeof(T),
                 IsDialog  = true,
+                IsGallery = false,
                 Parameter = e
             };
             Features.Add(f);
         }
 
-        private void CreateGalleryFeature<T>(string group, string name, params object[] e)
+        private void CreatePageFeature<T>(string group, string name, params object[] e)
         {
             var f = new MainFeature
             {
                 GroupId   = group,
                 NameId    = name,
                 ViewModel = typeof(T),
-                IsDialog  = true,
+                IsDialog  = false,
+                IsGallery = false,
                 Parameter = e
             };
             Features.Add(f);

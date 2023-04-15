@@ -25,9 +25,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private const    string                 Tools     = "global.tools";
         private const    string                 Home      = "__Home";
         private readonly Subject<ViewModelBase> _onStart;
-        
-        private          MainFeature            _selectedFeature;
-        private          ViewModelBase          _selectedViewModel;
+
+        private MainFeature   _selectedFeature;
+        private ViewModelBase _selectedViewModel;
 
         public HomeViewModel()
         {
@@ -63,7 +63,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 GroupId   = group,
                 NameId    = name,
-                ViewModel   = typeof(T),
+                ViewModel = typeof(T),
+                IsGallery = true,
+                IsDialog  = false,
                 Parameter = e
             };
             Features.Add(f);
@@ -93,6 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 feature.Cache?.Suspend();
             }
+
             base.Suspend();
         }
 
@@ -102,7 +105,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 feature.Cache?.Resume();
             }
-            
+
             base.Resume();
         }
 
