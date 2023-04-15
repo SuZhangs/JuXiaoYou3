@@ -18,5 +18,8 @@
       <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="NetCore5.0.Microsoft.Expression.Drawing" Version="1.0.0" />
+    </ItemGroup>
 
 </Project>
