@@ -145,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
         }
 
-        public ObservableCollection<MainFeature> Features { get; init; }
+        public ObservableCollection<MainFeature> Features { get; }
 
         public sealed override bool Uniqueness => true;
         public sealed override bool Removable => false;

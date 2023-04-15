@@ -7,6 +7,15 @@ namespace Acorisoft.FutureGL.Forest.Services
     {
         class Session : IBusySession
         {
+            private void RunOnDispatcherThread(Action action)
+            {
+                var dispatcher = Host.Dispatcher;
+                if (dispatcher.CheckAccess())
+                    action();
+                else
+                    dispatcher.Invoke(action);
+            }
+            
             public void Dispose()
             {
                 if (Host is null)
@@ -14,7 +23,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                     return;
                 }
                 
-                Host.Dispatcher.Invoke(() =>
+                RunOnDispatcherThread(() =>
                 {
                     Host.IsBusy = false;
                 });
@@ -29,7 +38,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                     return;
                 }
 
-                Host.Dispatcher.Invoke(() =>
+                RunOnDispatcherThread(() =>
                 {
 
                     //

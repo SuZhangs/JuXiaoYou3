@@ -13,5 +13,10 @@
         <FileVersion>1.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
     </PropertyGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\ui\Forest\Forest.Controls\Forest.Controls.csproj" />
+      <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
+      <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
+    </ItemGroup>
 
 </Project>

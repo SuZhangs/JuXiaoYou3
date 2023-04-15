@@ -1,0 +1,42 @@
+﻿<shell:ForestWindow x:Class="Acorisoft.FutureGL.MigaStudio.Repairs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Repairs"
+        xmlns:shell="urn:acorisoft/forest/shell"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:f="urn:acorisoft/forest/ui"
+        Background="{f:BackgroundBrush}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <ScrollViewer Margin="32">
+        <WrapPanel>
+            <HeaderedContentControl Header="人物关系：">
+                <Border Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="10"
+                        Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Height="48"
+                                 Width="48">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="E:\2.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <TextBlock Grid.Column="1"
+                                   FontSize="16"
+                                   Margin="16 0"
+                                   Text="测试人物"/>
+                    </Grid>
+                </Border>
+            </HeaderedContentControl>
+        </WrapPanel>
+    </ScrollViewer>
+</shell:ForestWindow>

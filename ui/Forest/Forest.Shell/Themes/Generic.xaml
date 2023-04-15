@@ -645,6 +645,8 @@
     <Style x:Key="ForestWindow" TargetType="{x:Type w:ForestWindow}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Color" Value="Transparent" />
         <Setter Property="ExtendToTitleBar" Value="False"/>
         <Setter Property="MinWidth" Value="200" />
@@ -722,6 +724,7 @@
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Color" Value="Transparent" />
         <Setter Property="ExtendToTitleBar" Value="False"/>
         <Setter Property="MinWidth" Value="200" />
