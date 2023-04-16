@@ -302,6 +302,21 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         }
 
         #endregion
+        
+        
+
+        public void AddRelationship(CharacterRelationship rel)
+        {
+            // ReSharper disable once MergeSequentialChecks
+            if (rel is null ||
+                rel.Source is null ||
+                rel.Target is null)
+            {
+                return;
+            }
+
+            RelDB.Insert(rel);
+        }
 
         /// <summary>
         /// 清空所有文档

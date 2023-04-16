@@ -8,8 +8,38 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
     /// </summary>
     public class CharacterRelationship : StorageUIObject, IEdge<DocumentCache>
     {
-        private string _nameToSource;
-        private string _nameToTarget;
+        private string       _nameToSource;
+        private string       _nameToTarget;
+        private bool         _isBidirection;
+        private int          _degree;
+        private Relationship _relationship;
+
+        /// <summary>
+        /// 获取或设置 <see cref="Relationship"/> 属性。
+        /// </summary>
+        public Relationship Relationship
+        {
+            get => _relationship;
+            set => SetValue(ref _relationship, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Degree"/> 属性。
+        /// </summary>
+        public int Degree
+        {
+            get => _degree;
+            set => SetValue(ref _degree, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="IsBidirection"/> 属性。
+        /// </summary>
+        public bool IsBidirection
+        {
+            get => _isBidirection;
+            set => SetValue(ref _isBidirection, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="NameToTarget"/> 属性。
@@ -19,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
             get => _nameToTarget;
             set => SetValue(ref _nameToTarget, value);
         }
-        
+
         /// <summary>
         /// 关系名
         /// </summary>
@@ -28,28 +58,13 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
             get => _nameToSource;
             set => SetValue(ref _nameToSource, value);
         }
-        
-        /// <summary>
-        /// 是否为双向关系
-        /// </summary>
-        public bool IsBidirection { get; init; }
-        
-        /// <summary>
-        /// 程度，1-10
-        /// </summary>
-        public int Degree { get; init; }
-        
-        /// <summary>
-        /// 关系类型
-        /// </summary>
-        public Relationship Relationship { get; init; }
-        
+
         /// <summary>
         /// 源
         /// </summary>
         [BsonRef(Constants.Name_Cache_Document)]
         public DocumentCache Source { get; init; }
-        
+
         /// <summary>
         /// 目标
         /// </summary>

@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             AddDocumentCommand         = AsyncCommand(NewDocumentImpl);
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
+            AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
             _version                   = DocumentEngine.Version;
             Initialize();
         }
@@ -56,6 +57,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         #endregion
 
+        #region Document: Add / Remove / Reset
+        
+
         private async Task NewDocumentImpl()
         {
             await DocumentUtilities.AddDocument(DocumentEngine, DocumentType.Character, x =>
@@ -73,6 +77,49 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         {
             SelectedDocument = null;
         }
+        
+        #endregion
+
+        #region Relationship: Add / Remove
+
+        private async Task AddRelationshipImpl(DocumentCache source)
+        {
+            var hash = Relationships.Select(x => x.Id)
+                                    .ToHashSet();
+            var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
+                                                                       .Where(x => !hash.Contains(x.Id)));
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var r1 = await NewRelationshipViewModel.New(source, r.Value);
+            
+            if (!r1.IsFinished)
+            {
+                return;
+            }
+
+            DocumentEngine.AddRelationship(r1.Value);
+            Graph.AddEdge(r1.Value);
+        }
+
+        private async Task RemoveRelationshipImpl(CharacterRelationship rel)
+        {
+            if (rel is null)
+            {
+                return;
+            }
+
+            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+            
+            
+        }
+        #endregion
 
         /// <summary>
         /// 人物关系面板的可视性
@@ -115,10 +162,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         
         [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public ImageEngine RelationshipEngine { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public IDatabaseManager DatabaseManager { get; }
 
@@ -132,19 +176,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public AsyncRelayCommand AddDocumentCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand RemoveDocumentCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> OpenDocumentCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand ResetDocumentCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddRelCommand { get; }
+        public AsyncRelayCommand<DocumentCache> AddRelCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand RemoveRelCommand { get; }
+        public AsyncRelayCommand<CharacterRelationship> RemoveRelCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand CaptureCommand { get; }
