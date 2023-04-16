@@ -35,7 +35,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
                                                .FindAll());
-            Graph.AddEdgeRange(DocumentEngine.GetRelationships(DocumentType.Character));
+            var rels = DocumentEngine.GetRelationships(DocumentType.Character);
+            Graph.AddEdgeRange(rels);
         }
 
         #region OnStart / OnResume

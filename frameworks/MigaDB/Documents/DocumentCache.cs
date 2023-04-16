@@ -5,12 +5,33 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
     /// <summary>
     /// 文档缓存
     /// </summary>
-    public class DocumentCache : ObservableObject, IDataCache
+    public class DocumentCache : ObservableObject, IDataCache, IEquatable<DocumentCache>
     {
         private bool   _isLocked;
         private string _avatar;
         private string _name;
         private string _intro;
+        
+
+        public bool Equals(DocumentCache other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id && Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == GetType() && Equals((DocumentCache)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, (int)Type);
+        }
+        
         
         [BsonId]
         public string Id { get; init; }
