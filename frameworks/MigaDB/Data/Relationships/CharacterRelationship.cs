@@ -13,6 +13,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
         private bool         _isBidirection;
         private int          _degree;
         private Relationship _relationship;
+        
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public DocumentType Type { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="Relationship"/> 属性。

@@ -35,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
                                                .FindAll());
-            Graph.AddEdgeRange(DocumentEngine.GetRelationships());
+            Graph.AddEdgeRange(DocumentEngine.GetRelationships(DocumentType.Character));
         }
 
         #region OnStart / OnResume
@@ -94,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 return;
             }
 
-            var r1 = await NewRelationshipViewModel.New(source, r.Value);
+            var r1 = await NewRelationshipViewModel.New(source, r.Value, DocumentType.Character);
             
             if (!r1.IsFinished)
             {

@@ -296,9 +296,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
         #region GetRelationships
 
-        public IEnumerable<CharacterRelationship> GetRelationships()
+        public IEnumerable<CharacterRelationship> GetRelationships(DocumentType type)
         {
-            return RelDB.FindAll();
+            return RelDB.Include(x => x.Source)
+                        .Include(x => x.Target)
+                        .Find(x => x.Type == type);
         }
 
         #endregion

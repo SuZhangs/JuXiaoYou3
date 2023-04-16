@@ -5,14 +5,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
     public class NewRelationshipViewModel : ExplicitDialogVM
     {
-        public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target)
+        public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, DocumentType type)
         {
             return DialogService().Dialog<CharacterRelationship, NewRelationshipViewModel>(new Parameter
             {
                 Args = new object[]
                 {
                     source,
-                    target
+                    target,
+                    type
                 }
             });
         }
@@ -44,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             var a = p.Args;
             Source     = (DocumentCache)a[0];
             Target     = (DocumentCache)a[1];
-            IsEditMode = a.Length > 2 && a[2] is not null;
+            IsEditMode = a.Length > 2 && a[2] is CharacterRelationship;
 
             if (IsEditMode)
             {
@@ -56,6 +57,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 Relationship  = Entity.Relationship;
                 Degree        = Entity.Degree;
                 IsBidirection = Entity.IsBidirection;
+            }
+            else
+            {
+                Type = (DocumentType)a[2];
             }
             base.OnStart(parameter);
         }
@@ -89,7 +94,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                     NameToTarget  = NameToTarget,
                     Degree        = Degree,
                     Relationship  = Relationship,
-                    IsBidirection = IsBidirection
+                    IsBidirection = IsBidirection,
+                    Type = Type
                 };
             }
         }
@@ -108,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
             return SubSystemString.Unknown;
         }
-        
+        public DocumentType Type { get; private set; }
         public bool IsEditMode { get; private set; }
         public CharacterRelationship Entity { get; private set; }
 
