@@ -81,6 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<ImageView, ImageViewModel>();
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
+            Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
 
             Xaml.InstallView<NewDocumentView, NewDocumentViewModel>();
             Xaml.InstallView<DocumentGalleryExPage, DocumentGalleryViewModelEx>();
@@ -99,6 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, GeographyDocumentViewModel>();
 
+            Xaml.InstallView<NewRelationshipView, NewRelationshipViewModel>();
             Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 
             Xaml.InstallView<EditBlockView, EditBlockViewModel>();

@@ -81,50 +81,50 @@
                                     </ImageBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <TextBlock HorizontalAlignment="Center" 
+                            <TextBlock HorizontalAlignment="Center"
                                        Margin="0 8 0 0"
-                                       Text="{Binding Source.Name,Mode=OneWay}"/>
+                                       Text="{Binding Source.Name,Mode=OneWay}" />
                         </DockPanel>
 
 
                         <UniformGrid Grid.Column="1"
-                                 Margin="32 0"
-                                 Rows="2"
-                                 VerticalAlignment="Center">
+                                     Margin="32 0"
+                                     Rows="2"
+                                     VerticalAlignment="Center">
                             <DockPanel Margin="0 0 0 8">
                                 <TextBlock DockPanel.Dock="Top"
-                                       Margin="0 0 0 2"
-                                       Text="关系1"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Top"/>
+                                           Margin="0 0 0 2"
+                                           Text="关系1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top" />
                                 <drawing:LineArrow ArrowSize="6"
-                                               BendAmount="0"
-                                               EndArrow="Arrow"
-                                               Height="1"
-                                               StartArrow="Arrow"
-                                               Stroke="{f:ForegroundBrush}"
-                                               StrokeThickness="3"/>
+                                                   BendAmount="0"
+                                                   EndArrow="Arrow"
+                                                   Height="1"
+                                                   StartArrow="Arrow"
+                                                   Stroke="{f:ForegroundBrush}"
+                                                   StrokeThickness="3" />
                             </DockPanel>
 
                             <DockPanel Margin="0 8 0 0">
                                 <TextBlock DockPanel.Dock="Bottom"
-                                       Margin="0 0 0 2"
-                                       Text="关系2"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Top"/>
+                                           Margin="0 0 0 2"
+                                           Text="关系2"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top" />
 
                                 <drawing:LineArrow ArrowSize="6"
-                                               BendAmount="0"
-                                               Height="1"
-                                               EndArrow="Arrow"
-                                               StartArrow="Arrow"
-                                               Stroke="{f:ForegroundBrush}"
-                                               StrokeThickness="3"/>
+                                                   BendAmount="0"
+                                                   Height="1"
+                                                   EndArrow="Arrow"
+                                                   StartArrow="Arrow"
+                                                   Stroke="{f:ForegroundBrush}"
+                                                   StrokeThickness="3" />
                             </DockPanel>
                         </UniformGrid>
 
                         <DockPanel Grid.Column="2"
-                               VerticalAlignment="Center">
+                                   VerticalAlignment="Center">
                             <Rectangle DataContext="{Binding Target,Mode=OneWay}"
                                        RadiusX="6"
                                        RadiusY="6"
@@ -141,9 +141,9 @@
                                     </ImageBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <TextBlock HorizontalAlignment="Center" 
+                            <TextBlock HorizontalAlignment="Center"
                                        Margin="0 8 0 0"
-                                       Text="{Binding Target.Name,Mode=OneWay}"/>
+                                       Text="{Binding Target.Name,Mode=OneWay}" />
                         </DockPanel>
                     </Grid>
                 </Border>
@@ -246,133 +246,133 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <f:Drawer>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="384" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="16" />
-                <RowDefinition Height="144" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="16" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="384" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16" />
+            <RowDefinition Height="144" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="16" />
+        </Grid.RowDefinitions>
 
-            <studio:ZoomControl Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                Grid.Row="0"
-                                Grid.RowSpan="4"
-                                Background="{f:BackgroundBrush}">
-                <studio:ZoomControl.ContextMenu>
-                    <f:ContextMenu>
-                        <f:MenuItem Click="DisplayMode_Circle" Header="圆形视图" />
-                        <f:MenuItem Click="DisplayMode_ISOM" Header="ISOM视图" />
-                        <f:MenuItem Click="DisplayMode_LinLog" Header="LinLog视图" />
-                        <f:MenuItem Click="DisplayMode_KK" Header="KK视图" />
-                    </f:ContextMenu>
-                </studio:ZoomControl.ContextMenu>
-                <Border x:Name="Canvas">
-                    <this:CharacterGraphLayout x:Name="Relationship"
-                                               Graph="{Binding Graph}"
-                                               LayoutAlgorithmType="ISOM"
-                                               IsAnimationEnabled="False"
-                                               HighlightAlgorithmType="Simple"
-                                               OverlapRemovalConstraint="Must"
-                                               OverlapRemovalAlgorithmType="FSA">
-                        <this:CharacterGraphLayout.OverlapRemovalParameters>
-                            <overlap:OverlapRemovalParameters HorizontalGap="80" VerticalGap="80" />
-                        </this:CharacterGraphLayout.OverlapRemovalParameters>
-                    </this:CharacterGraphLayout>
-                </Border>
-            </studio:ZoomControl>
-
-            <Border Grid.Column="1"
-                    Grid.Row="1"
-                    Background="{f:Brush BackgroundLevel2}"
-                    Effect="{StaticResource MenuItem.ShadowEffect2}"
-                    Margin="8 16 16 16"
-                    Padding="8">
-                <DockPanel>
-                    <Rectangle DataContext="{Binding SelectedDocument,Mode=OneWay}"
-                               RadiusX="6"
-                               RadiusY="6"
-                               Width="96" >
-                        <Rectangle.Fill>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource Avatar}">
-                                        <Binding Path="Avatar" Mode="OneWay" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-
-                    <DockPanel Margin="16 8 8 0">
-                        <UniformGrid DockPanel.Dock="Bottom"
-                                     Columns="3"
-                                     Margin="0 4 0 0">
-                            <ftk:ToolButton Content="添加"
-                                            Command="{Binding AddDocumentCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="打开"
-                                            Command="{Binding OpenDocumentCommand}"
-                                            CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
-                                            Icon="{StaticResource FeatherIcon.Folder}"
-                                            ShowText="True" />
-                            <ftk:ToolButton Content="取消"
-                                            Command="{Binding ResetDocumentCommand}"
-                                            CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
-                                            Icon="{StaticResource FeatherIcon.Close}"
-                                            IconSize="13"
-                                            ShowText="True" />
-                        </UniformGrid>
-
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontWeight="Bold"
-                                   FontSize="16"
-                                   Text="{Binding SelectedDocument.Name,Mode=OneWay}"
-                                   TextWrapping="Wrap"
-                                   TextTrimming="CharacterEllipsis" />
-                    </DockPanel>
-                </DockPanel>
+        <studio:ZoomControl Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="4"
+                            Background="{f:BackgroundBrush}">
+            <studio:ZoomControl.ContextMenu>
+                <f:ContextMenu>
+                    <f:MenuItem Click="DisplayMode_Circle" Header="圆形视图" />
+                    <f:MenuItem Click="DisplayMode_ISOM" Header="ISOM视图" />
+                    <f:MenuItem Click="DisplayMode_LinLog" Header="LinLog视图" />
+                    <f:MenuItem Click="DisplayMode_KK" Header="KK视图" />
+                </f:ContextMenu>
+            </studio:ZoomControl.ContextMenu>
+            <Border x:Name="Canvas">
+                <this:CharacterGraphLayout x:Name="Relationship"
+                                           Graph="{Binding Graph}"
+                                           LayoutAlgorithmType="ISOM"
+                                           IsAnimationEnabled="False"
+                                           HighlightAlgorithmType="Simple"
+                                           OverlapRemovalConstraint="Must"
+                                           OverlapRemovalAlgorithmType="FSA">
+                    <this:CharacterGraphLayout.OverlapRemovalParameters>
+                        <overlap:OverlapRemovalParameters HorizontalGap="80" VerticalGap="80" />
+                    </this:CharacterGraphLayout.OverlapRemovalParameters>
+                </this:CharacterGraphLayout>
             </Border>
+        </studio:ZoomControl>
 
-            <Border Grid.Column="1"
-                    Grid.Row="2"
-                    Background="{f:Brush BackgroundLevel2}"
-                    Effect="{StaticResource MenuItem.ShadowEffect2}"
-                    Margin="8 16 16 16"
-                    Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">
-                <DockPanel>
-                    <UniformGrid DockPanel.Dock="Top"
-                                 Columns="3">
-                        
-                        <ftk:ToolButton Content="添加关系"
-                                        CornerRadius="0"
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Background="{f:Brush BackgroundLevel2}"
+                Effect="{StaticResource MenuItem.ShadowEffect2}"
+                Margin="8 16 16 16"
+                Padding="8">
+            <DockPanel>
+                <Rectangle DataContext="{Binding SelectedDocument,Mode=OneWay}"
+                           RadiusX="6"
+                           RadiusY="6"
+                           Width="96">
+                    <Rectangle.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{StaticResource Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <DockPanel Margin="16 8 8 0">
+                    <UniformGrid DockPanel.Dock="Bottom"
+                                 Columns="3"
+                                 Margin="0 4 0 0">
+                        <ftk:ToolButton Content="添加"
+                                        Command="{Binding AddDocumentCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
-                        
-                        <ftk:ToolButton Click="Button_reLayout" 
-                                        Content="重新布局"
-                                        CornerRadius="0"
-                                        Icon="{StaticResource FeatherIcon.Refresh}"
+                        <ftk:ToolButton Content="打开"
+                                        Command="{Binding OpenDocumentCommand}"
+                                        CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Folder}"
                                         ShowText="True" />
-                        
-                        <ftk:ToolButton Content="截图"
-                                        CornerRadius="0"
-                                        Icon="{StaticResource FeatherIcon.Camera}"
+                        <ftk:ToolButton Content="取消"
+                                        Command="{Binding ResetDocumentCommand}"
+                                        CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Close}"
+                                        IconSize="13"
                                         ShowText="True" />
                     </UniformGrid>
 
-                    <ItemsControl DockPanel.Dock="Bottom"
-                                  Margin="8"
-                                  ItemsSource="{Binding Relationships,Mode=OneWay}"/>
+                    <TextBlock DockPanel.Dock="Top"
+                               FontWeight="Bold"
+                               FontSize="16"
+                               Text="{Binding SelectedDocument.Name,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis" />
                 </DockPanel>
-            </Border>
-        </Grid>
-    </f:Drawer>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Grid.Row="2"
+                Background="{f:Brush BackgroundLevel2}"
+                Effect="{StaticResource MenuItem.ShadowEffect2}"
+                Margin="8 16 16 16"
+                Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Top"
+                             Columns="3">
+
+                    <ftk:ToolButton Content="添加关系"
+                                    Command="{Binding AddRelCommand}"
+                                    CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
+                                    CornerRadius="0"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    ShowText="True" />
+
+                    <ftk:ToolButton Click="Button_reLayout"
+                                    Content="重新布局"
+                                    CornerRadius="0"
+                                    Icon="{StaticResource FeatherIcon.Refresh}"
+                                    ShowText="True" />
+
+                    <ftk:ToolButton Content="截图"
+                                    CornerRadius="0"
+                                    Icon="{StaticResource FeatherIcon.Camera}"
+                                    ShowText="True" />
+                </UniformGrid>
+
+                <ItemsControl DockPanel.Dock="Bottom"
+                              Margin="8"
+                              ItemsSource="{Binding Relationships,Mode=OneWay}" />
+            </DockPanel>
+        </Border>
+    </Grid>
 </f:ForestUserControl>
