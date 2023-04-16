@@ -5,8 +5,11 @@
                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <ctrl:DoubleToLog10Converter x:Key="Log10Converter" />
+    <ctrl:EqualityToBooleanConverter x:Key="EqualityConverter" />
 
     <Style TargetType="{x:Type ctrl:ActionButton}">
         <Setter Property="Background" Value="{f:BackgroundBrush}" />
@@ -25,18 +28,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:ActionButton}">
-                    <Border x:Name="ContentBorder" 
+                    <Border x:Name="ContentBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Width="{TemplateBinding Width}" 
-                            Height="{TemplateBinding Height}" 
-                            MinWidth="{TemplateBinding MinWidth}" 
-                            MinHeight="{TemplateBinding MinHeight}" 
-                            Padding="{TemplateBinding Padding}" 
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}" >
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
@@ -44,41 +47,41 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Path x:Name="ControlIcon" 
-                                  Grid.Column="0" 
-                                  Margin="0 0 14 0" 
-                                  Height="{TemplateBinding IconSize}" 
-                                  Width="{TemplateBinding IconSize}" 
-                                  Stretch="Uniform" 
-                                  Data="{TemplateBinding Icon}" 
+                            <Path x:Name="ControlIcon"
+                                  Grid.Column="0"
+                                  Margin="0 0 14 0"
+                                  Height="{TemplateBinding IconSize}"
+                                  Width="{TemplateBinding IconSize}"
+                                  Stretch="Uniform"
+                                  Data="{TemplateBinding Icon}"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center" />
 
-                            <ContentPresenter x:Name="ContentPresenter" 
-                                              Grid.Column="1" 
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Grid.Column="1"
                                               VerticalAlignment="Center"
-                                              Content="{TemplateBinding Content}" 
+                                              Content="{TemplateBinding Content}"
                                               TextElement.Foreground="{TemplateBinding Foreground}" />
 
-                            <Path x:Name="ChevronIcon" 
+                            <Path x:Name="ChevronIcon"
                                   Grid.Column="2"
-                                  Margin="14 0 0 0" 
-                                  Height="{TemplateBinding IconSize}" 
-                                  Width="{TemplateBinding IconSize}" 
+                                  Margin="14 0 0 0"
+                                  Height="{TemplateBinding IconSize}"
+                                  Width="{TemplateBinding IconSize}"
                                   Stroke="{f:ForegroundBrush}"
                                   StrokeThickness="1"
-                                  Stretch="Uniform" 
-                                  Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6" 
+                                  Stretch="Uniform"
+                                  Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel2}"/>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel2}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background"  Value="{f:Brush BackgroundLevel1}"/>
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel1}" />
                         </Trigger>
                         <Trigger Property="IsFilled" Value="True">
                             <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="ControlIcon" />
@@ -93,8 +96,8 @@
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="False"/>
-                                <Condition Property="IsFilled" Value="False"/>
+                                <Condition Property="IsEnabled" Value="False" />
+                                <Condition Property="IsFilled" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
                             <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
@@ -103,8 +106,8 @@
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="False"/>
-                                <Condition Property="IsFilled" Value="True"/>
+                                <Condition Property="IsEnabled" Value="False" />
+                                <Condition Property="IsFilled" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{f:Brush BackgroundLevel5}" />
                             <Setter TargetName="ContentPresenter" Value="{f:Brush ForegroundDisabled}" Property="TextElement.Foreground" />
@@ -207,7 +210,7 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="Transparent" Color="Transparent"/>
+    <SolidColorBrush x:Key="Transparent" Color="Transparent" />
 
     <Style TargetType="{x:Type ctrl:BinaryControl}">
         <Setter Property="Header" Value="36" />
@@ -285,8 +288,8 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{f:Brush AdaptiveLevel2}" TargetName="PART_Thumb" />
                         </MultiTrigger>
@@ -324,23 +327,23 @@
                               Stroke="Gray"
                               StrokeThickness="1"
                               Width="24"
-                              VerticalAlignment="Center"/>
+                              VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="False"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Gray" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Gray" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Stroke" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
-                            <Setter Property="Fill" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}" />
+                            <Setter Property="Fill" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Foreground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -367,17 +370,17 @@
                               Stroke="Gray"
                               StrokeThickness="1"
                               Width="24"
-                              VerticalAlignment="Center"/>
+                              VerticalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Stroke" TargetName="Icon" Value="Gray"/>
-                            <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Off}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Gray" />
+                            <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Off}" />
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Stroke" TargetName="Icon" Value="Crimson"/>
-                            <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=On}"/>
+                            <Setter Property="Stroke" TargetName="Icon" Value="Crimson" />
+                            <Setter Property="Data" TargetName="Icon" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=On}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -401,7 +404,7 @@
                                                Width="72" />
 
                             <ctrl:ActionButton Margin="16 0 0 0"
-                                           HorizontalAlignment="Stretch">
+                                               HorizontalAlignment="Stretch">
                                 <DockPanel DockPanel.Dock="Right"
                                            VerticalAlignment="Center">
                                     <TextBlock DockPanel.Dock="Top"
@@ -433,10 +436,10 @@
                         <DockPanel VerticalAlignment="Top">
                             <TextBlock FontSize="15"
                                        Text="{TemplateBinding Title}"
-                                       VerticalAlignment="Center" 
-                                       Width="84"/>
+                                       VerticalAlignment="Center"
+                                       Width="84" />
                             <ContentPresenter ContentSource="Content"
-                                              HorizontalAlignment="Stretch"/>
+                                              HorizontalAlignment="Stretch" />
                         </DockPanel>
                     </Border>
                 </ControlTemplate>
@@ -455,7 +458,7 @@
                                FontSize="14"
                                Text="{Binding Mode=OneWay}"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -465,32 +468,32 @@
                     <f:StretchPanel>
                         <DockPanel>
                             <Border DockPanel.Dock="Bottom"
-                                   Background="{TemplateBinding Accent}"
-                                   CornerRadius="0 0 16 16"
-                                   MinHeight="84">
+                                    Background="{TemplateBinding Accent}"
+                                    CornerRadius="0 0 16 16"
+                                    MinHeight="84">
                                 <ContentPresenter ContentSource="Header"
-                                                 HorizontalAlignment="Stretch"/>
+                                                  HorizontalAlignment="Stretch" />
 
                             </Border>
                             <Border Background="White"
-                                   CornerRadius="16 16 0 0"
-                                   Padding="8">
+                                    CornerRadius="16 16 0 0"
+                                    Padding="8">
                                 <ContentPresenter ContentSource="Content"
-                                                 HorizontalAlignment="Stretch"/>
+                                                  HorizontalAlignment="Stretch" />
                             </Border>
                         </DockPanel>
                         <Border x:Name="mask"
-                               CornerRadius="16"
-                               Visibility="Collapsed"/>
+                                CornerRadius="16"
+                                Visibility="Collapsed" />
                     </f:StretchPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
-                            <Setter Property="Background" TargetName="mask" Value="#30FFFFFF"/>
+                            <Setter Property="Visibility" TargetName="mask" Value="Visible" />
+                            <Setter Property="Background" TargetName="mask" Value="#30FFFFFF" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Visibility" TargetName="mask" Value="Visible"/>
-                            <Setter Property="Background" TargetName="mask" Value="#50FFFFFF"/>
+                            <Setter Property="Visibility" TargetName="mask" Value="Visible" />
+                            <Setter Property="Background" TargetName="mask" Value="#50FFFFFF" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -517,7 +520,7 @@
                 </Style>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="IsReadOnly" Value="False" />
@@ -535,7 +538,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:NumberBox}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                           VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Border x:Name="PART_Bd"
                                 BorderBrush="{x:Null}"
@@ -549,9 +552,9 @@
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <ScrollViewer x:Name="PART_ContentHost"
@@ -572,27 +575,153 @@
                                            Margin="{TemplateBinding Padding}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
-                                           Visibility="Collapsed"/>
+                                           Visibility="Collapsed" />
 
                                 <ftk:ToolButton x:Name="PART_Up"
                                                 Grid.Column="1"
                                                 IconSize="23"
-                                                Icon="F1 M24,24z M0,0z M18,15L18,15 12,9 6,15"/>
+                                                Icon="F1 M24,24z M0,0z M18,15L18,15 12,9 6,15" />
 
                                 <ftk:ToolButton x:Name="PART_Down"
                                                 Grid.Column="2"
                                                 IconSize="23"
-                                                Icon="F1 M24,24z M0,0z M6,9L6,9 12,15 18,9"/>
+                                                Icon="F1 M24,24z M0,0z M6,9L6,9 12,15 18,9" />
                             </Grid>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasText" Value="False">
-                            <Setter Property="Visibility" TargetName="PART_Watermark" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PART_Watermark" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrl:ZoomControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:ZoomControl}">
+                    <Grid>
+                        <Border
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            ClipToBounds="{TemplateBinding ClipToBounds}">
+                            <ctrl:ZoomContentPresenter x:Name="PART_Presenter" ClipToBounds="False" />
+                        </Border>
+                        <Canvas>
+                            <!-- Controls -->
+                            <Border Padding="5"
+                                    CornerRadius="5"
+                                    Background="#88C0C0C0"
+                                    Canvas.Left="20"
+                                    Canvas.Top="20"
+                                    ToolTipService.InitialShowDelay="0">
+                                <Border.ToolTip>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock><Run FontWeight="Bold">CTRL + Wheel:</Run> Zoom In / Out</TextBlock>
+                                        <TextBlock><Run FontWeight="Bold">ALT + Drag:</Run> ZoomBox</TextBlock>
+                                        <TextBlock><Run FontWeight="Bold">(SHIFT +) Drag:</Run> Pan</TextBlock>
+                                    </StackPanel>
+                                </Border.ToolTip>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type RadioButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                                                        <Border x:Name="border"
+                                                                BorderBrush="Black"
+                                                                Background="Silver"
+                                                                BorderThickness="1"
+                                                                CornerRadius="5"
+                                                                Width="40"
+                                                                Height="40"
+                                                                Margin="2"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                              VerticalAlignment="Center" />
+                                                        </Border>
+
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="border" Property="Background"
+                                                                        Value="WhiteSmoke" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="border" Property="Background"
+                                                                        Value="DarkGray" />
+                                                                <Setter TargetName="border"
+                                                                        Property="TextBlock.FontWeight" Value="Bold" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <Slider Height="150"
+                                            Minimum="{TemplateBinding MinZoom, Converter={StaticResource Log10Converter}}"
+                                            Maximum="{TemplateBinding MaxZoom, Converter={StaticResource Log10Converter}}"
+                                            Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Zoom, Mode=TwoWay, Converter={StaticResource Log10Converter}}"
+                                            HorizontalAlignment="Center"
+                                            Ticks="0.1, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2"
+                                            AutoToolTipPlacement="BottomRight"
+                                            AutoToolTipPrecision="1"
+                                            TickPlacement="BottomRight"
+                                            TickFrequency="1"
+                                            LargeChange="1"
+                                            SmallChange="0.1"
+                                            Orientation="Vertical" />
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Zoom, StringFormat='{}{0:F2}x'}"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold" />
+                                    <RadioButton Content="1:1"
+                                                 GroupName="rbgZoomMode"
+                                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Mode, Mode=TwoWay, Converter={StaticResource EqualityConverter}, ConverterParameter={x:Static ctrl:ZoomControlModes.Original}}" />
+                                    <RadioButton Content="{f:Language text.zoom.fill}"
+                                                 GroupName="rbgZoomMode"
+                                                 IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Mode, Mode=TwoWay, Converter={StaticResource EqualityConverter}, ConverterParameter={x:Static ctrl:ZoomControlModes.Fill}}" />
+                                </StackPanel>
+                            </Border>
+
+                            <!-- ZoomBox -->
+                            <Border
+                                BorderBrush="{TemplateBinding ZoomBoxBorderBrush}"
+                                BorderThickness="{TemplateBinding ZoomBoxBorderThickness}"
+                                Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.X}"
+                                Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Y}"
+                                Opacity="{TemplateBinding ZoomBoxOpacity}"
+                                Background="{TemplateBinding ZoomBoxBackground}"
+                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Width}"
+                                Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Height}" />
+                        </Canvas>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="White" />
+        <Setter Property="ZoomBoxBackground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.0, 0.0" EndPoint="1.0, 1.0">
+                    <GradientStop Color="Silver" Offset="0.0" />
+                    <GradientStop Color="DarkGray" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ZoomBoxBorderBrush" Value="Black" />
+        <Setter Property="ZoomBoxBorderThickness" Value="1" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="ModifierMode" Value="Pan">
+                <Setter Property="Cursor" Value="SizeAll" />
+            </Trigger>
+            <Trigger Property="ModifierMode" Value="ZoomBox">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

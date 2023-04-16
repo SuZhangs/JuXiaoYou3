@@ -11,7 +11,8 @@
                     Background="{f:BackgroundBrush}"
                     Style="{StaticResource ForestWindow}"
                     mc:Ignorable="d"
-                    Title="MainWindow" Height="450" Width="800">
+                    Title="MainWindow" Height="450" Width="800"
+                    UseLayoutRounding="True">
     <Window.Resources>
         <EllipseGeometry x:Key="Circle"
                          RadiusX="6"
@@ -530,7 +531,8 @@
             <Border Background="{f:Brush BackgroundLevel2}"
                     CornerRadius="12"
                     Margin="0 4"
-                    Padding="16">
+                    Width="416"
+                    Padding="16 16 16 8">
                 <Grid Width="384">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="64" />
@@ -556,37 +558,38 @@
 
 
                     <UniformGrid Grid.Column="1"
-                               Margin="32 0"
-                                 Rows="2">
-                        <DockPanel>
+                                 Margin="32 0"
+                                 Rows="2"
+                                 VerticalAlignment="Center">
+                        <DockPanel Margin="0 0 0 8">
                             <TextBlock DockPanel.Dock="Top"
                                        Margin="0 0 0 2"
                                        Text="关系1"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Top"/>
-                            <drawing:LineArrow ArrowSize="8"
+                            <drawing:LineArrow ArrowSize="6"
                                                BendAmount="0"
                                                EndArrow="Arrow"
-                                               Height="2"
+                                               Height="1"
                                                StartArrow="Arrow"
                                                Stroke="White"
-                                               StrokeThickness="2"/>
+                                               StrokeThickness="3"/>
                         </DockPanel>
 
-                        <DockPanel>
+                        <DockPanel Margin="0 8 0 0">
                             <TextBlock DockPanel.Dock="Bottom"
                                        Margin="0 0 0 2"
                                        Text="关系2"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Top"/>
                             
-                            <drawing:LineArrow ArrowSize="8"
+                            <drawing:LineArrow ArrowSize="6"
                                                BendAmount="0"
-                                               Height="2"
+                                               Height="1"
                                                EndArrow="Arrow"
                                                StartArrow="Arrow"
                                                Stroke="White"
-                                               StrokeThickness="2"/>
+                                               StrokeThickness="3"/>
                         </DockPanel>
                     </UniformGrid>
 

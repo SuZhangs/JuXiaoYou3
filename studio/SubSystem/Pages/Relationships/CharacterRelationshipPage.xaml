@@ -7,159 +7,320 @@
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:studio="urn:acorisoft/studio"
+                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
+                   xmlns:graph="clr-namespace:GraphShape.Controls.Converters;assembly=GraphShape.Controls"
+                   xmlns:layout="clr-namespace:GraphShape.Algorithms.Layout;assembly=GraphShape"
+                   xmlns:overlap="clr-namespace:GraphShape.Algorithms.OverlapRemoval;assembly=GraphShape"
+                   xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+                   xmlns:behaviors="clr-namespace:GraphShape.Controls.Behaviors;assembly=GraphShape.Controls"
+                   xmlns:controls="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterRelationshipViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <ImageBrush x:Key="Avatar_1" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_1.png"/>
-        <ImageBrush x:Key="Avatar_2" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_2.png"/>
+        <ImageBrush x:Key="Avatar_1" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_1.png" />
+        <ImageBrush x:Key="Avatar_2" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_2.png" />
+        <thisConverters:DirectiveAvatarConverter x:Key="Avatar"/>
+        <graph:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
+        <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
+
+        <SolidColorBrush x:Key="HighlightedVertexBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="HighlightedVertexBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
+        <SolidColorBrush x:Key="HighlightedVertexForegroundBrush" Color="Black" />
+        <SolidColorBrush x:Key="SemiHighlightedSourceVertexBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="SemiHighlightedSourceVertexBackgroundBrush" Color="#FF1DBA00" />
+        <SolidColorBrush x:Key="SemiHighlightedTargetVertexBorderBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="SemiHighlightedTargetVertexBackgroundBrush" Color="#FFD6A51C" />
+        <SolidColorBrush x:Key="HighlightedEdgeBrush" Color="Black" />
+        <SolidColorBrush x:Key="SemiHighlightedInEdgeBrush" Color="#FF1DBA00" />
+        <SolidColorBrush x:Key="SemiHighlightedOutEdgeBrush" Color="#FFD6A51C" />
+
+        <!-- Vertex Control -->
+        <Style x:Key="VertexControlBaseStyle" TargetType="{x:Type controls:VertexControl}">
+            <Setter Property="controls:GraphElementBehaviour.HighlightTrigger"
+                Value="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="behaviors:DragBehavior.IsDragEnabled" Value="True" />
+            <Setter Property="behaviors:DragBehavior.X"
+                Value="{Binding Path=(controls:GraphCanvas.X), Mode=TwoWay, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="behaviors:DragBehavior.Y"
+                Value="{Binding Path=(controls:GraphCanvas.Y), Mode=TwoWay, RelativeSource={RelativeSource Self}}" />
+            <Setter Property="Background" Value="#FFE3E3E3" />
+            <Setter Property="BorderThickness" Value="5,3,5,3" />
+            <Setter Property="Padding" Value="10,5,10,5" />
+            <Setter Property="BorderBrush" Value="#FF393939" />
+            <Style.Triggers>
+                <Trigger Property="controls:GraphElementBehaviour.IsHighlighted" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource HighlightedVertexBorderBrush}" />
+                    <Setter Property="Background" Value="{StaticResource HighlightedVertexBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource HighlightedVertexForegroundBrush}" />
+                </Trigger>
+                <Trigger Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource HighlightedVertexBorderBrush}" />
+                    <Setter Property="Background" Value="{StaticResource HighlightedVertexBackgroundBrush}" />
+                    <Setter Property="Foreground" Value="{StaticResource HighlightedVertexForegroundBrush}" />
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True" />
+                        <Condition Property="controls:GraphElementBehaviour.SemiHighlightInfo" Value="Source" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="{StaticResource SemiHighlightedSourceVertexBorderBrush}" />
+                    <Setter Property="Background" Value="{StaticResource SemiHighlightedSourceVertexBackgroundBrush}" />
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True" />
+                        <Condition Property="controls:GraphElementBehaviour.SemiHighlightInfo" Value="Target" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="BorderBrush" Value="{StaticResource SemiHighlightedTargetVertexBorderBrush}" />
+                    <Setter Property="Background" Value="{StaticResource SemiHighlightedTargetVertexBackgroundBrush}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Edge Control -->
+        <Style x:Key="EdgeControlBaseStyle" TargetType="{x:Type controls:EdgeControl}">
+            <Setter Property="controls:GraphElementBehaviour.HighlightTrigger"
+                Value="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" />
+            <Setter Property="MinWidth" Value="1" />
+            <Setter Property="MinHeight" Value="1" />
+            <Setter Property="Background" Value="Red" />
+            <Setter Property="Foreground" Value="Silver" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="ToolTip"
+                Value="{Binding RelativeSource={RelativeSource Mode=Self},Path=DataContext,Mode=OneWay}" />
+            <Style.Triggers>
+                <Trigger
+                Property="controls:GraphElementBehaviour.IsHighlighted"
+                Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource HighlightedEdgeBrush}" />
+                </Trigger>
+                <Trigger
+                Property="controls:GraphElementBehaviour.IsSemiHighlighted"
+                Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource HighlightedEdgeBrush}" />
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition
+                        Property="controls:GraphElementBehaviour.IsSemiHighlighted"
+                        Value="True" />
+                        <Condition
+                        Property="controls:GraphElementBehaviour.SemiHighlightInfo"
+                        Value="InEdge" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Foreground" Value="{DynamicResource SemiHighlightedInEdgeBrush}" />
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition
+                        Property="controls:GraphElementBehaviour.IsSemiHighlighted"
+                        Value="True" />
+                        <Condition
+                        Property="controls:GraphElementBehaviour.SemiHighlightInfo"
+                        Value="OutEdge" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Foreground" Value="{DynamicResource SemiHighlightedOutEdgeBrush}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate DataType="{x:Type doc:DocumentCache}">
+            <Border>
+                <Ellipse Height="64"
+                         Width="64">
+                    <Ellipse.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{StaticResource Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Border>
+        </DataTemplate>
+
+        <Style TargetType="{x:Type controls:EdgeControl}" BasedOn="{StaticResource EdgeControlBaseStyle}">
+            <Setter Property="Foreground" Value="LightGray" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:EdgeControl}">
+
+                        <Path x:Name="edgePath"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="2"
+                                  MinWidth="1"
+                                  MinHeight="1"
+                                  ToolTip="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Edge.Name}"
+                                  Opacity="1">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathGeometry.Figures>
+                                        <MultiBinding Converter="{StaticResource RouteToPathConverter}">
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Source.(controls:GraphCanvas.X)" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Source.(controls:GraphCanvas.Y)" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Source.ActualWidth" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Source.ActualHeight" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Target.(controls:GraphCanvas.X)" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Target.(controls:GraphCanvas.Y)" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Target.ActualWidth" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="Target.ActualHeight" />
+                                            <Binding
+                                                    RelativeSource="{RelativeSource TemplatedParent}"
+                                                    Path="RoutePoints" />
+                                        </MultiBinding>
+                                    </PathGeometry.Figures>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="controls:GraphElementBehaviour.IsHighlighted" Value="True">
+                                <Setter Property="Stroke" Value="{DynamicResource HighlightedEdgeBrush}" TargetName="edgePath" />
+                            </Trigger>
+                            <Trigger Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True">
+                                <Setter Property="Stroke" Value="{DynamicResource HighlightedEdgeBrush}" TargetName="edgePath" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True" />
+                                    <Condition Property="controls:GraphElementBehaviour.SemiHighlightInfo" Value="InEdge" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" Value="{DynamicResource SemiHighlightedInEdgeBrush}" TargetName="edgePath" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="controls:GraphElementBehaviour.IsSemiHighlighted" Value="True" />
+                                    <Condition Property="controls:GraphElementBehaviour.SemiHighlightInfo" Value="OutEdge" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" Value="{DynamicResource SemiHighlightedOutEdgeBrush}" TargetName="edgePath" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="384" />
-        </Grid.ColumnDefinitions>
+    <f:Drawer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="384" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16" />
+                <RowDefinition Height="144" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="16" />
+            </Grid.RowDefinitions>
 
-        <f:ForestSection Header="人物关系"
-                         Margin="16 10">
-            <f:ForestSection.ToolBar>
-                <StackPanel HorizontalAlignment="Right"
-                            Margin="0 0 0 4"
-                            Orientation="Horizontal">
-                    <ftk:ToolButton Content="{f:Language global.add}"
-                                    ShowText="True"/>
-                    <ftk:ToolButton Content="{f:Language global.Remove}"
-                                    ShowText="True"/>
-                    <ftk:ToolButton Content="导入"
-                                    ShowText="True"/>
+            <studio:ZoomControl Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="0"
+                                Grid.RowSpan="4"
+                                Background="{f:BackgroundBrush}">
+                <studio:ZoomControl.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="圆形视图"/>
+                        <f:MenuItem Header="层次视图"/>
+                    </f:ContextMenu>
+                </studio:ZoomControl.ContextMenu>
+                <this:CharacterGraphLayout Graph="{Binding Graph}"
+                                           LayoutAlgorithmType="ISOM"
+                                           IsAnimationEnabled="False"
+                                           HighlightAlgorithmType="Simple"
+                                           OverlapRemovalConstraint="Must"
+                                           OverlapRemovalAlgorithmType="FSA">
+                    <this:CharacterGraphLayout.OverlapRemovalParameters>
+                        <overlap:OverlapRemovalParameters HorizontalGap="80" VerticalGap="80" />
+                    </this:CharacterGraphLayout.OverlapRemovalParameters>
+                </this:CharacterGraphLayout>
+            </studio:ZoomControl>
 
-                    <ftk:DropDownButton>
-                        <ftk:DropDownButton.ContextMenu>
-                            <f:ContextMenu>
-                                <f:MenuItem Header="圆形视角 "/>
-                            </f:ContextMenu>
-                        </ftk:DropDownButton.ContextMenu>
-                    </ftk:DropDownButton>
-                </StackPanel>
-            </f:ForestSection.ToolBar>
-        </f:ForestSection>
+            <Border Grid.Column="1"
+                    Grid.Row="1"
+                    Background="{f:Brush BackgroundLevel2}"
+                    Effect="{StaticResource MenuItem.ShadowEffect2}"
+                    Margin="8 16 16 16"
+                    Padding="8">
+                <DockPanel>
+                    <Rectangle RadiusX="6"
+                               RadiusY="6"
+                               Fill="{StaticResource Avatar_1}"
+                               Width="96" />
 
-        <ftk:TabControl Grid.Column="1"
-                        Margin="8 16">
-            <ftk:TabItem Header="信息"
-                         Padding="16 8">
-                <Grid Margin="0 8 0 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="128" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
+                    <DockPanel Margin="16 8 8 0">
+                        <UniformGrid DockPanel.Dock="Bottom"
+                                     Columns="3"
+                                     Margin="0 4 0 0">
+                            <ftk:ToolButton Content="添加"
+                                            Icon="{StaticResource FeatherIcon.Plus}"
+                                            ShowText="True" />
+                            <ftk:ToolButton Content="打开"
+                                            Icon="{StaticResource FeatherIcon.Folder}"
+                                            ShowText="True" />
+                            <ftk:ToolButton Content="取消"
+                                            Icon="{StaticResource FeatherIcon.Close}"
+                                            IconSize="13"
+                                            ShowText="True" />
+                        </UniformGrid>
 
-                    <Border BorderBrush="{f:Brush AdaptiveLevel2}"
-                            BorderThickness="1"
-                            CornerRadius="3"
-                            Padding="8">
-                        <DockPanel>
-                            <Border Background="{StaticResource Avatar_1}"
-                                    CornerRadius="64"
-                                    Margin="0 8 0 0"
-                                    Height="64"
-                                    Width="64"
-                                    VerticalAlignment="Top"/>
+                        <TextBlock DockPanel.Dock="Top"
+                                   FontWeight="Bold"
+                                   Text="当前选择的角色当前选择的角色当前选择的角色当前选择的角色当前选择的角色当前选择的角色"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="CharacterEllipsis" />
+                    </DockPanel>
+                </DockPanel>
+            </Border>
 
-                            <DockPanel Margin="16 8"
-                                       VerticalAlignment="Top">
-                                <TextBlock DockPanel.Dock="Top"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Margin="0 0 0 8"
-                                           Text="角色名"/>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Foreground="{f:Brush ForegroundLevel3}"
-                                           FontSize="14"
-                                           Text="这是角色的简介,做一些长文字的简介然后看看文本裁切的效果。接下来是一堆废话ANJAHSDAJHDAUKDHAUIDHASU奥术大师大所多大家说的哈哈大"
-                                           TextWrapping="Wrap"
-                                           TextTrimming="CharacterEllipsis"/>
-                            </DockPanel>
-                        </DockPanel>
-                    </Border>
+            <Border Grid.Column="1"
+                    Grid.Row="2"
+                    Background="{f:Brush BackgroundLevel2}"
+                    Effect="{StaticResource MenuItem.ShadowEffect2}"
+                    Margin="8 16 16 16"
+                    Visibility="{Binding RelationshipPaneVisibility,Mode=TwoWay}">
+                <DockPanel>
+                    <UniformGrid DockPanel.Dock="Top"
+                                 Columns="3">
+                        <ftk:ToolButton Content="添加关系"
+                                        CornerRadius="0"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="重新布局"
+                                        CornerRadius="0"
+                                        Icon="{StaticResource FeatherIcon.Refresh}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="截图"
+                                        CornerRadius="0"
+                                        Icon="{StaticResource FeatherIcon.Camera}"
+                                        ShowText="True" />
+                    </UniformGrid>
 
-                    <StackPanel Grid.Row="1"
-                                Margin="0 8">
-
-                        <Border BorderBrush="{f:Brush AdaptiveLevel2}"
-                            BorderThickness="1"
-                            CornerRadius="3"
-                            Padding="8">
-                            <DockPanel>
-                                <Border Background="{StaticResource Avatar_2}"
-                                    CornerRadius="64"
-                                    Margin="0 8 0 0"
-                                    Height="48"
-                                    Width="48"
-                                    VerticalAlignment="Top"/>
-
-                                <DockPanel Margin="16 8"
-                                           VerticalAlignment="Top">
-                                    <TextBlock DockPanel.Dock="Top"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Margin="0 0 0 8"
-                                           Text="角色名"/>
-                                    <TextBlock DockPanel.Dock="Top"
-                                           Foreground="{f:Brush ForegroundLevel3}"
-                                           FontSize="14"
-                                           Text="这是角色的简介,做一些长文字的简介然后看看文本裁切的效果。接下来是一堆废话ANJAHSDAJHDAUKDHAUIDHASU奥术大师大所多大家说的哈哈大"
-                                           TextWrapping="Wrap"
-                                           TextTrimming="CharacterEllipsis"/>
-                                </DockPanel>
-                            </DockPanel>
-                        </Border>
-
-                    </StackPanel>
-                </Grid>
-            </ftk:TabItem>
-            <ftk:TabItem Header="关系"
-                         Padding="16 8">
-                <StackPanel Margin="0 16 0 0">
-                    <Border BorderBrush="{f:Brush BorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="3"
-                            Padding="16">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="80" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border Grid.Column="0"
-                                    Background="{StaticResource Avatar_1}"
-                                    CornerRadius="96"
-                                    Margin="8"
-                                    Height="64"
-                                    Width="64"/>
-
-                            <Rectangle Grid.Column="1"
-                                  Stroke="Gray"
-                                  StrokeThickness="1"
-                                  Height="2"/>
-
-                            <Border Grid.Column="2"
-                                    Background="{StaticResource Avatar_1}"
-                                    CornerRadius="96"
-                                    Margin="8"
-                                    Height="64"
-                                    Width="64"/>
-
-                        </Grid>
-                    </Border>
-                </StackPanel>
-            </ftk:TabItem>
-
-            <ftk:TabItem Header="信息"
-                         Padding="16 8">
-
-            </ftk:TabItem>
-        </ftk:TabControl>
-    </Grid>
+                    <ItemsControl DockPanel.Dock="Top" />
+                </DockPanel>
+            </Border>
+        </Grid>
+    </f:Drawer>
 </f:ForestUserControl>

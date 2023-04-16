@@ -68,6 +68,45 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             throw new NotSupportedException();
         }
     }
+    
+    
+    public class DirectiveAvatarConverter : IMultiValueConverter
+    {
+
+        private static readonly BitmapImage _character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
+
+        private static ImageSource FallbackImage(DocumentType type)
+        {
+            return _character;
+        }
+
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values is null || values.Length == 0)
+            {
+                return FallbackImage(DocumentType.Document);
+            }
+
+            if (values[1] is DocumentType type)
+            {
+                var avatar = values[0]?.ToString();
+                if (string.IsNullOrEmpty(avatar))
+                {
+                    return FallbackImage(type);
+                }
+
+
+                return new BitmapImage(new Uri(avatar));
+            }
+
+            return FallbackImage(DocumentType.Document);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
 
     public class ImageConverter : IValueConverter
     {
