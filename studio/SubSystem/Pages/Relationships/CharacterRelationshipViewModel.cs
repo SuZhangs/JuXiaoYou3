@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Data.Relationships;
 using CommunityToolkit.Mvvm.Input;
 
@@ -11,8 +12,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         public CharacterRelationshipViewModel()
         {
-            Graph         = new CharacterGraph();
-            Relationships = new ObservableCollection<CharacterRelationship>();
+            Graph                      = new CharacterGraph();
+            Relationships              = new ObservableCollection<CharacterRelationship>();
+            RelationshipPaneVisibility = Visibility.Collapsed;
             Initialize();
         }
 
@@ -121,7 +123,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public DocumentCache SelectedDocument
         {
             get => _selectedDocument;
-            set => SetValue(ref _selectedDocument, value);
+            set
+            {
+                SetValue(ref _selectedDocument, value);
+                RelationshipPaneVisibility = value is not null ? Visibility.Visible : Visibility.Collapsed;
+                if (_selectedDocument is null)
+                {
+                    return;
+                }
+
+                Graph.TryGetInEdges(value, out var edgeA);
+                Graph.TryGetOutEdges(value, out var edgeB);
+
+                var total = edgeA.Concat(edgeB);
+                Relationships.AddRange(total, true);
+            }
         }
 
         /// <summary>
