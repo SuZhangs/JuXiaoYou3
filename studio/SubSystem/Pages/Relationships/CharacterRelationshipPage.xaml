@@ -292,6 +292,7 @@
                 Effect="{StaticResource MenuItem.ShadowEffect2}"
                 Margin="8 16 16 16"
                 Padding="8">
+
             <DockPanel>
                 <Rectangle DataContext="{Binding SelectedDocument,Mode=OneWay}"
                            RadiusX="6"

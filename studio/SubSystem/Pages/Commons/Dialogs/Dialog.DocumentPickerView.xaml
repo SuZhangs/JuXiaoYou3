@@ -41,6 +41,7 @@
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
+    
     <f:DialogPage CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}"
                   Title="{Binding Title}">

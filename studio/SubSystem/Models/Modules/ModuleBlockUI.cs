@@ -81,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void OnValueChangedIntern(TValue oldValue, TValue newValue)
         {
-            OnValueChanged(oldValue, newValue);
+            _value = OnValueChanged(oldValue, newValue);
             Handler?.Invoke(this, TargetBlock);
         }
         
