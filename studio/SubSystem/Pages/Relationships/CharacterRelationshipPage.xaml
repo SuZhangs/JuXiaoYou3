@@ -32,20 +32,26 @@
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
 
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
-                <Border>
-                    <Ellipse Height="64"
-                             Width="64">
-                        <Ellipse.Fill>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource Avatar}">
-                                        <Binding Path="Avatar" Mode="OneWay" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                <Border Background="{f:BackgroundBrush}">
+                    <DockPanel>
+                        <Ellipse DockPanel.Dock="Top"
+                                 Height="64"
+                                 Width="64">
+                            <Ellipse.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <MultiBinding Converter="{StaticResource Avatar}">
+                                            <Binding Path="Avatar" Mode="OneWay" />
+                                            <Binding Path="Type" />
+                                        </MultiBinding>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Margin="0 8 0 0"
+                                   Text="{Binding Name,Mode=OneWay}"/>
+                    </DockPanel>
                 </Border>
             </DataTemplate>
 
@@ -271,7 +277,8 @@
                     <f:MenuItem Click="DisplayMode_KK" Header="KK视图" />
                 </f:ContextMenu>
             </studio:ZoomControl.ContextMenu>
-            <Border x:Name="Canvas">
+            <Border x:Name="Canvas"
+                    Background="{f:BackgroundBrush}">
                 <this:CharacterGraphLayout x:Name="Relationship"
                                            Graph="{Binding Graph}"
                                            LayoutAlgorithmType="ISOM"
@@ -365,6 +372,8 @@
                                     ShowText="True" />
 
                     <ftk:ToolButton Content="截图"
+                                    Command="{Binding CaptureCommand}"
+                                    CommandParameter="{Binding ElementName=Canvas}"
                                     CornerRadius="0"
                                     Icon="{StaticResource FeatherIcon.Camera}"
                                     ShowText="True" />

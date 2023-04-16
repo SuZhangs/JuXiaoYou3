@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
@@ -26,6 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
+            CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
             _version                   = DocumentEngine.Version;
             Initialize();
         }
@@ -122,6 +124,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         }
         #endregion
 
+        private async Task CaptureImpl(FrameworkElement element)
+        {
+            if (element is null)
+            {
+                return;
+            }
+
+            var savedlg = FileIO.Save(SubSystemString.PngFilter, "*.png");
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
+            
+            var ms      = Xaml.CaptureToStream(element);
+            await System.IO.File.WriteAllBytesAsync(savedlg.FileName, ms.GetBuffer());
+        }
+
         /// <summary>
         /// 人物关系面板的可视性
         /// </summary>
@@ -189,6 +209,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public AsyncRelayCommand<CharacterRelationship> RemoveRelCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand CaptureCommand { get; }
+        public AsyncRelayCommand<FrameworkElement> CaptureCommand { get; }
     }
 }

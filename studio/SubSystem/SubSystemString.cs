@@ -864,6 +864,20 @@ namespace Acorisoft.FutureGL.MigaStudio
                 _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
             };
         }
+        
+        public static string PngFilter
+        {
+            // TODO: 翻译
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "Image File|*.png",
+                CultureArea.French   => "Image File|*.png",
+                CultureArea.Japanese => "Image File|*.png",
+                CultureArea.Korean   => "Image File|*.png",
+                CultureArea.Russian  => "Image File|*.png",
+                _                    => "图片文件|*.png",
+            };
+        }
 
         public static string NoMoreData => GetText("text.noMoreData");
     }
