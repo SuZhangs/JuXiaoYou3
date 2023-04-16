@@ -3,7 +3,7 @@
                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
-                    xmlns:studio="urn:acorisoft/studio"
+                    xmlns:studio="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                     xmlns:graph="clr-namespace:GraphShape.Controls.Converters;assembly=GraphShape.Controls"
                     xmlns:layout="clr-namespace:GraphShape.Algorithms.Layout;assembly=GraphShape"
@@ -28,10 +28,10 @@
     <Style x:Key="VertexControlBaseStyle" TargetType="{x:Type controls:VertexControl}">
         <Setter Property="controls:GraphElementBehaviour.HighlightTrigger"
                 Value="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="behaviors:DragBehavior.IsDragEnabled" Value="True" />
-        <Setter Property="behaviors:DragBehavior.X"
+        <Setter Property="studio:DragBehavior.IsDragEnabled" Value="True" />
+        <Setter Property="studio:DragBehavior.X"
                 Value="{Binding Path=(controls:GraphCanvas.X), Mode=TwoWay, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="behaviors:DragBehavior.Y"
+        <Setter Property="studio:DragBehavior.Y"
                 Value="{Binding Path=(controls:GraphCanvas.Y), Mode=TwoWay, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Background" Value="#FFE3E3E3" />
         <Setter Property="BorderThickness" Value="5,3,5,3" />

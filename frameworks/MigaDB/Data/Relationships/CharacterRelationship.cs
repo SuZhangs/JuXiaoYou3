@@ -8,16 +8,41 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
     /// </summary>
     public class CharacterRelationship : StorageUIObject, IEdge<DocumentCache>
     {
-        private string _name;
+        private string _nameToSource;
+        private string _nameToTarget;
 
+        /// <summary>
+        /// 获取或设置 <see cref="NameToTarget"/> 属性。
+        /// </summary>
+        public string NameToTarget
+        {
+            get => _nameToTarget;
+            set => SetValue(ref _nameToTarget, value);
+        }
+        
         /// <summary>
         /// 关系名
         /// </summary>
-        public string Name
+        public string NameToSource
         {
-            get => _name;
-            set => SetValue(ref _name, value);
+            get => _nameToSource;
+            set => SetValue(ref _nameToSource, value);
         }
+        
+        /// <summary>
+        /// 是否为双向关系
+        /// </summary>
+        public bool IsBidirection { get; init; }
+        
+        /// <summary>
+        /// 程度，1-10
+        /// </summary>
+        public int Degree { get; init; }
+        
+        /// <summary>
+        /// 关系类型
+        /// </summary>
+        public Relationship Relationship { get; init; }
         
         /// <summary>
         /// 源

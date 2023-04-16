@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Concepts;
+﻿using Acorisoft.FutureGL.MigaDB.Data;
+using Acorisoft.FutureGL.MigaDB.Data.Relationships;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using static Acorisoft.FutureGL.MigaDB.Constants;
 // ReSharper disable ClassNeverInstantiated.Global
@@ -13,6 +12,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         protected override void OnDatabaseOpeningOverride(DatabaseSession session)
         {
             var database = session.Database;
+            RelDB     = database.GetCollection<CharacterRelationship>(Name_Relationship_Character);
             DocumentDB      = database.GetCollection<Document>(Name_Document);
             DocumentCacheDB = database.GetCollection<DocumentCache>(Name_Cache_Document);
         }
@@ -21,9 +21,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             DocumentDB      = null;
             DocumentCacheDB = null;
+            RelDB     = null;
         }
 
-        
 
         public override Knowledge GetKnowledge(string id)
         {
@@ -43,6 +43,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             };
         }
 
+        #region Add
+
+        
         /// <summary>
         /// 添加文档
         /// </summary>
@@ -127,6 +130,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             return EngineResult.Successful;
         }
 
+        #endregion
+
+        #region Remove
+
+        
         /// <summary>
         /// 移除文档
         /// </summary>
@@ -174,6 +182,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
         }
 
+        #endregion
+
+        #region Update
+
+        
         /// <summary>
         /// 更新文档
         /// </summary>
@@ -232,6 +245,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             AddConcept(cache.Id, cache.Name, DataEngineType.DocumentEngine);
             DocumentCacheDB.Update(cache);
         }
+
+        #endregion
+
+        #region GetDocument / GetDocuments
+
         
         /// <summary>
         /// 获得指定的文档
@@ -274,7 +292,16 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             return cache.IsDeleted ? null : GetDocument(cache.Id);
         }
 
+        #endregion
 
+        #region GetRelationships
+
+        public IEnumerable<CharacterRelationship> GetRelationships()
+        {
+            return RelDB.FindAll();
+        }
+
+        #endregion
 
         /// <summary>
         /// 清空所有文档
@@ -291,6 +318,11 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             if(markAsDeletedDocumentCache.Count > 0)
                 Modified();
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public ILiteCollection<CharacterRelationship> RelDB { get; private set; }
 
         /// <summary>
         /// 

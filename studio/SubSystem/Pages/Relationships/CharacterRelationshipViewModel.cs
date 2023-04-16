@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
+using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
@@ -9,103 +12,66 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
     {
         private DocumentCache _selectedDocument;
         private Visibility    _relationshipPaneVisibility;
+        private int           _version;
 
         public CharacterRelationshipViewModel()
         {
+            var dbMgr = Xaml.Get<IDatabaseManager>();
+            DatabaseManager            = dbMgr;
+            DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();
             Relationships              = new ObservableCollection<CharacterRelationship>();
             RelationshipPaneVisibility = Visibility.Collapsed;
+            AddDocumentCommand         = AsyncCommand(NewDocumentImpl);
+            OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
+            ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
+            _version                   = DocumentEngine.Version;
             Initialize();
         }
 
-        public void Initialize()
+        private void Initialize()
         {
-            var c1 =new DocumentCache
-            {
-                Id     = "1",
-                Name   = "角色1",
-                Avatar = @"E:\企划\橘小柚\社区\美术\罗易斯_1.png",
-            };
-            var c2 =new DocumentCache
-            {
-                Id     = "2",
-                Name   = "角色2",
-                Avatar = @"E:\企划\橘小柚\社区\美术\罗易斯_2.png",
-            };
-            var c3 =new DocumentCache
-            {
-                Id     = "3",
-                Name   = "角色3",
-                Avatar = @"E:\企划\橘小柚\社区\美术\罗易斯_3.png",
-            };
-            var c4 =new DocumentCache
-            {
-                Id     = "4",
-                Name   = "角色4",
-                Avatar = @"E:\企划\橘小柚\社区\美术\罗易斯_4.png",
-            };
-            var c5 = new DocumentCache
-            {
-                Id     = "5",
-                Name   = "角色5",
-                Avatar = @"E:\企划\橘小柚\社区\美术\罗易斯_5.png",
-            };
+            Graph.Clear();
+            Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
+                                               .FindAll());
+            Graph.AddEdgeRange(DocumentEngine.GetRelationships());
+        }
 
-            Graph.AddVertex(c1);
-            Graph.AddVertex(c2);
-            Graph.AddVertex(c3);
-            Graph.AddVertex(c4);
-            Graph.AddVertex(c5);
-            Graph.AddEdge(new CharacterRelationship
+        #region OnStart / OnResume
+
+        public sealed override void OnStart()
+        {
+            Initialize();
+            base.OnStart();
+        }
+
+        public sealed override void Resume()
+        {
+            if (_version != DocumentEngine.Version)
             {
-                Id     = ID.Get(),
-                Source = c1,
-                Target = c2,
-                Name   = "人物关系1"
-            });
-            
-            Graph.AddEdge(new CharacterRelationship
+                Initialize();
+                _version = DocumentEngine.Version;
+            }
+        }
+
+        #endregion
+
+        private async Task NewDocumentImpl()
+        {
+            await DocumentUtilities.AddDocument(DocumentEngine, DocumentType.Character, x =>
             {
-                Id     = ID.Get(),
-                Source = c1,
-                Target = c2,
-                Name   = "人物关系1"
+                Graph.AddVertex(x);
             });
-            Graph.AddEdge(new CharacterRelationship
-            {
-                Id     = ID.Get(),
-                Source = c2,
-                Target = c3,
-                Name   = "人物关系1"
-            });
-            Graph.AddEdge(new CharacterRelationship
-            {
-                Id     = ID.Get(),
-                Source = c3,
-                Target = c4,
-                Name   = "人物关系1"
-            });
-            Graph.AddEdge(new CharacterRelationship
-            {
-                Id     = ID.Get(),
-                Source = c4,
-                Target = c5,
-                Name   = "人物关系1"
-            });
-            Graph.AddEdge(new CharacterRelationship
-            {
-                Id     = ID.Get(),
-                Source = c1,
-                Target = c5,
-                Name   = "人物关系1"
-            });
-            Graph.AddEdge(new CharacterRelationship
-            {
-                Id     = ID.Get(),
-                Source = c2,
-                Target = c4,
-                Name   = "人物关系1"
-            });
+        }
+        
+        private void OpenDocumentImpl(DocumentCache cache)
+        {
+            DocumentUtilities.OpenDocument(Controller, cache);
+        }
+
+        private void Reset()
+        {
+            SelectedDocument = null;
         }
 
         /// <summary>
@@ -127,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             {
                 SetValue(ref _selectedDocument, value);
                 RelationshipPaneVisibility = value is not null ? Visibility.Visible : Visibility.Collapsed;
+                Relationships.Clear();
                 if (_selectedDocument is null)
                 {
                     return;
@@ -136,28 +103,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 Graph.TryGetOutEdges(value, out var edgeB);
 
                 var total = edgeA.Concat(edgeB);
-                Relationships.AddRange(total, true);
+                Relationships.AddRange(total);
             }
         }
 
         /// <summary>
         /// 人物关系图
         /// </summary>
+        [NullCheck(UniTestLifetime.Constructor)]
         public CharacterGraph Graph { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public DocumentEngine DocumentEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ImageEngine RelationshipEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public IDatabaseManager DatabaseManager { get; }
 
         /// <summary>
         /// 当前的所有人物关系
         /// </summary>
+        [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<CharacterRelationship> Relationships { get; }
 
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand RemoveDocumentCommand { get; }
-        public AsyncRelayCommand OpenDocumentCommand { get; }
-        public AsyncRelayCommand ResetDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand<DocumentCache> OpenDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand ResetDocumentCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddRelCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand RemoveRelCommand { get; }
-        public AsyncRelayCommand RelayoutCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand CaptureCommand { get; }
-        public AsyncRelayCommand SwitchModeCommand { get; }
     }
 }

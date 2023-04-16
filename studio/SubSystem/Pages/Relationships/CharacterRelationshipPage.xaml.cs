@@ -42,5 +42,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         {
             Relationship.LayoutAlgorithmType = "KK";
         }
+
+        private void Button_reLayout(object sender, RoutedEventArgs e)
+        {
+            Relationship.Relayout();
+        }
     }
 }

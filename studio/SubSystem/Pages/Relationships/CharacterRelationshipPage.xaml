@@ -26,10 +26,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relationships.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
-            <ImageBrush x:Key="Avatar_1" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_1.png" />
-            <ImageBrush x:Key="Avatar_2" ImageSource="E:\企划\橘小柚\社区\美术\罗易斯_2.png" />
-            <thisConverters:DirectiveAvatarConverter x:Key="Avatar" />
+
+            <thisConverters:AvatarConverter x:Key="Avatar" />
             <graph:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
 
@@ -317,12 +315,17 @@
                                      Columns="3"
                                      Margin="0 4 0 0">
                             <ftk:ToolButton Content="添加"
+                                            Command="{Binding AddDocumentCommand}"
                                             Icon="{StaticResource FeatherIcon.Plus}"
                                             ShowText="True" />
                             <ftk:ToolButton Content="打开"
+                                            Command="{Binding OpenDocumentCommand}"
+                                            CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
                                             Icon="{StaticResource FeatherIcon.Folder}"
                                             ShowText="True" />
                             <ftk:ToolButton Content="取消"
+                                            Command="{Binding ResetDocumentCommand}"
+                                            CommandParameter="{Binding SelectedDocument,Mode=OneWay}"
                                             Icon="{StaticResource FeatherIcon.Close}"
                                             IconSize="13"
                                             ShowText="True" />
@@ -347,14 +350,18 @@
                 <DockPanel>
                     <UniformGrid DockPanel.Dock="Top"
                                  Columns="3">
+                        
                         <ftk:ToolButton Content="添加关系"
                                         CornerRadius="0"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
-                        <ftk:ToolButton Content="重新布局"
+                        
+                        <ftk:ToolButton Click="Button_reLayout" 
+                                        Content="重新布局"
                                         CornerRadius="0"
                                         Icon="{StaticResource FeatherIcon.Refresh}"
                                         ShowText="True" />
+                        
                         <ftk:ToolButton Content="截图"
                                         CornerRadius="0"
                                         Icon="{StaticResource FeatherIcon.Camera}"
