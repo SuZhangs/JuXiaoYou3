@@ -6,21 +6,98 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipViewModel}, IsDesignTimeCreatable=True}"
-                     Height="300"
-                     Width="300">
-    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+                     Height="480"
+                     Width="640">
+    <UserControl.Resources>
+        <thisConverters:AvatarConverter x:Key="Avatar" />
+
+        <DataTemplate DataType="{x:Type doc:DocumentCache}">
+            <DockPanel Margin="4">
+                <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="84"
+                            Width="84">
+                    <Border.Background>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{StaticResource Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Border.Background>
+                </Border>
+
+                <TextBlock FontSize="14"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}" />
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
+                  CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
         <StackPanel>
             <f:ToggleSwitch Content="是否为双向关系"/>
             <f:ToggleSwitch Content="是否为双向关系"/>
-            <f:HeaderedSingleLine Header="关系名1"></f:HeaderedSingleLine>
-            <f:HeaderedSingleLine Header="关系名2"></f:HeaderedSingleLine>
+            <f:HeaderedSingleLine Header="关系名1"
+                                  Text="{Binding NameToSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <f:HeaderedSingleLine Header="关系名2"
+                                  Text="{Binding NameToTarget,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <ComboBox>
                 
             </ComboBox>
+            <DockPanel Grid.Column="0"
+                                   VerticalAlignment="Center">
+                <Rectangle DataContext="{Binding Source,Mode=OneWay}"
+                                       RadiusX="6"
+                                       RadiusY="6"
+                                       Height="64"
+                                       Width="64">
+                    <Rectangle.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{StaticResource Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock HorizontalAlignment="Center"
+                                       Margin="0 8 0 0"
+                                       Text="{Binding Source.Name,Mode=OneWay}" />
+            </DockPanel>
+            <DockPanel Grid.Column="0"
+                                   VerticalAlignment="Center">
+                <Rectangle DataContext="{Binding Source,Mode=OneWay}"
+                                       RadiusX="6"
+                                       RadiusY="6"
+                                       Height="64"
+                                       Width="64">
+                    <Rectangle.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{StaticResource Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock HorizontalAlignment="Center"
+                                       Margin="0 8 0 0"
+                                       Text="{Binding Source.Name,Mode=OneWay}" />
+            </DockPanel>
         </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>

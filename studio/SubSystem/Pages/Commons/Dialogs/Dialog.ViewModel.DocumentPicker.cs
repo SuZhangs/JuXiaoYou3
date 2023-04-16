@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var p = parameter.Parameter;
             var a = p.Args;
-            if (a is IEnumerable<DocumentCache> enumerable)
+            if (a[0] is IEnumerable<DocumentCache> enumerable)
             {
                 Documents.AddRange(enumerable, true);
             }
