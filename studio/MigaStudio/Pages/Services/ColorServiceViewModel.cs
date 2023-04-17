@@ -194,7 +194,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             Selected.Keywords.Remove(keyword);
             ColorService.Remove(keyword);
-            Keywords.Add(keyword);
+            Keywords.Remove(keyword);
             SetDirtyState();
         }
 
@@ -208,7 +208,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public string SelectedKeyword
         {
             get => _selectedKeyword;
-            set => SetValue(ref _selectedKeyword, value);
+            set { 
+                SetValue(ref _selectedKeyword, value);
+
+                AddKeywordCommand.NotifyCanExecuteChanged();
+                EditKeywordCommand.NotifyCanExecuteChanged();
+                RemoveKeywordCommand.NotifyCanExecuteChanged();
+            }
         }
         /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。
@@ -241,9 +247,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
                 EditMappingCommand.NotifyCanExecuteChanged();
                 RemoveMappingCommand.NotifyCanExecuteChanged();
-                AddKeywordCommand.NotifyCanExecuteChanged();
-                EditKeywordCommand.NotifyCanExecuteChanged();
-                RemoveKeywordCommand.NotifyCanExecuteChanged();
                 Keywords.Clear();
                 if (value is not null)
                 {
