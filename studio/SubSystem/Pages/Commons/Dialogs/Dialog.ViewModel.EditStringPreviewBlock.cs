@@ -113,7 +113,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             
             
             var spb = Block;
-            spb.ValueSourceID = r.Metadata;
+            spb.IsMetadata    = string.IsNullOrEmpty(r.Metadata);
+            spb.ValueSourceID = spb.IsMetadata ? r.Metadata : r.Id; 
         }
 
         protected override string Failed() => SubSystemString.Unknown;

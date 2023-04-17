@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Models;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
@@ -42,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                 {
                     Source = sp
                 },
-                _                     => null
+                _ => null
             };
         }
 
@@ -58,32 +59,61 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             get => _name;
             set => SetValue(ref _name, value);
         }
+
         public Presentation BaseSource { get; protected init; }
     }
 
     public class RarityPresentationUI : PresentationUI
     {
+        private string _color;
+        private string _value;
+
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var db = Xaml.Get<IDatabaseManager>();
-            var p  = db.Database
-                       .CurrentValue
-                       .Get<ColorServiceProperty>();
-            // TODO:
+            var    cs = Xaml.Get<IColorService>();
+            if (Source.IsMetadata)
+            {
+                Value = metadataTracker(ValueSource)?.Value
+                                                .SubString(200);
+            }
+            else
+            {
+                var v = blockTracker(ValueSource) as IMetadataTextSource;
+                Value = v?.GetValue().SubString(200);
+            }
+
+            Color = cs.GetColor(Value);
         }
+
+        public string ValueSource { get; init; }
 
         public RarityPresentation Source
         {
             get => (RarityPresentation)BaseSource;
             init
             {
-                Name = value.Name;
-                BaseSource = value;
-                Metadata   = value.ValueSourceID;
+                ValueSource = value.ValueSourceID;
+                Name        = value.Name;
+                BaseSource  = value;
             }
         }
 
-        public string Metadata { get; init; }
+        /// <summary>
+        /// 获取或设置 <see cref="Value"/> 属性。
+        /// </summary>
+        public string Value
+        {
+            get => _value;
+            set => SetValue(ref _value, value);
+        }
+        /// <summary>
+        /// 获取或设置 <see cref="Color"/> 属性。
+        /// </summary>
+        public string Color
+        {
+            get => _color;
+            set => SetValue(ref _color, value);
+        }
     }
 
     public class GroupingPresentationUI : PresentationUI
@@ -99,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             init
             {
                 BaseSource = value;
-                Name = value.Name;
+                Name       = value.Name;
                 NameLists  = new ObservableCollection<string>();
                 DataLists  = new ObservableCollection<PresentationDataUI>();
 
@@ -114,13 +144,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         public ObservableCollection<string> NameLists { get; private init; }
         public ObservableCollection<PresentationDataUI> DataLists { get; private init; }
     }
-    
+
     public class StringPresentationUI : PresentationUI
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            Value = metadataTracker(ValueSource)?.Value
-                                                .SubString(200);
+            if (Source.IsMetadata)
+            {
+                Value = metadataTracker(ValueSource)?.Value
+                                                    .SubString(200);
+            }
+            else
+            {
+                var v = blockTracker(ValueSource) as IMetadataTextSource;
+                Value = v?.GetValue().SubString(200);
+            }
         }
 
         public StringPresentation Source
@@ -137,7 +175,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         private string _value;
 
         public string ValueSource { get; init; }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="Value"/> 属性。
         /// </summary>
@@ -154,11 +192,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             var block = (ChartBlock)blockTracker(ValueSource);
 
-            if(block is null)
+            if (block is null)
             {
                 return;
             }
-            
+
             if (Source.IsMetadata)
             {
                 var unparsedValue = metadataTracker(ValueSource)?.Value;
@@ -174,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                 Value = new List<int>(value);
                 RaiseUpdated(nameof(Value));
             }
-            else if(block.Value is not null)
+            else if (block.Value is not null)
             {
                 Color = block.Color;
                 Axis.AddRange(block.Axis, true);
@@ -189,7 +227,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             init
             {
                 BaseSource  = value;
-                Name = value.Name;
+                Name        = value.Name;
                 ValueSource = value.ValueSourceID;
                 Color       = "#007ACC";
                 Value       = new List<int>();
@@ -209,7 +247,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             var block = (ChartBlock)blockTracker(ValueSource);
 
-            if(block is null)
+            if (block is null)
             {
                 return;
             }
@@ -229,7 +267,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                 Value = new List<int>(value);
                 RaiseUpdated(nameof(Value));
             }
-            else if(block.Value is not null)
+            else if (block.Value is not null)
             {
                 Color = block.Color;
                 Axis.AddRange(block.Axis, true);
@@ -244,7 +282,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             init
             {
                 BaseSource  = value;
-                Name = value.Name;
+                Name        = value.Name;
                 ValueSource = value.ValueSourceID;
                 Color       = "#007ACC";
                 Value       = new List<int>();

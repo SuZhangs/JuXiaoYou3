@@ -81,8 +81,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                             .Where(x => !string.IsNullOrEmpty(x.Metadata) && x is not GroupBlock)
                             .Where(x => x is NumberBlock or SingleLineBlock or RateBlock));
 
-                rarity.Name          = r1.Value.Name;
-                rarity.ValueSourceID = r1.Value.Metadata;
+                var r = r1.Value;
+                rarity.Name          = r.Name;
+                rarity.IsMetadata    = string.IsNullOrEmpty(r.Metadata);
+                rarity.ValueSourceID = rarity.IsMetadata ? r.Metadata : r.Id;
                 return r1.IsFinished;
             }
 

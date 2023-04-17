@@ -7,6 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 {
     public interface IColorService : IAttachableDatabaseService
     {
+        string GetColor(string keyword);
         void Changed(IEnumerable<string> items, string color);
         
         void AddOrUpdate(string name, string color);
@@ -18,14 +19,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     {
         private readonly Dictionary<string, string> _Color = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         
-        public Color GetColor(string keyword)
+        public string GetColor(string keyword)
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return Colors.CornflowerBlue;
+                return "$007ACC";
             }
 
-            return _Color.TryGetValue(keyword, out var color) ? Xaml.FromHex(color) : Colors.CornflowerBlue;
+            return _Color.TryGetValue(keyword, out var color) ? color : "$007ACC";
         }
 
         public void Changed(IEnumerable<string> items, string color)

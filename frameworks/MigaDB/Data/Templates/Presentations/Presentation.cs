@@ -28,12 +28,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
     public sealed class RarityPresentation : Presentation
     {
 
+        public bool IsMetadata { get; set; }
         public double Scale { get; init; }
         public string ValueSourceID { get; set; }
     }
 
     public sealed class StringPresentation : Presentation
     {
+        public bool IsMetadata { get; set; }
         public string ValueSourceID { get; set; }
     }
 
