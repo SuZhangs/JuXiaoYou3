@@ -245,6 +245,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 SetValue(ref _selected, value);
 
+                AddKeywordCommand.NotifyCanExecuteChanged();
+                EditKeywordCommand.NotifyCanExecuteChanged();
+                RemoveKeywordCommand.NotifyCanExecuteChanged();
                 EditMappingCommand.NotifyCanExecuteChanged();
                 RemoveMappingCommand.NotifyCanExecuteChanged();
                 Keywords.Clear();

@@ -39,6 +39,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             subView.Create(this);
             SubView = subView.SubView;
+
+            if (subView.Type == typeof(ShareView))
+            {
+                RefreshPresentation();
+            }
         }
     }
 }

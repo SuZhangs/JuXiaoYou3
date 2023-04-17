@@ -23,10 +23,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return "$007ACC";
+                return "#007ACC";
             }
 
-            return _Color.TryGetValue(keyword, out var color) ? color : "$007ACC";
+            return _Color.TryGetValue(keyword, out var color) ? color : "#007ACC";
         }
 
         public void Changed(IEnumerable<string> items, string color)

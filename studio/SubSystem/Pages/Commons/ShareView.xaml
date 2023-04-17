@@ -90,9 +90,11 @@
                 <Border Background="{Binding Color,Mode=OneWay}"
                         CornerRadius="6"
                         Effect="{StaticResource MenuItem.ShadowEffect}"
-                        Height="256"
+                        Height="96"
                         Margin="4"
-                        Width="256">
+                        Width="256"
+                        Padding="16"
+                        VerticalAlignment="Top">
                     <Border.ContextMenu>
                         <f:ContextMenu>
                             <f:MenuItem Header="编辑"
@@ -110,7 +112,9 @@
                         </f:ContextMenu>
                     </Border.ContextMenu>
                     <Grid>
-                        <TextBlock Text="{Binding Value,Mode=OneWay}"/>
+                        <TextBlock Foreground="White"
+                                   FontSize="18"
+                                   Text="{Binding Name,Mode=OneWay}"/>
                         <Border Background="Transparent" />
                     </Grid>
                 </Border>
@@ -246,7 +250,8 @@
                         </Border>
 
                         <Grid Margin="16">
-                            <studio:HistogramChart Axis="{Binding Axis,Mode=OneWay}"
+                            <studio:HistogramChart ClipToBounds="True"
+                                                   Axis="{Binding Axis,Mode=OneWay}"
                                                    Data="{Binding Value,Mode=OneWay}"
                                                    Color="{Binding Color}"
                                                    Height="160"

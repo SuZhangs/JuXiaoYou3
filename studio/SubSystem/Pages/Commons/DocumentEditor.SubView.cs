@@ -39,7 +39,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 OnSubViewChanged(_selectedSubView, value);
                 SetValue(ref _selectedSubView, value);
-
             }
         }
 

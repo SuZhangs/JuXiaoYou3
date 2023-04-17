@@ -70,11 +70,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
 
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var    cs = Xaml.Get<IColorService>();
+            var cs = Xaml.Get<IColorService>();
             if (Source.IsMetadata)
             {
-                Value = metadataTracker(ValueSource)?.Value
-                                                .SubString(200);
+                Value = metadataTracker(ValueSource)?.Value;
             }
             else
             {

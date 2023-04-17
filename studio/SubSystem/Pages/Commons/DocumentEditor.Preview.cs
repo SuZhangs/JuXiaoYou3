@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             PresentationPart.Blocks.Add(b);
             Presentations.Add(PresentationUI.GetUI(b));
             SavePresentationPart();
-            RefreshPresentationImp();
+            RefreshPresentation();
         }
 
         private async Task<bool> ContinueNamingImpl(Presentation b)
@@ -83,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
                 var r = r1.Value;
                 rarity.Name          = r.Name;
-                rarity.IsMetadata    = string.IsNullOrEmpty(r.Metadata);
+                rarity.IsMetadata    = !string.IsNullOrEmpty(r.Metadata);
                 rarity.ValueSourceID = rarity.IsMetadata ? r.Metadata : r.Id;
                 return r1.IsFinished;
             }
@@ -212,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             SavePresentationPart();
         }
 
-        private void RefreshPresentationImp()
+        protected void RefreshPresentation()
         {
             //
             // 更新

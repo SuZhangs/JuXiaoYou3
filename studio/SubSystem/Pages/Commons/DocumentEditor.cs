@@ -86,7 +86,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddPresentationCommand              = AsyncCommand(AddPresentationImpl);
             RemovePresentationCommand           = AsyncCommand<PresentationUI>(RemovePresentationImpl);
-            RefreshPresentationCommand          = Command(RefreshPresentationImp);
+            RefreshPresentationCommand          = Command(RefreshPresentation);
             EditPresentationCommand             = AsyncCommand<PresentationUI>(EditPresentationImpl);
             ShiftUpPresentationCommand          = Command<PresentationUI>(ShiftUpPresentationImpl);
             ShiftDownPresentationCommand        = Command<PresentationUI>(ShiftDownPresentationImpl);
