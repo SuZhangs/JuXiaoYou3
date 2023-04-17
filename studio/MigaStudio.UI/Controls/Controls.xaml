@@ -724,4 +724,36 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    
+    <Style TargetType="{x:Type ctrl:Avatar}">
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="64"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:Avatar}">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                ClipToBounds="True"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Image,Mode=OneWay}"/>
+                            </Border.Background>
+                        </Border>
+                        
+                        <TextBlock HorizontalAlignment="Center"
+                                   Margin="0 8 0 0"
+                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AvatarName,Mode=OneWay}"/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
