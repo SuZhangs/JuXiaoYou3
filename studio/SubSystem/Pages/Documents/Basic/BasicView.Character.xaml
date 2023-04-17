@@ -28,7 +28,7 @@
 
                         <f:HeaderedSingleLine Header="性别"
                                               Margin="4"
-                                              Text="{Binding Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,FallbackValue=1}" />
+                                              Text="{Binding Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                         <f:HeaderedSingleLine Header="生日"
                                               Margin="4"
@@ -45,6 +45,10 @@
                         <f:HeaderedSingleLine Header="体重（kg）"
                                               Margin="4"
                                               Text="{Binding Weight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        
+                        <f:ToggleSwitch Content="是否死亡"
+                                        Margin="4"
+                                        IsChecked="{Binding IsDeath,Mode=TwoWay}"/>
                     </UniformGrid>
 
                     <HeaderedContentControl Header="可选"

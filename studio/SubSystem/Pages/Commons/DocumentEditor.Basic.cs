@@ -15,6 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private const string MetaNameOfCountry  = "@country";
         private const string MetaNameOfRace     = "@race";
         private const string MetaNameOfNickName = "@nickname";
+        private const string MetaNameOfIsDeath  = "@death";
 
         private string GetOrAddMetadata(string name)
         {
@@ -126,6 +127,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
+        public bool IsDeath
+        {
+            get
+            {
+                var v = GetOrAddMetadata(MetaNameOfIsDeath);
+                return bool.TryParse(v, out var n) && n;
+            }
+            set
+            {
+                UpsertMetadata(MetaNameOfIsDeath, value.ToString());
+                SetDirtyState();
+                RaiseUpdated();
+            }
+        }
+        
         public string Height
         {
             get => GetOrAddMetadata(MetaNameOfHeight);
