@@ -786,7 +786,6 @@
                                          VerticalAlignment="Center">
                                 <DockPanel Margin="0 0 0 2">
                                     <TextBlock DockPanel.Dock="Top"
-                                               Margin="0 0 0 2"
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=TopName,Mode=OneWay}"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Top" />
@@ -800,7 +799,6 @@
 
                                 <DockPanel Margin="0 2 0 0">
                                     <TextBlock DockPanel.Dock="Bottom"
-                                               Margin="0 0 0 2"
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BottomName,Mode=OneWay}"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Top" />

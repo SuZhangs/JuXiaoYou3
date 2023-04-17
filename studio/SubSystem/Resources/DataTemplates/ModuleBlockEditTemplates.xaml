@@ -681,7 +681,6 @@
 
                     <f:HeaderedSingleLine f:Language.Id="global.fallback"
                                           Margin="4"
-                                          IsReadOnly="True"
                                           Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                           Header="默认值" />
                 </UniformGrid>
@@ -832,19 +831,16 @@
 
                     <f:HeaderedSingleLine f:Language.Id="global.minimum"
                                           Margin="4"
-                                          IsReadOnly="True"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="最小值" />
                     <f:HeaderedSingleLine f:Language.Id="global.maximum"
                                           Margin="4"
-                                          IsReadOnly="True"
                                           Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="最大值" />
 
                     <f:HeaderedSingleLine f:Language.Id="global.fallback"
                                           Margin="4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Text="{Binding FallbackValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="默认值" />
                 </UniformGrid>
 
@@ -911,19 +907,16 @@
 
                     <f:HeaderedSingleLine f:Language.Id="global.minimum"
                                           Margin="4"
-                                          IsReadOnly="True"
                                           Text="{Binding Minimum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="最小值" />
                     <f:HeaderedSingleLine f:Language.Id="global.maximum"
                                           Margin="4"
-                                          IsReadOnly="True"
                                           Text="{Binding Maximum,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="最大值" />
 
                     <f:HeaderedSingleLine f:Language.Id="global.fallback"
                                           Margin="4"
-                                          IsReadOnly="True"
-                                          Text="{Binding Fallback,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
+                                          Text="{Binding FallbackValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource String2Int}}"
                                           Header="默认值" />
                 </UniformGrid>
 

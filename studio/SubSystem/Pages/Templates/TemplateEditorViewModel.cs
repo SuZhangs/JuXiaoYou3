@@ -326,7 +326,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             DetectAll();
             SetDirtyState();
-            Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         private async Task RemoveBlockImpl(ModuleBlockEditUI element)
@@ -518,7 +517,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public bool IsPresentationPaneOpen
         {
             get => _isPresentationPaneOpen;
-            set => SetValue(ref _isPresentationPaneOpen, value);
+            set
+            {
+                SetValue(ref _isPresentationPaneOpen, value);
+                if(value)RaiseUpdated(nameof(Presentations));
+            }
         }
 
         /// <summary>

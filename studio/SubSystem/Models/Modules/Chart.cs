@@ -157,9 +157,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
     public abstract class ChartBlockEditUI : ModuleBlockEditUI<ChartBlock, int[]>, IChartBlockEditUI
     {
-        private int _maximum;
-        private int _minimum;
+        private int    _maximum;
+        private int    _minimum;
         private string _color;
+        private int _fallbackValue;
 
         protected ChartBlockEditUI(ChartBlock block) : base(block)
         {
@@ -190,6 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             }
             
             Axis.Add(r.Value);
+            
         }
 
         private async Task EditImpl(string item)
@@ -269,6 +271,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public RelayCommand<string> DownCommand { get; }
 
         /// <summary>
+        /// 获取或设置 <see cref="FallbackValue"/> 属性。
+        /// </summary>
+        public int FallbackValue
+        {
+            get => _fallbackValue;
+            set
+            {
+                SetValue(ref _fallbackValue, Math.Clamp(value, Minimum, Maximum));
+            }
+        }
+
+        /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。
         /// </summary>
         public string Color
@@ -283,7 +297,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public int Minimum
         {
             get => _minimum;
-            set => SetValue(ref _minimum, value);
+            set
+            {
+                if (value >= _maximum)
+                {
+                    return;
+                }
+                SetValue(ref _minimum, value);
+            }
         }
 
         /// <summary>
@@ -292,7 +313,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public int Maximum
         {
             get => _maximum;
-            set => SetValue(ref _maximum, value);
+            set
+            {
+                if (_minimum >= value)
+                {
+                    return;
+                }
+                SetValue(ref _maximum, value);
+            }
         }
 
         public ObservableCollection<string> Axis { get; }
@@ -317,12 +345,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         protected override ChartBlock CreateInstanceOverride()
         {
+            var f = new int[Axis.Count];
+            for (var i = 0; i < Axis.Count; i++)
+            {
+                f[i] = FallbackValue;
+            }
+            
             return new RadarBlock
             {
                 Id = Id,
                 Name = Name,
                 Metadata = Metadata,
-                Fallback = Fallback,
+                Fallback = f,
                 ToolTips = ToolTips,
                 Maximum = Maximum,
                 Minimum = Minimum,
@@ -354,12 +388,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         protected override ChartBlock CreateInstanceOverride()
         {
+            var f = new int[Axis.Count];
+            for (var i = 0; i < Axis.Count; i++)
+            {
+                f[i] = FallbackValue;
+            }
+
             return new HistogramBlock
             {
                 Id = Id,
                 Name = Name,
                 Metadata = Metadata,
-                Fallback = Fallback,
+                Fallback = f,
                 ToolTips = ToolTips,
                 Maximum = Maximum,
                 Minimum = Minimum,

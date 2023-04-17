@@ -61,6 +61,7 @@
                                          TargetName="{Binding Target.Name,Mode=OneWay}"
                                          TopName="{Binding NameToTarget,Mode=OneWay}"
                                          BottomName="{Binding NameToSource,Mode=OneWay}"
+                                         Height="120"
                                          Margin="4">
                     <studio:RelationshipCard.SourceImage>
                         <MultiBinding Converter="{StaticResource Avatar}">
