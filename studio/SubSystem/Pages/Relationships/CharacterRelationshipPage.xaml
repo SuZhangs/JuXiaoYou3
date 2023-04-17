@@ -28,7 +28,6 @@
             </ResourceDictionary.MergedDictionaries>
 
             <thisConverters:AvatarConverter x:Key="Avatar" />
-            <graph:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
 
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
@@ -113,7 +112,7 @@
                                 <Path.Data>
                                     <PathGeometry>
                                         <PathGeometry.Figures>
-                                            <MultiBinding Converter="{StaticResource RouteToPathConverter}">
+                                            <MultiBinding Converter="{StaticResource RouteToEdgeConverter}">
                                                 <Binding
                                                     RelativeSource="{RelativeSource TemplatedParent}"
                                                     Path="Source.(controls:GraphCanvas.X)" />
