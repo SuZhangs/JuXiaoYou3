@@ -57,102 +57,24 @@
 
 
             <DataTemplate DataType="{x:Type rel:CharacterRelationship}">
-                <Border Background="{f:Brush BackgroundLevel2}"
-                        CornerRadius="12"
-                        Margin="0 4"
-                        Width="320"
-                        Padding="16 16 16 8">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="64" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="64" />
-                        </Grid.ColumnDefinitions>
-
-                        <DockPanel Grid.Column="0"
-                                   VerticalAlignment="Center">
-                            <Rectangle DataContext="{Binding Source,Mode=OneWay}"
-                                       RadiusX="6"
-                                       RadiusY="6"
-                                       Height="64"
-                                       Width="64">
-                                <Rectangle.Fill>
-                                    <ImageBrush>
-                                        <ImageBrush.ImageSource>
-                                            <MultiBinding Converter="{StaticResource Avatar}">
-                                                <Binding Path="Avatar" Mode="OneWay" />
-                                                <Binding Path="Type" />
-                                            </MultiBinding>
-                                        </ImageBrush.ImageSource>
-                                    </ImageBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <TextBlock HorizontalAlignment="Center"
-                                       Margin="0 8 0 0"
-                                       Text="{Binding Source.Name,Mode=OneWay}" />
-                        </DockPanel>
-
-
-                        <UniformGrid Grid.Column="1"
-                                     Margin="32 0"
-                                     Rows="2"
-                                     VerticalAlignment="Center">
-                            <DockPanel Margin="0 0 0 8">
-                                <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 0 0 2"
-                                           Text="关系1"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Top" />
-                                <drawing:LineArrow ArrowSize="6"
-                                                   BendAmount="0"
-                                                   EndArrow="Arrow"
-                                                   Height="1"
-                                                   StartArrow="Arrow"
-                                                   Stroke="{f:ForegroundBrush}"
-                                                   StrokeThickness="3" />
-                            </DockPanel>
-
-                            <DockPanel Margin="0 8 0 0">
-                                <TextBlock DockPanel.Dock="Bottom"
-                                           Margin="0 0 0 2"
-                                           Text="关系2"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Top" />
-
-                                <drawing:LineArrow ArrowSize="6"
-                                                   BendAmount="0"
-                                                   Height="1"
-                                                   EndArrow="Arrow"
-                                                   StartArrow="Arrow"
-                                                   Stroke="{f:ForegroundBrush}"
-                                                   StrokeThickness="3" />
-                            </DockPanel>
-                        </UniformGrid>
-
-                        <DockPanel Grid.Column="2"
-                                   VerticalAlignment="Center">
-                            <Rectangle DataContext="{Binding Target,Mode=OneWay}"
-                                       RadiusX="6"
-                                       RadiusY="6"
-                                       Height="64"
-                                       Width="64">
-                                <Rectangle.Fill>
-                                    <ImageBrush>
-                                        <ImageBrush.ImageSource>
-                                            <MultiBinding Converter="{StaticResource Avatar}">
-                                                <Binding Path="Avatar" Mode="OneWay" />
-                                                <Binding Path="Type" />
-                                            </MultiBinding>
-                                        </ImageBrush.ImageSource>
-                                    </ImageBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <TextBlock HorizontalAlignment="Center"
-                                       Margin="0 8 0 0"
-                                       Text="{Binding Target.Name,Mode=OneWay}" />
-                        </DockPanel>
-                    </Grid>
-                </Border>
+                <studio:RelationshipCard SourceName="{Binding Source.Name,Mode=OneWay}"
+                                         TargetName="{Binding Target.Name,Mode=OneWay}"
+                                         TopName="{Binding NameToTarget,Mode=OneWay}"
+                                         BottomName="{Binding NameToSource,Mode=OneWay}"
+                                         Margin="4">
+                    <studio:RelationshipCard.SourceImage>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Source.Avatar" Mode="OneWay" />
+                            <Binding Path="Source.Type" />
+                        </MultiBinding>
+                    </studio:RelationshipCard.SourceImage>
+                    <studio:RelationshipCard.TargetImage>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Target.Avatar" Mode="OneWay" />
+                            <Binding Path="Target.Type" />
+                        </MultiBinding>
+                    </studio:RelationshipCard.TargetImage>
+                </studio:RelationshipCard>
             </DataTemplate>
 
             <!-- Vertex Control -->
@@ -380,7 +302,7 @@
                 </UniformGrid>
 
                 <ItemsControl DockPanel.Dock="Bottom"
-                              Margin="8"
+                              Margin="16 8"
                               ItemsSource="{Binding Relationships,Mode=OneWay}" />
             </DockPanel>
         </Border>
