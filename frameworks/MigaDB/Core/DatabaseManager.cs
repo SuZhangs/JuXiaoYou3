@@ -399,12 +399,12 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 _property.SetValue(property);
 
                 //
-                // 打开
-                _isOpen.SetValue(true);
-
-                //
                 // 设置数据库
                 _database.SetValue(database);
+
+                //
+                // 打开
+                _isOpen.SetValue(true);
 
                 //
                 //
@@ -463,13 +463,14 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 // 设置属性
                 _property.SetValue(property);
 
-                //
-                // 打开
-                _isOpen.SetValue(true);
 
                 //
                 // 设置数据库
                 _database.SetValue(database);
+
+                //
+                // 打开
+                _isOpen.SetValue(true);
 
                 //
                 //

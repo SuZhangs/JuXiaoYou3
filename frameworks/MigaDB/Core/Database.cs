@@ -113,7 +113,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             {
                 var document = _props.FindById(key)?.AsDocument;
                 obj = document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
-                _cache.TryAdd(key, obj);
+               if(obj is not null) 
+                   _cache.TryAdd(key, obj);
             }
             
             return (T)obj;

@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -14,10 +15,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         private ColorMapping _selected;
         private string       _color;
+        private string       _selectedKeyword;
 
         public ColorServiceViewModel()
         {
-            ColorService = Xaml.Get<ColorService>();
+            ColorService     = Xaml.Get<ColorService>();
             Database = Xaml.Get<IDatabaseManager>()
                            .Database
                            .CurrentValue;
@@ -25,13 +27,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Keywords = new ObservableCollection<string>();
             Mappings = new ObservableCollection<ColorMapping>();
 
+            if (Property.Mappings.Count > 0)
+            {
+                Mappings.AddRange(Property.Mappings, true);
+            }
+
             AddMappingCommand    = AsyncCommand(AddMappingImpl);
             RemoveMappingCommand = AsyncCommand<ColorMapping>(RemoveMappingImpl, HasItem);
             EditMappingCommand   = AsyncCommand<ColorMapping>(EditMappingImpl, HasItem);
             
-            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
+            AddKeywordCommand    = AsyncCommand<ColorMapping>(AddKeywordImpl, HasItem);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl,x => Selected is not null && HasItem(x));
             EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
+            SaveCommand          = Command(SavePropertyImpl);
+        }
+
+        private void SavePropertyImpl()
+        {
+            Database.Set(Property);
+            SetDirtyState(false);
         }
 
         private async Task AddMappingImpl()
@@ -53,7 +67,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Mappings.Add(m);
             Property.Mappings
                     .Add(m);
-            Database.Upsert(Property);
+            SetDirtyState();
         }
 
         private async Task RemoveMappingImpl(ColorMapping mapping)
@@ -71,7 +85,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Mappings.Remove(mapping);
             Property.Mappings
                     .Remove(mapping);
-            Database.Upsert(Property);
+            SetDirtyState();
 
             if (mapping.Keywords.Count > 0)
             {
@@ -96,12 +110,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             mapping.Name = r.Value;
-            Database.Upsert(Property);
+            SetDirtyState();
         }
 
-        private async Task AddKeywordImpl()
+        private async Task AddKeywordImpl(ColorMapping mapping)
         {
-            if (Selected is null)
+            if (mapping is null)
             {
                 return;
             }
@@ -115,17 +129,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var k = r.Value;
 
             if (string.IsNullOrEmpty(k) ||
-                Selected.Keywords.Contains(k))
+                mapping.Keywords.Contains(k))
             {
                 return;
             }
 
-            Selected.Keywords.Add(k);
-            Database.Upsert(Property);
+            mapping.Keywords.Add(k);
+            Keywords.Add(k);
+            SetDirtyState();
 
-            if (!string.IsNullOrEmpty(Selected.Color))
+            if (!string.IsNullOrEmpty(mapping.Color))
             {
-                ColorService.AddOrUpdate(k, Selected.Color);
+                ColorService.AddOrUpdate(k, mapping.Color);
             }
         }
         
@@ -154,7 +169,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Selected.Keywords.Add(k);
             ColorService.Remove(keyword);
             ColorService.AddOrUpdate(k, Selected.Color);
-            Database.Upsert(Property);
+            Keywords.Remove(keyword);
+            Keywords.Add(k);
+            SetDirtyState();
         }
         
         private async Task RemoveKeywordImpl(string keyword)
@@ -177,13 +194,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             Selected.Keywords.Remove(keyword);
             ColorService.Remove(keyword);
-            Database.Upsert(Property);
+            Keywords.Add(keyword);
+            SetDirtyState();
         }
 
         public IDatabase Database { get; }
         public ColorService ColorService { get; }
         public ColorServiceProperty Property { get; }
 
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedKeyword"/> 属性。
+        /// </summary>
+        public string SelectedKeyword
+        {
+            get => _selectedKeyword;
+            set => SetValue(ref _selectedKeyword, value);
+        }
         /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。
         /// </summary>
@@ -193,8 +219,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 SetValue(ref _color, value);
+
                 if (Selected is not null)
                 {
+                    SetDirtyState();
+                    Selected.Color = value;
                     ColorService.Changed(Selected.Keywords, value);
                 }
             }
@@ -210,10 +239,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 SetValue(ref _selected, value);
 
+                EditMappingCommand.NotifyCanExecuteChanged();
+                RemoveMappingCommand.NotifyCanExecuteChanged();
+                AddKeywordCommand.NotifyCanExecuteChanged();
+                EditKeywordCommand.NotifyCanExecuteChanged();
+                RemoveKeywordCommand.NotifyCanExecuteChanged();
+                Keywords.Clear();
                 if (value is not null)
                 {
                     _color = value.Color;
                     RaiseUpdated(nameof(Color));
+                    Keywords.AddRange(value.Keywords);
                 }
             }
         }
@@ -226,6 +262,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
 
         [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand SaveCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddMappingCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
@@ -235,7 +274,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public AsyncRelayCommand<ColorMapping> RemoveMappingCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddKeywordCommand { get; }
+        public AsyncRelayCommand<ColorMapping> AddKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<string> EditKeywordCommand { get; }
