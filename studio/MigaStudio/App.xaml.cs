@@ -84,11 +84,13 @@ namespace Acorisoft.FutureGL.MigaStudio
                     logger,
                     setting.DebugMode));
             
-            // _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
-            //     DatabaseManager.GetDefaultDatabaseManager(
-            //         logger,
-            //         DatabaseMode.Debug));
-
+            //
+            // 注册数据库附加服务
+            var attachable = new AttachableDatabaseServiceHost(container, _databaseManager);
+            attachable.Add(new ColorService());
+            
+            //
+            // 注册服务
             container.Use<AutoSaveService, IAutoSaveService>(new AutoSaveService());
             container.RegisterInstance<MusicService>(new MusicService());
         }

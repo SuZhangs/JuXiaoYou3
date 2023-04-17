@@ -23,6 +23,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 DefaultManifests = new Dictionary<DocumentType, string>(),
                 DefaultPresentationManifest = new Dictionary<DocumentType, PartOfPresentation>()
             });
+
+            database.Upsert<ColorServiceProperty>(new ColorServiceProperty
+            {
+                Mappings = new List<ColorMapping>(),
+            });
             
             database.Upsert<DatabaseVersion>(new DatabaseVersion
             {

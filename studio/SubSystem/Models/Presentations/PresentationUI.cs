@@ -2,6 +2,8 @@
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Windows.Forms;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
@@ -63,6 +65,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
+            var db = Xaml.Get<IDatabaseManager>();
+            var p  = db.Database
+                       .CurrentValue
+                       .Get<ColorServiceProperty>();
             // TODO:
         }
 
@@ -148,6 +154,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             var block = (ChartBlock)blockTracker(ValueSource);
 
+            if(block is null)
+            {
+                return;
+            }
+            
             if (Source.IsMetadata)
             {
                 var unparsedValue = metadataTracker(ValueSource)?.Value;
@@ -197,6 +208,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             var block = (ChartBlock)blockTracker(ValueSource);
+
+            if(block is null)
+            {
+                return;
+            }
 
             if (Source.IsMetadata)
             {
