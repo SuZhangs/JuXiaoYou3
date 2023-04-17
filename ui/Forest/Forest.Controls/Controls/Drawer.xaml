@@ -541,7 +541,6 @@
                                                  Rows="1">
                                         <b:DialogButton Icon="{StaticResource FeatherIcon.Checked}"
                                                         IconSize="29"
-                                                        IsDefault="True"
                                                         Content="{TemplateBinding CompletedButtonText}"
                                                         Command="{TemplateBinding CompletedCommand}"
                                                         Purpose="CallToAction" />
@@ -596,7 +595,6 @@
                                                     Height="48"
                                                     Icon="{StaticResource FeatherIcon.Checked}"
                                                     IconSize="29"
-                                                    IsDefault="True"
                                                     Content="{TemplateBinding CancelButtonText}"
                                                     Command="{TemplateBinding CancelCommand}"
                                                     Purpose="CallToAction" 

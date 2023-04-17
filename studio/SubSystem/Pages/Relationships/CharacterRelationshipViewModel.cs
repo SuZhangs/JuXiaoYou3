@@ -87,8 +87,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
-            var hash = Relationships.Select(x => x.Id)
+            var hash = Relationships.Select(x => x.Target.Id)
                                     .ToHashSet();
+            hash.Add(source.Id);
             var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
                                                                        .Where(x => !hash.Contains(x.Id)));
 
@@ -106,6 +107,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
             DocumentEngine.AddRelationship(r1.Value);
             Graph.AddEdge(r1.Value);
+            
+            if (SelectedDocument.Id == source.Id)
+            {
+                Relationships.Add(r1.Value);
+            }
         }
 
         private async Task RemoveRelationshipImpl(CharacterRelationship rel)
@@ -122,6 +128,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             
             
         }
+        
         #endregion
 
         private async Task CaptureImpl(FrameworkElement element)
@@ -169,9 +176,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
                 Graph.TryGetInEdges(value, out var edgeA);
                 Graph.TryGetOutEdges(value, out var edgeB);
-
-                var total = edgeA.Concat(edgeB);
-                Relationships.AddRange(total);
+                Relationships.AddRange(edgeA);
+                Relationships.AddRange(edgeB);
             }
         }
 
@@ -204,6 +210,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<DocumentCache> AddRelCommand { get; }
+        
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<CharacterRelationship> EditRelCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<CharacterRelationship> RemoveRelCommand { get; }

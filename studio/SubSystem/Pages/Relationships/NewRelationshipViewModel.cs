@@ -1,10 +1,20 @@
 ﻿using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+// ReSharper disable RedundantArgumentDefaultValue
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
     public class NewRelationshipViewModel : ExplicitDialogVM
     {
+        public static readonly Relationship[] Relationships = new[]
+        {
+            Relationship.Hostile,
+            Relationship.Neutral,
+            Relationship.Friendly,
+            Relationship.Kinship,
+            Relationship.InLaw,
+        };
+        
         public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, DocumentType type)
         {
             return DialogService().Dialog<CharacterRelationship, NewRelationshipViewModel>(new Parameter
@@ -114,6 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
             return SubSystemString.Unknown;
         }
+        
         public DocumentType Type { get; private set; }
         public bool IsEditMode { get; private set; }
         public CharacterRelationship Entity { get; private set; }
@@ -142,7 +153,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public bool IsBidirection
         {
             get => _isBidirection;
-            set => SetValue(ref _isBidirection, value);
+            set
+            {
+                SetValue(ref _isBidirection, value);
+
+                var ns = string.IsNullOrEmpty(_nameToSource);
+                var nt = string.IsNullOrEmpty(_nameToTarget);
+
+                if (ns && nt)
+                {
+                    return;
+                }
+
+                if (ns)
+                {
+                    _nameToSource = _nameToTarget;
+                    RaiseUpdated(nameof(NameToSource));
+                }
+                else
+                {
+                    
+                    _nameToTarget = _nameToSource;
+                    RaiseUpdated(nameof(NameToTarget));
+                }
+            }
         }
 
         /// <summary>
@@ -151,7 +185,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public string NameToTarget
         {
             get => _nameToTarget;
-            set => SetValue(ref _nameToTarget, value);
+            set
+            {
+                if (IsBidirection)
+                {
+                    _nameToTarget = value;
+                    _nameToSource = value;
+                    RaiseUpdated(nameof(NameToTarget));
+                    RaiseUpdated(nameof(NameToSource));
+                }
+                else
+                {
+                    SetValue(ref _nameToTarget, value);
+                }
+            }
         }
 
         /// <summary>
@@ -160,7 +207,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public string NameToSource
         {
             get => _nameToSource;
-            set => SetValue(ref _nameToSource, value);
+            set
+            {
+                if (IsBidirection)
+                {
+                    _nameToTarget = value;
+                    _nameToSource = value;
+                    RaiseUpdated(nameof(NameToTarget));
+                    RaiseUpdated(nameof(NameToSource));
+                }
+                else
+                {
+                    SetValue(ref _nameToSource, value);
+                }
+            }
         }
 
         /// <summary>

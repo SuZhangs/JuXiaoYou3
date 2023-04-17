@@ -10,6 +10,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
+                     xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relationships;assembly=MigaDB"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipViewModel}, IsDesignTimeCreatable=True}"
@@ -42,98 +43,118 @@
                            Text="{Binding Name,Mode=OneWay}" />
             </DockPanel>
         </DataTemplate>
+
+        <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
+        <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
-        <ftk:TabControl>
-            <ftk:TabItem Header="普通关系"
-                         Padding="16 8">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="128" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <studio:Avatar Grid.Column="0"
-                                       DataContext="{Binding Source,Mode=OneWay}"
-                                       AvatarName="{Binding Name,Mode=OneWay}">
-                            <studio:Avatar.Image>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </studio:Avatar.Image>
-                        </studio:Avatar>
 
-                        <Path Grid.Column="1"
-                              Data="M 0 8 L 0 8 128 8 112 0"
-                              Stroke="{f:ForegroundBrush}"
-                              StrokeThickness="2"
-                              Stretch="Uniform"
-                              Width="128"
-                              Height="16" />
+        <StackPanel>
+            <Grid Margin="0 4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <studio:Avatar Grid.Column="0"
+                               DataContext="{Binding Source,Mode=OneWay}"
+                               AvatarName="{Binding Name,Mode=OneWay}"
+                               Margin="16 0">
+                    <studio:Avatar.Image>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Avatar" Mode="OneWay" />
+                            <Binding Path="Type" />
+                        </MultiBinding>
+                    </studio:Avatar.Image>
+                </studio:Avatar>
 
-                        <studio:Avatar Grid.Column="2"
-                                       DataContext="{Binding Target,Mode=OneWay}"
-                                       AvatarName="{Binding Name,Mode=OneWay}">
-                            <studio:Avatar.Image>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </studio:Avatar.Image>
-                        </studio:Avatar>
+                <Path Grid.Column="1"
+                      Data="{StaticResource ArrowRight}"
+                      Stroke="{f:ForegroundBrush}"
+                      StrokeThickness="2"
+                      Stretch="Uniform"
+                      Width="128"
+                      Height="16" />
 
-                        <f:SingleLine Grid.Column="3" />
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <studio:Avatar Grid.Column="0"
-                                       DataContext="{Binding Source,Mode=OneWay}"
-                                       AvatarName="{Binding Name,Mode=OneWay}">
-                            <studio:Avatar.Image>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </studio:Avatar.Image>
-                        </studio:Avatar>
+                <studio:Avatar Grid.Column="2"
+                               DataContext="{Binding Target,Mode=OneWay}"
+                               AvatarName="{Binding Name,Mode=OneWay}"
+                               Margin="16 0">
+                    <studio:Avatar.Image>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Avatar" Mode="OneWay" />
+                            <Binding Path="Type" />
+                        </MultiBinding>
+                    </studio:Avatar.Image>
+                </studio:Avatar>
 
+                <f:SingleLine Grid.Column="3"
+                              Margin="8 0"
+                              Text="{Binding NameToTarget,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              VerticalAlignment="Center" />
+            </Grid>
 
-                        <Path Grid.Column="1"
-                              Data="M 16 8 L 16 8 0 0 128 0"
-                              Stroke="{f:ForegroundBrush}"
-                              StrokeThickness="2"
-                              Stretch="Uniform"
-                              Width="128"
-                              Height="16" />
+            <Grid Margin="0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="128" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <studio:Avatar Grid.Column="0"
+                               DataContext="{Binding Source,Mode=OneWay}"
+                               AvatarName="{Binding Name,Mode=OneWay}"
+                               Margin="16 0">
+                    <studio:Avatar.Image>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Avatar" Mode="OneWay" />
+                            <Binding Path="Type" />
+                        </MultiBinding>
+                    </studio:Avatar.Image>
+                </studio:Avatar>
 
-                        <studio:Avatar Grid.Column="2"
-                                       DataContext="{Binding Target,Mode=OneWay}"
-                                       AvatarName="{Binding Name,Mode=OneWay}">
-                            <studio:Avatar.Image>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </studio:Avatar.Image>
-                        </studio:Avatar>
+                <Path Grid.Column="1"
+                      Data="{StaticResource ArrowLeft}"
+                      Stroke="{f:ForegroundBrush}"
+                      StrokeThickness="2"
+                      Stretch="Uniform"
+                      Width="128"
+                      Height="16" />
 
-                        <f:SingleLine Grid.Column="3" />
-                    </Grid>
-                </StackPanel>
-            </ftk:TabItem>
-            <ftk:TabItem Header="血缘关系"
-                         Padding="16 8">
+                <studio:Avatar Grid.Column="2"
+                               DataContext="{Binding Target,Mode=OneWay}"
+                               AvatarName="{Binding Name,Mode=OneWay}"
+                               Margin="16 0">
+                    <studio:Avatar.Image>
+                        <MultiBinding Converter="{StaticResource Avatar}">
+                            <Binding Path="Avatar" Mode="OneWay" />
+                            <Binding Path="Type" />
+                        </MultiBinding>
+                    </studio:Avatar.Image>
+                </studio:Avatar>
 
-            </ftk:TabItem>
-        </ftk:TabControl>
+                <f:SingleLine Grid.Column="3"
+                              Margin="8 0"
+                              Text="{Binding NameToSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              VerticalAlignment="Center" />
+            </Grid>
+
+            <ComboBox Margin="0 16"
+                      ItemsSource="{x:Static thisVM:NewRelationshipViewModel.Relationships}"
+                      SelectedItem="{Binding Relationship,Mode=TwoWay}" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type rel:Relationship}">
+                        <TextBlock Text="{Binding Converter={StaticResource Translation}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <f:ToggleSwitch Margin="0 4"
+                            Content="双向关系"
+                            IsChecked="{Binding IsBidirection,Mode=TwoWay}"/>
+        </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>

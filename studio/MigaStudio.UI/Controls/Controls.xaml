@@ -728,8 +728,6 @@
     
     <Style TargetType="{x:Type ctrl:Avatar}">
         <Setter Property="CornerRadius" Value="6"/>
-        <Setter Property="Width" Value="64"/>
-        <Setter Property="Height" Value="64"/>
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -742,7 +740,9 @@
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 Padding="{TemplateBinding Padding}"
                                 HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
+                                VerticalAlignment="Stretch"
+                                Height="64"
+                                Width="64">
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Image,Mode=OneWay}"/>
                             </Border.Background>
@@ -750,7 +750,8 @@
                         
                         <TextBlock HorizontalAlignment="Center"
                                    Margin="0 8 0 0"
-                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AvatarName,Mode=OneWay}"/>
+                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AvatarName,Mode=OneWay}"
+                                   TextWrapping="Wrap"/>
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
