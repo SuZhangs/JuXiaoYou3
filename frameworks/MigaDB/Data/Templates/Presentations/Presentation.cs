@@ -16,7 +16,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
             set => SetValue(ref _name, value);
         }
 
-        public bool IsMetadata { get; init; }
         public MetadataKind Type { get; init; }
         
         public sealed override string ToString()
@@ -47,5 +46,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations
     {
         public string ValueSourceID { get; set; }
         public ChartType ChartType { get; init; }
+        public bool IsMetadata { get; set; }
     }
 }

@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/DataTemplates/PresentationDataUI.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <thisVM:DocumentEditorBaseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+            
             <DataTemplate DataType="{x:Type thisModel:GroupingPresentationUI}">
                 <Border Background="{f:Brush BackgroundLevel1}"
                         CornerRadius="6"
@@ -124,6 +125,102 @@
                                        TextWrapping="Wrap" />
                             <Border Background="Transparent"
                                     Grid.ColumnSpan="2" />
+                        </Grid>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type thisModel:RadarPresentationUI}">
+                <Border Background="{f:Brush BackgroundLevel1}"
+                        CornerRadius="6"
+                        Effect="{StaticResource MenuItem.ShadowEffect}"
+                        Height="256"
+                        Margin="4"
+                        Width="256">
+                    <Border.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Header="编辑"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="上移"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="下移"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="删除"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Border.ContextMenu>
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top"
+                                Background="{f:Brush BackgroundLevel3}"
+                                CornerRadius="6 6 0 0"
+                                Padding="16 8">
+                            <TextBlock FontSize="15"
+                                       FontWeight="Bold"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center" />
+                        </Border>
+
+                        <Grid Margin="16">
+                           
+                            <studio:RadarChart Axis="{Binding Axis,Mode=OneWay}"
+                                               Data="{Binding Value,Mode=OneWay}"
+                                               Color="{Binding Color}"
+                                               ShowAxisName="True"
+                                               Height="160"
+                                               Width="160" />
+                            <Border Background="Transparent" />
+                        </Grid>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type thisModel:HistogramPresentationUI}">
+                <Border Background="{f:Brush BackgroundLevel1}"
+                        CornerRadius="6"
+                        Effect="{StaticResource MenuItem.ShadowEffect}"
+                        Height="256"
+                        Margin="4"
+                        Width="256">
+                    <Border.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Header="编辑"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="上移"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="下移"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                            <f:MenuItem Header="删除"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Border.ContextMenu>
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top"
+                                Background="{f:Brush BackgroundLevel3}"
+                                CornerRadius="6 6 0 0"
+                                Padding="16 8">
+                            <TextBlock FontSize="15"
+                                       FontWeight="Bold"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center" />
+                        </Border>
+
+                        <Grid Margin="16">
+                            <studio:HistogramChart Axis="{Binding Axis,Mode=OneWay}"
+                                                   Data="{Binding Value,Mode=OneWay}"
+                                                   Color="{Binding Color}"
+                                                   Height="160"
+                                                   Width="160" />
+                            <Border Background="Transparent" />
                         </Grid>
                     </DockPanel>
                 </Border>

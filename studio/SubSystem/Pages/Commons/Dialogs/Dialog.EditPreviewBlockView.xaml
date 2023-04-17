@@ -16,7 +16,7 @@
                      Height="480"
                      Padding="16">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type thisModel:ModuleTemplateCache}">
+        <DataTemplate DataType="{x:Type thisModel:ModuleBlock}">
             <DockPanel Margin="8">
                 <TextBlock Text="{Binding Name,Mode=OneWay}" />
             </DockPanel>

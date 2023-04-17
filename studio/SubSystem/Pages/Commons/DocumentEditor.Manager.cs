@@ -167,6 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 if (part is PartOfModule pom)
                 {
                     ModuleParts.Add(pom);
+                    AddBlock(pom.Name, pom.Blocks);
                     continue;
                 }
 

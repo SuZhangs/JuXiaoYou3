@@ -10,15 +10,15 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditChartPresentationView}, IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditChartPresentationViewModel}, IsDesignTimeCreatable=True}"
                      Background="{f:BackgroundBrush}"
                      Width="640"
                      Height="480"
                      Padding="16">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type thisModel:ModuleTemplateCache}">
+        <DataTemplate DataType="{x:Type thisModel:ModuleBlock}">
             <DockPanel Margin="8">
-                <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                <TextBlock Text="{Binding Name,Mode=OneWay}" />
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -27,13 +27,12 @@
                   CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}">
         <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                   ItemsSource="{Binding Templates}"
-                   SelectionMode="Multiple"
-                   x:Name="Collection">
+                   ItemsSource="{Binding Modules}"
+                   SelectedItem="{Binding Selected,Mode=TwoWay}">
             <f:ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"
-                               ItemWidth="280"/>
+                               ItemWidth="280" />
                 </ItemsPanelTemplate>
             </f:ListBox.ItemsPanel>
         </f:ListBox>

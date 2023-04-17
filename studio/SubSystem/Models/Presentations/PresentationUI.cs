@@ -148,7 +148,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             var block = (ChartBlock)blockTracker(ValueSource);
 
-            if (BaseSource.IsMetadata)
+            if (Source.IsMetadata)
             {
                 var unparsedValue = metadataTracker(ValueSource)?.Value;
                 MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
@@ -160,13 +160,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                     out var color);
                 Color = color;
                 Axis.AddRange(axis, true);
-                Value.AddRange(value, true);
+                Value = new List<int>(value);
+                RaiseUpdated(nameof(Value));
             }
-            else
+            else if(block.Value is not null)
             {
                 Color = block.Color;
                 Axis.AddRange(block.Axis, true);
-                Value.AddRange(block.Value, true);
+                Value = new List<int>(block.Value);
+                RaiseUpdated(nameof(Value));
             }
         }
 
@@ -187,7 +189,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         public string ValueSource { get; init; }
         public string Color { get; private set; }
         public List<string> Axis { get; init; }
-        public List<int> Value { get; init; }
+        public List<int> Value { get; private set; }
     }
 
     public class RadarPresentationUI : PresentationUI
@@ -196,7 +198,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             var block = (ChartBlock)blockTracker(ValueSource);
 
-            if (BaseSource.IsMetadata)
+            if (Source.IsMetadata)
             {
                 var unparsedValue = metadataTracker(ValueSource)?.Value;
                 MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
@@ -208,13 +210,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                     out var color);
                 Color = color;
                 Axis.AddRange(axis, true);
-                Value.AddRange(value, true);
+                Value = new List<int>(value);
+                RaiseUpdated(nameof(Value));
             }
-            else
+            else if(block.Value is not null)
             {
                 Color = block.Color;
                 Axis.AddRange(block.Axis, true);
-                Value.AddRange(block.Value, true);
+                Value = new List<int>(block.Value);
+                RaiseUpdated(nameof(Value));
             }
         }
 
@@ -235,6 +239,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         public string ValueSource { get; init; }
         public string Color { get; private set; }
         public List<string> Axis { get; init; }
-        public List<int> Value { get; init; }
+        public List<int> Value { get; private set; }
     }
 }
