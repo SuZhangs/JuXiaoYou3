@@ -19,7 +19,7 @@
         <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="14 16" />
+        <Setter Property="Padding" Value="16" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -51,7 +51,6 @@
                             </Grid.ColumnDefinitions>
                             <Path x:Name="ControlIcon"
                                   Grid.Column="0"
-                                  Margin="0 0 14 0"
                                   Height="{TemplateBinding IconSize}"
                                   Width="{TemplateBinding IconSize}"
                                   Stretch="Uniform"
