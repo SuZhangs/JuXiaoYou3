@@ -58,7 +58,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             ImportTemplateCommand       = AsyncCommand(ImportTemplateImpl);
             ExportTemplateCommand       = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand       = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
-            PresentationCommand              = Command(() => IsPresentation            = true, () => SelectedTemplate is not null);
+            PresentationCommand         = Command(() => IsPresentation       = true, () => SelectedTemplate is not null);
             SetAbilityManifestCommand   = AsyncCommand(async () => Ability   = await PickModuleManifestImpl());
             SetCharacterManifestCommand = AsyncCommand(async () => Character = await PickModuleManifestImpl());
             SetGeographyManifestCommand = AsyncCommand(async () => Geography = await PickModuleManifestImpl());

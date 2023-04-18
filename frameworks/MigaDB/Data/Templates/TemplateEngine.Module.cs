@@ -51,6 +51,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 }
                 else
                 {
+                    meta.RefCount--;
                     MetadataCacheDB.Update(meta);
                 }
             }

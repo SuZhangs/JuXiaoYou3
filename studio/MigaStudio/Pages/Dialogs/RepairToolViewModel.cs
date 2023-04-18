@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -14,8 +19,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             CreateShortcutCommand = Command(CreateShortcut);
             KillProcessCommand    = AsyncCommand(KillProcess);
+            FixModuleCommand      = Command(FixModuleImpl);
         }
-        
+
         public static Task KillProcess()
         {
             return Task.Run(ProcessUtilities.Kill);
@@ -23,8 +29,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public static void CreateShortcut()
         {
-            var p        = Process.GetCurrentProcess();
-            if (p.MainModule is  null)
+            var p = Process.GetCurrentProcess();
+            if (p.MainModule is null)
             {
                 return;
             }
@@ -35,7 +41,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             FileIO.CreateShortcut(lnkFileName, fileName, dir);
         }
 
-        public RelayCommand CreateShortcutCommand { get; } 
+        public static void FixModuleImpl()
+        {
+            var te = Xaml.Get<IDatabaseManager>()
+                         .GetEngine<TemplateEngine>();
+
+
+            var inside = te.TemplateDB
+                           .FindAll()
+                           .ToArray();
+
+            foreach (var module in inside)
+            {
+                
+            }
+            
+            te.TemplateDB.DeleteAll();
+            te.TemplateCacheDB.DeleteAll();
+            te.MetadataCacheDB.DeleteAll();
+            inside.ForEach(x => te.AddModule(x));
+        }
+
+        /// <summary>
+        /// 修复模组
+        /// </summary>
+        public RelayCommand FixModuleCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand CreateShortcutCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand KillProcessCommand { get; }
     }
 }
