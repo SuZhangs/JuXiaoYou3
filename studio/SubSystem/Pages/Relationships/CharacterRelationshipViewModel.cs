@@ -9,6 +9,8 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
+    public class CharacterRelationshipViewModelProxy : BindingProxy<CharacterRelationshipViewModel>{}
+    
     public class CharacterRelationshipViewModel : TabViewModel
     {
         private DocumentCache _selectedDocument;
@@ -27,6 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
+            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl, HasItem, true);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
             _version                   = DocumentEngine.Version;
         }
@@ -86,7 +89,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
-            var hash = Relationships.Select(x => x.Target.Id)
+            var hash = Relationships.Flat(x => new []{ x.Source.Id, x.Target.Id})
                                     .ToHashSet();
             hash.Add(source.Id);
             var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
@@ -126,6 +129,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             }
             
             
+
+            DocumentEngine.RemoveRelationship(rel.Id);
+            Relationships.Remove(rel);
+            Graph.RemoveEdge(rel);
         }
         
         #endregion

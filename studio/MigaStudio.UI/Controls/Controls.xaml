@@ -762,11 +762,12 @@
     </Style>
 
     <Style TargetType="{x:Type ctrl:RelationshipCard}">
+        <Setter Property="Background" Value="{f:Brush BackgroundLevel2}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:RelationshipCard}">
-                    <Border Background="{f:Brush BackgroundLevel2}"
+                    <Border Background="{TemplateBinding Background}"
                             CornerRadius="12"
                             Margin="0 4">
                         <Grid>

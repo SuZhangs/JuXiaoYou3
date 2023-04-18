@@ -327,6 +327,18 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             RelDB.Insert(rel);
         }
+        
+        
+
+        public void RemoveRelationship(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return;
+            }
+            
+            RelDB.Delete(id);
+        }
 
         /// <summary>
         /// 清空所有文档

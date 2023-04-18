@@ -9,6 +9,8 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
+    public class CharacterRelPartViewModelProxy : BindingProxy<CharacterRelPartViewModel>{}
+    
     public class CharacterRelPartViewModel : ViewModelBase
     {
         private DocumentCache _selectedDocument;
@@ -25,15 +27,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Graph                      = new CharacterGraph();
             Relationships              = new ObservableCollection<CharacterRelationship>();
             RelationshipPaneVisibility = Visibility.Collapsed;
-            AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
+            AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
+            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl, HasItem, true);
             _version                   = DocumentEngine.Version;
         }
 
         private void Initialize()
         {
-            var rels = DocumentEngine.GetRelationships(DocumentType.Character, Owner.Cache
-                                                                                    .Id)
+            var cache = Owner.Cache;
+            var rels = DocumentEngine.GetRelationships(DocumentType.Character, cache.Id)
                                      .ToArray();
             var hash = rels.Flat(x => new[] { x.Target.Id, x.Source.Id })
                            .ToHashSet();
@@ -41,6 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
                                                .Find(x => hash.Contains(x.Id)));
             Graph.AddEdgeRange(rels);
+            SelectedDocument = cache;
         }
 
         #region OnStart / OnResume
@@ -66,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
-            var hash = Relationships.Select(x => x.Target.Id)
+            var hash = Relationships.Flat(x => new []{ x.Source.Id, x.Target.Id})
                                     .ToHashSet();
             hash.Add(source.Id);
             var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
@@ -104,6 +108,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
+
+            DocumentEngine.RemoveRelationship(rel.Id);
+            Relationships.Remove(rel);
+            Graph.RemoveEdge(rel);
         }
 
         #endregion
@@ -198,5 +206,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// 
         /// </summary>
         public PartOfRel Detail { get; }
+
+        private bool _isHidden;
+        public bool IsHidden
+        {
+            get => _isHidden;
+            set
+            {
+                SetValue(ref _isHidden, value);
+                _relationshipPaneVisibility = value ? Visibility.Collapsed : Visibility.Visible;
+                RaiseUpdated(nameof(RelationshipPaneVisibility));
+            }
+        }
     }
 }

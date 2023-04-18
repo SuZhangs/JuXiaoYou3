@@ -95,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             {
                 l.AddRange(target);
             }
-            else
+            else if(target is not null)
             {
                 foreach (var item in target)
                 {

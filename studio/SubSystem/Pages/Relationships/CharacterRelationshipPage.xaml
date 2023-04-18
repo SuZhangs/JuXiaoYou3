@@ -27,9 +27,9 @@
                 <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relationships.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <thisVM:CharacterRelationshipViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
             <thisConverters:AvatarConverter x:Key="Avatar" />
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
-
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
                 <Border Background="{f:BackgroundBrush}">
                     <DockPanel>
@@ -62,6 +62,13 @@
                                          BottomName="{Binding NameToSource,Mode=OneWay}"
                                          Height="120"
                                          Margin="4">
+                    <studio:RelationshipCard.ContextMenu>
+                        <f:ContextMenu>
+                            <MenuItem Header="删除"
+                                      Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
+                                      CommandParameter="{Binding}"/>
+                        </f:ContextMenu>
+                    </studio:RelationshipCard.ContextMenu>
                     <studio:RelationshipCard.SourceImage>
                         <MultiBinding Converter="{StaticResource Avatar}">
                             <Binding Path="Source.Avatar" Mode="OneWay" />
