@@ -97,12 +97,12 @@
         {
             get => Language.Culture switch
             {
-                CultureArea.English  => "Video File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.French   => "Fichier vidéo|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Japanese => "動画ファイル|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean   => "Image 파일|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian  => "Видеофайл|*.png;*.jpg;*.bmp;*.jpeg",
-                _                    => "视频文件|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.English  => "Video File|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
+                CultureArea.French   => "Fichier vidéo|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
+                CultureArea.Japanese => "動画ファイル|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
+                CultureArea.Korean   => "Image 파일|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
+                CultureArea.Russian  => "Видеофайл|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
+                _                    => "视频文件|*.mp4;*.avi;*.mkv;*.wmv;*.mpeg;*.mpg",
             };
         }
         
