@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
-            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl, HasItem, true);
+            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
             _version                   = DocumentEngine.Version;
         }

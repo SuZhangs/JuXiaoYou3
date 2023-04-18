@@ -31,7 +31,7 @@
             <thisConverters:AvatarConverter x:Key="Avatar" />
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
-                <Border Background="{f:BackgroundBrush}">
+                <Border Background="{f:Brush BackgroundLevel2}">
                     <DockPanel>
                         <Ellipse DockPanel.Dock="Top"
                                  Height="64"
@@ -280,7 +280,7 @@
 
         <Border Grid.Column="1"
                 Grid.Row="2"
-                Background="{f:BackgroundBrush}"
+                Background="{f:Brush BackgroundLevel2}"
                 Effect="{StaticResource MenuItem.ShadowEffect2}"
                 Margin="8 16 16 16"
                 Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">

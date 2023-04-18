@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             RelationshipPaneVisibility = Visibility.Collapsed;
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
-            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl, HasItem, true);
+            RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl);
             _version                   = DocumentEngine.Version;
         }
 
