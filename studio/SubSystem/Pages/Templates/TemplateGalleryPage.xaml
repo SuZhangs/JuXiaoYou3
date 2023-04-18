@@ -145,7 +145,7 @@
                              Padding="16 11">
                     <StackPanel>
                         <Border Background="{f:Brush BackgroundLevel3}"
-                                BorderBrush="{f:Brush Info200}"
+                                BorderBrush="{f:Brush HighlightB3}"
                                 BorderThickness="3 1 1 1"
                                 CornerRadius="3"
                                 Margin="8"
@@ -155,7 +155,7 @@
                                                   Direction="270" 
                                                   Opacity="0.32"
                                                   ShadowDepth="1.5"
-                                                  Color="{f:Color Info200}" />
+                                                  Color="{f:Color HighlightB3}" />
                             </Border.Effect>
                             <TextBlock Text="默认模板可以在创建设定的时候自动添加设定模板！"/>
                         </Border>
@@ -167,7 +167,7 @@
                                         Command="{Binding ManageManifestCommand}"
                                         Margin="8"
                                         Icon="{StaticResource FeatherIcon.Plus}"
-                                        Palette="Info" />
+                                        Palette="HighlightPalette2" />
 
                         <studio:ActionButton Margin="8"
                                              Command="{Binding SetCharacterManifestCommand}">

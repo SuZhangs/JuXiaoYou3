@@ -15,9 +15,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 {
                     outsideMetadata = new MetadataCache
                     {
-                        Id       = ID.Get(),
-                        RefCount = 1,
-                        Name     = meta.Name,
+                        Id           = meta.Id,
+                        RefCount     = 1,
+                        Name         = meta.Name,
                         MetadataName = meta.MetadataName
                     };
 
@@ -51,7 +51,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
                 }
                 else
                 {
-                    meta.RefCount--;
                     MetadataCacheDB.Update(meta);
                 }
             }
