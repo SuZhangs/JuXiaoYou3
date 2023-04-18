@@ -18,12 +18,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
     public class HomeViewModel : TabViewModel
     {
-        private const    string                 StartUp   = "global.startup";
-        private const    string                 Documents = "global.documents";
-        private const    string                 Compose   = "global.compose";
-        private const    string                 Service   = "global.service";
-        private const    string                 Tools     = "global.tools";
-        private const    string                 Home      = "__Home";
+        private const    string                 StartUp            = "global.startup";
+        private const    string                 Documents          = "global.documents";
+        private const    string                 Compose            = "global.compose";
+        private const    string                 Service            = "global.service";
+        private const    string                 Tools              = "global.tools";
+        private const    string                 Inspiration        = "global.Inspiration";
+        private const    string                 StoryboardSegments = "global.StoryboardSegments";
+        private const    string                 Home               = "__Home";
         private readonly Subject<ViewModelBase> _onStart;
 
         private MainFeature   _selectedFeature;
@@ -46,6 +48,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<StartupViewModel>(StartUp, Home, null);
             CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
             CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, Compose, null);
+            CreateGalleryFeature<InspirationViewModel>(StartUp, Inspiration, null);
+            CreateGalleryFeature<StoryboardSegmentsViewModel>(StartUp, StoryboardSegments, null);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
@@ -66,6 +70,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 ViewModel = typeof(T),
                 IsGallery = true,
                 IsDialog  = false,
+                Parameter = e
+            };
+            Features.Add(f);
+        }
+        private void CreatePageFeature<T>(string group, string name, params object[] e)
+        {
+            var f = new MainFeature
+            {
+                GroupId   = group,
+                NameId    = name,
+                ViewModel = typeof(T),
+                IsDialog  = false,
+                IsGallery = false,
                 Parameter = e
             };
             Features.Add(f);
