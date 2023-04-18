@@ -34,8 +34,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private   FrameworkElement _subView;
         private   object           _selectedDetailPart;
         private   FrameworkElement _detailPartOfDetail;
-        protected Document         Document;
-        protected DocumentCache    Cache;
         private   PartOfModule     _selectedModulePart;
 
 

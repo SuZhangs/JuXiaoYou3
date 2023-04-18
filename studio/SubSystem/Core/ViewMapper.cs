@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
+using ImTools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
@@ -44,12 +45,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         }
         private static UserControl GetCharacterRel(DocumentEditorBase owner, object instance)
         {
+            var d = (DocumentEditorVMBase)owner;
             return new CharacterRelshipPartView
             {
                 DataContext = new CharacterRelPartViewModel
                 {
-                    Owner  = (DocumentEditorVMBase)owner,
+                    Owner  = d,
                     Detail =  (PartOfRel)instance,
+                    Cache = d.Cache,
+                    Document = d.Document
                 }
             }; 
         }

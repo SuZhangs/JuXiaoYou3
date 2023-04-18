@@ -31,7 +31,7 @@
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
 
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
-                <Border Background="{f:BackgroundBrush}">
+                <Border Background="{f:Brush BackgroundLevel2}">
                     <DockPanel>
                         <Ellipse DockPanel.Dock="Top"
                                  Height="64"
@@ -190,7 +190,7 @@
                             Grid.ColumnSpan="2"
                             Grid.Row="0"
                             Grid.RowSpan="4"
-                            Background="{f:BackgroundBrush}">
+                            Background="{f:Brush BackgroundLevel2}"                            >
             <studio:ZoomControl.ContextMenu>
                 <f:ContextMenu>
                     <f:MenuItem Click="DisplayMode_Circle" Header="圆形视图" />
@@ -217,43 +217,11 @@
 
         <Border Grid.Column="1"
                 Grid.Row="1"
+                Grid.RowSpan="2"
                 Background="{f:Brush BackgroundLevel2}"
                 Effect="{StaticResource MenuItem.ShadowEffect2}"
                 Margin="8 16 16 16"
-                Padding="8">
-
-            <DockPanel>
-                <Rectangle DataContext="{Binding SelectedDocument,Mode=OneWay}"
-                           RadiusX="6"
-                           RadiusY="6"
-                           Width="96">
-                    <Rectangle.Fill>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
-
-                <TextBlock Margin="16 8 8 0"
-                           FontWeight="Bold"
-                           FontSize="16"
-                           Text="{Binding SelectedDocument.Name,Mode=OneWay}"
-                           TextWrapping="Wrap"
-                           TextTrimming="CharacterEllipsis" />
-            </DockPanel>
-        </Border>
-
-        <Border Grid.Column="1"
-                Grid.Row="2"
-                Background="{f:Brush BackgroundLevel2}"
-                Effect="{StaticResource MenuItem.ShadowEffect2}"
-                Margin="8 16 16 16"
-                Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">
+                VerticalAlignment="Top">
             <DockPanel>
                 <UniformGrid DockPanel.Dock="Top"
                              Columns="3">

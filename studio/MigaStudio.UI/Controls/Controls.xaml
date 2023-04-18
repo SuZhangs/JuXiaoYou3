@@ -607,12 +607,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:ZoomControl}">
                     <Grid>
-                        <Border
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            ClipToBounds="{TemplateBinding ClipToBounds}">
-                            <ctrl:ZoomContentPresenter x:Name="PART_Presenter" ClipToBounds="False" />
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                ClipToBounds="{TemplateBinding ClipToBounds}">
+                            <ctrl:ZoomContentPresenter x:Name="PART_Presenter" 
+                                                       ClipToBounds="False" />
                         </Border>
                         <Canvas>
                             <!-- Controls -->
@@ -692,8 +692,7 @@
                             </Border>
 
                             <!-- ZoomBox -->
-                            <Border
-                                BorderBrush="{TemplateBinding ZoomBoxBorderBrush}"
+                            <Border BorderBrush="{TemplateBinding ZoomBoxBorderBrush}"
                                 BorderThickness="{TemplateBinding ZoomBoxBorderThickness}"
                                 Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.X}"
                                 Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Y}"

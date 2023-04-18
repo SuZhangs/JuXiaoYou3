@@ -37,5 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// 
         /// </summary>
         public DocumentType Type { get; private set; }
+        public Document Document { get; protected set; }
+        public DocumentCache Cache { get; protected set; }
     }
 }

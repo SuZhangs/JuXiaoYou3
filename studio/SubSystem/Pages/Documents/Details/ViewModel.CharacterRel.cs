@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
                                                .FindAll());
-            var rels = DocumentEngine.GetRelationships(DocumentType.Character);
+            var rels = DocumentEngine.GetRelationships(DocumentType.Character, Cache.Id);
             Graph.AddEdgeRange(rels);
         }
 
@@ -193,5 +193,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// 
         /// </summary>
         public PartOfRel Detail { get; init; }
+        
+        public DocumentCache Cache { get; init; }
+        public Document Document { get; init; }
     }
 }
