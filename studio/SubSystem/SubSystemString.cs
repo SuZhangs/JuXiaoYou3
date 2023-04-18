@@ -6,7 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {
-    public static class SubSystemString
+    public static partial class SubSystemString
     {
         public static readonly DocumentType[] DocumentTypes = new[]
         {
@@ -788,94 +788,11 @@ namespace Acorisoft.FutureGL.MigaStudio
             get => Language.Culture switch
             {
                 CultureArea.English  => "Processing...",
-                CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.French   => "Processing...",
+                CultureArea.Japanese => "Processing...",
+                CultureArea.Korean   => "Processing...",
+                CultureArea.Russian  => "Processing...",
                 _                    => "正在处理图片....",
-            };
-        }
-
-
-        public static string ModuleFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.English  => "Module File|*.png",
-                CultureArea.French   => "Module File|*.png",
-                CultureArea.Japanese => "Module File|*.png",
-                CultureArea.Korean   => "Module File|*.png",
-                CultureArea.Russian  => "Module File|*.png",
-                _                    => "模组文件|*.png",
-            };
-        }
-        
-        
-        public static string PdfFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.English  => "PDF File|*.pdf",
-                CultureArea.French   => "PDF File|*.pdf",
-                CultureArea.Japanese => "PDF File|*.pdf",
-                CultureArea.Korean   => "PDF File|*.pdf",
-                CultureArea.Russian  => "PDF File|*.pdf",
-                _                    => "PDF文件|*.pdf",
-            };
-        }
-        public static string MarkdownFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.Chinese  => "Markdown文件|*.md",
-                CultureArea.French   => "Markdown File|*.md",
-                CultureArea.Japanese => "Markdown File|*.md",
-                CultureArea.Korean   => "Markdown File|*.md",
-                _                    => "Markdown File|*.md",
-            };
-        }
-        
-        public static string MusicFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.Chinese  => "Music File|*.wav;*.mp3",
-                CultureArea.French   => "Music File|*.wav;*.mp3",
-                CultureArea.Japanese => "Music File|*.wav;*.mp3",
-                CultureArea.Korean   => "Music File|*.wav;*.mp3",
-                _                    => "音乐文件|*.wav;*.mp3",
-            };
-        }
-
-        public static string ImageFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.French   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Japanese => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Korean   => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                CultureArea.Russian  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
-                _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
-            };
-        }
-        
-        public static string PngFilter
-        {
-            // TODO: 翻译
-            get => Language.Culture switch
-            {
-                CultureArea.English  => "Image File|*.png",
-                CultureArea.French   => "Image File|*.png",
-                CultureArea.Japanese => "Image File|*.png",
-                CultureArea.Korean   => "Image File|*.png",
-                CultureArea.Russian  => "Image File|*.png",
-                _                    => "图片文件|*.png",
             };
         }
 

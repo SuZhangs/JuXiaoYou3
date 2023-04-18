@@ -1,4 +1,8 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+﻿using System.Diagnostics;
+using System.IO;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
+using CommunityToolkit.Mvvm.Input;
 
 // ReSharper disable SuggestBaseTypeForParameterInConstructor
 
@@ -6,12 +10,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public abstract class TargetBlockDataUI : ModuleBlockDataUI, ITargetBlockDataUI
     {
+        private string _targetName;
+        private string _targetSource;
+        private string _targetThumbnail;
+
         protected TargetBlockDataUI(TargetBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock     = block;
             TargetName      = block.TargetName;
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
+            OpenCommand     = new RelayCommand(OpenImpl);
         }
 
         public override bool CompareTemplate(ModuleBlock block)
@@ -24,9 +33,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             return TargetBlock.CompareValue(block);
         }
 
-        private string _targetName;
-        private string _targetSource;
-        private string _targetThumbnail;
+        private void OpenImpl()
+        {
+            if (string.IsNullOrEmpty(TargetSource))
+            {
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                FileName        = "explorer.exe",
+                Arguments       = TargetSource
+            });
+        }
 
         /// <summary>
         /// 目标内容块
@@ -71,65 +91,156 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 SetValue(ref _targetName, value);
             }
         }
+
+        public RelayCommand OpenCommand { get; }
     }
 
-    public class AudioBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
+    public class AudioBlockDataUI : TargetBlockDataUI
     {
         public AudioBlockDataUI(AudioBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
 
         public AudioBlockDataUI(AudioBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
+
+        private void SelectImpl()
+        {
+            var opendlg = FileIO.Open(SubSystemString.AudioFilter);
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
+            TargetSource = opendlg.FileName;
+        }
+
+        public RelayCommand SelectCommand { get; }
     }
 
-    public class VideoBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
+    public class VideoBlockDataUI : TargetBlockDataUI
     {
         public VideoBlockDataUI(VideoBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
 
         public VideoBlockDataUI(VideoBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
+
+        private void SelectImpl()
+        {
+            var opendlg = FileIO.Open(SubSystemString.VideoFilter);
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
+            TargetSource = opendlg.FileName;
+        }
+
+        public RelayCommand SelectCommand { get; }
     }
 
-    public class FileBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
+    public class FileBlockDataUI : TargetBlockDataUI
     {
         public FileBlockDataUI(FileBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
 
         public FileBlockDataUI(FileBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
+
+        private void SelectImpl()
+        {
+            var opendlg = FileIO.Open(SubSystemString.AllFileFilter);
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
+            TargetSource = opendlg.FileName;
+        }
+
+        public RelayCommand SelectCommand { get; }
     }
 
-    public class MusicBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
+    public class MusicBlockDataUI : TargetBlockDataUI
     {
         public MusicBlockDataUI(MusicBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
 
         public MusicBlockDataUI(MusicBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
+
+        private void SelectImpl()
+        {
+            var opendlg = FileIO.Open(SubSystemString.MusicFilter);
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
+            TargetSource = opendlg.FileName;
+        }
+
+        public RelayCommand SelectCommand { get; }
     }
 
-    public class ImageBlockDataUI : TargetBlockDataUI, ITargetBlockDataUI
+    public class ImageBlockDataUI : TargetBlockDataUI
     {
         public ImageBlockDataUI(ImageBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
 
         public ImageBlockDataUI(ImageBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
+            SelectCommand = new RelayCommand(SelectImpl);
         }
+
+        private void SelectImpl()
+        {
+            var opendlg = FileIO.Open(SubSystemString.ImageFilter);
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
+            TargetSource = opendlg.FileName;
+        }
+
+        public RelayCommand SelectCommand { get; }
     }
 
     public class ReferenceBlockDataUI : ModuleBlockDataUI, ITargetBlockDataUI, IReferenceBlock
     {
+        private string _targetName;
+        private string _targetSource;
+        private string _targetThumbnail;
+
         public ReferenceBlockDataUI(ReferenceBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock     = block;
@@ -137,11 +248,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
             DataSource      = block.DataSource;
+            OpenCommand     = new RelayCommand(OpenImpl);
         }
 
         public ReferenceBlockDataUI(ReferenceBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
         {
+            OpenCommand = new RelayCommand(OpenImpl);
         }
+
+        private void OpenImpl()
+        {
+            if (string.IsNullOrEmpty(TargetSource))
+            {
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                FileName        = "explorer.exe",
+                Arguments       = TargetSource
+            });
+        }
+
 
         public override bool CompareTemplate(ModuleBlock block)
         {
@@ -153,14 +282,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             return TargetBlock.CompareValue(block);
         }
 
-        private string _targetName;
-        private string _targetSource;
-        private string _targetThumbnail;
-
         /// <summary>
         /// 目标内容块
         /// </summary>
         protected ReferenceBlock TargetBlock { get; }
+
+        public RelayCommand OpenCommand { get; }
+        public RelayCommand SelectCommand { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="TargetThumbnail"/> 属性。

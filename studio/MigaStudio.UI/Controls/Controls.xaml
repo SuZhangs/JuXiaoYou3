@@ -399,13 +399,15 @@
                     <Border Background="{f:Brush BackgroundLevel3}">
                         <DockPanel LastChildFill="True">
                             <ctrl:ActionButton DockPanel.Dock="Left"
+                                               Command="{TemplateBinding SelectCommand}"
                                                Icon="{TemplateBinding Icon}"
                                                IsFilled="{TemplateBinding IsFilled}"
                                                IconSize="32"
                                                Height="72"
                                                Width="72" />
 
-                            <ctrl:ActionButton Margin="16 0 0 0"
+                            <ctrl:ActionButton Command="{TemplateBinding OpenCommand}" 
+                                               Margin="16 0 0 0"
                                                HorizontalAlignment="Stretch">
                                 <DockPanel DockPanel.Dock="Right"
                                            VerticalAlignment="Center">

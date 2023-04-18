@@ -37,7 +37,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.Audio}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.Audio}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -54,7 +56,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.Video}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.Video}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -71,7 +75,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.File}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.File}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -88,7 +94,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.Image}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.Image}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />
@@ -105,7 +113,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.Music}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.Music}"
                                      IsFilled="True"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"
                                      Source="{Binding TargetSource,Mode=TwoWay}" />

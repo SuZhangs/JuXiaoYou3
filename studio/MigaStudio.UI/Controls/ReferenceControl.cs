@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Controls
+﻿using System.Windows.Input;
+
+namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     
     public class ActionButton : Button
@@ -128,6 +130,32 @@
                 typeof(string),
                 typeof(ReferenceControl),
                 new PropertyMetadata(default(string)));
+        }
+
+
+        public static readonly DependencyProperty OpenCommandProperty = DependencyProperty.Register(
+            nameof(OpenCommand),
+            typeof(ICommand),
+            typeof(ReferenceControl),
+            new PropertyMetadata(default(ICommand)));
+
+
+        public static readonly DependencyProperty SelectCommandProperty = DependencyProperty.Register(
+            nameof(SelectCommand),
+            typeof(ICommand),
+            typeof(ReferenceControl),
+            new PropertyMetadata(default(ICommand)));
+
+        public ICommand SelectCommand
+        {
+            get => (ICommand)GetValue(SelectCommandProperty);
+            set => SetValue(SelectCommandProperty, value);
+        }
+        
+        public ICommand OpenCommand
+        {
+            get => (ICommand)GetValue(OpenCommandProperty);
+            set => SetValue(OpenCommandProperty, value);
         }
 
         public bool HasIcon
