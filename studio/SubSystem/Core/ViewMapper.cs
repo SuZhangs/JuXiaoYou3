@@ -48,13 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             var d = (DocumentEditorVMBase)owner;
             return new CharacterRelshipPartView
             {
-                DataContext = new CharacterRelPartViewModel
-                {
-                    Owner  = d,
-                    Detail =  (PartOfRel)instance,
-                    Cache = d.Cache,
-                    Document = d.Document
-                }
+                DataContext = new CharacterRelPartViewModel(d, (PartOfRel)instance)
             }; 
         }
         

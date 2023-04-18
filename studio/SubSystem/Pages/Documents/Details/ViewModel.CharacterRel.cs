@@ -15,8 +15,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         private Visibility    _relationshipPaneVisibility;
         private int           _version;
 
-        public CharacterRelPartViewModel()
+        public CharacterRelPartViewModel(DocumentEditorBase owner, PartOfRel rel)
         {
+            Owner  = owner;
+            Detail = rel;
             var dbMgr = Xaml.Get<IDatabaseManager>();
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
@@ -26,15 +28,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
             _version                   = DocumentEngine.Version;
-            Initialize();
         }
 
         private void Initialize()
         {
+            var rels = DocumentEngine.GetRelationships(DocumentType.Character, Owner.Cache
+                                                                                    .Id)
+                                     .ToArray();
+            var hash = rels.Flat(x => new[] { x.Target.Id, x.Source.Id })
+                           .ToHashSet();
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
-                                               .FindAll());
-            var rels = DocumentEngine.GetRelationships(DocumentType.Character, Cache.Id);
+                                               .Find(x => hash.Contains(x.Id)));
             Graph.AddEdgeRange(rels);
         }
 
@@ -187,14 +192,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         /// <summary>
         /// 编辑器
         /// </summary>
-        public DocumentEditorVMBase Owner { get; init; }
+        public DocumentEditorBase Owner { get;}
 
         /// <summary>
         /// 
         /// </summary>
-        public PartOfRel Detail { get; init; }
-        
-        public DocumentCache Cache { get; init; }
-        public Document Document { get; init; }
+        public PartOfRel Detail { get; }
     }
 }

@@ -29,7 +29,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
             CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
             _version                   = DocumentEngine.Version;
-            Initialize();
         }
 
         private void Initialize()
