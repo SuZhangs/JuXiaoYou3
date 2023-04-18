@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaUtils;
 
@@ -40,7 +42,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             var p = parameter.Parameter;
             var a = p.Args;
-            Context = (GlobalStudioContext)a[0];
+            Context            = (GlobalStudioContext)a[0];
+            SelectedController = Context.CurrentController.Id;
             base.OnStart(parameter);
         }
 

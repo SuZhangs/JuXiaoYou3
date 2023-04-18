@@ -10,7 +10,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             if(controller is null ||
                ControllerSetter is null) return;
             ControllerSetter(controller);
+            CurrentController = controller;
         }
+        
+        public ITabViewController CurrentController { get; private set; }
         
         /// <summary>
         /// 是否打开数据库
