@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaUtils.Collections
+﻿using System.ComponentModel;
+
+namespace Acorisoft.FutureGL.MigaUtils.Collections
 {
     public static class CollectionOperations
     {
@@ -217,5 +219,6 @@
         }
 
         #endregion
+
     }
 }
