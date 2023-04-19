@@ -764,8 +764,10 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
         public static string Notify => GetText("text.notify");
+        public static string NoDataToSave => GetText("text.NoDataToSave");
         public static string NoChange => GetText("text.noChange");
         public static string BadImage => GetText("text.notimage");
+        public static string BadFormat => GetText("text.BadFormat");
         public static string BadModule => GetText("text.notModule");
         public static string ImageTooSmall => GetText("text.ImageTooSmall");
         public static string ImageTooBig => GetText("text.ImageTooBig");

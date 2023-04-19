@@ -67,7 +67,7 @@
                     <DockPanel>
                         <Border DockPanel.Dock="Top"
                                 Background="{f:Brush BackgroundLevel1}"
-                                BorderBrush="{f:Brush Info100}"
+                                BorderBrush="{f:Brush HighlightB3}"
                                 BorderThickness="3 1 1 1"
                                 CornerRadius="6"
                                 Effect="{StaticResource MenuItem.ShadowEffect}"
@@ -81,7 +81,7 @@
                                         HorizontalAlignment="Left"
                                         Margin="0 16 0 0"
                                         Icon="{StaticResource FeatherIcon.Plus}"
-                                        Palette="Info"/>
+                                        Palette="HighlightPalette2"/>
                     </DockPanel>
                 </HeaderedContentControl.Header>
 

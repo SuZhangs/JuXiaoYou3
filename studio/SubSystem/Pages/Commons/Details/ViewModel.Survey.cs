@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using NLog;
 
@@ -15,173 +16,74 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         public SurveyPartViewModel()
         {
-            Sets                      = new ObservableCollection<SurveySet>();
-            Surveys                   = new ObservableCollection<Survey>();
-            AddSurveySetCommand       = AsyncCommand(AddSurveySetImpl);
-            AddSurveyCommand          = AsyncCommand<SurveySet>(AddSurveyImpl);
-            ShiftUpSurveySetCommand   = Command<SurveySet>(ShiftUpSurveySetImpl);
-            ShiftUpSurveyCommand      = Command<Survey>(ShiftUpSurveyImpl);
-            ShiftDownSurveySetCommand = Command<SurveySet>(ShiftDownSurveySetImpl);
-            ShiftDownSurveyCommand    = Command<Survey>(ShiftDownSurveyImpl);
-            EditSurveySetCommand      = AsyncCommand<SurveySet>(EditSurveySetImpl);
-            EditSurveyCommand         = AsyncCommand<Survey>(EditSurveyImpl);
-            RemoveSurveySetCommand    = AsyncCommand<SurveySet>(RemoveSurveySetImpl);
-            RemoveSurveyCommand       = AsyncCommand<Survey>(RemoveSurveyImpl);
+            Sets          = new ObservableCollection<SurveySet>();
+            Surveys       = new ObservableCollection<Survey>();
+            ManageCommand = AsyncCommand(ManageImpl);
+            ExportCommand = AsyncCommand(ExportImpl);
+            ImportCommand = AsyncCommand(ImportImpl);
         }
-        
-        private async Task EditSurveyImpl(Survey item)
-        {
-            if (item is null)
-            {
-                return;
-            }
 
-            var r = await NewSurveyViewModel.Edit(item);
+        private async Task ManageImpl()
+        {
+            Op<List<SurveySet>> r;
+
+            if (Sets.Count > 0)
+            {
+                r = await ManageSurveyViewModel.Edit(Sets);
+            }
+            else
+            {
+                r = await ManageSurveyViewModel.New();
+            }
 
             if (!r.IsFinished)
             {
                 return;
             }
-            
+
+            Detail.Items.AddRange(r.Value, true);
+            Sets.AddRange(r.Value, true);
+            SelectedSurveySet = null;
             Save();
         }
 
-        private async Task EditSurveySetImpl(SurveySet item)
+        private async Task ExportImpl()
         {
-            if (item is null)
+            if (Sets.Count == 0)
+            {
+                await SensitiveOperation(SubSystemString.NoDataToSave);
+                return;
+            }
+
+            var savedlg = FileIO.Save(SubSystemString.JsonFilter, "*.json");
+
+            if (savedlg.ShowDialog() != true)
             {
                 return;
             }
 
-            
-            var r = await NewSurveyViewModel.Edit(item);
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-            
-            Save();
+            await JSON.ToFileAsync(Sets, savedlg.FileName);
         }
 
-        private async Task RemoveSurveyImpl(Survey item)
+        private async Task ImportImpl()
         {
-            if (item is null)
+            var opendlg = FileIO.Open(SubSystemString.JsonFilter);
+
+            if (opendlg.ShowDialog() != true)
             {
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            try
             {
-                return;
+                var s = await JSON.FromFileAsync<ObservableCollection<SurveySet>>(opendlg.FileName);
+                Sets.AddRange(s, true);
+                Save();
             }
-
-            SelectedSurveySet.Items.Remove(item);
-            Surveys.Remove(item);
-            
-            Save();
-        }
-
-        private async Task RemoveSurveySetImpl(SurveySet item)
-        {
-            if (item is null)
+            catch
             {
-                return;
+                await Warning(SubSystemString.BadFormat);
             }
-
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
-            {
-                return;
-            }
-
-            Sets.Remove(item);
-            Detail.Items.Remove(item);
-
-            if (ReferenceEquals(item, SelectedSurveySet))
-            {
-                SelectedSurveySet = null;
-            }
-            
-            Save();
-        }
-
-        private void ShiftDownSurveyImpl(Survey item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Surveys.ShiftDown(item);
-            SelectedSurveySet.Items.ShiftDown(item);
-            Save();
-        }
-
-        private void ShiftDownSurveySetImpl(SurveySet item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Sets.ShiftDown(item);
-            Detail.Items.ShiftDown(item);
-            Save();
-        }
-
-        private void ShiftUpSurveyImpl(Survey item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Surveys.ShiftUp(item);
-            SelectedSurveySet.Items.ShiftUp(item);
-            Save();
-        }
-
-        private void ShiftUpSurveySetImpl(SurveySet item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Sets.ShiftUp(item);
-            Detail.Items.ShiftUp(item);
-            Save();
-        }
-
-        private async Task AddSurveyImpl(SurveySet item)
-        {
-            var r = await NewSurveyViewModel.New();
-            
-            if (!r.IsFinished)
-            {
-                return;
-            }
-            
-            item.Items.Add(r.Value);
-            if(ReferenceEquals(SelectedSurveySet, item))
-            {
-                SelectedSurveySet.Items.Add(r.Value);
-            }
-            Save();
-        }
-
-        private async Task AddSurveySetImpl()
-        {
-            var r = await NewSurveyViewModel.NewSet();
-            
-            if (!r.IsFinished)
-            {
-                return;
-            }
-            
-            Sets.Add(r.Value);
-            Detail.Items.Add(r.Value);
-            Save();
         }
 
         public override void Start()
@@ -228,35 +130,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Surveys.AddRange(_selectedSurveySet.Items, true);
             }
         }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddSurveySetCommand { get; }
         
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<SurveySet> AddSurveyCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<SurveySet> ShiftUpSurveySetCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<Survey> ShiftUpSurveyCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<SurveySet> ShiftDownSurveySetCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<Survey> ShiftDownSurveyCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<SurveySet> RemoveSurveySetCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Survey> RemoveSurveyCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<SurveySet> EditSurveySetCommand { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Survey> EditSurveyCommand { get; }
+        public AsyncRelayCommand ManageCommand { get; }
+        public AsyncRelayCommand ExportCommand { get; }
+        public AsyncRelayCommand ImportCommand { get; }
     }
 }

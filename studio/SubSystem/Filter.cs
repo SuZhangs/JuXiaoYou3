@@ -15,6 +15,19 @@
             };
         }
         
+        public static string JsonFilter
+        {
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "Json File|*.json",
+                CultureArea.French   => "Fichier Json|*.json",
+                CultureArea.Japanese => "Jsonファイル|*.json",
+                CultureArea.Korean   => "Json 파일|*.json",
+                CultureArea.Russian  => "Файл Json|*.json",
+                _                    => "模板数据|*.json",
+            };
+        }
+        
         public static string AllFileFilter
         {
             get => Language.Culture switch

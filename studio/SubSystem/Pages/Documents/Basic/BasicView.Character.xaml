@@ -88,21 +88,21 @@
                     <DockPanel>
                         <Border DockPanel.Dock="Top"
                                 Background="{f:Brush BackgroundLevel1}"
-                                BorderBrush="{f:Brush Info100}"
+                                BorderBrush="{f:Brush HighlightB3}"
                                 BorderThickness="3 1 1 1"
                                 CornerRadius="6"
                                 Effect="{StaticResource MenuItem.ShadowEffect}"
                                 Padding="16">
                             <TextBlock Text="添加标签能够帮你更好的分类设定，如果输入的是目录的名字，则会自动添加到该目录下面" />
                         </Border>
-                        
+
                         <f:CallToAction f:Language.Id="global.add"
                                         Command="{Binding AddKeywordCommand}"
                                         Content="新建"
                                         HorizontalAlignment="Left"
                                         Margin="0 16 0 0"
                                         Icon="{StaticResource FeatherIcon.Plus}"
-                                        Palette="Info"/>
+                                        Palette="HighlightPalette2"/>
                     </DockPanel>
                 </HeaderedContentControl.Header>
 

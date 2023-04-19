@@ -120,12 +120,19 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
-            <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="{f:Language global.add}"
-                            Command="{Binding AddSurveySetCommand}"
+            <ftk:ToolButton Content="{f:Language global.manage}"
+                            Command="{Binding ManageCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
-
+            
+            <ftk:ToolButton Content="{f:Language global.import}"
+                            Command="{Binding ImportCommand}"
+                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            ShowText="True" />
+            <ftk:ToolButton Content="{f:Language global.export}"
+                            Command="{Binding ExportCommand}"
+                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            ShowText="True" />
         </StackPanel>
 
         <DockPanel>
