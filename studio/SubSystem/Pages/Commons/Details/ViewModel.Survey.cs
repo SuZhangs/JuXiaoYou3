@@ -17,7 +17,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public SurveyPartViewModel()
         {
             Sets          = new ObservableCollection<SurveySet>();
-            Surveys       = new ObservableCollection<Survey>();
             ManageCommand = AsyncCommand(ManageImpl);
             ExportCommand = AsyncCommand(ExportImpl);
             ImportCommand = AsyncCommand(ImportImpl);
@@ -110,7 +109,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// 
         /// </summary>
         public ObservableCollection<SurveySet> Sets { get; }
-        public ObservableCollection<Survey> Surveys { get; }
+
+        public ObservableCollection<Survey> Surveys => SelectedSurveySet?.Items;
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedSurveySet"/> 属性。
@@ -121,13 +121,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 SetValue(ref _selectedSurveySet, value);
-
-                if (_selectedSurveySet is null)
-                {
-                    return;
-                }
-                
-                Surveys.AddRange(_selectedSurveySet.Items, true);
+                RaiseUpdated(nameof(Surveys));
             }
         }
         

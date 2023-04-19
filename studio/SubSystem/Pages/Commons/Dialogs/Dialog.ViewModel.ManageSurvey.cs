@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 
@@ -9,29 +10,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     public class ManageSurveyViewModel : ImplicitDialogVM
     {
         private SurveySet _selectedSurveySet;
-        private Survey    _selectedSurvey;
+        private Survey _selectedSurvey;
 
         public ManageSurveyViewModel()
         {
-            SurveySets                = new ObservableCollection<SurveySet>();
-            Surveys                   = new ObservableCollection<Survey>();
-            AddSurveySetCommand       = AsyncCommand(AddSurveySetImpl);
-            AddSurveyCommand          = AsyncCommand<SurveySet>(AddSurveyImpl);
-            ShiftUpSurveySetCommand   = Command<SurveySet>(ShiftUpSurveySetImpl);
-            ShiftUpSurveyCommand      = Command<Survey>(ShiftUpSurveyImpl);
-            ShiftDownSurveySetCommand = Command<SurveySet>(ShiftDownSurveySetImpl);
-            ShiftDownSurveyCommand    = Command<Survey>(ShiftDownSurveyImpl);
-            EditSurveySetCommand      = AsyncCommand<SurveySet>(EditSurveySetImpl);
-            EditSurveyCommand         = AsyncCommand<Survey>(EditSurveyImpl);
-            RemoveSurveySetCommand    = AsyncCommand<SurveySet>(RemoveSurveySetImpl);
-            RemoveSurveyCommand       = AsyncCommand<Survey>(RemoveSurveyImpl);
+            SurveySets = new ObservableCollection<SurveySet>();
+            AddSurveySetCommand = AsyncCommand(AddSurveySetImpl);
+            AddSurveyCommand = AsyncCommand<SurveySet>(AddSurveyImpl, HasItem, true);
+            ShiftUpSurveySetCommand = Command<SurveySet>(ShiftUpSurveySetImpl, HasItem, true);
+            ShiftUpSurveyCommand = Command<Survey>(ShiftUpSurveyImpl, HasItem, true);
+            ShiftDownSurveySetCommand = Command<SurveySet>(ShiftDownSurveySetImpl, HasItem, true);
+            ShiftDownSurveyCommand = Command<Survey>(ShiftDownSurveyImpl, HasItem, true);
+            EditSurveySetCommand = AsyncCommand<SurveySet>(EditSurveySetImpl, HasItem, true);
+            EditSurveyCommand = AsyncCommand<Survey>(EditSurveyImpl, HasItem, true);
+            RemoveSurveySetCommand = AsyncCommand<SurveySet>(RemoveSurveySetImpl, HasItem, true);
+            RemoveSurveyCommand = AsyncCommand<Survey>(RemoveSurveyImpl, HasItem, true);
         }
 
         public static Task<Op<List<SurveySet>>> New()
         {
             return DialogService().Dialog<List<SurveySet>, ManageSurveyViewModel>();
         }
-        
+
         public static Task<Op<List<SurveySet>>> Edit(ObservableCollection<SurveySet> source)
         {
             if (source is not null)
@@ -109,11 +109,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             SurveySets.Remove(item);
-
-            if (ReferenceEquals(item, SelectedSurveySet))
-            {
-                SelectedSurveySet = null;
-            }
         }
 
         private void ShiftDownSurveyImpl(Survey item)
@@ -125,7 +120,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             Surveys.ShiftDown(item);
             SelectedSurveySet.Items.ShiftDown(item);
-            
+
         }
 
         private void ShiftDownSurveySetImpl(SurveySet item)
@@ -147,7 +142,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             Surveys.ShiftUp(item);
             SelectedSurveySet.Items.ShiftUp(item);
-            
+
         }
 
         private void ShiftUpSurveySetImpl(SurveySet item)
@@ -163,28 +158,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private async Task AddSurveyImpl(SurveySet item)
         {
             var r = await NewSurveyViewModel.New();
-            
+
             if (!r.IsFinished)
             {
                 return;
             }
-            
+
             item.Items.Add(r.Value);
-            if(ReferenceEquals(SelectedSurveySet, item))
-            {
-                SelectedSurveySet.Items.Add(r.Value);
-            }
         }
 
         private async Task AddSurveySetImpl()
         {
             var r = await NewSurveyViewModel.NewSet();
-            
+
             if (!r.IsFinished)
             {
                 return;
             }
-            
+
             SurveySets.Add(r.Value);
         }
 
@@ -205,49 +196,52 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             get => _selectedSurvey;
             set => SetValue(ref _selectedSurvey, value);
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="SelectedSurveySet"/> 属性。
         /// </summary>
         public SurveySet SelectedSurveySet
         {
             get => _selectedSurveySet;
-            set => SetValue(ref _selectedSurveySet, value);
+            set {
+                SetValue(ref _selectedSurveySet, value);
+               RaiseUpdated(nameof(Surveys));
+            } 
         }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<SurveySet> SurveySets { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<Survey> Surveys { get; }
+        public ObservableCollection<Survey> Surveys => SelectedSurveySet?.Items;
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddSurveySetCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<SurveySet> AddSurveyCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<SurveySet> ShiftUpSurveySetCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Survey> ShiftUpSurveyCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<SurveySet> ShiftDownSurveySetCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Survey> ShiftDownSurveyCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<SurveySet> RemoveSurveySetCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Survey> RemoveSurveyCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<SurveySet> EditSurveySetCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Survey> EditSurveyCommand { get; }
     }

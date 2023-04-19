@@ -15,7 +15,7 @@
 
     <f:DialogPage Title="{Binding Title,Mode=OneWay}"
                   Accent="{f:Brush HighlightA3}"
-                  CancelCommand="{Binding CancelCommand}"
+                  CancelCommand="{Binding CompletedCommand}"
                   Purpose="Notification">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -31,32 +31,23 @@
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton Content="{f:Language global.add}"
-                                        Command="{Binding AddSurveySetCommand}"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True" />
+                        <ftk:ToolButton Command="{Binding AddSurveySetCommand}"
+                                        Icon="{StaticResource FeatherIcon.PlusCircle}"/>
                         
-                        <ftk:ToolButton Content="{f:Language global.edit}"
-                                        Command="{Binding EditSurveySetCommand}"
+                        <ftk:ToolButton Command="{Binding EditSurveySetCommand}"
                                         CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True" />
+                                        Icon="{StaticResource FeatherIcon.Edit}"/>
 
-                        <ftk:ToolButton Content="{f:Language global.shiftup}"
-                                        Command="{Binding RemoveSurveySetCommand}"
+                        <ftk:ToolButton Command="{Binding RemoveSurveySetCommand}"
                                         CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True" />
+                                        Icon="{StaticResource FeatherIcon.ArrowUp}" />
                         <ftk:ToolButton Content="{f:Language global.shiftdown}"
                                         Command="{Binding RemoveSurveySetCommand}"
                                         CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True" />
-                        <ftk:ToolButton Content="{f:Language global.Remove}"
-                                        Command="{Binding RemoveSurveySetCommand}"
+                                        Icon="{StaticResource FeatherIcon.ArrowDown}"/>
+                        <ftk:ToolButton Command="{Binding RemoveSurveySetCommand}"
                                         CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True" />
+                                        Icon="{StaticResource FeatherIcon.Trash}"/>
                     </StackPanel>
                 </f:ForestSection.ToolBar>
                 <f:ListBox DisplayMemberPath="Name"
@@ -76,32 +67,26 @@
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton Content="{f:Language global.add}"
-                                        Command="{Binding AddSurveyCommand}"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        ShowText="True" />
+                        <ftk:ToolButton Command="{Binding AddSurveyCommand}"
+                                        CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.PlusCircle}"/>
                         
-                        <ftk:ToolButton Content="{f:Language global.edit}"
-                                        Command="{Binding EditSurveyCommand}"
+                        <ftk:ToolButton Command="{Binding EditSurveyCommand}"
                                         CommandParameter="{Binding SelectedSurvey,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        Icon="{StaticResource FeatherIcon.Edit}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton Content="{f:Language global.shiftup}"
-                                        Command="{Binding RemoveSurveyCommand}"
+                        <ftk:ToolButton Command="{Binding RemoveSurveyCommand}"
                                         CommandParameter="{Binding SelectedSurvey,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        Icon="{StaticResource FeatherIcon.ArrowUp}"
                                         ShowText="True" />
-                        <ftk:ToolButton Content="{f:Language global.shiftdown}"
-                                        Command="{Binding RemoveSurveyCommand}"
+                        <ftk:ToolButton Command="{Binding RemoveSurveyCommand}"
                                         CommandParameter="{Binding SelectedSurvey,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        Icon="{StaticResource FeatherIcon.ArrowDown}"
                                         ShowText="True" />
-                        <ftk:ToolButton Content="{f:Language global.Remove}"
-                                        Command="{Binding RemoveSurveyCommand}"
+                        <ftk:ToolButton Command="{Binding RemoveSurveyCommand}"
                                         CommandParameter="{Binding SelectedSurvey,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
-                                        ShowText="True" />
+                                        Icon="{StaticResource FeatherIcon.Trash}"/>
                     </StackPanel>
                 </f:ForestSection.ToolBar>
 
@@ -109,12 +94,6 @@
                            DisplayMemberPath="Name"
                            ItemsSource="{Binding Surveys,Mode=OneWay}"
                            SelectedItem="{Binding SelectedSurvey,Mode=TwoWay}">
-                    <f:ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"
-                                       ItemWidth="240"/>
-                        </ItemsPanelTemplate>
-                    </f:ListBox.ItemsPanel>
                 </f:ListBox>
             </f:ForestSection>
         </Grid>

@@ -22,38 +22,6 @@
                     CornerRadius="6"
                     Margin="4"
                     Padding="16 8">
-                <Border.ContextMenu>
-                    <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Add}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.AddSurveyCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Edit}" />
-
-                        <f:MenuItem Header="{f:Language global.Edit}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.EditSurveySetCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Edit}" />
-
-                        <f:MenuItem f:Language.Id="global.Up"
-                                    Header="上移"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpSurveySetCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
-
-                        <f:MenuItem f:Language.Id="global.Down"
-                                    Header="下移"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownSurveySetCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
-                        <Separator />
-
-                        <f:MenuItem f:Language.Id="global.Remove"
-                                    Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveSurveySetCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
-                    </f:ContextMenu>
-                </Border.ContextMenu>
                 <StackPanel>
                     <TextBlock FontSize="20"
                                FontWeight="Bold"
@@ -72,33 +40,6 @@
                     CornerRadius="6"
                     Margin="4"
                     Padding="16">
-                <Border.ContextMenu>
-                    <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Edit}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.EditSurveyCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Edit}" />
-
-                        <f:MenuItem f:Language.Id="global.Up"
-                                    Header="上移"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpSurveyCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
-
-                        <f:MenuItem f:Language.Id="global.Down"
-                                    Header="下移"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownSurveyCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
-                        <Separator />
-
-                        <f:MenuItem f:Language.Id="global.Remove"
-                                    Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveSurveyCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
-                    </f:ContextMenu>
-                </Border.ContextMenu>
                 <Expander Header="{Binding Name,Mode=OneWay}">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Top"
@@ -127,11 +68,11 @@
             
             <ftk:ToolButton Content="{f:Language global.import}"
                             Command="{Binding ImportCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            Icon="{StaticResource FeatherIcon.Download}"
                             ShowText="True" />
             <ftk:ToolButton Content="{f:Language global.export}"
                             Command="{Binding ExportCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
         </StackPanel>
 
