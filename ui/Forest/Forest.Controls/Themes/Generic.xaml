@@ -21,7 +21,7 @@
     <!-- <DropShadowEffect x:Key="Ui.Shadow3" Direction="270" ShadowDepth="4.5" BlurRadius="14" Opacity="0.42" Color="#AA000000"/> -->
     <!-- <DropShadowEffect x:Key="Ui.Shadow4" Direction="270" ShadowDepth="8" BlurRadius="25" Opacity="0.42" Color="#AA000000"/> -->
     <!-- <DropShadowEffect x:Key="Ui.Shadow5" Direction="270" ShadowDepth="13" BlurRadius="35" Opacity="0.42" Color="#AA000000"/> -->
-
+    <Geometry x:Key="FeatherIcon.Down">F1 M24,24z M0,0z M6,9L6,9 12,15 18,9</Geometry>
     <Style TargetType="HeaderedContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -67,17 +67,17 @@
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
                     <Grid x:Name="TemplateRoot" SnapsToDevicePixels="True">
                         <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 Height="10"
                                 CornerRadius="5">
                             <Border x:Name="PART_Track" />
                         </Border>
-                        <Border x:Name="PART_Indicator" 
+                        <Border x:Name="PART_Indicator"
                                 Margin="1,1,1,1"
                                 Height="10"
                                 HorizontalAlignment="Left"
-                                Background="{TemplateBinding Foreground}" 
+                                Background="{TemplateBinding Foreground}"
                                 CornerRadius="5" />
                     </Grid>
                 </ControlTemplate>
@@ -89,23 +89,23 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ProgressBar}">
                             <Grid x:Name="TemplateRoot">
-                                <Border Margin="1,1,1,1" 
-                                        Background="{TemplateBinding Background}" 
+                                <Border Margin="1,1,1,1"
+                                        Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}" 
+                                        BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="4">
-                                    
+
                                 </Border>
-                                <Rectangle x:Name="PART_Track" 
+                                <Rectangle x:Name="PART_Track"
                                            Margin="1,1,1,1" />
-                                <Decorator x:Name="PART_Indicator" 
-                                           Margin="1,1,1,1" 
+                                <Decorator x:Name="PART_Indicator"
+                                           Margin="1,1,1,1"
                                            HorizontalAlignment="Left">
                                     <Grid x:Name="Animation" ClipToBounds="True">
-                                        <Border x:Name="PART_GlowRect" 
-                                                Width="200" 
+                                        <Border x:Name="PART_GlowRect"
+                                                Width="200"
                                                 Margin="0,0,0,0"
-                                                HorizontalAlignment="Left" 
+                                                HorizontalAlignment="Left"
                                                 Background="{TemplateBinding Foreground}"
                                                 CornerRadius="4" />
                                     </Grid>
@@ -118,60 +118,58 @@
         </Style.Triggers>
     </Style>
 
-    <!--<Thickness x:Key="ExpanderPadding">11,11,11,11</Thickness>
-    <Thickness x:Key="ExpanderBorderThemeThickness">1</Thickness>
-    <system:Double x:Key="ExpanderChevronSize">16.0</system:Double>
-
     <ControlTemplate x:Key="DefaultExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentPresenter
-                x:Name="ContentPresenter"
-                Grid.Column="0"
-                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                Content="{TemplateBinding Content}" />
-            <Grid
-                x:Name="ChevronGrid"
-                Grid.Column="1"
-                Margin="0"
-                VerticalAlignment="Center"
-                Background="Transparent"
-                RenderTransformOrigin="0.5, 0.5">
-                <Grid.RenderTransform>
-                    <RotateTransform Angle="0" />
-                </Grid.RenderTransform>
-                <controls:SymbolIcon
-                    x:Name="ControlChevronIcon"
-                    FontSize="{StaticResource ExpanderChevronSize}"
-                    Foreground="{TemplateBinding Foreground}"
-                    Symbol="ChevronDown24" />
+        <Border Padding="{TemplateBinding Padding}" 
+                CornerRadius="3"
+                Background="{TemplateBinding Background}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="ContentPresenter"
+                              Grid.Column="0"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Content="{TemplateBinding Content}" />
+                <Grid x:Name="ChevronGrid"
+                      Grid.Column="1"
+                      Margin="0"
+                      VerticalAlignment="Center"
+                      Background="Transparent"
+                      RenderTransformOrigin="0.5, 0.5">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </Grid.RenderTransform>
+                    <Path Data="F1 M24,24z M0,0z M6,9L6,9 12,15 18,9"
+                      Stroke="{f:ForegroundBrush}"
+                      StrokeThickness="1"
+                      Stretch="Uniform"
+                      Width="19"
+                      Height="19" />
+                </Grid>
             </Grid>
-        </Grid>
+        </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ChevronGrid"
-                                Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
-                                To="180"
-                                Duration="00:00:00.167" />
+                            <DoubleAnimation Storyboard.TargetName="ChevronGrid"
+                                             Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
+                                             To="180"
+                                             Duration="00:00:00.167" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ChevronGrid"
-                                Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
-                                To="0"
-                                Duration="00:00:00.167" />
+                            <DoubleAnimation Storyboard.TargetName="ChevronGrid"
+                                             Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
+                                             To="0"
+                                             Duration="00:00:00.167" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -179,77 +177,60 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="DefaultExpanderStyle" TargetType="{x:Type Expander}">
-        --><!--  Universal WPF UI focus  --><!--
-        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultControlFocusVisualStyle}" />
-        --><!--  Universal WPF UI focus  --><!--
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlFillColorDefault}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        <Setter Property="BorderThickness" Value="{StaticResource ExpanderBorderThemeThickness}" />
-        <Setter Property="Padding" Value="{StaticResource ExpanderPadding}" />
+    <Style TargetType="{x:Type Expander}">
+        <Setter Property="Background" Value="{f:BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="11" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="FontWeight" Value="Normal" />
-        <Setter Property="Border.CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
         <Setter Property="IsExpanded" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">
-                    <Border
-                        x:Name="Border"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4,4,4,4">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4,4,4,4">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            --><!--  Top level controls always visible  --><!--
-                            <ToggleButton
-                                x:Name="ExpanderToggleButton"
-                                Margin="0"
-                                Padding="{TemplateBinding Padding}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="Center"
-                                Background="Transparent"
-                                Content="{TemplateBinding Header}"
-                                Foreground="{TemplateBinding Foreground}"
-                                IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                OverridesDefaultStyle="True"
-                                Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
+                            <!--  Top level controls always visible  -->
+                            <ToggleButton x:Name="ExpanderToggleButton"
+                                          Margin="0"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Center"
+                                          Background="Transparent"
+                                          Content="{TemplateBinding Header}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          OverridesDefaultStyle="True"
+                                          Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
 
-                            --><!--  Collapsed content to expand  --><!--
-                            <Border
-                                x:Name="ContentPresenterBorder"
-                                Grid.Row="1"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                Opacity="0.0">
-                                <ContentPresenter
-                                    x:Name="ContentPresenter"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Content="{TemplateBinding Content}" />
+                            <!--  Collapsed content to expand  -->
+                            <Border x:Name="ContentPresenterBorder"
+                                    Grid.Row="1"
+                                    Background="Transparent"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Opacity="0.0">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}" />
                                 <Border.LayoutTransform>
                                     <ScaleTransform ScaleY="0" />
                                 </Border.LayoutTransform>
@@ -262,55 +243,48 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="ContentPresenterBorder"
-                                            Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="00:00:00.167" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="ContentPresenterBorder"
-                                            Storyboard.TargetProperty="(Border.Opacity)"
-                                            From="0.0"
-                                            To="1.0"
-                                            Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         From="0.0"
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.Opacity)"
+                                                         From="0.0"
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="ContentPresenterBorder"
-                                            Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
-                                            From="1.0"
-                                            To="0"
-                                            Duration="00:00:00.167" />
-                                        <DoubleAnimation
-                                            Storyboard.TargetName="ContentPresenterBorder"
-                                            Storyboard.TargetProperty="(Border.Opacity)"
-                                            From="1.0"
-                                            To="0.0"
-                                            Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         From="1.0"
+                                                         To="0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.Opacity)"
+                                                         From="1.0"
+                                                         To="0.0"
+                                                         Duration="00:00:00.167" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel2}" TargetName="ExpanderToggleButton" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-                            <Setter TargetName="ExpanderToggleButton" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter Property="Background" Value="{f:Brush BackgroundDisabled}" />
+                            <Setter Property="BorderBrush" Value="{f:Brush BackgroundDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" />
+                            <Setter TargetName="ExpanderToggleButton" Property="Foreground" Value="{f:Brush ForegroundDisabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style BasedOn="{StaticResource DefaultExpanderStyle}" TargetType="{x:Type Expander}" />-->
-
 </ResourceDictionary>

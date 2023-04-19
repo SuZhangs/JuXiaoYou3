@@ -36,10 +36,8 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type m:Survey}">
-            <Border Background="{f:Brush BackgroundLevel3}"
-                    CornerRadius="6"
-                    Margin="4"
-                    Padding="16">
+            <Border Margin="4"
+                    Padding="16 0 16 16">
                 <Expander Header="{Binding Name,Mode=OneWay}">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Top"

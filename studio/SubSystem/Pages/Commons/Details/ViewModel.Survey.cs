@@ -40,8 +40,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            Detail.Items.AddRange(r.Value, true);
-            Sets.AddRange(r.Value, true);
+            var c = r.Value;
+            EnumerableExtensions.Diff(Sets, c, x => x.Id, out var added, out var modified, out var removed);
+            
+            Detail.Items.AddRange(added);
+            Detail.Items.RemoveMany(added);
+            Sets.AddRange(added);
+            Sets.RemoveMany(removed);
             SelectedSurveySet = null;
             Save();
         }
@@ -77,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 var s = await JSON.FromFileAsync<ObservableCollection<SurveySet>>(opendlg.FileName);
                 Sets.AddRange(s, true);
+                Detail.Items.AddRange(s, true);
                 Save();
             }
             catch

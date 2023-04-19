@@ -254,6 +254,20 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
         
         #endregion
 
+        public static void RemoveMany<T>(this ICollection<T> source, IEnumerable<T> target)
+        {
+            if (source is null || 
+                target is null)
+            {
+                return;
+            }
+            
+            foreach (var item in target)
+            {
+                source.Remove(item);
+            }
+        }
+
         public static List<T> Flat<TSource, T>(this IEnumerable<TSource> collection, Func<TSource, IEnumerable<T>> selector)
         {
             if (collection is null || selector is null)
@@ -269,6 +283,39 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             }
 
             return array;
+        }
+
+        public static void Diff<TItem, TKey>(
+            IEnumerable<TItem> source, 
+            IEnumerable<TItem> target, 
+            Func<TItem, TKey> keySelector, 
+            out List<TItem> added, 
+            out List<TItem> modified,
+            out List<TItem> removed)
+        {
+            // ReSharper disable PossibleMultipleEnumeration
+            var sourceHash = new HashSet<TKey>(source.Select(keySelector));
+            var targetHash = new HashSet<TKey>();
+            modified   = new List<TItem>();
+            added      = new List<TItem>();
+            
+            foreach (var item in target)
+            {
+                var key = keySelector(item);
+                
+                if (sourceHash.Remove(key))
+                {
+                    //
+                    // 相同
+                    modified.Add(item);
+                }
+                else
+                {
+                    added.Add(item);
+                }
+            }
+            removed = source.Where(x => sourceHash.Contains(keySelector(x)))
+                                .ToList();
         }
     }
 }

@@ -64,9 +64,9 @@
                                          Margin="4">
                     <studio:RelationshipCard.ContextMenu>
                         <f:ContextMenu>
-                            <MenuItem Header="删除"
-                                      Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
-                                      CommandParameter="{Binding}"/>
+                            <f:MenuItem Header="删除"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
+                                        CommandParameter="{Binding}"/>
                         </f:ContextMenu>
                     </studio:RelationshipCard.ContextMenu>
                     <studio:RelationshipCard.SourceImage>
@@ -109,6 +109,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:EdgeControl}">
 
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                             <Path x:Name="edgePath"
                                   Stroke="{TemplateBinding Foreground}"
                                   StrokeThickness="2"
