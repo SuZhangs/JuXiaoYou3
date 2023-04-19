@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
             RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl);
-            CaptureCommand             = AsyncCommand<FrameworkElement>(CaptureImpl, HasItem);
+            CaptureCommand             = AsyncCommand<FrameworkElement>(FileIO.CaptureAsync, HasItem);
             _version                   = DocumentEngine.Version;
         }
 
@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
-            var hash = Relationships.Flat(x => new []{ x.Source.Id, x.Target.Id})
+            var hash = Relationships.Flat(x=> x.Source.Id, x => x.Target.Id)
                                     .ToHashSet();
             hash.Add(source.Id);
             var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
@@ -136,24 +136,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         }
         
         #endregion
-
-        private async Task CaptureImpl(FrameworkElement element)
-        {
-            if (element is null)
-            {
-                return;
-            }
-
-            var savedlg = FileIO.Save(SubSystemString.PngFilter, "*.png");
-
-            if (savedlg.ShowDialog() != true)
-            {
-                return;
-            }
-            
-            var ms      = Xaml.CaptureToStream(element);
-            await System.IO.File.WriteAllBytesAsync(savedlg.FileName, ms.GetBuffer());
-        }
 
         /// <summary>
         /// 人物关系面板的可视性

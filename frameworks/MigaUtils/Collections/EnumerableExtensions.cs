@@ -254,37 +254,6 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
         
         #endregion
 
-        public static void RemoveMany<T>(this ICollection<T> source, IEnumerable<T> target)
-        {
-            if (source is null || 
-                target is null)
-            {
-                return;
-            }
-            
-            foreach (var item in target)
-            {
-                source.Remove(item);
-            }
-        }
-
-        public static List<T> Flat<TSource, T>(this IEnumerable<TSource> collection, Func<TSource, IEnumerable<T>> selector)
-        {
-            if (collection is null || selector is null)
-            {
-                return null;
-            }
-
-            var array = new List<T>(32);
-            foreach (var item in collection)
-            {
-                var result = selector(item);
-                array.AddRange(result);
-            }
-
-            return array;
-        }
-
         public static void Diff<TItem, TKey>(
             IEnumerable<TItem> source, 
             IEnumerable<TItem> target, 

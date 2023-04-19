@@ -1,9 +1,29 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using System.Threading.Tasks;
+using System.Windows;
+using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public static class FileIO
     {
+        public static async Task CaptureAsync(FrameworkElement element)
+        {
+            if (element is null)
+            {
+                return;
+            }
+
+            var savedlg = Save(SubSystemString.PngFilter, "*.png");
+
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
+            
+            var ms = Xaml.CaptureToStream(element);
+            await System.IO.File.WriteAllBytesAsync(savedlg.FileName, ms.GetBuffer());
+        }
+        
         public static VistaSaveFileDialog Save(string filter, string defaultExt, string fileName = null)
         {
             return new VistaSaveFileDialog

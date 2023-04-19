@@ -4,11 +4,11 @@ using System.ComponentModel;
 
 namespace Acorisoft.FutureGL.MigaUtils.Collections
 {
-    internal static class Cache
+    public static class CollectionPropertyCache
     {
-        internal static readonly PropertyChangedEventArgs         CountPropertyChanged   = new PropertyChangedEventArgs("Count");
-        internal static readonly PropertyChangedEventArgs         IndexerPropertyChanged = new PropertyChangedEventArgs("Item[]");
-        internal static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+        public static readonly PropertyChangedEventArgs         CountPropertyChanged   = new PropertyChangedEventArgs("Count");
+        public static readonly PropertyChangedEventArgs         IndexerPropertyChanged = new PropertyChangedEventArgs("Item[]");
+        public static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 
     }
     
@@ -166,9 +166,9 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
                 throw new InvalidOperationException();
         }
 
-        private void OnCountPropertyChanged() => OnPropertyChanged(Cache.CountPropertyChanged);
+        private void OnCountPropertyChanged() => OnPropertyChanged(CollectionPropertyCache.CountPropertyChanged);
 
-        private void OnIndexerPropertyChanged() => OnPropertyChanged(Cache.IndexerPropertyChanged);
+        private void OnIndexerPropertyChanged() => OnPropertyChanged(CollectionPropertyCache.IndexerPropertyChanged);
 
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, object item, int index) => OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item, index));
@@ -191,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
         }
 
-        private void OnCollectionReset() => OnCollectionChanged(Cache.ResetCollectionChanged);
+        private void OnCollectionReset() => OnCollectionChanged(CollectionPropertyCache.ResetCollectionChanged);
 
         private SimpleMonitor EnsureMonitorInitialized() => _monitor ??= new SimpleMonitor(this);
 
