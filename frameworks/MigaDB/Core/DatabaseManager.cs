@@ -1,13 +1,13 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Concepts;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaDB.Data.Universe;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using MediatR;
 using NLog;
-using ConceptEngine = Acorisoft.FutureGL.MigaDB.Data.Concepts.ConceptEngine;
 using Directory = System.IO.Directory;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<ImageEngine>(false)
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
-                   .Setup<ConceptEngine>(false)
+                   .Setup<UniverseEngine>(false)
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }
 
