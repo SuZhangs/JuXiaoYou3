@@ -7,6 +7,7 @@ using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using CommunityToolkit.Mvvm.Input;
+// ReSharper disable StringLiteralTypo
 
 // ReSharper disable MemberCanBeMadeStatic.Global
 
@@ -89,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             if (viewModel.ApprovalRequired && 
-                !await Xaml.Get<IBuiltinDialogService>().Danger(CloseTabItemCaption, CloseTabItemContent))
+                !await DialogService().Danger(CloseTabItemCaption, CloseTabItemContent))
             {
                 return;
             }
@@ -384,25 +385,34 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var unifiedKey = viewModel.Uniqueness ? viewModel.GetType().FullName : viewModel.PageId;
-            var result = !DeterminedViewModelExists(unifiedKey);
+            var result = DeterminedViewModelExists(unifiedKey);
 
             if (result)
             {
-                if (Workspace.Count < MaximumWorkspaceItemCount)
-                {
-                    OnAddViewModel(viewModel);
-                    Workspace.Add(viewModel);
-                    CurrentViewModel = viewModel;
-                }
-                else
-                {
-                    // TODO: 添加
-                    Xaml.Get<INotifyService>().Notify(new IconNotification
-                    {
-                        Title = "已经达到最高上限了！"
-                    });
-                }
+                return;
             }
+            
+            if (Workspace.Count < MaximumWorkspaceItemCount)
+            {
+                OnAddViewModel(viewModel);
+                Workspace.Add(viewModel);
+                CurrentViewModel = viewModel;
+                return;
+            }
+                
+            if(Outboards.Count < MaximumWorkspaceItemCount)
+            {
+                OnAddViewModel(viewModel);
+                Outboards.Add(viewModel);
+                return;
+            }
+                
+            
+            Xaml.Get<INotifyService>()
+                .Notify(new IconNotification
+            {
+                Title = "已经达到最高上限了！"
+            });
         }
 
         /// <summary>
@@ -471,10 +481,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             get
             {
-                // TODO: 翻译
                 return Language.Culture switch
                 {
-                    _ => "确认退出？"
+                    CultureArea.English  => "Are you sure you want to quit?",
+                    CultureArea.French   => "Êtes-vous sûr de vouloir vous déconnecter?",
+                    CultureArea.Japanese => "脱退は確定ですか?",
+                    CultureArea.Korean   => "종료하시겠습니까?",
+                    CultureArea.Russian  => "Вы уверены, что хотите уйти?",
+                    _                    => "您确定要退出？"
                 };
             }
         }
@@ -483,10 +497,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             get
             {
-                // TODO: 翻译
                 return Language.Culture switch
-                {
-                    _ => "当前页面尚未保存，您确定要退出？"
+                { 
+                    CultureArea.English    => "The current page has not been saved, are you sure you want to exit?",
+                    CultureArea.French   => "La page actuelle n’a pas été enregistrée. Êtes-vous sûr de vouloir quitter?",
+                    CultureArea.Japanese => "現在のページが保存されていないので、ログアウトしますか?",
+                    CultureArea.Korean   => "현재 페이지가 저장되지 않았습니다. 종료하시겠습니까?",
+                    CultureArea.Russian  => "Текущая страница еще не сохранена. Вы уверены, что хотите уйти?",
+                    _                    => "当前页面尚未保存，您确定要退出？"
                 };
             }
         }

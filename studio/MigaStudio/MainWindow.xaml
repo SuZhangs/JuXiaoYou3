@@ -20,9 +20,8 @@
                  d:DataContext="{d:DesignInstance Type={x:Type vm:AppViewModel}, IsDesignTimeCreatable=True}">
     <f:Drawer x:Name="MainDrawer">
         <fs:DialogHost x:Name="MainDialogHost">
-            <fs:EmptyContentHost x:Name="ViewHost"
-                         ClipToBounds="True"
-                         ViewModel="{Binding CurrentController,Mode=OneWay}" />
+            <fs:EmptyContentHost ClipToBounds="True"
+                                 ViewModel="{Binding CurrentController,Mode=OneWay}" />
         </fs:DialogHost>
     </f:Drawer>
 </s:TabBaseWindow>
