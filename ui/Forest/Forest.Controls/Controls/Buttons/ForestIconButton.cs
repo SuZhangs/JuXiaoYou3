@@ -129,7 +129,10 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _backgroundBrush ??= new SolidColorBrush(Colors.Transparent);
             _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
+
+            _bd.Background = _backgroundBrush;
             SetForeground(_foregroundDisabledBrush);
         }
 

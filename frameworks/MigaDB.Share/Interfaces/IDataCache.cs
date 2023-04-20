@@ -2,12 +2,15 @@
 {
     public interface IDataCache
     {
-        DocumentType Type { get; }
-        
         /// <summary>
         /// 唯一标识符
         /// </summary>
         string Id { get; }
+        
+        /// <summary>
+        /// 父级
+        /// </summary>
+        string Owner { get; }
         
         /// <summary>
         /// 

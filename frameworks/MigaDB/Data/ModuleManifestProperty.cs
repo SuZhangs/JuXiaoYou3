@@ -48,6 +48,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="callback">保存新建的展示清单回调</param>
+        /// <returns></returns>
         public PartOfPresentation GetPresentationManifest(DocumentType type, Action<ModuleManifestProperty> callback)
         {
             if (!DefaultPresentationManifest.TryGetValue(type, out var pop))

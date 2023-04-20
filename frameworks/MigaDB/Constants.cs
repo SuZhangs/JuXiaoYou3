@@ -65,6 +65,7 @@
          */
         public const string LiteDB_IdField   = "_id";
         public const string LiteDB_NameField = "name";
+        public const string LiteDB_ParentId  = "pid";
 
         /*
          * DatabaseVersion

@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
     {
         #region AddMany
 
-        public static void AddMany<T>(this ICollection<T> source, IEnumerable<T> target)
+        public static void AddMany<T>(this ICollection<T> source, IEnumerable<T> target, bool clear = false)
         {
             if (source is null || target is null)
             {
@@ -18,17 +18,27 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
                 return;
             }
 
+            if (clear)
+            {
+                source.Clear();
+            }
+
             foreach (var item in target)
             {
                 source.Add(item);
             }
         }
 
-        public static void AddMany<T>(this Stack<T> source, IEnumerable<T> target)
+        public static void AddMany<T>(this Stack<T> source, IEnumerable<T> target, bool clear = false)
         {
             if (source is null || target is null)
             {
                 return;
+            }
+            
+            if (clear)
+            {
+                source.Clear();
             }
 
             foreach (var item in target)
@@ -37,11 +47,16 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             }
         }
 
-        public static void AddMany<T>(this Queue<T> source, IEnumerable<T> target)
+        public static void AddMany<T>(this Queue<T> source, IEnumerable<T> target, bool clear = false)
         {
             if (source is null || target is null)
             {
                 return;
+            }
+            
+            if (clear)
+            {
+                source.Clear();
             }
 
             foreach (var item in target)

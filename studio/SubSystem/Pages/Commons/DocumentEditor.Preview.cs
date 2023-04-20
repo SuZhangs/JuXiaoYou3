@@ -105,14 +105,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void SavePresentationPart()
         {
-            
-            
-            var db = Xaml.Get<IDatabaseManager>()
-                         .Database
-                         .CurrentValue;
-            var mmp = db.Get<ModuleManifestProperty>();
-            mmp.SetPresentationManifest(Type, PresentationPart);
-            db.Set(mmp);
+            if (IsOverridePresentationPart)
+            {
+                SetDirtyState();
+            }
+            else
+            {
+                var db = Xaml.Get<IDatabaseManager>()
+                             .Database
+                             .CurrentValue;
+                var mmp = db.Get<ModuleManifestProperty>();
+                mmp.SetPresentationManifest(Type, PresentationPart);
+                db.Set(mmp);
+            }
         }
 
         private async Task EditPresentationImpl(PresentationUI block)
@@ -163,6 +168,94 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 PresentationPart.Blocks[i].Index = i;
             }
             SavePresentationPart();
+        }
+
+        protected void ResetPresentation()
+        {
+            Presentations.AddRange(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
+            RefreshPresentation();
+        }
+        
+        private async Task OverridePresentationImpl()
+        {
+            if (!await DangerousOperation(SubSystemString.AreYouSureOverrideIt))
+            {
+                return;
+            }
+            //
+            // 打开 PresentationPart
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+
+            var thisTypePresentation = db.Get<ModuleManifestProperty>()
+                                         .GetPresentationManifest(Type, x => db.Set(x));
+            
+            IsOverridePresentationPart = true;
+            
+            //
+            // 复制一份
+            PresentationPart = new PartOfPresentation
+            {
+                Id     = ID.Get(),
+                Blocks = new ObservableCollection<Presentation>(thisTypePresentation.Blocks)
+            };
+            
+            //
+            //
+            SavePresentationPart();
+            ResetPresentation();
+        }
+        
+        private async Task SynchronizePresentationImpl()
+        {
+            if (!await DangerousOperation(SubSystemString.AreYouSureSynchronizeIt))
+            {
+                return;
+            }
+            
+            //
+            // 打开 PresentationPart
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+
+            var thisTypePresentation = db.Get<ModuleManifestProperty>()
+                                         .GetPresentationManifest(Type, x => db.Set(x));
+            
+            IsOverridePresentationPart = true;
+            
+            //
+            // 复制一份
+            PresentationPart.Blocks.AddMany(thisTypePresentation.Blocks, true);
+            
+            //
+            //
+            SavePresentationPart();
+            ResetPresentation();
+        }
+
+        private async Task unOverridePresentationImpl()
+        {
+            if (!await DangerousOperation(SubSystemString.AreYouSureUnOverrideIt))
+            {
+                return;
+            }
+            
+            //
+            // 打开 PresentationPart
+            var db = Xaml.Get<IDatabaseManager>()
+                         .Database
+                         .CurrentValue;
+            
+            IsOverridePresentationPart = false;
+            
+            //
+            // 复制一份
+            PresentationPart = db.Get<ModuleManifestProperty>()
+                                 .GetPresentationManifest(Type, x => db.Set(x));
+            SavePresentationPart();
+            ResetPresentation();
         }
         
         private async Task ExportPresentationAsPictureImpl()
@@ -219,6 +312,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Presentations.ForEach(x => x.Update(GetMetadataById, GetBlockById));
         }
 
+        public bool IsOverridePresentationPart { get; private set; }
+        
         /// <summary>
         /// 自定义部件
         /// </summary>
@@ -255,5 +350,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<PresentationUI> RemovePresentationCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand OverridePresentationCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand UnoverridePresentationCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand SynchronizePresentationCommand { get; }
     }
 }

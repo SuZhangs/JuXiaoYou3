@@ -156,7 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         
         private async Task ChangeDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.ChangedDocument(DocumentEngine, ImageEngine, cache, _ =>
+            await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ =>
             {
                 Successful(SubSystemString.OperationOfSaveIsSuccessful);
             });

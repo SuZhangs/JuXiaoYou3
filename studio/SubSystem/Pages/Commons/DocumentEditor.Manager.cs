@@ -11,7 +11,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        [NullCheck(UniTestLifetime.Constructor)] private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
+        [NullCheck(UniTestLifetime.Constructor)]
+        private readonly Dictionary<string, MetadataIndexCache> _MetadataTrackerByName;
+        
+        
         private class MetadataIndexCache
         {
             private int _index;
@@ -149,7 +152,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             AddDataPartWhenDocumentOpening();
             IsDataPartExistence();
             AddMetadataWhenDocumentOpening();
-            GetDataPartFromDatabase();
+            GetPartOfPresentation();
         }
 
         private void AddDataPartWhenDocumentOpening()
@@ -180,6 +183,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     else if (part is PartOfDetail pod)
                     {
                         DetailParts.Add(pod);
+                    }
+                    else if (part is PartOfPresentation pop)
+                    {
+                        //
+                        // 优先覆盖
+                        PresentationPart           = pop;
+                        IsOverridePresentationPart = true;
                     }
                     else if (part is PartOfManifest)
                     {
@@ -226,16 +236,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected abstract void IsDataPartExistence(Document document);
 
-        private void GetDataPartFromDatabase()
+        private void GetPartOfPresentation()
         {
-            //
-            // 打开 PresentationPart
-            var db = Xaml.Get<IDatabaseManager>()
-                         .Database
-                         .CurrentValue;
+            if (PresentationPart is null)
+            {
+                //
+                // 打开 PresentationPart
+                var db = Xaml.Get<IDatabaseManager>()
+                             .Database
+                             .CurrentValue;
             
-            PresentationPart = db.Get<ModuleManifestProperty>()
-                              .GetPresentationManifest(Type, x => db.Set(x));
+                PresentationPart = db.Get<ModuleManifestProperty>()
+                                     .GetPresentationManifest(Type, x => db.Set(x));
+                IsOverridePresentationPart = false;
+            }
         }
 
         #endregion

@@ -33,8 +33,17 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         }
         
         
+        /// <summary>
+        /// 唯一标识符
+        /// </summary>
         [BsonId]
         public string Id { get; init; }
+        
+        /// <summary>
+        /// 父级
+        /// </summary>
+        [BsonField(Constants.LiteDB_ParentId)]
+        public string Owner { get; set; }
         
         /// <summary>
         /// 类型

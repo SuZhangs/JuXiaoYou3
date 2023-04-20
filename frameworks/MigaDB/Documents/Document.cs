@@ -41,6 +41,12 @@
         public DataPartCollection Parts { get; init; }
         
         /// <summary>
+        /// 父级
+        /// </summary>
+        [BsonField(Constants.LiteDB_ParentId)]
+        public string Owner { get; set; }
+        
+        /// <summary>
         /// 元数据
         /// </summary>
         public MetadataCollection Metas { get; init; }

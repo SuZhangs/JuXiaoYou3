@@ -761,6 +761,9 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string OperationOfAutoSaveIsSuccessful => GetText("text.OperationOfAutoSaveIsSuccessful");
         public static string OperationOfAddIsSuccessful => GetText("text.OperationOfAddIsSuccessful");
         public static string OperationOfRemoveIsSuccessful => GetText("text.OperationOfRemoveIsSuccessful");
+        public static string AreYouSureOverrideIt => GetText("text.AreYouSureOverrideIt");
+        public static string AreYouSureSynchronizeIt => GetText("text.AreYouSureSynchronizeIt");
+        public static string AreYouSureUnOverrideIt => GetText("text.AreYouSureUnOverrideIt");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
         public static string Notify => GetText("text.notify");

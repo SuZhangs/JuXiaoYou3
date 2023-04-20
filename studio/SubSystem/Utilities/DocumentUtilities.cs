@@ -216,7 +216,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
         }
 
-        public static async Task ChangedDocument(DocumentEngine engine, ImageEngine imageEngine, DocumentCache cache, Action<DocumentCache> callback)
+        public static async Task ChangeDocument(DocumentEngine engine, ImageEngine imageEngine, DocumentCache cache, Action<DocumentCache> callback)
         {
             if (cache is null ||
                 engine is null ||
@@ -259,10 +259,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
 
             cache.Avatar = avatar;
-            SyncDocument(engine, cache);
+            SynchronizeDocument(engine, cache);
         }
 
-        public static void SyncDocument(DocumentEngine engine, DocumentCache cache)
+        /// <summary>
+        /// 同步文档，将DocumentCache的变化应用到Document
+        /// </summary>
+        /// <param name="engine"></param>
+        /// <param name="cache"></param>
+        public static void SynchronizeDocument(DocumentEngine engine, DocumentCache cache)
         {
             if (cache is null || engine is null)
             {
@@ -280,6 +285,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 document.Name   = cache.Name;
                 document.Avatar = cache.Avatar;
                 document.Intro  = cache.Intro;
+                document.Owner  = cache.Owner;
                 engine.UpdateDocument(document, cache);
             }
         }

@@ -5,10 +5,22 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     public class ComposeCache : ObservableObject, IDataCache
     {
+        /// <summary>
+        /// 唯一标识符
+        /// </summary>
         [BsonId]
         public string Id { get; init; }
+        
+        /// <summary>
+        /// 父级
+        /// </summary>
+        [BsonField(Constants.LiteDB_ParentId)]
+        public string Owner { get; set; }
 
-        public DocumentType Type { get; init; }
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public ComposeType Type { get; init; }
         
         /// <summary>
         /// 头像

@@ -82,6 +82,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ShiftDownDetailPartCommand = Command<PartOfDetail>(ShiftDownDetailPartImpl, x => NotLastItem(DetailParts, x));
 
 
+            OverridePresentationCommand         = AsyncCommand(OverridePresentationImpl);
+            UnoverridePresentationCommand       = AsyncCommand(unOverridePresentationImpl);
+            SynchronizePresentationCommand      = AsyncCommand(SynchronizePresentationImpl);
             AddPresentationCommand              = AsyncCommand(AddPresentationImpl);
             RemovePresentationCommand           = AsyncCommand<PresentationUI>(RemovePresentationImpl);
             RefreshPresentationCommand          = Command(RefreshPresentation);
@@ -146,7 +149,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
-            Presentations.AddRange(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
+            ResetPresentation();
             base.OnStart();
         }
 
