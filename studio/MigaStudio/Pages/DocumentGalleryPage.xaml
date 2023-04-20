@@ -124,10 +124,20 @@
                                     Command="{Binding SearchPageCommand}"
                                     Icon="{StaticResource FeatherIcon.Search}"
                                     ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.lastPage}"
+                                    Command="{Binding LastPageCommand}"
+                                    Icon="{StaticResource FeatherIcon.Search}"
+                                    ShowText="True" />
+                    
+                    <ftk:ToolButton Content="{f:Language global.nextPage}"
+                                    Command="{Binding NextPageCommand}"
+                                    Icon="{StaticResource FeatherIcon.Search}"
+                                    ShowText="True" />
                 </StackPanel>
             </f:ForestSection.ToolBar>
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay}">
+                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay,IsAsync=True}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />

@@ -47,8 +47,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
         {
+            
             var count = dataSource.Count;
-            TotalPageCount = ((count == 0 ? 1 : count) + 29) / 30;
+            TotalPageCount = ((count == 0 ? 1 : count) + MaxItemCountMask) / MaxItemCount;
 
             if (TotalPageCount == 1)
             {

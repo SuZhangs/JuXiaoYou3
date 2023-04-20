@@ -10,7 +10,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
     public abstract class GalleryViewModel<TEntity> : TabViewModel where TEntity : class
     {
-        protected const int MaxItemCount     = 30;
+        protected const int MaxItemCount     = 50;
+        protected const int MaxItemCountMask = 49;
         protected const int PageCountLimited = 512;
 
 
@@ -33,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #region Last / Next
 
-        private bool CanNextPage() => _pageIndex + 1 < TotalPageCount;
+        private bool CanNextPage() => _pageIndex + 1 <= TotalPageCount;
 
         private bool CanLastPage() => _pageIndex > 1;
 
@@ -167,7 +168,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
             
-            var skipElementCounts = (index - 1) * 30;
+            var skipElementCounts = (index - 1) * MaxItemCount;
             var minPageItemCount  = Math.Clamp(unsortedDataSource.Count - skipElementCounts, 0, MaxItemCount);
 
             Collection.AddRange(unsortedDataSource.Skip(skipElementCounts)

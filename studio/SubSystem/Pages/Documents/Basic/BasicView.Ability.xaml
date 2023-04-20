@@ -28,7 +28,7 @@
 
                         <f:HeaderedSingleLine Header="稀有度"
                                               Margin="4"
-                                              Text="{Binding Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding Rarity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </UniformGrid>
 
                     <HeaderedContentControl Header="可选"
@@ -48,14 +48,17 @@
 
                         </UniformGrid>
                     </HeaderedContentControl>
+                    
+                    <f:HeaderedMultiLine Header="弱点"
+                                         Margin="4 12"
+                                         Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <f:HeaderedMultiLine DockPanel.Dock="Bottom"
-                                     Header="介绍"
+               
+
+                <f:HeaderedMultiLine Header="介绍"
                                      Margin="4 12"
                                      Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-
             </DockPanel>
         </ftk:TabItem>
 

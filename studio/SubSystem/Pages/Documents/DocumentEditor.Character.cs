@@ -7,6 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class CharacterDocumentViewModel : DocumentEditorVMBase
     {
+        // TODO: 人物关系中的血缘关系
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
             AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Basic");
