@@ -276,14 +276,32 @@
                             Icon="{StaticResource FeatherIcon.Refresh}"
                             ShowText="True" />
 
+            <ftk:DropDownButton Content="覆盖"
+                                Icon="{StaticResource IC.Save}"
+                                IsFilled="True"
+                                ShowText="True">
+                <ftk:DropDownButton.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="同步数据"
+                                    Command="{Binding SynchronizePresentationCommand}"/>
+                        <f:MenuItem Header="覆盖数据" 
+                                    Command="{Binding OverridePresentationCommand}"/>
+                        <f:MenuItem Header="取消覆盖" 
+                                    Command="{Binding UnoverridePresentationCommand}"/>
+                    </f:ContextMenu>
+                </ftk:DropDownButton.ContextMenu>
+            </ftk:DropDownButton>
             <ftk:DropDownButton Content="导出"
                                 Icon="{StaticResource FeatherIcon.Box}"
                                 ShowText="True">
                 <ftk:DropDownButton.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="导出为图片" />
-                        <f:MenuItem Header="导出为PDF" />
-                        <f:MenuItem Header="导出为Markdown" />
+                        <f:MenuItem Header="导出为图片"
+                                    Command="{Binding ExportPresentationAsPictureCommand}"/>
+                        <f:MenuItem Header="导出为PDF" 
+                                    Command="{Binding ExportPresentationAsPdfCommand}"/>
+                        <f:MenuItem Header="导出为Markdown" 
+                                    Command="{Binding ExportPresentationAsMarkdownCommand}"/>
                     </f:ContextMenu>
                 </ftk:DropDownButton.ContextMenu>
             </ftk:DropDownButton>
