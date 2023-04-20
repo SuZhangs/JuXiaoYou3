@@ -12,10 +12,6 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class HomeViewModelProxy : BindingProxy<HomeViewModel>
-    {
-    }
-
     public class HomeViewModel : TabViewModel
     {
         private const    string                 StartUp            = "global.startup";
@@ -74,6 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
             Features.Add(f);
         }
+        
         private void CreatePageFeature<T>(string group, string name, params object[] e)
         {
             var f = new MainFeature

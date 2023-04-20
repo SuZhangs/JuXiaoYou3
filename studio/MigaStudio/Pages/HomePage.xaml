@@ -17,7 +17,6 @@
                      d:DesignWidth="1280"
                      d:DataContext="{d:DesignInstance Type={x:Type local:HomeViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <local:HomeViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:MainFeatureConverter x:Key="NameConverter"/>
     </UserControl.Resources>
     <DockPanel>
