@@ -44,19 +44,26 @@
                             ShowText="True"/>
         </StackPanel>
 
-        <f:ListBox x:Name="Image"
-                   ItemsSource="{Binding DetailParts,Mode=OneWay}"
+        <f:ListBox ItemsSource="{Binding DetailParts,Mode=OneWay}"
                    SelectedItem="{Binding SelectedDetailPartInDocument,Mode=TwoWay}"
                    HorizontalAlignment="Left"
                    Width="640">
-                    <f:ListBox.ItemTemplate>
-
-                        <DataTemplate DataType="{x:Type part:PartOfDetail}">
-                            <TextBlock Margin="16 8"
-                                       Text="{Binding Converter={StaticResource Translation}}"
-                                       VerticalAlignment="Center"/>
-                        </DataTemplate>
-                    </f:ListBox.ItemTemplate>
+            <f:ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type part:PartOfDetail}">
+                    <DockPanel Margin="16">
+                        <Path Data="{StaticResource FeatherIcon.Box}"
+                              Margin="0 0 16 0"
+                              Stretch="Uniform"
+                              Stroke="{Binding ElementName=T,Path=Foreground,Mode=OneWay}"
+                              StrokeThickness="1"
+                              Height="17"
+                              Width="17"/>
+                        <TextBlock x:Name="T"
+                                   Text="{Binding Converter={StaticResource Translation}}"
+                                   VerticalAlignment="Center"/>
+                    </DockPanel>
+                </DataTemplate>
+            </f:ListBox.ItemTemplate>
         </f:ListBox>
     </DockPanel>
 </UserControl>
