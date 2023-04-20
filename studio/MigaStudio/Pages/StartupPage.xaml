@@ -16,7 +16,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="256" />
-                <RowDefinition Height="256" />
+                <RowDefinition Height="320" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
@@ -41,21 +41,6 @@
                 <f:SpacingStackPanel DockPanel.Dock="Right"
                                      Gap="8"
                                      Width="320">
-                    <fs:ActionButton Content="浏览教程" />
-                    <fs:ActionButton Content="反馈BUG" />
-                    <fs:ActionButton Content="赞助我们" />
-                    <fs:ActionButton Content="联系我们" />
-                </f:SpacingStackPanel>
-
-                <WrapPanel DockPanel.Dock="Left"
-                           Orientation="Horizontal">
-                    <fs:ActionButton Content="{f:Language global.tutorialVideo}"
-                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
-                                     CommandParameter="app.tutorial.video"
-                                     Margin="0 4"
-                                     Icon="{StaticResource IC.Video}"
-                                     IconSize="29"
-                                     IsFilled="True" />
 
                     <fs:ActionButton Content="{f:Language global.tutorialArticle}"
                                      Command="{x:Static sss:FileIO.OpenLinkCommand}"
@@ -86,6 +71,11 @@
                                      Margin="0 4"
                                      Icon="{StaticResource FeatherIcon.Link}"
                                      IconSize="29" />
+                </f:SpacingStackPanel>
+
+                <WrapPanel DockPanel.Dock="Left"
+                           Orientation="Horizontal">
+                    
                 </WrapPanel>
             </DockPanel>
         </Grid>

@@ -51,6 +51,7 @@
                             </Grid.ColumnDefinitions>
                             <Path x:Name="ControlIcon"
                                   Grid.Column="0"
+                                  Margin="8 0"
                                   Height="{TemplateBinding IconSize}"
                                   Width="{TemplateBinding IconSize}"
                                   Stretch="Uniform"

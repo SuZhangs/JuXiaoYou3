@@ -10,7 +10,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
     {
         public static void OpenLink(string key)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
             var link = Language.GetText(key);
+            
+            if (string.IsNullOrEmpty(link))
+            {
+                return;
+            }
             Process.Start(new ProcessStartInfo
             {
                 UseShellExecute = true,
@@ -92,7 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             };
         }
 
-        public static RelayCommand<string> OpenLinkCommand { get; } = new RelayCommand<string>(OpenLink, x => !string.IsNullOrEmpty(x));
+        public static RelayCommand<string> OpenLinkCommand { get; } = new RelayCommand<string>(OpenLink);
     }
 
     public class ShortcutDescription
