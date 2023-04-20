@@ -24,6 +24,26 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 DefaultPresentationManifest = new Dictionary<DocumentType, PartOfPresentation>()
             });
 
+            database.Upsert<DoubleProperty>(new DoubleProperty
+            {
+                Value = new Dictionary<string, double>()
+            });
+            
+            database.Upsert<BooleanProperty>(new BooleanProperty
+            {
+                Value = new Dictionary<string, bool>()
+            });
+            
+            database.Upsert<Int32Property>(new Int32Property
+            {
+                Value = new Dictionary<string, int>()
+            });
+            
+            database.Upsert<StringProperty>(new StringProperty
+            {
+                Value = new Dictionary<string, string>()
+            });
+
             database.Upsert<ColorServiceProperty>(new ColorServiceProperty
             {
                 Mappings = new List<ColorMapping>(),

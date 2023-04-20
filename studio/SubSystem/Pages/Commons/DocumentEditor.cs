@@ -83,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
 
             OverridePresentationCommand         = AsyncCommand(OverridePresentationImpl);
-            UnoverridePresentationCommand       = AsyncCommand(unOverridePresentationImpl);
+            unOverridePresentationCommand       = AsyncCommand(unOverridePresentationImpl);
             SynchronizePresentationCommand      = AsyncCommand(SynchronizePresentationImpl);
             AddPresentationCommand              = AsyncCommand(AddPresentationImpl);
             RemovePresentationCommand           = AsyncCommand<PresentationUI>(RemovePresentationImpl);

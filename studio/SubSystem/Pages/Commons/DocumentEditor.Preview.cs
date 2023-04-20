@@ -209,6 +209,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private async Task SynchronizePresentationImpl()
         {
+            if (!IsOverridePresentationPart)
+            {
+                await Obsoleted(SubSystemString.NoChange);
+                return;
+            }
+            
             if (!await DangerousOperation(SubSystemString.AreYouSureSynchronizeIt))
             {
                 return;
@@ -237,6 +243,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task unOverridePresentationImpl()
         {
+            if (!IsOverridePresentationPart)
+            {
+                await Obsoleted(SubSystemString.NoChange);
+                return;
+            }
+            
             if (!await DangerousOperation(SubSystemString.AreYouSureUnOverrideIt))
             {
                 return;
@@ -355,7 +367,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public AsyncRelayCommand OverridePresentationCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand UnoverridePresentationCommand { get; }
+        public AsyncRelayCommand unOverridePresentationCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand SynchronizePresentationCommand { get; }

@@ -140,7 +140,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                                                                        .Danger(DangerOperationCaption, content);
 
         protected Task<bool> SensitiveOperation(string content) => DialogService()
-                                                                       .Danger(SensitiveOperationCaption, content);
+                                                                       .Warning(SensitiveOperationCaption, content);
 
 
         protected Task Obsoleted(string content) => DialogService()

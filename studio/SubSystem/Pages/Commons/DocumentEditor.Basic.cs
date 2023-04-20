@@ -16,6 +16,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private const string MetaNameOfRace     = "@race";
         private const string MetaNameOfNickName = "@nickname";
         private const string MetaNameOfIsDeath  = "@death";
+        private const string MetaNameOfRarity  = "@rarity";
+        private const string MetaNameOfPrice  = "@price";
+        private const string MetaNameOfProduceArea  = "@produce-area";
 
         private string GetOrAddMetadata(string name)
         {
@@ -68,7 +71,40 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Type  = MetadataKind.Text,
             });
         }
-
+        
+        public string Rarity
+        {
+            get => GetOrAddMetadata(MetaNameOfRarity);
+            set
+            {
+                UpsertMetadata(MetaNameOfRarity, value);
+                SetDirtyState();
+                RaiseUpdated();
+            }
+        }
+        
+        public string Price
+        {
+            get => GetOrAddMetadata(MetaNameOfPrice);
+            set
+            {
+                UpsertMetadata(MetaNameOfPrice, value);
+                SetDirtyState();
+                RaiseUpdated();
+            }
+        }
+        
+        public string ProduceArea
+        {
+            get => GetOrAddMetadata(MetaNameOfProduceArea);
+            set
+            {
+                UpsertMetadata(MetaNameOfProduceArea, value);
+                SetDirtyState();
+                RaiseUpdated();
+            }
+        }
+        
 
         public string NickName
         {
