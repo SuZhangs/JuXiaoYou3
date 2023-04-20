@@ -20,7 +20,7 @@
              SnapsToDevicePixels="True"
              UseLayoutRounding="True">
     <UserControl.Resources>
-        <f:BooleanTrueToVisibilityConverter x:Key="bt2Visibility"></f:BooleanTrueToVisibilityConverter>
+        <f:BooleanTrueToVisibilityConverter x:Key="bt2Visibility"/>
         <proxy:TabShellBindingProxy x:Key="Shell" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type vm2:TabViewModel}">
@@ -97,6 +97,7 @@
                 
                 <!-- 不活跃面板视图 -->
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
+                                    Command="{Binding SelectInactiveWorkspaceCommand}"
                                     Icon="{StaticResource FeatherIcon.Down}"
                                     IconSize="29"
                                     Width="48"/>

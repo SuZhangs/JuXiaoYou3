@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected TabController()
         {
             Workspace        = new ObservableCollection<ITabViewModel>();
-            Outboards        = new ObservableCollection<ITabViewModel>();
+            InactiveWorkspace        = new ObservableCollection<ITabViewModel>();
             AddTabCommand    = new RelayCommand<object>(AddTabImpl);
             RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
             
@@ -117,10 +117,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 }
                 else if (index == Workspace.Count && index != 0)
                 {
-                    if (Outboards.Count > 0)
+                    if (InactiveWorkspace.Count > 0)
                     {
-                        var first = Outboards[0];
-                        Outboards.RemoveAt(0);
+                        var first = InactiveWorkspace[0];
+                        InactiveWorkspace.RemoveAt(0);
                         Workspace.Add(first);
                         CurrentViewModel = first;
                     }
@@ -139,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
             
             OnRemoveViewModel(viewModel);
-            Outboards.Remove(viewModel);
+            InactiveWorkspace.Remove(viewModel);
         }
 
         public Task RemoveTabItem(ITabViewModel viewModel)
@@ -219,7 +219,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 }
             }
 
-            foreach (var item in Outboards)
+            foreach (var item in InactiveWorkspace)
             {
                 var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
 
@@ -228,7 +228,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     if (Workspace.Count > 0)
                     {
                         var lastOneIndex = Workspace.Count - 1;
-                        (Workspace[lastOneIndex], Outboards[0]) = (Outboards[0], Workspace[lastOneIndex]);
+                        (Workspace[lastOneIndex], InactiveWorkspace[0]) = (InactiveWorkspace[0], Workspace[lastOneIndex]);
                         CurrentViewModel                        = Workspace[lastOneIndex];
                     }
                     else
@@ -258,7 +258,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 }
             }
 
-            foreach (var item in Outboards)
+            foreach (var item in InactiveWorkspace)
             {
                 var unifiedKey2 = item.Uniqueness ? item.GetType().FullName : item.PageId;
 
@@ -267,7 +267,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     if (Workspace.Count > 0)
                     {
                         var lastOneIndex = Workspace.Count - 1;
-                        (Workspace[lastOneIndex], Outboards[0]) = (Outboards[0], Workspace[lastOneIndex]);
+                        (Workspace[lastOneIndex], InactiveWorkspace[0]) = (InactiveWorkspace[0], Workspace[lastOneIndex]);
                         CurrentViewModel                        = Workspace[lastOneIndex];
                     }
                     else
@@ -400,10 +400,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
                 
-            if(Outboards.Count < MaximumWorkspaceItemCount)
+            if(InactiveWorkspace.Count < MaximumWorkspaceItemCount)
             {
                 OnAddViewModel(viewModel);
-                Outboards.Add(viewModel);
+                InactiveWorkspace.Add(viewModel);
                 return;
             }
                 
@@ -462,7 +462,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<ITabViewModel> Outboards { get; }
+        public ObservableCollection<ITabViewModel> InactiveWorkspace { get; }
 
         /// <summary>
         /// 添加标签页

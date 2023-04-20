@@ -24,7 +24,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private SolidColorBrush _foregroundBrush;
         private SolidColorBrush _backgroundHighlight1Brush;
         private SolidColorBrush _backgroundHighlight2Brush;
-        private SolidColorBrush _backgroundDisabledBrush;
         private SolidColorBrush _foregroundDisabledBrush;
 
 
@@ -34,7 +33,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
             _foregroundBrush           = null;
             _backgroundHighlight1Brush = null;
             _backgroundHighlight2Brush = null;
-            _backgroundDisabledBrush   = null;
             _foregroundDisabledBrush   = null;
             InvalidateVisual();
         }
@@ -131,10 +129,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void GoToDisableState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             _foregroundDisabledBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundDisabled]);
-
-            _bd.Background = _backgroundDisabledBrush;
             SetForeground(_foregroundDisabledBrush);
         }
 

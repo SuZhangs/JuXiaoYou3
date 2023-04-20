@@ -110,13 +110,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static RoutingEventArgs NewPage(ITabViewModel viewModel, ITabViewController controller)
         {
-            var id = viewModel.Uniqueness ? 
+            if(string.IsNullOrEmpty(viewModel.PageId))
+            {
+                var id = viewModel.Uniqueness ? 
                 viewModel.GetType().FullName : 
                     string.IsNullOrEmpty(viewModel.PageId) ? 
                     Guid.NewGuid().ToString("N"): viewModel.PageId;
+                
+                return new RoutingEventArgs
+                {
+                    Id         = id,
+                    Controller = controller,
+                    Parameter = new Parameter
+                    {
+                        Args = new object[4]
+                    }
+                };
+            }
+            
             return new RoutingEventArgs
             {
-                Id         = id,
+                Id         = viewModel.PageId,
                 Controller = controller,
                 Parameter  = new Parameter
                 {
@@ -134,13 +148,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static RoutingEventArgs NewPage(ITabViewModel viewModel, ITabViewController controller, Parameter parameter)
         {
-            var id = viewModel.Uniqueness ? 
-                viewModel.GetType().FullName : 
-                string.IsNullOrEmpty(viewModel.PageId) ? 
-                    Guid.NewGuid().ToString("N"): viewModel.PageId;
+            if(string.IsNullOrEmpty(viewModel.PageId))
+            {
+                var id = viewModel.Uniqueness ? 
+                    viewModel.GetType().FullName : 
+                    string.IsNullOrEmpty(viewModel.PageId) ? 
+                        Guid.NewGuid().ToString("N"): viewModel.PageId;
+                
+                return new RoutingEventArgs
+                {
+                    Id         = id,
+                    Controller = controller,
+                    Parameter  = parameter
+                };
+            }
+            
             return new RoutingEventArgs
             {
-                Id         = id,
+                Id         = viewModel.PageId,
                 Controller = controller,
                 Parameter = parameter
             };

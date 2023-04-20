@@ -82,11 +82,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public override int GetHashCode()
         {
-            return GetId();
+            return GetHashCodeIntern();
         }
         
-        private int GetId() => string.IsNullOrEmpty(PageId) ? base.GetHashCode() : PageId.GetHashCode();
+        protected int GetHashCodeIntern() => string.IsNullOrEmpty(PageId) ? base.GetHashCode() : PageId.GetHashCode();
 
+        
+        public override string ToString()
+        {
+            return string.IsNullOrEmpty(Title) ? PageId : Title;
+        }
         #endregion
 
         #region Start / OnStart
@@ -251,7 +256,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 用于表示当前的视图模型的唯一标识符。
         /// </summary>
-        public string PageId { get; private set; }
+        public string PageId { get; protected set; }
 
 
         /// <summary>

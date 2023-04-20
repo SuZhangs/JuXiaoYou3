@@ -146,7 +146,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         }
 
 
-        protected override async void OnExitOverride(ExitEventArgs e)
+        protected override void OnExitOverride(ExitEventArgs e)
         {
             //
             // 移除所有对象

@@ -7,9 +7,5 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 {
     public abstract class PageViewModel : ViewModelBase
     {
-        public override string ToString()
-        {
-            return $"{GetHashCode()}";
-        }
     }
 }
