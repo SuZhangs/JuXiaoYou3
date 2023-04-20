@@ -9,9 +9,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             PageId = 
                 Title = GetHashCodeIntern().ToString();
+            ApprovalRequired = false;
         }
         
-        public override bool Removable => false;
+        public override bool Removable => true;
         public override bool Uniqueness => false;
     }
 }

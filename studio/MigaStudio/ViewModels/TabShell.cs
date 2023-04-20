@@ -83,11 +83,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
-
-            for (var i = 0; i < 32; i++)
-            {
-                New<PlaceholderViewModel>();
-            }
         }
 
         protected override void RequireStartupTabViewModel()

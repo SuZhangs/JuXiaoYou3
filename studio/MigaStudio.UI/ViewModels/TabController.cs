@@ -106,16 +106,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 Workspace.RemoveAt(index);
 
-                if (!ReferenceEquals(_currentViewModel, viewModel))
-                {
-                    return;
-                }
-
-                if (index < Workspace.Count)
-                {
-                    CurrentViewModel = Workspace[index];
-                }
-                else if (index == Workspace.Count && index != 0)
+                //
+                //
+                if (Workspace.Count < MaximumWorkspaceItemCount &&
+                    InactiveWorkspace.Count > 0)
                 {
                     if (InactiveWorkspace.Count > 0)
                     {
@@ -129,8 +123,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         CurrentViewModel = Workspace[0];
                     }
                 }
+
+                if (ReferenceEquals(_currentViewModel, viewModel) &&
+                    Workspace.Count > 0 &&
+                    index < Workspace.Count)
+                {
+                    CurrentViewModel = Workspace[index];
+                }
                 else
                 {
+                    
                     RequireStartupTabViewModel();
                 }
                 
@@ -402,17 +404,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 
             if(InactiveWorkspace.Count < MaximumWorkspaceItemCount)
             {
+                var lastWorkspace = Workspace[^1];
                 OnAddViewModel(viewModel);
-                InactiveWorkspace.Add(viewModel);
+                Workspace[^1] = viewModel;
+                InactiveWorkspace.Insert(0, lastWorkspace);
                 return;
             }
-                
-            
-            Xaml.Get<INotifyService>()
-                .Notify(new IconNotification
-            {
-                Title = "已经达到最高上限了！"
-            });
+
+            DialogService().Notify(
+                CriticalLevel.Obsoleted,
+                Language.GetText("text.notify"), 
+                Language.GetText("text.cannotOpenPage"));
         }
 
         /// <summary>
