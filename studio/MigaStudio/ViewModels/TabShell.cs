@@ -74,7 +74,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var lastActiveWorkspace     = Workspace[^1];
             var selectInactiveWorkspace = r.Value;
 
-            InactiveWorkspace[^1] = lastActiveWorkspace;
+            var index = InactiveWorkspace.IndexOf(selectInactiveWorkspace);
+            InactiveWorkspace[index] = lastActiveWorkspace;
             Workspace[^1]         = selectInactiveWorkspace;
             CurrentViewModel      = selectInactiveWorkspace;
         }
