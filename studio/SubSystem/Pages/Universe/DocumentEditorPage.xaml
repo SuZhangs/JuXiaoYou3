@@ -63,19 +63,16 @@
                 <UniformGrid Columns="3"
                              Height="48">
 
-                    <ftk:ToolButton f:Language.Id="global.new"
-                                    Content="新建"
+                    <ftk:ToolButton Content="{f:Language global.new}"
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True" />
 
-                    <ftk:ToolButton f:Language.Id="global.open"
-                                    Content="打开"
+                    <ftk:ToolButton Content="{f:Language global.open}"
                                     Icon="{StaticResource IC.Folder}"
                                     IsFilled="True"
                                     ShowText="True" />
-                    <ftk:ToolButton f:Language.Id="global.save"
-                                    Content="保存"
+                    <ftk:ToolButton Content="{f:Language global.save}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
                                     ShowText="True" />

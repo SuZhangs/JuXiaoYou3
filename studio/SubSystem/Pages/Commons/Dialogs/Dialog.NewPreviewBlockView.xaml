@@ -41,8 +41,7 @@
             <f:TreeView Grid.Column="0"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
-                <f:TreeViewItem f:Language.Id="__GroupPresentation"
-                                Header="分组预览" 
+                <f:TreeViewItem Header="{f:Language __GroupPresentation}"
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicMetadataKinds}">
                     <f:TreeViewItem.ItemsPanel>
@@ -52,8 +51,7 @@
                         </ItemsPanelTemplate>
                     </f:TreeViewItem.ItemsPanel>
                 </f:TreeViewItem>
-                <f:TreeViewItem f:Language.Id="__ComplexPresentation"
-                                Header="复杂预览" 
+                <f:TreeViewItem Header="{f:Language __ComplexPresentation}"
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedMetadataKinds}">
                     <f:TreeViewItem.ItemsPanel>

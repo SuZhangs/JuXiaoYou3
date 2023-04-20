@@ -19,35 +19,30 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
-            <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="{f:Language global.add}"
+            <ftk:ToolButton Content="{f:Language global.Add}"
                             Command="{Binding AddAlbumCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
             
-            <ftk:ToolButton f:Language.Id="global.Remove"
-                            Content="{f:Language global.Remove}"
+            <ftk:ToolButton Content="{f:Language global.Remove}"
                             Command="{Binding RemoveAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
             
-            <ftk:ToolButton f:Language.Id="global.Up"
-                            Content="上移"
+            <ftk:ToolButton Content="{f:Language global.Up}"
                             Command="{Binding ShiftUpAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
             
-            <ftk:ToolButton f:Language.Id="global.Down"
-                            Content="下移"
+            <ftk:ToolButton Content="{f:Language global.Down}"
                             Command="{Binding ShiftDownAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
-            <ftk:ToolButton f:Language.Id="global.Presentation"
-                            Content="预览"
+            <ftk:ToolButton Content="{f:Language global.Presentation}"
                             Command="{Binding OpenAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.Upload}"

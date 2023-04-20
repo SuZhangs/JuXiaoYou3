@@ -31,21 +31,18 @@
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="{f:Language global.add}"
+                        <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding AddManifestCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
                         
-                        <ftk:ToolButton f:Language.Id="global.edit"
-                                        Content="{f:Language global.add}"
+                        <ftk:ToolButton Content="{f:Language global.edit}"
                                         Command="{Binding EditManifestCommand}"
                                         CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="{f:Language global.Remove}"
+                        <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveManifestCommand}"
                                         CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
@@ -59,9 +56,8 @@
                 </f:ListBox>
             </f:ForestSection>
 
-            <f:ForestSection f:Language.Id="global.Presentation"
+            <f:ForestSection Header="{f:Language global.Presentation}"
                              Grid.Column="1"
-                             Header="预览"
                              Margin="32 0 8 0">
                 <f:ForestSection.ToolBar>
                     <StackPanel Grid.Row="0"
@@ -69,14 +65,12 @@
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="{f:Language global.add}"
+                        <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding AddTemplateCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="{f:Language global.Remove}"
+                        <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Items,Path=SelectedItem,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"

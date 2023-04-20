@@ -75,9 +75,8 @@
                             <TextBlock Text="添加标签能够帮你更好的分类设定，如果输入的是目录的名字，则会自动添加到该目录下面" />
                         </Border>
 
-                        <f:CallToAction f:Language.Id="global.add"
+                        <f:CallToAction Content="{f:Language global.new}"
                                         Command="{Binding AddKeywordCommand}"
-                                        Content="新建"
                                         HorizontalAlignment="Left"
                                         Margin="0 16 0 0"
                                         Icon="{StaticResource FeatherIcon.Plus}"

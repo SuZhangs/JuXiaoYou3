@@ -50,14 +50,12 @@
             <!--  -->
             <StackPanel DockPanel.Dock="Top"
                         Height="128">
-                <TextBlock f:Language.Id="global.appNameWithId"
-                           FontSize="48"
-                           Text="橘小柚（JuXiaoYou）" />
+                <TextBlock FontSize="48"
+                           Text="{f:Language app.NameWithId}" />
 
-                <TextBlock f:Language.Id="global.appIntro"
-                           FontSize="16"
+                <TextBlock FontSize="16"
                            Margin="0 8"
-                           Text="一个世界观设计软件，能够帮你完善和管理OC和设定！让你的创作不再局限于文字！"
+                           Text="{f:Language app.Intro}" 
                            TextWrapping="Wrap" />
             </StackPanel>
 
@@ -68,36 +66,31 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <f:ForestSection f:Language.Id="global.start"
-                                 DockPanel.Dock="Top"
-                                 Header="开始"
+                <f:ForestSection DockPanel.Dock="Top"
+                                 Header="{f:Language global.start}"
                                  Margin="0 0 0 16">
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
                                     Margin="0 0 0 4">
-                            <ftk:ToolButton f:Language.Id="global.new"
-                                            Content="新建"
+                            <ftk:ToolButton Content="{f:Language global.new}"
                                             Command="{Binding CreateCommand}"
                                             Icon="{StaticResource FeatherIcon.File}"
                                             ShowText="True"
                                             Margin="0 4" />
 
-                            <ftk:ToolButton f:Language.Id="global.open"
-                                            Content="打开"
+                            <ftk:ToolButton Content="{f:Language global.open}"
                                             Command="{Binding OpenCommand}"
                                             Icon="{StaticResource FeatherIcon.Folder}"
                                             Margin="0 4"
                                             ShowText="True" />
 
-                            <ftk:ToolButton f:Language.Id="global.import"
-                                            Content="导入"
+                            <ftk:ToolButton Content="{f:Language global.import}"
                                             Icon="{StaticResource FeatherIcon.Upload}"
                                             Margin="0 4"
                                             ShowText="True" />
                             
-                            <ftk:ToolButton f:Language.Id="global.repair"
-                                            Content="修复"
+                            <ftk:ToolButton Content="{f:Language global.repair}"
                                             Command="{Binding RepairCommand}"
                                             Icon="{StaticResource FeatherIcon.Upload}"
                                             Margin="0 4"
@@ -105,55 +98,46 @@
                         </StackPanel>
                     </f:ForestSection.ToolBar>
                     <StackPanel Margin="0 8 0 0">
-                        <f:HeaderedSingleLine f:Language.Id="global.Name"
-                                              Header="名字"
+                        <f:HeaderedSingleLine Header="{f:Language global.Name}"
                                               Margin="0 6"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <f:HeaderedSingleLine f:Language.Id="global.Author"
-                                              Header="作者"
+                        <f:HeaderedSingleLine Header="{f:Language global.Author}"
                                               Margin="0 6"
                                               Text="{Binding Author,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <f:HeaderedSingleLine f:Language.Id="global.foreignName"
-                                              Header="外文名（可随意填写）"
+                        <f:HeaderedSingleLine Header="{f:Language global.foreignName}"
                                               Margin="0 6"
                                               Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </f:ForestSection>
 
-                <f:ForestSection f:Language.Id="global.Help"
+                <f:ForestSection Header="{f:Language global.Help}"
                                  Grid.Column="1"
-                                 Header="帮助"
                                  Margin="32 0 0 0">
                     <StackPanel>
-                        <studio:ActionButton f:Language.Id="global.tutorialVideo"
-                                             Content="教程（视频）"
+                        <studio:ActionButton Content="{f:Language global.tutorialVideo}"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Video}"
                                              IconSize="29"
                                              IsFilled="True" />
 
-                        <studio:ActionButton f:Language.Id="global.tutorialPassage"
-                                             Content="教程（文章）"
+                        <studio:ActionButton Content="{f:Language global.tutorialPassage}"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Notebook}"
                                              IconSize="29"
                                              IsFilled="True" />
 
-                        <studio:ActionButton f:Language.Id="global.sponsor"
-                                             Content="赞助我们"
+                        <studio:ActionButton Content="{f:Language global.sponsor}"
                                              Margin="0 4"
                                              Icon="{StaticResource FeatherIcon.Chat}"
                                              IconSize="29" />
 
-                        <studio:ActionButton f:Language.Id="global.otherApps"
-                                             Content="其他软件"
+                        <studio:ActionButton Content="{f:Language global.otherApps}"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Apps}"
                                              IconSize="29"
                                              IsFilled="True" />
 
-                        <studio:ActionButton f:Language.Id="global.AboutUs"
-                                             Content="关于我们"
+                        <studio:ActionButton Content="{f:Language global.AboutUs}"
                                              Margin="0 4"
                                              Icon="{StaticResource FeatherIcon.Link}"
                                              IconSize="29" />

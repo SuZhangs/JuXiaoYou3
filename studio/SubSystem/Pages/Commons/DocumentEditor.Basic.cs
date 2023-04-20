@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using System.Runtime.CompilerServices;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -53,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return value;
         }
 
-        private void UpsertMetadata(string name, string value)
+        private void UpsertMetadata(string name, string value, [CallerMemberName] string propName = "")
         {
             if (BasicPart.Buckets.ContainsKey(name))
             {
@@ -70,6 +71,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Value = value,
                 Type  = MetadataKind.Text,
             });
+            
+            SetDirtyState();
+            RaiseUpdated(propName);
         }
         
         public string Rarity
@@ -78,8 +82,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfRarity, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
         
@@ -89,8 +91,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfPrice, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
         
@@ -100,8 +100,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfProduceArea, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
         
@@ -112,8 +110,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfNickName, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -124,8 +120,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfAge, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -136,8 +130,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfRace, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -147,8 +139,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfCountry, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -158,8 +148,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfWeight, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -173,8 +161,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfIsDeath, value.ToString());
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
         
@@ -184,8 +170,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfHeight, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -196,8 +180,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfBirth, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -205,12 +187,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public string Gender
         {
             get => GetOrAddMetadata(MetaNameOfGender);
-            set
-            {
-                UpsertMetadata(MetaNameOfGender, value);
-                SetDirtyState();
-                RaiseUpdated();
-            }
+            set => UpsertMetadata(MetaNameOfGender, value);
         }
 
         public string Intro
@@ -221,8 +198,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 UpsertMetadata(MetaNameOfIntro, value);
                 Document.Intro = value;
                 Cache.Intro    = value;
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -240,8 +215,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Document.Avatar = value;
                 Cache.Avatar    = value;
                 UpsertMetadata(MetaNameOfAvatar, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 
@@ -258,8 +231,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Document.Name = value;
                 Cache.Name    = value;
                 UpsertMetadata(MetaNameOfName, value);
-                SetDirtyState();
-                RaiseUpdated();
             }
         }
 

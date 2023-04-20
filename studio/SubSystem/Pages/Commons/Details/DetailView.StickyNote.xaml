@@ -31,21 +31,18 @@
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.Edit}" />
 
-                        <f:MenuItem f:Language.Id="global.Up"
-                                    Header="上移"
+                        <f:MenuItem Header="{f:Language global.Up}"
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowUp}" />
 
-                        <f:MenuItem f:Language.Id="global.Down"
-                                    Header="下移"
+                        <f:MenuItem Header="{f:Language global.Down}"
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowDown}" />
                         <Separator/>
 
-                        <f:MenuItem f:Language.Id="global.Remove"
-                                    Header="{f:Language global.Remove}"
+                        <f:MenuItem Header="{f:Language global.Remove}"
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.MinusCircle}" />
@@ -91,8 +88,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
-            <ftk:ToolButton f:Language.Id="global.Add"
-                            Content="{f:Language global.add}"
+            <ftk:ToolButton Content="{f:Language global.Add}"
                             Command="{Binding AddCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />

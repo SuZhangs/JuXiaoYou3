@@ -32,35 +32,30 @@
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="{f:Language global.add}"
+                        <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding AddTemplateCommand}"
                                         Icon="{StaticResource IC.File}"
                                         IsFilled="True"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="{f:Language global.Remove}"
+                        <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveTemplateCommand}"
                                         CommandParameter="{Binding SelectedTemplate,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
                         
-                        <ftk:ToolButton f:Language.Id="global.preview"
-                                        Content="预览"
+                        <ftk:ToolButton Content="{f:Language global.preview}"
                                         Command="{Binding PresentationCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
                                         ShowText="True" />
                         
-                        <ftk:ToolButton f:Language.Id="global.import"
-                                        Content="导入"
+                        <ftk:ToolButton Content="{f:Language global.import}"
                                         Command="{Binding ImportTemplateCommand}"
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />
                         
-                        <ftk:ToolButton f:Language.Id="global.export"
-                                        Content="导出"
+                        <ftk:ToolButton Content="{f:Language global.export}"
                                         Command="{Binding ExportTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Canvas}"
                                         Icon="{StaticResource IC.Save}"
@@ -107,8 +102,7 @@
 
             <!-- 侧栏-->
             <ftk:TabControl Grid.Column="1">
-                <ftk:TabItem f:Language.Id="global.metadata"
-                             Header="喵喵咒语"
+                <ftk:TabItem Header="{f:Language global.metadata}"
                              Padding="16 11">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
@@ -140,8 +134,7 @@
                     </ScrollViewer>
                 </ftk:TabItem>
 
-                <ftk:TabItem f:Language.Id="global.defaultValue"
-                             Header="默认模板"
+                <ftk:TabItem Header="{f:Language global.defaultValue}"
                              Padding="16 11">
                     <StackPanel>
                         <Border Background="{f:Brush BackgroundLevel3}"
@@ -162,8 +155,7 @@
 
 
 
-                        <f:CallToAction f:Language.Id="global.setting"
-                                        Content="添加模板"
+                        <f:CallToAction Content="{f:Language global.setting}"
                                         Command="{Binding ManageManifestCommand}"
                                         Margin="8"
                                         Icon="{StaticResource FeatherIcon.Plus}"
@@ -219,8 +211,7 @@
             </ftk:TabControl>
         </Grid>
         <f:Drawer.RightContent>
-            <f:ForestSection f:Language.Id="global.preview"
-                             Header="预览"
+            <f:ForestSection Header="{f:Language global.preview}"
                              Padding="16 10"
                              Width="480">
                 <ScrollViewer Margin="0 16 0 0">

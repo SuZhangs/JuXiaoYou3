@@ -57,8 +57,7 @@
                 </f:ListBox>
             </f:ForestSection>
 
-            <f:ForestSection f:Language.Id="global.Presentation"
-                             Grid.Column="1"
+            <f:ForestSection Grid.Column="1"
                              Header="问卷"
                              Margin="32 0 8 0">
                 <f:ForestSection.ToolBar>

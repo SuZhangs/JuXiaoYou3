@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using Ookii.Dialogs.Wpf;
 
@@ -6,6 +7,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public static class FileIO
     {
+        public static void OpenLink(string key)
+        {
+            var link = Language.GetText(key);
+            Process.Start(new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                FileName        = "explorer.exe",
+                Arguments       = link
+            });
+        }
+        
         public static async Task CaptureAsync(FrameworkElement element)
         {
             if (element is null)

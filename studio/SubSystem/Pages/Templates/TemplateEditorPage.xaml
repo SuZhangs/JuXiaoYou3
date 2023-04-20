@@ -56,28 +56,24 @@
                     <StackPanel DockPanel.Dock="Top"
                                 Margin="0 16">
                         <StackPanel Orientation="Horizontal">
-                            <ftk:ToolButton f:Language.Id="global.new"
-                                        Content="新建"
+                            <ftk:ToolButton Content="{f:Language global.new}"
                                         Command="{Binding NewTemplateCommand}"
                                         Icon="{StaticResource IC.File}"
                                         IsFilled="True"
                                         ShowText="True" />
-                            <ftk:ToolButton f:Language.Id="global.open"
-                                        Content="打开"
+                            <ftk:ToolButton Content="{f:Language global.open}"
                                         Command="{Binding OpenTemplateCommand}"
                                         Icon="{StaticResource IC.Folder}"
                                         IsFilled="True"
                                         ShowText="True" />
-                            <ftk:ToolButton f:Language.Id="global.save"
-                                        Content="保存"
+                            <ftk:ToolButton Content="{f:Language global.save}"
                                         Command="{Binding SaveTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Canvas}"
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />
                             
-                            <ftk:ToolButton f:Language.Id="global.refresh"
-                                            Content="刷新"
+                            <ftk:ToolButton Content="{f:Language global.refresh}"
                                             Command="{Binding SaveTemplateCommand}"
                                             CommandParameter="{Binding ElementName=Canvas}"
                                             Icon="{StaticResource FeatherIcon.Refresh}"
@@ -101,51 +97,43 @@
                             </ListBox.ItemsPanel>
                         </f:ListBox>
 
-                        <f:HeaderedSingleLine f:Language.Id="global.name"
+                        <f:HeaderedSingleLine Header="{f:Language global.name}"
                                               Margin="0 8"
-                                              Header="名字"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                        <f:HeaderedSingleLine f:Language.Id="global.universe"
+                        <f:HeaderedSingleLine Header="{f:Language global.universe}"
                                               Margin="0 8"
-                                              Header="世界观名字"
                                               Text="{Binding For,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                        <f:HeaderedSingleLine f:Language.Id="global.author"
+                        <f:HeaderedSingleLine Header="{f:Language global.author}"
                                               Margin="0 8"
-                                              Header="作者"
                                               Text="{Binding AuthorList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </ftk:TabItem>
                 <ftk:TabItem Header="更多信息"
                              Padding="16 11">
                     <StackPanel>
-                        <f:HeaderedSingleLine f:Language.Id="global.id"
+                        <f:HeaderedSingleLine Header="{f:Language global.id}"
                                               IsReadOnly="True"
                                               Margin="0 8"
-                                              Header="ID"
                                               Text="{Binding Id,Mode=OneWay}" />
 
-                        <f:HeaderedSingleLine f:Language.Id="global.version"
+                        <f:HeaderedSingleLine Header="{f:Language global.version}"
                                               IsReadOnly="True"
                                               Margin="0 8"
-                                              Header="版本"
                                               Text="{Binding Version,Mode=OneWay}" />
                         
-                        <f:HeaderedSingleLine f:Language.Id="global.organization"
+                        <f:HeaderedSingleLine Header="{f:Language global.organization}"
                                               Margin="0 8"
-                                              Header="组织"
                                               Text="{Binding Organizations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                        <f:HeaderedSingleLine f:Language.Id="global.contract"
+                        <f:HeaderedSingleLine Header="{f:Language global.contract}"
                                               Margin="0 8"
-                                              Header="联系方式"
                                               Text="{Binding ContractList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                        <f:HeaderedMultiLine f:Language.Id="global.intro"
+                        <f:HeaderedMultiLine Header="{f:Language global.intro}"
                                              Height="144"
                                              Margin="0 8"
-                                             Header="介绍"
                                              TextWrapping="Wrap"
                                              Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
@@ -156,8 +144,7 @@
 
                     <DockPanel>
                         <ftk:ToolButton DockPanel.Dock="Top"
-                                    f:Language.Id="global.Refresh"
-                                    Content="刷新"
+                                    Content="{f:Language global.Refresh}"
                                     Command="{Binding RefreshMetadataListCommand}"
                                     HorizontalAlignment="Right"
                                     Margin="0 0 0 4"
@@ -197,34 +184,29 @@
                     <StackPanel HorizontalAlignment="Right"
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
-                        <ftk:ToolButton f:Language.Id="global.preview"
-                                        Content="预览"
+                        <ftk:ToolButton Content="{f:Language global.preview}"
                                         Command="{Binding OpenPresentationPaneCommand}"
                                         Icon="{StaticResource FeatherIcon.Camera}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.add"
-                                        Content="{f:Language global.add}"
+                        <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding NewBlockCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.edit"
-                                        Content="编辑"
+                        <ftk:ToolButton Content="{f:Language global.edit}"
                                         Command="{Binding EditBlockCommand}"
                                         CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Edit}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.remove"
-                                        Content="{f:Language global.Remove}"
+                        <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveBlockCommand}"
                                         CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Clear}"
                                         ShowText="True" />
 
-                        <ftk:ToolButton f:Language.Id="global.clear"
-                                        Content="清空"
+                        <ftk:ToolButton Content="{f:Language global.clear}"
                                         Command="{Binding RemoveAllBlockCommand}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />

@@ -37,21 +37,18 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top"
                         Orientation="Horizontal">
-                <ftk:ToolButton f:Language.Id="global.Add"
-                                Content="{f:Language global.add}"
+                <ftk:ToolButton Content="{f:Language global.Add}"
                                 Command="{Binding AddMusicCommand}"
                                 Icon="{StaticResource FeatherIcon.PlusCircle}"
                                 ShowText="True" />
 
-                <ftk:ToolButton f:Language.Id="global.Remove"
-                                Content="{f:Language global.Remove}"
+                <ftk:ToolButton Content="{f:Language global.Remove}"
                                 Command="{Binding RemoveMusicCommand}"
                                 CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.MinusCircle}"
                                 ShowText="True" />
 
-                <ftk:ToolButton f:Language.Id="global.Play"
-                                Content="播放"
+                <ftk:ToolButton Content="{f:Language global.Play}"
                                 Command="{Binding PlayMusicCommand}"
                                 CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
                                 Icon="{StaticResource IC.Play}"
@@ -60,8 +57,7 @@
                                 ShowText="True" />
 
 
-                <ftk:ToolButton f:Language.Id="global.Pause"
-                                Content="暂停"
+                <ftk:ToolButton Content="{f:Language global.Pause}"
                                 Command="{Binding PauseMusicCommand}"
                                 Icon="{StaticResource IC.Play}"
                                 IconSize="19"
