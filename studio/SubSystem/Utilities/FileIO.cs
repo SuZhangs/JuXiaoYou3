@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Utilities
@@ -90,6 +91,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 WorkingDirection    = shortcut.WorkingDirectory,
             };
         }
+
+        public static RelayCommand<string> OpenLinkCommand { get; } = new RelayCommand<string>(OpenLink, x => !string.IsNullOrEmpty(x));
     }
 
     public class ShortcutDescription

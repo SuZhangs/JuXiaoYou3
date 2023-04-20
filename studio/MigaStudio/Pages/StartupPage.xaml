@@ -6,6 +6,7 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:fs="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"
                      Padding="16"
@@ -23,15 +24,15 @@
                     Padding="32">
                 <Border.Background>
                     <LinearGradientBrush>
-                        <GradientStop Color="#bec936" Offset="0"/>
-                        <GradientStop Color="#ffab12" Offset="1"/>
+                        <GradientStop Color="#bec936" Offset="0" />
+                        <GradientStop Color="#ffab12" Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid>
                     <TextBlock Foreground="{f:Brush ForegroundInAdaptive}"
                                FontSize="32"
                                FontWeight="Bold"
-                               Text="橘小柚（JuXiaoYou）"/>
+                               Text="橘小柚（JuXiaoYou）" />
                 </Grid>
             </Border>
 
@@ -40,22 +41,51 @@
                 <f:SpacingStackPanel DockPanel.Dock="Right"
                                      Gap="8"
                                      Width="320">
-                    <fs:ActionButton Content="浏览教程"/>
-                    <fs:ActionButton Content="反馈BUG"/>
-                    <fs:ActionButton Content="赞助我们"/>
-                    <fs:ActionButton Content="联系我们"/>
+                    <fs:ActionButton Content="浏览教程" />
+                    <fs:ActionButton Content="反馈BUG" />
+                    <fs:ActionButton Content="赞助我们" />
+                    <fs:ActionButton Content="联系我们" />
                 </f:SpacingStackPanel>
-                
+
                 <WrapPanel DockPanel.Dock="Left"
                            Orientation="Horizontal">
-                    <fs:ActionButton Content="浏览教程"
-                                     Margin="4"/>
-                    <fs:ActionButton Content="反馈BUG"
-                                     Margin="4"/>
-                    <fs:ActionButton Content="赞助我们"
-                                     Margin="4"/>
-                    <fs:ActionButton Content="联系我们"
-                                     Margin="4"/>
+                    <fs:ActionButton Content="{f:Language global.tutorialVideo}"
+                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                     CommandParameter="app.tutorial.video"
+                                     Margin="0 4"
+                                     Icon="{StaticResource IC.Video}"
+                                     IconSize="29"
+                                     IsFilled="True" />
+
+                    <fs:ActionButton Content="{f:Language global.tutorialArticle}"
+                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                     CommandParameter="app.tutorial"
+                                     Margin="0 4"
+                                     Icon="{StaticResource IC.Notebook}"
+                                     IconSize="29"
+                                     IsFilled="True" />
+
+                    <fs:ActionButton Content="{f:Language global.sponsor}"
+                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                     CommandParameter="app.donate"
+                                     Margin="0 4"
+                                     Icon="{StaticResource FeatherIcon.Chat}"
+                                     IconSize="29" />
+
+                    <fs:ActionButton Content="{f:Language global.otherApps}"
+                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                     CommandParameter="app.otherApps"
+                                     Margin="0 4"
+                                     Icon="{StaticResource IC.Apps}"
+                                     IconSize="29"
+                                     IsFilled="True" />
+
+                    <fs:ActionButton Content="{f:Language global.AboutUs}"
+                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                     CommandParameter="app.help"
+                                     Margin="0 4"
+                                     Icon="{StaticResource FeatherIcon.Link}"
+                                     IconSize="29" />
                 </WrapPanel>
             </DockPanel>
         </Grid>

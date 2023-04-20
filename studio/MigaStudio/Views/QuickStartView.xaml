@@ -9,6 +9,7 @@
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:studio="urn:acorisoft/studio"
+                     xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      mc:Ignorable="d"
                      f:Language.Root="quickstart"
                      d:DesignHeight="720"
@@ -115,29 +116,39 @@
                                  Margin="32 0 0 0">
                     <StackPanel>
                         <studio:ActionButton Content="{f:Language global.tutorialVideo}"
+                                             Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                             CommandParameter="app.tutorial.video"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Video}"
                                              IconSize="29"
                                              IsFilled="True" />
 
-                        <studio:ActionButton Content="{f:Language global.tutorialPassage}"
+                        <studio:ActionButton Content="{f:Language global.tutorialArticle}"
+                                             Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                             CommandParameter="app.tutorial"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Notebook}"
                                              IconSize="29"
                                              IsFilled="True" />
 
                         <studio:ActionButton Content="{f:Language global.sponsor}"
+                                             Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                             CommandParameter="app.donate"
                                              Margin="0 4"
                                              Icon="{StaticResource FeatherIcon.Chat}"
                                              IconSize="29" />
 
                         <studio:ActionButton Content="{f:Language global.otherApps}"
+                                             Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                             CommandParameter="app.otherApps"
                                              Margin="0 4"
                                              Icon="{StaticResource IC.Apps}"
                                              IconSize="29"
                                              IsFilled="True" />
 
                         <studio:ActionButton Content="{f:Language global.AboutUs}"
+                                             Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                             CommandParameter="app.help"
                                              Margin="0 4"
                                              Icon="{StaticResource FeatherIcon.Link}"
                                              IconSize="29" />
