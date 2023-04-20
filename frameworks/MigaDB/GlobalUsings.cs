@@ -1,5 +1,6 @@
 ﻿global using Acorisoft.FutureGL.MigaUtils.Foundation;
 global using Acorisoft.FutureGL.MigaUtils;
+global using Acorisoft.FutureGL.MigaDB.Core;
 global using Acorisoft.FutureGL.MigaDB.Interfaces;
 global using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 global using Acorisoft.FutureGL.MigaDB.Data.Metadatas;

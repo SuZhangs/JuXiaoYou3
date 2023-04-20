@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Concepts;
+// ReSharper disable All
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Universe
 {
@@ -6,7 +7,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Universe
     {
         public override Knowledge GetKnowledge(string id)
         {
-            // ReSharper disable once InlineOutVariableDeclaration
             Knowledge k;
             
             if (GetElementalKnowledge(id, out k))
@@ -14,8 +14,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Universe
                 return k;
             }
 
-            // ReSharper disable once ConvertIfStatementToReturnStatement
             if (GetTechnologyKnowledge(id, out k))
+            {
+                return k;
+            }
+            
+            if (GetFaithKnowledge(id, out k))
             {
                 return k;
             }
@@ -26,13 +30,16 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Universe
         protected sealed override void OnDatabaseOpeningOverride(DatabaseSession session)
         {
             var database = session.Database;
-            ElementalOpening(database);
+            
+            ElementalOpening(database);           
+            FaithOpening(database);
             TechnologyOpening(database);
         }
 
         protected sealed override void OnDatabaseClosingOverride()
         {
             ElementalClosing();
+            FaithClosing();
             TechnologyClosing();
         }
     }
