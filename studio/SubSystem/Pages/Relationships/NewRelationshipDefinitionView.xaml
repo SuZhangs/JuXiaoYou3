@@ -140,11 +140,11 @@
                          Columns="3">
                 <f:ToggleSwitch Content="是否为亲属关系"
                                 Margin="4"
-                                IsChecked="{Binding IsParenthood,Mode=TwoWay}" />
+                                IsChecked="{Binding DirectRelative,Mode=TwoWay}" />
 
                 <f:ToggleSwitch Content="是否为夫妻关系"
                                 Margin="4"
-                                IsChecked="{Binding IsCouple,Mode=TwoWay}" />
+                                IsChecked="{Binding ConjugalRelative,Mode=TwoWay}" />
 
                 <f:ToggleSwitch Content="是否为双向关系"
                                 Margin="4"

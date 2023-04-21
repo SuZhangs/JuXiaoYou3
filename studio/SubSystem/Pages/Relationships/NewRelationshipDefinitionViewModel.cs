@@ -27,9 +27,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         private string _callOfTarget;
         private bool   _isBidirection;
         private int    _friendliness;
-        private bool   _isParenthood;
-        private bool   _isCouple;
+        private bool   _directRelative;
+        private bool   _conjugalRelative;
         private string _name;
+        private bool   _collateralRelative;
+
         protected override void OnStart(RoutingEventArgs parameter)
         {
             var p = parameter.Parameter;
@@ -57,25 +59,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         {
             if (IsEditMode)
             {
-                Entity.CallOfSource = CallOfSource;
-                Entity.CallOfTarget = CallOfTarget;
-                Entity.IsParenthood = IsParenthood;
-                Entity.IsCouple     = IsCouple;
-                Entity.Friendliness = Friendliness;
-                Entity.Name         = Name;
-                Result              = Entity;
+                Entity.CallOfSource       = CallOfSource;
+                Entity.CallOfTarget       = CallOfTarget;
+                Entity.CollateralRelative = CollateralRelative;
+                Entity.DirectRelative     = DirectRelative;
+                Entity.ConjugalRelative   = ConjugalRelative;
+                Entity.Friendliness       = Friendliness;
+                Entity.Name               = Name;
+                Result                    = Entity;
             }
             else
             {
                 Result = new RelationshipDefinition
                 {
-                    Id           = ID.Get(),
-                    CallOfSource = CallOfSource,
-                    CallOfTarget = CallOfTarget,
-                    IsCouple     = IsCouple,
-                    IsParenthood = IsParenthood,
-                    Friendliness = Friendliness,
-                    Name = Name
+                    Id             = ID.Get(), CollateralRelative = CollateralRelative,
+                    CallOfSource   = CallOfSource,
+                    CallOfTarget   = CallOfTarget,
+                    ConjugalRelative       = ConjugalRelative,
+                    DirectRelative = DirectRelative,
+                    Friendliness   = Friendliness,
+                    Name           = Name
                 };
             }
         }
@@ -98,6 +101,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public bool IsEditMode { get; private set; }
         public RelationshipDefinition Entity { get; private set; }
 
+        /// <summary>
+        /// 获取或设置 <see cref="CollateralRelative"/> 属性。
+        /// </summary>
+        public bool CollateralRelative
+        {
+            get => _collateralRelative;
+            set => SetValue(ref _collateralRelative, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
@@ -109,21 +120,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="IsCouple"/> 属性。
+        /// 获取或设置 <see cref="ConjugalRelative"/> 属性。
         /// </summary>
-        public bool IsCouple
+        public bool ConjugalRelative
         {
-            get => _isCouple;
-            set => SetValue(ref _isCouple, value);
+            get => _conjugalRelative;
+            set => SetValue(ref _conjugalRelative, value);
         }
 
         /// <summary>
         /// 是否为法律意义上的亲属关系（继父继母继兄等）
         /// </summary>
-        public bool IsParenthood
+        public bool DirectRelative
         {
-            get => _isParenthood;
-            set => SetValue(ref _isParenthood, value);
+            get => _directRelative;
+            set => SetValue(ref _directRelative, value);
         }
 
         /// <summary>
