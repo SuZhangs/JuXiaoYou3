@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Relationships.NewRelationshipView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Relationships.NewRelationshipDefinitionView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,12 +13,11 @@
                      xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relationships;assembly=MigaDB"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipViewModel}, IsDesignTimeCreatable=True}"
-                     Height="480"
-                     Width="640">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipDefinitionViewModel}, IsDesignTimeCreatable=True}"
+                     Height="300"
+                     Width="300">
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="Avatar" />
-
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <DockPanel Margin="4">
                 <Border DockPanel.Dock="Top"
@@ -44,8 +43,32 @@
             </DockPanel>
         </DataTemplate>
 
+        
         <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
         <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
+        <GeometryGroup x:Key="FeatherIcon.People">
+            <GeometryGroup.Children>
+                <Geometry>F1 M24,24z M0,0z M20,21L20,19A4,4,0,0,0,16,15L8,15A4,4,0,0,0,4,19L4,21</Geometry>
+                <EllipseGeometry RadiusX="4" RadiusY="4" Center="12,7" />
+            </GeometryGroup.Children>
+        </GeometryGroup>
+        
+        <Style x:Key="ArrowStyle" TargetType="Path">
+            <Setter Property="Stroke" Value="{f:ForegroundBrush}"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Width" Value="128"/>
+            <Setter Property="Height" Value="16"/>
+        </Style>
+        
+        <Style x:Key="PeopleStyle" TargetType="Path">
+            <Setter Property="Data" Value="{StaticResource FeatherIcon.People}"/>
+            <Setter Property="Stroke" Value="{f:ForegroundBrush}"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
@@ -59,37 +82,15 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <studio:Avatar Grid.Column="0"
-                               DataContext="{Binding Source,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+                <Path Grid.Column="0"
+                      Style="{StaticResource PeopleStyle}" />
 
                 <Path Grid.Column="1"
                       Data="{StaticResource ArrowRight}"
-                      Stroke="{f:ForegroundBrush}"
-                      StrokeThickness="2"
-                      Stretch="Uniform"
-                      Width="128"
-                      Height="16" />
+                      Style="{StaticResource ArrowStyle}"/>
 
-                <studio:Avatar Grid.Column="2"
-                               DataContext="{Binding Target,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+                <Path Grid.Column="2"
+                      Style="{StaticResource PeopleStyle}" />
 
                 <f:SingleLine Grid.Column="3"
                               Margin="8 0"
@@ -104,43 +105,38 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <studio:Avatar Grid.Column="0"
-                               DataContext="{Binding Source,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+                <Path Grid.Column="0"
+                      Style="{StaticResource PeopleStyle}" />
 
                 <Path Grid.Column="1"
                       Data="{StaticResource ArrowLeft}"
-                      Stroke="{f:ForegroundBrush}"
-                      StrokeThickness="2"
-                      Stretch="Uniform"
-                      Width="128"
-                      Height="16" />
+                      Style="{StaticResource ArrowStyle}"/>
 
-                <studio:Avatar Grid.Column="2"
-                               DataContext="{Binding Target,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+                <Path Grid.Column="2"
+                      Style="{StaticResource PeopleStyle}" />
 
                 <f:SingleLine Grid.Column="3"
                               Margin="8 0"
                               Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center" />
             </Grid>
+            
+            <UniformGrid Margin="0 8">
+                <f:ToggleSwitch Content="是否为亲属关系"
+                                IsChecked="{Binding IsParenthood,Mode=TwoWay}"/>
+                <f:ToggleSwitch Content="是否为夫妻关系"
+                                IsChecked="{Binding IsCouple,Mode=TwoWay}"/>
+                <f:ToggleSwitch Content="是否为双向关系"
+                                IsChecked="{Binding IsBidirection,Mode=TwoWay}"/>
+            </UniformGrid>
+            
+            <TextBlock Margin="0 4"
+                       Text="亲密程度"/>
+            
+            <Slider Margin="0 4"
+                    Minimum="-10"
+                    Maximum="10"
+                    Value="{Binding Friendliness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>

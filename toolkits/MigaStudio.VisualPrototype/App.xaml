@@ -6,7 +6,6 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:fs="urn:acorisoft/forest/shell"
-             xmlns:s="urn:acorisoft/studio"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

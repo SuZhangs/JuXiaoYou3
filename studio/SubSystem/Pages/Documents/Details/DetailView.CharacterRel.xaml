@@ -60,8 +60,8 @@
                 <studio:RelationshipCard Background="{f:Brush BackgroundLevel1}"
                                          SourceName="{Binding Source.Name,Mode=OneWay}"
                                          TargetName="{Binding Target.Name,Mode=OneWay}"
-                                         TopName="{Binding NameToTarget,Mode=OneWay}"
-                                         BottomName="{Binding NameToSource,Mode=OneWay}"
+                                         TopName="{Binding CallOfTarget,Mode=OneWay}"
+                                         BottomName="{Binding CallOfSource,Mode=OneWay}"
                                          Height="120"
                                          Margin="4">
                     <studio:RelationshipCard.ContextMenu>

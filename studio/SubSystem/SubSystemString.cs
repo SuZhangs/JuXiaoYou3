@@ -766,6 +766,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         public static string AreYouSureUnOverrideIt => GetText("text.AreYouSureUnOverrideIt");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
+        public static string AreYouSureClearIt => GetText("text.AreYouSureClearIt");
         public static string Notify => GetText("text.notify");
         public static string NoDataToSave => GetText("text.NoDataToSave");
         public static string NoChange => GetText("text.noChange");

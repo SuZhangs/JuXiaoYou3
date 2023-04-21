@@ -24,13 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             typeof(RelationshipCard),
             new PropertyMetadata(default(string)));
 
-
-        public static readonly DependencyProperty RelationshipProperty = DependencyProperty.Register(
-            nameof(Relationship),
-            typeof(Relationship),
-            typeof(RelationshipCard),
-            new PropertyMetadata(default(Relationship)));
-
         public static readonly DependencyProperty SourceImageProperty = DependencyProperty.Register(
             nameof(SourceImage),
             typeof(ImageSource),
@@ -76,12 +69,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         {
             get => (ImageSource)GetValue(SourceImageProperty);
             set => SetValue(SourceImageProperty, value);
-        }
-
-        public Relationship Relationship
-        {
-            get => (Relationship)GetValue(RelationshipProperty);
-            set => SetValue(RelationshipProperty, value);
         }
 
         public string BottomName

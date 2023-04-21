@@ -102,6 +102,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, GeographyDocumentViewModel>();
 
             Xaml.InstallView<NewRelationshipView, NewRelationshipViewModel>();
+            Xaml.InstallView<NewRelationshipDefinitionView, NewRelationshipDefinitionViewModel>();
+            Xaml.InstallView<RelationshipDefinitionPage, RelationshipDefinitionViewModel>();
             Xaml.InstallView<CharacterPedigreePage, CharacterPedigreeViewModel>();
             Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 
@@ -111,7 +113,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<TemplateEditorPage, TemplateEditorViewModel>();
             Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
             Xaml.InstallView<ModuleManifestView, ModuleManifestViewModel>();
-            
+
             ViewMapper.Initialize();
         }
     }

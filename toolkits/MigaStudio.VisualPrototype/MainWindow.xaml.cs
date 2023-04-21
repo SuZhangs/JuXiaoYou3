@@ -24,5 +24,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
         {
             InitializeComponent();
         }
+
+        private void Button_Zupu(object sender, RoutedEventArgs e)
+        {
+            ((MainViewModel)DataContext).CreateCharacterRelationship();
+        }
     }
 }

@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Universe;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
+using Acorisoft.FutureGL.MigaDB.Migrations;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using MediatR;
@@ -38,6 +39,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
                    .Setup<UniverseEngine>(false)
+                   .Update<UpdaterOfVer100>()
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }
 

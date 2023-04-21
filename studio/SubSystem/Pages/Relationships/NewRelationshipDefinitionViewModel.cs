@@ -1,64 +1,48 @@
-﻿using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
-    public class NewRelationshipViewModel : ExplicitDialogVM
+    public class NewRelationshipDefinitionViewModel : ExplicitDialogVM
     {
-        public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, DocumentType type)
+        public static Task<Op<RelationshipDefinition>> New()
         {
-            return DialogService().Dialog<CharacterRelationship, NewRelationshipViewModel>(new Parameter
-            {
-                Args = new object[]
-                {
-                    source,
-                    target,
-                    type
-                }
-            });
+            return DialogService().Dialog<RelationshipDefinition, NewRelationshipDefinitionViewModel>();
         }
-        
-        public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, CharacterRelationship rel)
+
+        public static Task<Op<RelationshipDefinition>> Edit(RelationshipDefinition rel)
         {
-            return DialogService().Dialog<CharacterRelationship, NewRelationshipViewModel>(new Parameter
+            return DialogService().Dialog<RelationshipDefinition, NewRelationshipDefinitionViewModel>(new Parameter
             {
                 Args = new object[]
                 {
-                    source,
-                    target,
                     rel
                 }
             });
         }
 
-        private DocumentCache _source;
-        private DocumentCache _target;
-        private string        _callOfSource;
-        private string        _callOfTarget;
-        private bool          _isBidirection;
-        private int           _degree;
-        
+
+        private string _callOfSource;
+        private string _callOfTarget;
+        private bool   _isBidirection;
+        private int    _friendliness;
+        private bool   _isParenthood;
+        private bool   _isCouple;
+
         protected override void OnStart(RoutingEventArgs parameter)
         {
             var p = parameter.Parameter;
             var a = p.Args;
-            Source     = (DocumentCache)a[0];
-            Target     = (DocumentCache)a[1];
-            IsEditMode = a.Length > 2 && a[2] is CharacterRelationship;
+            IsEditMode = a.Length > 0 && a[0] is RelationshipDefinition;
 
             if (IsEditMode)
             {
-                Entity        = (CharacterRelationship)a[2];
-                Source        = Entity.Source;
-                Target        = Entity.Target;
-                CallOfSource  = Entity.CallOfSource;
-                CallOfTarget  = Entity.CallOfTarget;
+                Entity       = (RelationshipDefinition)a[0];
+                CallOfSource = Entity.CallOfSource;
+                CallOfTarget = Entity.CallOfTarget;
             }
-            else
-            {
-                Type = (DocumentType)a[2];
-            }
+
             base.OnStart(parameter);
         }
 
@@ -73,20 +57,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         {
             if (IsEditMode)
             {
-                Entity.CallOfSource  = CallOfSource;
-                Entity.CallOfTarget  = CallOfTarget;
-                Result               = Entity;
+                Entity.CallOfSource = CallOfSource;
+                Entity.CallOfTarget = CallOfTarget;
+                Entity.IsParenthood = IsParenthood;
+                Entity.IsCouple     = IsCouple;
+                Entity.Friendliness = Friendliness;
+                Result              = Entity;
             }
             else
             {
-                Result = new CharacterRelationship
+                Result = new RelationshipDefinition
                 {
-                    Id            = ID.Get(),
-                    Source        = Source,
-                    Target        = Target,
-                    CallOfSource  = CallOfSource,
-                    CallOfTarget  = CallOfTarget,
-                    Type          = Type
+                    Id           = ID.Get(),
+                    CallOfSource = CallOfSource,
+                    CallOfTarget = CallOfTarget,
+                    IsCouple     = IsCouple,
+                    IsParenthood = IsParenthood,
+                    Friendliness = Friendliness
                 };
             }
         }
@@ -97,7 +84,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             {
                 return SubSystemString.EmptyName;
             }
-            
+
             if (string.IsNullOrEmpty(CallOfTarget))
             {
                 return SubSystemString.EmptyName;
@@ -105,18 +92,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
             return SubSystemString.Unknown;
         }
-        
+
         public DocumentType Type { get; private set; }
         public bool IsEditMode { get; private set; }
-        public CharacterRelationship Entity { get; private set; }
+        public RelationshipDefinition Entity { get; private set; }
 
         /// <summary>
-        /// 获取或设置 <see cref="Degree"/> 属性。
+        /// 获取或设置 <see cref="IsCouple"/> 属性。
         /// </summary>
-        public int Degree
+        public bool IsCouple
         {
-            get => _degree;
-            set => SetValue(ref _degree, value);
+            get => _isCouple;
+            set => SetValue(ref _isCouple, value);
+        }
+
+        /// <summary>
+        /// 是否为法律意义上的亲属关系（继父继母继兄等）
+        /// </summary>
+        public bool IsParenthood
+        {
+            get => _isParenthood;
+            set => SetValue(ref _isParenthood, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Friendliness"/> 属性。
+        /// </summary>
+        public int Friendliness
+        {
+            get => _friendliness;
+            set => SetValue(ref _friendliness, value);
         }
 
         /// <summary>
@@ -144,7 +149,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 }
                 else
                 {
-                    
                     _callOfTarget = _callOfSource;
                     RaiseUpdated(nameof(CallOfTarget));
                 }
@@ -193,24 +197,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                     SetValue(ref _callOfSource, value);
                 }
             }
-        }
-
-        /// <summary>
-        /// 获取或设置 <see cref="Target"/> 属性。
-        /// </summary>
-        public DocumentCache Target
-        {
-            get => _target;
-            set => SetValue(ref _target, value);
-        }
-
-        /// <summary>
-        /// 获取或设置 <see cref="Source"/> 属性。
-        /// </summary>
-        public DocumentCache Source
-        {
-            get => _source;
-            set => SetValue(ref _source, value);
         }
     }
 }
