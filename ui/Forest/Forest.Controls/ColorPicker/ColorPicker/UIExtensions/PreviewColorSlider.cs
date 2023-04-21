@@ -1,7 +1,6 @@
 ﻿using ColorPicker.Models;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace ColorPicker.UIExtensions
 {

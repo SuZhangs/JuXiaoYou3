@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Media;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+﻿using System.Windows.Media;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

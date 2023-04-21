@@ -1,5 +1,4 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Universe;
-using Acorisoft.FutureGL.MigaDB.Documents;
 using QuikGraph;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Relationships

@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace Acorisoft.FutureGL.Forest.Controls.Buttons
+﻿namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {
     public class SimpleButton : Button
     {

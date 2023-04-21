@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.Miga.Doc.Documents;
+﻿using Acorisoft.Miga.Doc.Documents;
 using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts

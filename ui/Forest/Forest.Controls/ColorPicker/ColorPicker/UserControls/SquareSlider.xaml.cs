@@ -1,9 +1,7 @@
 ﻿using ColorPicker.Models;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker.UserControls
 {

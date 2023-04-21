@@ -1,12 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using NLog;
-using Ookii.Dialogs.Wpf;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 

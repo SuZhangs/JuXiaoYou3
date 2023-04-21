@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Documents;
-
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     public class ModuleTemplate : ObservableObject
     {

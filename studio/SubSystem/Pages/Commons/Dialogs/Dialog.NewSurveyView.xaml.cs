@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     [Connected(View = typeof(NewSurveyView), ViewModel = typeof(NewSurveyViewModel))]
     public partial class NewSurveyView

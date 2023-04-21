@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Microsoft.Xaml.Behaviors;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Behaviors

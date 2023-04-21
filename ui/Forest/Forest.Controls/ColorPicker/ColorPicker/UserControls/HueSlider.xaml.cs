@@ -1,7 +1,6 @@
 ﻿using ColorPicker.Models;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker.UserControls
 {

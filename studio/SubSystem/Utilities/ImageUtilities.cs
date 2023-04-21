@@ -1,13 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.IO;
-using Acorisoft.FutureGL.MigaDB.Models;
-using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
-using Ookii.Dialogs.Wpf;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;

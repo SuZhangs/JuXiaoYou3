@@ -1,6 +1,4 @@
 ﻿using ColorPicker.Models;
-using System.Windows.Media;
-using Acorisoft.FutureGL.Forest.Controls;
 
 namespace ColorPicker
 {

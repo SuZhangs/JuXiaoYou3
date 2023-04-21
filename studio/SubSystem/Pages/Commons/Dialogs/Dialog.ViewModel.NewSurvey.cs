@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class NewSurveyViewModel : ExplicitDialogVM
     {

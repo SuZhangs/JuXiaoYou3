@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Acorisoft.FutureGL.Forest;
+﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages

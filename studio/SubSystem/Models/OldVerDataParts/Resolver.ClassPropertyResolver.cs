@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.Forest.Styles.Animations;
-using Acorisoft.Miga.Utils;
-using PropertySetter = Acorisoft.Miga.Utils.PropertySetter;
+﻿using PropertySetter = Acorisoft.Miga.Utils.PropertySetter;
 
 namespace Acorisoft.Miga.Xml
 {

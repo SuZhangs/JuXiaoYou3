@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
 
     [Connected(View = typeof(RelationshipDefinitionPage), ViewModel = typeof(RelationshipDefinitionViewModel))]

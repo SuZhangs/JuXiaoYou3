@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
 using GraphShape.Algorithms.Layout;
 using GraphShape.Controls.Converters;
 using GraphShape.Controls.Extensions;

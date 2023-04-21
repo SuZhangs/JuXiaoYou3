@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Acorisoft.FutureGL.MigaUtils.Collections
+﻿namespace Acorisoft.FutureGL.MigaUtils.Collections
 {
     public static class CollectionOperations
     {

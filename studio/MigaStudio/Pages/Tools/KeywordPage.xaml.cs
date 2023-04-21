@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
 
     [Connected(View = typeof(KeywordPage), ViewModel = typeof(KeywordViewModel))]

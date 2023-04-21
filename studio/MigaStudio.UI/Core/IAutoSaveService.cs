@@ -1,7 +1,6 @@
 ﻿using System.Reactive;
 using System.Reactive.Subjects;
 using System.Threading;
-using Acorisoft.FutureGL.MigaStudio.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {

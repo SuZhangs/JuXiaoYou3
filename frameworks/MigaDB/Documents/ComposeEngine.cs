@@ -1,5 +1,4 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Concepts;
 using static Acorisoft.FutureGL.MigaDB.Constants;
 
 namespace Acorisoft.FutureGL.MigaDB.Documents

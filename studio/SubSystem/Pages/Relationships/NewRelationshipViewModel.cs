@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships

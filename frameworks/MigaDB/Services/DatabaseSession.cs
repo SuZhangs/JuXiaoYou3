@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
-using NLog;
+﻿using NLog;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {

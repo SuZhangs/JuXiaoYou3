@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
     /// <summary>
     /// 表示两极内容块。

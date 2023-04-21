@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Acorisoft.FutureGL.Forest.Controls.Selectors;
+﻿using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
-using Acorisoft.FutureGL.MigaDB.Utils;
-using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.Miga.Doc.Documents;
 using Acorisoft.Miga.Doc.Parts;
-using ImTools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 {

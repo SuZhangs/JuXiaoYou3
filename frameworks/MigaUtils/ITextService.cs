@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Acorisoft.FutureGL.MigaUtils
+﻿namespace Acorisoft.FutureGL.MigaUtils
 {
     public interface ITextService
     {

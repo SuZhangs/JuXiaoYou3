@@ -1,9 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaStudio.Models.Modules;
-using Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

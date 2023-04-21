@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Acorisoft.Miga.Doc.Documents
+﻿namespace Acorisoft.Miga.Doc.Documents
 {
     public enum DocumentKind
     {

@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents.Basic
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents.Basic
 {
     public partial class GeographyBasicView
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Acorisoft.FutureGL.Forest;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {

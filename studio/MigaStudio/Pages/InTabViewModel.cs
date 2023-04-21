@@ -50,6 +50,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
         
+        protected void CreateDialogFeature<T>(string group, params object[] e)
+        {
+            var f = new MainFeature
+            {
+                GroupId   = group,
+                NameId    = string.Empty,
+                ViewModel = typeof(T),
+                IsDialog  = true,
+                IsGallery = false,
+                Parameter = e
+            };
+            Features.Add(f);
+        }
+        
         protected void CreateGalleryFeature<T>(string group, string name, params object[] e)
         {
             var f = new MainFeature
@@ -59,6 +73,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 ViewModel = typeof(T),
                 IsDialog  = false,
                 IsGallery = true,
+                Parameter = e
+            };
+            Features.Add(f);
+        }
+        
+        protected void CreateGalleryFeature<T>(string group, params object[] e)
+        {
+            var f = new MainFeature
+            {
+                GroupId   = group,
+                NameId    = string.Empty,
+                ViewModel = typeof(T),
+                IsDialog  = false,
+                IsGallery = true,
+                Parameter = e
+            };
+            Features.Add(f);
+        }
+        
+        protected void CreatePageFeature<T>(string group, params object[] e)
+        {
+            var f = new MainFeature
+            {
+                GroupId   = group,
+                NameId    = string.Empty,
+                ViewModel = typeof(T),
+                IsDialog  = false,
+                IsGallery = false,
                 Parameter = e
             };
             Features.Add(f);

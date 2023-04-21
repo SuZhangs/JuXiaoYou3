@@ -1,17 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
 using NLog;
-using Ookii.Dialogs.Wpf;
-using TagLib.Asf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {

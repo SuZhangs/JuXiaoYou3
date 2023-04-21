@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Utils;
-
-namespace Acorisoft.FutureGL.MigaDB.Services
+﻿namespace Acorisoft.FutureGL.MigaDB.Services
 {
     public abstract class FileEngine : DataEngine, IFileEngine, ITextService
     {

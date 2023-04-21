@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
-using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
-using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
-using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {

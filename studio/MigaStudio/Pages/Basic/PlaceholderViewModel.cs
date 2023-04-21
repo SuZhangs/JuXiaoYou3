@@ -1,7 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Utils;
-using ImTools;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class PlaceholderViewModel : TabViewModel
     {

@@ -1,7 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-
-namespace Acorisoft.FutureGL.MigaStudio.Resources
+﻿namespace Acorisoft.FutureGL.MigaStudio.Resources
 {
     public static class Constants
     {

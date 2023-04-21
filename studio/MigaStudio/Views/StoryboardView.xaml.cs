@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Views
+﻿namespace Acorisoft.FutureGL.MigaStudio.Views
 {
 
     [Connected(View = typeof(StoryboardViewPage), ViewModel = typeof(StoryboardController))]

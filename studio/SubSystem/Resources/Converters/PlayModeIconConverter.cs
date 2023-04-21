@@ -1,9 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

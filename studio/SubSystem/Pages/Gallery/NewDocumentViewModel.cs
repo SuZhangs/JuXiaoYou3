@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using Acorisoft.FutureGL.Forest.Attributes;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
-using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 

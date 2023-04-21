@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace ColorPicker.Models
+﻿namespace ColorPicker.Models
 {
     public class ColorRoutedEventArgs : RoutedEventArgs
     {

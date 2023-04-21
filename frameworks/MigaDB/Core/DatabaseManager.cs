@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Concepts;
-using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Universe;
 using Acorisoft.FutureGL.MigaDB.Documents;

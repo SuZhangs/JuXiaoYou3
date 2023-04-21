@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
 {
     /// <summary>
     /// 元数据

@@ -2,7 +2,6 @@
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

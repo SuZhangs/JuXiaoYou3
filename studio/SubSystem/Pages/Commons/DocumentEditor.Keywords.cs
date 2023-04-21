@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Views;
-using Acorisoft.FutureGL.MigaStudio.Utilities;
+﻿using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons

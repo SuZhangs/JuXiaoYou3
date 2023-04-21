@@ -1,8 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
+﻿using System.Windows.Controls;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
-using ImTools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {

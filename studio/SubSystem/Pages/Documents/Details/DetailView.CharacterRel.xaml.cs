@@ -1,8 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Utils;
-using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {

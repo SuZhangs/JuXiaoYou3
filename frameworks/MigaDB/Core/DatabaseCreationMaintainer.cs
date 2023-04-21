@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {

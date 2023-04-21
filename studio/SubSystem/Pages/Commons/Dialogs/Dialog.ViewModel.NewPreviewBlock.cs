@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 

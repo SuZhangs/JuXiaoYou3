@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Concepts;
-using Acorisoft.FutureGL.MigaDB.UnitTests;
+﻿using Acorisoft.FutureGL.MigaDB.UnitTests;
 using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services

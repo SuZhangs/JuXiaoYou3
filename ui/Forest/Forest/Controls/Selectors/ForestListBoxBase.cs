@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
-using System.Windows.Data;
-
-namespace Acorisoft.FutureGL.Forest.Controls.Selectors
+﻿namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
     public abstract class ForestListBoxBase : ListBox, ITextResourceAdapter
     {

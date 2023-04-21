@@ -1,8 +1,4 @@
-﻿using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Acorisoft.FutureGL.Forest.Styles;
+﻿using System.Windows.Shapes;
 
 namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 {

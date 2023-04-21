@@ -1,9 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
@@ -14,7 +12,6 @@ using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Microsoft.Win32;
 using NLog;
-using Ookii.Dialogs.Wpf;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 

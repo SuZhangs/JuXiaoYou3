@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Universe
 {

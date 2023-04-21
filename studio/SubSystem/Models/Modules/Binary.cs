@@ -1,6 +1,4 @@
 ﻿
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-
 namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     public class BinaryBlockDataUI : ModuleBlockDataUI<BinaryBlock, bool>, IBinaryBlockDataUI

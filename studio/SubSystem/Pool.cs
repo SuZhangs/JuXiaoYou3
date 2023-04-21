@@ -1,5 +1,4 @@
-﻿using System.Buffers;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {

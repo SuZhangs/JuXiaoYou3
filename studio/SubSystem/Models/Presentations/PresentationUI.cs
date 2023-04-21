@@ -1,10 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Windows.Forms;
-using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Models;

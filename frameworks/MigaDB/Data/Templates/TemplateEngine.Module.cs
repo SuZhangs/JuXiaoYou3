@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Utils;
+﻿using Acorisoft.FutureGL.MigaDB.Utils;
 using Newtonsoft.Json;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates

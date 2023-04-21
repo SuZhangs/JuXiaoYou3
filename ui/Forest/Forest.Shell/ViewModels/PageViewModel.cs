@@ -1,9 +1,4 @@
-﻿using System.Windows.Input;
-using Acorisoft.FutureGL.Forest.Inputs;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using CommunityToolkit.Mvvm.Input;
-
-namespace Acorisoft.FutureGL.Forest.ViewModels
+﻿namespace Acorisoft.FutureGL.Forest.ViewModels
 {
     public abstract class PageViewModel : ViewModelBase
     {

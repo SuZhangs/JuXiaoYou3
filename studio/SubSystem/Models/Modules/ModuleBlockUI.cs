@@ -1,10 +1,4 @@
-﻿using System;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
-using Acorisoft.FutureGL.MigaDB.Utils;
-using Acorisoft.FutureGL.MigaUtils;
-
-namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
+﻿namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 {
     /// <summary>
     /// 表示一个模组内容块。

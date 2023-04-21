@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
 
     [Connected(View = typeof(DocumentEditorPage), ViewModel = typeof(SampleDocumentEditorViewModel))]

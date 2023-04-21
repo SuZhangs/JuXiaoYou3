@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaUtils.Foundation;
+﻿using Acorisoft.FutureGL.MigaUtils.Foundation;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs
 {

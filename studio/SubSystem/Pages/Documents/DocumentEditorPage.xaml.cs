@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using Acorisoft.FutureGL.Forest.Utils;
+﻿using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {

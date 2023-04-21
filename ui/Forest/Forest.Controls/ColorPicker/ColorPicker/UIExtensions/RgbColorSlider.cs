@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace ColorPicker.UIExtensions
+﻿namespace ColorPicker.UIExtensions
 {
     internal class RgbColorSlider : PreviewColorSlider
     {

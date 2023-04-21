@@ -1,11 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Acorisoft.FutureGL.Forest.Interfaces;
-using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.MigaDB.Documents;
+﻿using System.IO;
 using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;

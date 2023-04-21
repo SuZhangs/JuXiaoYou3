@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     public class NewElementViewModel : ExplicitDialogVM
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
-using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -20,6 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private const    string                 Service            = "global.service";
         private const    string                 Tools              = "global.tools";
         private const    string                 Inspiration        = "global.Inspiration";
+        private const    string                 Relationship     = "global.Relationship";
         private const    string                 StoryboardSegments = "global.StoryboardSegments";
         private const    string                 Home               = "__Home";
         private readonly Subject<ViewModelBase> _onStart;
@@ -41,20 +37,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            CreateGalleryFeature<StartupViewModel>(StartUp, Home, null);
-            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe", null);
-            CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, Compose, null);
-            CreateGalleryFeature<InspirationViewModel>(StartUp, Inspiration, null);
-            CreateGalleryFeature<StoryboardSegmentsViewModel>(StartUp, StoryboardSegments, null);
+            CreateGalleryFeature<StartupViewModel>(StartUp, HomeEntityImpl);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe"EntityImpl);
+            CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, ComposeEntityImpl);
+            
+            //
+            //
+            CreateGalleryFeature<InspirationViewModel>(Inspiration, Inspiration);
+            CreateGalleryFeature<StoryboardSegmentsViewModel>(Inspiration, StoryboardSegmentsEntityImpl);
+            
+            //
+            //
+            CreateGalleryFeature<RelationshipViewModel>(Relationship, RelationshipEntityImpl);
+            
+            //
+            //
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
-            CreateGalleryFeature<ServiceViewModel>(Tools, Service, null);
-            CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel", null);
-            CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel", null);
-            CreateGalleryFeature<ToolsViewModel>(Tools, Tools, null);
+            CreateGalleryFeature<ServiceViewModel>(Tools, ServiceEntityImpl);
+            CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel"EntityImpl);
+            CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel"EntityImpl);
+            CreateGalleryFeature<ToolsViewModel>(Tools, ToolsEntityImpl);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)

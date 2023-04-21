@@ -1,12 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.Forest.Styles;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaStudio.Models;
 
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters

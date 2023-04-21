@@ -1,8 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.MigaStudio.Pages.Services;
-using Microsoft.Xaml.Behaviors;
+﻿using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Proxy
 {

@@ -1,6 +1,4 @@
-﻿
-using System.Collections.ObjectModel;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts

@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System.Reactive.Concurrency;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Controls;

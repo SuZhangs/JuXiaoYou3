@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Acorisoft.FutureGL.MigaDB.Core;
+﻿using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaDB.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {

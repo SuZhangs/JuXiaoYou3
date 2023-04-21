@@ -1,6 +1,4 @@
-﻿using System.Windows.Data;
-
-namespace Acorisoft.FutureGL.MigaStudio.Controls
+﻿namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     public class Avatar : Control
     {

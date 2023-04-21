@@ -1,10 +1,4 @@
-﻿
-
-using Acorisoft.FutureGL.MigaDB.Data.DataParts;
-using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaDB.Services;
-
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class AbilityDocumentViewModel : DocumentEditorVMBase
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Acorisoft.FutureGL.MigaStudio.Models
+﻿namespace Acorisoft.FutureGL.MigaStudio.Models
 {
     public class RepositoryCache : IEquatable<RepositoryCache>
     {

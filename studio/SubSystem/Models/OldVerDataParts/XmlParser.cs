@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-using Acorisoft.FutureGL.Forest.Styles.Animations;
 using Acorisoft.Miga.Utils;
 using GlobalTypeClassResolvers = System.Collections.Generic.Dictionary<System.Type, Acorisoft.Miga.Xml.ClassResolver>;
 using GlobalStringClassResolvers = System.Collections.Generic.Dictionary<string, Acorisoft.Miga.Xml.ClassResolver>;

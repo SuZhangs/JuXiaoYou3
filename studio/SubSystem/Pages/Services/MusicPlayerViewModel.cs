@@ -1,31 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Acorisoft.FutureGL.Forest;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
-using System.IO;
-using System.Reactive.Concurrency;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Reactive.Linq;
-using System.Threading;
 using GongSolutions.Wpf.DragDrop;
 using NAudio.Wave;
-using TagLib;
-using TagLib.Mpeg;
-using File = TagLib.File;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Services;
-using Acorisoft.FutureGL.MigaStudio.Models;
-using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
-using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 {

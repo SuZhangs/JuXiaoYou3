@@ -1,5 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
-using MediatR;
+﻿using MediatR;
 
 namespace Acorisoft.FutureGL.MigaDB.Services
 {

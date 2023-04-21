@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons

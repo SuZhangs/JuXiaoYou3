@@ -162,4 +162,8 @@
         </Page>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages\Relationships" />
+    </ItemGroup>
+
 </Project>

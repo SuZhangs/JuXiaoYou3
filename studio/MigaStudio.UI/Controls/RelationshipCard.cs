@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
-
-namespace Acorisoft.FutureGL.MigaStudio.Controls
+﻿namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     public class RelationshipCard : Control
     {

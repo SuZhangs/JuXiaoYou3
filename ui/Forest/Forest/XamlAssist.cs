@@ -2,7 +2,6 @@
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Windows.Data;
-using Acorisoft.FutureGL.Forest.Utils;
 using Microsoft.Xaml.Behaviors;
 
 namespace Acorisoft.FutureGL.Forest

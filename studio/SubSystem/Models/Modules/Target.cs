@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.IO;
-using Acorisoft.FutureGL.Forest.Services;
-using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
-using Acorisoft.FutureGL.MigaDB.Utils;
-
-namespace Acorisoft.FutureGL.MigaStudio
+﻿namespace Acorisoft.FutureGL.MigaStudio
 {
     public static partial class SubSystemString
     {

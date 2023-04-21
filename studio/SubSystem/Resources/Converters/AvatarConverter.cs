@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Globalization;
-using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaDB.Services;
-using Acorisoft.FutureGL.MigaStudio.Utilities;
-using NLog.Targets.Wrappers;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {

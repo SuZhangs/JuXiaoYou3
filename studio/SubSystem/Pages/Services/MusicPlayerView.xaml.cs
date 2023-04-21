@@ -1,14 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Acorisoft.FutureGL.Forest;
-using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Slider = Acorisoft.FutureGL.Forest.Controls.Slider;
 
