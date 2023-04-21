@@ -37,18 +37,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Initialize()
         {
-            CreateGalleryFeature<StartupViewModel>(StartUp, HomeEntityImpl);
-            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe"EntityImpl);
-            CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, ComposeEntityImpl);
+            CreateGalleryFeature<StartupViewModel>(StartUp, Home);
+            CreateGalleryFeature<UniverseViewModel>(StartUp, "__Universe");
+            CreateGalleryFeature<ComposeGalleryViewModel>(StartUp, Compose);
             
             //
             //
             CreateGalleryFeature<InspirationViewModel>(Inspiration, Inspiration);
-            CreateGalleryFeature<StoryboardSegmentsViewModel>(Inspiration, StoryboardSegmentsEntityImpl);
+            CreateGalleryFeature<StoryboardSegmentsViewModel>(Inspiration, StoryboardSegments);
             
             //
             //
-            CreateGalleryFeature<RelationshipViewModel>(Relationship, RelationshipEntityImpl);
+            CreateGalleryFeature<RelationshipViewModel>(Relationship, Relationship);
             
             //
             //
@@ -57,10 +57,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
-            CreateGalleryFeature<ServiceViewModel>(Tools, ServiceEntityImpl);
-            CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel"EntityImpl);
-            CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel"EntityImpl);
-            CreateGalleryFeature<ToolsViewModel>(Tools, ToolsEntityImpl);
+            CreateGalleryFeature<ServiceViewModel>(Tools, Service);
+            CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel");
+            CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel");
+            CreateGalleryFeature<ToolsViewModel>(Tools, Tools);
         }
 
         private void CreateGalleryFeature<T>(string group, string name, params object[] e)
