@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateShortcutCommand = Command(CreateShortcut);
             KillProcessCommand    = AsyncCommand(KillProcess);
             FixModuleCommand      = Command(FixModuleImpl);
+            FixAvatarCommand      = AsyncCommand(ImageUtilities.CropAllAvatar);
         }
 
         public static Task KillProcess()
@@ -53,18 +54,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             foreach (var module in inside)
             {
-                
             }
-            
+
             te.TemplateDB.DeleteAll();
             te.TemplateCacheDB.DeleteAll();
             te.MetadataCacheDB.DeleteAll();
             inside.ForEach(x => te.AddModule(x));
         }
 
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand FixAvatarCommand { get; }
+
         /// <summary>
         /// 修复模组
         /// </summary>
+        [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand FixModuleCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]

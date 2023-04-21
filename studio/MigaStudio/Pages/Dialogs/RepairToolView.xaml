@@ -26,6 +26,12 @@
                             Icon="{StaticResource FeatherIcon.Tools}"
                             Margin="8"
                             ShowText="True"/>
+            
+            <ftk:ToolButton Content="修复头像"
+                            Command="{Binding FixAvatarCommand}"
+                            Icon="{StaticResource FeatherIcon.Tools}"
+                            Margin="8"
+                            ShowText="True"/>
         </WrapPanel>
     </f:DialogPage>
 </f:ForestUserControl>

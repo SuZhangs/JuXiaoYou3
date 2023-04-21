@@ -1,5 +1,8 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
+using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
@@ -22,15 +25,51 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public MemoryStream Buffer { get; init; }
     }
 
-    
+
     public static class ImageUtilities
     {
-        public const string AvatarPattern    = "avatar_{0}.png";
+        public const string AvatarPattern            = "avatar_{0}.png";
         public const string ThumbnailWithSizePattern = "{0}_{1}_{2}";
-        public const string ThumbnailPattern = "thumb_{0}.png";
+        public const string ThumbnailPattern         = "thumb_{0}.png";
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
-        
+
+        public static async Task CropAllAvatar()
+        {
+            var dir = Xaml.Get<IDatabaseManager>()
+                          .GetEngine<ImageEngine>()
+                          .FullDirectory;
+
+            var images = Directory.GetFiles(dir)
+                                  .Where(x => x.Contains("avatar"))
+                                  .ToArray();
+
+
+            Image<Rgba32> img;
+
+            await Task.Run(async () =>
+            {
+                var session = Xaml.Get<IBusyService>().CreateSession();
+                session.Update(SubSystemString.Processing);
+
+                foreach (var image in images)
+                {
+                    img = Image.Load<Rgba32>(image);
+                    var w = img.Width;
+                    var h = img.Height;
+
+                    if (w > 256 && w == h)
+                    {
+                        var scale = 256d / w;
+                        img.Mutate(x => { x.Resize(new Size((int)(w * scale), (int)(h * scale))); });
+                        await img.SaveAsPngAsync(image);
+                    }
+                }
+
+                session.Dispose();
+            });
+        }
+
         public static async Task<ImageOpResult> Avatar()
         {
             var opendlg = FileIO.Open(SubSystemString.ImageFilter);
@@ -44,70 +83,61 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             //
             //
-            using (var session = Xaml.Get<IBusyService>().CreateSession())
+            var          session = Xaml.Get<IBusyService>().CreateSession();
+            var          buffer  = await File.ReadAllBytesAsync(fileName);
+            var          origin  = new MemoryStream(buffer);
+            MemoryStream result;
+            var          image = Image.Load<Rgba32>(buffer);
+
+
+            if (image.Width < 32 || image.Height < 32)
             {
-                var          buffer = await File.ReadAllBytesAsync(fileName);
-                var          origin = new MemoryStream(buffer);
-                MemoryStream result;
-                var          image = Image.Load<Rgba32>(buffer);
+                image.Dispose();
+                origin.Dispose();
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooSmall);
+                return new ImageOpResult { IsFinished = false };
+            }
 
 
-                if (image.Width < 32 || image.Height < 32)
+            if (image.Width != image.Height)
+            {
+                var horizontal = image.Width > 1920;
+
+                if (horizontal || image.Height > 1080)
                 {
-                    image.Dispose();
+                    await Task.Run(() =>
+                    {
+                        session.Update(SubSystemString.Processing);
+                        var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
+                        image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+
+                        // rewrite
+                        origin = new MemoryStream();
+                        image.SaveAsPng(origin);
+                        origin.Seek(0, SeekOrigin.Begin);
+                        session.Dispose();
+                    });
+                }
+
+                var r = await Xaml.Get<IDialogService>()
+                                  .Dialog<MemoryStream, ImageEditViewModel>(new Parameter
+                                  {
+                                      Args = new object[]
+                                      {
+                                          image,
+                                          origin
+                                      }
+                                  });
+
+                if (!r.IsFinished)
+                {
                     origin.Dispose();
-                    await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooSmall);
                     return new ImageOpResult { IsFinished = false };
                 }
 
-
-                if (image.Width != image.Height)
-                {
-                    var horizontal = image.Width > 1920;
-
-                    if (horizontal || image.Height > 1080)
-                    {
-                        await Task.Run(() =>
-                        {
-                            session.Update(SubSystemString.Processing);
-                            var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
-                            image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
-
-                            // rewrite
-                            origin = new MemoryStream();
-                            image.SaveAsPng(origin);
-                            origin.Seek(0, SeekOrigin.Begin);
-                            session.Dispose();
-                        });
-                    }
-
-                    var r = await Xaml.Get<IDialogService>()
-                                      .Dialog<MemoryStream, ImageEditViewModel>(new Parameter
-                                      {
-                                          Args = new object[]
-                                          {
-                                              image,
-                                              origin
-                                          }
-                                      });
-
-                    if (!r.IsFinished)
-                    {
-                        origin.Dispose();
-                        return new ImageOpResult { IsFinished = false };
-                    }
-
-                    result = r.Value;
-                    result.Seek(0, SeekOrigin.Begin);
-                }
-
-
-                origin.Dispose();
-                result = new MemoryStream();
-                await image.SaveAsPngAsync(result);
+                result = r.Value;
                 result.Seek(0, SeekOrigin.Begin);
-                session.Dispose();
-
+                origin.Dispose();
                 return new ImageOpResult
                 {
                     IsFinished = true,
@@ -115,6 +145,44 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     FileName   = opendlg.FileName
                 };
             }
+
+            if (image.Width > 256 ||
+                image.Width > 256)
+            {
+                await Task.Run(() =>
+                {
+                    session.Update(SubSystemString.Processing);
+                    var scale = 256d / image.Width;
+                    image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+
+                    // rewrite
+                    origin = new MemoryStream();
+                    image.SaveAsPng(origin);
+                    origin.Seek(0, SeekOrigin.Begin);
+                    session.Dispose();
+                });
+
+                return new ImageOpResult
+                {
+                    IsFinished = true,
+                    Buffer     = origin,
+                    FileName   = opendlg.FileName
+                };
+            }
+
+
+            origin.Dispose();
+            result = new MemoryStream();
+            await image.SaveAsPngAsync(result);
+            result.Seek(0, SeekOrigin.Begin);
+            session.Dispose();
+
+            return new ImageOpResult
+            {
+                IsFinished = true,
+                Buffer     = result,
+                FileName   = opendlg.FileName
+            };
         }
 
         public static async Task<Op<Album>> Thumbnail(ImageEngine engine, string fileName)
@@ -128,15 +196,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             if (engine.HasFile(md5))
             {
-                var fr  = engine.Records.FindById(md5);
+                var fr = engine.Records.FindById(md5);
                 var src = fr.Uri
                             .Split('_');
                 thumbnail = string.Format(ThumbnailPattern, src[0]);
                 return Op<Album>.Success(new Album
                 {
-                     Source = thumbnail,
-                     Width = int.Parse(src[1]),
-                     Height = int.Parse(src[2])
+                    Source = thumbnail,
+                    Width  = int.Parse(src[1]),
+                    Height = int.Parse(src[2])
                 });
             }
 
@@ -155,7 +223,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 var scale = horizontal ? 1920d / image.Width : 1920d / image.Height;
                 h = (int)(image.Height * scale);
                 w = (int)(image.Width * scale);
-                var ms    = new MemoryStream();
+                var ms = new MemoryStream();
                 image.Mutate(x => { x.Resize(new Size(w, h)); });
                 image.SaveAsPng(ms);
                 thumbnailBuffer = ms.GetBuffer();
@@ -179,7 +247,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             return Op<Album>.Success(new Album
             {
                 Source = thumbnail,
-                Width = w,
+                Width  = w,
                 Height = h
             });
         }
