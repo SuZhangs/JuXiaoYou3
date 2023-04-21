@@ -29,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         private int    _friendliness;
         private bool   _isParenthood;
         private bool   _isCouple;
-
+        private string _name;
         protected override void OnStart(RoutingEventArgs parameter)
         {
             var p = parameter.Parameter;
@@ -62,6 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 Entity.IsParenthood = IsParenthood;
                 Entity.IsCouple     = IsCouple;
                 Entity.Friendliness = Friendliness;
+                Entity.Name         = Name;
                 Result              = Entity;
             }
             else
@@ -73,7 +74,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                     CallOfTarget = CallOfTarget,
                     IsCouple     = IsCouple,
                     IsParenthood = IsParenthood,
-                    Friendliness = Friendliness
+                    Friendliness = Friendliness,
+                    Name = Name
                 };
             }
         }
@@ -93,9 +95,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             return SubSystemString.Unknown;
         }
 
-        public DocumentType Type { get; private set; }
         public bool IsEditMode { get; private set; }
         public RelationshipDefinition Entity { get; private set; }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="Name"/> 属性。
+        /// </summary>
+        public string Name
+        {
+            get => _name;
+            set => SetValue(ref _name, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="IsCouple"/> 属性。

@@ -14,8 +14,8 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipDefinitionViewModel}, IsDesignTimeCreatable=True}"
-                     Height="300"
-                     Width="300">
+                     Height="540"
+                     Width="640">
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="Avatar" />
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
@@ -43,7 +43,7 @@
             </DockPanel>
         </DataTemplate>
 
-        
+
         <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
         <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
         <GeometryGroup x:Key="FeatherIcon.People">
@@ -52,30 +52,39 @@
                 <EllipseGeometry RadiusX="4" RadiusY="4" Center="12,7" />
             </GeometryGroup.Children>
         </GeometryGroup>
-        
+
         <Style x:Key="ArrowStyle" TargetType="Path">
-            <Setter Property="Stroke" Value="{f:ForegroundBrush}"/>
-            <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Stretch" Value="Uniform"/>
-            <Setter Property="Width" Value="128"/>
-            <Setter Property="Height" Value="16"/>
+            <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stretch" Value="Uniform" />
+            <Setter Property="Width" Value="128" />
+            <Setter Property="Height" Value="16" />
         </Style>
-        
+
         <Style x:Key="PeopleStyle" TargetType="Path">
-            <Setter Property="Data" Value="{StaticResource FeatherIcon.People}"/>
-            <Setter Property="Stroke" Value="{f:ForegroundBrush}"/>
-            <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Stretch" Value="Uniform"/>
-            <Setter Property="Width" Value="32"/>
-            <Setter Property="Height" Value="32"/>
+            <Setter Property="Data" Value="{StaticResource FeatherIcon.People}" />
+            <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="Stretch" Value="Uniform" />
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Margin" Value="16 0" />
         </Style>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
 
+
         <StackPanel>
-            <Grid Margin="0 4">
+            <f:HeaderedSingleLine DockPanel.Dock="Top"
+                                  Header="{f:Language global.Name}"
+                                  Margin="8"
+                                  Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  VerticalAlignment="Center" />
+
+            <Grid Height="64"
+                  Margin="0 4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="128" />
@@ -87,7 +96,7 @@
 
                 <Path Grid.Column="1"
                       Data="{StaticResource ArrowRight}"
-                      Style="{StaticResource ArrowStyle}"/>
+                      Style="{StaticResource ArrowStyle}" />
 
                 <Path Grid.Column="2"
                       Style="{StaticResource PeopleStyle}" />
@@ -98,7 +107,8 @@
                               VerticalAlignment="Center" />
             </Grid>
 
-            <Grid Margin="0 8">
+            <Grid Height="64"
+                  Margin="0 8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="128" />
@@ -110,7 +120,7 @@
 
                 <Path Grid.Column="1"
                       Data="{StaticResource ArrowLeft}"
-                      Style="{StaticResource ArrowStyle}"/>
+                      Style="{StaticResource ArrowStyle}" />
 
                 <Path Grid.Column="2"
                       Style="{StaticResource PeopleStyle}" />
@@ -120,23 +130,34 @@
                               Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center" />
             </Grid>
-            
-            <UniformGrid Margin="0 8">
+
+
+
+            <UniformGrid DockPanel.Dock="Bottom"
+                         Margin="8"
+                         Columns="3">
                 <f:ToggleSwitch Content="是否为亲属关系"
-                                IsChecked="{Binding IsParenthood,Mode=TwoWay}"/>
+                                Margin="4"
+                                IsChecked="{Binding IsParenthood,Mode=TwoWay}" />
+
                 <f:ToggleSwitch Content="是否为夫妻关系"
-                                IsChecked="{Binding IsCouple,Mode=TwoWay}"/>
+                                Margin="4"
+                                IsChecked="{Binding IsCouple,Mode=TwoWay}" />
+
                 <f:ToggleSwitch Content="是否为双向关系"
-                                IsChecked="{Binding IsBidirection,Mode=TwoWay}"/>
+                                Margin="4"
+                                IsChecked="{Binding IsBidirection,Mode=TwoWay}" />
+               
             </UniformGrid>
-            
-            <TextBlock Margin="0 4"
-                       Text="亲密程度"/>
-            
-            <Slider Margin="0 4"
-                    Minimum="-10"
-                    Maximum="10"
-                    Value="{Binding Friendliness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <DockPanel Margin="0 4"
+                       HorizontalAlignment="Left">
+                <TextBlock DockPanel.Dock="Top"
+                               Margin="4"
+                               Text="亲密程度" />
+
+                <studio:DegreeControl Margin="4"
+                                      Value="{Binding Friendliness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
         </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>
