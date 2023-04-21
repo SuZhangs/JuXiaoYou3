@@ -170,6 +170,12 @@
             <EllipseGeometry RadiusX="3" RadiusY="3" Center="12,10" />
         </GeometryGroup.Children>
     </GeometryGroup>
+    <GeometryGroup x:Key="FeatherIcon.People">
+        <GeometryGroup.Children>
+            <Geometry>F1 M24,24z M0,0z M20,21L20,19A4,4,0,0,0,16,15L8,15A4,4,0,0,0,4,19L4,21</Geometry>
+            <EllipseGeometry RadiusX="4" RadiusY="4" Center="12,7" />
+        </GeometryGroup.Children>
+    </GeometryGroup>
     <GeometryGroup x:Key="FeatherIcon.ArrowLeft">
         <GeometryGroup.Children>
             <LineGeometry StartPoint="19,12" EndPoint="5,12" />
