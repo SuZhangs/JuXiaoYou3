@@ -26,11 +26,14 @@
         <thisConverters:LockStateNameConverter x:Key="LockStateNameConverter"
                                                Lock="{f:Language global.unlock}"
                                                Unlock="{f:Language global.lock}" />
+        <thisConverters:PageIndexConverter x:Key="PageIndex"/>
+        
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectedDocumentCommand}"
                             CommandParameter="{Binding}"
                             Margin="4"
-                            Padding="8">
+                            Height="144"
+                            Width="120">
                 <DockPanel>
                     <Border DockPanel.Dock="Top"
                             CornerRadius="64"
@@ -58,94 +61,118 @@
     </UserControl.Resources>
     <f:Drawer IsRightOpen="{Binding IsPropertyPaneOpen,Mode=TwoWay}"
               Padding="16">
-        <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
-            <f:ForestSection.ToolBar>
-                <StackPanel HorizontalAlignment="Right"
-                            Margin="0 0 0 4"
-                            Orientation="Horizontal">
-                    <ftk:ToolButton Content="{f:Language global.add}"
-                                    Command="{Binding NewDocumentCommand}"
-                                    Icon="{StaticResource FeatherIcon.Plus}"
-                                    ShowText="True" />
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Bottom"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Height="48">
+                <ftk:ToolButton Content="{f:Language global.firstPage}"
+                                Command="{Binding FirstPageCommand}"
+                                Icon="{StaticResource FeatherIcon.ChevronsLeft}"/>
 
-                    <ftk:DropDownButton Content="{f:Language global.orderBy}"
-                                        Icon="{StaticResource FeatherIcon.Filter}"
-                                        ShowText="True">
-                        <ftk:DropDownButton.ContextMenu>
-                            <f:ContextMenu>
-                                <f:MenuItem Header="{f:Language global.ascendingByName}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                                <f:MenuItem Header="{f:Language global.descendingByName}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>DescendingByName</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                                <f:MenuItem Header="{f:Language global.ascendingByTimeOfCreated}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>AscendingByTimeOfCreated</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                                <f:MenuItem Header="{f:Language global.descendingByTimeOfCreated}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>DescendingByTimeOfCreated</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                                <f:MenuItem Header="{f:Language global.ascendingByTimeOfModified}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>AscendingByTimeOfModified</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                                <f:MenuItem Header="{f:Language global.descendingByTimeOfModified}"
-                                            Command="{Binding SetOrderByMethodCommand}">
-                                    <f:MenuItem.CommandParameter>
-                                        <thisModel:OrderByMethods>DescendingByTimeOfModified</thisModel:OrderByMethods>
-                                    </f:MenuItem.CommandParameter>
-                                </f:MenuItem>
-                            </f:ContextMenu>
-                        </ftk:DropDownButton.ContextMenu>
-                    </ftk:DropDownButton>
+                <ftk:ToolButton Content="{f:Language global.previousPage}"
+                                Command="{Binding PreviousPageCommand}"
+                                Icon="{StaticResource FeatherIcon.Left}" />
 
-                    <f:ClosableSingleLine f:XamlAssist.IsDeferred="True"
-                                          f:XamlAssist.Text="{Binding FilterString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                          Margin="8 0"
-                                          KeyUp="SearchPage_OnKeyUp"
-                                          Watermark="{f:Language global.search}"
-                                          Width="192" />
+                <TextBox BorderThickness="0"
+                         Margin="4 8"
+                         Text="{Binding EditablePageIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource PageIndex}}"
+                         HorizontalAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Width="48" />
 
-                    <ftk:ToolButton Content="{f:Language global.search}"
-                                    Command="{Binding SearchPageCommand}"
-                                    Icon="{StaticResource FeatherIcon.Search}"
-                                    ShowText="True" />
+                <ftk:ToolButton Content="{f:Language global.nextPage}"
+                                Command="{Binding NextPageCommand}"
+                                Icon="{StaticResource FeatherIcon.Right}"/>
 
-                    <ftk:ToolButton Content="{f:Language global.lastPage}"
-                                    Command="{Binding LastPageCommand}"
-                                    Icon="{StaticResource FeatherIcon.Search}"
-                                    ShowText="True" />
-                    
-                    <ftk:ToolButton Content="{f:Language global.nextPage}"
-                                    Command="{Binding NextPageCommand}"
-                                    Icon="{StaticResource FeatherIcon.Search}"
-                                    ShowText="True" />
-                </StackPanel>
-            </f:ForestSection.ToolBar>
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay,IsAsync=True}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
-        </f:ForestSection>
+                <ftk:ToolButton Content="{f:Language global.lastPage}"
+                                Command="{Binding LastPageCommand}"
+                                Icon="{StaticResource FeatherIcon.ChevronsRight}" />
+            </StackPanel>
+            
+            <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
+                <f:ForestSection.ToolBar>
+                    <StackPanel HorizontalAlignment="Right"
+                                Margin="0 0 0 4"
+                                Orientation="Horizontal">
+                        <ftk:ToolButton Content="{f:Language global.add}"
+                                        Command="{Binding NewDocumentCommand}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+
+                        <ftk:DropDownButton Content="{f:Language global.orderBy}"
+                                            Icon="{StaticResource FeatherIcon.Filter}"
+                                            ShowText="True">
+                            <ftk:DropDownButton.ContextMenu>
+                                <f:ContextMenu>
+                                    <f:MenuItem Header="{f:Language global.ascendingByName}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>AscendingByName</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                    <f:MenuItem Header="{f:Language global.descendingByName}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>DescendingByName</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                    <f:MenuItem Header="{f:Language global.ascendingByTimeOfCreated}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>AscendingByTimeOfCreated</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                    <f:MenuItem Header="{f:Language global.descendingByTimeOfCreated}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>DescendingByTimeOfCreated</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                    <f:MenuItem Header="{f:Language global.ascendingByTimeOfModified}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>AscendingByTimeOfModified</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                    <f:MenuItem Header="{f:Language global.descendingByTimeOfModified}"
+                                                Command="{Binding SetOrderByMethodCommand}">
+                                        <f:MenuItem.CommandParameter>
+                                            <thisModel:OrderByMethods>DescendingByTimeOfModified</thisModel:OrderByMethods>
+                                        </f:MenuItem.CommandParameter>
+                                    </f:MenuItem>
+                                </f:ContextMenu>
+                            </ftk:DropDownButton.ContextMenu>
+                        </ftk:DropDownButton>
+
+                        <f:ClosableSingleLine f:XamlAssist.IsDeferred="True"
+                                              f:XamlAssist.Text="{Binding FilterString,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              Margin="8 0"
+                                              KeyUp="SearchPage_OnKeyUp"
+                                              Watermark="{f:Language global.search}"
+                                              Width="192" />
+
+                        <ftk:ToolButton Content="{f:Language global.search}"
+                                        Command="{Binding SearchPageCommand}"
+                                        Icon="{StaticResource FeatherIcon.Search}"
+                                        ShowText="True" />
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <ScrollViewer DockPanel.Dock="Top"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding Collection,Mode=OneWay,IsAsync=True}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+
+
+            </f:ForestSection>
+        </DockPanel>
 
         <f:Drawer.RightContent>
             <Border Background="{f:BackgroundBrush}"
@@ -189,7 +216,7 @@
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                         Icon="{Binding SelectedItem.IsLocked,Mode=TwoWay,Converter={StaticResource LockStateConverter}}"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="{f:Language global.Remove}"
                                         Command="{Binding RemoveDocumentCommand}"
                                         CommandParameter="{Binding SelectedItem,Mode=OneWay}"

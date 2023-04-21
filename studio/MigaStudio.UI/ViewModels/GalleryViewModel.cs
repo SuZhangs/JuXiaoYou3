@@ -26,17 +26,44 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             DataSource              = new List<TEntity>(128);
             Collection              = new ObservableCollection<TEntity>();
-            NextPageCommand         = Command(NextPageImpl, CanNextPage);
+            FirstPageCommand        = Command(FirstPageImpl, CanFirstPage);
             LastPageCommand         = Command(LastPageImpl, CanLastPage);
+            NextPageCommand         = Command(NextPageImpl, CanNextPage);
+            PreviousPageCommand     = Command(PreviousPageImpl, CanPreviousPage);
             SearchPageCommand       = Command(SearchPage);
             SetOrderByMethodCommand = Command<OrderByMethods>(OrderPageImpl);
         }
 
         #region Last / Next
 
+        private void UpdateCommands()
+        {
+            FirstPageCommand.NotifyCanExecuteChanged();
+            LastPageCommand.NotifyCanExecuteChanged();
+            NextPageCommand.NotifyCanExecuteChanged();
+            PreviousPageCommand.NotifyCanExecuteChanged();
+        }
+        
+        private bool CanFirstPage() => TotalPageCount > 1 && _pageIndex > 1;
+
+        private bool CanLastPage() => TotalPageCount > 1 && _pageIndex < TotalPageCount;
+        
         private bool CanNextPage() => _pageIndex + 1 <= TotalPageCount;
 
-        private bool CanLastPage() => _pageIndex > 1;
+        private bool CanPreviousPage() => _pageIndex > 1;
+
+        private void FirstPageImpl()
+        {
+            PageIndex = 1;
+            PageRequest(PageIndex);
+        }
+
+        private void LastPageImpl()
+        {
+            
+            PageIndex = TotalPageCount;
+            PageRequest(PageIndex);
+        }
 
         protected void JumpPage(int index)
         {
@@ -47,24 +74,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             PageIndex = index;
             PageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
         }
 
         private void NextPageImpl()
         {
             PageIndex++;
             PageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
         }
 
-        private void LastPageImpl()
+        private void PreviousPageImpl()
         {
             PageIndex--;
             PageRequest(PageIndex);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
         }
 
         #endregion
@@ -173,8 +194,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             Collection.AddRange(unsortedDataSource.Skip(skipElementCounts)
                                                   .Take(minPageItemCount), true);
-            NextPageCommand.NotifyCanExecuteChanged();
-            LastPageCommand.NotifyCanExecuteChanged();
+            UpdateCommands();
         }
 
         /// <summary>
@@ -241,14 +261,35 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public int PageIndex
         {
             get => _pageIndex;
-            set => SetValue(ref _pageIndex, value);
+            set
+            {
+                SetValue(ref _pageIndex, value);
+                RaiseUpdated(nameof(EditablePageIndex));
+            }
         }
+
+        public int EditablePageIndex
+        {
+            get => PageIndex;
+            set
+            {
+                var v = Math.Clamp(value, 1, Math.Min(TotalPageCount, PageCountLimited));
+                PageIndex = v;
+                JumpPage(v);
+            }
+        }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand FirstPageCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand LastPageCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand NextPageCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand LastPageCommand { get; }
+        public RelayCommand PreviousPageCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand SearchPageCommand { get; }

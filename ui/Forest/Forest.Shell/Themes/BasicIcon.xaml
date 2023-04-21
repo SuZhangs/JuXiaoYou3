@@ -176,6 +176,21 @@
             <Geometry>F1 M24,24z M0,0z M12,19L12,19 5,12 12,5</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
+
+    <GeometryGroup x:Key="FeatherIcon.ChevronsLeft">
+        <GeometryGroup.Children>
+            <Geometry>F1 M24,24z M0,0z M11,17L11,17 6,12 11,7</Geometry>
+            <Geometry>F1 M24,24z M0,0z M18,17L18,17 13,12 18,7</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
+
+    <GeometryGroup x:Key="FeatherIcon.ChevronsRight">
+        <GeometryGroup.Children>
+            <Geometry>F1 M24,24z M0,0z M13,17L13,17 18,12 13,7</Geometry>
+            <Geometry>F1 M24,24z M0,0z M6,17L6,17 11,12 6,7</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
+
     <GeometryGroup x:Key="FeatherIcon.ArrowRight">
         <GeometryGroup.Children>
             <LineGeometry StartPoint="5,12" EndPoint="19,12" />
