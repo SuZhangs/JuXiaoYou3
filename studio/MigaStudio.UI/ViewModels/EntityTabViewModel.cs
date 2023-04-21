@@ -13,6 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected EntityTabViewModel()
         {
+            ApprovalRequired = false;
             Collection       = new ObservableCollection<TEntity>();
             AddCommand       = AsyncCommand(AddEntityImpl);
             EditCommand      = AsyncCommand<TEntity>(EditEntityImpl);

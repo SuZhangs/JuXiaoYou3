@@ -14,75 +14,79 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipDefinitionViewModel}, IsDesignTimeCreatable=True}"
-                     Height="540"
+                     Height="480"
                      Width="640">
     <UserControl.Resources>
-        <thisConverters:AvatarConverter x:Key="Avatar" />
-        <DataTemplate DataType="{x:Type doc:DocumentCache}">
-            <DockPanel Margin="4">
-                <Border DockPanel.Dock="Top"
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <thisConverters:AvatarConverter x:Key="Avatar" />
+            <DataTemplate DataType="{x:Type doc:DocumentCache}">
+                <DockPanel Margin="4">
+                    <Border DockPanel.Dock="Top"
                         CornerRadius="64"
                         Height="84"
                         Width="84">
-                    <Border.Background>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Border.Background>
-                </Border>
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource Avatar}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
 
-                <TextBlock FontSize="14"
+                    <TextBlock FontSize="14"
                            Margin="0 8 0 0"
                            HorizontalAlignment="Center"
                            Text="{Binding Name,Mode=OneWay}" />
-            </DockPanel>
-        </DataTemplate>
+                </DockPanel>
+            </DataTemplate>
 
 
-        <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
-        <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
-        <GeometryGroup x:Key="FeatherIcon.People">
-            <GeometryGroup.Children>
-                <Geometry>F1 M24,24z M0,0z M20,21L20,19A4,4,0,0,0,16,15L8,15A4,4,0,0,0,4,19L4,21</Geometry>
-                <EllipseGeometry RadiusX="4" RadiusY="4" Center="12,7" />
-            </GeometryGroup.Children>
-        </GeometryGroup>
+            <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
+            <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
+            <GeometryGroup x:Key="FeatherIcon.People">
+                <GeometryGroup.Children>
+                    <Geometry>F1 M24,24z M0,0z M20,21L20,19A4,4,0,0,0,16,15L8,15A4,4,0,0,0,4,19L4,21</Geometry>
+                    <EllipseGeometry RadiusX="4" RadiusY="4" Center="12,7" />
+                </GeometryGroup.Children>
+            </GeometryGroup>
 
-        <Style x:Key="ArrowStyle" TargetType="Path">
-            <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
-            <Setter Property="StrokeThickness" Value="2" />
-            <Setter Property="Stretch" Value="Uniform" />
-            <Setter Property="Width" Value="128" />
-            <Setter Property="Height" Value="16" />
-        </Style>
+            <Style x:Key="ArrowStyle" TargetType="Path">
+                <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="Width" Value="128" />
+                <Setter Property="Height" Value="16" />
+            </Style>
 
-        <Style x:Key="PeopleStyle" TargetType="Path">
-            <Setter Property="Data" Value="{StaticResource FeatherIcon.People}" />
-            <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
-            <Setter Property="StrokeThickness" Value="2" />
-            <Setter Property="Stretch" Value="Uniform" />
-            <Setter Property="Width" Value="32" />
-            <Setter Property="Height" Value="32" />
-            <Setter Property="Margin" Value="16 0" />
-        </Style>
+            <Style x:Key="PeopleStyle" TargetType="Path">
+                <Setter Property="Data" Value="{StaticResource FeatherIcon.People}" />
+                <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="Width" Value="32" />
+                <Setter Property="Height" Value="32" />
+                <Setter Property="Margin" Value="16 0" />
+            </Style>
+        </ResourceDictionary>
+        
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
-
-
         <StackPanel>
             <f:HeaderedSingleLine DockPanel.Dock="Top"
                                   Header="{f:Language global.Name}"
                                   Margin="8"
-                                  Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   VerticalAlignment="Center" />
-
             <Grid Height="64"
                   Margin="0 4">
                 <Grid.ColumnDefinitions>
@@ -131,8 +135,6 @@
                               VerticalAlignment="Center" />
             </Grid>
 
-
-
             <UniformGrid DockPanel.Dock="Bottom"
                          Margin="8"
                          Columns="3">
@@ -147,17 +149,8 @@
                 <f:ToggleSwitch Content="是否为双向关系"
                                 Margin="4"
                                 IsChecked="{Binding IsBidirection,Mode=TwoWay}" />
-               
-            </UniformGrid>
-            <DockPanel Margin="0 4"
-                       HorizontalAlignment="Left">
-                <TextBlock DockPanel.Dock="Top"
-                               Margin="4"
-                               Text="亲密程度" />
 
-                <studio:DegreeControl Margin="4"
-                                      Value="{Binding Friendliness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            </DockPanel>
+            </UniformGrid>
         </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>

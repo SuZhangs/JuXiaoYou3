@@ -11,13 +11,11 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:RelationshipDefinitionViewModel}, IsDesignTimeCreatable=True}">
-
-    <f:ForestIsland Header="服务"
-                    Margin="16">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top"
-                        Margin="0 8"
-                        Orientation="Horizontal">
+    <f:ForestSection Header="人物关系"
+                     Margin="16">
+        <f:ForestSection.ToolBar>
+            <StackPanel Orientation="Horizontal"
+                        Margin="32 0 16 4">
                 <ftk:ToolButton Content="{f:Language global.add}"
                                 Command="{Binding AddCommand}"
                                 Icon="{StaticResource FeatherIcon.Plus}"
@@ -25,27 +23,36 @@
                 <ftk:ToolButton Content="{f:Language global.edit}"
                                 Command="{Binding EditCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
-                                Icon="{StaticResource FeatherIcon.Plus}"
+                                Icon="{StaticResource FeatherIcon.Edit}"
                                 ShowText="True"/>
                 <ftk:ToolButton Content="{f:Language global.remove}"
                                 Command="{Binding RemoveCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
-                                Icon="{StaticResource FeatherIcon.Plus}"
+                                Icon="{StaticResource FeatherIcon.Trash}"
+                                ShowText="True"/>
+                <ftk:ToolButton Content="{f:Language global.save}"
+                                Command="{Binding SaveCommand}"
+                                Icon="{StaticResource IC.Save}"
+                                IsFilled="True"
                                 ShowText="True"/>
             </StackPanel>
+        </f:ForestSection.ToolBar>
+        <DockPanel>
+            
             <f:ListBox ItemsSource="{Binding Collection,Mode=OneWay}"
                        SelectedItem="{Binding Selected,Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type rel:RelationshipDefinition}">
-                        <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                        <TextBlock Margin="8"
+                                   Text="{Binding Name,Mode=OneWay}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <WrapPanel ItemWidth="320"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </f:ListBox>
         </DockPanel>
-    </f:ForestIsland>
+    </f:ForestSection>
 </f:ForestUserControl>
