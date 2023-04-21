@@ -5,6 +5,8 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
+    public class InTabViewModelProxy : BindingProxy<InTabViewModel>{}
+    
     public abstract class InTabViewModel : TabViewModel
     {
         private readonly Subject<ViewModelBase> _onStart;
@@ -50,12 +52,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
         
-        protected void CreateDialogFeature<T>(string group, params object[] e)
+        protected void CreateDialogFeature<T>(string name, params object[] e)
         {
             var f = new MainFeature
             {
-                GroupId   = group,
-                NameId    = string.Empty,
+                GroupId   = string.Empty,
+                NameId    = name,
                 ViewModel = typeof(T),
                 IsDialog  = true,
                 IsGallery = false,
@@ -78,12 +80,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
         
-        protected void CreateGalleryFeature<T>(string group, params object[] e)
+        protected void CreateGalleryFeature<T>(string name, params object[] e)
         {
             var f = new MainFeature
             {
-                GroupId   = group,
-                NameId    = string.Empty,
+                GroupId   = string.Empty,
+                NameId    = name,
                 ViewModel = typeof(T),
                 IsDialog  = false,
                 IsGallery = true,
@@ -92,12 +94,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Features.Add(f);
         }
         
-        protected void CreatePageFeature<T>(string group, params object[] e)
+        protected void CreatePageFeature<T>(string name, params object[] e)
         {
             var f = new MainFeature
             {
-                GroupId   = group,
-                NameId    = string.Empty,
+                GroupId   = string.Empty,
+                NameId    = name,
                 ViewModel = typeof(T),
                 IsDialog  = false,
                 IsGallery = false,

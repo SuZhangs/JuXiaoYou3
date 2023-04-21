@@ -216,7 +216,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                         _maintainers, 
                         _updaters,
                         _engines,
-                        _minimumTargetVersion,
+                        databaseVersion,
                         mode);
                 }
             }
@@ -298,7 +298,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                                     continue;
                                 }
 
-                                if (updater.ResultVersion > version)
+                                if (updater.ResultVersion > database.Version)
                                 {
                                     database.UpdateVersion(updater.ResultVersion);
                                     _logger.Warn($"数据库升级完成，当前版本为:{updater.ResultVersion}");

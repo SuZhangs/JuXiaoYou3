@@ -21,8 +21,8 @@ namespace Acorisoft.FutureGL.MigaDB.Migrations
             });
         }
 
-        public override int TargetVersion => 100;
+        public override int TargetVersion => 0;
         
-        public override int ResultVersion => 0;
+        public override int ResultVersion => 100;
     }
 }

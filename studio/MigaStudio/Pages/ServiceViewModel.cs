@@ -3,7 +3,6 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class ServiceViewModelProxy : BindingProxy<ServiceViewModel>{}
     
     public class ServiceViewModel : InTabViewModel
     {
