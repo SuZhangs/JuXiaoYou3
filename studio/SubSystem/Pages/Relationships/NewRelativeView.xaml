@@ -14,50 +14,66 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelativeViewModel}, IsDesignTimeCreatable=True}"
-                     Height="480"
-                     Width="640">
+                     Height="586"
+                     Width="768">
     <UserControl.Resources>
-        <thisConverters:AvatarConverter x:Key="Avatar" />
-        <GeometryGroup x:Key="Refresh">
-            <GeometryGroup.Children>
-                <Geometry>F1 M24,24z M0,0z M23,4L23,4 23,10 17,10</Geometry>
-                <Geometry>F1 M24,24z M0,0z M1,20L1,20 1,14 7,14</Geometry>
-                <Geometry>F1 M24,24z M0,0z M3.51,9A9,9,0,0,1,18.36,5.64L23,10 M1,14L5.64,18.36A9,9,0,0,0,20.49,15</Geometry>
-            </GeometryGroup.Children>
-        </GeometryGroup>
-        <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
-        <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type doc:DocumentCache}">
-            <DockPanel Margin="4">
-                <Border DockPanel.Dock="Top"
-                        CornerRadius="64"
-                        Height="84"
-                        Width="84">
-                    <Border.Background>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource Avatar}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Border.Background>
-                </Border>
+            <thisConverters:AvatarConverter x:Key="Avatar" />
+            <GeometryGroup x:Key="Refresh">
+                <GeometryGroup.Children>
+                    <Geometry>F1 M24,24z M0,0z M23,4L23,4 23,10 17,10</Geometry>
+                    <Geometry>F1 M24,24z M0,0z M1,20L1,20 1,14 7,14</Geometry>
+                    <Geometry>F1 M24,24z M0,0z M3.51,9A9,9,0,0,1,18.36,5.64L23,10 M1,14L5.64,18.36A9,9,0,0,0,20.49,15</Geometry>
+                </GeometryGroup.Children>
+            </GeometryGroup>
+            <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
+            <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
+            <Style x:Key="ArrowStyle" TargetType="Path">
+                <Setter Property="Stroke" Value="{f:ForegroundBrush}" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="Width" Value="128" />
+                <Setter Property="Height" Value="16" />
+            </Style>
+            
+            <DataTemplate DataType="{x:Type doc:DocumentCache}">
+                <DockPanel Margin="4">
+                    <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="84"
+                            Width="84">
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource Avatar}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
 
-                <TextBlock FontSize="14"
-                           Margin="0 8 0 0"
-                           HorizontalAlignment="Center"
-                           Text="{Binding Name,Mode=OneWay}" />
-            </DockPanel>
-        </DataTemplate>
+                    <TextBlock FontSize="14"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"/>
+                </DockPanel>
+            </DataTemplate>
+        </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
 
         <StackPanel>
+            
             <Grid Margin="0 4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -78,12 +94,8 @@
                 </studio:Avatar>
 
                 <Path Grid.Column="1"
-                      Data="{StaticResource ArrowRight}"
-                      Stroke="{f:ForegroundBrush}"
-                      StrokeThickness="2"
-                      Stretch="Uniform"
-                      Width="128"
-                      Height="16" />
+                      Style="{StaticResource ArrowStyle}"
+                      Data="{StaticResource ArrowRight}"/>
 
                 <studio:Avatar Grid.Column="2"
                                DataContext="{Binding Target,Mode=OneWay}"
@@ -102,6 +114,14 @@
                               Text="{Binding CallOfTarget,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center" />
             </Grid>
+
+
+            <ftk:ToolButton Icon="{StaticResource Refresh}"
+                            Content="身份交换"
+                            Command="{Binding SwitchCommand}"
+                            HorizontalAlignment="Right"
+                            Margin="0 4"
+                            ShowText="True"/>
 
             <Grid Margin="0 8">
                 <Grid.ColumnDefinitions>
@@ -123,12 +143,8 @@
                 </studio:Avatar>
 
                 <Path Grid.Column="1"
-                      Data="{StaticResource ArrowLeft}"
-                      Stroke="{f:ForegroundBrush}"
-                      StrokeThickness="2"
-                      Stretch="Uniform"
-                      Width="128"
-                      Height="16" />
+                      Style="{StaticResource ArrowStyle}"
+                      Data="{StaticResource ArrowLeft}"/>
 
                 <studio:Avatar Grid.Column="2"
                                DataContext="{Binding Target,Mode=OneWay}"
@@ -147,18 +163,42 @@
                               Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center" />
             </Grid>
-            
-            <ftk:ToolButton Icon="{StaticResource Refresh}"
-                            Command="{Binding SwitchCommand}"/>
-            
-            <DockPanel>
-                <TextBlock DockPanel.Dock="Top"
-                           Text="友善度"/>
-                <studio:DegreeControl Value="{Binding Friendliness,Mode=TwoWay}"/>
-            </DockPanel>
-            <ComboBox ItemsSource="{Binding Preset}"
-                      SelectedItem="{Binding Preset,Mode=TwoWay}">
+
+            <TextBlock Margin="8 4" Text="友善度"/>
+            <studio:DegreeControl Margin="8 4" Value="{Binding Friendliness,Mode=TwoWay}"/>
+
+            <UniformGrid Margin="8 4"
+                         Columns="4">
+                <f:ToggleSwitch Content="直系亲属"
+                                Margin="4"
+                                IsChecked="{Binding DirectRelative,Mode=TwoWay}" />
+
+                <f:ToggleSwitch Content="旁系亲属"
+                                Margin="4"
+                                IsChecked="{Binding CollateralRelative,Mode=TwoWay}" />
+
+                <f:ToggleSwitch Content="夫妻关系"
+                                Margin="4"
+                                IsChecked="{Binding ConjugalRelative,Mode=TwoWay}" />
                 
+                <f:ToggleSwitch Content="其他关系"
+                                Margin="4"
+                                IsChecked="{Binding OtherRelative,Mode=TwoWay}" />
+
+            </UniformGrid>
+
+            <TextBlock Margin="8 4" Text="预设"/>
+            <ComboBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                      DisplayMemberPath="Name"
+                      Margin="8 4"
+                      ItemsSource="{Binding Presets}"
+                      SelectedItem="{Binding Preset,Mode=TwoWay}">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="128"
+                                   Width="640"/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
             </ComboBox>
         </StackPanel>
     </f:DialogPage>

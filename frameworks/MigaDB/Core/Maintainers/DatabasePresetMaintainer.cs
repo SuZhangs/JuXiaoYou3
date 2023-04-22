@@ -47,10 +47,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core.Maintainers
             
             InstallCollateralRelative(preset, "伯伯", "伯伯", Te);
             InstallCollateralRelative(preset, "叔叔", "叔叔", Te);
-            InstallCollateralRelative(preset, "婶婶", "伯伯", Te);
-            InstallCollateralRelative(preset, "阿姨", "叔叔", Te);
-            InstallCollateralRelative(preset, "姑姑", "伯伯", Te);
-            InstallCollateralRelative(preset, "姨丈", "叔叔", Te);
+            InstallCollateralRelative(preset, "婶婶", "婶婶", Te);
+            InstallCollateralRelative(preset, "阿姨", "阿姨", Te);
+            InstallCollateralRelative(preset, "姑姑", "姑姑", Te);
+            InstallCollateralRelative(preset, "姨丈", "姨丈", Te);
             
             
             InstallConjugalRelative(preset, "夫妻", "丈夫", "妻子");

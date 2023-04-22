@@ -44,33 +44,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         private bool           _conjugalRelative;
         private int            _friendliness;
         private RelativePreset _preset;
+        private bool           _otherRelative;
 
-        /// <summary>
-        /// 获取或设置 <see cref="Preset"/> 属性。
-        /// </summary>
-        public RelativePreset Preset
-        {
-            get => _preset;
-            set
-            {
-                SetValue(ref _preset, value);
-
-                if (_preset is null)
-                {
-                    return;
-                }
-                
-                ConjugalRelative   = _preset.ConjugalRelative;
-                DirectRelative     = _preset.DirectRelative;
-                CollateralRelative = _preset.CollateralRelative;
-                CallOfSource       = _preset.CallOfSource;
-                CallOfTarget       = _preset.CallOfTarget;
-            }
-        }
 
         public NewRelativeViewModel()
         {
-            Presets = new ObservableCollection<RelativePreset>();
+            _otherRelative = true;
+            Presets        = new ObservableCollection<RelativePreset>();
 
             var pp = Xaml.Get<IDatabaseManager>()
                          .Database
@@ -195,7 +175,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public bool CollateralRelative
         {
             get => _collateralRelative;
-            set => SetValue(ref _collateralRelative, value);
+            set
+            {
+                SetValue(ref _collateralRelative, value);
+                
+                
+                _conjugalRelative = false;
+                _otherRelative      = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+            }
         }
 
         /// <summary>
@@ -204,7 +195,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public bool ConjugalRelative
         {
             get => _conjugalRelative;
-            set => SetValue(ref _conjugalRelative, value);
+            set
+            {
+                SetValue(ref _conjugalRelative, value);
+                
+                _collateralRelative = false;
+                _otherRelative      = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
         }
 
         /// <summary>
@@ -213,7 +214,68 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         public bool DirectRelative
         {
             get => _directRelative;
-            set => SetValue(ref _directRelative, value);
+            set
+            {
+                SetValue(ref _directRelative, value);
+                
+                _collateralRelative = false;
+                _conjugalRelative   = false;
+                _otherRelative     = false;
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
+        }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="OtherRelative"/> 属性。
+        /// </summary>
+        public bool OtherRelative
+        {
+            get => _otherRelative;
+            set
+            {
+                SetValue(ref _otherRelative, value);
+                _collateralRelative = false;
+                _conjugalRelative   = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Preset"/> 属性。
+        /// </summary>
+        public RelativePreset Preset
+        {
+            get => _preset;
+            set
+            {
+                SetValue(ref _preset, value);
+
+                if (_preset is null)
+                {
+                    return;
+                }
+                
+                
+                
+                _collateralRelative = _preset.CollateralRelative;
+                _conjugalRelative   = _preset.ConjugalRelative;
+                _directRelative     = _preset.DirectRelative;
+                _otherRelative      = !_conjugalRelative &&
+                                      !_collateralRelative &&
+                                      !_directRelative;
+                CallOfSource        = _preset.CallOfSource;
+                CallOfTarget        = _preset.CallOfTarget;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
         }
 
 

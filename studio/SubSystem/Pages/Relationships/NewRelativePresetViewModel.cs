@@ -31,6 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         private bool   _conjugalRelative;
         private string _name;
         private bool   _collateralRelative;
+        private bool   _otherRelative = true;
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
@@ -98,15 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         public bool IsEditMode { get; private set; }
         public RelativePreset Entity { get; private set; }
-
-        /// <summary>
-        /// 获取或设置 <see cref="CollateralRelative"/> 属性。
-        /// </summary>
-        public bool CollateralRelative
-        {
-            get => _collateralRelative;
-            set => SetValue(ref _collateralRelative, value);
-        }
+        
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
@@ -117,22 +110,81 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             set => SetValue(ref _name, value);
         }
 
+         /// <summary>
+        /// 旁系亲属
+        /// </summary>
+        public bool CollateralRelative
+        {
+            get => _collateralRelative;
+            set
+            {
+                SetValue(ref _collateralRelative, value);
+                
+                
+                _conjugalRelative = false;
+                _otherRelative      = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+            }
+        }
+
         /// <summary>
-        /// 获取或设置 <see cref="ConjugalRelative"/> 属性。
+        /// 夫妻关系
         /// </summary>
         public bool ConjugalRelative
         {
             get => _conjugalRelative;
-            set => SetValue(ref _conjugalRelative, value);
+            set
+            {
+                SetValue(ref _conjugalRelative, value);
+                
+                _collateralRelative = false;
+                _otherRelative      = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
         }
 
         /// <summary>
-        /// 是否为法律意义上的亲属关系（继父继母继兄等）
+        /// 直系亲属
         /// </summary>
         public bool DirectRelative
         {
             get => _directRelative;
-            set => SetValue(ref _directRelative, value);
+            set
+            {
+                SetValue(ref _directRelative, value);
+                
+                _collateralRelative = false;
+                _conjugalRelative   = false;
+                _otherRelative     = false;
+                RaiseUpdated(nameof(OtherRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
+        }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="OtherRelative"/> 属性。
+        /// </summary>
+        public bool OtherRelative
+        {
+            get => _otherRelative;
+            set
+            {
+                SetValue(ref _otherRelative, value);
+                _collateralRelative = false;
+                _conjugalRelative   = false;
+                _directRelative     = false;
+                RaiseUpdated(nameof(DirectRelative));
+                RaiseUpdated(nameof(ConjugalRelative));
+                RaiseUpdated(nameof(CollateralRelative));
+            }
         }
 
         /// <summary>
