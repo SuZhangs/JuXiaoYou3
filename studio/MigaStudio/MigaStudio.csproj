@@ -150,12 +150,22 @@
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
-        <Page Update="Pages\Startup\UniversePage.xaml">
+        <Page Update="Pages\HomePage.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>
         </Page>
-        <Page Update="Pages\HomePage.xaml">
+        <Page Update="Pages\Universe\UniversePage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Pages\Universe\UniverseAlbumView.xaml">
+          <Generator>MSBuild:Compile</Generator>
+          <XamlRuntime>Wpf</XamlRuntime>
+          <SubType>Designer</SubType>
+        </Page>
+        <Page Update="Pages\Universe\UniverseComposeView.xaml">
           <Generator>MSBuild:Compile</Generator>
           <XamlRuntime>Wpf</XamlRuntime>
           <SubType>Designer</SubType>

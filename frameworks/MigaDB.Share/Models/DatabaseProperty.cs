@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Acorisoft.FutureGL.MigaDB.Models
 {
     public class DatabaseProperty : StorageObject
     {
@@ -37,5 +39,7 @@
         /// 图标
         /// </summary>
         public string Icon { get; set; }
+        
+        public ObservableCollection<Album> Album { get; set; }
     }
 }

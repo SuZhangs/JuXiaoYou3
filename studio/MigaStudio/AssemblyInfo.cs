@@ -1,6 +1,7 @@
 global using System;
 global using System.Collections.ObjectModel;
 global using System.Threading.Tasks;
+global using Acorisoft.FutureGL.MigaDB.Models;
 global using Acorisoft.FutureGL.Forest.Attributes;
 global using Acorisoft.FutureGL.Forest.Services;
 global using Acorisoft.FutureGL.Forest.Styles;

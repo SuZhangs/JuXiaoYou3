@@ -24,6 +24,7 @@ global using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 global using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 global using Acorisoft.FutureGL.MigaDB.Documents;
 global using Acorisoft.FutureGL.MigaDB.Interfaces;
+global using Acorisoft.FutureGL.MigaDB.Models;
 global using Acorisoft.FutureGL.MigaDB.Services;
 global using Acorisoft.FutureGL.MigaDB.Utils;
 
