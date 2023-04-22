@@ -184,10 +184,6 @@
                     <StackPanel HorizontalAlignment="Right"
                                 Margin="0 0 0 4"
                                 Orientation="Horizontal">
-                        <ftk:ToolButton Content="{f:Language global.preview}"
-                                        Command="{Binding OpenPresentationPaneCommand}"
-                                        Icon="{StaticResource FeatherIcon.Camera}"
-                                        ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding NewBlockCommand}"
@@ -209,6 +205,11 @@
                         <ftk:ToolButton Content="{f:Language global.clear}"
                                         Command="{Binding RemoveAllBlockCommand}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
+                        
+                        <ftk:ToolButton Content="{f:Language global.preview}"
+                                        Command="{Binding OpenPresentationPaneCommand}"
+                                        Icon="{StaticResource FeatherIcon.Camera}"
                                         ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
