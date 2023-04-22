@@ -38,7 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
             ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
-            OpenAlbumCommand      = AsyncCommand<Album>(OpenAlbumImpl, HasItem);
+            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
         }
 
         public override void Start()
@@ -108,7 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Save();
         }
 
-        private async Task OpenAlbumImpl(Album part)
+        private void OpenAlbumImpl(Album part)
         {
             if (part is null)
             {
@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             var fileName = ImageEngine.GetFileName(part.Source);
-            await SubSystem.ImageView(fileName);
+            SubSystem.ImageView(fileName);
         }
 
         private void ShiftDownAlbumImpl(Album album)
@@ -170,7 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public RelayCommand<Album> ShiftDownAlbumCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Album> OpenAlbumCommand { get; }
+        public RelayCommand<Album> OpenAlbumCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Album> RemoveAlbumCommand { get; }

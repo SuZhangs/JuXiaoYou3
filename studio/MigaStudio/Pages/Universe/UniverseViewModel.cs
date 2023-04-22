@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
             ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
-            OpenAlbumCommand      = AsyncCommand<Album>(OpenAlbumImpl, HasItem);
+            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
         }
 
         public override void OnStart()

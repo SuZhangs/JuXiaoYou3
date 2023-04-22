@@ -63,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Save();
         }
 
-        private async Task OpenAlbumImpl(Album part)
+        private void OpenAlbumImpl(Album part)
         {
             if (part is null)
             {
@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             var fileName = ImageEngine.GetFileName(part.Source);
-            await SubSystem.ImageView(fileName);
+            SubSystem.ImageView(fileName);
         }
 
         private void ShiftDownAlbumImpl(Album album)
@@ -114,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public RelayCommand<Album> ShiftDownAlbumCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Album> OpenAlbumCommand { get; }
+        public RelayCommand<Album> OpenAlbumCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Album> RemoveAlbumCommand { get; }

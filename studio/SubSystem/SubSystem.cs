@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
@@ -17,16 +18,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                        .Dialog<DocumentCache, NewDocumentViewModel>();
         }
 
-        public static async Task ImageView(string fileName)
+        public static void ImageView(string fileName)
         {
-            await Xaml.Get<IDialogService>()
-                      .Dialog(new ImageViewModel(), new Parameter
-                      {
-                          Args = new[]
-                          {
-                              fileName
-                          }
-                      });
+            var vm = new ImageViewModel
+            {
+                Source = new BitmapImage(new Uri(fileName, UriKind.Absolute))
+            };
+            
+            new ImageView
+            {
+                DataContext = vm
+            }.Show();
         }
 
         /// <summary>
@@ -72,7 +74,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static void InstallViews()
         {
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
-            Xaml.InstallView<ImageView, ImageViewModel>();
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
             Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
