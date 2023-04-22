@@ -53,8 +53,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public override void OnStart()
         {
-            base.Start();
-
             if (_databaseProperty.Album is null)
             {
                 _databaseProperty.Album = new ObservableCollection<Album>();
