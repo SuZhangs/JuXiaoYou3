@@ -61,19 +61,6 @@
                 </ItemsControl.ItemTemplate>
             </f:ListBox>
 
-            <ScrollViewer Padding="12">
-                <Viewbox>
-                    <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Album}">
-                                <Image Stretch="None"
-                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}" />
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </Viewbox>
-            </ScrollViewer>
-
         </DockPanel>
     </DockPanel>
 </UserControl>
