@@ -39,6 +39,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                             Error(ex.Message.SubString());
                         }
                     }
+                    
+                    Save();
+                    Successful(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
         }

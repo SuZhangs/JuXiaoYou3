@@ -40,7 +40,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                  PictureCollection.Add(x);
                                  _databaseProperty.Album.Add(x);
                                  SelectedAlbum ??= PictureCollection.FirstOrDefault();
-                                 Successful(SubSystemString.OperationOfAddIsSuccessful);
                                  Save();
                              })
                              .DisposeWith(Collector);
@@ -56,7 +55,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             if (_databaseProperty.Album is null)
             {
                 _databaseProperty.Album = new ObservableCollection<Album>();
-                Database.Set(_databaseProperty);
+                Save();
             }
 
             PictureCollection.AddMany(_databaseProperty.Album, true);
@@ -65,7 +64,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void Save()
         {
             Database.Set(_databaseProperty);
-            SetDirtyState();
         }
 
         /// <summary>

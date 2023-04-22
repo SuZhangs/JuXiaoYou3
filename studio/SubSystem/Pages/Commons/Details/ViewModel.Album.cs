@@ -32,8 +32,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                  Collection.Add(x);
                                  Detail!.Items.Add(x);
                                  SelectedAlbum ??= Collection.FirstOrDefault();
-                                 Successful(SubSystemString.OperationOfAddIsSuccessful);
-                                 Save();
                              })
                              .DisposeWith(Collector);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
@@ -87,6 +85,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                             Error(ex.Message.SubString());
                         }
                     }
+                    Save();
+                    Successful(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
         }
