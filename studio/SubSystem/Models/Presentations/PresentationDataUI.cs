@@ -46,7 +46,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         {
             if (IsMetadata)
             {
-                return int.TryParse(metadataTracker(Metadata)?.Value, out var n) ? n : 0;
+                var v = metadataTracker(Metadata)?.Value;
+                return int.TryParse(v, out var n) ? n : 0;
             }
             
             return ((IMetadataNumericSource)blockTracker(Metadata))?.GetValue() ?? 0;
@@ -195,19 +196,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         private int _value;
         private int _metadataValue;
         
-        public PresentationDegreeDataUI(IPresentationData value) : base(value)
+        public PresentationDegreeDataUI(PresentationDegreeData value) : base(value)
         {
-            Name          = value.Name;
-            Metadata      = value.ValueSourceID;
+            Name     = value.Name;
+            Metadata = value.ValueSourceID;
+            Scale    = value.Scale;
         }
         
         
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
             MetadataValue = GetNumberValue(metadataTracker, blockTracker);
-            Value         = MetadataValue / 5;
+            Value         = (int)(MetadataValue * Scale);
         }
         
+        public double Scale { get; }
         
         /// <summary>
         /// 获取或设置 <see cref="MetadataValue"/> 属性。

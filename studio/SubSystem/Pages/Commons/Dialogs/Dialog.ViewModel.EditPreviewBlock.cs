@@ -100,11 +100,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
+                var scale = 1d;
+                if (x is DegreeBlock number)
+                {
+                    scale = 8d / number.Maximum;
+                }
+
                 return new PresentationDegreeData
                 {
-                    Name          = x.Name,
+                    Name = x.Name,
+                    Scale = scale,
                     ValueSourceID = useID ? x.Id : x.Metadata,
-                    IsMetadata    = !useID
+                    IsMetadata = !useID
                 };
             });
         }
@@ -142,10 +149,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                var scale = 1;
+                var scale = 1d;
                 if (x is INumberBlock number)
                 {
-                    scale = 100 / number.Maximum;
+                    scale = 100d / number.Maximum;
                 }
 
                 return new PresentationProgressData
@@ -163,11 +170,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                var scale = 1;
+                var scale = 1d;
 
                 if (x is INumberBlock number)
                 {
-                    scale = 100 / number.Maximum;
+                    scale = 100d / number.Maximum;
                 }
 
                 return new PresentationLikabilityData
@@ -186,11 +193,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return blockCollection.Select(x =>
             {
                 var useID = string.IsNullOrEmpty(x.Metadata);
-                var scale = 1;
+                var scale = 1d;
 
                 if (x is INumberBlock number)
                 {
-                    scale = 100 / number.Maximum;
+                    scale = 100d / number.Maximum;
                 }
 
                 return new PresentationRateData

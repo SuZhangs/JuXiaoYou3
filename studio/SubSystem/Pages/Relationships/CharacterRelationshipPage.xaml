@@ -24,7 +24,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relatives.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relationships.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <thisVM:CharacterRelationshipViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>

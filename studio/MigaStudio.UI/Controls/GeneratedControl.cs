@@ -9,6 +9,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         protected static readonly SolidColorBrush BG;
         protected static readonly SolidColorBrush Border;
 
+        public static readonly DependencyProperty ItemWidthProperty = DependencyProperty.Register(
+            nameof(ItemWidth),
+            typeof(double),
+            typeof(GeneratedControl),
+            new PropertyMetadata(24d));
+
         static GeneratedControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GeneratedControl), new FrameworkPropertyMetadata(typeof(GeneratedControl)));
@@ -143,6 +149,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             typeof(GeneratedControl),
             new PropertyMetadata(Boxing.IntValues[1], OnValueChanged));
 
+        public double ItemWidth
+        {
+            get => (double)GetValue(ItemWidthProperty);
+            set => SetValue(ItemWidthProperty, value);
+        }
+        
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var gc    = (GeneratedControl)d;
@@ -197,7 +209,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             return new Border
             {
                 Background          = Transparent,
-                Width               = 24,
+                Width               = ItemWidth,
                 Height              = 12,
                 BorderBrush         = BG,
                 BorderThickness     = new Thickness(1),
@@ -227,6 +239,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                 b.Background      = Transparent;
             }
         }
+
 
         // F1 M24,24z M0,0z M20.84,4.61A5.5,5.5,0,0,0,13.06,4.61L12,5.67 10.94,4.61A5.5,5.5,0,0,0,3.16,12.39L4.22,13.45 12,21.23 19.78,13.45 20.84,12.39A5.5,5.5,0,0,0,20.84,4.61z
         // F1 M24,24z M0,0z M12,2L12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2z

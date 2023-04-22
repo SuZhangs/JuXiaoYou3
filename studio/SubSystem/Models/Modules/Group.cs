@@ -14,10 +14,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         public GroupBlockDataUI(GroupBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
             TargetBlock = block;
-            Items       = new List<ModuleBlockDataUI>();
+            Items = new List<ModuleBlockDataUI>();
             if (block.Items is not null)
             {
-                Items.AddRange(block.Items.Select(ModuleBlockFactory.GetDataUI));
+                Items.AddRange(block.Items.Select(x => ModuleBlockFactory.GetDataUI(x, handler)));
             }
         }
 
@@ -43,12 +43,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     {
         public GroupBlockEditUI(IGroupBlock block) : base(block)
         {
-            Items         = new ObservableCollection<ModuleBlockEditUI>();
-            AddCommand    = new AsyncRelayCommand(AddImpl);
+            Items = new ObservableCollection<ModuleBlockEditUI>();
+            AddCommand = new AsyncRelayCommand(AddImpl);
             RemoveCommand = new AsyncRelayCommand<ModuleBlockEditUI>(RemoveImpl);
-            EditCommand   = new AsyncRelayCommand<ModuleBlockEditUI>(EditImpl);
-            UpCommand     = new RelayCommand<ModuleBlockEditUI>(UpImpl);
-            DownCommand   = new RelayCommand<ModuleBlockEditUI>(DownImpl);
+            EditCommand = new AsyncRelayCommand<ModuleBlockEditUI>(EditImpl);
+            UpCommand = new RelayCommand<ModuleBlockEditUI>(UpImpl);
+            DownCommand = new RelayCommand<ModuleBlockEditUI>(DownImpl);
 
             if (block.Items is not null)
             {
@@ -60,11 +60,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         {
             return new GroupBlock
             {
-                Id       = Id,
-                Name     = Name,
+                Id = Id,
+                Name = Name,
                 Metadata = Metadata,
                 ToolTips = ToolTips,
-                Items    = new List<ModuleBlock>(Items.Select(x => x.CreateInstance()))
+                Items = new List<ModuleBlock>(Items.Select(x => x.CreateInstance()))
             };
         }
 
