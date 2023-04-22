@@ -15,7 +15,8 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300"
                      d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentGalleryViewModel}, IsDesignTimeCreatable=True}"
+                     UseLayoutRounding="True">
     <UserControl.Resources>
 
         <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
@@ -74,13 +75,13 @@
                                 Command="{Binding PreviousPageCommand}"
                                 Icon="{StaticResource FeatherIcon.Left}" />
 
-                <TextBox BorderThickness="0"
-                         Margin="4 8"
-                         Text="{Binding EditablePageIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource PageIndex}}"
-                         HorizontalAlignment="Center"
-                         HorizontalContentAlignment="Center"
-                         VerticalContentAlignment="Center"
-                         Width="48" />
+                <f:SingleLine BorderThickness="0"
+                              Margin="0 6"
+                              Text="{Binding EditablePageIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource PageIndex}}"
+                              HorizontalAlignment="Center"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center"
+                              Width="64" />
 
                 <ftk:ToolButton Content="{f:Language global.nextPage}"
                                 Command="{Binding NextPageCommand}"

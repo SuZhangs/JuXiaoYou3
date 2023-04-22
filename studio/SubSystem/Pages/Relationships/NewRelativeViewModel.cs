@@ -59,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             var rp = pp?.RelativePresets;
             if (rp is not null) Presets.AddMany(rp);
 
-            SwitchCommand = Command(() => { (CallOfTarget, CallOfSource) = (CallOfSource, CallOfTarget); });
+            SwitchCommand = Command(() => { (CallOfTarget, CallOfSource) = (CallOfSource, CallOfTarget); }, () => OtherRelative || ConjugalRelative);
         }
 
         protected override void OnStart(RoutingEventArgs parameter)
@@ -186,6 +186,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 RaiseUpdated(nameof(DirectRelative));
                 RaiseUpdated(nameof(OtherRelative));
                 RaiseUpdated(nameof(ConjugalRelative));
+                SwitchCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -205,6 +206,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 RaiseUpdated(nameof(DirectRelative));
                 RaiseUpdated(nameof(OtherRelative));
                 RaiseUpdated(nameof(CollateralRelative));
+                SwitchCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -224,6 +226,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 RaiseUpdated(nameof(OtherRelative));
                 RaiseUpdated(nameof(ConjugalRelative));
                 RaiseUpdated(nameof(CollateralRelative));
+                SwitchCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -243,6 +246,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 RaiseUpdated(nameof(DirectRelative));
                 RaiseUpdated(nameof(ConjugalRelative));
                 RaiseUpdated(nameof(CollateralRelative));
+                SwitchCommand.NotifyCanExecuteChanged();
             }
         }
 
@@ -275,6 +279,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 RaiseUpdated(nameof(OtherRelative));
                 RaiseUpdated(nameof(ConjugalRelative));
                 RaiseUpdated(nameof(CollateralRelative));
+                SwitchCommand.NotifyCanExecuteChanged();
             }
         }
 

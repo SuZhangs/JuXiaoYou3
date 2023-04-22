@@ -9,15 +9,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class HomeViewModel : InTabViewModel
     {
-        private const string StartUp            = "global.startup";
-        private const string Documents          = "global.documents";
-        private const string Compose            = "global.compose";
-        private const string Service            = "global.service";
-        private const string Tools              = "global.tools";
-        private const string Inspiration        = "global.Inspiration";
-        private const string Relationship       = "global.Relationship";
-        private const string StoryboardSegments = "global.StoryboardSegments";
-        private const string Home               = "__Home";
+        private const string StartUp                = "global.startup";
+        private const string Documents              = "global.documents";
+        private const string Compose                = "global.compose";
+        private const string Service                = "global.service";
+        private const string Tools                  = "global.tools";
+        private const string Inspiration            = "global.inspiration";
+        private const string InspirationAndRelative = "__InspirationAndRelative";
+        private const string Relationship           = "global.Relationship";
+        private const string StoryboardSegments     = "global.StoryboardSegments";
+        private const string Home                   = "__Home";
 
         public HomeViewModel()
         {
@@ -32,12 +33,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             //
             //
-            CreateGalleryFeature<InspirationViewModel>(Inspiration, Inspiration);
-            CreateGalleryFeature<StoryboardSegmentsViewModel>(Inspiration, StoryboardSegments);
+            CreateGalleryFeature<InspirationViewModel>(InspirationAndRelative, "global.inspiration");
+            CreateGalleryFeature<StoryboardSegmentsViewModel>(InspirationAndRelative, StoryboardSegments);
+            CreateGalleryFeature<ServiceViewModel>(InspirationAndRelative, Service);
+            CreateGalleryFeature<RelationshipViewModel>(InspirationAndRelative, Relationship);
 
             //
             //
-            CreateGalleryFeature<RelationshipViewModel>(Relationship, Relationship);
 
             //
             //
@@ -46,7 +48,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
-            CreateGalleryFeature<ServiceViewModel>(Tools, Service);
+            
+            //
+            //
             CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel");
             CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel");
             CreateGalleryFeature<ToolsViewModel>(Tools, Tools);
