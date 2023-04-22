@@ -93,7 +93,6 @@
             </ScrollViewer>
         </ftk:TabItem>
         <ftk:TabItem Header="图库">
-
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
@@ -160,6 +159,33 @@
         <ftk:TabItem Header="设定"/>
         <ftk:TabItem Header="术语"/>
         <ftk:TabItem Header="法则"/>
-        <ftk:TabItem Header="作品"/>
+        <ftk:TabItem Header="作品">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <ftk:ToolButton Content="{f:Language global.Add}"
+                                    Command="{Binding AddAlbumCommand}"
+                                    Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                    ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
+                                    Command="{Binding RemoveAlbumCommand}"
+                                    CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}"
+                                    ShowText="True" />
+                </StackPanel>
+
+                <f:EmptyStateListBox Grid.Row="1"
+                                       EmptyState="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！"
+                                       IsEmpty="True">
+                    
+                </f:EmptyStateListBox>
+            </Grid>
+        </ftk:TabItem>
     </ftk:TabControl>
 </f:ForestUserControl>

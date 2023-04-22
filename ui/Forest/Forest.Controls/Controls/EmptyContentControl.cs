@@ -7,52 +7,92 @@ namespace Acorisoft.FutureGL.Forest.Controls
     [ContentProperty("Content")]
     public class EmptyContentControl : ContentControl
     {
+        public static readonly DependencyProperty    EmptyStateProperty;
+        public static readonly DependencyProperty    EmptyStateTemplateProperty;
+        public static readonly DependencyProperty    EmptyStateTemplateSelectorProperty;
+        public static readonly DependencyProperty    EmptyStateStringFormatProperty;
+        public static readonly DependencyProperty    EmptyStateBrushProperty;
+        public static readonly DependencyProperty    IsEmptyProperty ;
+        public static readonly DependencyProperty    NotEmptyProperty;
+        public static readonly DependencyPropertyKey ShowEmptyStatePropertyKey;
+        public static readonly DependencyProperty    ShowEmptyStateProperty;
+        
         static EmptyContentControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EmptyContentControl), new FrameworkPropertyMetadata(typeof(EmptyContentControl)));
+            IsEmptyProperty = DependencyProperty.Register(
+                nameof(IsEmpty),
+                typeof(bool),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(Boxing.True, OnIsEmptyChanged));
+            NotEmptyProperty = DependencyProperty.Register(
+                nameof(NotEmpty),
+                typeof(bool),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(Boxing.False, OnNotEmptyChanged));
+            ShowEmptyStatePropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(ShowEmptyState),
+                typeof(bool),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(bool)));
+            
+            EmptyStateProperty = DependencyProperty.Register(
+                nameof(EmptyState),
+                typeof(object),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(object)));
+            
+            EmptyStateTemplateProperty = DependencyProperty.Register(
+                nameof(EmptyStateTemplate),
+                typeof(DataTemplate),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(DataTemplate)));
+            EmptyStateTemplateSelectorProperty = DependencyProperty.Register(
+                nameof(EmptyStateTemplateSelector),
+                typeof(DataTemplateSelector),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(DataTemplateSelector)));
+            EmptyStateStringFormatProperty = DependencyProperty.Register(
+                nameof(EmptyStateStringFormat),
+                typeof(string),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(string)));
+            EmptyStateBrushProperty = DependencyProperty.Register(
+                nameof(EmptyStateBrush),
+                typeof(Brush),
+                typeof(EmptyContentControl),
+                new PropertyMetadata(default(Brush)));
+            ShowEmptyStateProperty = ShowEmptyStatePropertyKey.DependencyProperty;
         }
 
-        /// <summary>
-        /// 实现 <see cref="EmptyState"/> 属性的依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty EmptyStateProperty = DependencyProperty.Register(
-            nameof(EmptyState),
-            typeof(object),
-            typeof(EmptyContentControl),
-            new PropertyMetadata(default(object)));
+        private static void OnIsEmptyChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
+        {
+            element.SetValue(ShowEmptyStatePropertyKey, e.NewValue);
+        }
+        
+        private static void OnNotEmptyChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
+        {
+            element.SetValue(ShowEmptyStatePropertyKey, Boxing.Box(!((bool)e.NewValue)));
+        }
 
-        /// <summary>
-        /// 实现 <see cref="EmptyStateTemplate"/> 属性的依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty EmptyStateTemplateProperty = DependencyProperty.Register(
-            nameof(EmptyStateTemplate),
-            typeof(DataTemplate),
-            typeof(EmptyContentControl),
-            new PropertyMetadata(default(DataTemplate)));
+        public bool ShowEmptyState
+        {
+            get => (bool)GetValue(ShowEmptyStateProperty);
+            private set => SetValue(ShowEmptyStateProperty, value);
+        }
 
-        /// <summary>
-        /// 实现 <see cref="EmptyStateTemplateSelector"/> 属性的依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty EmptyStateTemplateSelectorProperty = DependencyProperty.Register(
-            nameof(EmptyStateTemplateSelector),
-            typeof(DataTemplateSelector),
-            typeof(EmptyContentControl),
-            new PropertyMetadata(default(DataTemplateSelector)));
+        public bool NotEmpty
+        {
+            get => (bool)GetValue(NotEmptyProperty);
+            set => SetValue(NotEmptyProperty,  Boxing.Box(value));
+        }
 
-        /// <summary>
-        /// 实现 <see cref="EmptyStateStringFormat"/> 属性的依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty EmptyStateStringFormatProperty = DependencyProperty.Register(
-            nameof(EmptyStateStringFormat),
-            typeof(string),
-            typeof(EmptyContentControl),
-            new PropertyMetadata(default(string)));
+        public bool IsEmpty
+        {
+            get => (bool)GetValue(IsEmptyProperty);
+            set => SetValue(IsEmptyProperty, Boxing.Box(value));
+        }
 
-        public static readonly DependencyProperty EmptyStateBrushProperty = DependencyProperty.Register(
-            nameof(EmptyStateBrush),
-            typeof(Brush),
-            typeof(EmptyContentControl),
-            new PropertyMetadata(default(Brush)));
 
         public Brush EmptyStateBrush
         {
