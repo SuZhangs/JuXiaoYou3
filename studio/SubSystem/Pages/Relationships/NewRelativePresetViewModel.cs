@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 
 // ReSharper disable RedundantArgumentDefaultValue
 

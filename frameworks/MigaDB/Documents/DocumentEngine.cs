@@ -1,5 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using static Acorisoft.FutureGL.MigaDB.Constants;
 // ReSharper disable ClassNeverInstantiated.Global

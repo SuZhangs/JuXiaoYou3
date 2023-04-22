@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
+﻿namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
 {
     public class RelativePreset : StorageUIObject
     {

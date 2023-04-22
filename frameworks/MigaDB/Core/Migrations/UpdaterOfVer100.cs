@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Data;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 // ReSharper disable All
 
 namespace Acorisoft.FutureGL.MigaDB.Core.Migrations

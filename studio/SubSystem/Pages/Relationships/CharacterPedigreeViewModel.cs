@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Core;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 

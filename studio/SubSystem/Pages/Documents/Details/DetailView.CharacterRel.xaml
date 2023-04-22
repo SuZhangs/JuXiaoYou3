@@ -10,7 +10,7 @@
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:studio="urn:acorisoft/studio"
              xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
-             xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relationships;assembly=MigaDB"
+             xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relatives;assembly=MigaDB"
              xmlns:graph="clr-namespace:GraphShape.Controls.Converters;assembly=GraphShape.Controls"
              xmlns:layout="clr-namespace:GraphShape.Algorithms.Layout;assembly=GraphShape"
              xmlns:overlap="clr-namespace:GraphShape.Algorithms.OverlapRemoval;assembly=GraphShape"

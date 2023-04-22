@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Utils;
 

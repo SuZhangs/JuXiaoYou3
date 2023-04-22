@@ -1,7 +1,7 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Documents;
 using QuikGraph;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
+namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
 {
     /// <summary>
     /// 人物关系

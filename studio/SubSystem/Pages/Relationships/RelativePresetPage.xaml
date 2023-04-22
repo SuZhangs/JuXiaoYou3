@@ -4,7 +4,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
-                     xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relationships;assembly=MigaDB"
+                     xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relatives;assembly=MigaDB"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"

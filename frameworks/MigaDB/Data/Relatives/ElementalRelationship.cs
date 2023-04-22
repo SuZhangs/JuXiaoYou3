@@ -1,7 +1,7 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Universe;
 using QuikGraph;
 
-namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
+namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
 {
     public class ElementalRelationship: StorageUIObject, IEdge<Elemental>
     {

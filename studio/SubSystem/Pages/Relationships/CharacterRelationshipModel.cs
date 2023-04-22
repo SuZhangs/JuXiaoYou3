@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Relationships;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 using GraphShape.Controls;
 using QuikGraph;
 
