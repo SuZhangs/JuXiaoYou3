@@ -24,8 +24,8 @@
                                   DataType="{x:Type studio:ISettingComboBox}">
                         <Border Background="{f:Brush BackgroundLevel1}"
                                 CornerRadius="12"
-                                Margin="0 0 0 10"
                                 Padding="16"
+                                Margin="0 0 0 10"
                                 MinHeight="100">
                             <DockPanel>
                                 <ComboBox DockPanel.Dock="Right"
