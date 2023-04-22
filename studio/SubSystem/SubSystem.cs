@@ -95,9 +95,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, GeographyDocumentViewModel>();
 
-            Xaml.InstallView<NewRelationshipView, NewRelationshipViewModel>();
-            Xaml.InstallView<NewRelationshipDefinitionView, NewRelationshipDefinitionViewModel>();
-            Xaml.InstallView<RelationshipDefinitionPage, RelationshipDefinitionViewModel>();
+            Xaml.InstallView<NewRelativeView, NewRelativeViewModel>();
+            Xaml.InstallView<NewRelativePresetView, NewRelativePresetViewModel>();
+            Xaml.InstallView<RelativePresetPage, RelativePresetViewModel>();
             Xaml.InstallView<CharacterPedigreePage, CharacterPedigreeViewModel>();
             Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 

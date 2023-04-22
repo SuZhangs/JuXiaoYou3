@@ -3,7 +3,8 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Universe;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
-using Acorisoft.FutureGL.MigaDB.Migrations;
+using Acorisoft.FutureGL.MigaDB.Core.Maintainers;
+using Acorisoft.FutureGL.MigaDB.Core.Migrations;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using MediatR;
@@ -38,7 +39,9 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
                    .Setup<UniverseEngine>(false)
-                   .Update<UpdaterOfVer100>()
+                   .Maintain<DatabasePresetMaintainer>()
+                   .Maintain<DatabasePropertiesMaintainer>()
+                   .Maintain<ServicePropertyMaintainer>()
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }
 
@@ -235,7 +238,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly int                                _minimumTargetVersion;
         private readonly DatabaseMode                       _databaseMode;
         private readonly ILogger                            _logger;
-        private readonly DatabaseCreationMaintainer         _defaultMaintainer;
 
 
         public DatabaseManager(ILogger logger,
@@ -253,7 +255,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _minimumTargetVersion = minimumTargetVersion;
             Container             = container;
             _databaseMode         = mode;
-            _defaultMaintainer    = new DatabaseCreationMaintainer();
             _database             = new ObservableProperty<IDatabase>();
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
@@ -265,8 +266,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             return Task.Run(() =>
             {
-                //
-                _defaultMaintainer.Maintain(database);
                 foreach (var maintainer in _maintainers)
                 {
                     try

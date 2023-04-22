@@ -112,8 +112,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 var db = Xaml.Get<IDatabaseManager>()
                              .Database
                              .CurrentValue;
-                var mmp = db.Get<ModuleManifestProperty>();
-                mmp.SetPresentationManifest(Type, PresentationPart);
+                var mmp = db.Get<PresetProperty>();
+                mmp.SetPresentationPreset(Type, PresentationPart);
                 db.Set(mmp);
             }
         }
@@ -186,8 +186,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                          .Database
                          .CurrentValue;
 
-            var thisTypePresentation = db.Get<ModuleManifestProperty>()
-                                         .GetPresentationManifest(Type, x => db.Set(x));
+            var thisTypePresentation = db.Get<PresetProperty>()
+                                         .GetPresentationPreset(Type, x => db.Set(x));
             
             IsOverridePresentationPart = true;
             
@@ -224,8 +224,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                          .Database
                          .CurrentValue;
 
-            var thisTypePresentation = db.Get<ModuleManifestProperty>()
-                                         .GetPresentationManifest(Type, x => db.Set(x));
+            var thisTypePresentation = db.Get<PresetProperty>()
+                                         .GetPresentationPreset(Type, x => db.Set(x));
             
             IsOverridePresentationPart = true;
             
@@ -262,8 +262,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             
             //
             // 复制一份
-            PresentationPart = db.Get<ModuleManifestProperty>()
-                                 .GetPresentationManifest(Type, x => db.Set(x));
+            PresentationPart = db.Get<PresetProperty>()
+                                 .GetPresentationPreset(Type, x => db.Set(x));
             SavePresentationPart();
             ResetPresentation();
         }

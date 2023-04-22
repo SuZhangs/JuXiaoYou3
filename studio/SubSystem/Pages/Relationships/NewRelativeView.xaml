@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Relationships.NewRelationshipView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Relationships.NewRelativeView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,11 +13,20 @@
                      xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Relationships;assembly=MigaDB"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelationshipViewModel}, IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewRelativeViewModel}, IsDesignTimeCreatable=True}"
                      Height="480"
                      Width="640">
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="Avatar" />
+        <GeometryGroup x:Key="Refresh">
+            <GeometryGroup.Children>
+                <Geometry>F1 M24,24z M0,0z M23,4L23,4 23,10 17,10</Geometry>
+                <Geometry>F1 M24,24z M0,0z M1,20L1,20 1,14 7,14</Geometry>
+                <Geometry>F1 M24,24z M0,0z M3.51,9A9,9,0,0,1,18.36,5.64L23,10 M1,14L5.64,18.36A9,9,0,0,0,20.49,15</Geometry>
+            </GeometryGroup.Children>
+        </GeometryGroup>
+        <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
+        <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
 
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <DockPanel Margin="4">
@@ -43,9 +52,6 @@
                            Text="{Binding Name,Mode=OneWay}" />
             </DockPanel>
         </DataTemplate>
-
-        <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
-        <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
@@ -141,6 +147,19 @@
                               Text="{Binding CallOfSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               VerticalAlignment="Center" />
             </Grid>
+            
+            <ftk:ToolButton Icon="{StaticResource Refresh}"
+                            Command="{Binding SwitchCommand}"/>
+            
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top"
+                           Text="友善度"/>
+                <studio:DegreeControl Value="{Binding Friendliness,Mode=TwoWay}"/>
+            </DockPanel>
+            <ComboBox ItemsSource="{Binding Preset}"
+                      SelectedItem="{Binding Preset,Mode=TwoWay}">
+                
+            </ComboBox>
         </StackPanel>
     </f:DialogPage>
 </f:ForestUserControl>

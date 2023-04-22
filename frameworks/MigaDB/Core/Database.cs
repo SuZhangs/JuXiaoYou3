@@ -91,6 +91,14 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回一个数据类型。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ILiteCollection<T> GetCollection<T>(string collectionName) where T : class => _database.GetCollection<T>(collectionName);
+        
+        
+        /// <summary>
+        /// 删除数据库集合。
+        /// </summary>
+        /// <param name="collectionName">集合名</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void DropCollection(string collectionName)  => _database.DropCollection(collectionName);
 
         /// <summary>
         /// 获取指定的集合是否存在。
@@ -99,6 +107,29 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回指定的集合是否存在。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Exists(string collectionName) => _database.CollectionExists(collectionName);
+        
+        /// <summary>
+        /// 删除值。
+        /// </summary>
+        /// <typeparam name="T">值类型。</typeparam>
+        /// <returns>获得值。</returns>
+        public T Delete<T>() where T : class
+        {
+            var key = typeof(T).FullName;
+
+            if (Has<T>())
+            {
+                if (!_cache.TryRemove(key, out var instance))
+                {
+                    instance = Get<T>();
+                }
+                
+                _props.Delete(key);
+                return (T)instance;
+            }
+            
+            return default(T);
+        }
 
         /// <summary>
         /// 获得值。
@@ -120,12 +151,22 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return (T)obj;
         }
 
+        /// <summary>
+        /// 删除值。
+        /// </summary>
+        /// <typeparam name="T">值类型。</typeparam>
+        /// <returns>获得值是否存在，true为存在否则表示不存在。</returns>
         public bool Has<T>() where T : class
         {
             var key = typeof(T).FullName;
             return _cache.ContainsKey(key) || _props.HasID(key);
         }
 
+        /// <summary>
+        /// 添加或更新值。
+        /// </summary>
+        /// <typeparam name="T">值类型。</typeparam>
+        /// <returns>获得值。</returns>
         public T Upsert<T>(T instance) where T : class
         {
             return Has<T>() ? Get<T>() : Set<T>(instance);
@@ -171,6 +212,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             Set(information);
         }
 
+        /// <summary>
+        /// 收集垃圾
+        /// </summary>
+        /// <param name="disposable"></param>
         public void Collect(IDisposable disposable)
         {
             _collector.Collect(disposable);

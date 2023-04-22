@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Property = Xaml.Get<IDatabaseManager>()
                            .Database
                            .CurrentValue
-                           .Get<ModuleManifestProperty>();
+                           .Get<PresetProperty>();
 
             _sorter                     = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
             _reader                     = new DataPartReader();
@@ -263,12 +263,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             await DialogService().Dialog(new ModuleManifestViewModel());
         }
 
-        private async Task<ModuleManifest> PickModuleManifestImpl()
+        private async Task<ModulePreset> PickModuleManifestImpl()
         {
-            var r = await SubSystem.OptionSelection<ModuleManifest>(
+            var r = await SubSystem.OptionSelection<ModulePreset>(
                 SubSystemString.SelectTitle,
                 null,
-                Property.Manifests);
+                Property.ModulePresets);
 
             return r.IsFinished ? r.Value : null;
         }
@@ -346,58 +346,58 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         }
 
 
-        public ModuleManifestProperty Property { get; }
+        public PresetProperty Property { get; }
 
-        public ModuleManifest Ability
+        public ModulePreset Ability
         {
-            get => Property.GetModuleManifest(DocumentType.Ability);
+            get => Property.GetModulePreset(DocumentType.Ability);
             set
             {
-                Property.SetModuleManifest(DocumentType.Ability, value);
+                Property.SetModulePreset(DocumentType.Ability, value);
                 RaiseUpdated();
                 Save();
             }
         }
 
-        public ModuleManifest Character
+        public ModulePreset Character
         {
-            get => Property.GetModuleManifest(DocumentType.Character);
+            get => Property.GetModulePreset(DocumentType.Character);
             set
             {
-                Property.SetModuleManifest(DocumentType.Character, value);
+                Property.SetModulePreset(DocumentType.Character, value);
                 RaiseUpdated();
                 Save();
             }
         }
 
-        public ModuleManifest Geography
+        public ModulePreset Geography
         {
-            get => Property.GetModuleManifest(DocumentType.Geography);
+            get => Property.GetModulePreset(DocumentType.Geography);
             set
             {
-                Property.SetModuleManifest(DocumentType.Geography, value);
+                Property.SetModulePreset(DocumentType.Geography, value);
                 RaiseUpdated();
                 Save();
             }
         }
 
-        public ModuleManifest Item
+        public ModulePreset Item
         {
-            get => Property.GetModuleManifest(DocumentType.Item);
+            get => Property.GetModulePreset(DocumentType.Item);
             set
             {
-                Property.SetModuleManifest(DocumentType.Item, value);
+                Property.SetModulePreset(DocumentType.Item, value);
                 RaiseUpdated();
                 Save();
             }
         }
 
-        public ModuleManifest Other
+        public ModulePreset Other
         {
-            get => Property.GetModuleManifest(DocumentType.Other);
+            get => Property.GetModulePreset(DocumentType.Other);
             set
             {
-                Property.SetModuleManifest(DocumentType.Other, value);
+                Property.SetModulePreset(DocumentType.Other, value);
                 RaiseUpdated();
                 Save();
             }

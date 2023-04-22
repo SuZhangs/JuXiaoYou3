@@ -11,35 +11,35 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
         private string _callOfSource;
         private string _callOfTarget;
         private int    _friendliness;
-        private bool   _isParenthood;
-        private bool   _isCouple;
-        private bool _isBiDirection;
+        private bool   _directRelative;
+        private bool   _collateralRelative;
+        private bool   _conjugalRelative;
 
         /// <summary>
-        /// 获取或设置 <see cref="IsBiDirection"/> 属性。
+        /// 旁系亲属
         /// </summary>
-        public bool IsBiDirection
+        public bool CollateralRelative
         {
-            get => _isBiDirection;
-            set => SetValue(ref _isBiDirection, value);
-        }
-        
-        /// <summary>
-        /// 获取或设置 <see cref="IsCouple"/> 属性。
-        /// </summary>
-        public bool IsCouple
-        {
-            get => _isCouple;
-            set => SetValue(ref _isCouple, value);
+            get => _collateralRelative;
+            set => SetValue(ref _collateralRelative, value);
         }
 
         /// <summary>
-        /// 是否为法律意义上的亲属关系（继父继母继兄等）
+        /// 夫妻关系
         /// </summary>
-        public bool IsParenthood
+        public bool ConjugalRelative
         {
-            get => _isParenthood;
-            set => SetValue(ref _isParenthood, value);
+            get => _conjugalRelative;
+            set => SetValue(ref _conjugalRelative, value);
+        }
+
+        /// <summary>
+        /// 直系亲属
+        /// </summary>
+        public bool DirectRelative
+        {
+            get => _directRelative;
+            set => SetValue(ref _directRelative, value);
         }
 
         /// <summary>

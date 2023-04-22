@@ -15,36 +15,22 @@
 
         public void Maintain(IDatabase database)
         {
-            //
-            // 获得属性集合。
-            var props = ((IObjectCollection)database).Props;
-            var id = typeof(T).FullName;
-            var document = props.FindById(id)?.AsDocument;
-            var mapper = BsonMapper.Global;
             T instance;
-            
-            if (document is null)
+
+            if (database.Has<T>())
             {
-                instance = OnCreateInstance();
-            }
-            else
-            {
-                instance = mapper.Deserialize<T>(document);
-                
+                instance = database.Get<T>();
                 if (IsInvalidated(instance))
                 {
                     OnFixInstance(instance);
+                    database.Set<T>(instance);
                 }
             }
-
-            //
-            // 序列化
-            document                           = mapper.Serialize(instance).AsDocument;
-            document[Constants.LiteDB_IdField] = id;
-            
-            //
-            // 升级
-            props.Upsert(document);
+            else
+            {
+                instance = OnCreateInstance();
+                database.Set<T>(instance);
+            }
         }
     }
 }

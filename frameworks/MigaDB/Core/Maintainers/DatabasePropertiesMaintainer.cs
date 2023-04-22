@@ -1,9 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.MigaDB.Data;
+// ReSharper disable All
 
-namespace Acorisoft.FutureGL.MigaDB.Core
+namespace Acorisoft.FutureGL.MigaDB.Core.Maintainers
 {
-    public class DatabaseCreationMaintainer : IDatabaseMaintainer
+    public class DatabasePropertiesMaintainer : IDatabaseMaintainer
     {
         public void Maintain(IDatabase database)
         {
@@ -14,13 +15,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 Author      = "Test",
                 Name        = "Test",
                 ForeignName = "Test"
-            });
-
-            database.Upsert<ModuleManifestProperty>(new ModuleManifestProperty
-            {
-                Manifests        = new ObservableCollection<ModuleManifest>(),
-                DefaultManifests = new Dictionary<DocumentType, string>(),
-                DefaultPresentationManifest = new Dictionary<DocumentType, PartOfPresentation>()
             });
 
             database.Upsert<DoubleProperty>(new DoubleProperty

@@ -9,19 +9,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
     public class ModuleManifestViewModel : DialogViewModel
     {
-        private ModuleManifest _selectedManifest;
+        private ModulePreset _selectedPreset;
         
         public ModuleManifestViewModel()
         {
             Property = Xaml.Get<IDatabaseManager>()
                            .Database
                            .CurrentValue
-                           .Get<ModuleManifestProperty>();
+                           .Get<PresetProperty>();
             
             
             AddManifestCommand    = AsyncCommand(AddManifestImpl);
-            EditManifestCommand   = AsyncCommand<ModuleManifest>(EditManifestImpl, x => x is not null);
-            RemoveManifestCommand = AsyncCommand<ModuleManifest>(RemoveManifestImpl, x => x is not null);
+            EditManifestCommand   = AsyncCommand<ModulePreset>(EditManifestImpl, x => x is not null);
+            RemoveManifestCommand = AsyncCommand<ModulePreset>(RemoveManifestImpl, x => x is not null);
             AddTemplateCommand    = AsyncCommand(AddTemplateImpl);
             RemoveTemplateCommand = Command<ModuleTemplateCache>(RemoveTemplateImpl);
         }
@@ -59,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            var manifest = new ModuleManifest
+            var manifest = new ModulePreset
             {
                 Id        = ID.Get(),
                 Name      = r.Value,
@@ -70,9 +70,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Save();
         }
         
-        private async Task EditManifestImpl(ModuleManifest manifest)
+        private async Task EditManifestImpl(ModulePreset preset)
         {
-            if (manifest is null)
+            if (preset is null)
             {
                 return;
             }
@@ -84,13 +84,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            manifest.Name = r.Value;
+            preset.Name = r.Value;
             Save();
         }
         
-        private async Task RemoveManifestImpl(ModuleManifest manifest)
+        private async Task RemoveManifestImpl(ModulePreset preset)
         {
-            if (manifest is null)
+            if (preset is null)
             {
                 return;
             }
@@ -100,11 +100,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
             
-            Manifests.Remove(manifest);
+            Manifests.Remove(preset);
             
-            if (Property.DefaultManifests
+            if (Property.DefaultModulePreset
                         .Values
-                        .Any(x => ReferenceEquals(x, manifest)))
+                        .Any(x => ReferenceEquals(x, preset)))
             {
                 await Warning(Language.GetText("text.defaultManifestHasBeenRemoved"));
             }
@@ -115,7 +115,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task AddTemplateImpl()
         {
             var ds       = DialogService();
-            var template = _selectedManifest.Templates;
+            var template = _selectedPreset.Templates;
             var hash = template .Select(x => x.Id)
                                         .ToHashSet();
             var r = await ds.Dialog<IEnumerable<ModuleTemplateCache>, ModuleSelectorViewModel>(new Parameter
@@ -147,96 +147,96 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            if (_selectedManifest is null)
+            if (_selectedPreset is null)
             {
                 return;
             }
             
-            SelectedManifest.Templates.Remove(template);
+            SelectedPreset.Templates.Remove(template);
             Save();
         }
 
-        public ModuleManifestProperty Property { get; }
+        public PresetProperty Property { get; }
 
-        public ModuleManifest SelectedManifest
+        public ModulePreset SelectedPreset
         {
-            get => _selectedManifest;
+            get => _selectedPreset;
             set
             {
-                SetValue(ref _selectedManifest, value);
+                SetValue(ref _selectedPreset, value);
                 RemoveManifestCommand.NotifyCanExecuteChanged();
                 EditManifestCommand.NotifyCanExecuteChanged();
             }
         }
 
-        public ModuleManifest Ability
+        public ModulePreset Ability
         {
-            get => Property.GetModuleManifest(DocumentType.Ability);
+            get => Property.GetModulePreset(DocumentType.Ability);
             set
             {
-                Property.SetModuleManifest(DocumentType.Ability, value);
+                Property.SetModulePreset(DocumentType.Ability, value);
                 RaiseUpdated();
                 Save();
             }
         }
-        public ModuleManifest Character
+        public ModulePreset Character
         {
-            get => Property.GetModuleManifest(DocumentType.Character);
+            get => Property.GetModulePreset(DocumentType.Character);
             set
             {
-                Property.SetModuleManifest(DocumentType.Character, value);
+                Property.SetModulePreset(DocumentType.Character, value);
                 RaiseUpdated();
                 Save();
             }
         }
-        public ModuleManifest Geography
+        public ModulePreset Geography
         {
-            get => Property.GetModuleManifest(DocumentType.Geography);
+            get => Property.GetModulePreset(DocumentType.Geography);
             set
             {
-                Property.SetModuleManifest(DocumentType.Geography, value);
-                RaiseUpdated();
-                Save();
-            }
-        }
-        
-        public ModuleManifest Item
-        {
-            get => Property.GetModuleManifest(DocumentType.Item);
-            set
-            {
-                Property.SetModuleManifest(DocumentType.Item, value);
+                Property.SetModulePreset(DocumentType.Geography, value);
                 RaiseUpdated();
                 Save();
             }
         }
         
-        public ModuleManifest Other
+        public ModulePreset Item
         {
-            get => Property.GetModuleManifest(DocumentType.Other);
+            get => Property.GetModulePreset(DocumentType.Item);
             set
             {
-                Property.SetModuleManifest(DocumentType.Other, value);
+                Property.SetModulePreset(DocumentType.Item, value);
+                RaiseUpdated();
+                Save();
+            }
+        }
+        
+        public ModulePreset Other
+        {
+            get => Property.GetModulePreset(DocumentType.Other);
+            set
+            {
+                Property.SetModulePreset(DocumentType.Other, value);
                 RaiseUpdated();
                 Save();
             }
         }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<ModuleManifest> Manifests => Property.Manifests;
+        public ObservableCollection<ModulePreset> Manifests => Property.ModulePresets;
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddManifestCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<ModuleManifest> EditManifestCommand { get; }
+        public AsyncRelayCommand<ModulePreset> EditManifestCommand { get; }
         
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddTemplateCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<ModuleManifest> RemoveManifestCommand { get; }
+        public AsyncRelayCommand<ModulePreset> RemoveManifestCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<ModuleTemplateCache> RemoveTemplateCommand { get; }

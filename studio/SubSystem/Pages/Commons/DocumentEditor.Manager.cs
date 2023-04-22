@@ -243,8 +243,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                              .Database
                              .CurrentValue;
             
-                PresentationPart = db.Get<ModuleManifestProperty>()
-                                     .GetPresentationManifest(Type, x => db.Set(x));
+                PresentationPart = db.Get<PresetProperty>()
+                                     .GetPresentationPreset(Type, x => db.Set(x));
                 IsOverridePresentationPart = false;
             }
         }
@@ -279,8 +279,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var manifest = DatabaseManager.Database
                                           .CurrentValue
-                                          .Get<ModuleManifestProperty>()
-                                          .GetModuleManifest(Type);
+                                          .Get<PresetProperty>()
+                                          .GetModulePreset(Type);
 
             if (Type != manifest?.Type)
             {

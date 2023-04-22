@@ -4,16 +4,16 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 {
-    public class NewRelationshipDefinitionViewModel : ExplicitDialogVM
+    public class NewRelativePresetViewModel : ExplicitDialogVM
     {
-        public static Task<Op<RelationshipDefinition>> New()
+        public static Task<Op<RelativePreset>> New()
         {
-            return DialogService().Dialog<RelationshipDefinition, NewRelationshipDefinitionViewModel>();
+            return DialogService().Dialog<RelativePreset, NewRelativePresetViewModel>();
         }
 
-        public static Task<Op<RelationshipDefinition>> Edit(RelationshipDefinition rel)
+        public static Task<Op<RelativePreset>> Edit(RelativePreset rel)
         {
-            return DialogService().Dialog<RelationshipDefinition, NewRelationshipDefinitionViewModel>(new Parameter
+            return DialogService().Dialog<RelativePreset, NewRelativePresetViewModel>(new Parameter
             {
                 Args = new object[]
                 {
@@ -36,11 +36,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         {
             var p = parameter.Parameter;
             var a = p.Args;
-            IsEditMode = a.Length > 0 && a[0] is RelationshipDefinition;
+            IsEditMode = a.Length > 0 && a[0] is RelativePreset;
 
             if (IsEditMode)
             {
-                Entity       = (RelationshipDefinition)a[0];
+                Entity       = (RelativePreset)a[0];
                 CallOfSource = Entity.CallOfSource;
                 CallOfTarget = Entity.CallOfTarget;
             }
@@ -64,21 +64,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 Entity.CollateralRelative = CollateralRelative;
                 Entity.DirectRelative     = DirectRelative;
                 Entity.ConjugalRelative   = ConjugalRelative;
-                Entity.Friendliness       = Friendliness;
                 Entity.Name               = Name;
                 Result                    = Entity;
             }
             else
             {
-                Result = new RelationshipDefinition
+                Result = new RelativePreset
                 {
-                    Id             = ID.Get(), CollateralRelative = CollateralRelative,
-                    CallOfSource   = CallOfSource,
-                    CallOfTarget   = CallOfTarget,
-                    ConjugalRelative       = ConjugalRelative,
-                    DirectRelative = DirectRelative,
-                    Friendliness   = Friendliness,
-                    Name           = Name
+                    Id               = ID.Get(), CollateralRelative = CollateralRelative,
+                    CallOfSource     = CallOfSource,
+                    CallOfTarget     = CallOfTarget,
+                    ConjugalRelative = ConjugalRelative,
+                    DirectRelative   = DirectRelative,
+                    Name             = Name
                 };
             }
         }
@@ -99,7 +97,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         }
 
         public bool IsEditMode { get; private set; }
-        public RelationshipDefinition Entity { get; private set; }
+        public RelativePreset Entity { get; private set; }
 
         /// <summary>
         /// 获取或设置 <see cref="CollateralRelative"/> 属性。

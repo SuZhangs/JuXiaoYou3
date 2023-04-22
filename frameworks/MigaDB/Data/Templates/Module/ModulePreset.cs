@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
 {
-    public class ModuleManifest : ObservableObject
+    public class ModulePreset : ObservableObject
     {
         private string _name;
         private DocumentType _type;

@@ -38,20 +38,20 @@
                         
                         <ftk:ToolButton Content="{f:Language global.edit}"
                                         Command="{Binding EditManifestCommand}"
-                                        CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
+                                        CommandParameter="{Binding SelectedPreset,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveManifestCommand}"
-                                        CommandParameter="{Binding SelectedManifest,Mode=OneWay}"
+                                        CommandParameter="{Binding SelectedPreset,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
                 <f:ListBox DisplayMemberPath="Name"
                            ItemsSource="{Binding Manifests,Mode=OneWay}"
-                           SelectedItem="{Binding SelectedManifest,Mode=TwoWay}">
+                           SelectedItem="{Binding SelectedPreset,Mode=TwoWay}">
 
                 </f:ListBox>
             </f:ForestSection>
@@ -81,7 +81,7 @@
                 <f:ListBox x:Name="Items"
                            DisplayMemberPath="Name"
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                           ItemsSource="{Binding SelectedManifest.Templates,Mode=OneWay}">
+                           ItemsSource="{Binding SelectedPreset.Templates,Mode=OneWay}">
                     <f:ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"

@@ -7,6 +7,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
     /// </summary>
     public interface IDatabase
     {
+        void DropCollection(string collectionName);
+
+        T Delete<T>() where T : class;
+        
         /// <summary>
         /// 获取数据库集合。
         /// </summary>

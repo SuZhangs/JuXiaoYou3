@@ -98,7 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
                 return;
             }
 
-            var r1 = await NewRelationshipViewModel.New(source, r.Value, DocumentType.Character);
+            var r1 = await NewRelativeViewModel.New(source, r.Value, DocumentType.Character);
             
             if (!r1.IsFinished)
             {

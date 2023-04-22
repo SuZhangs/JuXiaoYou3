@@ -1,10 +1,9 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Relationships
 {
-    public class RelationshipDefinition : StorageUIObject
+    public class RelativePreset : StorageUIObject
     {
         private string _callOfSource;
         private string _callOfTarget;
-        private int    _friendliness;
         private bool   _directRelative;
         private bool   _collateralRelative;
         private bool   _conjugalRelative;
@@ -44,15 +43,6 @@
         {
             get => _directRelative;
             set => SetValue(ref _directRelative, value);
-        }
-
-        /// <summary>
-        /// 友善度
-        /// </summary>
-        public int Friendliness
-        {
-            get => _friendliness;
-            set => SetValue(ref _friendliness, value);
         }
 
         /// <summary>

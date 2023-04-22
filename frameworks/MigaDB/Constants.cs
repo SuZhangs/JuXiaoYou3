@@ -99,6 +99,6 @@
          * 当前数据库版本
          */
         public const int DatabaseMinimumVersion = 0;
-        public const int DatabaseCurrentVersion = 100;
+        public const int DatabaseCurrentVersion = 0;
     }
 }
