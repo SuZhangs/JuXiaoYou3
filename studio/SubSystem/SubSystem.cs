@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
-using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
+using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
 using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 

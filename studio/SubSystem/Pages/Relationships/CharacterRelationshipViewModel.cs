@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
     public class CharacterRelationshipViewModelProxy : BindingProxy<CharacterRelationshipViewModel>{}
     
@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();
-            Relationships              = new ObservableCollection<CharacterRelationship>();
+            Relatives              = new ObservableCollection<CharacterRelationship>();
             RelationshipPaneVisibility = Visibility.Collapsed;
             AddDocumentCommand         = AsyncCommand(NewDocumentImpl);
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
                                                .FindAll());
-            var rels = DocumentEngine.GetRelationships(DocumentType.Character);
+            var rels = DocumentEngine.GetRelatives(DocumentType.Character);
             Graph.AddEdgeRange(rels);
         }
 
@@ -87,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
-            var hash = Relationships.Flat(x=> x.Source.Id, x => x.Target.Id)
+            var hash = Relatives.Flat(x=> x.Source.Id, x => x.Target.Id)
                                     .ToHashSet();
             hash.Add(source.Id);
             var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
@@ -110,7 +110,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             
             if (SelectedDocument.Id == source.Id)
             {
-                Relationships.Add(r1.Value);
+                Relatives.Add(r1.Value);
             }
         }
 
@@ -129,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             
 
             DocumentEngine.RemoveRelationship(rel.Id);
-            Relationships.Remove(rel);
+            Relatives.Remove(rel);
             Graph.RemoveEdge(rel);
         }
         
@@ -154,7 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
             {
                 SetValue(ref _selectedDocument, value);
                 RelationshipPaneVisibility = value is not null ? Visibility.Visible : Visibility.Collapsed;
-                Relationships.Clear();
+                Relatives.Clear();
                 if (_selectedDocument is null)
                 {
                     return;
@@ -162,8 +162,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
 
                 Graph.TryGetInEdges(value, out var edgeA);
                 Graph.TryGetOutEdges(value, out var edgeB);
-                Relationships.AddRange(edgeA);
-                Relationships.AddRange(edgeB);
+                Relatives.AddRange(edgeA);
+                Relatives.AddRange(edgeB);
             }
         }
 
@@ -183,7 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
         /// 当前的所有人物关系
         /// </summary>
         [NullCheck(UniTestLifetime.Constructor)]
-        public ObservableCollection<CharacterRelationship> Relationships { get; }
+        public ObservableCollection<CharacterRelationship> Relatives { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddDocumentCommand { get; }

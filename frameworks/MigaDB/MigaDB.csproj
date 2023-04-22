@@ -26,4 +26,8 @@
       <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Universe" />
+    </ItemGroup>
+
 </Project>

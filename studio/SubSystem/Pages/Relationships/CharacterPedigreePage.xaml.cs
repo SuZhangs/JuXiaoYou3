@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
 
     [Connected(View = typeof(CharacterPedigreePage), ViewModel = typeof(CharacterPedigreeViewModel))]

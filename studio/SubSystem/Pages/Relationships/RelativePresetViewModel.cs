@@ -2,7 +2,7 @@
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
     public class RelativePresetViewModel : EntityTabViewModel<RelativePreset>
     {

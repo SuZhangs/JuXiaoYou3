@@ -2,7 +2,7 @@
 using GraphShape.Controls;
 using QuikGraph;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
     public class CharacterGraph : BidirectionalGraph<DocumentCache, CharacterRelationship>
     {

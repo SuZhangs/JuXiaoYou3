@@ -2,7 +2,7 @@
 
 // ReSharper disable RedundantArgumentDefaultValue
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
     public class NewRelativePresetViewModel : ExplicitDialogVM
     {

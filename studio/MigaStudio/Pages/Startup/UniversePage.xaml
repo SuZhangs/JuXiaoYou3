@@ -4,84 +4,162 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      mc:Ignorable="d"                    
                      Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+
+        <thisConverters:ImageConverter x:Key="ImageConverter"/>
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
+
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8 6" />
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320" />
-            <ColumnDefinition Width="320" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="320" />
-        </Grid.ColumnDefinitions>
-        <HeaderedContentControl Header="功能菜单">
-            <f:TreeView>
-                <f:TreeViewItem Header="世界观">
-                    <f:TreeViewItem Header="总览"/>
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="设定">
-                    <f:TreeViewItem Header="人物"/>
-                    <f:TreeViewItem Header="地图"/>
-                    <f:TreeViewItem Header="武器"/>
-                    <f:TreeViewItem Header="能力"/>
-                    <f:TreeViewItem Header="物品"/>
-                    <f:TreeViewItem Header="其他"/>
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="术语">
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="工具">
-                </f:TreeViewItem>
-            </f:TreeView>
-        </HeaderedContentControl>
+    <ftk:TabControl Padding="0 16 0 0">
+        <ftk:TabItem Header="基础信息">
+            <ScrollViewer>
+                <StackPanel>
+                    <DockPanel Margin="0 0 0 8">
+                        <!-- 头像 -->
+                        <f:LooklessButton Command="{Binding ChangeAvatarCommand}"
+                                          Height="160"
+                                          Width="160">
+                            <Border>
+                                <Border.Background>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                                <Binding Path="Avatar" Mode="OneWay" />
+                                                <Binding Path="Type" />
+                                            </MultiBinding>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Border.Background>
+                            </Border>
+                        </f:LooklessButton>
+                        <UniformGrid Columns="3"
+                                     Margin="32 0 0 0"
+                                     VerticalAlignment="Top">
+                            <f:HeaderedSingleLine Header="ID"
+                                                  IsReadOnly="True"
+                                                  Margin="8"
+                                                  Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <f:HeaderedSingleLine Header="版本"
+                                                  IsReadOnly="True"
+                                              Margin="8"
+                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <f:HeaderedSingleLine Header="封面"
+                                                  IsReadOnly="True"
+                                              Margin="8"
+                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <f:HeaderedSingleLine Header="{f:Language global.Name}"
+                                              Margin="8"
+                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <f:HeaderedSingleLine Header="{f:Language global.Author}"
+                                              Margin="8"
+                                              Text="{Binding Author,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <f:HeaderedSingleLine Header="{f:Language global.foreignName}"
+                                              Margin="8"
+                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            
+                        </UniformGrid>
 
-        <f:ForestIsland Grid.Column="1"
-                        Header="子菜单">
+                    </DockPanel>
+                    <f:HeaderedMultiLine Header="介绍"
+                                         Height="200"
+                                         Margin="8"
+                                         Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-            <f:TreeView>
-                <f:TreeViewItem Header="总览">
-                    <f:TreeViewItem Header="现实"/>
-                    <f:TreeViewItem Header="异世界"/>
-                    <f:TreeViewItem Header="次元"/>
-                    <f:TreeViewItem Header="位面"/>
-                    <f:TreeViewItem Header="其他"/>
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="法则">
-                    <f:TreeViewItem Header="神祇"/>
-                    <f:TreeViewItem Header="恶魔"/>
-                    <f:TreeViewItem Header="灾厄"/>
-                    <f:TreeViewItem Header="毒物"/>
-                    <f:TreeViewItem Header="元素"/>
-                    <f:TreeViewItem Header="科技"/>
-                    <f:TreeViewItem Header="魔法"/>
-                    <f:TreeViewItem Header="物理"/>
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="设定">
-                    <f:TreeViewItem Header="NPC"/>
-                    <f:TreeViewItem Header="国家"/>
-                    <f:TreeViewItem Header="势力"/>
-                    <f:TreeViewItem Header="团队"/>
-                    <f:TreeViewItem Header="物品"/>
-                    <f:TreeViewItem Header="生物"/>
-                    <f:TreeViewItem Header="毒物"/>
-                    <f:TreeViewItem Header="植物"/>
-                    <f:TreeViewItem Header="矿物"/>
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="术语">
-                    <f:TreeViewItem Header="元素"/>
-                    <f:TreeViewItem Header="属性"/>
-                    <f:TreeViewItem Header="特殊法则"/>
-                    <f:TreeViewItem Header="其他"/>
-                </f:TreeViewItem>
-            </f:TreeView>
-        </f:ForestIsland>
-    </Grid>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                    <f:ToggleSwitch Content="存在魔法?"
+                                    Margin="8"/>
+                </StackPanel>
+            </ScrollViewer>
+        </ftk:TabItem>
+        <ftk:TabItem Header="图库">
+
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal">
+                    <ftk:ToolButton Content="{f:Language global.Add}"
+                                    Command="{Binding AddAlbumCommand}"
+                                    Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                    ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
+                            Command="{Binding RemoveAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.MinusCircle}"
+                            ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.Up}"
+                            Command="{Binding ShiftUpAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowUp}"
+                            ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.Down}"
+                            Command="{Binding ShiftDownAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.ArrowDown}"
+                            ShowText="True" />
+
+                    <ftk:ToolButton Content="{f:Language global.Presentation}"
+                            Command="{Binding OpenAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.Upload}"
+                            ShowText="True" />
+                </StackPanel>
+
+                <DockPanel>
+                    <f:ListBox DockPanel.Dock="Right"
+                       ItemsSource="{Binding Collection,Mode=OneWay}"
+                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type m:Album}">
+                                <TextBlock Margin="8"
+                                   Text="{Binding Source}"
+                                   TextTrimming="CharacterEllipsis"
+                                   VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </f:ListBox>
+
+                    <ScrollViewer Padding="12">
+                        <Viewbox>
+                            <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
+                                <ContentControl.ContentTemplate>
+                                    <DataTemplate DataType="{x:Type m:Album}">
+                                        <Image Stretch="None"
+                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
+                                    </DataTemplate>
+                                </ContentControl.ContentTemplate>
+                            </ContentControl>
+                        </Viewbox>
+                    </ScrollViewer>
+
+                </DockPanel>
+            </DockPanel>
+        </ftk:TabItem>
+        <ftk:TabItem Header="设定"/>
+        <ftk:TabItem Header="术语"/>
+        <ftk:TabItem Header="法则"/>
+        <ftk:TabItem Header="作品"/>
+    </ftk:TabControl>
 </f:ForestUserControl>

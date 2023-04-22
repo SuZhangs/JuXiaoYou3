@@ -20,87 +20,72 @@
 
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
     </UserControl.Resources>
-    <DockPanel>
-        <Border DockPanel.Dock="Left"
-                Background="{f:BackgroundBrush}"
-                CornerRadius="3"
-                Width="320"
-                Padding="32">
-            <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="320" />
+        </Grid.ColumnDefinitions>
+        <HeaderedContentControl Header="功能菜单">
+            <f:TreeView>
+                <f:TreeViewItem Header="世界观">
+                    <f:TreeViewItem Header="总览"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="设定">
+                    <f:TreeViewItem Header="人物"/>
+                    <f:TreeViewItem Header="地图"/>
+                    <f:TreeViewItem Header="武器"/>
+                    <f:TreeViewItem Header="能力"/>
+                    <f:TreeViewItem Header="物品"/>
+                    <f:TreeViewItem Header="其他"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="术语">
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="工具">
+                </f:TreeViewItem>
+            </f:TreeView>
+        </HeaderedContentControl>
 
-                <!-- 头像 -->
-                <f:LooklessButton Command="{Binding ChangeAvatarCommand}"
-                                  Height="192"
-                                  Width="192">
-                    <Border>
-                        <Border.Background>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                        <Binding Path="Avatar" Mode="OneWay" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Border.Background>
-                    </Border>
-                </f:LooklessButton>
+        <f:ForestIsland Grid.Column="1"
+                        Header="子菜单">
 
-                <!-- 名字 -->
-                <Border Height="96">
-                    <TextBlock FontSize="24"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0 16 0 0"
-                               Text="{Binding Name,Mode=OneWay}"
-                               TextWrapping="Wrap"
-                               TextTrimming="CharacterEllipsis" />
-
-                </Border>
-
-                <!-- 操作 -->
-                <UniformGrid Columns="3"
-                             Height="48">
-
-                    <ftk:ToolButton Content="{f:Language global.new}"
-                                    Icon="{StaticResource IC.File}"
-                                    IsFilled="True"
-                                    ShowText="True" />
-
-                    <ftk:ToolButton Content="{f:Language global.open}"
-                                    Icon="{StaticResource IC.Folder}"
-                                    IsFilled="True"
-                                    ShowText="True" />
-                    <ftk:ToolButton Content="{f:Language global.save}"
-                                    Icon="{StaticResource IC.Save}"
-                                    IsFilled="True"
-                                    ShowText="True" />
-                </UniformGrid>
-
-
-                <!-- 名字 -->
-                <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                           Height="280"
-                           ItemsSource="{Binding SubViews}"
-                           SelectedItem="{Binding SelectedSubView,Mode=TwoWay}">
-                    <f:ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type thisSubView:HeaderedSubView}">
-                            <TextBlock Margin="16 4"
-                                       Text="{Binding Name}" />
-                        </DataTemplate>
-                    </f:ListBox.ItemTemplate>
-                </f:ListBox>
-            </StackPanel>
-        </Border>
-
-
-        <Border Background="{f:Brush BackgroundLevel2}"
-                Margin="16 0 0 0"
-                Padding="16"
-                Effect="{StaticResource ShadowEffect2}">
-            <ContentControl Content="{Binding SubView,Mode=OneWay}"
-                            DataContext="{Binding}" />
-        </Border>
-    </DockPanel>
+            <f:TreeView>
+                <f:TreeViewItem Header="总览">
+                    <f:TreeViewItem Header="现实"/>
+                    <f:TreeViewItem Header="异世界"/>
+                    <f:TreeViewItem Header="次元"/>
+                    <f:TreeViewItem Header="位面"/>
+                    <f:TreeViewItem Header="其他"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="法则">
+                    <f:TreeViewItem Header="神祇"/>
+                    <f:TreeViewItem Header="恶魔"/>
+                    <f:TreeViewItem Header="灾厄"/>
+                    <f:TreeViewItem Header="毒物"/>
+                    <f:TreeViewItem Header="元素"/>
+                    <f:TreeViewItem Header="科技"/>
+                    <f:TreeViewItem Header="魔法"/>
+                    <f:TreeViewItem Header="物理"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="设定">
+                    <f:TreeViewItem Header="NPC"/>
+                    <f:TreeViewItem Header="国家"/>
+                    <f:TreeViewItem Header="势力"/>
+                    <f:TreeViewItem Header="团队"/>
+                    <f:TreeViewItem Header="物品"/>
+                    <f:TreeViewItem Header="生物"/>
+                    <f:TreeViewItem Header="毒物"/>
+                    <f:TreeViewItem Header="植物"/>
+                    <f:TreeViewItem Header="矿物"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="术语">
+                    <f:TreeViewItem Header="元素"/>
+                    <f:TreeViewItem Header="属性"/>
+                    <f:TreeViewItem Header="特殊法则"/>
+                    <f:TreeViewItem Header="其他"/>
+                </f:TreeViewItem>
+            </f:TreeView>
+        </f:ForestIsland>
+    </Grid>
 </f:ForestUserControl>

@@ -1,4 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Pages.Relationships;
+﻿using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {

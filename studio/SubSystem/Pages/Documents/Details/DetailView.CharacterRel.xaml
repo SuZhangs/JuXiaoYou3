@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
-             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relationships"
+             xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relatives"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:studio="urn:acorisoft/studio"
@@ -24,7 +24,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relationships.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/Styles/Relatives.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <thisVM:CharacterRelPartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
@@ -272,7 +272,7 @@
                 Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">
             <ItemsControl DockPanel.Dock="Bottom"
                           Margin="16 8"
-                          ItemsSource="{Binding Relationships,Mode=OneWay}" />
+                          ItemsSource="{Binding Relatives,Mode=OneWay}" />
         </Border>
     </Grid>
 </UserControl>

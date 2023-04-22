@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Relationships
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
     [Connected(View = typeof(NewRelativeView), ViewModel = typeof(NewRelativeViewModel))]
     public partial class NewRelativeView
