@@ -170,8 +170,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (r.IsFinished)
             {
-                item.Value = item.Value;
-                item.Name = item.Value;
+                item.Value = r.Value;
+                item.Name = r.Value;
             }
         }
 

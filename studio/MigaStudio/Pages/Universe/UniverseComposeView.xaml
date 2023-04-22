@@ -13,54 +13,28 @@
              Padding="16"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
-
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top"
-                    Orientation="Horizontal">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
             <ftk:ToolButton Content="{f:Language global.Add}"
-                            Command="{Binding AddAlbumCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                            ShowText="True" />
-
+                                    Command="{Binding AddAlbumCommand}"
+                                    Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                    ShowText="True" />
             <ftk:ToolButton Content="{f:Language global.Remove}"
-                            Command="{Binding RemoveAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.MinusCircle}"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.Up}"
-                            Command="{Binding ShiftUpAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.ArrowUp}"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.Down}"
-                            Command="{Binding ShiftDownAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.ArrowDown}"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.Presentation}"
-                            Command="{Binding OpenAlbumCommand}"
-                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
-                            Icon="{StaticResource FeatherIcon.Upload}"
-                            ShowText="True" />
+                                    Command="{Binding RemoveAlbumCommand}"
+                                    CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}"
+                                    ShowText="True" />
         </StackPanel>
+        <f:EmptyStateListBox Grid.Row="1"
+                             EmptyState="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！"
+                             IsEmpty="True">
 
-        <DockPanel>
-            <f:ListBox DockPanel.Dock="Right"
-                       ItemsSource="{Binding PictureCollection,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Album}">
-                        <TextBlock Margin="8"
-                                   Text="{Binding Source}"
-                                   TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </f:ListBox>
-
-        </DockPanel>
-    </DockPanel>
+        </f:EmptyStateListBox>
+    </Grid>
 </UserControl>
