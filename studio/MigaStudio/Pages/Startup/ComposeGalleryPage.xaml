@@ -19,7 +19,9 @@
         <thisConverters:PageIndexConverter x:Key="PageIndex"/>
         <thisVM:ComposeGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <DataTemplate DataType="{x:Type doc:ComposeCache}">
-            <studio:DocumentCard Background="{f:Brush BackgroundLevel3}"
+            <studio:DocumentCard Background="{f:Brush BackgroundLevel1}"
+                                 Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenComposeCommand}"
+                                 CommandParameter="{Binding}"
                                  Id="{Binding Id,Mode=OneWay}"
                                  Title="{Binding Name,Mode=OneWay}"
                                  TimeOfCreated="{Binding TimeOfCreated,Mode=OneWay}"
@@ -34,15 +36,6 @@
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.Edit}" />
 
-                        <f:MenuItem Header="{f:Language global.Up}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpComposeCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
-
-                        <f:MenuItem Header="{f:Language global.Down}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownComposeCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
                         <Separator />
 
                         <f:MenuItem Header="{f:Language global.Remove}"

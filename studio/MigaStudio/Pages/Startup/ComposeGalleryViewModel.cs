@@ -35,8 +35,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             AddComposeCommand       = AsyncCommand(AddImpl);
             RemoveComposeCommand    = AsyncCommand<ComposeCache>(RemoveImpl);
-            ShiftUpComposeCommand   = Command<ComposeCache>(ShiftUpImpl);
-            ShiftDownComposeCommand = Command<ComposeCache>(ShiftDownImpl);
             OpenComposeCommand      = Command<ComposeCache>(OpenImpl);
             AddKeywordCommand       = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand    = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
@@ -141,6 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
             
             Collection.Add(item);
+            ComposeEngine.AddComposeCache(item);
         }
 
         private async Task RemoveImpl(ComposeCache index)
@@ -156,6 +155,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             Collection.Remove(index);
+            ComposeEngine.RemoveComposeCache(index);
         }
 
         private void OpenImpl(ComposeCache index)
@@ -168,37 +168,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Controller.OpenCompose<ComposeEditorViewModel>(index);
         }
 
-        private void ShiftDownImpl(ComposeCache index)
-        {
-            if (index is null)
-            {
-                return;
-            }
-
-            Collection.ShiftDown(index);
-        }
-
-        private void ShiftUpImpl(ComposeCache index)
-        {
-            if (index is null)
-            {
-                return;
-            }
-
-            Collection.ShiftUp(index);
-        }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public ComposeEngine ComposeEngine { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public ImageEngine ImageEngine { get; }
-        
-        [NullCheck(UniTestLifetime.Constructor)]
-        public KeywordEngine KeywordEngine { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public IDatabaseManager DatabaseManager { get; }
 
         private async Task AddKeywordImpl()
         {
@@ -217,6 +186,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState, 
                 DangerousOperation);
         }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ComposeEngine ComposeEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ImageEngine ImageEngine { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public KeywordEngine KeywordEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public IDatabaseManager DatabaseManager { get; }
 
 
         [NullCheck(UniTestLifetime.Constructor)]

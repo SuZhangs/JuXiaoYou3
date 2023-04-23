@@ -9,7 +9,6 @@
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:thisMarkups="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Markup"
              xmlns:f="urn:acorisoft/forest/ui"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
              d:DesignHeight="480"
              d:DesignWidth="768"

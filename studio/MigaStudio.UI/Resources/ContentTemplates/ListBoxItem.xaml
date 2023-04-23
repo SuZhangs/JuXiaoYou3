@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:f="urn:acorisoft/forest/ui"
                     xmlns:fs="urn:acorisoft/forest/shell"
-                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:sys="clr-namespace:System;assembly=System.Runtime">
     
     

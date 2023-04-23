@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Controls
+﻿using System.Windows.Input;
+
+namespace Acorisoft.FutureGL.MigaStudio.Controls
 {
     public class DocumentCard : Control
     {
@@ -6,8 +8,6 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DocumentCard), new FrameworkPropertyMetadata(typeof(DocumentCard)));
         }
-
-
 
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             nameof(Title),
@@ -42,6 +42,30 @@
             typeof(DocumentCard),
             new PropertyMetadata(Boxing.IntValues[0]));
 
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
+            nameof(Command),
+            typeof(ICommand),
+            typeof(DocumentCard),
+            new PropertyMetadata(default(ICommand)));
+
+
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+            nameof(CommandParameter),
+            typeof(object),
+            typeof(DocumentCard),
+            new PropertyMetadata(default(object)));
+
+        public object CommandParameter
+        {
+            get => (object)GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
         public int ContentLength
         {
             get => (int)GetValue(ContentLengthProperty);

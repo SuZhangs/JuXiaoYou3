@@ -2,8 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ctrl="clr-namespace:Acorisoft.FutureGL.MigaStudio.Controls"
                     xmlns:f="urn:acorisoft/forest/ui"
-                    xmlns:ftk="urn:acorisoft/forest/toolkits"
-                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+                    xmlns:ftk="urn:acorisoft/forest/toolkits">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -838,15 +837,22 @@
                     <Border Background="{TemplateBinding Background}"
                             CornerRadius="6"
                             Padding="{TemplateBinding Padding}">
-                        <StackPanel>
-                            <TextBlock FontSize="20"
-                                       FontWeight="Bold"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Title,Mode=OneWay}" />
+                        <DockPanel>
+                            <f:LooklessButton DockPanel.Dock="Top"
+                                              Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Command,Mode=OneWay}"
+                                              CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CommandParameter,Mode=OneWay}">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Title,Mode=OneWay}" />
 
-                            <TextBlock FontSize="13"
-                                       Foreground="{f:Brush ForegroundLevel3}"
-                                       Margin="0 8"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Id,Mode=OneWay}" />
+                                    <TextBlock FontSize="13"
+                                               Foreground="{f:Brush ForegroundLevel3}"
+                                               Margin="0 8"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Id,Mode=OneWay}" />
+                                </DockPanel>
+                            </f:LooklessButton>
                             <UniformGrid Columns="3"
                                          Margin="0 4">
                                 <DockPanel>
@@ -872,7 +878,7 @@
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ContentLength,Mode=OneWay}" />
                                 </DockPanel>
                             </UniformGrid>
-                        </StackPanel>
+                        </DockPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

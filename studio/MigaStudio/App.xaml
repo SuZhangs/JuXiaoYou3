@@ -4,7 +4,6 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio"
           xmlns:shell="urn:acorisoft/forest/shell"
-          xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
           xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
           xmlns:v="clr-namespace:Acorisoft.FutureGL.MigaStudio.Views"
           xmlns:convs="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
