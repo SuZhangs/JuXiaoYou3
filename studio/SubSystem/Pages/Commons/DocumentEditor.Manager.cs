@@ -221,7 +221,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             if (BasicPart is null)
             {
                 BasicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
+                
+                //
+                // Tracking
                 Document.Parts.Add(BasicPart);
+                _DataPartTrackerOfId.TryAdd(BasicPart.Id, BasicPart);
+                _DataPartTrackerOfType.TryAdd(BasicPart.GetType(), BasicPart);
+                
+                //
+                // Initialize
                 Name   = Cache.Name;
                 Gender = Language.GetText("global.DefaultGender");
             }

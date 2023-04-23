@@ -30,6 +30,7 @@
         internal const string IdOfStickyNote                 = "__StickyNote";
         internal const string IdOfSentence                   = "__Sentence";
         internal const string IdOfApprise                    = "__Apprise";
+        internal const string IdOfMarkdownPart               = "__Markdown";
 
 
         /*

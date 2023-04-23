@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Compose
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
 
     [Connected(View = typeof(ComposeEditorPage), ViewModel = typeof(ComposeEditorViewModel))]

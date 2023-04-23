@@ -2,7 +2,7 @@
 using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
-using Acorisoft.FutureGL.MigaStudio.Pages.Compose;
+using Acorisoft.FutureGL.MigaStudio.Pages.Composes;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;

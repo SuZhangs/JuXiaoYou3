@@ -38,8 +38,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected DocumentEditorBase()
         {
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
+            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _BlockTrackerOfId      = new Dictionary<string, ModuleBlock>(StringComparer.OrdinalIgnoreCase);
 
             ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();

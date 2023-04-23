@@ -17,11 +17,6 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         public string Intro { get; set; }
         
         /// <summary>
-        /// 类型
-        /// </summary>
-        public DocumentType Type { get; init; }
-        
-        /// <summary>
         /// 父级
         /// </summary>
         [BsonField(Constants.LiteDB_ParentId)]

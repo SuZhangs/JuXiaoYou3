@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
-using Acorisoft.FutureGL.MigaStudio.Pages.Compose;
+using Acorisoft.FutureGL.MigaStudio.Pages.Composes;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using NLog;
