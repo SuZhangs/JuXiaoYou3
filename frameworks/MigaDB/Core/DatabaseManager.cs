@@ -34,6 +34,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return CreateBuilder(logger)
                    .Setup<TemplateEngine>()
                    .Setup<DocumentEngine>()
+                   .Setup<ComposeEngine>()
                    .Setup<ImageEngine>(false)
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)

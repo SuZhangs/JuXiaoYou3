@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
              d:DesignHeight="300"
@@ -18,13 +19,15 @@
         <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type m:StickyNote}">
-            <Border Background="{f:Brush BackgroundLevel3}"
-                        CornerRadius="6"
-                              Margin="4"
-                        Padding="16"
+            <studio:DocumentCard Background="{f:Brush BackgroundLevel3}"
+                                 Id="{Binding Id,Mode=OneWay}"
+                                 Title="{Binding Title,Mode=OneWay}"
+                                 TimeOfCreated="{Binding TimeOfCreated,Mode=OneWay}"
+                                 TimeOfModified="{Binding TimeOfModified,Mode=OneWay}"
+                                 ContentLength="{Binding Content.Length, Mode=OneWay,FallbackValue=0,TargetNullValue=0}"
                               Height="160"
                               Width="500">
-                <Border.ContextMenu>
+                <studio:DocumentCard.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="{f:Language global.Edit}"
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
@@ -47,42 +50,8 @@
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.MinusCircle}" />
                     </f:ContextMenu>
-                </Border.ContextMenu>
-                <StackPanel>
-                    <TextBlock FontSize="20"
-                                   FontWeight="Bold"
-                                   Text="{Binding Title,Mode=OneWay}" />
-                    <TextBlock FontSize="13"
-                                   Foreground="{f:Brush ForegroundLevel3}"
-                                   Margin="0 8"
-                                   Text="{Binding Id,Mode=OneWay}" />
-                    <UniformGrid Columns="3"
-                                     Margin="0 4">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="创建时间" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                        </DockPanel>
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="修改时间" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                        </DockPanel>
-                        <DockPanel>
-
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="长度" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
-                        </DockPanel>
-                    </UniformGrid>
-                </StackPanel>
-            </Border>
+                </studio:DocumentCard.ContextMenu>
+            </studio:DocumentCard>
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>

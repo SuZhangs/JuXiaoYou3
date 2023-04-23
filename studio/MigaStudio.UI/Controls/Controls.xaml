@@ -8,6 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/UI/Tools/Themes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <SolidColorBrush x:Key="Transparent" Color="Transparent" />
     <Geometry x:Key="ArrowLeft">M 16 8 L 16 8 0 0 128 0</Geometry>
     <Geometry x:Key="ArrowRight">M 0 8 L 0 8 128 8 112 0</Geometry>
     <ctrl:DoubleToLog10Converter x:Key="Log10Converter" />
@@ -212,7 +213,6 @@
         </Setter>
     </Style>
 
-    <SolidColorBrush x:Key="Transparent" Color="Transparent" />
 
     <Style TargetType="{x:Type ctrl:BinaryControl}">
         <Setter Property="Header" Value="36" />
@@ -406,7 +406,7 @@
                                                Height="72"
                                                Width="72" />
 
-                            <ctrl:ActionButton Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=OpenCommand,Mode=OneWay}" 
+                            <ctrl:ActionButton Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=OpenCommand,Mode=OneWay}"
                                                Margin="16 0 0 0"
                                                HorizontalAlignment="Stretch">
                                 <DockPanel DockPanel.Dock="Right"
@@ -612,7 +612,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}"
                                 ClipToBounds="{TemplateBinding ClipToBounds}">
-                            <ctrl:ZoomContentPresenter x:Name="PART_Presenter" 
+                            <ctrl:ZoomContentPresenter x:Name="PART_Presenter"
                                                        ClipToBounds="False" />
                         </Border>
                         <Canvas>
@@ -694,13 +694,13 @@
 
                             <!-- ZoomBox -->
                             <Border BorderBrush="{TemplateBinding ZoomBoxBorderBrush}"
-                                BorderThickness="{TemplateBinding ZoomBoxBorderThickness}"
-                                Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.X}"
-                                Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Y}"
-                                Opacity="{TemplateBinding ZoomBoxOpacity}"
-                                Background="{TemplateBinding ZoomBoxBackground}"
-                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Width}"
-                                Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Height}" />
+                                    BorderThickness="{TemplateBinding ZoomBoxBorderThickness}"
+                                    Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.X}"
+                                    Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Y}"
+                                    Opacity="{TemplateBinding ZoomBoxOpacity}"
+                                    Background="{TemplateBinding ZoomBoxBackground}"
+                                    Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Width}"
+                                    Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ZoomBox.Height}" />
                         </Canvas>
                     </Grid>
                 </ControlTemplate>
@@ -755,7 +755,7 @@
                                    Margin="0 8 0 0"
                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=AvatarName,Mode=OneWay}"
                                    TextWrapping="Wrap"
-                                   TextTrimming="CharacterEllipsis"/>
+                                   TextTrimming="CharacterEllipsis" />
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
@@ -818,6 +818,61 @@
                                          Image="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=TargetImage,Mode=OneWay}"
                                          AvatarName="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path= TargetName,Mode=OneWay}" />
                         </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type ctrl:DocumentCard}">
+        <Setter Property="Background" Value="{f:Brush BackgroundLevel3}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Width" Value="500" />
+        <Setter Property="Height" Value="160" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DocumentCard}">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6"
+                            Padding="{TemplateBinding Padding}">
+                        <StackPanel>
+                            <TextBlock FontSize="20"
+                                       FontWeight="Bold"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Title,Mode=OneWay}" />
+
+                            <TextBlock FontSize="13"
+                                       Foreground="{f:Brush ForegroundLevel3}"
+                                       Margin="0 8"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Id,Mode=OneWay}" />
+                            <UniformGrid Columns="3"
+                                         Margin="0 4">
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top"
+                                               Margin="0 8"
+                                               Text="{f:Language global.TimeOfCreated}" />
+                                    <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top"
+                                               Margin="0 8"
+                                               Text="{f:Language global.TimeOfModified}" />
+                                    <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Top"
+                                               Margin="0 8"
+                                               Text="{f:Language global.Length}" />
+                                    
+                                    <TextBlock Foreground="{f:Brush ForegroundLevel3}"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ContentLength,Mode=OneWay}" />
+                                </DockPanel>
+                            </UniformGrid>
+                        </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

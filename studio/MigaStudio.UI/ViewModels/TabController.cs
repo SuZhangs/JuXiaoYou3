@@ -331,6 +331,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// </summary>
         /// <param name="cache">索引</param>
         /// <returns>返回一个新的导航参数。</returns>
+        public void OpenCompose<TViewModel>(IDataCache cache)where TViewModel : TabViewModel
+        {
+            var vm = Xaml.GetViewModel<TViewModel>();
+            vm.Startup(NavigationParameter.OpenDocument(cache, this));
+            Start(vm);
+        }
+        
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
+        /// <param name="cache">索引</param>
+        /// <returns>返回一个新的导航参数。</returns>
         public void OpenDocument<TViewModel>(IDataCache cache)where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();

@@ -2,6 +2,7 @@
 using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
+using Acorisoft.FutureGL.MigaStudio.Pages.Compose;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
@@ -73,14 +74,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public static void InstallViews()
         {
+            //
+            // Commons
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
             Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
+            
+            //
+            // Compose
+            Xaml.InstallView<ComposeEditorPage, ComposeEditorViewModel>();
 
+            //
+            // Commons
             Xaml.InstallView<NewDocumentView, NewDocumentViewModel>();
             Xaml.InstallView<DocumentGalleryExPage, DocumentGalleryViewModelEx>();
 
+            //
+            // Document
             Xaml.InstallView<DetailPartSelectorView, DetailPartSelectorViewModel>();
             Xaml.InstallView<ManageSurveyView, ManageSurveyViewModel>();
             Xaml.InstallView<NewPresentationView, NewPresentationViewModel>();
@@ -96,12 +107,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<DocumentEditorPage, OtherDocumentViewModel>();
             Xaml.InstallView<DocumentEditorPage, GeographyDocumentViewModel>();
 
+            //
+            // Relationships
             Xaml.InstallView<NewRelativeView, NewRelativeViewModel>();
             Xaml.InstallView<NewRelativePresetView, NewRelativePresetViewModel>();
             Xaml.InstallView<RelativePresetPage, RelativePresetViewModel>();
             Xaml.InstallView<CharacterPedigreePage, CharacterPedigreeViewModel>();
             Xaml.InstallView<CharacterRelationshipPage, CharacterRelationshipViewModel>();
 
+            //
+            // Template
             Xaml.InstallView<EditBlockView, EditBlockViewModel>();
             Xaml.InstallView<NewBlockView, NewBlockViewModel>();
             Xaml.InstallView<NewElementView, NewElementViewModel>();

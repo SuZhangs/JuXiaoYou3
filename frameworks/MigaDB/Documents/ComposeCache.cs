@@ -5,6 +5,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     public class ComposeCache : ObservableObject, IDataCache
     {
+        private bool _isLocked;
+        private int  _length;
+        
         /// <summary>
         /// 唯一标识符
         /// </summary>
@@ -41,9 +44,15 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// 是否删除
         /// </summary>
         public bool IsDeleted { get; set; }
-        
-        private bool _isLocked;
 
+        /// <summary>
+        /// 获取或设置 <see cref="Length"/> 属性。
+        /// </summary>
+        public int Length
+        {
+            get => _length;
+            set => SetValue(ref _length, value);
+        }
         /// <summary>
         /// 是否锁定
         /// </summary>
