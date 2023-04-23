@@ -17,7 +17,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
+    <ControlTemplate x:Key="ClearStyle.Slider.Thumb.Horizontal" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
             <Ellipse Width="12" Height="12" ClipToBounds="False" Fill="Transparent" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <Ellipse Width="10" Height="10" ClipToBounds="False" Fill="Transparent" Stroke="White" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -64,7 +64,7 @@
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb" Focusable="False" Height="12" OverridesDefaultStyle="True"
-                               Template="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center"
+                               Template="{StaticResource ClearStyle.Slider.Thumb.Horizontal}" VerticalAlignment="Center"
                                Width="12" />
                     </Track.Thumb>
                 </Track>
