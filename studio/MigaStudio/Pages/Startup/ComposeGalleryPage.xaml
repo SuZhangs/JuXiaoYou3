@@ -28,7 +28,7 @@
                                  TimeOfModified="{Binding TimeOfModified,Mode=OneWay}"
                                  ContentLength="{Binding Length, Mode=OneWay,FallbackValue=0,TargetNullValue=0}"
                                  Height="160"
-                                 Width="500">
+                                 Width="480">
                 <studio:DocumentCard.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="{f:Language global.Edit}"

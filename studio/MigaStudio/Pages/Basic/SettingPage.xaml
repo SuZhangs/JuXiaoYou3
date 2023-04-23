@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
              xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
              xmlns:studio="urn:acorisoft/studio"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:f="urn:acorisoft/forest/ui"
              mc:Ignorable="d"
              d:DesignHeight="720"
@@ -21,32 +22,15 @@
                 <ResourceDictionary>
                     <DataTemplate x:Key="ComboBox"
                                   DataType="{x:Type studio:ISettingComboBox}">
-                        <Border Background="{f:Brush BackgroundLevel1}"
-                                CornerRadius="12"
-                                Padding="16"
-                                Margin="0 0 0 10"
-                                MinHeight="100">
-                            <DockPanel>
-                                <ComboBox DockPanel.Dock="Right"
+                        <studio:SettingControl Title="{Binding MainTitle,Mode=OneWay}"
+                                               Intro="{Binding SubTitle,Mode=OneWay}">
+                            <ComboBox DockPanel.Dock="Right"
                                           MinWidth="240"
                                           ItemsSource="{Binding Collection}"
                                           ItemTemplate="{StaticResource Enumeration}"
                                           SelectedItem="{Binding Value,Mode=TwoWay}"
                                           VerticalAlignment="Top" />
-
-                                <StackPanel DockPanel.Dock="Left">
-                                    <TextBlock FontSize="20"
-                                               FontWeight="Bold"
-                                               Text="{Binding MainTitle}" />
-
-                                    <TextBlock Foreground="{f:Brush Theme=ForegroundDisabled}"
-                                               FontFamily="{StaticResource SongTi}"
-                                               FontSize="14"
-                                               Margin="0 8 0 0"
-                                               Text="{Binding SubTitle}" />
-                                </StackPanel>
-                            </DockPanel>
-                        </Border>
+                        </studio:SettingControl>
                     </DataTemplate>
                 </ResourceDictionary>
             </studio:SettingItemTemplateSelector.Resources>
@@ -67,13 +51,74 @@
                                   Focusable="False"
                                   Margin="0 32 0 0">
                     <ItemsControl ItemsSource="{Binding Items,Mode=OneWay}"
-                                      ItemTemplateSelector="{StaticResource SettingItemSelector}">
+                                  ItemTemplateSelector="{StaticResource SettingItemSelector}">
                     </ItemsControl>
                 </ScrollViewer>
             </DockPanel>
         </f:ShadowTabItem>
-        <f:ShadowTabItem Header="高级" Icon="{StaticResource IC.Setting}"
-                             IsFilled="True" />
+        <f:ShadowTabItem Header="高级" 
+                         Icon="{StaticResource IC.Setting}"
+                         IsFilled="True">
+            <ScrollViewer>
+                <StackPanel>
+                    <studio:SettingControl Title="修复"
+                                               Intro="选择修复工具">
+
+                        <WrapPanel DockPanel.Dock="Right"
+                                       Width="540">
+                            <ftk:ToolButton Content="添加快捷方式"
+                                                Command="{Binding CreateShortcutCommand}"
+                                                Icon="{StaticResource FeatherIcon.Tools}"
+                                                Margin="8"
+                                                ShowText="True"/>
+
+                            <ftk:ToolButton Content="修复头像"
+                                                Command="{Binding FixAvatarCommand}"
+                                                Icon="{StaticResource FeatherIcon.Tools}"
+                                                Margin="8"
+                                                ShowText="True"/>
+                            <ftk:ToolButton Content="关闭后台的橘小柚"
+                                            Command="{Binding KillProcessCommand}"
+                                            Icon="{StaticResource FeatherIcon.Tools}"
+                                            Margin="8"
+                                            ShowText="True"/>
+
+                            <ftk:ToolButton Content="添加快捷方式"
+                                                Command="{Binding CreateShortcutCommand}"
+                                                Icon="{StaticResource FeatherIcon.Tools}"
+                                                Margin="8"
+                                                ShowText="True"/>
+
+                            <ftk:ToolButton Content="修复头像"
+                                                Command="{Binding FixAvatarCommand}"
+                                                Icon="{StaticResource FeatherIcon.Tools}"
+                                                Margin="8"
+                                                ShowText="True"/>
+                        </WrapPanel>
+                    </studio:SettingControl>
+                    <Border Background="{f:Brush BackgroundLevel1}"
+                                CornerRadius="12"
+                                Padding="16"
+                                Margin="0 0 0 10"
+                                MinHeight="100">
+                        <DockPanel>
+
+                            <StackPanel DockPanel.Dock="Left">
+                                <TextBlock FontSize="20"
+                                               FontWeight="Bold"
+                                               Text="修复" />
+
+                                <TextBlock Foreground="{f:Brush Theme=ForegroundDisabled}"
+                                               FontFamily="{StaticResource SongTi}"
+                                               FontSize="14"
+                                               Margin="0 8 0 0"
+                                               Text="选择修复工具" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </f:ShadowTabItem>
         <f:ShadowTabItem Header="字体" Icon="{StaticResource IC.Setting}"
                              IsFilled="True" />
         <f:ShadowTabItem Header="许可证" Icon="{StaticResource IC.Setting}"
