@@ -4,12 +4,12 @@
     {
         public ComposeService GetService(PartOfAlbum poa)
         {
-            throw new NotImplementedException();
+            return null;
         }
         
         public ComposeService GetService(PartOfManifest poa)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

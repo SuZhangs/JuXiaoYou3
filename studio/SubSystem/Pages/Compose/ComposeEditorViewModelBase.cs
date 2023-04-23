@@ -16,12 +16,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
     {
         private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
         private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
-        
+
         protected ComposeEditorViewModelBase()
         {
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-            
+
             var dbMgr = Xaml.Get<IDatabaseManager>();
             Xaml.Get<IAutoSaveService>()
                 .Observable
@@ -36,9 +36,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             ImageEngine      = dbMgr.GetEngine<ImageEngine>();
             KeywordEngine    = dbMgr.GetEngine<KeywordEngine>();
 
-            ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
-            SaveDocumentCommand = Command(Save);
-            NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
+            // ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
+            // SaveDocumentCommand = Command(Save);
+            // NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             // 添加绑定
             AddKeyBinding(ModifierKeys.Control, Key.S, Save);
         }
-        
+
         private void ActivateAllEngines()
         {
             var engines = new DataEngine[]
@@ -114,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             LoadDataPart();
             IsDataPartExistence();
         }
-        
+
         private void LoadDataPart()
         {
             foreach (var part in Compose.Parts)
@@ -126,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                         .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
                     continue;
                 }
-                
+
                 if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
                 {
                     if (part is PartOfMarkdown pom)
@@ -138,7 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                         Album = poa;
                         Services.Add(ComposeContainer.GetService(poa));
                     }
-                    else if(part is PartOfManifest pom2)
+                    else if (part is PartOfManifest pom2)
                     {
                         DataParts.Add(part);
                         Services.Add(ComposeContainer.GetService(pom2));
@@ -219,10 +219,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private async Task RemoveKeywordImpl(string item)
         {
             await DocumentUtilities.RemoveKeyword(
-                item, 
-                Keywords, 
-                KeywordEngine, 
-                SetDirtyState, 
+                item,
+                Keywords,
+                KeywordEngine,
+                SetDirtyState,
                 DangerousOperation);
         }
 
@@ -232,14 +232,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Startup)]
         public ObservableCollection<string> Keywords => Cache.Keywords;
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<DataPart> DataParts { get; }
-        
-        
+
+
         [NullCheck(UniTestLifetime.Startup)]
         public ObservableCollection<ComposeService> Services { get; }
 
