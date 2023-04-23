@@ -890,14 +890,14 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="16" />
         <Setter Property="Margin" Value="4"/>
-        <Setter Property="Width" Value="500" />
-        <Setter Property="Height" Value="160" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="MinHeight" Value="128" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:SettingControl}">
                     <Border Background="{TemplateBinding Background}"
                             CornerRadius="12"
-                            Padding="16"
+                            Padding="32 20 32 16"
                             Margin="0 0 0 10"
                             MinHeight="100">
                         <DockPanel>
