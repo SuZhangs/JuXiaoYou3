@@ -17,15 +17,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     public partial class UniverseViewModel : TabViewModel
     {
         private readonly Subject<Album>   _threadSafeAdding;
-        private          Album            _selectedAlbum;
         private readonly DatabaseProperty _databaseProperty;
 
+        private Album  _selectedAlbum;
+        
         public UniverseViewModel()
         {
-            PictureCollection        = new ObservableCollection<Album>();
+            PictureCollection = new ObservableCollection<Album>();
             DatabaseManager   = Xaml.Get<IDatabaseManager>();
             ImageEngine       = DatabaseManager.GetEngine<ImageEngine>();
-            Database = DatabaseManager.Database.CurrentValue;
+            Database          = DatabaseManager.Database.CurrentValue;
             _databaseProperty = Database.Get<DatabaseProperty>();
             _threadSafeAdding = new Subject<Album>().DisposeWith(Collector);
             _threadSafeAdding.ObserveOn(Scheduler)
@@ -61,15 +62,85 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             PictureCollection.AddMany(_databaseProperty.Album, true);
         }
 
+        public override void Stop()
+        {
+            Save();
+        }
+
         private void Save()
         {
             Database.Set(_databaseProperty);
         }
 
         /// <summary>
+        /// 获取或设置 <see cref="Intro"/> 属性。
+        /// </summary>
+        public string Intro
+        {
+            get => _databaseProperty.Intro;
+            set
+            {
+                _databaseProperty.Intro = value;
+                RaiseUpdated();
+                SetDirtyState();
+            }
+        }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="ForeignName"/> 属性。
+        /// </summary>
+        public string ForeignName
+        {
+            get => _databaseProperty.ForeignName;
+            set
+            {
+                _databaseProperty.ForeignName = value;
+                RaiseUpdated();
+                SetDirtyState();
+            }
+        }
+        
+        public string Author
+        {
+            get => _databaseProperty.Author;
+            set
+            {
+                _databaseProperty.Author = value;
+                SetDirtyState();
+                RaiseUpdated();
+            }
+        }
+        
+        public string Name
+        {
+            get => _databaseProperty.Name;
+            set
+            {
+                _databaseProperty.Name = value;
+                RaiseUpdated();
+                SetDirtyState();
+            }
+        }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="Name"/> 属性。
+        /// </summary>
+        public string Icon
+        {
+            get => _databaseProperty.Icon;
+            set
+            {
+                _databaseProperty.Icon = value;
+                RaiseUpdated();
+                SetDirtyState();
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public ObservableCollection<Album> PictureCollection { get; init; }
+
         public IDatabase Database { get; }
         public IDatabaseManager DatabaseManager { get; }
         public ImageEngine ImageEngine { get; }

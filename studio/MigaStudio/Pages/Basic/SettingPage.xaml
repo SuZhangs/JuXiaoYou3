@@ -1,18 +1,20 @@
 ﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.SettingPage"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
-             xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
-             xmlns:studio="urn:acorisoft/studio"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
+                     xmlns:studio="urn:acorisoft/studio"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
-             xmlns:f="urn:acorisoft/forest/ui"
-             mc:Ignorable="d"
-             d:DesignHeight="720"
-             d:DesignWidth="1280"
-             d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
+                     xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                     mc:Ignorable="d"
+                     d:DesignHeight="720"
+                     d:DesignWidth="1280"
+                     d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
         <DataTemplate x:Key="Enumeration">
             <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
         </DataTemplate>
@@ -26,11 +28,11 @@
                                                Intro="{Binding SubTitle,Mode=OneWay}">
                             <ComboBox DockPanel.Dock="Right"
                                       HorizontalAlignment="Right"
-                                          MinWidth="240"
-                                          ItemsSource="{Binding Collection}"
-                                          ItemTemplate="{StaticResource Enumeration}"
-                                          SelectedItem="{Binding Value,Mode=TwoWay}"
-                                          VerticalAlignment="Top" />
+                                      MinWidth="240"
+                                      ItemsSource="{Binding Collection}"
+                                      ItemTemplate="{StaticResource Enumeration}"
+                                      SelectedItem="{Binding Value,Mode=TwoWay}"
+                                      VerticalAlignment="Top" />
                         </studio:SettingControl>
                     </DataTemplate>
                 </ResourceDictionary>
@@ -39,71 +41,165 @@
     </UserControl.Resources>
     <f:ShadowTabControl TabStripPlacement="Left"
                         Margin="16"
-                            Padding="32 0 96 0">
+                        Padding="32 0 96 0">
         <f:ShadowTabItem Header="常规"
-                             IsFilled="True"
-                             Icon="{StaticResource IC.Setting}">
+                         IsFilled="True"
+                         Icon="{StaticResource IC.Setting}">
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top"
-                               FontSize="32"
-                               FontWeight="Bold"
-                               Text="常规设置" />
+                           FontSize="32"
+                           FontWeight="Bold"
+                           Text="常规设置" />
                 <ScrollViewer IsTabStop="False"
-                                  Focusable="False"
-                                  Margin="0 32 0 0">
+                              Focusable="False"
+                              Margin="0 32 0 0">
                     <ItemsControl ItemsSource="{Binding Items,Mode=OneWay}"
                                   ItemTemplateSelector="{StaticResource SettingItemSelector}">
                     </ItemsControl>
                 </ScrollViewer>
             </DockPanel>
         </f:ShadowTabItem>
-        <f:ShadowTabItem Header="高级" 
+        <f:ShadowTabItem Header="高级"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True">
             <ScrollViewer>
                 <StackPanel>
+
+
+                    <Border Background="{f:Brush BackgroundLevel1}"
+                            CornerRadius="12"
+                            Margin="4 0 4 10"
+                            Padding="32">
+                        <Grid Height="160"
+                              ShowGridLines="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="480" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+
+                            <!-- 世界观头像 -->
+                            <Ellipse Grid.Column="0"
+                                     Grid.Row="0"
+                                     Grid.RowSpan="4">
+                                <Ellipse.Fill>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                                <Binding Path="Avatar" Mode="OneWay" />
+                                                <Binding Path="Type" />
+                                            </MultiBinding>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <!-- 世界观名称 -->
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Margin="16 0 0 0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatabaseProperty.Name,Mode=OneWay}" />
+
+                            <!-- 世界观外文名 -->
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="1"
+                                       Foreground="{f:Brush ForegroundLevel3}"
+                                       Margin="16 0 0 0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatabaseProperty.ForeignName,Mode=OneWay}" />
+                            <!-- 世界观简介 -->
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="2"
+                                       Grid.RowSpan="2"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Margin="16 0 0 0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DatabaseProperty.Intro,Mode=OneWay}" />
+
+                            <ftk:ToolButton Grid.Column="2"
+                                            Grid.Row="0"
+                                            Content="切换世界观"
+                                            Command="{Binding CloseDatabaseCommand}"
+                                            HorizontalAlignment="Right"
+                                            Icon="{StaticResource FeatherIcon.Refresh}"
+                                            ShowText="True" />
+
+                            <ScrollViewer Grid.Column="2"
+                                          Grid.Row="1"
+                                          Grid.RowSpan="3"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <ItemsControl ItemsSource="{Binding Repositories,Mode=OneWay}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <ftk:ToolButton Content="{Binding Name,Mode=OneWay}"
+                                                            Command="{Binding CreateShortcutCommand}"
+                                                            HorizontalContentAlignment="Left"
+                                                            Icon="{StaticResource FeatherIcon.Folder}"
+                                                            ShowText="True" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel ItemWidth="128" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                    </Border>
+
                     <studio:SettingControl Title="修复"
-                                               Intro="选择修复工具">
+                                           Intro="选择修复工具">
 
                         <WrapPanel DockPanel.Dock="Right">
                             <ftk:ToolButton Content="添加快捷方式"
-                                                Command="{Binding CreateShortcutCommand}"
-                                                Icon="{StaticResource FeatherIcon.Tools}"
-                                                Margin="8"
-                                                ShowText="True"/>
+                                            Command="{Binding CreateShortcutCommand}"
+                                            Icon="{StaticResource FeatherIcon.Tools}"
+                                            Margin="8"
+                                            ShowText="True" />
 
                             <ftk:ToolButton Content="修复头像"
-                                                Command="{Binding FixAvatarCommand}"
-                                                Icon="{StaticResource FeatherIcon.Tools}"
-                                                Margin="8"
-                                                ShowText="True"/>
+                                            Command="{Binding FixAvatarCommand}"
+                                            Icon="{StaticResource FeatherIcon.Tools}"
+                                            Margin="8"
+                                            ShowText="True" />
                             <ftk:ToolButton Content="关闭后台的橘小柚"
                                             Command="{Binding KillProcessCommand}"
                                             Icon="{StaticResource FeatherIcon.Tools}"
                                             Margin="8"
-                                            ShowText="True"/>
+                                            ShowText="True" />
 
                             <ftk:ToolButton Content="添加快捷方式"
-                                                Command="{Binding CreateShortcutCommand}"
-                                                Icon="{StaticResource FeatherIcon.Tools}"
-                                                Margin="8"
-                                                ShowText="True"/>
+                                            Command="{Binding CreateShortcutCommand}"
+                                            Icon="{StaticResource FeatherIcon.Tools}"
+                                            Margin="8"
+                                            ShowText="True" />
 
                             <ftk:ToolButton Content="修复头像"
-                                                Command="{Binding FixAvatarCommand}"
-                                                Icon="{StaticResource FeatherIcon.Tools}"
-                                                Margin="8"
-                                                ShowText="True"/>
+                                            Command="{Binding FixAvatarCommand}"
+                                            Icon="{StaticResource FeatherIcon.Tools}"
+                                            Margin="8"
+                                            ShowText="True" />
                         </WrapPanel>
                     </studio:SettingControl>
                 </StackPanel>
             </ScrollViewer>
         </f:ShadowTabItem>
         <f:ShadowTabItem Header="字体" Icon="{StaticResource IC.Setting}"
-                             IsFilled="True" />
+                         IsFilled="True" />
         <f:ShadowTabItem Header="许可证" Icon="{StaticResource IC.Setting}"
-                             IsFilled="True" />
+                         IsFilled="True" />
         <f:ShadowTabItem Header="关于" Icon="{StaticResource IC.Setting}"
-                             IsFilled="True" />
+                         IsFilled="True" />
     </f:ShadowTabControl>
 </f:ForestUserControl>
