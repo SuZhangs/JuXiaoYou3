@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 nameof(ShowEmptyState),
                 typeof(bool),
                 typeof(EmptyStateListBox),
-                new PropertyMetadata(default(bool)));
+                new PropertyMetadata(Boxing.True));
             
             EmptyStateProperty = DependencyProperty.Register(
                 nameof(EmptyState),

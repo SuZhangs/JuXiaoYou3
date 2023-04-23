@@ -29,7 +29,7 @@
                 nameof(ShowEmptyState),
                 typeof(bool),
                 typeof(EmptyStateTreeView),
-                new PropertyMetadata(default(bool)));
+                new PropertyMetadata(Boxing.True));
             
             EmptyStateProperty = DependencyProperty.Register(
                 nameof(EmptyState),
