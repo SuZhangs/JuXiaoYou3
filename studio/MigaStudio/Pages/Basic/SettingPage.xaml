@@ -120,10 +120,9 @@
                             <TextBlock Grid.Column="1"
                                        Grid.Row="2"
                                        Grid.RowSpan="2"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       Margin="16 0 0 0"
-                                       VerticalAlignment="Center"
+                                       Foreground="{f:Brush ForegroundLevel3}"
+                                       Margin="16 8 0 0"
+                                       VerticalAlignment="Top"
                                        Text="{Binding DatabaseProperty.Intro,Mode=OneWay}" />
 
                             <ftk:ToolButton Grid.Column="2"

@@ -50,15 +50,15 @@
                         <f:HeaderedSingleLine Header="ID"
                                               IsReadOnly="True"
                                               Margin="8"
-                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding PageId,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine Header="版本"
                                               IsReadOnly="True"
                                               Margin="8"
-                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding ForeignName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine Header="封面"
                                               IsReadOnly="True"
                                               Margin="8"
-                                              Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding ForeignName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine Header="{f:Language global.Name}"
                                               Margin="8"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -75,7 +75,7 @@
                 <f:HeaderedMultiLine Header="介绍"
                                      Height="200"
                                      Margin="8"
-                                     Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                     Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                 <UniformGrid>
                     <f:ToggleSwitch Content="是否有神明?"
