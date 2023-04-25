@@ -20,184 +20,179 @@
 
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
     </UserControl.Resources>
-    <ScrollViewer>
-        <Grid Margin="16"
-              ShowGridLines="True">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="160" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="160" />
-                <ColumnDefinition Width="840" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
 
-            <!-- 头像 -->
-            <f:LooklessButton Grid.Column="0"
-                              Grid.Row="0"
-                              Command="{Binding ChangeAvatarCommand}"
-                              Height="160"
-                              Width="160">
-                <Border>
-                    <Border.Background>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                    <Binding Path="Avatar" Mode="OneWay" />
-                                    <Binding Path="Type" />
-                                </MultiBinding>
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Border.Background>
-                </Border>
-            </f:LooklessButton>
+    <Grid Margin="16"
+          ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="160" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
 
-
-
-            <!-- 按钮 -->
-            <StackPanel Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="8 16 8 8"
-                        VerticalAlignment="Top">
-
-                <ftk:ToolButton Content="{f:Language global.new}"
-                                Command="{Binding NewDocumentCommand}"
-                                Icon="{StaticResource IC.File}"
-                                IsFilled="True"
-                                ShowText="True" />
-
-                <ftk:ToolButton Content="{f:Language global.open}"
-                                Command="{Binding OpenDocumentCommand}"
-                                Icon="{StaticResource IC.Folder}"
-                                IsFilled="True"
-                                ShowText="True" />
-
-                <ftk:ToolButton Content="{f:Language global.save}"
-                                Command="{Binding SaveDocumentCommand}"
-                                Icon="{StaticResource IC.Save}"
-                                IsFilled="True"
-                                ShowText="True" />
-                
-                <ftk:ToolButton Content="传统模式"
-                                Command="{Binding SaveDocumentCommand}"
-                                Icon="{StaticResource FeatherIcon.Edit}"
-                                ShowText="True" />
-            </StackPanel>
+        <!-- 头像 -->
+        <f:LooklessButton Grid.Column="0"
+                          Grid.Row="0"
+                          Command="{Binding ChangeAvatarCommand}"
+                          Height="160"
+                          Width="160">
+            <Border>
+                <Border.Background>
+                    <ImageBrush>
+                        <ImageBrush.ImageSource>
+                            <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                <Binding Path="Avatar" Mode="OneWay" />
+                                <Binding Path="Type" />
+                            </MultiBinding>
+                        </ImageBrush.ImageSource>
+                    </ImageBrush>
+                </Border.Background>
+            </Border>
+        </f:LooklessButton>
 
 
-            <!-- 基本信息 -->
-            <UniformGrid Grid.Column="1"
-                         Margin="32 0 0 0"
-                         Columns="4">
-                <f:HeaderedSingleLine Header="名字"
-                                      Margin="8" />
+        <!-- 按钮 -->
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="8 16 8 8"
+                    VerticalAlignment="Top">
 
-                <f:HeaderedSingleLine Header="类型"
-                                      Margin="8" />
+            <ftk:ToolButton Content="{f:Language global.new}"
+                            Command="{Binding NewDocumentCommand}"
+                            Icon="{StaticResource FeatherIcon.File}"
+                            ShowText="True" />
 
-                <f:HeaderedSingleLine Header="稀有度"
-                                      Margin="8" />
-                <f:HeaderedSingleLine Header="售价"
-                                      Margin="8" />
-                <f:HeaderedSingleLine Header="获得方式"
-                                      Margin="8" />
-                <f:HeaderedMultiLine Header="简介"
-                                     Margin="8" />
-                <f:HeaderedSingleLine Header="攻击力"
-                                      Margin="8" />
-                <f:HeaderedSingleLine Header="元素"
-                                      Margin="8" />
-            </UniformGrid>
+            <ftk:ToolButton Content="{f:Language global.open}"
+                            Command="{Binding OpenDocumentCommand}"
+                            Icon="{StaticResource FeatherIcon.Folder}"
+                            ShowText="True" />
+
+            <ftk:ToolButton Content="{f:Language global.save}"
+                            Command="{Binding SaveDocumentCommand}"
+                            Icon="{StaticResource FeatherIcon.Save}"
+                            ShowText="True" />
+
+            <ftk:ToolButton Content="传统模式"
+                            Command="{Binding SaveDocumentCommand}"
+                            Icon="{StaticResource FeatherIcon.Edit}"
+                            ShowText="True" />
+        </StackPanel>
 
 
-            <!-- 词条 -->
-            <DockPanel Grid.Column="1"
-                       Grid.Row="1"
-                       Margin="32 0 0 0">
-                <f:HeaderedMultiLine DockPanel.Dock="Top"
-                                      Header="简介"
-                                      Height="160"
-                                      Margin="8" />
-                
-                <f:ForestIsland Header="词条"
-                                Margin="8">
-                    <f:ForestIsland.ToolBar>
-                        <StackPanel Margin="32 0 0 0"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
+        <!-- 基本信息 -->
+        <UniformGrid Grid.Column="1"
+                     Margin="32 0 0 0"
+                     Columns="4">
+            <f:HeaderedSingleLine Header="名字"
+                                  Margin="8" />
 
-                            <ftk:ToolButton Content="{f:Language global.add}"
-                                            Command="{Binding NewDocumentCommand}"
-                                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                                            ShowText="True"/>
+            <f:HeaderedSingleLine Header="类型"
+                                  Margin="8" />
 
-                            <ftk:ToolButton Content="{f:Language global.remove}"
-                                            Command="{Binding OpenDocumentCommand}"
-                                            Icon="{StaticResource FeatherIcon.Trash}"
-                                            ShowText="True"/>
-                        </StackPanel>
-                    </f:ForestIsland.ToolBar>
-                    <ScrollViewer>
-                        <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel ItemWidth="384"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8"/>
-                            <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8"/>
-                            <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8"/>
-                            <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8"/>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </f:ForestIsland>
-            </DockPanel>
+            <f:HeaderedSingleLine Header="稀有度"
+                                  Margin="8" />
+            <f:HeaderedSingleLine Header="售价"
+                                  Margin="8" />
+            <f:HeaderedSingleLine Header="获得方式"
+                                  Margin="8" />
+            <f:HeaderedMultiLine Header="简介"
+                                 Margin="8" />
+            <f:HeaderedSingleLine Header="攻击力"
+                                  Margin="8" />
+            <f:HeaderedSingleLine Header="元素"
+                                  Margin="8" />
+        </UniformGrid>
 
-            <!-- 材料 -->
-            <f:ForestIsland Grid.Column="2"
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Header="材料"
+
+        <!-- 词条 -->
+        <DockPanel Grid.Column="1"
+                   Grid.Row="1"
+                   Margin="32 0 0 0">
+            <f:HeaderedMultiLine DockPanel.Dock="Top"
+                                 Header="简介"
+                                 Height="160"
+                                 Margin="8" />
+
+            <f:ForestIsland Header="词条"
                             Margin="8">
                 <f:ForestIsland.ToolBar>
                     <StackPanel Margin="32 0 0 0"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
 
-                        <ftk:ToolButton Command="{Binding NewDocumentCommand}"
-                                            Icon="{StaticResource FeatherIcon.PlusCircle}"/>
+                        <ftk:ToolButton Content="{f:Language global.add}"
+                                        Command="{Binding NewDocumentCommand}"
+                                        Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                        ShowText="True" />
 
-                        <ftk:ToolButton Command="{Binding OpenDocumentCommand}"
-                                            Icon="{StaticResource FeatherIcon.Clear}"/>
+                        <ftk:ToolButton Content="{f:Language global.remove}"
+                                        Command="{Binding OpenDocumentCommand}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True" />
                     </StackPanel>
                 </f:ForestIsland.ToolBar>
-                <ItemsControl>
-                    <DockPanel>
-                        <Border Height="48"
-                                Width="48">
-                            <Border.Background>
-                                <ImageBrush>
-                                    <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                            <Binding Path="Avatar" Mode="OneWay" />
-                                            <Binding Path="Type" />
-                                        </MultiBinding>
-                                    </ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Border.Background>
-                        </Border>
-                        <DockPanel Margin="16 0 0 0">
-                            <TextBlock DockPanel.Dock="Top"
-                                       FontSize="16"
-                                       Margin="4 0 0 0"
-                                       Text="材料1"/>
-                            <studio:RatingControl Value="3"
-                                                  Maximum="5"/>
-                        </DockPanel>
-                    </DockPanel>
-                </ItemsControl>
+                <ScrollViewer>
+                    <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel ItemWidth="420" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8" />
+                        <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8" />
+                        <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8" />
+                        <f:HeaderedSingleLine Header="简介" Margin="0 8 8 8" />
+                    </ItemsControl>
+                </ScrollViewer>
             </f:ForestIsland>
-        </Grid>
-    </ScrollViewer>
+        </DockPanel>
+
+        <!-- 材料 -->
+        <f:ForestSection Grid.Column="2"
+                         Grid.Row="0"
+                         Grid.RowSpan="2"
+                         Header="材料"
+                         Margin="8">
+            <f:ForestSection.ToolBar>
+                <StackPanel Margin="32 0 0 4"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+                    <ftk:ToolButton Command="{Binding NewDocumentCommand}"
+                                    Icon="{StaticResource FeatherIcon.PlusCircle}" />
+
+                    <ftk:ToolButton Command="{Binding OpenDocumentCommand}"
+                                    Icon="{StaticResource FeatherIcon.Clear}" />
+                </StackPanel>
+            </f:ForestSection.ToolBar>
+            <ItemsControl>
+                <DockPanel>
+                    <Border Height="48"
+                            Width="48">
+                        <Border.Background>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>
+                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <Binding Path="Avatar" Mode="OneWay" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </ImageBrush.ImageSource>
+                            </ImageBrush>
+                        </Border.Background>
+                    </Border>
+                    <DockPanel Margin="16 0 0 0">
+                        <TextBlock DockPanel.Dock="Top"
+                                   FontSize="16"
+                                   Margin="4 0 0 0"
+                                   Text="材料1" />
+                        <studio:RatingControl Value="3"
+                                              Maximum="5" />
+                    </DockPanel>
+                </DockPanel>
+            </ItemsControl>
+        </f:ForestSection>
+    </Grid>
 </f:ForestUserControl>
