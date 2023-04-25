@@ -128,8 +128,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             //
             // Template
             Xaml.InstallView<WeaponEditorPage, WeaponEditorViewModel>();
-            Xaml.InstallView<WeaponEditorPage, PlanetEditorViewModel>();
-            Xaml.InstallView<WeaponEditorPage, MaterialEditorViewModel>();
+            Xaml.InstallView<PlanetEditorPage, PlanetEditorViewModel>();
+            Xaml.InstallView<MaterialEditorPage, MaterialEditorViewModel>();
             
             ViewMapper.Initialize();
         }

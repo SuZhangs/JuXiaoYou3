@@ -17,7 +17,6 @@
                      SnapsToDevicePixels="True">
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
-
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
     </UserControl.Resources>
 
