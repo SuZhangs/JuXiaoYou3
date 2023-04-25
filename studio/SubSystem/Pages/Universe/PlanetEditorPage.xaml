@@ -25,8 +25,8 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Padding" Value="8" />
             <Setter Property="Margin" Value="4" />
-            <Setter Property="Width" Value="84" />
-            <Setter Property="Height" Value="100" />
+            <Setter Property="Width" Value="128" />
+            <Setter Property="Height" Value="96" />
             <Setter Property="IsFilled" Value="False" />
             <Setter Property="IconSize" Value="23" />
             <Setter Property="UseHighlight" Value="True"/>
@@ -67,21 +67,20 @@
 
     <Grid Margin="16">
         <Grid.RowDefinitions>
-            <RowDefinition Height="160" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="360" />
         </Grid.ColumnDefinitions>
 
         <!-- 头像 -->
         <f:LooklessButton Grid.Column="0"
                           Grid.Row="0"
                           Command="{Binding ChangeAvatarCommand}"
-                          Height="160"
-                          Width="160">
+                          Height="200"
+                          Width="200">
             <Border>
                 <Border.Background>
                     <ImageBrush>
@@ -131,121 +130,183 @@
                         Grid.RowSpan="2"
                         Margin="16 0">
             <ftk:TabItem Header="基础信息">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <WrapPanel Grid.Row="0">
-                        <ftk:StateButton Content="树类"/>
-                        <ftk:StateButton Content="草本"/>
-                        <ftk:StateButton Content="藤蔓"/>
-                        <ftk:StateButton Content="多肉"/>
-                        <ftk:StateButton Content="苔藓"/>
-                        <ftk:StateButton Content="蕨类"/>
-                        <ftk:StateButton Content="藻类"/>
-                        <ftk:StateButton Content="菌类"/>
-                    </WrapPanel>
-                    <WrapPanel Grid.Row="1">
-                        <ftk:StateButton Content="食材"/>
-                        <ftk:StateButton Content="药材"/>
-                        <ftk:StateButton Content="加工"/>
-                        <ftk:StateButton Content="观赏"/>
-                        <ftk:StateButton Content="调味"/>
-                        <ftk:StateButton Content="染色"/>
-                        <ftk:StateButton Content="香料"/>
-                    </WrapPanel>
-                    <UniformGrid Grid.Row="2"
+                <ScrollViewer>
+                    <StackPanel>
+                        <HeaderedContentControl Header="类型"
+                                                Margin="0 16 0 0">
+                            <WrapPanel Grid.Row="0">
+                                <ftk:StateButton Content="树类"/>
+                                <ftk:StateButton Content="草本"/>
+                                <ftk:StateButton Content="藤蔓"/>
+                                <ftk:StateButton Content="多肉"/>
+                                <ftk:StateButton Content="苔藓"/>
+                                <ftk:StateButton Content="蕨类"/>
+                                <ftk:StateButton Content="藻类"/>
+                                <ftk:StateButton Content="菌类"/>
+                            </WrapPanel>
+                        </HeaderedContentControl>
+                        <HeaderedContentControl Header="用途"
+                                       Margin="0 16 0 0">
+                            <WrapPanel Grid.Row="0">
+                                <ftk:StateButton Content="食材"/>
+                                <ftk:StateButton Content="药材"/>
+                                <ftk:StateButton Content="加工"/>
+                                <ftk:StateButton Content="观赏"/>
+                                <ftk:StateButton Content="调味"/>
+                                <ftk:StateButton Content="染色"/>
+                                <ftk:StateButton Content="香料"/>
+                                <ftk:StateButton Content="其他"/>
+                            </WrapPanel>
+                        </HeaderedContentControl>
+
+                        <HeaderedContentControl Header="基本信息"
+                                                Margin="0 16 0 0">
+                            <UniformGrid Grid.Row="2"
                                  Columns="4">
-                        <f:HeaderedSingleLine Header="名字"
+                                <f:HeaderedSingleLine Header="名字"
                                   Margin="8" />
 
-                        <f:HeaderedSingleLine Header="类型"
+                                <f:HeaderedSingleLine Header="类型"
                                   Margin="8" />
 
-                        <f:HeaderedSingleLine Header="稀有度"
+                                <f:HeaderedSingleLine Header="稀有度"
                                   Margin="8" />
-                        <f:HeaderedSingleLine Header="售价"
+                                <f:HeaderedSingleLine Header="售价"
                                   Margin="8" />
-                        <f:HeaderedSingleLine Header="获得方式"
-                                  Margin="8" />
-                        <f:HeaderedMultiLine Header="简介"
-                                 Margin="8" />
-                        <f:HeaderedSingleLine Header="攻击力"
-                                  Margin="8" />
-                        <f:HeaderedSingleLine Header="元素"
-                                  Margin="8" />
-                    </UniformGrid>
+                            </UniformGrid>
+                        </HeaderedContentControl>
 
 
-                    <!-- 词条 -->
-                    <f:HeaderedMultiLine Grid.Row="3"
+                        <!-- 词条 -->
+                        <f:HeaderedMultiLine Grid.Row="3"
                                          Header="简介"
+                                             Height="240"
                                          Margin="8" />
-
-                </Grid>
+                    </StackPanel>
+                </ScrollViewer>
             </ftk:TabItem>
-            <ftk:TabItem Header="基础信息">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <WrapPanel Grid.Row="0">
-                        <ftk:StateButton Content="树类"/>
-                        <ftk:StateButton Content="草本"/>
-                        <ftk:StateButton Content="藤蔓"/>
-                        <ftk:StateButton Content="多肉"/>
-                        <ftk:StateButton Content="苔藓"/>
-                        <ftk:StateButton Content="蕨类"/>
-                        <ftk:StateButton Content="藻类"/>
-                        <ftk:StateButton Content="菌类"/>
-                    </WrapPanel>
-                    <WrapPanel Grid.Row="1">
-                        <ftk:StateButton Content="食材"/>
-                        <ftk:StateButton Content="药材"/>
-                        <ftk:StateButton Content="加工"/>
-                        <ftk:StateButton Content="观赏"/>
-                        <ftk:StateButton Content="调味"/>
-                        <ftk:StateButton Content="染色"/>
-                        <ftk:StateButton Content="香料"/>
-                    </WrapPanel>
-                    <UniformGrid Grid.Row="2"
+
+            <ftk:TabItem Header="植被信息">
+                <ScrollViewer>
+                    <StackPanel>
+                        <HeaderedContentControl Header="基本信息"
+                                                Margin="0 16 0 0">
+                            <UniformGrid Grid.Row="2"
                                  Columns="4">
-                        <f:HeaderedSingleLine Header="名字"
+                                <f:HeaderedSingleLine Header="最高高度"
                                   Margin="8" />
 
-                        <f:HeaderedSingleLine Header="类型"
+                                <f:HeaderedSingleLine Header="寿命"
                                   Margin="8" />
 
-                        <f:HeaderedSingleLine Header="稀有度"
+                                <f:HeaderedSingleLine Header="稀有度"
                                   Margin="8" />
-                        <f:HeaderedSingleLine Header="售价"
+                                <f:HeaderedSingleLine Header="售价"
                                   Margin="8" />
-                        <f:HeaderedSingleLine Header="获得方式"
+                            </UniformGrid>
+                        </HeaderedContentControl>
+
+
+                        <!-- 词条 -->
+                        <f:HeaderedMultiLine Grid.Row="3"
+                                         Header="简介"
+                                             Height="240"
+                                         Margin="8" />
+                    </StackPanel>
+                </ScrollViewer>
+            </ftk:TabItem>
+            <ftk:TabItem Header="花">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:HeaderedSingleLine Header="花名"
                                   Margin="8" />
-                        <f:HeaderedMultiLine Header="简介"
-                                 Margin="8" />
-                        <f:HeaderedSingleLine Header="攻击力"
+                        <f:HeaderedSingleLine Header="花期"
                                   Margin="8" />
-                        <f:HeaderedSingleLine Header="元素"
+
+                        <f:HeaderedSingleLine Header=""
                                   Margin="8" />
                     </UniformGrid>
-
-
+                    <f:ToggleSwitch Content="是否为素材？" Margin="8" />
                     <!-- 词条 -->
                     <f:HeaderedMultiLine Grid.Row="3"
                                          Header="简介"
+                                             Height="240"
                                          Margin="8" />
-
-                </Grid>
+                </StackPanel>
+            </ftk:TabItem>
+            <ftk:TabItem Header="果">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
+                </StackPanel>
+            </ftk:TabItem>
+            <ftk:TabItem Header="根">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
+                </StackPanel>
+            </ftk:TabItem>
+            <ftk:TabItem Header="茎">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
+                </StackPanel>
+            </ftk:TabItem>
+            <ftk:TabItem Header="叶">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
+                </StackPanel>
+            </ftk:TabItem>
+            <ftk:TabItem Header="其他">
+                <StackPanel>
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
+                </StackPanel>
             </ftk:TabItem>
             <ftk:TabItem Header="词条">
-
                 <f:ForestIsland Header="词条"
                             Margin="8">
                     <f:ForestIsland.ToolBar>
@@ -280,57 +341,5 @@
                 </f:ForestIsland>
             </ftk:TabItem>
         </ftk:TabControl>
-
-
-        <!-- 词条 -->
-        <DockPanel Grid.Column="1"
-                   Grid.Row="1"
-                   Margin="32 0 0 0">
-        </DockPanel>
-
-        <!-- 材料 -->
-        <f:ForestSection Grid.Column="2"
-                         Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Header="材料"
-                         Margin="16 0">
-            <f:ForestSection.ToolBar>
-                <StackPanel Margin="32 0 0 4"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
-
-                    <ftk:ToolButton Command="{Binding NewDocumentCommand}"
-                                    Icon="{StaticResource FeatherIcon.PlusCircle}" />
-
-                    <ftk:ToolButton Command="{Binding OpenDocumentCommand}"
-                                    Icon="{StaticResource FeatherIcon.Clear}" />
-                </StackPanel>
-            </f:ForestSection.ToolBar>
-            <ItemsControl>
-                <DockPanel>
-                    <Border Height="48"
-                            Width="48">
-                        <Border.Background>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                        <Binding Path="Avatar" Mode="OneWay" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Border.Background>
-                    </Border>
-                    <DockPanel Margin="16 0 0 0">
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontSize="16"
-                                   Margin="4 0 0 0"
-                                   Text="材料1" />
-                        <studio:RatingControl Value="3"
-                                              Maximum="5" />
-                    </DockPanel>
-                </DockPanel>
-            </ItemsControl>
-        </f:ForestSection>
     </Grid>
 </f:ForestUserControl>
