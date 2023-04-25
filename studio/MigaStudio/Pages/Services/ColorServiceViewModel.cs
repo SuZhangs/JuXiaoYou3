@@ -58,12 +58,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 Id       = ID.Get(),
                 Name     = r.Value,
                 Color    = "#007ACC",
-                Keywords = new ObservableCollection<string>(),
+                Keywords = new ObservableCollection<string> { r.Value },
             };
 
             Mappings.Add(m);
             Property.Mappings
                     .Add(m);
+            ColorService.AddOrUpdate(r.Value, m.Color);
             SetDirtyState();
         }
 

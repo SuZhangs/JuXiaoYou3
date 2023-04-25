@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             if (b is RarityPresentation rarity)
             {
-                var r1 = await SubSystem.OptionSelection<ModuleBlock>(
+                var r1 = await SubSystem.Selection<ModuleBlock>(
                     SubSystemString.SelectTitle,
                     null,
                     Document.Parts

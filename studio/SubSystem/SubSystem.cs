@@ -8,12 +8,13 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
 using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public static class SubSystem
     {
-        public static Task<Op<DocumentCache>> NewDocumentWizard()
+        public static Task<Op<DocumentCache>> NewDocument()
         {
             return Xaml.Get<IDialogService>()
                        .Dialog<DocumentCache, NewDocumentViewModel>();
@@ -40,12 +41,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// <param name="options">所有选项</param>
         /// <typeparam name="TOption">选项类型</typeparam>
         /// <returns>返回一个操作结果</returns>
-        public static Task<Op<TOption>> OptionSelection<TOption>(string title, object selected, IEnumerable<object> options)
+        public static Task<Op<TOption>> Selection<TOption>(string title, object selected, IEnumerable<object> options)
         {
             var optionVM = Xaml.GetViewModel<OptionSelectionViewModel>();
             var parameter = new Parameter
             {
-                Args = new object[]
+                Args = new[]
                 {
                     selected,
                     options
@@ -124,6 +125,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<TemplateGalleryPage, TemplateGalleryViewModel>();
             Xaml.InstallView<ModuleManifestView, ModuleManifestViewModel>();
 
+            //
+            // Template
+            Xaml.InstallView<WeaponEditorPage, WeaponEditorViewModel>();
+            
             ViewMapper.Initialize();
         }
     }

@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var r = await SubSystem.OptionSelection<PartOfDetail>(
+            var r = await SubSystem.Selection<PartOfDetail>(
                 SubSystemString.SelectTitle,
                 null,
                 iterator);

@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{00FFC34C-2A5F-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{829B50A7-1B53-48F0-B1C8-7B5DC4CB3324}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem.Template", "studio\SubSystem.Template\SubSystem.Template.csproj", "{8DFF5AF2-54A6-4FDB-BD68-B8F40101C600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem.Inspiration", "studio\SubSystem.Inspiration\SubSystem.Inspiration.csproj", "{8DFF5AF2-54A6-4FDB-BD68-B8F40101C600}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigaGen.App", "generators\MigaGen.App\MigaGen.App.csproj", "{94A668AE-ADE1-4113-B843-CE27E99B5A3D}"
 EndProject

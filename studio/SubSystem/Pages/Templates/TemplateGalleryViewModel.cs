@@ -265,7 +265,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task<ModulePreset> PickModuleManifestImpl()
         {
-            var r = await SubSystem.OptionSelection<ModulePreset>(
+            var r = await SubSystem.Selection<ModulePreset>(
                 SubSystemString.SelectTitle,
                 null,
                 Property.ModulePresets);

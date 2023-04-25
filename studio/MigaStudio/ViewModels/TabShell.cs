@@ -3,6 +3,7 @@ using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Pages;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -45,7 +46,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
             
-            var r = await SubSystem.OptionSelection<TabViewModel>(
+            var r = await SubSystem.Selection<TabViewModel>(
                 SubSystemString.SelectTitle,
                 InactiveWorkspace.FirstOrDefault(),
                 InactiveWorkspace);
@@ -77,6 +78,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void RequireStartupTabViewModel()
         {
             New<HomeViewModel>();
+            New<WeaponEditorViewModel>();
+            New<PlanetEditorViewModel>();
+            New<MaterialEditorViewModel>();
         }
 
         public sealed override string Id => AppViewModel.IdOfTabShellController;
