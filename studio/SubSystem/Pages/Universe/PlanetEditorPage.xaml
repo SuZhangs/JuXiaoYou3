@@ -186,7 +186,7 @@
                 </ScrollViewer>
             </ftk:TabItem>
 
-            <ftk:TabItem Header="植被信息">
+            <ftk:TabItem Header="植株">
                 <ScrollViewer>
                     <StackPanel>
                         <HeaderedContentControl Header="基本信息"
@@ -228,7 +228,16 @@
                         <f:HeaderedSingleLine Header=""
                                   Margin="8" />
                     </UniformGrid>
-                    <f:ToggleSwitch Content="是否为素材？" Margin="8" />
+                    <UniformGrid Grid.Row="2"
+                                 Columns="4"
+                                 Margin="0 16 0 0">
+                        <f:ToggleSwitch Content="作为原材料？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有药效？" Margin="8" />
+                        <f:ToggleSwitch Content="是否可食用？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                        <f:ToggleSwitch Content="是否有毒性？" Margin="8" />
+                    </UniformGrid>
                     <!-- 词条 -->
                     <f:HeaderedMultiLine Grid.Row="3"
                                          Header="简介"

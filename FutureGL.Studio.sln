@@ -51,6 +51,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5
 		JuXiaoYou-Stable.cake = JuXiaoYou-Stable.cake
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem.Storyboard", "studio\SubSystem.Storyboard\SubSystem.Storyboard.csproj", "{7918CB45-0E47-4821-BDC1-130E7B561062}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem.Composer", "SubSystem.Composer\SubSystem.Composer.csproj", "{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +167,22 @@ Global
 		{239204F4-F934-4822-A249-EF6CB7CF0BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{239204F4-F934-4822-A249-EF6CB7CF0BF4}.Release|x86.ActiveCfg = Release|x86
 		{239204F4-F934-4822-A249-EF6CB7CF0BF4}.Release|x86.Build.0 = Release|x86
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Release|x86.ActiveCfg = Release|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Release|x86.Build.0 = Release|Any CPU
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Debug|x86.ActiveCfg = Debug|x86
+		{7918CB45-0E47-4821-BDC1-130E7B561062}.Debug|x86.Build.0 = Debug|x86
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Release|x86.ActiveCfg = Release|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Release|x86.Build.0 = Release|Any CPU
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Debug|x86.ActiveCfg = Debug|x86
+		{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}.Debug|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

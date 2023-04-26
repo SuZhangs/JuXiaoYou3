@@ -325,6 +325,35 @@ namespace Acorisoft.FutureGL.Forest.Services
                 //
             }
         }
+        
+        /// <summary>
+        /// 添加语言
+        /// </summary>
+        /// <param name="textSource">所有数据源</param>
+        public static void AppendLanguageSource(IEnumerable<string> textSource)
+        {
+            // pageRoot.Id.Function
+            try
+            {
+
+                foreach (var line in textSource)
+                {                   
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
+                    var separator = line.IndexOf('=');
+                    var id        = line[..separator].Trim();
+                    var value     = line[(separator + 1)..].Trim();
+
+                    _stringDictionary.TryAdd(id, value);
+                }
+            }
+            catch
+            {
+                //
+            }
+        }
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaUtils;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -9,29 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public ModeSwitchViewModel()
         {
-            Controllers = new ObservableCollection<NamedItem<string>>
-            {
-                new NamedItem<string>
-                {
-                    Name = Language.GetText(AppViewModel.IdOfTabShellController),
-                    Value = AppViewModel.IdOfTabShellController
-                },
-                new NamedItem<string>
-                {
-                    Name  = Language.GetText(AppViewModel.IdOfStoryboardController),
-                    Value = AppViewModel.IdOfStoryboardController
-                },
-                new NamedItem<string>
-                {
-                    Name  = Language.GetText(AppViewModel.IdOfVisitorController),
-                    Value = AppViewModel.IdOfVisitorController
-                },
-                new NamedItem<string>
-                {
-                    Name  = Language.GetText(AppViewModel.IdOfInspirationController),
-                    Value = AppViewModel.IdOfInspirationController
-                },
-            };
+            Controllers = new ObservableCollection<NamedItem<string>>();
         }
 
         protected override void OnStart(RoutingEventArgs parameter)
@@ -39,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var p = parameter.Parameter;
             var a = p.Args;
             Context            = (GlobalStudioContext)a[0];
+            Controllers.AddMany(Context.ControllerList, true);
             SelectedController = Context.CurrentController.Id;
             base.OnStart(parameter);
         }

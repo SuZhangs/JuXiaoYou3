@@ -3,9 +3,9 @@
     <PropertyGroup>
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>disable</Nullable>
+        <OutDir>../../Builds/JuXiaoYou/Plugins</OutDir>
+        <RootNamespace>Acorisoft.FutureGL.MigaStudio.Inspiration</RootNamespace>
         <UseWPF>true</UseWPF>
-        <OutDir>../../Builds/SubSystem</OutDir>
-        <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <Platforms>AnyCPU;x86;x64</Platforms>
         <AssemblyVersion>3.0.0</AssemblyVersion>
         <FileVersion>3.0.0.0</FileVersion>
@@ -17,14 +17,6 @@
       <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
       <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Modules\ModuleBlockTemplates.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -50,7 +42,8 @@
 
     <ItemGroup>
       <Folder Include="Pages" />
-      <Folder Include="Resources\Converters" />
+      <Folder Include="Resources" />
+      <Folder Include="ViewModels" />
     </ItemGroup>
 
 </Project>

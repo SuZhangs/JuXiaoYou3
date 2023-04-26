@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.Forest.AppModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -13,6 +14,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CurrentController = controller;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<NamedItem<string>> ControllerList { get; init; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ITabViewController CurrentController { get; private set; }
         
         /// <summary>
@@ -25,6 +34,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// </summary>
         public bool FirstTimeStartup { get; set; }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public Action<ITabViewController> ControllerSetter { get; init; }
 
         /// <summary>

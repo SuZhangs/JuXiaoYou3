@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
+using Acorisoft.FutureGL.MigaUtils;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -31,14 +32,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     launch,
                     quick
                 },
+                ControllerList = new ObservableCollection<NamedItem<string>>
+                {
+                    new NamedItem<string>
+                    {
+                        Name = Language.GetText(IdOfTabShellController),
+                        Value = shell.Id
+                    },
+                },
                 ControllerMaps = new Dictionary<string, ITabViewController>
                 {
                     { shell.Id, shell },
                     { launch.Id, launch },
                     { quick.Id, quick },
-                    { IdOfVisitorController, new VisitorController() },
-                    { IdOfStoryboardController, new StoryboardController() },
-                    { IdOfInspirationController, new InspirationController() },
                 },
                 ControllerSetter = x => CurrentController = x
             };
@@ -79,13 +85,27 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         .PlayNext();
                     return true;
                 case Key.F12:
-                    ModeSwitchViewModel.Switch(_context);
+                    SwitchModeImpl();
                     return true;
                 default:
                     break;
             }
 
             return base.OnKeyDown(e);
+        }
+
+        private void SwitchModeImpl()
+        {
+            var ccl    = _context.ControllerList;
+            var ccl_fv = ccl.FirstOrDefault();
+            if (ccl.Count > 1 || 
+                (ccl.Count == 1 && 
+                 ccl_fv is not null && 
+                 ccl_fv.Value != IdOfTabShellController))
+            {
+                
+                ModeSwitchViewModel.Switch(_context);
+            }
         }
 
         protected sealed override void OnControllerChanged(IViewController oldController, IViewController newController)
