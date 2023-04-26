@@ -80,15 +80,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void MainThemeSetting(MainTheme x)
         {
+            if (x == BasicAppSetting.Theme)
+            {
+                return;
+            }
+            
             BasicAppSetting.Theme = x;
             NotifyApplyWhenRestart();
         }
 
         private void DatabaseModeSetting(DatabaseMode x)
         {
-            Xaml.Get<SystemSetting>()
-                .AdvancedSetting
-                .DebugMode = x;
+            var setting = Xaml.Get<SystemSetting>()
+                              .AdvancedSetting;
+            if (x == setting.DebugMode)
+            {
+                return;
+            }
+
+            setting.DebugMode = x;
             NotifyApplyWhenRestart();
         }
 

@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>disable</Nullable>
-        <OutDir>../../Builds/JuXiaoYou/Plugins</OutDir>
+        <OutDir>../../Builds/Plugins</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio.Inspiration</RootNamespace>
         <UseWPF>true</UseWPF>
         <Platforms>AnyCPU;x86;x64</Platforms>

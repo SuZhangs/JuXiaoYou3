@@ -360,7 +360,7 @@
                             SnapsToDevicePixels="True"
                             UseLayoutRounding="True"
                             Width="384"
-                            Height="64">
+                            MinHeight="64">
                         <DockPanel>
                             <Path x:Name="Icon"
                                       Data="{TemplateBinding Geometry}"

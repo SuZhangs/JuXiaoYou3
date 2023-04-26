@@ -124,6 +124,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     }
                 }
 
+                //
+                // 当关闭的是当前的页面，且标签页的数量大于0，且当前标签页不是最后一个页面
+                //
+                // 则显示的页面是后一个
                 if (ReferenceEquals(_currentViewModel, viewModel) &&
                     Workspace.Count > 0 &&
                     index < Workspace.Count)
@@ -131,6 +135,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     CurrentViewModel = Workspace[index];
                 }
                 else
+                {
+                    //
+                    // 否则选择的页面就是最后一个
+                    CurrentViewModel = Workspace[^1];
+                }
+                //
+                // 只有当只剩最后一个标签页被关闭的时候才提示创建默认页面
+                if(Workspace.Count == 0)
                 {
                     
                     RequireStartupTabViewModel();
