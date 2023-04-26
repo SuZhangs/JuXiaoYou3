@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem.Storyboard", "studio\SubSystem.Storyboard\SubSystem.Storyboard.csproj", "{7918CB45-0E47-4821-BDC1-130E7B561062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem.Composer", "SubSystem.Composer\SubSystem.Composer.csproj", "{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem.Composer", "studio\SubSystem.Composer\SubSystem.Composer.csproj", "{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
