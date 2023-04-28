@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Windows.Forms.VisualStyles;
@@ -11,6 +12,7 @@ using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using NLog;
+// ReSharper disable All
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {

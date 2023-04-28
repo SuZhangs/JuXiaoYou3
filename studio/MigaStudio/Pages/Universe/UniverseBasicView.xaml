@@ -44,21 +44,9 @@
                             </Border.Background>
                         </Border>
                     </f:LooklessButton>
-                    <UniformGrid Columns="3"
+                    <UniformGrid Columns="2"
                                  Margin="32 0 0 0"
                                  VerticalAlignment="Top">
-                        <f:HeaderedSingleLine Header="ID"
-                                              IsReadOnly="True"
-                                              Margin="8"
-                                              Text="{Binding PageId,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <f:HeaderedSingleLine Header="版本"
-                                              IsReadOnly="True"
-                                              Margin="8"
-                                              Text="{Binding ForeignName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <f:HeaderedSingleLine Header="封面"
-                                              IsReadOnly="True"
-                                              Margin="8"
-                                              Text="{Binding ForeignName,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
                         <f:HeaderedSingleLine Header="{f:Language global.Name}"
                                               Margin="8"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
