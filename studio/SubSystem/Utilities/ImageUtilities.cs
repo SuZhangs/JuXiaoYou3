@@ -82,9 +82,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var          origin  = new MemoryStream(buffer);
             MemoryStream result;
             var          image = Image.Load<Rgba32>(buffer);
+            var          h     = image.Height;
+            var          w     = image.Width;
 
 
-            if (image.Width < 32 || image.Height < 32)
+            if (w < 32 || h < 32)
             {
                 image.Dispose();
                 origin.Dispose();
@@ -92,18 +94,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return new ImageOpResult { IsFinished = false };
             }
 
-
-            if (image.Width != image.Height)
+            if (w > 4096 ||
+                h > 4096)
             {
-                var horizontal = image.Width > 1920;
+                await Xaml.Get<IBuiltinDialogService>().Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooBig);
+                return new ImageOpResult { IsFinished = false };
+            }
 
-                if (horizontal || image.Height > 1080)
+
+            if (w != h)
+            {
+                var horizontal = w > 1920;
+
+                if (horizontal || h > 1080)
                 {
                     await Task.Run(() =>
                     {
                         session.Update(SubSystemString.Processing);
-                        var scale = horizontal ? 1920d / image.Width : 1080d / image.Height;
-                        image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+                        var scale = horizontal ? 1920d / w : 1080d / h;
+                        h = (int)(h * scale);
+                        w = (int)(w * scale);
+                        image.Mutate(x => { x.Resize(new Size(w, h)); });
 
                         // rewrite
                         origin = new MemoryStream();
@@ -132,6 +143,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 result = r.Value;
                 result.Seek(0, SeekOrigin.Begin);
                 origin.Dispose();
+                image.Dispose();
                 return new ImageOpResult
                 {
                     IsFinished = true,
@@ -147,7 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 {
                     session.Update(SubSystemString.Processing);
                     var scale = 256d / image.Width;
-                    image.Mutate(x => { x.Resize(new Size((int)(image.Width * scale), (int)(image.Height * scale))); });
+                    image.Mutate(x => { x.Resize(new Size((int)(w * scale), (int)(h * scale))); });
 
                     // rewrite
                     origin = new MemoryStream();
@@ -171,6 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             result.Seek(0, SeekOrigin.Begin);
             session.Dispose();
 
+            image.Dispose();
             return new ImageOpResult
             {
                 IsFinished = true,

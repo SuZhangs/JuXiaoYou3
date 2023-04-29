@@ -260,7 +260,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _cropped                = new CroppedBitmap(_grayImage, new Int32Rect(_x1, _y1, (int)ThumbSize, (int)ThumbSize));
             _thumbImage.ImageSource = _cropped;
             Thumb.Background        = _thumbImage;
-            Presentation.Background      = _thumbImage;
+            Presentation.Background = _thumbImage;
         }
 
         private void Button_ScaleUp(object sender, RoutedEventArgs e)
