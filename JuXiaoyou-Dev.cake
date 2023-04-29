@@ -6,7 +6,7 @@ var outputDur = "./Builds/JuXiaoYou";
 var cpyDir = @"E:\发行\橘小柚\3.0-Dev";
 var testDir = "./tests/MigaDB.Tests/MigaDB.Tests.csproj";
 var testDir2 = "./tests/MigaStudio.Tests/MigaStudio.Tests.csproj";
-var issFileName = MakeAbsolute(Directory("JuXiaoYou-Stable.iss"));
+var issFileName = MakeAbsolute(Directory("JuXiaoYou-Dev.iss"));
 
 #tool nuget:?package=NuGet.CommandLine&version=5.9.1
 //////////////////////////////////////////////////////////////////////

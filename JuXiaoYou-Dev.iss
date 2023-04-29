@@ -24,7 +24,7 @@ LicenseFile=E:\发行\橘小柚\License\EULA.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=E:\发行\橘小柚\Publish
-OutputBaseFilename=JuXiaoYou-x64        
+OutputBaseFilename=JuXiaoYou        
 SetupIconFile=E:\Repository\JuXiaoYou\assets\ico_2.ico
 Compression=lzma
 SolidCompression=yes
@@ -38,9 +38,9 @@ Name: "english"; MessagesFile: "compiler:Languages\English.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "E:\发行\橘小柚\dependencies\.Net6-x64.exe"; DestDir: "{app}"; Flags: dontcopy noencryption
-Source: "E:\发行\橘小柚\3.0-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\发行\橘小柚\3.0-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\发行\橘小柚\dependencies\.Net6-x86.exe"; DestDir: "{app}"; Flags: dontcopy noencryption
+Source: "E:\发行\橘小柚\3.0-Dev\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\发行\橘小柚\3.0-Dev\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -69,7 +69,7 @@ var
   S: AnsiString;
 begin
   // 在消息框显示 Readme.txt 内容(非 Unicode) 
-  ExtractTemporaryFile('.Net6-x64.exe');
+  ExtractTemporaryFile('.Net6-x86.exe');
   Result := True;
 end;
 var
@@ -168,7 +168,7 @@ begin
   WizardForm.StatusLabel.Caption := CustomMessage('InstallingDotNetRuntime');
   WizardForm.ProgressGauge.Style := npbstMarquee;
   try
-    if not Exec(ExpandConstant('{tmp}\.Net6-x64.exe'), '/passive /norestart /showrmui /showfinalerror', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+    if not Exec(ExpandConstant('{tmp}\.Net6-x86.exe'), '/passive /norestart /showrmui /showfinalerror', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
     begin
       Result := FmtMessage(CustomMessage('DotNetRuntimeFailedToLaunch'), [SysErrorMessage(resultCode)]);
     end
@@ -203,7 +203,7 @@ begin
     WizardForm.StatusLabel.Caption := StatusText;
     WizardForm.ProgressGauge.Style := npbstNormal;
     
-    DeleteFile(ExpandConstant('{tmp}\Net6-x64.exe'));
+    DeleteFile(ExpandConstant('{tmp}\Net6-x86.exe'));
   end;
 end;
 
@@ -215,7 +215,7 @@ begin
 
   if NetRuntimeIsMissing() then
   begin
-    ExtractTemporaryFile('.Net6-x64.exe');
+    ExtractTemporaryFile('.Net6-x86.exe');
     Result := InstallDotNetRuntime();
   end;
 end;
