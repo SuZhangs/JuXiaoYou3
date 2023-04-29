@@ -89,13 +89,13 @@
                          Margin="16 0">
 
                 <ftk:ToolButton Content="{f:Language global.new}"
-                                    Command="{Binding NewDocumentCommand}"
+                                    Command="{Binding NewComposeCommand}"
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True" />
 
                 <ftk:ToolButton Content="{f:Language global.save}"
-                                    Command="{Binding SaveDocumentCommand}"
+                                    Command="{Binding SaveComposeCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
                                     ShowText="True" />

@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             SavePresentationPart();
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
-            Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
+            Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
 
@@ -78,12 +78,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
            DocumentUtilities.OpenDocument(Controller, cache.Value);
         }
 
-
-        private async Task OpenDocumentImpl()
-        {
-            
-        }
-        
         //---------------------------------------------
         //
         // Keywords

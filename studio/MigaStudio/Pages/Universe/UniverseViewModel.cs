@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -6,6 +7,8 @@ using System.Windows.Forms.VisualStyles;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -137,6 +140,66 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState();
             }
         }
+        
+        public DocumentType Type => DocumentType.Universe;
+        
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task ChangeAvatarImpl()
+        {
+            var r = await ImageUtilities.Avatar();
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var    buffer = r.Buffer;
+            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
+            var    md5    = Convert.ToBase64String(raw);
+            string avatar;
+
+            if (ImageEngine.HasFile(md5))
+            {
+                var fr = ImageEngine.Records.FindById(md5);
+                avatar = fr.Uri;
+            }
+            else
+            {
+                avatar = ImageUtilities.GetAvatarName();
+                buffer.Seek(0, SeekOrigin.Begin);
+                ImageEngine.WriteAvatar(buffer, avatar);
+
+                var record = new FileRecord
+                {
+                    Id   = md5,
+                    Uri  = avatar,
+                    Type = ResourceType.Image
+                };
+
+                ImageEngine.AddFile(record);
+            }
+
+            Icon = avatar;
+        }
+
+        //---------------------------------------------
+        //
+        // Keywords
+        //
+        //---------------------------------------------
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand ChangeAvatarCommand { get; }
 
         /// <summary>
         /// 

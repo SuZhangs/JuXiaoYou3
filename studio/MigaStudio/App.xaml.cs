@@ -144,6 +144,8 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         protected override void OnExitOverride(ExitEventArgs e)
         {
+            Xaml.Get<AppViewModel>()
+                .Stop();
             //
             // 移除所有对象
             Task.Run(async () => await _databaseManager.CloseAsync())

@@ -36,7 +36,7 @@
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
                                         <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                            <Binding Path="Avatar" Mode="OneWay" />
+                                            <Binding Path="Icon" Mode="OneWay" />
                                             <Binding Path="Type" />
                                         </MultiBinding>
                                     </ImageBrush.ImageSource>
@@ -65,7 +65,7 @@
                                      Margin="8"
                                      Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
-                <UniformGrid>
+                <UniformGrid Visibility="Collapsed">
                     <f:ToggleSwitch Content="是否有神明?"
                                     Margin="8" />
                     <f:ToggleSwitch Content="存在魔法?"

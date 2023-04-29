@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             ComposeEngine.UpdateCompose(Compose, Cache);
             SetDirtyState(false);
-            Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
+            Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         public sealed override void Stop()
@@ -256,6 +256,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             {
                 Cache.Name   = value;
                 Compose.Name = value;
+                SetDirtyState();
                 RaiseUpdated();
             }
         }

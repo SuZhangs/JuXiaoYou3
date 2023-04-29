@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable SuspiciousTypeConversion.Global
@@ -148,37 +149,48 @@ namespace Acorisoft.FutureGL.Forest.Services
 
         public static string GetText(string id)
         {
+            #if DEBUG
+            if (GlobalStrings.TryGetValue(id, out var text))
+            {
+                return text;
+            }
+
+            Debug.WriteLine($"本地化文本不存在，键:{id}");
+            return id;
+#else
+
             return GlobalStrings.TryGetValue(id, out var text) ? text : id;
+#endif
         }
 
         public static string GetEnum<T>(string prefix, T value) where T : Enum
         {
             var key = $"enum.{prefix}.{value}";
-            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+            return GetText(key);
         }
         
         public static string GetEnum(string prefix, Enum value)
         {
             var key = $"enum.{prefix}.{value}";
-            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+            return GetText(key);
         }
         
         public static string GetEnum(Enum value)
         {
             var key = $"enum.{value.GetType().Name}.{value}";
-            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+            return GetText(key);
         }
         
         public static string GetEnum<T>(T value) where T : Enum
         {
             var key = $"enum.{typeof(T).Name}.{value}";
-            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+            return GetText(key);
         }
 
         public static string GetTypeName(Type type)
         {
             var key = $"text.{type.Name}";
-            return GlobalStrings.TryGetValue(key, out var text) ? text : key;
+            return GetText(key);
         }
 
         #endregion
