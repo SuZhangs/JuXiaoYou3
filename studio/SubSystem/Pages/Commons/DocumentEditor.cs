@@ -95,8 +95,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
-
-            Initialize();
         }
 
         private void Initialize()
@@ -133,6 +131,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnStart(Parameter parameter)
         {
+            Initialize();
             ActivateAllEngines();
             Cache    = (DocumentCache)parameter.Args[0];
             Document = DocumentEngine.GetDocument(Cache.Id);

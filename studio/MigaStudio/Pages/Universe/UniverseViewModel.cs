@@ -49,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                  Save();
                              })
                              .DisposeWith(Collector);
+            ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);

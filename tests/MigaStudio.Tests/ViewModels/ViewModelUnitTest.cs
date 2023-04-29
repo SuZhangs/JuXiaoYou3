@@ -4,10 +4,12 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
+using Microsoft.VisualStudio.TestTools.UnitTesting.STAExtensions;
 
 namespace MigaStudio.Tests.ViewModels
 {
-    [TestClass, TestCategory("ViewModels")]
+    [STATestClass]
+    [TestCategory("ViewModels")]
     public class ViewModelUnitTest
     {
         
@@ -23,6 +25,7 @@ namespace MigaStudio.Tests.ViewModels
 
         
         
+        [STAThread]
         [TestMethod]
         public void CharacterDocumentFixture()
         {
@@ -31,6 +34,7 @@ namespace MigaStudio.Tests.ViewModels
 
 
 
+        [STAThread]
         [TestMethod]
         public void ItemDocumentFixture()
         {
@@ -38,6 +42,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void AbilityDocumentFixture()
         {
@@ -45,6 +50,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void GeographyDocumentFixture()
         {
@@ -52,6 +58,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void OtherDocumentFixture()
         {
@@ -64,6 +71,7 @@ namespace MigaStudio.Tests.ViewModels
         #region TemplateViewModels
 
         
+        [STAThread]
         [TestMethod]
         public void TemplateEditorFixture()
         {
@@ -71,6 +79,7 @@ namespace MigaStudio.Tests.ViewModels
         }
 
         
+        [STAThread]
         [TestMethod]
         public void TemplateGalleryFixture()
         {
@@ -81,6 +90,7 @@ namespace MigaStudio.Tests.ViewModels
         
         
         
+        [STAThread]
         [TestMethod]
         public void ModuleManifestFixture()
         {
@@ -88,6 +98,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void ModuleSelectorFixture()
         {
@@ -95,6 +106,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void EditBlockFixture()
         {
@@ -102,6 +114,7 @@ namespace MigaStudio.Tests.ViewModels
         }
         
         
+        [STAThread]
         [TestMethod]
         public void NewElementFixture()
         {
@@ -109,6 +122,7 @@ namespace MigaStudio.Tests.ViewModels
         }
 
         
+        [STAThread]
         [TestMethod]
         public void NewBlockFixture()
         {
@@ -117,6 +131,7 @@ namespace MigaStudio.Tests.ViewModels
         
         #endregion
 
+        [STAThread]
         [TestMethod]
         public void DocumentGalleryFixture()
         {
