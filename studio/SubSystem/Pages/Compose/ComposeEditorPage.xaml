@@ -85,7 +85,8 @@
             
             <!-- 操作 -->
             <UniformGrid Columns="2"
-                         Height="48">
+                         Height="48"
+                         Margin="16 0">
 
                 <ftk:ToolButton Content="{f:Language global.new}"
                                     Command="{Binding NewDocumentCommand}"
@@ -93,16 +94,17 @@
                                     IsFilled="True"
                                     ShowText="True" />
 
-                <f:CallToAction Content="{f:Language global.save}"
+                <ftk:ToolButton Content="{f:Language global.save}"
                                     Command="{Binding SaveDocumentCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
-                                    Palette="HighlightPalette1" />
+                                    ShowText="True" />
             </UniformGrid>
 
             <f:HeaderedSingleLine Grid.Column="1"
                                   Grid.Row="0"
-                                  Header="标题"/>
+                                  Header="标题"
+                                  Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             
             <editor:TextEditor x:Name="Editor"
                                Grid.Column="1"

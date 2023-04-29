@@ -69,11 +69,11 @@
                                     IsFilled="True"
                                     ShowText="True" />
                     
-                    <f:CallToAction Content="{f:Language global.save}"
+                    <ftk:ToolButton Content="{f:Language global.save}"
                                     Command="{Binding SaveDocumentCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
-                                    Palette="HighlightPalette1" />
+                                    ShowText="True" />
                 </UniformGrid>
 
 

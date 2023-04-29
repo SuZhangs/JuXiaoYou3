@@ -86,6 +86,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 }
             }
         }
+        
+        protected override void OnDirtyStateChanged(bool state)
+        {
+            if (state)
+            {
+                SetTitle(Compose.Name, true);
+            }
+        }
 
         protected override void OnStart(Parameter parameter)
         {
@@ -237,6 +245,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             set
             {
                 Markdown.Content = value;
+                RaiseUpdated();
+            }
+        }
+        
+        public string Name
+        {
+            get => Cache.Name;
+            set
+            {
+                Cache.Name   = value;
+                Compose.Name = value;
                 RaiseUpdated();
             }
         }

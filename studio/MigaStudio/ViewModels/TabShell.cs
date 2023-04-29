@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 await SensitiveOperation(Language.GetText("text.noInactiveWorkspace"));
                 return;
             }
-            
+
             var r = await SubSystem.Selection<TabViewModel>(
                 SubSystemString.SelectTitle,
                 InactiveWorkspace.FirstOrDefault(),
@@ -66,16 +66,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             var index = InactiveWorkspace.IndexOf(selectInactiveWorkspace);
             InactiveWorkspace[index] = lastActiveWorkspace;
-            Workspace[^1]         = selectInactiveWorkspace;
-            CurrentViewModel      = selectInactiveWorkspace;
+            Workspace[^1]            = selectInactiveWorkspace;
+            CurrentViewModel         = selectInactiveWorkspace;
         }
-        
+
         protected override void StartOverride()
         {
+            RequireStartupTabViewModel();
+#if DEBUG
             New<WeaponEditorViewModel>();
             New<PlanetEditorViewModel>();
             New<MaterialEditorViewModel>();
-            RequireStartupTabViewModel();
+#endif
         }
 
         protected override void RequireStartupTabViewModel()
@@ -93,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             get => _windowState;
             set => SetValue(ref _windowState, value);
         }
-        
+
         /// <summary>
         /// 选择
         /// </summary>
