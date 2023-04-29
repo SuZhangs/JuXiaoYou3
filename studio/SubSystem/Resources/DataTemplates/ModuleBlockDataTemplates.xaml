@@ -528,9 +528,9 @@
                                    Data="{Binding Data,Mode=OneWay}"
                                    Maximum="{Binding Maximum}"
                                    Color="{Binding Color}"
-                                   Height="160"
-                                   Width="160"
-                                   ShowAxisName="False" />
+                                   Height="240"
+                                   Width="240"
+                                   ShowAxisName="True" />
 
                 <ItemsControl ItemsSource="{Binding Value}"
                               Margin="16 0 0 0"

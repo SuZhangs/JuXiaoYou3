@@ -171,7 +171,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                     pen    = new Pen(new SolidColorBrush(color), 1),
                     bg = new SolidColorBrush(color)
                     {
-                        Opacity = .25f
+                        Opacity = .1f
                     }
                 };
 

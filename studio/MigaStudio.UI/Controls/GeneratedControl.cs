@@ -123,7 +123,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                 return;
             }
 
-            Value = index;
+            if (Value == index && 
+                index == 1)
+            {
+                Value = 0;
+            }
+            else
+            {
+                Value = index;
+            }
         }
 
         public override void OnApplyTemplate()
