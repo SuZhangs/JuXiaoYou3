@@ -3,8 +3,20 @@
     public enum UniTestLifetime
     {
         Constructor,
+        
+        /// <summary>
+        /// 传参
+        /// </summary>
         Startup,
+        
+        /// <summary>
+        /// 启动
+        /// </summary>
         Start,
+        
+        /// <summary>
+        /// 运行
+        /// </summary>
         Running
     }
     
