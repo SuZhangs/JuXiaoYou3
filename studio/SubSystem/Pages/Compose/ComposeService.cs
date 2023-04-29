@@ -10,12 +10,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private FrameworkElement _view;
         private Compose          _compose;
         private ComposeCache     _cache;
-        private ComposeEditorViewModelBase           _viewModel;
+        private ComposeEditorBase           _viewModel;
 
         /// <summary>
         /// 获取或设置 <see cref="ViewModel"/> 属性。
         /// </summary>
-        public ComposeEditorViewModelBase ViewModel
+        public ComposeEditorBase ViewModel
         {
             get => _viewModel;
             set => SetValue(ref _viewModel, value);

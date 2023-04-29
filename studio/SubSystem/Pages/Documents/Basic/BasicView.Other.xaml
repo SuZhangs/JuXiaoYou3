@@ -27,7 +27,7 @@
 
                         <f:HeaderedSingleLine Header="稀有度"
                                               Margin="4"
-                                              Text="{Binding Gender,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding Rarity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </UniformGrid>
 
                     <HeaderedContentControl Header="可选"

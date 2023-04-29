@@ -72,15 +72,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         protected override void StartOverride()
         {
+            New<WeaponEditorViewModel>();
+            New<PlanetEditorViewModel>();
+            New<MaterialEditorViewModel>();
             RequireStartupTabViewModel();
         }
 
         protected override void RequireStartupTabViewModel()
         {
             New<HomeViewModel>();
-            New<WeaponEditorViewModel>();
-            New<PlanetEditorViewModel>();
-            New<MaterialEditorViewModel>();
         }
 
         public sealed override string Id => AppViewModel.IdOfTabShellController;

@@ -12,12 +12,12 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
-    public abstract class ComposeEditorViewModelBase : TabViewModel
+    public abstract partial class ComposeEditorBase : TabViewModel
     {
         private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
         private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
 
-        protected ComposeEditorViewModelBase()
+        protected ComposeEditorBase()
         {
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
@@ -36,9 +36,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             ImageEngine      = dbMgr.GetEngine<ImageEngine>();
             KeywordEngine    = dbMgr.GetEngine<KeywordEngine>();
 
-            // ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
-            // SaveDocumentCommand = Command(Save);
-            // NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
+            
+            SaveComposeCommand = Command(Save);
+            NewComposeCommand  = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
@@ -51,6 +51,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             ComposeEngine.UpdateCompose(Compose, Cache);
             SetDirtyState(false);
             Successful(SubSystemString.OperationOfAutoSaveIsSuccessful);
+        }
+
+        public sealed override void Stop()
+        { 
+            Save();
+            base.Stop();
         }
 
         private void Initialize()
@@ -151,7 +157,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
-
             if (Markdown is null)
             {
                 Markdown = new PartOfMarkdown();
@@ -224,6 +229,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 KeywordEngine,
                 SetDirtyState,
                 DangerousOperation);
+        }
+
+        public string Content
+        {
+            get => Markdown.Content;
+            set
+            {
+                Markdown.Content = value;
+                RaiseUpdated();
+            }
         }
 
 

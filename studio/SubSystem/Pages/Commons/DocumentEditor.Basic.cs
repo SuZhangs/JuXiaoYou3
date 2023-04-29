@@ -5,21 +5,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private const string MetaNameOfName     = "@name";
-        private const string MetaNameOfAvatar   = "@avatar";
-        private const string MetaNameOfAge      = "@age";
-        private const string MetaNameOfBirth    = "@birth";
-        private const string MetaNameOfWeight   = "@weight";
-        private const string MetaNameOfHeight   = "@height";
-        private const string MetaNameOfGender   = "@gender";
-        private const string MetaNameOfIntro    = "@intro";
-        private const string MetaNameOfCountry  = "@country";
-        private const string MetaNameOfRace     = "@race";
-        private const string MetaNameOfNickName = "@nickname";
-        private const string MetaNameOfIsDeath  = "@death";
-        private const string MetaNameOfRarity  = "@rarity";
-        private const string MetaNameOfPrice  = "@price";
-        private const string MetaNameOfProduceArea  = "@produce-area";
+        private const string MetaNameOfName        = "@name";
+        private const string MetaNameOfAvatar      = "@avatar";
+        private const string MetaNameOfAge         = "@age";
+        private const string MetaNameOfBirth       = "@birth";
+        private const string MetaNameOfWeight      = "@weight";
+        private const string MetaNameOfHeight      = "@height";
+        private const string MetaNameOfGender      = "@gender";
+        private const string MetaNameOfIntro       = "@intro";
+        private const string MetaNameOfCountry     = "@country";
+        private const string MetaNameOfRace        = "@race";
+        private const string MetaNameOfNickName    = "@nickname";
+        private const string MetaNameOfIsDeath     = "@death";
+        private const string MetaNameOfRarity      = "@rarity";
+        private const string MetaNameOfPrice       = "@price";
+        private const string MetaNameOfProduceArea = "@produce-area";
+        private const string MetaNameOfWeakness    = "@Weakness";
 
         private string GetOrAddMetadata(string name)
         {
@@ -189,13 +190,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             get => GetOrAddMetadata(MetaNameOfGender);
             set => UpsertMetadata(MetaNameOfGender, value);
         }
-
+        
         public string Intro
         {
             get => GetOrAddMetadata(MetaNameOfIntro);
             set
             {
                 UpsertMetadata(MetaNameOfIntro, value);
+                Document.Intro = value;
+                Cache.Intro    = value;
+            }
+        }
+
+        public string Weakness
+        {
+            get => GetOrAddMetadata(MetaNameOfWeakness);
+            set
+            {
+                UpsertMetadata(MetaNameOfWeakness, value);
                 Document.Intro = value;
                 Cache.Intro    = value;
             }

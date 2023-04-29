@@ -122,24 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task AddImpl()
         {
-            var title = await StringViewModel.String(SubSystemString.EditNameTitle);
-
-            if (!title.IsFinished)
-            {
-                return;
-            }
-
-            var now = DateTime.Now;
-            var item = new ComposeCache
-            {
-                Id             = ID.Get(),
-                Name          = title.Value,
-                TimeOfCreated  = now,
-                TimeOfModified = now,
-            };
-            
-            Collection.Add(item);
-            ComposeEngine.AddComposeCache(item);
+            await ComposeUtilities.AddComposeAsync(Collection, ComposeEngine);
         }
 
         private async Task RemoveImpl(ComposeCache index)

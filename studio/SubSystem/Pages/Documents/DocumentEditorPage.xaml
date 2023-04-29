@@ -60,7 +60,7 @@
                 </Border>
 
                 <!-- 操作 -->
-                <UniformGrid Columns="3"
+                <UniformGrid Columns="2"
                              Height="48">
 
                     <ftk:ToolButton Content="{f:Language global.new}"
@@ -68,18 +68,12 @@
                                     Icon="{StaticResource IC.File}"
                                     IsFilled="True"
                                     ShowText="True" />
-
-                    <ftk:ToolButton Content="{f:Language global.open}"
-                                    Command="{Binding OpenDocumentCommand}"
-                                    Icon="{StaticResource IC.Folder}"
-                                    IsFilled="True"
-                                    ShowText="True" />
                     
-                    <ftk:ToolButton Content="{f:Language global.save}"
+                    <f:CallToAction Content="{f:Language global.save}"
                                     Command="{Binding SaveDocumentCommand}"
                                     Icon="{StaticResource IC.Save}"
                                     IsFilled="True"
-                                    ShowText="True" />
+                                    Palette="HighlightPalette1" />
                 </UniformGrid>
 
 

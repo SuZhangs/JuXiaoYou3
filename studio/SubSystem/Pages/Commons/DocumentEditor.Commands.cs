@@ -98,9 +98,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public RelayCommand SaveDocumentCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand OpenDocumentCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewDocumentCommand { get; }
     }
 }

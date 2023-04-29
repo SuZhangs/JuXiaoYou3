@@ -51,7 +51,7 @@
                     
                     <f:HeaderedMultiLine Header="弱点"
                                          Margin="4 12"
-                                         Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                         Text="{Binding Weakness,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                

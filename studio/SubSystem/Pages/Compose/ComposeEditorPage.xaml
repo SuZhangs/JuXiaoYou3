@@ -4,6 +4,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Composes"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Composes"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
@@ -33,36 +34,36 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type f:HeaderedSingleLine}">
                         <Border x:Name="PART_Bd"
-                            BorderBrush="{x:Null}"
-                            BorderThickness="0 0 0 1"
-                            MinWidth="{TemplateBinding MinWidth}"
-                            MinHeight="{TemplateBinding MinHeight}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch">
+                                BorderBrush="{x:Null}"
+                                BorderThickness="0 0 0 1"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
                             <DockPanel>
                                 <ContentPresenter x:Name="PART_Header"
-                                              DockPanel.Dock="Top"
-                                              TextElement.Foreground="{f:Brush ForegroundLevel2}"
-                                              TextElement.FontSize="14"
-                                              Content="{TemplateBinding Header}"
-                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
-                                              ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                              Margin="8"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              SnapsToDevicePixels="True"
-                                              RecognizesAccessKey="False" />
+                                                  DockPanel.Dock="Top"
+                                                  TextElement.Foreground="{f:Brush ForegroundLevel2}"
+                                                  TextElement.FontSize="14"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                                  Margin="8"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  SnapsToDevicePixels="True"
+                                                  RecognizesAccessKey="False" />
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                          CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
-                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                          IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
-                                          Style="{StaticResource Base.ScrollViewer}"
-                                          Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
+                                              CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                              IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                              IsTabStop="{TemplateBinding ScrollViewer.IsTabStop}"
+                                              Style="{StaticResource Base.ScrollViewer}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" />
                             </DockPanel>
                         </Border>
                     </ControlTemplate>
@@ -70,22 +71,50 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="64" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <f:HeaderedSingleLine Grid.Row="0"
-                              Header="标题"
-                              Margin="16 0 16 0"/>
-        <editor:TextEditor Grid.Row="1"
-                           Padding="16 16 16 0"
-                           SyntaxHighlighting="MarkDown"
-                           WordWrap="True">
-            <editor:TextEditor.Options>
-                <editor:TextEditorOptions InheritWordWrapIndentation="True"
-                                          />
-            </editor:TextEditor.Options>
-        </editor:TextEditor>
-    </Grid>
+    <f:Drawer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="280" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            
+            <!-- 操作 -->
+            <UniformGrid Columns="2"
+                         Height="48">
+
+                <ftk:ToolButton Content="{f:Language global.new}"
+                                    Command="{Binding NewDocumentCommand}"
+                                    Icon="{StaticResource IC.File}"
+                                    IsFilled="True"
+                                    ShowText="True" />
+
+                <f:CallToAction Content="{f:Language global.save}"
+                                    Command="{Binding SaveDocumentCommand}"
+                                    Icon="{StaticResource IC.Save}"
+                                    IsFilled="True"
+                                    Palette="HighlightPalette1" />
+            </UniformGrid>
+
+            <f:HeaderedSingleLine Grid.Column="1"
+                                  Grid.Row="0"
+                                  Header="标题"/>
+            
+            <editor:TextEditor x:Name="Editor"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               FontSize="16"
+                               Padding="16 16 16 0"
+                               SyntaxHighlighting="MarkDown"
+                               WordWrap="True">
+                <editor:TextEditor.Options>
+                    <editor:TextEditorOptions InheritWordWrapIndentation="True" />
+                </editor:TextEditor.Options>
+            </editor:TextEditor>
+        </Grid>
+    </f:Drawer>
 </f:ForestUserControl>

@@ -22,7 +22,6 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
         private SolidColorBrush _foregroundBrush;
         private SolidColorBrush _backgroundHighlight1Brush;
         private SolidColorBrush _backgroundHighlight2Brush;
-        private SolidColorBrush _backgroundDisabledBrush;
         private SolidColorBrush _foregroundDisabledBrush;
 
 
@@ -32,7 +31,6 @@ namespace Acorisoft.FutureGL.Forest.UI.Tools
             _foregroundBrush           = null;
             _backgroundHighlight1Brush = null;
             _backgroundHighlight2Brush = null;
-            _backgroundDisabledBrush   = null;
             _foregroundDisabledBrush   = null;
             InvalidateVisual();
         }

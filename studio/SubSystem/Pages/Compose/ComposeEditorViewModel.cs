@@ -8,7 +8,7 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
-    public class ComposeEditorViewModel : ComposeEditorViewModelBase
+    public class ComposeEditorViewModel : ComposeEditorBase
     {
         protected override void IsDataPartExistence(Compose document)
         {
