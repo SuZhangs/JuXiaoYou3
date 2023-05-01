@@ -270,9 +270,10 @@
                 Margin="8 16 16 16"
                 VerticalAlignment="Top"
                 Visibility="{Binding RelationshipPaneVisibility,Mode=OneWay}">
-            <ItemsControl DockPanel.Dock="Bottom"
-                          Margin="16 8"
-                          ItemsSource="{Binding Relatives,Mode=OneWay}" />
+            <ScrollViewer>
+                <ItemsControl Margin="16 8"
+                              ItemsSource="{Binding Relatives,Mode=OneWay}" />
+            </ScrollViewer>
         </Border>
     </Grid>
 </UserControl>

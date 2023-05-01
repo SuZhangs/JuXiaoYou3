@@ -310,9 +310,10 @@
                                     ShowText="True" />
                 </UniformGrid>
 
-                <ItemsControl DockPanel.Dock="Bottom"
-                              Margin="16 8"
-                              ItemsSource="{Binding Relatives,Mode=OneWay}" />
+                <ScrollViewer DockPanel.Dock="Bottom">
+                    <ItemsControl Margin="16 8"
+                                  ItemsSource="{Binding Relatives,Mode=OneWay}" />
+                </ScrollViewer>
             </DockPanel>
         </Border>
     </Grid>
