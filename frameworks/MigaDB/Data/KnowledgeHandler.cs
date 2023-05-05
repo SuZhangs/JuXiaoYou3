@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data
 {
-    public enum DataEngineType
+    public enum KnowledgeHandler
     {
         DocumentEngine,
         TemplateEngine,

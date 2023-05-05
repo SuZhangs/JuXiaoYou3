@@ -70,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             }
 
 
-            AddConcept(document.Id, document.Name, DataEngineType.DocumentEngine);
+            AddConcept(document.Id, document.Name, KnowledgeHandler.DocumentEngine);
             DocumentCacheDB.Insert(document);
 
             //
@@ -215,7 +215,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
-            AddConcept(document.Id, document.Name, DataEngineType.DocumentEngine);
+            AddConcept(document.Id, document.Name, KnowledgeHandler.DocumentEngine);
             DocumentCacheDB.Update(cache);
             DocumentDB.Update(document);
         }
@@ -242,7 +242,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
         
-            AddConcept(cache.Id, cache.Name, DataEngineType.DocumentEngine);
+            AddConcept(cache.Id, cache.Name, KnowledgeHandler.DocumentEngine);
             DocumentCacheDB.Update(cache);
         }
 

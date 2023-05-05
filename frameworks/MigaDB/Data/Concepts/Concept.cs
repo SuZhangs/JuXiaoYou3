@@ -13,7 +13,7 @@
         /// <summary>
         /// 处理器
         /// </summary>
-        public DataEngineType Handler { get; init; }
+        public KnowledgeHandler Handler { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。

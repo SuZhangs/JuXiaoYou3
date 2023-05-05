@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         public Concept GetConcept(string id) => ConceptDB.FindById(id);
 
-        public void AddConcept(string id, string name, DataEngineType type)
+        public void AddConcept(string id, string name, KnowledgeHandler type)
         {
             if (string.IsNullOrEmpty(id) || 
                 string.IsNullOrEmpty(name))
