@@ -3,9 +3,9 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public static class ViewMapper
+    partial class ServiceViewContainer
     {
-        private static readonly Dictionary<Type, Func<DocumentEditorBase, object, UserControl>> Mappings = new Dictionary<Type, Func<DocumentEditorBase,object, UserControl>>();
+        private static readonly Dictionary<Type, Func<DocumentEditorBase, object, UserControl>> Mappings = new Dictionary<Type, Func<DocumentEditorBase, object, UserControl>>();
 
         public static void Add<T>(Func<DocumentEditorBase, object, UserControl> expression)
         {
@@ -23,12 +23,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             {
                 DataContext = new AlbumPartViewModel
                 {
-                    Owner         = owner,
-                    Detail        =  (PartOfAlbum)instance,
+                    Owner  = owner,
+                    Detail = (PartOfAlbum)instance,
                 }
             };
         }
-        
+
         private static UserControl GetPlaylistView(DocumentEditorBase owner, object instance)
         {
             return new PlaylistPartView
@@ -36,19 +36,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 DataContext = new PlaylistPartViewModel
                 {
                     Owner  = owner,
-                    Detail =  (PartOfPlaylist)instance,
+                    Detail = (PartOfPlaylist)instance,
                 }
-            }; 
+            };
         }
+
         private static UserControl GetCharacterRel(DocumentEditorBase owner, object instance)
         {
             var d = (DocumentEditorVMBase)owner;
             return new CharacterRelshipPartView
             {
                 DataContext = new CharacterRelPartViewModel(d, (PartOfRel)instance)
-            }; 
+            };
         }
-        
+
         private static UserControl GetSurvey(DocumentEditorBase owner, object instance)
         {
             return new SurveyPartView
@@ -56,11 +57,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 DataContext = new SurveyPartViewModel
                 {
                     Owner  = owner,
-                    Detail =  (PartOfSurvey)instance,
+                    Detail = (PartOfSurvey)instance,
                 }
-            }; 
+            };
         }
-        
+
         private static UserControl GetStickyNote(DocumentEditorBase owner, object instance)
         {
             return new StickyNotePartView
@@ -68,11 +69,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 DataContext = new StickyNotePartViewModel
                 {
                     Owner  = owner,
-                    Detail =  (PartOfStickyNote)instance,
+                    Detail = (PartOfStickyNote)instance,
                 }
-            }; 
+            };
         }
-        
+
         private static UserControl GetSentenceView(DocumentEditorBase owner, object instance)
         {
             return new SentencePartView
@@ -80,56 +81,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 DataContext = new SentencePartViewModel
                 {
                     Owner  = owner,
-                    Detail =  (PartOfSentence)instance,
+                    Detail = (PartOfSentence)instance,
                 }
-            }; 
+            };
         }
-        
+
         private static UserControl GetPrototypeView(DocumentEditorBase owner, object instance)
         {
             return new PrototypePartView
             {
                 DataContext = new PrototypePartViewModel
                 {
-                    Owner = owner,
+                    Owner  = owner,
                     Detail = (PartOfPrototype)instance
                 }
-            }; 
+            };
         }
-        
+
         private static UserControl GetAppriseView(DocumentEditorBase owner, object instance)
         {
             return new ApprisePartView
             {
                 DataContext = new ApprisePartViewModel
                 {
-                    Owner = owner,
+                    Owner  = owner,
                     Detail = (PartOfApprise)instance
                 }
-            }; 
+            };
         }
-        
+
         private static UserControl GetDetailSetting(DocumentEditorBase owner, object instance)
         {
             return new DetailPartSettingView
             {
                 DataContext = owner
-            }; 
-        }
-        
-        
-        
-        public static void Initialize()
-        {
-            Add<PartOfAlbum>(GetAlbumView);
-            Add<PartOfPlaylist>(GetPlaylistView);
-            Add<PartOfRel>(GetCharacterRel);
-            Add<PartOfSurvey>(GetSurvey);
-            Add<PartOfSentence>(GetSentenceView);
-            Add<PartOfPrototype>(GetPrototypeView);
-            Add<PartOfApprise>(GetAppriseView);
-            Add<PartOfStickyNote>(GetStickyNote);
-            Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
+            };
         }
 
         public static UserControl GetView(DocumentEditorBase owner, object viewModel)

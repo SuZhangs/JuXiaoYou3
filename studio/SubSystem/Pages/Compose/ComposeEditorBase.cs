@@ -28,7 +28,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 .ObserveOn(Scheduler)
                 .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
-            ComposeContainer = new ComposeContainer();
             DataParts        = new ObservableCollection<DataPart>();
             Services         = new ObservableCollection<ComposeService>();
             DatabaseManager  = dbMgr;
@@ -150,12 +149,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                     else if (part is PartOfAlbum poa)
                     {
                         Album = poa;
-                        Services.Add(ComposeContainer.GetService(poa));
+                        Services.Add(ServiceViewContainer.GetService(poa));
                     }
                     else if (part is PartOfManifest pom2)
                     {
                         DataParts.Add(part);
-                        Services.Add(ComposeContainer.GetService(pom2));
+                        Services.Add(ServiceViewContainer.GetService(pom2));
                     }
                 }
             }
@@ -292,7 +291,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         public PartOfMarkdown Markdown { get; private set; }
         public PartOfAlbum Album { get; private set; }
-        public ComposeContainer ComposeContainer { get; }
         public Compose Compose { get; protected set; }
         public ComposeCache Cache { get; protected set; }
     }

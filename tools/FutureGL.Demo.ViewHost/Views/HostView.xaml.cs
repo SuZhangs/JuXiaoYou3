@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost.Views
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            SubSystem.OptionSelection<FilteringOption>("过滤",
+            SubSystem.Selection<FilteringOption>("过滤",
                 (object) FilteringOption.Name, 
                 new object[]
                 {

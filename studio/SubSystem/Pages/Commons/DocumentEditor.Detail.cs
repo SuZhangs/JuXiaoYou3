@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
                 if (_selectedDetailPart is IPartOfDetail detail)
                 {
-                    DetailPart = ViewMapper.GetView(this, detail);
+                    DetailPart = ServiceViewContainer.GetView(this, detail);
                     (DetailPart.DataContext as ViewModelBase)?.Start();
                 }
                 else

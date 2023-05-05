@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons.Dialogs;
@@ -56,6 +57,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             optionVM.Title = title;
             return Xaml.Get<IDialogService>()
                        .Dialog<TOption>(optionVM, parameter);
+        }
+        
+        /// <summary>
+        /// 选择选项视图
+        /// </summary>
+        /// <param name="title">视图的标题</param>
+        /// <param name="options">所有选项</param>
+        /// <typeparam name="TOption">选项类型</typeparam>
+        /// <returns>返回一个操作结果</returns>
+        public static Task<Op<TOption>> Selection<TOption>(string title, IEnumerable<object> options)
+        {
+            // ReSharper disable PossibleMultipleEnumeration
+            return Selection<TOption>(title, options.First(), options);
         }
 
         public static void InstallLanguages()
@@ -131,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<PlanetEditorPage, PlanetEditorViewModel>();
             Xaml.InstallView<MaterialEditorPage, MaterialEditorViewModel>();
             
-            ViewMapper.Initialize();
+            ServiceViewContainer.Initialize();
         }
     }
 }

@@ -4,6 +4,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Repairs"
+                    xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio"
                     xmlns:shell="urn:acorisoft/forest/shell"
                     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                     xmlns:f="urn:acorisoft/forest/ui"
@@ -17,42 +18,22 @@
                     xmlns:controls="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
                     Style="{StaticResource ForestWindow}"
                     mc:Ignorable="d"
-                    Title="MainWindow" Height="450" Width="800"
+                    Title="MainWindow" 
+                    Height="450" 
+                    Width="800"
                     UseLayoutRounding="True">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
-    <DockPanel>
-        <UniformGrid DockPanel.Dock="Top"
-                     Columns="10">
-            <Button Content="添加"
-                    Click="Button_Zupu"></Button>
-        </UniformGrid>
+    <Grid>
+        <StackPanel>
+            <this:TimelineNode BorderBrush="CornflowerBlue"/>
+            <this:TimelineNode BorderBrush="CornflowerBlue"/>
+
+        </StackPanel>
         
-        <studio:ZoomControl Background="{f:Brush BackgroundLevel2}"
-                            ZoomBoxBackground="{f:Brush BackgroundLevel2}">
-            <Border x:Name="Canvas"
-                    Background="{f:Brush BackgroundLevel2}">
-                <local:PersonGraphLayout x:Name="Relationship"
-                                           Graph="{Binding Graph}"
-                                           LayoutAlgorithmType="Sugiyama"
-                                           IsAnimationEnabled="False"
-                                           HighlightAlgorithmType="Simple"
-                                           OverlapRemovalConstraint="Automatic"
-                                           OverlapRemovalAlgorithmType="FSA">
-                    <local:PersonGraphLayout.LayoutParameters>
-                        <layout:SugiyamaLayoutParameters LayerGap="30" 
-                                                         SliceGap="30"
-                                                         EdgeRouting="Orthogonal"
-                                                         OptimizeWidth="False"
-                                                         Direction="TopToBottom"
-                                                         PositionMode="0"/>
-                    </local:PersonGraphLayout.LayoutParameters>
-                    <local:PersonGraphLayout.OverlapRemovalParameters>
-                        <overlap:OverlapRemovalParameters HorizontalGap="80" VerticalGap="80" />
-                    </local:PersonGraphLayout.OverlapRemovalParameters>
-                </local:PersonGraphLayout>
-            </Border>
-        </studio:ZoomControl>
-    </DockPanel>
+        <Rectangle Fill="CornflowerBlue"
+                   Margin="16 0"
+                   Width="2"/>
+    </Grid>
 </shell:ForestWindow>

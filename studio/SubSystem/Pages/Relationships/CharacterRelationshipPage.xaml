@@ -19,7 +19,8 @@
                      xmlns:controls="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
                      xmlns:drawing="http://schemas.microsoft.com/expression/2010/drawing"
                      mc:Ignorable="d"
-                     d:DesignHeight="300" d:DesignWidth="300"
+                     d:DesignHeight="300"
+                     d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterRelationshipViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -178,7 +179,6 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
