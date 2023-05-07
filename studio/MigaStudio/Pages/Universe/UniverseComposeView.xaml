@@ -6,6 +6,7 @@
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Models;assembly=MigaDB.Share"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
@@ -18,20 +19,20 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
             <ftk:ToolButton Content="{f:Language global.Add}"
-                                    Icon="{StaticResource FeatherIcon.PlusCircle}"
-                                    ShowText="True" />
+                            Icon="{StaticResource FeatherIcon.PlusCircle}"
+                            ShowText="True" />
             <ftk:ToolButton Content="{f:Language global.Remove}"
-                                    CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}"
-                                    ShowText="True" />
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.MinusCircle}"
+                            ShowText="True" />
         </StackPanel>
-        <f:EmptyStateListBox Grid.Row="1"
-                             EmptyState="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！"
-                             IsEmpty="True">
-
+        <f:EmptyStateListBox Grid.Row="1">
+            <f:EmptyStateListBox.EmptyState>
+                <studio:CollectionEmptyStateView Title="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！" />
+            </f:EmptyStateListBox.EmptyState>
         </f:EmptyStateListBox>
     </Grid>
 </UserControl>

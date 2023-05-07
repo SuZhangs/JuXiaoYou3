@@ -1,4 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
+using Acorisoft.FutureGL.MigaUtils.Foundation;
+using CommunityToolkit.Mvvm.Input;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -8,11 +16,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             InitializeComponent();
         }
-    }
-
-    public abstract class DetailViewModel<TDetail> : ViewModelBase where TDetail : PartOfDetail
-    {
-        public TDetail Detail { get; init; }
-        public DocumentEditorBase Owner { get; init; }
     }
 }

@@ -45,7 +45,7 @@
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowDown}" />
-                        <Separator/>
+                        <Separator />
 
                         <f:MenuItem Header="{f:Language global.Remove}"
                                     Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
@@ -67,14 +67,17 @@
         </StackPanel>
 
         <ScrollViewer Margin="0 16 0 0">
-            <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ItemsSource="{Binding Collection,Mode=OneWay}">
+            <f:EmptyStateItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      ItemsSource="{Binding Collection,Mode=OneWay}">
+                <f:EmptyStateItemsControl.EmptyState>
+                    <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
+                </f:EmptyStateItemsControl.EmptyState>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            </f:EmptyStateItemsControl>
         </ScrollViewer>
     </DockPanel>
 </UserControl>

@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Services;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
              d:DesignHeight="300"
@@ -18,14 +19,14 @@
     </UserControl.Resources>
     <DockPanel>
         <f:LooklessButton DockPanel.Dock="Top"
-                          Command="{Binding PlayMusicCommand}"
-                          CommandParameter="{Binding SelectedMusic,Mode=OneWay}">
+                          Command="{Binding PlayCommand}"
+                          CommandParameter="{Binding Selected,Mode=OneWay}">
             <Image Stretch="Uniform"
                    Height="256"
                    Width="256">
                 <Image.Source>
                     <PriorityBinding>
-                        <Binding Path="SelectedMusic.Cover"
+                        <Binding Path="Selected.Cover"
                                  Mode="OneWay"
                                  Converter="{StaticResource AlbumConverter}"/>
                         <Binding Path="DefaultAlbum"/>
@@ -38,19 +39,19 @@
             <StackPanel DockPanel.Dock="Top"
                         Orientation="Horizontal">
                 <ftk:ToolButton Content="{f:Language global.Add}"
-                                Command="{Binding AddMusicCommand}"
+                                Command="{Binding AddCommand}"
                                 Icon="{StaticResource FeatherIcon.PlusCircle}"
                                 ShowText="True" />
 
                 <ftk:ToolButton Content="{f:Language global.Remove}"
-                                Command="{Binding RemoveMusicCommand}"
-                                CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                                Command="{Binding RemoveCommand}"
+                                CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.MinusCircle}"
                                 ShowText="True" />
 
                 <ftk:ToolButton Content="{f:Language global.Play}"
-                                Command="{Binding PlayMusicCommand}"
-                                CommandParameter="{Binding SelectedMusic,Mode=OneWay}"
+                                Command="{Binding PlayCommand}"
+                                CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource IC.Play}"
                                 IconSize="19"
                                 IsFilled="True"
@@ -58,18 +59,19 @@
 
 
                 <ftk:ToolButton Content="{f:Language global.Pause}"
-                                Command="{Binding PauseMusicCommand}"
+                                Command="{Binding PauseCommand}"
                                 Icon="{StaticResource IC.Play}"
                                 IconSize="19"
                                 IsFilled="True"
                                 ShowText="True" />
 
             </StackPanel>
-
-            <f:ListBox DockPanel.Dock="Right"
-                       Margin="0 8 0 0"
-                       ItemsSource="{Binding Collection,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedMusic,Mode=TwoWay}">
+            <f:EmptyStateListBox DockPanel.Dock="Right"
+                                 ItemsSource="{Binding Collection,Mode=OneWay}"
+                                 SelectedItem="{Binding Selected,Mode=TwoWay}">
+                <f:EmptyStateListBox.EmptyState>
+                    <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
+                </f:EmptyStateListBox.EmptyState>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type m:Music}">
                         <TextBlock Margin="8"
@@ -83,7 +85,7 @@
                         <WrapPanel ItemWidth="256" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-            </f:ListBox>
+            </f:EmptyStateListBox>
         </DockPanel>
     </DockPanel>
 </UserControl>

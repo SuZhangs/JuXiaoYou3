@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Services;
@@ -12,11 +10,9 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class PlaylistPartViewModel : DetailViewModel<PartOfPlaylist>
+    public class PlaylistPartViewModel : DetailViewModel<PartOfPlaylist, Music>
     {
-        private readonly        Subject<Music> _threadSafeAdding;
-        private static readonly DrawingImage   MusicDrawing;
-        private                 Music          _selectedMusic;
+        private static readonly     DrawingImage   MusicDrawing;
 
         static PlaylistPartViewModel()
         {
@@ -37,39 +33,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Collection = new ObservableCollection<Music>();
             MusicEngine = Xaml.Get<IDatabaseManager>()
                               .GetEngine<MusicEngine>();
-            _threadSafeAdding = new Subject<Music>().DisposeWith(Collector);
-            _threadSafeAdding.ObserveOn(Scheduler)
-                             .Subscribe(x =>
-                             {
-                                 if (Collection.Any(y => y.Id == x.Id))
-                                 {
-                                     Warning(Language.ItemDuplicatedText);
-                                     return;
-                                 }
-                                 
-                                 Collection.Add(x);
-                                 Detail!.Items.Add(x);
-                                 //
-                                 //
-                                 SelectedMusic ??= Collection.FirstOrDefault();
-                                 Successful(SubSystemString.OperationOfAddIsSuccessful);
-                                 Save();
-                             })
-                             .DisposeWith(Collector);
-            AddMusicCommand       = AsyncCommand(AddMusicImpl);
-            RemoveMusicCommand    = AsyncCommand<Music>(RemoveMusicImpl, HasItem);
-            ShiftUpMusicCommand   = Command<Music>(ShiftUpMusicImpl, HasItem);
-            ShiftDownMusicCommand = Command<Music>(ShiftDownMusicImpl, HasItem);
-            PlayMusicCommand      = Command<Music>(PlayMusicImpl, HasItem);
-            PauseMusicCommand = Command(PauseMusicImpl, () => Xaml.Get<MusicService>()
+            PlayCommand      = Command<Music>(PlayItem, HasItem);
+            PauseCommand = Command(PauseItem, () => Xaml.Get<MusicService>()
                                                                   .IsPlaying
                                                                   .CurrentValue);
         }
 
-        public override void Start()
+        protected override void OnInitialize(ICollection<Music> collection)
         {
-            base.Start();
-            
             if (Detail.Items is null)
             {
                 Xaml.Get<ILogger>()
@@ -77,10 +48,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
             
-            Collection.AddRange(Detail.Items);
+            collection.AddRange(Detail.Items);
         }
 
-        private async Task AddMusicImpl()
+        protected override void OnCollectionChanged(Music x)
+        {
+            if (Collection.Any(y => y.Id == x.Id))
+            {
+                Warning(Language.ItemDuplicatedText);
+                return;
+            }
+                                 
+            Collection.Add(x);
+            Detail!.Items.Add(x);
+            
+            //
+            //
+            Selected ??= Collection.FirstOrDefault();
+            Successful(SubSystemString.OperationOfAddIsSuccessful);
+            Save();
+        }
+
+        protected override async Task AddItem()
         {
             var opendlg = FileIO.Open(SubSystemString.MusicFilter, true);
 
@@ -97,14 +86,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 await Task.Run(async () =>
                 {
                     await Task.Delay(300);
-                    await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, x => _threadSafeAdding.OnNext(x));
+                    await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, Sync);
                 });
             }
             
         }
 
 
-        private async Task RemoveMusicImpl(Music part)
+        protected override async Task RemoveItem(Music part)
         {
             if (part is null)
             {
@@ -130,7 +119,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Save();
         }
 
-        private void PlayMusicImpl(Music part)
+        private void PlayItem(Music part)
         {
             if (part is null)
             {
@@ -173,7 +162,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
         
         
-        private void PauseMusicImpl()
+        private void PauseItem()
         {
             var ms = Xaml.Get<MusicService>();
 
@@ -184,23 +173,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        private void ShiftDownMusicImpl(Music album)
+        protected override void ShiftDownItem(Music album)
         {
             Collection.ShiftDown(album);
             Save();
         }
 
-        private void ShiftUpMusicImpl(Music album)
+        protected override void ShiftUpItem(Music album)
         {
             Collection.ShiftUp(album);
             Save();
         }
 
-        private void Save()
+        protected override void Save()
         {
             Owner.SetDirtyState();
         }
 
+        protected override void UpdateCommandState()
+        {
+            PlayCommand.NotifyCanExecuteChanged();
+            PauseCommand.NotifyCanExecuteChanged();
+        }
 
         public bool AutoPlay
         {
@@ -211,11 +205,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 RaiseUpdated();
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ObservableCollection<Music> Collection { get; init; }
 
         public MusicEngine MusicEngine { get; }
         
@@ -230,39 +219,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
             }
         }
-        /// <summary>
-        /// 获取或设置 <see cref="SelectedMusic"/> 属性。
-        /// </summary>
-        public Music SelectedMusic
-        {
-            get => _selectedMusic;
-            set
-            {
-                SetValue(ref _selectedMusic, value);
-                RemoveMusicCommand.NotifyCanExecuteChanged();
-                ShiftDownMusicCommand.NotifyCanExecuteChanged();
-                ShiftUpMusicCommand.NotifyCanExecuteChanged();
-                PlayMusicCommand.NotifyCanExecuteChanged();
-                PauseMusicCommand.NotifyCanExecuteChanged();
-            }
-        }
+        
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddMusicCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<Music> ShiftUpMusicCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<Music> ShiftDownMusicCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand<Music> PlayMusicCommand { get; }
+        public RelayCommand<Music> PlayCommand { get; }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand PauseMusicCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Music> RemoveMusicCommand { get; }
+        public RelayCommand PauseCommand { get; }
     }
 }

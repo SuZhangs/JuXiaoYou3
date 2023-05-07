@@ -12,7 +12,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" 
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type local:AlbumPartViewModel}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type local:AppraisePartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <thisConverters:ImageConverter x:Key="ImageConverter"/>
     </UserControl.Resources>
@@ -43,7 +43,7 @@
                             ShowText="True" />
 
             <ftk:ToolButton Content="{f:Language global.Presentation}"
-                            Command="{Binding OpenAlbumCommand}"
+                            Command="{Binding OpenCommand}"
                             CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
