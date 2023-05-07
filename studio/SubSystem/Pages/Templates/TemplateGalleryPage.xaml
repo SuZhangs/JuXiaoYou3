@@ -63,10 +63,9 @@
                                         ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
-
+                
                 <!-- 实际内容-->
                 <DockPanel>
-
                     <!-- 类型分类-->
                     <f:ListBox DockPanel.Dock="Top"
                                Margin="0 0 0 16"

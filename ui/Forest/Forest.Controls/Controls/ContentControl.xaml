@@ -45,8 +45,7 @@
                                           VerticalAlignment="Stretch"
                                           HorizontalAlignment="Stretch"
                                           SnapsToDevicePixels="True"
-                                          RecognizesAccessKey="False"
-                                          Visibility="Collapsed" />
+                                          RecognizesAccessKey="False"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

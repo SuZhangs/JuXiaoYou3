@@ -17,39 +17,43 @@
     <UserControl.Resources>
         <thisConverters:AlbumConverter x:Key="AlbumConverter" />
     </UserControl.Resources>
-    <DockPanel>
-        <f:LooklessButton DockPanel.Dock="Top"
-                          Command="{Binding PlayCommand}"
-                          CommandParameter="{Binding Selected,Mode=OneWay}">
-            <Image Stretch="Uniform"
+    <f:EmptyContentControl NotEmpty="{Binding HasElement,Mode=OneWay}">
+        <f:EmptyContentControl.EmptyState>
+            <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
+        </f:EmptyContentControl.EmptyState>
+        <DockPanel>
+            <f:LooklessButton DockPanel.Dock="Top"
+                              Command="{Binding PlayCommand}"
+                              CommandParameter="{Binding Selected,Mode=OneWay}">
+                <Image Stretch="Uniform"
                    Height="256"
                    Width="256">
-                <Image.Source>
-                    <PriorityBinding>
-                        <Binding Path="Selected.Cover"
+                    <Image.Source>
+                        <PriorityBinding>
+                            <Binding Path="Selected.Cover"
                                  Mode="OneWay"
                                  Converter="{StaticResource AlbumConverter}"/>
-                        <Binding Path="DefaultAlbum"/>
-                    </PriorityBinding>
-                </Image.Source>
-            </Image>
-        </f:LooklessButton>
+                            <Binding Path="DefaultAlbum"/>
+                        </PriorityBinding>
+                    </Image.Source>
+                </Image>
+            </f:LooklessButton>
 
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top"
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top"
                         Orientation="Horizontal">
-                <ftk:ToolButton Content="{f:Language global.Add}"
+                    <ftk:ToolButton Content="{f:Language global.Add}"
                                 Command="{Binding AddCommand}"
                                 Icon="{StaticResource FeatherIcon.PlusCircle}"
                                 ShowText="True" />
 
-                <ftk:ToolButton Content="{f:Language global.Remove}"
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
                                 Command="{Binding RemoveCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.MinusCircle}"
                                 ShowText="True" />
 
-                <ftk:ToolButton Content="{f:Language global.Play}"
+                    <ftk:ToolButton Content="{f:Language global.Play}"
                                 Command="{Binding PlayCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource IC.Play}"
@@ -58,34 +62,32 @@
                                 ShowText="True" />
 
 
-                <ftk:ToolButton Content="{f:Language global.Pause}"
+                    <ftk:ToolButton Content="{f:Language global.Pause}"
                                 Command="{Binding PauseCommand}"
                                 Icon="{StaticResource IC.Play}"
                                 IconSize="19"
                                 IsFilled="True"
                                 ShowText="True" />
 
-            </StackPanel>
-            <f:EmptyStateListBox DockPanel.Dock="Right"
+                </StackPanel>
+                <f:ListBox DockPanel.Dock="Right"
                                  ItemsSource="{Binding Collection,Mode=OneWay}"
                                  SelectedItem="{Binding Selected,Mode=TwoWay}">
-                <f:EmptyStateListBox.EmptyState>
-                    <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
-                </f:EmptyStateListBox.EmptyState>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Music}">
-                        <TextBlock Margin="8"
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:Music}">
+                            <TextBlock Margin="8"
                                    Text="{Binding Name}"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="256" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </f:EmptyStateListBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="256" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </f:ListBox>
+            </DockPanel>
         </DockPanel>
-    </DockPanel>
+    </f:EmptyContentControl>
 </UserControl>

@@ -66,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             Selected ??= Collection.FirstOrDefault();
             Successful(SubSystemString.OperationOfAddIsSuccessful);
-            Save();
+            SaveOperation();
         }
 
         protected override async Task AddItem()
@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             Collection.Remove(part);
-            Save();
+            SaveOperation();
         }
 
         private void PlayItem(Music part)
@@ -182,12 +182,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void ShiftUpItem(Music album)
         {
             Collection.ShiftUp(album);
-            Save();
-        }
-
-        protected override void Save()
-        {
-            Owner.SetDirtyState();
+            SaveOperation();
         }
 
         protected override void UpdateCommandState()

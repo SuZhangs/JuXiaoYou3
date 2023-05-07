@@ -31,7 +31,8 @@
         </StackPanel>
         <f:EmptyStateListBox Grid.Row="1">
             <f:EmptyStateListBox.EmptyState>
-                <studio:CollectionEmptyStateView Title="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！" />
+                <studio:CollectionEmptyStateView Title="在这里添加基于您的世界观创建的小说、漫画、影视、动画、手书！"
+                                                 Width="768"/>
             </f:EmptyStateListBox.EmptyState>
         </f:EmptyStateListBox>
     </Grid>

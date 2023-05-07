@@ -51,7 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         }
                     }
 
-                    Save();
+                    SaveOperation();
                     Successful(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
@@ -71,19 +71,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             Collection.Remove(part);
             Detail.Items.Remove(part);
-            Save();
+            SaveOperation();
         }
 
         protected override void ShiftDownItem(Album album)
         {
             Collection.ShiftDown(album);
-            Save();
+            SaveOperation();
         }
 
         protected override void ShiftUpItem(Album album)
         {
             Collection.ShiftUp(album);
-            Save();
+            SaveOperation();
         }
 
         protected override void OnCollectionChanged(Album x)
@@ -98,13 +98,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Detail!.Items.Add(x);
             Selected ??= Collection.FirstOrDefault();
         }
-
-        protected override void Save()
-        {
-            UpdateCollectionState();
-            Owner.SetDirtyState();
-        }
-
 
         private void OpenAlbumImpl(Album part)
         {

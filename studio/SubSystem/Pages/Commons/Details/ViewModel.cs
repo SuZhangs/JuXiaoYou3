@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -49,11 +51,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _threadSafeAdding.Dispose();
         }
 
-
-
         protected void UpdateCollectionState()
         {
             HasElement = Collection.Count > 0;
+        }
+
+        protected void SaveOperation()
+        {
+            Scheduler.Schedule(() =>
+            {
+                UpdateCollectionState();
+                UpdateCommandState();
+                Save();
+            });
         }
 
         protected abstract Task AddItem();
@@ -61,7 +71,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected abstract void ShiftDownItem(TDetail album);
         protected abstract void ShiftUpItem(TDetail album);
         protected abstract void OnCollectionChanged(TDetail x);
-        protected abstract void Save();
+
+        protected virtual void Save()
+        {
+            Owner.SetDirtyState();
+        }
+        
         protected abstract void OnInitialize(ICollection<TDetail> collection);
         protected abstract void UpdateCommandState();
 
