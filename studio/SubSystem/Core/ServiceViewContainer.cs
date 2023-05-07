@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Add<PartOfSurvey>(GetSurvey);
             Add<PartOfSentence>(GetSentenceView);
             Add<PartOfPrototype>(GetPrototypeView);
-            Add<PartOfApprise>(GetAppriseView);
+            Add<PartOfAppraise>(GetAppraiseView);
             Add<PartOfStickyNote>(GetStickyNote);
             Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
         }

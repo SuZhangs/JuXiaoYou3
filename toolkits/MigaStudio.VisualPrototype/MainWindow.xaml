@@ -18,22 +18,208 @@
                     xmlns:controls="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
                     Style="{StaticResource ForestWindow}"
                     mc:Ignorable="d"
-                    Title="MainWindow" 
-                    Height="450" 
+                    Title="MainWindow"
+                    Height="450"
                     Width="800"
+                    MinWidth="1440"
                     UseLayoutRounding="True">
+    <Window.Resources>
+        <Geometry x:Key="Quote">F1 M24,24z M0,0z M3.691,6.292C5.094,4.771,7.217,4,10,4L11,4 11,6.819 10.196,6.98C8.826,7.254,7.873,7.793,7.363,8.584A2.902,2.902,0,0,0,6.925,10L10,10A1,1,0,0,1,11,11L11,18C11,19.103,10.103,20,9,20L3,20A1,1,0,0,1,2,19L2,14 2.003,11.081C1.994,10.97,1.804,8.34,3.691,6.292z M20,20L14,20A1,1,0,0,1,13,19L13,14 13.003,11.081C12.994,10.97 12.804,8.34 14.691,6.292 16.094,4.771 18.217,4 21,4L22,4 22,6.819 21.196,6.98C19.826,7.254,18.873,7.793,18.363,8.584A2.902,2.902,0,0,0,17.925,10L21,10A1,1,0,0,1,22,11L22,18C22,19.103,21.103,20,20,20z</Geometry>
+    </Window.Resources>
     <Window.DataContext>
-        <local:MainViewModel/>
+        <local:MainViewModel />
     </Window.DataContext>
     <Grid>
-        <StackPanel>
-            <this:TimelineNode BorderBrush="CornflowerBlue"/>
-            <this:TimelineNode BorderBrush="CornflowerBlue"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Margin="16 0">
+            <Border Background="CornflowerBlue"
+                    CornerRadius="24"
+                    Margin="0 0 0 16"
+                    Height="48"
+                    Padding="16 8">
+                <DockPanel>
+                    <Path Data="{StaticResource FeatherIcon.Box}"
+                          Stroke="White"
+                          StrokeThickness="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Stretch="Uniform"
+                          Width="24"
+                          Height="24" />
+                    <TextBlock Margin="16 0"
+                               Text="故事背景"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Border>
+            <Border Background="CornflowerBlue"
+                    CornerRadius="24"
+                    Height="48"
+                    Margin="0 0 0 16"
+                    Padding="16 8">
+                <DockPanel>
+                    <Path Data="{StaticResource FeatherIcon.Box}"
+                          Stroke="White"
+                          StrokeThickness="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Stretch="Uniform"
+                          Width="24"
+                          Height="24" />
+                    <TextBlock Margin="16 0"
+                               Text="关键对白"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </Border>
         </StackPanel>
-        
-        <Rectangle Fill="CornflowerBlue"
-                   Margin="16 0"
-                   Width="2"/>
+
+
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Width="640">
+                <Border Background="{f:Brush Success100}"
+                        CornerRadius="32"
+                        Padding="32">
+                    <DockPanel>
+                        <Path Data="{StaticResource Quote}"
+                              Fill="White"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Stretch="Uniform"
+                              Width="48"
+                              Height="48" />
+                        <TextBlock FontSize="15"
+                                   Margin="16 16 0 0"
+                                   LineHeight="24"
+                                   TextWrapping="Wrap">
+                            <Run>末世之中，人类文明遭到致命打击。实验室也因此进入了深度睡眠模式，以度过这次危机。</Run>
+                            <LineBreak />
+                            <Run>而也因为如此，实验室的实验品得以逃出牢笼，探索外面的世界。</Run>
+                            <LineBreak />
+                            <Run>而橘晚施和橘小柚两姐弟，也踏上了探索外面世界和生存之旅。原来本应该和谐温馨的日常，也因为狸狸（一只狸猫）的出现而打破。</Run>
+                        </TextBlock>
+                    </DockPanel>
+                </Border>
+
+                <Border Background="#0099b433"
+                        CornerRadius="6"
+                        Margin="0 16 0 0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top"
+                                Background="{f:Brush Obsolete100}"
+                                CornerRadius="6 6 0 0"
+                                Padding="16">
+                            <TextBlock Text="对话"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+
+
+                        <StackPanel Margin="32 32 0 0">
+                            <DockPanel Margin="0 8">
+                                <Ellipse Height="64"
+                                         Width="64"
+                                         VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="E:\logo.png" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Border Background="{f:Brush SlateGray100}"
+                                        CornerRadius="16"
+                                        Margin="32 0 0 0 "
+                                        Padding="16">
+                                    <TextBlock FontSize="15"
+                                               LineHeight="24"
+                                               Text="我为什么要原谅人类？就凭他们创造了我们这副不人不兽的身躯？"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DockPanel>
+                            <DockPanel Margin="0 8">
+                                <Ellipse Height="64"
+                                         Width="64"
+                                         VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="E:\logo.png" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Border Background="{f:Brush SlateGray100}"
+                                        CornerRadius="16"
+                                        Margin="32 0 0 0 "
+                                        Padding="16">
+                                    <TextBlock FontSize="15"
+                                               LineHeight="24"
+                                               Text="我告诉你，橘晚施！如果不是这副不人不兽的躯体，我或许可以像一只真正的狸猫，穿梭于林野之间，自由自在"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DockPanel>
+                            <DockPanel Margin="0 8">
+                                <Ellipse Height="64"
+                                         Width="64"
+                                         VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="E:\logo.png" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Border Background="{f:Brush SlateGray100}"
+                                        CornerRadius="16"
+                                        Margin="32 0 0 0 "
+                                        Padding="16">
+                                    <TextBlock FontSize="15"
+                                               LineHeight="24"
+                                               Text="可是，现在的我就是一只怪物。既无法像动物一样捕猎，也无法像人类一样劳动，只能等待被投喂，像被圈养的动物一样。"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DockPanel>
+                            <DockPanel Margin="0 8">
+                                <Ellipse Height="64"
+                                         Width="64"
+                                         VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="E:\logo.png" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Border Background="{f:Brush SlateGray100}"
+                                        CornerRadius="16"
+                                        Margin="32 0 0 0 "
+                                        Padding="16">
+                                    <TextBlock FontSize="15"
+                                               LineHeight="24"
+                                               Text="你有小柚，有欢欢，你什么都不缺，你又拿什么和我感同身受我无法融入同类的痛苦？"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DockPanel>
+                            <DockPanel Margin="0 8 0 0">
+                                <Ellipse DockPanel.Dock="Right"
+                                         Height="64"
+                                         Width="64"
+                                         VerticalAlignment="Top">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="E:\2.png" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Border Background="{f:Brush Info100}"
+                                        CornerRadius="16"
+                                        Margin="32 0 0 0 "
+                                        Padding="16">
+                                    <TextBlock FontSize="15"
+                                               LineHeight="24"
+                                               TextWrapping="Wrap">
+                                        <Run>末世之中，人类文明遭到致命打击。实验室也因此进入了深度睡眠模式，以度过这次危机。</Run>
+                                        <LineBreak />
+                                        <Run>而也因为如此，实验室的实验品得以逃出牢笼，探索外面的世界。</Run>
+                                        <LineBreak />
+                                        <Run>而橘晚施和橘小柚两姐弟，也踏上了探索外面世界和生存之旅。原来本应该和谐温馨的日常，也因为狸狸（一只狸猫）的出现而打破。</Run>
+                                    </TextBlock>
+                                </Border>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </shell:ForestWindow>

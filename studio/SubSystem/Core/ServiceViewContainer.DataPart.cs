@@ -98,14 +98,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetAppriseView(DocumentEditorBase owner, object instance)
+        private static UserControl GetAppraiseView(DocumentEditorBase owner, object instance)
         {
-            return new ApprisePartView
+            return new AppraisePartView
             {
-                DataContext = new ApprisePartViewModel
+                DataContext = new AppraisePartViewModel
                 {
                     Owner  = owner,
-                    Detail = (PartOfApprise)instance
+                    Detail = (PartOfAppraise)instance
                 }
             };
         }

@@ -2,9 +2,9 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public partial class ApprisePartView : UserControl
+    public partial class AppraisePartView : UserControl
     {
-        public ApprisePartView()
+        public AppraisePartView()
         {
             InitializeComponent();
         }

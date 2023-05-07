@@ -18,7 +18,7 @@
             {
                 new PartOfAlbum { Items      = new List<Album>() },
                 new PartOfPlaylist { Items   = new List<Music>() },
-                new PartOfApprise { Items    = new List<Apprise>() },
+                new PartOfAppraise { Items    = new List<Appraise>() },
                 new PartOfStickyNote { Items = new List<StickyNote>() },
                 new PartOfPrototype { Items  = new List<Prototype>() },
                 new PartOfSentence { Items   = new List<Sentence>() },
