@@ -54,7 +54,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected void UpdateCollectionState()
         {
             HasElement = Collection.Count > 0;
-            Save();
         }
 
         protected abstract Task AddItem();
