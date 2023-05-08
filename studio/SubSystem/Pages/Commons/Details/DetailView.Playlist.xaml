@@ -19,7 +19,7 @@
     </UserControl.Resources>
     <f:EmptyContentControl NotEmpty="{Binding HasElement,Mode=OneWay}">
         <f:EmptyContentControl.EmptyState>
-            <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
+            <studio:MusicEmptyStateView Command="{Binding AddCommand}" />
         </f:EmptyContentControl.EmptyState>
         <DockPanel>
             <f:LooklessButton DockPanel.Dock="Top"

@@ -20,8 +20,8 @@
 
     <f:EmptyContentControl NotEmpty="{Binding HasElement,Mode=OneWay}">
         <f:EmptyContentControl.EmptyState>
-            <studio:CollectionEmptyStateView Command="{Binding AddCommand}"
-                                             Width="384" />
+            <studio:AlbumEmptyStateView Command="{Binding AddCommand}"
+                                        Width="384" />
         </f:EmptyContentControl.EmptyState>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top"

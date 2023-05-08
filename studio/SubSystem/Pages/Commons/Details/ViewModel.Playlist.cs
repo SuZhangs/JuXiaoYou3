@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public class PlaylistPartViewModel : DetailViewModel<PartOfPlaylist, Music>
     {
-        private static readonly     DrawingImage   MusicDrawing;
+        private static readonly DrawingImage MusicDrawing;
 
         static PlaylistPartViewModel()
         {
@@ -33,10 +33,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Collection = new ObservableCollection<Music>();
             MusicEngine = Xaml.Get<IDatabaseManager>()
                               .GetEngine<MusicEngine>();
-            PlayCommand      = Command<Music>(PlayItem, HasItem);
+            PlayCommand = Command<Music>(PlayItem, HasItem);
             PauseCommand = Command(PauseItem, () => Xaml.Get<MusicService>()
-                                                                  .IsPlaying
-                                                                  .CurrentValue);
+                                                        .IsPlaying
+                                                        .CurrentValue);
         }
 
         protected override void OnInitialize(ICollection<Music> collection)
@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     .Warn("PartOfAlbum为空");
                 return;
             }
-            
+
             collection.AddRange(Detail.Items);
         }
 
@@ -58,10 +58,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Warning(Language.ItemDuplicatedText);
                 return;
             }
-                                 
+
             Collection.Add(x);
             Detail!.Items.Add(x);
-            
+
             //
             //
             Selected ??= Collection.FirstOrDefault();
@@ -82,14 +82,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                      .CreateSession())
             {
                 session.Update(SubSystemString.Processing);
-                
+
                 await Task.Run(async () =>
                 {
                     await Task.Delay(300);
                     await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, Sync);
                 });
             }
-            
         }
 
 
@@ -125,12 +124,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 return;
             }
+
             var ms = Xaml.Get<MusicService>();
 
             if (ms.IsPlaying
                   .CurrentValue)
             {
-
                 if (ms.Music.CurrentValue == part)
                 {
                     return;
@@ -141,27 +140,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                              .Items
                              .Select(x => x.Id)
                              .ToHashSet();
-                
+
                 var noAddedValue = Collection.Where(x => !hash.Contains(x.Id));
 
                 ms.Playlist
                   .CurrentValue
                   .Items
                   .AddRange(noAddedValue);
-                
+
                 ms.Play(part);
             }
             else
             {
                 ms.SetPlaylist(new Playlist
                 {
-                    Name = Owner.Name,
+                    Name  = Owner.Name,
                     Items = new ObservableCollection<Music>(Collection)
                 }, true);
             }
         }
-        
-        
+
+
         private void PauseItem()
         {
             var ms = Xaml.Get<MusicService>();
@@ -202,7 +201,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         public MusicEngine MusicEngine { get; }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="DefaultAlbum"/> 属性。
         /// </summary>
@@ -210,15 +209,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             get => MusicDrawing;
             // ReSharper disable once ValueParameterNotUsed
-            set
-            {
-            }
+            set { }
         }
-        
+
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Music> PlayCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand PauseCommand { get; }
     }
