@@ -17,7 +17,6 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -48,8 +47,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type s:ForestListBoxItemBase}">
-                    <Border Name="PART_Bd"
-                            Margin="0"
+                    <Border x:Name="PART_Bd"
                             Padding="{TemplateBinding Padding}"
                             Background="Transparent"
                             CornerRadius="3">

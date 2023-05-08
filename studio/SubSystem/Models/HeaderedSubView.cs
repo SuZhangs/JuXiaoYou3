@@ -16,8 +16,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
             
             SubView.DataContext = dataContext;
         }
+        
         public Type Type { get; init; }
+        
         public FrameworkElement SubView { get; set; }
         
+        public string DefaultColor { get; init; }
+        public string HighlightColor { get; init; }
     }
 }

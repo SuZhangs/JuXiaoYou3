@@ -5,11 +5,10 @@
         // TODO: 人物关系中的血缘关系
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
-            AddSubView<CharacterBasicView>(collection, "text.DocumentEditor.Basic");
-            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
-            AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
-            // AddSubView<CharacterInspirationView>(collection, "text.DocumentEditor.Inspiration");
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
+            AddBasicView<CharacterBasicView>(collection);
+            AddDetailView(collection);
+            AddPartView(collection);
+            AddShareView(collection);
         }
 
         protected override IEnumerable<object> CreateDetailPartList()

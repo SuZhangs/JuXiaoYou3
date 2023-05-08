@@ -3,6 +3,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
     public class ChromeListBox : ForestListBoxBase
     {
+        static ChromeListBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ChromeListBox), new FrameworkPropertyMetadata(typeof(ChromeListBox)));
+        }
+        
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new ChromeListBoxItem();

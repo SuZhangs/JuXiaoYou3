@@ -5,11 +5,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
-            AddSubView<ItemBasicView>(collection, "text.DocumentEditor.Basic");
-            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
-            AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
-            //AddSubView<InspirationView>(collection, "text.DocumentEditor.Inspiration");
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
+            AddBasicView<ItemBasicView>(collection);
+            AddDetailView(collection);
+            AddPartView(collection);
+            AddShareView(collection);
         }
         
         

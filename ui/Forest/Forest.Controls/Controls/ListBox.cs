@@ -24,9 +24,9 @@
         private const string PART_ContentName = "PART_Content";
 
 
-        private Storyboard       _storyboard;
-        private Border           _bd;
-        private ContentPresenter _content;
+        private Storyboard _storyboard;
+        protected Border PART_Bd { get; private set; }
+        protected ContentPresenter PART_Content { get; private set; }
 
         private SolidColorBrush _background;
         private SolidColorBrush _foreground;
@@ -43,18 +43,18 @@
 
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
-            finder.Find<Border>(PART_BdName, x => _bd                     = x)
-                  .Find<ContentPresenter>(PART_ContentName, x => _content = x);
+            finder.Find<Border>(PART_BdName, x => PART_Bd                     = x)
+                  .Find<ContentPresenter>(PART_ContentName, x => PART_Content = x);
         }
 
         protected override void StopAnimation()
         {
-            _storyboard?.Stop(_bd);
+            _storyboard?.Stop(PART_Bd);
         }
 
         protected override void SetForeground(Brush brush)
         {
-            _content.SetValue(TextElement.ForegroundProperty, brush);
+            PART_Content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
         protected override void OnInvalidateState()
@@ -77,7 +77,7 @@
 
             //
             // 设置背景颜色
-            _bd.Background = IsSelected
+            PART_Bd.Background = IsSelected
                 ? _highlight2
                 : _background;
 
@@ -101,7 +101,7 @@
                 To       = _highlight.Color,
             };
 
-            Storyboard.SetTarget(backgroundAnimation, _bd);
+            Storyboard.SetTarget(backgroundAnimation, PART_Bd);
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
             _storyboard = new Storyboard
@@ -111,7 +111,7 @@
 
             //
             // 开始动画
-            _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
             SetForeground(_foregroundInHighlight);
@@ -132,7 +132,7 @@
 
 
             // Storyboard.SetTarget(OpacityAnimation, _bd);
-            Storyboard.SetTarget(backgroundAnimation, _bd);
+            Storyboard.SetTarget(backgroundAnimation, PART_Bd);
             // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
@@ -146,7 +146,7 @@
 
             //
             // 开始动画
-            _bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
 
             // 设置文本颜色
             SetForeground(_foregroundInHighlight);
@@ -156,10 +156,10 @@
         {
             _disabled           ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundDisabled]);
             _foregroundDisabled ??= new SolidColorBrush(Colors.LightGray);
-            
+
             //
             // 设置背景颜色
-            _bd.Background = _disabled;
+            PART_Bd.Background = _disabled;
 
             // 设置文本颜色
             SetForeground(_foregroundDisabled);

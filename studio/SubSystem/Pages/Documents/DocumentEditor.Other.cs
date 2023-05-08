@@ -4,11 +4,10 @@
     {
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
-            AddSubView<OtherBasicView>(collection, "text.DocumentEditor.Basic");
-            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail");
-            AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart");
-           // AddSubView<InspirationView>(collection, "text.DocumentEditor.Inspiration");
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation");
+            AddBasicView<OtherBasicView>(collection);
+            AddDetailView(collection);
+            AddPartView(collection);
+            AddShareView(collection);
         }
 
         protected override void OnCreateDocument(Document document)
