@@ -82,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             //
             // Opacity 动画
-            _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay200]);
+            _highlight             ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay100]);
             _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundInHighlight]);
 
             var backgroundAnimation = new ColorAnimation
