@@ -30,24 +30,34 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type thisCore:SubViewListBoxItem}">
                         <Grid>
+                            
+                            <Border x:Name="PART_BG"
+                                    Background="Transparent"
+                                    Margin="160 0 0 0"
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="0">
+                                <Border.Clip>
+                                    <Geometry>M 32 0 L 32 0 160 0 160 50 0 50</Geometry>
+                                </Border.Clip>
+                            </Border>
                             <Border x:Name="PART_Bd"
                                     HorizontalAlignment="Left"
                                     Background="Transparent"
                                     CornerRadius="0"
-                                    Width="8"/>
-                            <Border x:Name="PART_BG"
-                                    Margin="8 0 0 0"
-                                    Padding="{TemplateBinding Padding}"
-                                    CornerRadius="0">
-                                <ContentPresenter x:Name="PART_Content"
+                                    Width="192">
+                                <Border.Clip>
+                                    <Geometry>M 32 0 L 32 0 192 0 160 50 0 50</Geometry>
+                                </Border.Clip>
+                            </Border>
+                            <ContentPresenter x:Name="PART_Content"
                                                   TextElement.Foreground="{TemplateBinding Foreground}"
                                                   Content="{TemplateBinding Content}"
                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              Margin="32 0 0 0"
                                                   VerticalAlignment="Stretch"
                                                   HorizontalAlignment="Stretch" />
-                            </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">

@@ -19,4 +19,32 @@
         <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
         <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
     </ItemGroup>
+
+
+    <ItemGroup>
+        <None Remove="Languages\cn.ini" />
+        <EmbeddedResource Include="Languages\cn.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\en.ini" />
+        <EmbeddedResource Include="Languages\en.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\fr.ini" />
+        <EmbeddedResource Include="Languages\fr.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\jp.ini" />
+        <EmbeddedResource Include="Languages\jp.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\kr.ini" />
+        <EmbeddedResource Include="Languages\kr.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\ru.ini" />
+        <EmbeddedResource Include="Languages\ru.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+    </ItemGroup>
 </Project>

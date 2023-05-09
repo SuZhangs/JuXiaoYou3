@@ -19,10 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
             };
         }
 
-        protected override IEnumerable<string> InstallLanguages(CultureArea culture)
-        {
-            return Array.Empty<string>();
-        }
+        protected override string GetLanguageFilePrefix() => "Acorisoft.FutureGL.MigaStudio.Inspirations.Languages.";
 
         protected override void InstallView(IContainer container)
         {

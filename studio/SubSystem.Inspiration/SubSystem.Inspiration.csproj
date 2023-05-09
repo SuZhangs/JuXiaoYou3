@@ -20,30 +20,36 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Languages\TemplateSystem.cn.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Languages\TemplateSystem.en.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Languages\TemplateSystem.fr.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Languages\TemplateSystem.jp.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Languages\TemplateSystem.kr.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Languages\TemplateSystem.ru.ini">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Pages" />
       <Folder Include="Resources" />
       <Folder Include="ViewModels" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Languages\cn.ini" />
+        <EmbeddedResource Include="Languages\cn.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\en.ini" />
+        <EmbeddedResource Include="Languages\en.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\fr.ini" />
+        <EmbeddedResource Include="Languages\fr.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\jp.ini" />
+        <EmbeddedResource Include="Languages\jp.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\kr.ini" />
+        <EmbeddedResource Include="Languages\kr.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <None Remove="Languages\ru.ini" />
+        <EmbeddedResource Include="Languages\ru.ini">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
     </ItemGroup>
 
 </Project>

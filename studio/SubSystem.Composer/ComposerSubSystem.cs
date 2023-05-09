@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaStudio.Core;
@@ -19,14 +21,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Composer
             };
         }
 
-        protected override IEnumerable<string> InstallLanguages(CultureArea culture)
-        {
-            return Array.Empty<string>();
-        }
+
+        protected override string GetLanguageFilePrefix() => "Acorisoft.FutureGL.MigaStudio.Composer.Languages.";
 
         protected override void InstallView(IContainer container)
         {
-            
         }
 
         protected override void InstallServices(IContainer container)

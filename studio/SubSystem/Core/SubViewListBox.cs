@@ -19,10 +19,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     public class SubViewListBoxItem : ListBoxItem
     {
         private Storyboard      _storyboard;
-        private Storyboard      _storyboard2;
         private Border          PART_BG;
         private SolidColorBrush _background;
-        private SolidColorBrush _background2;
         private SolidColorBrush _foreground;
         private SolidColorBrush _foregroundInHighlight;
         private SolidColorBrush _highlight;
@@ -36,7 +34,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         protected override void StopAnimation()
         {
             _storyboard?.Stop(PART_Bd);
-            _storyboard2?.Stop(PART_BG);
             base.StopAnimation();
         }
 
@@ -72,7 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
             //
             // 设置背景颜色
-            PART_BG.Background = _background;
+            PART_BG.Background = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel3]);
             PART_Bd.Background = IsSelected
                 ? _highlight2
                 : _background;
@@ -119,7 +116,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 _highlight2 ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.HighlightA5]);
             }
 
-            _background2            ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
             _foregroundInHighlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             var backgroundAnimation = new ColorAnimation
@@ -128,12 +124,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 From     = _highlight.Color,
                 To       = _highlight2.Color,
             };
-            var backgroundAnimation2 = new ColorAnimation
-            {
-                Duration = duration,
-                From     = _background.Color,
-                To       = _background2.Color,
-            };
 
 
             // Storyboard.SetTarget(OpacityAnimation, _bd);
@@ -141,11 +131,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
             Storyboard.SetTargetProperty(backgroundAnimation, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
 
-            // Storyboard.SetTarget(OpacityAnimation, _bd);
-            Storyboard.SetTarget(backgroundAnimation2, PART_BG);
-            // Storyboard.SetTargetProperty(OpacityAnimation, new PropertyPath(OpacityProperty));
-            Storyboard.SetTargetProperty(backgroundAnimation2, new PropertyPath("(Border.Background).(SolidColorBrush.Color)"));
-            
             _storyboard = new Storyboard
             {
                 Children = new TimelineCollection
@@ -153,19 +138,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                     /*OpacityAnimation,*/ backgroundAnimation
                 }
             };
-            
-            _storyboard2 = new Storyboard
-            {
-                Children = new TimelineCollection
-                {
-                    /*OpacityAnimation,*/ backgroundAnimation2
-                }
-            };
 
             //
             // 开始动画
+            PART_BG.Background = new SolidColorBrush(theme.Colors[(int)ForestTheme.BackgroundLevel2]);
             PART_Bd.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
-            PART_BG.BeginStoryboard(_storyboard2, HandoffBehavior.SnapshotAndReplace, true);
         }
     }
 }

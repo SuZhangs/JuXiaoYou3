@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using Acorisoft.FutureGL.Forest.AppModels;
 using DryIoc;
 
@@ -67,7 +69,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
         protected abstract string GetSubSystemName(CultureArea language);
 
-        protected abstract IEnumerable<string> InstallLanguages(CultureArea culture);
+        protected IEnumerable<string> InstallLanguages(CultureArea culture)
+        {
+            var assembly       = Assembly.GetAssembly(GetType());
+            var manifestStream = assembly?.GetManifestResourceStream(GetManifestFileStream(culture));
+            
+            if(manifestStream is null)
+            {
+                return Array.Empty<string>();
+            }
+
+            var languages = new List<string>();
+            
+            //
+            //
+            using (var sr = new StreamReader(manifestStream))
+            {
+                while (!sr.EndOfStream)
+                {
+                    languages.Add(sr.ReadLine());
+                }
+            }
+
+            //
+            //
+            return languages;
+        }
+
+        private string GetManifestFileStream(CultureArea culture)
+        {
+            var p = GetLanguageFilePrefix();
+            var s = culture switch
+            {
+                CultureArea.Chinese  => "cn.ini",
+                CultureArea.Korean   => "kr.ini",
+                CultureArea.Japanese => "jp.ini",
+                CultureArea.Russian  => "ru.ini",
+                CultureArea.English  => "en.ini",
+                _                    => "fr.ini"
+            };
+
+            return $"{p}{s}";
+        }
+
+        protected abstract string GetLanguageFilePrefix();
         protected abstract void InstallView(IContainer container);
         protected abstract void InstallServices(IContainer container);
         public CultureArea Language { get; private set; }
