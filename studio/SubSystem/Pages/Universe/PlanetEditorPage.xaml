@@ -18,7 +18,7 @@
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
-        <Style TargetType="{x:Type ftk:StateButton}">
+        <Style x:Key="Temp" TargetType="{x:Type ftk:StateButton}">
             <Setter Property="CornerRadius" Value="3" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />

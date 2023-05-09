@@ -23,7 +23,7 @@
         <Style TargetType="{x:Type thisCore:SubViewListBoxItem}">
             <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
             <Setter Property="Background" Value="{f:BackgroundBrush}" />
-            <Setter Property="Margin" Value="0 0 16 16" />
+            <Setter Property="Margin" Value="0 0 16 10" />
             <Setter Property="Padding" Value="2" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="Template">
@@ -54,7 +54,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Effect" Value="{StaticResource MenuItem.ShadowEffect2}" />
-                                <Setter Property="Margin" Value="0 0 0 16" />
+                                <Setter Property="Margin" Value="0 0 0 10" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -155,7 +155,8 @@
                     Grid.RowSpan="4"
                     Background="{f:Brush BackgroundLevel2}"
                     Effect="{StaticResource ShadowEffect2}"
-                    Margin="16 0 0 0"
+                    ClipToBounds="True"
+                    BorderThickness="16 0 0 0"
                     Padding="16">
                 <ContentControl Content="{Binding SubView,Mode=OneWay}"
                                 DataContext="{Binding}" />

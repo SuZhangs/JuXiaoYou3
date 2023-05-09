@@ -107,6 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
         protected override void GoToHighlight2State(Duration duration, HighlightColorPalette palette, ForestThemeSystem theme)
         {
+            _highlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay100]);
             if (DataContext is HeaderedSubView hsv)
             {
                 _highlight2 ??= new SolidColorBrush(Xaml.FromHex(hsv.HighlightColor));
