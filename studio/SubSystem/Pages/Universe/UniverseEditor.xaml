@@ -69,60 +69,13 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-
-        <!-- 头像 -->
-        <f:LooklessButton Grid.Column="0"
-                          Grid.Row="0"
-                          Command="{Binding ChangeAvatarCommand}"
-                          Margin="32 32 32 0"
-                          Height="128"
-                          Width="128">
-            <Border>
-                <Border.Background>
-                    <ImageBrush>
-                        <ImageBrush.ImageSource>
-                            <MultiBinding Converter="{StaticResource AvatarConverter}">
-                                <Binding Path="Avatar" Mode="OneWay" />
-                                <Binding Path="Type" />
-                            </MultiBinding>
-                        </ImageBrush.ImageSource>
-                    </ImageBrush>
-                </Border.Background>
-            </Border>
-        </f:LooklessButton>
-
-
-        <!-- 名字 -->
-        <Border Grid.Column="0"
-                Grid.Row="1"
-                Height="96"
-                Margin="32 0">
-            <TextBlock FontSize="24"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="0 16 0 0"
-                       Text="{Binding Name,Mode=OneWay}"
-                       TextWrapping="Wrap"
-                       TextTrimming="CharacterEllipsis" />
-
-        </Border>
-
-
         <!-- 操作 -->
         <UniformGrid Grid.Column="0"
-                     Grid.Row="2"
                      Columns="3"
                      Height="48"
                      Margin="32 0">
@@ -145,14 +98,7 @@
 
         <Grid Grid.Column="0"
               Grid.ColumnSpan="2"
-              Grid.Row="0"
-              Grid.RowSpan="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="320" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+              Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="1*" />
@@ -160,8 +106,6 @@
 
 
             <Border Grid.Column="1"
-                    Grid.Row="0"
-                    Grid.RowSpan="4"
                     Background="{f:Brush BackgroundLevel2}"
                     Effect="{StaticResource ShadowEffect2}"
                     ClipToBounds="True"
@@ -174,7 +118,6 @@
 
             <!-- 名字 -->
             <thisCore:SubViewListBox Grid.Column="0"
-                                     Grid.Row="3"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                      Margin="32 0 -16 0"
                                      ItemsSource="{Binding SubViews}"
