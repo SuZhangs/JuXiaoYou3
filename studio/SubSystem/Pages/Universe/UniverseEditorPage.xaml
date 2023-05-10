@@ -62,6 +62,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="{x:Type f:ForestSection}">
+            <Setter Property="Background" Value="{x:Static f:Xaml.Transparent}" />
+            <Setter Property="HeaderBrush" Value="{f:Brush BackgroundLevel5}"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

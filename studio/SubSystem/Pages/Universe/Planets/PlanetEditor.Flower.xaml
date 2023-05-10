@@ -3,10 +3,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+             xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+             xmlns:studio="urn:acorisoft/studio"
+             xmlns:f="urn:acorisoft/forest/ui"
+             xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:cp="clr-namespace:ColorPicker;assembly=Forest.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
-    </Grid>
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:PlanetEditorViewModel}, IsDesignTimeCreatable=True}">
+    <ScrollViewer>
+        <StackPanel>
+            <f:ForestSection Header="基本信息"
+                             Margin="0 8">
+                <UniformGrid Columns="2">
+                    <f:HeaderedSingleLine Header="别名"
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap" />
+
+                    <f:HeaderedSingleLine Header="花期"
+                                          Margin="4"
+                                          TextWrapping="Wrap" />
+
+                    <f:HeaderedSingleLine Header="初次开花时间"
+                                          Margin="4"
+                                          TextWrapping="Wrap" />
+                    <DockPanel DockPanel.Dock="Top"
+                               HorizontalAlignment="Left"
+                               Margin="4">
+                        <cp:PortableColorPicker Height="48"
+                                                Width="48"/>
+
+
+                        <TextBlock Margin="16 0 16 0"
+                                   Text="颜色"
+                                   VerticalAlignment="Center" />
+                    </DockPanel>
+                </UniformGrid>
+            </f:ForestSection>
+
+            <!-- 简介 -->
+            <f:HeaderedMultiLine Header="简介"
+                                 Height="160"
+                                 Margin="0 8" />
+
+
+            <!-- 简介 -->
+            <f:HeaderedMultiLine Header="用途"
+                                 Height="160"
+                                 Margin="0 8" />
+
+
+            <!-- 香味 -->
+            <thisVM:SmellControl/>
+
+            <!-- 味道 -->
+            <thisVM:TasteControl/>
+            <f:ForestSection Header="其他"
+                             Margin="0 8">
+                <UniformGrid Columns="3">
+                    <f:ToggleSwitch Content="是否可以食用？"
+                                    Margin="4" />
+                    <f:ToggleSwitch Content="是否可以药用？"
+                                    Margin="4" />
+                    <f:ToggleSwitch Content="添加到物价系统？"
+                                    Margin="4" />
+                    <f:ToggleSwitch Content="添加到素材系统？"
+                                    Margin="4" />
+                </UniformGrid>
+            </f:ForestSection>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

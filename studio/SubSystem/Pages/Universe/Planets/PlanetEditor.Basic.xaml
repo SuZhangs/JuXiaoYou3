@@ -13,7 +13,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:PlanetEditorViewModel}, IsDesignTimeCreatable=True}">
     <ScrollViewer>
         <StackPanel>
-            <HeaderedContentControl Header="基本信息"
+            <f:ForestSection Header="基本信息"
                                     Margin="0 8">
                 <UniformGrid Columns="3">
                     <f:HeaderedSingleLine Header="名字" 
@@ -27,13 +27,14 @@
                     <f:HeaderedSingleLine Header="稀有度"
                                           Margin="4" />
                 </UniformGrid>
-            </HeaderedContentControl>
+            </f:ForestSection>
 
             <f:HeaderedMultiLine Header="简介"
-                                 Height="160"/>
+                                 Height="160"
+                                 Margin="0 8"/>
 
-            <HeaderedContentControl Header="类型"
-                                    Margin="0 8">
+            <f:ForestSection Header="类型"
+                             Margin="0 8">
                 <UniformGrid Columns="4">
                     <RadioButton Content="树木"
                                  Margin="4"/>
@@ -52,9 +53,9 @@
                     <RadioButton Content="菌类"
                                  Margin="4"/>
                 </UniformGrid>
-            </HeaderedContentControl>
+            </f:ForestSection>
 
-            <HeaderedContentControl Header="用途"
+            <f:ForestSection Header="用途"
                                     Margin="0 8">
                 <UniformGrid Columns="4">
                     <RadioButton Content="食材"
@@ -74,9 +75,9 @@
                     <RadioButton Content="其他"
                                  Margin="4"/>
                 </UniformGrid>
-            </HeaderedContentControl>
+            </f:ForestSection>
 
-            <HeaderedContentControl Header="栽种要求"
+            <f:ForestSection Header="栽种要求"
                                     Margin="0 8">
                 <UniformGrid Columns="2">
                     <f:HeaderedSingleLine Header="适宜温度"
@@ -91,9 +92,9 @@
                     <f:HeaderedSingleLine Header="适宜土壤"
                                       Margin="4" />
                 </UniformGrid>
-            </HeaderedContentControl>
+            </f:ForestSection>
 
-            <HeaderedContentControl Header="数值"
+            <f:ForestSection Header="数值"
                                     Margin="0 8">
                 <UniformGrid Columns="3">
                     <f:HeaderedSingleLine Header="最大高度"
@@ -105,8 +106,8 @@
 
                     <f:HeaderedSingleLine Header="最大直径"/>
                 </UniformGrid>
-            </HeaderedContentControl>
-            <HeaderedContentControl Header="其他"
+            </f:ForestSection>
+            <f:ForestSection Header="其他"
                                     Margin="0 8">
                 <UniformGrid Columns="3">
                     <f:ToggleSwitch Content="是否有毒性？"
@@ -116,7 +117,7 @@
                     <f:ToggleSwitch Content="添加到素材系统？"
                                     Margin="4" />
                 </UniformGrid>
-            </HeaderedContentControl>
+            </f:ForestSection>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
