@@ -1,11 +1,38 @@
 ﻿using System.Windows;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    partial class DocumentEditorBase
+    public class UniverseEditorViewModelProxy : BindingProxy<UniverseEditorBase>
+    {
+    }
+
+    public abstract partial class UniverseEditorBase : TabViewModel
     {
         private SubViewBase      _selectedSubView;
         private FrameworkElement _subView;
+
+        protected UniverseEditorBase()
+        {
+            InternalSubViews = new ObservableCollection<SubViewBase>();
+            SubViews         = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
+        }
+        
+        protected static void AddSubView<TView>(ICollection<SubViewBase> collection, string id, string nc, string hc) where TView : FrameworkElement
+        {
+            collection.Add(new HeaderedSubView
+            {
+                Name           = Language.GetText(id),
+                Type           = typeof(TView),
+                DefaultColor   = nc,
+                HighlightColor = hc
+            });
+        }
+
+        public override void OnStart()
+        {
+            CreateSubViews(InternalSubViews);
+        }
+
 
         /// <summary>
         /// 创建子页面
@@ -47,5 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ReadOnlyCollection<SubViewBase> SubViews { get; }
+        
+        public override bool Removable => false;
     }
 }

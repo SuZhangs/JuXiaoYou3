@@ -29,7 +29,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         //
         //                                                  
         // SubViews
-        private   FrameworkElement _subView;
         private   object           _selectedDetailPart;
         private   FrameworkElement _detailPartOfDetail;
         private   PartOfModule     _selectedModulePart;
