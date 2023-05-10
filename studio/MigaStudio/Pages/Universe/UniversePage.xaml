@@ -37,7 +37,7 @@
                     <ftk:ToolButton Content="切换世界观"
                                     HorizontalAlignment="Left"
                                     Margin="32 0 0 0"
-                                    Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                    Icon="{StaticResource FeatherIcon.Refresh}"
                                     ShowText="True"/>
                 </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl>

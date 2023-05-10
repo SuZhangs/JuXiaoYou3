@@ -11,6 +11,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
@@ -50,6 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                              })
                              .DisposeWith(Collector);
             ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
+            EditCommand           = Command(() => Controller.New<UniverseEditorViewModel>());
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
@@ -201,6 +203,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ChangeAvatarCommand { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public RelayCommand EditCommand { get; }
 
         /// <summary>
         /// 

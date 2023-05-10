@@ -65,9 +65,12 @@
                                  Header="说明">
                     <f:ForestSection.ToolBar>
                         <ftk:ToolButton Content="更多设置"
+                                        Command="{Binding EditCommand}"
                                         HorizontalAlignment="Right"
                                         Margin="0 0 0 4"
-                                        Icon="{StaticResource FeatherIcon.ArrowDown}"
+                                        Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                        IconSize="17"
+                                        IsFilled="True"
                                         ShowText="True"/>
                     </f:ForestSection.ToolBar>
                     <f:MultiLine Height="200"
