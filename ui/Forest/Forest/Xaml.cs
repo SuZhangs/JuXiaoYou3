@@ -27,8 +27,8 @@ namespace Acorisoft.FutureGL.Forest
 
         static Xaml()
         {
-            Container            = new Container(x => x.With(FactoryMethod.ConstructorWithResolvableArguments)
-                                                       .WithTrackingDisposableTransients());
+            Container = new Container(x => x.With(FactoryMethod.ConstructorWithResolvableArguments)
+                                            .WithTrackingDisposableTransients());
             ViewInfoMapper       = new Dictionary<Type, BindingInfo>();
             ViewModelInfoMapper  = new Dictionary<Type, BindingInfo>();
             InstanceScope        = new Dictionary<Type, object>();
@@ -41,7 +41,6 @@ namespace Acorisoft.FutureGL.Forest
 
         public static bool AlwaysTrue<T>(T _) => true;
         public static bool AlwaysFalse<T>(T _) => false;
-        
 
         #endregion
 
@@ -124,7 +123,7 @@ namespace Acorisoft.FutureGL.Forest
         }
 
         #endregion
-        
+
         /// <summary>
         /// 寻找指定元素的父级。
         /// </summary>
@@ -139,6 +138,22 @@ namespace Acorisoft.FutureGL.Forest
             }
 
             return source as T;
+        }
+
+        public static T FindChild<T>(DependencyObject source) where T : DependencyObject
+        {
+            var count = VisualTreeHelper.GetChildrenCount(source);
+
+            for (var i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(source, i);
+                if (child is T instance)
+                {
+                    return instance;
+                }
+            }
+
+            return default(T);
         }
 
         public static T GetViewModel<T>(Type key)
@@ -157,7 +172,7 @@ namespace Acorisoft.FutureGL.Forest
         public static T GetViewModel<T>()
         {
             var key = typeof(T);
-            
+
             //
             // instance是一个ViewModel
             // 返回 View
@@ -243,9 +258,9 @@ namespace Acorisoft.FutureGL.Forest
             // instance是一个View
             // 返回 ViewModel
             // ReSharper disable once InvertIf
-            if (ViewInfoMapper.TryGetValue(key, out info) && 
+            if (ViewInfoMapper.TryGetValue(key, out info) &&
                 instance is FrameworkElement)
-            {               
+            {
                 return instance;
             }
 
@@ -281,7 +296,7 @@ namespace Acorisoft.FutureGL.Forest
             ViewModelInfoMapper.TryAdd(bindingInfo.ViewModel, bindingInfo);
         }
 
-        public static void InstallView<TView, TViewModel>() where TView:UserControl  where TViewModel : IViewModel =>
+        public static void InstallView<TView, TViewModel>() where TView : UserControl where TViewModel : IViewModel =>
             InstallView(new BindingInfo
             {
                 ViewModel = typeof(TViewModel),
@@ -341,7 +356,7 @@ namespace Acorisoft.FutureGL.Forest
                 }
             }
         }
-        
+
         #region GetResource
 
         public static Geometry GetGeometry(string key)
@@ -404,7 +419,7 @@ namespace Acorisoft.FutureGL.Forest
             var ms = new MemoryStream(buffer);
             return FromStream(ms, w, h);
         }
-        
+
         public static ImageSource FromStream(MemoryStream ms, int w, int h)
         {
             ms.Seek(0, SeekOrigin.Begin);
@@ -417,7 +432,7 @@ namespace Acorisoft.FutureGL.Forest
             bi.EndInit();
             return bi;
         }
-        
+
         /// <summary>
         /// 渲染
         /// </summary>
@@ -441,7 +456,7 @@ namespace Acorisoft.FutureGL.Forest
 
             return bitmap;
         }
-        
+
         /// <summary>
         /// 渲染
         /// </summary>
@@ -455,7 +470,7 @@ namespace Acorisoft.FutureGL.Forest
             {
                 return null;
             }
-            
+
             var bitmap = new RenderTargetBitmap(
                 (int)element.ActualWidth,
                 (int)element.ActualHeight,
@@ -477,7 +492,7 @@ namespace Acorisoft.FutureGL.Forest
             {
                 return null;
             }
-            
+
             var bitmap = new RenderTargetBitmap(
                 (int)element.ActualWidth,
                 (int)element.ActualHeight,
@@ -492,14 +507,14 @@ namespace Acorisoft.FutureGL.Forest
 
             return ms;
         }
-        
+
         public static byte[] CaptureToBuffer(FrameworkElement element, int dip = 96)
         {
             if (element is null)
             {
                 return null;
             }
-            
+
             var bitmap = new RenderTargetBitmap(
                 (int)element.ActualWidth,
                 (int)element.ActualHeight,

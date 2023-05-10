@@ -63,6 +63,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource ClearStyle.RadioButton}">
+            <Setter Property="Margin" Value="4"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid Margin="16">
@@ -135,9 +139,9 @@
                         <HeaderedContentControl Header="类型"
                                                 Margin="0 16 0 0">
                             <WrapPanel Grid.Row="0">
-                                <ftk:StateButton Content="树类"/>
-                                <ftk:StateButton Content="草本"/>
-                                <ftk:StateButton Content="藤蔓"/>
+                                <RadioButton Content="树类"/>
+                                <RadioButton Content="草本"/>
+                                <RadioButton Content="藤蔓"/>
                                 <ftk:StateButton Content="多肉"/>
                                 <ftk:StateButton Content="苔藓"/>
                                 <ftk:StateButton Content="蕨类"/>

@@ -85,7 +85,8 @@
                                     Command="{Binding AddTabCommand}"
                                     Icon="{StaticResource FeatherIcon.Plus}"
                                     IconSize="19"
-                                    Width="48"/>
+                                    Width="48"
+                                    Visibility="Collapsed"/>
                 <!-- 设置页按钮 -->
                 <f:ForestIconButton WindowChrome.IsHitTestVisibleInChrome="True"
                                     Command="{Binding AddTabCommand}"

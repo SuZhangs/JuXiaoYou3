@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/ScrollViewer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Slider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/Drawer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Controls/ContentControl.xaml" />

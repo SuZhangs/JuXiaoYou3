@@ -5,6 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
+                     xmlns:studio="urn:acorisoft/studio"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
@@ -48,9 +49,7 @@
                 </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl>
                     <f:EmptyStateItemsControl.EmptyState>
-                        <Grid>
-                            <TextBlock Text="打开其他的世界观"/>
-                        </Grid>
+                        <studio:FeatureEmptyStateView/>
                     </f:EmptyStateItemsControl.EmptyState>
                 </f:EmptyStateItemsControl>
             </f:ForestIsland>
