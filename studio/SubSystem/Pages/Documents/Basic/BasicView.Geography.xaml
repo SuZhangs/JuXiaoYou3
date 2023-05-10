@@ -24,7 +24,8 @@
                     <UniformGrid Columns="3">
                         <f:HeaderedSingleLine Header="名字"
                                               Margin="4"
-                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                              TextWrapping="Wrap"/>
 
                         <f:HeaderedSingleLine Header="稀有度"
                                               Margin="4"

@@ -13,13 +13,110 @@
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:PlanetEditorViewModel}, IsDesignTimeCreatable=True}">
     <ScrollViewer>
         <StackPanel>
-            <UniformGrid Columns="3">
-                <f:HeaderedSingleLine Header="名字" 
-                                      Margin="4"
-                                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                <f:HeaderedSingleLine Header="学名"
+            <HeaderedContentControl Header="基本信息"
+                                    Margin="0 8">
+                <UniformGrid Columns="3">
+                    <f:HeaderedSingleLine Header="名字" 
+                                          Margin="4"
+                                          Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          TextWrapping="Wrap"/>
+
+                    <f:HeaderedSingleLine Header="学名"
+                                          Margin="4" />
+
+                    <f:HeaderedSingleLine Header="稀有度"
+                                          Margin="4" />
+                </UniformGrid>
+            </HeaderedContentControl>
+
+            <f:HeaderedMultiLine Header="简介"
+                                 Height="160"/>
+
+            <HeaderedContentControl Header="类型"
+                                    Margin="0 8">
+                <UniformGrid Columns="4">
+                    <RadioButton Content="树木"
+                                 Margin="4"/>
+                    <RadioButton Content="草本"
+                                 Margin="4"/>
+                    <RadioButton Content="藤蔓"
+                                 Margin="4"/>
+                    <RadioButton Content="多肉"
+                                 Margin="4"/>
+                    <RadioButton Content="苔藓"
+                                 Margin="4"/>
+                    <RadioButton Content="蕨类"
+                                 Margin="4"/>
+                    <RadioButton Content="藻类"
+                                 Margin="4"/>
+                    <RadioButton Content="菌类"
+                                 Margin="4"/>
+                </UniformGrid>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl Header="用途"
+                                    Margin="0 8">
+                <UniformGrid Columns="4">
+                    <RadioButton Content="食材"
+                                 Margin="4"/>
+                    <RadioButton Content="药材"
+                                 Margin="4"/>
+                    <RadioButton Content="加工"
+                                 Margin="4"/>
+                    <RadioButton Content="观赏"
+                                 Margin="4"/>
+                    <RadioButton Content="调味"
+                                 Margin="4"/>
+                    <RadioButton Content="染色"
+                                 Margin="4"/>
+                    <RadioButton Content="香料"
+                                 Margin="4"/>
+                    <RadioButton Content="其他"
+                                 Margin="4"/>
+                </UniformGrid>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl Header="栽种要求"
+                                    Margin="0 8">
+                <UniformGrid Columns="2">
+                    <f:HeaderedSingleLine Header="适宜温度"
                                       Margin="4" />
-            </UniformGrid>
+
+                    <f:HeaderedSingleLine Header="适宜湿度"
+                                      Margin="4" />
+
+                    <f:HeaderedSingleLine Header="适宜海拔"
+                                      Margin="4" />
+
+                    <f:HeaderedSingleLine Header="适宜土壤"
+                                      Margin="4" />
+                </UniformGrid>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl Header="数值"
+                                    Margin="0 8">
+                <UniformGrid Columns="3">
+                    <f:HeaderedSingleLine Header="最大高度"
+                                      Margin="4" />
+
+
+                    <f:HeaderedSingleLine Header="最大树龄"
+                                      Margin="4" />
+
+                    <f:HeaderedSingleLine Header="最大直径"/>
+                </UniformGrid>
+            </HeaderedContentControl>
+            <HeaderedContentControl Header="其他"
+                                    Margin="0 8">
+                <UniformGrid Columns="3">
+                    <f:ToggleSwitch Content="是否有毒性？"
+                                    Margin="4" />
+                    <f:ToggleSwitch Content="添加到物价系统？"
+                                    Margin="4" />
+                    <f:ToggleSwitch Content="添加到素材系统？"
+                                    Margin="4" />
+                </UniformGrid>
+            </HeaderedContentControl>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

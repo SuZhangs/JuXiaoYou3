@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             }
 
             subView.Create(this);
-            SubView ??= subView.SubView;
+            SubView = subView.SubView;
         }
         
         /// <summary>
