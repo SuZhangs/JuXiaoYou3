@@ -47,8 +47,8 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsEnabled" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush BackgroundLevel6}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush BackgroundLevel6}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush AdaptiveLevel2}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush AdaptiveLevel2}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -64,8 +64,8 @@
                                 <Condition Property="IsEnabled" Value="True"/>
                                 <Condition Property="IsChecked" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush BackgroundLevel6}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush BackgroundLevel6}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush AdaptiveLevel2}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush AdaptiveLevel2}"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Icon" />
                         </MultiTrigger>
                         <MultiTrigger>
@@ -73,8 +73,8 @@
                                 <Condition Property="IsEnabled" Value="False"/>
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush HighlightA1}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush HighlightA1}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush HighlightA2}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush HighlightA2}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

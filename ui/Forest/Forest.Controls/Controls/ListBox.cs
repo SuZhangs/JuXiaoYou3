@@ -36,6 +36,11 @@
         private SolidColorBrush _highlight2;
         private SolidColorBrush _disabled;
 
+        public static readonly DependencyProperty IsHighlightTextProperty = DependencyProperty.Register(
+            nameof(IsHighlightText),
+            typeof(bool),
+            typeof(ListBoxItem),
+            new PropertyMetadata(Boxing.True));
         static ListBoxItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ListBoxItem), new FrameworkPropertyMetadata(typeof(ListBoxItem)));
@@ -54,6 +59,11 @@
 
         protected override void SetForeground(Brush brush)
         {
+            if (!IsHighlightText)
+            {
+                return;
+            }
+            
             PART_Content.SetValue(TextElement.ForegroundProperty, brush);
         }
 
@@ -163,6 +173,13 @@
 
             // 设置文本颜色
             SetForeground(_foregroundDisabled);
+        }
+        
+
+        public bool IsHighlightText
+        {
+            get => (bool)GetValue(IsHighlightTextProperty);
+            set => SetValue(IsHighlightTextProperty, Boxing.Box(value));
         }
     }
 }
