@@ -236,6 +236,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #endregion
 
+        /// <summary>
+        /// 是否未保存？
+        /// </summary>
+        public bool DirtyState => _dirtyState;
+
         protected TabController Controller { get; private set; }
 
         /// <summary>

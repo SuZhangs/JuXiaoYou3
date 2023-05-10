@@ -8,7 +8,7 @@
                  xmlns:f="urn:acorisoft/forest/ui"
                  xmlns:ftk="urn:acorisoft/forest/toolkits"
                  Background="{x:Static f:Xaml.Transparent}"
-                 Header="香味"
+                 Header="食用性"
                  Margin="0 8"
                  mc:Ignorable="d"
                  d:DesignHeight="300"
@@ -20,7 +20,7 @@
     </f:ForestSection.ToolBar>
     <f:EmptyContentControl NotEmpty="{Binding ElementName=CustomTaste,Mode=TwoWay,Path=IsChecked}">
         <f:EmptyContentControl.EmptyState>
-            <studio:FeatureEmptyStateView Title="未启用"/>
+            <studio:DisableEmptyStateView Title="未启用"/>
         </f:EmptyContentControl.EmptyState>
     </f:EmptyContentControl>
 </f:ForestSection>

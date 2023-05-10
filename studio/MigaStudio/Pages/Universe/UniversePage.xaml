@@ -30,21 +30,14 @@
         <ftk:TabItem Header="图库">
             <this:UniverseAlbumView/>
         </ftk:TabItem>
-        <ftk:TabItem Header="世界"/>
-        <ftk:TabItem Header="设定"/>
-        <ftk:TabItem Header="术语"/>
-        <ftk:TabItem Header="法则"/>
-        <ftk:TabItem Header="作品">
-            <this:UniverseComposeView/>
-        </ftk:TabItem>
-        <ftk:TabItem Header="关于">
+        <ftk:TabItem Header="其他世界观">
             <f:ForestIsland Header="其他世界观"
                             Margin="16 8">
                 <f:ForestIsland.ToolBar>
                     <ftk:ToolButton Content="切换世界观"
                                     HorizontalAlignment="Left"
                                     Margin="32 0 0 0"
-                                    Icon="{StaticResource FeatherIcon.Refresh}"
+                                    Icon="{StaticResource FeatherIcon.More.Horizontal}"
                                     ShowText="True"/>
                 </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl>

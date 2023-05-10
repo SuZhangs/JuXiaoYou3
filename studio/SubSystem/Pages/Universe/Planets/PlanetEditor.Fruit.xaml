@@ -98,18 +98,11 @@
                                  Height="160"
                                  Margin="0 8" />
 
-            <thisVM:EatableInfoControl/>
-
-            <!-- 香味 -->
-            <thisVM:SmellControl/>
-
-            <!-- 味道 -->
-            <thisVM:TasteControl/>
+            <thisVM:EatableInfoControl Height="256"/>
+            
             <f:ForestSection Header="其他"
                              Margin="0 8">
                 <UniformGrid Columns="3">
-                    <f:ToggleSwitch Content="是否可以食用？"
-                                    Margin="4" />
                     <f:ToggleSwitch Content="是否可以药用？"
                                     Margin="4" />
                     <f:ToggleSwitch Content="添加到物价系统？"

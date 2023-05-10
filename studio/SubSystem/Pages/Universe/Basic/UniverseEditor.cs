@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
@@ -31,6 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         public override void OnStart()
         {
             CreateSubViews(InternalSubViews);
+            SelectedSubView = SubViews.FirstOrDefault();
         }
 
 
@@ -84,6 +86,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         [NullCheck(UniTestLifetime.Constructor)]
         public ReadOnlyCollection<SubViewBase> SubViews { get; }
         
-        public override bool Removable => false;
+        public sealed override bool Removable => true;
     }
 }
