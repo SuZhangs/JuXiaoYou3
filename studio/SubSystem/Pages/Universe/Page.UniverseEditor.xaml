@@ -67,6 +67,10 @@
             <Setter Property="Background" Value="{x:Static f:Xaml.Transparent}" />
             <Setter Property="HeaderBrush" Value="{f:Brush BackgroundLevel5}"/>
         </Style>
+
+        <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
+            <Setter Property="Padding" Value="8" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -74,61 +78,106 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <!-- 操作 -->
-        <UniformGrid Grid.Column="0"
-                     Columns="3"
-                     Height="48"
-                     Margin="32 0">
-
-            <ftk:ToolButton Content="{f:Language global.new}"
-                            Icon="{StaticResource IC.File}"
-                            IsFilled="True"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.save}"
-                            Icon="{StaticResource IC.Save}"
-                            IsFilled="True"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.edit}"
-                            Icon="{StaticResource IC.Save}"
-                            IsFilled="True"
-                            ShowText="True" />
-        </UniformGrid>
-
-        <Grid Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+        <Border Grid.Column="1"
+                Background="{f:Brush BackgroundLevel2}"
+                Effect="{StaticResource ShadowEffect2}"
+                ClipToBounds="True"
+                BorderThickness="16 0 0 0"
+                Padding="16">
+            <ContentControl Content="{Binding SubView,Mode=OneWay}"
+                            DataContext="{Binding}" />
+        </Border>
 
 
-            <Border Grid.Column="1"
-                    Background="{f:Brush BackgroundLevel2}"
-                    Effect="{StaticResource ShadowEffect2}"
-                    ClipToBounds="True"
-                    BorderThickness="16 0 0 0"
+        <!-- 名字 -->
+        <f:TreeView Grid.Column="0"
                     Padding="16">
-                <ContentControl Content="{Binding SubView,Mode=OneWay}"
-                                DataContext="{Binding}" />
-            </Border>
+            <f:TreeView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="8"
+                               Text="{Binding}"/>
+                </DataTemplate>
+            </f:TreeView.ItemTemplate>
+            <f:TreeViewItem Header="总览">
 
+            </f:TreeViewItem>
+            <f:TreeViewItem Header="世界">
+                <f:TreeViewItem Header="世界">
 
-            <!-- 名字 -->
-            <thisCore:SubViewListBox Grid.Column="0"
-                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                     Margin="32 0 -16 0"
-                                     ItemsSource="{Binding SubViews}"
-                                     SelectedItem="{Binding SelectedSubView,Mode=TwoWay}">
-                <f:ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type thisSubView:HeaderedSubView}">
-                        <TextBlock Margin="16 12"
-                                   Text="{Binding Name}" />
-                    </DataTemplate>
-                </f:ListBox.ItemTemplate>
-            </thisCore:SubViewListBox>
-        </Grid>
+                </f:TreeViewItem>
+            </f:TreeViewItem>
+            <f:TreeViewItem Header="法则">
+                <f:TreeViewItem Header="神祇">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="恶魔">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="灾厄">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="毒物">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="元素">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="科技">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="魔法">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="物理">
+
+                </f:TreeViewItem>
+
+            </f:TreeViewItem>
+            <f:TreeViewItem Header="设定">
+
+                <f:TreeViewItem Header="NPC">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="国家">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="势力">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="团队">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="生物">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="植物">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="矿物">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="素材">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="神祇">
+
+                </f:TreeViewItem>
+            </f:TreeViewItem>
+            <f:TreeViewItem Header="其他">
+                <f:TreeViewItem Header="物价">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="单位">
+
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="稀有度">
+
+                </f:TreeViewItem>
+
+                <f:TreeViewItem Header="词条">
+
+                </f:TreeViewItem>
+            </f:TreeViewItem>
+        </f:TreeView>
     </Grid>
 </f:ForestUserControl>
