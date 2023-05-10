@@ -6,9 +6,5 @@
         {
             
         }
-
-        protected override void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue)
-        {
-        }
     }
 }

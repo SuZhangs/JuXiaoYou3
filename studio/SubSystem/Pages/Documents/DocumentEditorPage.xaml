@@ -167,7 +167,6 @@
             <thisCore:SubViewListBox Grid.Column="0"
                                      Grid.Row="3"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                     Height="280"
                                      Margin="32 16 -16 0"
                                      VerticalAlignment="Top"
                                      ItemsSource="{Binding SubViews}"
