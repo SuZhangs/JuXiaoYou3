@@ -22,19 +22,15 @@
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <DockPanel Background="Transparent">
                         <Border x:Name="PART_Bd"
-                                Background="{f:Brush BackgroundLevel1}"
+                                Background="Transparent"
                                 BorderThickness="2"
                                 CornerRadius="16"
                                 Margin="0 0 8 0"
-                                Height="23"
-                                Width="23"
-                                Padding="1">
-                            <Path x:Name="PART_Icon"
-                                  Data="F1 M24,24z M0,0z M20,6L20,6 9,17 4,12"
-                                  StrokeThickness="2"
-                                  Stretch="Uniform"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"/>
+                                Height="20"
+                                Width="20"
+                                Padding="3">
+                            <Border x:Name="PART_Icon"
+                                    CornerRadius="16"/>
                         </Border>
                         <ContentPresenter x:Name="ContentPresenter"
                                           Margin="{TemplateBinding Padding}"
@@ -51,17 +47,16 @@
                                 <Condition Property="IsChecked" Value="False"/>
                                 <Condition Property="IsEnabled" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="PART_Icon" Value="{f:Brush HighlightA3}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush HighlightA3}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush BackgroundLevel6}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush BackgroundLevel6}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsEnabled" Value="True"/>
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="PART_Icon" Value="{f:Brush BackgroundLevel1}"/>
-                            <Setter Property="Background" TargetName="PART_Bd" Value="{f:Brush HighlightA4}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="Transparent"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush HighlightA4}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush HighlightA4}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -69,15 +64,16 @@
                                 <Condition Property="IsEnabled" Value="True"/>
                                 <Condition Property="IsChecked" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="PART_Icon" Value="{f:Brush Overlay200}"/>
-                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush Overlay200}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush BackgroundLevel6}"/>
+                            <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush BackgroundLevel6}"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_Icon" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsEnabled" Value="False"/>
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="PART_Icon" Value="{f:Brush HighlightA1}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush HighlightA1}"/>
                             <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush HighlightA1}"/>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -85,7 +81,7 @@
                                 <Condition Property="IsEnabled" Value="False"/>
                                 <Condition Property="IsChecked" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Stroke" TargetName="PART_Icon" Value="{f:Brush Overlay100}"/>
+                            <Setter Property="Background" TargetName="PART_Icon" Value="{f:Brush Overlay100}"/>
                             <Setter Property="BorderBrush" TargetName="PART_Bd" Value="{f:Brush Overlay100}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

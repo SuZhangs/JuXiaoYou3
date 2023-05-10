@@ -18,7 +18,7 @@
     <UserControl.Resources>
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
-        <Style x:Key="Temp" TargetType="{x:Type ftk:StateButton}">
+        <Style x:Key="Temp" TargetType="{x:Type RadioButton}">
             <Setter Property="CornerRadius" Value="3" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -32,7 +32,7 @@
             <Setter Property="UseHighlight" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ftk:StateButton}">
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
                         <Border x:Name="PART_Bd"
                                 BorderBrush="{f:Brush BorderBrush}"
                                 BorderThickness="1"
@@ -65,7 +65,7 @@
         </Style>
 
         <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource ClearStyle.RadioButton}">
-            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Margin" Value="8"/>
         </Style>
     </UserControl.Resources>
 
@@ -142,24 +142,24 @@
                                 <RadioButton Content="树类"/>
                                 <RadioButton Content="草本"/>
                                 <RadioButton Content="藤蔓"/>
-                                <ftk:StateButton Content="多肉"/>
-                                <ftk:StateButton Content="苔藓"/>
-                                <ftk:StateButton Content="蕨类"/>
-                                <ftk:StateButton Content="藻类"/>
-                                <ftk:StateButton Content="菌类"/>
+                                <RadioButton Content="多肉"/>
+                                <RadioButton Content="苔藓"/>
+                                <RadioButton Content="蕨类"/>
+                                <RadioButton Content="藻类"/>
+                                <RadioButton Content="菌类"/>
                             </WrapPanel>
                         </HeaderedContentControl>
                         <HeaderedContentControl Header="用途"
                                        Margin="0 16 0 0">
                             <WrapPanel Grid.Row="0">
-                                <ftk:StateButton Content="食材"/>
-                                <ftk:StateButton Content="药材"/>
-                                <ftk:StateButton Content="加工"/>
-                                <ftk:StateButton Content="观赏"/>
-                                <ftk:StateButton Content="调味"/>
-                                <ftk:StateButton Content="染色"/>
-                                <ftk:StateButton Content="香料"/>
-                                <ftk:StateButton Content="其他"/>
+                                <RadioButton Content="食材"/>
+                                <RadioButton Content="药材"/>
+                                <RadioButton Content="加工"/>
+                                <RadioButton Content="观赏"/>
+                                <RadioButton Content="调味"/>
+                                <RadioButton Content="染色"/>
+                                <RadioButton Content="香料"/>
+                                <RadioButton Content="其他"/>
                             </WrapPanel>
                         </HeaderedContentControl>
 
