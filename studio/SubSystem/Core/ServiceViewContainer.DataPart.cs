@@ -1,13 +1,16 @@
 ﻿using System.Windows.Controls;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
+using DocumentEditorViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Commons.DocumentEditorBase;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
+    using DataPartDictionary = System.Collections.Generic.Dictionary<System.Type, Acorisoft.FutureGL.MigaStudio.Core.ViewFactory<DocumentEditorViewModel>>;
+    
     partial class ServiceViewContainer
     {
-        private static readonly Dictionary<Type, Func<DocumentEditorBase, object, UserControl>> Mappings = new Dictionary<Type, Func<DocumentEditorBase, object, UserControl>>();
+        private static readonly DataPartDictionary Mappings = new DataPartDictionary();
 
-        public static void Add<T>(Func<DocumentEditorBase, object, UserControl> expression)
+        public static void Add<T>(ViewFactory<DocumentEditorBase> expression)
         {
             if (expression is null)
             {

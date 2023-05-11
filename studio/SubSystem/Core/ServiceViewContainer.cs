@@ -1,7 +1,12 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Pages.Composes;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Pages.Composes;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
+    public delegate UserControl ViewFactory<TViewModel>(TViewModel owner, object parameter);
+    
     public static partial class ServiceViewContainer
     {
         
@@ -16,6 +21,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Add<PartOfAppraise>(GetAppraiseView);
             Add<PartOfStickyNote>(GetStickyNote);
             Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
+            
+            
+            Browse<UniversalIntroduction>(GetUniversalView);
+            Browse<SpaceConceptOverview>(GetSpaceConceptOverviewView);
+            Browse<PropertyOverview>(GetPropertyOverviewView);
+            Browse<OtherIntroduction>(GetOtherView);
+            Browse<SpaceConcept>(GetSpaceConceptView);
+            Browse<BrowsableProperty>(GetBrowsablePropertyView);
         }
     }
 }

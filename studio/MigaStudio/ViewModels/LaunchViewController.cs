@@ -22,21 +22,21 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             _alc = AssemblyLoadContext.Default;
             
             // 加载设置
-            Job(SubSystemString.GetText("text.launch.loadSetting"), _ =>
+            Job("text.launch.loadSetting", _ =>
             {
                 
             });
             
             // 检查更新
-            Job(SubSystemString.GetText("text.launch.checkVersion"), x =>
+            Job("text.launch.checkVersion", x =>
             {
             });
             
             // 加载插件
-            Job(SubSystemString.GetText("text.launch.loadModules"), x => LoadModuleImpl((GlobalStudioContext)x));
+            Job("text.launch.loadModules", x => LoadModuleImpl((GlobalStudioContext)x));
             
             // 打开数据库
-            Job(SubSystemString.GetText("text.launch.openDatabase"), x => OpenDatabaseImpl((GlobalStudioContext)x));
+            Job("text.launch.openDatabase", x => OpenDatabaseImpl((GlobalStudioContext)x));
         }
 
         private static string GetPluginDirectory()

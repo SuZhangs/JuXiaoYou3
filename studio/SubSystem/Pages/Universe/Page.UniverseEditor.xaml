@@ -3,7 +3,7 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
                      xmlns:thisCore="clr-namespace:Acorisoft.FutureGL.MigaStudio.Core"
                      xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
@@ -13,7 +13,7 @@
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseEditorBase}, IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseEditorViewModel}, IsDesignTimeCreatable=True}"
                      UseLayoutRounding="True"
                      SnapsToDevicePixels="True">
     <UserControl.Resources>
@@ -21,6 +21,7 @@
         <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
+        
         <Style TargetType="{x:Type thisCore:SubViewListBoxItem}">
             <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
             <Setter Property="Background" Value="{f:BackgroundBrush}" />
@@ -71,6 +72,16 @@
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8" />
         </Style>
+
+
+        <HierarchicalDataTemplate DataType="{x:Type thisVM:BrowsableRoot}"
+                                  ItemsSource="{Binding Children,Mode=OneWay}">
+            <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+        </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type thisVM:BrowsableElement}">
+            <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -84,100 +95,16 @@
                 ClipToBounds="True"
                 BorderThickness="16 0 0 0"
                 Padding="16">
-            <ContentControl Content="{Binding SubView,Mode=OneWay}"
+            <ContentControl Content="{Binding SelectedView,Mode=OneWay}"
                             DataContext="{Binding}" />
         </Border>
 
 
         <!-- 名字 -->
         <f:TreeView Grid.Column="0"
+                    ItemsSource="{Binding BrowsableElements,Mode=OneWay}"
+                    BindableSelectedItem="{Binding SelectedBrowsableElement,Mode=TwoWay}"
                     Padding="16">
-            <f:TreeView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Margin="8"
-                               Text="{Binding}"/>
-                </DataTemplate>
-            </f:TreeView.ItemTemplate>
-            <f:TreeViewItem Header="总览">
-
-            </f:TreeViewItem>
-            <f:TreeViewItem Header="世界">
-                <f:TreeViewItem Header="世界">
-
-                </f:TreeViewItem>
-            </f:TreeViewItem>
-            <f:TreeViewItem Header="法则">
-                <f:TreeViewItem Header="神祇">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="恶魔">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="灾厄">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="毒物">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="元素">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="科技">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="魔法">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="物理">
-
-                </f:TreeViewItem>
-
-            </f:TreeViewItem>
-            <f:TreeViewItem Header="设定">
-
-                <f:TreeViewItem Header="NPC">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="国家">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="势力">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="团队">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="生物">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="植物">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="矿物">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="素材">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="神祇">
-
-                </f:TreeViewItem>
-            </f:TreeViewItem>
-            <f:TreeViewItem Header="其他">
-                <f:TreeViewItem Header="物价">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="单位">
-
-                </f:TreeViewItem>
-                <f:TreeViewItem Header="稀有度">
-
-                </f:TreeViewItem>
-
-                <f:TreeViewItem Header="词条">
-
-                </f:TreeViewItem>
-            </f:TreeViewItem>
         </f:TreeView>
     </Grid>
 </f:ForestUserControl>

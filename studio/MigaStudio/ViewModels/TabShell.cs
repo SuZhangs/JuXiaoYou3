@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
@@ -17,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 .PropertyTunnel
                 .WindowState = x => WindowState = x;
 
-            SelectInactiveWorkspaceCommand = AsyncCommand(SelectInactiveWorkspaceImpl, () => InactiveWorkspace.Count > 0);
+            SelectInactiveWorkspaceCommand = AsyncCommand(SelectInactiveWorkspaceImpl);
         }
 
         protected override void OnAddViewModel(ITabViewModel viewModel)
@@ -42,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             if (InactiveWorkspace.Count == 0)
             {
-                await SensitiveOperation(Language.GetText("text.noInactiveWorkspace"));
+                await Warning(Language.GetText("text.noInactiveWorkspace"));
                 return;
             }
 
