@@ -98,6 +98,33 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         }
         
         
+        private static UserControl GetRarityConceptView(UniverseEditorViewModel owner, object parameter)
+        {
+            var overview = (RarityConcept)parameter;
+            var vm = new RarityConceptViewModel
+            {
+                Owner     = owner,
+                Browsable = overview
+            };
+            return new RarityConceptView
+            {
+                DataContext = vm
+            };
+        }
+        
+        private static UserControl GetDeclarationConceptView(UniverseEditorViewModel owner, object parameter)
+        {
+            var overview = (DeclarationConcept)parameter;
+            var vm = new DeclarationConceptViewModel
+            {
+                Owner     = owner,
+                Browsable = overview
+            };
+            return new DeclarationConceptView
+            {
+                DataContext = vm
+            };
+        }
         
         private static UserControl GetSpaceConceptOverviewView(UniverseEditorViewModel owner, object parameter)
         {

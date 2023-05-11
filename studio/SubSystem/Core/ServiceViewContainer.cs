@@ -29,6 +29,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Browse<OtherIntroduction>(GetOtherView);
             Browse<SpaceConcept>(GetSpaceConceptView);
             Browse<BrowsableProperty>(GetBrowsablePropertyView);
+            Browse<DeclarationConcept>(GetDeclarationConceptView);
+            Browse<RarityConcept>(GetRarityConceptView);
         }
     }
 }

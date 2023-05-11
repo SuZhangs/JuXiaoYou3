@@ -7,6 +7,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     partial class UniverseEditorViewModel
     {
+        #region Initialize
+
+        
         private void InitializeBrowsableElements()
         {
             var universe     = new UniversalIntroduction();
@@ -52,16 +55,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         private static void InitializeUniverse(UniversalIntroduction universe)
         {
             universe.Add(new RarityConcept());
+            universe.Add(new DeclarationConcept());
         }
         
         private static void InitializeSpace(SpaceConceptOverview space)
         {
             
+            
         }
         
         private static void InitializeDocument(PropertyOverview property)
         {
-            InitializeProperty(property, "", BrowsablePropertyDataSource.NPC);
+            InitializeProperty(property, "text.Universe.Property.Country", BrowsablePropertyDataSource.Country);
+            InitializeProperty(property, "text.Universe.Property.Gangbang", BrowsablePropertyDataSource.Gangbang);
+            InitializeProperty(property, "text.Universe.Property.Team", BrowsablePropertyDataSource.Team);
+            InitializeProperty(property, "text.Universe.Property.Planets", BrowsablePropertyDataSource.Planets);
+            InitializeProperty(property, "text.Universe.Property.Creatures", BrowsablePropertyDataSource.Creatures);
+            InitializeProperty(property, "text.Universe.Property.Material", BrowsablePropertyDataSource.Material);
+            InitializeProperty(property, "text.Universe.Property.Ore", BrowsablePropertyDataSource.Ore);
+            InitializeProperty(property, "text.Universe.Property.NPC", BrowsablePropertyDataSource.NPC);
         }
 
         private static void InitializeProperty(PropertyOverview property, string uid, BrowsablePropertyDataSource dataSource)
@@ -75,6 +87,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         
         private static void InitializeRule(PropertyOverview rule)
         {
+            InitializeProperty(rule, "text.Universe.Property.Gods", BrowsablePropertyDataSource.Gods);
+            InitializeProperty(rule, "text.Universe.Property.Devils", BrowsablePropertyDataSource.Devils);
+            InitializeProperty(rule, "text.Universe.Property.Technology", BrowsablePropertyDataSource.Technology);
+            InitializeProperty(rule, "text.Universe.Property.Elemental", BrowsablePropertyDataSource.Elemental);
+            InitializeProperty(rule, "text.Universe.Property.Poison", BrowsablePropertyDataSource.Poison);
+            InitializeProperty(rule, "text.Universe.Property.Calamity", BrowsablePropertyDataSource.Calamity);
+            InitializeProperty(rule, "text.Universe.Property.Magic", BrowsablePropertyDataSource.Magic);
+            InitializeProperty(rule, "text.Universe.Property.Physic", BrowsablePropertyDataSource.Physic);
         }
         
         private static void InitializeOther(Introduction universe)
@@ -111,6 +131,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         }
         
         
+
+        #endregion
 
 
         /// <summary>

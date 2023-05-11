@@ -10,7 +10,21 @@
 
     public enum BrowsablePropertyDataSource
     {
+        Country,
+        Gangbang,
+        Team,
+        Planets,
+        Creatures,
+        Material,
+        Ore,
         NPC,
-        
+        Gods,
+        Devils,
+        Technology,
+        Elemental,
+        Poison,
+        Calamity,
+        Magic,
+        Physic,
     }
 }
