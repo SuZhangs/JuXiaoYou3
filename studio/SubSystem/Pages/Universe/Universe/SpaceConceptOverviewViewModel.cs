@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe
+﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     public class SpaceConceptOverviewViewModel : InspectableViewModel<SpaceConceptOverview>
     {

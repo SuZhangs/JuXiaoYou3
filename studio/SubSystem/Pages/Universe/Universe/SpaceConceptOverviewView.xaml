@@ -1,12 +1,20 @@
-﻿<UserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe.SpaceConceptOverviewView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+﻿<ScrollViewer x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Universe.SpaceConceptOverviewView"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+              xmlns:thisCore="clr-namespace:Acorisoft.FutureGL.MigaStudio.Core"
+              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+              xmlns:studio="urn:acorisoft/studio"
+              xmlns:f="urn:acorisoft/forest/ui"
+              xmlns:ftk="urn:acorisoft/forest/toolkits"
+              mc:Ignorable="d"
+              d:DesignHeight="300" d:DesignWidth="300"
+              d:DataContext="{d:DesignInstance Type={x:Type thisVM:SpaceConceptOverviewViewModel}, IsDesignTimeCreatable=True}">
+    <StackPanel>
         
-    </Grid>
-</UserControl>
+    </StackPanel>
+</ScrollViewer>

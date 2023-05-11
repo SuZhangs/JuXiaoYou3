@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public delegate UserControl ViewFactory<TViewModel>(TViewModel owner, object parameter);
+    public delegate FrameworkElement ViewFactory<TViewModel>(TViewModel owner, object parameter);
     
     public static partial class ServiceViewContainer
     {

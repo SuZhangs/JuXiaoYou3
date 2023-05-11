@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using DocumentEditorViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Commons.DocumentEditorBase;
 
@@ -20,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Mappings.TryAdd(typeof(T), expression);
         }
 
-        private static UserControl GetAlbumView(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetAlbumView(DocumentEditorBase owner, object instance)
         {
             return new AlbumPartView
             {
@@ -32,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetPlaylistView(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetPlaylistView(DocumentEditorBase owner, object instance)
         {
             return new PlaylistPartView
             {
@@ -44,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetCharacterRel(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetCharacterRel(DocumentEditorBase owner, object instance)
         {
             var d = (DocumentEditorVMBase)owner;
             return new CharacterRelshipPartView
@@ -53,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetSurvey(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetSurvey(DocumentEditorBase owner, object instance)
         {
             return new SurveyPartView
             {
@@ -65,7 +66,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetStickyNote(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetStickyNote(DocumentEditorBase owner, object instance)
         {
             return new StickyNotePartView
             {
@@ -77,7 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetSentenceView(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetSentenceView(DocumentEditorBase owner, object instance)
         {
             return new SentencePartView
             {
@@ -89,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetPrototypeView(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetPrototypeView(DocumentEditorBase owner, object instance)
         {
             return new PrototypePartView
             {
@@ -101,7 +102,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetAppraiseView(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetAppraiseView(DocumentEditorBase owner, object instance)
         {
             return new AppraisePartView
             {
@@ -113,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        private static UserControl GetDetailSetting(DocumentEditorBase owner, object instance)
+        private static FrameworkElement GetDetailSetting(DocumentEditorBase owner, object instance)
         {
             return new DetailPartSettingView
             {
@@ -121,7 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
 
-        public static UserControl GetView(DocumentEditorBase owner, object viewModel)
+        public static FrameworkElement GetView(DocumentEditorBase owner, object viewModel)
         {
             if (viewModel is null)
             {
@@ -133,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 return mapping(owner, viewModel);
             }
 
-            return new UserControl
+            return new FrameworkElement
             {
                 DataContext = viewModel
             };

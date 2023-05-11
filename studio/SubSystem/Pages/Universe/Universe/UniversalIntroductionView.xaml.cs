@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    public partial class UniversalIntroductionView : UserControl
+    public partial class UniversalIntroductionView
     {
         public UniversalIntroductionView()
         {

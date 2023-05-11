@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    public partial class PropertyOverviewView : UserControl
+    public partial class PropertyOverviewView
     {
         public PropertyOverviewView()
         {

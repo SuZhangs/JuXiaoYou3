@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    public partial class RarityConceptView : UserControl
+    public partial class RarityConceptView
     {
         public RarityConceptView()
         {

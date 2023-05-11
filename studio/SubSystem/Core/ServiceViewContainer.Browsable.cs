@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
-using Acorisoft.FutureGL.MigaStudio.Pages.Universe.Universe;
 using NLog.Targets.Wrappers;
 using UniverseEditorViewModel = Acorisoft.FutureGL.MigaStudio.Pages.Universe.UniverseEditorViewModel;
 
@@ -41,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             BrowsableMappings.TryAdd(typeof(T), expression);
         }
 
-        private static UserControl GetUniversalView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetUniversalView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (UniversalIntroduction)parameter;
             var vm = new UniversalIntroductionViewModel
@@ -55,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetPropertyOverviewView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetPropertyOverviewView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (PropertyOverview)parameter;
             var vm = new PropertyOverviewViewModel
@@ -69,7 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetBrowsablePropertyView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetBrowsablePropertyView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (BrowsableProperty)parameter;
             var vm = new BrowsablePropertyViewModel
@@ -83,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetSpaceConceptView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetSpaceConceptView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (SpaceConcept)parameter;
             var vm = new SpaceConceptViewModel
@@ -98,7 +97,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         }
         
         
-        private static UserControl GetRarityConceptView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetRarityConceptView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (RarityConcept)parameter;
             var vm = new RarityConceptViewModel
@@ -112,7 +111,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetDeclarationConceptView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetDeclarationConceptView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (DeclarationConcept)parameter;
             var vm = new DeclarationConceptViewModel
@@ -126,7 +125,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetSpaceConceptOverviewView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetSpaceConceptOverviewView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (SpaceConceptOverview)parameter;
             var vm = new SpaceConceptOverviewViewModel
@@ -140,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             };
         }
         
-        private static UserControl GetOtherView(UniverseEditorViewModel owner, object parameter)
+        private static FrameworkElement GetOtherView(UniverseEditorViewModel owner, object parameter)
         {
             var overview = (OtherIntroduction)parameter;
             var vm = new OtherIntroductionViewModel
