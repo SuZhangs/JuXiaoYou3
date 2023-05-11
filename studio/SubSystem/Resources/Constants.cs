@@ -6,7 +6,7 @@
         {
             DocumentType.Character,
             DocumentType.Geography,
-            DocumentType.Ability,
+            DocumentType.Skill,
             DocumentType.Item,
             DocumentType.Other
         };

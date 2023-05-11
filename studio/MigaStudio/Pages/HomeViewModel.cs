@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             //
             //
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Character", DocumentType.Character);
-            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Ability);
+            CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Ability", DocumentType.Skill);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);

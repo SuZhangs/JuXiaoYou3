@@ -163,8 +163,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
         }
 
-        public DocumentType Type => DocumentType.Universe;
-
 
         /// <summary>
         /// 

@@ -61,7 +61,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         private static void InitializeSpace(SpaceConceptOverview space)
         {
             
-            
         }
         
         private static void InitializeDocument(PropertyOverview property)

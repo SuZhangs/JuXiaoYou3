@@ -171,10 +171,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public ModulePreset Ability
         {
-            get => Property.GetModulePreset(DocumentType.Ability);
+            get => Property.GetModulePreset(DocumentType.Skill);
             set
             {
-                Property.SetModulePreset(DocumentType.Ability, value);
+                Property.SetModulePreset(DocumentType.Skill, value);
                 RaiseUpdated();
                 Save();
             }

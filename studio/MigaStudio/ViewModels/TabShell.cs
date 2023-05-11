@@ -78,6 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             New<WeaponEditorViewModel>();
             New<PlanetEditorViewModel>();
             New<MaterialEditorViewModel>();
+            New<UniverseEditorViewModel>();
 #endif
         }
 

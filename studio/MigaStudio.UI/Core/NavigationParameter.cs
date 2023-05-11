@@ -124,21 +124,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                             Args = new object[4]
                         }
                     };
-                }
-
-                return new RoutingEventArgs
-                {
-                    Controller = controller,
-                    Parameter = new Parameter
-                    {
-                        Args = new object[4]
-                    }
-                };
+                }                
             }
-
             return new RoutingEventArgs
             {
-                Id         = viewModel.PageId,
                 Controller = controller,
                 Parameter = new Parameter
                 {
@@ -164,10 +153,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                     Id = Guid.NewGuid()
                              .ToString("N"),
                     Controller = controller,
-                    Parameter = new Parameter
-                    {
-                        Args = new object[4]
-                    }
+                    Parameter = parameter
                 };
             }
 

@@ -5,22 +5,20 @@
         public static readonly DocumentType[] DocumentTypes = new[]
         {
             DocumentType.Character,
-            DocumentType.Ability,
+            DocumentType.Skill,
             DocumentType.Geography,
             DocumentType.Item,
             DocumentType.Other,
-            DocumentType.Universe,
         };
 
         public static readonly DocumentType[] DocumentGalleryTypes = new[]
         {
             DocumentType.None,
             DocumentType.Character,
-            DocumentType.Ability,
+            DocumentType.Skill,
             DocumentType.Geography,
             DocumentType.Item,
             DocumentType.Other,
-            DocumentType.Universe,
         };
 
         public static string GetText(string id) => Language.GetText(id);
@@ -537,103 +535,6 @@
                 CultureArea.Japanese => "Kg",
                 CultureArea.French   => "Kg",
                 _                    => "Kg"
-            };
-        }
-
-        #endregion
-
-        #region DocumentType Translate
-
-        public static string GetDocumentTypeName(DocumentType type)
-        {
-            return type switch
-            {
-                DocumentType.Compose => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "写作",
-                    CultureArea.French   => "Compose",
-                    CultureArea.Japanese => "Compose",
-                    CultureArea.Russian  => "Compose",
-                    CultureArea.Korean   => "Compose",
-                    _                    => "Compose",
-                },
-                DocumentType.Document => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "设定",
-                    CultureArea.French   => "Document",
-                    CultureArea.Japanese => "Document",
-                    CultureArea.Russian  => "Document",
-                    CultureArea.Korean   => "Document",
-                    _                    => "Document",
-                },
-                DocumentType.Character => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "人设",
-                    CultureArea.French   => "Character",
-                    CultureArea.Japanese => "Character",
-                    CultureArea.Russian  => "Character",
-                    CultureArea.Korean   => "Character",
-                    _                    => "Character",
-                },
-                DocumentType.Item => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "物品",
-                    CultureArea.French   => "Item",
-                    CultureArea.Japanese => "Item",
-                    CultureArea.Russian  => "Item",
-                    CultureArea.Korean   => "Item",
-                    _                    => "Item",
-                },
-                DocumentType.Ability => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "能力",
-                    CultureArea.French   => "Ability",
-                    CultureArea.Japanese => "Ability",
-                    CultureArea.Russian  => "Ability",
-                    CultureArea.Korean   => "Ability",
-                    _                    => "Ability",
-                },
-                DocumentType.Geography => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "地图",
-                    CultureArea.French   => "Geography",
-                    CultureArea.Japanese => "Geography",
-                    CultureArea.Russian  => "Geography",
-                    CultureArea.Korean   => "Geography",
-                    _                    => "Geography",
-                },
-                DocumentType.Universe => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "世界观",
-                    CultureArea.French   => "Mystery",
-                    CultureArea.Japanese => "Mystery",
-                    CultureArea.Russian  => "Mystery",
-                    CultureArea.Korean   => "Mystery",
-                    _                    => "Mystery",
-                },
-
-                DocumentType.Other => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "其他",
-                    CultureArea.French   => "Other",
-                    CultureArea.Japanese => "Other",
-                    CultureArea.Russian  => "Other",
-                    CultureArea.Korean   => "Other",
-                    _                    => "Other",
-                },
-                DocumentType.None => Language.Culture switch
-                {
-                    CultureArea.Chinese  => "全部",
-                    CultureArea.French   => "All",
-                    CultureArea.Japanese => "All",
-                    CultureArea.Russian  => "All",
-                    CultureArea.Korean   => "All",
-                    _                    => "All",
-                },
-                _ => Language.Culture switch
-                {
-                    _ => "未知",
-                },
             };
         }
 

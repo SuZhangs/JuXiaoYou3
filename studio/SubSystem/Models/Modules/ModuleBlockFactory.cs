@@ -624,7 +624,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             {
                 DocumentKind.Assets    => DocumentType.Item,
                 DocumentKind.Character => DocumentType.Character,
-                DocumentKind.Skills    => DocumentType.Ability,
+                DocumentKind.Skills    => DocumentType.Skill,
                 DocumentKind.Materials => DocumentType.Item,
                 DocumentKind.Map       => DocumentType.Geography,
                 _                      => DocumentType.Other,

@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return SubSystemString.GetDocumentTypeName(value is DocumentType t ? t : DocumentType.Other);
+            return Language.GetEnum(value is DocumentType t ? t : DocumentType.Other);
         }
         
 

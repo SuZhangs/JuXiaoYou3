@@ -176,7 +176,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 case DocumentType.None:
                     break;
-                case DocumentType.Ability:
+                case DocumentType.Skill:
                     controller.OpenDocument<AbilityDocumentViewModel>(cache);
                     break;
                 case DocumentType.Character:
@@ -190,20 +190,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     break;
                 case DocumentType.Other:
                     controller.OpenDocument<OtherDocumentViewModel>(cache);
-                    break;
-                case DocumentType.Document:
-                    break;
-                case DocumentType.Universe:
-                    break;
-                case DocumentType.World:
-                    break;
-                case DocumentType.God:
-                    break;
-                case DocumentType.Devil:
-                    break;
-                case DocumentType.NPC:
-                    break;
-                case DocumentType.Compose:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

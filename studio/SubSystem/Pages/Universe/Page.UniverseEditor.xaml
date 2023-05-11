@@ -90,7 +90,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="1"
-                Background="{f:Brush BackgroundLevel2}"
+                Background="{f:Brush BackgroundLevel3}"
                 Effect="{StaticResource ShadowEffect2}"
                 ClipToBounds="True"
                 BorderThickness="16 0 0 0"

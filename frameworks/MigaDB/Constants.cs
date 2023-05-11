@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB
 {
-    public class Constants
+    public class  Constants
     {
 
      /*

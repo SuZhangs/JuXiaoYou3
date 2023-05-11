@@ -44,6 +44,8 @@
         /// 
         /// </summary>
         public ReadOnlyObservableCollection<IBrowsable> Children { get; init; }
+        
+        
     }
 
     public class SpaceProperty : BrowsableProperty, ISpaceConceptProperty
