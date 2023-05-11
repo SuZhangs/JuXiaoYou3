@@ -46,7 +46,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     { launch.Id, launch },
                     { quick.Id, quick },
                 },
-                ControllerSetter = x => CurrentController = x
+                ControllerSetter = x => CurrentController = x,
             };
 
             _parameter = new RoutingEventArgs

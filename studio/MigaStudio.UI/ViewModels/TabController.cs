@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 // ReSharper disable StringLiteralTypo
 
@@ -25,6 +26,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             AddTabCommand    = new RelayCommand<object>(AddTabImpl);
             RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
             
+        }
+
+        public void Reset()
+        {
+            CurrentViewModel = null;
+            Workspace.ForEach(x => x.Stop());
+            InactiveWorkspace.ForEach(x => x.Stop());
+            Workspace.Clear();
+            InactiveWorkspace.Clear();
+            StartOverride();
         }
 
         /// <summary>

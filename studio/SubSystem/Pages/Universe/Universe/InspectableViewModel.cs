@@ -2,6 +2,7 @@
 {
     public abstract class InspectableViewModel : ViewModelBase
     {
+        public abstract void Save();
         public UniverseEditorViewModel Owner { get; init; }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using Acorisoft.FutureGL.MigaDB.Core;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
@@ -101,6 +102,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         }
 
         public static RelayCommand<string> OpenLinkCommand { get; } = new RelayCommand<string>(OpenLink);
+        
     }
 
     public class ShortcutDescription

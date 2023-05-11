@@ -2,6 +2,9 @@
 {
     public class UniversalIntroductionViewModel : InspectableViewModel<UniversalIntroduction>
     {
-        
+        public override void Save()
+        {
+            
+        }
     }
 }

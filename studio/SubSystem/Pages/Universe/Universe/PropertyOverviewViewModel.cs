@@ -2,6 +2,9 @@
 {
     public class PropertyOverviewViewModel : InspectableViewModel<PropertyOverview>
     {
-        
+        public override void Save()
+        {
+            
+        }
     }
 }

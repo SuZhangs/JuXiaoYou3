@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -17,9 +18,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public ColorServiceViewModel()
         {
             ColorService     = Xaml.Get<ColorService>();
-            Database = Xaml.Get<IDatabaseManager>()
-                           .Database
-                           .CurrentValue;
             Property = Database.Get<ColorServiceProperty>();
             Keywords = new ObservableCollection<string>();
             Mappings = new ObservableCollection<ColorMapping>();
@@ -196,7 +194,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             SetDirtyState();
         }
 
-        public IDatabase Database { get; }
+        public IDatabase Database => DatabaseUtilities.Database;
         public ColorService ColorService { get; }
         public ColorServiceProperty Property { get; }
 

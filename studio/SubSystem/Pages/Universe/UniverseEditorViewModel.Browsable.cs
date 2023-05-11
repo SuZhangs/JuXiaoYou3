@@ -66,35 +66,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         
         private static void InitializeDocument(PropertyOverview property)
         {
-            InitializeProperty(property, "text.Universe.Property.Country", BrowsablePropertyDataSource.Country);
-            InitializeProperty(property, "text.Universe.Property.Gangbang", BrowsablePropertyDataSource.Gangbang);
-            InitializeProperty(property, "text.Universe.Property.Team", BrowsablePropertyDataSource.Team);
-            InitializeProperty(property, "text.Universe.Property.Planets", BrowsablePropertyDataSource.Planets);
-            InitializeProperty(property, "text.Universe.Property.Creatures", BrowsablePropertyDataSource.Creatures);
-            InitializeProperty(property, "text.Universe.Property.Material", BrowsablePropertyDataSource.Material);
-            InitializeProperty(property, "text.Universe.Property.Ore", BrowsablePropertyDataSource.Ore);
-            InitializeProperty(property, "text.Universe.Property.NPC", BrowsablePropertyDataSource.NPC);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Country);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Gangbang);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Team);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Planets);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Creatures);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Material);
+            InitializeProperty(property,  BrowsablePropertyDataSource.Ore);
+            InitializeProperty(property,  BrowsablePropertyDataSource.NPC);
         }
 
-        private static void InitializeProperty(PropertyOverview property, string uid, BrowsablePropertyDataSource dataSource)
+        private static void InitializeProperty(PropertyOverview property, BrowsablePropertyDataSource dataSource)
         {
             property.Add(new BrowsableProperty
             {
-                Uid = uid,
+                Uid = Language.GetEnum(dataSource),
                 Source = dataSource,
             });
         }
         
         private static void InitializeRule(PropertyOverview rule)
         {
-            InitializeProperty(rule, "text.Universe.Property.Gods", BrowsablePropertyDataSource.Gods);
-            InitializeProperty(rule, "text.Universe.Property.Devils", BrowsablePropertyDataSource.Devils);
-            InitializeProperty(rule, "text.Universe.Property.Technology", BrowsablePropertyDataSource.Technology);
-            InitializeProperty(rule, "text.Universe.Property.Elemental", BrowsablePropertyDataSource.Elemental);
-            InitializeProperty(rule, "text.Universe.Property.Poison", BrowsablePropertyDataSource.Poison);
-            InitializeProperty(rule, "text.Universe.Property.Calamity", BrowsablePropertyDataSource.Calamity);
-            InitializeProperty(rule, "text.Universe.Property.Magic", BrowsablePropertyDataSource.Magic);
-            InitializeProperty(rule, "text.Universe.Property.Physic", BrowsablePropertyDataSource.Physic);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Gods);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Devils);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Technology);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Elemental);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Poison);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Calamity);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Magic);
+            InitializeProperty(rule,  BrowsablePropertyDataSource.Physic);
         }
         
         private static void InitializeOther(Introduction universe)
@@ -141,7 +141,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         public FrameworkElement SelectedView
         {
             get => _selectedView;
-            private set => SetValue(ref _selectedView, value);
+            private set
+            {
+                if (_selectedView is not null)
+                {
+                    var inspectable = (InspectableViewModel)_selectedView.DataContext;
+                    inspectable?.Save();
+                }
+
+                SetValue(ref _selectedView, value);
+            }
         }
 
         /// <summary>

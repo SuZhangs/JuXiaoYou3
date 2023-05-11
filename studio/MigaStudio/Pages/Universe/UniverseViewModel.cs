@@ -16,6 +16,7 @@ using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using NLog;
+
 // ReSharper disable All
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -25,14 +26,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private readonly Subject<Album>   _threadSafeAdding;
         private readonly DatabaseProperty _databaseProperty;
 
-        private Album  _selectedAlbum;
-        
+        private Album _selectedAlbum;
+        private bool  _exitOperation;
+
         public UniverseViewModel()
         {
             PictureCollection = new ObservableCollection<Album>();
             DatabaseManager   = Xaml.Get<IDatabaseManager>();
             ImageEngine       = DatabaseManager.GetEngine<ImageEngine>();
-            Database          = DatabaseManager.Database.CurrentValue;
             _databaseProperty = Database.Get<DatabaseProperty>();
             _threadSafeAdding = new Subject<Album>().DisposeWith(Collector);
             _threadSafeAdding.ObserveOn(Scheduler)
@@ -50,6 +51,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                  Save();
                              })
                              .DisposeWith(Collector);
+
+            CloseDatabaseCommand  = AsyncCommand(CloseDatabaseImpl);
             ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
             EditCommand           = Command(() => Controller.New<UniverseEditorViewModel>());
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
@@ -72,7 +75,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public override void Stop()
         {
+            if (_exitOperation)
+            {
+                return;
+            }
             Save();
+        }
+
+        private async Task CloseDatabaseImpl()
+        {
+            _exitOperation = true;
+            var context = Controller.Context;
+            var controller = (TabController)context.MainController;
+            controller.Reset();
+            controller = (TabController)Controller.Context
+                                                  .ControllerMaps[AppViewModel.IdOfQuickStartController];
+            await DatabaseManager.CloseAsync();
+            context.SwitchController(controller);
         }
 
         private void Save()
@@ -93,7 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState();
             }
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="ForeignName"/> 属性。
         /// </summary>
@@ -107,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState();
             }
         }
-        
+
         public string Author
         {
             get => _databaseProperty.Author;
@@ -118,7 +137,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 RaiseUpdated();
             }
         }
-        
+
         public string Name
         {
             get => _databaseProperty.Name;
@@ -129,7 +148,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState();
             }
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
@@ -143,10 +162,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SetDirtyState();
             }
         }
-        
+
         public DocumentType Type => DocumentType.Universe;
-        
-        
+
 
         /// <summary>
         /// 
@@ -201,9 +219,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         //---------------------------------------------
 
 
+        public AsyncRelayCommand CloseDatabaseCommand { get; }
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ChangeAvatarCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand EditCommand { get; }
 
@@ -212,7 +232,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// </summary>
         public ObservableCollection<Album> PictureCollection { get; init; }
 
-        public IDatabase Database { get; }
+        public IDatabase Database => DatabaseUtilities.Database;
         public IDatabaseManager DatabaseManager { get; }
         public ImageEngine ImageEngine { get; }
 

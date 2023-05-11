@@ -116,9 +116,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <param name="arg"></param>
         protected sealed override void OnStartup(RoutingEventArgs arg)
         {
-            PageId     = arg.Id;
+            PageId     = Uniqueness ? GetUniquenessKey() : arg.Id;
             Controller = (TabController)arg.Controller;
             OnStart(arg.Parameter ?? Parameter.Empty);
+        }
+
+        private string GetUniquenessKey()
+        {
+            return $"{GetHashCode()}-{GetType().FullName}";  
         }
 
         protected virtual void OnStart(Parameter parameter)

@@ -3,5 +3,9 @@
     public class SpaceConceptOverviewViewModel : InspectableViewModel<SpaceConceptOverview>
     {
         
+        public override void Save()
+        {
+            
+        }
     }
 }

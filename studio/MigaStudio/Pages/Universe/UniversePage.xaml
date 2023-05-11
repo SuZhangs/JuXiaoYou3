@@ -35,6 +35,7 @@
                             Margin="16 8">
                 <f:ForestIsland.ToolBar>
                     <ftk:ToolButton Content="切换世界观"
+                                    Command="{Binding CloseDatabaseCommand}"
                                     HorizontalAlignment="Left"
                                     Margin="32 0 0 0"
                                     Icon="{StaticResource FeatherIcon.Refresh}"

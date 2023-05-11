@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             return RoutingEventArgs.Empty;
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -25,7 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             return new RoutingEventArgs
             {
-                Id = id,
+                Id         = id,
                 Controller = controller,
                 Parameter = new Parameter
                 {
@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 }
             };
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -44,11 +44,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             return new RoutingEventArgs
             {
-                Id = cache.Id,
+                Id         = cache.Id,
                 Controller = controller,
                 Parameter = new Parameter
                 {
-                    Args = new object[4]
+                    Args = new object[]
                     {
                         cache,
                         null,
@@ -58,7 +58,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 }
             };
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -73,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 Controller = controller,
                 Parameter = new Parameter
                 {
-                    Args = new object[4]
+                    Args = new object[]
                     {
                         fileName,
                         null,
@@ -83,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 }
             };
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -97,10 +97,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             {
                 Id         = fileName,
                 Controller = controller,
-                Parameter = parameter
+                Parameter  = parameter
             };
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -109,16 +109,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static RoutingEventArgs NewPage(ITabViewModel viewModel, ITabViewController controller)
         {
-            if(string.IsNullOrEmpty(viewModel.PageId))
+            if (string.IsNullOrEmpty(viewModel.PageId))
             {
-                var id = viewModel.Uniqueness ? 
-                viewModel.GetType().FullName : 
-                    string.IsNullOrEmpty(viewModel.PageId) ? 
-                    Guid.NewGuid().ToString("N"): viewModel.PageId;
-                
+                if (string.IsNullOrEmpty(viewModel.PageId) &&
+                    !viewModel.Uniqueness)
+                {
+                    return new RoutingEventArgs
+                    {
+                        Id = Guid.NewGuid()
+                                 .ToString("N"),
+                        Controller = controller,
+                        Parameter = new Parameter
+                        {
+                            Args = new object[4]
+                        }
+                    };
+                }
+
                 return new RoutingEventArgs
                 {
-                    Id         = id,
                     Controller = controller,
                     Parameter = new Parameter
                     {
@@ -126,18 +135,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                     }
                 };
             }
-            
+
             return new RoutingEventArgs
             {
                 Id         = viewModel.PageId,
                 Controller = controller,
-                Parameter  = new Parameter
+                Parameter = new Parameter
                 {
                     Args = new object[4]
                 }
             };
         }
-        
+
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
@@ -147,24 +156,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <returns>返回一个新的导航参数。</returns>
         public static RoutingEventArgs NewPage(ITabViewModel viewModel, ITabViewController controller, Parameter parameter)
         {
-            if(string.IsNullOrEmpty(viewModel.PageId))
+            if (string.IsNullOrEmpty(viewModel.PageId) &&
+                !viewModel.Uniqueness)
             {
-                var id = viewModel.Uniqueness ? 
-                    viewModel.GetType().FullName : 
-                    string.IsNullOrEmpty(viewModel.PageId) ? 
-                        Guid.NewGuid().ToString("N"): viewModel.PageId;
-                
                 return new RoutingEventArgs
                 {
-                    Id         = id,
+                    Id = Guid.NewGuid()
+                             .ToString("N"),
                     Controller = controller,
-                    Parameter  = parameter
+                    Parameter = new Parameter
+                    {
+                        Args = new object[4]
+                    }
                 };
             }
-            
+
             return new RoutingEventArgs
             {
-                Id         = viewModel.PageId,
                 Controller = controller,
                 Parameter = parameter
             };

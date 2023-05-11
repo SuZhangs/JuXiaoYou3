@@ -2,6 +2,7 @@
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Resources;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -19,7 +20,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
             BasicAppSetting      = Xaml.Get<BasicAppSetting>();
             DatabaseManager      = Xaml.Get<IDatabaseManager>();
-            Database             = DatabaseManager.Database.CurrentValue;
             Title                = Language.GetText(ConstantValues.PageName_Setting);
             Repositories         = new ObservableCollection<RepositoryCache>();
 
@@ -135,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public AsyncRelayCommand CloseDatabaseCommand { get; }
         public ObservableCollection<RepositoryCache> Repositories { get; }
         public IDatabaseManager DatabaseManager { get; }
-        public IDatabase Database { get; }
+        public IDatabase Database => DatabaseUtilities.Database;
         protected BasicAppSetting BasicAppSetting { get; }
 
         public sealed override bool Uniqueness => true;
