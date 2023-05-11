@@ -172,8 +172,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             // 需要Take(Math.Min(,1,MaxCountPerPage)
             var takeElementCount =  _totalElementCount > MaxCountPerPage ? MaxCountPerPage : _totalElementCount;
             
-            var iterator = DocumentEngine.DocumentCacheDB
-                                         .FindAll()
+            var iterator = DocumentEngine.GetCaches()
                                          .Skip((index - 1) * MaxCountPerPage)
                                          .Take(takeElementCount);
 
@@ -184,7 +183,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         private void Update()
         {
-            _totalElementCount = DocumentEngine.DocumentCacheDB.Count();
+            _totalElementCount = DocumentEngine.GetCacheCount();
             _totalPageCount    = (_totalElementCount + MaxCountPerPageMask) / MaxCountPerPage;
         }
 

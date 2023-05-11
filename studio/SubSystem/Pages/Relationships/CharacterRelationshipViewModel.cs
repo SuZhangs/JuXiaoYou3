@@ -35,8 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
         private void Initialize()
         {
             Graph.Clear();
-            Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
-                                               .Find(x => x.Type == DocumentType.Character));
+            Graph.AddVertexRange(DocumentEngine.GetCharacterCaches());
             var rels = DocumentEngine.GetRelatives(DocumentType.Character);
             Graph.AddEdgeRange(rels);
         }

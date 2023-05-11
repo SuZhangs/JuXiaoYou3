@@ -312,7 +312,37 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         }
 
         #endregion
+
+        #region GetCaches
+
+        public IEnumerable<DocumentCache> GetCaches(HashSet<string> idPool)
+        {
+            return DocumentCacheDB.Find(x => idPool.Contains(x.Id));
+        }
+
+        public IEnumerable<DocumentCache> GetCaches()
+        {
+            return DocumentCacheDB.FindAll();
+        }
+
+        public IEnumerable<DocumentCache> GetCharacterCaches()
+        {
+            return DocumentCacheDB.Find(x => x.Type == DocumentType.Character);
+        }
+
+        public IEnumerable<DocumentCache> GetCharacterWitNPCCaches()
+        {
+            return DocumentCacheDB.Find(x => x.Type == DocumentType.Character || x.Type == DocumentType.NPC);
+        }
+
+        public DocumentCache GetCache(string id)
+        {
+            return DocumentCacheDB.FindById(id);
+        }
+
+        public int GetCacheCount() => DocumentCacheDB.Count();
         
+        #endregion
         
 
         public void AddRelationship(CharacterRelationship rel)

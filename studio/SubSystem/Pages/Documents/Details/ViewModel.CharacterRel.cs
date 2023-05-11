@@ -40,8 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             var hash = rels.Flat(x=> x.Source.Id, x => x.Target.Id)
                            .ToHashSet();
             Graph.Clear();
-            Graph.AddVertexRange(DocumentEngine.DocumentCacheDB
-                                               .Find(x => hash.Contains(x.Id)));
+            Graph.AddVertexRange(DocumentEngine.GetCaches(hash));
             Graph.AddEdgeRange(rels);
             SelectedDocument = cache;
         }

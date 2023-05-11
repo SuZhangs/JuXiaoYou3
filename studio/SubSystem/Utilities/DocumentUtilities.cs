@@ -153,7 +153,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var indexA = sourceA.IndexOf(x => x.Id == id);
             var indexB = sourceB.IndexOf(x => x.Id == id);
 
-            var inside = engine.DocumentCacheDB.FindById(id);
+            var inside = engine.GetCache(id);
 
             if (inside is null)
             {
