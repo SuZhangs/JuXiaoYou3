@@ -13,8 +13,19 @@
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniversalIntroduction}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniversalIntroductionViewModel}, IsDesignTimeCreatable=True}">
     <StackPanel>
-        
+        <f:ForestSection Header="简介">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top"
+                           Text="在这里创建世界观"/>
+                <ItemsControl ItemsSource="{Binding Browsable.Children}">
+
+                </ItemsControl>
+            </DockPanel>
+        </f:ForestSection>
+        <f:ForestSection Header="设置">
+
+        </f:ForestSection>
     </StackPanel>
 </ScrollViewer>
