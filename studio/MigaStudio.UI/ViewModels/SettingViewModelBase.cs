@@ -10,20 +10,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             Items = new ObservableCollection<ISettingItem>();
         }
-        
 
 
         protected ISettingItem Text(string id, string defaultValue, Action<string> callback)
         {
             var mainTitleKey = $"{id}";
-            var subTitleKey = $"{id}.Tips";
+            var subTitleKey  = $"{id}.Tips";
 
             var item = new SettingField
             {
                 MainTitle = Language.GetText(mainTitleKey),
-                SubTitle = Language.GetText(subTitleKey),
-                Callback = callback,
-                Value = defaultValue
+                SubTitle  = Language.GetText(subTitleKey),
+                Callback  = callback,
+                Value     = defaultValue
             };
 
             Items.Add(item);
@@ -34,15 +33,35 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             IEnumerable<object> collection)
         {
             var mainTitleKey = $"{id}";
-            var subTitleKey = $"{id}.Tips";
+            var subTitleKey  = $"{id}.Tips";
 
             var item = new SettingComboBox<T>
             {
-                MainTitle = Language.GetText(mainTitleKey),
-                SubTitle = Language.GetText(subTitleKey),
-                Callback = callback,
+                MainTitle  = Language.GetText(mainTitleKey),
+                SubTitle   = Language.GetText(subTitleKey),
+                Callback   = callback,
                 Collection = collection,
-                Value = defaultValue
+                Value      = defaultValue
+            };
+
+            Items.Add(item);
+            return item;
+        }
+
+
+        protected ISettingItem Slider(string id, int defaultValue, Action<int> callback, int min, int max)
+        {
+            var mainTitleKey = $"{id}";
+            var subTitleKey  = $"{id}.Tips";
+
+            var item = new SettingSlider
+            {
+                MainTitle = Language.GetText(mainTitleKey),
+                SubTitle  = Language.GetText(subTitleKey),
+                Callback  = callback,
+                Maximum   = max,
+                Minimum   = min,
+                Value     = defaultValue
             };
 
             Items.Add(item);

@@ -28,6 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
         internal const string Setting_MainTheme = "setting.theme";
         internal const string Setting_DebugMode = "setting.debugMode";
         internal const string Setting_Language  = "setting.language";
+        internal const string Setting_AutoSavePeriod  = "setting.AutoSavePeriod";
         internal const string PageName_Home     = "global.home";
         internal const string PageName_Setting  = "global.setting";
     }

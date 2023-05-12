@@ -66,67 +66,6 @@ namespace Acorisoft.FutureGL.MigaStudio
         }
 
 
-        protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
-        {
-            var setting = InstallSetting(logger, appModel, container);
-            
-            //
-            // TODO: 安装语言
-            // SubSystem.InstallLanguages();
-            // TemplateSystem.InstallLanguages();
-            
-            _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
-                DatabaseManager.GetDefaultDatabaseManager(
-                    logger,
-                    setting.DebugMode));
-            
-            //
-            // 注册数据库附加服务
-            var attachable = new InMemoryServiceHost(container, _databaseManager);
-            InstallInMemoryService(attachable);
-            
-            //
-            // 注册服务
-            container.Use<AutoSaveService, IAutoSaveService>(new AutoSaveService());
-            container.RegisterInstance<MusicService>(new MusicService());
-        }
-
-
-        private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)
-        {
-            logger.Info("写入设置");
-            
-            //
-            // Repository Setting
-            var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
-            var repositorySetting = JSON.OpenSetting<RepositorySetting>(repositorySettingFileName,
-                () => new RepositorySetting
-                {
-                    LastRepository = null,
-                    Repositories   = new ObservableCollection<RepositoryCache>()
-                });
-
-            //
-            // Repository Setting
-            var advancedSettingFileName = Path.Combine(appModel.Settings, AdvancedSettingFileName);
-            var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(advancedSettingFileName,
-                () => new AdvancedSettingModel
-                {
-                    DebugMode = DatabaseMode.Release,
-                });
-
-            //
-            // 注册设置
-            Xaml.Use<SystemSetting, ISystemSetting>(new SystemSetting
-            {
-                AdvancedSettingFileName   = advancedSettingFileName,
-                AdvancedSetting           = advancedSetting,
-                RepositorySetting         = repositorySetting,
-                RepositorySettingFileName = repositorySettingFileName
-            });
-            
-            return advancedSetting;
-        }
 
         protected override void RegisterResourceDictionary(ResourceDictionary appResDict)
         {

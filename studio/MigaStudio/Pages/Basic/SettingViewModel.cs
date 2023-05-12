@@ -1,14 +1,17 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Resources;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class SettingViewModelProxy : BindingProxy<SettingViewModel>{}
-    
+    public class SettingViewModelProxy : BindingProxy<SettingViewModel>
+    {
+    }
+
     public class SettingViewModel : SettingViewModelBase
     {
         private int _count;
@@ -18,6 +21,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             _count = 0;
 
             CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
+            SystemSetting        = Xaml.Get<SystemSetting>();
+            AdvancedSetting      = SystemSetting.AdvancedSetting;
             BasicAppSetting      = Xaml.Get<BasicAppSetting>();
             DatabaseManager      = Xaml.Get<IDatabaseManager>();
             Title                = Language.GetText(ConstantValues.PageName_Setting);
@@ -29,8 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void OnRefresh()
         {
-            var ss = Xaml.Get<SystemSetting>()
-                         .RepositorySetting;
+            var ss = SystemSetting.RepositorySetting;
             DatabaseProperty = Database.Get<DatabaseProperty>();
 
             CurrentRepository = ss.LastRepository;
@@ -62,10 +66,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             ComboBox<MainTheme>(ConstantValues.Setting_MainTheme, BasicAppSetting.Theme, MainThemeSetting, ConstantValues.Themes);
             ComboBox<DatabaseMode>(ConstantValues.Setting_DebugMode, DatabaseMode.Release, DatabaseModeSetting, ConstantValues.DebugMode);
-            ComboBox<CultureArea>(ConstantValues.Setting_Language,
-                BasicAppSetting.Language,
-                x => { BasicAppSetting.Language = x; },
-                ConstantValues.Languages);
+            ComboBox<CultureArea>(ConstantValues.Setting_Language, BasicAppSetting.Language, LanguageSetting, ConstantValues.Languages);
+            Slider(ConstantValues.Setting_AutoSavePeriod, AdvancedSetting.AutoSavePeriod, AutoSavePeriod, 1, 10);
         }
 
         private void NotifyApplyWhenRestart()
@@ -78,14 +80,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             _count++;
         }
 
+        private void AutoSavePeriod(int x)
+        {
+            if (x == AdvancedSetting.AutoSavePeriod)
+            {
+                return;
+            }
+
+            AdvancedSetting.AutoSavePeriod = Math.Clamp(x, 1, 10);
+            Xaml.Get<AutoSaveService>()
+                .Elapsed = x;
+        }
+
         private void MainThemeSetting(MainTheme x)
         {
             if (x == BasicAppSetting.Theme)
             {
                 return;
             }
-            
+
             BasicAppSetting.Theme = x;
+            NotifyApplyWhenRestart();
+        }
+
+        private void LanguageSetting(CultureArea x)
+        {
+            if (x == BasicAppSetting.Language)
+            {
+                return;
+            }
+
+            BasicAppSetting.Language = x;
             NotifyApplyWhenRestart();
         }
 
@@ -137,6 +162,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public IDatabaseManager DatabaseManager { get; }
         public IDatabase Database => DatabaseUtilities.Database;
         protected BasicAppSetting BasicAppSetting { get; }
+        protected AdvancedSettingModel AdvancedSetting { get; }
+        protected SystemSetting SystemSetting { get; }
 
         public sealed override bool Uniqueness => true;
     }

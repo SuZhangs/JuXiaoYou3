@@ -11,6 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
     public class AutoSaveService : Disposable, IAutoSaveService
     {
+        public const     int           MinutesToTick = 30;
         private readonly Subject<Unit> _subject;
         private readonly Timer         _timer;
         private          int           _secondCount;
@@ -20,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             _subject      = new Subject<Unit>();
             _triggerCount = 100;
-            _timer        = new Timer(DurationPushHandler, null, 0, 3000);
+            _timer        = new Timer(DurationPushHandler, null, 0, 2000);
         }
 
         protected override void ReleaseManagedResources()
@@ -45,8 +46,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             get => _triggerCount;
             set
             {
-                var v = Math.Clamp(value, 20, 300);
-                _triggerCount = value;
+                var v = Math.Clamp(value, 1, 10);
+                _triggerCount = v * MinutesToTick;
             }
         }
 

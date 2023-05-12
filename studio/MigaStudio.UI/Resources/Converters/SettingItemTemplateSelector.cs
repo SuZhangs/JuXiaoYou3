@@ -9,7 +9,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             return item switch
             {
                 ISettingComboBox => Resources["ComboBox"] as DataTemplate,
-                _ => base.SelectTemplate(item, container),
+                SettingSlider    => Resources["Slider"] as DataTemplate,
+                _                => base.SelectTemplate(item, container),
             };
         }
 
