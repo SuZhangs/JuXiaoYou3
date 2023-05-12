@@ -14,7 +14,6 @@
         <FileVersion>3.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
         <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
     <ItemGroup>

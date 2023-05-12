@@ -1,11 +1,24 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    partial class DocumentEditorBase
+    public abstract class HierarchicalViewModel : TabViewModel 
     {
         private SubViewBase      _selectedSubView;
         private FrameworkElement _subView;
+        
+        protected HierarchicalViewModel()
+        {
+            InternalSubViews = new ObservableCollection<SubViewBase>();
+            SubViews         = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
+        }
+
+        protected void InitializeSubView()
+        {
+            CreateSubViews(InternalSubViews);
+            SelectedSubView = InternalSubViews.FirstOrDefault();
+        }
 
         /// <summary>
         /// 创建子页面

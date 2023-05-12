@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
     }
 
-    public abstract partial class DocumentEditorBase : TabViewModel
+    public abstract partial class DocumentEditorBase : HierarchicalViewModel
     {
         //
         // Fields
@@ -42,8 +42,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             _BlockTrackerOfId      = new Dictionary<string, ModuleBlock>(StringComparer.OrdinalIgnoreCase);
 
             ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
-            InternalSubViews   = new ObservableCollection<SubViewBase>();
-            SubViews           = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
             DetailParts        = new ObservableCollection<PartOfDetail>();
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleParts        = new ObservableCollection<PartOfModule>();
@@ -98,8 +96,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void Initialize()
         {
-            CreateSubViews(InternalSubViews);
-            SelectedSubView = InternalSubViews.FirstOrDefault();
+            InitializeSubView();
 
             //
             // 添加绑定
