@@ -28,7 +28,6 @@
             </ResourceDictionary.MergedDictionaries>
 
             <thisVM:CharacterRelationshipViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
-            <thisConverters:AvatarConverter x:Key="Avatar" />
             <studio:RouteToEdgeConverter x:Key="RouteToEdgeConverter" />
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
                 <Border Background="{f:Brush BackgroundLevel2}">
@@ -39,7 +38,7 @@
                             <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{StaticResource Avatar}">
+                                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                             <Binding Path="Avatar" Mode="OneWay" />
                                             <Binding Path="Type" />
                                         </MultiBinding>
@@ -70,13 +69,13 @@
                         </f:ContextMenu>
                     </studio:RelationshipCard.ContextMenu>
                     <studio:RelationshipCard.SourceImage>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Source.Avatar" Mode="OneWay" />
                             <Binding Path="Source.Type" />
                         </MultiBinding>
                     </studio:RelationshipCard.SourceImage>
                     <studio:RelationshipCard.TargetImage>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Target.Avatar" Mode="OneWay" />
                             <Binding Path="Target.Type" />
                         </MultiBinding>
@@ -231,7 +230,7 @@
                     <Rectangle.Fill>
                         <ImageBrush>
                             <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource Avatar}">
+                                <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                     <Binding Path="Avatar" Mode="OneWay" />
                                     <Binding Path="Type" />
                                 </MultiBinding>

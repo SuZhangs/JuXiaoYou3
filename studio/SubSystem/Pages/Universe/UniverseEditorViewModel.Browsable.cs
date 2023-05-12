@@ -79,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         {
             property.Add(new BrowsableProperty
             {
-                Uid = Language.GetEnum(dataSource),
+                Name = Language.GetEnum(dataSource),
                 Source = dataSource,
             });
         }

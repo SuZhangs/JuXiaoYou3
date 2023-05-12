@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Resources
+﻿using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
+
+namespace Acorisoft.FutureGL.MigaStudio.Resources
 {
     public static class Constants
     {

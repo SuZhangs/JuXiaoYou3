@@ -12,8 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         private static readonly ConcurrentDictionary<string, ImageSource> Pool = new ConcurrentDictionary<string, ImageSource>();
         private static          ImageEngine                               _engine;
-
-        private static readonly BitmapImage _character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
+        private static readonly BitmapImage                               _character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
 
         private static ImageSource FallbackImage(DocumentType type)
         {
@@ -39,7 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             if (values is null || values.Length == 0)
             {
-                return FallbackImage(DocumentType.Document);
+                return FallbackImage(DocumentType.Character);
             }
 
             if (values[1] is DocumentType type)
@@ -54,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
             }
 
-            return FallbackImage(DocumentType.Document);
+            return FallbackImage(DocumentType.Character);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
@@ -78,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         {
             if (values is null || values.Length == 0)
             {
-                return FallbackImage(DocumentType.Document);
+                return FallbackImage(DocumentType.Character);
             }
 
             if (values[1] is DocumentType type)
@@ -93,7 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return new BitmapImage(new Uri(avatar));
             }
 
-            return FallbackImage(DocumentType.Document);
+            return FallbackImage(DocumentType.Character);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

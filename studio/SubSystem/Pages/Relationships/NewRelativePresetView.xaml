@@ -22,7 +22,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <thisConverters:AvatarConverter x:Key="Avatar" />
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
                 <DockPanel Margin="4">
                     <Border DockPanel.Dock="Top"
@@ -32,7 +31,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource Avatar}">
+                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                         <Binding Path="Avatar" Mode="OneWay" />
                                         <Binding Path="Type" />
                                     </MultiBinding>

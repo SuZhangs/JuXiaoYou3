@@ -4,7 +4,7 @@
 <Border.Background>
      <ImageBrush>
             <ImageBrush.ImageSource>
-                <MultiBinding Converter="{StaticResource AvatarConverter}">
+                <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                     <Binding Path="Avatar" Mode="OneWay" />
                     <Binding Path="Type" />
             </MultiBinding>

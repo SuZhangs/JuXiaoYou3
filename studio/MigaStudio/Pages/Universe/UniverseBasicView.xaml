@@ -17,7 +17,6 @@
     <UserControl.Resources>
 
         <thisConverters:ImageConverter x:Key="ImageConverter" />
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8 6" />
@@ -35,7 +34,7 @@
                             <Border.Background>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                             <Binding Path="Icon" Mode="OneWay" />
                                             <Binding Path="Type" />
                                         </MultiBinding>

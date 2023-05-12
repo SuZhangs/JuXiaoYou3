@@ -14,8 +14,6 @@
                      Height="640"
                      Width="768">
     <UserControl.Resources>
-        <thisConverters:AvatarConverter x:Key="Avatar" />
-
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <DockPanel Margin="4">
                 <Border DockPanel.Dock="Top"
@@ -25,7 +23,7 @@
                     <Border.Background>
                         <ImageBrush>
                             <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{StaticResource Avatar}">
+                                <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                     <Binding Path="Avatar" Mode="OneWay" />
                                     <Binding Path="Type" />
                                 </MultiBinding>

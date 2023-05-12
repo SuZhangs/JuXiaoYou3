@@ -2,11 +2,10 @@
 {
     public enum DocumentType : int
     {
-        None       = 0,
-        Document   = 0x1000,
-        Character  = Document + 0x001,
-        Skill    = Document + 0x002,
-        Geography  = Document + 0x004,
+        None,
+        Character,
+        Skill,
+        Geography,
         NPC,
         Creature,
         Plant,

@@ -18,7 +18,6 @@
                      SnapsToDevicePixels="True">
     <UserControl.Resources>
         <thisVM:UniverseEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <DropShadowEffect x:Key="ShadowEffect2" BlurRadius="25" Direction="270" Opacity="0.2" ShadowDepth="4.5" Color="#AA000000" />
         <Style TargetType="{x:Type thisCore:SubViewListBoxItem}">
@@ -92,7 +91,7 @@
                 <Border.Background>
                     <ImageBrush>
                         <ImageBrush.ImageSource>
-                            <MultiBinding Converter="{StaticResource AvatarConverter}">
+                            <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                 <Binding Path="Avatar" Mode="OneWay" />
                                 <Binding Path="Type" />
                             </MultiBinding>

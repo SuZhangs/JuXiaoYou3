@@ -16,7 +16,6 @@
     <UserControl.Resources>
 
         <thisConverters:ImageConverter x:Key="ImageConverter"/>
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8 6" />

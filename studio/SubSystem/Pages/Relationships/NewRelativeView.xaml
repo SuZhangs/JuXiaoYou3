@@ -22,7 +22,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <thisConverters:AvatarConverter x:Key="Avatar" />
             <GeometryGroup x:Key="Refresh">
                 <GeometryGroup.Children>
                     <Geometry>F1 M24,24z M0,0z M23,4L23,4 23,10 17,10</Geometry>
@@ -49,7 +48,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource Avatar}">
+                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                         <Binding Path="Avatar" Mode="OneWay" />
                                         <Binding Path="Type" />
                                     </MultiBinding>
@@ -86,7 +85,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -102,7 +101,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -135,7 +134,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -151,7 +150,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{StaticResource Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>

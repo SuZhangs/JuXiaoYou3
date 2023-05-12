@@ -20,7 +20,6 @@
     <UserControl.Resources>
 
         <thisVM:EasyDocumentGalleryViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
         <thisConverters:LockStateConverter x:Key="LockStateConverter"
                                            Lock="{StaticResource FeatherIcon.Lock}"
                                            Unlock="{StaticResource FeatherIcon.Unlock}" />
@@ -43,7 +42,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                         <Binding Path="Avatar" Mode="OneWay" />
                                         <Binding Path="Type" />
                                     </MultiBinding>
@@ -187,7 +186,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                         <Binding Path="SelectedItem.Avatar" Mode="OneWay" />
                                         <Binding Path="SelectedItem.Type" />
                                     </MultiBinding>

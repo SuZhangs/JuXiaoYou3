@@ -21,7 +21,6 @@
         <thisConverters:LockStateConverter x:Key="LockStateConverter"
                                            Lock="{StaticResource FeatherIcon.Lock}"
                                            Unlock="{StaticResource FeatherIcon.Unlock}" />
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
 
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectDocumentCommand}"
@@ -36,7 +35,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{StaticResource AvatarConverter}">
+                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
                                         <Binding Path="Avatar" Mode="OneWay" />
                                         <Binding Path="Type" />
                                     </MultiBinding>

@@ -14,7 +14,6 @@
                      d:DesignWidth="1280"
                      d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:AvatarConverter x:Key="AvatarConverter" />
         <DataTemplate x:Key="Enumeration">
             <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
         </DataTemplate>
