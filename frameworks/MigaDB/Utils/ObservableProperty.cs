@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Utils
 {
-    public class ObservableProperty<T> : ObservableObject, IObservableProperty<T>
+    public class ObservableProperty<T> : NotifyPropertyChanged, IObservableProperty<T>
     {
         private readonly BehaviorSubject<T> _stream;
         private          T                  _value;
@@ -26,10 +26,11 @@ namespace Acorisoft.FutureGL.MigaDB.Utils
             ValueChanged?.Invoke(value);
         }
 
-        protected override void ReleaseManagedResources()
+        public void Dispose()
         {
             // 释放
             (_value as IDisposable)?.Dispose();
+            SetValue(_value);
         }
 
         /// <summary>

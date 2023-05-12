@@ -86,15 +86,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private async Task CloseDatabaseImpl()
         {
             _exitOperation = true;
-            var context = Controller.Context;
+            var ss         = Xaml.Get<SystemSetting>();
+            var context    = Controller.Context;
             var controller = (TabController)context.MainController;
             controller.Reset();
             controller = (TabController)Controller.Context
                                                   .ControllerMaps[AppViewModel.IdOfQuickStartController];
             ConverterPool.Avatar
                          .Reset();
+            ss.RepositorySetting
+              .LastRepository = null;
+            await ss.SaveAsync();
             await DatabaseManager.CloseAsync();
-            
             context.SwitchController(controller);
         }
 

@@ -40,8 +40,7 @@
                                 ShowText="True" />
                 <ftk:ToolButton Content="保存"
                                 Command="{Binding SaveCommand}"
-                                Icon="{StaticResource IC.Save}"
-                                IsFilled="True"
+                                Icon="{StaticResource FeatherIcon.Save}"
                                 ShowText="True" />
             </StackPanel>
         </f:ForestSection.ToolBar>
@@ -109,9 +108,15 @@
                 </Border>
 
 
-                <f:ListBox Margin="0 16"
+                <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                           Margin="0 16"
                            ItemsSource="{Binding Keywords,Mode=OneWay}"
                            SelectedItem="{Binding SelectedKeyword,Mode=TwoWay}">
+                    <f:ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="320"/>
+                        </ItemsPanelTemplate>
+                    </f:ListBox.ItemsPanel>
                     <f:ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color,Mode=OneWay}"

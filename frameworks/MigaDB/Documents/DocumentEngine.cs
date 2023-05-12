@@ -129,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
             return EngineResult.Successful;
         }
-
+        
         #endregion
 
         #region Remove
@@ -244,6 +244,31 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         
             AddConcept(cache.Id, cache.Name, KnowledgeHandler.DocumentEngine);
             DocumentCacheDB.Update(cache);
+        }
+        
+        
+        /// <summary>
+        /// 更新文档
+        /// </summary>
+        /// <param name="document">指定要更新的文档</param>
+        internal void UpdateDocument(Document document)
+        {
+            if (document is null)
+            {
+                return;
+            }
+        
+            if (string.IsNullOrEmpty(document.Id))
+            {
+                return;
+            }
+        
+            if (!DocumentDB.HasID(document.Id))
+            {
+                return;
+            }
+        
+            DocumentDB.Update(document);
         }
 
         #endregion
@@ -390,6 +415,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             if(markAsDeletedDocumentCache.Count > 0)
                 Modified();
         }
+        
+        internal bool DataConsistencyCheck { get; set; }
         
         /// <summary>
         /// 

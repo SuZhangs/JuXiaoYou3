@@ -9,6 +9,11 @@ namespace Acorisoft.FutureGL.MigaUtils
     public interface IObservableProperty<out T> : INotifyPropertyChanged, INotifyPropertyChanging
     {
         /// <summary>
+        /// 
+        /// </summary>
+        void Dispose();
+        
+        /// <summary>
         /// 当前值
         /// </summary>
         T CurrentValue { get; }
