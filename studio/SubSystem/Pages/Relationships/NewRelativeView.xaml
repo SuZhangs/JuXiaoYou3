@@ -48,7 +48,7 @@
                         <Border.Background>
                             <ImageBrush>
                                 <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                                         <Binding Path="Avatar" Mode="OneWay" />
                                         <Binding Path="Type" />
                                     </MultiBinding>
@@ -85,7 +85,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -101,7 +101,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -134,7 +134,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>
@@ -150,7 +150,7 @@
                                AvatarName="{Binding Name,Mode=OneWay}"
                                Margin="16 0">
                     <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Avatar" Mode="OneWay" />
                             <Binding Path="Type" />
                         </MultiBinding>

@@ -39,7 +39,7 @@
                             <Ellipse.Fill>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                                             <Binding Path="Avatar" Mode="OneWay" />
                                             <Binding Path="Type" />
                                         </MultiBinding>
@@ -70,13 +70,13 @@
                         </f:ContextMenu>
                     </studio:RelationshipCard.ContextMenu>
                     <studio:RelationshipCard.SourceImage>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Source.Avatar" Mode="OneWay" />
                             <Binding Path="Source.Type" />
                         </MultiBinding>
                     </studio:RelationshipCard.SourceImage>
                     <studio:RelationshipCard.TargetImage>
-                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                             <Binding Path="Target.Avatar" Mode="OneWay" />
                             <Binding Path="Target.Type" />
                         </MultiBinding>
@@ -238,7 +238,7 @@
                     <Rectangle.Fill>
                         <ImageBrush>
                             <ImageBrush.ImageSource>
-                                <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                                <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                                     <Binding Path="Avatar" Mode="OneWay" />
                                     <Binding Path="Type" />
                                 </MultiBinding>

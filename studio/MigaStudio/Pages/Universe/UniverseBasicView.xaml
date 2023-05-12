@@ -34,7 +34,7 @@
                             <Border.Background>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
-                                        <MultiBinding Converter="{x:Static thisConverters:Converters.Avatar}">
+                                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
                                             <Binding Path="Icon" Mode="OneWay" />
                                             <Binding Path="Type" />
                                         </MultiBinding>
