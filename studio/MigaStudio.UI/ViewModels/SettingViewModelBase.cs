@@ -54,6 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var mainTitleKey = $"{id}";
             var subTitleKey  = $"{id}.Tips";
             var unitKey = $"{id}.Unit";
+            defaultValue = Math.Clamp(defaultValue, min, max);
 
             var item = new SettingSlider
             {
