@@ -2,6 +2,7 @@
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -66,6 +67,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 StartOverride();
             }
+        }
+
+        public sealed override void Stop()
+        {
+            _context.Controllers
+                    .ForEach(x => x.Stop());
+            StopOverride();
+        }
+        
+        protected virtual void StopOverride()
+        {
         }
 
         protected virtual void StartOverride()

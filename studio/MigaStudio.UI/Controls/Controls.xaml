@@ -908,7 +908,7 @@
                                            FontWeight="Bold"
                                            Text="{Binding Title,RelativeSource={RelativeSource Mode=TemplatedParent},Mode=OneWay}" />
 
-                                <TextBlock Foreground="{f:Brush Theme=ForegroundDisabled}"
+                                <TextBlock Foreground="{f:Brush Theme=ForegroundLevel2}"
                                            FontFamily="{TemplateBinding SubTitleFontFamily}"
                                            FontSize="14"
                                            Margin="0 8 0 0"

@@ -204,6 +204,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #endregion
 
+        public override void Stop()
+        {
+            foreach (var page in Workspace)
+            {
+                page.Stop();
+            }
+
+            foreach (var page in InactiveWorkspace)
+            {
+                page.Stop();
+            }
+        }
+
         protected virtual void OnAddViewModel(ITabViewModel viewModel)
         {
             
