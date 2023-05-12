@@ -4,37 +4,30 @@ using DryIoc;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public interface IAttachableDatabaseService
+
+    public interface IInMemoryServiceHost
     {
-        void Start(IDatabaseManager databaseManager);
-        void Register(IContainer container);
-        void Unregister(IContainer container);
-        void Stop();
+        void Add(IInMemoryDatabaseService service);
+        void Remove(IInMemoryDatabaseService service);
     }
 
-    public interface IAttachableDatabaseServiceHost
+    public class InMemoryServiceHost : Disposable, IInMemoryServiceHost
     {
-        void Add(IAttachableDatabaseService service);
-        void Remove(IAttachableDatabaseService service);
-    }
+        private readonly IContainer                     _container;
+        private readonly IDatabaseManager               _databaseManager;
+        private readonly List<IInMemoryDatabaseService> _services;
+        private readonly IDisposable                    _disposable;
 
-    public class AttachableDatabaseServiceHost : Disposable, IAttachableDatabaseServiceHost
-    {
-        private readonly IContainer                       _container;
-        private readonly IDatabaseManager                 _databaseManager;
-        private readonly List<IAttachableDatabaseService> _services;
-        private readonly IDisposable                      _disposable;
-
-        public AttachableDatabaseServiceHost(IContainer container, IDatabaseManager databaseManager)
+        public InMemoryServiceHost(IContainer container, IDatabaseManager databaseManager)
         {
             _container       = container;
             _databaseManager = databaseManager;
-            _services        = new List<IAttachableDatabaseService>(16);
+            _services        = new List<IInMemoryDatabaseService>(16);
             _disposable = _databaseManager.IsOpen
                                           .Observable
                                           .Subscribe(OnDatabaseOpenStateChanged);
             
-            container.Use<AttachableDatabaseServiceHost, IAttachableDatabaseServiceHost>(this);
+            container.Use<InMemoryServiceHost, IInMemoryServiceHost>(this);
         }
 
         protected override void ReleaseManagedResources()
@@ -54,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             }
         }
 
-        public void Add(IAttachableDatabaseService service)
+        public void Add(IInMemoryDatabaseService service)
         {
             if (service is null)
             {
@@ -64,7 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             _services.Add(service);
         }
 
-        public void Remove(IAttachableDatabaseService service)
+        public void Remove(IInMemoryDatabaseService service)
         {
             if (service is null)
             {

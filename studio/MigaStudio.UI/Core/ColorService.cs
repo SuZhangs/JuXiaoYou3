@@ -5,7 +5,7 @@ using DryIoc;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public interface IColorService : IAttachableDatabaseService
+    public interface IColorService : IInMemoryDatabaseService
     {
         string GetColor(string keyword);
         void Changed(IEnumerable<string> items, string color);

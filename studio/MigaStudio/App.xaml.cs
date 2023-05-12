@@ -82,14 +82,15 @@ namespace Acorisoft.FutureGL.MigaStudio
             
             //
             // 注册数据库附加服务
-            var attachable = new AttachableDatabaseServiceHost(container, _databaseManager);
-            attachable.Add(new ColorService());
+            var attachable = new InMemoryServiceHost(container, _databaseManager);
+            InstallInMemoryService(attachable);
             
             //
             // 注册服务
             container.Use<AutoSaveService, IAutoSaveService>(new AutoSaveService());
             container.RegisterInstance<MusicService>(new MusicService());
         }
+
 
         private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)
         {
