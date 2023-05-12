@@ -45,7 +45,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <DockPanel Height="640"
+        <DockPanel Height="540"
                    Width="1152">
             <!--  -->
             <StackPanel DockPanel.Dock="Top"
@@ -72,7 +72,7 @@
                     <f:ForestSection.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
-                                    Margin="0 0 0 4">
+                                    Margin="0 0 0 2">
                             <ftk:ToolButton Content="{f:Language global.new}"
                                             Command="{Binding CreateCommand}"
                                             Icon="{StaticResource FeatherIcon.File}"
