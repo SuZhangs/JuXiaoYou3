@@ -38,12 +38,26 @@
                                   DataType="{x:Type studio:SettingSlider}">
                         <studio:SettingControl Title="{Binding MainTitle,Mode=OneWay}"
                                                Intro="{Binding SubTitle,Mode=OneWay}">
-                            <Slider HorizontalAlignment="Right"
-                                    MinWidth="240"
-                                    Minimum="{Binding Minimum}"
-                                    Maximum="{Binding Maximum}"
-                                    Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                    VerticalAlignment="Top" />
+                            <DockPanel Margin="0 8 0 0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Top">
+                                <Slider Width="160"
+                                        Minimum="{Binding Minimum}"
+                                        Maximum="{Binding Maximum}"
+                                        Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Margin="16 0 0 0"
+                                           VerticalAlignment="Center"
+                                           Width="100"
+                                           TextTrimming="CharacterEllipsis">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Value" Mode="OneWay"/>
+                                            <Binding Path="Unit" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DockPanel>
                         </studio:SettingControl>
                     </DataTemplate>
                 </ResourceDictionary>

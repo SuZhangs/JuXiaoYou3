@@ -53,11 +53,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var mainTitleKey = $"{id}";
             var subTitleKey  = $"{id}.Tips";
+            var unitKey = $"{id}.Unit";
 
             var item = new SettingSlider
             {
                 MainTitle = Language.GetText(mainTitleKey),
                 SubTitle  = Language.GetText(subTitleKey),
+                Unit      =  Language.GetText(unitKey),
                 Callback  = callback,
                 Maximum   = max,
                 Minimum   = min,

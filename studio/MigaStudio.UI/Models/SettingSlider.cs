@@ -2,9 +2,19 @@
 {
     public class SettingSlider : SettingItem<int>
     {
-        private int _maximum;
-        private int _minimum;
+        private int    _maximum;
+        private int    _minimum;
+        private string _unit;
 
+        /// <summary>
+        /// 获取或设置 <see cref="Unit"/> 属性。
+        /// </summary>
+        public string Unit
+        {
+            get => _unit;
+            set => SetValue(ref _unit, value);
+        }
+        
         /// <summary>
         /// 获取或设置 <see cref="Minimum"/> 属性。
         /// </summary>
