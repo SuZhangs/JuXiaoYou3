@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             });
         }
 
-        public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, CharacterRelationship rel)
+        public static Task<Op<CharacterRelationship>> Edit(DocumentCache source, DocumentCache target, CharacterRelationship rel)
         {
             return DialogService().Dialog<CharacterRelationship, NewRelativeViewModel>(new Parameter
             {

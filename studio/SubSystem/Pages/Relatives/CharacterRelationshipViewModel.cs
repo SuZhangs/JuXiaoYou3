@@ -21,12 +21,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();
-            Relatives              = new ObservableCollection<CharacterRelationship>();
+            Relatives                  = new ObservableCollection<CharacterRelationship>();
             RelationshipPaneVisibility = Visibility.Collapsed;
             AddDocumentCommand         = AsyncCommand(NewDocumentImpl);
             OpenDocumentCommand        = Command<DocumentCache>(OpenDocumentImpl, HasItem, true);
             ResetDocumentCommand       = Command(Reset, () => HasItem(SelectedDocument), true);
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl, HasItem, true);
+            EditRelCommand             = AsyncCommand<CharacterRelationship>(EditRelationshipImpl);
             RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl);
             CaptureCommand             = AsyncCommand<FrameworkElement>(FileIO.CaptureAsync, HasItem);
             _version                   = DocumentEngine.Version;
@@ -82,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
         
         #endregion
 
-        #region Relationship: Add / Remove
+        #region Relationship: Add / Edit / Remove
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
@@ -111,6 +112,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             {
                 Relatives.Add(r1.Value);
             }
+        }
+        
+        
+        private async Task EditRelationshipImpl(CharacterRelationship source)
+        {
+            var r1 = await NewRelativeViewModel.Edit(source.Source, source.Target, source);
+            
+            if (!r1.IsFinished)
+            {
+                return;
+            }
+
+            DocumentEngine.EditRelationship(r1.Value);
         }
 
         private async Task RemoveRelationshipImpl(CharacterRelationship rel)

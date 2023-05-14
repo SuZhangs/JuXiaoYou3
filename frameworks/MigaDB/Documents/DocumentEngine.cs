@@ -387,7 +387,19 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             RelDB.Insert(rel);
         }
-        
+
+        public void EditRelationship(CharacterRelationship rel)
+        {
+            // ReSharper disable once MergeSequentialChecks
+            if (rel is null ||
+                rel.Source is null ||
+                rel.Target is null)
+            {
+                return;
+            }
+
+            RelDB.Update(rel);
+        }
         
 
         public void RemoveRelationship(string id)

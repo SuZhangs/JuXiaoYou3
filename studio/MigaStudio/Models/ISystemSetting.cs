@@ -39,6 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
 
             if (r.Any(x => x.Path == cache.Path))
             {
+                await SaveAsync();
                 return;
             }
             

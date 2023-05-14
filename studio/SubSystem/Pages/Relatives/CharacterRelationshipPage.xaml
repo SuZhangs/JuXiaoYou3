@@ -64,6 +64,9 @@
                                          Margin="4">
                     <studio:RelationshipCard.ContextMenu>
                         <f:ContextMenu>
+                            <f:MenuItem Header="编辑"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditRelCommand}"
+                                        CommandParameter="{Binding}"/>
                             <f:MenuItem Header="删除"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
                                         CommandParameter="{Binding}"/>

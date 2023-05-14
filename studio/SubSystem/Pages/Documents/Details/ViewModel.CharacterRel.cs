@@ -24,9 +24,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();
-            Relatives              = new ObservableCollection<CharacterRelationship>();
+            Relatives                  = new ObservableCollection<CharacterRelationship>();
             RelationshipPaneVisibility = Visibility.Collapsed;
             AddRelCommand              = AsyncCommand<DocumentCache>(AddRelationshipImpl);
+            EditRelCommand             = AsyncCommand<CharacterRelationship>(EditRelationshipImpl);
             CaptureCommand             = AsyncCommand<FrameworkElement>(FileIO.CaptureAsync, HasItem);
             RemoveRelCommand           = AsyncCommand<CharacterRelationship>(RemoveRelationshipImpl);
             _version                   = DocumentEngine.Version;
@@ -64,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         #endregion
 
 
-        #region Relationship: Add / Remove
+        #region Relationship: Add / Edit / Remove
 
         private async Task AddRelationshipImpl(DocumentCache source)
         {
@@ -93,6 +94,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 Relatives.Add(r1.Value);
             }
+        }
+        
+        private async Task EditRelationshipImpl(CharacterRelationship source)
+        {
+            var r1 = await NewRelativeViewModel.Edit(source.Source, source.Target, source);
+            
+            if (!r1.IsFinished)
+            {
+                return;
+            }
+
+            DocumentEngine.EditRelationship(r1.Value);
         }
 
         private async Task RemoveRelationshipImpl(CharacterRelationship rel)
