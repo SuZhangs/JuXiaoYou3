@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
-             xmlns:thisCommons="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
+             xmlns:thisCommons="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:part="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"

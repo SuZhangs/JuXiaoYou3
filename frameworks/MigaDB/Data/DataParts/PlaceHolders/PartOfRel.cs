@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class PartOfRel : PartOfDetailPlaceHolder
+    public class PartOfRel : PartOfEditableDetail
     {
         public PartOfRel()
         {

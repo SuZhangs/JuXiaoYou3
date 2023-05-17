@@ -167,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                     return;
                 }
 
-                SelectedView = ServiceViewContainer.GetView(this, _selectedBrowsableElement);
+                SelectedView = ServiceViewContainer.Build(this, _selectedBrowsableElement);
             }
         }
 

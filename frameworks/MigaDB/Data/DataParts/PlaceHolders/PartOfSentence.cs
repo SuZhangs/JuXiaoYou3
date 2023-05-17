@@ -5,7 +5,7 @@
         
     }
     
-    public class PartOfSentence : PartOfDetailPlaceHolder
+    public class PartOfSentence : PartOfEditableDetail
     {
         public PartOfSentence()
         {

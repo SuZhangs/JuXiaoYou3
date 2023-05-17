@@ -46,8 +46,8 @@
             return Name;
         }
     }
-    
-    public abstract class PartOfDetailPlaceHolder : PartOfDetail, IPartOfDetail, ITextService
+
+    public abstract class PartOfEditableDetail : PartOfDetail, IPartOfDetail, ITextService
     {
         public bool UseLanguageService() => true;
         
@@ -66,5 +66,35 @@
         /// 是否可移除
         /// </summary>
         public sealed override bool Removable => true;
+    }
+    
+    public abstract class PartOfDetailPlaceHolder : PartOfDetail, IPartOfDetail, ITextService
+    {
+        protected PartOfDetailPlaceHolder(string id) => Id = id;
+        
+        public bool UseLanguageService() => true;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetTextSource() => Id;
+
+        /// <summary>
+        /// 是否为占位符
+        /// </summary>
+        public sealed override bool IsDeclaration => true;
+
+        /// <summary>
+        /// 是否可移除
+        /// </summary>
+        public sealed override bool Removable => true;
+    }
+    
+    public class DetailPartSettingPlaceHolder : PartOfDetailPlaceHolder
+    {
+        public DetailPartSettingPlaceHolder() : base("__Detail_Setting")
+        {
+        }
     }
 }

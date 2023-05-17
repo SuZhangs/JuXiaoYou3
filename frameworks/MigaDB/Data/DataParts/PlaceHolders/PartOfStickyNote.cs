@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class PartOfStickyNote : PartOfDetailPlaceHolder
+    public class PartOfStickyNote : PartOfEditableDetail
     {
         public PartOfStickyNote()
         {

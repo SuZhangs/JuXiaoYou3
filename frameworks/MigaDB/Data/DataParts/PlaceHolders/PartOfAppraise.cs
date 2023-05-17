@@ -5,7 +5,7 @@
         
     }
     
-    public class PartOfAppraise : PartOfDetailPlaceHolder
+    public class PartOfAppraise : PartOfEditableDetail
     {
         public PartOfAppraise()
         {

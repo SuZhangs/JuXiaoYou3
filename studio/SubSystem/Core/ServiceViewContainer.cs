@@ -48,11 +48,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             _service.Manual<TPart>(factory);
         }
         
-        public static FrameworkElement GetView(object parent, object data)
+        public static FrameworkElement Build(object parent, object data)
         {
             return _service.GetView(parent, data);
         }
         
+        /// <summary>
+        /// 映射数据部件
+        /// </summary>
+        /// <typeparam name="TPart"></typeparam>
+        /// <typeparam name="TViewModel"></typeparam>
+        /// <typeparam name="TView"></typeparam>
         private static void MappingDataPart<TPart, TViewModel, TView>()
             where TPart : DataPart
             where TViewModel : IsolatedViewModel<DocumentEditorBase, TPart>, new()

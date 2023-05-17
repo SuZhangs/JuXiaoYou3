@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
         }
     }
     
-    public class PartOfSurvey : PartOfDetailPlaceHolder
+    public class PartOfSurvey : PartOfEditableDetail
     {
         public PartOfSurvey()
         {

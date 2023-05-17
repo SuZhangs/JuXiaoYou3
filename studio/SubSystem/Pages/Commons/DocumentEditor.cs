@@ -10,13 +10,6 @@ using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class DetailPartSettingPlaceHolder : PartOfDetailPlaceHolder
-    {
-        public DetailPartSettingPlaceHolder()
-        {
-            Id = "__Detail_Setting";
-        }
-    }
 
     public class DocumentEditorBaseViewModelProxy : BindingProxy<DocumentEditorBase>
     {

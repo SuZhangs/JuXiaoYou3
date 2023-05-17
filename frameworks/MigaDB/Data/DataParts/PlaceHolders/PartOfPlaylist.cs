@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.DataParts
 {
-    public class PartOfPlaylist : PartOfDetailPlaceHolder
+    public class PartOfPlaylist : PartOfEditableDetail
     {
         public PartOfPlaylist()
         {
