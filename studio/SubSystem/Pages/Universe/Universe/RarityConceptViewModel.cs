@@ -33,11 +33,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             AddKeywordCommand    = AsyncCommand<ColorMapping>(AddKeywordImpl, HasItem);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl,x => Selected is not null && HasItem(x));
             EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
-            SaveCommand          = Command(Save);
+            SaveCommand          = Command(Stop);
             IsEmpty              = Selected is null;
         }
 
-        public override void Save()
+        public override void Stop()
         {
             Database.Set(Property);
             Owner.SetDirtyState(false);

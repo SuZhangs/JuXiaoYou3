@@ -2,9 +2,5 @@
 {
     public class OtherIntroductionViewModel: InspectableViewModel<OtherIntroduction>
     {
-        public override void Save()
-        {
-            
-        }
     }
 }

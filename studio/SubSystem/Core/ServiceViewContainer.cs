@@ -1,12 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Acorisoft.FutureGL.MigaStudio.Pages.Composes;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
-    public delegate FrameworkElement ViewFactory<TViewModel>(TViewModel owner, object parameter);
-    
     public static partial class ServiceViewContainer
     {
         private static readonly IViewFactoryService _service = new ViewFactoryService();
@@ -15,25 +13,65 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         
         public static void Initialize()
         {
-            _service.Manual<PartOfRel>(GetCharacterRel);
-            UseDataPart<PartOfAlbum, AlbumPartViewModel, AlbumPartView>();
-            UseDataPart<PartOfPlaylist, PlaylistPartViewModel, PlaylistPartView>();
-            UseDataPart<PartOfSurvey, SurveyPartViewModel, SurveyPartView>();
-            UseDataPart<PartOfSentence, SentencePartViewModel, SentencePartView>();
-            UseDataPart<PartOfPrototype, PrototypePartViewModel, PrototypePartView>();
-            UseDataPart<PartOfAppraise, AppraisePartViewModel, AppraisePartView>();
-            UseDataPart<PartOfStickyNote, StickyNotePartViewModel, StickyNotePartView>();
+            Manual<PartOfRel>(GetCharacterRel);
+            MappingDataPart<PartOfAlbum, AlbumPartViewModel, AlbumPartView>();
+            MappingDataPart<PartOfPlaylist, PlaylistPartViewModel, PlaylistPartView>();
+            MappingDataPart<PartOfSurvey, SurveyPartViewModel, SurveyPartView>();
+            MappingDataPart<PartOfSentence, SentencePartViewModel, SentencePartView>();
+            MappingDataPart<PartOfPrototype, PrototypePartViewModel, PrototypePartView>();
+            MappingDataPart<PartOfAppraise, AppraisePartViewModel, AppraisePartView>();
+            MappingDataPart<PartOfStickyNote, StickyNotePartViewModel, StickyNotePartView>();
             UseDetailSetting();
-            
-            
-            Browse<UniversalIntroduction>(GetUniversalView);
-            Browse<SpaceConceptOverview>(GetSpaceConceptOverviewView);
-            Browse<PropertyOverview>(GetPropertyOverviewView);
-            Browse<OtherIntroduction>(GetOtherView);
-            Browse<SpaceConcept>(GetSpaceConceptView);
-            Browse<BrowsableProperty>(GetBrowsablePropertyView);
-            Browse<DeclarationConcept>(GetDeclarationConceptView);
-            Browse<RarityConcept>(GetRarityConceptView);
+
+            MappingSubViewModel<UniversalIntroduction, UniversalIntroductionViewModel, UniversalIntroductionView>();
+            MappingSubViewModel<SpaceConceptOverview, SpaceConceptOverviewViewModel, SpaceConceptOverviewView>();
+            MappingSubViewModel<PropertyOverview, PropertyOverviewViewModel, PropertyOverviewView>();
+            MappingSubViewModel<OtherIntroduction, OtherIntroductionViewModel, OtherIntroductionView>();
+            MappingSubViewModel<SpaceConcept, SpaceConceptViewModel, SpaceConceptView>();
+            MappingSubViewModel<BrowsableProperty, BrowsablePropertyViewModel, BrowsablePropertyView>();
+            MappingSubViewModel<DeclarationConcept, DeclarationConceptViewModel, DeclarationConceptView>();
+            MappingSubViewModel<RarityConcept, RarityConceptViewModel, RarityConceptView>();
+        }
+        
+        
+        private static FrameworkElement GetCharacterRel(object owner, object instance)
+        {
+            var d = (DocumentEditorVMBase)owner;
+            return new CharacterRelshipPartView
+            {
+                DataContext = new CharacterRelPartViewModel(d, (PartOfRel)instance)
+            };
+        }
+
+        private static void Manual<TPart>(ViewFactory factory)
+        {
+            _service.Manual<TPart>(factory);
+        }
+        
+        public static FrameworkElement GetView(object parent, object data)
+        {
+            return _service.GetView(parent, data);
+        }
+        
+        private static void MappingDataPart<TPart, TViewModel, TView>()
+            where TPart : DataPart
+            where TViewModel : IsolatedViewModel<DocumentEditorBase, TPart>, new()
+            where TView : FrameworkElement, new()
+        {
+            _service.Isolate<DocumentEditorBase, TPart, TView, TViewModel>();
+        }
+        
+        private static void MappingSubViewModel<TPart, TViewModel, TView>()
+            where TPart : class
+            where TViewModel : IsolatedViewModel<UniverseEditorViewModel, TPart>, new()
+            where TView : FrameworkElement, new()
+        {
+            _service.Isolate<UniverseEditorViewModel, TPart, TView, TViewModel>();
+        }
+
+        private static void UseDetailSetting()
+        {
+            _service.Direct<DocumentEditorBase, DetailPartSettingPlaceHolder, DetailPartSettingView>();
         }
     }
 }

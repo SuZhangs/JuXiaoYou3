@@ -2,9 +2,5 @@
 {
     public class BrowsablePropertyViewModel : InspectableViewModel<BrowsableProperty>
     {
-        public override void Save()
-        {
-            
-        }
     }
 }

@@ -2,9 +2,5 @@
 {
     public class DeclarationConceptViewModel : InspectableViewModel<DeclarationConcept>
     {
-        public override void Save()
-        {
-            
-        }
     }
 }

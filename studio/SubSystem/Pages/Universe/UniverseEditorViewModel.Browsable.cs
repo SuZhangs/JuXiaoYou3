@@ -145,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 if (_selectedView is not null)
                 {
                     var inspectable = (InspectableViewModel)_selectedView.DataContext;
-                    inspectable?.Save();
+                    inspectable?.Stop();
                 }
 
                 SetValue(ref _selectedView, value);
@@ -167,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                     return;
                 }
 
-                SelectedView = ServiceViewContainer.GetBrowsableView(this, _selectedBrowsableElement);
+                SelectedView = ServiceViewContainer.GetView(this, _selectedBrowsableElement);
             }
         }
 
