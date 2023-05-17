@@ -22,6 +22,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 typeof(ViewHostBase),
                 new PropertyMetadata(default(object)));
             ContentProperty = ContentPropertyKey.DependencyProperty;
+            UIHelper.Init();
         }
 
         public static readonly DependencyProperty    ViewModelProperty;

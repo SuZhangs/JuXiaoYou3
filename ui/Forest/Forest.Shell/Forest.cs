@@ -23,14 +23,13 @@ namespace Acorisoft.FutureGL.Forest
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     public static class UIHelper
     {
-        private static readonly GeometryGroup        Checked;
-        private static readonly Geometry             InfoGeometry;
-        private static readonly Geometry             ErrorGeometry;
-        private static readonly Lazy<IDialogService> DialogServiceField;
+        private static          GeometryGroup        Checked;
+        private static          Geometry             InfoGeometry;
+        private static          Geometry             ErrorGeometry;
+        private static readonly Lazy<IDialogService> DialogServiceField = new Lazy<IDialogService>(Xaml.Get<IDialogService>);
 
-        static UIHelper()
+        public static void Init()
         {
-            DialogServiceField = new Lazy<IDialogService>(Xaml.Get<IDialogService>);
             InfoGeometry       = Geometry.Parse("F1 M24,24z M0,0z M21,15A2,2,0,0,1,19,17L7,17 3,21 3,5A2,2,0,0,1,5,3L19,3A2,2,0,0,1,21,5z");
             ErrorGeometry = new GeometryGroup
             {
@@ -176,6 +175,10 @@ namespace Acorisoft.FutureGL.Forest
         }
 
 
+
+        #endregion
+        
+        
         public static Task<bool> Error(this IViewModel source, string content)
         {
             return DialogService()
@@ -247,7 +250,5 @@ namespace Acorisoft.FutureGL.Forest
                     Title    = content
                 });
         }
-
-        #endregion
     }
 }

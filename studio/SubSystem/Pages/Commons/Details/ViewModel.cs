@@ -38,6 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             base.Start();
             OnInitialize(Collection);
+            UpdateCollectionState();
         }
 
         protected override void ReleaseManagedResourcesOverride()

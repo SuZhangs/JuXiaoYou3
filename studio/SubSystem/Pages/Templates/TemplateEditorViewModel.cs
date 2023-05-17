@@ -151,7 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             catch (Exception ex)
             {
-                await this.Error(SubSystemString.BadModule);
+                this.ErrorNotification(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");

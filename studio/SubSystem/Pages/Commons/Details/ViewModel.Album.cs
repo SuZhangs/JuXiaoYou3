@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         }
                         catch (Exception ex)
                         {
-                            await this.Error(ex.Message.SubString());
+                            this.ErrorNotification(ex.Message.SubString());
                         }
                     }
 

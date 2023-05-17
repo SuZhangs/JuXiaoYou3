@@ -127,7 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             if (finishedCount == 0)
             {
-                await this.Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+                this.ErrorNotification(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
             }
             else
             {
@@ -210,7 +210,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             if (finishedCount == 0)
             {
-                await this.Error(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
+                this.ErrorNotification(string.Format(Language.GetText("text.ImportModulesFailed"), finishedCount, errorCount));
             }
             else
             {
@@ -251,7 +251,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             catch (Exception ex)
             {
-                await this.Error(SubSystemString.BadModule);
+                this.ErrorNotification(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");

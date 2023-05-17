@@ -6,7 +6,15 @@ namespace Acorisoft.FutureGL.Forest.Services
     public class NotifyService : INotifyService, INotifyServiceAmbient
     {
         private const string Color = "#6F0240";
-        private DialogHost _host;
+        private DialogHost _host;      
+        private void RunOnDispatcherThread(Action action)
+        {
+            var dispatcher = _host.Dispatcher;
+            if (dispatcher.CheckAccess())
+                action();
+            else
+                dispatcher.Invoke(action);
+        }
 
         /// <summary>
         /// 设置服务响应者
@@ -32,7 +40,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                 notification.Initialize();
             }
             
-            _host.Messaging(notification);
+            RunOnDispatcherThread(() => _host.Messaging(notification));
         }
 
         /// <summary>
@@ -53,7 +61,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                 notification.Initialize();
             }
             
-            _host.Messaging(notification);
+            RunOnDispatcherThread(() => _host.Messaging(notification));
         }
     }
 }
