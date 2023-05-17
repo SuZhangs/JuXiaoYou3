@@ -24,7 +24,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private string GetOrAddMetadata(string name)
         {
-            if (BasicPart.Buckets.TryGetValue(name, out var value))
+            var dict = BasicPart.Buckets;
+            if (dict.TryGetValue(name, out var value))
             {
                 return value;
             }
@@ -39,31 +40,33 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             value = string.Empty;
-            BasicPart.Buckets.TryAdd(name, value);
+            dict.TryAdd(name, value);
             return value;
         }
 
         private string GetOrAddMetadata(string name, string defaultValue)
         {
-            if (BasicPart.Buckets.TryGetValue(name, out var value))
+            var dict = BasicPart.Buckets;
+            if (dict.TryGetValue(name, out var value))
             {
                 return value;
             }
 
             value = defaultValue;
-            BasicPart.Buckets.TryAdd(name, value);
+            dict.TryAdd(name, value);
             return value;
         }
 
         private void UpsertMetadata(string name, string value, [CallerMemberName] string propName = "")
         {
-            if (BasicPart.Buckets.ContainsKey(name))
+            var dict = BasicPart.Buckets;
+            if (dict.ContainsKey(name))
             {
-                BasicPart.Buckets[name] = value;
+                dict[name] = value;
             }
             else
             {
-                BasicPart.Buckets.Add(name, value);
+                dict.Add(name, value);
             }
 
             AddMetadata(new Metadata
