@@ -9,18 +9,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     
     public static partial class ServiceViewContainer
     {
+        private static readonly IViewFactoryService _service = new ViewFactoryService();
+        
+        
         
         public static void Initialize()
         {
-            Add<PartOfAlbum>(GetAlbumView);
-            Add<PartOfPlaylist>(GetPlaylistView);
-            Add<PartOfRel>(GetCharacterRel);
-            Add<PartOfSurvey>(GetSurvey);
-            Add<PartOfSentence>(GetSentenceView);
-            Add<PartOfPrototype>(GetPrototypeView);
-            Add<PartOfAppraise>(GetAppraiseView);
-            Add<PartOfStickyNote>(GetStickyNote);
-            Add<DetailPartSettingPlaceHolder>(GetDetailSetting);
+            _service.Manual<PartOfRel>(GetCharacterRel);
+            UseDataPart<PartOfAlbum, AlbumPartViewModel, AlbumPartView>();
+            UseDataPart<PartOfPlaylist, PlaylistPartViewModel, PlaylistPartView>();
+            UseDataPart<PartOfSurvey, SurveyPartViewModel, SurveyPartView>();
+            UseDataPart<PartOfSentence, SentencePartViewModel, SentencePartView>();
+            UseDataPart<PartOfPrototype, PrototypePartViewModel, PrototypePartView>();
+            UseDataPart<PartOfAppraise, AppraisePartViewModel, AppraisePartView>();
+            UseDataPart<PartOfStickyNote, StickyNotePartViewModel, StickyNotePartView>();
+            UseDetailSetting();
             
             
             Browse<UniversalIntroduction>(GetUniversalView);

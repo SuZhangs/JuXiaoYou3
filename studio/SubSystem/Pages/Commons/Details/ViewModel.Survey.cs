@@ -8,11 +8,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     public class SurveyPartViewModelProxy : BindingProxy<SurveyPartViewModel>
     {
     }
-    
-    public class SurveyPartViewModel : DetailViewModel<PartOfSurvey>
+
+    public class SurveyPartViewModel : IsolatedViewModel<DocumentEditorBase, PartOfSurvey>
     {
         private SurveySet _selectedSurveySet;
-        
+
         public SurveyPartViewModel()
         {
             Sets          = new ObservableCollection<SurveySet>();
@@ -40,8 +40,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             var c = r.Value;
-            EnumerableExtensions.Diff(Sets, c, x => x.Id, out var added, out var modified, out var removed);
-            
+            EnumerableExtensions.Diff(
+                Sets, 
+                c, 
+                x => x.Id, 
+                out var added, 
+                out var modified, 
+                out var removed);
+
             Detail.Items.AddRange(added);
             Detail.Items.RemoveMany(added);
             Sets.AddRange(added);
@@ -129,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 RaiseUpdated(nameof(Surveys));
             }
         }
-        
+
         public AsyncRelayCommand ManageCommand { get; }
         public AsyncRelayCommand ExportCommand { get; }
         public AsyncRelayCommand ImportCommand { get; }

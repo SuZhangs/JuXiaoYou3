@@ -9,7 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
     }
 
-    public class StickyNotePartViewModel : DetailViewModel<PartOfStickyNote>
+    public class StickyNotePartViewModel : IsolatedViewModel<DocumentEditorBase,PartOfStickyNote>
     {
         public StickyNotePartViewModel()
         {

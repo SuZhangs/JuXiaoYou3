@@ -10,13 +10,7 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public abstract class DetailViewModel<TDetail> : ViewModelBase where TDetail : PartOfDetail
-    {
-        public TDetail Detail { get; init; }
-        public DocumentEditorBase Owner { get; init; }
-    }
-
-    public abstract class DetailViewModel<TPart, TDetail> : DetailViewModel<TPart>
+    public abstract class DetailViewModel<TPart, TDetail> : IsolatedViewModel<DocumentEditorBase, TPart>
         where TPart : PartOfDetail
         where TDetail : class
     {

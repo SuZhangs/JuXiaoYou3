@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class SentencePartViewModel : DetailViewModel<PartOfSentence>
+    public class SentencePartViewModel : IsolatedViewModel<DocumentEditorBase,PartOfSentence>
     {
         
     }
