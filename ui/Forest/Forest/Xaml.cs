@@ -23,7 +23,11 @@ namespace Acorisoft.FutureGL.Forest
         static readonly        Dictionary<Type, object>        InstanceScope;
         static readonly        Dictionary<string, Geometry>    FastGeometryMapper;
         static readonly        Dictionary<string, ImageSource> FastImageMapper;
-        static readonly        Dictionary<string, ImageBrush>  FastImageBrushMapper;
+        static readonly        Dictionary<string, ImageBrush>  FastImageBrushMapper;        
+        public static readonly GeometryGroup                   Checked;
+        public static readonly Geometry                        InfoGeometry;
+        public static readonly Geometry                        ErrorGeometry;
+        
 
         static Xaml()
         {
@@ -34,7 +38,28 @@ namespace Acorisoft.FutureGL.Forest
             InstanceScope        = new Dictionary<Type, object>();
             FastGeometryMapper   = new Dictionary<string, Geometry>();
             FastImageMapper      = new Dictionary<string, ImageSource>();
-            FastImageBrushMapper = new Dictionary<string, ImageBrush>();
+            FastImageBrushMapper = new Dictionary<string, ImageBrush>(); InfoGeometry = Geometry.Parse("F1 M24,24z M0,0z M21,15A2,2,0,0,1,19,17L7,17 3,21 3,5A2,2,0,0,1,5,3L19,3A2,2,0,0,1,21,5z");
+            ErrorGeometry = new GeometryGroup
+            {
+                Children = new GeometryCollection
+                {
+                    new LineGeometry { StartPoint = new Point(18, 6), EndPoint = new Point(6, 18) },
+                    new LineGeometry { StartPoint = new Point(6, 6), EndPoint  = new Point(18, 18) },
+                    new EllipseGeometry { Center  = new Point(9, 9), RadiusX   = 9, RadiusY = 9 },
+                }
+            };
+            Checked = new GeometryGroup
+            {
+                Children = new GeometryCollection
+                {
+                    new LineGeometry
+                    {
+                        StartPoint = new Point(12, 5),
+                        EndPoint   = new Point(12, 19)
+                    },
+                    Geometry.Parse("F1 M24,24z M0,0z M19,12L19,12 12,19 5,12")
+                }
+            };
         }
 
         #region Commons

@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.Forest.Models;
@@ -23,36 +24,9 @@ namespace Acorisoft.FutureGL.Forest
     [SuppressMessage("ReSharper", "UnusedMember.Local")]
     public static class UIHelper
     {
-        private static          GeometryGroup        Checked;
-        private static          Geometry             InfoGeometry;
-        private static          Geometry             ErrorGeometry;
         private static readonly Lazy<IDialogService> DialogServiceField = new Lazy<IDialogService>(Xaml.Get<IDialogService>);
 
-        public static void Init()
-        {
-            InfoGeometry       = Geometry.Parse("F1 M24,24z M0,0z M21,15A2,2,0,0,1,19,17L7,17 3,21 3,5A2,2,0,0,1,5,3L19,3A2,2,0,0,1,21,5z");
-            ErrorGeometry = new GeometryGroup
-            {
-                Children = new GeometryCollection
-                {
-                    new LineGeometry { StartPoint = new Point(18, 6), EndPoint = new Point(6, 18) },
-                    new LineGeometry { StartPoint = new Point(6, 6), EndPoint  = new Point(18, 18) },
-                    new EllipseGeometry { Center  = new Point(9, 9), RadiusX   = 9, RadiusY = 9 },
-                }
-            };
-            Checked = new GeometryGroup
-            {
-                Children = new GeometryCollection
-                {
-                    new LineGeometry
-                    {
-                        StartPoint = new Point(12, 5),
-                        EndPoint   = new Point(12, 19)
-                    },
-                    Geometry.Parse("F1 M24,24z M0,0z M19,12L19,12 12,19 5,12")
-                }
-            };
-        }
+        
 
 
         public static IDialogService DialogService()
@@ -208,7 +182,7 @@ namespace Acorisoft.FutureGL.Forest
                                        .Theme
                                        .Colors[(int)ForestTheme.Success100],
                     Delay    = TimeSpan.FromSeconds(seconds),
-                    Geometry = Checked,
+                    Geometry = Xaml.Checked,
                     IsFilled = false,
                     Title    = content
                 });
@@ -229,7 +203,7 @@ namespace Acorisoft.FutureGL.Forest
                                        .Theme
                                        .Colors[(int)ForestTheme.Info100],
                     Delay    = TimeSpan.FromSeconds(seconds),
-                    Geometry = InfoGeometry,
+                    Geometry = Xaml.InfoGeometry,
                     IsFilled = false,
                     Title    = content
                 });
@@ -245,7 +219,7 @@ namespace Acorisoft.FutureGL.Forest
                                        .Theme
                                        .Colors[(int)ForestTheme.Danger100],
                     Delay    = TimeSpan.FromSeconds(seconds),
-                    Geometry = ErrorGeometry,
+                    Geometry = Xaml.ErrorGeometry,
                     IsFilled = false,
                     Title    = content
                 });
