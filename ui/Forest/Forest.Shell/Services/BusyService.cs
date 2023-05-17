@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.Forest.Interfaces;
+﻿using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.Forest.Services
@@ -15,6 +16,9 @@ namespace Acorisoft.FutureGL.Forest.Services
                 else
                     dispatcher.Invoke(action);
             }
+            
+            
+            public Task Await() => Task.Delay(100);
             
             public void Dispose()
             {

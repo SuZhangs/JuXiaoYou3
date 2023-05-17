@@ -118,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }

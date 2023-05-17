@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             if (InactiveWorkspace.Count == 0)
             {
-                await Warning(Language.GetText("text.noInactiveWorkspace"));
+                await this.WarningNotification(Language.GetText("text.noInactiveWorkspace"));
                 return;
             }
 

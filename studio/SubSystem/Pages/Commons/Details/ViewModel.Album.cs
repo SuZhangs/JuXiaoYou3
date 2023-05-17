@@ -47,12 +47,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         }
                         catch (Exception ex)
                         {
-                            Error(ex.Message.SubString());
+                            await this.Error(ex.Message.SubString());
                         }
                     }
 
                     SaveOperation();
-                    Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    this.Successful(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
         }
@@ -64,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -90,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             if (Collection.Any(y => y.Source == x.Source))
             {
-                Warning(Language.ItemDuplicatedText);
+                this.WarningNotification(Language.ItemDuplicatedText);
                 return;
             }
 

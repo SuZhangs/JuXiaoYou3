@@ -155,7 +155,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ =>
             {
-                Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
             });
         }
         
@@ -183,11 +183,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             if (cache.IsLocked)
             {
-                await Warning(SubSystemString.CannotDelete);
+                await this.WarningNotification(SubSystemString.CannotDelete);
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -196,7 +196,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 DataSource.Remove(x);
                 Collection.Remove(x);
-                Successful(SubSystemString.OperationOfRemoveIsSuccessful);
+                this.Successful(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
         private async Task AddKeywordImpl()
@@ -204,7 +204,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             await DocumentUtilities.AddKeyword(SelectedItem.Keywords,
                 KeywordEngine,
                 SetDirtyState,
-                Warning);
+                this.WarningNotification);
         }
 
         private async Task RemoveKeywordImpl(string item)
@@ -214,7 +214,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SelectedItem.Keywords, 
                 KeywordEngine, 
                 SetDirtyState, 
-                DangerousOperation);
+                 this.Error);
         }
 
 

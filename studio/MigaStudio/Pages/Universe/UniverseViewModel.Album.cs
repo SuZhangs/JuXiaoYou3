@@ -36,12 +36,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                         }
                         catch (Exception ex)
                         {
-                            Error(ex.Message.SubString());
+                            await this.Error(ex.Message.SubString());
                         }
                     }
                     
                     Save();
-                    Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    this.Successful(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
         }
@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }

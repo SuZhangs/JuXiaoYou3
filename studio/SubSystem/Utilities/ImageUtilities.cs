@@ -108,9 +108,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                 if (horizontal || h > 1080)
                 {
-                    await Task.Run(() =>
+                    await Task.Run(async () =>
                     {
                         session.Update(SubSystemString.Processing);
+                        await session.Await();
                         var scale = horizontal ? 1920d / w : 1080d / h;
                         h = (int)(h * scale);
                         w = (int)(w * scale);
@@ -155,9 +156,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             if (image.Width > 256 ||
                 image.Width > 256)
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
                     session.Update(SubSystemString.Processing);
+                    await session.Await();
                     var scale = 256d / image.Width;
                     image.Mutate(x => { x.Resize(new Size((int)(w * scale), (int)(h * scale))); });
 

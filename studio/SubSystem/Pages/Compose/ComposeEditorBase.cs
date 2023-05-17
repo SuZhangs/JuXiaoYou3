@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             ComposeEngine.UpdateCompose(Compose, Cache);
             SetDirtyState(false);
-            Successful(SubSystemString.OperationOfSaveIsSuccessful);
+            this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         public sealed override void Stop()
@@ -225,7 +225,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             await DocumentUtilities.AddKeyword(Keywords,
                 KeywordEngine,
                 SetDirtyState,
-                Warning);
+                this.WarningNotification);
         }
 
         private async Task RemoveKeywordImpl(string item)
@@ -235,7 +235,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 Keywords,
                 KeywordEngine,
                 SetDirtyState,
-                DangerousOperation);
+                 this.Error);
         }
 
         public string Content

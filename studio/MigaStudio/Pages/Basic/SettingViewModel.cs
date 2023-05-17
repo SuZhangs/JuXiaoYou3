@@ -74,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (_count % 5 == 0)
             {
-                Successful(SubSystemString.ApplyWhenRestart);
+                this.Successful(SubSystemString.ApplyWhenRestart);
             }
 
             _count++;

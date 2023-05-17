@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.Forest.Controls;
+﻿using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.Forest.Interfaces
 {
@@ -29,5 +30,11 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <remarks>如果已经开始会话则只会更新内容</remarks>
         /// <param name="text">要更新的内容</param>
         void Update(string text);
+
+        /// <summary>
+        /// 等待
+        /// </summary>
+        /// <returns></returns>
+        Task Await();
     }
 }

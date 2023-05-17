@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                                  .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
             if(!availableModules.Any() )
             {
-                await Warning("你已经添加了所有模组！");
+                await this.WarningNotification("你已经添加了所有模组！");
                 return;
             }
 
@@ -105,7 +105,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     if (!_BlockTrackerOfId.TryAdd(block.Id, block))
                     {
-                        SensitiveOperation($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
+                        this.Warning($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
                             .GetAwaiter()
                             .GetResult();
                         continue;
@@ -135,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -318,12 +318,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             if (upgradeCount == 0)
             {
-                Info("没有需要升级的模板");
+                this.Info("没有需要升级的模板");
             }
             else
             {
                 SetDirtyState();
-                Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
+                this.Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
             }
         }
 

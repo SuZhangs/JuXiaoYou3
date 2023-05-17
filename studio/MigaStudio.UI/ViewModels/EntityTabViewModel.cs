@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         private async Task RemoveEntityImpl(TEntity entity)
         {
-            if (!await DangerousOperation(Language.GetText("text.AreYouSureRemoveIt")))
+            if (!await  this.Error(Language.GetText("text.AreYouSureRemoveIt")))
             {
                 return;
             }
@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         private async Task ClearEntityImpl()
         {
-            if (!await DangerousOperation(Language.GetText("text.AreYouSureClearIt")))
+            if (!await  this.Error(Language.GetText("text.AreYouSureClearIt")))
             {
                 return;
             }

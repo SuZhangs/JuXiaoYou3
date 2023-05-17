@@ -42,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                              {
                                  if (PictureCollection.Any(y => y.Source == x.Source))
                                  {
-                                     Warning(Language.ItemDuplicatedText);
+                                     this.WarningNotification(Language.ItemDuplicatedText);
                                      return;
                                  }
 

@@ -73,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -182,7 +182,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }

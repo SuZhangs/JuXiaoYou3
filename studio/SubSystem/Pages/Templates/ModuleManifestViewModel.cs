@@ -95,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -106,7 +106,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                         .Values
                         .Any(x => ReferenceEquals(x, preset)))
             {
-                await Warning(Language.GetText("text.defaultManifestHasBeenRemoved"));
+                await this.WarningNotification(Language.GetText("text.defaultManifestHasBeenRemoved"));
             }
             
             Save();

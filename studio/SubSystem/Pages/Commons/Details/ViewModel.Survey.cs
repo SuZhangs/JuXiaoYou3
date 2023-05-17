@@ -60,7 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             if (Sets.Count == 0)
             {
-                await SensitiveOperation(SubSystemString.NoDataToSave);
+                await this.Warning(SubSystemString.NoDataToSave);
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
             catch
             {
-                await Warning(SubSystemString.BadFormat);
+                await this.WarningNotification(SubSystemString.BadFormat);
             }
         }
 

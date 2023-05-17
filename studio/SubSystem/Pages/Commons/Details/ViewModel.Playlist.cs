@@ -55,7 +55,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             if (Collection.Any(y => y.Id == x.Id))
             {
-                Warning(Language.ItemDuplicatedText);
+                this.WarningNotification(Language.ItemDuplicatedText);
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             //
             Selected ??= Collection.FirstOrDefault();
-            Successful(SubSystemString.OperationOfAddIsSuccessful);
+            this.Successful(SubSystemString.OperationOfAddIsSuccessful);
             SaveOperation();
         }
 
@@ -99,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }

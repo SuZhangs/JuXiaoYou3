@@ -115,7 +115,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             // 行为 1)
             if (_dirty)
             {
-                var r = await SensitiveOperation(SubSystemString.AreYouSureCreateNew);
+                var r = await this.Warning(SubSystemString.AreYouSureCreateNew);
 
                 if (!r) return;
             }
@@ -151,7 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             catch (Exception ex)
             {
-                Error(SubSystemString.BadModule);
+                await this.Error(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"打开模组文件失败,文件名:{opendlg.FileName}，错误原因:{ex.Message}!");
@@ -169,20 +169,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
             if (string.IsNullOrEmpty(Name))
             {
-                await Warning(SubSystemString.EmptyName);
+                await this.WarningNotification(SubSystemString.EmptyName);
                 return;
             }
             
             
             if (string.IsNullOrEmpty(AuthorList))
             {
-                await Warning(SubSystemString.EmptyAuthor);
+                await this.WarningNotification(SubSystemString.EmptyAuthor);
                 return;
             }
             
             if (string.IsNullOrEmpty(For))
             {
-                await Warning(SubSystemString.EmptyFor);
+                await this.WarningNotification(SubSystemString.EmptyFor);
                 return;
             }
 
@@ -221,12 +221,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
                 await PNG.Write(fileName, payload, ms);
-                Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
                 SetDirtyState(false);
             }
             catch (Exception ex)
             {
-                Error(SubSystemString.BadModule);
+                this.Error(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");
@@ -327,7 +327,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task RemoveBlockImpl(ModuleBlockEditUI element)
         {
-            var r = await DangerousOperation(Language.RemoveAllItemText);
+            var r = await  this.Error(Language.RemoveAllItemText);
 
             if (!r)
             {
@@ -352,7 +352,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task RemoveAllBlockImpl()
         {
-            var r = await DangerousOperation(Language.RemoveAllItemText);
+            var r = await  this.Error(Language.RemoveAllItemText);
 
             if (!r)
             {

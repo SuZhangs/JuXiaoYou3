@@ -18,6 +18,9 @@ namespace Acorisoft.FutureGL.Forest.Services
                 else
                     dispatcher.Invoke(action);
             }
+
+            public Task Await() => Task.Delay(100);
+            
             public void Dispose()
             {
                 if (Host is null)

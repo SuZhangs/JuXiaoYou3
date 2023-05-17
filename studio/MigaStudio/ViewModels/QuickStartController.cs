@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             else
             {
                 var reason = result.Reason;
-                await Warning(SubSystemString.GetDatabaseResult(reason));
+                await this.WarningNotification(SubSystemString.GetDatabaseResult(reason));
             }
         }
 
@@ -117,7 +117,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             else
             {
                 var reason = result.Reason;
-                await Warning(SubSystemString.GetDatabaseResult(reason));
+                await this.Warning(SubSystemString.GetDatabaseResult(reason));
             }
         }
 

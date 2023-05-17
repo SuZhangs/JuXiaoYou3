@@ -132,7 +132,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -157,7 +157,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             await DocumentUtilities.AddKeyword(SelectedItem.Keywords,
                 KeywordEngine,
                 SetDirtyState,
-                Warning);
+                this.WarningNotification);
         }
 
         private async Task RemoveKeywordImpl(string item)
@@ -167,7 +167,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SelectedItem.Keywords, 
                 KeywordEngine, 
                 SetDirtyState, 
-                DangerousOperation);
+                 this.Error);
         }
 
         [NullCheck(UniTestLifetime.Constructor)]

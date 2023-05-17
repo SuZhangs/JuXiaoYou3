@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             await DocumentUtilities.AddKeyword(Keywords,
                 KeywordEngine,
                 SetDirtyState,
-                Warning);
+                this.WarningNotification);
         }
 
         private async Task RemoveKeywordImpl(string item)
@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Keywords, 
                 KeywordEngine, 
                 SetDirtyState, 
-                DangerousOperation);
+                this.Error);
         }
 
 
