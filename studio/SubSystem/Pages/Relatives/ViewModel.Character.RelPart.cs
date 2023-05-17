@@ -42,7 +42,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Graph.Clear();
             Graph.AddVertexRange(DocumentEngine.GetCaches(hash));
             Graph.AddEdgeRange(rels);
-            SelectedDocument = cache;
         }
 
         #region OnStart / OnResume
