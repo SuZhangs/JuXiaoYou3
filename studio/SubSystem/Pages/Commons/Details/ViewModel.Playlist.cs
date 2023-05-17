@@ -85,7 +85,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
                 await Task.Run(async () =>
                 {
-                    await Task.Delay(300);
+                    await session.Await();
                     await MusicUtilities.AddMusic(opendlg.FileNames, MusicEngine, Sync);
                 });
             }

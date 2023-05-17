@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
                 await Task.Run(async () =>
                 {
-                    await Task.Delay(300);
+                    await session.Await();
 
                     foreach (var fileName in opendlg.FileNames)
                     {
