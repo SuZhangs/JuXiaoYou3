@@ -44,6 +44,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return value;
         }
 
+        private bool GetOrAddBoolMetadata(string name)
+        {
+            var v = GetOrAddMetadata(name);
+            return bool.TryParse(v, out var n) && n;
+        }
+
         private string GetOrAddMetadata(string name, string defaultValue)
         {
             var dict = BasicPart.Buckets;
@@ -157,11 +163,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public bool IsDeath
         {
-            get
-            {
-                var v = GetOrAddMetadata(MetaNameOfIsDeath);
-                return bool.TryParse(v, out var n) && n;
-            }
+            get => GetOrAddBoolMetadata(MetaNameOfIsDeath);
             set
             {
                 UpsertMetadata(MetaNameOfIsDeath, value.ToString());

@@ -6,10 +6,54 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:studio="urn:acorisoft/studio"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:KeywordViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <f:Drawer IsRightOpen="True">
+        <f:Drawer.RightContent>
+            <Border Width="960">
+                <studio:ZoomControl>
+
+                </studio:ZoomControl>
+            </Border>
+        </f:Drawer.RightContent>
+
+
+
+        <DockPanel>
+            <!-- 未分类标签 -->
+            <f:ForestSection DockPanel.Dock="Right"
+                                 HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
+                                 Header="未分类"
+                                 Margin="16"
+                             Width="384">
+
+            </f:ForestSection>
+
+            <!-- 目录 -->
+            <f:EmptyContentControl NotEmpty="False">
+                <f:EmptyContentControl.EmptyState>
+                    <studio:CollectionEmptyStateView/>
+                </f:EmptyContentControl.EmptyState>
+                <DockPanel>
+                    <!-- 标签 -->
+                    <f:ForestSection Grid.Column="1"
+                                     HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
+                                     Header="子目录"
+                                     Margin="16"
+                                     Width="384">
+                    </f:ForestSection>
+
+                    <!-- 标签 -->
+                    <f:ForestSection Grid.Column="1"
+                                     HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
+                                     Header="子目录"
+                                     Margin="16">
+                    </f:ForestSection>
+
+                </DockPanel>
+            </f:EmptyContentControl>
+        </DockPanel>
+    </f:Drawer>
 </f:ForestUserControl>

@@ -44,6 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             if (InactiveWorkspace.Count == 0)
             {
                 await this.WarningNotification(Language.GetText("text.noInactiveWorkspace"));
+                SelectInactiveWorkspaceCommand.NotifyCanExecuteChanged();
                 return;
             }
 
@@ -79,6 +80,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             New<PlanetEditorViewModel>();
             New<MaterialEditorViewModel>();
             New<UniverseEditorViewModel>();
+            New<KeywordViewModel>();
 #endif
         }
 

@@ -31,11 +31,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         [NullCheck(UniTestLifetime.Constructor)]
         public KeywordEngine KeywordEngine { get; }
         
-        /// <summary>
-        /// 
-        /// </summary>
+        [NullCheck(UniTestLifetime.Startup)]
         public DocumentType Type { get; private set; }
+        
+        [NullCheck(UniTestLifetime.Startup)]
         public Document Document { get; protected set; }
+        
+        [NullCheck(UniTestLifetime.Startup)]
         public DocumentCache Cache { get; protected set; }
     }
 }

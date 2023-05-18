@@ -1,7 +1,5 @@
 namespace Acorisoft.FutureGL.MigaUtils.Foundation
 {
-    using System.Text;
-
     public static class StringExtended
     {
         public static string SubString(this string source, int maxLength = 100)
@@ -25,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Foundation
             if (string.IsNullOrEmpty(src)) return src;
             var length = src.Length;
             var hash = new HashSet<char>(removedCharacters);
-            var sb = new StringBuilder();
+            var sb = Pool.GetStringBuilder();
 
             for (var i = 0; i < length; i++)
             {
@@ -33,7 +31,9 @@ namespace Acorisoft.FutureGL.MigaUtils.Foundation
                 sb.Append(src[i]);
             }
 
-            return sb.ToString();
+            var s = sb.ToString();
+            Pool.ReturnStringBuilder(sb);
+            return s;
         }
 
         public static bool StartWithEx(this string src, char character)
@@ -102,13 +102,15 @@ namespace Acorisoft.FutureGL.MigaUtils.Foundation
         public static string Repeat(this string src, int count)
         {
             count = count == 0 ? 1 : count;
-            var sb = new StringBuilder();
+            var sb = Pool.GetStringBuilder();
             for (var i = 0; i < count; i++)
             {
                 sb.Append(src);
             }
 
-            return sb.ToString();
+            var s = sb.ToString();
+            Pool.ReturnStringBuilder(sb);
+            return s;
         }
 
         public static bool ToBoolean(this string text, bool defaultValue)

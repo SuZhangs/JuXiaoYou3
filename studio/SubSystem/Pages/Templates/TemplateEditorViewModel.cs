@@ -226,7 +226,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             catch (Exception ex)
             {
-                this.Error(SubSystemString.BadModule);
+                this.ErrorNotification(SubSystemString.BadModule);
 
                 Xaml.Get<ILogger>()
                     .Warn($"保存模组文件失败,文件名:{savedlg.FileName}，错误原因:{ex.Message}!");

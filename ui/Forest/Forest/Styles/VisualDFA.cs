@@ -198,5 +198,10 @@
         /// 所有迁移函数
         /// </summary>
         public IReadOnlyDictionary<VisualState, Transition> Transitions => _transitions;
+
+        public override string ToString()
+        {
+            return CurrentState.ToString();
+        }
     }
 }
