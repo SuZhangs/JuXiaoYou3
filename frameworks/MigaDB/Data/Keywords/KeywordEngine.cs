@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
                 // 映射内容
                 return;
             }
-            
+
             if (KeywordDB.HasName(keyword))
             {
                 return;
@@ -31,17 +31,109 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             //     Value = keyword
             // });
         }
-        
+
         public void RemoveKeyword(string documentID, string keyword)
         {
             // KeywordDB.Delete(keyword);
         }
+
+        public void AddDirectory(string name)
+        {
+            if (string.IsNullOrEmpty(name) ||
+                !DirectoryDB.HasName(name))
+            {
+                //
+                // 映射内容
+                return;
+            }
+        }
+
+        public EngineResult AddDirectory(string name, Directory parent)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return;
+            }
+            
+            if (parent is null ||
+                string.IsNullOrEmpty(parent.Id) ||
+                !DirectoryDB.HasID(parent.Id))
+            {
+                //
+                // 映射内容
+                return;
+            }
+
+            var dir = new Directory
+            {
+                Id    = ID.Get(),
+                Owner = parent.Id,
+                Name  = name
+            };
+
+            DirectoryDB.Insert(dir);
+        }
         
+        public void ChangeDirectory(Directory directory)
+        {
+            if (directory is null ||
+                string.IsNullOrEmpty(directory.Id))
+            {
+                return;
+            }
+            
+            if (!DirectoryDB.HasName(directory.Name))
+            {
+                //
+                // 映射内容
+                return;
+            }
+            
+            DirectoryDB.Update(directory);
+        }
+        
+        public void ChangeDirectory(Directory directory, Directory parent)
+        {
+            if (directory is null ||
+                string.IsNullOrEmpty(directory.Id))
+            {
+                return;
+            }
+            
+            if (parent is null ||
+                string.IsNullOrEmpty(parent.Id))
+            {
+                return;
+            }
+            
+            if (!DirectoryDB.HasName(directory.Name))
+            {
+                //
+                // 映射内容
+                return;
+            }
+
+            directory.Owner = parent.Id;
+            DirectoryDB.Update(directory);
+        }
+
+        public void RemoveDirectory(Directory directory, bool addToParent)
+        {
+            if (directory is null ||
+                string.IsNullOrEmpty(directory.Id))
+            {
+                return;
+            }
+
+            DirectoryDB.Delete(directory.Id);
+            RemoveMappings(directory.Id, addToParent);
+        }
+
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
-                MappingDB = session.Database.GetCollection<DocumentMapping>(Constants.Name_Relationship_Directory);
-            DirectoryDB   = session.Database.GetCollection<Directory>(Constants.Name_Directory);
-            KeywordDB     = session.Database.GetCollection<Keyword>(Constants.Name_Keyword);
+            MappingDB   = session.Database.GetCollection<DocumentMapping>(Constants.Name_Relationship_Directory);
+            DirectoryDB = session.Database.GetCollection<Directory>(Constants.Name_Directory);
+            KeywordDB   = session.Database.GetCollection<Keyword>(Constants.Name_Keyword);
         }
 
         protected override void OnDatabaseClosing()
@@ -76,7 +168,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
                     // 删除所有子节点
                     DirectoryDB.DeleteMany(x => hash.Contains(x.Id));
                 }
-                
+
                 //
                 // 删除所有映射
                 MappingDB.DeleteMany(x => x.DirectoryID == id);
@@ -86,11 +178,10 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
                 //
                 // 删除所有映射
                 MappingDB.DeleteMany(x => x.DocumentID == id);
-                
             }
         }
-        
-        
+
+
         /// <summary>
         /// 映射
         /// </summary>
