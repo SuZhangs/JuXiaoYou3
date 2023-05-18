@@ -58,6 +58,7 @@
         //
         // Rel
         internal const string Name_Relationship_Character  = "rel_ch";
+        internal const string Name_Relationship_Directory  = "rel_key";
         internal const string Name_Relationship_Technology = "rel_tech";
         internal const string Name_Relationship_Elemental  = "rel_elemental";
         
@@ -75,8 +76,9 @@
         
         //
         //
-        internal const string Name_Document                = "doc";
-        internal const string Name_Compose                 = "compose";
+        internal const string Name_Document = "doc";
+        internal const string Name_Object = "obj";
+        internal const string Name_Compose  = "compose";
 
 
         /*

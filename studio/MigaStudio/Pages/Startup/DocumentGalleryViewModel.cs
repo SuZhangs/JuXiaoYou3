@@ -192,7 +192,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            DocumentUtilities.RemoveDocument(DocumentEngine, cache, x =>
+            DocumentUtilities.RemoveDocument(KeywordEngine, DocumentEngine, cache, x =>
             {
                 DataSource.Remove(x);
                 Collection.Remove(x);
@@ -201,7 +201,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
         private async Task AddKeywordImpl()
         {
-            await DocumentUtilities.AddKeyword(SelectedItem.Keywords,
+            await DocumentUtilities.AddKeyword(
+                SelectedItem.Id,
+                SelectedItem.Keywords,
                 KeywordEngine,
                 SetDirtyState,
                 this.WarningNotification);
@@ -210,6 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private async Task RemoveKeywordImpl(string item)
         {
             await DocumentUtilities.RemoveKeyword(
+                SelectedItem.Id,
                 item, 
                 SelectedItem.Keywords, 
                 KeywordEngine, 

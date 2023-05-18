@@ -8,5 +8,11 @@ namespace Acorisoft.FutureGL.MigaDB.Utils
         {
             return db.Exists(Query.EQ("_id", id));
         }
+        
+        
+        public static bool HasName<T>(this ILiteCollection<T> db, string name)
+        {
+            return db.Exists(Query.EQ("name", name));
+        }
     }
 }

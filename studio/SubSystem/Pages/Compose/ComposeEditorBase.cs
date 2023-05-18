@@ -222,7 +222,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         private async Task AddKeywordImpl()
         {
-            await DocumentUtilities.AddKeyword(Keywords,
+            await DocumentUtilities.AddKeyword(
+                Cache.Id,
+                Keywords,
                 KeywordEngine,
                 SetDirtyState,
                 this.WarningNotification);
@@ -231,6 +233,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private async Task RemoveKeywordImpl(string item)
         {
             await DocumentUtilities.RemoveKeyword(
+                Cache.Id,
                 item,
                 Keywords,
                 KeywordEngine,

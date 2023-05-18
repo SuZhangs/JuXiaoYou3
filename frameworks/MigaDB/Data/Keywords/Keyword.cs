@@ -2,7 +2,9 @@
 {
     public class Keyword : StorageObject
     {
-        public string Value { get; init; }
-        public int RefCount { get; set; }
+        /// <summary>
+        /// 名字
+        /// </summary>
+        public string Name { get; init; }
     }
 }

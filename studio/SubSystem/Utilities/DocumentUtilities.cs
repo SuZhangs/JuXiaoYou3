@@ -11,6 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
     public static class DocumentUtilities
     {
         public static async Task AddKeyword(
+            string documentID,
             IList<string> Keywords,
             KeywordEngine KeywordEngine,
             Action<bool> SetDirtyState,
@@ -35,12 +36,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            KeywordEngine.AddKeyword(r.Value);
+            KeywordEngine.AddKeyword(documentID, r.Value);
             Keywords.Add(r.Value);
             SetDirtyState(true);
         }
 
         public static async Task RemoveKeyword(
+            string documentID,
             string item,
             IList<string> Keywords,
             KeywordEngine KeywordEngine,
@@ -58,7 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
 
             Keywords.Remove(item);
-            KeywordEngine.RemoveKeyword(item);
+            KeywordEngine.RemoveKeyword(documentID, item);
             SetDirtyState(true);
         }
 
@@ -270,13 +272,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
         }
 
-        public static void RemoveDocument(DocumentEngine engine, DocumentCache cache, Action<DocumentCache> callback)
+        public static void RemoveDocument(KeywordEngine ke, DocumentEngine engine, DocumentCache cache, Action<DocumentCache> callback)
         {
             if (cache is null || engine is null)
             {
                 return;
             }
 
+            ke.RemoveMappings(cache.Id, false);
             engine.RemoveDocumentCache(cache);
             callback?.Invoke(cache);
         }

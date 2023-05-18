@@ -15,11 +15,14 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Worldview
             var database = session.Database;
             DocumentDB      = database.GetCollection<Document>(Name_Document);
             DocumentCacheDB = database.GetCollection<DocumentCache>(Name_Cache_Document);
+            ObjectDB        = database.GetCollection<WorldViewObject>(Name_Object);
         }
 
         protected override void OnDatabaseClosingOverride()
         {
-            throw new NotImplementedException();
+            DocumentDB      = null;
+            DocumentCacheDB = null;
+            ObjectDB        = null;
         }
         
         public ILiteCollection<WorldViewObject> ObjectDB { get; private set; }
