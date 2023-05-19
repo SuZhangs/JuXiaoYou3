@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
 
-            var dr = Xaml.Get<IDatabaseManager>()
+            var dr = Studio.DatabaseManager()
                          .LoadAsync(setting.LastRepository)
                          .GetAwaiter()
                          .GetResult();

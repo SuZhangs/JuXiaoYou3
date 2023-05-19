@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
         private static ImageSource Caching(string avatar)
         {
-            _engine ??= Xaml.Get<IDatabaseManager>()
+            _engine ??= Studio.DatabaseManager()
                             .GetEngine<ImageEngine>();
 
             if (!Pool.TryGetValue(avatar, out var img))
@@ -109,7 +109,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
         private static ImageSource Caching(string avatar)
         {
-            _engine ??= Xaml.Get<IDatabaseManager>()
+            _engine ??= Studio.DatabaseManager()
                             .GetEngine<ImageEngine>();
             var ms = _engine.Get(avatar);
             var img = Xaml.FromStream(ms, 1920, 1080);
@@ -117,7 +117,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         }
         private static ImageSource Caching(string avatar, int w, int h)
         {
-            _engine ??= Xaml.Get<IDatabaseManager>()
+            _engine ??= Studio.DatabaseManager()
                             .GetEngine<ImageEngine>();
             var ms  = _engine.Get(avatar);
             var img = Xaml.FromStream(ms, w, h);

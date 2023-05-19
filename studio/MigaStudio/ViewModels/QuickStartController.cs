@@ -43,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var folder = opendlg.SelectedPath;
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             var property = new DatabaseProperty
             {
                 Id          = ID.Get(),
@@ -90,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var folder = opendlg.SelectedPath;
-            var dbMgr  = Xaml.Get<IDatabaseManager>();
+            var dbMgr  = Studio.DatabaseManager();
             
             var result = await dbMgr.LoadAsync(folder);
 

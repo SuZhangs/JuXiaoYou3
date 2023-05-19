@@ -30,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task CropAllAvatar()
         {
-            var dir = Xaml.Get<IDatabaseManager>()
+            var dir = Studio.DatabaseManager()
                           .GetEngine<ImageEngine>()
                           .FullDirectory;
 

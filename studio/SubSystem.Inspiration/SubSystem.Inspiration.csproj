@@ -4,7 +4,7 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>disable</Nullable>
         <OutDir>../../Builds/Plugins</OutDir>
-        <RootNamespace>Acorisoft.FutureGL.MigaStudio.Inspiration</RootNamespace>
+        <RootNamespace>Acorisoft.FutureGL.MigaStudio.Inspirations</RootNamespace>
         <UseWPF>true</UseWPF>
         <Platforms>AnyCPU;x86;x64</Platforms>
         <AssemblyVersion>3.0.0</AssemblyVersion>
@@ -21,7 +21,6 @@
 
     <ItemGroup>
       <Folder Include="Pages\Communications" />
-      <Folder Include="Resources" />
       <Folder Include="ViewModels" />
     </ItemGroup>
 
@@ -50,6 +49,14 @@
         <EmbeddedResource Include="Languages\ru.ini">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="InspirationView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>

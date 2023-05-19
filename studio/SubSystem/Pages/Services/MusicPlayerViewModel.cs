@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
         public MusicPlayerViewModel()
         {
             _service = Xaml.Get<MusicService>();
-            MusicEngine = Xaml.Get<IDatabaseManager>()
+            MusicEngine = Studio.DatabaseManager()
                               .GetEngine<MusicEngine>();
             _service.State
                     .ObserveOn(Scheduler)

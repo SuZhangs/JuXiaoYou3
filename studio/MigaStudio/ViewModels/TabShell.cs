@@ -8,16 +8,10 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public class TabShell : TabController
+    public class TabShell : ShellCore
     {
-        private WindowState _windowState;
-
         public TabShell()
         {
-            Xaml.Get<IWindowEventBroadcast>()
-                .PropertyTunnel
-                .WindowState = x => WindowState = x;
-
             SelectInactiveWorkspaceCommand = AsyncCommand(SelectInactiveWorkspaceImpl);
         }
 
@@ -89,15 +83,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         public sealed override string Id => AppViewModel.IdOfTabShellController;
-
-        /// <summary>
-        /// 用于绑定的<see cref="WindowState"/> 属性。
-        /// </summary>
-        public WindowState WindowState
-        {
-            get => _windowState;
-            set => SetValue(ref _windowState, value);
-        }
 
         /// <summary>
         /// 选择

@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             Owner  = owner;
             Detail = rel;
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();

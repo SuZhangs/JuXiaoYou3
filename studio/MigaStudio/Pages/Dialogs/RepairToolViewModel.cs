@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public static void FixModuleImpl()
         {
-            var te = Xaml.Get<IDatabaseManager>()
+            var te = Studio.DatabaseManager()
                          .GetEngine<TemplateEngine>();
 
 

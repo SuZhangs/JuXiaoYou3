@@ -36,10 +36,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public TemplateGalleryViewModel()
         {
-            TemplateEngine = Xaml.Get<IDatabaseManager>()
+            TemplateEngine = Studio.DatabaseManager()
                                  .GetEngine<TemplateEngine>();
 
-            Property = Xaml.Get<IDatabaseManager>()
+            Property = Studio.DatabaseManager()
                            .Database
                            .CurrentValue
                            .Get<PresetProperty>();
@@ -79,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private void Save()
         {
-            Xaml.Get<IDatabaseManager>()
+            Studio.DatabaseManager()
                 .Database
                 .CurrentValue
                 .Set(Property);

@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             _otherRelative = true;
             Presets        = new ObservableCollection<RelativePreset>();
 
-            var pp = Xaml.Get<IDatabaseManager>()
+            var pp = Studio.DatabaseManager()
                          .Database
                          .CurrentValue
                          .Get<PresetProperty>();

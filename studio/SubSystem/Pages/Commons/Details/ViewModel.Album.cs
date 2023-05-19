@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public AlbumPartViewModel()
         {
             Collection = new ObservableCollection<Album>();
-            ImageEngine = Xaml.Get<IDatabaseManager>()
+            ImageEngine = Studio.DatabaseManager()
                               .GetEngine<ImageEngine>();
             OpenCommand = Command<Album>(OpenAlbumImpl, HasItem);
         }

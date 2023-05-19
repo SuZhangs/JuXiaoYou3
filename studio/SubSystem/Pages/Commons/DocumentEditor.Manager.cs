@@ -247,7 +247,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 //
                 // 打开 PresentationPart
-                var db = Xaml.Get<IDatabaseManager>()
+                var db = Studio.DatabaseManager()
                              .Database
                              .CurrentValue;
             

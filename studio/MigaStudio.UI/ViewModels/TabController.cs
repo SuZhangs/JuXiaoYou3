@@ -559,4 +559,26 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
     }
+    
+    public abstract class ShellCore : TabController
+    {
+        private WindowState _windowState;
+
+        protected ShellCore()
+        {
+            Xaml.Get<IWindowEventBroadcast>()
+                .PropertyTunnel
+                .WindowState = x => WindowState = x;
+        }
+
+
+        /// <summary>
+        /// 用于绑定的<see cref="WindowState"/> 属性。
+        /// </summary>
+        public WindowState WindowState
+        {
+            get => _windowState;
+            set => SetValue(ref _windowState, value);
+        }
+    }
 }

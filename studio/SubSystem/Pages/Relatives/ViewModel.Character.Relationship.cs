@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         public CharacterRelationshipViewModel()
         {
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             DatabaseManager            = dbMgr;
             DocumentEngine             = dbMgr.GetEngine<DocumentEngine>();
             Graph                      = new CharacterGraph();

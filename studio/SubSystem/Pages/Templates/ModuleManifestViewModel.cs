@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         public ModuleManifestViewModel()
         {
-            Property = Xaml.Get<IDatabaseManager>()
+            Property = Studio.DatabaseManager()
                            .Database
                            .CurrentValue
                            .Get<PresetProperty>();
@@ -28,7 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private void Save()
         {
-            Xaml.Get<IDatabaseManager>()
+            Studio.DatabaseManager()
                 .Database
                 .CurrentValue
                 .Set(Property);
@@ -48,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 Args = new object[]
                 {
-                    Xaml.Get<IDatabaseManager>()
+                    Studio.DatabaseManager()
                         .GetEngine<TemplateEngine>()
                         .TemplateCacheDB
                         .FindAll()
@@ -122,7 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 Args = new object[]
                 {
-                    Xaml.Get<IDatabaseManager>()
+                    Studio.DatabaseManager()
                         .GetEngine<TemplateEngine>()
                         .TemplateCacheDB
                         .FindAll()

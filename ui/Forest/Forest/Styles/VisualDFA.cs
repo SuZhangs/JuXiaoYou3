@@ -158,6 +158,9 @@
             }
         }
 
+        /// <summary>
+        /// 重新进入相同的状态
+        /// </summary>
         public void GotoState()
         {
             StateChangedHandler?.Invoke(true, _last, _now, VisualStateTrigger.Next);

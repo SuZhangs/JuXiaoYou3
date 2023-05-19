@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaUtils;
@@ -32,6 +33,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     launch,
                     quick
                 },
+                Character = null,
+                FavoriteCharacterList = new ObservableCollection<DocumentCache>(),
                 ControllerList = new ObservableCollection<NamedItem<string>>
                 {
                     new NamedItem<string>
@@ -115,8 +118,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 return;
             }
 
-            newController.Startup(_parameter);
-            newController.Start();
+            if (newController.IsInitialized)
+            {
+                newController.Resume();
+            }
+            else
+            {
+                newController.Startup(_parameter);
+                newController.Start();
+            }
         }
 
         protected override void StartOverride()

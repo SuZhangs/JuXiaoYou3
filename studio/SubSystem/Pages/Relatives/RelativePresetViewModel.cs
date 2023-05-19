@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         protected override void OnRequestDataSourceSynchronize(ICollection<RelativePreset> dataSource)
         {
-            var db = Xaml.Get<IDatabaseManager>()
+            var db = Studio.DatabaseManager()
                          .Database
                          .CurrentValue;
             var property = db.Get<PresetProperty>();
@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         protected override void Save()
         { 
-            var db = Xaml.Get<IDatabaseManager>()
+            var db = Studio.DatabaseManager()
                        .Database
                        .CurrentValue;
             var property = db.Get<PresetProperty>();

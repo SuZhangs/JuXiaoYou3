@@ -2,6 +2,6 @@
 {
     public class KeywordViewModel : TabViewModel
     {
-        
+        public sealed override bool Uniqueness => true;
     }
 }

@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            _engine ??= Xaml.Get<IDatabaseManager>()
+            _engine ??= Studio.DatabaseManager()
                             .GetEngine<MusicEngine>();
 
             var album = value?.ToString();

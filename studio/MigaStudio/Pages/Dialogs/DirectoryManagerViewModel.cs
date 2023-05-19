@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Database = new DatabaseCounter
             {
                 Counters = new ObservableCollection<FolderCounter>(),
-                Directory = Xaml.Get<IDatabaseManager>()
+                Directory = Studio.DatabaseManager()
                                 .Database
                                 .CurrentValue
                                 .DatabaseDirectory,
@@ -100,7 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 var appSize = await IOSystemUtilities.GetFolderSize(Application.Directory, true);
                 var logSize = await IOSystemUtilities.GetFolderSize(Logs.Directory, false);
-                var engines = Xaml.Get<IDatabaseManager>()
+                var engines = Studio.DatabaseManager()
                                   .GetEngines()
                                   .OfType<FileEngine>()
                                   .Select(x => new EngineCounter

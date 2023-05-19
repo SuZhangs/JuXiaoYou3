@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public UniverseViewModel()
         {
             PictureCollection = new ObservableCollection<Album>();
-            DatabaseManager   = Xaml.Get<IDatabaseManager>();
+            DatabaseManager   = Studio.DatabaseManager();
             ImageEngine       = DatabaseManager.GetEngine<ImageEngine>();
             _databaseProperty = Database.Get<DatabaseProperty>();
             _threadSafeAdding = new Subject<Album>().DisposeWith(Collector);

@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             SystemSetting        = Xaml.Get<SystemSetting>();
             AdvancedSetting      = SystemSetting.AdvancedSetting;
             BasicAppSetting      = Xaml.Get<BasicAppSetting>();
-            DatabaseManager      = Xaml.Get<IDatabaseManager>();
+            DatabaseManager      = Studio.DatabaseManager();
             Title                = Language.GetText(ConstantValues.PageName_Setting);
             Repositories         = new ObservableCollection<RepositoryCache>();
 

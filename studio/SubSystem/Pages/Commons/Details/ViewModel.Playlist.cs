@@ -31,7 +31,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public PlaylistPartViewModel()
         {
             Collection = new ObservableCollection<Music>();
-            MusicEngine = Xaml.Get<IDatabaseManager>()
+            MusicEngine = Studio.DatabaseManager()
                               .GetEngine<MusicEngine>();
             PlayCommand = Command<Music>(PlayItem, HasItem);
             PauseCommand = Command(PauseItem, () => Xaml.Get<MusicService>()

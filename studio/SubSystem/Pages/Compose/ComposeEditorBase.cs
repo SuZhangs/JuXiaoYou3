@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
             _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
 
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)

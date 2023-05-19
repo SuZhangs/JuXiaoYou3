@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         public DocumentGalleryViewModelEx()
         {
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             DatabaseManager = dbMgr;
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();

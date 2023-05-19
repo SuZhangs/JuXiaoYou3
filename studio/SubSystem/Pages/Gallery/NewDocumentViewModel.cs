@@ -85,7 +85,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
 
         private string ApplyAvatar()
         {
-            var dm = Xaml.Get<IDatabaseManager>();
+            var dm = Studio.DatabaseManager();
 
             //
             //

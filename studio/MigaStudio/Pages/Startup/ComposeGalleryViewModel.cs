@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         
         public ComposeGalleryViewModel()
         {
-            var dbMgr = Xaml.Get<IDatabaseManager>();
+            var dbMgr = Studio.DatabaseManager();
             DatabaseManager = dbMgr;
             ComposeEngine   = dbMgr.GetEngine<ComposeEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();

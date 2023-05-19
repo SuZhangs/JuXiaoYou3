@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.MigaStudio.Inspirations
 {
+    
     public class InspirationSubSystem : SubSystemModule
     {
         
@@ -23,7 +25,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
 
         protected override void InstallView(IContainer container)
         {
-            
+            Xaml.InstallView<InspirationView, InspirationController>();
+            Xaml.InstallView<HomePage, HomeViewModel>();
         }
 
         protected override void InstallServices(IContainer container)
