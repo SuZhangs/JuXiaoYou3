@@ -6,5 +6,7 @@
         /// 名字
         /// </summary>
         public string Name { get; init; }
+        
+        public int ReferenceCount { get; set; }
     }
 }

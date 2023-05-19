@@ -43,6 +43,11 @@
         ParameterEmptyOrNull,
         
         /// <summary>
+        /// 参数依赖为空，例如 DocumentCache里面，虽然DocumentCache不为空，但是Owner为空
+        /// </summary>
+        ParameterDependencyEmptyOrNull,
+        
+        /// <summary>
         /// 参数或者执行中遇到的文件无访问权限
         /// </summary>
         InputSourceUnauthorizedAccess,
