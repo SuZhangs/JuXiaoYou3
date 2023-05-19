@@ -40,8 +40,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             var hash = rels.Flat(x => x.Source.Id, x => x.Target.Id)
                            .ToHashSet();
             Graph.Clear();
+            Graph.AddVertex(cache);
             Graph.AddVertexRange(DocumentEngine.GetCaches(hash));
             Graph.AddEdgeRange(rels);
+            _selectedDocument = cache;
         }
 
         #region OnStart / OnResume
@@ -86,6 +88,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
 
             DocumentEngine.AddRelationship(r1.Value);
+            Graph.AddVertex(r.Value);
             Graph.AddEdge(r1.Value);
 
             if (SelectedDocument.Id == source.Id)
@@ -121,6 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             DocumentEngine.RemoveRelationship(rel.Id);
             Relatives.Remove(rel);
             Graph.RemoveEdge(rel);
+            Graph.RemoveVertex(rel.Target);
         }
 
         #endregion

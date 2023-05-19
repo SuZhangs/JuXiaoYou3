@@ -134,7 +134,7 @@ begin
 
   minimumVersion := '6.0.0';
   maximumExclusiveVersion := '6.2.0';
-  registryKey := 'SOFTWARE\WOW6432Node\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App';
+  registryKey := 'SOFTWARE\WOW6432Node\dotnet\Setup\InstalledVersions\x86\sharedfx\Microsoft.WindowsDesktop.App';
   if RegGetValueNames(HKLM, registryKey, runtimes) then
   begin
     for I := 0 to GetArrayLength(runtimes)-1 do

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Acorisoft.FutureGL.Forest.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -19,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            // this.ViewModel<CharacterRelPartViewModel>().SelectedDocument = target;
+            this.ViewModel<CharacterRelPartViewModel>().SelectedDocument = target;
         }
 
         private void DisplayMode_Circle(object sender, RoutedEventArgs e)
