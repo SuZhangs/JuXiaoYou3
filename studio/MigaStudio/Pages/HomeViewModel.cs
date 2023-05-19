@@ -84,14 +84,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             base.Suspend();
         }
 
-        public override void Resume()
+        protected override void OnResume()
         {
             foreach (var feature in Features)
             {
                 feature.Cache?.Resume();
             }
 
-            base.Resume();
+            
         }
 
 

@@ -116,9 +116,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             base.OnStart(parameter);
         }
 
-        public override void Resume()
+        protected override void OnResume()
         {
-            base.Resume();
+            
 
             if (SelectedItem is not null)
             {

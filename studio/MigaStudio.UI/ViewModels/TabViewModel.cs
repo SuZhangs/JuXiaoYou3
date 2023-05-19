@@ -13,9 +13,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     [DebuggerDisplay("{PageId}-{Title}")]
     public abstract class TabViewModel : PageViewModel, IEquatable<TabViewModel>, ITabViewModel
     {
-        private string _title;
-        private bool   _isPinned;
-        private bool   _dirtyState;
+        private const string Unsave = "● {0}";
+        private       string _title;
+        private       bool   _isPinned;
+        private       bool   _dirtyState;
 
 
         protected TabViewModel()
@@ -24,18 +25,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             KeyInputs        = new List<KeyInput>(8);
         }
 
-        private static string Unsave
-        {
-            get => Language.Culture switch
-            {
-                CultureArea.English  => "[+] {0}",
-                CultureArea.French   => "[+] {0}",
-                CultureArea.Japanese => "[+] {0}",
-                CultureArea.Korean   => "[+] {0}",
-                CultureArea.Russian  => "[+] {0}",
-                _                    => "[+] {0}",
-            };
-        }
 
         protected void SetTitle(string title, bool useUnsavePattern = false)
         {
@@ -128,6 +117,24 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected virtual void OnStart(Parameter parameter)
         {
+        }
+
+        #endregion
+
+        #region Resume / OnResume
+
+        public sealed override void Resume()
+        {
+            base.Resume();
+            OnInvalidateDataSource();
+            OnResume();
+        }
+
+        protected virtual void OnInvalidateDataSource(){}
+
+        protected virtual void OnResume()
+        {
+            
         }
 
         #endregion

@@ -47,10 +47,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             base.OnStart();
         }
 
-        public sealed override void Resume()
+        protected override void OnResume()
         {
             OnRefresh();
-            base.Resume();
+            
         }
 
         private async Task CloseDatabaseImpl()

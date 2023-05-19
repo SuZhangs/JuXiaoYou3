@@ -105,14 +105,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             base.OnStart();
         }
 
-        public override void Resume()
+        protected override void OnResume()
         {
             if (NeedDataSourceSynchronize())
             {
                 OnRequestDataSourceSynchronize(Collection);
             }
-
-            base.Resume();
         }
 
         #endregion

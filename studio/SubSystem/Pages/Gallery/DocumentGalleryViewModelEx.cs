@@ -224,10 +224,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             base.OnStart();
         }
 
-        public override void Resume()
+        protected override void OnInvalidateDataSource()
         {
             Refresh();
-            base.Resume();
         }
 
         #endregion

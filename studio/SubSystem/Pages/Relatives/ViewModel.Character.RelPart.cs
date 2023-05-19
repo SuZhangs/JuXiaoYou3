@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             Initialize();
         }
 
-        public sealed override void Resume()
+        public override void Resume()
         {
             if (_version != DocumentEngine.Version)
             {

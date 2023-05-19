@@ -49,7 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             base.OnStart();
         }
 
-        public sealed override void Resume()
+        protected override void OnResume()
         {
             if (_version != DocumentEngine.Version)
             {

@@ -139,11 +139,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             base.OnStart();
         }
 
-        public override void Resume()
+        protected override void OnResume()
         {
-            //
-            // TODO:数据恢复
-            base.Resume();
         }
 
         public override void Suspend()
