@@ -19,6 +19,6 @@ namespace Acorisoft.FutureGL.MigaStudio
                                                             .Database
                                                             .CurrentValue;
 
-        public static T ThisEngine<T>() where T : DataEngine => _databaseField.Value.GetEngine<T>();
+        public static T Engine<T>() where T : DataEngine => _databaseField.Value.GetEngine<T>();
     }
 }

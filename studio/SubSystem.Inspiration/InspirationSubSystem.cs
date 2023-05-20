@@ -4,6 +4,7 @@ using System.IO;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages;
+using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications;
 using DryIoc;
 
 namespace Acorisoft.FutureGL.MigaStudio.Inspirations
@@ -27,6 +28,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
         {
             Xaml.InstallView<InspirationView, InspirationController>();
             Xaml.InstallView<HomePage, HomeViewModel>();
+            Xaml.InstallView<CharacterContractPage, CharacterContractViewModel>();
+            Xaml.InstallView<CharacterChannelPage, CharacterChannelViewModel>();
         }
 
         protected override void InstallServices(IContainer container)

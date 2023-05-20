@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 
@@ -69,11 +70,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             RequireStartupTabViewModel();
 #if DEBUG
-            New<WeaponEditorViewModel>();
-            New<PlanetEditorViewModel>();
-            New<MaterialEditorViewModel>();
-            New<UniverseEditorViewModel>();
-            New<KeywordViewModel>();
+            New<CharacterContractViewModel>();
+            New<CharacterChannelViewModel>();
+            // New<WeaponEditorViewModel>();
+            // New<PlanetEditorViewModel>();
+            // New<MaterialEditorViewModel>();
+            // New<UniverseEditorViewModel>();
+            // New<KeywordViewModel>();
 #endif
         }
 

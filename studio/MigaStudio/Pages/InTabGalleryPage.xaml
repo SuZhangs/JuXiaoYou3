@@ -19,7 +19,8 @@
         <thisConverters:MainFeatureConverter x:Key="NameConverter" />
     </UserControl.Resources>
     <f:ForestIsland Header="服务">
-        <ItemsControl ItemsSource="{Binding Features,Mode=OneWay}">
+        <ItemsControl f:XamlAssist.GroupName="GroupId" 
+                      ItemsSource="{Binding Features,Mode=OneWay}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">
                     <ftk:ToolButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RunFeatureCommand}"
@@ -35,6 +36,27 @@
                     <WrapPanel />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <DockPanel>
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       FontWeight="Bold"
+                                                       Text="{Binding Name, Converter={StaticResource NameConverter}}"
+                                                       VerticalAlignment="Center" />
+                                            <ItemsPresenter Margin="24 8"/>
+                                        </DockPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ItemsControl.GroupStyle>
         </ItemsControl>
     </f:ForestIsland>
 </f:ForestUserControl>

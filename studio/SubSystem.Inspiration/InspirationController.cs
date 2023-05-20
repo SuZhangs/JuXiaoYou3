@@ -1,6 +1,7 @@
 ﻿using System;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages;
+using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications;
 
 namespace Acorisoft.FutureGL.MigaStudio.Inspirations
 {
@@ -10,10 +11,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
     }
     
     public class InspirationController : ShellCore
-    {       
+    {
+        private bool _isCharacterSelected;
+        
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
+#if DEBUG
+            New<CharacterContractViewModel>();
+            New<CharacterChannelViewModel>();
+#endif
+
         }
 
         protected sealed override void OnStart(RoutingEventArgs arg)
@@ -31,9 +39,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
 
         public override void Resume()
         {
+            var db = Studio.Engine<DocumentEngine>()
+                           .DocumentCacheDB;
+
+            var list = GlobalStudioContext.FavoriteCharacterList;
+            
+            //
+            // check character is delete?
             IsCharacterSelected = GlobalStudioContext is not null &&
                                   GlobalStudioContext.Character is not null &&
-                                  DocumentEngine
+                                  db.HasID(GlobalStudioContext.Character.Id);
+
+            //
+            // remove deleted character
+            for (var i = 0; i < list.Count; i++)
+            {
+                var item = list[i];
+                
+                if (!db.HasID(item.Id))
+                {
+                    list.RemoveAt(i);
+                }
+            }
+            
             base.Resume();
         }
 
@@ -41,8 +69,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
         {
             New<HomeViewModel>();
         }
-
-        private bool _isCharacterSelected;
 
         public GlobalStudioContext GlobalStudioContext { get; private set; }
         
