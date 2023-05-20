@@ -58,7 +58,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void GoToNormalState(HighlightColorPalette palette, ForestThemeSystem theme)
         {
-            _backgroundBrush ??= new SolidColorBrush(Colors.Transparent);
+            _backgroundBrush = new SolidColorBrush(Colors.Transparent);
             _foregroundBrush ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.ForegroundLevel1]);
 
             _bd.Background = _backgroundBrush;

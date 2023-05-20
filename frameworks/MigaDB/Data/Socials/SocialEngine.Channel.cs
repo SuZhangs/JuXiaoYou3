@@ -1,11 +1,18 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Socials
 {
+    public enum CharacterRole
+    {
+        Owner,
+        Manager,
+        Member,
+        Stranger
+    }
+    
     public class ChannelMember : StorageObject
     {
         public string Alias { get; set; }
         public string Title { get; set; }
-        public bool IsOwner { get; set; }
-        public bool IsManager { get; set; }
+        public CharacterRole Role { get; set; }
     }
     
     public class SocialChannel : StorageObject
@@ -28,9 +35,11 @@
         /// <summary>
         /// 成员
         /// </summary>
-        
         public List<ChannelMember> Member { get; init; }
         
+        /// <summary>
+        /// 消息
+        /// </summary>
         public List<ChannelMessage> Messages { get; init; }
     }
 }

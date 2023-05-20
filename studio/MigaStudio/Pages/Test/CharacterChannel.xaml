@@ -4,12 +4,368 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterChannelViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ImageBrush x:Key="Avatar" ImageSource="E:\2.png" />
+        <SolidColorBrush x:Key="Brush.QQ.Background" Color="#F5F5F5" />
+        <SolidColorBrush x:Key="Brush.QQ.Bar" Color="#0199FF" />
+        <DrawingImage x:Key="FeatherIcon.Mic">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M12,1A3,3,0,0,0,9,4L9,12A3,3,0,0,0,15,12L15,4A3,3,0,0,0,12,1z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M19,10L19,12A7,7,0,0,1,5,12L5,10">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="12,19" EndPoint="12,23" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="8,23" EndPoint="16,23" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <!--<GeometryGroup x:Key="FeatherIcon.Mic">
+            <GeometryGroup.Children>
+                <Geometry>F1 M24,24z M0,0z M12,1A3,3,0,0,0,9,4L9,12A3,3,0,0,0,15,12L15,4A3,3,0,0,0,12,1z</Geometry>
+                <Geometry>F1 M24,24z M0,0z M19,10L19,12A7,7,0,0,1,5,12L5,10</Geometry>
+                <LineGeometry StartPoint="12,19" EndPoint="12,23" />
+                <LineGeometry StartPoint="8,23" EndPoint="16,23" />
+            </GeometryGroup.Children>
+        </GeometryGroup>-->
+        <!--<GeometryGroup x:Key="FeatherIcon.Menu">
+            <GeometryGroup.Children>
+                <LineGeometry StartPoint="3,12" EndPoint="21,12" />
+                <LineGeometry StartPoint="3,6" EndPoint="21,6" />
+                <LineGeometry StartPoint="3,18" EndPoint="21,18" />
+            </GeometryGroup.Children>
+        </GeometryGroup>-->
+        <DrawingImage x:Key="FeatherIcon.Menu">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="3,12" EndPoint="21,12" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="3,6" EndPoint="21,6" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="3,18" EndPoint="21,18" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="FeatherIcon.Phone">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M22,16.92L22,19.92A2,2,0,0,1,19.82,21.92A19.79,19.79,0,0,1,11.19,18.85A19.5,19.5,0,0,1,5.19,12.85A19.79,19.79,0,0,1,2.12,4.18A2,2,0,0,1,4.11,2L7.11,2A2,2,0,0,1,9.11,3.72A12.84,12.84,0,0,0,9.81,6.53A2,2,0,0,1,9.36,8.64L8.09,9.91A16,16,0,0,0,14.09,15.91L15.36,14.64A2,2,0,0,1,17.47,14.19A12.84,12.84,0,0,0,20.28,14.89A2,2,0,0,1,22,16.92z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="FeatherIcon.Emoji">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M8,14C8,14 9.5,16 12,16 14.5,16 16,14 16,14">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="9,9" EndPoint="9.01,9" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="15,9" EndPoint="15.01,9" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+        <DrawingImage x:Key="FeatherIcon.PlusCircle">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="12,8" EndPoint="12,16" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="2" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="8,12" EndPoint="16,12" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </UserControl.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="64" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="1">
+            <ItemsControl>
+
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!--
+            预览：
+            用来显示选定的人物的联系人群聊
+        -->
+        <Viewbox Grid.Column="2">
+            <Border>
+                <Grid Background="{StaticResource Brush.QQ.Background}"
+                      Height="960"
+                      Width="540">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="72" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="64" />
+                    </Grid.RowDefinitions>
+
+                    <!--
+                        标题：
+                        用来显示选定的人物的联系人群聊
+                    -->
+                    <Border Grid.Row="0"
+                            Background="{StaticResource Brush.QQ.Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0"
+                                  Data="{StaticResource FeatherIcon.Left}"
+                                  Stretch="Uniform"
+                                  Stroke="Black"
+                                  StrokeThickness="2"
+                                  Height="42"
+                                  Width="42" />
+
+                            <DockPanel Grid.Column="1"
+                                       Margin="16 0 0 0"
+                                       VerticalAlignment="Center" >
+                                <TextBlock DockPanel.Dock="Top"
+                                       Foreground="Black"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Text="测试群(30)"/>
+                                <TextBlock Foreground="Black"
+                                           FontSize="11"
+                                           Text="19人在线" />
+
+                            </DockPanel>
+
+                            <Image Grid.Column="2"
+                                   Margin="4 0 16 0"
+                                   Source="{StaticResource FeatherIcon.Phone}"
+                                   Stretch="Uniform"
+                                   Width="19" />
+
+                            <Image Grid.Column="3"
+                                   Margin="4 0 16 0"
+                                   Source="{StaticResource FeatherIcon.Menu}"
+                                   Stretch="Uniform"
+                                   Width="21" />
+                        </Grid>
+                    </Border>
+
+                    <!--
+                        聊天记录：
+                        用来显示选定的人物的联系人群聊
+                    -->
+                    <ScrollViewer Grid.Row="1"
+                                  Padding="16">
+                        <ItemsControl>
+                            <DockPanel Margin="0 4">
+                                <Ellipse Height="48"
+                                         Width="48"
+                                         Fill="{StaticResource Avatar}"/>
+                                <DockPanel Margin="12 0 0 0">
+                                    <TextBlock DockPanel.Dock="Top"
+                                               Foreground="Gray"
+                                               FontSize="13"
+                                               FontWeight="Heavy"
+                                               Margin="0 0 0 4"
+                                               Text="测试群"/>
+                                    <Border Background="{StaticResource Brush.QQ.Bar}"
+                                            CornerRadius="8"
+                                            HorizontalAlignment="Left"
+                                            Padding="12">
+                                        <TextBlock Text="这是一则消息"/>
+                                    </Border>
+                                </DockPanel>
+                            </DockPanel>
+
+                            <DockPanel Margin="0 4">
+                                <Ellipse DockPanel.Dock="Right"
+                                         Height="48"
+                                         Width="48"
+                                         Fill="{StaticResource Avatar}"/>
+                                
+                                <DockPanel HorizontalAlignment="Right"
+                                           Margin="0 0 12 0">
+                                    <TextBlock DockPanel.Dock="Top"
+                                               Foreground="Gray"
+                                               FontSize="13"
+                                               FontWeight="Heavy"
+                                               HorizontalAlignment="Right"                                           
+                                               Margin="0 0 0 4"
+                                               Text="测试群"/>
+                                    <Border Background="{StaticResource Brush.QQ.Bar}"
+                                            CornerRadius="8"
+                                            HorizontalAlignment="Left"
+                                            Padding="12">
+                                        <TextBlock Text="这是一则消息"/>
+                                    </Border>
+                                </DockPanel>
+                            </DockPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <!--
+                        输入框：
+                        用来显示选定的人物的联系人群聊
+                    -->
+                    <Border Grid.Row="2"
+                            Background="White"
+                            Padding="12 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0"
+                                   Margin="8 0 "
+                                   Source="{StaticResource FeatherIcon.Mic}"
+                                   Stretch="Uniform"
+                                   Width="21" />
+
+                            <Border Grid.Column="1"
+                                    Background="{StaticResource Brush.QQ.Background}"
+                                    CornerRadius="3"
+                                    Margin="8">
+                                <TextBlock FontSize="18"
+                                           HorizontalAlignment="Center"
+                                           Text="测试群"
+                                           VerticalAlignment="Center" />
+                            </Border>
+
+                            <Image Grid.Column="2"
+                                   Margin="4 0"
+                                   Source="{StaticResource FeatherIcon.Emoji}"
+                                   Stretch="Uniform"
+                                   Width="31" />
+
+
+                            <Image Grid.Column="3"
+                                   Margin="4 0"
+                                   Source="{StaticResource FeatherIcon.PlusCircle}"
+                                   Stretch="Uniform"
+                                   Width="31" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Viewbox>
+
+        <!--
+            工具：
+            用来显示选定的人物的联系人群聊
+        -->
+        <StackPanel Grid.Column="3"
+                    Margin="0 16 0 0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+                    <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+                    <Setter Property="Margin" Value="0 0 0 4" />
+                    <Setter Property="IconSize" Value="23" />
+                    <Setter Property="Height" Value="48" />
+                    <Setter Property="Width" Value="48" />
+                </Style>
+            </StackPanel.Resources>
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Refresh}" />
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Settings}" />
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}" />
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                            IsFilled="True" />
+        </StackPanel>
     </Grid>
 </f:ForestUserControl>
