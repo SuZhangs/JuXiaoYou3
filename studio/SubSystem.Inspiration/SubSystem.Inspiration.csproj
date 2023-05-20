@@ -10,6 +10,7 @@
         <AssemblyVersion>3.0.0</AssemblyVersion>
         <FileVersion>3.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Models\Communications" />
       <Folder Include="ViewModels" />
     </ItemGroup>
 

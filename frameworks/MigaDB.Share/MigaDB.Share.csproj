@@ -13,15 +13,12 @@
 		<Title>MigaDB</Title>
 		<Description>可公开的文档层Api</Description>
 		<Copyright>All right reseved by Luoyisi</Copyright>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RELEASE|x86'">
-	  <LangVersion>preview</LangVersion>
-	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RELEASE|x86'" />
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG|x86'">
-	  <LangVersion>preview</LangVersion>
-	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG|x86'" />
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|x86'">
 	  <LangVersion>preview</LangVersion>

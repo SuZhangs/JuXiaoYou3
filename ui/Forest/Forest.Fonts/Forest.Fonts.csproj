@@ -15,6 +15,7 @@
         <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
         <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
         <PackageIcon>ico.png</PackageIcon>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
     <ItemGroup>
       <None Remove="PuHuiTi.otf" />

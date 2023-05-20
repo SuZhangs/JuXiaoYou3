@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Repositories.AddMany(ss.Repositories, true);
         }
 
-        public sealed override void OnStart()
+        protected override void OnStart()
         {
             OnRefresh();
             base.OnStart();

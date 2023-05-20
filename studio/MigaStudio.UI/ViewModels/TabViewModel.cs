@@ -95,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
 
-        public virtual void OnStart()
+        protected virtual void OnStart()
         {
         }
 

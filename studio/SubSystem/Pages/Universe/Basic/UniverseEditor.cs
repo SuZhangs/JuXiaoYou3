@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             });
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             CreateSubViews(InternalSubViews);
             SelectedSubView = SubViews.FirstOrDefault();

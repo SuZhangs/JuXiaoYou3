@@ -7,6 +7,7 @@
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <OutDir>../../Builds/Studio</OutDir>
         <Platforms>AnyCPU;x86;x64</Platforms>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -17,13 +18,9 @@
       <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" />
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" />
 
     <ItemGroup>
       <ProjectReference Include="..\..\frameworks\MigaDB.Share\MigaDB.Share.csproj" />

@@ -13,12 +13,14 @@
     <UserControl.Resources>
         <ImageBrush x:Key="Avatar" ImageSource="E:\2.png" />
     </UserControl.Resources>
-    <Grid Margin="0 16 0 0">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="384" />
+            <ColumnDefinition Width="1*"
+                              MinWidth="384"/>
+            <ColumnDefinition Width="1*"
+                              MaxWidth="640" />
             <ColumnDefinition Width="1*" 
                               MaxWidth="640"/>
-            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
         <!--
@@ -76,7 +78,7 @@
                 </f:ListBoxItem>
             </f:EmptyStateListBox>
         </f:ForestSection>
-        
+
         <!--
             分组：
             用来显示选定的人物的联系人分组
@@ -93,7 +95,7 @@
                 </StackPanel>
             </f:ForestSection.ToolBar>
 
-            <f:TreeView>
+            <f:EmptyStateTreeView NotEmpty="True">
                 <f:TreeViewItem Header="普通好友">
                     <Border Padding="0 8">
                         <DockPanel>
@@ -123,32 +125,131 @@
                                 <TextBlock DockPanel.Dock="Top"
                                            FontSize="16"
                                            FontWeight="Bold"
-                                           Text="Character2" />
+                                           Text="Alias（Character2）" />
                                 <TextBlock FontSize="12"
                                            Text="Character2" />
                             </DockPanel>
                         </DockPanel>
                     </Border>
                 </f:TreeViewItem>
-            </f:TreeView>
+            </f:EmptyStateTreeView>
         </f:ForestSection>
 
         <!--
             群聊：
             用来显示选定的人物的联系人群聊
         -->
-        <f:ForestSection Grid.Column="2"
-                         Header="群聊"
-                         Margin="16 0">
-            <f:ForestSection.ToolBar>
-                <StackPanel HorizontalAlignment="Right"
-                            Orientation="Horizontal"
-                            Margin="0 0 0 4">
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Plus}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}" />
-                </StackPanel>
-            </f:ForestSection.ToolBar>
+        <Border Grid.Column="2"
+                Background="{f:Brush BackgroundLevel2}"
+                Padding="16 0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <Ellipse Fill="{StaticResource Avatar}"
+                             Margin="0 32 0 8" 
+                             Height="96"
+                             Width="96" />
+                    <TextBlock FontSize="16"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0 4" 
+                               Text="Character2" />
 
-        </f:ForestSection>
+                    <TextBlock FontSize="12"
+                               Foreground="{f:Brush ForegroundLevel3}"
+                               HorizontalAlignment="Center"
+                               Margin="0 4" 
+                               MinHeight="28"
+                               MaxHeight="192"
+                               Text="Intro"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"/>
+
+                    <f:SingleLine Margin="0 8" 
+                                  Watermark="备注"/>
+
+                    <f:CallToAction CornerRadius="18"
+                                    Content="保存"
+                                    Icon="{StaticResource FeatherIcon.Save}"
+                                    Height="36"
+                                    Margin="0 8"
+                                    Palette="Success"
+                                    Width="192"/>
+                </StackPanel>
+
+
+                <f:ForestIsland Background="{f:Brush BackgroundLevel2}" 
+                                Header="群聊">
+                    <f:ForestIsland.ToolBar>
+                        <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <ftk:ToolButton Content="添加"
+                                            Icon="{StaticResource FeatherIcon.Plus}"
+                                            ShowText="True"/>
+                        </StackPanel>
+                    </f:ForestIsland.ToolBar>
+                    <f:EmptyStateItemsControl NotEmpty="True">
+                        <Border Background="{f:BackgroundBrush}"
+                                Margin="0 2"
+                                Padding="8">
+                            <DockPanel>
+                                <Ellipse Fill="{StaticResource Avatar}"
+                                         Height="48"
+                                         Width="48" />
+
+                                <DockPanel>
+                                    <f:CallToAction DockPanel.Dock="Right"
+                                                    Content="打开"
+                                                    CornerRadius="18"
+                                                    Height="36"
+                                                    Padding="36 4"
+                                                    Palette="HighlightPalette3"/>
+                                    
+                                    <DockPanel Margin="16 0 0 0"
+                                               VerticalAlignment="Center">
+                                        <TextBlock DockPanel.Dock="Top"
+                                                   FontSize="16"
+                                                   FontWeight="Bold"
+                                                   Text="Character1" />
+                                        <TextBlock FontSize="12"
+                                                   Foreground="{f:Brush ForegroundLevel3}"
+                                                   Text="Character1" />
+                                    </DockPanel>
+                                </DockPanel>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Background="{f:BackgroundBrush}"
+                                Margin="0 2"
+                                Padding="8">
+                            <DockPanel>
+                                <Ellipse Fill="{StaticResource Avatar}"
+                                         Height="48"
+                                         Width="48" />
+
+                                <DockPanel>
+                                    <f:CallToAction DockPanel.Dock="Right"
+                                                    Content="打开"
+                                                    CornerRadius="18"
+                                                    Height="36"
+                                                    Padding="36 4"
+                                                    Palette="HighlightPalette3"/>
+
+                                    <DockPanel Margin="16 0 0 0"
+                                               VerticalAlignment="Center">
+                                        <TextBlock DockPanel.Dock="Top"
+                                                   FontSize="16"
+                                                   FontWeight="Bold"
+                                                   Text="Character1" />
+                                        <TextBlock FontSize="12"
+                                                   Foreground="{f:Brush ForegroundLevel3}"
+                                                   Text="Character1" />
+                                    </DockPanel>
+                                </DockPanel>
+                            </DockPanel>
+                        </Border>
+                    </f:EmptyStateItemsControl>
+                </f:ForestIsland>
+            </DockPanel>
+        </Border>
     </Grid>
 </f:ForestUserControl>

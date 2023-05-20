@@ -6,7 +6,7 @@
         <Nullable>disable</Nullable>
         <RootNamespace>Acorisoft.MigaGen.App</RootNamespace>
         <OutDir>../../Builds/Base</OutDir>
-        <LangVersion>8</LangVersion>
+        <LangVersion>latest</LangVersion>
         <IsRoslynComponent>True</IsRoslynComponent>
         <Platforms>AnyCPU;x86;x64</Platforms>
     </PropertyGroup>

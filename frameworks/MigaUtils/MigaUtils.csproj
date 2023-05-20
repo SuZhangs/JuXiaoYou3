@@ -8,6 +8,7 @@
         <RootNamespace>Acorisoft.FutureGL.MigaUtils</RootNamespace>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU;x86;x64</Platforms>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|AnyCPU'">
@@ -22,17 +23,13 @@
       <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" />
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-      <LangVersion>preview</LangVersion>
-    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" />
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.4" />

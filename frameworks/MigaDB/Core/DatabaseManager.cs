@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
 using Acorisoft.FutureGL.MigaDB.Core.Maintainers;
 using Acorisoft.FutureGL.MigaDB.Core.Migrations;
+using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Data.Worldview;
 using DryIoc;
 using Acorisoft.FutureGL.MigaDB.Utils;
@@ -39,6 +40,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Setup<ImageEngine>(false)
                    .Setup<MusicEngine>(false)
                    .Setup<KeywordEngine>(false)
+                   .Setup<SocialEngine>()
                    .Setup<WorldViewEngine>()
                    .Maintain<DatabasePresetMaintainer>()
                    .Maintain<DatabasePropertiesMaintainer>()

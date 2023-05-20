@@ -99,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <param name="dataSource">需要同步的数据源</param>
         protected abstract void OnRequestDataSourceSynchronize(ICollection<TEntity> dataSource);
 
-        public sealed override void OnStart()
+        protected override void OnStart()
         {
             OnRequestDataSourceSynchronize(Collection);
             base.OnStart();

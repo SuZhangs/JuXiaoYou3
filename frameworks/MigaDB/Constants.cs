@@ -49,11 +49,14 @@
         
         //
         // Universe
-        internal const string Name_Elemental     = "elemental";
-        internal const string Name_Technology    = "tech";
-        internal const string Name_MeasuringUnit = "unit";
-        internal const string Name_Faith         = "faith";
-        internal const string Name_Market        = "market";
+        internal const string Name_Elemental      = "elemental";
+        internal const string Name_Technology     = "tech";
+        internal const string Name_MeasuringUnit  = "unit";
+        internal const string Name_Faith          = "faith";
+        internal const string Name_Market         = "market";
+        internal const string Name_Chat_Channel   = "qq_channel";
+        internal const string Name_Chat_Character = "qq_character";
+        internal const string Name_Chat_Contract  = "qq_contract";
         
         //
         // Rel

@@ -218,7 +218,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             LoadPage();
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             Refresh();
             base.OnStart();

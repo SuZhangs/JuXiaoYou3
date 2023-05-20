@@ -126,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #region OnStart / OnResume
 
-        public sealed override void OnStart()
+        protected override void OnStart()
         {
             OnRequestDataSourceSynchronize(DataSource);
             OnRequestComputePageCount(DataSource);

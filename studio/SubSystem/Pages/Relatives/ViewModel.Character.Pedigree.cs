@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         #region OnStart / OnResume
 
-        public sealed override void OnStart()
+        protected override void OnStart()
         {
             Initialize();
             base.OnStart();

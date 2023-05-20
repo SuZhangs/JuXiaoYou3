@@ -237,7 +237,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public string Name
         {
-            get => GetOrAddMetadata(MetaNameOfName, Language.GetText("global.DefaultName"));
+            get => GetOrAddMetadata(MetaNameOfName, Language.GetText("global.unNamed"));
             set
             {
                 if (string.IsNullOrEmpty(value))

@@ -63,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             if (_databaseProperty.Album is null)
             {

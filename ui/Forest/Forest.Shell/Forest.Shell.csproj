@@ -18,6 +18,7 @@
         <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
         <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
         <PackageIcon>ico.png</PackageIcon>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
     <ItemGroup>
       <ProjectReference Include="..\Forest.Controls\Forest.Controls.csproj" />

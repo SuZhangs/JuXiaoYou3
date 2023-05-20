@@ -131,7 +131,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             base.OnStart(parameter);
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();

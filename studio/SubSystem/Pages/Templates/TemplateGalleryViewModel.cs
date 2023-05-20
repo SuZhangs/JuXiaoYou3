@@ -70,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                   .DisposeWith(Collector);
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             TemplateEngine.Activate();
             Refresh();

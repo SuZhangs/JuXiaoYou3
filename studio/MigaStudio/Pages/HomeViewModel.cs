@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<ToolsViewModel>(Tools, Tools);
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             foreach (var feature in Features)
             {
