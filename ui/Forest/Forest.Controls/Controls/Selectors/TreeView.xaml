@@ -146,18 +146,18 @@
                                 CornerRadius="{TemplateBinding CornerRadius}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="19" />
+                                    <ColumnDefinition Width="Auto" MinWidth="12" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <ToggleButton x:Name="Expander"
-                                              Grid.Column="0"                                              
-                                              Margin="8,0" 
+                                              Grid.Column="0"
+                                              Margin="8 0"
                                               ClickMode="Press"
                                               Style="{StaticResource ClearStyle.TreeView.ToggleButton}"
                                               IsChecked="{Binding IsExpanded , RelativeSource={RelativeSource TemplatedParent}}" />
                                 <ContentPresenter x:Name="PART_Content"
-                                                  Grid.Column="1" 
+                                                  Grid.Column="2" 
                                                   TextElement.FontSize="{TemplateBinding FontSize}" 
                                                   Margin="{TemplateBinding Padding}"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

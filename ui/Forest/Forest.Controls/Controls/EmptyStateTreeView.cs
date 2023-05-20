@@ -69,6 +69,17 @@
         {
             element.SetValue(ShowEmptyStatePropertyKey, Boxing.Box(!((bool)e.NewValue)));
         }
+        
+        
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is FrameworkElement || base.IsItemItsOwnContainerOverride(item);
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new TreeViewItem();
+        }
 
         public bool ShowEmptyState
         {

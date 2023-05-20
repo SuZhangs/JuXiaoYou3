@@ -61,6 +61,17 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 new PropertyMetadata(default(Brush)));
             ShowEmptyStateProperty = ShowEmptyStatePropertyKey.DependencyProperty;
         }
+        
+        
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is FrameworkElement || base.IsItemItsOwnContainerOverride(item);
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new ListBoxItem();
+        }
 
         private static void OnIsEmptyChanged(DependencyObject element, DependencyPropertyChangedEventArgs e)
         {

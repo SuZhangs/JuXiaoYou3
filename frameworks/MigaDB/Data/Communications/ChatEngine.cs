@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Communications
+﻿using Acorisoft.FutureGL.MigaDB.Documents;
+
+namespace Acorisoft.FutureGL.MigaDB.Data.Communications
 {
     public class ChatEngine : DataEngine
     {
@@ -12,6 +14,7 @@
             throw new NotImplementedException();
         }
         
+        public ILiteCollection<DocumentCache> CharacterDB { get; private set; }
         public ILiteCollection<ContractList> ContractDB { get; private set; }
         public ILiteCollection<BubbleChannel> ChannelDB { get; private set; }
     }
