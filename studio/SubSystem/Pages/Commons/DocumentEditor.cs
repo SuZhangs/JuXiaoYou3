@@ -154,10 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
        
         protected override void OnDirtyStateChanged(bool state)
         {
-            if (state)
-            {
-                SetTitle(Document.Name, true);
-            }
+            SetTitle(Document.Name, state);
         }
     }
 }

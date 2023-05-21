@@ -38,7 +38,7 @@
                        Foreground="{f:Brush HighlightA3}"
                        HorizontalAlignment="Center"
                        Margin="0 16 0 0"
-                       Text="{thisMarkups:Text dialog.title.ImageEditView}"
+                       Text="{Binding Title}"
                        VerticalAlignment="Top" />
 
             <DockPanel Grid.Row="1">
