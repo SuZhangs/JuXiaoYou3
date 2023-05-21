@@ -36,13 +36,13 @@
             <Geometry>F1 M24,24z M0,0z M12,7L16.5,7A2.5,2.5,0,0,0,16.5,2C13,2,12,7,12,7z</Geometry>
         </GeometryGroup.Children>
     </GeometryGroup>
-    <GeometryGroup x:Key="FeatherIcon.Type">
+    <!--<GeometryGroup x:Key="FeatherIcon.Type">
         <GeometryGroup.Children>
             <Geometry>F1 M24,24z M0,0z M4,7L4,7 4,4 20,4 20,7</Geometry>
             <LineGeometry StartPoint="9,20" EndPoint="15,20" />
             <LineGeometry StartPoint="12,4" EndPoint="12,20" />
         </GeometryGroup.Children>
-    </GeometryGroup>
+    </GeometryGroup>-->
     <GeometryGroup x:Key="FeatherIcon.Clock">
         <GeometryGroup.Children>
             <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />

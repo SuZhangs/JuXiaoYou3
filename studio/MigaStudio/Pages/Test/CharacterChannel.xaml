@@ -243,7 +243,7 @@
                     <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal"
                             Margin="0 0 0 4">
-                        <ftk:ToolButton Icon="{StaticResource Plus}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Plus}" />
                     </StackPanel>
                 </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl Grid.Row="2"
@@ -384,7 +384,7 @@
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
                             <Path Grid.Column="0"
-                                  Data="{StaticResource Left}"
+                                  Data="{StaticResource FeatherIcon.Left}"
                                   Stretch="Uniform"
                                   Stroke="Black"
                                   StrokeThickness="2"
