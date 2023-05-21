@@ -179,21 +179,24 @@
                     Padding="16"
                     Width="320">
                 <StackPanel>
-                    <Border DockPanel.Dock="Top"
-                            CornerRadius="64"
-                            Height="128"
-                            Width="128">
-                        <Border.Background>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>
-                                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
-                                        <Binding Path="SelectedItem.Avatar" Mode="OneWay" />
-                                        <Binding Path="SelectedItem.Type" />
-                                    </MultiBinding>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Border.Background>
-                    </Border>
+                    <f:LooklessButton DockPanel.Dock="Top"
+                                      Command="{Binding ChangeDocumentCommand}"
+                                      CommandParameter="{Binding SelectedItem,Mode=OneWay}">
+                        <Border CornerRadius="64"
+                                Height="128"
+                                Width="128">
+                            <Border.Background>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                                            <Binding Path="SelectedItem.Avatar" Mode="OneWay" />
+                                            <Binding Path="SelectedItem.Type" />
+                                        </MultiBinding>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Border.Background>
+                        </Border>
+                    </f:LooklessButton>
 
 
                     <TextBlock FontSize="18"

@@ -198,6 +198,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
         }
 
+        /// <summary>
+        /// 修改头像
+        /// </summary>
+        /// <param name="engine"></param>
+        /// <param name="imageEngine"></param>
+        /// <param name="cache"></param>
+        /// <param name="callback"></param>
         public static async Task ChangeDocument(DocumentEngine engine, ImageEngine imageEngine, DocumentCache cache, Action<DocumentCache> callback)
         {
             if (cache is null ||

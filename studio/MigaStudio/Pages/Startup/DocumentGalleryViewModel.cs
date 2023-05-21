@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using DynamicData;
@@ -150,6 +152,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
             });
         }
+        
         
         private async Task ChangeDocumentImpl(DocumentCache cache)
         {

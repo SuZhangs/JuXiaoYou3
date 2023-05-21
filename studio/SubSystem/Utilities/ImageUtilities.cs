@@ -118,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                         image.Mutate(x => { x.Resize(new Size(w, h)); });
 
                         // rewrite
-                        origin = new MemoryStream();
+                        origin = new MemoryStream(w * h * 4);
                         image.SaveAsPng(origin);
                         origin.Seek(0, SeekOrigin.Begin);
                         session.Dispose();
@@ -164,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     image.Mutate(x => { x.Resize(new Size((int)(w * scale), (int)(h * scale))); });
 
                     // rewrite
-                    origin = new MemoryStream();
+                    origin = new MemoryStream(w * h * 4);
                     image.SaveAsPng(origin);
                     origin.Seek(0, SeekOrigin.Begin);
                     session.Dispose();
@@ -180,7 +180,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
 
             origin.Dispose();
-            result = new MemoryStream();
+            result = new MemoryStream(w * h * 4);
             await image.SaveAsPngAsync(result);
             result.Seek(0, SeekOrigin.Begin);
             session.Dispose();
