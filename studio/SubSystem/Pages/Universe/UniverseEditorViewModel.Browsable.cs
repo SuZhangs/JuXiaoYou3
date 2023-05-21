@@ -144,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             {
                 if (_selectedView is not null)
                 {
-                    var inspectable = (InspectableViewModel)_selectedView.DataContext;
+                    var inspectable = (ViewModelBase)_selectedView.DataContext;
                     inspectable?.Stop();
                 }
 
