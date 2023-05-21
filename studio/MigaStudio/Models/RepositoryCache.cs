@@ -10,19 +10,19 @@
         /// <summary>
         /// 世界观名字
         /// </summary>
-        public string Name { get; init; }
+        public string Name { get; set; }
         
         
         /// <summary>
         /// 作者
         /// </summary>
-        public string Author { get; init; }
+        public string Author { get; set; }
         
         
         /// <summary>
         /// 世界观简介
         /// </summary>
-        public string Intro { get; init; }
+        public string Intro { get; set; }
         
         /// <summary>
         /// 路径

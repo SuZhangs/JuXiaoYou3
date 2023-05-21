@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
@@ -6,6 +7,7 @@ using System.Reactive.Subjects;
 using System.Windows.Forms.VisualStyles;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
@@ -22,6 +24,11 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
+    public class UniverseViewModelProxy : BindingProxy<UniverseViewModel>
+    {
+        
+    }
+    
     public partial class UniverseViewModel : TabViewModel
     {
         private readonly Subject<Album>   _threadSafeAdding;
@@ -54,6 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                              .DisposeWith(Collector);
 
             CloseDatabaseCommand  = AsyncCommand(CloseDatabaseImpl);
+            SwitchDatabaseCommand = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
             ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
             EditCommand           = Command(() => Controller.New<UniverseEditorViewModel>());
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
@@ -96,8 +104,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                          .Reset();
             ss.RepositorySetting
               .LastRepository = null;
+            App.SynchronizeSetting();
             await ss.SaveAsync();
             await DatabaseManager.CloseAsync();
+            context.SwitchController(controller);
+        }
+        
+        private async Task SwitchDatabaseImpl(RepositoryCache cache)
+        {
+            if (cache is null)
+            {
+                return;
+            }
+            
+            _exitOperation = true;
+            var ss         = Xaml.Get<SystemSetting>();
+            var context    = Controller.Context;
+            var controller = (TabController)context.MainController;
+            controller.Reset();
+            controller = (TabController)Controller.Context
+                                                  .ControllerMaps[AppViewModel.IdOfTabShellController];
+            ConverterPool.Avatar
+                         .Reset();
+            App.SynchronizeSetting();
+            await DatabaseManager.CloseAsync();
+            await DatabaseManager.LoadAsync(cache.Path);
+            cache.OpenCount++;
+            ss.RepositorySetting
+              .LastRepository = cache.Path;
+            await ss.SaveAsync();
             context.SwitchController(controller);
         }
 
@@ -172,6 +207,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
 
         /// <summary>
+        /// 获取或设置 <see cref="Name"/> 属性。
+        /// </summary>
+        public bool HasRepositories
+        {
+            get => Repositories.Count > 0;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         private async Task ChangeAvatarImpl()
@@ -227,6 +270,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public DocumentType Type => DocumentType.None;
         
         public AsyncRelayCommand CloseDatabaseCommand { get; }
+        public AsyncRelayCommand<RepositoryCache> SwitchDatabaseCommand { get; }
+
+        public ObservableCollection<RepositoryCache> Repositories => Xaml.Get<SystemSetting>()
+                                                                         .RepositorySetting
+                                                                         .Repositories;
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand ChangeAvatarCommand { get; }

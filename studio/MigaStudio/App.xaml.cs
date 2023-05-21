@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
@@ -81,9 +82,47 @@ namespace Acorisoft.FutureGL.MigaStudio
             // TemplateSystem.InstallViews();
         }
 
+        public static void SynchronizeSetting()
+        {
+            var db = Xaml.Get<IDatabaseManager>();
+            if (db.IsOpen
+                  .CurrentValue)
+            {
+                var p = db.Property
+                          .CurrentValue;
+
+                if (p is null)
+                {
+                    return;
+                }
+                var id = p.Id;
+                var ss = Xaml.Get<SystemSetting>();
+                var rs = ss.RepositorySetting;
+                var r = rs.Repositories
+                          .FirstOrDefault(x => x.Id == id);
+
+                if (r is null)
+                {
+                    return;
+                }
+
+                r.Author = p.Author;
+                r.Name   = p.Name;
+                r.Intro  = p.Intro;
+                
+                //
+                // 移除所有对象
+                Task.Run(async () => await ss.SaveAsync())
+                    .GetAwaiter()
+                    .GetResult();
+            }
+
+        }
 
         protected override void OnExitOverride(ExitEventArgs e)
         {
+            SynchronizeSetting();
+            
             Xaml.Get<AppViewModel>()
                 .Stop();
             //
