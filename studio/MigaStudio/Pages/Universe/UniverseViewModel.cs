@@ -224,6 +224,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         //---------------------------------------------
 
 
+        public DocumentType Type => DocumentType.None;
+        
         public AsyncRelayCommand CloseDatabaseCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]

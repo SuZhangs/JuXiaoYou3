@@ -118,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                         image.Mutate(x => { x.Resize(new Size(w, h)); });
 
                         // rewrite
-                        origin = new MemoryStream(w * h * 4);
+                        origin = new MemoryStream(buffer.Length);
                         image.SaveAsPng(origin);
                         origin.Seek(0, SeekOrigin.Begin);
                         session.Dispose();
@@ -164,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     image.Mutate(x => { x.Resize(new Size((int)(w * scale), (int)(h * scale))); });
 
                     // rewrite
-                    origin = new MemoryStream(w * h * 4);
+                    origin = new MemoryStream(buffer.Length);
                     image.SaveAsPng(origin);
                     origin.Seek(0, SeekOrigin.Begin);
                     session.Dispose();
@@ -180,7 +180,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
 
             origin.Dispose();
-            result = new MemoryStream(w * h * 4);
+            result = new MemoryStream(buffer.Length);
             await image.SaveAsPngAsync(result);
             result.Seek(0, SeekOrigin.Begin);
             session.Dispose();
@@ -232,7 +232,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 var scale = horizontal ? 1920d / image.Width : 1920d / image.Height;
                 h = (int)(image.Height * scale);
                 w = (int)(image.Width * scale);
-                var ms = new MemoryStream();
+                var ms = new MemoryStream(buffer.Length);
                 image.Mutate(x => { x.Resize(new Size(w, h)); });
                 image.SaveAsPng(ms);
                 thumbnailBuffer = ms.GetBuffer();
