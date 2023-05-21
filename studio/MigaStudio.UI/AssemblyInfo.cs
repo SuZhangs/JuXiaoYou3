@@ -19,6 +19,7 @@ using System.Windows.Markup;
     // app, or any theme specific resource dictionaries)
 )]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Controls")]
+[assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Controls.Socials")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Resources.Behaviors")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Resources.Converters")]
 [assembly: XmlnsDefinition("urn:acorisoft/studio", "Acorisoft.FutureGL.MigaStudio.Resources.Panels")]

@@ -5,6 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
+                     xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications"
                      mc:Ignorable="d"
@@ -198,13 +199,13 @@
                 <ItemsControl>
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel/>
+                            <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <f:StretchPanel Margin="8">
                         <Rectangle Height="64"
-                                 Width="64"
-                                 Fill="{StaticResource Avatar}" />
+                                   Width="64"
+                                   Fill="{StaticResource Avatar}" />
                         <Border Background="{f:Brush HighlightB4}"
                                 CornerRadius="12"
                                 Margin="8 2"
@@ -215,43 +216,43 @@
                             <TextBlock FontSize="16"
                                        Text="1"
                                        HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
                         </Border>
                     </f:StretchPanel>
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                     <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                             Height="64"
+                             Width="64"
+                             Fill="{StaticResource Avatar}" />
                 </ItemsControl>
             </HeaderedContentControl>
 
             <HeaderedContentControl Grid.Row="2"
-                            Header="其他联系人"
-                            Margin="0 8">
+                                    Header="其他联系人"
+                                    Margin="0 8">
                 <f:EmptyStateItemsControl Grid.Row="2"
                                           NotEmpty="True">
                     <Grid Margin="0 4">
@@ -267,7 +268,7 @@
                         <f:CallToAction Grid.Column="2"
                                         Content="发言"
                                         Margin="4 0"
-                                        Palette="Info"/>
+                                        Palette="Info" />
 
                         <DockPanel Grid.Column="1"
                                    Margin="16 0 0 0 "
@@ -293,7 +294,7 @@
                         <f:CallToAction Grid.Column="2"
                                         Content="发言"
                                         Margin="4 0"
-                                        Palette="Info"/>
+                                        Palette="Info" />
 
                         <DockPanel Grid.Column="1"
                                    Margin="16 0 0 0 "
@@ -319,7 +320,7 @@
                         <f:CallToAction Grid.Column="2"
                                         Content="发言"
                                         Margin="4 0"
-                                        Palette="Info"/>
+                                        Palette="Info" />
 
                         <DockPanel Grid.Column="1"
                                    Margin="16 0 0 0 "
@@ -364,27 +365,27 @@
                         <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
                         <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
                     </WrapPanel>
-                    <f:MultiLine Height="128"/>
+                    <f:MultiLine Height="128" />
                 </DockPanel>
-                
-                
+
+
                 <ScrollViewer DockPanel.Dock="Top">
                     <ItemsControl>
                         <DockPanel Margin="0 4">
                             <Ellipse Height="48"
-                                 Width="48"
-                                 Fill="{StaticResource Avatar}" />
+                                     Width="48"
+                                     Fill="{StaticResource Avatar}" />
                             <DockPanel Margin="12 0 0 0">
                                 <TextBlock DockPanel.Dock="Top"
-                                       Foreground="Gray"
-                                       FontSize="13"
-                                       FontWeight="Heavy"
-                                       Margin="0 0 0 4"
-                                       Text="测试群" />
+                                           Foreground="Gray"
+                                           FontSize="13"
+                                           FontWeight="Heavy"
+                                           Margin="0 0 0 4"
+                                           Text="测试群" />
                                 <Border Background="{StaticResource Brush.QQ.Bar}"
-                                    CornerRadius="8"
-                                    HorizontalAlignment="Left"
-                                    Padding="12">
+                                        CornerRadius="8"
+                                        HorizontalAlignment="Left"
+                                        Padding="12">
                                     <TextBlock Text="这是一则消息" />
                                 </Border>
                             </DockPanel>
@@ -392,23 +393,23 @@
 
                         <DockPanel Margin="0 4">
                             <Ellipse DockPanel.Dock="Right"
-                                 Height="48"
-                                 Width="48"
-                                 Fill="{StaticResource Avatar}" />
+                                     Height="48"
+                                     Width="48"
+                                     Fill="{StaticResource Avatar}" />
 
                             <DockPanel HorizontalAlignment="Right"
-                                   Margin="0 0 12 0">
+                                       Margin="0 0 12 0">
                                 <TextBlock DockPanel.Dock="Top"
-                                       Foreground="Gray"
-                                       FontSize="13"
-                                       FontWeight="Heavy"
-                                       HorizontalAlignment="Right"
-                                       Margin="0 0 0 4"
-                                       Text="测试群" />
+                                           Foreground="Gray"
+                                           FontSize="13"
+                                           FontWeight="Heavy"
+                                           HorizontalAlignment="Right"
+                                           Margin="0 0 0 4"
+                                           Text="测试群" />
                                 <Border Background="{StaticResource Brush.QQ.Bar}"
-                                    CornerRadius="8"
-                                    HorizontalAlignment="Left"
-                                    Padding="12">
+                                        CornerRadius="8"
+                                        HorizontalAlignment="Left"
+                                        Padding="12">
                                     <TextBlock Text="这是一则消息" />
                                 </Border>
                             </DockPanel>
@@ -423,69 +424,11 @@
             用来显示选定的人物的联系人群聊
         -->
         <Viewbox Grid.Column="2">
-            <Border>
-                <Grid Background="{StaticResource Brush.QQ.Background}"
-                      Height="720"
-                      Width="405">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="72" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="64" />
-                    </Grid.RowDefinitions>
+            <Border x:Name="Canvas">
 
-                    <!--
-                        标题：
-                        用来显示选定的人物的联系人群聊
-                    -->
-                    <Border Grid.Row="0"
-                            Background="{StaticResource Brush.QQ.Background}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <Path Grid.Column="0"
-                                  Data="{StaticResource FeatherIcon.Left}"
-                                  Stretch="Uniform"
-                                  Stroke="Black"
-                                  StrokeThickness="2"
-                                  Height="42"
-                                  Width="42" />
-
-                            <DockPanel Grid.Column="1"
-                                       Margin="16 0 0 0"
-                                       VerticalAlignment="Center">
-                                <TextBlock DockPanel.Dock="Top"
-                                           Foreground="Black"
-                                           FontSize="17"
-                                           FontWeight="Heavy"
-                                           Text="测试群(30)" />
-                                <TextBlock Foreground="Black"
-                                           FontSize="11"
-                                           Text="19人在线" />
-
-                            </DockPanel>
-
-                            <Image Grid.Column="2"
-                                   Margin="4 0 16 0"
-                                   Source="{StaticResource Phone}"
-                                   Stretch="Uniform"
-                                   Width="19" />
-
-                            <Image Grid.Column="3"
-                                   Margin="4 0 16 0"
-                                   Source="{StaticResource Menu}"
-                                   Stretch="Uniform"
-                                   Width="21" />
-                        </Grid>
-                    </Border>
-
-                    <!--
-                        聊天记录：
-                        用来显示选定的人物的联系人群聊
-                    -->
+                <studio:SocialSoftwareLayout ChannelName="测试群(30)"
+                                             ChannelSubtitle="19人在线"
+                                             PendingContent="你妈的">
                     <ScrollViewer Grid.Row="1"
                                   Padding="16">
                         <ItemsControl>
@@ -545,54 +488,7 @@
                             </DockPanel>
                         </ItemsControl>
                     </ScrollViewer>
-                    <!--
-                        输入框：
-                        用来显示选定的人物的联系人群聊
-                    -->
-                    <Border Grid.Row="2"
-                            Background="White"
-                            Padding="12 0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0"
-                                   Margin="8 0 "
-                                   Source="{StaticResource Mic}"
-                                   Stretch="Uniform"
-                                   Width="17" />
-
-                            <Border Grid.Column="1"
-                                    Background="{StaticResource Brush.QQ.Background}"
-                                    CornerRadius="3"
-                                    Margin="16 0"
-                                    Height="48"
-                                    VerticalAlignment="Center">
-                                <TextBlock FontSize="18"
-                                           Foreground="Black"
-                                           HorizontalAlignment="Center"
-                                           Text="测试群"
-                                           VerticalAlignment="Center" />
-                            </Border>
-
-                            <Image Grid.Column="2"
-                                   Margin="4 0"
-                                   Source="{StaticResource Emoji}"
-                                   Stretch="Uniform"
-                                   Width="23" />
-
-
-                            <Image Grid.Column="3"
-                                   Margin="4 0"
-                                   Source="{StaticResource PlusCircle}"
-                                   Stretch="Uniform"
-                                   Width="23" />
-                        </Grid>
-                    </Border>
-                </Grid>
+                </studio:SocialSoftwareLayout>
             </Border>
         </Viewbox>
 
