@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override async Task AddItem()
         {
-            var opendlg = FileIO.Open(SubSystemString.ImageFilter, true);
+            var opendlg = Studio.Open(SubSystemString.ImageFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {

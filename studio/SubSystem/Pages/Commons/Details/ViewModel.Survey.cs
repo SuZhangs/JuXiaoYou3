@@ -64,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var savedlg = FileIO.Save(SubSystemString.JsonFilter, "*.json");
+            var savedlg = Studio.Save(SubSystemString.JsonFilter, "*.json");
 
             if (savedlg.ShowDialog() != true)
             {
@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task ImportImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.JsonFilter);
+            var opendlg = Studio.Open(SubSystemString.JsonFilter);
 
             if (opendlg.ShowDialog() != true)
             {

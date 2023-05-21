@@ -138,7 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         private async Task AddMusicToPlaylistImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.MusicFilter, true);
+            var opendlg = Studio.Open(SubSystemString.MusicFilter, true);
             if (opendlg.ShowDialog() != true)
             {
                 return;

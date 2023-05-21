@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override async Task AddItem()
         {
-            var opendlg = FileIO.Open(SubSystemString.MusicFilter, true);
+            var opendlg = Studio.Open(SubSystemString.MusicFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {

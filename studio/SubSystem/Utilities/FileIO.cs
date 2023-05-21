@@ -14,12 +14,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 return;
             }
+
             var link = Language.GetText(key);
-            
+
             if (string.IsNullOrEmpty(link))
             {
                 return;
             }
+
             Process.Start(new ProcessStartInfo
             {
                 UseShellExecute = true,
@@ -27,44 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Arguments       = link
             });
         }
-        
-        public static async Task CaptureAsync(FrameworkElement element)
-        {
-            if (element is null)
-            {
-                return;
-            }
 
-            var savedlg = Save(SubSystemString.PngFilter, "*.png");
-
-            if (savedlg.ShowDialog() != true)
-            {
-                return;
-            }
-            
-            var ms = Xaml.CaptureToStream(element);
-            await System.IO.File.WriteAllBytesAsync(savedlg.FileName, ms.GetBuffer());
-        }
-        
-        public static VistaSaveFileDialog Save(string filter, string defaultExt, string fileName = null)
-        {
-            return new VistaSaveFileDialog
-            {
-                FileName     = fileName,
-                Filter       = filter,
-                AddExtension = true,
-                DefaultExt   = defaultExt
-            };
-        }
-
-        public static VistaOpenFileDialog Open(string filter, bool multiselect = false)
-        {
-           return new VistaOpenFileDialog
-            {
-                Filter      = filter,
-                Multiselect = multiselect
-            };
-        }
         /// <summary>
         /// 创建一个快捷方式
         /// </summary>
@@ -82,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             shortcut.WorkingDirectory = workDir;
             shortcut.Save();
         }
-        
+
         /// <summary>
         /// 读取一个快捷方式的信息
         /// </summary>
@@ -95,14 +60,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var     shortcut  = shell.CreateShortcut(lnkFilePath);
             return new ShortcutDescription()
             {
-                TargetPath = shortcut.TargetPath,
-                Arguments  = shortcut.Arguments,
-                WorkingDirection    = shortcut.WorkingDirectory,
+                TargetPath       = shortcut.TargetPath,
+                Arguments        = shortcut.Arguments,
+                WorkingDirection = shortcut.WorkingDirectory,
             };
         }
 
         public static RelayCommand<string> OpenLinkCommand { get; } = new RelayCommand<string>(OpenLink);
-        
     }
 
     public class ShortcutDescription

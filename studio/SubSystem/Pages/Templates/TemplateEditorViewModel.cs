@@ -120,7 +120,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 if (!r) return;
             }
 
-            var opendlg = FileIO.Open(SubSystemString.ModuleFilter);
+            var opendlg = Studio.Open(SubSystemString.ModuleFilter);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -191,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             // 2) 选择文件
             // 3) 打开文件并赋值
 
-            var savedlg = FileIO.Save(SubSystemString.ModuleFilter, "*.png", PresentationName);
+            var savedlg = Studio.Save(SubSystemString.ModuleFilter, "*.png", PresentationName);
 
             if (savedlg.ShowDialog() != true)
             {

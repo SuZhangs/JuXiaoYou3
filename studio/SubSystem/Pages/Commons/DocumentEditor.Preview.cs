@@ -270,7 +270,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private async Task ExportPresentationAsPictureImpl()
         {
-            var savedlg = FileIO.Save(SubSystemString.ImageFilter, "*.png");
+            var savedlg = Studio.Save(SubSystemString.ImageFilter, "*.png");
 
             if (savedlg.ShowDialog() != true)
             {
@@ -280,7 +280,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task ExportPresentationAsPdfImpl()
         {
-            var savedlg = FileIO.Save(SubSystemString.PdfFilter, "*.pdf");
+            var savedlg = Studio.Save(SubSystemString.PdfFilter, "*.pdf");
 
             if (savedlg.ShowDialog() != true)
             {
@@ -290,7 +290,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task ExportPresentationAsMarkdownImpl()
         {
-            var savedlg = FileIO.Save(SubSystemString.MarkdownFilter, "*.md");
+            var savedlg = Studio.Save(SubSystemString.MarkdownFilter, "*.md");
 
             if (savedlg.ShowDialog() != true)
             {

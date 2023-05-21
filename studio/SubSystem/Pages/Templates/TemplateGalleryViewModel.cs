@@ -87,7 +87,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task AddTemplateImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.ModuleFilter, true);
+            var opendlg = Studio.Open(SubSystemString.ModuleFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -172,7 +172,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private async Task ImportTemplateImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.ModuleFilter, true);
+            var opendlg = Studio.Open(SubSystemString.ModuleFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {

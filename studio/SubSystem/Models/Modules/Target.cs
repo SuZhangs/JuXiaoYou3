@@ -108,7 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void SelectImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.AudioFilter);
+            var opendlg = Studio.Open(SubSystemString.AudioFilter);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -136,7 +136,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void SelectImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.VideoFilter);
+            var opendlg = Studio.Open(SubSystemString.VideoFilter);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -164,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void SelectImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.AllFileFilter);
+            var opendlg = Studio.Open(SubSystemString.AllFileFilter);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -192,7 +192,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void SelectImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.MusicFilter);
+            var opendlg = Studio.Open(SubSystemString.MusicFilter);
 
             if (opendlg.ShowDialog() != true)
             {
@@ -220,7 +220,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private void SelectImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.ImageFilter);
+            var opendlg = Studio.Open(SubSystemString.ImageFilter);
 
             if (opendlg.ShowDialog() != true)
             {

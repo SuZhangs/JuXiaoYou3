@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         private async Task AddAlbumImpl()
         {
-            var opendlg = FileIO.Open(SubSystemString.ImageFilter, true);
+            var opendlg = Studio.Open(SubSystemString.ImageFilter, true);
 
             if (opendlg.ShowDialog() != true)
             {
