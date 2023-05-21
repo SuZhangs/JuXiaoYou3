@@ -43,6 +43,13 @@
             <LineGeometry StartPoint="12,4" EndPoint="12,20" />
         </GeometryGroup.Children>
     </GeometryGroup>-->
+    <GeometryGroup x:Key="FeatherIcon.Image">
+        <GeometryGroup.Children>
+            <RectangleGeometry RadiusX="2" RadiusY="2" Rect="3,3,18,18" />
+            <EllipseGeometry RadiusX="1.5" RadiusY="1.5" Center="8.5,8.5" />
+            <Geometry>F1 M24,24z M0,0z M21,15L21,15 16,10 5,21</Geometry>
+        </GeometryGroup.Children>
+    </GeometryGroup>
     <GeometryGroup x:Key="FeatherIcon.Clock">
         <GeometryGroup.Children>
             <EllipseGeometry RadiusX="10" RadiusY="10" Center="12,12" />

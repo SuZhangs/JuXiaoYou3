@@ -201,10 +201,23 @@
                             <WrapPanel/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <Ellipse Margin="8"
-                         Height="64"
-                         Width="64"
-                         Fill="{StaticResource Avatar}" />
+                    <f:StretchPanel Margin="8">
+                        <Rectangle Height="64"
+                                 Width="64"
+                                 Fill="{StaticResource Avatar}" />
+                        <Border Background="{f:Brush HighlightB4}"
+                                CornerRadius="12"
+                                Margin="8 2"
+                                Height="24"
+                                Width="24"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom">
+                            <TextBlock FontSize="16"
+                                       Text="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </f:StretchPanel>
                     <Ellipse Margin="8"
                          Height="64"
                          Width="64"
@@ -236,16 +249,9 @@
                 </ItemsControl>
             </HeaderedContentControl>
 
-            <f:ForestIsland Grid.Row="2"
+            <HeaderedContentControl Grid.Row="2"
                             Header="其他联系人"
                             Margin="0 8">
-                <f:ForestIsland.ToolBar>
-                    <StackPanel HorizontalAlignment="Right"
-                            Orientation="Horizontal"
-                            Margin="0 0 0 4">
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Plus}" />
-                    </StackPanel>
-                </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl Grid.Row="2"
                                           NotEmpty="True">
                     <Grid Margin="0 4">
@@ -262,48 +268,105 @@
                                         Content="发言"
                                         Margin="4 0"
                                         Palette="Info"/>
-                        <f:CallToAction Grid.Column="3"
-                                        Content="删除"
-                                        Margin="4 0"
-                                        Palette="Danger"/>
 
-                        <TextBlock Grid.Column="1"
-                                   FontSize="16"
-                                       FontWeight="Bold"
-                                       Margin="16 8 0 0"
-                                       Text="这是一则消息"
-                                       VerticalAlignment="Top"/>
+                        <DockPanel Grid.Column="1"
+                                   Margin="16 0 0 0 "
+                                   VerticalAlignment="Center">
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Text="发言者" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="群主" />
+                        </DockPanel>
+                    </Grid>
+                    <Grid Margin="0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Height="48"
+                                 Width="48"
+                                 Fill="{StaticResource Avatar}" />
+                        <f:CallToAction Grid.Column="2"
+                                        Content="发言"
+                                        Margin="4 0"
+                                        Palette="Info"/>
+
+                        <DockPanel Grid.Column="1"
+                                   Margin="16 0 0 0 "
+                                   VerticalAlignment="Center">
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Text="发言者" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="管理" />
+                        </DockPanel>
+                    </Grid>
+                    <Grid Margin="0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Height="48"
+                                 Width="48"
+                                 Fill="{StaticResource Avatar}" />
+                        <f:CallToAction Grid.Column="2"
+                                        Content="发言"
+                                        Margin="4 0"
+                                        Palette="Info"/>
+
+                        <DockPanel Grid.Column="1"
+                                   Margin="16 0 0 0 "
+                                   VerticalAlignment="Center">
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Text="发言者" />
+                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
+                                       Margin="0 4"
+                                       Text="群友" />
+                        </DockPanel>
                     </Grid>
                 </f:EmptyStateItemsControl>
-            </f:ForestIsland>
+            </HeaderedContentControl>
         </Grid>
 
 
         <Border Grid.Column="1"
                 Padding="16">
             <DockPanel>
-                <WrapPanel DockPanel.Dock="Bottom">
-                    <WrapPanel.Resources>
-                        <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
-                            <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
-                            <Setter Property="Margin" Value="0 0 0 4" />
-                            <Setter Property="IconSize" Value="23" />
-                            <Setter Property="Height" Value="40" />
-                            <Setter Property="Width" Value="40" />
-                        </Style>
-                    </WrapPanel.Resources>
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Login}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.LogOut}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}" />
-                </WrapPanel>
+                <DockPanel DockPanel.Dock="Bottom">
+                    <WrapPanel DockPanel.Dock="Top">
+                        <WrapPanel.Resources>
+                            <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+                                <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+                                <Setter Property="Margin" Value="0 0 0 4" />
+                                <Setter Property="IconSize" Value="23" />
+                                <Setter Property="Height" Value="40" />
+                                <Setter Property="Width" Value="40" />
+                            </Style>
+                        </WrapPanel.Resources>
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Login}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.LogOut}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
+                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
+                    </WrapPanel>
+                    <f:MultiLine Height="128"/>
+                </DockPanel>
+                
                 
                 <ScrollViewer DockPanel.Dock="Top">
                     <ItemsControl>
