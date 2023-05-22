@@ -17,17 +17,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigaGen.App", "generators\M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigaStudio.VisualPrototype", "toolkits\MigaStudio.VisualPrototype\MigaStudio.VisualPrototype.csproj", "{D5C75503-CA37-41FF-BD15-16F0AA4BCE5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest", "ui\Forest\Forest\Forest.csproj", "{05470C71-B408-483D-8379-174EC73FE7A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest", "ui\Forest\Forest\Forest.csproj", "{05470C71-B408-483D-8379-174EC73FE7A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Controls", "ui\Forest\Forest.Controls\Forest.Controls.csproj", "{B0CC85BE-C155-4ED5-BC93-6D43D592FB8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Controls", "ui\Forest\Forest.Controls\Forest.Controls.csproj", "{B0CC85BE-C155-4ED5-BC93-6D43D592FB8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Shell", "ui\Forest\Forest.Shell\Forest.Shell.csproj", "{F4F06130-251C-45D8-885B-17D7E8725846}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forest.Shell", "ui\Forest\Forest.Shell\Forest.Shell.csproj", "{F4F06130-251C-45D8-885B-17D7E8725846}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.UI", "studio\MigaStudio.UI\MigaStudio.UI.csproj", "{BFEF27BE-9ECB-428F-89DD-CB4E505902D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigaStudio.UI", "studio\MigaStudio.UI\MigaStudio.UI.csproj", "{BFEF27BE-9ECB-428F-89DD-CB4E505902D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{B027E579-4A11-4FA5-8F4F-1FC407058CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureGL.Demo.ViewHost", "tools\FutureGL.Demo.ViewHost\FutureGL.Demo.ViewHost.csproj", "{B027E579-4A11-4FA5-8F4F-1FC407058CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubSystem", "studio\SubSystem\SubSystem.csproj", "{36559FCA-FBE2-4E82-BB5D-D754ABDB4057}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem", "studio\SubSystem\SubSystem.csproj", "{36559FCA-FBE2-4E82-BB5D-D754ABDB4057}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoryDiagram", "toolkits\StoryDiagram\StoryDiagram.csproj", "{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,18 @@ Global
 		{36559FCA-FBE2-4E82-BB5D-D754ABDB4057}.Release|x64.Build.0 = Release|x64
 		{36559FCA-FBE2-4E82-BB5D-D754ABDB4057}.Release|x86.ActiveCfg = Release|x86
 		{36559FCA-FBE2-4E82-BB5D-D754ABDB4057}.Release|x86.Build.0 = Release|x86
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|x86.ActiveCfg = Debug|x86
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Debug|x86.Build.0 = Debug|x86
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|x64.Build.0 = Release|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D1A533F5-6217-4FB9-B239-B6D7B1F80F0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

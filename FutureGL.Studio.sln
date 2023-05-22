@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gists", "Gists", "{6399E2E1
 	ProjectSection(SolutionItems) = preProject
 		gists\avatar-binding.md = gists\avatar-binding.md
 		gists\innosetup.md = gists\innosetup.md
+		gists\grid-line.md = gists\grid-line.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5A7A0-8D0B-42A2-9AF5-CB9133FE7AE2}"
