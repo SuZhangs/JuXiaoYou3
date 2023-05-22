@@ -65,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
         where TSplash : UserControl
         where TViewModel : TabBaseAppViewModel
     {
-        protected TabApp()
+        protected TabApp() : base(BasicSettingDefaultFileName)
         {
         }
 

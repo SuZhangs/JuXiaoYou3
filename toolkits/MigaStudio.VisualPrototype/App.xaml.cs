@@ -18,11 +18,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
     /// </summary>
     public partial class App
     {
-        protected override ForestThemeSystem GetThemeSystem(BasicAppSetting basicAppSetting)
-        {
-            return new ForestDarkTheme();
-        }
-
         protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
             

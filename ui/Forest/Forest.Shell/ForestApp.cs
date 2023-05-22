@@ -66,13 +66,33 @@ namespace Acorisoft.FutureGL.Forest
             }
         }
 
+        protected const  string BasicSettingDefaultFileName = "main.json";
         private readonly string BasicSettingFileName;
+        private readonly bool   EnableDefaultSetting;
 
-        protected ForestApp() : this("main.json")
+        protected ForestApp()
         {
-            Current.DispatcherUnhandledException       += OnUnhandledException;
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            EnableDefaultSetting = false;
+
+            //
+            // 初始化
+            Initialize();
         }
+
+        protected ForestApp(string fileName)
+        {
+            EnableDefaultSetting = true;
+            BasicSettingFileName = fileName;
+
+            //
+            // 初始化
+            Initialize();
+        }
+
+        #region OnUnhandledException Handlers
+
+        
+
 
         private void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -86,15 +106,8 @@ namespace Acorisoft.FutureGL.Forest
         {
             Logger.Error(e.ExceptionObject);
         }
-
-        protected ForestApp(string fileName)
-        {
-            BasicSettingFileName = fileName;
-
-            //
-            // 初始化
-            Initialize();
-        }
+        
+        #endregion
 
         protected static void InstallView<TView, TViewModel>() where TView : ForestUserControl where TViewModel : ViewModelBase, IViewModel
         {
@@ -107,7 +120,10 @@ namespace Acorisoft.FutureGL.Forest
 
         private void Initialize()
         {
-            var (logger, appModel) = RegisterFrameworkServicesIntern(Xaml.Container);
+            
+            Current.DispatcherUnhandledException       += OnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            var (logger, appModel)                     =  RegisterFrameworkServicesIntern(Xaml.Container);
             RegisterServices(logger, appModel, Xaml.Container);
             Xaml.InstallViewFromSourceGenerator();
             RegisterViews(logger, Xaml.Container);
@@ -181,7 +197,7 @@ namespace Acorisoft.FutureGL.Forest
             var config = new LoggingConfiguration();
             var debugFileTarget = new DebuggerTarget
             {
-                Layout = "【${level}】 ${date:HH:mm:ss} ${message}"
+                Layout = "【${level}】 ${date:HH\\:mm\\:ss} ${message}"
             };
 
             var logfile = new FileTarget("logfile")
@@ -202,26 +218,31 @@ namespace Acorisoft.FutureGL.Forest
         /// </summary>
         protected virtual ApplicationModel ConfigureDirectory()
         {
-            var domain = ApplicationModel.CheckDirectory(
-                Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    "Forest"));
-
-            return new ApplicationModel
+            if (EnableDefaultSetting)
             {
-                Logs     = Path.Combine(domain, "Logs"),
-                Settings = Path.Combine(domain, "UserData"),
-            }.Initialize();
+                var domain = ApplicationModel.CheckDirectory(
+                    Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        "Forest"));
+
+                return new ApplicationModel
+                {
+                    Logs     = Path.Combine(domain, "Logs"),
+                    Settings = Path.Combine(domain, "UserData"),
+                }.Initialize();
+            }
+            else
+            {
+                var domain = AppDomain.CurrentDomain.BaseDirectory;
+                return new ApplicationModel
+                {
+                    Logs     = Path.Combine(domain, "Logs"),
+                    Settings = Path.Combine(domain, "UserData"),
+                }.Initialize();
+            }
         }
 
         #endregion
-
-        private void SaveBasicSettingImpl(BasicAppSetting setting)
-        {
-            JSON.WriteSetting(Path.Combine(AppModel.Settings, BasicSettingFileName), Xaml.Get<BasicAppSetting>());
-        }
-
-        public static void SaveBasicSetting(BasicAppSetting setting) => ((ForestApp)Current).SaveBasicSettingImpl(setting);
 
         /// <summary>
         /// 注册框架服务。
@@ -237,15 +258,29 @@ namespace Acorisoft.FutureGL.Forest
             Logger   = logger;
             AppModel = appModel;
 
+            BasicAppSetting basicAppSetting;
+
             //
             // 构建基本的属性
-            var basicAppSetting = JSON.OpenSetting<BasicAppSetting>(
+            if (EnableDefaultSetting)
+            {
+                basicAppSetting = JSON.OpenSetting<BasicAppSetting>(
                 Path.Combine(appModel.Settings, BasicSettingFileName),
                 () => new BasicAppSetting
                 {
                     Language = CultureArea.Chinese,
                     Theme    = MainTheme.Light
                 });
+                
+            }
+            else
+            {
+                basicAppSetting = new BasicAppSetting
+                {
+                    Language = CultureArea.Chinese,
+                    Theme    = MainTheme.Dark
+                };
+            }
 
             //
             // 设置主题。
@@ -365,7 +400,17 @@ namespace Acorisoft.FutureGL.Forest
         #endregion
 
         #endregion
-
+        
+        private void SaveBasicSettingImpl(BasicAppSetting setting)
+        {
+            JSON.WriteSetting(Path.Combine(AppModel.Settings, BasicSettingFileName), setting);
+        }
+        
+        /// <summary>
+        /// 保存基础设置
+        /// </summary>
+        /// <param name="setting">设置</param>
+        public static void SaveBasicSetting(BasicAppSetting setting) => ((ForestApp)Current).SaveBasicSettingImpl(setting);
 
         public ILogger Logger { get; private set; }
         public ApplicationModel AppModel { get; private set; }
