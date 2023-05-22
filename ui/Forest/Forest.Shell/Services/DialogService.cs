@@ -148,6 +148,19 @@ namespace Acorisoft.FutureGL.Forest.Services
         {
             return Notify(level, title, content, Language.ConfirmText);
         }
+        
+        /// <summary>
+        /// 通知对话框
+        /// </summary>
+        /// <param name="level">标题</param>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns></returns>
+        public Task Notify(CriticalLevel level, string title, string content, int seconds)
+        {
+            return Notify(level, title, content,seconds, Language.ConfirmText);
+        }
 
         /// <summary>
         /// 通知对话框
@@ -167,34 +180,34 @@ namespace Acorisoft.FutureGL.Forest.Services
                 {
                     Title            = title,
                     Content          = content,
-                    CancelButtonText = buttonText,
+                    CompleteButtonText = buttonText,
                 };
             }
             else if (level == CriticalLevel.Warning)
             {
                 dvm = new WarningNotifyViewModel
                 {
-                    Title            = title,
-                    Content          = content,
-                    CancelButtonText = buttonText,
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
                 };
             }
             else if (level == CriticalLevel.Info)
             {
                 dvm = new InfoViewModel
                 {
-                    Title            = title,
-                    Content          = content,
-                    CancelButtonText = buttonText,
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
                 };
             }
             else if (level == CriticalLevel.Success)
             {
                 dvm = new SuccessViewModel
                 {
-                    Title            = title,
-                    Content          = content,
-                    CancelButtonText = buttonText,
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
                 };
             }
             else
@@ -203,6 +216,79 @@ namespace Acorisoft.FutureGL.Forest.Services
                 {
                     Title   = title,
                     Content = content,
+                    CompleteButtonText = buttonText
+                };
+            }
+
+            await _host.ShowDialog(dvm, new RoutingEventArgs());
+        }
+        
+        /// <summary>
+        /// 通知对话框
+        /// </summary>
+        /// <param name="level">标题</param>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <param name="buttonText">确认按钮文本</param>
+        /// <returns></returns>
+        public async Task Notify(CriticalLevel level, string title, string content,int seconds, string buttonText)
+        {
+            DialogViewModel dvm;
+
+            if (level == CriticalLevel.Danger)
+            {
+                dvm = new DangerNotifyViewModel
+                {
+                    Title            = title,
+                    Content          = content,
+                    CompleteButtonText = buttonText,
+                    CountDown        = true,
+                    CountSeconds     = seconds
+                };
+            }
+            else if (level == CriticalLevel.Warning)
+            {
+                dvm = new WarningNotifyViewModel
+                {
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
+                    CountDown          = true,
+                    CountSeconds       = seconds
+                };
+            }
+            else if (level == CriticalLevel.Info)
+            {
+                dvm = new InfoViewModel
+                {
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
+                    CountDown          = true,
+                    CountSeconds       = seconds
+                };
+            }
+            else if (level == CriticalLevel.Success)
+            {
+                dvm = new SuccessViewModel
+                {
+                    Title              = title,
+                    Content            = content,
+                    CompleteButtonText = buttonText,
+                    CountDown          = true,
+                    CountSeconds       = seconds
+                };
+            }
+            else
+            {
+                dvm = new ObsoleteViewModel
+                {
+                    Title        = title,
+                    CompleteButtonText = buttonText,
+                    Content      = content,
+                    CountDown    = true,
+                    CountSeconds = seconds
                 };
             }
 
@@ -219,6 +305,19 @@ namespace Acorisoft.FutureGL.Forest.Services
         public Task<bool> Danger(string title, string content)
         {
             return Danger(title, content, Language.ConfirmText, Language.CancelText);
+        }
+        
+        /// <summary>
+        /// 危险提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        /// <param name="seconds">倒计时</param>
+        /// <returns></returns>
+        public Task<bool> Danger(string title, string content,int seconds)
+        {
+            return Danger(title, content, seconds, Language.ConfirmText, Language.CancelText);
         }
 
         /// <summary>
@@ -242,6 +341,31 @@ namespace Acorisoft.FutureGL.Forest.Services
             var result = await _host.ShowDialog(dvm, new RoutingEventArgs());
             return result.IsFinished;
         }
+        
+        /// <summary>
+        /// 危险提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="okButtonText">确认按钮文本</param>
+        /// <param name="cancelButtonText">放弃按钮文本</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        public async Task<bool> Danger(string title, string content,int seconds, string okButtonText, string cancelButtonText)
+        {
+            var dvm = new DangerViewModel
+            {
+                Title              = title,
+                Content            = content,
+                CancelButtonText   = cancelButtonText,
+                CompleteButtonText = okButtonText,
+                CountDown = true,
+                CountSeconds = seconds
+            };
+
+            var result = await _host.ShowDialog(dvm, new RoutingEventArgs());
+            return result.IsFinished;
+        }
 
         /// <summary>
         /// 危险提示对话框
@@ -254,6 +378,44 @@ namespace Acorisoft.FutureGL.Forest.Services
         {
             return Warning(title, content, Language.ConfirmText, Language.CancelText);
         }
+        /// <summary>
+        /// 危险提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        /// <returns></returns>
+        public Task<bool> Warning(string title, string content, int seconds)
+        {
+            return Warning(title, content, seconds, Language.ConfirmText, Language.CancelText);
+        }
+        
+        /// <summary>
+        /// 危险提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <param name="okButtonText">确认按钮文本</param>
+        /// <param name="cancelButtonText">放弃按钮文本</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        public async Task<bool> Warning(string title, string content,int seconds, string okButtonText, string cancelButtonText)
+        {
+            var dvm = new WarningViewModel
+            {
+                Title              = title,
+                Content            = content,
+                CancelButtonText   = cancelButtonText,
+                CompleteButtonText = okButtonText,
+                CountDown = true,
+                CountSeconds = seconds
+            };
+
+            var result = await _host.ShowDialog(dvm, new RoutingEventArgs());
+            return result.IsFinished;
+        }
+        
 
         /// <summary>
         /// 危险提示对话框

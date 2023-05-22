@@ -158,11 +158,23 @@ namespace Acorisoft.FutureGL.Forest
             return DialogService()
                 .Danger(DangerOperationCaption, content);
         }
+        
+        public static Task<bool> Error(this IViewModel source, string content, int seconds)
+        {
+            return DialogService()
+                .Danger(DangerOperationCaption, content, seconds);
+        }
 
         public static Task<bool> Warning(this IViewModel source, string content)
         {
             return DialogService()
                 .Warning(SensitiveOperationCaption, content);
+        }
+        
+        public static Task<bool> Warning(this IViewModel source, string content, int seconds)
+        {
+            return DialogService()
+                .Warning(SensitiveOperationCaption, content, seconds);
         }
 
 
@@ -171,7 +183,12 @@ namespace Acorisoft.FutureGL.Forest
             return DialogService()
                 .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content);
         }
-
+        
+        public static Task Obsoleted(this IViewModel source, string content, int seconds)
+        {
+            return DialogService()
+                .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content,seconds);
+        }
 
         public static void Successful(this IViewModel source, string content, int seconds = 2)
         {
@@ -208,7 +225,6 @@ namespace Acorisoft.FutureGL.Forest
                     Title    = content
                 });
         }
-
 
         public static void ErrorNotification(this IViewModel source, string content, int seconds = 2)
         {

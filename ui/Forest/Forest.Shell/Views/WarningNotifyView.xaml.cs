@@ -2,15 +2,15 @@
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
-    public partial class WarningNotifyView:ForestUserControl 
+    public partial class WarningNotifyView : ForestUserControl
     {
         public WarningNotifyView()
         {
             InitializeComponent();
         }
     }
-    
-    
+
+
     public sealed class WarningNotifyViewModel : BooleanDialogVM
     {
         private string _content;

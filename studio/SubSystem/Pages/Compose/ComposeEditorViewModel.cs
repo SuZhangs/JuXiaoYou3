@@ -18,5 +18,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         protected override void OnCreateCompose(Compose document)
         {
         }
+
+        protected override void OnStart()
+        {
+            this.Obsoleted("写作功能尚未完全开发完成", 10);
+            base.OnStart();
+        }
     }
 }

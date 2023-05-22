@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using CommunityToolkit.Mvvm.Input;
 
@@ -73,14 +74,72 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         public RelayCommand CompletedCommand { get; }
     }
 
-    public abstract class BooleanDialogVM : ImplicitDialogVM
+    public abstract class BooleanDialogVM : CountableDialogVM
     {
-        private string      _completeButtonText;
-        private string      _cancelButtonText;
+
+        #region IObserver<WindowKeyEventArgs>
+
+        
+        protected override void OnKeyboardInput(WindowKeyEventArgs e)
+        {
+            if (!e.IsDown && IsFireCancelFromKeyEvent(e))
+            {
+                Cancel();
+            }
+        }
+        
+        protected virtual bool IsFireCancelFromKeyEvent(WindowKeyEventArgs value) => value.Args.Key == Key.Escape;
+
+        #endregion
+
+        #region InputViewModel Overrides
+
+        protected sealed override void Finish()
+        {
+            Result = Boxing.True;
+        }
+
+        protected sealed override string Failed()
+        {
+            Result = Boxing.False;
+            return "用户取消操作";
+        }
+
+        #endregion
+    }
+
+    public abstract class CountableDialogVM : ExplicitDialogVM
+    {
+        private int             _tick;
+        private DispatcherTimer _timer;
+        private string          _text;
+        private string          _completeButtonText;
+        private string          _cancelButtonText;
+        
         #region Lifetime
 
         public sealed override void Start()
         {
+            if (CountDown)
+            {
+                _text = CompleteButtonText;
+                _tick = Math.Clamp(CountSeconds, 5, 60);
+                _timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (_, _) =>
+                {
+                    _tick--;
+
+
+                    UpdateOkText();
+
+                    if (_tick <= 0)
+                    {
+                        _timer.Stop();
+                    }
+                }, Dispatcher.CurrentDispatcher);
+
+                UpdateOkText();
+                _timer.Start();
+            }
             StartOverride();
             base.Start();
         }
@@ -104,37 +163,25 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #endregion
 
-        #region IObserver<WindowKeyEventArgs>
+        protected override bool IsCompleted() => !CountDown || (CountDown && _tick <= 0);
 
+        private void UpdateOkText()
+        {
+            CompleteButtonText = _tick > 0 ? $"{_text} ({_tick})" : _text;
+            CompletedCommand.NotifyCanExecuteChanged();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int CountSeconds { get; init; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="CountDown"/> 属性。
+        /// </summary>
+        public bool CountDown { get; init; }
         
-        protected override void OnKeyboardInput(WindowKeyEventArgs e)
-        {
-            if (!e.IsDown && IsFireCancelFromKeyEvent(e))
-            {
-                Cancel();
-            }
-        }
         
-        protected virtual bool IsFireCancelFromKeyEvent(WindowKeyEventArgs value) => value.Args.Key == Key.Escape;
-
-        #endregion
-
-        #region InputViewModel Overrides
-
-        protected override bool IsCompleted() => true;
-
-        protected sealed override void Finish()
-        {
-            Result = Boxing.True;
-        }
-
-        protected sealed override string Failed()
-        {
-            Result = Boxing.False;
-            return "用户取消操作";
-        }
-
-        #endregion
 
         /// <summary>
         /// 获取或设置 <see cref="CancelButtonText"/> 属性。

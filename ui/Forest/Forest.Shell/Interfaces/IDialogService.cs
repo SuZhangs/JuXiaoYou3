@@ -117,6 +117,15 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="content">内容</param>
         /// <returns>返回一个可等待的任务。</returns>
         Task<bool> Danger(string title, string content);
+        
+        /// <summary>
+        /// 危险提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        Task<bool> Danger(string title, string content, int seconds);
 
         /// <summary>
         /// 危险提示对话框
@@ -136,6 +145,16 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <returns>返回一个可等待的任务。</returns>
         Task<bool> Warning(string title, string content);
         
+        
+        /// <summary>
+        /// 警告提示对话框
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns>返回一个可等待的任务。</returns>
+        Task<bool> Warning(string title, string content, int seconds);
+        
         /// <summary>
         /// 警告提示对话框
         /// </summary>
@@ -154,6 +173,19 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <param name="content">内容</param>
         /// <returns></returns>
         Task Notify(CriticalLevel level, string title, string content);
+        
+        /// <summary>
+        /// 通知对话框
+        /// </summary>
+        /// <param name="level">标题</param>
+        /// <param name="title">标题</param>
+        /// <param name="content">内容</param>
+        /// <param name="seconds">倒计时</param>
+        /// <returns></returns>
+        Task Notify(CriticalLevel level, string title, string content, int seconds);
+
+        Task Notify(CriticalLevel level, string title, string content, string buttonText);
+        Task Notify(CriticalLevel level, string title, string content, int seconds, string buttonText);
     }
 
     /// <summary>
