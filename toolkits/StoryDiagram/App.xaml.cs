@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.UI;
 using DryIoc;
 using NLog;
 
@@ -23,6 +24,11 @@ namespace StoryDiagram
 
         protected override void RegisterViews(ILogger logger, IContainer container)
         {
+        }
+
+        protected override void RegisterResourceDictionary(ResourceDictionary appResDict)
+        {
+            appResDict.MergedDictionaries.Add(ForestUI.UseToolKits());
         }
     }
 }
