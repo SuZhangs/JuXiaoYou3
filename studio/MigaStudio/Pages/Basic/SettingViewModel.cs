@@ -1,4 +1,9 @@
-﻿using Acorisoft.FutureGL.Forest;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
@@ -12,15 +17,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
     }
 
-    public class SettingViewModel : SettingViewModelBase
+    public partial class SettingViewModel : SettingViewModelBase
     {
+        private readonly Subject<ValueTuple<long, long, long, EngineCounter[]>> _subject;
+
         private int _count;
 
         public SettingViewModel()
         {
-            _count = 0;
+            _count          = 0;
+            
+            DatabaseCounter = CreateDatabaseCounter();
+            Application     = CreateApplicationCounter();
+            Logs            = CreateLogCounter();
+            Self            = CreateSelfCounter(Application, Logs);
 
-            CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
+            _subject = new Subject<(long, long,long, EngineCounter[])>();
+            _subject.ObserveOn(Scheduler)
+                    .Subscribe(OnDataSourceChanged);
+
             SystemSetting        = Xaml.Get<SystemSetting>();
             AdvancedSetting      = SystemSetting.AdvancedSetting;
             BasicAppSetting      = Xaml.Get<BasicAppSetting>();
@@ -28,6 +43,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Title                = Language.GetText(ConstantValues.PageName_Setting);
             Repositories         = new ObservableCollection<RepositoryCache>();
 
+            
+            RefreshCommand       = Command(ComputeDirectorySize);
+            OpenCommand          = Command<FolderCounter>(OpenCounter);
+            CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
+            
             ConfigureRegularSetting();
             ApprovalRequired = false;
         }
@@ -39,6 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             CurrentRepository = ss.LastRepository;
             Repositories.AddMany(ss.Repositories, true);
+            ComputeDirectorySize();
         }
 
         protected override void OnStart()
@@ -50,7 +71,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         protected override void OnResume()
         {
             OnRefresh();
-            
         }
 
         private async Task CloseDatabaseImpl()

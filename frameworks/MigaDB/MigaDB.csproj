@@ -27,8 +27,4 @@
       <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\Socials" />
-    </ItemGroup>
-
 </Project>

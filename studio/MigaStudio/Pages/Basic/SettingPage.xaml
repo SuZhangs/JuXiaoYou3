@@ -5,17 +5,78 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
+                     xmlns:thisModels="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
                      xmlns:studio="urn:acorisoft/studio"
-                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:fs="urn:acorisoft/studio"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      mc:Ignorable="d"
                      d:DesignHeight="720"
                      d:DesignWidth="1280"
                      d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <local:SettingViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <DataTemplate x:Key="Enumeration">
             <TextBlock Text="{Binding Converter={StaticResource Translation}}" />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type thisModels:FolderCounter}">
+            <fs:ActionButton BorderThickness="0"
+                             CornerRadius="12"
+                             Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenCommand}"
+                             CommandParameter="{Binding }"
+                             Margin="0 0 0 10"
+                             Icon="{StaticResource FeatherIcon.Box}"
+                             IconSize="31">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"
+                               FontSize="15"
+                               Text="{Binding Name,Mode=OneWay}" />
+
+                    <DockPanel Margin="0 8 0 0">
+                        <TextBlock DockPanel.Dock="Right"
+                                   TextAlignment="Right"
+                                   Margin="16 0 0 0"
+                                   Text="{Binding SizeString,Mode=OneWay}"
+                                   VerticalAlignment="Center"
+                                   Width="72" />
+
+                        <ProgressBar Minimum="0"
+                                     Maximum="100"
+                                     Value="{Binding Percent,Mode=OneWay}" />
+                    </DockPanel>
+                </DockPanel>
+            </fs:ActionButton>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type thisModels:DatabaseCounter}">
+            <DockPanel>
+                <fs:ActionButton DockPanel.Dock="Top"
+                                 Background="{f:Brush BackgroundLevel2}"
+                                 BorderThickness="0"
+                                 Cursor="Hand"
+                                 Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenCommand}"
+                                 CommandParameter="{Binding }"
+                                 CornerRadius="8"
+                                 Icon="{StaticResource FeatherIcon.Folder}"
+                                 IconSize="32">
+                    <TextBlock DockPanel.Dock="Top"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Margin="16 8">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1})">
+                                <Binding Path="Name" />
+                                <Binding Path="SizeString" Mode="OneWay" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </fs:ActionButton>
+                <ScrollViewer Margin="0 16 0 0">
+                    <ItemsControl ItemsSource="{Binding Counters,Mode=OneWay}" />
+                </ScrollViewer>
+            </DockPanel>
         </DataTemplate>
 
         <studio:SettingItemTemplateSelector x:Key="SettingItemSelector">
@@ -43,7 +104,7 @@
                                 <Slider Width="160"
                                         Minimum="{Binding Minimum}"
                                         Maximum="{Binding Maximum}"
-                                        Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                        Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                                 <TextBlock Margin="16 0 0 0"
                                            VerticalAlignment="Center"
@@ -51,8 +112,8 @@
                                            TextTrimming="CharacterEllipsis">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
-                                            <Binding Path="Value" Mode="OneWay"/>
-                                            <Binding Path="Unit" Mode="OneWay"/>
+                                            <Binding Path="Value" Mode="OneWay" />
+                                            <Binding Path="Unit" Mode="OneWay" />
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
@@ -96,8 +157,51 @@
         <f:ShadowTabItem Header="许可证"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True" />
+
         <f:ShadowTabItem Header="关于"
                          Icon="{StaticResource IC.Setting}"
-                         IsFilled="True" />
+                         IsFilled="True">
+            <ScrollViewer>
+                <StackPanel>
+
+                    <UniformGrid Columns="2">
+                        <f:ForestSection Grid.Column="0"
+                                         Header="{Binding Self.Name}"
+                                         Margin="8"
+                                         Padding="16 8"
+                                         Content="{Binding Self}" />
+                        <f:ForestSection Grid.Column="1"
+                                         Header="{Binding DatabaseCounter.Name}"
+                                         Margin="8"
+                                         Padding="16 8"
+                                         Content="{Binding DatabaseCounter}" />
+
+
+                    </UniformGrid>
+
+                    <HeaderedContentControl Grid.Column="2"
+                                             Header="反馈"
+                                             Margin="8"
+                                             Padding="16 8">
+                        <UniformGrid Columns="4"
+                                     VerticalAlignment="Top">
+                            <fs:ActionButton Margin="4"
+                                             Content="普通BUG反馈"
+                                             Padding="8 24 24 24" />
+
+                            <fs:ActionButton Margin="4"
+                                             Content="特殊BUG反馈"
+                                             Padding="8 24 24 24" />
+                            <fs:ActionButton Margin="4"
+                                             Content="离谱BUG反馈"
+                                             Padding="8 24 24 24" />
+                            <fs:ActionButton Margin="4"
+                                             Content="如何反馈？"
+                                             Padding="8 24 24 24" />
+                        </UniformGrid>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </ScrollViewer>
+        </f:ShadowTabItem>
     </f:ShadowTabControl>
 </f:ForestUserControl>
