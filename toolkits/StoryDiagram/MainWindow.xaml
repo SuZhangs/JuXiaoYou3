@@ -62,7 +62,8 @@
 
                                 <f:HeaderedMultiLine  Height="160"
                                                       Header="故事"
-                                                      Margin="0 0 0 16"/>
+                                                      Margin="0 0 0 16"
+                                                      />
 
                                 <f:ForestIsland Header="人物">
                                     <StackPanel Orientation="Horizontal">
