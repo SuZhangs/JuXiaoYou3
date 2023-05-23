@@ -307,6 +307,7 @@ namespace Acorisoft.FutureGL.Forest
                 INotifyServiceAmbient,
                 INotifyService,
                 IBuiltinDialogService>(new DialogService());
+            container.Use<IPendingQueue>(new PendingQueue());
             container.Use<ILogger>(logger);
             Xaml.InstallViewManually(new BuiltinViews());
 
