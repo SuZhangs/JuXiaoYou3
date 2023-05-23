@@ -65,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             //
             Selected ??= Collection.FirstOrDefault();
-            this.Successful(SubSystemString.OperationOfAddIsSuccessful);
+            this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
             SaveOperation();
         }
 

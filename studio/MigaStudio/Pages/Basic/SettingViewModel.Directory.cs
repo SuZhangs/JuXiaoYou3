@@ -3,6 +3,8 @@ using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaDB.Utils;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
@@ -112,8 +114,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             });
             
         }
-        
-        
+
+        private async Task CompressLogsImpl()
+        {
+            var savedlg = Studio.Save(Studio.ZipFilter, Studio.ZipExt);
+            if (savedlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            try
+            {
+                await ZipFile.Zip(Logs.Directory, savedlg.FileName);
+                await this.Successful("保存成功");
+            }
+            catch(Exception ex)
+            {
+                await this.Danger(ex.Message);
+            }
+        }
         
         [NullCheck(UniTestLifetime.Constructor)]
         public DatabaseCounter DatabaseCounter { get; }
@@ -133,5 +152,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<FolderCounter> OpenCommand { get; }
+        public AsyncRelayCommand CompressLogsCommand { get; }
     }
 }

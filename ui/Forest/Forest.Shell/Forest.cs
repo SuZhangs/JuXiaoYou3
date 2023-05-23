@@ -176,7 +176,18 @@ namespace Acorisoft.FutureGL.Forest
             return DialogService()
                 .Warning(SensitiveOperationCaption, content, seconds);
         }
+        
+        public static Task Danger(this IViewModel source, string content)
+        {
+            return DialogService()
+                .Notify(CriticalLevel.Danger, ObsoletedCaption, content);
+        }
 
+        public static Task Info(this IViewModel source, string content)
+        {
+            return DialogService()
+                .Notify(CriticalLevel.Info, ObsoletedCaption, content);
+        }
 
         public static Task Obsoleted(this IViewModel source, string content)
         {
@@ -189,8 +200,14 @@ namespace Acorisoft.FutureGL.Forest
             return DialogService()
                 .Notify(CriticalLevel.Obsoleted, ObsoletedCaption, content,seconds);
         }
+        
+        public static Task Successful(this IViewModel source, string content)
+        {
+            return Xaml.Get<IDialogService>()
+                       .Notify(CriticalLevel.Success, SuccessfulCaption, content);
+        }
 
-        public static void Successful(this IViewModel source, string content, int seconds = 2)
+        public static void SuccessfulNotification(this IViewModel source, string content, int seconds = 2)
         {
             Xaml.Get<INotifyService>()
                 .Notify(new IconNotification
@@ -211,7 +228,7 @@ namespace Acorisoft.FutureGL.Forest
                 .Notify(CriticalLevel.Warning, WarningCaption, content);
         }
 
-        public static void Info(this IViewModel source, string content, int seconds = 2)
+        public static void InfoNotification(this IViewModel source, string content, int seconds = 2)
         {
             Xaml.Get<INotifyService>()
                 .Notify(new IconNotification

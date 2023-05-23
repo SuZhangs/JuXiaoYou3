@@ -1,7 +1,62 @@
 namespace Acorisoft.FutureGL.MigaUtils.Foundation
 {
-    public static class StringExtended
+    public static class StringUtilities
     {
+        public static string ReplaceCommonPrefix(this string pattern, string value)
+        {
+            if (string.IsNullOrEmpty(pattern) || string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+            
+            var diffIndex = 0;
+            var minLength = Math.Min(pattern.Length, value.Length);
+            
+            for(var i =0; i< minLength;i++)
+            {
+                diffIndex = i;
+                if (pattern[i] != value[i])
+                {
+                    break;
+                }
+            }
+
+            var span = value.AsSpan()[diffIndex..];
+            return new string(span);
+        }
+        
+        public static string ReplaceCommonPrefix(this string pattern, string value, params string[] concat)
+        {
+            if (string.IsNullOrEmpty(pattern) || string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+            
+            var diffIndex = 0;
+            var minLength = Math.Min(pattern.Length, value.Length);
+            var sb        = Pool.GetStringBuilder();
+            
+            for(var i =0; i< minLength;i++)
+            {
+                diffIndex = i;
+                if (pattern[i] != value[i])
+                {
+                    break;
+                }
+            }
+
+            var span = value.AsSpan()[diffIndex..];
+            sb.Append(span);
+            foreach (var i in concat)
+            {
+                sb.Append(i);
+            }
+
+            var s = sb.ToString();
+            Pool.ReturnStringBuilder(sb);
+            return s;
+        }
+        
         public static string SubString(this string source, int maxLength = 100)
         {
             if (string.IsNullOrEmpty(source))

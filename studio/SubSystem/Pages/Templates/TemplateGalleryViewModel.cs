@@ -129,7 +129,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             else
             {
-                this.Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+                this.SuccessfulNotification(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
             }
 
             Refresh();
@@ -212,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
             else
             {
-                this.Successful(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
+                this.SuccessfulNotification(string.Format(Language.GetText("text.ImportModulesSuccessful"), finishedCount, errorCount));
             }
 
             Refresh();
@@ -245,7 +245,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
                 await PNG.Write(fileName, payload, ms);
-                this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
             }
             catch (Exception ex)
             {

@@ -158,7 +158,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ =>
             {
-                this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
             });
         }
         
@@ -199,7 +199,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 DataSource.Remove(x);
                 Collection.Remove(x);
-                this.Successful(SubSystemString.OperationOfRemoveIsSuccessful);
+                this.SuccessfulNotification(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
         private async Task AddKeywordImpl()

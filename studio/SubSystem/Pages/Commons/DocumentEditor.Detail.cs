@@ -55,7 +55,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             //
             //
-            this.Successful(SubSystemString.OperationOfAddIsSuccessful);
+            this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
             ResortDetailPart();
             SetDirtyState();
         }

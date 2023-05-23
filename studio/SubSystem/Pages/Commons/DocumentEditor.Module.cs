@@ -318,12 +318,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             if (upgradeCount == 0)
             {
-                this.Info("没有需要升级的模板");
+                this.InfoNotification("没有需要升级的模板");
             }
             else
             {
                 SetDirtyState();
-                this.Successful($"添加成功，完成升级{upgradeCount}个，总计:{count}");
+                this.SuccessfulNotification($"添加成功，完成升级{upgradeCount}个，总计:{count}");
             }
         }
 

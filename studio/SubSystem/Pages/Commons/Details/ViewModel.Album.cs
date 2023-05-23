@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     }
 
                     SaveOperation();
-                    this.Successful(SubSystemString.OperationOfAddIsSuccessful);
+                    this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
         }

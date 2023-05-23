@@ -1,0 +1,51 @@
+﻿<ScrollViewer x:Class="Acorisoft.FutureGL.MigaStudio.Pages.SettingAdvancedView"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+              xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
+              xmlns:thisModels="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+              xmlns:studio="urn:acorisoft/studio"
+              xmlns:f="urn:acorisoft/forest/ui"
+              xmlns:fs="urn:acorisoft/studio"
+              xmlns:ftk="urn:acorisoft/forest/toolkits"
+              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+              mc:Ignorable="d"
+              d:DesignHeight="720"
+              d:DesignWidth="1280"
+              d:DataContext="{d:DesignInstance Type={x:Type local:SettingViewModel}, IsDesignTimeCreatable=True}">
+
+    <StackPanel>
+        <HeaderedContentControl Header="统计">
+            <UniformGrid Columns="2">
+                <ContentControl Content="{Binding Self}"
+                                Margin="16 4" />
+                <ContentControl Content="{Binding DatabaseCounter}"
+                                Margin="16 4" />
+            </UniformGrid>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl Header="反馈"
+                                Margin="8"
+                                Padding="16 8">
+            <UniformGrid Columns="4"
+                         VerticalAlignment="Top">
+                <fs:ActionButton Margin="4"
+                                 Command="{Binding CompressLogsCommand}"
+                                 Content="普通BUG反馈"
+                                 Padding="8 24 24 24" />
+
+                <fs:ActionButton Margin="4"
+                                 Content="特殊BUG反馈"
+                                 Padding="8 24 24 24" />
+                <fs:ActionButton Margin="4"
+                                 Content="离谱BUG反馈"
+                                 Padding="8 24 24 24" />
+                <fs:ActionButton Margin="4"
+                                 Content="如何反馈？"
+                                 Padding="8 24 24 24" />
+            </UniformGrid>
+        </HeaderedContentControl>
+    </StackPanel>
+</ScrollViewer>

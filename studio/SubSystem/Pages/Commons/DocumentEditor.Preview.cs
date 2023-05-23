@@ -273,7 +273,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         private async Task ExportPresentationAsPictureImpl()
         {
-            var savedlg = Studio.Save(SubSystemString.ImageFilter, "*.png");
+            var savedlg = Studio.Save(SubSystemString.ImageFilter, Studio.PngExt);
 
             if (savedlg.ShowDialog() != true)
             {

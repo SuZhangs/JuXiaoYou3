@@ -23,7 +23,22 @@ namespace Acorisoft.FutureGL.MigaStudio
                                                             .CurrentValue;
 
         public static T Engine<T>() where T : DataEngine => _databaseField.Value.GetEngine<T>();
+
+        public const string ZipExt = "*.zip";
+        public const string PngExt =  "*.png";
         
+        public static string ZipFilter
+        {
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "Zip File|*.zip",
+                CultureArea.French   => "Fichier Zip|*.zip",
+                CultureArea.Japanese => "Zip ファイル|*.zip",
+                CultureArea.Korean   => "Zip 파일|*.zip",
+                CultureArea.Russian  => "Файл Zip|*.zip",
+                _                    => "Zip压缩文件|*.zip",
+            };
+        }
         public static string PngFilter
         {
             get => Language.Culture switch
@@ -44,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 return;
             }
 
-            var savedlg = Save(PngFilter, "*.png");
+            var savedlg = Save(PngFilter, PngExt);
 
             if (savedlg.ShowDialog() != true)
             {

@@ -191,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             // 2) 选择文件
             // 3) 打开文件并赋值
 
-            var savedlg = Studio.Save(SubSystemString.ModuleFilter, "*.png", PresentationName);
+            var savedlg = Studio.Save(SubSystemString.ModuleFilter, Studio.PngExt, PresentationName);
 
             if (savedlg.ShowDialog() != true)
             {
@@ -221,7 +221,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
                 await PNG.Write(fileName, payload, ms);
-                this.Successful(SubSystemString.OperationOfSaveIsSuccessful);
+                this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
                 SetDirtyState(false);
             }
             catch (Exception ex)

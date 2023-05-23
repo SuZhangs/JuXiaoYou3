@@ -146,41 +146,7 @@
         <f:ShadowTabItem Header="高级"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True">
-
-            <ScrollViewer>
-                <StackPanel>
-                    <HeaderedContentControl Header="统计">
-                        <UniformGrid Columns="2">
-                            <ContentControl Content="{Binding Self}"
-                                             Margin="16 4" />
-                            <ContentControl Content="{Binding DatabaseCounter}" 
-                                             Margin="16 4"/>
-                        </UniformGrid>
-                    </HeaderedContentControl>
-
-                    <HeaderedContentControl Grid.Column="2"
-                                            Header="反馈"
-                                            Margin="8"
-                                            Padding="16 8">
-                        <UniformGrid Columns="4"
-                                     VerticalAlignment="Top">
-                            <fs:ActionButton Margin="4"
-                                             Content="普通BUG反馈"
-                                             Padding="8 24 24 24" />
-
-                            <fs:ActionButton Margin="4"
-                                             Content="特殊BUG反馈"
-                                             Padding="8 24 24 24" />
-                            <fs:ActionButton Margin="4"
-                                             Content="离谱BUG反馈"
-                                             Padding="8 24 24 24" />
-                            <fs:ActionButton Margin="4"
-                                             Content="如何反馈？"
-                                             Padding="8 24 24 24" />
-                        </UniformGrid>
-                    </HeaderedContentControl>
-                </StackPanel>
-            </ScrollViewer>
+            <local:SettingAdvancedView/>
         </f:ShadowTabItem>
         <f:ShadowTabItem Header="字体"
                          Icon="{StaticResource IC.Setting}"

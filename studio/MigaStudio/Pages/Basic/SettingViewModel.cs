@@ -44,9 +44,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Repositories         = new ObservableCollection<RepositoryCache>();
 
             
-            RefreshCommand       = Command(ComputeDirectorySize);
-            OpenCommand          = Command<FolderCounter>(OpenCounter);
-            CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
+            RefreshCommand          = Command(ComputeDirectorySize);
+            OpenCommand             = Command<FolderCounter>(OpenCounter);
+            CompressLogsCommand = AsyncCommand(CompressLogsImpl);
+            CloseDatabaseCommand    = AsyncCommand(CloseDatabaseImpl);
             
             ConfigureRegularSetting();
             ApprovalRequired = false;
@@ -94,7 +95,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (_count % 5 == 0)
             {
-                this.Successful(SubSystemString.ApplyWhenRestart);
+                this.SuccessfulNotification(SubSystemString.ApplyWhenRestart);
             }
 
             _count++;
