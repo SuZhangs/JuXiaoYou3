@@ -140,7 +140,7 @@
             <studio:Avatar Grid.Column="2"
                            Grid.Row="0"
                            DataContext="{Binding Target,Mode=OneWay}"
-                           AvatarName="123456789101112131415167889"
+                           AvatarName="{Binding Name,Mode=OneWay}"
                            Margin="16 0">
                 <studio:Avatar.Image>
                     <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
