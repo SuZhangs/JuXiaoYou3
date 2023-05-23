@@ -27,6 +27,51 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         bool Exists(string collectionName);
 
         /// <summary>
+        /// 获得布尔值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns>返回结果</returns>
+        bool Boolean(string key);
+
+        /// <summary>
+        /// 设置布尔值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        bool Boolean(string key, bool value);
+
+        /// <summary>
+        /// 获得字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns></returns>
+        string String(string key);
+
+        /// <summary>
+        /// 设置字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        string String(string key, string value);
+        
+        /// <summary>
+        /// 获得字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns></returns>
+        int? Int(string key);
+
+        /// <summary>
+        /// 设置字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        int Int(string key, int value);
+
+        /// <summary>
         /// 获得值。
         /// </summary>
         /// <typeparam name="T">值类型。</typeparam>

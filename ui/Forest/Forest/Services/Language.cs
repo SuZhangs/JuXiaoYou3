@@ -269,6 +269,23 @@ namespace Acorisoft.FutureGL.Forest.Services
 
         #region LanguageSource
 
+        private static void AppendTextSource(Dictionary<string, string> temp, IEnumerable<string> lines)
+        {
+            foreach (var line in lines)
+            {                   
+                if (string.IsNullOrEmpty(line))
+                {
+                    continue;
+                }
+                var separator = line.IndexOf('=');
+                var id        = line[..separator].Trim();
+                var value = line[(separator + 1)..].Trim()
+                                                   .Replace("\\n", "\n");
+
+                temp.TryAdd(id, value);
+            }
+        }
+        
         
         /// <summary>
         /// 设置语言
@@ -280,27 +297,8 @@ namespace Acorisoft.FutureGL.Forest.Services
             try
             {
                 var lines = File.ReadAllLines(fileName);
-                var temp  = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-                foreach (var line in lines)
-                {                   
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        continue;
-                    }
-                    var separator = line.IndexOf('=');
-                    var id        = line[..separator].Trim();
-                    var value     = line[(separator + 1)..].Trim();
-
-                    temp.TryAdd(id, value);
-                }
-
                 _stringDictionary.Clear();
-
-                foreach (var kv in temp)
-                {
-                    _stringDictionary.Add(kv.Key, kv.Value);
-                }
+                AppendTextSource(_stringDictionary, lines);
             }
             catch
             {
@@ -319,18 +317,7 @@ namespace Acorisoft.FutureGL.Forest.Services
             {
                 var lines = File.ReadAllLines(fileName);
 
-                foreach (var line in lines)
-                {                   
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        continue;
-                    }
-                    var separator = line.IndexOf('=');
-                    var id        = line[..separator].Trim();
-                    var value     = line[(separator + 1)..].Trim();
-
-                    _stringDictionary.TryAdd(id, value);
-                }
+                AppendTextSource(_stringDictionary, lines);
             }
             catch
             {

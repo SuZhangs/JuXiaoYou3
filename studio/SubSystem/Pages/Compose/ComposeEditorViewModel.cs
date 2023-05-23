@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
@@ -21,7 +22,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         protected override void OnStart()
         {
-            this.Obsoleted("写作功能尚未完全开发完成", 10);
+            var db = Studio.Database();
+
+            if (!db.Boolean(Feature.TextEditorFeatureMissing))
+            {
+                this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 12);
+
+                db.Boolean(Feature.TextEditorFeatureMissing, true);
+            }
+            
             base.OnStart();
         }
     }

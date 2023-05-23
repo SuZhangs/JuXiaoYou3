@@ -80,12 +80,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         .PlayOrPause();
                     return true;
                 case Key.F6:
-                    Xaml.Get<MusicService>()
-                        .PlayLast();
                     return true;
                 case Key.F7:
-                    Xaml.Get<MusicService>()
-                        .PlayNext();
                     return true;
                 case Key.F12:
                     SwitchModeImpl();

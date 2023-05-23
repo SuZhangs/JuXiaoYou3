@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
@@ -107,6 +108,110 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回指定的集合是否存在。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Exists(string collectionName) => _database.CollectionExists(collectionName);
+
+        /// <summary>
+        /// 获得布尔值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns>返回结果</returns>
+        public bool Boolean(string key)
+        {
+            return Get<BooleanProperty>().Value
+                                         .TryGetValue(key, out var v) && v;
+        }
+
+        /// <summary>
+        /// 设置布尔值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        public bool Boolean(string key, bool value)
+        {
+            var b = Get<BooleanProperty>();
+            var d = b.Value;
+            if (d.ContainsKey(key))
+            {
+                d[key] = value;
+            }
+            else
+            {
+                d.Add(key, value);
+            }
+
+            Upsert(b);
+            return value;
+        }
+        
+        /// <summary>
+        /// 获得数字值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns>返回结果</returns>
+        public int? Int(string key)
+        {
+            return Get<Int32Property>().Value
+                                         .TryGetValue(key, out var v) ? v : null;
+        }
+
+        /// <summary>
+        /// 设置数字值
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        public int Int(string key, int value)
+        {
+            var b = Get<Int32Property>();
+            var d = b.Value;
+            if (d.ContainsKey(key))
+            {
+                d[key] = value;
+            }
+            else
+            {
+                d.Add(key, value);
+            }
+
+            Upsert(b);
+            return value;
+        }
+        
+        /// <summary>
+        /// 获得字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <returns></returns>
+        public string String(string key)
+        {
+            return Get<StringProperty>().Value
+                                        .TryGetValue(key, out var v)
+                ? v
+                : null;
+        }
+
+        /// <summary>
+        /// 设置字符串
+        /// </summary>
+        /// <param name="key">键</param>
+        /// <param name="value">值</param>
+        /// <returns>返回结果</returns>
+        public string String(string key, string value)
+        {
+            var b = Get<StringProperty>();
+            var d = b.Value;
+            if (d.ContainsKey(key))
+            {
+                d[key] = value;
+            }
+            else
+            {
+                d.Add(key, value);
+            }
+
+            Upsert(b);
+            return value;
+        }
         
         /// <summary>
         /// 删除值。

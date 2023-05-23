@@ -184,10 +184,12 @@
         </f:ShadowTabItem>
         <f:ShadowTabItem Header="字体"
                          Icon="{StaticResource IC.Setting}"
-                         IsFilled="True" />
+                         IsFilled="True" 
+                         Visibility="Collapsed"/>
         <f:ShadowTabItem Header="许可证"
                          Icon="{StaticResource IC.Setting}"
-                         IsFilled="True" />
+                         IsFilled="True"
+                         Visibility="Collapsed" />
 
         <f:ShadowTabItem Header="关于"
                          Icon="{StaticResource IC.Setting}"

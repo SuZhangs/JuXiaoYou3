@@ -143,7 +143,7 @@ namespace Acorisoft.FutureGL.Forest
                     CultureArea.Japanese => "期限切れです",
                     CultureArea.French   => "Périmés",
                     CultureArea.Russian  => "Срок годност",
-                    _                    => "过期"
+                    _                    => "功能变动提示"
                 };
             }
         }

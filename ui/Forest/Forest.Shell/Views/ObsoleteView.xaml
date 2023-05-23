@@ -54,8 +54,7 @@
 
 
             <ScrollViewer Grid.Row="2"
-                          Margin="16"
-                          Padding="16">
+                          Margin="16">
                 <TextBlock FontSize="16"
                            HorizontalAlignment="Center"
                            Text="{Binding Content,Mode=OneWay,FallbackValue=NoData}"
@@ -70,7 +69,7 @@
                             Content="{Binding CompleteButtonText,Mode=OneWay}"
                             Command="{Binding CompletedCommand}"
                             Height="48"
-                            Margin="16"
+                            Margin="16 16 16 8"
                             Purpose="Obsolete"/>
         </Grid>
     </Border>
