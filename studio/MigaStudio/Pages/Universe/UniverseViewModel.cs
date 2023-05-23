@@ -138,7 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Save()
         {
-            Database.Set(_databaseProperty);
+            Database.Upsert(_databaseProperty);
         }
 
         /// <summary>

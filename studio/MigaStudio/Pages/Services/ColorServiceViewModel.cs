@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void SavePropertyImpl()
         {
-            Database.Set(Property);
+            Database.Upsert(Property);
             SetDirtyState(false);
         }
 

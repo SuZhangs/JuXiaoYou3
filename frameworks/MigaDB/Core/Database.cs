@@ -9,7 +9,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly string                     _databaseDirectory;
         private readonly string                     _databaseFileName;
         private readonly string                     _databaseIndexFileName;
-        private readonly ConcurrentDictionary<string, object> _cache;
 
         private readonly  LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
@@ -20,7 +19,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public Database(LiteDatabase kernel, string root, string fileName, string indexFileName, DatabaseMode mode)
         {
             _collector             = new DisposableCollector();
-            _cache                 = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _databaseDirectory     = root;
             _databaseFileName      = fileName;
@@ -29,12 +27,12 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _mode                  = mode;
 
             Property = Initialize();
+            CheckPrimitiveProperty();
         }
 
         internal Database(LiteDatabase kernel)
         {
             _collector             = new DisposableCollector();
-            _cache                 = new ConcurrentDictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _props                 = _database.GetCollection<BsonDocument>(Constants.PropertyCollectionName);
             _databaseDirectory     = AppDomain.CurrentDomain.BaseDirectory;
@@ -42,6 +40,30 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _databaseIndexFileName = Path.Combine(_databaseDirectory, Constants.DatabaseIndexFileName);
 
             Property = Get<DatabaseProperty>();
+            CheckPrimitiveProperty();
+        }
+
+        private void CheckPrimitiveProperty()
+        {
+            IfSet<DoubleProperty>(new DoubleProperty
+            {
+                Value = new Dictionary<string, double>()
+            });
+            
+            IfSet<BooleanProperty>(new BooleanProperty
+            {
+                Value = new Dictionary<string, bool>()
+            });
+            
+            IfSet<Int32Property>(new Int32Property
+            {
+                Value = new Dictionary<string, int>()
+            });
+            
+            IfSet<StringProperty>(new StringProperty
+            {
+                Value = new Dictionary<string, string>()
+            });
         }
 
         private DatabaseProperty Initialize()
@@ -139,7 +161,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 d.Add(key, value);
             }
 
-            Upsert(b);
+            Update(b);
             return value;
         }
         
@@ -173,7 +195,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 d.Add(key, value);
             }
 
-            Upsert(b);
+            Update(b);
             return value;
         }
         
@@ -209,7 +231,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 d.Add(key, value);
             }
 
-            Upsert(b);
+            Update(b);
             return value;
         }
         
@@ -224,13 +246,9 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             if (Has<T>())
             {
-                if (!_cache.TryRemove(key, out var instance))
-                {
-                    instance = Get<T>();
-                }
-                
+                var d = Get<T>();
                 _props.Delete(key);
-                return (T)instance;
+                return d;
             }
             
             return default(T);
@@ -243,17 +261,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>获得值。</returns>
         public T Get<T>() where T : class
         {
-            var key = typeof(T).FullName;
-
-            if (!_cache.TryGetValue(key, out var obj))
-            {
-                var document = _props.FindById(key)?.AsDocument;
-                obj = document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
-               if(obj is not null) 
-                   _cache.TryAdd(key, obj);
-            }
+            var key      = typeof(T).FullName;
+            var document = _props.FindById(key)?.AsDocument;
+            var obj      = document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
             
-            return (T)obj;
+            return obj;
         }
 
         /// <summary>
@@ -263,18 +275,40 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>获得值是否存在，true为存在否则表示不存在。</returns>
         public bool Has<T>() where T : class
         {
-            var key = typeof(T).FullName;
-            return _cache.ContainsKey(key) || _props.HasID(key);
+            return _props.HasID(typeof(T).FullName);
         }
 
-        /// <summary>
-        /// 添加或更新值。
-        /// </summary>
-        /// <typeparam name="T">值类型。</typeparam>
-        /// <returns>获得值。</returns>
+
         public T Upsert<T>(T instance) where T : class
         {
-            return Has<T>() ? Get<T>() : Set<T>(instance);
+            return Has<T>() ? Update(instance) : Set(instance);
+        }
+
+        public void IfSet<T>(T instance) where T : class
+        {
+            if (!Has<T>())
+            {
+                Set(instance);
+            }
+        }
+        
+        /// <summary>
+        /// 删除值。
+        /// </summary>
+        /// <typeparam name="T">值类型。</typeparam>
+        /// <returns>获得值是否存在，true为存在否则表示不存在。</returns>
+        public T Update<T>(T instance) where T : class
+        {
+            var key = typeof(T).FullName;
+            if (instance is null)
+                return default(T);
+            
+            var document = BsonMapper.Global
+                                     .Serialize(instance)
+                                     .AsDocument;
+            document[Constants.LiteDB_IdField] = key;
+            _props.Update(document);
+            return instance;
         }
 
         /// <summary>
@@ -289,10 +323,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             if (instance is null)
                 return default(T);
             
-            var document = BsonMapper.Global.Serialize(instance).AsDocument;
+            var document = BsonMapper.Global
+                                     .Serialize(instance)
+                                     .AsDocument;
             document[Constants.LiteDB_IdField] = key;
-            _props.Upsert(document);
-            _cache.TryAdd(key, instance);
+            _props.Insert(document);
             return instance;
         }
 

@@ -10,39 +10,20 @@ namespace Acorisoft.FutureGL.MigaDB.Core.Maintainers
         {
             var timeOfBoth = DateTime.Now;
 
-            database.Upsert<DatabaseProperty>(new DatabaseProperty
+            database.IfSet<DatabaseProperty>(new DatabaseProperty
             {
                 Author      = "Test",
                 Name        = "Test",
                 ForeignName = "Test"
             });
 
-            database.Upsert<DoubleProperty>(new DoubleProperty
-            {
-                Value = new Dictionary<string, double>()
-            });
-            
-            database.Upsert<BooleanProperty>(new BooleanProperty
-            {
-                Value = new Dictionary<string, bool>()
-            });
-            
-            database.Upsert<Int32Property>(new Int32Property
-            {
-                Value = new Dictionary<string, int>()
-            });
-            
-            database.Upsert<StringProperty>(new StringProperty
-            {
-                Value = new Dictionary<string, string>()
-            });
 
-            database.Upsert<ColorServiceProperty>(new ColorServiceProperty
+            database.IfSet<ColorServiceProperty>(new ColorServiceProperty
             {
                 Mappings = new List<ColorMapping>(),
             });
             
-            database.Upsert<DatabaseVersion>(new DatabaseVersion
+            database.IfSet<DatabaseVersion>(new DatabaseVersion
             {
                 TimeOfModified = timeOfBoth,
                 TimeOfCreated  = timeOfBoth,

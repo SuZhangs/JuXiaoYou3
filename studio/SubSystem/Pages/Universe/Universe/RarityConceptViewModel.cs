@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         public override void Stop()
         {
-            Database.Set(Property);
+            Database.Upsert(Property);
             Owner.SetDirtyState(false);
         }
 

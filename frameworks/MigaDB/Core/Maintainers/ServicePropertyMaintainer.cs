@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core.Maintainers
     {
         public void Maintain(IDatabase database)
         {
-            database.Upsert<ColorServiceProperty>(new ColorServiceProperty
+            database.IfSet<ColorServiceProperty>(new ColorServiceProperty
             {
                 Mappings = new List<ColorMapping>(),
             });

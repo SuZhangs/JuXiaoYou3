@@ -250,9 +250,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 var db = Studio.DatabaseManager()
                              .Database
                              .CurrentValue;
-            
-                PresentationPart = db.Get<PresetProperty>()
-                                     .GetPresentationPreset(Type, x => db.Set(x));
+
+                PresentationPart           = GetPresentationPreset(db, Type);
                 IsOverridePresentationPart = false;
             }
         }

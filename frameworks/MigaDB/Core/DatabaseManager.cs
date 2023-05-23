@@ -602,7 +602,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             // Update
             var ver = _database.CurrentValue.Get<DatabaseVersion>();
             ver.TimeOfModified = DateTime.Now;
-            _database.CurrentValue.Set(ver);
+            _database.CurrentValue.Upsert(ver);
 
             //
             // 写入文件

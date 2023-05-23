@@ -114,7 +114,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                              .CurrentValue;
                 var mmp = db.Get<PresetProperty>();
                 mmp.SetPresentationPreset(Type, PresentationPart);
-                db.Set(mmp);
+                db.Upsert(mmp);
             }
         }
 
@@ -173,6 +173,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Presentations.AddRange(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
             RefreshPresentation();
         }
+
+        private static PartOfPresentation GetPresentationPreset(IDatabase db, DocumentType type)
+        {
+            return db.Get<PresetProperty>()
+                     .GetPresentationPreset(type, x => db.Set(x));
+        }
         
         private async Task OverridePresentationImpl()
         {
@@ -186,9 +192,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                          .Database
                          .CurrentValue;
 
-            var thisTypePresentation = db.Get<PresetProperty>()
-                                         .GetPresentationPreset(Type, x => db.Set(x));
-            
+            var thisTypePresentation = GetPresentationPreset(db, Type);
+
             IsOverridePresentationPart = true;
             
             //
@@ -224,8 +229,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                          .Database
                          .CurrentValue;
 
-            var thisTypePresentation = db.Get<PresetProperty>()
-                                         .GetPresentationPreset(Type, x => db.Set(x));
+            var thisTypePresentation = GetPresentationPreset(db, Type);
             
             IsOverridePresentationPart = true;
             
@@ -262,8 +266,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             
             //
             // 复制一份
-            PresentationPart = db.Get<PresetProperty>()
-                                 .GetPresentationPreset(Type, x => db.Set(x));
+            PresentationPart = GetPresentationPreset(db, Type);
             SavePresentationPart();
             ResetPresentation();
         }

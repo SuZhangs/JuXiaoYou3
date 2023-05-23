@@ -79,10 +79,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         private void Save()
         {
-            Studio.DatabaseManager()
-                .Database
-                .CurrentValue
-                .Set(Property);
+            Studio.Database()
+                  .Upsert(Property);
         }
 
         private async Task AddTemplateImpl()

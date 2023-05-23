@@ -85,15 +85,31 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <typeparam name="T">值类型。</typeparam>
         /// <returns>返回这个值本身。</returns>
         T Set<T>(T instance) where T : class;
-        
-        
+
         /// <summary>
         /// 设置值。
         /// </summary>
         /// <param name="instance">实例</param>
         /// <typeparam name="T">值类型。</typeparam>
         /// <returns>返回这个值本身。</returns>
+        T Update<T>(T instance) where T : class;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         T Upsert<T>(T instance) where T : class;
+        
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        void IfSet<T>(T instance) where T : class;
 
         /// <summary>
         /// 是否存在

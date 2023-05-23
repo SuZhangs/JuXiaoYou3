@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
                        .CurrentValue;
             var property = db.Get<PresetProperty>();
             property.RelativePresets.AddMany(Collection, true);
-            db.Set(property);
+            db.Upsert(property);
             SetDirtyState(false);
         }
 
