@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly string                     _databaseFileName;
         private readonly string                     _databaseIndexFileName;
 
-        private readonly  LiteDatabase                  _database;
+        internal readonly LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
         private readonly  DisposableCollector           _collector;
         private readonly  DatabaseMode                  _mode;

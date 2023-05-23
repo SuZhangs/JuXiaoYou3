@@ -70,53 +70,110 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+            <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+            <Setter Property="IconSize" Value="17" />
+            <Setter Property="Height" Value="36" />
+        </Style>
     </UserControl.Resources>
     <f:Drawer>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="64" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="64" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
             <!-- 操作 -->
-            <UniformGrid Columns="2"
-                         Height="48"
-                         Margin="16 0">
+            <DockPanel>
 
-                <ftk:ToolButton Content="{f:Language global.new}"
-                                    Command="{Binding NewComposeCommand}"
-                                    Icon="{StaticResource IC.File}"
-                                    IsFilled="True"
-                                    ShowText="True" />
+                <ftk:TabControl Margin="16 8"
+                                Padding="0 8">
+                    <ftk:TabItem Header="信息"
+                                 Padding="16 8">
+                        <StackPanel>
+                            <UniformGrid Columns="2">
 
-                <ftk:ToolButton Content="{f:Language global.save}"
-                                    Command="{Binding SaveComposeCommand}"
-                                    Icon="{StaticResource IC.Save}"
-                                    IsFilled="True"
-                                    ShowText="True" />
-            </UniformGrid>
+                                <ftk:ToolButton Content="{f:Language global.new}"
+                                                Command="{Binding NewComposeCommand}"
+                                                Icon="{StaticResource FeatherIcon.File}"
+                                                IconSize="17"
+                                                ShowText="True" />
 
-            <f:HeaderedSingleLine Grid.Column="1"
-                                  Grid.Row="0"
-                                  Header="标题"
-                                  Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            
-            <editor:TextEditor x:Name="Editor"
-                               Grid.Column="1"
-                               Grid.Row="1"
+                                <ftk:ToolButton Content="{f:Language global.save}"
+                                                Command="{Binding SaveComposeCommand}"
+                                                Icon="{StaticResource FeatherIcon.Folder}"
+                                                ShowText="True" />
+                            </UniformGrid>
+                        </StackPanel>
+                        
+                    </ftk:TabItem>
+                    <ftk:TabItem Header="大纲"
+                                 Padding="16 8">
+
+                    </ftk:TabItem>
+                </ftk:TabControl>
+            </DockPanel>
+
+            <DockPanel Grid.Column="1">
+                <f:SingleLine DockPanel.Dock="Top"
+                              Margin="0 8"
+                              Text="{Binding Name,Mode=OneWay}"/>
+
+                <editor:TextEditor x:Name="Editor"
+                               Background="{f:Brush BackgroundLevel2}"
+                               Foreground="{f:ForegroundBrush}"
                                FontSize="16"
                                Padding="16 16 16 0"
                                SyntaxHighlighting="MarkDown"
                                WordWrap="True">
-                <editor:TextEditor.Options>
-                    <editor:TextEditorOptions InheritWordWrapIndentation="True" />
-                </editor:TextEditor.Options>
-            </editor:TextEditor>
+                    <editor:TextEditor.Options>
+                        <editor:TextEditorOptions InheritWordWrapIndentation="True" />
+                    </editor:TextEditor.Options>
+                </editor:TextEditor>
+            </DockPanel>
+
+
+
+            <StackPanel Grid.Column="2"
+                        Margin="0 8">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+                        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+                        <Setter Property="Margin" Value="0 0 0 4" />
+                        <Setter Property="IconSize" Value="23" />
+                        <Setter Property="Height" Value="48" />
+                        <Setter Property="Width" Value="48" />
+                    </Style>
+                </StackPanel.Resources>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Inbox}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                IsFilled="True"/>
+            </StackPanel>
+
+            <StatusBar Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="1"
+                       Background="{f:Brush BackgroundLevel4}"
+                       Foreground="{f:ForegroundBrush}">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding Content.Length,Mode=OneWay,FallbackValue=0,StringFormat={}字数：{0}}"/>
+                </StatusBarItem>
+            </StatusBar>
         </Grid>
     </f:Drawer>
 </f:ForestUserControl>
