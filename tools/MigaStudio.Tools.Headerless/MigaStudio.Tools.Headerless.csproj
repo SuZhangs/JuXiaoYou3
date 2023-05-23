@@ -6,15 +6,12 @@
         <Authors>罗易斯（Luoyisi）</Authors>
         <Nullable>disable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
-        <UseWPF>true</UseWPF>
         <OutDir>../../Builds/JuXiaoYou</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <Platforms>AnyCPU;x86;x64</Platforms>
-        <ApplicationIcon>ico_2.ico</ApplicationIcon>
         <AssemblyVersion>3.0.0</AssemblyVersion>
         <FileVersion>3.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
-        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
