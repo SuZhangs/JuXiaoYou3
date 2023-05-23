@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Controls/Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <GeometryGroup x:Key="Refresh">
@@ -38,7 +38,7 @@
                 <Setter Property="Width" Value="128" />
                 <Setter Property="Height" Value="16" />
             </Style>
-            
+
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
                 <DockPanel Margin="4">
                     <Border DockPanel.Dock="Top"
@@ -62,112 +62,180 @@
                                HorizontalAlignment="Center"
                                Text="{Binding Name,Mode=OneWay}"
                                TextWrapping="Wrap"
-                               TextTrimming="CharacterEllipsis"/>
+                               TextTrimming="CharacterEllipsis" />
                 </DockPanel>
             </DataTemplate>
+
+            <Style TargetType="HeaderedContentControl">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="HeaderedContentControl">
+                            <DockPanel>
+                                <ContentPresenter DockPanel.Dock="Top"
+                                                  TextElement.FontSize="14"
+                                                  TextElement.Foreground="{f:ForegroundBrush}"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                                  Margin="0 0 0 4"
+                                                  VerticalAlignment="Stretch"
+                                                  HorizontalAlignment="Stretch" />
+
+                                <ContentPresenter DockPanel.Dock="Bottom"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  TextElement.Foreground="{f:ForegroundBrush}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <f:DialogPage CompletedCommand="{Binding CompletedCommand}"
                   CancelCommand="{Binding CancelCommand}"
                   Title="{Binding Title}">
 
-        <StackPanel>
-            
-            <Grid Margin="0 4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="128" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <studio:Avatar Grid.Column="0"
-                               DataContext="{Binding Source,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+        <Grid ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="120" />
+                <RowDefinition Height="64" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="128" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
 
-                <Path Grid.Column="1"
-                      Style="{StaticResource ArrowStyle}"
-                      Data="{StaticResource ArrowRight}"/>
+            <!-- Source To Target -->
+            <studio:Avatar Grid.Column="0"
+                           Grid.Row="0"
+                           DataContext="{Binding Source,Mode=OneWay}"
+                           AvatarName="{Binding Name,Mode=OneWay}"
+                           Margin="16 0">
+                <studio:Avatar.Image>
+                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                        <Binding Path="Avatar" Mode="OneWay" />
+                        <Binding Path="Type" />
+                    </MultiBinding>
+                </studio:Avatar.Image>
+            </studio:Avatar>
 
-                <studio:Avatar Grid.Column="2"
-                               DataContext="{Binding Target,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+            <Path Grid.Column="1"
+                  Grid.Row="0"
+                  Style="{StaticResource ArrowStyle}"
+                  Data="{StaticResource ArrowRight}" />
 
-                <f:SingleLine Grid.Column="3"
-                              Margin="8 0"
-                              Text="{Binding CallOfTarget,Mode=TwoWay}"
-                              VerticalAlignment="Center" />
-            </Grid>
+            <studio:Avatar Grid.Column="2"
+                           Grid.Row="0"
+                           DataContext="{Binding Target,Mode=OneWay}"
+                           AvatarName="123456789101112131415167889"
+                           Margin="16 0">
+                <studio:Avatar.Image>
+                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                        <Binding Path="Avatar" Mode="OneWay" />
+                        <Binding Path="Type" />
+                    </MultiBinding>
+                </studio:Avatar.Image>
+            </studio:Avatar>
+
+            <f:SingleLine Grid.Column="3"
+                          Grid.Row="0"
+                          Margin="8 0"
+                          Text="{Binding CallOfTarget,Mode=TwoWay}"
+                          VerticalAlignment="Center" />
 
 
-            <ftk:ToolButton Icon="{StaticResource Refresh}"
+            <!-- Switch -->
+            <ftk:ToolButton Grid.Row="1"
+                            Grid.Column="3"
+                            Icon="{StaticResource Refresh}"
                             Content="身份交换"
                             Command="{Binding SwitchCommand}"
                             HorizontalAlignment="Right"
                             Margin="0 4"
-                            ShowText="True"/>
+                            ShowText="True" />
 
-            <Grid Margin="0 8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="128" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <studio:Avatar Grid.Column="0"
-                               DataContext="{Binding Source,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
 
-                <Path Grid.Column="1"
-                      Style="{StaticResource ArrowStyle}"
-                      Data="{StaticResource ArrowLeft}"/>
+            <!-- Target To Source -->
+            <studio:Avatar Grid.Column="0"
+                           Grid.Row="2"
+                           DataContext="{Binding Source,Mode=OneWay}"
+                           AvatarName="{Binding Name,Mode=OneWay}"
+                           Margin="16 0">
+                <studio:Avatar.Image>
+                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                        <Binding Path="Avatar" Mode="OneWay" />
+                        <Binding Path="Type" />
+                    </MultiBinding>
+                </studio:Avatar.Image>
+            </studio:Avatar>
 
-                <studio:Avatar Grid.Column="2"
-                               DataContext="{Binding Target,Mode=OneWay}"
-                               AvatarName="{Binding Name,Mode=OneWay}"
-                               Margin="16 0">
-                    <studio:Avatar.Image>
-                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
-                            <Binding Path="Avatar" Mode="OneWay" />
-                            <Binding Path="Type" />
-                        </MultiBinding>
-                    </studio:Avatar.Image>
-                </studio:Avatar>
+            <Path Grid.Column="1"
+                  Grid.Row="2"
+                  Style="{StaticResource ArrowStyle}"
+                  Data="{StaticResource ArrowLeft}" />
 
-                <f:SingleLine Grid.Column="3"
-                              Margin="8 0"
-                              Text="{Binding CallOfSource,Mode=TwoWay}"
-                              VerticalAlignment="Center" />
-            </Grid>
+            <studio:Avatar Grid.Column="2"
+                           Grid.Row="2"
+                           DataContext="{Binding Target,Mode=OneWay}"
+                           AvatarName="{Binding Name,Mode=OneWay}"
+                           Margin="16 0">
+                <studio:Avatar.Image>
+                    <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                        <Binding Path="Avatar" Mode="OneWay" />
+                        <Binding Path="Type" />
+                    </MultiBinding>
+                </studio:Avatar.Image>
+            </studio:Avatar>
 
-            <TextBlock Margin="8 4" Text="友善度"/>
-            <studio:DegreeControl Margin="8 4" Value="{Binding Friendliness,Mode=TwoWay}"/>
+            <f:SingleLine Grid.Column="3"
+                          Grid.Row="2"
+                          Margin="8 0"
+                          Text="{Binding CallOfSource,Mode=TwoWay}"
+                          VerticalAlignment="Center" />
 
-            <UniformGrid Margin="8 4"
-                         Columns="4">
+
+            <HeaderedContentControl Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Header="亲密程度"
+                                    Margin="0 0 0 8">
+                <studio:DegreeControl Value="{Binding Friendliness,Mode=TwoWay}" />
+            </HeaderedContentControl>
+            <HeaderedContentControl Grid.Row="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Header="预设">
+                <ComboBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          DisplayMemberPath="Name"
+                          ItemsSource="{Binding Presets}"
+                          SelectedItem="{Binding Preset,Mode=TwoWay}">
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="128"
+                                       Width="640" />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+            </HeaderedContentControl>
+            <UniformGrid Grid.Column="3"
+                         Grid.Row="3"
+                         Grid.RowSpan="2"
+                         HorizontalAlignment="Right"
+                         Margin="32 0 32 0"
+                         Rows="4">
                 <f:ToggleSwitch Content="直系亲属"
                                 Margin="4"
                                 IsChecked="{Binding DirectRelative,Mode=TwoWay}" />
@@ -179,26 +247,12 @@
                 <f:ToggleSwitch Content="夫妻关系"
                                 Margin="4"
                                 IsChecked="{Binding ConjugalRelative,Mode=TwoWay}" />
-                
+
                 <f:ToggleSwitch Content="其他关系"
                                 Margin="4"
                                 IsChecked="{Binding OtherRelative,Mode=TwoWay}" />
 
             </UniformGrid>
-
-            <TextBlock Margin="8 4" Text="预设"/>
-            <ComboBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                      DisplayMemberPath="Name"
-                      Margin="8 4 8 0"
-                      ItemsSource="{Binding Presets}"
-                      SelectedItem="{Binding Preset,Mode=TwoWay}">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel ItemWidth="128"
-                                   Width="640"/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </StackPanel>
+        </Grid>
     </f:DialogPage>
 </f:ForestUserControl>

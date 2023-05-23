@@ -63,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CloseDatabaseCommand  = AsyncCommand(CloseDatabaseImpl);
             SwitchDatabaseCommand = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
             ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
-            EditCommand           = Command(() => Controller.New<UniverseEditorViewModel>());
+            EditCommand           = Command(EditImpl);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
             RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
             ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
@@ -89,6 +89,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
             Save();
+        }
+
+        private void EditImpl()
+        {
+            // Controller.New<UniverseEditorViewModel>();
+            this.Obsoleted(Language.GetText("feature.Universe"), 15);
         }
 
         private async Task CloseDatabaseImpl()
@@ -134,6 +140,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
               .LastRepository = cache.Path;
             await ss.SaveAsync();
             context.SwitchController(controller);
+        }
+        
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task ChangeAvatarImpl()
+        {
+            var r = await ImageUtilities.Avatar();
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var    buffer = r.Buffer;
+            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
+            var    md5    = Convert.ToBase64String(raw);
+            string avatar;
+
+            if (ImageEngine.HasFile(md5))
+            {
+                var fr = ImageEngine.Records.FindById(md5);
+                avatar = fr.Uri;
+            }
+            else
+            {
+                avatar = ImageUtilities.GetAvatarName();
+                buffer.Seek(0, SeekOrigin.Begin);
+                ImageEngine.WriteAvatar(buffer, avatar);
+
+                var record = new FileRecord
+                {
+                    Id   = md5,
+                    Uri  = avatar,
+                    Type = ResourceType.Image
+                };
+
+                ImageEngine.AddFile(record);
+            }
+
+            Icon = avatar;
         }
 
         private void Save()
@@ -212,52 +266,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public bool HasRepositories
         {
             get => Repositories.Count > 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private async Task ChangeAvatarImpl()
-        {
-            var r = await ImageUtilities.Avatar();
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-
-            var    buffer = r.Buffer;
-            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
-            var    md5    = Convert.ToBase64String(raw);
-            string avatar;
-
-            if (ImageEngine.HasFile(md5))
-            {
-                var fr = ImageEngine.Records.FindById(md5);
-                avatar = fr.Uri;
-            }
-            else
-            {
-                avatar = ImageUtilities.GetAvatarName();
-                buffer.Seek(0, SeekOrigin.Begin);
-                ImageEngine.WriteAvatar(buffer, avatar);
-
-                var record = new FileRecord
-                {
-                    Id   = md5,
-                    Uri  = avatar,
-                    Type = ResourceType.Image
-                };
-
-                ImageEngine.AddFile(record);
-            }
-
-            Icon = avatar;
         }
 
         //---------------------------------------------

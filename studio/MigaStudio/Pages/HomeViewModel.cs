@@ -33,8 +33,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             //
             //
-            CreateGalleryFeature<InspirationViewModel>(InspirationAndRelative, "global.inspiration");
-            CreateGalleryFeature<StoryboardSegmentsViewModel>(InspirationAndRelative, StoryboardSegments);
+            // CreateGalleryFeature<InspirationViewModel>(InspirationAndRelative, "global.inspiration");
+            // CreateGalleryFeature<StoryboardSegmentsViewModel>(InspirationAndRelative, StoryboardSegments);
             CreateGalleryFeature<ServiceViewModel>(InspirationAndRelative, Service);
             CreateGalleryFeature<RelationshipViewModel>(InspirationAndRelative, Relationship);
 
