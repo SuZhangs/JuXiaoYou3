@@ -93,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             // Commons
             Xaml.InstallView<ImageEditView, ImageEditViewModel>();
             Xaml.InstallView<MusicPlayerView, MusicPlayerViewModel>();
+            Xaml.InstallView<MusicPage, MusicViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
             Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
             

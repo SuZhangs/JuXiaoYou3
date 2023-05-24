@@ -10,6 +10,8 @@
                      xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relatives;assembly=SubSystem"
+                     xmlns:srv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services;assembly=SubSystem"
+                     xmlns:wv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe;assembly=SubSystem"
                      mc:Ignorable="d"
                      Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
@@ -166,6 +168,18 @@
                         <ftk:ToolButton Content="{f:Language global.CharacterRelationship}"
                                         Command="{x:Static fs:Studio.GotoPageCommand}"
                                         CommandParameter="{x:Type rel:CharacterRelationshipViewModel}"
+                                        ShowText="True"
+                                        Icon="{StaticResource FeatherIcon.People}" />
+
+                        <ftk:ToolButton Content="{f:Language __MusicPlayer}"
+                                        Command="{x:Static fs:Studio.GotoPageCommand}"
+                                        CommandParameter="{x:Type srv:MusicViewModel}"
+                                        ShowText="True"
+                                        Icon="{StaticResource FeatherIcon.People}" />
+
+                        <ftk:ToolButton Content="{f:Language __ColorService}"
+                                        Command="{x:Static fs:Studio.GotoPageCommand}"
+                                        CommandParameter="{x:Type wv:RarityConceptViewModel}"
                                         ShowText="True"
                                         Icon="{StaticResource FeatherIcon.People}" />
                     </WrapPanel>
