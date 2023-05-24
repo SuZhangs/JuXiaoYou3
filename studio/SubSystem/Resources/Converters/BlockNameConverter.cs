@@ -12,16 +12,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             var t = values[0] as ModuleBlockEditUI;
             var n = values[1]?.ToString();
 
-            if (string.IsNullOrEmpty(n))
+            if (string.IsNullOrEmpty(t?.Name))
             {
-                return t;
+                return n;
             }
 
             if (t is BinaryBlockEditUI d)
             {
                 return $"{d.Positive}-{d.Negative}";
             }
-            return n;
+            return t.Name;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
