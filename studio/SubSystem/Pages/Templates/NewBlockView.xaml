@@ -37,25 +37,50 @@
         
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
             <!-- 选项 -->
             <f:TreeView Grid.Column="0"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
                 <f:TreeViewItem Header="基础块" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicBlockKinds}"/>
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicBlockKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="128"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem>
                 <f:TreeViewItem Header="高级块" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedBlockKinds}"/>
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedBlockKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="128"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem>
                 <f:TreeViewItem Header="选项块" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.OptionBlockKinds}"/>
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.OptionBlockKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="128"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem>
                 <f:TreeViewItem Header="图表块" 
                                 Padding="8"
-                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartBlockKinds}"/>
+                                ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartBlockKinds}">
+                    <f:TreeViewItem.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="128"/>
+                        </ItemsPanelTemplate>
+                    </f:TreeViewItem.ItemsPanel>
+                </f:TreeViewItem> 
             </f:TreeView>
 
             <!-- 预览 -->

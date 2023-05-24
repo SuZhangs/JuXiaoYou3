@@ -16,7 +16,7 @@
                      d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewElementViewModel}, IsDesignTimeCreatable=True}"
                      MinHeight="320"
-                     Width="768">
+                     Width="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,7 +26,7 @@
             <thisConverters:BlockNameConverter x:Key="Name"/>
 
             <DataTemplate DataType="{x:Type thisModel3:BlockType}">
-                <TextBlock Margin="8"
+                <TextBlock Margin="16 12"
                            Text="{Binding Converter={StaticResource Name}}"/>
             </DataTemplate>
         </ResourceDictionary>
@@ -37,8 +37,8 @@
                   CompletedCommand="{Binding CompletedCommand}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="384" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
             <!-- 选项 -->
@@ -46,6 +46,11 @@
                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                        ItemsSource="{x:Static thisModel2:ModuleBlockFactory.GroupElementKinds}"
                        SelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
+                <f:ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="128"/>
+                    </ItemsPanelTemplate>
+                </f:ListBox.ItemsPanel>
             </f:ListBox>
 
             <!-- 预览 -->

@@ -57,7 +57,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem.Storyboard", "stu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem.Composer", "studio\SubSystem.Composer\SubSystem.Composer.csproj", "{6468A5C4-23E6-4F28-A313-49FDBD8AFDDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.Tools.Headerless", "tools\MigaStudio.Tools.Headerless\MigaStudio.Tools.Headerless.csproj", "{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.BugReporter", "studio\MigaStudio.BugReporter\MigaStudio.BugReporter.csproj", "{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

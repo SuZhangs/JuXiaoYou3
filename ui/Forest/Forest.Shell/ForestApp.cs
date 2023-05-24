@@ -229,6 +229,7 @@ namespace Acorisoft.FutureGL.Forest
                 {
                     Logs     = Path.Combine(domain, "Logs"),
                     Settings = Path.Combine(domain, "UserData"),
+                    Feedbacks = Path.Combine(domain, "Feedbacks"),
                 }.Initialize();
             }
             else
@@ -236,8 +237,9 @@ namespace Acorisoft.FutureGL.Forest
                 var domain = AppDomain.CurrentDomain.BaseDirectory;
                 return new ApplicationModel
                 {
-                    Logs     = Path.Combine(domain, "Logs"),
-                    Settings = Path.Combine(domain, "UserData"),
+                    Logs      = Path.Combine(domain, "Logs"),
+                    Settings  = Path.Combine(domain, "UserData"),
+                    Feedbacks = Path.Combine(domain, "Feedbacks"),
                 }.Initialize();
             }
         }

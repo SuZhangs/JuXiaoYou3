@@ -19,13 +19,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         
         public override void Run()
         {
+            Crash($"{Database} {(int)Bug} {Logs}");
+        }
+
+        public static void Crash(string args)
+        {
             var thisAppDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var crashReporter    = Path.Combine(thisAppDirectory, "MigaStudio.Tools.Headerless.exe");
+            var crashReporter    = Path.Combine(thisAppDirectory, "MigaStudio.BugReporter.exe");
             
             Process.Start(new ProcessStartInfo
             {
                 UseShellExecute = true,
-                Arguments       = $"{Database} {(int)Bug} {Logs}",
+                Arguments       = args,
                 FileName        = crashReporter
             });
         }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -34,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         public App() : base(BasicSettingFileName)
         {
-            Current.DispatcherUnhandledException += OnUnhandledException;
+            Current.DispatcherUnhandledException       += OnUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         }
 
@@ -46,6 +47,16 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            
+            var thisAppDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var crashReporter    = Path.Combine(thisAppDirectory, "MigaStudio.BugReporter.exe");
+            Process.Start(new ProcessStartInfo
+            {
+                Arguments = "dump 2 1",
+                FileName = crashReporter
+            });
+            //
+            // 写入错误次数
             Logger.Error(e.ExceptionObject);
         }
 
@@ -124,28 +135,14 @@ namespace Acorisoft.FutureGL.MigaStudio
         protected override void OnExitOverride(ExitEventArgs e)
         {
             SynchronizeSetting();
-
-            var queue = Xaml.Get<IPendingQueue>();
-
-#if DEBUG
-            queue.Add(new BugReportVerbose
-            {
-                Database = _databaseManager.Database
-                                           .CurrentValue
-                                           .DatabaseDirectory,
-                Logs = Xaml.Get<ApplicationModel>()
-                           .Logs,
-                Bug = BugLevel.Bug
-            });
-#endif
-
             Xaml.Get<AppViewModel>()
                 .Stop();
             //
             // 移除所有对象
             Task.Run(async () =>
                 {
-                    queue.ForEach(x => x.Run());
+                    Xaml.Get<IPendingQueue>()
+                        .ForEach(x => x.Run());
                     return await _databaseManager.CloseAsync();
                 })
                 .GetAwaiter()

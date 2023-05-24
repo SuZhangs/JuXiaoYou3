@@ -548,14 +548,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         public static readonly BlockType[] GroupElementKinds = new[]
         {
-            BlockType.Slider,
-            BlockType.Degree,
-            BlockType.Switch,
-            BlockType.Star,
-            BlockType.Heart,
-            BlockType.Binary,
+            BlockType.Color,
+            BlockType.Number,
+            BlockType.SingleLine,
+            BlockType.MultiLine,
             BlockType.Likability,
             BlockType.Rate,
+            BlockType.Reference,
+            BlockType.Image,
+            BlockType.Video,
+            BlockType.Music,
+            BlockType.Audio,
+            BlockType.File,
         };
 
         // (\BlockType.w,

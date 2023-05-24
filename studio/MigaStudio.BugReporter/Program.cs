@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaStudio.Models;
 using Colorful;
 using Console = Colorful.Console;
 
-namespace Acorisoft.FutureGL.MigaStudio.Tools.Headerless
+namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
 {
     public class Program
     {
@@ -64,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.Headerless
             //-------------------------------------
             Console.WriteAscii("JuXiaoYou", PrimaryColor);
             Console.WriteLineFormatted(
-                "欢迎使用{0},此工具可以帮助您反馈BUG！\n",
+                "欢迎使用{0},此工具可以帮助您反馈BUG！",
                 Color.LightSlateGray,
                 formatter);
             
@@ -110,16 +110,40 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.Headerless
 
         private static void Report(BugLevel bug, string dir, string log)
         {
-            var output = Path.Combine(Path.GetDirectoryName(log), "Feedbacks", "output.zip");
+            var feedback = Path.Combine(Path.GetDirectoryName(log), "Feedbacks");
+            var outputLogZipFile   = Path.Combine(feedback, "世界观.zip");
+            var outputDbZipFile   = Path.Combine(feedback, "日志.zip");
             var formatter = new []
             {
                 GetBugFormatter(bug),
                 new Formatter(dir, Color.Peru),
                 new Formatter(log, Color.Peru),
-                new Formatter(output, Color.Peru),
+                new Formatter(outputLogZipFile, Color.Peru),
+                new Formatter(outputDbZipFile, Color.Peru),
             };
             
-            Console.WriteLineFormatted("BUG等级：{0}\n数据位置：{1}\n日志位置：{2}\n输出位置：{3}\n", Color.LightGray, formatter);
+            Console.WriteLineFormatted("BUG等级：{0}\n数据位置：{1}\n日志位置：{2}\n", Color.LightGray, formatter);
+            Console.WriteLineFormatted("日志压缩包输出位置:{3}\n数据库压缩包输出位置：{4}\n", Color.LightGray, formatter);
+
+            if (bug == BugLevel.Bug)
+            {
+                Pack(log, outputLogZipFile);
+            }
+            else if (bug == BugLevel.NotImplemented)
+            {
+                Pack(log, outputLogZipFile);
+                Pack(dir, outputDbZipFile);
+            }
+            else
+            {
+                Pack(log, outputLogZipFile);
+                Pack(dir, outputDbZipFile);
+            }
+        }
+
+        private static void Pack(string folder, string target)
+        {
+            
         }
 
         private static Formatter GetBugFormatter(BugLevel level)
