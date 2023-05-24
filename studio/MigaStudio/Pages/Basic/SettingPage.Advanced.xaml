@@ -25,27 +25,5 @@
                                 Margin="16 4" />
             </UniformGrid>
         </HeaderedContentControl>
-
-        <HeaderedContentControl Header="反馈"
-                                Margin="8"
-                                Padding="16 8">
-            <UniformGrid Columns="4"
-                         VerticalAlignment="Top">
-                <fs:ActionButton Margin="4"
-                                 Command="{Binding CompressLogsCommand}"
-                                 Content="普通BUG反馈"
-                                 Padding="8 24 24 24" />
-
-                <fs:ActionButton Margin="4"
-                                 Content="特殊BUG反馈"
-                                 Padding="8 24 24 24" />
-                <fs:ActionButton Margin="4"
-                                 Content="离谱BUG反馈"
-                                 Padding="8 24 24 24" />
-                <fs:ActionButton Margin="4"
-                                 Content="如何反馈？"
-                                 Padding="8 24 24 24" />
-            </UniformGrid>
-        </HeaderedContentControl>
     </StackPanel>
 </ScrollViewer>

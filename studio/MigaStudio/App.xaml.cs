@@ -4,12 +4,14 @@ using System.Windows;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.UI;
 using Acorisoft.FutureGL.Forest.Utils;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using DryIoc;
 using NLog;
 // ReSharper disable UnusedParameter.Local
@@ -122,12 +124,30 @@ namespace Acorisoft.FutureGL.MigaStudio
         protected override void OnExitOverride(ExitEventArgs e)
         {
             SynchronizeSetting();
-            
+
+            var queue = Xaml.Get<IPendingQueue>();
+
+#if DEBUG
+            queue.Add(new BugReportVerbose
+            {
+                Database = _databaseManager.Database
+                                           .CurrentValue
+                                           .DatabaseDirectory,
+                Logs = Xaml.Get<ApplicationModel>()
+                           .Logs,
+                Bug = BugLevel.Bug
+            });
+#endif
+
             Xaml.Get<AppViewModel>()
                 .Stop();
             //
             // 移除所有对象
-            Task.Run(async () => await _databaseManager.CloseAsync())
+            Task.Run(async () =>
+                {
+                    queue.ForEach(x => x.Run());
+                    return await _databaseManager.CloseAsync();
+                })
                 .GetAwaiter()
                 .GetResult();
         }

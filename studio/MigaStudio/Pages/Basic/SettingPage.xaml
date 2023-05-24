@@ -11,6 +11,7 @@
                      xmlns:fs="urn:acorisoft/studio"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                     xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      mc:Ignorable="d"
                      d:DesignHeight="720"
                      d:DesignWidth="1280"
@@ -146,12 +147,12 @@
         <f:ShadowTabItem Header="高级"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True">
-            <local:SettingAdvancedView/>
+            <local:SettingAdvancedView />
         </f:ShadowTabItem>
         <f:ShadowTabItem Header="字体"
                          Icon="{StaticResource IC.Setting}"
-                         IsFilled="True" 
-                         Visibility="Collapsed"/>
+                         IsFilled="True"
+                         Visibility="Collapsed" />
         <f:ShadowTabItem Header="许可证"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True"
@@ -160,6 +161,54 @@
         <f:ShadowTabItem Header="关于"
                          Icon="{StaticResource IC.Setting}"
                          IsFilled="True">
+            <ScrollViewer>
+                <StackPanel>
+                    <HeaderedContentControl Header="联系我们"
+                                            Margin="0 0 0 48"
+                                            Padding="16 8">
+                        <f:SpacingStackPanel Orientation="Horizontal"
+                                             Gap="8">
+                            <f:CallToAction Content="查看官网"
+                                            CornerRadius="24"
+                                            Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                            CommandParameter="app.HomePage"
+                                            Margin="32 0"
+                                            Height="48"
+                                            Width="192"/>
+                        </f:SpacingStackPanel>
+                    </HeaderedContentControl>
+                    <f:ForestIsland Header="反馈"
+                                    Margin="0 0 0 48"
+                                    Padding="0 8">
+                        <f:ForestIsland.Resources>
+                            <Style TargetType="{x:Type ftk:StateButton}" BasedOn="{StaticResource ClearStyle.StateButton}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </f:ForestIsland.Resources>
+                        <StackPanel>
+                            <TextBlock Margin="0 0 0 16"
+                                       Foreground="{f:Brush ForegroundLevel2}"
+                                       Text="如果你在使用过程中遇到问题，需要反馈BUG的话，请根据BUG的表现选择下面的选项，然后点击“反馈”按钮，待退出橘小柚之后会自动的提示!"
+                                       TextWrapping="Wrap"/>
+                            <DockPanel>
+                                <f:CallToAction DockPanel.Dock="Right"
+                                                Click="Button_BugReport"
+                                                Content="反馈"
+                                                CornerRadius="24"
+                                                Margin="32 0"
+                                                Height="48"
+                                                Width="256"/>
+                                <f:SpacingStackPanel Orientation="Vertical"
+                                                     Gap="8">
+                                    <RadioButton x:Name="CannotUseBug" Content="部分功能无法使用?"/>
+                                    <RadioButton x:Name="CrashBugButCanContinue" Content="部分功能无法使用并且闪退！但是重启之后仍然可以运行！"/>
+                                    <RadioButton x:Name="CrashBug" Content="无法继续使用！"/>
+                                </f:SpacingStackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </f:ForestIsland>
+                </StackPanel>
+            </ScrollViewer>
         </f:ShadowTabItem>
     </f:ShadowTabControl>
 </f:ForestUserControl>

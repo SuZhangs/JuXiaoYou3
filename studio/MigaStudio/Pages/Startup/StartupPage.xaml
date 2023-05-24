@@ -153,18 +153,18 @@
                 <f:ForestIsland DockPanel.Dock="Left"
                                 Header="常用功能">
                     <WrapPanel Orientation="Horizontal">
-
-                        <ftk:ToolButton Content="{f:Language __Keywords}"
-                                        Command="{x:Static fs:Studio.GotoPageCommand}"
-                                        CommandParameter="{x:Type this:KeywordViewModel}"
-                                        ShowText="True"
-                                        Icon="{StaticResource FeatherIcon.Folder}" />
-
-                        <ftk:ToolButton Content="{f:Language __Bookmark}"
-                                        Command="{x:Static fs:Studio.GotoPageCommand}"
-                                        CommandParameter="{x:Type this:BookmarkViewModel}"
-                                        ShowText="True"
-                                        Icon="{StaticResource FeatherIcon.Inbox}" />
+                        <!-- -->
+                        <!-- <ftk:ToolButton Content="{f:Language __Keywords}" -->
+                        <!--                 Command="{x:Static fs:Studio.GotoPageCommand}" -->
+                        <!--                 CommandParameter="{x:Type this:KeywordViewModel}" -->
+                        <!--                 ShowText="True" -->
+                        <!--                 Icon="{StaticResource FeatherIcon.Folder}" /> -->
+                        <!-- -->
+                        <!-- <ftk:ToolButton Content="{f:Language __Bookmark}" -->
+                        <!--                 Command="{x:Static fs:Studio.GotoPageCommand}" -->
+                        <!--                 CommandParameter="{x:Type this:BookmarkViewModel}" -->
+                        <!--                 ShowText="True" -->
+                        <!--                 Icon="{StaticResource FeatherIcon.Inbox}" /> -->
 
                         <ftk:ToolButton Content="{f:Language global.CharacterRelationship}"
                                         Command="{x:Static fs:Studio.GotoPageCommand}"
