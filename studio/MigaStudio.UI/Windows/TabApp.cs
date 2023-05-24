@@ -1,6 +1,7 @@
 ﻿using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
+using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using DryIoc;
@@ -34,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Windows
 
             //
             // 创建Shell
-            Xaml.Use<TViewModel>(GetShell());
+            Xaml.Use<TViewModel, TabBaseAppViewModel, AppViewModelBase>(GetShell());
         }
 
         protected override void RegisterResourceDictionary(ResourceDictionary appResDict)

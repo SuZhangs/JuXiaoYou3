@@ -18,45 +18,45 @@
         <this:InTabViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <thisConverters:MainFeatureConverter x:Key="NameConverter" />
     </UserControl.Resources>
-    <f:ForestIsland Header="服务">
-        <ItemsControl f:XamlAssist.GroupName="GroupId" 
+    <ItemsControl f:XamlAssist.GroupName="GroupId" 
                       ItemsSource="{Binding Features,Mode=OneWay}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type model:MainFeature}">
-                    <ftk:ToolButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RunFeatureCommand}"
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type model:MainFeature}">
+                <ftk:ToolButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RunFeatureCommand}"
                                     CommandParameter="{Binding}"
-                                    Margin="16 8"
+                                    Margin="8 4"
                                     Icon="{StaticResource FeatherIcon.Tools}"
                                     Content="{Binding Converter={StaticResource NameConverter}}"
                                     ShowText="True" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <DockPanel>
-                                            <TextBlock DockPanel.Dock="Top"
-                                                       FontWeight="Bold"
-                                                       Text="{Binding Name, Converter={StaticResource NameConverter}}"
-                                                       VerticalAlignment="Center" />
-                                            <ItemsPresenter Margin="24 8"/>
-                                        </DockPanel>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ItemsControl.GroupStyle>
-        </ItemsControl>
-    </f:ForestIsland>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.ContainerStyle>
+                    <Style TargetType="{x:Type GroupItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                    <DockPanel>
+                                        <TextBlock DockPanel.Dock="Top"
+                                                   FontSize="16"
+                                                   FontWeight="Bold"
+                                                   Foreground="{f:Brush ForegroundLevel2}"
+                                                   Text="{Binding Name, Converter={StaticResource NameConverter}}"
+                                                   VerticalAlignment="Center" />
+                                        <ItemsPresenter Margin="24 4 24 8"/>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GroupStyle.ContainerStyle>
+            </GroupStyle>
+        </ItemsControl.GroupStyle>
+    </ItemsControl>
 </f:ForestUserControl>

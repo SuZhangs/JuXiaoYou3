@@ -9,6 +9,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     
     public abstract class InTabViewModel : TabViewModel
     {
+        public const string ToolsGroup = "global.tools";
+        public const string FeatureGroup = "global.Feature";
+        public const string PresetGroup  = "global.Preset";
+        
         private readonly Subject<ViewModelBase> _onStart;
         private          MainFeature            _selectedFeature;
         private          ViewModelBase          _selectedViewModel;

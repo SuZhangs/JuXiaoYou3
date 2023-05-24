@@ -5,22 +5,93 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:fs="urn:acorisoft/studio"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relatives;assembly=SubSystem"
                      mc:Ignorable="d"
                      Padding="16"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:StartupViewModel}, IsDesignTimeCreatable=True}">
-    <ScrollViewer>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="256" />
-                <RowDefinition Height="320" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type ftk:ToolButton}">
+                <Setter Property="ShowText" Value="True" />
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="Width" Value="96" />
+                <Setter Property="Height" Value="96" />
+                <Setter Property="IsFilled" Value="False" />
+                <Setter Property="IconSize" Value="29" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ftk:ToolButton}">
+                            <Border x:Name="PART_Bd"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    Padding="{TemplateBinding Padding}">
+                                <DockPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                    <Path x:Name="PART_Icon"
+                                          DockPanel.Dock="Top"
+                                          Data="{TemplateBinding Icon}"
+                                          Stretch="Uniform"
+                                          Margin="0 0 0 8"
+                                          Width="{TemplateBinding IconSize}"
+                                          Height="{TemplateBinding IconSize}" />
 
+                                    <ContentPresenter x:Name="PART_Content"
+                                                      TextElement.FontSize="14"
+                                                      TextElement.Foreground="{f:ForegroundBrush}"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center" />
+                                </DockPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsFilled" Value="True">
+                                    <Setter Property="Fill" Value="{f:ForegroundBrush}" TargetName="PART_Icon" />
+                                </Trigger>
+
+                                <Trigger Property="IsFilled" Value="False">
+                                    <Setter Property="Stroke" Value="{f:ForegroundBrush}" TargetName="PART_Icon" />
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="False" />
+                                        <Condition Property="IsFilled" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Content" />
+                                    <Setter Property="Fill" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon" />
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="False" />
+                                        <Condition Property="IsFilled" Value="False" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Content" />
+                                    <Setter Property="Stroke" Value="{f:Brush ForegroundDisabled}" TargetName="PART_Icon" />
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel>
+
+            <!-- 巨幕 -->
             <Border CornerRadius="12"
+                    Height="256"
                     Padding="32">
                 <Border.Background>
                     <LinearGradientBrush>
@@ -36,48 +107,70 @@
                 </Grid>
             </Border>
 
+            <!-- 快速功能 -->
             <DockPanel Grid.Row="1"
                        Margin="0 16 0 0">
-                <f:SpacingStackPanel DockPanel.Dock="Right"
-                                     Gap="8"
-                                     Width="320">
+                <f:ForestIsland DockPanel.Dock="Right"
+                                Header="反馈">
+                    <f:SpacingStackPanel Gap="8"
+                                         Width="320">
 
-                    <fs:ActionButton Content="{f:Language global.tutorialArticle}"
-                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
-                                     CommandParameter="app.tutorial"
-                                     Margin="0 4"
-                                     Icon="{StaticResource IC.Notebook}"
-                                     IconSize="29"
-                                     IsFilled="True" />
+                        <fs:ActionButton Content="{f:Language global.tutorialArticle}"
+                                         Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                         CommandParameter="app.tutorial"
+                                         Margin="0 4"
+                                         Icon="{StaticResource IC.Notebook}"
+                                         IconSize="29"
+                                         IsFilled="True" />
 
-                    <fs:ActionButton Content="{f:Language global.sponsor}"
-                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
-                                     CommandParameter="app.donate"
-                                     Margin="0 4"
-                                     Icon="{StaticResource FeatherIcon.Chat}"
-                                     IconSize="29" />
+                        <fs:ActionButton Content="{f:Language global.sponsor}"
+                                         Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                         CommandParameter="app.donate"
+                                         Margin="0 4"
+                                         Icon="{StaticResource FeatherIcon.Chat}"
+                                         IconSize="29" />
 
-                    <fs:ActionButton Content="{f:Language global.otherApps}"
-                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
-                                     CommandParameter="app.otherApps"
-                                     Margin="0 4"
-                                     Icon="{StaticResource IC.Apps}"
-                                     IconSize="29"
-                                     IsFilled="True" />
+                        <fs:ActionButton Content="{f:Language global.otherApps}"
+                                         Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                         CommandParameter="app.otherApps"
+                                         Margin="0 4"
+                                         Icon="{StaticResource IC.Apps}"
+                                         IconSize="29"
+                                         IsFilled="True" />
 
-                    <fs:ActionButton Content="{f:Language global.AboutUs}"
-                                     Command="{x:Static sss:FileIO.OpenLinkCommand}"
-                                     CommandParameter="app.help"
-                                     Margin="0 4"
-                                     Icon="{StaticResource FeatherIcon.Link}"
-                                     IconSize="29" />
-                </f:SpacingStackPanel>
+                        <fs:ActionButton Content="{f:Language global.AboutUs}"
+                                         Command="{x:Static sss:FileIO.OpenLinkCommand}"
+                                         CommandParameter="app.help"
+                                         Margin="0 4"
+                                         Icon="{StaticResource FeatherIcon.Link}"
+                                         IconSize="29" />
+                    </f:SpacingStackPanel>
+                </f:ForestIsland>
 
-                <WrapPanel DockPanel.Dock="Left"
-                           Orientation="Horizontal">
-                    
-                </WrapPanel>
+                <f:ForestIsland DockPanel.Dock="Left"
+                                Header="常用功能">
+                    <WrapPanel Orientation="Horizontal">
+
+                        <ftk:ToolButton Content="{f:Language __Keywords}"
+                                        Command="{x:Static fs:Studio.GotoPageCommand}"
+                                        CommandParameter="{x:Type this:KeywordViewModel}"
+                                        ShowText="True"
+                                        Icon="{StaticResource FeatherIcon.Folder}" />
+
+                        <ftk:ToolButton Content="{f:Language __Bookmark}"
+                                        Command="{x:Static fs:Studio.GotoPageCommand}"
+                                        CommandParameter="{x:Type this:BookmarkViewModel}"
+                                        ShowText="True"
+                                        Icon="{StaticResource FeatherIcon.Inbox}" />
+
+                        <ftk:ToolButton Content="{f:Language global.CharacterRelationship}"
+                                        Command="{x:Static fs:Studio.GotoPageCommand}"
+                                        CommandParameter="{x:Type rel:CharacterRelationshipViewModel}"
+                                        ShowText="True"
+                                        Icon="{StaticResource FeatherIcon.People}" />
+                    </WrapPanel>
+                </f:ForestIsland>
             </DockPanel>
-        </Grid>
+        </StackPanel>
     </ScrollViewer>
 </f:ForestUserControl>

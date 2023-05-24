@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 using CommunityToolkit.Mvvm.Input;
 using Ookii.Dialogs.Wpf;
 
@@ -70,7 +72,23 @@ namespace Acorisoft.FutureGL.MigaStudio
             await System.IO.File.WriteAllBytesAsync(savedlg.FileName, ms.GetBuffer());
         }
 
-        
+        public static void GotoPage(Type element)
+        {
+            if (element is null)
+            {
+                return;
+            }
+
+            var shellCore = Xaml.Get<TabBaseAppViewModel>();
+
+            if (shellCore is null)
+            {
+                return;
+            }
+
+            var controller = shellCore.Controller as ShellCore;
+            controller?.New(element);
+        }
 
         public static VistaSaveFileDialog Save(string filter, string defaultExt, string fileName = null)
         {
@@ -93,5 +111,6 @@ namespace Acorisoft.FutureGL.MigaStudio
         }
         
         public static AsyncRelayCommand<FrameworkElement> CaptureCommand { get; } = new AsyncRelayCommand<FrameworkElement>(CaptureAsync);
+        public static RelayCommand<Type> GotoPageCommand { get; } = new RelayCommand<Type>(GotoPage);
     }
 }

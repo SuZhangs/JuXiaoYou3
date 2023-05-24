@@ -11,11 +11,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         protected override void Initialize()
         {
-            CreatePageFeature<CharacterRelationshipViewModel>(string.Empty, "__CharacterRelationship", null);
-            CreateDialogFeature<DirectoryManagerViewModel>(string.Empty, "__DirectoryStatistic", null);
-            CreateDialogFeature<RepairToolViewModel>(string.Empty, "global.repair", null);
-            CreatePageFeature<KeywordViewModel>(string.Empty, "__Keywords", null);
-            CreatePageFeature<BookmarkViewModel>(string.Empty, "__Bookmark", null);
+            // CreatePageFeature<CharacterRelationshipViewModel>(string.Empty, "__CharacterRelationship", null);
+            // CreateDialogFeature<DirectoryManagerViewModel>(string.Empty, "__DirectoryStatistic", null);
+            CreateDialogFeature<RepairToolViewModel>(ToolsGroup, "global.repair", null);
+            CreatePageFeature<KeywordViewModel>(FeatureGroup, "__Keywords", null);
+            CreatePageFeature<BookmarkViewModel>(FeatureGroup, "__Bookmark", null);
         }
     }
 }

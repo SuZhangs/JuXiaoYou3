@@ -6,8 +6,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         protected override void Initialize()
         {
-            CreatePageFeature<RelativePresetViewModel>( "global.RelationshipDefinition");
-            CreatePageFeature<CharacterRelationshipViewModel>("global.CharacterRelationship");
+            CreatePageFeature<RelativePresetViewModel>(PresetGroup, "global.RelationshipDefinition");
+            CreatePageFeature<CharacterRelationshipViewModel>(FeatureGroup, "global.CharacterRelationship");
         }
     }
 }

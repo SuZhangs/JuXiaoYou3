@@ -1,0 +1,70 @@
+﻿<f:ForestIsland x:Class="Acorisoft.FutureGL.MigaStudio.Pages.UniverseMoreView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:f="urn:acorisoft/forest/ui"
+                xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
+                xmlns:studio="urn:acorisoft/studio"
+                xmlns:ftk="urn:acorisoft/forest/toolkits"
+                xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                Header="其他世界观"
+                Margin="16 8"
+                mc:Ignorable="d"
+                d:DesignHeight="300"
+                d:DesignWidth="300"
+                d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
+    <f:ForestIsland.ToolBar>
+        <StackPanel Orientation="Horizontal">
+
+            <ftk:ToolButton Content="切换世界观"
+                            Command="{Binding CloseDatabaseCommand}"
+                            HorizontalAlignment="Left"
+                            Margin="32 0 0 0"
+                            Icon="{StaticResource FeatherIcon.Refresh}"
+                            ShowText="True" />
+
+            <ftk:ToolButton Content="更多设置"
+                            Command="{Binding EditCommand}"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 0 4"
+                            Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                            IconSize="17"
+                            IsFilled="True"
+                            ShowText="True" />
+        </StackPanel>
+    </f:ForestIsland.ToolBar>
+    <f:EmptyStateItemsControl NotEmpty="{Binding HasRepositories,Mode=OneWay}"
+                              ItemsSource="{Binding Repositories,Mode=OneWay}">
+        <f:EmptyStateItemsControl.EmptyState>
+            <studio:FeatureEmptyStateView />
+        </f:EmptyStateItemsControl.EmptyState>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="3"
+                        Margin="4"
+                        Padding="16 8 8 8">
+                    <DockPanel>
+                        <f:CallToAction DockPanel.Dock="Right"
+                                        Content="打开"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchDatabaseCommand}"
+                                        CommandParameter="{Binding}"
+                                        Palette="SlateGray" />
+
+                        <TextBlock DockPanel.Dock="Left"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel ItemWidth="256" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </f:EmptyStateItemsControl>
+</f:ForestIsland>
