@@ -8,8 +8,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         protected override void Initialize()
         {
-            CreateDialogFeature<MusicPlayerViewModel>(FeatureGroup, "__MusicPlayer", null);
-            CreatePageFeature<ColorServiceViewModel>(FeatureGroup, "__ColorService", null);
+            // CreateDialogFeature<MusicPlayerViewModel>(FeatureGroup, "__MusicPlayer", null);
+            // CreatePageFeature<ColorServiceViewModel>(FeatureGroup, "__ColorService", null);
             
             // TODO: Next Version Feature
             // CreatePageFeature<RankServiceViewModel>(string.Empty, "__RankService", null);

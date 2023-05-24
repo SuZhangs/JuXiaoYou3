@@ -18,6 +18,7 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:StartupViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary>
+            <Geometry x:Key="Playlist">F1 M24,24z M0,0z M14,6L4,6C3.45,6 3,6.45 3,7 3,7.55 3.45,8 4,8L14,8C14.55,8 15,7.55 15,7 15,6.45 14.55,6 14,6z M14,10L4,10C3.45,10 3,10.45 3,11 3,11.55 3.45,12 4,12L14,12C14.55,12 15,11.55 15,11 15,10.45 14.55,10 14,10z M4,16L10,16C10.55,16 11,15.55 11,15 11,14.45 10.55,14 10,14L4,14C3.45,14 3,14.45 3,15 3,15.55 3.45,16 4,16z M19,6C17.9,6,17,6.9,17,8L17,14.18C16.69,14.07 16.35,14 16,14 14.16,14 12.72,15.64 13.05,17.54 13.26,18.75 14.25,19.74 15.46,19.95 17.36,20.28 19,18.84 19,17L19,8 21,8C21.55,8 22,7.55 22,7 22,6.45 21.55,6 21,6L19,6z</Geometry>
             <Style TargetType="{x:Type ftk:ToolButton}">
                 <Setter Property="ShowText" Value="True" />
                 <Setter Property="CornerRadius" Value="3" />
@@ -175,13 +176,14 @@
                                         Command="{x:Static fs:Studio.GotoPageCommand}"
                                         CommandParameter="{x:Type srv:MusicViewModel}"
                                         ShowText="True"
-                                        Icon="{StaticResource FeatherIcon.People}" />
-
-                        <ftk:ToolButton Content="{f:Language __ColorService}"
-                                        Command="{x:Static fs:Studio.GotoPageCommand}"
-                                        CommandParameter="{x:Type wv:RarityConceptViewModel}"
-                                        ShowText="True"
-                                        Icon="{StaticResource FeatherIcon.People}" />
+                                        Icon="{StaticResource Playlist}" 
+                                        IsFilled="True"/>
+                        <!-- -->
+                        <!-- <ftk:ToolButton Content="{f:Language __ColorService}" -->
+                        <!--                 Command="{x:Static fs:Studio.GotoPageCommand}" -->
+                        <!--                 CommandParameter="{x:Type wv:RarityConceptViewModel}" -->
+                        <!--                 ShowText="True" -->
+                        <!--                 Icon="{StaticResource FeatherIcon.People}" /> -->
                     </WrapPanel>
                 </f:ForestIsland>
             </DockPanel>

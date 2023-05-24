@@ -94,7 +94,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void EditImpl()
         {
             // Controller.New<UniverseEditorViewModel>();
-            this.Obsoleted(Language.GetText("feature.Universe"), 15);
+            this.Obsoleted(Language.GetText("feature.Universe"), 8);
         }
 
         private async Task CloseDatabaseImpl()

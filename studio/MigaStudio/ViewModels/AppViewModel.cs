@@ -3,9 +3,11 @@ using System.Linq;
 using System.Windows.Input;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages;
+using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaUtils;
 
@@ -76,8 +78,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     ((TabController)Controller).New<SettingViewModel>();
                     return true;
                 case Key.F5:
-                    Xaml.Get<MusicService>()
-                        .PlayOrPause();
+                    Xaml.Get<IDialogService>()
+                        .Dialog(new MusicPlayerViewModel());
                     return true;
                 case Key.F6:
                     return true;
