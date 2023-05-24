@@ -73,11 +73,6 @@
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
                                     Margin="0 0 0 2">
-                            <ftk:ToolButton Content="{f:Language global.new}"
-                                            Command="{Binding CreateCommand}"
-                                            Icon="{StaticResource FeatherIcon.File}"
-                                            ShowText="True"
-                                            Margin="0 4" />
 
                             <ftk:ToolButton Content="{f:Language global.open}"
                                             Command="{Binding OpenCommand}"
@@ -107,6 +102,16 @@
                         <f:HeaderedSingleLine Header="{f:Language global.foreignName}"
                                               Margin="0 6"
                                               Text="{Binding ForeignName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        
+                        <f:CallToAction Content="{f:Language global.new}"
+                                        Command="{Binding CreateCommand}"
+                                        CornerRadius="24"
+                                        Icon="{StaticResource FeatherIcon.Checked}"
+                                        IconSize="23"
+                                        Margin="0 32 0 0"
+                                        Height="48"
+                                        Width="320"
+                                        Palette="HighlightPalette1"/>
                     </StackPanel>
                 </f:ForestSection>
 

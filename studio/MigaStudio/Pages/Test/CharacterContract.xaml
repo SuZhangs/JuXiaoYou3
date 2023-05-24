@@ -15,10 +15,8 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"
-                              MinWidth="384"/>
-            <ColumnDefinition Width="1*"
-                              MaxWidth="640" />
+            <ColumnDefinition Width="384"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*" 
                               MaxWidth="640"/>
         </Grid.ColumnDefinitions>
@@ -83,17 +81,17 @@
             分组：
             用来显示选定的人物的联系人分组
         -->
-        <f:ForestSection Grid.Column="1"
+        <f:ForestIsland  Grid.Column="1"
                          Header="分组"
                          Margin="16 0">
-            <f:ForestSection.ToolBar>
+            <f:ForestIsland.ToolBar>
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal"
                             Margin="0 0 0 4">
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Plus}" />
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}" />
                 </StackPanel>
-            </f:ForestSection.ToolBar>
+            </f:ForestIsland.ToolBar>
 
             <f:EmptyStateTreeView NotEmpty="True">
                 <f:TreeViewItem Header="普通好友">
@@ -133,7 +131,7 @@
                     </Border>
                 </f:TreeViewItem>
             </f:EmptyStateTreeView>
-        </f:ForestSection>
+        </f:ForestIsland>
 
         <!--
             群聊：

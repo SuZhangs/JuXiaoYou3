@@ -29,16 +29,31 @@
         <ftk:TabItem Header="图库">
             <this:UniverseAlbumView/>
         </ftk:TabItem>
-        <ftk:TabItem Header="其他世界观">
+        <ftk:TabItem Header="时间线">
+            <this:UniverseAlbumView/>
+        </ftk:TabItem>
+        <ftk:TabItem Header="更多">
             <f:ForestIsland Header="其他世界观"
                             Margin="16 8">
                 <f:ForestIsland.ToolBar>
-                    <ftk:ToolButton Content="切换世界观"
+                    <StackPanel Orientation="Horizontal">
+
+                        <ftk:ToolButton Content="切换世界观"
                                     Command="{Binding CloseDatabaseCommand}"
                                     HorizontalAlignment="Left"
                                     Margin="32 0 0 0"
                                     Icon="{StaticResource FeatherIcon.Refresh}"
                                     ShowText="True"/>
+
+                        <ftk:ToolButton Content="更多设置"
+                                        Command="{Binding EditCommand}"
+                                        HorizontalAlignment="Right"
+                                        Margin="0 0 0 4"
+                                        Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                        IconSize="17"
+                                        IsFilled="True"
+                                        ShowText="True"/>
+                    </StackPanel>
                 </f:ForestIsland.ToolBar>
                 <f:EmptyStateItemsControl NotEmpty="{Binding HasRepositories,Mode=OneWay}"
                                           ItemsSource="{Binding Repositories,Mode=OneWay}">
