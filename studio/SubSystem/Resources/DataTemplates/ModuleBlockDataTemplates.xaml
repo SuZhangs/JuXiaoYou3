@@ -188,7 +188,8 @@
                        Text="{Binding Name}"
                        VerticalAlignment="Center" />
 
-            <f:MultiLine Height="160"
+            <f:MultiLine ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         Height="160"
                          Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
     </DataTemplate>
@@ -535,7 +536,7 @@
                                    ShowAxisName="True" />
 
                 <ItemsControl ItemsSource="{Binding Value}"
-                              Margin="16 0 0 0"
+                              HorizontalAlignment="Right"
                               VerticalAlignment="Center">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
