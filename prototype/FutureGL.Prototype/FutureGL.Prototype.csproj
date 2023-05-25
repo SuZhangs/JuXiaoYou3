@@ -5,9 +5,11 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;x86</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\studio\MigaStudio.UI\MigaStudio.UI.csproj" />
       <ProjectReference Include="..\FutureGL.Prototype.Core\FutureGL.Prototype.Core.csproj" />
     </ItemGroup>
 
