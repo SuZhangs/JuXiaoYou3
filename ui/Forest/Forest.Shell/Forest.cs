@@ -106,12 +106,12 @@ namespace Acorisoft.FutureGL.Forest
             {
                 return Language.Culture switch
                 {
-                    CultureArea.English  => "Error",
-                    CultureArea.Korean   => "오류",
-                    CultureArea.Japanese => "間違いです",
-                    CultureArea.French   => "Les erreurs",
-                    CultureArea.Russian  => "ошибк",
-                    _                    => "错误"
+                    CultureArea.English  => "Info",
+                    CultureArea.Korean   => "정보",
+                    CultureArea.Japanese => "情報",
+                    CultureArea.French   => "À propos de nous",
+                    CultureArea.Russian  => "Информация о компании",
+                    _                    => "提示"
                 };
             }
         }
@@ -186,7 +186,7 @@ namespace Acorisoft.FutureGL.Forest
         public static Task Info(this IViewModel source, string content)
         {
             return DialogService()
-                .Notify(CriticalLevel.Info, ObsoletedCaption, content);
+                .Notify(CriticalLevel.Info, InfoCaption, content);
         }
 
         public static Task Obsoleted(this IViewModel source, string content)

@@ -41,6 +41,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     verbose.Bug = BugLevel.Bug;
                 }
 
+                
+                this.ViewModel<SettingViewModel>()
+                    .Info("此项操作在程序退出后才生效哦！");
                 return;
             }
 
@@ -65,6 +68,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     verbose.Bug = BugLevel.NotImplemented;
                 }
 
+                this.ViewModel<SettingViewModel>()
+                    .Info("此项操作在程序退出后才生效哦！");
                 return;
             }
 
@@ -89,6 +94,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     verbose.Bug = BugLevel.Crash;
                 }
 
+                this.ViewModel<SettingViewModel>()
+                    .Info("此项操作在程序退出后才生效哦！");
                 return;
             }
 

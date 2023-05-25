@@ -85,6 +85,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                     "此工具由{2}启动，正在执行自动化操作！\n这个过程比较耗费时间,请耐心等待！\n",
                     Color.LightSlateGray,
                     formatter);
+                
+                Console.WriteLineFormatted(
+                    "正在等待应用程序退出，完成此项操作需要5秒，请耐心等待\n",
+                    Color.LightSlateGray,
+                    formatter);
+                Thread.Sleep(5000);
+                
                 Report(bug, dir, log);
             }
             else
