@@ -177,7 +177,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private static PartOfPresentation GetPresentationPreset(IDatabase db, DocumentType type)
         {
             return db.Get<PresetProperty>()
-                     .GetPresentationPreset(type, x => db.Set(x));
+                     .GetPresentationPreset(type, x => db.Upsert(x));
         }
         
         private async Task OverridePresentationImpl()
