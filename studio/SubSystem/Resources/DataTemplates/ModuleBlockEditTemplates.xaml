@@ -144,23 +144,6 @@
                                           Text="{Binding Metadata,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </UniformGrid>
 
-                <f:ListBox Margin="4 8"
-                           SelectedItem="{Binding DataSource,Mode=TwoWay}">
-                    <f:ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </f:ListBox.ItemsPanel>
-                    <f:ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type t:ReferenceSource}">
-                            <TextBlock Margin="4"
-                                       Text="{Binding Converter={StaticResource RefSource}}"/>
-                        </DataTemplate>
-                    </f:ListBox.ItemTemplate>
-                    <t:ReferenceSource>Document</t:ReferenceSource>
-                    <t:ReferenceSource>Compose</t:ReferenceSource>
-                </f:ListBox>
-
                 <f:HeaderedMultiLine Header="{f:Language global.tooltips}"
                                      Margin="4 8"
                                      Height="128"

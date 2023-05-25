@@ -131,7 +131,9 @@
                        Margin="0 0 0 8"
                        Text="{Binding Name}" />
 
-            <studio:ReferenceControl Icon="{StaticResource IC.Notebook}"
+            <studio:ReferenceControl OpenCommand="{Binding OpenCommand}"
+                                     SelectCommand="{Binding SelectCommand}"
+                                     Icon="{StaticResource IC.Notebook}"
                                      IsFilled="True"
                                      Foreground="{f:ForegroundBrush}"
                                      DisplayName="{Binding TargetName,Mode=TwoWay}"

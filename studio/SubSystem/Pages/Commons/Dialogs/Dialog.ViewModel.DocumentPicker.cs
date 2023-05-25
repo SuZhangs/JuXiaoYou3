@@ -29,13 +29,13 @@
 
         protected override string Failed() => SubSystemString.Unknown;
 
-        public static Task<Op<DocumentCache>> Select(IEnumerable<DocumentCache> excludeDocuments)
+        public static Task<Op<DocumentCache>> Select(IEnumerable<DocumentCache> documents)
         {
             return DialogService().Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
             {
                 Args = new object[]
                 {
-                    excludeDocuments
+                    documents
                 }
             });
         }

@@ -88,7 +88,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             ComboBox<MainTheme>(ConstantValues.Setting_MainTheme, BasicAppSetting.Theme, MainThemeSetting, ConstantValues.Themes);
             ComboBox<DatabaseMode>(ConstantValues.Setting_DebugMode, DatabaseMode.Release, DatabaseModeSetting, ConstantValues.DebugMode);
             ComboBox<CultureArea>(ConstantValues.Setting_Language, BasicAppSetting.Language, LanguageSetting, ConstantValues.Languages);
-            Slider(ConstantValues.Setting_AutoSavePeriod, AdvancedSetting.AutoSavePeriod, AutoSavePeriod, 1, 10);
+            Slider(ConstantValues.Setting_AutoSavePeriod, AdvancedSetting.AutoSavePeriod, AutoSavePeriod, 5, 30);
         }
 
         private void NotifyApplyWhenRestart()
@@ -108,7 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            AdvancedSetting.AutoSavePeriod = Math.Clamp(x, 1, 10);
+            AdvancedSetting.AutoSavePeriod = Math.Clamp(x, 5, 30);
             Xaml.Get<AutoSaveService>()
                 .Elapsed = x;
         }

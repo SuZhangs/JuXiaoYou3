@@ -246,13 +246,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             TargetName      = block.TargetName;
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
-            DataSource      = block.DataSource;
             OpenCommand     = new RelayCommand(OpenImpl);
+            SelectCommand   = new AsyncRelayCommand(SelectImpl);
         }
 
         public ReferenceBlockDataUI(ReferenceBlock block) : this(block, ModuleBlockFactory.EmptyHandler)
         {
-            OpenCommand = new RelayCommand(OpenImpl);
+            OpenCommand   = new RelayCommand(OpenImpl);
+            SelectCommand = new AsyncRelayCommand(SelectImpl);
         }
 
         private void OpenImpl()
@@ -270,6 +271,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             });
         }
 
+        private async Task SelectImpl()
+        {
+            var r = await DocumentPickerViewModel.Select(Studio.Engine<DocumentEngine>()
+                                                               .GetCaches());
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var v = r.Value;
+            TargetThumbnail = v.Avatar;
+            TargetName      = v.Name;
+            TargetSource    = v.Id;
+        }
 
         public override bool CompareTemplate(ModuleBlock block)
         {
@@ -285,9 +301,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         /// 目标内容块
         /// </summary>
         protected ReferenceBlock TargetBlock { get; }
-
-        public RelayCommand OpenCommand { get; }
-        public RelayCommand SelectCommand { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="TargetThumbnail"/> 属性。
@@ -328,10 +341,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             }
         }
 
-        /// <summary>
-        /// 获取或设置 <see cref="DataSource"/> 属性。
-        /// </summary>
-        public ReferenceSource DataSource { get; }
+        public RelayCommand OpenCommand { get; }
+        public AsyncRelayCommand SelectCommand { get; }
     }
 
     public class AudioBlockEditUI : ModuleBlockEditUI, ITargetBlockEditUI
@@ -431,7 +442,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             TargetName      = block.TargetName;
             TargetSource    = block.TargetSource;
             TargetThumbnail = block.TargetThumbnail;
-            DataSource      = block.DataSource;
         }
 
         private ReferenceSource _dataSource;

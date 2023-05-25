@@ -46,10 +46,6 @@
     /// </summary>
     public interface IReferenceBlock : ITargetBlock
     {
-        /// <summary>
-        /// 数据来源
-        /// </summary>
-        ReferenceSource DataSource { get; }
     }
 
     /// <summary>
