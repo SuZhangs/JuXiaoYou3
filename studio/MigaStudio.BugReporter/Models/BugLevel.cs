@@ -5,5 +5,6 @@
         Bug,
         NotImplemented,
         Crash,
+        No
     }
 }

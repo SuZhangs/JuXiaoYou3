@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
 using Acorisoft.FutureGL.MigaStudio.Models;
@@ -14,11 +15,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
 {
     public class Program
     {
-        private static readonly Color PrimaryColor            = Color.FromArgb(0x98, 0xa1, 0x2b);
-        private static readonly Color ObsoletedColor          = Color.FromArgb(0xff, 0x66, 0x00);
-        private static readonly Color WarningColor            = Color.FromArgb(0xff, 0xb3, 0x14);
-        private static readonly Color DangerColor             = Color.FromArgb(0xd9, 0x08, 0x0c);
-        private const           char  ZipEntryFolderCharacter = '/';
+        private static readonly Color PrimaryColor   = Color.FromArgb(0x98, 0xa1, 0x2b);
+        private static readonly Color ObsoletedColor = Color.FromArgb(0xff, 0x66, 0x00);
+        private static readonly Color WarningColor   = Color.FromArgb(0xff, 0xb3, 0x14);
+        private static readonly Color DangerColor    = Color.FromArgb(0xd9, 0x08, 0x0c);
 
         private static bool FormatArgs(string[] args, out BugLevel level, out string dir, out string log)
         {
@@ -90,14 +90,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             else
             {
                 Console.WriteLineFormatted(
-                    "如果您遇到!",
+                    "此工具只支持由{2}启动!!",
                     Color.LightSlateGray,
                     formatter);
-                // Console.WriteLineFormatted(
-                //     "根据工具命令提示，即可完成反馈BUG的操作！\n那接下来让我们开始吧！",
-                //     Color.LightSlateGray,
-                //     formatter);
-                Manual();
             }
 
             WriteEmptyLine();
@@ -123,7 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             var settingFile      = Path.Combine(user, "juxiaoyou-main.json");
             var outputLogZipFile = Path.Combine(feedback, "日志.zip");
             var outputDbZipFile  = Path.Combine(feedback, "世界观.zip");
-            var outputReadmeFile  = Path.Combine(feedback, "[readme]看这里.txt");
+            var outputReadmeFile = Path.Combine(feedback, "[readme]看这里.txt");
             var setting          = JSON.OpenSetting<Setting>(settingFile, () => new Setting { Language = CultureArea.Chinese });
 
             if (!Directory.Exists(feedback))
@@ -134,33 +129,55 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             var formatter = new[]
             {
                 GetBugFormatter(bug),
-                new Formatter(dir, Color.Peru),
-                new Formatter(log, Color.Peru),
-                new Formatter(user, Color.Peru),
+                new Formatter(dir, Color.IndianRed),
+                new Formatter(log, Color.IndianRed),
+                new Formatter(user, Color.IndianRed),
                 new Formatter(outputLogZipFile, Color.Peru),
                 new Formatter(outputDbZipFile, Color.Peru),
                 new Formatter(settingFile, Color.Peru),
-                new Formatter(Setting.GetName(setting.Language), Color.Peru),
+                new Formatter(Setting.GetName(setting.Language), Color.Teal),
             };
 
-            Console.WriteLineFormatted("BUG等级：{0}\n数据位置：{1}\n日志位置：{2}\n", Color.LightGray, formatter);
-            Console.WriteLineFormatted("用户数据目录:{3}\n设置位置：{6}\n", Color.LightGray, formatter);
-            Console.WriteLineFormatted("日志压缩包输出位置:{4}\n数据库压缩包输出位置：{5}\n语言:{6}\n", Color.LightGray, formatter);
+            Console.WriteLineFormatted("BUG等级：{0}\n\n数据位置：{1}\n日志位置：{2}", Color.LightGray, formatter);
 
             if (bug == BugLevel.Bug)
             {
+                Console.WriteLineFormatted("用户数据目录:{3}\n设置位置：{6}", Color.LightGray, formatter);
+                Console.WriteLineFormatted("日志压缩包输出位置:{4}\n数据库压缩包输出位置：{5}\n语言:{7}\n", Color.LightGray, formatter);
                 Pack(log, outputLogZipFile);
+                Focus(crashes, feedback, outputReadmeFile, setting);
             }
             else if (bug == BugLevel.NotImplemented)
             {
+                Console.WriteLineFormatted("用户数据目录:{3}\n设置位置：{6}", Color.LightGray, formatter);
+                Console.WriteLineFormatted("日志压缩包输出位置:{4}\n数据库压缩包输出位置：{5}\n语言:{7}\n", Color.LightGray, formatter);
                 Pack(log, outputLogZipFile);
                 Pack(dir, outputDbZipFile);
+                Focus(crashes, feedback, outputReadmeFile, setting);
+            }
+            else if (bug == BugLevel.No)
+            {
+                SetCrashCount(0, crashes);
             }
             else
             {
-                Pack(log, outputLogZipFile);
-                Pack(dir, outputDbZipFile);
+                Console.WriteLineFormatted("用户数据目录:{3}\n设置位置：{6}", Color.LightGray, formatter);
+                Console.WriteLineFormatted("日志压缩包输出位置:{4}\n数据库压缩包输出位置：{5}\n语言:{7}\n", Color.LightGray, formatter);
+                if (HandleCrashException(
+                        user,
+                        log,
+                        dir,
+                        crashes,
+                        outputLogZipFile,
+                        outputDbZipFile))
+                {
+                    Focus(crashes, feedback, outputReadmeFile, setting);
+                }
             }
+        }
+
+        private static void Focus(string crashes, string feedback, string outputReadmeFile, Setting setting)
+        {
             
             File.Copy(Setting.GetFileName(crashes, setting.Language), outputReadmeFile, true);
 
@@ -169,11 +186,99 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                 FileName  = "explorer.exe",
                 Arguments = feedback
             });
-            
+
             Process.Start(new ProcessStartInfo
             {
                 FileName  = "explorer.exe",
                 Arguments = outputReadmeFile
+            });
+        }
+        
+        private static int GetCrashCount(string crash)
+        {
+            try
+            {
+                var fileName = Path.Combine(crash, "bug.txt");
+
+                if (File.Exists(fileName))
+                {
+                    var lines     = File.ReadAllLines(fileName);
+                    var firstLine = lines.FirstOrDefault() ?? "0";
+                    return int.TryParse(firstLine, out var n) ? n : 0;
+                }
+
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        private static void SetCrashCount(int count, string crash)
+        {
+            var fileName = Path.Combine(crash, "bug.txt");
+            File.WriteAllText(fileName, count.ToString());
+        }
+
+        private static bool HandleCrashException(string user, string log, string dir, string crash, string outputLogZipFile, string outputDbZipFile)
+        {
+            var crashCount = GetCrashCount(crash);
+            
+            if (crashCount == 0)
+            {
+                //
+                // 
+                SetCrashCount(1, crash);
+                Reboot();
+                Console.WriteLine("这是第一次应用崩溃，我们将尝试重启一次应用，如果还有问题我们会有进一步提示！\n", ObsoletedColor);
+                return false;
+            }
+            
+            if (crashCount == 1)
+            {
+                Console.WriteLine("这是第二次应用崩溃，我们将重置设置，如果还有问题我们会有进一步提示！\n", WarningColor);
+                //
+                //
+                var repo = Path.Combine(user, "repo.json");
+                var advanced = Path.Combine(user, "advanced.json");
+                var repoSetting = JSON.OpenSetting<RepositorySetting>(repo, () => new RepositorySetting
+                {
+                    Repositories = new ObservableCollection<RepositoryCache>()
+                });
+                var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(repo, () => new AdvancedSettingModel
+                {
+                    AutoSavePeriod = 5,
+                    DebugMode = 2
+                });
+                
+                repoSetting.Repositories.Clear();
+                repoSetting.LastRepository     = null;
+                advancedSetting.DebugMode      = 2;
+                advancedSetting.AutoSavePeriod = 5;
+                Console.WriteLine($"{DateTime.Now}\t正在重置世界观的启动设置！\n", Color.SlateBlue);
+                Console.WriteLine($"{DateTime.Now}\t正在设置数据模式为：保护模式，保证数据不会崩坏！\n", Color.SlateBlue);
+                JSON.WriteSetting(repo, repoSetting);
+                JSON.WriteSetting(advanced, advancedSetting);
+                Console.WriteLine($"{DateTime.Now}\t写入设置！\n", Color.SlateBlue);
+                Console.WriteLine($"{DateTime.Now}\t写入设置完成！\n", Color.SlateBlue);
+                Reboot();
+                SetCrashCount(2, crash);
+                return false;
+            }
+            
+            Console.WriteLine("这是第三次应用崩溃，修复工具无法确定BUG的问题所在，请按照提示将BUG提交给开发者！\n", DangerColor);
+            Pack(log, outputLogZipFile);
+            Pack(dir, outputDbZipFile);
+            SetCrashCount(3, crash);
+            return true;
+        }
+
+        private static void Reboot()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "MigaStudio.exe"
             });
         }
 
@@ -192,11 +297,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             var zip = new FastZip();
             var formatter = new[]
             {
-                new Formatter(DateTime.Now, Color.Peru),
+                new Formatter(DateTime.Now, Color.OliveDrab),
                 new Formatter(fileName, Color.Peru),
             };
             zip.CreateZip(fileName, dir, true, "");
-            Console.WriteLineFormatted("{0}压缩完毕：{1}\t\n数据位置：{1}\n", Color.LightGray, formatter);
+            Console.WriteLineFormatted("{0}\t压缩完毕！\n数据位置：{1}\n", Color.LightGray, formatter);
         }
 
 
@@ -208,10 +313,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                 BugLevel.NotImplemented => new Formatter("严重", WarningColor),
                 _                       => new Formatter("危险", DangerColor),
             };
-        }
-
-        private static void Manual()
-        {
         }
     }
 }

@@ -143,10 +143,42 @@ namespace Acorisoft.FutureGL.MigaStudio
                 {
                     Xaml.Get<IPendingQueue>()
                         .ForEach(x => x.Run());
+                    
+                    var dir        = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Crashes", "bug.txt");
+                    var crashCount = GetCrashCount(dir);
+                    if (crashCount > 0)
+                    {
+                        SetCrashCount(0, dir);
+                    }
+
                     return await _databaseManager.CloseAsync();
                 })
                 .GetAwaiter()
                 .GetResult();
+        }
+        
+        private static int GetCrashCount(string fileName)
+        {
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    var lines     = File.ReadAllLines(fileName);
+                    var firstLine = lines.FirstOrDefault() ?? "0";
+                    return int.TryParse(firstLine, out var n) ? n : 0;
+                }
+
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        
+        private static void SetCrashCount(int count, string fileName)
+        {
+            File.WriteAllText(fileName, count.ToString());
         }
     }
 }
