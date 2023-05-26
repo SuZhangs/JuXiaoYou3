@@ -11,6 +11,7 @@
       <ProjectReference Include="..\..\frameworks\MigaUtils\MigaUtils.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest.Controls\Forest.Controls.csproj" />
       <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
+      <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
     </ItemGroup>
 
 </Project>

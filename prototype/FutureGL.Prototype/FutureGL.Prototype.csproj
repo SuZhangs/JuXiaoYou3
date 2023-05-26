@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\studio\MigaStudio.UI\MigaStudio.UI.csproj" />
       <ProjectReference Include="..\FutureGL.Prototype.Core\FutureGL.Prototype.Core.csproj" />
     </ItemGroup>
 

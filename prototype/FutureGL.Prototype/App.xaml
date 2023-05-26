@@ -4,7 +4,6 @@
               xmlns:shell="urn:acorisoft/forest/shell"
               xmlns:f="urn:acorisoft/forest/ui"
               xmlns:fs="urn:acorisoft/forest/shell"
-              xmlns:s="urn:acorisoft/studio"
               StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,11 +11,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio.UI;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml" />
-                <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" /> -->
-                <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ProgressBar.xaml" /> -->
-                <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ComboBox.xaml" /> -->
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Application.Resources>
 </fs:ForestApp>
