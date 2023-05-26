@@ -44,9 +44,9 @@ namespace MigaStudio.Tests.ViewModels
         
         [STAThread]
         [TestMethod]
-        public void AbilityDocumentFixture()
+        public void SkillDocumentFixture()
         {
-            ViewModelUnitTestArchitecture.UnitTest(new AbilityDocumentViewModel());
+            ViewModelUnitTestArchitecture.UnitTest(new SkillDocumentViewModel());
         }
         
         

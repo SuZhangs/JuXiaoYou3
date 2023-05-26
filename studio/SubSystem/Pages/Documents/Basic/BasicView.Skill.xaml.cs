@@ -2,9 +2,9 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public partial class AbilityBasicView:UserControl 
+    public partial class SkillBasicView:UserControl 
     {
-        public AbilityBasicView()
+        public SkillBasicView()
         {
             InitializeComponent();
         }

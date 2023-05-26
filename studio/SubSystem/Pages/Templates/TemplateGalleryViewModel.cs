@@ -56,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             ExportTemplateCommand       = AsyncCommand<FrameworkElement>(ExportTemplateImpl, x => x is not null && SelectedTemplate is not null);
             RemoveTemplateCommand       = AsyncCommand<ModuleTemplateCache>(RemoveTemplateImpl);
             PresentationCommand         = Command(() => IsPresentation       = true, () => SelectedTemplate is not null);
-            SetAbilityManifestCommand   = AsyncCommand(async () => Ability   = await PickModuleManifestImpl());
+            SetSkillManifestCommand   = AsyncCommand(async () => Skill   = await PickModuleManifestImpl());
             SetCharacterManifestCommand = AsyncCommand(async () => Character = await PickModuleManifestImpl());
             SetGeographyManifestCommand = AsyncCommand(async () => Geography = await PickModuleManifestImpl());
             SetItemManifestCommand      = AsyncCommand(async () => Item      = await PickModuleManifestImpl());
@@ -346,7 +346,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
         public PresetProperty Property { get; }
 
-        public ModulePreset Ability
+        public ModulePreset Skill
         {
             get => Property.GetModulePreset(DocumentType.Skill);
             set
@@ -441,7 +441,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand SetAbilityManifestCommand { get; }
+        public AsyncRelayCommand SetSkillManifestCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand SetCharacterManifestCommand { get; }
@@ -458,7 +458,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public override bool Removable => false;
         public override bool Uniqueness => true;
 
-        public RelayCommand SetAbilityPresentationManifestCommand { get; }
+        public RelayCommand SetSkillPresentationManifestCommand { get; }
         public RelayCommand SetCharacterPresentationManifestCommand { get; }
         public RelayCommand SetGeographyPresentationManifestCommand { get; }
         public RelayCommand SetItemPresentationManifestCommand { get; }

@@ -179,7 +179,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 case DocumentType.None:
                     break;
                 case DocumentType.Skill:
-                    controller.OpenDocument<AbilityDocumentViewModel>(cache);
+                    controller.OpenDocument<SkillDocumentViewModel>(cache);
                     break;
                 case DocumentType.Character:
                     controller.OpenDocument<CharacterDocumentViewModel>(cache);

@@ -1,10 +1,10 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
-    public class AbilityDocumentViewModel : DocumentEditorVMBase
+    public class SkillDocumentViewModel : DocumentEditorVMBase
     {
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
-            AddBasicView<AbilityBasicView>(collection);
+            AddBasicView<SkillBasicView>(collection);
             AddDetailView(collection);
             AddPartView(collection);
             AddShareView(collection);

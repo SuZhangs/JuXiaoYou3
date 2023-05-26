@@ -188,12 +188,12 @@
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"
-                                             Command="{Binding SetAbilityManifestCommand}">
+                                             Command="{Binding SetSkillManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
                                            Text="能力"/>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Ability.Name,Mode=OneWay}"/>
+                                           Text="{Binding Skill.Name,Mode=OneWay}"/>
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"

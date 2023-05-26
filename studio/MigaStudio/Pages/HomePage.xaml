@@ -23,7 +23,7 @@
                    f:XamlAssist.GroupName="GroupId"
                    SelectedItem="{Binding SelectedFeature,Mode=TwoWay}"
                    ItemsSource="{Binding Features,Mode=OneWay}"
-                   Margin="16"
+                   Margin="16 16 8 16"
                    Width="280">
             <f:ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type model:MainFeature}">
