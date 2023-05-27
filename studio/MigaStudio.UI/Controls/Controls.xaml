@@ -66,7 +66,6 @@
 
                             <Path x:Name="ChevronIcon"
                                   Grid.Column="2"
-                                  Margin="14 0 0 0"
                                   Height="{TemplateBinding IconSize}"
                                   Width="{TemplateBinding IconSize}"
                                   Stroke="{f:ForegroundBrush}"
@@ -74,10 +73,15 @@
                                   Stretch="Uniform"
                                   Data="F1 M24,24z M0,0z M9,18L9,18 15,12 9,6"
                                   HorizontalAlignment="Center"
-                                  VerticalAlignment="Center" />
+                                  VerticalAlignment="Center"
+                                  Visibility="Collapsed"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="ShowArrow" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="ChevronIcon" />
+                            <Setter Property="Margin" Value="14 0 0 0"  TargetName="ChevronIcon" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{f:Brush BackgroundLevel2}" />
                         </Trigger>
@@ -387,38 +391,82 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    <Style x:Key="ClearStyle.ForestIconButton" TargetType="{x:Type f:ForestIconButton}">
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{f:Brush BackgroundDisabled}" />
+        <Setter Property="Foreground" Value="{f:Brush ForegroundLevel1}" />
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="MinWidth" Value="24" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type f:ForestIconButton}">
+                    <Border x:Name="PART_Bd"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="PART_Content"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style TargetType="{x:Type ctrl:ReferenceControl}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrl:ReferenceControl}">
-                    <Border Background="Transparent">
+                    <Border Background="{f:Brush BackgroundLevel3}"
+                            BorderBrush="{f:Brush BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="3">
                         <DockPanel LastChildFill="True">
-                            <ctrl:ActionButton DockPanel.Dock="Left"
-                                               Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SelectCommand,Mode=OneWay}"
-                                               Icon="{TemplateBinding Icon}"
-                                               IsFilled="{TemplateBinding IsFilled}"
-                                               IconSize="32"
+                            <f:ForestIconButton DockPanel.Dock="Right" 
+                                               Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=OpenCommand,Mode=OneWay}"
                                                Height="72"
-                                               Width="72" />
+                                               Icon="F1 M24,24z M0,0z M10,4L2,4 2,20 22,20 22,6 12,6 10,4z"
+                                                   IconSize="23"
+                                                   IsFilled="True"
+                                                   Width="72">
+                            </f:ForestIconButton>
 
-                            <ctrl:ActionButton Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=OpenCommand,Mode=OneWay}"
-                                               Margin="16 0 0 0"
+                            <f:ForestIconButton DockPanel.Dock="Left"
+                                               Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SelectCommand,Mode=OneWay}"
+                                                Style="{StaticResource ClearStyle.ForestIconButton}"
                                                HorizontalAlignment="Stretch">
-                                <DockPanel DockPanel.Dock="Right"
-                                           VerticalAlignment="Center">
-                                    <TextBlock DockPanel.Dock="Top"
+
+                                <DockPanel>
+                                    <Path Data="{TemplateBinding Icon}"
+                                          Fill="LightGray"
+                                          Margin="16 0 0 0"
+                                          Stretch="Uniform"
+                                          Height="31"
+                                          Width="31"/>
+                                    <DockPanel DockPanel.Dock="Right"
+                                               Margin="16 0 0 0"
+                                               VerticalAlignment="Center">
+                                        <TextBlock DockPanel.Dock="Top"
                                                FontSize="14"
                                                Margin="0 0 0 4"
                                                Text="{TemplateBinding DisplayName}"
                                                VerticalAlignment="Center" />
-                                    <TextBlock FontSize="12"
+                                        <TextBlock FontSize="12"
                                                Text="{TemplateBinding Source}"
                                                VerticalAlignment="Center" />
+                                    </DockPanel>
                                 </DockPanel>
-                            </ctrl:ActionButton>
+                            </f:ForestIconButton>
                         </DockPanel>
                     </Border>
                 </ControlTemplate>

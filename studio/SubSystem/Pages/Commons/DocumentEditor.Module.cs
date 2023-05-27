@@ -57,14 +57,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var result = 0;
 
             foreach (var module in modules)
             {
                 if (AddModule(module))
                 {
                     Document.Parts.Add(module);
-                    result++;
                 }
             }
 
@@ -350,6 +348,54 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ModuleParts.ShiftUp(module, (_, _, _) => ResortModuleParts());
         }
 
+        #region GetBlocks
+
+        
+
+        public IEnumerable<TBlock> GetBlocks<TBlock>() where TBlock : ModuleBlock
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<TBlock>();
+        }
+
+        public IEnumerable<ReferenceBlock> GetDocumentReferences()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<ReferenceBlock>();
+        }
+        
+        public IEnumerable<VideoBlock> GetVideoBlocks()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<VideoBlock>();
+        }
+        
+        public IEnumerable<AudioBlock> GetAudioBlocks()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<AudioBlock>();
+        }
+        
+        public IEnumerable<MusicBlock> GetMusicBlocks()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<MusicBlock>();
+        }
+        
+        public IEnumerable<FileBlock> GetFileBlocks()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<FileBlock>();
+        }
+        
+        public IEnumerable<ImageBlock> GetImageBlocks()
+        {
+            return _BlockTrackerOfId.Values
+                                    .OfType<ImageBlock>();
+        }
+
+        #endregion
+        
         /// <summary>
         /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
         /// </summary>

@@ -63,8 +63,14 @@
                                         Palette="SlateGray" />
 
                         <TextBlock DockPanel.Dock="Left"
-                                   Text="{Binding Name,Mode=OneWay}"
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}（{1}）">
+                                    <Binding Path="Name" Mode="OneWay"/>
+                                    <Binding Path="Author" Mode="OneWay"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </DockPanel>
                 </Border>
             </DataTemplate>

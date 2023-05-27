@@ -26,6 +26,7 @@ namespace Acorisoft.FutureGL.Forest.Utils
                 {
                     var rawJsonContent = File.ReadAllText(fileName, Encoding.UTF8);
                     var instance = JsonConvert.DeserializeObject<T>(rawJsonContent, _settings);
+                    instance ??= factory();
                     return instance;
                 }
                 catch

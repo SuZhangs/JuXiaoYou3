@@ -66,6 +66,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 RefreshPresentation();
             }
         }
-        
     }
 }

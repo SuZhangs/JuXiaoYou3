@@ -15,6 +15,7 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         private const string           PART_IconName    = "PART_Icon";
         private       Border           _bd;
         private       Path             _icon;
+        private       ContentPresenter _content;
         private       Storyboard       _storyboard;
 
         private SolidColorBrush _backgroundBrush;
@@ -44,6 +45,12 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
 
         protected override void SetForeground(Brush foreground)
         {
+            if(_icon is null)
+            {
+                _content.SetValue(TextElement.ForegroundProperty, foreground);
+                return;
+            }
+
             if (IsFilled)
             {
                 _icon.StrokeThickness = 0;
@@ -138,7 +145,8 @@ namespace Acorisoft.FutureGL.Forest.Controls.Buttons
         protected override void GetTemplateChildOverride(ITemplatePartFinder finder)
         {
             finder.Find<Border>(PART_BdName, x => _bd                     = x)
-                  .Find<Path>(PART_IconName, x => _icon                   = x);
+                  .Find<Path>(PART_IconName, x => _icon                   = x)
+                  .Find<ContentPresenter>(PART_ContentName, x => _content = x);
         }
     }
 

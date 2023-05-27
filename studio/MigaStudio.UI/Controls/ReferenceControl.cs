@@ -12,6 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
         public static readonly DependencyProperty    HasIconProperty; 
         public static readonly DependencyProperty    CornerRadiusProperty;
 
+        public static readonly DependencyProperty ShowArrowProperty;
 
         static ActionButton()
         {
@@ -45,10 +46,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
                 typeof(CornerRadius),
                 typeof(ActionButton),
                 new PropertyMetadata(default(CornerRadius)));
+            ShowArrowProperty = DependencyProperty.Register(
+                nameof(ShowArrow),
+                typeof(bool),
+                typeof(ActionButton),
+                new PropertyMetadata(Boxing.False));
             HasIconProperty = HasIconPropertyKey.DependencyProperty;
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ActionButton), new FrameworkPropertyMetadata(typeof(ActionButton)));
         }
 
+
+        public bool ShowArrow
+        {
+            get => (bool)GetValue(ShowArrowProperty);
+            set => SetValue(ShowArrowProperty, Boxing.Box(value));
+        }
+
+        
         public CornerRadius CornerRadius
         {
             get => (CornerRadius)GetValue(CornerRadiusProperty);

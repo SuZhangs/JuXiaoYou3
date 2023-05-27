@@ -34,11 +34,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
                 return;
             }
 
-            var r = RepositorySetting.Repositories;
+            var r          = RepositorySetting.Repositories;
+            var existsItem = r.FirstOrDefault(x => x.Path == cache.Path);
             RepositorySetting.LastRepository = cache.Path;
 
-            if (r.Any(x => x.Path == cache.Path))
+            if (existsItem is not null)
             {
+                existsItem.Author = cache.Author;
+                existsItem.Name   = cache.Name;
+                existsItem.Intro  = cache.Intro;
+                existsItem.OpenCount++;
                 await SaveAsync();
                 return;
             }

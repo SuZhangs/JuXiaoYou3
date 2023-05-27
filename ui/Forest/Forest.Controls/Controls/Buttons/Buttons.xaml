@@ -495,6 +495,8 @@
         </Setter>
     </Style>
 
+    
+
     <!-- <Style TargetType="{x:Type b:HighlightButton}"> -->
     <!--     <Setter Property="CornerRadius" Value="8" /> -->
     <!--     <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualInAccent}" /> -->
