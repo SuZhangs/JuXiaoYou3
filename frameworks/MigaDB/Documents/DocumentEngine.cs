@@ -339,6 +339,21 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         #endregion
 
         #region GetCaches
+        
+        public IEnumerable<DocumentCache> GetCaches(DocumentType type)
+        {
+            return DocumentCacheDB.Find(x => x.Type == type);
+        }
+        
+        public IEnumerable<DocumentCache> GetCaches(DocumentType type, ISet<string> idPool)
+        {
+            return DocumentCacheDB.Find(x => x.Type == type && idPool.Contains(x.Id));
+        }
+        
+        public IEnumerable<DocumentCache> GetCachesExclude(DocumentType type, ISet<string> idPool)
+        {
+            return DocumentCacheDB.Find(x => x.Type == type && !idPool.Contains(x.Id));
+        }
 
         public IEnumerable<DocumentCache> GetCaches(HashSet<string> idPool)
         {

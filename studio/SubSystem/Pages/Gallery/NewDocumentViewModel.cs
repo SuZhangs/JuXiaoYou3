@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.IO;
+using Acorisoft.FutureGL.MigaStudio.Resources;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
@@ -16,6 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
         private        MemoryStream _buffer;
         private static DocumentType _type = DocumentType.Character;
         private        Visibility   _visibility;
+        
         public NewDocumentViewModel()
         {
             SetAvatarCommand = new AsyncRelayCommand(SetAvatarImpl);
@@ -33,13 +35,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             }
             else
             {
+                var iterator = a[0] as IEnumerable<DocumentType> ?? Constants.DocumentTypes;
+                Types.AddMany(iterator);
                 Visibility = Visibility.Visible;
             }
         }
 
         public static Task<Op<DocumentCache>> New()
         {
-            return DialogService().Dialog<DocumentCache, NewDocumentViewModel>();
+            return New(Constants.DocumentTypes);
+        }
+        
+        public static Task<Op<DocumentCache>> New(DocumentType[] types)
+        {
+            return DialogService().Dialog<DocumentCache, NewDocumentViewModel>(new Parameter
+            {
+                Args = new object[] { types }
+            });
         }
         
         public static Task<Op<DocumentCache>> New(DocumentType type)
@@ -179,6 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             set => SetValue(ref _name, value);
         }
 
+        public ObservableCollection<DocumentType> Types { get; }
         public AsyncRelayCommand SetAvatarCommand { get; }
     }
 }

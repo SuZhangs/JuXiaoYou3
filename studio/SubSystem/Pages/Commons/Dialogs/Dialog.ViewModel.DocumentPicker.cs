@@ -40,6 +40,45 @@
             });
         }
 
+        public static Task<Op<DocumentCache>> Select(DocumentType type)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type);
+            return DialogService().Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<DocumentCache>> Select(DocumentType type, ISet<string> idPool)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type, idPool);
+            return DialogService().Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<DocumentCache>> Select()
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches();
+            return DialogService().Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+
         /// <summary>
         /// 获取或设置 <see cref="Selected"/> 属性。
         /// </summary>

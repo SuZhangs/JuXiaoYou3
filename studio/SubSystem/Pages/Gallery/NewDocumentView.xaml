@@ -53,7 +53,7 @@
 
             <f:ListBox Grid.Row="2"
                        HorizontalAlignment="Center"
-                       ItemsSource="{Binding Source={x:Static thisResources:Constants.DocumentTypes}}"
+                       ItemsSource="{Binding Types ,Mode=OneWay}"
                        SelectedItem="{Binding Type,Mode=TwoWay}"
                        Visibility="{Binding Visibility}">
                 <ListBox.ItemTemplate>
