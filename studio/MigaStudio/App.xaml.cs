@@ -97,7 +97,8 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         public static void SynchronizeSetting()
         {
-            var db = Xaml.Get<IDatabaseManager>();
+            var db = Studio.DatabaseManager();
+            
             if (db.IsOpen
                   .CurrentValue)
             {
@@ -108,11 +109,12 @@ namespace Acorisoft.FutureGL.MigaStudio
                 {
                     return;
                 }
-                var id = p.Id;
+                var id = Studio.Database()
+                               .DatabaseDirectory;
                 var ss = Xaml.Get<SystemSetting>();
                 var rs = ss.RepositorySetting;
                 var r = rs.Repositories
-                          .FirstOrDefault(x => x.Id == id);
+                          .FirstOrDefault(x => x.Path == id);
 
                 if (r is null)
                 {
