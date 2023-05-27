@@ -12,13 +12,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         private static readonly ConcurrentDictionary<string, ImageSource> Pool = new ConcurrentDictionary<string, ImageSource>();
         private static          ImageEngine                               _engine;
-        private static readonly BitmapImage                               _character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
+        public static readonly BitmapImage                               Character = new BitmapImage(new Uri("pack://application:,,,/Forest.Fonts;component/avatar.png"));
 
         public void Reset() => Pool.Clear();
         
         private static ImageSource FallbackImage(DocumentType type)
         {
-            return _character;
+            return Character;
         }
 
         private static ImageSource Caching(string avatar)

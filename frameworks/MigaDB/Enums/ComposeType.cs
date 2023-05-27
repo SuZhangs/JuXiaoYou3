@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Documents
+﻿namespace Acorisoft.FutureGL.MigaDB.Enums
 {
     public enum ComposeType
     {

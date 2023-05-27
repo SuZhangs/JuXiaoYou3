@@ -19,7 +19,7 @@
              UseLayoutRounding="True"
              SnapsToDevicePixels="True">
     <UserControl.Resources>
-        <ImageBrush x:Key="Avatar" ImageSource="E:\2.png"/>
+        <ImageBrush x:Key="Avatar" ImageSource="{x:Static thisConverters:AvatarConverter.Character}"/>
         <sys:String x:Key="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat tellus lorem, vel eleifend est viverra vitae. In quis condimentum ligula. Donec malesuada sollicitudin odio, in malesuada augue dictum at. Nulla facilisi. Quisque ornare felis eros, egestas rutrum tellus venenatis eu. Duis ac sapien bibendum, blandit diam a, ultrices sem. Nam et pretium sem. Cras aliquam metus vel imperdiet venenatis. Sed non ultrices lectus. Maecenas semper lectus urna, vel hendrerit nulla fringilla at. Donec at nibh eros. Nullam nec porttitor dolor, vel pharetra turpis. Integer a dui vitae odio convallis fringilla. Phasellus venenatis, purus vel pulvinar condimentum, arcu nibh sollicitudin justo, et faucibus nisi purus congue enim. In ut tortor lorem. Duis consequat lectus hendrerit eros porta sagittis.
 
 Nullam vel condimentum velit. Praesent elit ante, convallis quis tempus sed, pellentesque suscipit tortor. Duis sed tempor dolor. Suspendisse potenti. Morbi at augue at leo hendrerit congue. Vestibulum placerat tellus metus, et tempus libero rutrum eget. Suspendisse pretium tortor gravida tortor vehicula cursus.

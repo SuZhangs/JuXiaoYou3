@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data
+﻿namespace Acorisoft.FutureGL.MigaDB.Enums
 {
     public enum KnowledgeHandler
     {
