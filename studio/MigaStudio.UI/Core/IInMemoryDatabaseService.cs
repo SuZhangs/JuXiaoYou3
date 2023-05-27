@@ -11,6 +11,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// </summary>
         /// <param name="databaseManager">数据库</param>
         void Start(IDatabaseManager databaseManager);
+
+        /// <summary>
+        /// 令数据失效，重新同步
+        /// </summary>
+        void InvalidateDataSource();
         
         /// <summary>
         /// 注册服务
@@ -28,5 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// 当数据库关闭时
         /// </summary>
         void Stop();
+        
+        int TrackingVersion { get; }
     }
 }

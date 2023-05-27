@@ -18,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     public class ColorService : IColorService
     {
         private readonly Dictionary<string, string> _Color = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private          IDatabaseManager           _databaseManager;
         
         public string GetColor(string keyword)
         {
@@ -66,16 +67,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
         public void Start(IDatabaseManager databaseManager)
         {
-            var db = databaseManager.Database
-                                    .CurrentValue
-                                    .Get<ColorServiceProperty>();
+            _databaseManager = databaseManager ?? throw new InvalidOperationException();
+            InvalidateDataSource();
+        }
 
-            if (db is null)
+        public void InvalidateDataSource()
+        {
+            var db = _databaseManager.Database
+                                     .CurrentValue;
+            var p = db.Get<ColorServiceProperty>();
+            
+            TrackingVersion = p.Version;
+            
+            if (p is null)
             {
                 return;
             }
 
-            foreach (var mapping in db.Mappings)
+            _Color.Clear();
+            foreach (var mapping in p.Mappings)
             {
                 foreach (var keyword in mapping.Keywords)
                 {
@@ -99,5 +109,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             _Color.Clear();
         }
+        
+        public int TrackingVersion { get; private set; }
     }
 }

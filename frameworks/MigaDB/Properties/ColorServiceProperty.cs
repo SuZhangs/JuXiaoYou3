@@ -34,5 +34,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data
     public class ColorServiceProperty : ObservableObject
     {
         public List<ColorMapping> Mappings { get; init; }
+        public int Version { get; set; }
     }
 }
