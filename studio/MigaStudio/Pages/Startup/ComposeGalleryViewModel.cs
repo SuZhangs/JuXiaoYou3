@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             RemoveComposeCommand    = AsyncCommand<ComposeCache>(RemoveImpl);
             OpenComposeCommand      = Command<ComposeCache>(OpenImpl);
             AddKeywordCommand       = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand    = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            RemoveKeywordCommand    = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
         }
 
         protected sealed override bool NeedDataSourceSynchronize()
@@ -156,22 +156,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             await DocumentUtilities.AddKeyword(
                 SelectedItem.Id,
-                SelectedItem.Keywords,
+                Keywords,
                 KeywordEngine,
                 SetDirtyState,
                 this.WarningNotification);
         }
 
-        private async Task RemoveKeywordImpl(string item)
+        private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                SelectedItem.Id,
                 item, 
-                SelectedItem.Keywords, 
+                Keywords, 
                 KeywordEngine, 
                 SetDirtyState, 
                  this.Error);
         }
+        
+        public ObservableCollection<Keyword> Keywords { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ComposeEngine ComposeEngine { get; }
@@ -190,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public AsyncRelayCommand AddKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
+        public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddComposeCommand { get; }

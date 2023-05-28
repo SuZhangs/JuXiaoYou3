@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Utilities;
+﻿using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -15,10 +16,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 this.WarningNotification);
         }
 
-        private async Task RemoveKeywordImpl(string item)
+        private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                Cache.Id,
                 item, 
                 Keywords, 
                 KeywordEngine, 
@@ -31,6 +31,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public AsyncRelayCommand AddKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
+        public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
     }
 }

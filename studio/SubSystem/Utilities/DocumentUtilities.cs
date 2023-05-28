@@ -12,17 +12,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
     {
         public static async Task AddKeyword(
             string documentID,
-            IList<string> Keywords,
+            IList<Keyword> keywords,
             KeywordEngine KeywordEngine,
             Action<bool> SetDirtyState,
             Func<string, Task> Warning)
         {
-            if (Keywords.Count >= 32)
+            if (KeywordEngine.GetKeywordCount(documentID) >= 32)
             {
                 await Warning(SubSystemString.KeywordTooMany);
             }
 
-            var hash = Keywords.ToHashSet();
             var r    = await StringViewModel.String(SubSystemString.AddKeywordTitle);
 
             if (!r.IsFinished)
@@ -30,21 +29,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            if (!hash.Add(r.Value))
+            if (KeywordEngine.HasKeyword(documentID, r.Value))
             {
                 await Warning(Language.ContentDuplicatedText);
                 return;
             }
 
             KeywordEngine.AddKeyword(documentID, r.Value);
-            Keywords.Add(r.Value);
             SetDirtyState(true);
         }
 
         public static async Task RemoveKeyword(
-            string documentID,
-            string item,
-            IList<string> Keywords,
+            Keyword item,
+            IList<Keyword> keywords,
             KeywordEngine KeywordEngine,
             Action<bool> SetDirtyState,
             Func<string, Task<bool>> DangerousOperation)
@@ -54,13 +51,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            if (!Keywords.Remove(item))
+            if (!keywords.Remove(item))
             {
                 return;
             }
 
-            Keywords.Remove(item);
-            KeywordEngine.RemoveKeyword(documentID, item);
+            keywords.Remove(item);
+            KeywordEngine.RemoveKeyword(item);
             SetDirtyState(true);
         }
 

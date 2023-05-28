@@ -81,10 +81,5 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         /// 介绍
         /// </summary>
         public string Intro { get; set; }
-        
-        /// <summary>
-        /// 关键字
-        /// </summary>
-        public ObservableCollection<string> Keywords { get; init; }
     }
 }

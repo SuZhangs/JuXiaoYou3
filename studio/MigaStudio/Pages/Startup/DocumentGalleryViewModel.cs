@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -31,6 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             SelectedDocumentCommand     = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
             {
+                Keywords.AddMany(KeywordEngine.GetKeywords(x.Id), true);
                 SelectedItem       = x;
                 IsPropertyPaneOpen = true;
             });
@@ -40,7 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             RemoveDocumentCommand       = AsyncCommand<DocumentCache>(RemoveDocumentImpl);
             OpenDocumentCommand         = Command<DocumentCache>(OpenDocumentImpl);
             AddKeywordCommand           = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand        = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            RemoveKeywordCommand        = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
         }
 
         protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
@@ -202,33 +204,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 this.SuccessfulNotification(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
+        
         private async Task AddKeywordImpl()
         {
             await DocumentUtilities.AddKeyword(
                 SelectedItem.Id,
-                SelectedItem.Keywords,
+                Keywords,
                 KeywordEngine,
                 SetDirtyState,
                 this.WarningNotification);
         }
 
-        private async Task RemoveKeywordImpl(string item)
+        private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                SelectedItem.Id,
                 item, 
-                SelectedItem.Keywords, 
+                Keywords, 
                 KeywordEngine, 
                 SetDirtyState, 
-                 this.Error);
+                this.Error);
         }
 
+        public ObservableCollection<Keyword> Keywords { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
+        public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public DocumentEngine DocumentEngine { get; }

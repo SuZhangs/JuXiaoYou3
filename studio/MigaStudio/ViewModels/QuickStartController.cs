@@ -145,19 +145,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             
             var targetFilePath = opendlg.SelectedPath;
-            var r              = await V209DatabaseUpdater.Update(databaseFilePath, targetFilePath);
+            var r              = await V209DatabaseUpdater.Update(Studio.DatabaseManager(), databaseFilePath, targetFilePath);
             var dbMgr          = Studio.DatabaseManager();
-            
-            var result = await dbMgr.CreateAsync(targetFilePath);
-
-            if ()
-            {
-                
-            }
-            else
-            {
-                
-            }
         }
 
 

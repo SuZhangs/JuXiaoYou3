@@ -38,8 +38,19 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             {
                 return;
             }
-            
+
             KeywordDB.Delete(v.Id);
+        }
+        
+        public void RemoveKeyword(Keyword keyword)
+        {
+            if (keyword is null ||
+                string.IsNullOrEmpty(keyword.Id))
+            {
+                return;
+            }
+
+            KeywordDB.Delete(keyword.Id);
         }
 
         public void RemoveMappings(string documentId)
@@ -47,8 +58,16 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             KeywordDB.DeleteMany(x => x.DocumentId == documentId);
         }
 
-        public IEnumerable<Keyword> GetKeywords(string cacheId) => KeywordDB.Find(x => x.DocumentId == cacheId);
-        
+
+        public bool HasKeyword(string documentId, string name)
+        {
+            return KeywordDB.Exists(x => x.DocumentId == documentId && x.Name == name);
+        }
+
+        public IEnumerable<Keyword> GetKeywords(string documentId) => KeywordDB.Find(x => x.DocumentId == documentId);
+
+        public int GetKeywordCount(string documentId) => KeywordDB.Count(x => x.DocumentId == documentId);
+
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             DirectoryDB = session.Database.GetCollection<Directory>(Constants.Name_Directory);
@@ -70,6 +89,5 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 模板缓存
         /// </summary>
         public ILiteCollection<Keyword> KeywordDB { get; private set; }
-
     }
 }

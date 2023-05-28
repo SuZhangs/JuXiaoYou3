@@ -85,7 +85,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ExportPresentationAsMarkdownCommand = AsyncCommand(ExportPresentationAsMarkdownImpl);
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            RemoveKeywordCommand = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
         }
 
         private void Initialize()

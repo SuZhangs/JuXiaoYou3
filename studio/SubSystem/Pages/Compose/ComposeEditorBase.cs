@@ -28,19 +28,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 .ObserveOn(Scheduler)
                 .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
-            DataParts        = new ObservableCollection<DataPart>();
-            Services         = new ObservableCollection<ComposeService>();
-            DatabaseManager  = dbMgr;
-            ComposeEngine    = dbMgr.GetEngine<ComposeEngine>();
-            ImageEngine      = dbMgr.GetEngine<ImageEngine>();
-            KeywordEngine    = dbMgr.GetEngine<KeywordEngine>();
+            Keywords        = new ObservableCollection<Keyword>();
+            DataParts       = new ObservableCollection<DataPart>();
+            Services        = new ObservableCollection<ComposeService>();
+            DatabaseManager = dbMgr;
+            ComposeEngine   = dbMgr.GetEngine<ComposeEngine>();
+            ImageEngine     = dbMgr.GetEngine<ImageEngine>();
+            KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
             
             SaveComposeCommand = Command(Save);
             NewComposeCommand  = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
 
             AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl, x => !string.IsNullOrEmpty(x));
+            RemoveKeywordCommand = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
 
             Initialize();
         }
@@ -99,7 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             ActivateAllEngines();
             Cache   = (ComposeCache)parameter.Args[0];
             Compose = ComposeEngine.GetCompose(Cache.Id);
-
+            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
             Open();
 
             base.OnStart(parameter);
@@ -230,10 +231,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 this.WarningNotification);
         }
 
-        private async Task RemoveKeywordImpl(string item)
+        private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                Cache.Id,
                 item,
                 Keywords,
                 KeywordEngine,
@@ -268,10 +268,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         public AsyncRelayCommand AddKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<string> RemoveKeywordCommand { get; }
+        public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
 
         [NullCheck(UniTestLifetime.Startup)]
-        public ObservableCollection<string> Keywords => Cache.Keywords;
+        public ObservableCollection<Keyword> Keywords { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<DataPart> DataParts { get; }
