@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaUtils;
 
-namespace Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
 
 }

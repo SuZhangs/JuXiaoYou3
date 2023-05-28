@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
 
     [Connected(View = typeof(CharacterChannelPage), ViewModel = typeof(CharacterChannelViewModel))]
