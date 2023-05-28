@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents.Share;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -7,6 +9,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ShareView()
         {
             InitializeComponent();
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is not DocumentEditorBase dc)
+            {
+                return;
+            }
+
+            dc.Preshapes
+              .ForEach(x =>
+              {
+                  ((PreshapeViewModelBase)x.DataContext).Owner = dc;
+                  Preshape.Items
+                          .Add(new Acorisoft.FutureGL.Forest.UI.Tools.TabItem
+                          {
+                              Header  = x.Tag,
+                              Content = x,
+                          });
+              });
         }
     }
 }

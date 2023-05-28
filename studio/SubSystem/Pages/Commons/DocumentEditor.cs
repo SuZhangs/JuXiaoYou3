@@ -40,6 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ModuleParts        = new ObservableCollection<PartOfModule>();
             Presentations      = new ObservableCollection<PresentationUI>();
             Keywords           = new ObservableCollection<Keyword>();
+            Preshapes          = new ObservableCollection<FrameworkElement>();
 
             var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()

@@ -1,3 +1,4 @@
+using MediatR;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -13,7 +14,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls
             nameof(ItemWidth),
             typeof(double),
             typeof(GeneratedControl),
-            new PropertyMetadata(24d));
+            new PropertyMetadata(24d, OnRebuild));
+
+        private static void OnRebuild(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var sender = (GeneratedControl)d;
+            if (sender.IsInitialized)
+            {
+                sender.Rebuild();
+            }
+        }
 
         static GeneratedControl()
         {

@@ -27,7 +27,7 @@
                         Effect="{StaticResource MenuItem.ShadowEffect}"
                         Height="256"
                         Margin="4"
-                        Width="256">
+                        Width="300">
                     <Border.ContextMenu>
                         <f:ContextMenu>
                             <f:MenuItem Header="编辑"
@@ -263,67 +263,63 @@
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ftk:TabControl>
-        <ftk:TabControl.ItemsSource>
-            <CompositeCollection>
-                <ftk:TabItem Header="数据看板">
-                    <DockPanel Margin="0 8 0 0">
-                        <WrapPanel DockPanel.Dock="Top"
-                                   Orientation="Horizontal">
-                            <ftk:ToolButton Content="{f:Language global.add}"
-                                            Command="{Binding AddPresentationCommand}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            ShowText="True" />
+    <ftk:TabControl x:Name="Preshape">
+        <ftk:TabItem Header="数据看板">
+            <DockPanel Margin="0 8 0 0">
+                <WrapPanel DockPanel.Dock="Top"
+                           Orientation="Horizontal">
+                    <ftk:ToolButton Content="{f:Language global.add}"
+                                    Command="{Binding AddPresentationCommand}"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    ShowText="True" />
 
-                            <ftk:ToolButton Content="刷新"
-                                            Command="{Binding RefreshPresentationCommand}"
-                                            Icon="{StaticResource FeatherIcon.Refresh}"
-                                            ShowText="True" />
+                    <ftk:ToolButton Content="刷新"
+                                    Command="{Binding RefreshPresentationCommand}"
+                                    Icon="{StaticResource FeatherIcon.Refresh}"
+                                    ShowText="True" />
 
-                            <ftk:DropDownButton Content="覆盖"
-                                                Icon="{StaticResource IC.Save}"
-                                                IsFilled="True"
-                                                ShowText="True">
-                                <ftk:DropDownButton.ContextMenu>
-                                    <f:ContextMenu>
-                                        <f:MenuItem Header="同步数据"
-                                                    Command="{Binding SynchronizePresentationCommand}" />
-                                        <f:MenuItem Header="覆盖数据"
-                                                    Command="{Binding OverridePresentationCommand}" />
-                                        <f:MenuItem Header="取消覆盖"
-                                                    Command="{Binding unOverridePresentationCommand}" />
-                                    </f:ContextMenu>
-                                </ftk:DropDownButton.ContextMenu>
-                            </ftk:DropDownButton>
-                            <ftk:DropDownButton Content="导出"
-                                                Icon="{StaticResource FeatherIcon.Box}"
-                                                ShowText="True">
-                                <ftk:DropDownButton.ContextMenu>
-                                    <f:ContextMenu>
-                                        <f:MenuItem Header="导出为图片"
-                                                    Command="{Binding ExportPresentationAsPictureCommand}" />
-                                        <f:MenuItem Header="导出为PDF"
-                                                    Command="{Binding ExportPresentationAsPdfCommand}" />
-                                        <f:MenuItem Header="导出为Markdown"
-                                                    Command="{Binding ExportPresentationAsMarkdownCommand}" />
-                                    </f:ContextMenu>
-                                </ftk:DropDownButton.ContextMenu>
-                            </ftk:DropDownButton>
-                        </WrapPanel>
+                    <ftk:DropDownButton Content="覆盖"
+                                        Icon="{StaticResource IC.Save}"
+                                        IsFilled="True"
+                                        ShowText="True">
+                        <ftk:DropDownButton.ContextMenu>
+                            <f:ContextMenu>
+                                <f:MenuItem Header="同步数据"
+                                            Command="{Binding SynchronizePresentationCommand}" />
+                                <f:MenuItem Header="覆盖数据"
+                                            Command="{Binding OverridePresentationCommand}" />
+                                <f:MenuItem Header="取消覆盖"
+                                            Command="{Binding unOverridePresentationCommand}" />
+                            </f:ContextMenu>
+                        </ftk:DropDownButton.ContextMenu>
+                    </ftk:DropDownButton>
+                    <ftk:DropDownButton Content="导出"
+                                        Icon="{StaticResource FeatherIcon.Box}"
+                                        ShowText="True">
+                        <ftk:DropDownButton.ContextMenu>
+                            <f:ContextMenu>
+                                <f:MenuItem Header="导出为图片"
+                                            Command="{Binding ExportPresentationAsPictureCommand}" />
+                                <f:MenuItem Header="导出为PDF"
+                                            Command="{Binding ExportPresentationAsPdfCommand}" />
+                                <f:MenuItem Header="导出为Markdown"
+                                            Command="{Binding ExportPresentationAsMarkdownCommand}" />
+                            </f:ContextMenu>
+                        </ftk:DropDownButton.ContextMenu>
+                    </ftk:DropDownButton>
+                </WrapPanel>
 
-                        <ScrollViewer Margin="0 16 0 0"
-                                      Padding="8 0">
-                            <ItemsControl ItemsSource="{Binding Presentations,Mode=OneWay}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </DockPanel>
-                </ftk:TabItem>
-            </CompositeCollection>
-        </ftk:TabControl.ItemsSource>
+                <ScrollViewer Margin="0 16 0 0"
+                              Padding="8 0">
+                    <ItemsControl ItemsSource="{Binding Presentations,Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </ftk:TabItem>
     </ftk:TabControl>
 </UserControl>

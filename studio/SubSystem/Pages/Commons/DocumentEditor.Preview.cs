@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
@@ -324,6 +325,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             // 更新
             Presentations.ForEach(x => x.Update(GetMetadataById, GetBlockById));
         }
+        
+        public ObservableCollection<FrameworkElement> Preshapes { get; }
 
         public bool IsOverridePresentationPart { get; private set; }
         

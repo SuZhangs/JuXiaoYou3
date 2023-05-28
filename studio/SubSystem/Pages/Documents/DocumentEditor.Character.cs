@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
+﻿using System.Windows.Controls;
+
+namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class CharacterDocumentViewModel : DocumentEditorVMBase
     {
