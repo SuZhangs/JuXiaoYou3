@@ -1,7 +1,6 @@
 ﻿//
 //
 
-global using Acorisoft.Miga.Doc.Utils;
 global using Acorisoft.Miga.Xml;
 global using Acorisoft.Miga.Utils;
 
@@ -22,12 +21,12 @@ global using Acorisoft.Miga.Doc.Entities.Timelines;
 global using Acorisoft.Miga.Doc.Channels;
 global using Acorisoft.FutureGL.MigaUtils;
 
-
 //
 //
 //global using LibGit2Sharp;
 //
 //
+global using LiteDB;
 global using System.Text;
 global using System.Xml.Linq;
 global using System.Runtime.CompilerServices;

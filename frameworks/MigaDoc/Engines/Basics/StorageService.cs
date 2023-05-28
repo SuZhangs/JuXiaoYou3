@@ -1,19 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿
 
 namespace Acorisoft.Miga.Doc.Engines
 {
-    using IRepoOpenHandler = INotificationHandler<RepoOpenMessage>;
-    using IRepoSetHandler = INotificationHandler<RepoSetMessage>;
-    using IRepoCloseHandler = INotificationHandler<RepoCloseMessage>;
 
 
     /// <summary>
     /// <see cref="StorageService"/> 类型表示一个数据库存储集合。
     /// </summary>
-    public abstract class StorageService : IRepoOpenHandler, IRepoSetHandler, IRepoCloseHandler
+    public abstract class StorageService 
     {
         private volatile bool            _initialized;
-        private          RepoOpenMessage _cache;
 
         #region Override Methods
 
@@ -23,21 +19,6 @@ namespace Acorisoft.Miga.Doc.Engines
         protected internal virtual void OnRepositorySetting(UserCredential credential)
         {
         }
-
-        protected static T DeserializeFromBase64<T>(string base64)
-        {
-            var buffer = Convert.FromBase64String(base64);
-            var payload = Encoding.UTF8.GetString(buffer);
-            return JsonConvert.DeserializeObject<T>(payload);
-        }
-
-        protected static string SerializeToBase64(object instance)
-        {
-            var payload = JsonConvert.SerializeObject(instance);
-            var buffer = Encoding.UTF8.GetBytes(payload);
-            return Convert.ToBase64String(buffer);
-        }
-        
         #endregion
 
 
@@ -67,54 +48,6 @@ namespace Acorisoft.Miga.Doc.Engines
             return directory;
         }
 
-        #region INotificationHandlers
-
-        Task IRepoOpenHandler.Handle(RepoOpenMessage notification, CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                var status = notification.Context.StatusEngine;
-                status.Enqueue();
-                IsDisposed = false;
-                if (IsLazyMode)
-                {
-                    if (_initialized)
-                    {
-                        OnRepositoryOpening(notification.Context, notification.Property);
-                    }
-                    else
-                    {
-                        _cache = notification;
-                    }
-                }
-                else
-                {
-                    OnRepositoryOpening(notification.Context, notification.Property);
-                }
-
-                status.Dequeue();
-            }, cancellationToken);
-        }
-
-        Task IRepoSetHandler.Handle(RepoSetMessage notification, CancellationToken cancellationToken)
-        {
-            return Task.Run(() => { RepositorySetting(notification.Credential); }, cancellationToken);
-        }
-
-        Task IRepoCloseHandler.Handle(RepoCloseMessage notification, CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                var status = notification.Context.StatusEngine;
-                status.Enqueue();
-                OnRepositoryClosing(notification.Context);
-                status.Dequeue();
-                _cache     = null;
-                IsDisposed = true;
-            }, cancellationToken);
-        }
-
-        #endregion
 
         /// <summary>
         /// 手动初始化，适合懒加载模式。
@@ -122,25 +55,7 @@ namespace Acorisoft.Miga.Doc.Engines
         /// <remarks>此操作有效能防止启动卡顿，在低配电脑上效果显著。但是如果硬盘IO本身就非常低，这个优化是效果甚微。</remarks>
         public bool ManualInitialized()
         {
-            if (!IsLazyMode)
-            {
-                return false;
-            }
-
-            if (_cache is null)
-            {
-                return false;
-            }
-
-            if (_initialized)
-            {
-                return false;
-            }
-
-            //
-            //
-            OnRepositoryOpening(_cache.Context, _cache.Property);
-            _initialized = true;
+            
             return true;
         }
 

@@ -3,12 +3,11 @@ namespace Acorisoft.Miga.Doc.Engines
 {
     [Lazy]
     [GeneratedModules]
-    public class ChannelService : StorageService, IRefreshSupport, IDirectlyDifferenceProvider
+    public class ChannelService : StorageService, IRefreshSupport
     {
         public ChannelService()
         {
             IsLazyMode = true;
-            Index      = new SourceList<ChannelIndex>();
         }
 
         public void Add(Channel channel)
@@ -30,54 +29,8 @@ namespace Acorisoft.Miga.Doc.Engines
 
             if (!IndexDB.Contains(channel.Id))
             {
-                Index.Add(channel);
             }
             IndexDB.Upsert(channel);
-        }
-        
-        public void BuildService(IDictionary<EntityID, IDirectlyDifferenceProvider> context)
-        {
-            context.Add(EntityID.Channel, this);
-            context.Add(EntityID.ChannelIndex, this);
-        }
-
-        public void Process(Transaction transaction)
-        {
-            if(transaction is not DirectlyTransaction dt)return;
-            dt.Base64 = dt.EntityId == EntityID.Channel ? 
-                SerializeToBase64(DB.FindById(dt.Id)) : 
-                SerializeToBase64(IndexDB.FindById(dt.Id));
-        }
-
-        public void Resolve(Transaction transaction)
-        {
-            if(transaction is not DirectlyTransaction dt)return;
-            
-            if (dt.EntityId == EntityID.Channel)
-            {
-                DB.Upsert(DeserializeFromBase64<Channel>(dt.Base64));
-            }
-            else
-            {
-                
-                IndexDB.Upsert(DeserializeFromBase64<ChannelIndex>(dt.Base64));
-            }
-        }
-        
-
-        public void GetDescriptions(IList<DirectlyDescription> context)
-        {
-            context.AddRange(IndexDB.FindAll().Select(x => new DirectlyDescription
-            {
-                Id = x.Id,
-                EntityId = EntityID.ChannelIndex
-            }));
-            
-            context.AddRange(DB.FindAll().Select(x => new DirectlyDescription
-            {
-                Id       = x.Id,
-                EntityId = EntityID.Channel
-            }));
         }
 
         public Channel Open(string id)
@@ -87,8 +40,6 @@ namespace Acorisoft.Miga.Doc.Engines
 
         public void Refresh()
         {
-            Index.Clear();
-            Index.AddRange(IndexDB.FindAll());
         }
         
         public void Remove(ChannelIndex index)
@@ -99,7 +50,6 @@ namespace Acorisoft.Miga.Doc.Engines
             }
 
             DB.Delete(index.Id);
-            Index.Remove(index);
             IndexDB.Delete(index.Id);
         }
         
@@ -134,7 +84,6 @@ namespace Acorisoft.Miga.Doc.Engines
             DB = null;
         }
 
-        public SourceList<ChannelIndex> Index { get; }
         public ILiteCollection<ChannelIndex> IndexDB { get; private set; }
         public ILiteCollection<Channel> DB { get; private set; }
     }

@@ -1,10 +1,10 @@
 ﻿using Acorisoft.Miga.Doc.IO;
-using Acorisoft.Miga.Doc.Networks;
+
 
 namespace Acorisoft.Miga.Doc.Engines
 {
     [GeneratedModules]
-    public class ImageService : DirectoryService, IBinaryDifferenceProvider
+    public class ImageService : DirectoryService
     {
         private const string SubFolders = "Images";
 
@@ -99,29 +99,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return null;
             }
-        }
-
-        public void Resolve(Transaction transaction)
-        {
-            if (transaction is not BinaryTransaction bt) return;
-            var buffer = Convert.FromBase64String(bt.Base64);
-            File.WriteAllBytes(Path.Combine(Directory,bt.FileName), buffer);
-        }
-
-        public void Process(Transaction transaction)
-        {
-            if (transaction is not BinaryTransaction bt) return;
-            var buffer = File.ReadAllBytes(Path.Combine(Directory,bt.FileName));
-            bt.Base64 = Convert.ToBase64String(buffer);
-        }
-
-        public List<BinaryDescription> GetDescriptions()
-        {
-            return System.IO.Directory.GetFiles(Directory).Select(x =>
-            {
-                var fi = new FileInfo(x);
-                return new BinaryDescription { FileName = fi.Name };
-            }).ToList();
         }
     }
 }

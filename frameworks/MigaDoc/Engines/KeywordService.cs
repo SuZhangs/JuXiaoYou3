@@ -4,90 +4,19 @@ using Acorisoft.Miga.Doc.Keywords;
 namespace Acorisoft.Miga.Doc.Engines
 {
     [GeneratedModules]
-    public class KeywordService : StorageService, IRefreshSupport, IDirectlyDifferenceProvider
+    public class KeywordService : StorageService, IRefreshSupport
     {
         public KeywordService()
         {
-            Keywords    = new SourceCache<Keyword, string>(x => x.Id);
             IdMapping   = new Dictionary<string, Keyword>();
             NameMapping = new Dictionary<string, Keyword>();
-            Sights      = new SourceList<Sight>();
         }
 
         public void Refresh()
         {
             IdMapping.Clear();
-            Keywords.Clear();
-            Sights.Clear();
-
-            foreach (var keyword in KeywordDB.FindAll())
-            {
-                Keywords.AddOrUpdate(keyword);
-                IdMapping.Add(keyword.Id, keyword);
-                NameMapping.Add(keyword.Name, keyword);
-            }
-
-            Sights.AddRange(SightDB.FindAll());
         }
 
-        #region IDirectlyDifferenceProvider
-
-        public void BuildService(IDictionary<EntityID, IDirectlyDifferenceProvider> context)
-        {
-            context.Add(EntityID.Keyword, this);
-            context.Add(EntityID.KeywordMapping, this);
-            context.Add(EntityID.Sight, this);
-        }
-
-        public void Resolve(Transaction transaction)
-        {
-            if (transaction is not DirectlyTransaction dt) return;
-            // ReSharper disable once ConvertIfStatementToSwitchStatement
-            if (dt.EntityId == EntityID.Keyword)
-            {
-                KeywordDB.Upsert(DeserializeFromBase64<Keyword>(dt.Base64));
-            }
-            else if (dt.EntityId == EntityID.Sight)
-            {
-                SightDB.Upsert(DeserializeFromBase64<Sight>(dt.Base64));
-            }
-            else
-            {
-                RelDB.Upsert(DeserializeFromBase64<KeywordMapping>(dt.Base64));
-            }
-        }
-
-        public void Process(Transaction transaction)
-        {
-            if (transaction is not DirectlyTransaction dt) return;
-            dt.Base64 = dt.EntityId switch
-            {
-                EntityID.Keyword => SerializeToBase64(KeywordDB.FindById(dt.Id)),
-                EntityID.Sight => SerializeToBase64(SightDB.FindById(dt.Id)),
-                _ => SerializeToBase64(RelDB.FindById(dt.Id))
-            };
-        }
-
-        public void GetDescriptions(IList<DirectlyDescription> context)
-        {
-            context.AddRange(KeywordDB.FindAll().Select(x => new DirectlyDescription
-            {
-                Id       = x.Id,
-                EntityId = EntityID.Keyword
-            }));
-            context.AddRange(SightDB.FindAll().Select(x => new DirectlyDescription
-            {
-                Id       = x.Id,
-                EntityId = EntityID.Sight
-            }));
-            context.AddRange(RelDB.FindAll().Select(x => new DirectlyDescription
-            {
-                Id       = x.Id,
-                EntityId = EntityID.KeywordMapping
-            }));
-        }
-
-        #endregion
 
         public bool GetKeyword(string id, out Keyword keyword)
         {
@@ -121,7 +50,6 @@ namespace Acorisoft.Miga.Doc.Engines
 
             if (!KeywordDB.Contains(keyword.Id))
             {
-                Keywords.AddOrUpdate(keyword);
                 IdMapping.TryAdd(keyword.Id, keyword);
                 NameMapping.TryAdd(keyword.Name, keyword);
             }
@@ -160,10 +88,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            if (!SightDB.Contains(sight.Id))
-            {
-                Sights.Add(sight);
-            }
 
             SightDB.Upsert(sight);
         }
@@ -193,7 +117,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            Keywords.Remove(keyword);
             KeywordDB.Delete(keyword.Id);
             RelDB.DeleteMany(Query.EQ(nameof(KeywordMapping.Keyword), keyword.Id));
             IdMapping.Remove(keyword.Id);
@@ -229,7 +152,6 @@ namespace Acorisoft.Miga.Doc.Engines
             }
 
             SightDB.Delete(sight.Id);
-            Sights.Remove(sight);
         }
 
         public void Remove(DocumentIndex index)
@@ -284,16 +206,12 @@ namespace Acorisoft.Miga.Doc.Engines
             SightDB   = null;
             RelDB     = null;
 
-            Keywords.Clear();
-            Sights.Clear();
             NameMapping.Clear();
             IdMapping.Clear();
         }
 
         public Dictionary<string, Keyword> IdMapping { get; }
         public Dictionary<string, Keyword> NameMapping { get; }
-        public SourceCache<Keyword, string> Keywords { get; }
-        public SourceList<Sight> Sights { get; }
         public ILiteCollection<Keyword> KeywordDB { get; private set; }
         public ILiteCollection<Sight> SightDB { get; private set; }
         public ILiteCollection<KeywordMapping> RelDB { get; private set; }

@@ -4,7 +4,7 @@
 
 namespace Acorisoft.Miga.Doc.Relationships
 {
-    public class Relationship : ObservableObject, IEdge<DocumentIndex>, IDocumentNameService
+    public class Relationship : ObservableObject, IEdge<DocumentIndex>
     {
         private string _name;
         

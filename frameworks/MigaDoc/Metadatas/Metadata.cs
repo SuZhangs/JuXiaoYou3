@@ -4,7 +4,7 @@ namespace Acorisoft.Miga.Doc.Metadatas
     /// <summary>
     /// <see cref="Metadata"/> 类型表示一个元数据。
     /// </summary>
-    public class Metadata : IDocumentNameService
+    public class Metadata
     {
         /// <summary>
         /// 当前对象名。

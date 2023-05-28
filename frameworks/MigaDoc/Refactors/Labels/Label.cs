@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Labels
 {
-    public class Label : ObservableObject, IObjectLabel, IDocumentNameService
+    public class Label : ObservableObject, IObjectLabel
     {
         private string _name;
         

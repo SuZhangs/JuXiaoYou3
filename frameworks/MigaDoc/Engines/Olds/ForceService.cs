@@ -9,7 +9,6 @@ namespace Acorisoft.Miga.Doc.Engines
         
         public ForceService()
         {
-            Collection = new SourceList<Force>();
             IsLazyMode = true;
         }
 
@@ -27,7 +26,6 @@ namespace Acorisoft.Miga.Doc.Engines
             else
             {
                 Database.Insert(entity);
-                Collection.Add(entity);
             }
         }
 
@@ -37,26 +35,18 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            if (Database.Delete(entity.Id))
-            {
-                Collection.Remove(entity);
-            }
         }
         
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
             Database = context.Database.GetCollection<Force>(CollectionName);
-            Collection.AddRange(Database.FindAll());
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
         {
             Database = null;
-            Collection.Clear();
         }
         
-        public SourceList<Force> Collection { get; }
         public ILiteCollection<Force> Database { get; private set; }
     }
 }

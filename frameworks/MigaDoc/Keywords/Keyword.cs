@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using System.Reactive.Linq;
+
 
 namespace Acorisoft.Miga.Doc.Keywords
 {
@@ -29,44 +29,5 @@ namespace Acorisoft.Miga.Doc.Keywords
             get => _name;
             set => SetValue(ref _name, value);
         }
-    }
-
-    public class KeywordObject : ObservableObject
-    {
-        private readonly ReadOnlyObservableCollection<KeywordObject> _collection;
-        private readonly IDisposable                                 _disposable;
-
-        public KeywordObject(Node<Keyword, string> node, IScheduler scheduler)
-        {
-            _disposable = node.Children
-                .Connect()
-                .Transform(x => new KeywordObject(x, scheduler))
-                .ObserveOn(scheduler)
-                .Bind(out _collection)
-                .Subscribe();
-
-            Source = node.Item;
-        }
-        
-        protected override void ReleaseManagedResources()
-        {
-            _disposable.Dispose();
-        }
-
-        public string Id => Source.Id;
-        public Keyword Source { get; }
-        public string Name
-        {
-            get => Source.Name;
-            set
-            {
-                Source.Name = value;
-                RaiseUpdated();
-            }
-        }
-
-        public string Summary => Source.Summary;
-        
-        public ReadOnlyObservableCollection<KeywordObject> Children => _collection;
     }
 }

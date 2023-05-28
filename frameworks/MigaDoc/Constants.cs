@@ -58,7 +58,5 @@
         {
             return BsonMapper.Global.Deserialize<T>(document);
         }
-
-        internal static readonly IsCompleted Successful = new IsCompleted { IsFinished = true };
     }
 }

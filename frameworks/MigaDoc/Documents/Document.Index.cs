@@ -5,7 +5,7 @@ using Acorisoft.Miga.Doc.Groups;
 namespace Acorisoft.Miga.Doc.Documents
 {
     [DebuggerDisplay("{DocumentType}-{Name}")]
-    public class DocumentIndex : SnapshotObject, IDocumentNameService
+    public class DocumentIndex : SnapshotObject
     {
         private bool   _isAssociated;
         private string _avatar;

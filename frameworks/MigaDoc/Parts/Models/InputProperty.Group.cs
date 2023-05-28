@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.ObjectModel;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.Miga.Doc.Parts
 {

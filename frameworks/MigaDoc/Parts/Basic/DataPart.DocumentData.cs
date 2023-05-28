@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+
 
 namespace Acorisoft.Miga.Doc.Parts
 {
