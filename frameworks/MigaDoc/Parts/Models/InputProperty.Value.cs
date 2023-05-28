@@ -1,0 +1,21 @@
+﻿namespace Acorisoft.Miga.Doc.Parts
+{
+    public class Value : PropertyChanger, ITextNode
+    {
+        private string _text;
+        
+        public void AddText(string text)
+        {
+            Text = text;
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Text"/> 属性。
+        /// </summary>
+        public string Text
+        {
+            get => _text;
+            set => SetValue(ref _text, value);
+        }
+    }
+}

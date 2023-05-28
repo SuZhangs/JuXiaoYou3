@@ -7,6 +7,9 @@
         /// </summary>
         public string Name { get; init; }
         
-        public int ReferenceCount { get; set; }
+        /// <summary>
+        /// 文档ID
+        /// </summary>
+        public string DocumentId { get; init; }
     }
 }

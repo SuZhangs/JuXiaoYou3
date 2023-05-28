@@ -61,7 +61,6 @@
         //
         // Rel
         internal const string Name_Relationship_Character  = "rel_ch";
-        internal const string Name_Relationship_Directory  = "rel_key";
         internal const string Name_Relationship_Technology = "rel_tech";
         internal const string Name_Relationship_Elemental  = "rel_elemental";
         

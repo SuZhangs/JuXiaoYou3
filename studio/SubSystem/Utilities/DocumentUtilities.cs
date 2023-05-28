@@ -286,7 +286,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            ke.RemoveMappings(cache.Id, false);
+            ke.RemoveMappings(cache.Id);
             engine.RemoveDocumentCache(cache);
             callback?.Invoke(cache);
         }
