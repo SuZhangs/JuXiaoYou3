@@ -86,8 +86,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (_exitOperation)
             {
+                _exitOperation = false;
                 return;
             }
+            
             Save();
         }
 
@@ -134,12 +136,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                          .Reset();
             App.SynchronizeSetting();
             await DatabaseManager.CloseAsync();
-            await DatabaseManager.LoadAsync(cache.Path);
-            cache.OpenCount++;
-            ss.RepositorySetting
-              .LastRepository = cache.Path;
-            await ss.SaveAsync();
-            context.SwitchController(controller);
+            var r = await DatabaseManager.LoadAsync(cache.Path);
+            if (r.IsFinished)
+            {
+                cache.OpenCount++;
+                ss.RepositorySetting
+                  .LastRepository = cache.Path;
+                await ss.SaveAsync();
+                context.SwitchController(controller);
+            }
+            else
+            {
+                await this.WarningNotification("打开失败");
+            }
         }
         
         

@@ -5,22 +5,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private const string MetaNameOfName        = "@name";
-        private const string MetaNameOfAvatar      = "@avatar";
-        private const string MetaNameOfAge         = "@age";
-        private const string MetaNameOfBirth       = "@birth";
-        private const string MetaNameOfWeight      = "@weight";
-        private const string MetaNameOfHeight      = "@height";
-        private const string MetaNameOfGender      = "@gender";
-        private const string MetaNameOfIntro       = "@intro";
-        private const string MetaNameOfCountry     = "@country";
-        private const string MetaNameOfRace        = "@race";
-        private const string MetaNameOfNickName    = "@nickname";
-        private const string MetaNameOfIsDeath     = "@death";
-        private const string MetaNameOfRarity      = "@rarity";
-        private const string MetaNameOfPrice       = "@price";
-        private const string MetaNameOfProduceArea = "@produce-area";
-        private const string MetaNameOfWeakness    = "@Weakness";
+        private const string MetaNameOfName             = "@name";
+        private const string MetaNameOfAvatar           = "@avatar";
+        private const string MetaNameOfAge              = "@age";
+        private const string MetaNameOfBirth            = "@birth";
+        private const string MetaNameOfWeight           = "@weight";
+        private const string MetaNameOfHeight           = "@height";
+        private const string MetaNameOfGender           = "@gender";
+        private const string MetaNameOfIntro            = "@intro";
+        private const string MetaNameOfCountry          = "@country";
+        private const string MetaNameOfRace             = "@race";
+        private const string MetaNameOfNickName         = "@nickname";
+        private const string MetaNameOfIsDeath          = "@death";
+        private const string MetaNameOfRarity           = "@rarity";
+        private const string MetaNameOfPrice            = "@price";
+        private const string MetaNameOfProduceArea      = "@produce-area";
+        private const string MetaNameOfWeakness         = "@Weakness";
+        private const string MetaNameOfMainPictureOf4x3 = "@mg-4x3";
+        private const string MetaNameOfMainPictureOf16x9 = "@mg-16x9";
+        private const string MetaNameOfMainPictureOf9x16 = "@mg-9x16";
 
         private string GetOrAddMetadata(string name)
         {
@@ -213,8 +216,40 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             set
             {
                 UpsertMetadata(MetaNameOfWeakness, value);
-                Document.Intro = value;
-                Cache.Intro    = value;
+            }
+        }
+
+        public bool IsMainPictureOf4x3Empty => string.IsNullOrEmpty(MainPictureOf4x3);
+        public bool IsMainPictureOf9x16Empty => string.IsNullOrEmpty(MainPictureOf9x16);
+        public bool IsMainPictureOf16x9Empty => string.IsNullOrEmpty(MainPictureOf16x9);
+        
+        public string MainPictureOf4x3
+        {
+            get => GetOrAddMetadata(MetaNameOfMainPictureOf4x3);
+            set
+            {
+                UpsertMetadata(MetaNameOfMainPictureOf4x3, value);
+                RaiseUpdated(nameof(IsMainPictureOf4x3Empty));
+            }
+        }
+        
+        public string MainPictureOf9x16
+        {
+            get => GetOrAddMetadata(MetaNameOfMainPictureOf9x16);
+            set
+            {
+                UpsertMetadata(MetaNameOfMainPictureOf9x16, value);
+                RaiseUpdated(nameof(IsMainPictureOf9x16Empty));
+            }
+        }
+        
+        public string MainPictureOf16x9
+        {
+            get => GetOrAddMetadata(MetaNameOfMainPictureOf16x9);
+            set
+            {
+                UpsertMetadata(MetaNameOfMainPictureOf16x9, value);
+                RaiseUpdated(nameof(IsMainPictureOf16x9Empty));
             }
         }
 

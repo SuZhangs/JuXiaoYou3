@@ -146,4 +146,48 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             throw new NotSupportedException();
         }
     }
+    
+    
+    public class ScaledImageConverter : IValueConverter
+    {
+        private ImageEngine _engine;
+        private        int         w;
+        private        int         h;
+
+        public ScaledImageConverter(int w, int h)
+        {
+            this.w = w;
+            this.h = h;
+        }
+
+        private ImageSource Caching(string avatar)
+        {
+            var ms  = _engine.Get(avatar);
+            var img = Xaml.FromStream(ms, w * 120, h * 120);
+            return img;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is null)
+            {
+                return null;
+            }
+
+            _engine ??= Studio.DatabaseManager()
+                              .GetEngine<ImageEngine>();
+            if (value is Album a)
+            {
+                return Caching(a.Source);
+            }
+            
+            var avatar = value.ToString();
+            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
+        }
+
+        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }

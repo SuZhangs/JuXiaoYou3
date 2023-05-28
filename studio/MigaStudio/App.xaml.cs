@@ -124,6 +124,16 @@ namespace Acorisoft.FutureGL.MigaStudio
                 r.Author = p.Author;
                 r.Name   = p.Name;
                 r.Intro  = p.Intro;
+
+                for (var i = 0; i < rs.Repositories.Count; i++)
+                {
+                    if (Directory.Exists(rs.Repositories[i].Path))
+                    {
+                        continue;
+                    }
+                    
+                    rs.Repositories.RemoveAt(i);
+                }
                 
                 //
                 // 移除所有对象

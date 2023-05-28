@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public const string AvatarPattern            = "avatar_{0}.png";
         public const string ThumbnailWithSizePattern = "{0}_{1}_{2}";
         public const string ThumbnailPattern         = "thumb_{0}.png";
+        public const string RawPattern         = "{0}.png";
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
 
@@ -259,6 +260,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Width  = w,
                 Height = h
             });
+        }
+        
+        
+        public static async Task<Op<string>> Raw(ImageEngine engine, string fileName, int wScale, int hScale)
+        {
+            var    buffer = await File.ReadAllBytesAsync(fileName);
+            var    raw   = Pool.MD5.ComputeHash(buffer);
+            var    md5   = Convert.ToBase64String(raw);
+            var    image = Image.Load<Rgba32>(buffer);
+            string thumbnail;
+
+            if (engine.HasFile(md5))
+            {
+                var fr = engine.Records.FindById(md5);
+                thumbnail = fr.Uri;
+                return Op<string>.Success(thumbnail);
+            }
+
+            if (image.Width < 32 || image.Height < 32)
+            {
+                return Op<string>.Failed("图片过小");
+            }
+
+
+            var w = image.Width;
+            var h = image.Height;
+            var a = w / wScale;
+            
+            if ((h / a) != hScale)
+            {
+                return Op<string>.Failed("比例不对");
+            }
+
+            var id = ID.Get();
+            thumbnail = string.Format(RawPattern, id);
+            engine.AddFile(new FileRecord
+            {
+                Id   = md5,
+                Uri  = thumbnail,
+                Type = ResourceType.Image
+            });
+
+            engine.Write(thumbnail, buffer);
+            return Op<string>.Success(thumbnail);
         }
     }
 }

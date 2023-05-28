@@ -7,12 +7,15 @@
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterDocumentViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <thisConverters:ImageConverter x:Key="ImageConverter" />
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
     </UserControl.Resources>
     <ftk:TabControl Padding="0 16 0 0">
@@ -25,7 +28,7 @@
                         <f:HeaderedSingleLine Header="名字"
                                               Margin="4"
                                               Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                              TextWrapping="Wrap"/>
+                                              TextWrapping="Wrap" />
 
                         <f:HeaderedSingleLine Header="性别"
                                               Margin="4"
@@ -46,10 +49,10 @@
                         <f:HeaderedSingleLine Header="体重（kg）"
                                               Margin="4"
                                               Text="{Binding Weight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        
+
                         <f:ToggleSwitch Content="是否死亡"
                                         Margin="4"
-                                        IsChecked="{Binding IsDeath,Mode=TwoWay}"/>
+                                        IsChecked="{Binding IsDeath,Mode=TwoWay}" />
                     </UniformGrid>
 
                     <HeaderedContentControl Header="可选"
@@ -79,6 +82,64 @@
 
             </DockPanel>
         </ftk:TabItem>
+        <ftk:TabItem Header="立绘"
+                     Padding="16 8">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <WrapPanel>
+                    <f:ForestIsland Background="Transparent"
+                                    Header="立绘（9:16比例）"
+                                    HorizontalAlignment="Left"
+                                    Height="640"
+                                    Width="360"
+                                    Margin="8">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf9x16Empty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf9x16Command}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOf9x16Command}">
+                                <Image Source="{Binding MainPictureOf9x16,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image9x16}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </f:ForestIsland>
+
+                    <f:ForestIsland Background="Transparent"
+                                    Header="立绘（16:9比例）"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Height="360"
+                                    Width="640"
+                                    Margin="8">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf16x9Empty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf16x9Command}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOf16x9Command}">
+                                <Image Source="{Binding MainPictureOf16x9,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image16x9}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </f:ForestIsland>
+
+                    <f:ForestIsland Background="Transparent"
+                                    Header="立绘（4:3比例）"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Height="600"
+                                    Width="800"
+                                    Margin="8">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf4x3Empty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf4x3Command}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOf4x3Command}">
+                                <Image Source="{Binding MainPictureOf4x3,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image4x3}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </f:ForestIsland>
+                </WrapPanel>
+            </ScrollViewer>
+
+        </ftk:TabItem>
+
 
         <ftk:TabItem Header="标签"
                      Padding="16 8">
@@ -102,7 +163,7 @@
                                         HorizontalAlignment="Left"
                                         Margin="0 16 0 0"
                                         Icon="{StaticResource FeatherIcon.Plus}"
-                                        Palette="HighlightPalette2"/>
+                                        Palette="HighlightPalette2" />
                     </DockPanel>
                 </HeaderedContentControl.Header>
 
