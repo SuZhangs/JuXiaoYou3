@@ -39,6 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleParts        = new ObservableCollection<PartOfModule>();
             Presentations      = new ObservableCollection<PresentationUI>();
+            Keywords           = new ObservableCollection<Keyword>();
 
             var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()
@@ -125,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Cache    = (DocumentCache)parameter.Args[0];
             Document = DocumentEngine.GetDocument(Cache.Id);
             Type     = Cache.Type;
-
+            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
             Open();
 
             base.OnStart(parameter);

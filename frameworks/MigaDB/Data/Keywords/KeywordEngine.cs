@@ -47,7 +47,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             KeywordDB.DeleteMany(x => x.DocumentId == documentId);
         }
 
-
+        public IEnumerable<Keyword> GetKeywords(string cacheId) => KeywordDB.Find(x => x.DocumentId == cacheId);
+        
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             DirectoryDB = session.Database.GetCollection<Directory>(Constants.Name_Directory);
@@ -69,5 +70,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 模板缓存
         /// </summary>
         public ILiteCollection<Keyword> KeywordDB { get; private set; }
+
     }
 }

@@ -140,7 +140,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             {
                 Id             = ID.Get(),
                 Avatar         = _selectedAvatar ? ApplyAvatar() : null,
-                Keywords       = new ObservableCollection<string>(),
                 Name           = _name,
                 Removable      = false,
                 Type           = _type,

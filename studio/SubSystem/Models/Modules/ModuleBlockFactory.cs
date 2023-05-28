@@ -686,7 +686,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        private static ModuleBlock Upgrade(InputProperty property)
+        public static ModuleBlock Upgrade(InputProperty property)
         {
             return property switch
             {

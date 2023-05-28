@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
 
         [NullCheck(UniTestLifetime.Startup)]
-        public ObservableCollection<string> Keywords => Cache.Keywords;
+        public ObservableCollection<Keyword> Keywords { get; }
 
 
         [NullCheck(UniTestLifetime.Constructor)]

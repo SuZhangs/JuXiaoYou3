@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Core.Migrations;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages;
@@ -123,6 +124,40 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private async Task UpgradeImpl()
         {
+            var opendlg = new VistaFolderBrowserDialog
+            {
+                Description = "选择旧版世界观的位置",
+                UseDescriptionForTitle = true
+            };
+
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            var databaseFilePath = opendlg.SelectedPath;
+            
+            
+            if (opendlg.ShowDialog() != true)
+            {
+                return;
+            }
+
+            
+            var targetFilePath = opendlg.SelectedPath;
+            var r              = await V209DatabaseUpdater.Update(databaseFilePath, targetFilePath);
+            var dbMgr          = Studio.DatabaseManager();
+            
+            var result = await dbMgr.CreateAsync(targetFilePath);
+
+            if ()
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
 

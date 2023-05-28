@@ -110,10 +110,5 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             get => _intro;
             set => SetValue(ref _intro, value);
         }
-        
-        /// <summary>
-        /// 关键字
-        /// </summary>
-        public ObservableCollection<string> Keywords { get; init; }
     }
 }

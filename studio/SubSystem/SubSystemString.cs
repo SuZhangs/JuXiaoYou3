@@ -630,15 +630,7 @@
 
 
         public static string GetDatabaseResult(DatabaseFailedReason reason) => Language.GetEnum(reason);
-        public static string GetEngineResult(EngineFailedReason reason)
-        {
-            // TODO: 翻译
-            return reason switch
-            {
-                EngineFailedReason.Duplicated => GetText("enum.EngineFailedReason.Duplicated"),
-                _                             => GetText("enum.EngineFailedReason.Unknown")
-            };
-        }
+        public static string GetEngineResult(EngineFailedReason reason) => Language.GetEnum(reason);
 
         public static string OperationOfSaveIsSuccessful
         {
