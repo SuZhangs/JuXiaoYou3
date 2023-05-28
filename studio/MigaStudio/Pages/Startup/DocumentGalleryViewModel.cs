@@ -14,13 +14,15 @@ using DynamicData;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class EasyDocumentGalleryViewModelProxy : BindingProxy<DocumentGalleryViewModel>{}
-    
+    public class EasyDocumentGalleryViewModelProxy : BindingProxy<DocumentGalleryViewModel>
+    {
+    }
+
     public class DocumentGalleryViewModel : GalleryViewModel<DocumentCache>
     {
         private int  _version;
         private bool _isPropertyPaneOpen;
-        
+
         public DocumentGalleryViewModel()
         {
             var dbMgr = Studio.DatabaseManager();
@@ -28,9 +30,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
+            Keywords        = new ObservableCollection<Keyword>();
             _version        = DocumentEngine.Version;
 
-            SelectedDocumentCommand     = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
+            SelectedDocumentCommand = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
             {
                 Keywords.AddMany(KeywordEngine.GetKeywords(x.Id), true);
                 SelectedItem       = x;
@@ -47,7 +50,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
         {
-            
             var count = dataSource.Count;
             TotalPageCount = ((count == 0 ? 1 : count) + MaxItemCountMask) / MaxItemCount;
 
@@ -71,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return dataSource.OrderBy(x => x.Name)
                                  .ToList();
             }
-            
+
             if (sorting == OrderByMethods.DescendingByName)
             {
                 return dataSource.OrderByDescending(x => x.Name)
@@ -86,14 +88,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             if (sorting == OrderByMethods.DescendingByTimeOfCreated)
             {
-                
                 return dataSource.OrderByDescending(x => x.TimeOfCreated)
                                  .ToList();
             }
 
             if (sorting == OrderByMethods.AscendingByTimeOfModified)
             {
-                
                 return dataSource.OrderBy(x => x.TimeOfModified)
                                  .ToList();
             }
@@ -122,15 +122,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected override void OnResume()
         {
-            
-
             if (SelectedItem is not null)
             {
                 SelectedItem = DocumentUtilities.UpdateDocument(
                     DocumentEngine,
-                    SelectedItem.Id, 
+                    SelectedItem.Id,
                     DataSource,
                     Collection);
+                
+                Keywords.AddMany(KeywordEngine.GetKeywords(SelectedItem.Id), true);
             }
         }
 
@@ -151,19 +151,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 DataSource.Add(x);
                 Collection.Add(x);
-                
             });
         }
-        
-        
+
+
         private async Task ChangeDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ =>
-            {
-                this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
-            });
+            await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ => { this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful); });
         }
-        
+
         private void LockOrUnlockDocumentImpl(DocumentCache cache)
         {
             DocumentUtilities.LockOrUnlock(DocumentEngine, cache);
@@ -192,7 +188,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -204,7 +200,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 this.SuccessfulNotification(SubSystemString.OperationOfRemoveIsSuccessful);
             });
         }
-        
+
         private async Task AddKeywordImpl()
         {
             await DocumentUtilities.AddKeyword(
@@ -218,10 +214,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                item, 
-                Keywords, 
-                KeywordEngine, 
-                SetDirtyState, 
+                item,
+                Keywords,
+                KeywordEngine,
+                SetDirtyState,
                 this.Error);
         }
 
@@ -238,7 +234,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ImageEngine ImageEngine { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public KeywordEngine KeywordEngine { get; }
 
@@ -247,13 +243,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewDocumentCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> SelectedDocumentCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<DocumentCache> ChangeDocumentCommand { get; }
-        
+
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> LockOrUnlockDocumentCommand { get; }
 

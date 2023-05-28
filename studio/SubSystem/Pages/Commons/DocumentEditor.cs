@@ -119,6 +119,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
+        private void SynchronizeKeywords()
+        {
+            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
+        }
+
         protected override void OnStart(Parameter parameter)
         {
             Initialize();
@@ -126,7 +131,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Cache    = (DocumentCache)parameter.Args[0];
             Document = DocumentEngine.GetDocument(Cache.Id);
             Type     = Cache.Type;
-            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
+            SynchronizeKeywords();
             Open();
 
             base.OnStart(parameter);
@@ -142,6 +147,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void OnResume()
         {
+            SynchronizeKeywords();
         }
 
         public override void Suspend()

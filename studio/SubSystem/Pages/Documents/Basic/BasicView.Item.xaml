@@ -111,7 +111,7 @@
                             <Border Background="{f:Brush HighlightA4}"
                                     CornerRadius="3"
                                     Margin="4"
-                                    Padding="8">
+                                    Padding="16 8 8 8">
                                 <DockPanel>
                                     <f:LooklessButton DockPanel.Dock="Right"
                                                       Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveKeywordCommand}"
@@ -128,7 +128,7 @@
 
                                     <TextBlock Foreground="{f:Brush ForegroundInHighlight}"
                                                FontSize="14"
-                                               Text="{Binding}"
+                                               Text="{Binding Name,Mode=OneWay}"
                                                VerticalAlignment="Center" />
                                 </DockPanel>
                             </Border>

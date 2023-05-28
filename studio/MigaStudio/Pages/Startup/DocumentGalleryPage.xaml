@@ -240,7 +240,7 @@
                                             ShowText="True" />
                         </f:ForestSection.ToolBar>
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                            <ItemsControl ItemsSource="{Binding SelectedItem.Keywords,Mode=OneWay}">
+                            <ItemsControl ItemsSource="{Binding Keywords,Mode=OneWay}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel />
@@ -265,7 +265,7 @@
 
                                                 <TextBlock Foreground="{f:Brush ForegroundInHighlight}"
                                                            FontSize="14"
-                                                           Text="{Binding}"
+                                                           Text="{Binding Name,Mode=OneWay}"
                                                            VerticalAlignment="Center" />
                                             </DockPanel>
                                         </Border>

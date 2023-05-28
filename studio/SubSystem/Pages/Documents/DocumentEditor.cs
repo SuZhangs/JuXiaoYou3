@@ -51,6 +51,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             };
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+
         protected sealed override void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue)
         {
             if (newValue is not HeaderedSubView subView)
