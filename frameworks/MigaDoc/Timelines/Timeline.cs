@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Entities.Timelines
 {
-    public class Timeline : PropertyChanger, IDocumentNameService
+    public class Timeline : ObservableObject, IDocumentNameService
     {
         private int    _index;
         private string _name;

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Documents
 {
-    public abstract class MetaItem : PropertyChanger
+    public abstract class MetaItem : ObservableObject
     {
         protected MetaItem(string propertyName) => PropertyName = propertyName;
 

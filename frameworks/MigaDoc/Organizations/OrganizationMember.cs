@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities.Organizations
 {
-    public class OrganizationMember : PropertyChanger
+    public class OrganizationMember : ObservableObject
     {
         public string Id { get; init; }
         public string Avatar { get; init; }

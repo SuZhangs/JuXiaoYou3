@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Parts
 {
-    public class ModuleIndex : PropertyChanger
+    public class ModuleIndex : ObservableObject
     {
         private string _name;
         private string _fileName;

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Inspirations
 {
-    public class Prototype : PropertyChanger
+    public class Prototype : ObservableObject
     {
         private string _name;
         private string _summary;

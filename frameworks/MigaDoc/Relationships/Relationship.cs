@@ -4,7 +4,7 @@
 
 namespace Acorisoft.Miga.Doc.Relationships
 {
-    public class Relationship : PropertyChanger, IEdge<DocumentIndex>, IDocumentNameService
+    public class Relationship : ObservableObject, IEdge<DocumentIndex>, IDocumentNameService
     {
         private string _name;
         
@@ -29,7 +29,7 @@ namespace Acorisoft.Miga.Doc.Relationships
         }
     }
 
-    public class RelCopy : PropertyChanger
+    public class RelCopy : ObservableObject
     {
         private string _relationName;
         

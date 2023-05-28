@@ -1,6 +1,6 @@
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public abstract class SnapshotObject : PropertyChanger
+    public abstract class SnapshotObject : ObservableObject
     {
         private string _name;
         

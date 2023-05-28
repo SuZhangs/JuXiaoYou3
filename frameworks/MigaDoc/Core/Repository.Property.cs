@@ -53,7 +53,7 @@ namespace Acorisoft.Miga.Doc.Core
         public ObservableCollection<string> Backgrounds { get; set; }
     }
 
-    public class RepositoryConfiguration : PropertyChanger
+    public class RepositoryConfiguration : ObservableObject
     {
         private bool _enableCustomMetadataView;
         
@@ -74,7 +74,7 @@ namespace Acorisoft.Miga.Doc.Core
         public ObservableCollection<CustomMetadataView> Custom { get; set; }
     }
 
-    public class RepositoryAuthor : PropertyChanger
+    public class RepositoryAuthor : ObservableObject
     {
 
         private string _name;

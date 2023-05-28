@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Documents
 {
-    public class StickyNote : PropertyChanger
+    public class StickyNote : ObservableObject
     {
         private string _name;
         private string _summary;

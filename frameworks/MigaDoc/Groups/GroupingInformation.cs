@@ -11,7 +11,7 @@
         Pairing
     }
     
-    public class GroupingInformation : PropertyChanger
+    public class GroupingInformation : ObservableObject
     {
         private string _name;
         private string _summary;

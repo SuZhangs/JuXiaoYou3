@@ -1,6 +1,6 @@
 namespace Acorisoft.Miga.Doc.Channels
 {
-    public class ChannelIndex : PropertyChanger
+    public class ChannelIndex : ObservableObject
     {
 
         public string Id { get; init; }

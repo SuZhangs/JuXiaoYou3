@@ -15,7 +15,7 @@ namespace Acorisoft.Miga.Doc.Parts
 
     }
 
-    public class SimpleTextNode : PropertyChanger
+    public class SimpleTextNode : ObservableObject
     {
         private string _name;
         private string _content;

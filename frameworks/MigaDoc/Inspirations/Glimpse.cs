@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities.Inspirations
 {
-    public abstract class Glimpse : PropertyChanger
+    public abstract class Glimpse : ObservableObject
     {
         
     }

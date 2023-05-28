@@ -6,7 +6,7 @@
     }
     
     
-    public abstract class InputProperty : PropertyChanger, ICloneable
+    public abstract class InputProperty : ObservableObject, ICloneable
     {
         #region ICloneable Interface
 

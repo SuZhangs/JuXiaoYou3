@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Labels
 {
-    public class VirtualDirectory : PropertyChanger, IVirtualDirectory, IDocumentNameService
+    public class VirtualDirectory : ObservableObject, IVirtualDirectory, IDocumentNameService
     {
         private string _name;
 

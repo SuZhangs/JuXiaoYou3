@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Entities
 {
-    public class Force : PropertyChanger
+    public class Force : ObservableObject
     {
         private string _name;
         private string _summary;

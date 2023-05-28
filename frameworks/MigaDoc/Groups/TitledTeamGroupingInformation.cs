@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Groups
 {
-    public class TitledMember : PropertyChanger
+    public class TitledMember : ObservableObject
     {
         private string _name;
 

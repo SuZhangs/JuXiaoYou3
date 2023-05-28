@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public class Compose : PropertyChanger
+    public class Compose : ObservableObject
     {
         public string Id { get; init; }
         public ObservableCollection<ComposeVersion> Drafts { get; init; }
@@ -29,7 +29,7 @@ namespace Acorisoft.Miga.Doc.Documents
         }
     }
 
-    public class ComposeVersion : PropertyChanger
+    public class ComposeVersion : ObservableObject
     {
         private string   _name;
         private DateTime _modifiedDateTime;

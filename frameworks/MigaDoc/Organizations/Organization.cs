@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Entities.Organizations
 {
-    public class Organization : PropertyChanger
+    public class Organization : ObservableObject
     {
         private string _name;
         private string _summary;

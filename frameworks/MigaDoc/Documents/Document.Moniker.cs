@@ -3,7 +3,7 @@ using Acorisoft.Miga.Doc.Groups;
 
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public class Moniker : PropertyChanger
+    public class Moniker : ObservableObject
     {
 
         private string _name;

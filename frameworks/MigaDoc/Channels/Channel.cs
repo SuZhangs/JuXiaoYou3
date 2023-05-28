@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace Acorisoft.Miga.Doc.Channels
 {
-    public class Channel : PropertyChanger
+    public class Channel : ObservableObject
     {
         private string _name;
         private string _summary;

@@ -12,7 +12,7 @@ namespace Acorisoft.Miga.Doc.Parts
         public ObservableCollection<string> Lines { get; set; }
     }
 
-    public class SkillData : PropertyChanger
+    public class SkillData : ObservableObject
     {
         private DocumentIndex _passive;
         private DocumentIndex _cost;

@@ -4,7 +4,7 @@ namespace Acorisoft.Miga.Doc.Inspirations
 {
 
 
-    public class SurveySet : PropertyChanger
+    public class SurveySet : ObservableObject
     {
         private string _name;
         private string _summary;
@@ -30,7 +30,7 @@ namespace Acorisoft.Miga.Doc.Inspirations
         public ObservableCollection<Survey> Surveys { get; init; }
     }
 
-    public class Survey : PropertyChanger
+    public class Survey : ObservableObject
     {
         private string _value;
         private string _name;

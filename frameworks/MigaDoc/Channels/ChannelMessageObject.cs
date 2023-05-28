@@ -1,6 +1,6 @@
 namespace Acorisoft.Miga.Doc.Channels
 {
-    public class ChannelMessageObject : PropertyChanger
+    public class ChannelMessageObject : ObservableObject
     {
         private bool _isOwner;
 

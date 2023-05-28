@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities.Timelines
 {
-    public class TimelineSet : PropertyChanger
+    public class TimelineSet : ObservableObject
     {
         private string _name;
         

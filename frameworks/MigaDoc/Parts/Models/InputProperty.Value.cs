@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Parts
 {
-    public class Value : PropertyChanger, ITextNode
+    public class Value : ObservableObject, ITextNode
     {
         private string _text;
         

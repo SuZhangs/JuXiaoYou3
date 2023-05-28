@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 
 namespace Acorisoft.Miga.Doc.Keywords
 {
-    public class Keyword : PropertyChanger
+    public class Keyword : ObservableObject
     {
         private string _name;
         private string _summary;
@@ -31,7 +31,7 @@ namespace Acorisoft.Miga.Doc.Keywords
         }
     }
 
-    public class KeywordObject : PropertyChanger
+    public class KeywordObject : ObservableObject
     {
         private readonly ReadOnlyObservableCollection<KeywordObject> _collection;
         private readonly IDisposable                                 _disposable;

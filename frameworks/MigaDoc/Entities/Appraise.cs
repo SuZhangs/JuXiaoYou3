@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities
 {
-    public class Appraise : PropertyChanger
+    public class Appraise : ObservableObject
     {
         private string _content;
         

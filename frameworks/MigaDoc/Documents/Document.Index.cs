@@ -104,7 +104,7 @@ namespace Acorisoft.Miga.Doc.Documents
         public GroupType GroupType { get; init; }
     }
 
-    public class DocumentIndexCopy : PropertyChanger
+    public class DocumentIndexCopy : ObservableObject
     {
         public string Id { get; init; }
         public string Avatar { get; init; }

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities
 {
-    public class Conversation : PropertyChanger
+    public class Conversation : ObservableObject
     {
         private string _content;
 
