@@ -35,7 +35,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            KeywordEngine.AddKeyword(documentID, r.Value);
+            var key = new Keyword
+            {
+                Id         = ID.Get(),
+                DocumentId = documentID,
+                Name       = r.Value
+            };
+            keywords.Add(key);
+            KeywordEngine.AddKeyword(key);
             SetDirtyState(true);
         }
 

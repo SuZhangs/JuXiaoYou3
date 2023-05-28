@@ -8,20 +8,16 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class KeywordEngine : DataEngine
     {
-        public void AddKeyword(string documentID, string keyword)
+        public void AddKeyword(Keyword keyword)
         {
-            if (string.IsNullOrEmpty(keyword) ||
-                string.IsNullOrEmpty(documentID))
+            if (keyword is null ||
+                string.IsNullOrEmpty(keyword.Name) ||
+                string.IsNullOrEmpty(keyword.DocumentId))
             {
                 return;
             }
 
-            KeywordDB.Upsert(new Keyword
-            {
-                Id         = ID.Get(),
-                DocumentId = documentID,
-                Name       = keyword,
-            });
+            KeywordDB.Upsert(keyword);
         }
 
         public void RemoveKeyword(string documentID, string keyword)
