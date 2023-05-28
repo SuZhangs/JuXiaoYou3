@@ -121,7 +121,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void SynchronizeKeywords()
         {
-            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
+            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id), true);
         }
 
         protected override void OnStart(Parameter parameter)
