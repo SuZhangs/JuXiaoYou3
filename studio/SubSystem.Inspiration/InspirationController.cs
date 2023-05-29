@@ -1,7 +1,6 @@
 ﻿using System;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages;
-using Acorisoft.FutureGL.MigaStudio.Inspirations.Pages.Communications;
 
 namespace Acorisoft.FutureGL.MigaStudio.Inspirations
 {
@@ -17,10 +16,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
-#if DEBUG
-            New<CharacterContractViewModel>();
-            New<CharacterChannelViewModel>();
-#endif
 
         }
 

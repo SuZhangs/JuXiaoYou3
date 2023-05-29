@@ -87,51 +87,51 @@
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <WrapPanel>
                     <f:ForestIsland Background="Transparent"
-                                    Header="立绘（9:16比例）"
+                                    Header="立绘（横向）"
                                     HorizontalAlignment="Left"
                                     Height="640"
                                     Width="360"
                                     Margin="8">
-                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf9x16Empty,Mode=OneWay}">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfVerticalEmpty,Mode=OneWay}">
                             <f:EmptyContentControl.EmptyState>
-                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf9x16Command}" />
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfVerticalCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOf9x16Command}">
-                                <Image Source="{Binding MainPictureOf9x16,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image9x16}}" />
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfVerticalCommand}">
+                                <Image Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image9x16}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>
 
                     <f:ForestIsland Background="Transparent"
-                                    Header="立绘（16:9比例）"
+                                    Header="立绘（纵向）"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Height="360"
                                     Width="640"
                                     Margin="8">
-                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf16x9Empty,Mode=OneWay}">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfHorizontalEmpty,Mode=OneWay}">
                             <f:EmptyContentControl.EmptyState>
-                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf16x9Command}" />
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfHorizontalCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOf16x9Command}">
-                                <Image Source="{Binding MainPictureOf16x9,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image16x9}}" />
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfHorizontalCommand}">
+                                <Image Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image16x9}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>
 
                     <f:ForestIsland Background="Transparent"
-                                    Header="立绘（4:3比例）"
+                                    Header="立绘（等比）"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Height="600"
                                     Width="800"
                                     Margin="8">
-                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOf4x3Empty,Mode=OneWay}">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfSquareEmpty,Mode=OneWay}">
                             <f:EmptyContentControl.EmptyState>
-                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOf4x3Command}" />
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfSquareCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOf4x3Command}">
-                                <Image Source="{Binding MainPictureOf4x3,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image4x3}}" />
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfSquareCommand}">
+                                <Image Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image4x3}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>

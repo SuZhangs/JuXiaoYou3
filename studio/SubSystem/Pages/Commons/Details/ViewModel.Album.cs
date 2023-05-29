@@ -42,8 +42,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         try
                         {
                             var r         = await ImageUtilities.Thumbnail(ImageEngine, fileName);
-                            var thumbnail = r.Value;
-                            Sync(thumbnail);
+                            if (r.IsFinished)
+                            {
+                                var thumbnail = r.Value;
+                                Sync(thumbnail);
+                            }
+                            else
+                            {
+                                this.ErrorNotification(r.Reason);
+                            }
                         }
                         catch (Exception ex)
                         {

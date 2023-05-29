@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents.Share;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
@@ -68,6 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
             if (subView.Type == typeof(ShareView))
             {
+                Preshapes.ForEach(x => (x.DataContext as PreshapeViewModelBase)?.Resume());
                 RefreshPresentation();
             }
         }

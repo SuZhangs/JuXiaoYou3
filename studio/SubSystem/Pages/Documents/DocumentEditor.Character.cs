@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Linq;
+using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Pages.Documents.Share;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using CommunityToolkit.Mvvm.Input;
@@ -9,9 +11,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
         public CharacterDocumentViewModel() : base()
         {
-            SetAsMainPictureOf4x3Command = AsyncCommand(SetAsMainPictureOf4x3Impl);
-            SetAsMainPictureOf16x9Command = AsyncCommand(SetAsMainPictureOf16x9Impl);
-            SetAsMainPictureOf9x16Command = AsyncCommand(SetAsMainPictureOf9x16Impl);
+            SetAsMainPictureOfSquareCommand = AsyncCommand(SetAsMainPictureOfSquareImpl);
+            SetAsMainPictureOfHorizontalCommand = AsyncCommand(SetAsMainPictureOfHorizontalImpl);
+            SetAsMainPictureOfVerticalCommand = AsyncCommand(SetAsMainPictureOfVerticalImpl);
         }
         
         // TODO: 人物关系中的血缘关系
@@ -21,6 +23,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddDetailView(collection);
             AddPartView(collection);
             AddShareView(collection);
+            Preshapes.Add(new CharacterPergamynStyleView
+            {
+                Tag = Language.GetText("preshape.character.Pergamyn")
+            });
         }
 
         protected override IEnumerable<object> CreateDetailPartList()
@@ -49,7 +55,56 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
         }
 
-        private async Task SetAsMainPictureOf9x16Impl()
+        private void AddAlbumToDetailPart(Album album)
+        {
+            if (album is null)
+            {
+                return;
+            }
+            
+            var part = DetailParts.OfType<PartOfAlbum>()
+                                  .FirstOrDefault();
+
+            if (part is null)
+            {
+                return;
+            }
+
+            if (part.Items.Any(x => x.Source == album.Source))
+            {
+                return;
+            }
+            
+            part.Items.Add(album);
+        }
+        
+        private void RemoveAlbumFromDetailPart(string album)
+        {
+            if (album is null)
+            {
+                return;
+            }
+            
+            var part = DetailParts.OfType<PartOfAlbum>()
+                                  .FirstOrDefault();
+
+            if (part is null)
+            {
+                return;
+            }
+
+            var item = part.Items.FirstOrDefault(x => x.Source == album);
+
+            if (item is null)
+            {
+                return;
+            }
+            
+            part.Items
+                .Remove(item);
+        }
+
+        private async Task SetAsMainPictureOfVerticalImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
 
@@ -58,14 +113,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, 9, 16);
+            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfVertical);
+            }
+
+            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Vertical, AddAlbumToDetailPart);
             if (r.IsFinished)
             {
-                MainPictureOf9x16 = r.Value;
+                MainPictureOfVertical = r.Value;
             }
         }
         
-        private async Task SetAsMainPictureOf16x9Impl()
+        private async Task SetAsMainPictureOfHorizontalImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
 
@@ -74,14 +136,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, 16, 9);
+            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Horizontal, AddAlbumToDetailPart);
             if (r.IsFinished)
             {
-                MainPictureOf16x9 = r.Value;
+                MainPictureOfHorizontal = r.Value;
             }
         }
         
-        private async Task SetAsMainPictureOf4x3Impl()
+        private async Task SetAsMainPictureOfSquareImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
 
@@ -90,15 +152,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, 4, 3);
+            var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Square, AddAlbumToDetailPart);
             if (r.IsFinished)
             {
-                MainPictureOf4x3 = r.Value;
+                MainPictureOfSquare = r.Value;
             }
         }
 
-        public AsyncRelayCommand SetAsMainPictureOf9x16Command { get; }
-        public AsyncRelayCommand SetAsMainPictureOf16x9Command { get; }
-        public AsyncRelayCommand SetAsMainPictureOf4x3Command { get; }
+        public AsyncRelayCommand SetAsMainPictureOfVerticalCommand { get; }
+        public AsyncRelayCommand SetAsMainPictureOfHorizontalCommand { get; }
+        public AsyncRelayCommand SetAsMainPictureOfSquareCommand { get; }
     }
 }

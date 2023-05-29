@@ -21,9 +21,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private const string MetaNameOfPrice            = "@price";
         private const string MetaNameOfProduceArea      = "@produce-area";
         private const string MetaNameOfWeakness         = "@Weakness";
-        private const string MetaNameOfMainPictureOf4x3 = "@mg-4x3";
-        private const string MetaNameOfMainPictureOf16x9 = "@mg-16x9";
-        private const string MetaNameOfMainPictureOf9x16 = "@mg-9x16";
+        private const string MetaNameOfMainPictureOf4x3 = "@mg-s";
+        private const string MetaNameOfMainPictureOf16x9 = "@mg-h";
+        private const string MetaNameOfMainPictureOf9x16 = "@mg-v";
 
         private string GetOrAddMetadata(string name)
         {
@@ -219,37 +219,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        public bool IsMainPictureOf4x3Empty => string.IsNullOrEmpty(MainPictureOf4x3);
-        public bool IsMainPictureOf9x16Empty => string.IsNullOrEmpty(MainPictureOf9x16);
-        public bool IsMainPictureOf16x9Empty => string.IsNullOrEmpty(MainPictureOf16x9);
+        public bool IsMainPictureOfSquareEmpty => string.IsNullOrEmpty(MainPictureOfSquare);
+        public bool IsMainPictureOfVerticalEmpty => string.IsNullOrEmpty(MainPictureOfVertical);
+        public bool IsMainPictureOfHorizontalEmpty => string.IsNullOrEmpty(MainPictureOfHorizontal);
         
-        public string MainPictureOf4x3
+        public string MainPictureOfSquare
         {
             get => GetOrAddMetadata(MetaNameOfMainPictureOf4x3);
             set
             {
                 UpsertMetadata(MetaNameOfMainPictureOf4x3, value);
-                RaiseUpdated(nameof(IsMainPictureOf4x3Empty));
+                RaiseUpdated(nameof(IsMainPictureOfSquareEmpty));
             }
         }
         
-        public string MainPictureOf9x16
+        public string MainPictureOfVertical
         {
             get => GetOrAddMetadata(MetaNameOfMainPictureOf9x16);
             set
             {
                 UpsertMetadata(MetaNameOfMainPictureOf9x16, value);
-                RaiseUpdated(nameof(IsMainPictureOf9x16Empty));
+                RaiseUpdated(nameof(IsMainPictureOfVerticalEmpty));
             }
         }
         
-        public string MainPictureOf16x9
+        public string MainPictureOfHorizontal
         {
             get => GetOrAddMetadata(MetaNameOfMainPictureOf16x9);
             set
             {
                 UpsertMetadata(MetaNameOfMainPictureOf16x9, value);
-                RaiseUpdated(nameof(IsMainPictureOf16x9Empty));
+                RaiseUpdated(nameof(IsMainPictureOfHorizontalEmpty));
             }
         }
 

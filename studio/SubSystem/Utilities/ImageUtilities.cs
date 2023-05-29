@@ -212,6 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 thumbnail = string.Format(ThumbnailPattern, src[0]);
                 return Op<Album>.Success(new Album
                 {
+                    Id     = thumbnail,
                     Source = thumbnail,
                     Width  = int.Parse(src[1]),
                     Height = int.Parse(src[2])
@@ -256,14 +257,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             engine.Write(thumbnail, thumbnailBuffer);
             return Op<Album>.Success(new Album
             {
+                Id = thumbnail,
                 Source = thumbnail,
                 Width  = w,
                 Height = h
             });
         }
         
+        public enum ImageScale
+        {
+            Square,
+            Horizontal,
+            Vertical
+        }
         
-        public static async Task<Op<string>> Raw(ImageEngine engine, string fileName, int wScale, int hScale)
+        public static async Task<Op<string>> Raw(ImageEngine engine, string fileName, ImageScale scale, Action<Album> callback)
         {
             var    buffer = await File.ReadAllBytesAsync(fileName);
             var    raw   = Pool.MD5.ComputeHash(buffer);
@@ -286,23 +294,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             var w = image.Width;
             var h = image.Height;
-            var a = w / wScale;
-            
-            if ((h / a) != hScale)
+
+            if ((scale == ImageScale.Horizontal && w <= h) ||
+                (scale == ImageScale.Vertical && w >= h) ||
+                (scale == ImageScale.Square && w != h) )
             {
                 return Op<string>.Failed("比例不对");
             }
+            
+            
+            var scale1 = scale == ImageScale.Horizontal ? 1920d / image.Width : 1920d / image.Height;
+            var h1 = (int)(image.Height * scale1);
+            var w1 = (int)(image.Width * scale1);
 
             var id = ID.Get();
-            thumbnail = string.Format(RawPattern, id);
+            thumbnail = string.Format(ThumbnailPattern, id);
             engine.AddFile(new FileRecord
             {
                 Id   = md5,
-                Uri  = thumbnail,
+                Uri  = string.Format(ThumbnailWithSizePattern, id, w1, h1),
                 Type = ResourceType.Image
             });
 
             engine.Write(thumbnail, buffer);
+            callback?.Invoke(new Album
+            {
+                Id = thumbnail,
+                Source = thumbnail,
+                Width = w1,
+                Height = h1
+            });
             return Op<string>.Success(thumbnail);
         }
     }
