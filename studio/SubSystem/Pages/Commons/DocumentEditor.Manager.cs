@@ -299,7 +299,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             //
             //
-            document.Parts.AddRange(iterators);
+            document.Parts.AddMany(iterators);
         }
 
         protected abstract void OnCreateDocument(Document document);

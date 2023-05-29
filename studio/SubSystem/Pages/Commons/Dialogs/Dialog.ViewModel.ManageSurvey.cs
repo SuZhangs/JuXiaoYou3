@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var a = p.Args;
             if (a[0] is IEnumerable<SurveySet> s)
             {
-                SurveySets.AddRange(s, true);
+                SurveySets.AddMany(s, true);
             }
             base.OnStart(parameter);
         }

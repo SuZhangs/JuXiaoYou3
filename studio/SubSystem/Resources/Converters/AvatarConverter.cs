@@ -151,19 +151,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     public class ScaledImageConverter : IValueConverter
     {
         private ImageEngine _engine;
-        private        int         w;
-        private        int         h;
 
-        public ScaledImageConverter(int w, int h)
+        public ScaledImageConverter()
         {
-            this.w = w;
-            this.h = h;
         }
 
-        private ImageSource Caching(string avatar)
+        private ImageSource Caching(string avatar, int w, int h)
         {
             var ms  = _engine.Get(avatar);
-            var img = Xaml.FromStream(ms, w * 120, h * 120);
+            var img = Xaml.FromStream(ms, w, h);
             return img;
         }
 
@@ -174,15 +170,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return null;
             }
 
+            var v = value.ToString();
+            
+            if (string.IsNullOrEmpty(v))
+            {
+                return null;
+            }
+
             _engine ??= Studio.DatabaseManager()
                               .GetEngine<ImageEngine>();
             if (value is Album a)
             {
-                return Caching(a.Source);
+                return Caching(a.Source, a.Width, a.Height);
+            }
+
+            var values = v.Split("_");
+
+            if (values.Length < 3)
+            {
+
+                return null;
             }
             
-            var avatar = value.ToString();
-            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
+            var avatar = values[0];
+            var w      = int.TryParse(values[1], out var n) ? n : 100;
+            var h      = int.TryParse(values[2], out n) ? n : 100;
+            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching($"{avatar}.png", w, h));
         }
 
         public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)

@@ -145,10 +145,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ResetPresentation();
             base.OnStart();
         }
-
         protected override void OnResume()
         {
             SynchronizeKeywords();
+            
         }
 
         public override void Suspend()

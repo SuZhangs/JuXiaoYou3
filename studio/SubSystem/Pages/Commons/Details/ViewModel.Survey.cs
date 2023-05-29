@@ -48,9 +48,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 out var modified, 
                 out var removed);
 
-            Detail.Items.AddRange(added);
+            Detail.Items.AddMany(added);
             Detail.Items.RemoveMany(added);
-            Sets.AddRange(added);
+            Sets.AddMany(added);
             Sets.RemoveMany(removed);
             SelectedSurveySet = null;
             Save();
@@ -86,8 +86,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             try
             {
                 var s = await JSON.FromFileAsync<ObservableCollection<SurveySet>>(opendlg.FileName);
-                Sets.AddRange(s, true);
-                Detail.Items.AddRange(s, true);
+                Sets.AddMany(s, true);
+                Detail.Items.AddMany(s, true);
                 Save();
             }
             catch
@@ -107,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            Sets.AddRange(Detail.Items);
+            Sets.AddMany(Detail.Items);
             SelectedSurveySet = Sets.FirstOrDefault();
         }
 

@@ -134,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            template.AddRange(r.Value);
+            template.AddMany(r.Value);
             Save();
         }
         

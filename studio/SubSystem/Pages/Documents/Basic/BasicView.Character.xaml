@@ -97,7 +97,7 @@
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfVerticalCommand}" />
                             </f:EmptyContentControl.EmptyState>
                             <f:LooklessButton Command="{Binding SetAsMainPictureOfVerticalCommand}">
-                                <Image Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image9x16}}" />
+                                <Image Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>
@@ -106,15 +106,15 @@
                                     Header="立绘（纵向）"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Height="360"
-                                    Width="640"
+                                    Height="450"
+                                    Width="800"
                                     Margin="8">
                         <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfHorizontalEmpty,Mode=OneWay}">
                             <f:EmptyContentControl.EmptyState>
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfHorizontalCommand}" />
                             </f:EmptyContentControl.EmptyState>
                             <f:LooklessButton Command="{Binding SetAsMainPictureOfHorizontalCommand}">
-                                <Image Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image16x9}}" />
+                                <Image Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>
@@ -131,7 +131,7 @@
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfSquareCommand}" />
                             </f:EmptyContentControl.EmptyState>
                             <f:LooklessButton Command="{Binding SetAsMainPictureOfSquareCommand}">
-                                <Image Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image4x3}}" />
+                                <Image Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
                             </f:LooklessButton>
                         </f:EmptyContentControl>
                     </f:ForestIsland>

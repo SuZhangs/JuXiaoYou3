@@ -54,6 +54,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         protected override void IsDataPartExistence(Document document)
         {
         }
+        
+        
+        private void ResumeDetailPart()
+        {
+            if (DetailPart is null)
+            {
+                return;
+            }
+
+            if (DetailPart.DataContext is ViewModelBase vm)
+            {
+                vm.Resume();
+            }
+        }
+
 
         private void AddAlbumToDetailPart(Album album)
         {
@@ -76,6 +91,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
             
             part.Items.Add(album);
+            ResumeDetailPart();
+
         }
         
         private void RemoveAlbumFromDetailPart(string album)
@@ -102,6 +119,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             
             part.Items
                 .Remove(item);
+            ResumeDetailPart();
         }
 
         private async Task SetAsMainPictureOfVerticalImpl()

@@ -33,12 +33,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         protected void Sync(TDetail item) => _threadSafeAdding.OnNext(item);
-        
+
+        public override void Resume()
+        {
+            OnInitialize(Collection);
+            base.Resume();
+        }
+
         public override void Start()
         {
             base.Start();
             OnInitialize(Collection);
-            UpdateCollectionState();
         }
 
         protected override void ReleaseManagedResourcesOverride()

@@ -279,18 +279,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var    image = Image.Load<Rgba32>(buffer);
             string thumbnail;
 
-            if (engine.HasFile(md5))
-            {
-                var fr = engine.Records.FindById(md5);
-                thumbnail = fr.Uri;
-                return Op<string>.Success(thumbnail);
-            }
-
-            if (image.Width < 32 || image.Height < 32)
-            {
-                return Op<string>.Failed("图片过小");
-            }
-
 
             var w = image.Width;
             var h = image.Height;
@@ -304,15 +292,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             
             
             var scale1 = scale == ImageScale.Horizontal ? 1920d / image.Width : 1920d / image.Height;
-            var h1 = (int)(image.Height * scale1);
-            var w1 = (int)(image.Width * scale1);
+            var h1     = (int)(image.Height * scale1);
+            var w1     = (int)(image.Width * scale1);
 
-            var id = ID.Get();
-            thumbnail = string.Format(ThumbnailPattern, id);
+            if (engine.HasFile(md5))
+            {
+                var fr = engine.Records.FindById(md5);
+                thumbnail = fr.Uri;
+                callback?.Invoke(new Album
+                {
+                    Id = thumbnail,
+                    Source = thumbnail,
+                    Width = w1,
+                    Height = h1
+                });
+                return Op<string>.Success(thumbnail);
+            }
+
+            if (image.Width < 32 || image.Height < 32)
+            {
+                return Op<string>.Failed("图片过小");
+            }
+
+            var id       = ID.Get();
+            var withSize = string.Format(ThumbnailWithSizePattern, id, w1, h1);
+            thumbnail = string.Format(RawPattern, id);
             engine.AddFile(new FileRecord
             {
                 Id   = md5,
-                Uri  = string.Format(ThumbnailWithSizePattern, id, w1, h1),
+                Uri  = withSize,
                 Type = ResourceType.Image
             });
 
@@ -324,7 +332,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Width = w1,
                 Height = h1
             });
-            return Op<string>.Success(thumbnail);
+            return Op<string>.Success(withSize);
         }
     }
 }

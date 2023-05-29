@@ -77,7 +77,7 @@
                             <ContentControl.ContentTemplate>
                                 <DataTemplate DataType="{x:Type m:Album}">
                                     <Image Stretch="None"
-                                           Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}" />
+                                           Source="{Binding Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Image}}" />
                                 </DataTemplate>
                             </ContentControl.ContentTemplate>
                         </ContentControl>

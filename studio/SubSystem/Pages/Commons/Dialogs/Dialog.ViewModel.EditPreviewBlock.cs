@@ -25,8 +25,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                      .SelectMany(x => x.Items)
                                      .Where(x => x.ExtractType == hb.Type);
 
-            blockCollection.AddRange(blockInGroup);
-            blockCollection.AddRange(simpleBlock);
+            blockCollection.AddMany(blockInGroup);
+            blockCollection.AddMany(simpleBlock);
             return Xaml.Get<IDialogService>()
                        .Dialog(new EditPresentationViewModel(), new Parameter
                        {
@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var param = parameter.Parameter;
             Block = param.Args[0] as GroupingPresentation;
             var array = param.Args[1] as IEnumerable<ModuleBlock>;
-            Templates.AddRange(array, true);
+            Templates.AddMany(array, true);
         }
 
         protected override void Finish()
@@ -61,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                  .Cast<ModuleBlock>()
                                  .ToArray();
             Block.DataLists
-                 .AddRange(Create(r));
+                 .AddMany(Create(r));
         }
 
         private IEnumerable<IPresentationData> Create(IEnumerable<ModuleBlock> blockCollection)

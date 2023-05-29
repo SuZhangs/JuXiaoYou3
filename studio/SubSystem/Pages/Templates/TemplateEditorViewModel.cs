@@ -146,8 +146,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 
                 SetDirtyState(false);
                 RaiseUpdated(nameof(Presentations));
-                Blocks.AddRange(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
-                MetadataList.AddRange(template.MetadataList, true);
+                Blocks.AddMany(template.Blocks.Select(ModuleBlockFactory.GetEditUI), true);
+                MetadataList.AddMany(template.MetadataList, true);
             }
             catch (Exception ex)
             {

@@ -190,8 +190,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var skipElementCounts = (index - 1) * MaxItemCount;
             var minPageItemCount  = Math.Clamp(unsortedDataSource.Count - skipElementCounts, 0, MaxItemCount);
 
-            Collection.AddRange(unsortedDataSource.Skip(skipElementCounts)
-                                                  .Take(minPageItemCount), true);
+            Collection.AddMany(unsortedDataSource.Skip(skipElementCounts)
+                                                 .Take(minPageItemCount), true);
             UpdateCommands();
         }
 

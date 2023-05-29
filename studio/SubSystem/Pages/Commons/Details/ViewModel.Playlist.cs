@@ -48,7 +48,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            collection.AddRange(Detail.Items);
+            collection.AddMany(Detail.Items, true);
+            var music = Owner.GetMusicBlocks()
+                             .Select(x => new Music
+                             {
+                                 Id   = x.Id,
+                                 Name = x.TargetName,
+                                 Path = x.TargetSource,
+                                 Cover = x.TargetThumbnail
+                             });
+            collection.AddMany(music);
+            UpdateCollectionState();
         }
 
         protected override void OnCollectionChanged(Music x)
@@ -146,7 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 ms.Playlist
                   .CurrentValue
                   .Items
-                  .AddRange(noAddedValue);
+                  .AddMany(noAddedValue);
 
                 ms.Play(part);
             }

@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (block.Items is not null && block.Items.Count > 0)
             {
-                Items.AddRange(block.Items
+                Items.AddMany(block.Items
                                     .Select(x => new OptionItemUI(
                                         GetId(),
                                         Fallback,
@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (block.Items is not null && block.Items.Count > 0)
             {
-                Items.AddRange(block.Items);
+                Items.AddMany(block.Items);
             }
         }
 

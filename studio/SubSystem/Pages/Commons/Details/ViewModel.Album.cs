@@ -127,7 +127,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            collection.AddRange(Detail.Items);
+            collection.AddMany(Detail.Items, true);
+            
+            var music = Owner.GetImageBlocks()
+                             .Select(x => new Album
+                             {
+                                 Id   = x.Id,
+                                 Source = x.TargetSource,
+                             });
+            collection.AddMany(music);
+            UpdateCollectionState();
         }
 
         protected override void UpdateCommandState()

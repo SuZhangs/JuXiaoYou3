@@ -201,14 +201,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                     out _,
                     out var color);
                 Color = color;
-                Axis.AddRange(axis, true);
+                Axis.AddMany(axis, true);
                 Value = new List<int>(value);
                 RaiseUpdated(nameof(Value));
             }
             else if (block.Value is not null)
             {
                 Color = block.Color;
-                Axis.AddRange(block.Axis, true);
+                Axis.AddMany(block.Axis, true);
                 Value = new List<int>(block.Value);
                 RaiseUpdated(nameof(Value));
             }
@@ -256,14 +256,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                     out _,
                     out var color);
                 Color = color;
-                Axis.AddRange(axis, true);
+                Axis.AddMany(axis, true);
                 Value = new List<int>(value);
                 RaiseUpdated(nameof(Value));
             }
             else if (block.Value is not null)
             {
                 Color = block.Color;
-                Axis.AddRange(block.Axis, true);
+                Axis.AddMany(block.Axis, true);
                 Value = new List<int>(block.Value);
                 RaiseUpdated(nameof(Value));
             }

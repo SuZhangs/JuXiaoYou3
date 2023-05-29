@@ -43,18 +43,18 @@
                                         CommandParameter="{Binding SelectedTemplate,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="{f:Language global.preview}"
                                         Command="{Binding PresentationCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="{f:Language global.import}"
                                         Command="{Binding ImportTemplateCommand}"
                                         Icon="{StaticResource IC.Save}"
                                         IsFilled="True"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="{f:Language global.export}"
                                         Command="{Binding ExportTemplateCommand}"
                                         CommandParameter="{Binding ElementName=Canvas}"
@@ -63,7 +63,7 @@
                                         ShowText="True" />
                     </StackPanel>
                 </f:ForestSection.ToolBar>
-                
+
                 <!-- 实际内容-->
                 <DockPanel>
                     <!-- 类型分类-->
@@ -91,7 +91,7 @@
                         <f:ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type thisModel:ModuleTemplateCache}">
                                 <DockPanel Margin="6">
-                                    <TextBlock Text="{Binding Name,Mode=OneWay}"/>
+                                    <TextBlock Text="{Binding Name,Mode=OneWay}" />
                                 </DockPanel>
                             </DataTemplate>
                         </f:ListBox.ItemTemplate>
@@ -107,7 +107,7 @@
                         <ItemsControl ItemsSource="{Binding MetadataCollection,Mode=OneWay,IsAsync=True}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemWidth="184"/>
+                                    <WrapPanel ItemWidth="184" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
@@ -123,8 +123,8 @@
                                                        FontWeight="Bold"
                                                        Text="{Binding Name}"
                                                        TextTrimming="CharacterEllipsis" />
-                                            <TextBlock Text="{Binding MetadataName}" 
-                                                       TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding MetadataName}"
+                                                       TextTrimming="CharacterEllipsis" />
                                         </DockPanel>
                                     </Border>
                                 </DataTemplate>
@@ -143,15 +143,14 @@
                                 Margin="8"
                                 Padding="16">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="14" 
-                                                  Direction="270" 
+                                <DropShadowEffect BlurRadius="14"
+                                                  Direction="270"
                                                   Opacity="0.32"
                                                   ShadowDepth="1.5"
                                                   Color="{f:Color HighlightB3}" />
                             </Border.Effect>
-                            <TextBlock Text="默认模板可以在创建设定的时候自动添加设定模板！"/>
+                            <TextBlock Text="默认模板可以在创建设定的时候自动添加设定模板！" />
                         </Border>
-
 
 
                         <f:CallToAction Content="{f:Language global.setting}"
@@ -164,45 +163,45 @@
                                              Command="{Binding SetCharacterManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="人设模板"/>
+                                           Text="人设模板" />
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Character.Name,Mode=OneWay}"/>
+                                           Text="{Binding Character.Name,Mode=OneWay}" />
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"
                                              Command="{Binding SetGeographyManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="地图模板"/>
+                                           Text="地图模板" />
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Geography.Name,Mode=OneWay}"/>
+                                           Text="{Binding Geography.Name,Mode=OneWay}" />
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"
                                              Command="{Binding SetItemManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="物品模板"/>
+                                           Text="物品模板" />
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Item.Name,Mode=OneWay}"/>
+                                           Text="{Binding Item.Name,Mode=OneWay}" />
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"
                                              Command="{Binding SetSkillManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="能力"/>
+                                           Text="能力" />
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Skill.Name,Mode=OneWay}"/>
+                                           Text="{Binding Skill.Name,Mode=OneWay}" />
                             </DockPanel>
                         </studio:ActionButton>
                         <studio:ActionButton Margin="8"
                                              Command="{Binding SetOtherManifestCommand}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="其他模板"/>
+                                           Text="其他模板" />
                                 <TextBlock DockPanel.Dock="Top"
-                                           Text="{Binding Other.Name,Mode=OneWay}"/>
+                                           Text="{Binding Other.Name,Mode=OneWay}" />
                             </DockPanel>
                         </studio:ActionButton>
                     </StackPanel>
@@ -216,7 +215,37 @@
                 <ScrollViewer Margin="0 16 0 0">
                     <Border x:Name="Canvas"
                             Background="{f:BackgroundBrush}">
-                        <thisVM:PresentationView/>
+                        <Grid>
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/DataTemplates/ModuleBlockDataTemplates.xaml" />
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+                            <StackPanel>
+                                <TextBlock FontSize="32"
+                                           Text="{Binding PresentationName,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           Margin="0 4"
+                                           Text="{Binding PresentationAuthorList,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           Margin="0 4"
+                                           Text="{Binding PresentationContractList,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           MaxHeight="96"
+                                           Margin="0 4"
+                                           TextTrimming="CharacterEllipsis"
+                                           Text="{Binding PresentationIntro,Mode=OneWay}" />
+
+                                <ItemsControl Margin="0 12"
+                                              ItemsSource="{Binding Presentations,Mode=OneWay,IsAsync=True}" />
+                            </StackPanel>
+                            <Border Background="Transparent" />
+                        </Grid>
                     </Border>
                 </ScrollViewer>
             </f:ForestSection>

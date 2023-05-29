@@ -414,7 +414,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     var selector = _selectedModulePart.Blocks
                                                       .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
-                    ContentBlocks.AddRange(selector, true);
+                    ContentBlocks.AddMany(selector, true);
                     RemoveModulePartCommand.NotifyCanExecuteChanged();
                     ShiftDownModulePartCommand.NotifyCanExecuteChanged();
                     ShiftUpModulePartCommand.NotifyCanExecuteChanged();

@@ -36,7 +36,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             if (parts?.Length  > 0)
             {
-                Modules.AddRange(parts, true);
+                Modules.AddMany(parts, true);
             }
         }
 

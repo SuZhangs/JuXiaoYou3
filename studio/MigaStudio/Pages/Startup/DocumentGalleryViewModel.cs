@@ -111,7 +111,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected sealed override void OnRequestDataSourceSynchronize(IList<DocumentCache> dataSource)
         {
-            dataSource.AddRange(DocumentEngine.GetDocuments(Type));
+            dataSource.AddMany(DocumentEngine.GetDocuments(Type));
         }
 
         protected sealed override void OnStart(Parameter parameter)

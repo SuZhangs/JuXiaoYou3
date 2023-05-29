@@ -55,57 +55,7 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
         }
 
         #endregion
-
-        #region AddRange
-
         
-
-        public static void AddRange<T>(this Queue<T> collection, IEnumerable<T> target, bool clear = false)
-        {
-            if (collection is null)
-            {
-                return;
-            }
-            
-            if (clear)
-            {
-                collection.Clear();
-            }
-
-            
-            foreach (var item in target)
-            {
-                collection.Enqueue(item);
-            }
-        }
-
-        public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> target, bool clear = false)
-        {
-            if (collection is null)
-            {
-                return;
-            }
-            
-            if (clear)
-            {
-                collection.Clear();
-            }
-
-            if (collection is List<T> l)
-            {
-                l.AddRange(target);
-            }
-            else if(target is not null)
-            {
-                foreach (var item in target)
-                {
-                    collection.Add(item);
-                }
-            }
-        }
-        
-        #endregion
-
         #region ShiftUp
 
                 

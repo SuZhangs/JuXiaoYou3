@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             Items = new List<ModuleBlockDataUI>();
             if (block.Items is not null)
             {
-                Items.AddRange(block.Items.Select(x => ModuleBlockFactory.GetDataUI(x, handler)));
+                Items.AddMany(block.Items.Select(x => ModuleBlockFactory.GetDataUI(x, handler)));
             }
         }
 
@@ -52,7 +52,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (block.Items is not null)
             {
-                Items.AddRange(block.Items.Select(ModuleBlockFactory.GetEditUI));
+                Items.AddMany(block.Items.Select(ModuleBlockFactory.GetEditUI));
             }
         }
 

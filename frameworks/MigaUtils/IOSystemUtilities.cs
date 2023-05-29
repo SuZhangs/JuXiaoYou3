@@ -113,15 +113,15 @@ namespace Acorisoft.FutureGL.MigaUtils
                     {
                         var dir     = queue.Dequeue();
                         var subDirs = Directory.GetDirectories(dir);
-                        list.AddRange(Directory.GetFiles(dir)
+                        list.AddMany(Directory.GetFiles(dir)
                                                .Select(x => new FileInfo(x))
                                                .Where(x => x.Exists));
-                        queue.AddRange(subDirs);
+                        queue.AddMany(subDirs);
                     }
                 }
                 else
                 {
-                    list.AddRange(Directory.GetFiles(directory)
+                    list.AddMany(Directory.GetFiles(directory)
                                            .Select(x => new FileInfo(x))
                                            .Where(x => x.Exists));
                 }

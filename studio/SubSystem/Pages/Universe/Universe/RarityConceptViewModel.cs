@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
             if (Property.Mappings.Count > 0)
             {
-                Mappings.AddRange(Property.Mappings, true);
+                Mappings.AddMany(Property.Mappings, true);
             }
 
             AddMappingCommand    = AsyncCommand(AddMappingImpl);
@@ -251,7 +251,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 {
                     _color = value.Color;
                     RaiseUpdated(nameof(Color));
-                    Keywords.AddRange(value.Keywords);
+                    Keywords.AddMany(value.Keywords);
                 }
             }
         }

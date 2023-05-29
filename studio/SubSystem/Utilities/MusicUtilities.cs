@@ -60,5 +60,50 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 callback(music);
             }
         }
+        
+        
+        public static async Task AddMusic(string fileName, MusicEngine engine, Action<Music> callback)
+        {
+            Music music;
+            var   fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            var   fileNameWithExtension    = fileNameWithoutExtension + ".mp3";
+
+            if (engine.HasFile(fileNameWithExtension))
+            {
+                music = engine.GetFile(fileNameWithExtension);
+            }
+            else
+            {
+                var file      = File.Create(fileName);
+                var musicFile = (AudioFile)file;
+                var tag       = musicFile.GetTag(TagTypes.Id3v2);
+                var cover     = Path.GetFileNameWithoutExtension(fileName) + ".png";
+
+                if (tag.Pictures is not null &&
+                    tag.Pictures?.Length > 0)
+                {
+                    var pic = tag.Pictures.First();
+                    cover = Path.GetFileNameWithoutExtension(fileName) + ".png";
+                    await engine.WriteAlbum(pic.Data.Data, cover);
+                }
+
+                var title      = string.IsNullOrEmpty(tag.Title) ? fileNameWithoutExtension : tag.Title;
+                var performers = CombineString(tag.Performers);
+                music = new Music
+                {
+                    Id     = fileNameWithExtension,
+                    Path   = fileName,
+                    Name   = title,
+                    Author = performers,
+                    Cover  = cover
+                };
+
+                engine.AddFile(music);
+            }
+
+            //
+            //
+            callback(music);
+        }
     }
 }

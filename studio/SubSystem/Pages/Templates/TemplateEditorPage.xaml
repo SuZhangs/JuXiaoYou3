@@ -22,8 +22,8 @@
             <TextBlock Margin="4">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource BlockName}">
-                        <Binding/>
-                        <Binding Path="Name" Mode="OneWay"/>
+                        <Binding />
+                        <Binding Path="Name" Mode="OneWay" />
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
@@ -38,7 +38,37 @@
                     <Border x:Name="Canvas"
                             Padding="32"
                             Background="{f:BackgroundBrush}">
-                        <thisVM:PresentationView/>
+                        <Grid>
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <ResourceDictionary.MergedDictionaries>
+                                        <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/DataTemplates/ModuleBlockDataTemplates.xaml" />
+                                    </ResourceDictionary.MergedDictionaries>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+                            <StackPanel>
+                                <TextBlock FontSize="32"
+                                           Text="{Binding PresentationName,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           Margin="0 4"
+                                           Text="{Binding PresentationAuthorList,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           Margin="0 4"
+                                           Text="{Binding PresentationContractList,Mode=OneWay}" />
+                                <TextBlock FontSize="14"
+                                           Foreground="{f:Brush ForegroundLevel2}"
+                                           MaxHeight="96"
+                                           Margin="0 4"
+                                           TextTrimming="CharacterEllipsis"
+                                           Text="{Binding PresentationIntro,Mode=OneWay}" />
+
+                                <ItemsControl Margin="0 12"
+                                              ItemsSource="{Binding Presentations,Mode=OneWay,IsAsync=True}" />
+                            </StackPanel>
+                            <Border Background="Transparent" />
+                        </Grid>
                     </Border>
                 </ScrollViewer>
             </Border>
@@ -57,22 +87,22 @@
                                 Margin="0 16">
                         <StackPanel Orientation="Horizontal">
                             <ftk:ToolButton Content="{f:Language global.new}"
-                                        Command="{Binding NewTemplateCommand}"
-                                        Icon="{StaticResource IC.File}"
-                                        IsFilled="True"
-                                        ShowText="True" />
+                                            Command="{Binding NewTemplateCommand}"
+                                            Icon="{StaticResource IC.File}"
+                                            IsFilled="True"
+                                            ShowText="True" />
                             <ftk:ToolButton Content="{f:Language global.open}"
-                                        Command="{Binding OpenTemplateCommand}"
-                                        Icon="{StaticResource IC.Folder}"
-                                        IsFilled="True"
-                                        ShowText="True" />
+                                            Command="{Binding OpenTemplateCommand}"
+                                            Icon="{StaticResource IC.Folder}"
+                                            IsFilled="True"
+                                            ShowText="True" />
                             <ftk:ToolButton Content="{f:Language global.save}"
-                                        Command="{Binding SaveTemplateCommand}"
-                                        CommandParameter="{Binding ElementName=Canvas}"
-                                        Icon="{StaticResource IC.Save}"
-                                        IsFilled="True"
-                                        ShowText="True" />
-                            
+                                            Command="{Binding SaveTemplateCommand}"
+                                            CommandParameter="{Binding ElementName=Canvas}"
+                                            Icon="{StaticResource IC.Save}"
+                                            IsFilled="True"
+                                            ShowText="True" />
+
                             <ftk:ToolButton Content="{f:Language global.refresh}"
                                             Command="{Binding SaveTemplateCommand}"
                                             CommandParameter="{Binding ElementName=Canvas}"
@@ -81,9 +111,9 @@
                         </StackPanel>
 
                         <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                           ItemsSource="{x:Static local:SubSystemString.DocumentTypes}"
-                                           SelectedItem="{Binding ForType,Mode=TwoWay}"
-                                           Margin="0 8">
+                                   ItemsSource="{x:Static local:SubSystemString.DocumentTypes}"
+                                   SelectedItem="{Binding ForType,Mode=TwoWay}"
+                                   Margin="0 8">
                             <f:ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type thisModel2:DocumentType}">
                                     <TextBlock Margin="4"
@@ -122,7 +152,7 @@
                                               IsReadOnly="True"
                                               Margin="0 8"
                                               Text="{Binding Version,Mode=OneWay}" />
-                        
+
                         <f:HeaderedSingleLine Header="{f:Language global.organization}"
                                               Margin="0 8"
                                               Text="{Binding Organizations,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -144,27 +174,27 @@
 
                     <DockPanel>
                         <ftk:ToolButton DockPanel.Dock="Top"
-                                    Content="{f:Language global.Refresh}"
-                                    Command="{Binding RefreshMetadataListCommand}"
-                                    HorizontalAlignment="Right"
-                                    Margin="0 0 0 4"
-                                    Icon="{StaticResource FeatherIcon.Search}"
-                                    ShowText="True" />
+                                        Content="{f:Language global.Refresh}"
+                                        Command="{Binding RefreshMetadataListCommand}"
+                                        HorizontalAlignment="Right"
+                                        Margin="0 0 0 4"
+                                        Icon="{StaticResource FeatherIcon.Search}"
+                                        ShowText="True" />
                         <ScrollViewer>
                             <ItemsControl ItemsSource="{Binding MetadataList,Mode=OneWay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderBrush="{f:Brush BorderBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="3"
-                                        Margin="0 4"
-                                        Padding="8">
+                                                BorderThickness="1"
+                                                CornerRadius="3"
+                                                Margin="0 4"
+                                                Padding="8">
                                             <DockPanel>
 
                                                 <TextBlock DockPanel.Dock="Top"
-                                                   FontSize="16"
-                                                   FontWeight="Bold"
-                                                   Text="{Binding Name}" />
+                                                           FontSize="16"
+                                                           FontWeight="Bold"
+                                                           Text="{Binding Name}" />
                                                 <TextBlock Text="{Binding MetadataName}" />
                                             </DockPanel>
                                         </Border>
@@ -206,7 +236,7 @@
                                         Command="{Binding RemoveAllBlockCommand}"
                                         Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="{f:Language global.preview}"
                                         Command="{Binding OpenPresentationPaneCommand}"
                                         Icon="{StaticResource FeatherIcon.Camera}"
@@ -216,7 +246,7 @@
 
                 <ScrollViewer>
                     <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}"
-                               SelectedItem="{Binding SelectedBlock,Mode=TwoWay}"/>
+                               SelectedItem="{Binding SelectedBlock,Mode=TwoWay}" />
                 </ScrollViewer>
             </f:ForestSection>
         </Grid>

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
@@ -182,15 +183,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
     {
         public MusicBlockDataUI(MusicBlock block, Action<ModuleBlockDataUI, ModuleBlock> handler) : base(block, handler)
         {
-            SelectCommand = new RelayCommand(SelectImpl);
+            SelectCommand = new AsyncRelayCommand(SelectImpl);
         }
 
         public MusicBlockDataUI(MusicBlock block) : base(block, ModuleBlockFactory.EmptyHandler)
         {
-            SelectCommand = new RelayCommand(SelectImpl);
+            SelectCommand = new AsyncRelayCommand(SelectImpl);
         }
 
-        private void SelectImpl()
+        private async Task SelectImpl()
         {
             var opendlg = Studio.Open(SubSystemString.MusicFilter);
 
@@ -199,11 +200,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            TargetName   = Path.GetFileNameWithoutExtension(opendlg.FileName);
-            TargetSource = opendlg.FileName;
+            await MusicUtilities.AddMusic(opendlg.FileName, Studio.Engine<MusicEngine>()
+                , x =>
+                {
+                    Dispatcher.CurrentDispatcher
+                              .Invoke(() =>
+                              {
+                                  TargetThumbnail = x.Cover;
+                                  TargetName      = x.Name;
+                                  TargetSource    = x.Path;
+                              });
+                });
         }
 
-        public RelayCommand SelectCommand { get; }
+        public AsyncRelayCommand SelectCommand { get; }
     }
 
     public class ImageBlockDataUI : TargetBlockDataUI

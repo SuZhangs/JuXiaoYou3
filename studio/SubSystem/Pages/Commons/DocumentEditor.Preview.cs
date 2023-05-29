@@ -171,7 +171,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected void ResetPresentation()
         {
-            Presentations.AddRange(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
+            Presentations.AddMany(PresentationPart.Blocks.Select(PresentationUI.GetUI), true);
             RefreshPresentation();
         }
 

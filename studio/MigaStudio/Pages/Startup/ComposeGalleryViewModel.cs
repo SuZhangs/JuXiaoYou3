@@ -117,7 +117,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected sealed override void OnRequestDataSourceSynchronize(IList<ComposeCache> dataSource)
         {
-            dataSource.AddRange(ComposeEngine.GetComposes());
+            dataSource.AddMany(ComposeEngine.GetComposes());
         }
 
         private async Task AddImpl()

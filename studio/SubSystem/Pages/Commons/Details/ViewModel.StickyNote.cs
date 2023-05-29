@@ -32,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            Collection.AddRange(Detail.Items);
+            Collection.AddMany(Detail.Items);
         }
 
         private async Task AddImpl()

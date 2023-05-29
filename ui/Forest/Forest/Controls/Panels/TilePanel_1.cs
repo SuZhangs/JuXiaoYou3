@@ -210,7 +210,7 @@
     //         var list = new List<FrameworkElement>(32);
     //         var maxH = 0;
     //         var maxW = 0;
-    //         list.AddRange(Children.Cast<FrameworkElement>()
+    //         list.AddMany(Children.Cast<FrameworkElement>()
     //                               .Where(element => element is not null && element.Visibility != Visibility.Collapsed));
     //         return new ValueTuple<ArrangeItem[], int, int>(list.Select(x =>
     //         {

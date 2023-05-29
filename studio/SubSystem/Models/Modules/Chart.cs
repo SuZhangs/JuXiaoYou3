@@ -166,7 +166,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (block.Axis is not null)
             {
-                Axis.AddRange(block.Axis);
+                Axis.AddMany(block.Axis);
             }
         }
         

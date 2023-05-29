@@ -18,7 +18,7 @@ namespace Acorisoft.Miga.Doc.Parts
             var tp = (SequenceProperty)target;
 
             tp.Fallback = Fallback;
-            tp.Values.AddRange(Values);
+            tp.Values.AddMany(Values);
 
             base.ShadowCopy(target);
         }

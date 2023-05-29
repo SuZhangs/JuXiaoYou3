@@ -278,7 +278,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             Source.Clear();
             Source.AddRange(TemplateEngine.TemplateCacheDB.FindAll());
 
-            MetadataCollection.AddRange(TemplateEngine.MetadataCacheDB.FindAll(), true);
+            MetadataCollection.AddMany(TemplateEngine.MetadataCacheDB.FindAll(), true);
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 ExportTemplateCommand.NotifyCanExecuteChanged();
                 PresentationCommand.NotifyCanExecuteChanged();
                 RemoveTemplateCommand.NotifyCanExecuteChanged();
-                Blocks.AddRange(template.Blocks, true);
+                Blocks.AddMany(template.Blocks, true);
                 RaiseUpdated(nameof(Presentations));
             }
         }

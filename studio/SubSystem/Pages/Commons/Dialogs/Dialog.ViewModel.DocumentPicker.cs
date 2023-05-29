@@ -16,7 +16,7 @@
             
             if (a[0] is IEnumerable<DocumentCache> enumerable)
             {
-                Documents.AddRange(enumerable, true);
+                Documents.AddMany(enumerable, true);
             }
         }
 

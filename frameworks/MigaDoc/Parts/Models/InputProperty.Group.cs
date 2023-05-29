@@ -16,7 +16,7 @@ namespace Acorisoft.Miga.Doc.Parts
         {
             var tp = (GroupProperty)target;
             
-            tp.Values.AddRange(Values);
+            tp.Values.AddMany(Values);
             
             base.ShadowCopy(target);
         }

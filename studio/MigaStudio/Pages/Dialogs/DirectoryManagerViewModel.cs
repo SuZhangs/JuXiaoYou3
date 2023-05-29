@@ -68,7 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
                         //
                         //
-                        Database.Counters.AddRange(engines, true);
+                        Database.Counters.AddMany(engines, true);
                         Database.Size = engines.Sum(e => e.Size) + db;
                         foreach (var engine in engines)
                         {
