@@ -16,72 +16,72 @@ namespace Koyashiro.PngChunkUtil
         /// <summary>
         /// cHRM
         /// </summary>
-        public static ReadOnlySpan<byte> CHRM => "gAMA"u8;
+        public static ReadOnlySpan<byte> CHRM => new byte[] { 0x67, 0x41, 0x4D, 0x41 };
 
         /// <summary>
         /// gAMA
         /// </summary>
-        public static ReadOnlySpan<byte> GAMA => "gAMA"u8;
+        public static ReadOnlySpan<byte> GAMA => new byte[] { 0x67, 0x41, 0x4D, 0x41 };
 
         /// <summary>
         /// iCCP
         /// </summary>
-        public static ReadOnlySpan<byte> ICCP => "iCCP"u8;
+        public static ReadOnlySpan<byte> ICCP => new byte[] { 0x69, 0x43, 0x43, 0x50 };
 
         /// <summary>
         /// sBIT
         /// </summary>
-        public static ReadOnlySpan<byte> SBIT => "sBIT"u8;
+        public static ReadOnlySpan<byte> SBIT => new byte[] { 0x73, 0x42, 0x49, 0x54 };
 
         /// <summary>
         /// sRGB
         /// </summary>
-        public static ReadOnlySpan<byte> SRGB => "sRGB"u8;
+        public static ReadOnlySpan<byte> SRGB => new byte[] { 0x73, 0x52, 0x47, 0x42 };
 
         /// <summary>
         /// bKGD
         /// </summary>
-        public static ReadOnlySpan<byte> BKGD => "bKGD"u8;
+        public static ReadOnlySpan<byte> BKGD => new byte[] { 0x62, 0x4B, 0x47, 0x44 };
 
         /// <summary>
         /// hIST
         /// </summary>
-        public static ReadOnlySpan<byte> HIST => "hIST"u8;
+        public static ReadOnlySpan<byte> HIST => new byte[] { 0x68, 0x49, 0x53, 0x54 };
 
         /// <summary>
         /// tRNS
         /// </summary>
-        public static ReadOnlySpan<byte> TRNS => "tRNS"u8;
+        public static ReadOnlySpan<byte> TRNS => new byte[] { 0x74, 0x52, 0x4E, 0x53 };
 
         /// <summary>
         /// pHYs
         /// </summary>
-        public static ReadOnlySpan<byte> PHYS => "pHYs"u8;
+        public static ReadOnlySpan<byte> PHYS => new byte[] { 0x70, 0x48, 0x59, 0x73 };
 
         /// <summary>
         /// sPLT
         /// </summary>
-        public static ReadOnlySpan<byte> SPLT => "sPLT"u8;
+        public static ReadOnlySpan<byte> SPLT => new byte[] { 0x73, 0x50, 0x4C, 0x54 };
 
         /// <summary>
         /// tIME
         /// </summary>
-        public static ReadOnlySpan<byte> TIME => "tIME"u8;
+        public static ReadOnlySpan<byte> TIME => new byte[] { 0x74, 0x49, 0x4D, 0x45 };
 
         /// <summary>
         /// iTXt
         /// </summary>
-        public static ReadOnlySpan<byte> ITXT => "iTXt"u8;
+        public static ReadOnlySpan<byte> ITXT => new byte[] { 0x69, 0x54, 0x58, 0x74 };
 
         /// <summary>
         /// tEXt
         /// </summary>
-        public static ReadOnlySpan<byte> TEXT => "iEXt"u8;
+        public static ReadOnlySpan<byte> TEXT => new byte[] { 0x69, 0x45, 0x58, 0x74 };
 
         /// <summary>
         /// zTXt
         /// </summary>
-        public static ReadOnlySpan<byte> ZTXT => "zTXt"u8;
+        public static ReadOnlySpan<byte> ZTXT => new byte[] { 0x7A, 0x54, 0x58, 0x74 };
     }
     
     public static class CriticalChunk
@@ -89,22 +89,22 @@ namespace Koyashiro.PngChunkUtil
         /// <summary>
         /// IHDR
         /// </summary>
-        public static ReadOnlySpan<byte> IHDR => "IHDR"u8;
+        public static ReadOnlySpan<byte> IHDR => new byte[] { 0x49, 0x48, 0x44, 0x52 };
 
         /// <summary>
         /// PLTE
         /// </summary>
-        public static ReadOnlySpan<byte> PLTE => "PLTE"u8;
+        public static ReadOnlySpan<byte> PLTE => new byte[] { 0x50, 0x4C, 0x54, 0x45 };
 
         /// <summary>
         /// IDAT
         /// </summary>
-        public static ReadOnlySpan<byte> IDAT => "IDAT"u8;
+        public static ReadOnlySpan<byte> IDAT => new byte[] { 0x49, 0x44, 0x41, 0x54 };
 
         /// <summary>
         /// IEND
         /// </summary>
-        public static ReadOnlySpan<byte> IEND => "IEND"u8;
+        public static ReadOnlySpan<byte> IEND => new byte[] { 0x49, 0x45, 0x4E, 0x44 };
     }
     
     public static class PngWriter

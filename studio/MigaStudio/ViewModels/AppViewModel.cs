@@ -23,9 +23,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public AppViewModel()
         {
-            var shell  = new TabShell();
-            var launch = new LaunchViewController();
-            var quick  = new QuickStartController();
+            var shell       = new TabShell();
+            var launch      = new LaunchViewController();
+            var quick       = new QuickStartController();
+            var interaction = new InteractionController();
 
             _context = new GlobalStudioContext
             {
@@ -34,7 +35,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 {
                     shell,
                     launch,
-                    quick
+                    quick,
+                    interaction
                 },
                 Character = null,
                 FavoriteCharacterList = new ObservableCollection<DocumentCache>(),
@@ -49,6 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 ControllerMaps = new Dictionary<string, ITabViewController>
                 {
                     { shell.Id, shell },
+                    { interaction.Id, interaction },
                     { launch.Id, launch },
                     { quick.Id, quick },
                 },
@@ -138,7 +141,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public const string IdOfQuickStartController  = "__Quick";
         public const string IdOfStoryboardController  = "__Storyboard";
         public const string IdOfLaunchController      = "__Launch";
-        public const string IdOfInspirationController = "__Inspiration";
+        public const string IdOfInteractionController = "__Interaction";
         public const string IdOfVisitorController     = "__Visitor";
         public const string IdOfTabShellController    = "__Main";
     }

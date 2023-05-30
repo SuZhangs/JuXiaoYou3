@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Views.InspirationViewPage"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Views.InteractionViewPage"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +8,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:InspirationController}, IsDesignTimeCreatable=True}">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:InteractionController}, IsDesignTimeCreatable=True}">
     <Grid>
         
     </Grid>
