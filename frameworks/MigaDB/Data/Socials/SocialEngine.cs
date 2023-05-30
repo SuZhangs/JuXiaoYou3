@@ -10,5 +10,9 @@
         protected override void OnDatabaseClosing()
         {
         }
+        
+        public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
+        public ILiteCollection<SocialThread> ThreadDB { get; private set; }
+        public ILiteCollection<Upvote> UpvoteDB { get; private set; }
     }
 }
