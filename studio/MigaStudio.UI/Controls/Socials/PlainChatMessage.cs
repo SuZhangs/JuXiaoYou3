@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 {
-    public class PlainChatMessage : ChatMessageBase
+    public class PlainChatMessage : UserMessageBase
     {
         static PlainChatMessage()
         {

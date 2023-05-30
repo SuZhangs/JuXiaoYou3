@@ -461,7 +461,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="MinWidth" Value="256" />
         <Setter Property="MaxWidth" Value="480" />
-        <Setter Property="Margin" Value="0 8"/>
+        <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:PlainChatMessage}">
@@ -488,9 +488,10 @@
                                         Margin="0 0 6 0"
                                         Padding="2"
                                         Visibility="Collapsed">
-                                    <TextBlock FontSize="12"
-                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}" 
-                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Foreground="White"
+                                               FontSize="12"
+                                               Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}"
+                                               TextTrimming="CharacterEllipsis" />
                                 </Border>
 
                                 <TextBlock DockPanel.Dock="Right"
@@ -520,60 +521,139 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsSelf" Value="True"/>
-                                <Condition Property="Layout" Value="Wechat"/>
+                                <Condition Property="IsSelf" Value="True" />
+                                <Condition Property="Layout" Value="Wechat" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar"/>
-                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar"/>
-                            <Setter Property="Background" Value="{StaticResource Brush.Wechat.Bubble.Self}" TargetName="PART_ContentPanel"/>
-                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content"/>
-                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar"/>
+                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar" />
+                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar" />
+                            <Setter Property="Background" Value="{StaticResource Brush.Wechat.Bubble.Self}" TargetName="PART_ContentPanel" />
+                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content" />
+                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsSelf" Value="False"/>
-                                <Condition Property="Layout" Value="Wechat"/>
+                                <Condition Property="IsSelf" Value="False" />
+                                <Condition Property="Layout" Value="Wechat" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar"/>
-                            <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar"/>
-                            <Setter Property="Background" Value="White" TargetName="PART_ContentPanel"/>
-                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content"/>
-                            <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar"/>
+                            <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar" />
+                            <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar" />
+                            <Setter Property="Background" Value="White" TargetName="PART_ContentPanel" />
+                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content" />
+                            <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsSelf" Value="True"/>
-                                <Condition Property="Layout" Value="QQ"/>
+                                <Condition Property="IsSelf" Value="True" />
+                                <Condition Property="Layout" Value="QQ" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar"/>
-                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar"/>
-                            <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Self}" TargetName="PART_ContentPanel"/>
-                            <Setter Property="Foreground" Value="White" TargetName="PART_Content"/>
-                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar"/>
+                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar" />
+                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar" />
+                            <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Self}" TargetName="PART_ContentPanel" />
+                            <Setter Property="Foreground" Value="White" TargetName="PART_Content" />
+                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsSelf" Value="False"/>
-                                <Condition Property="Layout" Value="QQ"/>
+                                <Condition Property="IsSelf" Value="False" />
+                                <Condition Property="Layout" Value="QQ" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar"/>
-                            <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar"/>
-                            <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Background}" TargetName="PART_ContentPanel"/>
-                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content"/>
-                            <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar"/>
+                            <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar" />
+                            <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar" />
+                            <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Background}" TargetName="PART_ContentPanel" />
+                            <Setter Property="Foreground" Value="Black" TargetName="PART_Content" />
+                            <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar" />
                         </MultiTrigger>
                         <Trigger Property="Layout" Value="QQ">
-                            <Setter Property="RadiusX" Value="24" TargetName="PART_Avatar"/>
-                            <Setter Property="RadiusY" Value="24" TargetName="PART_Avatar"/>
-                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Title"/>
+                            <Setter Property="RadiusX" Value="24" TargetName="PART_Avatar" />
+                            <Setter Property="RadiusY" Value="24" TargetName="PART_Avatar" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Title" />
                         </Trigger>
                         <Trigger Property="Layout" Value="Wechat">
-                            <Setter Property="RadiusX" Value="6" TargetName="PART_Avatar"/>
-                            <Setter Property="RadiusY" Value="6" TargetName="PART_Avatar"/>
+                            <Setter Property="RadiusX" Value="6" TargetName="PART_Avatar" />
+                            <Setter Property="RadiusY" Value="6" TargetName="PART_Avatar" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type this:TimestampMessage}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="MinWidth" Value="256" />
+        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="Margin" Value="0 8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type this:TimestampMessage}">
+                    <Border HorizontalAlignment="Center"
+                            Margin="0 8"
+                            Padding="8 4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Foreground="#777777"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=RelativeString,Mode=OneWay}" />
+                            <TextBlock Foreground="#777777"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CurrentTime,Mode=OneWay}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type this:MemberJoinMessage}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="MinWidth" Value="256" />
+        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="Margin" Value="0 8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type this:MemberJoinMessage}">
+                    <Border HorizontalAlignment="Center"
+                            Margin="0 8"
+                            Padding="8 4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Foreground="#3fa0ff"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}" />
+                            <TextBlock Foreground="#777777"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}" />
+                            <TextBlock Foreground="#3fa0ff" 
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=WelcomeContent,Mode=OneWay}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type this:UserEventMessage}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="MinWidth" Value="256" />
+        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="Margin" Value="0 8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type this:UserEventMessage}">
+                    <Border HorizontalAlignment="Center"
+                            Margin="0 8"
+                            Padding="8 4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Foreground="#3fa0ff"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}" />
+                            <TextBlock Foreground="#777777"
+                                       Margin="3 0"
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}" />
+                        </StackPanel>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
