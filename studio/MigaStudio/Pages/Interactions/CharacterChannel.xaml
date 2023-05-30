@@ -423,7 +423,9 @@
             预览：
             用来显示选定的人物的联系人群聊
         -->
-        <Viewbox Grid.Column="2">
+        <Viewbox Grid.Column="2"
+                 Stretch="Uniform"
+                 StretchDirection="Both">
             <Border x:Name="Canvas">
 
                 <studio:SocialSoftwareLayout ChannelName="测试群(30)"

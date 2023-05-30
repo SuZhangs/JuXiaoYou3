@@ -535,8 +535,8 @@
                                 <Condition Property="IsSelf" Value="False"/>
                                 <Condition Property="Layout" Value="Wechat"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar"/>
-                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar"/>
+                            <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar"/>
+                            <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar"/>
                             <Setter Property="Background" Value="White" TargetName="PART_ContentPanel"/>
                             <Setter Property="Foreground" Value="Black" TargetName="PART_Content"/>
                             <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar"/>
