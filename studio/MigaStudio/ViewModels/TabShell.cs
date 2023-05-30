@@ -68,10 +68,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void StartOverride()
         {
-            RequireStartupTabViewModel();
+            base.StartOverride();
+            
 #if DEBUG
-            New<CharacterContractViewModel>();
-            New<CharacterChannelViewModel>();
             // New<WeaponEditorViewModel>();
             // New<PlanetEditorViewModel>();
             // New<MaterialEditorViewModel>();

@@ -571,6 +571,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 .WindowState = x => WindowState = x;
         }
 
+        protected override void StartOverride()
+        {
+            RequireStartupTabViewModel();
+        }
+
 
         /// <summary>
         /// 用于绑定的<see cref="WindowState"/> 属性。

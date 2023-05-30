@@ -348,9 +348,9 @@
                                     </Grid.RowDefinitions>
 
                                     <!--
-                                标题：
-                                用来显示选定的人物的联系人群聊
-                            -->
+                                        标题：
+                                        用来显示选定的人物的联系人群聊
+                                    -->
                                     <Border Grid.Row="0"
                                             Background="{StaticResource Brush.Wechat.Background}">
                                         <Grid>
