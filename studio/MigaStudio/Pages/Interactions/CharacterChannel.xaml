@@ -8,6 +8,8 @@
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Socials"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterChannelViewModel}, IsDesignTimeCreatable=True}">
@@ -16,7 +18,20 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/SocialChatItems.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush"/>
+            <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility"/>
             <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
+
+            <DataTemplate DataType="{x:Type thisModel:PlainTextMessageUI}">
+                <studio:PlainChatMessage CharacterName="{Binding Name,Mode=OneWay}"
+                                         IsSelf="{Binding IsSelf,Mode=OneWay}"
+                                         CharacterAvatar="{StaticResource Avatar}"
+                                         CharacterTitle="{Binding Title,Mode=OneWay}"
+                                         CharacterTitleBrush="{Binding Role,Mode=OneWay,Converter={StaticResource Role2Brush}}"
+                                         ShowTitle="{Binding Role,Mode=OneWay, Converter={StaticResource Role2Visibility}}"
+                                         Content="{Binding Content,Mode=OneWay}"
+                                         Layout="{Binding Style,Mode=OneWay}" />
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -232,7 +247,8 @@
                             </f:ContextMenu>
                         </ftk:DropDownButton.ContextMenu>
                     </ftk:DropDownButton>
-                    <f:SingleLine Watermark="群聊名称" />
+                    <f:SingleLine Watermark="群聊名称" 
+                                  Text="{Binding ChannelName,Mode=TwoWay}"/>
                 </DockPanel>
 
                 <ScrollViewer Grid.Row="1"
@@ -325,8 +341,7 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Border x:Name="Canvas">
-
-                <studio:SocialSoftwareLayout ChannelName="测试群(30)"
+                <studio:SocialSoftwareLayout ChannelName="{Binding ChannelName,Mode=OneWay}"
                                              ChannelSubtitle="19人在线"
                                              PendingContent="你妈的"
                                              Layout="WechatGroup">

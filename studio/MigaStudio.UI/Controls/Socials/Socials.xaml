@@ -486,7 +486,7 @@
                                         CornerRadius="3"
                                         HorizontalAlignment="Left"
                                         Margin="0 0 6 0"
-                                        Padding="2"
+                                        Padding="4 2"
                                         Visibility="Collapsed">
                                     <TextBlock Foreground="White"
                                                FontSize="12"
@@ -549,6 +549,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar" />
                             <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar" />
+                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_ContentPanel" />
                             <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Self}" TargetName="PART_ContentPanel" />
                             <Setter Property="Foreground" Value="White" TargetName="PART_Content" />
                             <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar" />

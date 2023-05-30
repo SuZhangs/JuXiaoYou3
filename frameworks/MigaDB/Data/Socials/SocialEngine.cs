@@ -4,15 +4,24 @@
     {
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
-            
+            var db = session.Database;
+            CharacterDB = db.GetCollection<SocialCharacter>(Constants.Name_Chat_Character);
+            UpvoteDB    = db.GetCollection<Upvote>(Constants.Name_Chat_Upvote);
+            ThreadDB    = db.GetCollection<SocialThread>(Constants.Name_Chat_Thread);
+            ChannelDB   = db.GetCollection<SocialChannel>(Constants.Name_Chat_Channel);
         }
 
         protected override void OnDatabaseClosing()
         {
+            CharacterDB = null;
+            UpvoteDB    = null;
+            ThreadDB    = null;
+            ChannelDB   = null;
         }
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }
+        public ILiteCollection<SocialCharacter> CharacterDB { get; private set; }
         public ILiteCollection<Upvote> UpvoteDB { get; private set; }
     }
 }
