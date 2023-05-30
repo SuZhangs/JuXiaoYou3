@@ -13,6 +13,7 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterChannelViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ImageBrush x:Key="Avatar" ImageSource="E:\2.png" />
+        <Geometry x:Key="Mute">F1 M24,24z M0,0z M4.34,2.93L2.93,4.34 7.29,8.7 7,9 3,9 3,15 7,15 12,20 12,13.41 16.18,17.59C15.53,18.08,14.8,18.47,14,18.7L14,20.76A8.94,8.94,0,0,0,17.61,19.01L19.66,21.06 21.07,19.65 4.34,2.93z M19,12C19,12.82,18.85,13.61,18.59,14.34L20.12,15.87C20.68,14.7 21,13.39 21,12 21,7.72 18.01,4.14 14,3.23L14,5.29C16.89,6.15,19,8.83,19,12z M12,4L10.12,5.88 12,7.76z M16.5,12A4.5,4.5,0,0,0,14,7.97L14,9.76 16.48,12.24C16.49,12.16,16.5,12.08,16.5,12z</Geometry>
         <SolidColorBrush x:Key="Brush.QQ.Background" Color="#F5F5F5" />
         <SolidColorBrush x:Key="Brush.QQ.Bar" Color="#0199FF" />
         <DrawingImage x:Key="Mic">
@@ -341,35 +342,38 @@
 
         <Border Grid.Column="1"
                 Padding="16">
-            <DockPanel>
-                <DockPanel DockPanel.Dock="Bottom">
-                    <WrapPanel DockPanel.Dock="Top">
-                        <WrapPanel.Resources>
-                            <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
-                                <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
-                                <Setter Property="Margin" Value="0 0 0 4" />
-                                <Setter Property="IconSize" Value="23" />
-                                <Setter Property="Height" Value="40" />
-                                <Setter Property="Width" Value="40" />
-                            </Style>
-                        </WrapPanel.Resources>
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Login}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.LogOut}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
-                    </WrapPanel>
-                    <f:MultiLine Height="128" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="48" />
+                    <RowDefinition Height="128" />
+                </Grid.RowDefinitions>
+                <DockPanel>
+                    <ftk:DropDownButton DockPanel.Dock="Right"
+                                        Margin="8 0 0 0"
+                                        Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                        IsFilled="True">
+                        <ftk:DropDownButton.ContextMenu>
+                            <f:ContextMenu>
+                                <f:MenuItem Header="加群"
+                                            Icon="{StaticResource FeatherIcon.Login}"
+                                            IconSize="19"/>
+                                <f:MenuItem Header="禁言"
+                                            IsFilled="True"
+                                            Icon="{StaticResource Mute}"
+                                            IconSize="19"/>
+                                <f:MenuItem Header="退群"
+                                            Icon="{StaticResource FeatherIcon.LogOut}"
+                                            IconSize="19"/>
+                            </f:ContextMenu>
+                        </ftk:DropDownButton.ContextMenu>
+                    </ftk:DropDownButton>
+                    <f:SingleLine Watermark="群聊名称" />
                 </DockPanel>
 
-
-                <ScrollViewer DockPanel.Dock="Top">
+                <ScrollViewer Grid.Row="1"
+                              Margin="0 8 0 0">
                     <ItemsControl>
                         <DockPanel Margin="0 4">
                             <Ellipse Height="48"
@@ -416,7 +420,32 @@
                         </DockPanel>
                     </ItemsControl>
                 </ScrollViewer>
-            </DockPanel>
+                
+                <WrapPanel Grid.Row="2">
+                    <WrapPanel.Resources>
+                        <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+                            <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+                            <Setter Property="Margin" Value="0 0 0 4" />
+                            <Setter Property="IconSize" Value="23" />
+                            <Setter Property="Height" Value="40" />
+                            <Setter Property="Width" Value="40" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Login}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.LogOut}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
+                </WrapPanel>
+
+                <f:MultiLine Grid.Row="3" Height="128" />
+            </Grid>
         </Border>
 
         <!--

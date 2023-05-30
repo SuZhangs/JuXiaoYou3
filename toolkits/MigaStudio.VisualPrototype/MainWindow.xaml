@@ -31,7 +31,7 @@
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
-    <Grid>
+    <ScrollViewer>
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="320" />
             <ColumnDefinition Width="1*" />
@@ -169,7 +169,57 @@
                                      CharacterTitleBrush="CornflowerBlue"
                                      Content="QuadraticBezierSegment"
                                      Layout="Wechat"/>
-            
+
+            <!-- 时间戳 -->
+            <Border HorizontalAlignment="Center"
+                    Margin="0 8"
+                    Padding="8 4">
+                <TextBlock Foreground="#777777" Text="昨天 晚上9:31"/>
+            </Border>
+
+            <!-- 加群 -->
+            <Border HorizontalAlignment="Center"
+                    Margin="0 8"
+                    Padding="8 4">
+                <DockPanel>
+                    <TextBlock Foreground="#777777" Text="QuadraticBezierSegment"/>
+                    <TextBlock Foreground="#777777" Text="撤回了一条消息，因为有错别字。"/>
+                </DockPanel>
+            </Border>
+
+            <!-- 加群 -->
+            <Border HorizontalAlignment="Center"
+                    Margin="0 8"
+                    Padding="8 4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/>
+                    <TextBlock Foreground="#777777" Margin="4 0 0 0"
+                               Text="加入了本群，"/>
+                    <TextBlock Foreground="#3fa0ff" Text="点击欢迎"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 踢群 -->
+            <Border HorizontalAlignment="Center"
+                    Margin="0 8"
+                    Padding="8 4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/>
+                    <TextBlock Foreground="#777777" Margin="4 0 0 0"
+                               Text="已被移除群聊"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 禁言 -->
+            <Border HorizontalAlignment="Center"
+                    Margin="0 8"
+                    Padding="8 4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/>
+                    <TextBlock Foreground="#777777" Margin="4 0"
+                               Text="被你禁言了10分钟"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </shell:ForestWindow>
