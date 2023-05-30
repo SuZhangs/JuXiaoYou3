@@ -330,38 +330,9 @@
                                              ChannelSubtitle="19人在线"
                                              PendingContent="你妈的"
                                              Layout="WechatGroup">
-                    <ScrollViewer Grid.Row="1"
-                                  Padding="16">
-                        <ItemsControl>
-                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
-                                                     CharacterAvatar="{StaticResource Avatar}"
-                                                     CharacterTitle="Test"
-                                                     CharacterTitleBrush="CornflowerBlue"
-                                                     Content="QuadraticBezierSegment"
-                                                     Layout="QQ" />
-
-                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
-                                                     CharacterAvatar="{StaticResource Avatar}"
-                                                     CharacterTitle="Test"
-                                                     CharacterTitleBrush="#FEC83D"
-                                                     Content="QuadraticBezierSegment"
-                                                     IsSelf="True"
-                                                     Layout="QQ" />
-
-                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
-                                                     CharacterAvatar="{StaticResource Avatar}"
-                                                     CharacterTitle="Test"
-                                                     CharacterTitleBrush="CornflowerBlue"
-                                                     Content="QuadraticBezierSegment"
-                                                     IsSelf="True"
-                                                     Layout="Wechat" />
-
-                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
-                                                     CharacterAvatar="{StaticResource Avatar}"
-                                                     CharacterTitle="Test"
-                                                     CharacterTitleBrush="CornflowerBlue"
-                                                     Content="QuadraticBezierSegment"
-                                                     Layout="Wechat" />
+                    <ScrollViewer Padding="16">
+                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
+                            
                         </ItemsControl>
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>

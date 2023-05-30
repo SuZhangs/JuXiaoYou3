@@ -3,5 +3,8 @@ using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
-
+    partial class CharacterChannelViewModel
+    {
+        
+    }
 }

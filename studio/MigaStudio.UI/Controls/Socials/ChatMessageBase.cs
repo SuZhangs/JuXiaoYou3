@@ -50,7 +50,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
             typeof(UserMessageBase),
             new PropertyMetadata(default(PreferSocialMessageLayout)));
 
-        
+
+        public static readonly DependencyProperty ShowTitleProperty = DependencyProperty.Register(
+            nameof(ShowTitle),
+            typeof(bool),
+            typeof(UserMessageBase),
+            new PropertyMetadata(Boxing.False));
+
+        public bool ShowTitle
+        {
+            get => (bool)GetValue(ShowTitleProperty);
+            set => SetValue(ShowTitleProperty, Boxing.Box(value));
+        }
 
         public Brush CharacterTitleBrush
         {

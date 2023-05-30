@@ -568,7 +568,9 @@
                         <Trigger Property="Layout" Value="QQ">
                             <Setter Property="RadiusX" Value="24" TargetName="PART_Avatar" />
                             <Setter Property="RadiusY" Value="24" TargetName="PART_Avatar" />
-                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Title" />
+                        </Trigger>
+                        <Trigger Property="ShowTitle" Value="True">
+                            <Setter Property="Visibility" Value="Visible" TargetName="PART_Title"/>
                         </Trigger>
                         <Trigger Property="Layout" Value="Wechat">
                             <Setter Property="RadiusX" Value="6" TargetName="PART_Avatar" />
