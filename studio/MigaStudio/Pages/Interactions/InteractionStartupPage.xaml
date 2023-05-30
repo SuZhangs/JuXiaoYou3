@@ -69,7 +69,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="128" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="48" />
+                    <RowDefinition Height="16" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <ScrollViewer Grid.Row="3"
@@ -90,31 +90,27 @@
                                         CornerRadius="8"
                                         HorizontalAlignment="Left"
                                         Padding="12">
-                                    <TextBlock Text="这是一则消息" />
+                                    <TextBlock Text="这是一条说说" />
                                 </Border>
                             </DockPanel>
                         </DockPanel>
 
                         <DockPanel Margin="0 4">
-                            <Ellipse DockPanel.Dock="Right"
-                                     Height="48"
+                            <Ellipse Height="48"
                                      Width="48"
                                      Fill="{StaticResource Avatar}" />
-
-                            <DockPanel HorizontalAlignment="Right"
-                                       Margin="0 0 12 0">
+                            <DockPanel Margin="12 0 0 0">
                                 <TextBlock DockPanel.Dock="Top"
                                            Foreground="Gray"
                                            FontSize="13"
                                            FontWeight="Heavy"
-                                           HorizontalAlignment="Right"
                                            Margin="0 0 0 4"
                                            Text="测试群" />
                                 <Border Background="{StaticResource Brush.QQ.Bar}"
                                         CornerRadius="8"
                                         HorizontalAlignment="Left"
                                         Padding="12">
-                                    <TextBlock Text="这是一则消息" />
+                                    <TextBlock Text="这是一条说说" />
                                 </Border>
                             </DockPanel>
                         </DockPanel>
@@ -133,13 +129,8 @@
                     </WrapPanel.Resources>
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
                     <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
                 </WrapPanel>
 
                 <DockPanel Grid.Row="0">
