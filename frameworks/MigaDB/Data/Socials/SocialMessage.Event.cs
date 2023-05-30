@@ -5,7 +5,15 @@
     /// </summary>
     public class MutedMessage : SocialMessage
     {
-        
+        /// <summary>
+        /// 发送者的ID
+        /// </summary>
+        public string MemberID { get; init; }
+
+        /// <summary>
+        /// 发送的内容。
+        /// </summary>
+        public string Content { get; set; }
     }
     
     /// <summary>
@@ -13,7 +21,15 @@
     /// </summary>
     public class MemberJoinMessage : SocialMessage
     {
-        
+        /// <summary>
+        /// 发送者的ID
+        /// </summary>
+        public string MemberID { get; init; }
+
+        /// <summary>
+        /// 发送的内容。
+        /// </summary>
+        public string Content { get; set; }
     }
     
     /// <summary>
@@ -21,6 +37,14 @@
     /// </summary>
     public class MemberLeaveMessage : SocialMessage
     {
-        
+        /// <summary>
+        /// 发送者的ID
+        /// </summary>
+        public string MemberID { get; init; }
+
+        /// <summary>
+        /// 发送的内容。
+        /// </summary>
+        public string Content { get; set; }
     }
 }
