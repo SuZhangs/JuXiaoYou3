@@ -45,7 +45,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     new NamedItem<string>
                     {
                         Name = Language.GetText(IdOfTabShellController),
-                        Value = shell.Id
+                        Value = IdOfTabShellController
+                    },
+                    new NamedItem<string>
+                    {
+                        Name  = Language.GetText(IdOfInteractionController),
+                        Value = IdOfInteractionController
                     },
                 },
                 ControllerMaps = new Dictionary<string, ITabViewController>

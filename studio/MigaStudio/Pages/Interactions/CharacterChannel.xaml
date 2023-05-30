@@ -16,7 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/SocialChatItems.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <ImageBrush x:Key="Avatar" ImageSource="E:\2.png" />
+            <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
