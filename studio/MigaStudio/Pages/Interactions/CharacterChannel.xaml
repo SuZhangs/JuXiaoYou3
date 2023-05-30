@@ -433,60 +433,35 @@
                     <ScrollViewer Grid.Row="1"
                                   Padding="16">
                         <ItemsControl>
-                            <DockPanel Margin="0 4">
-                                <Ellipse Height="48"
-                                         Width="48"
-                                         Fill="{StaticResource Avatar}" />
-                                <DockPanel Margin="12 0 0 0">
-                                    <DockPanel DockPanel.Dock="Top"
-                                               Margin="0 0 0 4">
-                                        <Border Background="#FEC83D"
-                                                CornerRadius="6"
-                                                Padding="6 3">
-                                            <TextBlock Foreground="White"
-                                                       FontSize="12"
-                                                       FontWeight="Heavy"
-                                                       Text="群主"
-                                                       VerticalAlignment="Center" />
-                                        </Border>
-                                        <TextBlock Foreground="#999999"
-                                                   FontSize="13"
-                                                   FontWeight="Heavy"
-                                                   Margin="8 0 0 0"
-                                                   Text="测试群" />
-                                    </DockPanel>
-                                    <Border Background="{StaticResource Brush.QQ.Bar}"
-                                            CornerRadius="8"
-                                            HorizontalAlignment="Left"
-                                            Padding="12">
-                                        <TextBlock Text="这是一则消息" />
-                                    </Border>
-                                </DockPanel>
-                            </DockPanel>
+                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
+                                                     CharacterAvatar="{StaticResource Avatar}"
+                                                     CharacterTitle="Test"
+                                                     CharacterTitleBrush="CornflowerBlue"
+                                                     Content="QuadraticBezierSegment"
+                                                     Layout="QQ"/>
 
-                            <DockPanel Margin="0 4">
-                                <Ellipse DockPanel.Dock="Right"
-                                         Height="48"
-                                         Width="48"
-                                         Fill="{StaticResource Avatar}" />
+                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
+                                                     CharacterAvatar="{StaticResource Avatar}"
+                                                     CharacterTitle="Test"
+                                                     CharacterTitleBrush="#FEC83D"
+                                                     Content="QuadraticBezierSegment"
+                                                     IsSelf="True"
+                                                     Layout="QQ"/>
 
-                                <DockPanel HorizontalAlignment="Right"
-                                           Margin="0 0 12 0">
-                                    <TextBlock DockPanel.Dock="Top"
-                                               Foreground="Gray"
-                                               FontSize="13"
-                                               FontWeight="Heavy"
-                                               HorizontalAlignment="Right"
-                                               Margin="0 0 0 4"
-                                               Text="测试群" />
-                                    <Border Background="{StaticResource Brush.QQ.Bar}"
-                                            CornerRadius="8"
-                                            HorizontalAlignment="Left"
-                                            Padding="12">
-                                        <TextBlock Text="这是一则消息" />
-                                    </Border>
-                                </DockPanel>
-                            </DockPanel>
+                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
+                                                     CharacterAvatar="{StaticResource Avatar}"
+                                                     CharacterTitle="Test"
+                                                     CharacterTitleBrush="CornflowerBlue"
+                                                     Content="QuadraticBezierSegment"
+                                                     IsSelf="True"
+                                                     Layout="Wechat"/>
+            
+                            <studio:PlainChatMessage CharacterName="QuadraticBezierSegment"
+                                                     CharacterAvatar="{StaticResource Avatar}"
+                                                     CharacterTitle="Test"
+                                                     CharacterTitleBrush="CornflowerBlue"
+                                                     Content="QuadraticBezierSegment"
+                                                     Layout="Wechat"/>
                         </ItemsControl>
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>

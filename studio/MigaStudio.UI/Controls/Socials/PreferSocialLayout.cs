@@ -7,4 +7,10 @@
         QQFriend,
         WechatFriend
     }
+
+    public enum PreferSocialMessageLayout
+    {
+        QQ,
+        Wechat
+    }
 }
