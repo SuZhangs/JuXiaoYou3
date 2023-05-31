@@ -148,8 +148,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
+            if(SelectedCharacter is not null &&
+                SelectedCharacter.Id == item.Id)
+            {
+                SelectedCharacter = null;
+            }
+
             Characters.Remove(item);
             SocialEngine.RemoveCharacter(item);
+            UpdateState();
         }
 
         private async Task AddChannelImpl(SocialCharacter item)
@@ -206,6 +213,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         protected override void OnResume()
         {
+            UpdateState();
             // 需要同步
             base.OnResume();
         }
@@ -280,8 +288,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             set
             {
                 SetValue(ref _selectedCharacter, value);
-                UpdateContextualDataSource();
-                UpdateState();
+
+                if(value is null)
+                {
+                    Threads.Clear();
+                    Channels.Clear();
+                }
+                else
+                {
+                    UpdateContextualDataSource();
+                    UpdateState();
+                }
             }
         }
 
