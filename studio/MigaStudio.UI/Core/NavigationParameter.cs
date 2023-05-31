@@ -37,6 +37,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         /// <summary>
         /// 新建一个导航参数
         /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="controller">控制器</param>
+        /// <param name="parameter">控制器</param>
+        /// <returns>返回一个新的导航参数。</returns>
+        public static RoutingEventArgs NewPage(string id, ITabViewController controller, Parameter parameter)
+        {
+            return new RoutingEventArgs
+            {
+                Id         = id,
+                Controller = controller,
+                Parameter  = parameter
+            };
+        }
+
+        /// <summary>
+        /// 新建一个导航参数
+        /// </summary>
         /// <param name="cache">索引</param>
         /// <param name="controller">控制器</param>
         /// <returns>返回一个新的导航参数。</returns>

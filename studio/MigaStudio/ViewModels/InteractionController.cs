@@ -11,13 +11,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             CharacterMapper = new Dictionary<string, SocialCharacter>(StringComparer.OrdinalIgnoreCase);
         }
-        
-        protected override void StartOverride()
-        {
-            base.StartOverride();
-            New<CharacterContractViewModel>();
-            New<CharacterChannelViewModel>();
-        }
 
         protected override void RequireStartupTabViewModel()
         {

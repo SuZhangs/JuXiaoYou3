@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
 using Acorisoft.FutureGL.MigaStudio.Models.Socials;
@@ -11,46 +12,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         
         public CharacterChannelViewModel()
         {
-            Messages = new ObservableCollection<ChatMessageUI>
+            Characters = new ObservableCollection<CharacterUI>();
+            Messages   = new ObservableCollection<ChatMessageUI>();
+        }
+
+        private void Initialize()
+        {
+            
+        }
+
+        protected override void OnStart(Parameter parameter)
+        {
+            var p = parameter.Args;
+            Channel     = p[0] as ChannelUI;
+
+            if (Channel is null)
             {
-                new PlainTextMessageUI
-                {
-                    
-                    Avatar = "D:\\2.png",
-                    Name = "Sender",
-                    Role = MemberRole.Owner,
-                    Title = "群主",
-                    Content = typeof(CharacterChannelViewModel).FullName,
-                    IsSelf = false,
-                    Style = PreferSocialMessageLayout.QQ,
-                },
-                new PlainTextMessageUI
-                {
-                    
-                    Avatar  = "D:\\2.png",
-                    Name    = "Character 1",
-                    Role    = MemberRole.Self,
-                    Content = "rashiua",
-                    IsSelf  = true,
-                    Style   = PreferSocialMessageLayout.QQ,
-                },   new PlainTextMessageUI
-                {
-                    
-                    Avatar  = "D:\\2.png",
-                    Name    = "Character 2",
-                    Role    = MemberRole.Manager,
-                    Content = "false",
-                    Title   = "管理",
-                    IsSelf  = false,
-                    Style   = PreferSocialMessageLayout.QQ,
-                },
-            };
+                throw new ArgumentNullException(nameof(Channel));
+            }
+            
+            ChannelName = Channel.Name;
+            Initialize();
+            base.OnStart(parameter);
         }
 
         /// <summary>
         /// 绑定的对象
         /// </summary>
-        public SocialChannel Channel { get; private set; }
+        public ChannelUI Channel { get; private set; }
         
         /// <summary>
         /// 获取或设置 <see cref="ChannelName"/> 属性。

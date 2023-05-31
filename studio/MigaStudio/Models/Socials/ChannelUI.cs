@@ -1,14 +1,17 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Socials;
+﻿using System.Collections.Generic;
+using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
     public class ChannelUI : ObservableObject
     {
-        public ChannelUI(SocialChannel channel)
+        public ChannelUI(SocialChannel channel, Dictionary<string, SocialCharacter> characterMapper)
         {
             ChannelSource = channel ?? throw new ArgumentNullException(nameof(channel));
         }
+
+        public string Id => ChannelSource.Id;
         
         public SocialChannel ChannelSource { get;  }
 

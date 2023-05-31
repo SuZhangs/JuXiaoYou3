@@ -8,7 +8,7 @@
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
-                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Socials"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:Model="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
                      xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
@@ -29,7 +29,7 @@
                         <f:ContextMenu>
                             <f:MenuItem Header="{f:Language global.remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCharacterCommand}"
-                                        CommandParameter="{Binding }"/>
+                                        CommandParameter="{Binding }" />
                         </f:ContextMenu>
                     </Border.ContextMenu>
                     <DockPanel>
@@ -73,10 +73,44 @@
                         </Ellipse>
 
                         <TextBlock FontSize="18"
-                                       FontWeight="Heavy"
-                                       Margin="16 0 0 0"
-                                       Text="{Binding Name,Mode=OneWay}"
-                                       VerticalAlignment="Center" />
+                                   FontWeight="Heavy"
+                                   Margin="16 0 0 0"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type thisModel:ChannelUI}">
+                <Border Background="{f:BackgroundBrush}"
+                        Margin="0 2"
+                        Padding="8">
+                    <DockPanel>
+                        <Ellipse Fill="{StaticResource Avatar}"
+                                 Height="48"
+                                 Width="48" />
+                        <DockPanel>
+                            <f:CallToAction DockPanel.Dock="Right"
+                                            Content="打开"
+                                            CornerRadius="18"
+                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditChannelCommand,Mode=OneWay}"
+                                            CommandParameter="{Binding}"
+                                            Height="36"
+                                            Padding="36 4"
+                                            Palette="HighlightPalette3" />
+
+                            <DockPanel Margin="16 0 0 0"
+                                       VerticalAlignment="Center">
+                                <TextBlock DockPanel.Dock="Top"
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Text="{Binding Name,Mode=OneWay}" />
+                                <TextBlock FontSize="12"
+                                           Foreground="{f:Brush ForegroundLevel3}"
+                                           Margin="0 4 0 0"
+                                           Text="{Binding Intro,Mode=OneWay}" />
+                            </DockPanel>
+                        </DockPanel>
                     </DockPanel>
                 </Border>
             </DataTemplate>
@@ -105,18 +139,12 @@
                                 CornerRadius="3"
                                 Padding="16"
                                 Margin="0 0 0 16">
-                            <f:CallToAction DockPanel.Dock="Right"
-                                            Content="选择"
-                                            CornerRadius="18"
-                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
-                                            CommandParameter="{Binding}"
-                                            Height="36"
-                                            Padding="32 8" />
+                            <TextBlock Text="请选择一个角色"/>
                         </Border>
                     </f:EmptyContentControl.EmptyState>
                     <ContentControl Content="{Binding SelectedCharacter,Mode=OneWay}"
                                     ContentTemplate="{StaticResource Selected}"
-                                    Margin="0 0 0 24"/>
+                                    Margin="0 0 0 24" />
                 </f:EmptyContentControl>
 
 
@@ -136,7 +164,7 @@
                                       VirtualizingPanel.IsVirtualizing="True">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel/>
+                                    <VirtualizingStackPanel />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
@@ -227,85 +255,23 @@
                 </Grid>
             </Border>
 
-
             <f:ForestIsland Grid.Column="2"
-                            Header="所有群聊">
+                                Header="所有群聊">
                 <f:ForestIsland.ToolBar>
                     <f:CallToAction Content="{f:Language global.add}"
                                     CornerRadius="16"
-                                    Command="{Binding AddCharacterCommand,Mode=OneWay}"
+                                    Command="{Binding AddChannelCommand,Mode=OneWay}"
+                                    CommandParameter="{Binding SelectedCharacter,Mode=OneWay}"
                                     HorizontalAlignment="Right"
                                     Icon="{StaticResource FeatherIcon.Plus}"
                                     IconSize="13"
-                                    Padding="48 8" />
+                                    Padding="48 8"
+                                    Palette="HighlightPalette2"/>
                 </f:ForestIsland.ToolBar>
-                <f:EmptyContentControl NotEmpty="True">
 
-                    <ScrollViewer>
-                        <ItemsControl>
-
-                            <Border Background="{f:BackgroundBrush}"
-                                    Margin="0 2"
-                                    Padding="8">
-                                <DockPanel>
-                                    <Ellipse Fill="{StaticResource Avatar}"
-                                             Height="48"
-                                             Width="48" />
-
-                                    <DockPanel>
-                                        <f:CallToAction DockPanel.Dock="Right"
-                                                        Content="打开"
-                                                        CornerRadius="18"
-                                                        Height="36"
-                                                        Padding="36 4"
-                                                        Palette="HighlightPalette3" />
-
-                                        <DockPanel Margin="16 0 0 0"
-                                                   VerticalAlignment="Center">
-                                            <TextBlock DockPanel.Dock="Top"
-                                                       FontSize="16"
-                                                       FontWeight="Bold"
-                                                       Text="Character1" />
-                                            <TextBlock FontSize="12"
-                                                       Foreground="{f:Brush ForegroundLevel3}"
-                                                       Text="Character1" />
-                                        </DockPanel>
-                                    </DockPanel>
-                                </DockPanel>
-                            </Border>
-
-                            <Border Background="{f:BackgroundBrush}"
-                                    Margin="0 2"
-                                    Padding="8">
-                                <DockPanel>
-                                    <Ellipse Fill="{StaticResource Avatar}"
-                                             Height="48"
-                                             Width="48" />
-
-                                    <DockPanel>
-                                        <f:CallToAction DockPanel.Dock="Right"
-                                                        Content="打开"
-                                                        CornerRadius="18"
-                                                        Height="36"
-                                                        Padding="36 4"
-                                                        Palette="HighlightPalette3" />
-
-                                        <DockPanel Margin="16 0 0 0"
-                                                   VerticalAlignment="Center">
-                                            <TextBlock DockPanel.Dock="Top"
-                                                       FontSize="16"
-                                                       FontWeight="Bold"
-                                                       Text="Character1" />
-                                            <TextBlock FontSize="12"
-                                                       Foreground="{f:Brush ForegroundLevel3}"
-                                                       Text="Character1" />
-                                        </DockPanel>
-                                    </DockPanel>
-                                </DockPanel>
-                            </Border>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </f:EmptyContentControl>
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Channels,Mode=OneWay}"/>
+                </ScrollViewer>
             </f:ForestIsland>
         </Grid>
     </f:EmptyContentControl>

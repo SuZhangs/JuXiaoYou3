@@ -59,6 +59,13 @@
             ChannelDB.Delete(channel.Id);
         }
         
+        public IEnumerable<SocialChannel> GetChannels(string character)
+        {
+            return ChannelDB.FindAll()
+                            .Where(x => x.Members
+                                         .Any(y => y.MemberID == character));
+        }
+        
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }
         public ILiteCollection<SocialCharacter> CharacterDB { get; private set; }

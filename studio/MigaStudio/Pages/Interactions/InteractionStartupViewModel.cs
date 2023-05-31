@@ -27,14 +27,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         public InteractionStartupViewModel()
         {
-            DatabaseManager  = Studio.DatabaseManager();
-            ImageEngine      = Studio.Engine<ImageEngine>();
-            SocialEngine     = Studio.Engine<SocialEngine>();
-            DocumentEngine   = Studio.Engine<DocumentEngine>();
-            Channels         = new ObservableCollection<ChannelUI>();
-            Characters       = new ObservableCollection<SocialCharacter>();
-            Threads          = new ObservableCollection<ThreadUI>();
-            
+            DatabaseManager = Studio.DatabaseManager();
+            ImageEngine     = Studio.Engine<ImageEngine>();
+            SocialEngine    = Studio.Engine<SocialEngine>();
+            DocumentEngine  = Studio.Engine<DocumentEngine>();
+            Channels        = new ObservableCollection<ChannelUI>();
+            Characters      = new ObservableCollection<SocialCharacter>();
+            Threads         = new ObservableCollection<ThreadUI>();
+
 
             AddCharacterCommand    = AsyncCommand(AddCharacterImpl);
             EditCharacterCommand   = AsyncCommand<SocialCharacter>(EditCharacterImpl);
@@ -71,7 +71,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            // Channels.AddMany(, true);
+            var channels = SocialEngine.GetChannels(SelectedCharacter.Id);
+            Channels.AddMany(channels.Select(x => new ChannelUI(x, CharacterMapper)), true);
             // Threads.AddMany(, true);
         }
 
@@ -90,7 +91,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                                  .ToHashSet();
 
             var r = await SubSystem.MultiSelectExclude(DocumentType.Character, hash);
-            
+
             if (!r.IsFinished)
             {
                 return;
@@ -99,15 +100,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             var values = r.Value
                           .Select(x => new SocialCharacter
                           {
-                              Id = x.Id,
-                              Name = x.Name,
+                              Id     = x.Id,
+                              Name   = x.Name,
                               Avatar = x.Avatar,
-                              Intro = x.Intro
+                              Intro  = x.Intro
                           });
 
             foreach (var character in values)
             {
-                
                 Characters.Add(character);
                 SocialEngine.AddCharacter(character);
             }
@@ -127,6 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 return;
             }
+
             var db = Studio.Database();
             var pp = db.Get<PresetProperty>();
             pp.LastSocialCharacterID = item.Id;
@@ -146,7 +147,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            if(SelectedCharacter is not null &&
+            if (SelectedCharacter is not null &&
                 SelectedCharacter.Id == item.Id)
             {
                 SelectedCharacter = null;
@@ -168,7 +169,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 return;
             }
-            
+
             if (item.Id != SelectedCharacter.Id)
             {
                 return;
@@ -198,15 +199,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Members  = new ObservableCollection<ChannelMember>(),
                 Messages = new ObservableCollection<SocialMessage>(),
             };
-            
+
             channel.Members
                    .Add(new ChannelMember
                    {
-                       MemberID = SelectedCharacter.Id,
+                       MemberID     = SelectedCharacter.Id,
                        AliasMapping = new Dictionary<string, string>(),
-                       Name = SelectedCharacter.Name,
-                       Title = GetOwnerName(),
-                       Role = MemberRole.Owner
+                       Name         = SelectedCharacter.Name,
+                       Title        = GetOwnerName(),
+                       Role         = MemberRole.Owner
                    });
 
             var members = r1.Value
@@ -222,10 +223,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             //
             // 添加
             SocialEngine.AddChannel(channel);
-            
+
             //
             // 添加
-            Channels.Add(new ChannelUI(channel));
+            Channels.Add(new ChannelUI(channel, CharacterMapper));
         }
 
         private void EditChannelImpl(ChannelUI item)
@@ -235,7 +236,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            Controller.Start<CharacterChannelViewModel>(new Parameter
+            Controller.Start<CharacterChannelViewModel>(item.Id,new Parameter
             {
                 Args = new[]
                 {
@@ -250,7 +251,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 return;
             }
-            
+
             if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
@@ -278,14 +279,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             //
             // 加载数据
             Synchronize();
-            
+
             //
             // 选择最后一个打开的设定
             var db = Studio.Database();
             var pp = db.Get<PresetProperty>();
             var id = pp.LastSocialCharacterID;
 
-            if (!string.IsNullOrEmpty(id) && 
+            if (!string.IsNullOrEmpty(id) &&
                 CharacterMapper.TryGetValue(id, out var character))
             {
                 SelectedCharacter = character;
@@ -295,9 +296,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 pp.LastSocialCharacterID = null;
                 db.Update(pp);
             }
-            
+
             UpdateState();
-            
+
             base.OnStart();
         }
 
@@ -379,15 +380,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 SetValue(ref _selectedCharacter, value);
 
-                if(value is null)
+                if (value is null)
                 {
                     Threads.Clear();
                     Channels.Clear();
                 }
                 else
                 {
-                    UpdateContextualDataSource();
                     UpdateState();
+                    UpdateContextualDataSource();
                 }
             }
         }

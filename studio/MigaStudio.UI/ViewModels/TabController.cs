@@ -348,29 +348,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             return vm;
         }
         
+        
         /// <summary>
         /// 打开视图模型
         /// </summary>
-        /// <param name="viewModel">指定要打开的视图模型类型</param>
+        /// <param name="id">id</param>
         /// <param name="parameter">指定要打开的视图模型类型</param>
         /// <returns>返回一个新的实例。</returns>
-        public TabViewModel Start(Type viewModel, Parameter parameter) 
-        {
-            var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
-            vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
-            return vm;
-        }
-
-        /// <summary>
-        /// 打开视图模型
-        /// </summary>
-        /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
-        /// <returns>返回一个新的实例。</returns>
-        public TViewModel New<TViewModel>() where TViewModel : TabViewModel
+        public TabViewModel Start<TViewModel>(string id, Parameter parameter) where TViewModel : TabViewModel
         {
             var vm = Xaml.GetViewModel<TViewModel>();
-            vm.Startup(NavigationParameter.NewPage(vm, this));
-            Start(vm);
+            vm.Startup(NavigationParameter.NewPage(id, this, parameter));
             return vm;
         }
         
@@ -414,6 +402,32 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 打开视图模型
         /// </summary>
+        /// <param name="viewModel">指定要打开的视图模型类型</param>
+        /// <param name="parameter">指定要打开的视图模型类型</param>
+        /// <returns>返回一个新的实例。</returns>
+        public TabViewModel Start(Type viewModel, Parameter parameter)
+        {
+            var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
+            vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
+            return vm;
+        }
+
+        /// <summary>
+        /// 打开视图模型
+        /// </summary>
+        /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
+        /// <returns>返回一个新的实例。</returns>
+        public TViewModel New<TViewModel>() where TViewModel : TabViewModel
+        {
+            var vm = Xaml.GetViewModel<TViewModel>();
+            vm.Startup(NavigationParameter.NewPage(vm, this));
+            Start(vm);
+            return vm;
+        }
+
+        /// <summary>
+        /// 打开视图模型
+        /// </summary>
         /// <param name="id">唯一标识符</param>
         /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
         /// <returns>返回一个新的实例或已经打开的视图模型。</returns>
@@ -426,6 +440,27 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             var vm1 = Xaml.GetViewModel<TViewModel>();
             vm1.Startup(NavigationParameter.NewPage(vm, this));
+            Start(vm1);
+            return vm1;
+        }
+        
+        
+        /// <summary>
+        /// 打开视图模型
+        /// </summary>
+        /// <param name="id">唯一标识符</param>
+        /// <param name="parameter">参数</param>
+        /// <typeparam name="TViewModel">指定要打开的视图模型类型</typeparam>
+        /// <returns>返回一个新的实例或已经打开的视图模型。</returns>
+        public TViewModel New<TViewModel>(string id, Parameter parameter) where TViewModel : TabViewModel
+        {
+            if (DeterminedViewModelExists(id, out var vm))
+            {
+                return (TViewModel)vm;
+            }
+            
+            var vm1 = Xaml.GetViewModel<TViewModel>();
+            vm1.Startup(NavigationParameter.NewPage(id, this, parameter));
             Start(vm1);
             return vm1;
         }
@@ -497,6 +532,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     return;
                 }
 
+                OnCurrentViewModelChanged(_currentViewModel, value);
+                SetValue(ref _currentViewModel, value);
+
+
                 if (value.IsInitialized)
                 {
                     value.Resume();
@@ -506,8 +545,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     value.Start();
                 }
 
-                OnCurrentViewModelChanged(_currentViewModel, value);
-                SetValue(ref _currentViewModel, value);
             }
         }
         
