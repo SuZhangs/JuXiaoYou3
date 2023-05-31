@@ -345,6 +345,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var vm = Xaml.GetViewModel<TViewModel>();
             vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
+            Start(vm);
             return vm;
         }
         
@@ -359,6 +360,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var vm = Xaml.GetViewModel<TViewModel>();
             vm.Startup(NavigationParameter.NewPage(id, this, parameter));
+            Start(vm);
             return vm;
         }
         
@@ -409,6 +411,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
             vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
+            Start(vm);
             return vm;
         }
 
