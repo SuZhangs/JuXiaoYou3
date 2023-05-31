@@ -63,7 +63,7 @@
                                          Margin="4">
                     <studio:RelationshipCard.ContextMenu>
                         <f:ContextMenu>
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
                                         CommandParameter="{Binding}"/>
                         </f:ContextMenu>

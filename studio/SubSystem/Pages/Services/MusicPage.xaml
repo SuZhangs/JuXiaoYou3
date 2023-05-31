@@ -82,7 +82,7 @@
                     </i:Interaction.Behaviors>
                     <!--<Border.ContextMenu>
                         <f:ContextMenu>
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMusicFromPlaylistCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>

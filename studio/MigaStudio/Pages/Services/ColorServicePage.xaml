@@ -32,7 +32,7 @@
                                     CommandParameter="{Binding Selected,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Edit}"
                                     ShowText="True"/>
-                    <ftk:ToolButton Content="{f:Language global.Remove}“
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
                                     Command="{Binding RemoveMappingCommand}"
                                     CommandParameter="{Binding Selected,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Trash}"
@@ -78,7 +78,7 @@
                                     CommandParameter="{Binding SelectedKeyword,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Edit}"
                                     ShowText="True"/>
-                    <ftk:ToolButton Content="{f:Language global.Remove}“
+                    <ftk:ToolButton Content="{f:Language global.Remove}"
                                     Command="{Binding RemoveKeywordCommand}"
                                     CommandParameter="{Binding SelectedKeyword,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Trash}"

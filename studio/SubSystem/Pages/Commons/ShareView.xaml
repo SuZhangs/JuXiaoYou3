@@ -39,7 +39,7 @@
                             <f:MenuItem Header="下移"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
                                         CommandParameter="{Binding}" />
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
@@ -106,7 +106,7 @@
                             <f:MenuItem Header="下移"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
                                         CommandParameter="{Binding}" />
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
@@ -139,7 +139,7 @@
                             <f:MenuItem Header="下移"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
                                         CommandParameter="{Binding}" />
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
@@ -184,7 +184,7 @@
                             <f:MenuItem Header="下移"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
                                         CommandParameter="{Binding}" />
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
@@ -233,7 +233,7 @@
                             <f:MenuItem Header="下移"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownPresentationCommand}"
                                         CommandParameter="{Binding}" />
-                            <f:MenuItem Header="{f:Language global.Remove}“
+                            <f:MenuItem Header="{f:Language global.Remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemovePresentationCommand}"
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
