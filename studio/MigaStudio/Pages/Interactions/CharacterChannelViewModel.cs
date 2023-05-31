@@ -3,6 +3,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
 using Acorisoft.FutureGL.MigaStudio.Models.Socials;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
@@ -18,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private void Initialize()
         {
-            
+            Characters.AddMany(Channel.Members, true);
         }
 
         protected override void OnStart(Parameter parameter)

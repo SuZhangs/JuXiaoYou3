@@ -1,14 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaUtils;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
     public class ChannelUI : ObservableObject
     {
+        private readonly IReadOnlyDictionary<string, SocialCharacter> _characterMapper;
+        
         public ChannelUI(SocialChannel channel, Dictionary<string, SocialCharacter> characterMapper)
         {
-            ChannelSource = channel ?? throw new ArgumentNullException(nameof(channel));
+            _characterMapper = characterMapper ?? throw new ArgumentNullException(nameof(characterMapper));
+            ChannelSource    = channel ?? throw new ArgumentNullException(nameof(channel));
+            Members          = new ObservableCollection<CharacterUI>();
+            Members.AddMany(channel.Members
+                                   .Select(Transform)
+                                   .Where(x => x is not null));
+        }
+
+        private CharacterUI Transform(ChannelMember x)
+        {
+            return _characterMapper.TryGetValue(x.MemberID, out var character) ? new CharacterUI(x, character) : null;
         }
 
         public string Id => ChannelSource.Id;

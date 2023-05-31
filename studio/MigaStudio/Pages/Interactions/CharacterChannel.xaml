@@ -299,7 +299,7 @@
                                              PendingContent="你妈的"
                                              Layout="WechatGroup">
                     <studio:SocialSoftwareLayout.ChannelName>
-                        <MultiBinding>
+                        <MultiBinding StringFormat="{}{0} ({1})">
                             <Binding Path="ChannelName" Mode="OneWay" />
                             <Binding Path="Characters.Count" Mode="OneWay" />
                         </MultiBinding>
