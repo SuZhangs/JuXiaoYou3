@@ -258,15 +258,19 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Border x:Name="Canvas">
-                <studio:SocialSoftwareLayout ChannelSubtitle="19人在线"
-                                             PendingContent="你妈的"
-                                             Layout="WechatGroup">
+                <studio:SocialSoftwareLayout PendingContent="你妈的"
+                                             Layout="QQGroup">
                     <studio:SocialSoftwareLayout.ChannelName>
                         <MultiBinding StringFormat="{}{0} ({1})">
                             <Binding Path="ChannelName" Mode="OneWay" />
                             <Binding Path="Characters.Count" Mode="OneWay" />
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelName>
+                    <studio:SocialSoftwareLayout.ChannelSubtitle>
+                        <MultiBinding StringFormat="{}{0} 人在线">
+                            <Binding Path="Characters.Count" Mode="OneWay" />
+                        </MultiBinding>
+                    </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
                         <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}" />
                     </ScrollViewer>
