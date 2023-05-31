@@ -72,22 +72,11 @@
                             </Ellipse.Fill>
                         </Ellipse>
 
-                        <DockPanel>
-                            <f:CallToAction DockPanel.Dock="Right"
-                                            Content="切换"
-                                            CornerRadius="18"
-                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
-                                            CommandParameter="{Binding}"
-                                            Height="36"
-                                            Padding="32 8" />
-
-                            <TextBlock DockPanel.Dock="Left"
-                                       FontSize="18"
+                        <TextBlock FontSize="18"
                                        FontWeight="Heavy"
                                        Margin="16 0 0 0"
                                        Text="{Binding Name,Mode=OneWay}"
                                        VerticalAlignment="Center" />
-                        </DockPanel>
                     </DockPanel>
                 </Border>
             </DataTemplate>
@@ -108,10 +97,27 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel>
-                <ContentControl DockPanel.Dock="Top"
-                                Content="{Binding SelectedCharacter,Mode=OneWay}"
-                                ContentTemplate="{StaticResource Selected}"
-                                Margin="0 0 0 24"/>
+                <f:EmptyContentControl DockPanel.Dock="Top"
+                                       Height="128"
+                                       NotEmpty="{Binding HasSelectedCharacter,Mode=OneWay}">
+                    <f:EmptyContentControl.EmptyState>
+                        <Border Background="{f:Brush BackgroundLevel2}"
+                                CornerRadius="3"
+                                Padding="16"
+                                Margin="0 0 0 16">
+                            <f:CallToAction DockPanel.Dock="Right"
+                                            Content="选择"
+                                            CornerRadius="18"
+                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
+                                            CommandParameter="{Binding}"
+                                            Height="36"
+                                            Padding="32 8" />
+                        </Border>
+                    </f:EmptyContentControl.EmptyState>
+                    <ContentControl Content="{Binding SelectedCharacter,Mode=OneWay}"
+                                    ContentTemplate="{StaticResource Selected}"
+                                    Margin="0 0 0 24"/>
+                </f:EmptyContentControl>
 
 
                 <f:ForestIsland Header="所有角色"

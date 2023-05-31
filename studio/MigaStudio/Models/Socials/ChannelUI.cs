@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
                 RaiseUpdated();
             }
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="Avatar"/> 属性。
         /// </summary>

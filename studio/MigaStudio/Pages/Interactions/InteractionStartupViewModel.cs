@@ -2,22 +2,22 @@
 using System.Linq;
 using System.Windows.Forms.VisualStyles;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
-    public class InteractionStartupViewModel : TabViewModel
+    public class InteractionStartupViewModel : InteractionViewModelBase
     {
-        private readonly Dictionary<string, SocialCharacter> _characterMapper;
-
         private SocialCharacter _selectedCharacter;
         private bool            _hasCharacter;
         private bool            _hasChannel;
@@ -27,8 +27,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         public InteractionStartupViewModel()
         {
-            _characterMapper = new Dictionary<string, SocialCharacter>(StringComparer.OrdinalIgnoreCase);
-            
             DatabaseManager  = Studio.DatabaseManager();
             ImageEngine      = Studio.Engine<ImageEngine>();
             SocialEngine     = Studio.Engine<SocialEngine>();
@@ -48,20 +46,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             RemoveThreadCommand = AsyncCommand<ThreadUI>(RemoveThreadImpl);
 
             AddChannelCommand    = AsyncCommand<SocialCharacter>(AddChannelImpl);
-            EditChannelCommand   = AsyncCommand<ChannelUI>(EditChannelImpl);
+            EditChannelCommand   = Command<ChannelUI>(EditChannelImpl);
             RemoveChannelCommand = AsyncCommand<ChannelUI>(RemoveChannelImpl);
         }
 
         private void Synchronize()
         {
-            _characterMapper.Clear();
+            CharacterMapper.Clear();
 
             var iterator = SocialEngine.CharacterDB
                                        .FindAll();
 
             foreach (var character in iterator)
             {
-                _characterMapper.TryAdd(character.Id, character);
+                CharacterMapper.TryAdd(character.Id, character);
                 Characters.Add(character);
             }
         }
@@ -161,14 +159,106 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private async Task AddChannelImpl(SocialCharacter item)
         {
+            if (item is null)
+            {
+                return;
+            }
+
+            if (SelectedCharacter is null)
+            {
+                return;
+            }
+            
+            if (item.Id != SelectedCharacter.Id)
+            {
+                return;
+            }
+
+            var r = await StringViewModel.String("创建群聊");
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            var r1 = await SubSystem.MultiSelectExclude(DocumentType.Character, new HashSet<string>
+            {
+                SelectedCharacter.Id
+            });
+
+            if (!r1.IsFinished)
+            {
+                return;
+            }
+
+            var channel = new SocialChannel
+            {
+                Id       = ID.Get(),
+                Name     = r.Value,
+                Members  = new ObservableCollection<ChannelMember>(),
+                Messages = new ObservableCollection<SocialMessage>(),
+            };
+            
+            channel.Members
+                   .Add(new ChannelMember
+                   {
+                       MemberID = SelectedCharacter.Id,
+                       AliasMapping = new Dictionary<string, string>(),
+                       Name = SelectedCharacter.Name,
+                       Title = GetOwnerName(),
+                       Role = MemberRole.Owner
+                   });
+
+            var members = r1.Value
+                            .Select(x => new ChannelMember
+                            {
+                                MemberID     = x.Id,
+                                Name         = x.Name,
+                                AliasMapping = new Dictionary<string, string>(),
+                                Role         = MemberRole.Member,
+                            });
+
+            channel.Members.AddMany(members);
+            //
+            // 添加
+            SocialEngine.AddChannel(channel);
+            
+            //
+            // 添加
+            Channels.Add(new ChannelUI(channel));
         }
 
-        private async Task EditChannelImpl(ChannelUI item)
+        private void EditChannelImpl(ChannelUI item)
         {
+            if (item is null)
+            {
+                return;
+            }
+
+            Controller.Start<CharacterChannelViewModel>(new Parameter
+            {
+                Args = new[]
+                {
+                    item
+                }
+            });
         }
 
         private async Task RemoveChannelImpl(ChannelUI item)
         {
+            if (item is null)
+            {
+                return;
+            }
+            
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            Channels.Remove(item);
+            SocialEngine.RemoveChannel(item.ChannelSource);
+            UpdateState();
         }
 
         private async Task AddThreadImpl(SocialCharacter item)
@@ -196,7 +286,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             var id = pp.LastSocialCharacterID;
 
             if (!string.IsNullOrEmpty(id) && 
-                _characterMapper.TryGetValue(id, out var character))
+                CharacterMapper.TryGetValue(id, out var character))
             {
                 SelectedCharacter = character;
             }
@@ -323,7 +413,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public AsyncRelayCommand<SocialCharacter> AddChannelCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<ChannelUI> EditChannelCommand { get; }
+        public RelayCommand<ChannelUI> EditChannelCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ChannelUI> RemoveChannelCommand { get; }

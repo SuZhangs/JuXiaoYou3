@@ -38,6 +38,26 @@
 
             CharacterDB.Delete(character.Id);
         }
+
+        public void AddChannel(SocialChannel channel)
+        {
+            if (channel is null)
+            {
+                return;
+            }
+
+            ChannelDB.Upsert(channel);
+        }
+        
+        public void RemoveChannel(SocialChannel channel)
+        {
+            if (channel is null)
+            {
+                return;
+            }
+
+            ChannelDB.Delete(channel.Id);
+        }
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }

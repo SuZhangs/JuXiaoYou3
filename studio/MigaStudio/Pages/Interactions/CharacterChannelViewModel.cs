@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
-    public partial class CharacterChannelViewModel : TabViewModel
+    public partial class CharacterChannelViewModel : InteractionViewModelBase
     {
         private string _channelName;
         
