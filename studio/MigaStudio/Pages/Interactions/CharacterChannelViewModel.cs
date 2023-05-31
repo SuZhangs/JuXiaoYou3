@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
@@ -13,13 +14,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         
         public CharacterChannelViewModel()
         {
-            Characters = new ObservableCollection<CharacterUI>();
-            Messages   = new ObservableCollection<ChatMessageUI>();
+            LatestSpeakers = new ObservableCollection<CharacterUI>();
+            Characters     = new ObservableCollection<CharacterUI>();
+            Messages       = new ObservableCollection<ChatMessageUI>();
         }
 
         private void Initialize()
         {
             Characters.AddMany(Channel.Members, true);
+            AddLatestSpeaker(Characters.First());
         }
 
         protected override void OnStart(Parameter parameter)
@@ -66,6 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
         }
         
+        public ObservableCollection<CharacterUI> LatestSpeakers { get; }
         public ObservableCollection<CharacterUI> Characters { get; }
         public ObservableCollection<ChatMessageUI> Messages { get; }
     }

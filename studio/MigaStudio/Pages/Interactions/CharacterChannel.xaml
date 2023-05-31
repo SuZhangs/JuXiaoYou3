@@ -107,58 +107,21 @@
             <HeaderedContentControl Grid.Row="1"
                                     Header="常用发言"
                                     Margin="0 8">
-
-                <ItemsControl>
+                <ItemsControl ItemsSource="{Binding LatestSpeakers,Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <f:StretchPanel Margin="8">
-                        <Rectangle Height="64"
-                                   Width="64"
-                                   Fill="{StaticResource Avatar}" />
-                        <Border Background="{f:Brush HighlightB4}"
-                                CornerRadius="12"
-                                Margin="8 2"
-                                Height="24"
-                                Width="24"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom">
-                            <TextBlock FontSize="16"
-                                       Text="1"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center" />
-                        </Border>
-                    </f:StretchPanel>
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
-                    <Ellipse Margin="8"
-                             Height="64"
-                             Width="64"
-                             Fill="{StaticResource Avatar}" />
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
+                            <studio:Avatar Margin="0 4"
+                                           Image="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}"
+                                           AvatarName="{Binding Name,Mode=OneWay}">
+
+                            </studio:Avatar>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </HeaderedContentControl>
 
