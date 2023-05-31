@@ -34,5 +34,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Socials
             get => _name;
             set => SetValue(ref _name, value);
         }
+
+        public DocumentType Type => DocumentType.Character;
     }
 }

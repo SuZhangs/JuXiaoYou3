@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public static Task<Op<IEnumerable<DocumentCache>>> MultiSelect(IEnumerable<DocumentCache> documents)
         {
             return Xaml.Get<IDialogService>()
-                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<DocumentCache>, MultiDocumentPickerViewModel>(new Parameter
                        {
                            Args = new object[]
                            {
@@ -78,7 +78,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var documents = Studio.Engine<DocumentEngine>()
                                   .GetCaches(type);
             return Xaml.Get<IDialogService>()
-                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<DocumentCache>, MultiDocumentPickerViewModel>(new Parameter
                        {
                            Args = new object[]
                            {
@@ -106,7 +106,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var documents = Studio.Engine<DocumentEngine>()
                                   .GetCachesExclude(type, pool);
             return Xaml.Get<IDialogService>()
-                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<DocumentCache>, MultiDocumentPickerViewModel>(new Parameter
                        {
                            Args = new object[]
                            {
@@ -134,7 +134,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var documents = Studio.Engine<DocumentEngine>()
                                   .GetCaches(type, idPool);
             return Xaml.Get<IDialogService>()
-                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<DocumentCache>, MultiDocumentPickerViewModel>(new Parameter
                        {
                            Args = new object[]
                            {
@@ -148,7 +148,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var documents = Studio.Engine<DocumentEngine>()
                                   .GetCaches();
             return Xaml.Get<IDialogService>()
-                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<DocumentCache>, MultiDocumentPickerViewModel>(new Parameter
             {
                 Args = new object[]
                 {
@@ -219,6 +219,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<MusicPage, MusicViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
             Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
+            Xaml.InstallView<MultiDocumentPickerView, MultiDocumentPickerViewModel>();
 
             //
             // Compose

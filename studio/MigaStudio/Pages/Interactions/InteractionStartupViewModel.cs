@@ -83,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             HasCharacter                        = Characters.Count > 0;
             HasChannel                          = Channels.Count > 0;
             HasThread                           = Threads.Count > 0;
-            HasSelectedCharacterAndHasCharacter = HasSelectedCharacter && HasCharacter;
+            HasSelectedCharacterAndHasCharacter = HasSelectedCharacter || HasCharacter;
         }
 
         private async Task AddCharacterImpl()
@@ -187,7 +187,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             var pp = db.Get<PresetProperty>();
             var id = pp.LastSocialCharacterID;
 
-            if (_characterMapper.TryGetValue(id, out var character))
+            if (!string.IsNullOrEmpty(id) && 
+                _characterMapper.TryGetValue(id, out var character))
             {
                 SelectedCharacter = character;
             }

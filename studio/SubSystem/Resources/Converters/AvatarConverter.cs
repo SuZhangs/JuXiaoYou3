@@ -8,7 +8,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
-    public class AvatarConverter : IMultiValueConverter
+    public class AvatarConverter : IMultiValueConverter, IValueConverter
     {
         private static readonly ConcurrentDictionary<string, ImageSource> Pool = new ConcurrentDictionary<string, ImageSource>();
         private static          ImageEngine                               _engine;
@@ -59,6 +59,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is null)
+            {
+                return FallbackImage(DocumentType.Character);
+            }
+            
+            var avatar = value?.ToString();
+            
+            
+            if (string.IsNullOrEmpty(avatar))
+            {
+                return FallbackImage(DocumentType.Character);
+            }
+
+            return Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }

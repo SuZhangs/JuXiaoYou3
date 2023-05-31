@@ -8,18 +8,59 @@
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
+                     xmlns:Model="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
+                     xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:InteractionStartupViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <ResourceDictionary>
+            <thisProxy:InteractionStartupViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
             <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
+
+            <DataTemplate DataType="{x:Type Model:SocialCharacter}">
+                <Border Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="8"
+                        Margin="0 4"
+                        Padding="16 8">
+                    <DockPanel>
+                        <Ellipse Height="64"
+                                 Width="64">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <DockPanel>
+                            <f:CallToAction DockPanel.Dock="Right"
+                                            Content="切换"
+                                            CornerRadius="18"
+                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
+                                            CommandParameter="{Binding}"
+                                            Height="36"
+                                            Padding="32 8" />
+
+                            <TextBlock DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Margin="16 0 0 0"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center" />
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <!-- 根元素 -->
-    <f:EmptyContentControl Padding="16"
+    <f:EmptyContentControl Padding="8"
                            NotEmpty="{Binding HasSelectedCharacterAndHasCharacter,Mode=OneWay}">
+        <f:EmptyContentControl.EmptyState>
+            <studio:CollectionEmptyStateView Command="{Binding AddCharacterCommand}" />
+        </f:EmptyContentControl.EmptyState>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="384" />
@@ -28,52 +69,37 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel>
-                <f:EmptyContentControl DockPanel.Dock="Top"
-                                       NotEmpty="True"
-                                       Margin="0 0 0 16">
-                    <f:EmptyContentControl.EmptyState>
-                        <studio:CollectionEmptyStateView Command="{Binding AddCharacterCommand,Mode=OneWay}"/>
-                    </f:EmptyContentControl.EmptyState>
-                    <Border Background="{f:Brush BackgroundLevel2}"
-                            CornerRadius="3"
-                            Margin="0 0 0 8"
-                            Padding="16">
-                        <DockPanel>
-                            <Ellipse Height="64"
-                                     Width="64"
-                                     Fill="{StaticResource Avatar}" />
-                            <DockPanel Margin="16 0 0 0 "
-                                       VerticalAlignment="Center">
-                                <TextBlock DockPanel.Dock="Top"
-                                           FontSize="18"
-                                           FontWeight="Heavy"
-                                           Text="当前角色" />
-                                <TextBlock Foreground="{f:Brush ForegroundLevel2}"
-                                           Margin="0 8"
-                                           Text="角色名字" />
-                            </DockPanel>
-                        </DockPanel>
-                    </Border>
-                </f:EmptyContentControl>
-                <f:ForestIsland Header="所有角色">
-                    <f:EmptyContentControl NotEmpty="True">
-                        <DockPanel>
-                            <f:CallToAction DockPanel.Dock="Top"
-                                            Content="添加"
-                                            Command="{Binding AddCharacterCommand,Mode=OneWay}"
-                                            Icon="{StaticResource FeatherIcon.Plus}"
-                                            IconSize="13" />
-                            <ScrollViewer>
-                                <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}"/>
-                            </ScrollViewer>
-                        </DockPanel>
-                    </f:EmptyContentControl>
+                <ContentControl DockPanel.Dock="Top"
+                                Content="{Binding SelectedCharacter,Mode=OneWay}"
+                                Margin="0 0 0 24" />
+
+                <f:ForestIsland Header="所有角色"
+                                Padding="0 16 0 0">
+                    <f:ForestIsland.ToolBar>
+                        <f:CallToAction Content="添加"
+                                        CornerRadius="16"
+                                        Command="{Binding AddCharacterCommand,Mode=OneWay}"
+                                        HorizontalAlignment="Right"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        IconSize="13"
+                                        Padding="48 8" />
+                    </f:ForestIsland.ToolBar>
+                    <ScrollViewer Padding="0 0 8 0">
+                        <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}"
+                                      VirtualizingPanel.IsVirtualizing="True">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </f:ForestIsland>
             </DockPanel>
 
 
             <Border Grid.Column="1"
-                    Margin="16 0">
+                    Margin="32 0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="128" />
@@ -157,77 +183,81 @@
 
             <f:ForestIsland Grid.Column="2"
                             Header="所有群聊">
+                <f:ForestIsland.ToolBar>
+                    <f:CallToAction Content="添加"
+                                    CornerRadius="16"
+                                    Command="{Binding AddCharacterCommand,Mode=OneWay}"
+                                    HorizontalAlignment="Right"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    IconSize="13"
+                                    Padding="48 8" />
+                </f:ForestIsland.ToolBar>
                 <f:EmptyContentControl NotEmpty="True">
-                    <DockPanel>
-                        <f:CallToAction DockPanel.Dock="Top"
-                                        Content="添加"
-                                        Icon="{StaticResource FeatherIcon.Plus}"
-                                        IconSize="13" />
-                        <ScrollViewer>
-                            <ItemsControl>
 
-                                <Border Background="{f:BackgroundBrush}"
-                                        Margin="0 2"
-                                        Padding="8">
+                    <ScrollViewer>
+                        <ItemsControl>
+
+                            <Border Background="{f:BackgroundBrush}"
+                                    Margin="0 2"
+                                    Padding="8">
+                                <DockPanel>
+                                    <Ellipse Fill="{StaticResource Avatar}"
+                                             Height="48"
+                                             Width="48" />
+
                                     <DockPanel>
-                                        <Ellipse Fill="{StaticResource Avatar}"
-                                                 Height="48"
-                                                 Width="48" />
+                                        <f:CallToAction DockPanel.Dock="Right"
+                                                        Content="打开"
+                                                        CornerRadius="18"
+                                                        Height="36"
+                                                        Padding="36 4"
+                                                        Palette="HighlightPalette3" />
 
-                                        <DockPanel>
-                                            <f:CallToAction DockPanel.Dock="Right"
-                                                            Content="打开"
-                                                            CornerRadius="18"
-                                                            Height="36"
-                                                            Padding="36 4"
-                                                            Palette="HighlightPalette3" />
-
-                                            <DockPanel Margin="16 0 0 0"
-                                                       VerticalAlignment="Center">
-                                                <TextBlock DockPanel.Dock="Top"
-                                                           FontSize="16"
-                                                           FontWeight="Bold"
-                                                           Text="Character1" />
-                                                <TextBlock FontSize="12"
-                                                           Foreground="{f:Brush ForegroundLevel3}"
-                                                           Text="Character1" />
-                                            </DockPanel>
+                                        <DockPanel Margin="16 0 0 0"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       FontSize="16"
+                                                       FontWeight="Bold"
+                                                       Text="Character1" />
+                                            <TextBlock FontSize="12"
+                                                       Foreground="{f:Brush ForegroundLevel3}"
+                                                       Text="Character1" />
                                         </DockPanel>
                                     </DockPanel>
-                                </Border>
+                                </DockPanel>
+                            </Border>
 
-                                <Border Background="{f:BackgroundBrush}"
-                                        Margin="0 2"
-                                        Padding="8">
+                            <Border Background="{f:BackgroundBrush}"
+                                    Margin="0 2"
+                                    Padding="8">
+                                <DockPanel>
+                                    <Ellipse Fill="{StaticResource Avatar}"
+                                             Height="48"
+                                             Width="48" />
+
                                     <DockPanel>
-                                        <Ellipse Fill="{StaticResource Avatar}"
-                                                 Height="48"
-                                                 Width="48" />
+                                        <f:CallToAction DockPanel.Dock="Right"
+                                                        Content="打开"
+                                                        CornerRadius="18"
+                                                        Height="36"
+                                                        Padding="36 4"
+                                                        Palette="HighlightPalette3" />
 
-                                        <DockPanel>
-                                            <f:CallToAction DockPanel.Dock="Right"
-                                                            Content="打开"
-                                                            CornerRadius="18"
-                                                            Height="36"
-                                                            Padding="36 4"
-                                                            Palette="HighlightPalette3" />
-
-                                            <DockPanel Margin="16 0 0 0"
-                                                       VerticalAlignment="Center">
-                                                <TextBlock DockPanel.Dock="Top"
-                                                           FontSize="16"
-                                                           FontWeight="Bold"
-                                                           Text="Character1" />
-                                                <TextBlock FontSize="12"
-                                                           Foreground="{f:Brush ForegroundLevel3}"
-                                                           Text="Character1" />
-                                            </DockPanel>
+                                        <DockPanel Margin="16 0 0 0"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock DockPanel.Dock="Top"
+                                                       FontSize="16"
+                                                       FontWeight="Bold"
+                                                       Text="Character1" />
+                                            <TextBlock FontSize="12"
+                                                       Foreground="{f:Brush ForegroundLevel3}"
+                                                       Text="Character1" />
                                         </DockPanel>
                                     </DockPanel>
-                                </Border>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </DockPanel>
+                                </DockPanel>
+                            </Border>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </f:EmptyContentControl>
             </f:ForestIsland>
         </Grid>

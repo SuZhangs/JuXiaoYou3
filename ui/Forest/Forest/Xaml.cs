@@ -455,6 +455,7 @@ namespace Acorisoft.FutureGL.Forest
             bi.DecodePixelHeight = h;
             bi.StreamSource      = ms;
             bi.EndInit();
+            bi.Freeze();
             return bi;
         }
 
