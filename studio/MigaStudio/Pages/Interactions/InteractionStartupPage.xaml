@@ -25,6 +25,45 @@
                         CornerRadius="8"
                         Margin="0 4"
                         Padding="16 8">
+                    <Border.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCharacterCommand}"
+                                        CommandParameter="{Binding }"/>
+                        </f:ContextMenu>
+                    </Border.ContextMenu>
+                    <DockPanel>
+                        <Ellipse Height="64"
+                                 Width="64">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <DockPanel>
+                            <f:CallToAction DockPanel.Dock="Right"
+                                            Content="切换"
+                                            CornerRadius="18"
+                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
+                                            CommandParameter="{Binding}"
+                                            Height="36"
+                                            Padding="32 8" />
+
+                            <TextBlock DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Heavy"
+                                       Margin="16 0 0 0"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center" />
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Selected" DataType="{x:Type Model:SocialCharacter}">
+                <Border Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="3"
+                        Padding="16">
                     <DockPanel>
                         <Ellipse Height="64"
                                  Width="64">
@@ -71,12 +110,14 @@
             <DockPanel>
                 <ContentControl DockPanel.Dock="Top"
                                 Content="{Binding SelectedCharacter,Mode=OneWay}"
-                                Margin="0 0 0 24" />
+                                ContentTemplate="{StaticResource Selected}"
+                                Margin="0 0 0 24"/>
+
 
                 <f:ForestIsland Header="所有角色"
                                 Padding="0 16 0 0">
                     <f:ForestIsland.ToolBar>
-                        <f:CallToAction Content="添加"
+                        <f:CallToAction Content="{f:Language global.add}"
                                         CornerRadius="16"
                                         Command="{Binding AddCharacterCommand,Mode=OneWay}"
                                         HorizontalAlignment="Right"
@@ -184,7 +225,7 @@
             <f:ForestIsland Grid.Column="2"
                             Header="所有群聊">
                 <f:ForestIsland.ToolBar>
-                    <f:CallToAction Content="添加"
+                    <f:CallToAction Content="{f:Language global.add}"
                                     CornerRadius="16"
                                     Command="{Binding AddCharacterCommand,Mode=OneWay}"
                                     HorizontalAlignment="Right"

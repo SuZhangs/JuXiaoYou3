@@ -67,7 +67,7 @@
                             <f:MenuItem Header="编辑"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditRelCommand}"
                                         CommandParameter="{Binding}"/>
-                            <f:MenuItem Header="删除"
+                            <f:MenuItem Header="{f:Language global.Remove}“
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveRelCommand}"
                                         CommandParameter="{Binding}"/>
                         </f:ContextMenu>
@@ -254,7 +254,7 @@
                     <UniformGrid DockPanel.Dock="Bottom"
                                  Columns="3"
                                  Margin="0 4 0 0">
-                        <ftk:ToolButton Content="添加"
+                        <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding AddDocumentCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />

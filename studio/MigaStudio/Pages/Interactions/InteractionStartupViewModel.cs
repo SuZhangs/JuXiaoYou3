@@ -113,7 +113,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Characters.Add(character);
                 SocialEngine.AddCharacter(character);
             }
-            
+
+            SelectedCharacter = Characters.FirstOrDefault();
             UpdateState();
         }
 
@@ -142,7 +143,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }

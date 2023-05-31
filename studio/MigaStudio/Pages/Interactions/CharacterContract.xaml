@@ -180,7 +180,7 @@
                     <f:ForestIsland.ToolBar>
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal">
-                            <ftk:ToolButton Content="添加"
+                            <ftk:ToolButton Content="{f:Language global.add}"
                                             Icon="{StaticResource FeatherIcon.Plus}"
                                             ShowText="True"/>
                         </StackPanel>

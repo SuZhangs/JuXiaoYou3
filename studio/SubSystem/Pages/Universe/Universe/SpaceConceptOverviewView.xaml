@@ -29,7 +29,7 @@
                 <StackPanel HorizontalAlignment="Right"
                             Margin="0 0 0 4"
                             Orientation="Horizontal">
-                    <ftk:ToolButton Content="添加"
+                    <ftk:ToolButton Content="{f:Language global.add}"
                                 Command="{Binding AddMappingCommand}"
                                 Icon="{StaticResource FeatherIcon.Plus}"
                                 ShowText="True" />
@@ -38,7 +38,7 @@
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.Edit}"
                                 ShowText="True" />
-                    <ftk:ToolButton Content="删除"
+                    <ftk:ToolButton Content="{f:Language global.Remove}“
                                 Command="{Binding RemoveMappingCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
                                 Icon="{StaticResource FeatherIcon.Trash}"
