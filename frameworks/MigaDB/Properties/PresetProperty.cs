@@ -88,5 +88,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data
         public ObservableCollection<ModulePreset> ModulePresets { get; init; }
         public ObservableCollection<RelativePreset> RelativePresets { get; init; }
         public ObservableCollection<ObjectEntry> EntryPresets { get; init; }
+        public string LastSocialCharacterID { get; set; }
     }
 }

@@ -17,24 +17,20 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     public class LaunchViewController : LaunchViewControllerBase
     {
         private readonly AssemblyLoadContext _alc;
+
         public LaunchViewController()
         {
             _alc = AssemblyLoadContext.Default;
-            
+
             // 加载设置
-            Job("text.launch.loadSetting", _ =>
-            {
-                
-            });
-            
+            Job("text.launch.loadSetting", _ => { });
+
             // 检查更新
-            Job("text.launch.checkVersion", x =>
-            {
-            });
-            
+            Job("text.launch.checkVersion", x => { });
+
             // 加载插件
             Job("text.launch.loadModules", x => LoadModuleImpl((GlobalStudioContext)x));
-            
+
             // 打开数据库
             Job("text.launch.openDatabase", x => OpenDatabaseImpl((GlobalStudioContext)x));
         }
@@ -43,8 +39,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var pluginDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
             if (!System.IO
-                      .Directory
-                      .Exists(pluginDir))
+                       .Directory
+                       .Exists(pluginDir))
             {
                 System.IO
                       .Directory
@@ -53,10 +49,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             return pluginDir;
         }
-        
-        private  void LoadModuleImpl(GlobalStudioContext context)
+
+        private void LoadModuleImpl(GlobalStudioContext context)
         {
-            var pluginDir        = GetPluginDirectory();
+            var pluginDir = GetPluginDirectory();
             var maybePluginFiles = System.IO
                                          .Directory
                                          .GetFiles(pluginDir, "*.dll");
@@ -65,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 try
                 {
                     var assembly = _alc.LoadFromAssemblyPath(maybePluginFile);
-                    var ssmType      = Classes.FindInterfaceImplementation<ISubSystemModule>(assembly);
+                    var ssmType  = Classes.FindInterfaceImplementation<ISubSystemModule>(assembly);
 
                     if (ssmType is null)
                     {
@@ -75,28 +71,28 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     }
 
                     var ssm = (ISubSystemModule)Activator.CreateInstance(ssmType);
-                    
+
                     if (ssm is null)
                     {
                         Xaml.Get<ILogger>()
                             .Warn($"文件：{maybePluginFile}是可识别的插件，但无法创建插件实现！");
                         continue;
                     }
-                    
+
                     //
                     // 注册
                     ssm.Initialize(Language.Culture, Xaml.Container);
-                    
+
                     var nameItem = new NamedItem<string>
                     {
                         Name  = ssm.FriendlyName,
                         Value = ssm.ModuleId
                     };
-                    
+
                     //
                     // 添加控制器列表
                     context.ControllerList.Add(nameItem);
-                    
+
                     //
                     // 添加控制器映射
                     var map = (Dictionary<string, ITabViewController>)context.ControllerMaps;
@@ -110,7 +106,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         Xaml.Get<ILogger>()
                             .Warn($"无法加载插件，已有同名插件，插件ID:{ssm.ModuleId}, 插件名:{ssm.FriendlyName}, 路径:{maybePluginFile}！");
                     }
-                    
                 }
                 catch
                 {
@@ -131,10 +126,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var dr = Studio.DatabaseManager()
-                         .LoadAsync(setting.LastRepository)
-                         .GetAwaiter()
-                         .GetResult();
-            
+                           .LoadAsync(setting.LastRepository)
+                           .GetAwaiter()
+                           .GetResult();
+
             if (dr.IsFinished)
             {
                 context.IsDatabaseOpen = true;
@@ -159,16 +154,22 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void OnJobCompleted()
         {
-            var opening    = Context.IsDatabaseOpen;
+            var opening = Context.IsDatabaseOpen;
+
+#if DEBUG
+
+            var controller = opening ? Context.Controllers.First(x => x is InteractionController) : Context.Controllers.First(x => x is QuickStartController);
+#else
             var controller = opening ? 
                 Context.Controllers.First(x => x is TabShell) : 
                 Context.Controllers.First(x => x is QuickStartController) ;
-            
+#endif
+
             //
             //
             Context.SwitchController(controller);
         }
-        
+
         public GlobalStudioContext Context { get; private set; }
     }
 }

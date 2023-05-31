@@ -7,8 +7,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Socials
         public string MemberID { get; init; }
         public string Name { get; init; }
         public Dictionary<string, string> AliasMapping { get; init; }
-        public string Title { get; init; }
-        public MemberRole Role { get; init; }
+        public string Title { get; set; }
+        public MemberRole Role { get; set; }
     }
     
     public class SocialChannel : StorageUIObject

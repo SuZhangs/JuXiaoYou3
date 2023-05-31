@@ -18,6 +18,26 @@
             ThreadDB    = null;
             ChannelDB   = null;
         }
+
+        public void AddCharacter(SocialCharacter character)
+        {
+            if (character is null)
+            {
+                return;
+            }
+
+            CharacterDB.Upsert(character);
+        }
+        
+        public void RemoveCharacter(SocialCharacter character)
+        {
+            if (character is null)
+            {
+                return;
+            }
+
+            CharacterDB.Delete(character.Id);
+        }
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }

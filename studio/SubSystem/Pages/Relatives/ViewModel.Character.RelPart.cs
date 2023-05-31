@@ -73,8 +73,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                                 .ToHashSet();
             hash.Add(source.Id);
 
-            //var r = await DocumentPickerViewModel.Select(DocumentType.Character,hash);
-            var r = await DocumentPickerViewModel.Select(DocumentEngine.GetDocuments(DocumentType.Character)
+            //var r = await SubSystem.Select(DocumentType.Character,hash);
+            var r = await SubSystem.Select(DocumentEngine.GetDocuments(DocumentType.Character)
                                                                        .Where(x => !hash.Contains(x.Id)));
 
             if (!r.IsFinished)

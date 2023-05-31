@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Windows.Threading;
+using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
 
@@ -283,7 +284,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private async Task SelectImpl()
         {
-            var r = await DocumentPickerViewModel.Select(Studio.Engine<DocumentEngine>()
+            var r = await SubSystem.Select(Studio.Engine<DocumentEngine>()
                                                                .GetCaches());
 
             if (!r.IsFinished)

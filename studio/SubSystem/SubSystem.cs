@@ -27,11 +27,134 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 Source = new BitmapImage(new Uri(fileName, UriKind.Absolute))
             };
-            
+
             new ImageView
             {
                 DataContext = vm
             }.Show();
+        }
+
+
+        public static Task<Op<DocumentCache>> Select(IEnumerable<DocumentCache> documents)
+        {
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<IEnumerable<DocumentCache>>> MultiSelect(IEnumerable<DocumentCache> documents)
+        {
+            return Xaml.Get<IDialogService>()
+                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       {
+                           Args = new object[]
+                           {
+                               documents
+                           }
+                       });
+        }
+
+        public static Task<Op<DocumentCache>> Select(DocumentType type)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<IEnumerable<DocumentCache>>> MultiSelect(DocumentType type)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       {
+                           Args = new object[]
+                           {
+                               documents
+                           }
+                       });
+        }
+
+        public static Task<Op<DocumentCache>> SelectExclude(DocumentType type, ISet<string> pool)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCachesExclude(type, pool);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<IEnumerable<DocumentCache>>> MultiSelectExclude(DocumentType type, ISet<string> pool)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCachesExclude(type, pool);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       {
+                           Args = new object[]
+                           {
+                               documents
+                           }
+                       });
+        }
+
+        public static Task<Op<DocumentCache>> Select(DocumentType type, ISet<string> idPool)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type, idPool);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
+        }
+        
+        public static Task<Op<IEnumerable<DocumentCache>>> MultiSelect(DocumentType type, ISet<string> idPool)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches(type, idPool);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+                       {
+                           Args = new object[]
+                           {
+                               documents
+                           }
+                       });
+        }
+
+        public static Task<Op<IEnumerable<DocumentCache>>> MultiSelect()
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCaches();
+            return Xaml.Get<IDialogService>()
+                       .Dialog<IEnumerable<DocumentCache>, DocumentPickerViewModel>(new Parameter
+            {
+                Args = new object[]
+                {
+                    documents
+                }
+            });
         }
 
         /// <summary>
@@ -58,7 +181,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return Xaml.Get<IDialogService>()
                        .Dialog<TOption>(optionVM, parameter);
         }
-        
+
         /// <summary>
         /// 选择选项视图
         /// </summary>
@@ -96,7 +219,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<MusicPage, MusicViewModel>();
             Xaml.InstallView<OptionSelectionView, OptionSelectionViewModel>();
             Xaml.InstallView<DocumentPickerView, DocumentPickerViewModel>();
-            
+
             //
             // Compose
             Xaml.InstallView<ComposeEditorPage, ComposeEditorViewModel>();
@@ -146,7 +269,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<UniverseDocumentEditorPage, PlanetEditorViewModel>();
             Xaml.InstallView<UniverseDocumentEditorPage, MaterialEditorViewModel>();
             Xaml.InstallView<UniverseEditorPage, UniverseEditorViewModel>();
-            
+
             ServiceViewContainer.Initialize();
         }
     }
