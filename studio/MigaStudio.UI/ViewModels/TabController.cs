@@ -402,7 +402,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         /// <summary>
-        /// 打开视图模型
+        /// 打开视图模型（不适用ViewService）
         /// </summary>
         /// <param name="viewModel">指定要打开的视图模型类型</param>
         /// <param name="parameter">指定要打开的视图模型类型</param>
@@ -411,7 +411,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var vm = Xaml.GetViewModel<TabViewModel>(viewModel);
             vm.Startup(NavigationParameter.NewPage(vm, this, parameter));
-            Start(vm);
             return vm;
         }
 

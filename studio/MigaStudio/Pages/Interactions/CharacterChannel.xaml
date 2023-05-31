@@ -10,6 +10,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Socials"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:thisConverters2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterChannelViewModel}, IsDesignTimeCreatable=True}">
@@ -18,8 +19,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/SocialChatItems.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush"/>
-            <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility"/>
+            <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush" />
+            <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility" />
             <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
 
             <DataTemplate DataType="{x:Type thisModel:PlainTextMessageUI}">
@@ -31,6 +32,38 @@
                                          ShowTitle="{Binding Role,Mode=OneWay, Converter={StaticResource Role2Visibility}}"
                                          Content="{Binding Content,Mode=OneWay}"
                                          Layout="{Binding Style,Mode=OneWay}" />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
+                <Grid Margin="0 4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Height="48"
+                             Width="48">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <f:CallToAction Grid.Column="2"
+                                    Content="发言"
+                                    Margin="4 0"
+                                    Palette="Info" />
+                    <DockPanel Grid.Column="1"
+                               Margin="16 0 0 0 "
+                               VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top"
+                                   FontSize="18"
+                                   FontWeight="Heavy"
+                                   Text="{Binding Name,Mode=OneWay}" />
+                        <TextBlock Foreground="{f:Brush ForegroundLevel2}"
+                                   Margin="0 4"
+                                   Text="{Binding Title,Mode=OneWay}" />
+                    </DockPanel>
+                </Grid>
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -132,88 +165,9 @@
             <HeaderedContentControl Grid.Row="2"
                                     Header="其他联系人"
                                     Margin="0 8">
-                <f:EmptyStateItemsControl Grid.Row="2"
-                                          NotEmpty="True">
-                    <Grid Margin="0 4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Height="48"
-                                 Width="48"
-                                 Fill="{StaticResource Avatar}" />
-                        <f:CallToAction Grid.Column="2"
-                                        Content="发言"
-                                        Margin="4 0"
-                                        Palette="Info" />
-
-                        <DockPanel Grid.Column="1"
-                                   Margin="16 0 0 0 "
-                                   VerticalAlignment="Center">
-                            <TextBlock DockPanel.Dock="Top"
-                                       FontSize="18"
-                                       FontWeight="Heavy"
-                                       Text="发言者" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
-                                       Margin="0 4"
-                                       Text="群主" />
-                        </DockPanel>
-                    </Grid>
-                    <Grid Margin="0 4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Height="48"
-                                 Width="48"
-                                 Fill="{StaticResource Avatar}" />
-                        <f:CallToAction Grid.Column="2"
-                                        Content="发言"
-                                        Margin="4 0"
-                                        Palette="Info" />
-
-                        <DockPanel Grid.Column="1"
-                                   Margin="16 0 0 0 "
-                                   VerticalAlignment="Center">
-                            <TextBlock DockPanel.Dock="Top"
-                                       FontSize="18"
-                                       FontWeight="Heavy"
-                                       Text="发言者" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
-                                       Margin="0 4"
-                                       Text="管理" />
-                        </DockPanel>
-                    </Grid>
-                    <Grid Margin="0 4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Height="48"
-                                 Width="48"
-                                 Fill="{StaticResource Avatar}" />
-                        <f:CallToAction Grid.Column="2"
-                                        Content="发言"
-                                        Margin="4 0"
-                                        Palette="Info" />
-
-                        <DockPanel Grid.Column="1"
-                                   Margin="16 0 0 0 "
-                                   VerticalAlignment="Center">
-                            <TextBlock DockPanel.Dock="Top"
-                                       FontSize="18"
-                                       FontWeight="Heavy"
-                                       Text="发言者" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel2}"
-                                       Margin="0 4"
-                                       Text="群友" />
-                        </DockPanel>
-                    </Grid>
-                </f:EmptyStateItemsControl>
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}" />
+                </ScrollViewer>
             </HeaderedContentControl>
         </Grid>
 
@@ -247,8 +201,8 @@
                             </f:ContextMenu>
                         </ftk:DropDownButton.ContextMenu>
                     </ftk:DropDownButton>
-                    <f:SingleLine Watermark="群聊名称" 
-                                  Text="{Binding ChannelName,Mode=TwoWay}"/>
+                    <f:SingleLine Watermark="群聊名称"
+                                  Text="{Binding ChannelName,Mode=TwoWay}" />
                 </DockPanel>
 
                 <ScrollViewer Grid.Row="1"
@@ -341,14 +295,17 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Border x:Name="Canvas">
-                <studio:SocialSoftwareLayout ChannelName="{Binding ChannelName,Mode=OneWay}"
-                                             ChannelSubtitle="19人在线"
+                <studio:SocialSoftwareLayout ChannelSubtitle="19人在线"
                                              PendingContent="你妈的"
                                              Layout="WechatGroup">
+                    <studio:SocialSoftwareLayout.ChannelName>
+                        <MultiBinding>
+                            <Binding Path="ChannelName" Mode="OneWay" />
+                            <Binding Path="Characters.Count" Mode="OneWay" />
+                        </MultiBinding>
+                    </studio:SocialSoftwareLayout.ChannelName>
                     <ScrollViewer Padding="16">
-                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
-                            
-                        </ItemsControl>
+                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}" />
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>
             </Border>

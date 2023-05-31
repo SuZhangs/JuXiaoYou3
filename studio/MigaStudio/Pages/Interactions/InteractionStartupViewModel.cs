@@ -427,5 +427,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<ThreadUI> RemoveThreadCommand { get; }
+
+        public override bool Removable => false;
     }
 }

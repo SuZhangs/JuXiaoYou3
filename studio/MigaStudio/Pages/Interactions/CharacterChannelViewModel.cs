@@ -31,7 +31,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 throw new ArgumentNullException(nameof(Channel));
             }
             
-            ChannelName = Channel.Name;
+            //
+            // 设置标题
+            Title = 
+                ChannelName =
+                    Channel.Name;
+            
             Initialize();
             base.OnStart(parameter);
         }
@@ -59,7 +64,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Channel.Name = value;
             }
         }
-
+        
         public ObservableCollection<CharacterUI> Characters { get; }
         public ObservableCollection<ChatMessageUI> Messages { get; }
     }
