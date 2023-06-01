@@ -14,15 +14,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         {
             var hash = Characters.Select(x => x.Id)
                                  .ToHashSet();
-            var r = await SubSystem.MultiSelectExclude(DocumentType.Character, hash);
+            var r = await CharacterPickerViewModel.MultiSelectExclude(Characters, hash);
 
             if (!r.IsFinished)
             {
                 return;
             }
 
-            var i = r.Value
-                     .Select(GetCharacter);
+            var i = r.Value;
             
             foreach (var character in i)
             {
@@ -37,7 +36,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 var name  = GetCharacterName(ch, Channel.AliasMapping);
                 var x     = new CharacterUI(title, name, ch);
                 Characters.Add(x);
-                AddMessage(character, Channel, new MemberJoinMessage
+                AddMessage(
+                    character.Character,
+                    Channel,
+                    new MemberJoinMessage
                 {
                     Id       = ID.Get(),
                     MemberID = character.Id

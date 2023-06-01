@@ -8,17 +8,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public abstract class InteractionViewModelBase : TabViewModel
     {
-
-        public static SocialCharacter GetCharacter(DocumentCache x)
+        public static CharacterUI GetCharacter(SocialChannel channel, SocialCharacter character)
         {
-            return new SocialCharacter
-            {
-                Id     = x.Id,
-                Name   = x.Name,
-                Avatar = x.Avatar,
-                Intro  = x.Intro
-            };
+            var title = GetCharacterTitle(character.Id, channel.RoleMapping, channel.TitleMapping);
+            var name  = GetCharacterName(character, channel.AliasMapping);
+            return new CharacterUI(title, name, character);
         }
+        
+        public static CharacterUI GetCharacter(ChannelUI channel, SocialCharacter character)
+        {
+            var title = GetCharacterTitle(character.Id, channel.RoleMapping, channel.TitleMapping);
+            var name  = GetCharacterName(character, channel.AliasMapping);
+            return new CharacterUI(title, name, character);
+        }
+        
         public static string GetOwnerName() => Language.GetText("text.Interaction.Owner");
         public static string GetManagerName() => Language.GetText("text.Interaction.Manager");
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
+using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
