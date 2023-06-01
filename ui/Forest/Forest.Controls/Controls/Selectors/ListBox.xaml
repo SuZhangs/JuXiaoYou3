@@ -395,7 +395,7 @@
     </Style>
 
     
-    <Style TargetType="{x:Type s:AnchoredItemsControl}">
+    <Style x:Key="ClearStyle.AnchoredItemsControl" TargetType="{x:Type s:AnchoredItemsControl}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
@@ -419,7 +419,8 @@
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}">
-                        <ScrollViewer CanContentScroll="True" 
+                        <ScrollViewer x:Name="PART_ScrollViewer"
+                                      CanContentScroll="True" 
                                       Padding="{TemplateBinding Padding}"
                                       Focusable="False">
                             <ItemsPresenter />

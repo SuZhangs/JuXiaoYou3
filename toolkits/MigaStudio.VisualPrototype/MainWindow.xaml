@@ -144,14 +144,10 @@
                               VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                               VirtualizingPanel.ScrollUnit="Item"
                               VirtualizingPanel.VirtualizationMode="Recycling"
+                              AnchoredItem="{Binding Anchor,Mode=TwoWay}"
                               Margin="32"
-                              ItemsSource="{Binding Items,Mode=OneWay}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <VirtualizingStackPanel IsVirtualizing="True"
-                                        VirtualizationMode="Recycling" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
+                              ItemsSource="{Binding Items,Mode=OneWay}"
+                              Style="{StaticResource ClearStyle.AnchoredItemsControl}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Border Background="CornflowerBlue"

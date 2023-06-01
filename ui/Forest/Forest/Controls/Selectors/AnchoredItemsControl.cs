@@ -6,13 +6,6 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 {
     public abstract class AnchoredItemsControl : ForestItemsControlBase
     {
-        static AnchoredItemsControl()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AnchoredItemsControl),
-                new FrameworkPropertyMetadata(typeof(AnchoredItemsControl)));
-        }
-
-
         public class AnchoredItemInfo
         {
             public FrameworkElement Container { get; set; }
@@ -26,6 +19,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
 
         private bool _isAnchoredItemInfoGenerated;
 
+        public AnchoredItemsControl()
+        {
+            ItemContainerGenerator.StatusChanged += OnItemsChanged;
+        }
+
 
         public override void OnApplyTemplate()
         {
@@ -36,12 +34,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
                 return;
             }
 
-            ItemContainerGenerator.ItemsChanged += OnItemsChanged;
             ScrollViewer.ScrollChanged          += OnScrollChanged;
             base.OnApplyTemplate();
         }
 
-        private void OnItemsChanged(object sender, ItemsChangedEventArgs e)
+        private void OnItemsChanged(object sender, EventArgs e)
         {
             var i = ItemContainerGenerator.Items;
 
