@@ -1,10 +1,13 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
+﻿using System.Collections.ObjectModel;
+
+namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
-    public abstract class TimelineConcept : StorageUIObject
+    public class Terminology : StorageUIObject
     {
-        public const int    Seed = 100000;
-        private      string _name;
-        private      string _intro;
+        private string _name;
+        private string _intro;
+
+        public ObservableCollection<RichContentElement> ContentElements { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。

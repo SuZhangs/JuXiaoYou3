@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Exceptions;
 using Acorisoft.FutureGL.MigaDB.Core.Maintainers;
 using Acorisoft.FutureGL.MigaDB.Core.Migrations;
+using Acorisoft.FutureGL.MigaDB.Data.Concepts;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Data.Worldview;
 using DryIoc;
@@ -670,6 +671,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             return engine;
         }
+
+        public IEnumerable<IConceptProvider> GetConceptProviders() => _engines.OfType<IConceptProvider>();
 
         /// <summary>
         /// 获得所有数据引擎。

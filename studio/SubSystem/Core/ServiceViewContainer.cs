@@ -8,9 +8,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     public static partial class ServiceViewContainer
     {
         private static readonly IViewFactoryService _service = new ViewFactoryService();
-        
-        
-        
+
+
         public static void Initialize()
         {
             Manual<PartOfRel>(GetCharacterRel);
@@ -31,9 +30,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             MappingSubViewModel<BrowsableProperty, BrowsablePropertyViewModel, BrowsablePropertyView>();
             MappingSubViewModel<DeclarationConcept, DeclarationConceptViewModel, DeclarationConceptView>();
             MappingSubViewModel<RarityConcept, RarityConceptViewModel, RarityConceptView>();
+
+            Prepare<PartOfAlbum>();
+            Prepare<PartOfAppraise>();
+            Prepare<PartOfPrototype>(false);
+            Prepare<PartOfPlaylist>();
+            Prepare<PartOfRel>();
+            Prepare<PartOfSentence>();
+            Prepare<PartOfStickyNote>();
+            Prepare<PartOfSurvey>();
         }
-        
-        
+
+
         private static FrameworkElement GetCharacterRel(object owner, object instance)
         {
             var d = (DocumentEditorVMBase)owner;
@@ -47,12 +55,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             _service.Manual<TPart>(factory);
         }
-        
+
         public static FrameworkElement Build(object parent, object data)
         {
             return _service.GetView(parent, data);
         }
-        
+
         /// <summary>
         /// 映射数据部件
         /// </summary>
@@ -66,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             _service.Isolate<DocumentEditorBase, TPart, TView, TViewModel>();
         }
-        
+
         private static void MappingSubViewModel<TPart, TViewModel, TView>()
             where TPart : class
             where TViewModel : IsolatedViewModel<UniverseEditorViewModel, TPart>, new()

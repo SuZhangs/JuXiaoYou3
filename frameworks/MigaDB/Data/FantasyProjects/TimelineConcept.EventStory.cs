@@ -1,10 +1,17 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
-    public abstract class TimelineConcept : StorageUIObject
+    public abstract class EventElement : ObservableObject
     {
-        public const int    Seed = 100000;
-        private      string _name;
-        private      string _intro;
+        
+    }
+
+    /// <summary>
+    /// 事件描述
+    /// </summary>
+    public sealed class EventDescription : EventElement
+    {
+        private string _name;
+        private string _intro;
 
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。

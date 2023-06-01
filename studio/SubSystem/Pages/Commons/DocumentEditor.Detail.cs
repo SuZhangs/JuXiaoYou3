@@ -31,7 +31,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var hash = DetailParts.Select(x => x.GetType())
                                   .ToHashSet();
 
-            var iterator = CreateDetailPartList().Where(x => !hash.Contains(x.GetType()))
+            var iterator = CreateDetailPartList().Where(ServiceViewContainer.IsDetailPartPrepared)
+                                                 .Where(x => !hash.Contains(x.GetType()))
                                                  .ToArray();
 
             if (iterator.Length == 0)

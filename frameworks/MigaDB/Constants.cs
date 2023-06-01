@@ -19,6 +19,10 @@
         internal const int MaxVersion   = 512;
 
 
+        /*
+         * DataPart Fields
+         * 数据库引擎字段
+         */
         internal const string IdOfAlbumPart                  = "__Album";
         internal const string IdOfPlaylistPart               = "__Playlist";
         internal const string IdOfRelationship_CharacterPart = "__Relationship_Character";
@@ -48,8 +52,14 @@
 
         //
         // Universe
-        internal const string Name_Elemental      = "elemental";
-        internal const string Name_Technology     = "tech";
+        internal const string Name_Elemental   = "elemental";
+        internal const string Name_Technology  = "tech";
+        internal const string Name_Terminology = "terminology";
+        internal const string Name_Timeline    = "timeline";
+        internal const string Name_Appraise    = "appraise";
+        internal const string Name_Prototype   = "prototype";
+        internal const string Name_Preshape    = "preshape";
+        
         internal const string Name_MeasuringUnit  = "unit";
         internal const string Name_Faith          = "faith";
         internal const string Name_Market         = "market";
