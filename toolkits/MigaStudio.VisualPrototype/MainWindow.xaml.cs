@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Acorisoft.FutureGL.Forest.Controls.Selectors;
 using Acorisoft.FutureGL.Forest.ViewModels;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using ImTools;
@@ -40,7 +41,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
                                                                    Num     = x
                                                                }));
         }
+
+        private Number _anchor;
+
+        /// <summary>
+        /// 获取或设置 <see cref="Anchor"/> 属性。
+        /// </summary>
+        public Number Anchor
+        {
+            get => _anchor;
+            set
+            {
+                SetValue(ref _anchor, value);
+                Debug.WriteLine($"当前项: {value}");
+            }
+        }
+
         public ObservableCollection<Number> Items { get; }
+    }
+
+    public class NumberItemsControl : AnchoredItemsControl<Number, Number>
+    {
+        protected override bool IsAnchorNode(object dataContext)
+        {
+            return dataContext is Number n && n.Num % 10 == 0;
+        }
     }
 
     public class Container
@@ -66,14 +91,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
             _count      = 100;
             _dictionary = new ObservableCollection<Container>();
             InitializeComponent();
-            ItemsControl.ItemContainerGenerator
-                        .StatusChanged += ItemContainerGeneratorOnStatusChanged;
             
         }
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Viewer.ScrollChanged     += OnScrollChanged;
             base.OnLoaded(sender, e);
         }
 
@@ -118,6 +140,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
                 foreach (var container in _dictionary)
                 {
                     var f = (FrameworkElement)container.Owner;
+                    if (f is null)
+                    {
+                        continue;
+                    }
                     var p  = f.TranslatePoint(zero, ItemsControl);
                     container.Point        = p;
                     container.ControlBound = p.Y + f.DesiredSize.Height;
@@ -186,7 +212,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
 
         private void Window_AddNumber(object sender, MouseButtonEventArgs e)
         {
-            ItemsControl.Items
+            ((MainWindowViewModel)DataContext).Items
                         .Add(new Number
                         {
                             Num     = _count,

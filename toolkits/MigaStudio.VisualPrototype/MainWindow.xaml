@@ -32,8 +32,7 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <ScrollViewer x:Name="Viewer">
-        <!--<Grid.ColumnDefinitions>
+    <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="320" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -139,98 +138,107 @@
             <this:TimelineNode/>
             <this:TimelineNode/>
         </StackPanel>-->
-        <ItemsControl x:Name="ItemsControl"
-                      VirtualizingPanel.IsVirtualizing="True"
-                      VirtualizingPanel.CacheLength="1,2"
-                      VirtualizingPanel.CacheLengthUnit="Item"
-                      Margin="32"
-                      Width="720"
-                      ItemsSource="{Binding Items,Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
-            <!--                          CharacterAvatar="{StaticResource Avatar}" -->
-            <!--                          CharacterTitle="Test" -->
-            <!--                          CharacterTitleBrush="CornflowerBlue" -->
-            <!--                          Content="QuadraticBezierSegment" -->
-            <!--                          Layout="QQ"/> -->
-            <!-- -->
-            <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
-            <!--                          CharacterAvatar="{StaticResource Avatar}" -->
-            <!--                          CharacterTitle="Test" -->
-            <!--                          CharacterTitleBrush="CornflowerBlue" -->
-            <!--                          Content="QuadraticBezierSegment" -->
-            <!--                          IsSelf="True" -->
-            <!--                          Layout="QQ"/> -->
-            <!-- -->
-            <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
-            <!--                          CharacterAvatar="{StaticResource Avatar}" -->
-            <!--                          CharacterTitle="Test" -->
-            <!--                          CharacterTitleBrush="CornflowerBlue" -->
-            <!--                          Content="QuadraticBezierSegment" -->
-            <!--                          IsSelf="True" -->
-            <!--                          Layout="Wechat"/> -->
-            <!-- -->
-            <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
-            <!--                          CharacterAvatar="{StaticResource Avatar}" -->
-            <!--                          CharacterTitle="Test" -->
-            <!--                          CharacterTitleBrush="CornflowerBlue" -->
-            <!--                          Content="QuadraticBezierSegment" -->
-            <!--                          Layout="Wechat"/> -->
-            <!-- -->
-            <!-- ~1~ 时间戳 @1@ -->
-            <!-- <Border HorizontalAlignment="Center" -->
-            <!--         Margin="0 8" -->
-            <!--         Padding="8 4"> -->
-            <!--     <TextBlock Foreground="#777777" Text="昨天 晚上9:31"/> -->
-            <!-- </Border> -->
-            <!-- -->
-            <!-- ~1~ 撤回 @1@ -->
-            <!-- <Border HorizontalAlignment="Center" -->
-            <!--         Margin="0 8" -->
-            <!--         Padding="8 4"> -->
-            <!--     <DockPanel> -->
-            <!--         <TextBlock Foreground="#777777" Text="QuadraticBezierSegment"/> -->
-            <!--         <TextBlock Foreground="#777777" Text="撤回了一条消息，因为有错别字。"/> -->
-            <!--     </DockPanel> -->
-            <!-- </Border> -->
-            <!-- -->
-            <!-- ~1~ 加群 @1@ -->
-            <!-- <Border HorizontalAlignment="Center" -->
-            <!--         Margin="0 8" -->
-            <!--         Padding="8 4"> -->
-            <!--     <StackPanel Orientation="Horizontal"> -->
-            <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
-            <!--         <TextBlock Foreground="#777777" Margin="4 0 0 0" -->
-            <!--                    Text="加入了本群，"/> -->
-            <!--         <TextBlock Foreground="#3fa0ff" Text="点击欢迎"/> -->
-            <!--     </StackPanel> -->
-            <!-- </Border> -->
-            <!-- -->
-            <!-- ~1~ 踢群 @1@ -->
-            <!-- <Border HorizontalAlignment="Center" -->
-            <!--         Margin="0 8" -->
-            <!--         Padding="8 4"> -->
-            <!--     <StackPanel Orientation="Horizontal"> -->
-            <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
-            <!--         <TextBlock Foreground="#777777" Margin="4 0 0 0" -->
-            <!--                    Text="已被移除群聊"/> -->
-            <!--     </StackPanel> -->
-            <!-- </Border> -->
-            <!-- -->
-            <!-- ~1~ 禁言 @1@ -->
-            <!-- <Border HorizontalAlignment="Center" -->
-            <!--         Margin="0 8" -->
-            <!--         Padding="8 4"> -->
-            <!--     <StackPanel Orientation="Horizontal"> -->
-            <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
-            <!--         <TextBlock Foreground="#777777" Margin="4 0" -->
-            <!--                    Text="被你禁言了10分钟"/> -->
-            <!--     </StackPanel> -->
-            <!-- </Border> -->
-        </ItemsControl>
-    </ScrollViewer>
+    <local:NumberItemsControl x:Name="ItemsControl"
+                              ScrollViewer.CanContentScroll="True"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                              VirtualizingPanel.ScrollUnit="Item"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              Margin="32"
+                              ItemsSource="{Binding Items,Mode=OneWay}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <VirtualizingStackPanel IsVirtualizing="True"
+                                        VirtualizationMode="Recycling" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border Background="CornflowerBlue"
+                        Margin="4">
+                    <TextBlock Text="{Binding Content}" />
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
+        <!--                          CharacterAvatar="{StaticResource Avatar}" -->
+        <!--                          CharacterTitle="Test" -->
+        <!--                          CharacterTitleBrush="CornflowerBlue" -->
+        <!--                          Content="QuadraticBezierSegment" -->
+        <!--                          Layout="QQ"/> -->
+        <!-- -->
+        <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
+        <!--                          CharacterAvatar="{StaticResource Avatar}" -->
+        <!--                          CharacterTitle="Test" -->
+        <!--                          CharacterTitleBrush="CornflowerBlue" -->
+        <!--                          Content="QuadraticBezierSegment" -->
+        <!--                          IsSelf="True" -->
+        <!--                          Layout="QQ"/> -->
+        <!-- -->
+        <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
+        <!--                          CharacterAvatar="{StaticResource Avatar}" -->
+        <!--                          CharacterTitle="Test" -->
+        <!--                          CharacterTitleBrush="CornflowerBlue" -->
+        <!--                          Content="QuadraticBezierSegment" -->
+        <!--                          IsSelf="True" -->
+        <!--                          Layout="Wechat"/> -->
+        <!-- -->
+        <!-- <studio:PlainChatMessage CharacterName="QuadraticBezierSegment" -->
+        <!--                          CharacterAvatar="{StaticResource Avatar}" -->
+        <!--                          CharacterTitle="Test" -->
+        <!--                          CharacterTitleBrush="CornflowerBlue" -->
+        <!--                          Content="QuadraticBezierSegment" -->
+        <!--                          Layout="Wechat"/> -->
+        <!-- -->
+        <!-- ~1~ 时间戳 @1@ -->
+        <!-- <Border HorizontalAlignment="Center" -->
+        <!--         Margin="0 8" -->
+        <!--         Padding="8 4"> -->
+        <!--     <TextBlock Foreground="#777777" Text="昨天 晚上9:31"/> -->
+        <!-- </Border> -->
+        <!-- -->
+        <!-- ~1~ 撤回 @1@ -->
+        <!-- <Border HorizontalAlignment="Center" -->
+        <!--         Margin="0 8" -->
+        <!--         Padding="8 4"> -->
+        <!--     <DockPanel> -->
+        <!--         <TextBlock Foreground="#777777" Text="QuadraticBezierSegment"/> -->
+        <!--         <TextBlock Foreground="#777777" Text="撤回了一条消息，因为有错别字。"/> -->
+        <!--     </DockPanel> -->
+        <!-- </Border> -->
+        <!-- -->
+        <!-- ~1~ 加群 @1@ -->
+        <!-- <Border HorizontalAlignment="Center" -->
+        <!--         Margin="0 8" -->
+        <!--         Padding="8 4"> -->
+        <!--     <StackPanel Orientation="Horizontal"> -->
+        <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
+        <!--         <TextBlock Foreground="#777777" Margin="4 0 0 0" -->
+        <!--                    Text="加入了本群，"/> -->
+        <!--         <TextBlock Foreground="#3fa0ff" Text="点击欢迎"/> -->
+        <!--     </StackPanel> -->
+        <!-- </Border> -->
+        <!-- -->
+        <!-- ~1~ 踢群 @1@ -->
+        <!-- <Border HorizontalAlignment="Center" -->
+        <!--         Margin="0 8" -->
+        <!--         Padding="8 4"> -->
+        <!--     <StackPanel Orientation="Horizontal"> -->
+        <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
+        <!--         <TextBlock Foreground="#777777" Margin="4 0 0 0" -->
+        <!--                    Text="已被移除群聊"/> -->
+        <!--     </StackPanel> -->
+        <!-- </Border> -->
+        <!-- -->
+        <!-- ~1~ 禁言 @1@ -->
+        <!-- <Border HorizontalAlignment="Center" -->
+        <!--         Margin="0 8" -->
+        <!--         Padding="8 4"> -->
+        <!--     <StackPanel Orientation="Horizontal"> -->
+        <!--         <TextBlock Foreground="#3fa0ff" Text="QuadraticBezierSegment"/> -->
+        <!--         <TextBlock Foreground="#777777" Margin="4 0" -->
+        <!--                    Text="被你禁言了10分钟"/> -->
+        <!--     </StackPanel> -->
+        <!-- </Border> -->
+    </local:NumberItemsControl>
 </shell:ForestWindow>
