@@ -14,13 +14,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         private          CharacterUI                     _speaker;
         private          string                          _pendingContent;
         private readonly Dictionary<string, CharacterUI> _characterUIMapper;
-
+        private          string                          _messageContent;
         public CharacterChannelViewModel()
         {
-            _characterUIMapper = new Dictionary<string, CharacterUI>();
-            LatestSpeakers     = new ObservableCollection<CharacterUI>();
-            Characters         = new ObservableCollection<CharacterUI>();
-            MemberJoinCommand  = AsyncCommand(MemberJoinImpl);
+            _characterUIMapper         = new Dictionary<string, CharacterUI>();
+            LatestSpeakers             = new ObservableCollection<CharacterUI>();
+            Characters                 = new ObservableCollection<CharacterUI>();
+            MemberJoinCommand          = AsyncCommand(MemberJoinImpl);
+            AddPlainTextMessageCommand = Command<CharacterUI>(AddPlainTextMessageImpl);
         }
 
         private void Initialize()
@@ -33,7 +34,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 _characterUIMapper.Add(member.Id, member);
                 Characters.Add(member);
             }
-            AddLatestSpeaker(Characters.First());
+
+            //
+            // 添加消息
+            foreach (var message in Channel.ChannelSource
+                                           .Messages)
+            {
+                AddMessageFromInitialize(message);
+            }
+
+            Speaker = Characters.FirstOrDefault();
         }
 
         protected override void OnStart(Parameter parameter)
@@ -71,6 +81,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
 
         /// <summary>
+        /// 获取或设置 <see cref="MessageContent"/> 属性。
+        /// </summary>
+        public string MessageContent
+        {
+            get => _messageContent;
+            set => SetValue(ref _messageContent, value);
+        }
+        
+        /// <summary>
         /// 获取或设置 <see cref="Speaker"/> 属性。
         /// </summary>
         public CharacterUI Speaker
@@ -88,6 +107,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 //
                 // 添加最近的发言人
                 AddLatestSpeaker(_speaker);
+                Messages.OfType<UserMessageUI>()
+                        .ForEach(x =>
+                        {
+                            x.IsSelf = x.MemberID == value.Id;
+                        });
             }
         }
 

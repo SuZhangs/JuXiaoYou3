@@ -19,6 +19,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         
         public SocialChannel ChannelSource { get;  }
 
+        /// <summary>
+        /// 别名映射
+        /// </summary>
+        public Dictionary<string, string> AvatarMapping => ChannelSource.AliasMapping;
 
         /// <summary>
         /// 别名映射

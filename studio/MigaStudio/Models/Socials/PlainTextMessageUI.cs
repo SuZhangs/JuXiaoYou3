@@ -5,27 +5,28 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
-    public class PlainTextMessageUI : ChatMessageUI
+    public class PlainTextMessageUI : UserMessageUI
     {
-        private bool                      _isSelf;
-        private string                    _name;
-        private string                    _title;
-        private string                    _avatar;
+        private string     _name;
+        private string     _title;
+        private string     _avatar;
+        private MemberRole _role;
 
-        public PlainTextMessageUI(PlainTextMessage message, SocialCharacter character, ChannelUI channel)
+        public PlainTextMessageUI(SocialMessage message, string avatar, string title, string name, MemberRole role)
         {
-            Source  = message;
-            Avatar  = character.Avatar;
-            Title   = InteractionViewModelBase.GetCharacterTitle(Source.MemberID, channel.RoleMapping, channel.TitleMapping);
-            Name    = InteractionViewModelBase.GetCharacterName(character, channel.AliasMapping);
-            Role    = channel.RoleMapping.TryGetValue(Source.MemberID, out var r) ? r : MemberRole.Member;
-            Content = message.Content;
+            Source   = message;
+            Avatar   = avatar;
+            Title    = title;
+            Name     = name;
+            Role     = role;
+            Content  = message.Content;
+            MemberID = message.MemberID;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public PlainTextMessage Source { get; }
+        public SocialMessage Source { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="Avatar"/> 属性。
@@ -35,8 +36,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
             get => _avatar;
             set => SetValue(ref _avatar, value);
         }
-
-        private MemberRole _role;
 
         /// <summary>
         /// 获取或设置 <see cref="Role"/> 属性。
@@ -76,15 +75,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         {
             get => _name;
             set => SetValue(ref _name, value);
-        }
-
-        /// <summary>
-        /// 获取或设置 <see cref="IsSelf"/> 属性。
-        /// </summary>
-        public bool IsSelf
-        {
-            get => _isSelf;
-            set => SetValue(ref _isSelf, value);
         }
     }
 }

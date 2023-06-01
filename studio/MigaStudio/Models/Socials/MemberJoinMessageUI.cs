@@ -6,23 +6,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
     public class MemberJoinMessageUI : ChatMessageUI
     {
-        public MemberJoinMessageUI(MemberJoinMessage message, Dictionary<string, CharacterUI> characterMapper)
+        public MemberJoinMessageUI(SocialMessage message, string name)
         {
             MessageSource = message;
             MemberID      = message.MemberID;
-            Content = CharacterChannelViewModel.GetMemberJoinText(characterMapper[MemberID]);
+            Name    = name;
+            WelcomeContent = CharacterChannelViewModel.GetMemberJoinText();
         }
         
-        public MemberJoinMessage MessageSource { get; }
+        public SocialMessage MessageSource { get; }
         
         /// <summary>
         /// 发送者的ID
         /// </summary>
-        public string MemberID { get; init; }
+        public string MemberID { get; }
 
         /// <summary>
         /// 发送的内容。
         /// </summary>
-        public string Content { get; set; }
+        public string WelcomeContent { get; }
+        
+        public string Name { get; }
     }
 }

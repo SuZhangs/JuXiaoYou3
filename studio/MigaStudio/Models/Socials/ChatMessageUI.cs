@@ -16,4 +16,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
             set => SetValue(ref _style, value);
         }
     }
+
+    public abstract class UserMessageUI : ChatMessageUI
+    {
+        private bool _isSelf;
+
+        public string MemberID { get; protected set; }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="IsSelf"/> 属性。
+        /// </summary>
+        public bool IsSelf
+        {
+            get => _isSelf;
+            set => SetValue(ref _isSelf, value);
+        }
+    }
 }

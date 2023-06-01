@@ -33,6 +33,12 @@
                                          Content="{Binding Content,Mode=OneWay}"
                                          Layout="{Binding Style,Mode=OneWay}" />
             </DataTemplate>
+            
+            
+            <DataTemplate DataType="{x:Type thisModel:MemberJoinMessageUI}">
+                <studio:MemberJoinMessageControl CharacterName="{Binding Name,Mode=OneWay}"
+                                                 Content="{Binding WelcomeContent,Mode=OneWay}"/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
                 <Grid Background="{f:BackgroundBrush}"
@@ -132,9 +138,7 @@
                         <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
                             <studio:Avatar Margin="0 4"
                                            Image="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}"
-                                           AvatarName="{Binding Name,Mode=OneWay}">
-
-                            </studio:Avatar>
+                                           AvatarName="{Binding Name,Mode=OneWay}"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -258,10 +262,13 @@
                     <f:CallToAction DockPanel.Dock="Right"
                                     Content="发送"
                                     CornerRadius="8"
+                                    Command="{Binding AddPlainTextMessageCommand}"
+                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
                                     Margin="8 0 0 0"
                                     Padding="20 10"
                                     VerticalAlignment="Top" />
-                    <f:MultiLine Height="128" />
+                    <f:MultiLine Height="128" 
+                                 Text="{Binding MessageContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
             </Grid>
         </Border>

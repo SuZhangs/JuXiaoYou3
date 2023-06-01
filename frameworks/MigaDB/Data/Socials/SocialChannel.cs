@@ -8,6 +8,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Socials
         private string _avatar;
         private string _intro;
         
+        
+        /// <summary>
+        /// 别名映射
+        /// </summary>
+        public Dictionary<string, string> AvatarMapping { get; init; }
+        
         /// <summary>
         /// 别名映射
         /// </summary>

@@ -196,24 +196,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             var channel = new SocialChannel
             {
-                Id           = ID.Get(),
-                Name         = r.Value,
-                Members      = new ObservableCollection<string>(),
-                Messages     = new ObservableCollection<SocialMessage>(),
-                AliasMapping = new Dictionary<string, string>(),
-                TitleMapping = new Dictionary<string, string>(),
-                RoleMapping  = new Dictionary<string, MemberRole>()
+                Id            = ID.Get(),
+                Name          = r.Value,
+                Members       = new ObservableCollection<string>(),
+                Messages      = new ObservableCollection<SocialMessage>(),
+                AvatarMapping = new Dictionary<string, string>(),
+                AliasMapping  = new Dictionary<string, string>(),
+                TitleMapping  = new Dictionary<string, string>(),
+                RoleMapping   = new Dictionary<string, MemberRole>(),
             };
 
             var owner = SelectedCharacter.Id;
 
             channel.Members
                    .Add(owner);
-            
+
             channel.RoleMapping
                    .Add(owner, MemberRole.Owner);
-            
-            
+
+
             channel.TitleMapping
                    .Add(owner, GetOwnerName());
 
@@ -221,7 +222,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 channel.Members
                        .Add(character.Id);
-            
+
                 channel.RoleMapping
                        .Add(character.Id, MemberRole.Member);
             }
@@ -242,7 +243,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            Controller.Start<CharacterChannelViewModel>(item.Id,new Parameter
+            Controller.Start<CharacterChannelViewModel>(item.Id, new Parameter
             {
                 Args = new[]
                 {

@@ -34,18 +34,45 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 var title = GetCharacterTitle(member, Channel.RoleMapping, Channel.TitleMapping);
                 var name  = GetCharacterName(character, Channel.AliasMapping);
                 var x     = new CharacterUI(title, name, character);
-                Characters.Add(x);
-                AddMessage(
-                    character,
-                    Channel,
-                    new MemberJoinMessage
+                
+                //
+                // 添加角色
+                AddCharacter(x);
+                
+                //
+                // 添加角色
+                AddMessageFromOperation(
+                    new SocialMessage
+                    {
+                        Id       = ID.Get(),
+                        MemberID = character.Id,
+                        Type = MessageType.MemberJoin
+                    });
+            }
+        }
+
+        private void AddPlainTextMessageImpl(CharacterUI character)
+        {
+            if (character is null)
+            {
+                return;
+            }
+            
+            //
+            // 添加角色
+            AddMessageFromOperation(
+                new SocialMessage
                 {
                     Id       = ID.Get(),
-                    MemberID = character.Id
+                    MemberID = character.Id,
+                    Content = MessageContent,
+                    Type = MessageType.PlainText
                 });
-            }
+
+            MessageContent = null;
         }
         
         public AsyncRelayCommand MemberJoinCommand { get; }
+        public RelayCommand<CharacterUI> AddPlainTextMessageCommand { get; }
     }
 }

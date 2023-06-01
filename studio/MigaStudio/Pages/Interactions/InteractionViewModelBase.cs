@@ -8,23 +8,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public abstract class InteractionViewModelBase : TabViewModel
     {
-        public static CharacterUI GetCharacter(SocialChannel channel, SocialCharacter character)
-        {
-            var title = GetCharacterTitle(character.Id, channel.RoleMapping, channel.TitleMapping);
-            var name  = GetCharacterName(character, channel.AliasMapping);
-            return new CharacterUI(title, name, character);
-        }
-        
-        public static CharacterUI GetCharacter(ChannelUI channel, SocialCharacter character)
-        {
-            var title = GetCharacterTitle(character.Id, channel.RoleMapping, channel.TitleMapping);
-            var name  = GetCharacterName(character, channel.AliasMapping);
-            return new CharacterUI(title, name, character);
-        }
-        
+
         public static string GetOwnerName() => Language.GetText("text.Interaction.Owner");
         public static string GetManagerName() => Language.GetText("text.Interaction.Manager");
 
+        public static string GetCharacterTitle(string id, MemberRole role,
+            IReadOnlyDictionary<string, string> titleMapping)
+        {
+            if (role == MemberRole.Manager)
+            {
+                return GetManagerName();
+            }
+
+            if (role == MemberRole.Owner)
+            {
+                return GetOwnerName();
+            }
+
+            if (role == MemberRole.Special)
+            {
+                return titleMapping.TryGetValue(id, out var title) ? title : string.Empty;
+            }
+
+            return string.Empty;
+        }
         public static string GetCharacterTitle(string id, 
             IReadOnlyDictionary<string, MemberRole> roleMapping,
             IReadOnlyDictionary<string, string> titleMapping)
@@ -48,6 +55,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             return string.Empty;
+        }
+        
+        public static MemberRole GetCharacterRole(string id, 
+            IReadOnlyDictionary<string, MemberRole> roleMapping)
+        {
+            return roleMapping.TryGetValue(id, out var role) ? role : MemberRole.Member;
         }
         
 
