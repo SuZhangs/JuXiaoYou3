@@ -215,37 +215,7 @@
                 <ScrollViewer Margin="0 16 0 0">
                     <Border x:Name="Canvas"
                             Background="{f:BackgroundBrush}">
-                        <Grid>
-                            <Grid.Resources>
-                                <ResourceDictionary>
-                                    <ResourceDictionary.MergedDictionaries>
-                                        <ResourceDictionary Source="pack://application:,,,/SubSystem;component/Resources/DataTemplates/ModuleBlockDataTemplates.xaml" />
-                                    </ResourceDictionary.MergedDictionaries>
-                                </ResourceDictionary>
-                            </Grid.Resources>
-                            <StackPanel>
-                                <TextBlock FontSize="32"
-                                           Text="{Binding PresentationName,Mode=OneWay}" />
-                                <TextBlock FontSize="14"
-                                           Foreground="{f:Brush ForegroundLevel2}"
-                                           Margin="0 4"
-                                           Text="{Binding PresentationAuthorList,Mode=OneWay}" />
-                                <TextBlock FontSize="14"
-                                           Foreground="{f:Brush ForegroundLevel2}"
-                                           Margin="0 4"
-                                           Text="{Binding PresentationContractList,Mode=OneWay}" />
-                                <TextBlock FontSize="14"
-                                           Foreground="{f:Brush ForegroundLevel2}"
-                                           MaxHeight="96"
-                                           Margin="0 4"
-                                           TextTrimming="CharacterEllipsis"
-                                           Text="{Binding PresentationIntro,Mode=OneWay}" />
-
-                                <ItemsControl Margin="0 12"
-                                              ItemsSource="{Binding Presentations,Mode=OneWay,IsAsync=True}" />
-                            </StackPanel>
-                            <Border Background="Transparent" />
-                        </Grid>
+                        <thisVM:PresentationView/>
                     </Border>
                 </ScrollViewer>
             </f:ForestSection>

@@ -400,10 +400,8 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -421,7 +419,6 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}">
                         <ScrollViewer x:Name="PART_ScrollViewer"
-                                      CanContentScroll="True" 
                                       Padding="{TemplateBinding Padding}"
                                       Focusable="False">
                             <ItemsPresenter />

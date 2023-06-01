@@ -134,6 +134,11 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
                 _isAnchoredItemInfoGenerated = true;
             }
 
+            if(ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+            {
+                return;
+            }
+
             var anchoredItem = FindOutNearedAnchor(_anchoredItemInfos, e.VerticalOffset, e.ViewportHeight);
 
             if (anchoredItem is null)
