@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents.Share;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
@@ -11,11 +12,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
         public CharacterDocumentViewModel() : base()
         {
-            SetAsMainPictureOfSquareCommand = AsyncCommand(SetAsMainPictureOfSquareImpl);
+            SetAsMainPictureOfSquareCommand     = AsyncCommand(SetAsMainPictureOfSquareImpl);
             SetAsMainPictureOfHorizontalCommand = AsyncCommand(SetAsMainPictureOfHorizontalImpl);
-            SetAsMainPictureOfVerticalCommand = AsyncCommand(SetAsMainPictureOfVerticalImpl);
+            SetAsMainPictureOfVerticalCommand   = AsyncCommand(SetAsMainPictureOfVerticalImpl);
         }
-        
+
         // TODO: 人物关系中的血缘关系
         protected override void CreateSubViews(ICollection<SubViewBase> collection)
         {
@@ -33,13 +34,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             return new object[]
             {
-                new PartOfAlbum { Items      = new List<Album>() },
-                new PartOfPlaylist { Items   = new List<Music>() },
-                new PartOfAppraise { Items   = new List<Appraise>() },
+                new PartOfAlbum { Items    = new List<Album>() },
+                new PartOfPlaylist { Items = new List<Music>() },
+                new PartOfAppraise(),
                 new PartOfStickyNote { Items = new List<StickyNote>() },
-                new PartOfPrototype { Items  = new List<Prototype>() },
-                new PartOfSentence { Items   = new List<Sentence>() },
-                new PartOfSurvey { Items     = new List<SurveySet>() },
+                new PartOfPrototype(),
+                new PartOfSentence { Items = new List<Sentence>() },
+                new PartOfSurvey { Items   = new List<SurveySet>() },
                 new PartOfRel(),
             };
         }
@@ -54,8 +55,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         protected override void IsDataPartExistence(Document document)
         {
         }
-        
-        
+
+
         private void ResumeDetailPart()
         {
             if (DetailPart is null)
@@ -76,7 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-            
+
             var part = DetailParts.OfType<PartOfAlbum>()
                                   .FirstOrDefault();
 
@@ -89,19 +90,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-            
+
             part.Items.Add(album);
             ResumeDetailPart();
-
         }
-        
+
         private void RemoveAlbumFromDetailPart(string album)
         {
             if (album is null)
             {
                 return;
             }
-            
+
             var part = DetailParts.OfType<PartOfAlbum>()
                                   .FirstOrDefault();
 
@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-            
+
             part.Items
                 .Remove(item);
             ResumeDetailPart();
@@ -144,7 +144,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 MainPictureOfVertical = r.Value;
             }
         }
-        
+
         private async Task SetAsMainPictureOfHorizontalImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
@@ -160,7 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 MainPictureOfHorizontal = r.Value;
             }
         }
-        
+
         private async Task SetAsMainPictureOfSquareImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);

@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
+﻿using Acorisoft.FutureGL.MigaDB.Documents;
+
+namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
     public class ProjectEngine : KnowledgeEngine
     {
@@ -28,6 +30,41 @@
             Terminologies = null;
         }
         
+        public void AddAppraise(Appraise item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Appraises.Upsert(item);
+        }
+
+        public void RemoveAppraise(Appraise item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Appraises.Delete(item.Id);
+        }
+
+        public IEnumerable<Appraise> GetAppraises(DocumentCache source)
+        {
+            if (source is null)
+            {
+                return GetAppraises();
+            }
+
+            return Appraises
+                   .Include(y => y.Source)
+                   .Include(a => a.Target)
+                   .Find(x => x.Source.Id == source.Id);
+        }
+
+        public IEnumerable<Appraise> GetAppraises() => Appraises.FindAll();
+
         /// <summary>
         /// 时间线
         /// </summary>

@@ -9,13 +9,13 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class AlbumPartViewModel : DetailViewModel<PartOfAlbum, Album>
+    public class AlbumPartViewModel : AsyncDetailViewModel<PartOfAlbum, Album>
     {
         public AlbumPartViewModel()
         {
             Collection = new ObservableCollection<Album>();
             ImageEngine = Studio.DatabaseManager()
-                              .GetEngine<ImageEngine>();
+                                .GetEngine<ImageEngine>();
             OpenCommand = Command<Album>(OpenAlbumImpl, HasItem);
         }
 
@@ -41,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     {
                         try
                         {
-                            var r         = await ImageUtilities.Thumbnail(ImageEngine, fileName);
+                            var r = await ImageUtilities.Thumbnail(ImageEngine, fileName);
                             if (r.IsFinished)
                             {
                                 var thumbnail = r.Value;
@@ -71,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -128,11 +128,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             collection.AddMany(Detail.Items, true);
-            
+
             var music = Owner.GetImageBlocks()
                              .Select(x => new Album
                              {
-                                 Id   = x.Id,
+                                 Id     = x.Id,
                                  Source = x.TargetSource,
                              });
             collection.AddMany(music);

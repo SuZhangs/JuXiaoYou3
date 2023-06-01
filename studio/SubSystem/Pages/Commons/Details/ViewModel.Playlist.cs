@@ -10,7 +10,7 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class PlaylistPartViewModel : DetailViewModel<PartOfPlaylist, Music>
+    public class PlaylistPartViewModel : AsyncDetailViewModel<PartOfPlaylist, Music>
     {
         private static readonly DrawingImage MusicDrawing;
 

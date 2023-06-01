@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Models;assembly=MigaDB.Share"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
@@ -20,30 +20,30 @@
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
             <ftk:ToolButton Content="{f:Language global.Add}"
-                            Command="{Binding AddAlbumCommand}"
+                            Command="{Binding AddCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
 
             <ftk:ToolButton Content="{f:Language global.Remove}"
-                            Command="{Binding RemoveAlbumCommand}"
+                            Command="{Binding RemoveCommand}"
                             CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
 
             <ftk:ToolButton Content="{f:Language global.Up}"
-                            Command="{Binding ShiftUpAlbumCommand}"
+                            Command="{Binding ShiftUpCommand}"
                             CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
 
             <ftk:ToolButton Content="{f:Language global.Down}"
-                            Command="{Binding ShiftDownAlbumCommand}"
+                            Command="{Binding ShiftDownCommand}"
                             CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
-            <ftk:ToolButton Content="{f:Language global.Presentation}"
-                            Command="{Binding OpenCommand}"
+            <ftk:ToolButton Content="{f:Language global.edit}"
+                            Command="{Binding EditCommand}"
                             CommandParameter="{Binding}"
                             Icon="{StaticResource FeatherIcon.Upload}"
                             ShowText="True" />
@@ -52,9 +52,9 @@
         <DockPanel>
             <f:ListBox DockPanel.Dock="Right"
                        ItemsSource="{Binding Collection,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
+                       SelectedItem="{Binding Selected,Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Album}">
+                    <DataTemplate DataType="{x:Type m:Appraise}">
                         <TextBlock Margin="8"
                                    Text="{Binding Source}"
                                    TextTrimming="CharacterEllipsis"
@@ -65,9 +65,9 @@
 
             <ScrollViewer Padding="12">
                 <Viewbox>
-                    <ContentControl Content="{Binding SelectedAlbum,Mode=OneWay}">
+                    <ContentControl Content="{Binding Selected,Mode=OneWay}">
                         <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Album}">
+                            <DataTemplate DataType="{x:Type m:Appraise}">
                                 <Image Stretch="None"
                                        Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
                             </DataTemplate>
