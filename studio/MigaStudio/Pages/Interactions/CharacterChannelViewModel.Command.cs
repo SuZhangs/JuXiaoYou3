@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         {
             var hash = Characters.Select(x => x.Id)
                                  .ToHashSet();
-            var r = await CharacterPickerViewModel.MultiSelectExclude(Characters, hash);
+            var r = await CharacterPickerViewModel.MultiSelectExclude(CharacterMapper.Values, hash);
 
             if (!r.IsFinished)
             {
@@ -31,13 +31,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                        .Members
                        .Add(member);
 
-                var ch    = CharacterMapper[member];
                 var title = GetCharacterTitle(member, Channel.RoleMapping, Channel.TitleMapping);
-                var name  = GetCharacterName(ch, Channel.AliasMapping);
-                var x     = new CharacterUI(title, name, ch);
+                var name  = GetCharacterName(character, Channel.AliasMapping);
+                var x     = new CharacterUI(title, name, character);
                 Characters.Add(x);
                 AddMessage(
-                    character.Character,
+                    character,
                     Channel,
                     new MemberJoinMessage
                 {

@@ -108,6 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             foreach (var character in values)
             {
+                CharacterMapper.TryAdd(character.Id, character);
                 Characters.Add(character);
                 SocialEngine.AddCharacter(character);
             }
@@ -153,6 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 SelectedCharacter = null;
             }
 
+            CharacterMapper.Remove(item.Id);
             Characters.Remove(item);
             SocialEngine.RemoveCharacter(item);
             UpdateState();

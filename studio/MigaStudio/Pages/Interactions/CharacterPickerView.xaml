@@ -4,7 +4,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
-                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Socials"
+                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
@@ -14,7 +14,7 @@
                      Height="640"
                      Width="768">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type doc:CharacterUI}">
+        <DataTemplate DataType="{x:Type doc:SocialCharacter}">
             <DockPanel Margin="4">
                 <Border DockPanel.Dock="Top"
                         CornerRadius="64"

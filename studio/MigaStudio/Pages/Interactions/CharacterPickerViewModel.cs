@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Controls;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Models.Socials;
@@ -11,12 +12,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public class CharacterPickerViewModel : ExplicitDialogVM
     {
-        private DocumentCache _selected;
-        public static Task<Op<IEnumerable<CharacterUI>>> MultiSelectExclude(IEnumerable<CharacterUI> characters, ISet<string> pool)
+        private SocialCharacter _selected;
+        
+        public static Task<Op<IEnumerable<SocialCharacter>>> MultiSelectExclude(IEnumerable<SocialCharacter> characters, ISet<string> pool)
         {
             var documents = characters.Where(x => !pool.Contains(x.Id));
             return DialogService()
-                       .Dialog<IEnumerable<CharacterUI>, CharacterPickerViewModel>(new Parameter
+                       .Dialog<IEnumerable<SocialCharacter>, CharacterPickerViewModel>(new Parameter
                        {
                            Args = new object[]
                            {
@@ -27,7 +29,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         public CharacterPickerViewModel()
         {
-            Documents = new ObservableCollection<CharacterUI>();
+            Documents = new ObservableCollection<SocialCharacter>();
         }
 
         protected override void OnStart(RoutingEventArgs parameter)
@@ -35,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             var p = parameter.Parameter;
             var a = p.Args;
             
-            if (a[0] is IEnumerable<CharacterUI> enumerable)
+            if (a[0] is IEnumerable<SocialCharacter> enumerable)
             {
                 Documents.AddMany(enumerable, true);
             }
@@ -51,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             Result = TargetElement.SelectedItems
-                                  .Cast<CharacterUI>()
+                                  .Cast<SocialCharacter>()
                                   .ToArray();
         }
 
@@ -61,13 +63,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         /// <summary>
         /// 获取或设置 <see cref="Selected"/> 属性。
         /// </summary>
-        public DocumentCache Selected
+        public SocialCharacter Selected
         {
             get => _selected;
             set => SetValue(ref _selected, value);
         }
         
-        public ObservableCollection<CharacterUI> Documents { get; }
+        public ObservableCollection<SocialCharacter> Documents { get; }
         public ListBox TargetElement { get; set; }
     }
 }
