@@ -2,20 +2,26 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Socials
 {
-    public class ChannelMember
-    {
-        public string MemberID { get; init; }
-        public string Name { get; init; }
-        public Dictionary<string, string> AliasMapping { get; init; }
-        public string Title { get; set; }
-        public MemberRole Role { get; set; }
-    }
-    
     public class SocialChannel : StorageUIObject
     {
         private string _name;
         private string _avatar;
         private string _intro;
+        
+        /// <summary>
+        /// 别名映射
+        /// </summary>
+        public Dictionary<string, string> AliasMapping { get; init; }
+        
+        /// <summary>
+        /// 头衔映射
+        /// </summary>
+        public Dictionary<string, string> TitleMapping { get; init; }
+        
+        /// <summary>
+        /// 身份映射
+        /// </summary>
+        public Dictionary<string, MemberRole> RoleMapping { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。
@@ -47,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Socials
         /// <summary>
         /// 所有成员
         /// </summary>
-        public ObservableCollection<ChannelMember> Members { get; init; }
+        public ObservableCollection<string> Members { get; init; }
         
         /// <summary>
         /// 所有消息

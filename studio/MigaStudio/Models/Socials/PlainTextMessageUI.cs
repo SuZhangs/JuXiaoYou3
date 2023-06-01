@@ -12,28 +12,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         private string                    _title;
         private string                    _avatar;
 
-        public PlainTextMessageUI(PlainTextMessage message, SocialCharacter character, ChannelMember member)
+        public PlainTextMessageUI(PlainTextMessage message, SocialCharacter character, ChannelUI channel)
         {
             Source  = message;
             Avatar  = character.Avatar;
-            Title   = GetTitle(member.Title, member.Role);
-            Member  = member;
+            Title   = InteractionViewModelBase.GetCharacterTitle(Source.MemberID, channel.RoleMapping, channel.TitleMapping);
+            Name    = InteractionViewModelBase.GetCharacterName(character, channel.AliasMapping);
+            Role    = channel.RoleMapping.TryGetValue(Source.MemberID, out var r) ? r : MemberRole.Member;
             Content = message.Content;
         }
 
-        private static string GetTitle(string title, MemberRole role)
-        {
-            return role switch
-            {
-                MemberRole.Owner   => InteractionViewModelBase.GetOwnerName(),
-                MemberRole.Manager => InteractionViewModelBase.GetManagerName(),
-                MemberRole.Special => title,
-                _                  => string.Empty
-            };
-        }
-        
-        public ChannelMember Member { get; }
-        
         /// <summary>
         /// 
         /// </summary>
@@ -48,17 +36,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
             set => SetValue(ref _avatar, value);
         }
 
+        private MemberRole _role;
+
         /// <summary>
         /// 获取或设置 <see cref="Role"/> 属性。
         /// </summary>
         public MemberRole Role
         {
-            get => Member.Role;
-            set
-            {
-                Member.Role = value;
-                RaiseUpdated();
-            }
+            get => _role;
+            set => SetValue(ref _role, value);
         }
 
         /// <summary>

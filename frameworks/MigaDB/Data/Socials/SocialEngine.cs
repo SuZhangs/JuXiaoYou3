@@ -61,9 +61,7 @@
         
         public IEnumerable<SocialChannel> GetChannels(string character)
         {
-            return ChannelDB.FindAll()
-                            .Where(x => x.Members
-                                         .Any(y => y.MemberID == character));
+            return ChannelDB.Find(x => x.Members.Any(y => y == character));
         }
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }

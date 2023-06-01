@@ -21,28 +21,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
 
 
-        private void AddMessage(SocialCharacter character, ChannelMember member, SocialMessage message)
+        private void AddMessage(SocialCharacter character, ChannelUI channel, SocialMessage message)
         {
             Channel.ChannelSource
                    .Messages
                    .Add(message);
 
             Channel.Messages
-                   .Add(GetMessage(character, member, message));
+                   .Add(GetMessage(character, channel, message));
         }
 
-        private static ChatMessageUI GetMessage(SocialCharacter character, ChannelMember member, SocialMessage message)
+        private ChatMessageUI GetMessage(SocialCharacter character, ChannelUI channel, SocialMessage message)
         {
-            if (message is PlainTextMessage ptm)
+            return message switch
             {
-                return new PlainTextMessageUI(ptm, character, member);
-            }
-
+                PlainTextMessage ptm  => new PlainTextMessageUI(ptm, character, channel),
+                MemberJoinMessage mjm => new MemberJoinMessageUI(mjm, _characterUIMapper),
+                _                     => new TimestampMessageUI()
+            };
 
             return new TimestampMessageUI();
         }
 
-        private static string GetMemberJoinText(CharacterUI character)
+        public static string GetMemberJoinText(CharacterUI character)
         {
             return string.Format(Language.GetText("text.Interaction.MemberJoin"), character.Name);
         }

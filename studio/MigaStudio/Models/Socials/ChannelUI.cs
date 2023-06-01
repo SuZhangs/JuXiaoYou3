@@ -8,27 +8,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
     public class ChannelUI : ObservableObject
     {
-        private readonly IReadOnlyDictionary<string, SocialCharacter> _characterMapper;
-        
-        public ChannelUI(SocialChannel channel, Dictionary<string, SocialCharacter> characterMapper)
+        public ChannelUI(SocialChannel channel, IEnumerable<CharacterUI> characters)
         {
-            _characterMapper = characterMapper ?? throw new ArgumentNullException(nameof(characterMapper));
-            ChannelSource    = channel ?? throw new ArgumentNullException(nameof(channel));
-            Members          = new ObservableCollection<CharacterUI>();
-            Members.AddMany(channel.Members
-                                   .Select(Transform)
-                                   .Where(x => x is not null));
-            Messages = new ObservableCollection<ChatMessageUI>();
-        }
-
-        private CharacterUI Transform(ChannelMember x)
-        {
-            return _characterMapper.TryGetValue(x.MemberID, out var character) ? new CharacterUI(x, character) : null;
+            ChannelSource = channel ?? throw new ArgumentNullException(nameof(channel));
+            Members       = new ObservableCollection<CharacterUI>(characters);
+            Messages      = new ObservableCollection<ChatMessageUI>();
         }
 
         public string Id => ChannelSource.Id;
         
         public SocialChannel ChannelSource { get;  }
+
+
+        /// <summary>
+        /// 别名映射
+        /// </summary>
+        public Dictionary<string, string> AliasMapping => ChannelSource.AliasMapping;
+        
+        /// <summary>
+        /// 头衔映射
+        /// </summary>
+        public Dictionary<string, string> TitleMapping  => ChannelSource.TitleMapping;
+        
+        /// <summary>
+        /// 身份映射
+        /// </summary>
+        public Dictionary<string, MemberRole> RoleMapping  => ChannelSource.RoleMapping;
 
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。
@@ -72,11 +77,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         /// <summary>
         /// 所有成员
         /// </summary>
-        public ObservableCollection<CharacterUI> Members { get; init; }
+        public ObservableCollection<CharacterUI> Members { get; }
         
         /// <summary>
         /// 所有消息
         /// </summary>
-        public ObservableCollection<ChatMessageUI> Messages { get; init; }
+        public ObservableCollection<ChatMessageUI> Messages { get; }
     }
 }

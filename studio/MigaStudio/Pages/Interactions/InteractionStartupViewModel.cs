@@ -72,7 +72,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             var channels = SocialEngine.GetChannels(SelectedCharacter.Id);
-            Channels.AddMany(channels.Select(x => new ChannelUI(x, CharacterMapper)), true);
+            Channels.AddMany(channels.Select(GetChannel), true);
             // Threads.AddMany(, true);
         }
 
@@ -194,39 +194,43 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             var channel = new SocialChannel
             {
-                Id       = ID.Get(),
-                Name     = r.Value,
-                Members  = new ObservableCollection<ChannelMember>(),
-                Messages = new ObservableCollection<SocialMessage>(),
+                Id           = ID.Get(),
+                Name         = r.Value,
+                Members      = new ObservableCollection<string>(),
+                Messages     = new ObservableCollection<SocialMessage>(),
+                AliasMapping = new Dictionary<string, string>(),
+                TitleMapping = new Dictionary<string, string>(),
+                RoleMapping  = new Dictionary<string, MemberRole>()
             };
 
+            var owner = SelectedCharacter.Id;
+
             channel.Members
-                   .Add(new ChannelMember
-                   {
-                       MemberID     = SelectedCharacter.Id,
-                       AliasMapping = new Dictionary<string, string>(),
-                       Name         = SelectedCharacter.Name,
-                       Title        = GetOwnerName(),
-                       Role         = MemberRole.Owner
-                   });
+                   .Add(owner);
+            
+            channel.RoleMapping
+                   .Add(owner, MemberRole.Owner);
+            
+            
+            channel.TitleMapping
+                   .Add(owner, GetOwnerName());
 
-            var members = r1.Value
-                            .Select(x => new ChannelMember
-                            {
-                                MemberID     = x.Id,
-                                Name         = x.Name,
-                                AliasMapping = new Dictionary<string, string>(),
-                                Role         = MemberRole.Member,
-                            });
+            foreach (var character in r1.Value)
+            {
+                channel.Members
+                       .Add(character.Id);
+            
+                channel.RoleMapping
+                       .Add(character.Id, MemberRole.Member);
+            }
 
-            channel.Members.AddMany(members);
             //
             // 添加
             SocialEngine.AddChannel(channel);
 
             //
             // 添加
-            Channels.Add(new ChannelUI(channel, CharacterMapper));
+            Channels.Add(GetChannel(channel));
         }
 
         private void EditChannelImpl(ChannelUI item)

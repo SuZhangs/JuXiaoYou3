@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
+using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
-    public class MemberJoinMessageUI
+    public class MemberJoinMessageUI : ChatMessageUI
     {
-        public MemberJoinMessageUI(MemberJoinMessage message, Dictionary<string, SocialCharacter> characterMapper)
+        public MemberJoinMessageUI(MemberJoinMessage message, Dictionary<string, CharacterUI> characterMapper)
         {
             MessageSource = message;
             MemberID      = message.MemberID;
-            Content       = characterMapper.TryGetValue(MemberID, out var ch) ? ch.Name : string.Empty;
+            Content = CharacterChannelViewModel.GetMemberJoinText(characterMapper[MemberID]);
         }
         
         public MemberJoinMessage MessageSource { get; }

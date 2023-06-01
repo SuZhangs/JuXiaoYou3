@@ -26,28 +26,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             
             foreach (var character in i)
             {
-                var member = new ChannelMember
-                {
-                    MemberID     = character.Id,
-                    AliasMapping = new Dictionary<string, string>(),
-                    Name         = character.Name,
-                    Role         = MemberRole.Member,
-                    Title        = string.Empty
-                };
-
-                _memberMapper.TryAdd(character.Id, member);
+                var member = character.Id;
                 
                 Channel.ChannelSource
                        .Members
                        .Add(member);
 
-                var x = new CharacterUI(member, character);
+                var ch    = CharacterMapper[member];
+                var title = GetCharacterTitle(member, Channel.RoleMapping, Channel.TitleMapping);
+                var name  = GetCharacterName(ch, Channel.AliasMapping);
+                var x     = new CharacterUI(title, name, ch);
                 Characters.Add(x);
-                AddMessage(character, member, new MemberJoinMessage
+                AddMessage(character, Channel, new MemberJoinMessage
                 {
                     Id       = ID.Get(),
-                    MemberID = character.Id,
-                    Content = GetMemberJoinText(x)
+                    MemberID = character.Id
                 });
             }
         }
