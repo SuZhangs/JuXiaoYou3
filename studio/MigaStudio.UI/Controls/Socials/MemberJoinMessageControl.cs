@@ -1,31 +1,31 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 {
-    public class MemberJoinMessage : ChatMessageBase
+    public class MemberJoinMessageControl : ChatMessageBase
     {
-        static MemberJoinMessage()
+        static MemberJoinMessageControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(MemberJoinMessage), new FrameworkPropertyMetadata(typeof(MemberJoinMessage)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MemberJoinMessageControl), new FrameworkPropertyMetadata(typeof(MemberJoinMessageControl)));
         }
 
 
         public static readonly DependencyProperty CharacterNameProperty = DependencyProperty.Register(
             nameof(CharacterName),
             typeof(string),
-            typeof(MemberJoinMessage),
+            typeof(MemberJoinMessageControl),
             new PropertyMetadata(default(string)));
 
 
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
             nameof(Content),
             typeof(string),
-            typeof(MemberJoinMessage),
+            typeof(MemberJoinMessageControl),
             new PropertyMetadata(default(string)));
 
 
         public static readonly DependencyProperty WelcomeContentProperty = DependencyProperty.Register(
             nameof(WelcomeContent),
             typeof(string),
-            typeof(MemberJoinMessage),
+            typeof(MemberJoinMessageControl),
             new PropertyMetadata(default(string)));
 
         public string WelcomeContent

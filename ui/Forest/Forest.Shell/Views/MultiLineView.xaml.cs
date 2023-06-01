@@ -1,19 +1,21 @@
 ﻿using System.Threading.Tasks;
-using Acorisoft.FutureGL.Forest.Controls;
+using System.Windows.Controls;
+using Acorisoft.FutureGL.Forest.Attributes;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
-    public partial class StringView:ForestUserControl 
+    [Connected(View = typeof(MultiLineView), ViewModel = typeof(MultiLineViewModel))]
+    public partial class MultiLineView
     {
-        public StringView()
+        public MultiLineView()
         {
             InitializeComponent();
         }
     }
 
-    public sealed class StringViewModel : ImplicitDialogVM
+    public sealed class MultiLineViewModel : ImplicitDialogVM
     {
-        private string     _text;
+        private string _text;
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
@@ -47,9 +49,9 @@ namespace Acorisoft.FutureGL.Forest.Views
         }
         
         public static Task<Op<string>> String(string title) => DialogService()
-                                                       .Dialog<string>(new StringViewModel(), new Parameter
-                                                       {
-                                                           Args = new []{ title }
-                                                       });
+            .Dialog<string>(new MultiLineViewModel(), new Parameter
+            {
+                Args = new object[]{ title }
+            });
     }
 }

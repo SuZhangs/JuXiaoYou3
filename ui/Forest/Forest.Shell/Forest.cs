@@ -28,7 +28,6 @@ namespace Acorisoft.FutureGL.Forest
 
         
 
-
         public static IDialogService DialogService()
         {
             return DialogServiceField.Value;

@@ -49,8 +49,8 @@ namespace Acorisoft.FutureGL.Forest
                     },
                     new BindingInfo
                     {
-                        ViewModel = typeof(StringViewModel),
-                        View      = typeof(StringView)
+                        ViewModel = typeof(SingleLineViewModel),
+                        View      = typeof(SingleLineView)
                     },
                     new BindingInfo
                     {

@@ -173,7 +173,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         
         private async Task AddImpl()
         {
-            var r  = await StringViewModel.String(Language.GetText("text.Axis"));
+            var r  = await SingleLineViewModel.String(Language.GetText("text.Axis"));
             
             if (!r.IsFinished)
             {
@@ -191,7 +191,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            var r = await StringViewModel.String(Language.GetText("text.Edit"));
+            var r = await SingleLineViewModel.String(Language.GetText("text.Edit"));
 
             if (r.IsFinished && !string.IsNullOrEmpty(r.Value))
             {

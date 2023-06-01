@@ -10,13 +10,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public partial class CharacterChannelViewModel : InteractionViewModelBase
     {
-        private string _channelName;
-        
+        private string      _channelName;
+        private CharacterUI _speaker;
+        private string      _pendingContent;
+
         public CharacterChannelViewModel()
         {
-            LatestSpeakers = new ObservableCollection<CharacterUI>();
-            Characters     = new ObservableCollection<CharacterUI>();
-            Messages       = new ObservableCollection<ChatMessageUI>();
+            LatestSpeakers    = new ObservableCollection<CharacterUI>();
+            Characters        = new ObservableCollection<CharacterUI>();
+            MemberJoinCommand = AsyncCommand(MemberJoinImpl);
         }
 
         private void Initialize()
@@ -51,6 +53,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public ChannelUI Channel { get; private set; }
         
         /// <summary>
+        /// 未发送的内容
+        /// </summary>
+        public string PendingContent
+        {
+            get => _pendingContent;
+            set => SetValue(ref _pendingContent, value);
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Speaker"/> 属性。
+        /// </summary>
+        public CharacterUI Speaker
+        {
+            get => _speaker;
+            set
+            {
+                SetValue(ref _speaker, value);
+
+                if (_speaker is null)
+                {
+                    return;
+                }
+                
+                //
+                // 添加最近的发言人
+                AddLatestSpeaker(_speaker);
+            }
+        }
+
+        /// <summary>
         /// 获取或设置 <see cref="ChannelName"/> 属性。
         /// </summary>
         public string ChannelName
@@ -71,6 +103,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         
         public ObservableCollection<CharacterUI> LatestSpeakers { get; }
         public ObservableCollection<CharacterUI> Characters { get; }
-        public ObservableCollection<ChatMessageUI> Messages { get; }
+        public ObservableCollection<ChatMessageUI> Messages => Channel.Messages;
     }
 }

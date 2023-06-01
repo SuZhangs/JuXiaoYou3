@@ -18,6 +18,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         public ChannelMember   Member { get; }
         public SocialCharacter Character { get; }
 
+        public string Id => Character.Id;
+
         /// <summary>
         /// 修改发言者ID，可以使得
         /// </summary>

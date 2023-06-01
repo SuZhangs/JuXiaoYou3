@@ -48,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return false;
             }
 
-            var r1 = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r1 = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r1.IsFinished)
             {
@@ -125,7 +125,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 return;
             }
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r.IsFinished)
             {

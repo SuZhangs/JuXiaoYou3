@@ -175,7 +175,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            var r = await StringViewModel.String("创建群聊");
+            var r = await SingleLineViewModel.String("创建群聊");
 
             if (!r.IsFinished)
             {

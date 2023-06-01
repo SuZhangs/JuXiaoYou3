@@ -1,6 +1,7 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Enums;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
+using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
 {
@@ -9,24 +10,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         private bool                      _isSelf;
         private string                    _name;
         private string                    _title;
-        private string                    _content;
-        private MemberRole                _role;
         private string                    _avatar;
-        private PreferSocialMessageLayout _style;
+
+        public PlainTextMessageUI(PlainTextMessage message, SocialCharacter character, ChannelMember member)
+        {
+            Source  = message;
+            Avatar  = character.Avatar;
+            Title   = GetTitle(member.Title, member.Role);
+            Member  = member;
+            Content = message.Content;
+        }
+
+        private static string GetTitle(string title, MemberRole role)
+        {
+            return role switch
+            {
+                MemberRole.Owner   => InteractionViewModelBase.GetOwnerName(),
+                MemberRole.Manager => InteractionViewModelBase.GetManagerName(),
+                MemberRole.Special => title,
+                _                  => string.Empty
+            };
+        }
+        
+        public ChannelMember Member { get; }
         
         /// <summary>
         /// 
         /// </summary>
-        public PlainTextMessage Source { get; init; }
-
-        /// <summary>
-        /// 获取或设置 <see cref="Name"/> 属性。
-        /// </summary>
-        public PreferSocialMessageLayout Style
-        {
-            get => _style;
-            set => SetValue(ref _style, value);
-        }
+        public PlainTextMessage Source { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="Avatar"/> 属性。
@@ -42,8 +53,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         /// </summary>
         public MemberRole Role
         {
-            get => _role;
-            set => SetValue(ref _role, value);
+            get => Member.Role;
+            set
+            {
+                Member.Role = value;
+                RaiseUpdated();
+            }
         }
 
         /// <summary>
@@ -51,8 +66,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         /// </summary>
         public string Content
         {
-            get => _content;
-            set => SetValue(ref _content, value);
+            get => Source.Content;
+            set
+            {
+                Source.Content = value;
+                RaiseUpdated();
+            }
         }
 
         /// <summary>

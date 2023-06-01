@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         private async Task AddMappingImpl()
         {
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
             if (!r.IsFinished)
             {
                 return;
@@ -99,7 +99,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
             if (!r.IsFinished)
             {
                 return;
@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
             if (!r.IsFinished)
             {
                 return;
@@ -147,7 +147,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
             if (!r.IsFinished)
             {
                 return;

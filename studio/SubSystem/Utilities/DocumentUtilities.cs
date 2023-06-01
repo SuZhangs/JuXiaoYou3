@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 await Warning(SubSystemString.KeywordTooMany);
             }
 
-            var r    = await StringViewModel.String(SubSystemString.AddKeywordTitle);
+            var r    = await SingleLineViewModel.String(SubSystemString.AddKeywordTitle);
 
             if (!r.IsFinished)
             {

@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private async Task AddImpl()
         {
-            var title = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var title = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!title.IsFinished)
             {

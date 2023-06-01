@@ -1,24 +1,24 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 {
-    public class UserEventMessage : ChatMessageBase
+    public class UserEventMessageControl : ChatMessageBase
     {
-        static UserEventMessage()
+        static UserEventMessageControl()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(UserEventMessage), new FrameworkPropertyMetadata(typeof(UserEventMessage)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(UserEventMessageControl), new FrameworkPropertyMetadata(typeof(UserEventMessageControl)));
         }
         
         
         public static readonly DependencyProperty CharacterNameProperty = DependencyProperty.Register(
             nameof(CharacterName),
             typeof(string),
-            typeof(UserEventMessage),
+            typeof(UserEventMessageControl),
             new PropertyMetadata(default(string)));
 
 
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
             nameof(Content),
             typeof(string),
-            typeof(UserEventMessage),
+            typeof(UserEventMessageControl),
             new PropertyMetadata(default(string)));
 
         public string Content

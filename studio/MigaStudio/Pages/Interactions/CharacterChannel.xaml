@@ -35,13 +35,28 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
-                <Grid Margin="0 4">
+                <Grid Background="{f:BackgroundBrush}"
+                      Margin="0 4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <Grid.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Header="加群"
+                                            Icon="{StaticResource FeatherIcon.Login}"
+                                            IconSize="19" />
+                            <f:MenuItem Header="禁言"
+                                            IsFilled="True"
+                                            Icon="{StaticResource Mute}"
+                                            IconSize="19" />
+                            <f:MenuItem Header="退群"
+                                            Icon="{StaticResource FeatherIcon.LogOut}"
+                                            IconSize="19" />
+                        </f:ContextMenu>
+                    </Grid.ContextMenu>
                     <Ellipse Height="48"
                              Width="48">
                         <Ellipse.Fill>
@@ -258,7 +273,7 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Border x:Name="Canvas">
-                <studio:SocialSoftwareLayout PendingContent="你妈的"
+                <studio:SocialSoftwareLayout PendingContent="{Binding PendingContent,Mode=OneWay}"
                                              Layout="QQGroup">
                     <studio:SocialSoftwareLayout.ChannelName>
                         <MultiBinding StringFormat="{}{0} ({1})">

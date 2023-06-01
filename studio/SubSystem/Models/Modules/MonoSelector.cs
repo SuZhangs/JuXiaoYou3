@@ -116,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
         private async Task AddImpl()
         {
-            var r = await StringViewModel.String(Language.GetText("text.AddItem"));
+            var r = await SingleLineViewModel.String(Language.GetText("text.AddItem"));
 
             if (!r.IsFinished)
             {
@@ -128,7 +128,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
 
             if (AllowDiffValue)
             {
-                r = await StringViewModel.String(Language.GetText("text.AddValue"));
+                r = await SingleLineViewModel.String(Language.GetText("text.AddValue"));
 
                 if (!r.IsFinished)
                 {
@@ -166,7 +166,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            var r = await StringViewModel.String(Language.GetText("text.EditName"));
+            var r = await SingleLineViewModel.String(Language.GetText("text.EditName"));
 
             if (r.IsFinished)
             {

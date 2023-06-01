@@ -6,7 +6,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
     {
         public static async Task AddComposeAsync(ComposeEngine engine)
         {
-            var title = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var title = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!title.IsFinished)
             {
@@ -27,7 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         
         public static async Task AddComposeAsync(ICollection<ComposeCache> collection, ComposeEngine engine)
         {
-            var title = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var title = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!title.IsFinished)
             {

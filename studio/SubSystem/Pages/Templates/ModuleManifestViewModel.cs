@@ -35,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private async Task AddManifestImpl()
         {
             var ds = DialogService();
-            var r  = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r  = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r.IsFinished)
             {
@@ -75,7 +75,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            var r = await StringViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
 
             if (!r.IsFinished)
             {
