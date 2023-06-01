@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Repairs
             set
             {
                 SetValue(ref _anchor, value);
-                Debug.WriteLine($"当前项: {value}");
+                Debug.WriteLine($"当前项: {value.Num}");
             }
         }
 

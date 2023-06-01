@@ -118,10 +118,15 @@ namespace Acorisoft.FutureGL.Forest.Controls.Selectors
                     var f = info.Container;
                     if (f is null)
                     {
-                        continue;
+                        var container = ItemContainerGenerator.ContainerFromItem(info.DataContext);
+                        info.Container = (FrameworkElement)container;
                     }
 
-                    var p = f.TranslatePoint(ZeroPoint, this);
+                    if (f is null)
+                    {
+                        continue;
+                    }
+                    var p = f.TranslatePoint(ZeroPoint, ScrollViewer);
                     info.Y      = p.Y;
                     info.Height = f.DesiredSize.Height;
                 }
