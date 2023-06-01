@@ -18,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
             Members.AddMany(channel.Members
                                    .Select(Transform)
                                    .Where(x => x is not null));
+            Messages = new ObservableCollection<ChatMessageUI>();
         }
 
         private CharacterUI Transform(ChannelMember x)

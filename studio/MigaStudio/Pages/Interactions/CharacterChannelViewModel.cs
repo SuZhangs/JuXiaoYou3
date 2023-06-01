@@ -10,12 +10,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public partial class CharacterChannelViewModel : InteractionViewModelBase
     {
-        private string      _channelName;
-        private CharacterUI _speaker;
-        private string      _pendingContent;
+        private          string                            _channelName;
+        private          CharacterUI                       _speaker;
+        private          string                            _pendingContent;
+        private readonly Dictionary<string, ChannelMember> _memberMapper;
 
         public CharacterChannelViewModel()
         {
+            _memberMapper     = new Dictionary<string, ChannelMember>();
             LatestSpeakers    = new ObservableCollection<CharacterUI>();
             Characters        = new ObservableCollection<CharacterUI>();
             MemberJoinCommand = AsyncCommand(MemberJoinImpl);
@@ -23,6 +25,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private void Initialize()
         {
+            Channel.ChannelSource
+                   .Members
+                   .ForEach(x => _memberMapper.Add(x.MemberID, x));
             Characters.AddMany(Channel.Members, true);
             AddLatestSpeaker(Characters.First());
         }

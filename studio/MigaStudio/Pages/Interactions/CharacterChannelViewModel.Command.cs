@@ -34,6 +34,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Role         = MemberRole.Member,
                     Title        = string.Empty
                 };
+
+                _memberMapper.TryAdd(character.Id, member);
                 
                 Channel.ChannelSource
                        .Members

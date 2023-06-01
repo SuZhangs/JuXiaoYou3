@@ -167,6 +167,7 @@
                         <ftk:DropDownButton.ContextMenu>
                             <f:ContextMenu>
                                 <f:MenuItem Header="加群"
+                                            Command="{Binding MemberJoinCommand}"
                                             Icon="{StaticResource FeatherIcon.Login}"
                                             IconSize="19" />
                                 <f:MenuItem Header="禁言"
