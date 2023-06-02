@@ -111,6 +111,34 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
         #endregion
 
+        #region Timelines
+
+        public void AddTimeline(TimelineConcept item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Timelines.Upsert(item);
+        }
+
+        public void RemoveTimeline(TimelineConcept item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Timelines.Delete(item.Id);
+        }
+        
+        public IEnumerable<TimelineConcept> GetTimeline() => Timelines.FindAll();
+
+
+
+        #endregion
+
         /// <summary>
         /// 时间线
         /// </summary>

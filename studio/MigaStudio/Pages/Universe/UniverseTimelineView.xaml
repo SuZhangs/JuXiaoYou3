@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:f="urn:acorisoft/forest/ui"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;assembly=MigaDB"
              xmlns:studio="urn:acorisoft/studio"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
@@ -19,163 +19,139 @@
              UseLayoutRounding="True"
              SnapsToDevicePixels="True">
     <UserControl.Resources>
-        <ImageBrush x:Key="Avatar" ImageSource="{x:Static thisConverters:AvatarConverter.Character}"/>
-        <sys:String x:Key="Lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat tellus lorem, vel eleifend est viverra vitae. In quis condimentum ligula. Donec malesuada sollicitudin odio, in malesuada augue dictum at. Nulla facilisi. Quisque ornare felis eros, egestas rutrum tellus venenatis eu. Duis ac sapien bibendum, blandit diam a, ultrices sem. Nam et pretium sem. Cras aliquam metus vel imperdiet venenatis. Sed non ultrices lectus. Maecenas semper lectus urna, vel hendrerit nulla fringilla at. Donec at nibh eros. Nullam nec porttitor dolor, vel pharetra turpis. Integer a dui vitae odio convallis fringilla. Phasellus venenatis, purus vel pulvinar condimentum, arcu nibh sollicitudin justo, et faucibus nisi purus congue enim. In ut tortor lorem. Duis consequat lectus hendrerit eros porta sagittis.
+        <thisVM:UniverseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
+        <ImageBrush x:Key="Avatar" ImageSource="{x:Static thisConverters:AvatarConverter.Character}" />
 
-Nullam vel condimentum velit. Praesent elit ante, convallis quis tempus sed, pellentesque suscipit tortor. Duis sed tempor dolor. Suspendisse potenti. Morbi at augue at leo hendrerit congue. Vestibulum placerat tellus metus, et tempus libero rutrum eget. Suspendisse pretium tortor gravida tortor vehicula cursus.
+        <DataTemplate DataType="{x:Type m:TimelineAge}">
+            <Grid Background="Transparent"
+                  Height="96">
+                <Grid.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="在前面添加大事记"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineAgeBeforeCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="在后面添加大事记"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineAgeAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <Separator />
+                        <f:MenuItem Header="在前面添加事件"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="在后面添加事件"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <Separator />
+                        <f:MenuItem Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="删除"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                    </f:ContextMenu>
+                </Grid.ContextMenu>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Width="2"
+                           Fill="SlateGray" />
+                <Ellipse Grid.Column="0"
+                         Height="14"
+                         Width="14"
+                         Fill="Peru"
+                         Margin="0 32 0 0"
+                         VerticalAlignment="Top" />
+                <Border Grid.Column="1"
+                        Background="{f:Brush BackgroundLevel2}"
+                        Margin="16 0 0 16">
+                    <DockPanel>
+                        <TextBlock Text="{Binding Name,Mode=OneWay}" />
+                        <TextBlock Text="{Binding Intro,Mode=OneWay}" />
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
 
-Suspendisse vel nunc in sapien pretium ornare. Cras at rutrum urna. Suspendisse lacinia lacus et felis fermentum, vel placerat urna iaculis. Morbi faucibus elit non nulla pellentesque sagittis a non ex. Maecenas auctor venenatis ipsum. Etiam dapibus nunc id mauris elementum placerat. Suspendisse mollis elit luctus neque tristique, eu sodales libero laoreet. Proin laoreet nunc neque, id condimentum magna volutpat ut. Nullam condimentum augue porttitor urna tempor lacinia. Donec massa risus, lobortis a massa vel, fermentum varius diam. Donec nec dui erat.
-
-Morbi vestibulum sapien vitae hendrerit ornare. Maecenas quam justo, pulvinar et dui at, consectetur convallis nisl. Ut lacinia neque sit amet leo congue cursus. Maecenas velit neque, condimentum et eleifend eu, bibendum ut massa. Aliquam purus ligula, elementum non eros ut, lacinia aliquam nisi. Proin augue sapien, suscipit a tempus vel, lobortis a velit. Quisque quis aliquet nunc. Aliquam varius, mi quis porttitor interdum, mauris diam ullamcorper nibh, sit amet faucibus elit dui malesuada magna. Integer vel dui malesuada, dignissim tortor quis, sollicitudin felis. Donec vestibulum finibus tellus sodales tempus. Ut sodales eleifend ullamcorper. Integer pharetra elit in placerat tempor. Nullam vel tortor sapien. Etiam tristique dictum eleifend. Proin quis sollicitudin libero. Aenean augue enim, imperdiet a leo et, posuere semper orci.
-
-Etiam at pretium metus, ac hendrerit lorem. Praesent laoreet dolor nec sem interdum, vel varius libero condimentum. Aenean eget efficitur nisi. Curabitur aliquet sapien et orci fringilla, quis mollis ex vehicula. Aenean gravida neque ut nulla tristique condimentum eget vitae ex. Curabitur a ullamcorper augue. Nunc ex quam, efficitur nec gravida in, vestibulum euismod risus.</sys:String>
+        <DataTemplate DataType="{x:Type m:TimelineEvent}">
+            <Grid Background="Transparent"
+                  MinHeight="96"
+                  MaxHeight="128">
+                <Grid.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="在前面添加大事记"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineAgeBeforeCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="在后面添加大事记"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineAgeAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <Separator />
+                        <f:MenuItem Header="在前面添加事件"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="在后面添加事件"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    CommandParameter="{Binding}" />
+                        <Separator />
+                        <f:MenuItem Header="上移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="下移"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                        <f:MenuItem Header="删除"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveTimelineCommand}"
+                                    CommandParameter="{Binding}" />
+                    </f:ContextMenu>
+                </Grid.ContextMenu>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Width="2"
+                           Fill="SlateGray" />
+                <Ellipse Grid.Column="0"
+                         Height="14"
+                         Width="14"
+                         Fill="Peru"
+                         Margin="0 32 0 0"
+                         VerticalAlignment="Top" />
+                <Border Grid.Column="1"
+                        Background="{f:Brush BackgroundLevel2}"
+                        Margin="16 0 0 16">
+                    <DockPanel>
+                        <TextBlock Text="{Binding Name,Mode=OneWay}" />
+                        <TextBlock Text="{Binding Intro,Mode=OneWay}" />
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="48" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="420" />
-        </Grid.ColumnDefinitions>
-        <UniformGrid Rows="3">
-            <Border Grid.Row="0"
-                    Background="#3F6495ED"
-                    CornerRadius="3">
-                <ItemsControl FontSize="16"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center">
-                    <TextBlock Text="威" />
-                    <TextBlock Text="慑" />
-                    <TextBlock Text="纪" />
-                    <TextBlock Text="元" />
-                </ItemsControl>
-            </Border>
-            <Border Grid.Row="1"
-                    Background="SlateGray"
-                    CornerRadius="3">
-
-                <ItemsControl FontSize="16"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center">
-                    <TextBlock Text="和" />
-                    <TextBlock Text="平" />
-                    <TextBlock Text="纪" />
-                    <TextBlock Text="元" />
-                </ItemsControl>
-            </Border>
-            <Border Grid.Row="2"
-                    Background="Peru"
-                    CornerRadius="3">
-
-                <ItemsControl FontSize="16"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center">
-                    <TextBlock Text="战" />
-                    <TextBlock Text="争" />
-                    <TextBlock Text="纪" />
-                    <TextBlock Text="元" />
-                </ItemsControl>
-            </Border>
-        </UniformGrid>
-        <StackPanel Grid.Column="1"
-                    Margin="16 0 0 0">
-            <Grid MinHeight="96">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Rectangle Width="2"
-                           Fill="SlateGray"/>
-                <Ellipse Height="14"
-                         Width="14"
-                         Fill="Peru"
-                         Margin="0 32 0 0"
-                         VerticalAlignment="Top"/>
-                <Border Grid.Column="1"
-                        Background="{f:Brush BackgroundLevel2}"
-                        Margin="16 0 0 16">
-                    
-                </Border>
-            </Grid>
-            <Grid MinHeight="96">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Rectangle Width="2"
-                           Fill="SlateGray"/>
-                <Ellipse Height="14"
-                         Width="14"
-                         Fill="Peru"
-                         Margin="0 32 0 0"
-                         VerticalAlignment="Top"/>
-                <Border Grid.Column="1"
-                        Background="{f:Brush BackgroundLevel2}"
-                        Margin="16 0 0 16">
-
-                </Border>
-            </Grid>
-        </StackPanel>
-
-        <Grid Grid.Column="2"
-              Margin="16 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="256" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <f:ForestIsland Grid.Row="0"
-                            Header="Background"
-                            Margin="0 0 0 8">
-                <f:MultiLine Text="{StaticResource Lorem}">
-                    
-                </f:MultiLine>
-            </f:ForestIsland>
-            <f:ForestIsland Grid.Row="1"
-                            Header="Character"
-                            Margin="0 8">
-                <WrapPanel Orientation="Horizontal">
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                    <Ellipse Margin="4"
-                             Fill="{StaticResource Avatar}"
-                             Height="48"
-                             Width="48"/>
-                </WrapPanel>
-            </f:ForestIsland>
-            <f:ForestIsland Grid.Row="2"
-                            Header="Story"
-                            Padding="0 8">
-
-                <f:MultiLine Text="{StaticResource Lorem}">
-
-                </f:MultiLine>
-            </f:ForestIsland>
-        </Grid>
-    </Grid>
+    <f:ForestIsland Header="时间轴">
+        <f:ForestIsland.ToolBar>
+            <StackPanel HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <f:CallToAction DockPanel.Dock="Top"
+                                Content="{f:Language global.Add}"
+                                Command="{Binding AddTimelineAgeCommand}"
+                                CornerRadius="24"
+                                HorizontalAlignment="Right"
+                                Padding="16"
+                                Icon="{StaticResource FeatherIcon.Plus}" />
+                <f:CallToAction DockPanel.Dock="Top"
+                                Content="{f:Language global.Add}"
+                                Command="{Binding AddTimelineEventCommand}"
+                                CornerRadius="24"
+                                HorizontalAlignment="Right"
+                                Padding="16"
+                                Palette="HighlightPalette3"
+                                Icon="{StaticResource FeatherIcon.Plus}" />
+            </StackPanel>
+        </f:ForestIsland.ToolBar>
+        <ItemsControl Margin="16 0 0 0"
+                      ItemsSource="{Binding Timelines,Mode=OneWay}">
+        </ItemsControl>
+    </f:ForestIsland>
 </UserControl>

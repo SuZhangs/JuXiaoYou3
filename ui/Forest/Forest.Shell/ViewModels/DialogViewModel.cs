@@ -92,6 +92,8 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             get => CloseAction;
             set => CloseAction = value;
         }
+        
+        public bool IsEditMode { get; protected set; }
 
         /// <summary>
         /// 取消命令。

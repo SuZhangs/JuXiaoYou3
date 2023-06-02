@@ -139,7 +139,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
         }
 
         public DocumentType Type { get; private set; }
-        public bool IsEditMode { get; private set; }
         public CharacterRelationship Entity { get; private set; }
 
         /// <summary>

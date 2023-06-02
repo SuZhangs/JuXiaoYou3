@@ -5,10 +5,12 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Media.Animation;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
@@ -42,7 +44,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             PictureCollection = new ObservableCollection<Album>();
             DatabaseManager   = Studio.DatabaseManager();
-            ImageEngine       = DatabaseManager.GetEngine<ImageEngine>();
+            ImageEngine       = Studio.Engine<ImageEngine>();
+            ProjectEngine     = Studio.Engine<ProjectEngine>();
+            Timelines         = new ObservableCollection<TimelineConcept>();
             _databaseProperty = Database.Get<DatabaseProperty>();
             _threadSafeAdding = new Subject<Album>().DisposeWith(Collector);
             _threadSafeAdding.ObserveOn(Scheduler)
@@ -60,16 +64,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                  Save();
                              })
                              .DisposeWith(Collector);
+            
 
-            CloseDatabaseCommand  = AsyncCommand(CloseDatabaseImpl);
-            SwitchDatabaseCommand = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
-            ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
-            EditCommand           = Command(EditImpl);
-            AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
-            RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
-            ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
-            ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
-            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
+            CloseDatabaseCommand        = AsyncCommand(CloseDatabaseImpl);
+            SwitchDatabaseCommand       = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
+            ChangeAvatarCommand         = AsyncCommand(ChangeAvatarImpl);
+            EditCommand                 = Command(EditImpl);
+            AddAlbumCommand             = AsyncCommand(AddAlbumImpl);
+            RemoveAlbumCommand          = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
+            ShiftUpAlbumCommand         = Command<Album>(ShiftUpAlbumImpl, HasItem);
+            ShiftDownAlbumCommand       = Command<Album>(ShiftDownAlbumImpl, HasItem);
+            OpenAlbumCommand            = Command<Album>(OpenAlbumImpl, HasItem);
+            
+            AddTimelineAgeCommand         = AsyncCommand(AddTimelineAgeImpl);
+            AddTimelineAgeBeforeCommand   = AsyncCommand<TimelineConcept>(AddTimelineAgeBeforeImpl);
+            AddTimelineAgeAfterCommand    = AsyncCommand<TimelineConcept>(AddTimelineAgeAfterImpl);
+            AddTimelineAgeCommand         = AsyncCommand(AddTimelineAgeImpl);
+            AddTimelineEventBeforeCommand = AsyncCommand<TimelineConcept>(AddTimelineEventBeforeImpl);
+            AddTimelineEventAfterCommand  = AsyncCommand<TimelineConcept>(AddTimelineEventAfterImpl);
+            AddTimelineEventCommand       = AsyncCommand(AddTimelineEventImpl);
+            RemoveTimelineCommand         = AsyncCommand<TimelineConcept>(RemoveTimelineImpl);
+            EditTimelineCommand           = AsyncCommand<TimelineConcept>(EditTimelineImpl);
+            ShiftUpTimelineCommand        = Command<TimelineConcept>(ShiftUpTimelineImpl);
+            ShiftDownTimelineCommand      = Command<TimelineConcept>(ShiftDownTimelineImpl);
         }
 
         protected override void OnStart()
@@ -305,6 +322,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// </summary>
         public ObservableCollection<Album> PictureCollection { get; init; }
 
+        public ProjectEngine ProjectEngine { get; }
         public IDatabase Database => DatabaseUtilities.Database;
         public IDatabaseManager DatabaseManager { get; }
         public ImageEngine ImageEngine { get; }

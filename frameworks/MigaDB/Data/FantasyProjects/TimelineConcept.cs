@@ -5,6 +5,9 @@
         public const int    Seed = 100000;
         private      string _name;
         private      string _intro;
+        
+       public string LastItem { get; set; }
+       public string NextItem { get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。

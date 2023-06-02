@@ -97,7 +97,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
             return SubSystemString.Unknown;
         }
 
-        public bool IsEditMode { get; private set; }
         public RelativePreset Entity { get; private set; }
         
 
