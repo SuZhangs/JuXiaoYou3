@@ -277,6 +277,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             else
             {
                 SynchronizeDocument(cache, document);
+                engine.UpdateDocument(document, cache);
             }
         }
         
@@ -312,7 +313,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         
         private static void UpdateIntro(Document document, string value)
         {
-            document.Name = value;
+            document.Intro = value;
             UpdateMetadata(document, MetadataUtilities.MetaNameOfIntro, value);
         }
 

@@ -201,7 +201,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             foreach (var metadata in BasicPart.Buckets)
             {
-                UpsertMetadata(metadata.Key, metadata.Value);
+                UpsertMetadataWithoutSave(metadata.Key, metadata.Value);
             }
 
             foreach (var module in ModuleParts)

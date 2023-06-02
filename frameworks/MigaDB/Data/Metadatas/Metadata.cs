@@ -1,8 +1,11 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
+﻿using System.Diagnostics;
+
+namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
 {
     /// <summary>
     /// 元数据
     /// </summary>
+    [DebuggerDisplay("{Name}-{Value}")]
     public class Metadata
     {
         /// <summary>

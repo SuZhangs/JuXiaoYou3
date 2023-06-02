@@ -50,6 +50,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public void UpsertMetadata(string name, string value, [CallerMemberName] string propName = "")
         {
+            UpsertMetadataWithoutSave(name, value, propName);
+            SetDirtyState();
+        }
+
+        public void UpsertMetadataWithoutSave(string name, string value, [CallerMemberName] string propName = "")
+        {
             var dict = BasicPart.Buckets;
             if (dict.ContainsKey(name))
             {
@@ -62,15 +68,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddMetadata(new Metadata
             {
-                Name  = name,
+                Name = name,
                 Value = value,
-                Type  = MetadataKind.Text,
+                Type = MetadataKind.Text,
             });
-            
-            SetDirtyState();
+
             RaiseUpdated(propName);
         }
-        
+
         public string Rarity
         {
             get => GetOrAddMetadata(MetaNameOfRarity);

@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             Collection        = new ObservableCollection<TDetail>();
             AddCommand       = AsyncCommand(AddItem);
-            RemoveCommand    = AsyncCommand<TDetail>(RemoveItem, HasItem);
+            RemoveCommand    = AsyncCommand<TDetail>(RemoveItem);
             ShiftUpCommand   = Command<TDetail>(ShiftUpItem, HasItem);
             ShiftDownCommand = Command<TDetail>(ShiftDownItem, HasItem);
         }
@@ -125,7 +125,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                              .Subscribe(OnCollectionChanged)
                              .DisposeWith(Collector);
             AddCommand       = AsyncCommand(AddItem);
-            RemoveCommand    = AsyncCommand<TDetail>(RemoveItem, HasItem);
+            RemoveCommand    = AsyncCommand<TDetail>(RemoveItem);
             ShiftUpCommand   = Command<TDetail>(ShiftUpItem, HasItem);
             ShiftDownCommand = Command<TDetail>(ShiftDownItem, HasItem);
         }
