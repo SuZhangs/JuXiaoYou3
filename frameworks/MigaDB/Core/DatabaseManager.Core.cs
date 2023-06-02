@@ -255,10 +255,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 _database.SetValue(database);
 
                 //
-                // 打开
-                _isOpen.SetValue(true);
-
-                //
                 //
                 await MaintainAndUpdate(database, _minimumTargetVersion);
 
