@@ -2,8 +2,15 @@
 {
     public enum MetadataKind : int
     {
+        /// <summary>
+        /// 独立的
+        /// </summary>
         String,
         Service,
+        
+        /// <summary>
+        /// 在分组里面的
+        /// </summary>
         Text,
         Color,
         Degree,

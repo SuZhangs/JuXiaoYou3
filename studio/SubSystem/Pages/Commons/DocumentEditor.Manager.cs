@@ -2,6 +2,7 @@
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaStudio.Utilities;
 using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
@@ -272,6 +273,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Parts     = new DataPartCollection(),
                 Metas     = new MetadataCollection(),
             };
+
+            DocumentUtilities.SynchronizeDocument(Cache, document);
 
             //
             //

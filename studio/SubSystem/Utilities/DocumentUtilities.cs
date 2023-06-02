@@ -2,6 +2,7 @@
 using System.Linq;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Gallery;
@@ -275,11 +276,95 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             }
             else
             {
-                document.Name   = cache.Name;
-                document.Avatar = cache.Avatar;
-                document.Intro  = cache.Intro;
-                document.Owner  = cache.Owner;
-                engine.UpdateDocument(document, cache);
+                SynchronizeDocument(cache, document);
+            }
+        }
+        
+        /// <summary>
+        /// 同步文档，将DocumentCache的变化应用到Document
+        /// </summary>
+        /// <param name="engine"></param>
+        /// <param name="cache"></param>
+        public static void SynchronizeDocument(DocumentCache cache, Document document)
+        {
+            if (cache is null || document is null)
+            {
+                return;
+            }
+
+            UpdateName(document, cache.Name);
+            UpdateAvatar(document, cache.Avatar);
+            UpdateIntro(document, cache.Avatar);
+            document.Owner = cache.Owner;
+        }
+
+        private static void UpdateName(Document document, string value)
+        {
+            document.Name = value;
+            UpdateMetadata(document, MetadataUtilities.MetaNameOfName, value);
+        }
+        
+        private static void UpdateAvatar(Document document, string value)
+        {
+            document.Avatar = value;
+            UpdateMetadata(document, MetadataUtilities.MetaNameOfAvatar, value);
+        }
+        
+        private static void UpdateIntro(Document document, string value)
+        {
+            document.Name = value;
+            UpdateMetadata(document, MetadataUtilities.MetaNameOfIntro, value);
+        }
+
+        private static void UpdateMetadata(Document document, string name, string value)
+        {
+            var index = document.Metas
+                                .IndexOf(x => x.Name == name);
+
+            if (index == -1)
+            {
+                document.Metas.Add(new Metadata
+                {
+                    Name = name,
+                    Value = value,
+                    Type = MetadataKind.Text
+                });
+            }
+            else
+            {
+                var meta = document.Metas[index];
+
+                if (meta.Type != MetadataKind.Text)
+                {
+                    document.Metas[index] = new Metadata
+                    {
+                        Name  = name,
+                        Value = value,
+                        Type  = MetadataKind.Text
+                    };
+                }
+                else
+                {
+                    document.Metas[index]
+                            .Value = value;
+                }
+            }
+
+            if (document.Parts
+                        .FirstOrDefault(x => x is PartOfBasic) is not PartOfBasic basic)
+            {
+                return;
+            }
+
+            if (basic.Buckets.ContainsKey(name))
+            {
+                
+                basic.Buckets[name] = value;
+            }
+            else
+            {
+                
+                basic.Buckets.Add(name, value);
             }
         }
 

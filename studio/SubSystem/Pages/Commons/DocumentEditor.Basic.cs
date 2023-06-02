@@ -1,31 +1,13 @@
 ﻿using System.Runtime.CompilerServices;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using static Acorisoft.FutureGL.MigaStudio.Utilities.MetadataUtilities;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private const string MetaNameOfName             = "@name";
-        private const string MetaNameOfAvatar           = "@avatar";
-        private const string MetaNameOfAge              = "@age";
-        private const string MetaNameOfBirth            = "@birth";
-        private const string MetaNameOfWeight           = "@weight";
-        private const string MetaNameOfHeight           = "@height";
-        private const string MetaNameOfGender           = "@gender";
-        private const string MetaNameOfIntro            = "@intro";
-        private const string MetaNameOfCountry          = "@country";
-        private const string MetaNameOfRace             = "@race";
-        private const string MetaNameOfNickName         = "@nickname";
-        private const string MetaNameOfIsDeath          = "@death";
-        private const string MetaNameOfRarity           = "@rarity";
-        private const string MetaNameOfPrice            = "@price";
-        private const string MetaNameOfProduceArea      = "@produce-area";
-        private const string MetaNameOfWeakness         = "@Weakness";
-        private const string MetaNameOfMainPictureOf4x3 = "@mg-s";
-        private const string MetaNameOfMainPictureOf16x9 = "@mg-h";
-        private const string MetaNameOfMainPictureOf9x16 = "@mg-v";
 
-        private string GetOrAddMetadata(string name)
+        public string GetOrAddMetadata(string name)
         {
             var dict = BasicPart.Buckets;
             if (dict.TryGetValue(name, out var value))
@@ -47,13 +29,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return value;
         }
 
-        private bool GetOrAddBoolMetadata(string name)
+        public bool GetOrAddBoolMetadata(string name)
         {
             var v = GetOrAddMetadata(name);
             return bool.TryParse(v, out var n) && n;
         }
 
-        private string GetOrAddMetadata(string name, string defaultValue)
+        public string GetOrAddMetadata(string name, string defaultValue)
         {
             var dict = BasicPart.Buckets;
             if (dict.TryGetValue(name, out var value))
@@ -66,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return value;
         }
 
-        private void UpsertMetadata(string name, string value, [CallerMemberName] string propName = "")
+        public void UpsertMetadata(string name, string value, [CallerMemberName] string propName = "")
         {
             var dict = BasicPart.Buckets;
             if (dict.ContainsKey(name))
