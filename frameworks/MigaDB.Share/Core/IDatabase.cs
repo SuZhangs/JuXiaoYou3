@@ -109,7 +109,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <param name="instance"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        void IfSet<T>(T instance) where T : class;
+        T IfSet<T>(T instance) where T : class;
 
         /// <summary>
         /// 是否存在

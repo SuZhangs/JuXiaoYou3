@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaDB.Documents;
+﻿using System.Diagnostics;
+using Acorisoft.FutureGL.MigaDB.Documents;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
@@ -33,8 +34,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
         #region Appraise
 
-        
-        
         public void AddAppraise(Appraise item)
         {
             if (item is null)
@@ -54,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             Appraises.Delete(item.Id);
         }
-        
+
         public IEnumerable<Appraise> GetAppraises(DocumentCache source)
         {
             if (source is null)
@@ -74,7 +73,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
         #region Sentence
 
-        
         public void AddSentence(Sentence item)
         {
             if (item is null)
@@ -94,6 +92,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             Sentences.Delete(item.Id);
         }
+
         public IEnumerable<Sentence> GetSentences(DocumentCache source)
         {
             if (source is null)
@@ -107,7 +106,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         }
 
         public IEnumerable<Sentence> GetSentences() => Sentences.FindAll();
-        
 
         #endregion
 
@@ -119,6 +117,10 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             {
                 return;
             }
+
+#if DEBUG
+            Debug.WriteLine($"last:{item.LastItem}\ncurrent:{item.Id}\nnext:{item.NextItem}\n");
+#endif
 
             Timelines.Upsert(item);
         }
@@ -132,10 +134,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             Timelines.Delete(item.Id);
         }
-        
-        public IEnumerable<TimelineConcept> GetTimeline() => Timelines.FindAll();
 
-
+        public IEnumerable<TimelineConcept> GetTimelines() => Timelines.FindAll();
 
         #endregion
 
@@ -143,17 +143,18 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         /// 时间线
         /// </summary>
         public ILiteCollection<Prototype> Prototypes { get; private set; }
+
         /// <summary>
         /// 时间线
         /// </summary>
         public ILiteCollection<Preshape> Preshapes { get; private set; }
-        
+
         /// <summary>
         /// 时间线
         /// </summary>
         public ILiteCollection<Appraise> Appraises { get; private set; }
-        
-        
+
+
         /// <summary>
         /// 时间线
         /// </summary>

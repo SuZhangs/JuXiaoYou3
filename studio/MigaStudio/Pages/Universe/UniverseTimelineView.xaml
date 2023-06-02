@@ -22,9 +22,14 @@
         <thisVM:UniverseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
         <ImageBrush x:Key="Avatar" ImageSource="{x:Static thisConverters:AvatarConverter.Character}" />
 
+        <SolidColorBrush x:Key="Stroke" Color="Gray"/>
+        <SolidColorBrush x:Key="Fill" Color="{f:Color BackgroundLevel2}" Opacity="0.5"/>
+
         <DataTemplate DataType="{x:Type m:TimelineAge}">
             <Grid Background="Transparent"
-                  Height="96">
+                  HorizontalAlignment="Left"
+                  Height="128"
+                  Width="320">
                 <Grid.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="在前面添加大事记"
@@ -35,7 +40,7 @@
                                     CommandParameter="{Binding}" />
                         <Separator />
                         <f:MenuItem Header="在前面添加事件"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventBeforeCommand}"
                                     CommandParameter="{Binding}" />
                         <f:MenuItem Header="在后面添加事件"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
@@ -64,12 +69,29 @@
                          Fill="Peru"
                          Margin="0 32 0 0"
                          VerticalAlignment="Top" />
+
+                <Rectangle Grid.Column="1"
+                           StrokeDashArray="4 4"
+                           Stroke="#cc4e4e"
+                           Fill="#30CC4E4E"
+                           Margin="16 0 0 16"
+                           RadiusX="8"
+                           RadiusY="8" />
+                
                 <Border Grid.Column="1"
-                        Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="8"
                         Margin="16 0 0 16">
-                    <DockPanel>
-                        <TextBlock Text="{Binding Name,Mode=OneWay}" />
-                        <TextBlock Text="{Binding Intro,Mode=OneWay}" />
+                    <DockPanel Margin="16">
+                        <TextBlock DockPanel.Dock="Top"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Height="24"
+                                       Margin="0 0 0 16"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding Intro,Mode=OneWay}"
+                                       TextWrapping="Wrap"
+                                       TextTrimming="CharacterEllipsis" />
                     </DockPanel>
                 </Border>
             </Grid>
@@ -78,7 +100,7 @@
         <DataTemplate DataType="{x:Type m:TimelineEvent}">
             <Grid Background="Transparent"
                   MinHeight="96"
-                  MaxHeight="128">
+                  MaxHeight="192">
                 <Grid.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="在前面添加大事记"
@@ -89,7 +111,7 @@
                                     CommandParameter="{Binding}" />
                         <Separator />
                         <f:MenuItem Header="在前面添加事件"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventBeforeCommand}"
                                     CommandParameter="{Binding}" />
                         <f:MenuItem Header="在后面添加事件"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.AddTimelineEventAfterCommand}"
@@ -110,20 +132,39 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
+                
                 <Rectangle Width="2"
                            Fill="SlateGray" />
+                
                 <Ellipse Grid.Column="0"
                          Height="14"
                          Width="14"
                          Fill="Peru"
                          Margin="0 32 0 0"
                          VerticalAlignment="Top" />
+                <Rectangle Grid.Column="1"
+                           StrokeDashArray="4 4"
+                           Stroke="{StaticResource Stroke}"
+                           Fill="{StaticResource Fill}"
+                           StrokeThickness="2"
+                           Margin="16 0 32 8"
+                           RadiusX="8"
+                           RadiusY="8" />
+
                 <Border Grid.Column="1"
-                        Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="8"
                         Margin="16 0 0 16">
-                    <DockPanel>
-                        <TextBlock Text="{Binding Name,Mode=OneWay}" />
-                        <TextBlock Text="{Binding Intro,Mode=OneWay}" />
+                    <DockPanel Margin="16">
+                        <TextBlock DockPanel.Dock="Top"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Height="24"
+                                       Margin="0 0 0 16"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding Intro,Mode=OneWay}"
+                                       TextWrapping="Wrap"
+                                       TextTrimming="CharacterEllipsis" />
                     </DockPanel>
                 </Border>
             </Grid>
@@ -134,24 +175,28 @@
             <StackPanel HorizontalAlignment="Right"
                         Orientation="Horizontal">
                 <f:CallToAction DockPanel.Dock="Top"
-                                Content="{f:Language global.Add}"
+                                Content="添加大事记"
                                 Command="{Binding AddTimelineAgeCommand}"
                                 CornerRadius="24"
                                 HorizontalAlignment="Right"
+                                Margin="4"
                                 Padding="16"
                                 Icon="{StaticResource FeatherIcon.Plus}" />
                 <f:CallToAction DockPanel.Dock="Top"
-                                Content="{f:Language global.Add}"
+                                Content="添加事件"
                                 Command="{Binding AddTimelineEventCommand}"
                                 CornerRadius="24"
+                                Margin="4"
                                 HorizontalAlignment="Right"
                                 Padding="16"
                                 Palette="HighlightPalette3"
                                 Icon="{StaticResource FeatherIcon.Plus}" />
             </StackPanel>
         </f:ForestIsland.ToolBar>
-        <ItemsControl Margin="16 0 0 0"
-                      ItemsSource="{Binding Timelines,Mode=OneWay}">
-        </ItemsControl>
+        <ScrollViewer>
+            <ItemsControl Margin="16 0 0 0"
+                          ItemsSource="{Binding Timelines,Mode=OneWay}">
+            </ItemsControl>
+        </ScrollViewer>
     </f:ForestIsland>
 </UserControl>

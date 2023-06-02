@@ -98,6 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             PictureCollection.AddMany(_databaseProperty.Album, true);
+            InitializeTimelines();
         }
 
         public override void Stop()

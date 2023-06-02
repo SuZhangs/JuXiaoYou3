@@ -20,7 +20,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources
         public static IEnumerable<object> DebugMode => new object[]
         {
             DatabaseMode.Release,
-            DatabaseMode.Debug,
             DatabaseMode.Attached,
         };
 

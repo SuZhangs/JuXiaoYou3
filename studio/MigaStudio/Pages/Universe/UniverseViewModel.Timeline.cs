@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
@@ -10,6 +11,38 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     partial class UniverseViewModel
     {
+        private void InitializeTimelines()
+        {
+            var inside     = ProjectEngine.GetTimelines();
+            var dictionary = new Dictionary<string, TimelineConcept>();
+            
+            foreach (var t in inside)
+            {
+                dictionary.TryAdd(t.Id, t);
+            }
+            
+            var first  = dictionary.FirstOrDefault(x => string.IsNullOrEmpty(x.Value
+                                                                              .LastItem))
+                                   .Value;
+
+            if(first is null)
+            {
+                return;
+            }
+            
+            Timelines.Add(first);
+
+            while (!string.IsNullOrEmpty(first.NextItem))
+            {
+                if (dictionary.TryGetValue(first.NextItem, out var c))
+                {
+                    Timelines.Add(c);
+                    dictionary.Remove(first.NextItem);
+                    first = c;
+                }
+            }
+            
+        }
         
         private async Task AddTimelineConceptImpl(bool isAge, TimelineConcept target, bool after)
         {
@@ -50,7 +83,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             if (target is null)
             {
                 var last = Timelines.Last();
-                last.NextItem = concept.Id;
+                last.NextItem    = concept.Id;
+                concept.LastItem = last.Id;
                 ProjectEngine.AddTimeline(last);
                 ProjectEngine.AddTimeline(concept);
                 Timelines.Add(concept);
@@ -86,6 +120,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     target.NextItem  = concept.Id;
                     ProjectEngine.AddTimeline(target);
                     ProjectEngine.AddTimeline(concept);
+                    Timelines.Insert(index + 1, concept);
                 }
                 else
                 {
@@ -105,8 +140,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     ProjectEngine.AddTimeline(target);
                     ProjectEngine.AddTimeline(concept);
                     ProjectEngine.AddTimeline(b);
+                    Timelines.Insert(index + 1, concept);
                 }
-                Timelines.Add(concept);
                 return;
             }
             
@@ -125,6 +160,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 target.LastItem  = concept.Id;
                 ProjectEngine.AddTimeline(target);
                 ProjectEngine.AddTimeline(concept);
+                Timelines.Insert(index, concept);
             }
             else
             {
@@ -145,8 +181,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 ProjectEngine.AddTimeline(target);
                 ProjectEngine.AddTimeline(a);
                 ProjectEngine.AddTimeline(concept);
+                Timelines.Insert(index, concept);
             }
-            Timelines.Add(concept);
         }
 
         private Task AddTimelineAgeImpl()
@@ -178,7 +214,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 return Task.FromException(new ArgumentNullException(nameof(target)));
             }
-            return AddTimelineConceptImpl(true, target, false);
+            return AddTimelineConceptImpl(false, target, false);
         }
         
         private Task AddTimelineEventAfterImpl(TimelineConcept target)
@@ -188,7 +224,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return Task.FromException(new ArgumentNullException(nameof(target)));
             }
             
-            return AddTimelineConceptImpl(true, target, true);
+            return AddTimelineConceptImpl(false, target, true);
         }
         
         private Task AddTimelineEventImpl()
@@ -221,6 +257,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             concept.LastItem = next.Id;
             next.NextItem    = concept.Id;
             Timelines.ShiftDown(concept);
+            Timelines[0].LastItem = null;
             ProjectEngine.AddTimeline(concept);
             ProjectEngine.AddTimeline(next);
         }
@@ -245,12 +282,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             var last = Timelines[index - 1];
-            last.LastItem    = concept.LastItem;
+            concept.LastItem = last.LastItem;
             concept.NextItem = last.NextItem;
-            concept.LastItem = last.Id;
-            last.NextItem    = concept.Id;
-            
+
+            if (index == Timelines.Count - 1)
+            {
+                last.NextItem = null;
+            }
+            else
+            {
+                last.NextItem = concept.NextItem;
+            }
+
+            last.LastItem = concept.Id;
+
             Timelines.ShiftUp(concept);
+            Timelines[0].LastItem = null;
             ProjectEngine.AddTimeline(concept);
             ProjectEngine.AddTimeline(last);
         }

@@ -86,7 +86,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             if (_mode == DatabaseMode.Debug)
             {
-                return Set<DatabaseVersion>(new DatabaseVersion
+                return IfSet<DatabaseVersion>(new DatabaseVersion
                 {
                     TimeOfCreated = DateTime.Now,
                     TimeOfModified = DateTime.Now,
@@ -284,12 +284,15 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             return Has<T>() ? Update(instance) : Set(instance);
         }
 
-        public void IfSet<T>(T instance) where T : class
+        public T IfSet<T>(T instance) where T : class
         {
             if (!Has<T>())
             {
                 Set(instance);
+                return instance;
             }
+
+            return Get<T>();
         }
         
         /// <summary>

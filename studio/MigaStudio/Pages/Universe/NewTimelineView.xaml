@@ -9,20 +9,21 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewTimelineViewModel}, IsDesignTimeCreatable=True}"
-                     Height="300"
-                     Width="300">
+                     Height="360"
+                     Width="480">
     <f:DialogPage CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}"
                   Title="{Binding Title}">
-        <StackPanel>
-            <f:HeaderedSingleLine Header="名字"
+        <DockPanel>
+            <f:HeaderedSingleLine DockPanel.Dock="Top"
+                                  Header="名字"
                                   Margin="0 6"
                                   Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             
             <f:HeaderedMultiLine Header="介绍"
                                  Margin="0 6"
                                  Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
+        </DockPanel>
         
     </f:DialogPage>
 </f:ForestUserControl>

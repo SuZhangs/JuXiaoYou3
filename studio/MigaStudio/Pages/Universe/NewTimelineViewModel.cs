@@ -74,6 +74,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 return;
             }
 
+            #if DEBUG
+            
+            if (IsAge)
+            {
+                Result = new TimelineAge
+                {
+                    Id    = Name,
+                    Name  = Name,
+                    Intro = Intro
+                };
+                return;
+            }
+
+            Result = new TimelineEvent
+            {
+                Id    = Name,
+                Name  = Name,
+                Intro = Intro
+            };
+            
+            #else
+            
             if (IsAge)
             {
                 Result = new TimelineAge
@@ -91,6 +113,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 Name  = Name,
                 Intro = Intro
             };
+            #endif
         }
 
         protected override string Failed()

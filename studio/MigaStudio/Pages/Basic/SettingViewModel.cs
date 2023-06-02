@@ -86,7 +86,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void ConfigureRegularSetting()
         {
             ComboBox<MainTheme>(ConstantValues.Setting_MainTheme, BasicAppSetting.Theme, MainThemeSetting, ConstantValues.Themes);
-            ComboBox<DatabaseMode>(ConstantValues.Setting_DebugMode, DatabaseMode.Release, DatabaseModeSetting, ConstantValues.DebugMode);
+            ComboBox<DatabaseMode>(ConstantValues.Setting_DebugMode,SystemSetting.AdvancedSetting
+                                                                                 .DebugMode, DatabaseModeSetting, ConstantValues.DebugMode);
             ComboBox<CultureArea>(ConstantValues.Setting_Language, BasicAppSetting.Language, LanguageSetting, ConstantValues.Languages);
             Slider(ConstantValues.Setting_AutoSavePeriod, AdvancedSetting.AutoSavePeriod, AutoSavePeriod, 5, 30);
         }
@@ -137,8 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void DatabaseModeSetting(DatabaseMode x)
         {
-            var setting = Xaml.Get<SystemSetting>()
-                              .AdvancedSetting;
+            var setting = SystemSetting.AdvancedSetting;
             if (x == setting.DebugMode)
             {
                 return;
@@ -152,8 +152,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public sealed override void Stop()
         {
             ForestApp.SaveBasicSetting(BasicAppSetting);
-            Xaml.Get<SystemSetting>()
-                .Save();
+            SystemSetting.Save();
             ApprovalRequired = false;
         }
 
