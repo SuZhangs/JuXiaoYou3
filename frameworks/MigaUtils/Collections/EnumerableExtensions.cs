@@ -198,7 +198,6 @@ namespace Acorisoft.FutureGL.MigaUtils.Collections
             }
             
             source.Move(index, index + 1);
-            
             callback?.Invoke(target, index, index + 1);
         }
         

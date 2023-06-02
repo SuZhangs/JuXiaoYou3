@@ -232,74 +232,77 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return AddTimelineConceptImpl(false, null, true);
         }
         
-        private void ShiftDownTimelineImpl(TimelineConcept concept)
+        private void ShiftDownTimelineImpl(TimelineConcept c)
         {
-            if (concept is null)
+            if (c is null)
             {
                 return;
             }
 
-            var index = Timelines.IndexOf(concept);
+            var index = Timelines.IndexOf(c);
 
             if (index == -1)
             {
                 return;
             }
+            var b = index == 0 ? null : Timelines[index - 1];
+            var a = index == Timelines.Count - 1 ? null : Timelines[index + 1];
 
-            if (index == Timelines.Count - 1)
+            if (b is not null)
             {
-                return;
+                b.NextItem = a?.Id;
             }
-            
-            var next = Timelines[index + 1];
-            next.LastItem    = concept.LastItem;
-            concept.NextItem = next.NextItem;
-            concept.LastItem = next.Id;
-            next.NextItem    = concept.Id;
-            Timelines.ShiftDown(concept);
-            Timelines[0].LastItem = null;
-            ProjectEngine.AddTimeline(concept);
-            ProjectEngine.AddTimeline(next);
+
+            c.LastItem = a?.Id;
+            c.NextItem = a?.NextItem;
+
+            if (a is not null)
+            {
+                a.LastItem = b?.Id;
+                a.NextItem = c.Id;
+            }
+
+
+            Timelines.ShiftDown(c);
+            ProjectEngine.AddTimeline(b);
+            ProjectEngine.AddTimeline(a);
+            ProjectEngine.AddTimeline(c);
         }
         
-        private void ShiftUpTimelineImpl(TimelineConcept concept)
+        private void ShiftUpTimelineImpl(TimelineConcept c)
         {
-            if (concept is null)
+            if (c is null)
             {
                 return;
             }
 
-            var index = Timelines.IndexOf(concept);
+            var index = Timelines.IndexOf(c);
 
             if (index == -1)
             {
                 return;
             }
 
-            if (index == 0)
+            var b = index == 0 ? null : Timelines[index - 1];
+            var a = index == Timelines.Count - 1 ? null : Timelines[index + 1];
+
+            c.LastItem = b?.LastItem;
+            c.NextItem = b?.Id;
+
+            if (b is not null)
             {
-                return;
+                b.LastItem = c.Id;
+                b.NextItem = a?.Id;
             }
 
-            var last = Timelines[index - 1];
-            concept.LastItem = last.LastItem;
-            concept.NextItem = last.NextItem;
-
-            if (index == Timelines.Count - 1)
+            if (a is not null)
             {
-                last.NextItem = null;
+                a.LastItem = b?.Id;
             }
-            else
-            {
-                last.NextItem = concept.NextItem;
-            }
-
-            last.LastItem = concept.Id;
-
-            Timelines.ShiftUp(concept);
-            Timelines[0].LastItem = null;
-            ProjectEngine.AddTimeline(concept);
-            ProjectEngine.AddTimeline(last);
+            Timelines.ShiftUp(c);
+            ProjectEngine.AddTimeline(c);
+            ProjectEngine.AddTimeline(b);
+            ProjectEngine.AddTimeline(a);
         }
 
         private async Task RemoveTimelineImpl(TimelineConcept concept)
