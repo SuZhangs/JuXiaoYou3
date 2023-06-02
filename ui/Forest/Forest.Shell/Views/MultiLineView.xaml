@@ -9,10 +9,8 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:MultiLineViewModel}, IsDesignTimeCreatable=True}"
-                     Width="420"
-                     Height="256"
-                     MinHeight="280"
-                     MaxHeight="384">
+                     Width="540"
+                     Height="360">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -43,7 +41,6 @@
             <f:MultiLine Grid.Row="1"
                          ScrollViewer.CanContentScroll="True"
                          VerticalScrollBarVisibility="Auto"
-                         Height="128"
                           Margin="16"
                           Padding="8"
                           Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

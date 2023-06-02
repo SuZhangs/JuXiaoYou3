@@ -9,13 +9,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public AppraisePartViewModel()
         {
             ProjectEngine = Studio.Engine<ProjectEngine>();
-            Items         = new ObservableCollection<Appraise>();
             EditCommand   = AsyncCommand<Appraise>(EditItem);
         }
 
         protected override async Task AddItem()
         {
-            var r = await SubSystem.Select(DocumentType.Character);
+            var r = await SubSystem.SelectExclude(DocumentType.Character, new HashSet<string>
+            {
+                Owner.Cache.Id
+            });
 
             if (!r.IsFinished)
             {
@@ -32,13 +34,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var appraise = new Appraise
             {
                 Id      = ID.Get(),
-                Source  = Owner.Cache,
-                Target  = r.Value,
+                Target  = Owner.Cache,
+                Source  = r.Value,
                 Content = r1.Value 
             };
             
             ProjectEngine.AddAppraise(appraise);
-            Items.Add(appraise);
+            Collection.Add(appraise);
         }
         
         protected async Task EditItem(Appraise item)
@@ -110,7 +112,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Appraise> EditCommand { get; }
-        public ObservableCollection<Appraise> Items { get; }
         public ProjectEngine ProjectEngine { get; }
     }
 }

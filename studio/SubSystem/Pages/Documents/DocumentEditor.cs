@@ -47,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 new PartOfAlbum { Items      = new List<Album>() },
                 new PartOfPlaylist { Items   = new List<Music>() },
                 new PartOfStickyNote { Items = new List<StickyNote>() },
-                new PartOfPrototype { Items  = new List<Prototype>() },
+                new PartOfPrototype(),
                 new PartOfSurvey { Items     = new List<SurveySet>() },
             };
         }

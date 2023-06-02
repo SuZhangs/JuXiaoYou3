@@ -8,74 +8,92 @@
              xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
-             d:DesignHeight="300" 
+             d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:AppraisePartViewModel}, IsDesignTimeCreatable=True}">
+    <!-- ReSharper disable  Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
-        <thisConverters:ImageConverter x:Key="ImageConverter"/>
+        <thisConverters:ImageConverter x:Key="ImageConverter" />
+
+        <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
+
+        <DataTemplate DataType="{x:Type m:Appraise}">
+            <Border Background="{f:Brush BackgroundLevel4}"
+                    CornerRadius="8"
+                    Margin="8"
+                    Padding="16 32 16 16"
+                    Height="320"
+                    Width="256">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+
+                        <f:MenuItem Header="{f:Language global.Up}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
+
+                        <f:MenuItem Header="{f:Language global.Down}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+
+                        <f:MenuItem Header="{f:Language global.edit}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Upload}" />
+                    </f:ContextMenu>
+                </Border.ContextMenu>
+                <DockPanel>
+                    <studio:Avatar DockPanel.Dock="Top"
+                                   CornerRadius="32"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   AvatarName="{Binding Source.Name}"
+                                   Image="{Binding Source.Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+
+                    <TextBlock FontFamily="{f:SongTi}"
+                               FontSize="16"
+                               Margin="16"
+                               Text="{Binding Content,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"
+                               HorizontalAlignment="Center" />
+                </DockPanel>
+            </Border>
+        </DataTemplate>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top"
-                    Orientation="Horizontal">
-            <ftk:ToolButton Content="{f:Language global.Add}"
+    <f:ForestIsland Background="{f:Brush BackgroundLevel2}"
+                    Header="所有评价"
+                    Margin="16 8"
+                    Padding="0 16 0 0">
+        <f:ForestIsland.ToolBar>
+            <f:CallToAction DockPanel.Dock="Top"
+                            Content="{f:Language global.Add}"
                             Command="{Binding AddCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                            ShowText="True" />
+                            CornerRadius="24"
+                            HorizontalAlignment="Right"
+                            Padding="16"
+                            Icon="{StaticResource FeatherIcon.Plus}" />
+        </f:ForestIsland.ToolBar>
 
-            <ftk:ToolButton Content="{f:Language global.Remove}"
-                            Command="{Binding RemoveCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.MinusCircle}"
-                            ShowText="True" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl DockPanel.Dock="Right"
+                          ItemsSource="{Binding Collection,Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
 
-            <ftk:ToolButton Content="{f:Language global.Up}"
-                            Command="{Binding ShiftUpCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowUp}"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.Down}"
-                            Command="{Binding ShiftDownCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.ArrowDown}"
-                            ShowText="True" />
-
-            <ftk:ToolButton Content="{f:Language global.edit}"
-                            Command="{Binding EditCommand}"
-                            CommandParameter="{Binding}"
-                            Icon="{StaticResource FeatherIcon.Upload}"
-                            ShowText="True" />
-        </StackPanel>
-
-        <DockPanel>
-            <f:ListBox DockPanel.Dock="Right"
-                       ItemsSource="{Binding Collection,Mode=OneWay}"
-                       SelectedItem="{Binding Selected,Mode=TwoWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Appraise}">
-                        <TextBlock Margin="8"
-                                   Text="{Binding Source}"
-                                   TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </f:ListBox>
-
-            <ScrollViewer Padding="12">
-                <Viewbox>
-                    <ContentControl Content="{Binding Selected,Mode=OneWay}">
-                        <ContentControl.ContentTemplate>
-                            <DataTemplate DataType="{x:Type m:Appraise}">
-                                <Image Stretch="None"
-                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}"/>
-                            </DataTemplate>
-                        </ContentControl.ContentTemplate>
-                    </ContentControl>
-                </Viewbox>
-            </ScrollViewer>
-
-        </DockPanel>
-    </DockPanel>
+    </f:ForestIsland>
 </UserControl>

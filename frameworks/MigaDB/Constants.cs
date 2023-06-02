@@ -2,7 +2,8 @@
 {
     public class Constants
     {
-        /*
+
+     /*
             * Database Const Fields : string
             * 数据库常量字段
             */
@@ -59,6 +60,7 @@
         internal const string Name_Appraise    = "appraise";
         internal const string Name_Prototype   = "prototype";
         internal const string Name_Preshape    = "preshape";
+        internal const string Name_Sentence    = "sentence";
         
         internal const string Name_MeasuringUnit  = "unit";
         internal const string Name_Faith          = "faith";

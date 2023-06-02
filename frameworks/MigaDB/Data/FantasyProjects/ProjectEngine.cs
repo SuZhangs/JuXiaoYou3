@@ -16,6 +16,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             var database = session.Database;
             Preshapes     = database.GetCollection<Preshape>(Constants.Name_Preshape);
             Appraises     = database.GetCollection<Appraise>(Constants.Name_Appraise);
+            Sentences     = database.GetCollection<Sentence>(Constants.Name_Sentence);
             Timelines     = database.GetCollection<TimelineConcept>(Constants.Name_Timeline);
             Terminologies = database.GetCollection<Terminology>(Constants.Name_Terminology);
             Prototypes    = database.GetCollection<Prototype>(Constants.Name_Prototype);
@@ -29,6 +30,10 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             Timelines     = null;
             Terminologies = null;
         }
+
+        #region Appraise
+
+        
         
         public void AddAppraise(Appraise item)
         {
@@ -49,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             Appraises.Delete(item.Id);
         }
-
+        
         public IEnumerable<Appraise> GetAppraises(DocumentCache source)
         {
             if (source is null)
@@ -65,6 +70,47 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
         public IEnumerable<Appraise> GetAppraises() => Appraises.FindAll();
 
+        #endregion
+
+        #region Sentence
+
+        
+        public void AddSentence(Sentence item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Sentences.Upsert(item);
+        }
+
+        public void RemoveSentence(Sentence item)
+        {
+            if (item is null)
+            {
+                return;
+            }
+
+            Sentences.Delete(item.Id);
+        }
+        public IEnumerable<Sentence> GetSentences(DocumentCache source)
+        {
+            if (source is null)
+            {
+                return GetSentences();
+            }
+
+            return Sentences
+                   .Include(y => y.Source)
+                   .Find(x => x.Source.Id == source.Id);
+        }
+
+        public IEnumerable<Sentence> GetSentences() => Sentences.FindAll();
+        
+
+        #endregion
+
         /// <summary>
         /// 时间线
         /// </summary>
@@ -73,10 +119,17 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         /// 时间线
         /// </summary>
         public ILiteCollection<Preshape> Preshapes { get; private set; }
+        
         /// <summary>
         /// 时间线
         /// </summary>
         public ILiteCollection<Appraise> Appraises { get; private set; }
+        
+        
+        /// <summary>
+        /// 时间线
+        /// </summary>
+        public ILiteCollection<Sentence> Sentences { get; private set; }
 
         /// <summary>
         /// 时间线

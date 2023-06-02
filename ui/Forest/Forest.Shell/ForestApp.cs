@@ -62,6 +62,11 @@ namespace Acorisoft.FutureGL.Forest
                         ViewModel = typeof(WarningNotifyViewModel),
                         View      = typeof(WarningNotifyView)
                     },
+                    new BindingInfo
+                    {
+                        ViewModel = typeof(MultiLineViewModel),
+                        View      = typeof(MultiLineView)
+                    },
                 };
             }
         }

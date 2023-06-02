@@ -5,98 +5,87 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
              xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
-             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.DataParts;assembly=MigaDB"
+             xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;assembly=MigaDB"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              mc:Ignorable="d"
-             d:DesignHeight="300" 
+             d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:SentencePartViewModel}, IsDesignTimeCreatable=True}">
+    <!-- ReSharper disable  Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
         <thisConverters:ImageConverter x:Key="ImageConverter" />
-        <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
-        <DataTemplate DataType="{x:Type m:StickyNote}">
-            <Border Background="{f:Brush BackgroundLevel3}"
-                        CornerRadius="6"
-                              Margin="4"
-                        Padding="16"
-                              Height="160"
-                              Width="500">
+        <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
+
+        <DataTemplate DataType="{x:Type m:Sentence}">
+            <Border Background="{f:Brush BackgroundLevel4}"
+                    CornerRadius="8"
+                    Margin="8"
+                    Padding="16 32 16 16"
+                    Height="320"
+                    Width="256">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Edit}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
+
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Edit}" />
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
 
                         <f:MenuItem Header="{f:Language global.Up}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpCommand}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowUp}" />
 
                         <f:MenuItem Header="{f:Language global.Down}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
                                     Icon="{StaticResource FeatherIcon.ArrowDown}" />
-                        <Separator/>
 
-                        <f:MenuItem Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
+                        <f:MenuItem Header="{f:Language global.edit}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                                    Icon="{StaticResource FeatherIcon.Upload}" />
                     </f:ContextMenu>
                 </Border.ContextMenu>
-                <StackPanel>
-                    <TextBlock FontSize="20"
+                <DockPanel>
+                    <studio:Avatar DockPanel.Dock="Top"
+                                   CornerRadius="32"
+                                   FontSize="18"
                                    FontWeight="Bold"
-                                   Text="{Binding Title,Mode=OneWay}" />
-                    <TextBlock FontSize="13"
-                                   Foreground="{f:Brush ForegroundLevel3}"
-                                   Margin="0 8"
-                                   Text="{Binding Id,Mode=OneWay}" />
-                    <UniformGrid Columns="3"
-                                     Margin="0 4">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="创建时间" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding TimeOfCreated,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                        </DockPanel>
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="修改时间" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding TimeOfModified,Mode=OneWay,StringFormat={}{0:yyyy-MM-dd HH\:mm}}" />
-                        </DockPanel>
-                        <DockPanel>
+                                   AvatarName="{Binding Source.Name}"
+                                   Image="{Binding Source.Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
 
-                            <TextBlock DockPanel.Dock="Top"
-                                           Margin="0 8"
-                                           Text="长度" />
-                            <TextBlock Foreground="{f:Brush ForegroundLevel3}"
-                                           Text="{Binding Content.Length,Mode=OneWay, FallbackValue=0}" />
-                        </DockPanel>
-                    </UniformGrid>
-                </StackPanel>
+                    <TextBlock FontFamily="{f:SongTi}"
+                               FontSize="16"
+                               Margin="16"
+                               Text="{Binding Content,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"
+                               HorizontalAlignment="Center" />
+                </DockPanel>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top"
-                    Orientation="Horizontal">
-            <ftk:ToolButton Content="{f:Language global.Add}"
+    <f:ForestIsland Background="{f:Brush BackgroundLevel2}"
+                    Header="所有台词"
+                    Margin="16 8"
+                    Padding="0 16 0 0">
+        <f:ForestIsland.ToolBar>
+            <f:CallToAction DockPanel.Dock="Top"
+                            Content="{f:Language global.Add}"
                             Command="{Binding AddCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                            ShowText="True" />
+                            CornerRadius="24"
+                            HorizontalAlignment="Right"
+                            Padding="16"
+                            Icon="{StaticResource FeatherIcon.Plus}" />
+        </f:ForestIsland.ToolBar>
 
-        </StackPanel>
-
-        <ScrollViewer Margin="0 16 0 0">
-            <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl DockPanel.Dock="Right"
                           ItemsSource="{Binding Collection,Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -105,5 +94,6 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-    </DockPanel>
+
+    </f:ForestIsland>
 </UserControl>

@@ -39,7 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 new PartOfAppraise(),
                 new PartOfStickyNote { Items = new List<StickyNote>() },
                 new PartOfPrototype(),
-                new PartOfSentence { Items = new List<Sentence>() },
+                new PartOfSentence(),
                 new PartOfSurvey { Items   = new List<SurveySet>() },
                 new PartOfRel(),
             };
