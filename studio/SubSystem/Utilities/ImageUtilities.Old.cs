@@ -193,6 +193,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 var fr = engine.Records
                                .FindById(md5);
 
+                callback?.Invoke(new Album
+                {
+                    Id = fr.Id,
+                    Source = fr.Uri,
+                    Width = fr.Width,
+                    Height = fr.Height,
+                });
                 return Op<string>.Success(string.Format(ThumbnailWithSizePattern, fr.Uri, fr.Width, fr.Height));
             }
 

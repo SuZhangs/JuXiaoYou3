@@ -219,7 +219,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             var avatar = values[0];
             var w      = int.TryParse(values[1], out var n) ? n : 100;
             var h      = int.TryParse(values[2], out n) ? n : 100;
-            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching($"{avatar}.png", w, h));
+            return string.IsNullOrEmpty(avatar) ? null : Dispatcher.CurrentDispatcher.Invoke(() => Caching(avatar, w, h));
         }
 
         public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
