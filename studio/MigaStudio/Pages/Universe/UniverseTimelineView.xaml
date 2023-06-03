@@ -28,7 +28,8 @@
         <DataTemplate DataType="{x:Type m:TimelineAge}">
             <Grid Background="Transparent"
                   HorizontalAlignment="Left"
-                  Height="128"
+                  MinHeight="128"
+                  MaxHeight="192"
                   Width="768">
                 <Grid.ContextMenu>
                     <f:ContextMenu>
@@ -176,6 +177,7 @@
     <f:ForestIsland Header="时间轴">
         <f:ForestIsland.ToolBar>
             <StackPanel HorizontalAlignment="Right"
+                        Margin="0 0 0 8"
                         Orientation="Horizontal">
                 <f:CallToAction DockPanel.Dock="Top"
                                 Content="添加大事记"

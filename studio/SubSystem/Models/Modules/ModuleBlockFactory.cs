@@ -551,6 +551,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             BlockType.Color,
             BlockType.Number,
             BlockType.SingleLine,
+            BlockType.Slider,
+            BlockType.Heart,
+            BlockType.Degree,
             BlockType.MultiLine,
             BlockType.Likability,
             BlockType.Rate,
@@ -572,6 +575,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             BlockType.MultiLine,
             BlockType.Likability,
             BlockType.Rate,
+            BlockType.Slider,
+            BlockType.Heart,
+            BlockType.Degree,
         };
 
         public static readonly BlockType[] AdvancedBlockKinds = new[]
@@ -586,6 +592,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
 
         public static readonly BlockType[] OptionBlockKinds = new[]
         {
+            BlockType.Binary,
+            BlockType.Switch,
             BlockType.Sequence,
             BlockType.Group,
         };

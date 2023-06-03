@@ -22,7 +22,8 @@
             
             <f:HeaderedMultiLine Header="介绍"
                                  Margin="0 6"
-                                 Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                 TextWrapping="Wrap"/>
         </DockPanel>
         
     </f:DialogPage>
