@@ -153,6 +153,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
+            
+            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfVertical);
+            }
 
             var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Horizontal, AddAlbumToDetailPart);
             if (r.IsFinished)
@@ -168,6 +175,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             if (opendlg.ShowDialog() != true)
             {
                 return;
+            }
+            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfVertical);
             }
 
             var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Square, AddAlbumToDetailPart);

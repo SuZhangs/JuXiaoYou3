@@ -25,9 +25,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public const string AvatarPattern            = "avatar_{0}.png";
         public const string ThumbnailWithSizePattern = "{0}_{1}_{2}";
         public const string ThumbnailPattern         = "thumb_{0}.png";
-        public const string RawPattern         = "{0}.png";
+        public const string ThumbnailPrefixPattern   = "Images\\thumb_";
+        public const string RawPattern               = "{0}.png";
+
+        public static string GetSourceFileName(string fileName)
+        {
+            return fileName.Replace(ThumbnailPrefixPattern, "\\Sources\\");
+        }
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
+        
+
+        private static bool ConvertAlbumFromUri(string uri, out Album album)
+        {
+            var sources = uri.Split("_");
+
+            if (sources is null ||
+                sources.Length < 3)
+            {
+                album = null;
+                return false;
+            }
+
+            album = new Album
+            {
+                Id     = uri,
+                Source = string.Format(ThumbnailPattern, sources[0]),
+                Width  = int.Parse(sources[1]),
+                Height = int.Parse(sources[2])
+            };
+            return true;
+        }
 
         public static async Task CropAllAvatar()
         {
@@ -202,21 +230,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var    raw   = Pool.MD5.ComputeHash(buffer);
             var    md5   = Convert.ToBase64String(raw);
             var    image = Image.Load<Rgba32>(buffer);
-            string thumbnail;
 
             if (engine.HasFile(md5))
             {
                 var fr = engine.Records.FindById(md5);
-                var src = fr.Uri
-                            .Split('_');
-                thumbnail = string.Format(ThumbnailPattern, src[0]);
-                return Op<Album>.Success(new Album
-                {
-                    Id     = thumbnail,
-                    Source = thumbnail,
-                    Width  = int.Parse(src[1]),
-                    Height = int.Parse(src[2])
-                });
+
+                return ConvertAlbumFromUri(fr.Uri, out var album) ? 
+                    Op<Album>.Success(album) : 
+                    Op<Album>.Failed("错误的数据类型");
             }
 
             if (image.Width < 32 || image.Height < 32)
@@ -245,8 +266,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Array.Copy(buffer, thumbnailBuffer, buffer.Length);
             }
 
-            var id = ID.Get();
-            thumbnail = string.Format(ThumbnailPattern, id);
+            var    id        = ID.Get();
+            var thumbnail = string.Format(ThumbnailPattern, id);
             engine.AddFile(new FileRecord
             {
                 Id   = md5,
@@ -254,6 +275,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Type = ResourceType.Image
             });
 
+            //
+            // 复制源文件到
+            var dst = Path.Combine(engine.SourceDirectory, string.Format(RawPattern, id));
+            File.Copy(fileName, dst, true);
+            
+            //
+            //
             engine.Write(thumbnail, thumbnailBuffer);
             return Op<Album>.Success(new Album
             {
@@ -297,16 +325,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             if (engine.HasFile(md5))
             {
-                var fr = engine.Records.FindById(md5);
-                thumbnail = fr.Uri;
-                callback?.Invoke(new Album
+                var fr  = engine.Records.FindById(md5);
+
+                if (ConvertAlbumFromUri(fr.Uri, out var album))
                 {
-                    Id = thumbnail,
-                    Source = thumbnail,
-                    Width = w1,
-                    Height = h1
-                });
-                return Op<string>.Success(thumbnail);
+                    callback?.Invoke(album);
+                    return Op<string>.Success(album.Source);
+                }
+
+                return Op<string>.Failed(string.Empty);
             }
 
             if (image.Width < 32 || image.Height < 32)

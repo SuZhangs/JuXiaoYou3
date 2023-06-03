@@ -38,13 +38,28 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         protected override void OnDatabaseClosing()
         {
-            Records = null;
+            Records         = null;
+            SourceDirectory = null;
+            base.OnDatabaseClosing();
         }
 
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
-            Records = session.Database.GetCollection<FileRecord>(Constants.Name_FileTable);
+            //
+            // 检查文件夹创建状态
             base.OnDatabaseOpening(session);
+            
+
+            SourceDirectory = Path.Combine(session.RootDirectory, "Sources");
+            
+            if (!Directory.Exists(SourceDirectory))
+            {
+                Directory.CreateDirectory(SourceDirectory);
+            }
+            
+            
+            Records = session.Database
+                             .GetCollection<FileRecord>(Constants.Name_FileTable);
         }
 
         public void WriteAvatar(MemoryStream ms, string resource)
@@ -88,5 +103,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         public ILiteCollection<FileRecord> Records { get; private set; }
 
         public static string GetAvatarUri() => $"avatar_{ID.Get()}.png";
+        
+        public string SourceDirectory { get; private set; }
     }
 }

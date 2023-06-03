@@ -71,6 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             var fileName = ImageEngine.GetFileName(part.Source);
+            fileName = ImageUtilities.GetSourceFileName(fileName);
             SubSystem.ImageView(fileName);
         }
 

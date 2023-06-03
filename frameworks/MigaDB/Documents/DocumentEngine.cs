@@ -367,7 +367,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
         public IEnumerable<DocumentCache> GetCharacterCaches()
         {
-            return DocumentCacheDB.Find(x => x.Type == DocumentType.Character);
+            return DocumentCacheDB.Find(x => x.Type == DocumentType.Character && !x.IsDeleted);
         }
         
         public IEnumerable<DocumentCache> GetNPCCaches()

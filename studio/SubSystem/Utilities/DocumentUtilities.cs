@@ -284,7 +284,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         /// <summary>
         /// 同步文档，将DocumentCache的变化应用到Document
         /// </summary>
-        /// <param name="engine"></param>
+        /// <param name="document"></param>
         /// <param name="cache"></param>
         public static void SynchronizeDocument(DocumentCache cache, Document document)
         {

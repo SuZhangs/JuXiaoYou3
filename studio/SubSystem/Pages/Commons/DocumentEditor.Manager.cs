@@ -238,6 +238,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             // 检查部件的缺失
             IsDataPartExistence(Document);
+            DocumentUtilities.SynchronizeDocument(Cache, Document);
         }
 
         protected abstract void IsDataPartExistence(Document document);
@@ -273,8 +274,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Parts     = new DataPartCollection(),
                 Metas     = new MetadataCollection(),
             };
-
-            DocumentUtilities.SynchronizeDocument(Cache, document);
 
             //
             //
