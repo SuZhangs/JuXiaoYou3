@@ -83,29 +83,43 @@
             </DockPanel>
         </ftk:TabItem>
         <ftk:TabItem Header="立绘">
-            <ftk:TabControl TabStripPlacement="Right">
-                <ftk:TabControl.Resources>
-                    <Style TargetType="{x:Type ftk:TabItem}">
-                        <Setter Property="MinHeight" Value="36" />
-                        <Setter Property="MinWidth" Value="144" />
-                        <Setter Property="Padding" Value="16 8" />
-                        <Setter Property="IconSize" Value="23" />
-                        <Setter Property="FontSize" Value="14" />
-                        <Setter Property="Placement" Value="Left" />
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ftk:TabItem}">
-                                    <Border x:Name="PART_Bd"
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Path Data="{StaticResource FeatherIcon.Message}"
+                          Stroke="{f:Brush Theme=ForegroundLevel1}"
+                          Stretch="Uniform"
+                          Height="31"
+                          Width="32"/>
+
+                    <TextBlock Margin="16 0 0 0"
+                               Text="注意：立绘将用于自动设卡生成！我们不会上传用户数据！"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <ftk:TabControl Margin="0 8 0 0"
+                                TabStripPlacement="Right">
+                    <ftk:TabControl.Resources>
+                        <Style TargetType="{x:Type ftk:TabItem}">
+                            <Setter Property="MinHeight" Value="36" />
+                            <Setter Property="MinWidth" Value="144" />
+                            <Setter Property="Padding" Value="16 8" />
+                            <Setter Property="IconSize" Value="23" />
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="Placement" Value="Left" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ftk:TabItem}">
+                                        <Border x:Name="PART_Bd"
                                             BorderBrush="{TemplateBinding Background}"
                                             CornerRadius="0 8 8 0"
                                             Padding="{TemplateBinding Padding}">
-                                        <DockPanel Background="Transparent"
+                                            <DockPanel Background="Transparent"
                                                    HorizontalAlignment="Center"
                                                    LastChildFill="True"
                                                    VerticalAlignment="Center">
-                                            <Path x:Name="PART_Icon"
+                                                <Path x:Name="PART_Icon"
                                                   DockPanel.Dock="Left"
                                                   Data="{TemplateBinding Icon}"
                                                   HorizontalAlignment="Center"
@@ -117,7 +131,7 @@
                                                   VerticalAlignment="Center"
                                                   Visibility="Collapsed" />
 
-                                            <ContentPresenter x:Name="PART_Content"
+                                                <ContentPresenter x:Name="PART_Content"
                                                               HorizontalAlignment="Center"
                                                               VerticalAlignment="Center"
                                                               Content="{TemplateBinding Header}"
@@ -128,81 +142,79 @@
                                                               RecognizesAccessKey="True"
                                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                               TextElement.Foreground="Gray" />
-                                        </DockPanel>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="Placement" Value="Top" />
-                                                <Condition Property="HasIcon" Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Visibility" Value="Visible" />
-                                            <Setter Property="DockPanel.Dock" Value="Top" TargetName="PART_Icon" />
-                                            <Setter Property="Margin" Value="8 0 0 0" TargetName="PART_Content" />
-                                        </MultiTrigger>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="Placement" Value="Right" />
-                                                <Condition Property="HasIcon" Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Visibility" Value="Visible" />
-                                            <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Icon" />
-                                            <Setter Property="Margin" Value="0 0 8 0" TargetName="PART_Content" />
-                                        </MultiTrigger>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="Placement" Value="Bottom" />
-                                                <Condition Property="HasIcon" Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Visibility" Value="Visible" />
-                                            <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="PART_Icon" />
-                                            <Setter Property="Margin" Value="0 0 0 8" TargetName="PART_Content" />
-                                        </MultiTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ftk:TabControl.Resources>
-                <ftk:TabItem Header="立绘（纵向）">
-                    <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfVerticalEmpty,Mode=OneWay}">
-                        <f:EmptyContentControl.EmptyState>
-                            <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfVerticalCommand}" />
-                        </f:EmptyContentControl.EmptyState>
-                        <f:LooklessButton Command="{Binding SetAsMainPictureOfVerticalCommand}">
-                            <Image Height="640"
-                                   Width="360"
-                                   Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                        </f:LooklessButton>
-                    </f:EmptyContentControl>
-                </ftk:TabItem>
+                                            </DockPanel>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Placement" Value="Top" />
+                                                    <Condition Property="HasIcon" Value="True" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                                <Setter Property="DockPanel.Dock" Value="Top" TargetName="PART_Icon" />
+                                                <Setter Property="Margin" Value="8 0 0 0" TargetName="PART_Content" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Placement" Value="Right" />
+                                                    <Condition Property="HasIcon" Value="True" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                                <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Icon" />
+                                                <Setter Property="Margin" Value="0 0 8 0" TargetName="PART_Content" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Placement" Value="Bottom" />
+                                                    <Condition Property="HasIcon" Value="True" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                                <Setter Property="DockPanel.Dock" Value="Bottom" TargetName="PART_Icon" />
+                                                <Setter Property="Margin" Value="0 0 0 8" TargetName="PART_Content" />
+                                            </MultiTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ftk:TabControl.Resources>
+                    <ftk:TabItem Header="立绘（纵向）">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfVerticalEmpty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfVerticalCommand}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfVerticalCommand}">
+                                <Image Stretch="Uniform" 
+                                       Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </ftk:TabItem>
 
-                <ftk:TabItem Header="立绘（横向）">
-                    <f:EmptyContentControl
-                        Height="450"
-                        Width="800" IsEmpty="{Binding IsMainPictureOfHorizontalEmpty,Mode=OneWay}">
-                        <f:EmptyContentControl.EmptyState>
-                            <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfHorizontalCommand}" />
-                        </f:EmptyContentControl.EmptyState>
-                        <f:LooklessButton Command="{Binding SetAsMainPictureOfHorizontalCommand}">
-                            <Image Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                        </f:LooklessButton>
-                    </f:EmptyContentControl>
-                </ftk:TabItem>
+                    <ftk:TabItem Header="立绘（横向）">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfHorizontalEmpty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfHorizontalCommand}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfHorizontalCommand}">
+                                <Image Stretch="Uniform" 
+                                       Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </ftk:TabItem>
 
-                <ftk:TabItem Header="立绘（等比）">
-                    <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfSquareEmpty,Mode=OneWay}"
-                                           Height="600"
-                                           Width="800">
-                        <f:EmptyContentControl.EmptyState>
-                            <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfSquareCommand}" />
-                        </f:EmptyContentControl.EmptyState>
-                        <f:LooklessButton Command="{Binding SetAsMainPictureOfSquareCommand}">
-                            <Image Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                        </f:LooklessButton>
-                    </f:EmptyContentControl>
-                </ftk:TabItem>
-            </ftk:TabControl>
+                    <ftk:TabItem Header="立绘（等比）">
+                        <f:EmptyContentControl IsEmpty="{Binding IsMainPictureOfSquareEmpty,Mode=OneWay}">
+                            <f:EmptyContentControl.EmptyState>
+                                <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfSquareCommand}" />
+                            </f:EmptyContentControl.EmptyState>
+                            <f:LooklessButton Command="{Binding SetAsMainPictureOfSquareCommand}">
+                                <Image Stretch="Uniform" 
+                                       Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
+                            </f:LooklessButton>
+                        </f:EmptyContentControl>
+                    </ftk:TabItem>
+                </ftk:TabControl>
+            </DockPanel>
 
         </ftk:TabItem>
 
