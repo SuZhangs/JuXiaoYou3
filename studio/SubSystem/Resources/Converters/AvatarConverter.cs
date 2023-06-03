@@ -138,6 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             var img = Xaml.FromStream(ms, 1920, 1080);
             return img;
         }
+        
         private static ImageSource Caching(string avatar, int w, int h)
         {
             _engine ??= Studio.DatabaseManager()
@@ -207,7 +208,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
                 return Caching(a.Source, a.Width, a.Height);
             }
 
-            var values = v.Split("_");
+            var values = v.Split(":");
 
             if (values.Length < 3)
             {

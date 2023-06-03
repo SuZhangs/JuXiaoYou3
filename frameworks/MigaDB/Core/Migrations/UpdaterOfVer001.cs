@@ -5,10 +5,12 @@ using Acorisoft.FutureGL.MigaDB.Data.Relatives;
 
 namespace Acorisoft.FutureGL.MigaDB.Core.Migrations
 {
-    public class UpdaterOfVer100 : DatabaseUpdater
+    public class UpdaterOfVer001 : DatabaseUpdater
     {
         protected override void Execute(IDatabase database)
         {
+            var db = database.GetLiteDatabase();
+            db.DropCollection(Constants.Name_FileTable);
 
         }
 
@@ -19,6 +21,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core.Migrations
 
         public override int TargetVersion => 0;
         
-        public override int ResultVersion => 100;
+        public override int ResultVersion => 1;
     }
 }

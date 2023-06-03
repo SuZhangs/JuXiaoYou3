@@ -123,8 +123,10 @@ namespace Acorisoft.FutureGL.MigaDB.Utils
 
             public static string Encode(Guid guid)
             {
-                return Convert.ToBase64String(guid.ToByteArray()).Replace("/", "_").Replace("+", "-")
-                    .Substring(0, 22);
+                return Convert.ToBase64String(guid.ToByteArray())
+                              .Replace("/", "_")
+                              .Replace("+", "-")
+                              .Substring(0, 22);
             }
 
             public static Guid Decode(string value)

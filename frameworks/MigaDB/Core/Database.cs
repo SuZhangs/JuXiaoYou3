@@ -352,7 +352,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             //
             // Update
-            Set(information);
+            Update(information);
         }
 
         /// <summary>

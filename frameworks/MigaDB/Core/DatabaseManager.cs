@@ -47,6 +47,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Maintain<DatabasePresetMaintainer>()
                    .Maintain<DatabasePropertiesMaintainer>()
                    .Maintain<ServicePropertyMaintainer>()
+                   .Update<UpdaterOfVer001>()
                    .Build(Constants.DatabaseCurrentVersion, mode);
         }
         

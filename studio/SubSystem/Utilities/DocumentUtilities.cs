@@ -295,7 +295,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             UpdateName(document, cache.Name);
             UpdateAvatar(document, cache.Avatar);
-            UpdateIntro(document, cache.Avatar);
+            UpdateIntro(document, cache.Intro);
             document.Owner = cache.Owner;
         }
 

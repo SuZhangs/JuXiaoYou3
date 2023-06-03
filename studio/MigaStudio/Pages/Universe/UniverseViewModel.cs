@@ -177,45 +177,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// </summary>
         private async Task ChangeAvatarImpl()
         {
-            var r = await ImageUtilities.Avatar();
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-
-            var    buffer = r.Buffer;
-            var    raw    = await Pool.MD5.ComputeHashAsync(buffer);
-            var    md5    = Convert.ToBase64String(raw);
-            string avatar;
-
-            if (ImageEngine.HasFile(md5))
-            {
-                var fr = ImageEngine.Records.FindById(md5);
-                avatar = fr.Uri;
-            }
-            else
-            {
-                avatar = ImageUtilities.GetAvatarName();
-                buffer.Seek(0, SeekOrigin.Begin);
-                ImageEngine.WriteAvatar(buffer, avatar);
-
-                var record = new FileRecord
-                {
-                    Id   = md5,
-                    Uri  = avatar,
-                    Type = ResourceType.Image
-                };
-
-                ImageEngine.AddFile(record);
-            }
-
-            Icon = avatar;
+            await ImageUtilities.Avatar(ImageEngine, x => Icon = x);
         }
 
         private void Save()

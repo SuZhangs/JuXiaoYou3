@@ -13,5 +13,9 @@ namespace Acorisoft.FutureGL.MigaDB.Services
         /// 
         /// </summary>
         public ResourceType Type { get; init; }
+        
+        public int Width { get; init; }
+        
+        public int Height { get; init; }
     }
 }
