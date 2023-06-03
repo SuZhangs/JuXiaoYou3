@@ -27,8 +27,7 @@
 
                         <Border x:Name="HeaderBorder"
                                 Grid.Row="0"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderBrush="{TemplateBinding BorderBrush}">
                             <TabPanel x:Name="HeaderPanel"
                                       Panel.ZIndex="1"
                                       IsItemsHost="True"
@@ -54,24 +53,28 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter Property="BorderThickness" TargetName="HeaderBorder" Value="0 0 2 0" />
                             <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.Column" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.RowSpan" TargetName="HeaderBorder" Value="3" />
                             <Setter Property="Grid.RowSpan" TargetName="Border" Value="3" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Top">
+                            <Setter Property="BorderThickness" TargetName="HeaderBorder" Value="0 0 0 2" />
                             <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.Column" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.ColumnSpan" TargetName="HeaderBorder" Value="3" />
                             <Setter Property="Grid.ColumnSpan" TargetName="Border" Value="3" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter Property="BorderThickness" TargetName="HeaderBorder" Value="2 0 0 0" />
                             <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.Column" TargetName="HeaderBorder" Value="2" />
                             <Setter Property="Grid.RowSpan" TargetName="HeaderBorder" Value="3" />
                             <Setter Property="Grid.RowSpan" TargetName="Border" Value="3" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
+                            <Setter Property="BorderThickness" TargetName="HeaderBorder" Value="0 2 0 0" />
                             <Setter Property="Grid.Row" TargetName="HeaderBorder" Value="2" />
                             <Setter Property="Grid.Column" TargetName="HeaderBorder" Value="0" />
                             <Setter Property="Grid.ColumnSpan" TargetName="HeaderBorder" Value="3" />
