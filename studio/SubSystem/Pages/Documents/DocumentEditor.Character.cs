@@ -12,9 +12,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
     {
         public CharacterDocumentViewModel() : base()
         {
-            SetAsMainPictureOfSquareCommand     = AsyncCommand(SetAsMainPictureOfSquareImpl);
-            SetAsMainPictureOfHorizontalCommand = AsyncCommand(SetAsMainPictureOfHorizontalImpl);
-            SetAsMainPictureOfVerticalCommand   = AsyncCommand(SetAsMainPictureOfVerticalImpl);
+            SetAsMainPictureOfSquareCommand       = AsyncCommand(SetAsMainPictureOfSquareImpl);
+            SetAsMainPictureOfHorizontalCommand   = AsyncCommand(SetAsMainPictureOfHorizontalImpl);
+            SetAsMainPictureOfVerticalCommand     = AsyncCommand(SetAsMainPictureOfVerticalImpl);
+            ResetAsMainPictureOfHorizontalCommand = Command(ResetAsMainPictureOfHorizontalImpl);
+            ResetAsMainPictureOfVerticalCommand = Command(ResetAsMainPictureOfVerticalImpl);
+            ResetAsMainPictureOfSquareCommand = Command(ResetAsMainPictureOfSquareImpl);
         }
 
         // TODO: 人物关系中的血缘关系
@@ -145,6 +148,45 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             }
         }
 
+        private void ResetAsMainPictureOfHorizontalImpl()
+        {
+            
+            if (!string.IsNullOrEmpty(MainPictureOfHorizontal))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfHorizontal);
+            }
+
+            MainPictureOfHorizontal = null;
+        }
+        
+        private void ResetAsMainPictureOfVerticalImpl()
+        {
+            
+            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfVertical);
+            }
+
+            MainPictureOfVertical = null;
+        }
+        
+        private void ResetAsMainPictureOfSquareImpl()
+        {
+            
+            if (!string.IsNullOrEmpty(MainPictureOfSquare))
+            {
+                //
+                // delete
+                RemoveAlbumFromDetailPart(MainPictureOfSquare);
+            }
+
+            MainPictureOfSquare = null;
+        }
+        
         private async Task SetAsMainPictureOfHorizontalImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
@@ -154,11 +196,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
             
-            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            if (!string.IsNullOrEmpty(MainPictureOfHorizontal))
             {
                 //
                 // delete
-                RemoveAlbumFromDetailPart(MainPictureOfVertical);
+                RemoveAlbumFromDetailPart(MainPictureOfHorizontal);
             }
 
             var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Horizontal, AddAlbumToDetailPart);
@@ -176,11 +218,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(MainPictureOfVertical))
+            if (!string.IsNullOrEmpty(MainPictureOfSquare))
             {
                 //
                 // delete
-                RemoveAlbumFromDetailPart(MainPictureOfVertical);
+                RemoveAlbumFromDetailPart(MainPictureOfSquare);
             }
 
             var r = await ImageUtilities.Raw(ImageEngine, opendlg.FileName, ImageUtilities.ImageScale.Square, AddAlbumToDetailPart);
@@ -193,5 +235,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public AsyncRelayCommand SetAsMainPictureOfVerticalCommand { get; }
         public AsyncRelayCommand SetAsMainPictureOfHorizontalCommand { get; }
         public AsyncRelayCommand SetAsMainPictureOfSquareCommand { get; }
+        public RelayCommand ResetAsMainPictureOfVerticalCommand { get; }
+        public RelayCommand ResetAsMainPictureOfHorizontalCommand { get; }
+        public RelayCommand ResetAsMainPictureOfSquareCommand { get; }
     }
 }

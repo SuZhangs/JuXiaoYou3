@@ -89,11 +89,11 @@
                           Stroke="{f:Brush Theme=ForegroundLevel1}"
                           Stretch="Uniform"
                           Height="31"
-                          Width="32"/>
+                          Width="32" />
 
                     <TextBlock Margin="16 0 0 0"
                                Text="注意：立绘将用于自动设卡生成！我们不会上传用户数据！"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </DockPanel>
 
                 <ftk:TabControl Margin="0 8 0 0"
@@ -112,36 +112,36 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ftk:TabItem}">
                                         <Border x:Name="PART_Bd"
-                                            BorderBrush="{TemplateBinding Background}"
-                                            CornerRadius="0 8 8 0"
-                                            Padding="{TemplateBinding Padding}">
+                                                BorderBrush="{TemplateBinding Background}"
+                                                CornerRadius="0 8 8 0"
+                                                Padding="{TemplateBinding Padding}">
                                             <DockPanel Background="Transparent"
-                                                   HorizontalAlignment="Center"
-                                                   LastChildFill="True"
-                                                   VerticalAlignment="Center">
+                                                       HorizontalAlignment="Center"
+                                                       LastChildFill="True"
+                                                       VerticalAlignment="Center">
                                                 <Path x:Name="PART_Icon"
-                                                  DockPanel.Dock="Left"
-                                                  Data="{TemplateBinding Icon}"
-                                                  HorizontalAlignment="Center"
-                                                  Stroke="Gray"
-                                                  StrokeThickness="2"
-                                                  Stretch="Uniform"
-                                                  Height="{TemplateBinding IconSize}"
-                                                  Width="{TemplateBinding IconSize}"
-                                                  VerticalAlignment="Center"
-                                                  Visibility="Collapsed" />
+                                                      DockPanel.Dock="Left"
+                                                      Data="{TemplateBinding Icon}"
+                                                      HorizontalAlignment="Center"
+                                                      Stroke="Gray"
+                                                      StrokeThickness="2"
+                                                      Stretch="Uniform"
+                                                      Height="{TemplateBinding IconSize}"
+                                                      Width="{TemplateBinding IconSize}"
+                                                      VerticalAlignment="Center"
+                                                      Visibility="Collapsed" />
 
                                                 <ContentPresenter x:Name="PART_Content"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"
-                                                              Content="{TemplateBinding Header}"
-                                                              ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                                              ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                              Focusable="False"
-                                                              RecognizesAccessKey="True"
-                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                              TextElement.Foreground="Gray" />
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"
+                                                                  Content="{TemplateBinding Header}"
+                                                                  ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                                                  ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                                  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                                                  Focusable="False"
+                                                                  RecognizesAccessKey="True"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  TextElement.Foreground="Gray" />
                                             </DockPanel>
                                         </Border>
                                         <ControlTemplate.Triggers>
@@ -183,10 +183,32 @@
                             <f:EmptyContentControl.EmptyState>
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfVerticalCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOfVerticalCommand}">
-                                <Image Stretch="Uniform" 
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 0 32 0"
+                                            Orientation="Horizontal">
+                                    <f:CallToAction Content="{f:Language global.add}"
+                                                    Command="{Binding SetAsMainPictureOfVerticalCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="HighlightPalette2"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+
+                                    </f:CallToAction>
+                                    <f:CallToAction Content="{f:Language global.remove}"
+                                                    Command="{Binding ResetAsMainPictureOfVerticalCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="Danger"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+                                    </f:CallToAction>
+                                </StackPanel>
+                                <Image Stretch="Uniform"
                                        Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                            </f:LooklessButton>
+                            </DockPanel>
                         </f:EmptyContentControl>
                     </ftk:TabItem>
 
@@ -195,10 +217,32 @@
                             <f:EmptyContentControl.EmptyState>
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfHorizontalCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOfHorizontalCommand}">
-                                <Image Stretch="Uniform" 
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 0 32 0"
+                                            Orientation="Horizontal">
+                                    <f:CallToAction Content="{f:Language global.add}"
+                                                    Command="{Binding SetAsMainPictureOfHorizontalCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="HighlightPalette2"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+
+                                    </f:CallToAction>
+                                    <f:CallToAction Content="{f:Language global.remove}"
+                                                    Command="{Binding ResetAsMainPictureOfHorizontalCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="Danger"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+                                    </f:CallToAction>
+                                </StackPanel>
+                                <Image Stretch="Uniform"
                                        Source="{Binding MainPictureOfHorizontal,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                            </f:LooklessButton>
+                            </DockPanel>
                         </f:EmptyContentControl>
                     </ftk:TabItem>
 
@@ -207,10 +251,32 @@
                             <f:EmptyContentControl.EmptyState>
                                 <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureOfSquareCommand}" />
                             </f:EmptyContentControl.EmptyState>
-                            <f:LooklessButton Command="{Binding SetAsMainPictureOfSquareCommand}">
-                                <Image Stretch="Uniform" 
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 0 32 0"
+                                            Orientation="Horizontal">
+                                    <f:CallToAction Content="{f:Language global.add}"
+                                                    Command="{Binding SetAsMainPictureOfSquareCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="HighlightPalette2"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+
+                                    </f:CallToAction>
+                                    <f:CallToAction Content="{f:Language global.remove}"
+                                                    Command="{Binding ResetAsMainPictureOfSquareCommand}"
+                                                    CornerRadius="24"
+                                                    Palette="Danger"
+                                                    Padding="32 8"
+                                                    Margin="4 0"
+                                                    Height="48">
+                                    </f:CallToAction>
+                                </StackPanel>
+                                <Image Stretch="Uniform"
                                        Source="{Binding MainPictureOfSquare,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
-                            </f:LooklessButton>
+                            </DockPanel>
                         </f:EmptyContentControl>
                     </ftk:TabItem>
                 </ftk:TabControl>
