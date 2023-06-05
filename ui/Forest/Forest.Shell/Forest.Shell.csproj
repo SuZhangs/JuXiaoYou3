@@ -17,9 +17,16 @@
         <Copyright>All copy reserved by Luoyisi</Copyright>
         <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
         <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
-        <PackageIcon>ico.png</PackageIcon>
+        <PackageIcon>橘小柚_9.png</PackageIcon>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="F:\Repository\FutureGL\assets\橘小柚_9.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Forest.Controls\Forest.Controls.csproj" />
       <ProjectReference Include="..\Forest\Forest.csproj" />
