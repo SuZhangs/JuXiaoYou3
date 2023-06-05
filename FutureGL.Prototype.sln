@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureGL.Prototype.Core", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigaStudio.UI", "prototype\MigaStudio.UI\MigaStudio.UI.csproj", "{9D6F77A2-00D3-4AED-BCD7-CC157A434181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.Story", "Builds\demo\FutureGL.Demo.Story\FutureGL.Demo.Story.csproj", "{3A783C54-DB74-46EA-8FB1-360BCF3754F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.Story", "demo\FutureGL.Demo.Story\FutureGL.Demo.Story.csproj", "{3A783C54-DB74-46EA-8FB1-360BCF3754F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

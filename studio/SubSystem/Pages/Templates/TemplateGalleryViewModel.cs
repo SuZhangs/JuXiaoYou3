@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Windows;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -39,10 +40,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             TemplateEngine = Studio.DatabaseManager()
                                  .GetEngine<TemplateEngine>();
 
-            Property = Studio.DatabaseManager()
-                           .Database
-                           .CurrentValue
-                           .Get<PresetProperty>();
+            Property = Studio.Database()
+                             .Get<PresetProperty>();
 
             _sorter                     = new BehaviorSubject<Func<ModuleTemplateCache, bool>>(Xaml.AlwaysTrue);
             _reader                     = new DataPartReader();

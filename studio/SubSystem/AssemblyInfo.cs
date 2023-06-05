@@ -20,6 +20,8 @@ global using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 global using Acorisoft.FutureGL.MigaUtils;
 global using Acorisoft.FutureGL.MigaUtils.Collections;
 
+global using Acorisoft.FutureGL.MigaDB;
+global using Acorisoft.FutureGL.MigaDB.Core;
 global using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 global using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
 global using Acorisoft.FutureGL.MigaDB.Documents;

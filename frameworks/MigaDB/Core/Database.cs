@@ -6,9 +6,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 {
     public class Database : Disposable, IDatabase, IObjectCollection, IDisposableCollector
     {
-        private readonly string                     _databaseDirectory;
-        private readonly string                     _databaseFileName;
-        private readonly string                     _databaseIndexFileName;
+        private readonly string                   _databaseDirectory;
+        private readonly string                   _databaseFileName;
+        private readonly string                   _databaseIndexFileName;
+        private readonly Dictionary<Type, object> _DataConsistencyCache;
 
         internal readonly LiteDatabase                  _database;
         internal readonly ILiteCollection<BsonDocument> _props;
@@ -18,6 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         
         public Database(LiteDatabase kernel, string root, string fileName, string indexFileName, DatabaseMode mode)
         {
+            _DataConsistencyCache  = new Dictionary<Type, object>();
             _collector             = new DisposableCollector();
             _database              = kernel ?? throw new ArgumentNullException(nameof(kernel));
             _databaseDirectory     = root;
@@ -45,22 +47,22 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
         private void CheckPrimitiveProperty()
         {
-            IfSet<DoubleProperty>(new DoubleProperty
+            this.IfSet<DoubleProperty>(new DoubleProperty
             {
                 Value = new Dictionary<string, double>()
             });
             
-            IfSet<BooleanProperty>(new BooleanProperty
+            this.IfSet<BooleanProperty>(new BooleanProperty
             {
                 Value = new Dictionary<string, bool>()
             });
             
-            IfSet<Int32Property>(new Int32Property
+            this.IfSet<Int32Property>(new Int32Property
             {
                 Value = new Dictionary<string, int>()
             });
             
-            IfSet<StringProperty>(new StringProperty
+            this.IfSet<StringProperty>(new StringProperty
             {
                 Value = new Dictionary<string, string>()
             });
@@ -86,7 +88,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             if (_mode == DatabaseMode.Debug)
             {
-                return IfSet<DatabaseVersion>(new DatabaseVersion
+                return this.IfSet<DatabaseVersion>(new DatabaseVersion
                 {
                     TimeOfCreated = DateTime.Now,
                     TimeOfModified = DateTime.Now,
@@ -131,109 +133,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Exists(string collectionName) => _database.CollectionExists(collectionName);
 
-        /// <summary>
-        /// 获得布尔值
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <returns>返回结果</returns>
-        public bool Boolean(string key)
-        {
-            return Get<BooleanProperty>().Value
-                                         .TryGetValue(key, out var v) && v;
-        }
-
-        /// <summary>
-        /// 设置布尔值
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <param name="value">值</param>
-        /// <returns>返回结果</returns>
-        public bool Boolean(string key, bool value)
-        {
-            var b = Get<BooleanProperty>();
-            var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
-
-            Update(b);
-            return value;
-        }
-        
-        /// <summary>
-        /// 获得数字值
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <returns>返回结果</returns>
-        public int? Int(string key)
-        {
-            return Get<Int32Property>().Value
-                                         .TryGetValue(key, out var v) ? v : null;
-        }
-
-        /// <summary>
-        /// 设置数字值
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <param name="value">值</param>
-        /// <returns>返回结果</returns>
-        public int Int(string key, int value)
-        {
-            var b = Get<Int32Property>();
-            var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
-
-            Update(b);
-            return value;
-        }
-        
-        /// <summary>
-        /// 获得字符串
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <returns></returns>
-        public string String(string key)
-        {
-            return Get<StringProperty>().Value
-                                        .TryGetValue(key, out var v)
-                ? v
-                : null;
-        }
-
-        /// <summary>
-        /// 设置字符串
-        /// </summary>
-        /// <param name="key">键</param>
-        /// <param name="value">值</param>
-        /// <returns>返回结果</returns>
-        public string String(string key, string value)
-        {
-            var b = Get<StringProperty>();
-            var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
-
-            Update(b);
-            return value;
-        }
+       
         
         /// <summary>
         /// 删除值。
@@ -261,10 +161,22 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>获得值。</returns>
         public T Get<T>() where T : class
         {
-            var key      = typeof(T).FullName;
+            var keyA = typeof(T);
+            var key  = keyA.FullName;
+            
+            if (_DataConsistencyCache.TryGetValue(typeof(T), out var v))
+            {
+                return (T)v;
+            }
+            
+            
             var document = _props.FindById(key)?.AsDocument;
             var obj      = document is null ? default(T) : BsonMapper.Global.Deserialize<T>(document);
             
+            //
+            // add to cache
+            v = obj;
+            _DataConsistencyCache.TryAdd(keyA, v);
             return obj;
         }
 
@@ -275,25 +187,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>获得值是否存在，true为存在否则表示不存在。</returns>
         public bool Has<T>() where T : class
         {
-            return _props.HasID(typeof(T).FullName);
+            return _DataConsistencyCache.ContainsKey(typeof(T)) || 
+                   _props.HasID(typeof(T).FullName);
         }
-
-
-        public T Upsert<T>(T instance) where T : class
-        {
-            return Has<T>() ? Update(instance) : Set(instance);
-        }
-
-        public T IfSet<T>(T instance) where T : class
-        {
-            if (!Has<T>())
-            {
-                Set(instance);
-                return instance;
-            }
-
-            return Get<T>();
-        }
+        
         
         /// <summary>
         /// 删除值。
@@ -302,9 +199,19 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>获得值是否存在，true为存在否则表示不存在。</returns>
         public T Update<T>(T instance) where T : class
         {
-            var key = typeof(T).FullName;
+            var keyA = typeof(T);
+            var key  = keyA.FullName;
             if (instance is null)
                 return default(T);
+            
+            if (_DataConsistencyCache.ContainsKey(keyA))
+            {
+                _DataConsistencyCache[keyA] = instance;
+            }
+            else
+            {
+                _DataConsistencyCache.TryAdd(keyA, instance);
+            }
             
             var document = BsonMapper.Global
                                      .Serialize(instance)
@@ -322,10 +229,20 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <returns>返回这个值本身。</returns>
         public T Set<T>(T instance) where T : class
         {
-            var key = typeof(T).FullName;
+            var keyA = typeof(T);
+            var key  = keyA.FullName;
             if (instance is null)
                 return default(T);
-            
+
+            if (_DataConsistencyCache.ContainsKey(keyA))
+            {
+                _DataConsistencyCache[keyA] = instance;
+            }
+            else
+            {
+                _DataConsistencyCache.TryAdd(keyA, instance);
+            }
+
             var document = BsonMapper.Global
                                      .Serialize(instance)
                                      .AsDocument;

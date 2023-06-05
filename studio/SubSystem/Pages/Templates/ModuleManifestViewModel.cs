@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Acorisoft.FutureGL.Forest.Views;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -13,10 +14,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         
         public ModuleManifestViewModel()
         {
-            Property = Studio.DatabaseManager()
-                           .Database
-                           .CurrentValue
-                           .Get<PresetProperty>();
+            Property = Studio.Database()
+                             .Get<PresetProperty>();
             
             
             AddManifestCommand    = AsyncCommand(AddManifestImpl);
@@ -46,10 +45,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 Args = new object[]
                 {
-                    Studio.DatabaseManager()
-                        .GetEngine<TemplateEngine>()
-                        .TemplateCacheDB
-                        .FindAll()
+                    Studio.Engine<TemplateEngine>()
+                          .TemplateCacheDB
+                          .FindAll()
                 }
             });
             if (!r1.IsFinished)
