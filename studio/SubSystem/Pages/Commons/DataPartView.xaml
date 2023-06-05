@@ -71,6 +71,8 @@
 
 
         <ScrollViewer Grid.Column="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
                       Focusable="False"
                       IsTabStop="False">
             <ItemsControl HorizontalAlignment="Left"

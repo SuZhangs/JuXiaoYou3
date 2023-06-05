@@ -286,8 +286,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void CreateDocumentFromManifest(Document document)
         {
-            var manifest = DatabaseManager.Database
-                                          .CurrentValue
+            var manifest = Studio.Database()
                                           .Get<PresetProperty>()
                                           .GetModulePreset(Type);
 
