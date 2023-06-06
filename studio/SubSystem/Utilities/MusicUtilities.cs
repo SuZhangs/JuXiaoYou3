@@ -43,10 +43,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                     var title      = string.IsNullOrEmpty(tag.Title) ? fileNameWithoutExtension : tag.Title;
                     var performers = CombineString(tag.Performers);
+                    var dst        = Path.Combine(engine.FullDirectory, fileNameWithExtension);
+
+                    System.IO.File.Copy(fileName, dst, true);
+                    
                     music = new Music
                     {
                         Id     = fileNameWithExtension,
-                        Path   = fileName,
+                        Path   = dst,
                         Name   = title,
                         Author = performers,
                         Cover  = cover
@@ -89,10 +93,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                 var title      = string.IsNullOrEmpty(tag.Title) ? fileNameWithoutExtension : tag.Title;
                 var performers = CombineString(tag.Performers);
+                var dst        = Path.Combine(engine.FullDirectory, fileNameWithExtension);
+
+                System.IO.File.Copy(fileName, dst, true);
                 music = new Music
                 {
                     Id     = fileNameWithExtension,
-                    Path   = fileName,
+                    Path   = dst,
                     Name   = title,
                     Author = performers,
                     Cover  = cover
