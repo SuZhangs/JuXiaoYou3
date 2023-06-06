@@ -280,6 +280,7 @@ namespace Acorisoft.FutureGL.Forest.Services
                 var separator = line.IndexOf('=');
                 var id        = line[..separator].Trim();
                 var value = line[(separator + 1)..].Trim()
+                                                   .Replace("\\t", "\x20\x20")
                                                    .Replace("\\n", "\n");
 
                 temp.TryAdd(id, value);

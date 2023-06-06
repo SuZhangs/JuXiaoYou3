@@ -3,6 +3,7 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.Forest.Controls;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Languager = Acorisoft.FutureGL.Forest.Services.Language;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -43,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
                 
                 this.ViewModel<SettingViewModel>()
-                    .Info("此项操作在程序退出后才生效哦！");
+                    .Info(Languager.GetText("text.applyWhenRestart"));
                 return;
             }
 
@@ -69,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 }
 
                 this.ViewModel<SettingViewModel>()
-                    .Info("此项操作在程序退出后才生效哦！");
+                    .Info(Languager.GetText("text.applyWhenRestart"));
                 return;
             }
 
@@ -95,7 +96,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 }
 
                 this.ViewModel<SettingViewModel>()
-                    .Info("此项操作在程序退出后才生效哦！");
+                    .Info(Languager.GetText("text.applyWhenRestart"));
                 return;
             }
 

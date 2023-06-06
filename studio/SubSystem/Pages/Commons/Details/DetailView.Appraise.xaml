@@ -16,6 +16,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type local:AppraisePartViewModel}, IsDesignTimeCreatable=True}">
     <!-- ReSharper disable  Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
+        <thisConverters:AppraiseNameConverter x:Key="NameConverter"/>
         <thisConverters:ImageConverter x:Key="ImageConverter" />
 
         <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
@@ -56,8 +57,9 @@
                                    CornerRadius="32"
                                    FontSize="18"
                                    FontWeight="Bold"
-                                   AvatarName="{Binding Source.Name}"
-                                   Image="{Binding Source.Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+                                   AvatarName="{Binding Source.Name,Mode=OneWay,Converter={StaticResource NameConverter}}"
+                                   Image="{Binding Source.Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}"/>
+
 
                     <TextBlock FontFamily="{f:SongTi}"
                                FontSize="16"

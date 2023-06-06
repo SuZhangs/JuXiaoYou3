@@ -46,7 +46,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 verbose.Bug      = BugLevel.Bug;
             }
             
-            this.Info("此项操作在程序退出后才生效哦！");
+            this.Info(Language.GetText("text.applyWhenRestart"));
         }
 
         public static Task KillProcess()
