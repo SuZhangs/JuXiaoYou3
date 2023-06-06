@@ -13,6 +13,7 @@
         <FileVersion>3.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
         <LangVersion>latest</LangVersion>
+        <ApplicationIcon>icon_repair.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
