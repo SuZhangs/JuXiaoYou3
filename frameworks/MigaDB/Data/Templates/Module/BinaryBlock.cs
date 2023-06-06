@@ -47,7 +47,7 @@
     {
         public bool GetValue() => Value;
 
-        public override string GetLanguageId() => "__Binary";
+        public override string GetLanguageId() => IdOfBinary;
 
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {

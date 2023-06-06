@@ -8,7 +8,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:StoryboardController}, IsDesignTimeCreatable=True}">
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:WorldViewController}, IsDesignTimeCreatable=True}">
     <Grid>
         
     </Grid>

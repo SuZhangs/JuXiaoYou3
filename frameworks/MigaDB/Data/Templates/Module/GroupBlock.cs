@@ -17,7 +17,7 @@
 
     public class GroupBlock : ModuleBlock, IGroupBlock
     {
-        public override string GetLanguageId() => "__Group";
+        public override string GetLanguageId() => IdOfGroup;
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             if (block is not GroupBlock gb)

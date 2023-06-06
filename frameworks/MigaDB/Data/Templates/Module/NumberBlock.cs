@@ -34,7 +34,7 @@
     /// </summary>
     public class NumberBlock : ModuleBlock, INumberBlock, IMetadataNumericSource
     {
-        public override string GetLanguageId() => "__Number";
+        public override string GetLanguageId() => IdOfNumber;
         public int GetValue() => Value;
                 
         protected override bool CompareTemplateOverride(ModuleBlock block)

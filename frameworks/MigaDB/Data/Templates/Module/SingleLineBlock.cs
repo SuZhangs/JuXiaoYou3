@@ -35,7 +35,7 @@
     /// </summary>
     public class SingleLineBlock : ModuleBlock, ISingleLineBlock, IMetadataTextSource
     {
-        public override string GetLanguageId() => "__SingleLine";
+        public override string GetLanguageId() => IdOfSingleLine;
         public string GetValue() => Value.SubString(200);
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

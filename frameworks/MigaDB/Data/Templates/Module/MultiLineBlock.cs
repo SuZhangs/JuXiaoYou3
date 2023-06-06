@@ -45,7 +45,7 @@
     /// </summary>
     public class MultiLineBlock : ModuleBlock, IMultiLineBlock, IMetadataTextSource
     {
-        public override string GetLanguageId() => "__MultiLine";
+        public override string GetLanguageId() => IdOfMultiLine;
         public string GetValue() => Value.SubString(200);
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

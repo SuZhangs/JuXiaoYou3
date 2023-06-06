@@ -89,7 +89,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
     /// </summary>
     public sealed class SequenceBlock : MonoSelectorBlock, IMetadataTextSource
     {
-        public override string GetLanguageId() => "__Sequence";
+        public override string GetLanguageId() => IdOfSequence;
         
         public sealed override Metadata ExtractMetadata()
         {

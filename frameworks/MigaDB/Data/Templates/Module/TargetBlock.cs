@@ -114,7 +114,7 @@
     public sealed class AudioBlock : TargetBlock
     {
         
-        public override string GetLanguageId() => "__Audio";
+        public override string GetLanguageId() => IdOfAudio;
         
         public override Metadata ExtractMetadata()
         {
@@ -131,7 +131,7 @@
     
     public sealed class VideoBlock : TargetBlock
     {
-        public override string GetLanguageId() => "__Video";
+        public override string GetLanguageId() => IdOfVideo;
         
         public override Metadata ExtractMetadata()
         {
@@ -149,7 +149,7 @@
     public sealed class MusicBlock : TargetBlock
     {
         
-        public override string GetLanguageId() => "__Music";
+        public override string GetLanguageId() => IdOfMusic;
         public override Metadata ExtractMetadata()
         {
             return new Metadata
@@ -165,7 +165,7 @@
     
     public sealed class ImageBlock : TargetBlock
     {
-        public override string GetLanguageId() => "__Image";
+        public override string GetLanguageId() => IdOfImage;
         
         public override Metadata ExtractMetadata()
         {
@@ -182,7 +182,7 @@
     
     public sealed class FileBlock : TargetBlock
     {
-        public override string GetLanguageId() => "__File";
+        public override string GetLanguageId() => IdOfFile;
         
         public override Metadata ExtractMetadata()
         {
@@ -199,7 +199,8 @@
     
     public sealed class ReferenceBlock : TargetBlock, IReferenceBlock
     {
-        public override string GetLanguageId() => "__Reference";
+        public override string GetLanguageId() => IdOfReference;
+        
         protected override bool CompareTemplateOverride(ModuleBlock block)
         {
             var rb = (ReferenceBlock)block;

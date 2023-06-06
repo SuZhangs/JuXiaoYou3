@@ -99,7 +99,7 @@
     public class LikabilityBlock : CounterBlock
     {
         
-        public override string GetLanguageId() => "__Likability";
+        public override string GetLanguageId() => IdOfLikability;
         public sealed override Metadata ExtractMetadata()
         {
             return new Metadata
@@ -115,7 +115,7 @@
     public class RateBlock : CounterBlock
     {
         
-        public override string GetLanguageId() => "__Rate";
+        public override string GetLanguageId() => IdOfRate;
         public sealed override Metadata ExtractMetadata()
         {
             return new Metadata

@@ -31,20 +31,20 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             _context = new GlobalStudioContext
             {
                 MainController = shell,
-                Controllers = new ITabViewController[]
+                Controllers = new List<ITabViewController>
                 {
                     shell,
                     launch,
                     quick,
                     interaction
                 },
-                Character = null,
+                Character             = null,
                 FavoriteCharacterList = new ObservableCollection<DocumentCache>(),
                 ControllerList = new ObservableCollection<NamedItem<string>>
                 {
                     new NamedItem<string>
                     {
-                        Name = Language.GetText(IdOfTabShellController),
+                        Name  = Language.GetText(IdOfTabShellController),
                         Value = IdOfTabShellController
                     },
                     new NamedItem<string>
@@ -73,11 +73,32 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     }
                 }
             };
+
+            InitializeBuiltinController(_context);
             OnInitialize(_context);
             Controller = shell;
         }
-        
-        
+
+        private static void InitializeBuiltinController(GlobalStudioContext context)
+        {
+            InitializeController(context, () => new WorldViewController());
+        }
+
+        private static void InitializeController(GlobalStudioContext context, Func<TabController> factory)
+        {
+            var controller = factory();
+            var id         = controller.Id;
+            var item = new NamedItem<string>
+            {
+                Name  = Language.GetText(id),
+                Value = id,
+            };
+            
+            context.ControllerList.Add(item);
+            ((List<ITabViewController>)context.Controllers).Add(controller);
+            ((Dictionary<string, ITabViewController>)context.ControllerMaps).TryAdd(id, controller);
+
+        }
 
         protected override bool OnKeyDown(WindowKeyEventArgs e)
         {
@@ -110,12 +131,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var ccl    = _context.ControllerList;
             var ccl_fv = ccl.FirstOrDefault();
-            if (ccl.Count > 1 || 
-                (ccl.Count == 1 && 
-                 ccl_fv is not null && 
+            if (ccl.Count > 1 ||
+                (ccl.Count == 1 &&
+                 ccl_fv is not null &&
                  ccl_fv.Value != IdOfTabShellController))
             {
-                
                 ModeSwitchViewModel.Switch(_context);
             }
         }
@@ -144,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
 
         public const string IdOfQuickStartController  = "__Quick";
-        public const string IdOfStoryboardController  = "__Storyboard";
+        public const string IdOfWorldViewController   = "__WorldView";
         public const string IdOfLaunchController      = "__Launch";
         public const string IdOfInteractionController = "__Interaction";
         public const string IdOfVisitorController     = "__Visitor";

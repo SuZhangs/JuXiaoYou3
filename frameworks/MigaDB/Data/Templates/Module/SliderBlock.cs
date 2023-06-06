@@ -5,7 +5,7 @@
     /// </summary>
     public class SliderBlock : ModuleBlock, INumberBlock, IHeaderlessBlock, IMetadataNumericSource
     {
-        public override string GetLanguageId() => "__Slider";
+        public override string GetLanguageId() => IdOfSlider;
         public int GetValue() => Value;
         
         protected override bool CompareTemplateOverride(ModuleBlock block)

@@ -26,304 +26,50 @@
         #region ModuleBlock Translate
 
         // TODO: 翻译
-        public static string GetAudioName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "语音",
-                CultureArea.Russian  => "Audio",
-                CultureArea.Korean   => "Audio",
-                CultureArea.Japanese => "Audio",
-                CultureArea.French   => "Audio",
-                _                    => "Audio"
-            };
-        }
+        public static string GetAudioName() => ModuleBlock.IdOfAudio;
 
-        public static string GetUnknownName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "未知",
-                CultureArea.Russian  => "Unknown",
-                CultureArea.Korean   => "Unknown",
-                CultureArea.Japanese => "Unknown",
-                CultureArea.French   => "Unknown",
-                _                    => "Unknown"
-            };
-        }
+        public static string GetUnknownName() => "__Unknown";
 
-        public static string GetGroupName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "分组",
-                CultureArea.Russian  => "Group",
-                CultureArea.Korean   => "Group",
-                CultureArea.Japanese => "Group",
-                CultureArea.French   => "Group",
-                _                    => "Group"
-            };
-        }
+        public static string GetGroupName() => ModuleBlock.IdOfGroup;
 
-        public static string GetSequenceName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "选项",
-                CultureArea.Russian  => "Sequence",
-                CultureArea.Korean   => "Sequence",
-                CultureArea.Japanese => "Sequence",
-                CultureArea.French   => "Sequence",
-                _                    => "Sequence"
-            };
-        }
+        public static string GetSequenceName() => ModuleBlock.IdOfSequence;
 
-        public static string GetColorName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "色块",
-                CultureArea.Russian  => "Color",
-                CultureArea.Korean   => "Color",
-                CultureArea.Japanese => "Color",
-                CultureArea.French   => "Color",
-                _                    => "Color"
-            };
-        }
+        public static string GetColorName() => ModuleBlock.IdOfColor;
 
-        public static string GetNumberName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "数字块",
-                CultureArea.Russian  => "Number",
-                CultureArea.Korean   => "Number",
-                CultureArea.Japanese => "Number",
-                CultureArea.French   => "Number",
-                _                    => "Number"
-            };
-        }
+        public static string GetNumberName() => ModuleBlock.IdOfNumber;
 
-        public static string GetHistogramName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "直方图",
-                CultureArea.Russian  => "Histogram",
-                CultureArea.Korean   => "Histogram",
-                CultureArea.Japanese => "Histogram",
-                CultureArea.French   => "Histogram",
-                _                    => "Histogram"
-            };
-        }
+        public static string GetHistogramName() => ModuleBlock.IdOfHistogram;
 
-        public static string GetRadarName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "雷达图",
-                CultureArea.Russian  => "Radar",
-                CultureArea.Korean   => "Radar",
-                CultureArea.Japanese => "Radar",
-                CultureArea.French   => "Radar",
-                _                    => "Radar"
-            };
-        }
+        public static string GetRadarName() => ModuleBlock.IdOfRadar;
 
-        public static string GetLikabilityName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "好感度",
-                CultureArea.Russian  => "Likability",
-                CultureArea.Korean   => "Likability",
-                CultureArea.Japanese => "Likability",
-                CultureArea.French   => "Likability",
-                _                    => "Likability"
-            };
-        }
+        public static string GetLikabilityName() => ModuleBlock.IdOfLikability;
 
-        public static string GetDegreeName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "程度块",
-                CultureArea.Russian  => "Degree",
-                CultureArea.Korean   => "Degree",
-                CultureArea.Japanese => "Degree",
-                CultureArea.French   => "Degree",
-                _                    => "Degree"
-            };
-        }
+        public static string GetDegreeName() => ModuleBlock.IdOfDegree;
 
-        public static string GetRateName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "评分",
-                CultureArea.Russian  => "Rate",
-                CultureArea.Korean   => "Rate",
-                CultureArea.Japanese => "Rate",
-                CultureArea.French   => "Rate",
-                _                    => "Rate"
-            };
-        }
+        public static string GetRateName() => ModuleBlock.IdOfRate;
 
-        public static string GetSliderName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "滑块",
-                CultureArea.Russian  => "Slider",
-                CultureArea.Korean   => "Slider",
-                CultureArea.Japanese => "Slider",
-                CultureArea.French   => "Slider",
-                _                    => "Slider"
-            };
-        }
+        public static string GetSliderName() => ModuleBlock.IdOfSlider;
 
-        public static string GetMultiLineName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "多行块",
-                CultureArea.Russian  => "MultiLine",
-                CultureArea.Korean   => "MultiLine",
-                CultureArea.Japanese => "MultiLine",
-                CultureArea.French   => "MultiLine",
-                _                    => "MultiLine"
-            };
-        }
+        public static string GetMultiLineName() => ModuleBlock.IdOfMultiLine;
 
-        public static string GetSingleLineName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "单行块",
-                CultureArea.Russian  => "SingleLine",
-                CultureArea.Korean   => "SingleLine",
-                CultureArea.Japanese => "SingleLine",
-                CultureArea.French   => "SingleLine",
-                _                    => "SingleLine"
-            };
-        }
+        public static string GetSingleLineName() => ModuleBlock.IdOfSingleLine;
 
-        public static string GetReferenceName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "引用",
-                CultureArea.Russian  => "Reference",
-                CultureArea.Korean   => "Reference",
-                CultureArea.Japanese => "Reference",
-                CultureArea.French   => "Reference",
-                _                    => "Reference"
-            };
-        }
+        public static string GetReferenceName() => ModuleBlock.IdOfReference;
 
-        public static string GetVideoName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "视频",
-                CultureArea.Russian  => "Video",
-                CultureArea.Korean   => "Video",
-                CultureArea.Japanese => "Video",
-                CultureArea.French   => "Video",
-                _                    => "Video"
-            };
-        }
+        public static string GetVideoName() => ModuleBlock.IdOfVideo;
+        public static string GetMusicName() => ModuleBlock.IdOfMusic;
 
-        public static string GetMusicName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "音乐",
-                CultureArea.Russian  => "Music",
-                CultureArea.Korean   => "Music",
-                CultureArea.Japanese => "Music",
-                CultureArea.French   => "Music",
-                _                    => "Music"
-            };
-        }
+        public static string GetImageName() => ModuleBlock.IdOfImage;
 
-        public static string GetImageName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "图片",
-                CultureArea.Russian  => "Image",
-                CultureArea.Korean   => "Image",
-                CultureArea.Japanese => "Image",
-                CultureArea.French   => "Image",
-                _                    => "Image"
-            };
-        }
+        public static string GetFileName() => ModuleBlock.IdOfFile;
 
-        public static string GetFileName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "文件",
-                CultureArea.Russian  => "File",
-                CultureArea.Korean   => "File",
-                CultureArea.Japanese => "File",
-                CultureArea.French   => "File",
-                _                    => "File"
-            };
-        }
+        public static string GetBinaryName() => ModuleBlock.IdOfBinary;
 
-        public static string GetBinaryName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "双选块",
-                CultureArea.Russian  => "Binary",
-                CultureArea.Korean   => "Binary",
-                CultureArea.Japanese => "Binary",
-                CultureArea.French   => "Binary",
-                _                    => "Binary"
-            };
-        }
+        public static string GetSwitchName() => ModuleBlock.IdOfSwitch;
 
-        public static string GetSwitchName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "开关块",
-                CultureArea.Russian  => "Switch",
-                CultureArea.Korean   => "Switch",
-                CultureArea.Japanese => "Switch",
-                CultureArea.French   => "Switch",
-                _                    => "Switch"
-            };
-        }
+        public static string GetHeartName() => ModuleBlock.IdOfHeart;
 
-        public static string GetHeartName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "心形",
-                CultureArea.Russian  => "Heart",
-                CultureArea.Korean   => "Heart",
-                CultureArea.Japanese => "Heart",
-                CultureArea.French   => "Heart",
-                _                    => "Heart"
-            };
-        }
-
-        public static string GetStarName()
-        {
-            return Language.Culture switch
-            {
-                CultureArea.Chinese  => "五角星",
-                CultureArea.Russian  => "Star",
-                CultureArea.Korean   => "Star",
-                CultureArea.Japanese => "Star",
-                CultureArea.French   => "Star",
-                _                    => "Star"
-            };
-        }
+        public static string GetStarName() => ModuleBlock.IdOfStar;
 
 
         public static string GetModuleBlockNameByType(object type)
@@ -539,7 +285,7 @@
         }
 
         #endregion
-        
+
 
         #region ModuleBlockPresentation Translate
 

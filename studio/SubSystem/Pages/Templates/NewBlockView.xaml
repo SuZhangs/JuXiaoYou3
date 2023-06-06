@@ -45,7 +45,7 @@
             <f:TreeView Grid.Column="0"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         BindableSelectedItem="{Binding MaybeMetadataKind,Mode=TwoWay}">
-                <f:TreeViewItem Header="基础块" 
+                <f:TreeViewItem Header="{f:Language __Basic}" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.BasicBlockKinds}">
                     <f:TreeViewItem.ItemsPanel>
@@ -54,7 +54,7 @@
                         </ItemsPanelTemplate>
                     </f:TreeViewItem.ItemsPanel>
                 </f:TreeViewItem>
-                <f:TreeViewItem Header="高级块" 
+                <f:TreeViewItem Header="{f:Language __Advanced}" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.AdvancedBlockKinds}">
                     <f:TreeViewItem.ItemsPanel>
@@ -63,7 +63,7 @@
                         </ItemsPanelTemplate>
                     </f:TreeViewItem.ItemsPanel>
                 </f:TreeViewItem>
-                <f:TreeViewItem Header="选项块" 
+                <f:TreeViewItem Header="{f:Language __Group}" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.OptionBlockKinds}">
                     <f:TreeViewItem.ItemsPanel>
@@ -72,7 +72,7 @@
                         </ItemsPanelTemplate>
                     </f:TreeViewItem.ItemsPanel>
                 </f:TreeViewItem>
-                <f:TreeViewItem Header="图表块" 
+                <f:TreeViewItem Header="{f:Language __Chart}" 
                                 Padding="8"
                                 ItemsSource="{x:Static thisModel2:ModuleBlockFactory.ChartBlockKinds}">
                     <f:TreeViewItem.ItemsPanel>

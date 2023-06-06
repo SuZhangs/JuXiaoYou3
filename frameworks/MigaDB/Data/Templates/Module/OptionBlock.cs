@@ -72,7 +72,7 @@
     /// </summary>
     public sealed class SwitchBlock : OptionBlock, IMetadataBooleanSource
     {
-        public override string GetLanguageId() => "__Switch";
+        public override string GetLanguageId() => IdOfSwitch;
         public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
@@ -92,7 +92,7 @@
     /// </summary>
     public sealed class HeartBlock : OptionBlock, IMetadataBooleanSource
     {
-        public override string GetLanguageId() => "__Heart";
+        public override string GetLanguageId() => IdOfHeart;
         public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
@@ -113,7 +113,7 @@
     /// </summary>
     public sealed class StarBlock : OptionBlock, IMetadataBooleanSource
     {
-        public override string GetLanguageId() => "__Star";
+        public override string GetLanguageId() => IdOfStar;
         public bool GetValue() => Value;
         
         public sealed override Metadata ExtractMetadata()
