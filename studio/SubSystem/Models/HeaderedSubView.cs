@@ -13,8 +13,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
             {
                 return;
             }
-            
-            SubView.DataContext = dataContext;
+
+            if (!ReferenceEquals(dataContext, SubView.DataContext))
+            {
+                SubView.DataContext = dataContext;
+            }
         }
         
         public Type Type { get; init; }

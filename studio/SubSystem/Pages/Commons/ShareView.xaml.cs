@@ -6,6 +6,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     public partial class ShareView : UserControl
     {
+        private bool _initialize;
         public ShareView()
         {
             InitializeComponent();
@@ -19,6 +20,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
+            if (_initialize)
+            {
+                return;
+            }
+            
+            
             dc.Preshapes
               .ForEach(x =>
               {
@@ -30,6 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                               Content = x,
                           });
               });
+            _initialize = true;
         }
     }
 }

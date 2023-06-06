@@ -27,6 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddDetailView(collection);
             AddPartView(collection);
             AddShareView(collection);
+            Preshapes.Clear();
             Preshapes.Add(new CharacterPergamynStyleView
             {
                 Tag = Language.GetText("preshape.character.Pergamyn")
