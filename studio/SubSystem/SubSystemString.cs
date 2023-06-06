@@ -25,7 +25,6 @@
 
         #region ModuleBlock Translate
 
-        // TODO: 翻译
         public static string GetAudioName() => ModuleBlock.IdOfAudio;
 
         public static string GetUnknownName() => "__Unknown";

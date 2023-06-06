@@ -21,9 +21,39 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                                         Fallback,
                                         x,
                                         OnSelected)));
-            }
 
-            Value = string.IsNullOrEmpty(block.Value) ? block.Fallback : block.Value;
+                
+            }
+            if (Items.Count > 0)
+            {
+                string v;
+                
+                if (Items.All(x => x.Value != block.Value))
+                {
+                    v           = block.Fallback;
+                    block.Value = v;
+                    Value       = v;
+                }
+                
+                if(Items.All(x => x.Value != block.Fallback))
+                {
+                    //
+                    // 如果选项的值不是集合中的值，则随机选一个
+                    v = Items.First()
+                             .Value;
+                    block.Value = v;
+                    Value       = v;
+                    return;
+                }
+                
+                v           = string.IsNullOrEmpty(block.Value) ? block.Fallback : block.Value;
+                block.Value = v;
+                Value       = v;
+            }
+            else
+            {
+                Value = string.IsNullOrEmpty(block.Value) ? block.Fallback : block.Value;
+            }
         }
 
         private string GetId() => string.IsNullOrEmpty(Id) ? GetHashCode().ToString() : Id;
@@ -38,11 +68,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
             if (Items is null)
             {
                 return newValue;
-            }
-
-            if (Items.Any(x => x.Value != newValue))
-            {
-                newValue = Items.First().Value;
             }
 
             TargetBlock.Value = newValue;
