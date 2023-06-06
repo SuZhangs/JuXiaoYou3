@@ -3,6 +3,8 @@ using System.Reactive.Linq;
 using GongSolutions.Wpf.DragDrop;
 using NAudio.Wave;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Services;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -132,6 +134,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
             }
             else
             {
+                if (_current is null &&
+                    _playlist is not null)
+                {
+                    Play(Playlist.Items
+                                 .First());
+                }
                 _service.Play();
                 IsPlaying = true;
             }
@@ -211,6 +219,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Services
 
         void Play(Music item)
         {
+            if (item is null ||
+                !File.Exists(item.Path))
+            {
+                this.Obsoleted(string.Format(Language.GetText("text.FileNotFound"), item?.Name));
+                RemoveMusicFromPlaylistImpl(item);
+                return;
+            }
+            
             IsPlaying = true;
 
             //

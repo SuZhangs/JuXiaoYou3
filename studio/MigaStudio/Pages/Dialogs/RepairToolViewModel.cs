@@ -2,8 +2,11 @@
 using System.IO;
 using System.Linq;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaStudio.Pages.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -14,10 +17,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         public RepairToolViewModel()
         {
-            CreateShortcutCommand = Command(CreateShortcut);
-            KillProcessCommand    = AsyncCommand(KillProcess);
-            FixModuleCommand      = Command(FixModuleImpl);
-            FixAvatarCommand      = AsyncCommand(ImageUtilities.CropAllAvatar);
+            BugReportCommand   = Command(BugReportImpl);
+            KillProcessCommand = AsyncCommand(KillProcess);
+            FixModuleCommand   = Command(FixModuleImpl);
+            FixAvatarCommand   = AsyncCommand(ImageUtilities.CropAllAvatar);
+        }
+
+        private void BugReportImpl()
+        {
+            var pendingQueue = Xaml.Get<IPendingQueue>();
+            var verbose = pendingQueue.OfType<BugReportVerbose>()
+                                      .FirstOrDefault();
+
+            if (verbose is null)
+            {
+                verbose = new BugReportVerbose
+                {
+                    Database = string.Empty,
+                    Logs = Xaml.Get<ApplicationModel>()
+                               .Logs,
+                    Bug = BugLevel.Bug
+                };
+                pendingQueue.Add(verbose);
+            }
+            else
+            {
+                verbose.Database = string.Empty;
+                verbose.Bug      = BugLevel.Bug;
+            }
+            
+            this.Info("此项操作在程序退出后才生效哦！");
         }
 
         public static Task KillProcess()
@@ -69,7 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public RelayCommand FixModuleCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public RelayCommand CreateShortcutCommand { get; }
+        public RelayCommand BugReportCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand KillProcessCommand { get; }

@@ -102,8 +102,8 @@
                                 Icon="{StaticResource FeatherIcon.Tools}"
                                 Margin="8" />
 
-                <ftk:ToolButton Content="添加快捷方式"
-                                Command="{Binding CreateShortcutCommand}"
+                <ftk:ToolButton Content="提交BUG"
+                                Command="{Binding BugReportCommand}"
                                 Icon="{StaticResource FeatherIcon.Tools}"
                                 Margin="8"
                                 ShowText="True" />

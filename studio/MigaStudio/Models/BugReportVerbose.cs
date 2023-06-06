@@ -19,7 +19,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         
         public override void Run()
         {
-            Crash($"{Database} {(int)Bug} {Logs}");
+            var db = string.IsNullOrEmpty(Database) ? "d" : Database;
+            Crash($"{db} {(int)Bug} {Logs}");
         }
 
         public static void Crash(string args)

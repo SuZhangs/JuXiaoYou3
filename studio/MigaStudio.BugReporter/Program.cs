@@ -51,8 +51,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                 return false;
             }
 
-            dir = args[0];
-            log = args[2];
+            dir = args[0].Trim();
+            log = args[2].Trim();
             return true;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Windows.Media;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Services;
@@ -50,6 +51,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             collection.AddMany(Detail.Items, true);
             var music = Owner.GetMusicBlocks()
+                             .Where(x => !string.IsNullOrEmpty(x.TargetSource) &&
+                                         File.Exists(x.TargetSource))
                              .Select(x => new Music
                              {
                                  Id   = x.Id,
@@ -109,11 +112,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
+            
+            RemoveImpl(part);
+        }
 
+        private void RemoveImpl(Music item)
+        {
             var ms = Xaml.Get<MusicService>();
             if (ms.IsPlaying
                   .CurrentValue)
@@ -121,10 +129,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 ms.Playlist
                   .CurrentValue
                   .Items
-                  .Remove(part);
+                  .Remove(item);
             }
 
-            Collection.Remove(part);
+            Collection.Remove(item);
             SaveOperation();
         }
 
@@ -135,38 +143,52 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            var ms = Xaml.Get<MusicService>();
-
-            if (ms.IsPlaying
-                  .CurrentValue)
+            try
             {
-                if (ms.Music.CurrentValue == part)
+                if (!File.Exists(part.Path))
                 {
+                    this.Obsoleted(string.Format(Language.GetText("text.FileNotFound"), part?.Name));
+                    RemoveImpl(part);
                     return;
                 }
+                
+                var ms = Xaml.Get<MusicService>();
 
-                var hash = ms.Playlist
-                             .CurrentValue
-                             .Items
-                             .Select(x => x.Id)
-                             .ToHashSet();
-
-                var noAddedValue = Collection.Where(x => !hash.Contains(x.Id));
-
-                ms.Playlist
-                  .CurrentValue
-                  .Items
-                  .AddMany(noAddedValue);
-
-                ms.Play(part);
-            }
-            else
-            {
-                ms.SetPlaylist(new Playlist
+                if (ms.IsPlaying
+                      .CurrentValue)
                 {
-                    Name  = Owner.Name,
-                    Items = new ObservableCollection<Music>(Collection)
-                }, true);
+                    if (ms.Music.CurrentValue == part)
+                    {
+                        return;
+                    }
+
+                    var hash = ms.Playlist
+                                 .CurrentValue
+                                 .Items
+                                 .Select(x => x.Id)
+                                 .ToHashSet();
+
+                    var noAddedValue = Collection.Where(x => !hash.Contains(x.Id));
+
+                    ms.Playlist
+                      .CurrentValue
+                      .Items
+                      .AddMany(noAddedValue);
+
+                    ms.Play(part);
+                }
+                else
+                {
+                    ms.SetPlaylist(new Playlist
+                    {
+                        Name  = Owner.Name,
+                        Items = new ObservableCollection<Music>(Collection)
+                    }, true);
+                }
+            }
+            catch (NAudio.MmException)
+            {
+
             }
         }
 
