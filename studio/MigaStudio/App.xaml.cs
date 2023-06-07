@@ -12,6 +12,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Services;
+using Acorisoft.FutureGL.MigaStudio.Views;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using DryIoc;
 using NLog;

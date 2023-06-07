@@ -3,15 +3,12 @@ using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Views
 {
-    public partial class TabShellView:ForestUserControl 
+    [Connected(View = typeof(TabShellView), ViewModel = typeof(WorldViewController))]
+    public partial class TabShellView
     {
         public TabShellView()
         {
             InitializeComponent();
-        }
-
-        private void MouseDown_ClosePage(object sender, MouseButtonEventArgs e)
-        {
         }
 
         public TabShell ViewModel => (TabShell)DataContext;

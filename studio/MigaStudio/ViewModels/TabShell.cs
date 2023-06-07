@@ -82,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected override void RequireStartupTabViewModel()
         {
             New<HomeViewModel>();
+            
         }
 
         public sealed override string Id => AppViewModel.IdOfTabShellController;
