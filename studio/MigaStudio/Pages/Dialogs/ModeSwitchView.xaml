@@ -33,12 +33,12 @@
                        Margin="0 16"
                        Text="{Binding Title,Mode=OneWay}"
                        Style="{StaticResource TextBlock.DialogTitle}" />
-            
+
             <f:ShadowListBox Grid.Row="1"
+                             Grid.Column="0"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              ItemsSource="{Binding Controllers,Mode=OneWay}"
-                             SelectedValue="{Binding SelectedController,Mode=TwoWay}"
-                             SelectedValuePath="Value">
+                             SelectedItem="{Binding Selected,Mode=TwoWay}">
                 <f:ShadowListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -56,10 +56,10 @@
                             Grid.Row="0"
                             Grid.RowSpan="2"
                             Header="描述">
-                <TextBlock Text="{Binding SelectedController,Mode=OneWay}"
-                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Selected.Intro,Mode=OneWay}"
+                           TextWrapping="Wrap" />
             </f:ForestIsland>
-                            
+
 
             <f:DialogButton Grid.Row="2"
                             Grid.Column="0"

@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.Forest;
+﻿using System.Linq;
+using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
@@ -6,7 +7,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class ModeSwitchViewModel : ImplicitDialogVM
     {
-        private string _selectedController;
+        private string             _selectedController;
+        private ControllerManifest _selected;
 
         public ModeSwitchViewModel()
         {
@@ -19,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var a = p.Args;
             Context            = (GlobalStudioContext)a[0];
             Controllers.AddMany(Context.ControllerList, true);
-            SelectedController = Context.CurrentController.Id;
+            Selected = Controllers.FirstOrDefault(x => x.Value == Context.CurrentController.Id);
             base.OnStart(parameter);
         }
 
@@ -54,6 +56,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public GlobalStudioContext Context { get; private set; }
 
         public ObservableCollection<ControllerManifest> Controllers { get; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Selected"/> 属性。
+        /// </summary>
+        public ControllerManifest Selected
+        {
+            get => _selected;
+            set
+            {
+                SetValue(ref _selected, value);
+                SelectedController = value?.Value;
+            }
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedController"/> 属性。
