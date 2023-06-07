@@ -45,7 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     {
                         Name  = Language.GetText(IdOfTabShellController),
                         Value = IdOfTabShellController,
-                        Intro = Language.GetText("")
+                        Intro = Language.GetText("__Main.Intro")
                     }
                 },
                 ControllerMaps = new Dictionary<string, ITabViewController>
