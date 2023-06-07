@@ -13,13 +13,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
     {
         
         public override ITabViewController GetController() => new InspirationController();
-        protected override string GetSubSystemName(CultureArea language)
-        {
-            return language switch
-            {
-                _ => "灵感模式"
-            };
-        }
 
         protected override string GetLanguageFilePrefix() => "Acorisoft.FutureGL.MigaStudio.Inspirations.Languages.";
 
@@ -33,6 +26,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Inspirations
         {
         }
 
+        public override string FriendlyName => Language switch
+        {
+            _ => "灵感模式"
+        };
+        public override string Intro => Language switch
+        {
+            _ => "灵感模式"
+        };
         public override string ModuleId => Id;
         public const string Id = "__Inspiration";
     }

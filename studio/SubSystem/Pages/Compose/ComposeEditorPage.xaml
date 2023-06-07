@@ -114,7 +114,8 @@
                         
                     </ftk:TabItem>
                     <ftk:TabItem Header="大纲"
-                                 Padding="16 8">
+                                 Padding="16 8"
+                                 Visibility="Collapsed">
 
                     </ftk:TabItem>
                 </ftk:TabControl>
@@ -141,7 +142,8 @@
 
 
             <StackPanel Grid.Column="2"
-                        Margin="0 8">
+                        Margin="0 8"
+                        Visibility="Collapsed">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
                         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />

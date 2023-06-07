@@ -10,7 +10,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public ModeSwitchViewModel()
         {
-            Controllers = new ObservableCollection<NamedItem<string>>();
+            Controllers = new ObservableCollection<ControllerManifest>();
         }
 
         protected override void OnStart(RoutingEventArgs parameter)
@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public GlobalStudioContext Context { get; private set; }
 
-        public ObservableCollection<NamedItem<string>> Controllers { get; }
+        public ObservableCollection<ControllerManifest> Controllers { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedController"/> 属性。

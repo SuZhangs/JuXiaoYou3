@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -31,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<NamedItem<string>> ControllerList { get; init; }
+        public ObservableCollection<ControllerManifest> ControllerList { get; init; }
 
         /// <summary>
         /// 

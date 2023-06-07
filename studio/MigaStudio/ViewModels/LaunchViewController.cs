@@ -86,10 +86,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     // 注册
                     ssm.Initialize(Language.Culture, Xaml.Container);
 
-                    var nameItem = new NamedItem<string>
+                    var nameItem = new ControllerManifest
                     {
                         Name  = ssm.FriendlyName,
-                        Value = ssm.ModuleId
+                        Value = ssm.ModuleId,
+                        Intro = ssm.Intro
                     };
 
                     //

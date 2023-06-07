@@ -10,15 +10,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Storyboard
     public class StoryboardSubSystem : SubSystemModule
     {
         public override ITabViewController GetController() => new StoryboardController();
-
-        protected override string GetSubSystemName(CultureArea language)
-        {
-            return language switch
-            {
-                _ => "灵感模式"
-            };
-        }
-
         protected override string GetLanguageFilePrefix() => "Acorisoft.FutureGL.MigaStudio.Storyboard.Languages.";
 
         protected override void InstallView(IContainer container)
@@ -29,6 +20,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Storyboard
         {
         }
 
+        public override string FriendlyName => Language switch
+        {
+            _ => "故事模式"
+        };
+        public override string Intro => Language switch
+        {
+            _ => "故事模式"
+        };
         public override string ModuleId => Id;
         public const string Id = "__Storyboard";
     }

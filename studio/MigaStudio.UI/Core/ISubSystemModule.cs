@@ -27,10 +27,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         CultureArea Language { get; }
 
 
+        string Intro { get; }
+        
         /// <summary>
         /// 当前名字
         /// </summary>
         string FriendlyName { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         string ModuleId { get; }
     }
 
@@ -45,10 +51,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Language     = culture;
             
             //
-            // 设置名字
-            FriendlyName = GetSubSystemName(culture);
-            
-            //
             // 注册语言
             var textSource = InstallLanguages(culture);
 
@@ -57,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             Forest.Services
                   .Language
                   .AppendLanguageSource(textSource);
-
+            
             //
             // 注册视图
             InstallView(container);
@@ -66,8 +68,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             // 注册服务
             InstallServices(container);
         }
-
-        protected abstract string GetSubSystemName(CultureArea language);
 
         protected IEnumerable<string> InstallLanguages(CultureArea culture)
         {
@@ -116,7 +116,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         protected abstract void InstallView(IContainer container);
         protected abstract void InstallServices(IContainer container);
         public CultureArea Language { get; private set; }
-        public string FriendlyName { get; private set; }
+        public abstract string FriendlyName { get; }
         public abstract string ModuleId { get; }
+        public abstract string Intro { get; }
     }
 }

@@ -40,14 +40,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 },
                 Character             = null,
                 FavoriteCharacterList = new ObservableCollection<DocumentCache>(),
-                ControllerList = new ObservableCollection<NamedItem<string>>
+                ControllerList = new ObservableCollection<ControllerManifest>
                 {
-                    new NamedItem<string>
+                    new ControllerManifest
                     {
                         Name  = Language.GetText(IdOfTabShellController),
                         Value = IdOfTabShellController
                     },
-                    new NamedItem<string>
+                    new ControllerManifest
                     {
                         Name  = Language.GetText(IdOfInteractionController),
                         Value = IdOfInteractionController
@@ -90,7 +90,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         {
             var controller = factory();
             var id         = controller.Id;
-            var item = new NamedItem<string>
+            var item = new ControllerManifest
             {
                 Name  = Language.GetText(id),
                 Value = id,

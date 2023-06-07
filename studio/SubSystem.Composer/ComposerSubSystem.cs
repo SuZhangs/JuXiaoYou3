@@ -13,14 +13,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Composer
     {
         public override ITabViewController GetController() => new ComposerController();
 
-        protected override string GetSubSystemName(CultureArea language)
-        {
-            return language switch
-            {
-                _ => "建造模式"
-            };
-        }
-
 
         protected override string GetLanguageFilePrefix() => "Acorisoft.FutureGL.MigaStudio.Composer.Languages.";
 
@@ -32,6 +24,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Composer
         {
         }
 
+        public override string FriendlyName => Language switch
+        {
+            _ => "建造模式"
+        };
+        public override string Intro => Language switch
+        {
+            _ => "建造模式"
+        };
         public override string ModuleId => Id;
         public const string Id = "__Composer";
     }
