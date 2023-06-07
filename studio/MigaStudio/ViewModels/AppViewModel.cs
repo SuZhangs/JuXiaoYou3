@@ -81,7 +81,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private static void InitializeBuiltinController(GlobalStudioContext context)
         {
+#if DEBUG
             InitializeController(context, () => new WorldViewController());
+#endif
         }
 
         private static void InitializeController(GlobalStudioContext context, Func<TabController> factory)

@@ -15,5 +15,10 @@ namespace Acorisoft.FutureGL.Forest.AppModels
         /// </summary>
         /// <param name="windowKeyEventArgs">拖拽参数</param>
         void SetWindowEvent(WindowDragDropArgs windowKeyEventArgs);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        WindowState WindowState { get; set; }
     }
 }

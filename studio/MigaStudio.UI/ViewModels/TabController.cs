@@ -18,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     {
         private ITabViewModel       _currentViewModel;
         private GlobalStudioContext _context;
+        private WindowState         _windowState;
 
         protected TabController()
         {
@@ -550,6 +551,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
         
+
+        /// <summary>
+        /// 用于绑定的<see cref="WindowState"/> 属性。
+        /// </summary>
+        public WindowState WindowState
+        {
+            get => _windowState;
+            set => SetValue(ref _windowState, value);
+        }
+        
         /// <summary>
         /// 唯一标识符
         /// </summary>
@@ -613,28 +624,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
     
     public abstract class ShellCore : TabController
     {
-        private WindowState _windowState;
-
-        protected ShellCore()
-        {
-            Xaml.Get<IWindowEventBroadcast>()
-                .PropertyTunnel
-                .WindowState = x => WindowState = x;
-        }
 
         protected override void StartOverride()
         {
             RequireStartupTabViewModel();
-        }
-
-
-        /// <summary>
-        /// 用于绑定的<see cref="WindowState"/> 属性。
-        /// </summary>
-        public WindowState WindowState
-        {
-            get => _windowState;
-            set => SetValue(ref _windowState, value);
         }
     }
 }

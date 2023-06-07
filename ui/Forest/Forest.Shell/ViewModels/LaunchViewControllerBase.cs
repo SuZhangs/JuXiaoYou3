@@ -11,6 +11,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         private          object _context;
         private readonly object _sync;
         private          bool   _init;
+        private          WindowState _windowState;
         
         protected LaunchViewControllerBase()
         {
@@ -103,6 +104,15 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         /// 所有
         /// </summary>
         public Queue<AsyncJob> Jobs { get; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="WindowState"/> 属性。
+        /// </summary>
+        public WindowState WindowState
+        {
+            get => _windowState;
+            set => SetValue(ref _windowState, value);
+        }
 
         /// <summary>
         /// 唯一标识符

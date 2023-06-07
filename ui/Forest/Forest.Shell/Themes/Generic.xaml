@@ -629,7 +629,7 @@
                                            Width="48"
                                            Mode="Maximum"
                                            Command="{x:Static SystemCommands.MaximizeWindowCommand}"
-                                           WindowState="{TemplateBinding WindowState}" />
+                                           WindowState="{Binding WindowState,Mode=TwoWay,RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                             <p:PrimitiveButton Height="29"
                                            Width="48"

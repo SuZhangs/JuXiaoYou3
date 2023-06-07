@@ -57,7 +57,10 @@ namespace Acorisoft.FutureGL.Forest
                                   .PropertyTunnel
                                   .WindowState;
                 }
-                _skip = true;
+                else
+                {
+                    _skip = true;
+                }
             }
             
             if (_skip == false)

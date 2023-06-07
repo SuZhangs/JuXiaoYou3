@@ -15,7 +15,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         protected TabBaseAppViewModel()
         {
             ApplicationModel = Xaml.Get<ApplicationModel>();
-            
             var web = Xaml.Get<IWindowEventBroadcast>();
             
             web.Keys
@@ -25,6 +24,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             web.Drags
                .Subscribe(OnWindowEventRouting)
                .DisposeWith(Collector);
+            
+            web.PropertyTunnel
+               .WindowState = x => CurrentController.WindowState = x;
         }
 
         protected virtual bool OnKeyDown(WindowKeyEventArgs e)

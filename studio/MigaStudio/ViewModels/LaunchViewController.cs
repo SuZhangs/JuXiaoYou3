@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -27,6 +26,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             // 检查更新
             Job("text.launch.checkVersion", x => { });
+            
+            
+            // 检查世界观存在性
+            Job("text.launch.databaseExistence", x =>  CheckDatabaseExistenceImpl((GlobalStudioContext)x));
 
             // 加载插件
             Job("text.launch.loadModules", x => LoadModuleImpl((GlobalStudioContext)x));
@@ -141,6 +144,23 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                         CriticalLevel.Warning,
                         Language.NotifyText,
                         SubSystemString.GetDatabaseResult(dr.Reason));
+            }
+        }
+
+        private static void CheckDatabaseExistenceImpl(GlobalStudioContext context)
+        {
+            var ss = Xaml.Get<SystemSetting>();
+            var rs = ss.RepositorySetting;
+
+            for (var i = 0; i < rs.Repositories.Count; i++)
+            {
+                if (System.IO.Directory.Exists(rs.Repositories[i].Path))
+                {
+                    continue;
+                }
+                
+                rs.Repositories
+                  .RemoveAt(i);
             }
         }
 
