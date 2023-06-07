@@ -14,10 +14,6 @@ namespace Acorisoft.Miga.Doc.Engines
 
         public ImageService(string dir) : base(SubFolders)
         {
-            OnRepositoryOpening(new RepositoryContext
-            {
-                RepositoryFolder = dir
-            }, null);
         }
 
         protected internal sealed override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)

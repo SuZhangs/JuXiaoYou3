@@ -1,20 +1,16 @@
-﻿using QuikGraph;
-// ReSharper disable ConstantConditionalAccessQualifier
+﻿// ReSharper disable ConstantConditionalAccessQualifier
 // ReSharper disable NotNullMemberIsNotInitialized
 
 namespace Acorisoft.Miga.Doc.Relationships
 {
-    public class Relationship : ObservableObject, IEdge<DocumentIndex>
+    public class Relationship : ObservableObject
     {
         private string _name;
         
-        [BsonId]
         public string Id { get; init; }
         
-        [BsonRef(Constants.cn_index)]
         public DocumentIndex Source { get; set; }
         
-        [BsonRef(Constants.cn_index)]
         public DocumentIndex Target { get; set; }
         
         public bool IsBidirection { get; init; }
@@ -47,10 +43,5 @@ namespace Acorisoft.Miga.Doc.Relationships
             set => SetValue(ref _relationName, value);
         }
 
-    }
-
-    public sealed class RelationshipGraph : BidirectionalGraph<DocumentIndex, Relationship>
-    {
-        
     }
 }

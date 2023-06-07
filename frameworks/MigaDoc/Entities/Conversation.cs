@@ -7,13 +7,11 @@
         /// <summary>
         /// 
         /// </summary>
-        [BsonId]
         public string Id { get; init; }
         
         /// <summary>
         /// 人物
         /// </summary>
-        [BsonRef(Constants.cn_index)]
         public DocumentIndex Index { get; set; }
         
         /// <summary>

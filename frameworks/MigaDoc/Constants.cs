@@ -20,6 +20,30 @@
     
     public static class Constants
     {
+        
+        public static void AddMany<T>(this ICollection<T> source, IEnumerable<T> target, bool clear = false)
+        {
+            if (source is null || target is null)
+            {
+                return;
+            }
+
+            if (source.IsReadOnly)
+            {
+                return;
+            }
+
+            if (clear)
+            {
+                source.Clear();
+            }
+
+            foreach (var item in target)
+            {
+                source.Add(item);
+            }
+        }
+        
         //
         // fileName
         internal const string main_database = "main.mgdb";
@@ -53,10 +77,5 @@
         //
         // field
         internal const string fieldName_id = "_id";
-
-        internal static T Deserialize<T>(this BsonDocument document)
-        {
-            return BsonMapper.Global.Deserialize<T>(document);
-        }
     }
 }

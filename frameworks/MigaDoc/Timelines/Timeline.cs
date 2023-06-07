@@ -21,7 +21,6 @@ namespace Acorisoft.Miga.Doc.Entities.Timelines
         /// <summary>
         /// 
         /// </summary>
-        [BsonId]
         public string Id { get; init; }
 
         /// <summary>

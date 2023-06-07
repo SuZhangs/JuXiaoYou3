@@ -76,31 +76,6 @@ namespace Acorisoft.Miga.Doc.Engines
 
     public static class NoSqlUtils
     {
-        public static bool Contains<T>(this ILiteCollection<T> collection, BsonValue value)
-        {
-            return collection.Exists(Query.EQ("_id", value));
-        }
-
-        public static T FindByName<T>(this ILiteCollection<T> collection, BsonValue value)
-        {
-            return collection.FindOne(Query.EQ("Name", value));
-        }
-
-        public static bool ContainName<T>(this ILiteCollection<T> collection, BsonValue value)
-        {
-            return collection.Exists(Query.EQ("Name", value));
-        }
-
-        public static bool Contains<T>(this ILiteCollection<T> collection, string field, BsonValue value)
-        {
-            return collection.Exists(Query.EQ(field, value));
-        }
-
-        public static T FindOne<T>(this ILiteCollection<T> collection, string field, BsonValue value)
-        {
-            return collection.FindOne(Query.EQ(field, value));
-        }
-
 
         public static bool AlwaysTrue<T>(T _) => true;
     }

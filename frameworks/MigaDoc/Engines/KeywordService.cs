@@ -23,10 +23,6 @@ namespace Acorisoft.Miga.Doc.Engines
             return IdMapping.TryGetValue(id, out keyword);
         }
 
-        public IEnumerable<KeywordMapping> GetMapping(Keyword value)
-        {
-            return RelDB.Find(Query.EQ(nameof(KeywordMapping.Keyword), value.Id));
-        }
 
         public bool Add(string newName, string owner)
         {
@@ -48,13 +44,7 @@ namespace Acorisoft.Miga.Doc.Engines
                 Owner = owner
             };
 
-            if (!KeywordDB.Contains(keyword.Id))
-            {
-                IdMapping.TryAdd(keyword.Id, keyword);
-                NameMapping.TryAdd(keyword.Name, keyword);
-            }
 
-            KeywordDB.Upsert(keyword);
             return true;
         }
         
@@ -64,7 +54,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-            KeywordDB.Upsert(keyword);
         }
 
         public bool Rename(Keyword keyword, string oldName, string newName)
@@ -89,7 +78,6 @@ namespace Acorisoft.Miga.Doc.Engines
             }
 
 
-            SightDB.Upsert(sight);
         }
 
         public bool Add(KeywordMapping mapping)
@@ -106,7 +94,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return false;
             }
 
-            RelDB.Insert(mapping);
             return true;
         }
 
@@ -117,10 +104,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            KeywordDB.Delete(keyword.Id);
-            RelDB.DeleteMany(Query.EQ(nameof(KeywordMapping.Keyword), keyword.Id));
-            IdMapping.Remove(keyword.Id);
-            NameMapping.Remove(keyword.Name);
         }
 
         public void Remove(string labelName, string id)
@@ -130,18 +113,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            var rel = RelDB.FindOne(Query.And(
-                Query.EQ(nameof(KeywordMapping.Document), id),
-                Query.EQ(nameof(KeywordMapping.Keyword), keyword.Id)));
-
-            if (rel is null)
-            {
-                return;
-            }
-
-            //
-            //
-            RelDB.Delete(rel.Id);
         }
 
         public void Remove(Sight sight)
@@ -151,7 +122,6 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            SightDB.Delete(sight.Id);
         }
 
         public void Remove(DocumentIndex index)
@@ -160,10 +130,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            RelDB.DeleteMany(Query.EQ(nameof(KeywordMapping.Document), index.Id));
-
-            Refresh();
         }
 
         public void Remove(string labelName, DocumentIndex index)
@@ -183,37 +149,24 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            RelDB.DeleteMany(
-                Query.And(
-                    Query.EQ(nameof(KeywordMapping.Keyword), keyword.Id),
-                    Query.EQ(nameof(KeywordMapping.Document), index.Id)));
-
-            Refresh();
         }
 
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
-            KeywordDB = context.Database.GetCollection<Keyword>(Constants.cn_keyword);
-            RelDB     = context.Database.GetCollection<KeywordMapping>(Constants.cn_keywordMapping);
-            SightDB   = context.Database.GetCollection<Sight>(Constants.cn_sight);
+            // KeywordDB = context.Database.GetCollection<Keyword>(Constants.cn_keyword);
+            // RelDB     = context.Database.GetCollection<KeywordMapping>(Constants.cn_keywordMapping);
+            // SightDB   = context.Database.GetCollection<Sight>(Constants.cn_sight);
 
             Refresh();
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
         {
-            KeywordDB = null;
-            SightDB   = null;
-            RelDB     = null;
-
             NameMapping.Clear();
             IdMapping.Clear();
         }
 
         public Dictionary<string, Keyword> IdMapping { get; }
         public Dictionary<string, Keyword> NameMapping { get; }
-        public ILiteCollection<Keyword> KeywordDB { get; private set; }
-        public ILiteCollection<Sight> SightDB { get; private set; }
-        public ILiteCollection<KeywordMapping> RelDB { get; private set; }
     }
 }

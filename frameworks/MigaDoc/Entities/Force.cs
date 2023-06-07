@@ -8,7 +8,6 @@ namespace Acorisoft.Miga.Doc.Entities
         private string _summary;
         private string _avatar;
 
-        [BsonId]
         public string Id { get; init; }
 
         /// <summary>

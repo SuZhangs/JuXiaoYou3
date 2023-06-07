@@ -8,7 +8,6 @@ namespace Acorisoft.Miga.Doc.Keywords
         private string _name;
         private string _summary;
         
-        [BsonId]
         public string Id { get; init; }
         public string Owner { get; set; }
 

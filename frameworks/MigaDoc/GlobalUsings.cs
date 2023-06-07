@@ -26,7 +26,6 @@ global using Acorisoft.FutureGL.MigaUtils;
 //global using LibGit2Sharp;
 //
 //
-global using LiteDB;
 global using System.Text;
 global using System.Xml.Linq;
 global using System.Runtime.CompilerServices;

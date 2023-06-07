@@ -5,7 +5,6 @@
     /// </summary>
     public class LabelMapping : IObjectMapping
     {
-        [BsonId]
         public string Id { get; init; }
         public string TargetId { get; init; }
         public string LabelId { get; init; }
@@ -25,7 +24,6 @@
 
     public class LabelRel
     {
-        [BsonId]
         public string Id { get; init; }
         public string TargetId { get; init; }
         public string LabelId { get; init; }

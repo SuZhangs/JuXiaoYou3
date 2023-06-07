@@ -16,19 +16,12 @@ namespace Acorisoft.Miga.Doc.Engines
         {
         }
 
-        public Document Open(string id)
-        {
-            return Database.Contains(id) ? Database.FindById(id) : null;
-        }
-
         public void Add(Document document)
         {
             if (document is null)
             {
                 return;
             }
-
-            Database.Upsert(document);
         }
 
         public void Update(Document document, bool overwritten = true)
@@ -37,19 +30,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            if (overwritten)
-            {
-                Database.Upsert(document);
-                return;
-            }
-
-            if (Database.Contains(document.Id))
-            {
-                return;
-            }
-
-            Database.Insert(document);
         }
 
         public void Remove(string id)
@@ -58,14 +38,12 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            Database.Delete(id);
         }
         
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
 
-            Database = context.Database.GetCollection<Document>(Constants.cn_document);
+           // Database = context.Database.GetCollection<Document>(Constants.cn_document);
 
             //
             //
@@ -77,9 +55,7 @@ namespace Acorisoft.Miga.Doc.Engines
             //
             //
             base.OnRepositoryClosing(context);
-            Database = null;
         }
 
-        public ILiteCollection<Document> Database { get; private set; }
     }
 }

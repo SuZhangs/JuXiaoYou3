@@ -18,15 +18,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            if (Database.ContainName(entity.Name))
-            {
-                Database.Update(entity);
-            }
-            else
-            {
-                Database.Insert(entity);
-            }
         }
 
         public void Remove(Force entity)
@@ -39,14 +30,12 @@ namespace Acorisoft.Miga.Doc.Engines
         
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
-            Database = context.Database.GetCollection<Force>(CollectionName);
+           // Database = context.Database.GetCollection<Force>(CollectionName);
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
         {
-            Database = null;
         }
         
-        public ILiteCollection<Force> Database { get; private set; }
     }
 }

@@ -14,12 +14,6 @@ namespace Acorisoft.Miga.Doc.Engines
         public void Refresh()
         {
            Mapping.Clear();
-           foreach (var moniker in Database.FindAll())
-           {
-               if (Mapping.TryAdd(moniker.Name, moniker))
-               {
-               }
-           }
         } 
 
         public void Add(Moniker moniker)
@@ -32,8 +26,6 @@ namespace Acorisoft.Miga.Doc.Engines
             if (Mapping.TryAdd(moniker.Name, moniker))
             {
             }
-            Database.Upsert(moniker);
-            
         }
         
         public void Remove(Moniker moniker)
@@ -44,23 +36,20 @@ namespace Acorisoft.Miga.Doc.Engines
             }
 
             Mapping.Remove(moniker.Name);
-            Database.Delete(moniker.Id);
             
         }
         
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
-            Database = context.Database.GetCollection<Moniker>(Constants.cn_moniker);
+            // Database = context.Database.GetCollection<Moniker>(Constants.cn_moniker);
             Refresh();
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
         {
             Mapping.Clear();
-            Database = null;
         }
         
         public Dictionary<string, Moniker> Mapping { get; }
-        public ILiteCollection<Moniker> Database { get; private set; }
     }
 }

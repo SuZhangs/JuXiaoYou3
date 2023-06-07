@@ -14,19 +14,12 @@ namespace Acorisoft.Miga.Doc.Engines
         {
         }
 
-        public Compose Open(string id)
-        {
-            return Database.Contains(id) ? Database.FindById(id) : null;
-        }
-
         public void Add(Compose compose)
         {
             if (compose is null)
             {
                 return;
             }
-
-            Database.Upsert(compose);
         }
 
         public void Update(Compose compose, bool overwritten = true)
@@ -35,19 +28,6 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            if (overwritten)
-            {
-                Database.Upsert(compose);
-                return;
-            }
-
-            if (Database.Contains(compose.Id))
-            {
-                return;
-            }
-
-            Database.Insert(compose);
         }
 
         public void Remove(string id)
@@ -56,19 +36,17 @@ namespace Acorisoft.Miga.Doc.Engines
             {
                 return;
             }
-
-            Database.Delete(id);
         }
         
 
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
 
-            Database = context.Database.GetCollection<Compose>(Constants.cn_compose);
-
+            // Database = context.Database.GetCollection<Compose>(Constants.cn_compose);
             //
-            //
-            base.OnRepositoryOpening(context, property);
+            // //
+            // //
+            // base.OnRepositoryOpening(context, property);
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
@@ -76,9 +54,6 @@ namespace Acorisoft.Miga.Doc.Engines
             //
             //
             base.OnRepositoryClosing(context);
-            Database = null;
         }
-
-        public ILiteCollection<Compose> Database { get; private set; }
     }
 }

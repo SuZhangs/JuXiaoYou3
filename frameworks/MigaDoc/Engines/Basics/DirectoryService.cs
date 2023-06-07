@@ -9,7 +9,6 @@
 
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
-            BaseDirectory = context.RepositoryFolder;
             Directory     = CheckDirectory(Path.Combine(BaseDirectory, SubFolder));
         }
         

@@ -7,7 +7,6 @@
         /// <summary>
         /// 
         /// </summary>
-        [BsonId]
         public string Id { get; init; }
 
         /// <summary>

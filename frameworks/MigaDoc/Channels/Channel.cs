@@ -33,7 +33,6 @@ namespace Acorisoft.Miga.Doc.Channels
         /// <summary>
         /// 房主
         /// </summary>
-        [BsonRef(Constants.cn_index)]
         public DocumentIndex Owner { get; init; }
         
         /// <summary>

@@ -10,7 +10,6 @@
         /// <summary>
         /// 获取或设置 <see cref="Id"/> 属性。
         /// </summary>
-        [BsonId]
         public Guid Id { get; init; }
         
         /// <summary>

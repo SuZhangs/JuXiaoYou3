@@ -16,22 +16,11 @@ namespace Acorisoft.Miga.Doc.Engines
                 return;
             }
 
-            if (!Database.Contains(index.Id))
-            {
-            }
-
-            Database.Upsert(index);
         }
 
 
         public void Remove(ComposeIndex index)
         {          
-            if (index is null)
-            {
-                return;
-            }
-            
-            Database.Delete(index.Id);
         }
 
         public void Refresh()
@@ -40,15 +29,12 @@ namespace Acorisoft.Miga.Doc.Engines
 
         protected internal override void OnRepositoryOpening(RepositoryContext context, RepositoryProperty property)
         {
-            Database = context.Database.GetCollection<ComposeIndex>(Constants.cn_index_compose);
-            Refresh();
+            // Database = context.Database.GetCollection<ComposeIndex>(Constants.cn_index_compose);
+            // Refresh();
         }
 
         protected internal override void OnRepositoryClosing(RepositoryContext context)
         {
-            Database = null;
         }
-
-        public ILiteCollection<ComposeIndex> Database { get; private set; }
     }
 }

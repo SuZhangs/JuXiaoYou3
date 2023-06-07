@@ -10,27 +10,6 @@ namespace Acorisoft.Miga.Doc.Documents
     /// </summary>
     public class Document : StorageObject
     {
-        #region ICloneable Interface
-
-        /// <summary>
-        /// 创建新的实例
-        /// </summary>
-        /// <returns>返回一个新的实例</returns>
-        protected override StorageObject CreateInstanceOverride()
-        {
-            return new Document();
-        }
-
-        /// <summary>
-        /// 复制当前的数据
-        /// </summary>
-        /// <param name="target">要复制到的目标实例。</param>
-        protected sealed override void ShadowCopy(StorageObject target)
-        {
-            base.ShadowCopy(target);
-        }
-
-        #endregion
 
         /// <summary>
         /// 获取或设置当前的文档类型

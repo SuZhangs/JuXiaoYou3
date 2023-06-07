@@ -4,7 +4,6 @@
     {
         private string _name;
         
-        [BsonId]
         public string Id { get; init; }
         
         /// <summary>
