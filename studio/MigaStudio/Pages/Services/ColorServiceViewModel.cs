@@ -12,9 +12,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class ColorServiceViewModel : TabViewModel
     {
-        private ColorMapping _selected;
+       private ColorMapping _selected;
         private string       _color;
         private string       _selectedKeyword;
+        private bool       _isEmpty;
 
         public ColorServiceViewModel()
         {
@@ -35,10 +36,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             AddKeywordCommand    = AsyncCommand<ColorMapping>(AddKeywordImpl, HasItem);
             RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl,x => Selected is not null && HasItem(x));
             EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
-            SaveCommand          = Command(SavePropertyImpl);
+            SaveCommand          = Command(Stop);
+            IsEmpty              = Selected is null;
         }
 
-        private void SavePropertyImpl()
+        public override void Stop()
         {
             Database.Upsert(Property);
             SetDirtyState(false);
@@ -74,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -183,7 +185,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -241,7 +243,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 SetValue(ref _selected, value);
-
+                IsEmpty = Selected is null;
                 AddKeywordCommand.NotifyCanExecuteChanged();
                 EditKeywordCommand.NotifyCanExecuteChanged();
                 RemoveKeywordCommand.NotifyCanExecuteChanged();
@@ -255,6 +257,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     Keywords.AddMany(value.Keywords);
                 }
             }
+        }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="IsEmpty"/> 属性。
+        /// </summary>
+        public bool IsEmpty
+        {
+            get => _isEmpty;
+            set => SetValue(ref _isEmpty, value);
         }
 
         [NullCheck(UniTestLifetime.Constructor)]

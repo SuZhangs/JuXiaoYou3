@@ -33,6 +33,9 @@
         <ftk:TabItem Header="时间线">
             <this:UniverseTimelineView/>
         </ftk:TabItem>
+        <ftk:TabItem Header="稀有度">
+            <this:ColorServicePage/>
+        </ftk:TabItem>
         <ftk:TabItem Header="更多">
             <this:UniverseMoreView/>
         </ftk:TabItem>

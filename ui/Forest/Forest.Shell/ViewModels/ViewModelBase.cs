@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         }
 
 
-        protected static bool HasItem<T>(T item) where T : class
+        public static bool HasItem<T>(T item) where T : class
             => item is not null;
         protected static bool NotLastItem<T>(IList<T> collection, T item)  where T : class
             => item is not null && collection.IndexOf(item) < collection.Count - 1;
