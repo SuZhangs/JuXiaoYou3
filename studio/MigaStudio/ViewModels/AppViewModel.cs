@@ -35,8 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 {
                     shell,
                     launch,
-                    quick,
-                    interaction
+                    quick
                 },
                 Character             = null,
                 FavoriteCharacterList = new ObservableCollection<DocumentCache>(),
@@ -45,13 +44,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     new ControllerManifest
                     {
                         Name  = Language.GetText(IdOfTabShellController),
-                        Value = IdOfTabShellController
-                    },
-                    new ControllerManifest
-                    {
-                        Name  = Language.GetText(IdOfInteractionController),
-                        Value = IdOfInteractionController
-                    },
+                        Value = IdOfTabShellController,
+                        Intro = Language.GetText("")
+                    }
                 },
                 ControllerMaps = new Dictionary<string, ITabViewController>
                 {
@@ -82,18 +77,19 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         private static void InitializeBuiltinController(GlobalStudioContext context)
         {
 #if DEBUG
-            InitializeController(context, () => new WorldViewController());
+            InitializeController(context, new InteractionController(), "__Interaction.Intro");
+            InitializeController(context, new WorldViewController(), "__WorldView.Intro");
 #endif
         }
 
-        private static void InitializeController(GlobalStudioContext context, Func<TabController> factory)
+        private static void InitializeController(GlobalStudioContext context, TabController controller, string introID)
         {
-            var controller = factory();
             var id         = controller.Id;
             var item = new ControllerManifest
             {
                 Name  = Language.GetText(id),
                 Value = id,
+                Intro = Language.GetText(introID)
             };
             
             context.ControllerList.Add(item);
