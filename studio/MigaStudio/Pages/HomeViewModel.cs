@@ -100,9 +100,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Controller.New(type);
         }
 
-        public sealed override bool Uniqueness => true;
-        public sealed override bool Removable => false;
-
         public RelayCommand<Type> GotoPageCommand { get; }
     }
 }

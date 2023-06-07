@@ -91,7 +91,7 @@
     /// </summary>
     public abstract class ModuleBlock : StorageObject
     {
-        public const string IdOfGroup     = "__Group";
+        public const string IdOfGroup      = "__Group";
         public const string IdOfBinary     = "__Binary";
         public const string IdOfColor      = "__Color";
         public const string IdOfRadar      = "__Radar";
@@ -99,6 +99,7 @@
         public const string IdOfLikability = "__Likability";
         public const string IdOfRate       = "__Rate";
         public const string IdOfDegree     = "__Degree";
+        public const string IdOfHybridSlider     = "__HybridSlider";
         public const string IdOfSequence   = "__Sequence";
         public const string IdOfMultiLine  = "__MultiLine";
         public const string IdOfSingleLine = "__SingleLine";

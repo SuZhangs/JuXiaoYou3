@@ -303,4 +303,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// </remarks>
         public virtual bool Uniqueness => false;
     }
+
+    public abstract class TabStartupViewModel : TabViewModel
+    {
+        public sealed override bool Removable => false;
+        public sealed override bool Uniqueness => true;
+    }
 }

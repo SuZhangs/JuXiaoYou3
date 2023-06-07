@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class InTabViewModelProxy : BindingProxy<InTabViewModel>{}
     
-    public abstract class InTabViewModel : TabViewModel
+    public abstract class InTabViewModel : TabStartupViewModel
     {
         public const string ToolsGroup = "global.tools";
         public const string FeatureGroup = "global.Feature";
