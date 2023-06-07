@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected TabViewModel()
         {
-            ApprovalRequired = true;
+            ApprovalRequired = false;
             KeyInputs        = new List<KeyInput>(8);
         }
 

@@ -51,7 +51,7 @@
 
             </DockPanel>
         </ftk:TabItem>
-        <ftk:TabItem Header="立绘">
+        <ftk:TabItem Header="地图">
             <DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Path Data="{StaticResource FeatherIcon.Message}"
@@ -61,13 +61,13 @@
                           Width="32" />
 
                     <TextBlock Margin="16 0 0 0"
-                               Text="注意：立绘将用于自动设卡生成！我们不会上传用户数据！"
+                               Text="注意：地图"
                                VerticalAlignment="Center" />
                 </DockPanel>
 
 
                 <f:EmptyContentControl Margin="0 8 0 0"
-                                       IsEmpty="{Binding IsMainPictureOfVerticalEmpty,Mode=OneWay}">
+                                       IsEmpty="{Binding IsMainPictureEmpty,Mode=OneWay}">
                     <f:EmptyContentControl.EmptyState>
                         <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureCommand}" />
                     </f:EmptyContentControl.EmptyState>
@@ -95,7 +95,7 @@
                             </f:CallToAction>
                         </StackPanel>
                         <Image Stretch="Uniform"
-                               Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
+                               Source="{Binding MainPicture,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
                     </DockPanel>
                 </f:EmptyContentControl>
             </DockPanel>
