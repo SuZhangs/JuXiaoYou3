@@ -11,11 +11,13 @@ using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -43,13 +45,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public UniverseViewModel()
         {
+            ColorService      = Xaml.Get<ColorService>();
+            Keywords          = new ObservableCollection<string>();
+            Mappings          = new ObservableCollection<ColorMapping>();
             PictureCollection = new ObservableCollection<Album>();
-            DatabaseManager   = Studio.DatabaseManager();
-            ImageEngine       = Studio.Engine<ImageEngine>();
-            ProjectEngine     = Studio.Engine<ProjectEngine>();
             Timelines         = new ObservableCollection<TimelineConcept>();
-            _databaseProperty = Database.Get<DatabaseProperty>();
-            _threadSafeAdding = new Subject<Album>().DisposeWith(Collector);
+            IsEmpty              = Selected is null;
+            DatabaseManager      = Studio.DatabaseManager();
+            ImageEngine          = Studio.Engine<ImageEngine>();
+            ProjectEngine        = Studio.Engine<ProjectEngine>();
+            _databaseProperty    = Studio.Database()
+                                         .Get<DatabaseProperty>();
+            Property = Studio.Database()
+                             .Get<ColorServiceProperty>();
+            
+            _threadSafeAdding    = new Subject<Album>().DisposeWith(Collector);
             _threadSafeAdding.ObserveOn(Scheduler)
                              .Subscribe(x =>
                              {
@@ -65,7 +75,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                  Save();
                              })
                              .DisposeWith(Collector);
+
+
+            if (Property.Mappings.Count > 0)
+            {
+                Mappings.AddMany(Property.Mappings, true);
+            }
+
+
+            AddMappingCommand = AsyncCommand(AddMappingImpl);
+            RemoveMappingCommand = AsyncCommand<ColorMapping>(RemoveMappingImpl, HasItem);
+            EditMappingCommand   = AsyncCommand<ColorMapping>(EditMappingImpl, HasItem);
             
+            AddKeywordCommand    = AsyncCommand<ColorMapping>(AddKeywordImpl, HasItem);
+            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl,x => Selected is not null && HasItem(x));
+            EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
+
 
             CloseDatabaseCommand        = AsyncCommand(CloseDatabaseImpl);
             SwitchDatabaseCommand       = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
@@ -183,6 +208,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Save()
         {
+            Database.Upsert(Property);
+            SetDirtyState(false);
             Database.Upsert(_databaseProperty);
         }
 

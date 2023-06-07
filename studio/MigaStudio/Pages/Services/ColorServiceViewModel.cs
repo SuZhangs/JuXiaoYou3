@@ -10,41 +10,13 @@ using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    public class ColorServiceViewModel : TabViewModel
+    partial class UniverseViewModel : TabViewModel
     {
-       private ColorMapping _selected;
+        private ColorMapping _selected;
         private string       _color;
         private string       _selectedKeyword;
         private bool       _isEmpty;
 
-        public ColorServiceViewModel()
-        {
-            ColorService     = Xaml.Get<ColorService>();
-            Property = Database.Get<ColorServiceProperty>();
-            Keywords = new ObservableCollection<string>();
-            Mappings = new ObservableCollection<ColorMapping>();
-
-            if (Property.Mappings.Count > 0)
-            {
-                Mappings.AddMany(Property.Mappings, true);
-            }
-
-            AddMappingCommand    = AsyncCommand(AddMappingImpl);
-            RemoveMappingCommand = AsyncCommand<ColorMapping>(RemoveMappingImpl, HasItem);
-            EditMappingCommand   = AsyncCommand<ColorMapping>(EditMappingImpl, HasItem);
-            
-            AddKeywordCommand    = AsyncCommand<ColorMapping>(AddKeywordImpl, HasItem);
-            RemoveKeywordCommand = AsyncCommand<string>(RemoveKeywordImpl,x => Selected is not null && HasItem(x));
-            EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
-            SaveCommand          = Command(Stop);
-            IsEmpty              = Selected is null;
-        }
-
-        public override void Stop()
-        {
-            Database.Upsert(Property);
-            SetDirtyState(false);
-        }
 
         private async Task AddMappingImpl()
         {
@@ -197,7 +169,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             SetDirtyState();
         }
 
-        public IDatabase Database => DatabaseUtilities.Database;
         public ColorService ColorService { get; }
         public ColorServiceProperty Property { get; }
 

@@ -11,10 +11,7 @@
       xmlns:studio="urn:acorisoft/studio"
       mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
-      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ColorServiceViewModel}, IsDesignTimeCreatable=True}">
-    <Grid.DataContext>
-        <this:ColorServiceViewModel/>
-    </Grid.DataContext>
+      d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="480" />
         <ColumnDefinition Width="1*" />
