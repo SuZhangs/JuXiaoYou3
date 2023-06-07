@@ -7,12 +7,15 @@
              xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
              xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
              xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
+             xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+             xmlns:studio="urn:acorisoft/studio"
              xmlns:f="urn:acorisoft/forest/ui"
              xmlns:ftk="urn:acorisoft/forest/toolkits"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance Type={x:Type thisVM:DocumentEditorVMBase}, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance Type={x:Type thisVM:GeographyDocumentViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <thisConverters:ImageConverter x:Key="ImageConverter" />
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
     </UserControl.Resources>
     <ftk:TabControl Padding="0 16 0 0">
@@ -24,28 +27,17 @@
                     <UniformGrid Columns="3">
                         <f:HeaderedSingleLine Header="名字"
                                               Margin="4"
-                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                              TextWrapping="Wrap"/>
+                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              TextWrapping="Wrap" />
 
-                        <f:HeaderedSingleLine Header="稀有度"
+                        <f:HeaderedSingleLine Header="别名"
                                               Margin="4"
-                                              Text="{Binding Rarity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding NickName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </UniformGrid>
 
                     <HeaderedContentControl Header="可选"
                                             Margin="0 16">
                         <UniformGrid Columns="3">
-                            <f:HeaderedSingleLine Header="昵称"
-                                                  Margin="4"
-                                                  Text="{Binding NickName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-                            <f:HeaderedSingleLine Header="种族"
-                                                  Margin="4"
-                                                  Text="{Binding Race,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-                            <f:HeaderedSingleLine Header="国家"
-                                                  Margin="4"
-                                                  Text="{Binding Country,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
                         </UniformGrid>
                     </HeaderedContentControl>
@@ -59,7 +51,56 @@
 
             </DockPanel>
         </ftk:TabItem>
+        <ftk:TabItem Header="立绘">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Path Data="{StaticResource FeatherIcon.Message}"
+                          Stroke="{f:Brush Theme=ForegroundLevel1}"
+                          Stretch="Uniform"
+                          Height="31"
+                          Width="32" />
 
+                    <TextBlock Margin="16 0 0 0"
+                               Text="注意：立绘将用于自动设卡生成！我们不会上传用户数据！"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+
+
+                <f:EmptyContentControl Margin="0 8 0 0"
+                                       IsEmpty="{Binding IsMainPictureOfVerticalEmpty,Mode=OneWay}">
+                    <f:EmptyContentControl.EmptyState>
+                        <studio:AlbumEmptyStateView Command="{Binding SetAsMainPictureCommand}" />
+                    </f:EmptyContentControl.EmptyState>
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top"
+                                    HorizontalAlignment="Right"
+                                    Margin="0 0 16 8"
+                                    Orientation="Horizontal">
+                            <f:CallToAction Content="{f:Language global.add}"
+                                            Command="{Binding SetAsMainPictureCommand}"
+                                            CornerRadius="24"
+                                            Palette="HighlightPalette2"
+                                            Padding="32 8"
+                                            Margin="4 0"
+                                            Height="48">
+
+                            </f:CallToAction>
+                            <f:CallToAction Content="{f:Language global.remove}"
+                                            Command="{Binding ResetAsMainPictureCommand}"
+                                            CornerRadius="24"
+                                            Palette="Danger"
+                                            Padding="32 8"
+                                            Margin="4 0"
+                                            Height="48">
+                            </f:CallToAction>
+                        </StackPanel>
+                        <Image Stretch="Uniform"
+                               Source="{Binding MainPictureOfVertical,Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.ScaledImage}}" />
+                    </DockPanel>
+                </f:EmptyContentControl>
+            </DockPanel>
+
+        </ftk:TabItem>
         <ftk:TabItem Header="标签"
                      Padding="16 8">
             <HeaderedContentControl DockPanel.Dock="Top"
@@ -82,7 +123,7 @@
                                         HorizontalAlignment="Left"
                                         Margin="0 16 0 0"
                                         Icon="{StaticResource FeatherIcon.Plus}"
-                                        Palette="HighlightPalette2"/>
+                                        Palette="HighlightPalette2" />
                     </DockPanel>
                 </HeaderedContentControl.Header>
 

@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public const string MetaNameOfPrice             = "@price";
         public const string MetaNameOfProduceArea       = "@produce-area";
         public const string MetaNameOfWeakness          = "@Weakness";
+        public const string MetaNameOfMainPicture  = "@mg";
         public const string MetaNameOfMainPictureOf4x3  = "@mg-s";
         public const string MetaNameOfMainPictureOf16x9 = "@mg-h";
         public const string MetaNameOfMainPictureOf9x16 = "@mg-v";

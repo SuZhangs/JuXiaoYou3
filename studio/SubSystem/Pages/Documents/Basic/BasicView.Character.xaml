@@ -283,8 +283,6 @@
             </DockPanel>
 
         </ftk:TabItem>
-
-
         <ftk:TabItem Header="标签"
                      Padding="16 8">
             <HeaderedContentControl DockPanel.Dock="Top"

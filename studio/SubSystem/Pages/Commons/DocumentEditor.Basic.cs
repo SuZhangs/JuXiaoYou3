@@ -209,6 +209,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public bool IsMainPictureOfSquareEmpty => string.IsNullOrEmpty(MainPictureOfSquare);
         public bool IsMainPictureOfVerticalEmpty => string.IsNullOrEmpty(MainPictureOfVertical);
         public bool IsMainPictureOfHorizontalEmpty => string.IsNullOrEmpty(MainPictureOfHorizontal);
+        public bool IsMainPictureEmpty => string.IsNullOrEmpty(MainPicture);
+        
+        public string MainPicture
+        {
+            get => GetOrAddMetadata(MetaNameOfMainPicture);
+            set
+            {
+                UpsertMetadata(MetaNameOfMainPicture, value);
+                RaiseUpdated(nameof(IsMainPictureEmpty));
+            }
+        }
         
         public string MainPictureOfSquare
         {
