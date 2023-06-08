@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureGL.Demo.Weapon", "demo\FutureGL.Demo.Weapon\FutureGL.Demo.Weapon.csproj", "{C577F0CC-4F76-4186-8F7E-1493D144EDF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C577F0CC-4F76-4186-8F7E-1493D144EDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C577F0CC-4F76-4186-8F7E-1493D144EDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C577F0CC-4F76-4186-8F7E-1493D144EDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C577F0CC-4F76-4186-8F7E-1493D144EDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
