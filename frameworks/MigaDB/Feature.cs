@@ -9,6 +9,11 @@ namespace Acorisoft.FutureGL.MigaDB
             return ((Database)database)._database;
         }
 
+        public static void InternalSetName(this ModuleBlock block, string value)
+        {
+            block._name = value;
+        }
+
         /// <summary>
         /// 获得布尔值
         /// </summary>

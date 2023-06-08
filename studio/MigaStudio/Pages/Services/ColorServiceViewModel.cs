@@ -10,7 +10,7 @@ using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
-    partial class UniverseViewModel : TabViewModel
+    partial class UniverseViewModel
     {
         private ColorMapping _selected;
         private string       _color;

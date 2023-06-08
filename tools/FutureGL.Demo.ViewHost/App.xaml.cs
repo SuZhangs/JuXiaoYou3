@@ -25,9 +25,9 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
     /// </summary>
     public partial class App
     {
-        public App() : base("main.json")
+        public App() 
         {
-            
+            Language.SetLanguageSource("cn.ini");
         }
         
         private IDatabaseManager _databaseManager;

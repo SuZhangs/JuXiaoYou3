@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
@@ -12,7 +13,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
         public static IEnumerable<ModuleBlock> CreateBlocks()
         {
             var b = CreateBlocksImpl();
-            EnumerableExtensions.ForEach(b, x => x.ClearValue());
+            b.ForEach(x =>
+            {
+                x.ClearValue();
+                x.InternalSetName(Language.GetText(x.Name));
+            });
             return b;
         }
 

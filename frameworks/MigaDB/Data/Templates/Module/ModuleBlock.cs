@@ -115,6 +115,8 @@
         public const string IdOfVideo      = "__Video";
         public const string IdOfReference  = "__Reference";
 
+        internal string _name;
+
         public bool CompareTemplate(ModuleBlock block)
         {
             return block is not null &&
@@ -163,7 +165,7 @@
         /// <summary>
         /// 名字
         /// </summary>
-        public string Name { get; init; }
+        public string Name { get => _name; init => _name = value; }
 
         /// <summary>
         /// 喵喵咒语

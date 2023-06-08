@@ -4,8 +4,8 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Authors>罗易斯（Luoyisi）</Authors>
         <Nullable>disable</Nullable>
-        <UseWPF>true</UseWPF>
-        <OutDir>../../Builds/JuXiaoYou</OutDir>
+        <UseWPF>true</UseWPF> 
+        <OutDir>../../Builds/Tools/prototype</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
         <Platforms>AnyCPU;x86;x64</Platforms>
         <ApplicationIcon>icon_repair.ico</ApplicationIcon>
