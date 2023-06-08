@@ -5,6 +5,11 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <RootNamespace>FutureGL.Demo.Weapon</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ForestUI" Version="1.0.0" />
+    </ItemGroup>
 
 </Project>

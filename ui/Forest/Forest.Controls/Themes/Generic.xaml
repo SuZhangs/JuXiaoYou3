@@ -119,7 +119,7 @@
         </Style.Triggers>
     </Style>
 
-    <ControlTemplate x:Key="DefaultExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+    <ControlTemplate x:Key="ClearStyle.Expander.ToggleButton" TargetType="{x:Type ToggleButton}">
         <Border Padding="{TemplateBinding Padding}"
                 CornerRadius="3"
                 Background="{TemplateBinding Background}">
@@ -219,7 +219,118 @@
                                           Foreground="{TemplateBinding Foreground}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                           OverridesDefaultStyle="True"
-                                          Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
+                                          Template="{StaticResource ClearStyle.Expander.ToggleButton}" />
+
+                            <!--  Collapsed content to expand  -->
+                            <Border x:Name="ContentPresenterBorder"
+                                    Grid.Row="1"
+                                    Background="Transparent"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Opacity="0.0">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}" />
+                                <Border.LayoutTransform>
+                                    <ScaleTransform ScaleY="0" />
+                                </Border.LayoutTransform>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ContentPresenterBorder" Property="BorderThickness" Value="0,1,0,0" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         From="0.0"
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.Opacity)"
+                                                         From="0.0"
+                                                         To="1.0"
+                                                         Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                         From="1.0"
+                                                         To="0"
+                                                         Duration="00:00:00.167" />
+                                        <DoubleAnimation Storyboard.TargetName="ContentPresenterBorder"
+                                                         Storyboard.TargetProperty="(Border.Opacity)"
+                                                         From="1.0"
+                                                         To="0.0"
+                                                         Duration="00:00:00.167" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{f:Brush BackgroundLevel2}" TargetName="ExpanderToggleButton" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{f:Brush BackgroundDisabled}" />
+                            <Setter Property="BorderBrush" Value="{f:Brush BackgroundDisabled}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{f:Brush ForegroundDisabled}" />
+                            <Setter TargetName="ExpanderToggleButton" Property="Foreground" Value="{f:Brush ForegroundDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ClearStyle.Expander" TargetType="{x:Type Expander}">
+        <Setter Property="Background" Value="{f:BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{f:Brush BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="11" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="IsExpanded" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Expander}">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4,4,4,4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--  Top level controls always visible  -->
+                            <ToggleButton x:Name="ExpanderToggleButton"
+                                          Margin="0"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Center"
+                                          Background="Transparent"
+                                          Content="{TemplateBinding Header}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          OverridesDefaultStyle="True"
+                                          Template="{StaticResource ClearStyle.Expander.ToggleButton}" />
 
                             <!--  Collapsed content to expand  -->
                             <Border x:Name="ContentPresenterBorder"
@@ -292,7 +403,6 @@
     <Style x:Key="ClearStyle.ComboBox.TextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
         <Setter Property="CaretBrush" Value="{f:Brush HighlightA3}" />
-        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Visibility" Value="Hidden" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="Margin" Value="0" />
