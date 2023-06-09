@@ -45,11 +45,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 c, 
                 x => x.Id, 
                 out var added, 
-                out var modified, 
+                out _, 
                 out var removed);
 
             Detail.Items.AddMany(added);
-            Detail.Items.RemoveMany(added);
+            Detail.Items.RemoveMany(removed);
             Sets.AddMany(added);
             Sets.RemoveMany(removed);
             SelectedSurveySet = null;
@@ -107,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            Sets.AddMany(Detail.Items);
+            Sets.AddMany(Detail.Items, true);
             SelectedSurveySet = Sets.FirstOrDefault();
         }
 
