@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
@@ -7,6 +8,7 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
+    [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
     partial class ComposeEditorBase
     {
         protected override Compose GetDocumentById(string id)
@@ -17,7 +19,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         protected override void PrepareOpeningDocument(ComposeCache cache, Compose document)
         {
             ActivateAllEngines();
-            SynchronizeKeywords();
         }
         
         
@@ -82,6 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             //
             //
             Document = document;
+            CreateComposeFromManifest(document);
             OnCreateDocument(document);
 
             ComposeEngine.AddCompose(document);

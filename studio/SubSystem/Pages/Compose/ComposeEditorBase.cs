@@ -83,8 +83,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 SetTitle(Document.Name, true);
             }
         }
+        
         protected override void OpeningDocument(ComposeCache cache, Compose document)
         {
+            SynchronizeKeywords();
         }
 
         #region OnLoad

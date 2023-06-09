@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public abstract class HierarchicalViewModel : MetadataEditable<DocumentCache, Document>
     {
