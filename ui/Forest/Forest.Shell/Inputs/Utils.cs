@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Acorisoft.FutureGL.MigaUtils;
 
 namespace CommunityToolkit.Mvvm.Input
 {

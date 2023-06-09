@@ -7,8 +7,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 {
     public class RichTextFileWorkspace : Workspace
     {
-        private bool _immutable;
-        
         public PartOfRtf Part { get; init; }
         public RichTextBox Control { get; set; }
         public override void Immutable()
@@ -19,17 +17,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             }
 
             IsWorking = true;
-            Observable.FromEventPattern<EventHandler, EventArgs>(
+            Observable.FromEventPattern<TextChangedEventHandler, TextChangedEventArgs>(
                           added => Control.TextChanged   += added,
                           removed => Control.TextChanged -= removed)
                       .Throttle(TimeSpan.FromMilliseconds(200))
                       .ObserveOn(Xaml.Get<IScheduler>())
-                      .Subscribe(_ =>
+                      .Subscribe(x =>
                       {
-                      });
+                          OnTextChanged(x.Sender, x.EventArgs);
+                      })
+                      .DisposeWith(Disposable);
+            Observable.FromEventPattern<RoutedEventHandler, RoutedEventArgs>(
+                          added => Control.SelectionChanged   += added,
+                          removed => Control.SelectionChanged -= removed)
+                      .Throttle(TimeSpan.FromMilliseconds(200))
+                      .ObserveOn(Xaml.Get<IScheduler>())
+                      .Subscribe(x =>
+                      {
+                          OnSelectionChanged(x.Sender, x.EventArgs);
+                      })
+                      .DisposeWith(Disposable);
             
-            Control.TextChanged += OnTextChanged;
-            Control.SelectionChanged += OnSelectionChanged;
         }
 
         private void OnSelectionChanged(object sender, RoutedEventArgs e)
@@ -41,6 +49,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
         {
         }
 
-        public override string Content { get; }
+        public override string Content =>  Part is null ? string.Empty : Part.Content;
     }
 }
