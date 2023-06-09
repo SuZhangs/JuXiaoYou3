@@ -131,11 +131,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         public string Content
         {
-            get => Markdown.Content;
+            get => Workspace?.Content;
             set
             {
-                Markdown.Content = value;
-                Cache.Length     = value?.Length ?? 0;
                 RaiseUpdated();
             }
         }

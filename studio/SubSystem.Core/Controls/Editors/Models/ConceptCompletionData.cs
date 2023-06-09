@@ -10,7 +10,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors.Models
         // https://www.cnblogs.com/nankezhishi/archive/2008/11/22/1338959.html
         public void Complete(TextArea textArea, ISegment completionSegment, EventArgs insertionRequestEventArgs)
         {
-            throw new NotImplementedException();
+            textArea.Document
+                    .Replace(completionSegment, Text);
         }
 
         public ImageSource Image { get;init; }

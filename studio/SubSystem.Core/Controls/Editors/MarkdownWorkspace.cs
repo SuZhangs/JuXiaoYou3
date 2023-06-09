@@ -9,6 +9,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 {
     public class MarkdownWorkspace : Workspace
     {
+        private ConceptCompletionWindow _window;
+        private bool                    _isShow;
+        
         public override void Immutable()
         {
             if (IsWorking)
@@ -52,19 +55,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
         {
         }
 
+        private void OnWindowClose(object sender, EventArgs e)
+        {
+            _window.Closed -= OnWindowClose;
+            _window        =  null;
+        }
+        
         private void OnTextChanged(object sender, EventArgs e)
         {
-            var window = new ConceptCompletionWindow(Control.TextArea);
-            var data   = window.CompletionList
-                               .CompletionData;
+            if (_window is null)
+            {
+                _isShow        =  false;
+                _window        =  new ConceptCompletionWindow(Control.TextArea);
+                _window.Closed += OnWindowClose; 
+            }
+            
+            var data   = _window.CompletionList
+                                .CompletionData;
             var engine   = Studio.Engine<DocumentEngine>();
             var concepts = engine.GetConcepts()
                                  .Select(x => new ConceptCompletionData
                                  {
                                      Text = x.Name,
+                                     Content = x.Name
                                  });
             data.AddMany(concepts, true);
-            window.Show();
+            
+            //
+            //
+            if (_isShow)
+            {
+                _window.Close();
+            }
+            
+            _isShow = true;
+            _window.Show();
             Part.Content = Control.Text;
         }
 

@@ -59,6 +59,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 x.Scheduler = Scheduler;
                 x.Immutable();
             });
+
+            Workspace = WorkspaceCollection.FirstOrDefault();
         }
         
         /// <summary>
