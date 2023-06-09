@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Core;
+﻿using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Windows

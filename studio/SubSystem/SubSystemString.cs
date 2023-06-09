@@ -414,8 +414,6 @@
         public static string EmptyAuthor => GetText("text.EmptyAuthor");
         public static string EmptyValue => GetText("text.EmptyValue");
         public static string EmptyFor => GetText("text.EmptyFor");
-        public static string KeywordTooMany => GetText("text.KeywordTooMany");
-        public static string AddKeywordTitle => GetText("text.AddKeyword");
         public static string EditNameTitle => GetText("text.editName");
         public static string EditValueTitle => GetText("text.editValue");
         public static string SelectTitle => GetText("global.select");

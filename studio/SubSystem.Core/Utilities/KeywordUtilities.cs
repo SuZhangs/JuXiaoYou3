@@ -9,6 +9,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 {
     public static class KeywordUtilities
     {
+        public static string KeywordTooMany => Language.GetText("text.KeywordTooMany");
+        public static string AddKeywordTitle => Language.GetText("text.AddKeyword");
+        public static string AreYouSureRemoveIt => Language.GetText("text.AreYouSureRemoveIt");
+        
         public static async Task AddKeyword(
             string documentID,
             IList<Keyword> keywords,
@@ -18,10 +22,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         {
             if (KeywordEngine.GetKeywordCount(documentID) >= 32)
             {
-                await Warning(SubSystemString.KeywordTooMany);
+                await Warning(KeywordTooMany);
             }
 
-            var r    = await SingleLineViewModel.String(SubSystemString.AddKeywordTitle);
+            var r    = await SingleLineViewModel.String(AddKeywordTitle);
 
             if (!r.IsFinished)
             {
@@ -52,7 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             Action<bool> SetDirtyState,
             Func<string, Task<bool>> DangerousOperation)
         {
-            if (!await DangerousOperation(SubSystemString.AreYouSureRemoveIt))
+            if (!await DangerousOperation(AreYouSureRemoveIt))
             {
                 return;
             }

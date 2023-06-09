@@ -5,7 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      xmlns:thisCore="clr-namespace:Acorisoft.FutureGL.MigaStudio.Core"
-                     xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
+                     xmlns:thisSubView="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models;assembly=SubSystem.Core"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:f="urn:acorisoft/forest/ui"

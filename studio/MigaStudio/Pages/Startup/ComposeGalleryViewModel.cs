@@ -154,7 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task AddKeywordImpl()
         {
-            await DocumentUtilities.AddKeyword(
+            await KeywordUtilities.AddKeyword(
                 SelectedItem.Id,
                 Keywords,
                 KeywordEngine,
@@ -164,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task RemoveKeywordImpl(Keyword item)
         {
-            await DocumentUtilities.RemoveKeyword(
+            await KeywordUtilities.RemoveKeyword(
                 item, 
                 Keywords, 
                 KeywordEngine, 
