@@ -5,8 +5,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private readonly Dictionary<string, DataPart>             _DataPartTrackerOfId;
-        private readonly Dictionary<Type, DataPart>               _DataPartTrackerOfType;
         private readonly Dictionary<string, ModuleBlock>          _BlockTrackerOfId;
 
         private ModuleBlock GetBlockById(string id)
@@ -20,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             // 只能添加未添加的模组
             var availableModules = TemplateEngine.TemplateCacheDB
                                                  .FindAll()
-                                                 .Where(x => !_DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
+                                                 .Where(x => !DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
             if(!availableModules.Any() )
             {
                 await this.WarningNotification("你已经添加了所有模组！");
@@ -76,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return false;
             }
 
-            if (_DataPartTrackerOfId.TryAdd(module.Id, module))
+            if (DataPartTrackerOfId.TryAdd(module.Id, module))
             {
                 module.Index = ModuleParts.Count;
                 ModuleParts.Add(module);
@@ -114,7 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                         continue;
                     }
 
-                    if (_MetadataTrackerByName.ContainsKey(metadata))
+                    if (MetadataTrackerByName.ContainsKey(metadata))
                     {
                         blocks.RemoveAt(i);
                     }
@@ -174,8 +172,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             Document.Parts.Remove(module);
             ModuleParts.Remove(module);
-            _DataPartTrackerOfId.Remove(module.Id);
-            _DataPartTrackerOfType.Remove(module.GetType());
+            DataPartTrackerOfId.Remove(module.Id);
+            DataPartTrackerOfType.Remove(module.GetType());
         }
 
         private bool CanUpgrade(PartOfModule module, out ModuleTemplate template)

@@ -4,7 +4,7 @@ using static Acorisoft.FutureGL.MigaStudio.Utilities.MetadataUtilities;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    partial class DocumentEditorBase
+    public abstract class BasicEditable : HierarchicalViewModel
     {
 
         public string GetOrAddMetadata(string name)
@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return value;
             }
 
-            if (_MetadataTrackerByName.TryGetValue(name, out var metadata))
+            if (MetadataTrackerByName.TryGetValue(name, out var metadata))
             {
                 if (!string.IsNullOrEmpty(metadata.Value))
                 {
@@ -284,6 +284,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        public PartOfBasic BasicPart { get; private set; }
+        public PartOfBasic BasicPart { get; protected set; }
     }
 }

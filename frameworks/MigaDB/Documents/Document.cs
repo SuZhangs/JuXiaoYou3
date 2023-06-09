@@ -3,7 +3,7 @@
     /// <summary>
     /// 表示一个文档
     /// </summary>
-    public class Document : StorageObject, IData
+    public class Document : StorageObject, IMetadataPackage
     {
         /// <summary>
         /// 名字

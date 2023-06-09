@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public abstract class HierarchicalViewModel : TabViewModel 
+    public abstract class HierarchicalViewModel : MetadataEditable<DocumentCache, Document>
     {
         private SubViewBase      _selectedSubView;
         private FrameworkElement _subView;

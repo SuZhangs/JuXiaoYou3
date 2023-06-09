@@ -84,7 +84,7 @@
         //
         // Cache
         internal const string Name_Cache_ModuleTemplate = "idx_module";
-        internal const string Name_Cache_Metadata       = "idx_meta";
+        internal const string Name_CacheMetadata       = "idx_meta";
         internal const string Name_Cache_Document       = "idx_doc";
         internal const string Name_Cache_Compose        = "idx_compose";
 

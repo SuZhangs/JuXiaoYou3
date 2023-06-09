@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
     }
 
-    public abstract partial class DocumentEditorBase : HierarchicalViewModel
+    public abstract partial class DocumentEditorBase : BasicEditable
     {
         //
         // Fields
@@ -29,9 +29,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected DocumentEditorBase()
         {
-            _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-            _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
-            _MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
             _BlockTrackerOfId      = new Dictionary<string, ModuleBlock>(StringComparer.OrdinalIgnoreCase);
 
             ContentBlocks      = new ObservableCollection<ModuleBlockDataUI>();
@@ -39,7 +36,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             InvisibleDataParts = new ObservableCollection<DataPart>();
             ModuleParts        = new ObservableCollection<PartOfModule>();
             Presentations      = new ObservableCollection<PresentationUI>();
-            Keywords           = new ObservableCollection<Keyword>();
             Preshapes          = new ObservableCollection<FrameworkElement>();
 
             var dbMgr = Studio.DatabaseManager();
@@ -50,10 +46,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 .DisposeWith(Collector);
 
             DatabaseManager = dbMgr;
-            DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
             TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
-            KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
             ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
             SaveDocumentCommand = Command(Save);
@@ -84,9 +78,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ExportPresentationAsPdfCommand      = AsyncCommand(ExportPresentationAsPdfImpl);
             ExportPresentationAsPictureCommand  = AsyncCommand(ExportPresentationAsPictureImpl);
             ExportPresentationAsMarkdownCommand = AsyncCommand(ExportPresentationAsMarkdownImpl);
-
-            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
         }
 
         private void Initialize()
@@ -125,17 +116,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id), true);
         }
 
-        protected override void OnStart(Parameter parameter)
+        protected override void PrepareOpeningDocument(DocumentCache cache, Document document)
         {
             Initialize();
             ActivateAllEngines();
-            Cache    = (DocumentCache)parameter.Args[0];
-            Document = DocumentEngine.GetDocument(Cache.Id);
-            Type     = Cache.Type;
-            SynchronizeKeywords();
-            Open();
+        }
 
-            base.OnStart(parameter);
+        protected override void OpeningDocument(DocumentCache cache, Document document)
+        {
+            SynchronizeKeywords();
+        }
+
+        protected override void FinishOpeningDocument(DocumentCache cache, Document document)
+        {
         }
 
         protected override void OnStart()
@@ -164,5 +157,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SetTitle(Document.Name, state);
         }
+        
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<DataPart> InvisibleDataParts { get; }
+
+
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public IDatabaseManager DatabaseManager { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public TemplateEngine TemplateEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ImageEngine ImageEngine { get; }
     }
 }

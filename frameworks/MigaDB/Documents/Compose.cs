@@ -4,7 +4,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
     /// <summary>
     /// 表示一个创作
     /// </summary>
-    public class Compose : StorageObject, IData
+    public class Compose : StorageObject, IMetadataPackage
     {
         /// <summary>
         /// 名字

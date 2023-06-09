@@ -4,8 +4,19 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    partial class DocumentEditorBase
+    public abstract class KeywordEditable<TCache, TDocument> : DocumentEditable<TCache, TDocument>
+        where TDocument : class, IData
+        where TCache : class, IDataCache
     {
+        protected KeywordEditable()
+        {
+            Keywords      = new ObservableCollection<Keyword>();
+            KeywordEngine = Studio.Engine<KeywordEngine>();
+
+            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
+            RemoveKeywordCommand = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
+        }
+
         private async Task AddKeywordImpl()
         {
             await DocumentUtilities.AddKeyword(
@@ -19,10 +30,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         private async Task RemoveKeywordImpl(Keyword item)
         {
             await DocumentUtilities.RemoveKeyword(
-                item, 
-                Keywords, 
-                KeywordEngine, 
-                SetDirtyState, 
+                item,
+                Keywords,
+                KeywordEngine,
+                SetDirtyState,
                 this.Error);
         }
 
@@ -32,5 +43,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public KeywordEngine KeywordEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<Keyword> Keywords { get; }
     }
 }

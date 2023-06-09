@@ -14,13 +14,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
     public abstract partial class ComposeEditorBase : TabViewModel
     {
-        private readonly Dictionary<string, DataPart> _DataPartTrackerOfId;
-        private readonly Dictionary<Type, DataPart>   _DataPartTrackerOfType;
+        private readonly Dictionary<string, DataPart> DataPartTrackerOfId;
+        private readonly Dictionary<Type, DataPart>   DataPartTrackerOfType;
 
         protected ComposeEditorBase()
         {
-            _DataPartTrackerOfType = new Dictionary<Type, DataPart>();
-            _DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
+            DataPartTrackerOfType = new Dictionary<Type, DataPart>();
+            DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
 
             var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()
@@ -134,14 +134,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             foreach (var part in Compose.Parts)
             {
                 if (!string.IsNullOrEmpty(part.Id) &&
-                    !_DataPartTrackerOfId.TryAdd(part.Id, part))
+                    !DataPartTrackerOfId.TryAdd(part.Id, part))
                 {
                     Xaml.Get<ILogger>()
                         .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
                     continue;
                 }
 
-                if (_DataPartTrackerOfType.TryAdd(part.GetType(), part))
+                if (DataPartTrackerOfType.TryAdd(part.GetType(), part))
                 {
                     if (part is PartOfMarkdown pom)
                     {
@@ -169,16 +169,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             {
                 Markdown = new PartOfMarkdown();
                 Compose.Parts.Add(Markdown);
-                _DataPartTrackerOfId.TryAdd(Markdown.Id, Markdown);
-                _DataPartTrackerOfType.TryAdd(Markdown.GetType(), Markdown);
+                DataPartTrackerOfId.TryAdd(Markdown.Id, Markdown);
+                DataPartTrackerOfType.TryAdd(Markdown.GetType(), Markdown);
             }
 
             if (Album is null)
             {
                 Album = new PartOfAlbum();
                 Compose.Parts.Add(Album);
-                _DataPartTrackerOfId.TryAdd(Album.Id, Album);
-                _DataPartTrackerOfType.TryAdd(Album.GetType(), Album);
+                DataPartTrackerOfId.TryAdd(Album.Id, Album);
+                DataPartTrackerOfType.TryAdd(Album.GetType(), Album);
             }
 
             //

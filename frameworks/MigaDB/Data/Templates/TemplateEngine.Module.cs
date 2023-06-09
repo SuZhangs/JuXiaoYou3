@@ -70,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates
         {
             TemplateDB      = database.GetCollection<ModuleTemplate>(Constants.Name_ModuleTemplate);
             TemplateCacheDB = database.GetCollection<ModuleTemplateCache>(Constants.Name_Cache_ModuleTemplate);
-            MetadataCacheDB = database.GetCollection<MetadataCache>(Constants.Name_Cache_Metadata);
+            MetadataCacheDB = database.GetCollection<MetadataCache>(Constants.Name_CacheMetadata);
         }
 
         protected void ModuleClosing()
