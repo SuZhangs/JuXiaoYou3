@@ -14,7 +14,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             {
                 w = new RichTextFileWorkspace
                 {
-                    Visible = Visibility.Collapsed,
                     Control = control
                 };
                 
@@ -37,7 +36,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             {
                 w = new MarkdownWorkspace
                 {
-                    Visible = Visibility.Collapsed,
                     Control = control
                 };
                 
@@ -51,8 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             }
             return editor;
         }
-        
-        
+
         public static IWorkspace CreateFromRtfPart(PartOfRtf rtf)
         {
             return new RichTextFileWorkspace

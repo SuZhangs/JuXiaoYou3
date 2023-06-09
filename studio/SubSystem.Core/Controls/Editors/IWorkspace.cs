@@ -1,37 +1,49 @@
-﻿using System.Windows;
+﻿using System.Reactive.Concurrency;
+using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 {
     public interface IWorkspace
     {
         /// <summary>
-        /// 获取当前工作区的可视性
-        /// </summary>
-        Visibility Visible { get; }
-        
-        /// <summary>
         /// 获取当前的文本
         /// </summary>
         string Content { get; }
+        IScheduler Scheduler { get; set; }
 
         event EventHandler PositionChanged;
         event EventHandler TextChanged;
         event EventHandler SelectionChanged;
+        void Immutable();
     }
 
     public abstract class Workspace : ObservableObject, IWorkspace
     {
-        private Visibility _visible;
+        private            IScheduler           _scheduler;
+        protected readonly DisposableCollector Disposable = new DisposableCollector();
 
-        /// <summary>
-        /// 获取或设置 <see cref="Visible"/> 属性。
-        /// </summary>
-        public Visibility Visible
+        protected override void ReleaseManagedResources()
         {
-            get => _visible;
-            set => SetValue(ref _visible, value);
+            _scheduler = null;
         }
 
+        public abstract void Immutable();
+
+        public IScheduler Scheduler
+        {
+            get => _scheduler;
+            set
+            {
+                if (value is null)
+                {
+                    return;
+                }
+
+                _scheduler = value;
+            }
+        }
+
+        public bool IsWorking { get; protected set; }
         public abstract string Content { get; }
         public event EventHandler PositionChanged;
         public event EventHandler TextChanged;

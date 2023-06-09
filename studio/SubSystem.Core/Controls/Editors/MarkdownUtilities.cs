@@ -10,13 +10,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
         
         static void Test()
         {
-            var editor = new TextEditor();
-            editor.TextChanged += OnTextChanged;
-            editor.TextArea
-                  .SelectionChanged += OnSelectionChanged;
-            editor.TextArea
-                  .Caret
-                  .PositionChanged += OnPositionChanged;
 
             var rtf = new RichTextBox();
             rtf.SelectionChanged += OnSelectionChanged;
@@ -32,19 +25,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             throw new NotImplementedException();
         }
 
-        private static void OnPositionChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private static void OnSelectionChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private static void OnTextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }
