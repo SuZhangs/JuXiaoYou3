@@ -1,5 +1,11 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Acorisoft.FutureGL.Forest.Attributes;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaStudio.Pages.Commons;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -24,7 +30,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task AddKeywordImpl()
         {
-            await DocumentUtilities.AddKeyword(
+            await KeywordUtilities.AddKeyword(
                 Cache.Id,
                 Keywords,
                 KeywordEngine,
@@ -34,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task RemoveKeywordImpl(Keyword item)
         {
-            await DocumentUtilities.RemoveKeyword(
+            await KeywordUtilities.RemoveKeyword(
                 item,
                 Keywords,
                 KeywordEngine,

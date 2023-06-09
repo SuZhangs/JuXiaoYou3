@@ -3,7 +3,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 {
     public class ItemDocumentViewModel : DocumentEditorVMBase
     {
-        protected override void CreateSubViews(ICollection<SubViewBase> collection)
+        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
         {
             AddBasicView<ItemBasicView>(collection);
             AddDetailView(collection);

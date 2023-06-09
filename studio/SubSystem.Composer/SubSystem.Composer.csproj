@@ -17,6 +17,7 @@
         <ProjectReference Include="..\..\ui\Forest\Forest.Shell\Forest.Shell.csproj" />
         <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
         <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
+        <ProjectReference Include="..\SubSystem.Core\SubSystem.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Languages\cn.ini" />

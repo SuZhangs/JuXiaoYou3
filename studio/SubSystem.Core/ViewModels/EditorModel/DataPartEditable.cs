@@ -1,4 +1,7 @@
-﻿using System.Drawing.Imaging;
+﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
+using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -8,8 +11,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         where TCache : class, IDataCache
     {
         
-        private protected readonly Dictionary<string, DataPart> DataPartTrackerOfId;
-        private protected readonly Dictionary<Type, DataPart>   DataPartTrackerOfType;
+        protected readonly Dictionary<string, DataPart> DataPartTrackerOfId;
+        protected readonly Dictionary<Type, DataPart>   DataPartTrackerOfType;
 
         protected DataPartEditable()
         {

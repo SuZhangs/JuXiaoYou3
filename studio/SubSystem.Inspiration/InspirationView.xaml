@@ -6,7 +6,7 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations"
-                     xmlns:vm2="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels;assembly=MigaStudio.UI"
+                     xmlns:vm2="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels;assembly=SubSystem.Core"
                      xmlns:thisEmptyState="clr-namespace:Acorisoft.FutureGL.MigaStudio.Inspirations.Resources.EmptyState"
                      xmlns:s="urn:acorisoft/studio"
                      xmlns:fs="urn:acorisoft/forest/shell"

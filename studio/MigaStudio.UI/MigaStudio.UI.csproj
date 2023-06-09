@@ -58,4 +58,8 @@
       <Compile Remove="Utilities\CloudMap.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ViewModels\Editors" />
+    </ItemGroup>
+
 </Project>

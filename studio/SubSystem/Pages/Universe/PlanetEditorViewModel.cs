@@ -2,7 +2,7 @@
 {
     public class PlanetEditorViewModel : UniverseEditorBase
     {
-        protected override void CreateSubViews(ICollection<SubViewBase> collection)
+        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
         {
             AddSubView<PlanetBasicEditorView>(collection, "text.Planet.Basic", "#92A400", "#A1B500");
             AddSubView<PlanetFlowerEditorView>(collection, "text.Planet.Flower", "#92A400", "#A1B500");

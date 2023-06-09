@@ -2,7 +2,7 @@
 {
     public class SkillDocumentViewModel : DocumentEditorVMBase
     {
-        protected override void CreateSubViews(ICollection<SubViewBase> collection)
+        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
         {
             AddBasicView<SkillBasicView>(collection);
             AddDetailView(collection);

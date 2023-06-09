@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>disable</Nullable>
+        <OutDir>../../Builds/SubSystem</OutDir>
+        <RootNamespace>Acorisoft.FutureGL.MigaStudio</RootNamespace>
+        <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;x86;x64</Platforms>
+        <AssemblyVersion>3.0.0</AssemblyVersion>
+        <FileVersion>3.0.0.0</FileVersion>
+        <NeutralLanguage>zh</NeutralLanguage>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\frameworks\MigaDB.Share\MigaDB.Share.csproj" />
+      <ProjectReference Include="..\..\frameworks\MigaDB\MigaDB.csproj" />
+      <ProjectReference Include="..\..\frameworks\MigaUtils\MigaUtils.csproj" />
+      <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    </ItemGroup>
+
+</Project>

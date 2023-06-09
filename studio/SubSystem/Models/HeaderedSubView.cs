@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
 {
-    public class HeaderedSubView : SubViewBase
+    public class HeaderedSubView
     {
         public void Create(object dataContext)
         {
@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         }
         
         public Type Type { get; init; }
-        
+        public string Name { get; init; }
         public FrameworkElement SubView { get; set; }
         
         public string DefaultColor { get; init; }

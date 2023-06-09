@@ -8,7 +8,7 @@
              xmlns:fs="urn:acorisoft/forest/shell"
              xmlns:vm="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels"
              xmlns:pages="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
-             xmlns:vm2="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels;assembly=MigaStudio.UI"
+             xmlns:vm2="clr-namespace:Acorisoft.FutureGL.MigaStudio.ViewModels;assembly=SubSystem.Core"
              xmlns:s="urn:acorisoft/studio"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:proxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"

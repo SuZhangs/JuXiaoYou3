@@ -1,4 +1,8 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using System.Collections.Generic;
+using Acorisoft.FutureGL.Forest.Attributes;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -12,10 +16,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
         
         [NullCheck(UniTestLifetime.Constructor)]
-        private protected readonly Dictionary<string, MetadataIndexCache> MetadataTrackerByName;
+        protected readonly Dictionary<string, MetadataIndexCache> MetadataTrackerByName;
         
         
-        private protected class MetadataIndexCache
+        protected class MetadataIndexCache
         {
             private int _index;
 
@@ -60,30 +64,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         #region Metadata
 
         
-        protected void OnModuleBlockValueChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
-        {
-            var metadataString = block.Metadata;
-            
-            //
-            // ModuleBlockDataUI 已经实现了Value的Clamp和Fallback，不需要重新设置了
-            // 这里只做Metadata的Add or Update
-            if (block is GroupBlock)
-            {
-                return;
-            }
-            
-            if (string.IsNullOrEmpty(metadataString))
-            {
-                return;
-            }
-            
-            //
-            //
-            var metadata = block.ExtractMetadata();
-            
-            AddMetadata(metadata);
-            
-        }
 
         protected Metadata GetMetadataById(string metadata)
         {

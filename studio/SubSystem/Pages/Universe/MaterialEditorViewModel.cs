@@ -2,7 +2,7 @@
 {
     public class MaterialEditorViewModel : UniverseEditorBase
     {
-        protected override void CreateSubViews(ICollection<SubViewBase> collection)
+        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
         {
             
         }

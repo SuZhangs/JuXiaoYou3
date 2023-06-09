@@ -1,17 +1,22 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using Acorisoft.FutureGL.Forest.Attributes;
+using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public abstract class HierarchicalViewModel : MetadataEditable<DocumentCache, Document>
     {
-        private SubViewBase      _selectedSubView;
+        private HeaderedSubView      _selectedSubView;
         private FrameworkElement _subView;
         
         protected HierarchicalViewModel()
         {
-            InternalSubViews = new ObservableCollection<SubViewBase>();
-            SubViews         = new ReadOnlyCollection<SubViewBase>(InternalSubViews);
+            InternalSubViews = new ObservableCollection<HeaderedSubView>();
+            SubViews         = new ReadOnlyCollection<HeaderedSubView>(InternalSubViews);
         }
 
         protected void InitializeSubView()
@@ -24,14 +29,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// 创建子页面
         /// </summary>
         /// <param name="collection">集合</param>
-        protected abstract void CreateSubViews(ICollection<SubViewBase> collection);
+        protected abstract void CreateSubViews(ICollection<HeaderedSubView> collection);
         
         /// <summary>
         /// 当子页面创建时
         /// </summary>
         /// <param name="oldValue"></param>
         /// <param name="newValue"></param>
-        protected abstract void OnSubViewChanged(SubViewBase oldValue, SubViewBase newValue);
+        protected abstract void OnSubViewChanged(HeaderedSubView oldValue, HeaderedSubView newValue);
         
         /// <summary>
         /// 获取或设置 <see cref="SubView"/> 属性。
@@ -45,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// <summary>
         /// 获取或设置 <see cref="SelectedSubView"/> 属性。
         /// </summary>
-        public SubViewBase SelectedSubView
+        public HeaderedSubView SelectedSubView
         {
             get => _selectedSubView;
             set
@@ -56,9 +61,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        protected ObservableCollection<SubViewBase> InternalSubViews { get; }
+        protected ObservableCollection<HeaderedSubView> InternalSubViews { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
-        public ReadOnlyCollection<SubViewBase> SubViews { get; }
+        public ReadOnlyCollection<HeaderedSubView> SubViews { get; }
     }
 }

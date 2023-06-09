@@ -1,6 +1,9 @@
-﻿using Acorisoft.FutureGL.MigaDB.Core;
+﻿using Acorisoft.FutureGL.Forest.Attributes;
+using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaStudio.ViewModels;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
@@ -73,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected abstract TDocument GetDocumentById(string id);
         
         [NullCheck(UniTestLifetime.Startup)]
-        public DocumentType Type { get; private protected set; }
+        public DocumentType Type { get; protected set; }
         
         [NullCheck(UniTestLifetime.Startup)]
         public TDocument Document { get; protected set; }

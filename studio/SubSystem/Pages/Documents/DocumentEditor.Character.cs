@@ -21,7 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         }
 
         // TODO: 人物关系中的血缘关系
-        protected override void CreateSubViews(ICollection<SubViewBase> collection)
+        protected override void CreateSubViews(ICollection<HeaderedSubView> collection)
         {
             AddBasicView<CharacterBasicView>(collection);
             AddDetailView(collection);

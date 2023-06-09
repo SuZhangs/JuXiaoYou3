@@ -419,6 +419,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             }
         }
+        
+        
+        protected void OnModuleBlockValueChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
+        {
+            var metadataString = block.Metadata;
+            
+            //
+            // ModuleBlockDataUI 已经实现了Value的Clamp和Fallback，不需要重新设置了
+            // 这里只做Metadata的Add or Update
+            if (block is GroupBlock)
+            {
+                return;
+            }
+            
+            if (string.IsNullOrEmpty(metadataString))
+            {
+                return;
+            }
+            
+            //
+            //
+            var metadata = block.ExtractMetadata();
+            
+            AddMetadata(metadata);
+            
+        }
 
 
         [NullCheck(UniTestLifetime.Constructor)]

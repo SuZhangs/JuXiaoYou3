@@ -289,7 +289,7 @@
         #region ModuleBlockPresentation Translate
 
         // TODO: 翻译
-        internal static string GetName(string value)
+        public static string GetName(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -302,7 +302,7 @@
             return value;
         }
 
-        internal static string GetFor(string value)
+        public static string GetFor(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -320,7 +320,7 @@
             return string.Format(pattern, value);
         }
 
-        internal static string GetAuthor(string value)
+        public static string GetAuthor(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -339,7 +339,7 @@
         }
 
 
-        internal static string GetContractList(string value)
+        public static string GetContractList(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -358,7 +358,7 @@
         }
 
 
-        internal static string GetIntro(string value)
+        public static string GetIntro(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
