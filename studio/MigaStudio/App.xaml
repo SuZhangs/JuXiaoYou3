@@ -19,6 +19,11 @@
                 <ResourceDictionary Source="pack://application:,,,/Forest.Controls;component/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/Generic.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/ListBoxItem.xaml" />
+                <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/TextEditor.xaml" />
+                <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Search/DropDownButton.xaml" />
+                <ResourceDictionary Source="/ICSharpCode.AvalonEdit;component/Search/SearchPanel.xaml" />
+                <ResourceDictionary Source="/SubSystem.Core;component/Controls/Editors/Completion/CompletionList.xaml" />
+                <ResourceDictionary Source="/SubSystem.Core;component/Controls/Editors/Completion/InsightWindow.xaml" />
                 <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Wpf.Ui.xaml" /> -->
                 <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ProgressBar.xaml" /> -->
                 <!-- <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Styles/Controls/ComboBox.xaml" /> -->

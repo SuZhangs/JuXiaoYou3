@@ -7,7 +7,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors.Models
 {
     public class ConceptCompletionData : ICompletionData
     {
-        // https://www.cnblogs.com/nankezhishi/archive/2008/11/22/1338959.html
+        // TODO: https://www.cnblogs.com/nankezhishi/archive/2008/11/22/1338959.html
+        // TODO: https://www.cnblogs.com/Soar1991/p/15834391.html
         public void Complete(TextArea textArea, ISegment completionSegment, EventArgs insertionRequestEventArgs)
         {
             textArea.Document
