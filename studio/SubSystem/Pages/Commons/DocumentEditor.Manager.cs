@@ -101,7 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             IsDataPartExistenceOverride(Document);
         }
 
-        protected abstract void IsDataPartExistenceOverride(Document document);
+        protected virtual void IsDataPartExistenceOverride(Document document){}
 
         private void GetPartOfPresentation()
         {
