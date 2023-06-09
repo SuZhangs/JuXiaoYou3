@@ -49,10 +49,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 
         private void OnPositionChanged(object sender, EventArgs e)
         {
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Caret, this);
         }
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Selection, this);
         }
 
         private void OnWindowClose(object sender, EventArgs e)
@@ -91,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             _isShow = true;
             _window.Show();
             Part.Content = Control.Text;
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
         }
 
         public override string Content => Part is null ? string.Empty : Part.Content;

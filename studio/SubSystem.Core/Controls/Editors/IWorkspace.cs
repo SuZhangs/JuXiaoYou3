@@ -3,17 +3,24 @@ using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 {
-    public interface IWorkspace
+    public enum StateChangedEventSource
+    {
+        Caret,
+        TextSource,
+        Selection
+    }
+
+    public delegate void WorkspaceChangedEventHandler(StateChangedEventSource source, IWorkspace workspace);
+    
+    public interface IWorkspace : IDisposable
     {
         /// <summary>
         /// 获取当前的文本
         /// </summary>
         string Content { get; }
         IScheduler Scheduler { get; set; }
-
-        event EventHandler PositionChanged;
-        event EventHandler TextChanged;
-        event EventHandler SelectionChanged;
+        WorkspaceChangedEventHandler WorkspaceChanged { get; set; }
+        
         void Immutable();
     }
 
@@ -25,6 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
         protected override void ReleaseManagedResources()
         {
             _scheduler = null;
+            Disposable.Dispose();
         }
 
         public abstract void Immutable();
@@ -45,8 +53,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 
         public bool IsWorking { get; protected set; }
         public abstract string Content { get; }
-        public event EventHandler PositionChanged;
-        public event EventHandler TextChanged;
-        public event EventHandler SelectionChanged;
+        public WorkspaceChangedEventHandler WorkspaceChanged { get; set; }
     }
 }

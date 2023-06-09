@@ -128,15 +128,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         #endregion
 
-
-        public string Content
+        protected override void ReleaseManagedResourcesOverride()
         {
-            get => Workspace?.Content;
-            set
-            {
-                RaiseUpdated();
-            }
+            ReleaseWorkspace();
+            base.ReleaseManagedResourcesOverride();
         }
+        
         
         public string Name
         {

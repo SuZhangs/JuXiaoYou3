@@ -10,6 +10,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private readonly ObservableCollection<IWorkspace> InternalWorkspaceCollection;
         private          IWorkspace                       _workspace;
 
+        private void ReleaseWorkspace()
+        {
+            WorkspaceCollection.ForEach(x =>
+            {
+                x.WorkspaceChanged = null;
+                x.Dispose();
+            });
+        }
+
         protected void CreateWorkspace(PartOfRtf rtf)
         {
             if (rtf is null)
@@ -18,33 +27,44 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             }
 
             var workspace = EditorUtilities.CreateFromRtfPart(rtf);
-            
+            workspace.WorkspaceChanged = OnWorkspaceChanged;
+
             if (!WorkspaceMapping.TryAdd(typeof(PartOfRtf), workspace))
             {
                 Xaml.Get<ILogger>()
                     .Warn("创建了重复的RTF模组");
                 return;
             }
-            
+
             InternalWorkspaceCollection.Add(workspace);
         }
-        
+
+        private void OnWorkspaceChanged(StateChangedEventSource source, IWorkspace workspace)
+        {
+            if (source == StateChangedEventSource.TextSource)
+            {
+                Statistic(workspace.Content);
+                RaiseUpdated(nameof(TotalCharacterCount));
+                SetDirtyState();
+            }
+        }
+
         protected void CreateWorkspace(PartOfMarkdown md)
         {
             if (md is null)
             {
                 return;
             }
-            
+
             var workspace = EditorUtilities.CreateFromMarkdownPart(md);
-            
+
             if (!WorkspaceMapping.TryAdd(typeof(PartOfRtf), workspace))
             {
                 Xaml.Get<ILogger>()
                     .Warn("创建了重复的RTF模组");
                 return;
             }
-            
+
             InternalWorkspaceCollection.Add(workspace);
         }
 
@@ -62,7 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
             Workspace = WorkspaceCollection.FirstOrDefault();
         }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="Workspace"/> 属性。
         /// </summary>
@@ -71,7 +91,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             get => _workspace;
             set => SetValue(ref _workspace, value);
         }
-        
+
         public ReadOnlyObservableCollection<IWorkspace> WorkspaceCollection { get; }
     }
 }

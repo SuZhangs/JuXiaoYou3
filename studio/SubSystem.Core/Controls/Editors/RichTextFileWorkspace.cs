@@ -42,11 +42,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 
         private void OnSelectionChanged(object sender, RoutedEventArgs e)
         {
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Selection, this);
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Caret, this);
             
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
         }
 
         public override string Content =>  Part is null ? string.Empty : Part.Content;

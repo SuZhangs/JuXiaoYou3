@@ -21,47 +21,46 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 return;
             }
 
-            Task.Run(() =>
-            {
-                foreach (var ch in textSnapshot)
-                {
-                    _totalCharacterCount++;
-                    
-                    
-                    if (char.IsDigit(ch))
-                    {
-                        _digitCount++;
-                        _characterCount++;
-                        continue;
-                    }
-                    
-                    if (char.IsControl(ch))
-                    {
-                        _controlCount++;
-                        _nonCharacterCount++;
-                        continue;
-                    }
-
-                    if (char.IsWhiteSpace(ch))
-                    {
-                        _whitespaceCount++;
-                        _nonCharacterCount++;
-                        continue;
-                    }
-                    
-                    _characterCount++;
-                }
-                
-                Scheduler.Schedule(() =>
-                {
-                    RaiseUpdated(nameof(ControlCount));
-                    RaiseUpdated(nameof(DigitCount));
-                    RaiseUpdated(nameof(WhitespaceCount));
-                    RaiseUpdated(nameof(CharacterCount));
-                    RaiseUpdated(nameof(NonCharacterCount));
-                    RaiseUpdated(nameof(TotalCharacterCount));
-                });
-            });
+            TotalCharacterCount = textSnapshot.Length;
+            
+            // Task.Run(() =>
+            // {
+            //     return;
+            //     foreach (var ch in textSnapshot)
+            //     {
+            //         if (char.IsDigit(ch))
+            //         {
+            //             _digitCount++;
+            //             _characterCount++;
+            //             continue;
+            //         }
+            //         
+            //         if (char.IsControl(ch))
+            //         {
+            //             _controlCount++;
+            //             _nonCharacterCount++;
+            //             continue;
+            //         }
+            //
+            //         if (char.IsWhiteSpace(ch))
+            //         {
+            //             _whitespaceCount++;
+            //             _nonCharacterCount++;
+            //             continue;
+            //         }
+            //         
+            //         _characterCount++;
+            //     }
+            //     
+            //     Scheduler.Schedule(() =>
+            //     {
+            //         RaiseUpdated(nameof(ControlCount));
+            //         RaiseUpdated(nameof(DigitCount));
+            //         RaiseUpdated(nameof(WhitespaceCount));
+            //         RaiseUpdated(nameof(CharacterCount));
+            //         RaiseUpdated(nameof(NonCharacterCount));
+            //     });
+            // });
         }
 
         /// <summary>
