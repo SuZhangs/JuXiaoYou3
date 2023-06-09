@@ -13,6 +13,10 @@
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:ComposeEditorViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialSymbols.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         <Style TargetType="{x:Type f:HeaderedSingleLine}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource ClearStyle.FocusVisual}" />
             <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
@@ -105,7 +109,7 @@
                                       Height="{TemplateBinding IconSize}" />
 
                                 <ContentPresenter x:Name="PART_Content"
-                                              TextElement.FontSize="12"
+                                              TextElement.FontSize="13"
                                               TextElement.Foreground="#4F5B66"
                                               Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -119,6 +123,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <f:Drawer>
         <Grid ShowGridLines="True">
@@ -160,38 +165,53 @@
                         Margin="16 0"
                         Orientation="Horizontal">
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Archive}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Book}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Path}"
+                                IsFilled="True"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Book}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.At}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Inbox}"/>
-                
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.More.Horizontal}"
-                                IconSize="17"
-                                IsFilled="True"/>
+
+                <ftk:DropDownButton Icon="{StaticResource FeatherIcon.More.Horizontal}"
+                                    IconSize="17"
+                                    IsFilled="True">
+                    <ftk:DropDownButton.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource MaterialSymbols.Format_Align_Left}"
+                                        IsFilled="True"/>
+                            <f:MenuItem Icon="{StaticResource MaterialSymbols.Format_Align_right}"
+                                        IsFilled="True"/>
+                            <f:MenuItem Icon="{StaticResource MaterialSymbols.Format_align_Center}"
+                                        IsFilled="True"/>
+                            <f:MenuItem Header=""/>
+                        </f:ContextMenu>
+                    </ftk:DropDownButton.ContextMenu>
+                </ftk:DropDownButton>
             </StackPanel>
 
             <!-- 操作 -->
             <DockPanel Grid.Row="2">
 
-                <ftk:TabControl Margin="16 8"
-                                Padding="0 8">
-                    <ftk:TabItem Header="信息"
-                                 Padding="16 8">
-                        <StackPanel>
-                            <UniformGrid Columns="2">
+            </DockPanel>
 
-                                
-                            </UniformGrid>
-                        </StackPanel>
-                        
-                    </ftk:TabItem>
-                    <ftk:TabItem Header="大纲"
+            <ftk:TabControl Grid.Row="2"
+                                Margin="16 8"
+                                Padding="0 8">
+                <ftk:TabItem Header="信息"
+                                 Padding="16 8">
+                    <StackPanel>
+                        <UniformGrid Columns="2">
+
+
+                        </UniformGrid>
+                    </StackPanel>
+
+                </ftk:TabItem>
+                <ftk:TabItem Header="大纲"
                                  Padding="16 8"
                                  Visibility="Collapsed">
 
-                    </ftk:TabItem>
-                </ftk:TabControl>
-            </DockPanel>
+                </ftk:TabItem>
+            </ftk:TabControl>
 
             <DockPanel Grid.Column="1"
                        Grid.Row="2">
@@ -211,28 +231,45 @@
 
 
 
-            <StackPanel Grid.Column="1"
-                        Grid.ColumnSpan="2"
+            <StackPanel Grid.Column="0"
+                        Grid.ColumnSpan="3"
                         Grid.Row="1" 
+                        HorizontalAlignment="Center"
                         Orientation="Horizontal"
                         Margin="0 8">
                 <StackPanel.Resources>
 
                     <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
                         <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
-                        <Setter Property="IconSize" Value="21" />
-                        <Setter Property="Height" Value="36" />
+                        <Setter Property="IconSize" Value="23" />
+                        <Setter Property="Height" Value="40" />
                         <Setter Property="IsFilled" Value="True" />
-                        <Setter Property="Width" Value="36" />
+                        <Setter Property="Width" Value="40" />
                     </Style>
                 </StackPanel.Resources>
-                <ftk:ToolButton Icon="{StaticResource IC.Undo}"/>
-                <ftk:ToolButton Icon="{StaticResource IC.Redo}"/>
-                <ftk:ToolButton Icon="{StaticResource IC.Video}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Undo}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Redo}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Format}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Image}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Code}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.text_Increase}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Decrease}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Increase}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Decrease}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Italic}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_bold}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Strikethrough}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Quote}"/>
+                <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Grid_on}"/>
             </StackPanel>
 
             <!-- 状态栏 -->
@@ -249,10 +286,13 @@
                 </StatusBarItem>
                 <StatusBarItem HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
-                        <ftk:StateButton Content="富文本"/>
-                        <ftk:StateButton Content="Markdown"/>
-                        <ftk:StateButton Content="Markdown+预览"/>
-                        <ftk:StateButton Content="预览"/>
+                        <ftk:StateButton Icon="{StaticResource MaterialSymbols.Rtf}" 
+                                         Content="Rtf"/>
+                        <ftk:StateButton Icon="{StaticResource MaterialSymbols.Markdown}" 
+                                         IsFilled="True"
+                                         Content="Markdown"/>
+                        <ftk:StateButton Icon="{StaticResource MaterialSymbols.Projector}" 
+                                         Content="Preview"/>
                     </StackPanel>
                 </StatusBarItem>
             </StatusBar>
