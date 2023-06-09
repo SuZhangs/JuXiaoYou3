@@ -7,8 +7,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 {
     public class RichTextFileWorkspace : Workspace
     {
+        private RichTextBox _ctrl;
+        
         public PartOfRtf Part { get; init; }
-        public RichTextBox Control { get; set; }
+
+        public RichTextBox Control
+        {
+            get => _ctrl;
+            set
+            {
+                if (value is null)
+                {
+                    return;
+                }
+
+                if (_ctrl is not null &&
+                    ReferenceEquals(_ctrl, value))
+                {
+                    return;
+                }
+
+                _ctrl     = value;
+                IsWorking = false;
+                Disposable.Dispose();
+                Disposable = new DisposableCollector();
+            }
+        }
         public override void Immutable()
         {
             if (IsWorking)

@@ -57,6 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             }
 
             var workspace = EditorUtilities.CreateFromMarkdownPart(md);
+            workspace.WorkspaceChanged = OnWorkspaceChanged;
 
             if (!WorkspaceMapping.TryAdd(typeof(PartOfRtf), workspace))
             {

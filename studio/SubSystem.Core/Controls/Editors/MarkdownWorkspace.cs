@@ -14,6 +14,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
         
         public override void Immutable()
         {
+            if (!string.IsNullOrEmpty(Part.Content))
+            {
+                Control.Text = Part.Content;
+            }
+
+            
             if (IsWorking)
             {
                 return;
@@ -83,17 +89,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
                                  });
             data.AddMany(concepts, true);
             
+            Part.Content = Control.Text;
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
+            
             //
             //
             if (_isShow)
             {
                 _window.Close();
             }
+
+            if (_window is null)
+            {
+                _isShow = false;
+                return;
+            }
             
             _isShow = true;
             _window.Show();
-            Part.Content = Control.Text;
-            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
         }
 
         public override string Content => Part is null ? string.Empty : Part.Content;

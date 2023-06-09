@@ -26,8 +26,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
 
     public abstract class Workspace : ObservableObject, IWorkspace
     {
-        private            IScheduler           _scheduler;
-        protected readonly DisposableCollector Disposable = new DisposableCollector();
+        private   IScheduler          _scheduler;
+        protected DisposableCollector Disposable = new DisposableCollector();
 
         protected override void ReleaseManagedResources()
         {

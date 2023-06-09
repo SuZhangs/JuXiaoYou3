@@ -194,12 +194,12 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
             if (visibleRect.Contains(visualLocation) || visibleRect.Contains(visualLocationTop))
                 UpdatePosition();
             else
-                CloseImpl();
+                Close();
         }
 
         void TextAreaDocumentChanged(object sender, EventArgs e)
         {
-            CloseImpl();
+            Close();
         }
 
         void TextAreaLostFocus(object sender, RoutedEventArgs e)
@@ -269,7 +269,7 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
                 Debug.WriteLine("CloseIfFocusLost: this.IsActive=" + IsActive + " IsTextAreaFocused=" + IsTextAreaFocused);
                 if (!IsActive && !IsTextAreaFocused)
                 {
-                    CloseImpl();
+                    Close();
                 }
             }
         }
@@ -325,15 +325,8 @@ namespace ICSharpCode.AvalonEdit.CodeCompletion
             if (!e.Handled && e.Key == Key.Escape)
             {
                 e.Handled = true;
-                CloseImpl();
+                Close();
             }
-        }
-
-        private void CloseImpl()
-        {
-#if RELEASE
-Close();
-#endif
         }
 
         Point visualLocation, visualLocationTop;
@@ -423,7 +416,7 @@ Close();
         {
             if (e.Offset + e.RemovalLength == StartOffset && e.RemovalLength > 0)
             {
-                CloseImpl(); // removal immediately in front of completion segment: close the window
+                Close(); // removal immediately in front of completion segment: close the window
                 // this is necessary when pressing backspace after dot-completion
             }
 

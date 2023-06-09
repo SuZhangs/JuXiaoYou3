@@ -24,10 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                      .Register(RtfEditor)
                      .Initialize();
             
-            
-            //
-            // 初始化
-            Editor.Text = ViewModel<ComposeEditorViewModel>().Content;
             base.OnLoaded(sender, e);
         }
 
