@@ -159,8 +159,10 @@
                         Grid.Row="0"
                         Margin="16 0"
                         Orientation="Horizontal">
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Box}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Inbox}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Archive}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Book}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Book}"/>
+                <ftk:ToolButton Icon="{StaticResource FeatherIcon.At}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Inbox}"/>
                 
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.More.Horizontal}"
@@ -215,11 +217,18 @@
                         Orientation="Horizontal"
                         Margin="0 8">
                 <StackPanel.Resources>
+
+                    <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
+                        <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
+                        <Setter Property="IconSize" Value="21" />
+                        <Setter Property="Height" Value="36" />
+                        <Setter Property="IsFilled" Value="True" />
+                        <Setter Property="Width" Value="36" />
+                    </Style>
                 </StackPanel.Resources>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}"/>
-                <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}"/>
+                <ftk:ToolButton Icon="{StaticResource IC.Undo}"/>
+                <ftk:ToolButton Icon="{StaticResource IC.Redo}"/>
+                <ftk:ToolButton Icon="{StaticResource IC.Video}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
                 <ftk:ToolButton Icon="{StaticResource FeatherIcon.Trash}"/>
