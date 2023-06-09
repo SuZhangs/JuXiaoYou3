@@ -2,11 +2,12 @@
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using static Acorisoft.FutureGL.MigaStudio.Utilities.MetadataUtilities;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public abstract class BasicEditable : HierarchicalViewModel
     {
-
+ 
+        
         public string GetOrAddMetadata(string name)
         {
             var dict = BasicPart.Buckets;

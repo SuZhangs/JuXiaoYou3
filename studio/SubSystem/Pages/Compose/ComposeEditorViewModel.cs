@@ -16,7 +16,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             
         }
 
-        protected override void OnCreateCompose(Compose document)
+
+        protected override void OnCreateDocument(Compose document)
         {
         }
 

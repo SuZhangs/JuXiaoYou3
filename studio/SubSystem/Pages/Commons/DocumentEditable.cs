@@ -8,10 +8,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         where TDocument : class, IData
         where TCache : class, IDataCache
     {
-        protected DocumentEditable()
-        {
-            DocumentEngine = Studio.Engine<DocumentEngine>();
-        }
 
         #region OnStart
 
@@ -55,6 +51,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             // 创建文档
             Document ??= CreateDocument();
+            
+            //
+            // 传递到派生类
+            OnCreateDocument(Document);
 
             // 加载文档
             LoadDocument(Cache, Document);
@@ -65,14 +65,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         protected abstract TDocument CreateDocument();
+        protected abstract void OnCreateDocument(TDocument document);
 
         protected abstract void LoadDocument(TCache cache, TDocument document);
         #endregion
 
         protected abstract TDocument GetDocumentById(string id);
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public DocumentEngine DocumentEngine { get; }
         
         [NullCheck(UniTestLifetime.Startup)]
         public DocumentType Type { get; private protected set; }

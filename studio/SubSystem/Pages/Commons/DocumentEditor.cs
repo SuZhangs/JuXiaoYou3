@@ -38,16 +38,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Presentations      = new ObservableCollection<PresentationUI>();
             Preshapes          = new ObservableCollection<FrameworkElement>();
 
-            var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)
                 .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
 
-            DatabaseManager = dbMgr;
-            ImageEngine     = dbMgr.GetEngine<ImageEngine>();
-            TemplateEngine  = dbMgr.GetEngine<TemplateEngine>();
+            DatabaseManager = Studio.DatabaseManager();
+            DocumentEngine  = Studio.Engine<DocumentEngine>();
+            ImageEngine     = Studio.Engine<ImageEngine>();
+            TemplateEngine  = Studio.Engine<TemplateEngine>();
 
             ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
             SaveDocumentCommand = Command(Save);
@@ -111,10 +111,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        private void SynchronizeKeywords()
-        {
-            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id), true);
-        }
 
         protected override void PrepareOpeningDocument(DocumentCache cache, Document document)
         {
@@ -125,10 +121,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void OpeningDocument(DocumentCache cache, Document document)
         {
             SynchronizeKeywords();
-        }
-
-        protected override void FinishOpeningDocument(DocumentCache cache, Document document)
-        {
         }
 
         protected override void OnStart()
@@ -142,11 +134,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SynchronizeKeywords();
             
-        }
-
-        public override void Suspend()
-        {
-            base.Suspend();
         }
 
         #endregion
@@ -172,5 +159,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ImageEngine ImageEngine { get; }
+
+        [NullCheck(UniTestLifetime.Constructor)]
+        public DocumentEngine DocumentEngine { get; }
     }
 }

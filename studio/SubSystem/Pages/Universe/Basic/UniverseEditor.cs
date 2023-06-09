@@ -7,7 +7,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
     {
     }
 
-    public abstract partial class UniverseEditorBase : HierarchicalViewModel
+    public abstract partial class UniverseEditorBase : DocumentEditorBase
     {
         protected static void AddSubView<TView>(ICollection<SubViewBase> collection, string id, string nc, string hc) where TView : FrameworkElement
         {

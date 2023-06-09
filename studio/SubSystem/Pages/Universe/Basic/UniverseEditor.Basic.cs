@@ -12,5 +12,15 @@
             get => _name;
             set => SetValue(ref _name, value);
         }
+        
+        
+        protected override void IsDataPartExistence(Document document)
+        {
+            
+        }
+
+        protected override void OnCreateDocument(Document document)
+        {
+        }
     }
 }

@@ -14,54 +14,47 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         #region OnLoad
 
-        protected override void LoadDocument(DocumentCache cache, Document document)
+
+        protected override void FinishOpeningDocument(DocumentCache cache, Document document)
         {
-            AddDataPartWhenDocumentOpening();
-            IsDataPartExistence();
             AddMetadataWhenDocumentOpening();
             GetPartOfPresentation();
         }
 
-        private void AddDataPartWhenDocumentOpening()
+        protected override bool OnDataPartAddingBefore(DataPart part)
         {
-            foreach (var part in Document.Parts)
+            if (part is PartOfModule pom)
             {
-                if (!string.IsNullOrEmpty(part.Id) &&
-                    !DataPartTrackerOfId.TryAdd(part.Id, part))
-                {
-                    Xaml.Get<ILogger>()
-                        .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
-                    continue;
-                }
-                
-                if (part is PartOfModule pom)
-                {
-                    ModuleParts.Add(pom);
-                    AddBlock(pom.Name, pom.Blocks);
-                    continue;
-                }
+                ModuleParts.Add(pom);
+                AddBlock(pom.Name, pom.Blocks);
+                return true;
+            }
 
-                if (DataPartTrackerOfType.TryAdd(part.GetType(), part))
+            return false;
+        }
+
+        protected override void OnDataPartAddingAfter(DataPart part)
+        {
+            if (DataPartTrackerOfType.TryAdd(part.GetType(), part))
+            {
+                if (part is PartOfBasic pob)
                 {
-                    if (part is PartOfBasic pob)
-                    {
-                        BasicPart = pob;
-                    }
-                    else if (part is PartOfDetail pod)
-                    {
-                        DetailParts.Add(pod);
-                    }
-                    else if (part is PartOfPresentation pop)
-                    {
-                        //
-                        // 优先覆盖
-                        PresentationPart           = pop;
-                        IsOverridePresentationPart = true;
-                    }
-                    else if (part is PartOfManifest)
-                    {
-                        InvisibleDataParts.Add(part);
-                    }
+                    BasicPart = pob;
+                }
+                else if (part is PartOfDetail pod)
+                {
+                    DetailParts.Add(pod);
+                }
+                else if (part is PartOfPresentation pop)
+                {
+                    //
+                    // 优先覆盖
+                    PresentationPart           = pop;
+                    IsOverridePresentationPart = true;
+                }
+                else if (part is PartOfManifest)
+                {
+                    InvisibleDataParts.Add(part);
                 }
             }
         }
@@ -82,8 +75,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             }
         }
-
-        private void IsDataPartExistence()
+        
+        protected override void IsDataPartExistence(Document document)
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
@@ -104,13 +97,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Gender = Language.GetText("global.DefaultGender");
             }
             
-            //
-            // 检查部件的缺失
-            IsDataPartExistence(Document);
             DocumentUtilities.SynchronizeDocument(Cache, Document);
         }
-
-        protected abstract void IsDataPartExistence(Document document);
 
         private void GetPartOfPresentation()
         {
@@ -172,8 +160,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             document.Parts.AddMany(iterators);
         }
-
-        protected abstract void OnCreateDocument(Document document);
 
         #endregion
 

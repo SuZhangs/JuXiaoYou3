@@ -1,6 +1,6 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 
-namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
+namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public abstract class MetadataEditable<TCache, TDocument> : DataPartEditable<TCache, TDocument>
         where TDocument : class, IMetadataPackage

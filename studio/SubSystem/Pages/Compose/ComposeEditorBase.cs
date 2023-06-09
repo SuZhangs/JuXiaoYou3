@@ -12,43 +12,32 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
-    public abstract partial class ComposeEditorBase : TabViewModel
+    public abstract partial class ComposeEditorBase : DataPartEditable<ComposeCache, Compose>
     {
-        private readonly Dictionary<string, DataPart> DataPartTrackerOfId;
-        private readonly Dictionary<Type, DataPart>   DataPartTrackerOfType;
-
         protected ComposeEditorBase()
         {
-            DataPartTrackerOfType = new Dictionary<Type, DataPart>();
-            DataPartTrackerOfId   = new Dictionary<string, DataPart>(StringComparer.OrdinalIgnoreCase);
-
             var dbMgr = Studio.DatabaseManager();
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)
                 .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
-            Keywords        = new ObservableCollection<Keyword>();
             DataParts       = new ObservableCollection<DataPart>();
             Services        = new ObservableCollection<ComposeService>();
             DatabaseManager = dbMgr;
             ComposeEngine   = dbMgr.GetEngine<ComposeEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
-            KeywordEngine   = dbMgr.GetEngine<KeywordEngine>();
 
             
             SaveComposeCommand = Command(Save);
             NewComposeCommand  = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
-
-            AddKeywordCommand    = AsyncCommand(AddKeywordImpl);
-            RemoveKeywordCommand = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
 
             Initialize();
         }
 
         private void Save()
         {
-            ComposeEngine.UpdateCompose(Compose, Cache);
+            ComposeEngine.UpdateCompose(Document, Cache);
             SetDirtyState(false);
             this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
         }
@@ -91,155 +80,43 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             if (state)
             {
-                SetTitle(Compose.Name, true);
+                SetTitle(Document.Name, true);
             }
         }
-
-        protected override void OnStart(Parameter parameter)
+        protected override void OpeningDocument(ComposeCache cache, Compose document)
         {
-            ActivateAllEngines();
-            Cache   = (ComposeCache)parameter.Args[0];
-            Compose = ComposeEngine.GetCompose(Cache.Id);
-            Keywords.AddMany(KeywordEngine.GetKeywords(Cache.Id));
-            Open();
-
-            base.OnStart(parameter);
-        }
-
-        //
-        // ComposeManager Part
-        protected void Open()
-        {
-            if (Compose is null)
-            {
-                //
-                // 创建文档
-                CreateComposeImpl();
-            }
-
-            // 加载文档
-            LoadComposeImpl();
         }
 
         #region OnLoad
 
-        private void LoadComposeImpl()
+        protected override bool OnDataPartAddingBefore(DataPart part)
         {
-            LoadDataPart();
-            IsDataPartExistence();
+            return false;
         }
 
-        private void LoadDataPart()
+        protected override void OnDataPartAddingAfter(DataPart part)
         {
-            foreach (var part in Compose.Parts)
+            if (DataPartTrackerOfType.TryAdd(part.GetType(), part))
             {
-                if (!string.IsNullOrEmpty(part.Id) &&
-                    !DataPartTrackerOfId.TryAdd(part.Id, part))
+                if (part is PartOfMarkdown pom)
                 {
-                    Xaml.Get<ILogger>()
-                        .Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
-                    continue;
+                    Markdown = pom;
                 }
-
-                if (DataPartTrackerOfType.TryAdd(part.GetType(), part))
+                else if (part is PartOfAlbum poa)
                 {
-                    if (part is PartOfMarkdown pom)
-                    {
-                        Markdown = pom;
-                    }
-                    else if (part is PartOfAlbum poa)
-                    {
-                        Album = poa;
-                        Services.Add(ServiceViewContainer.GetService(poa));
-                    }
-                    else if (part is PartOfManifest pom2)
-                    {
-                        DataParts.Add(part);
-                        Services.Add(ServiceViewContainer.GetService(pom2));
-                    }
+                    Album = poa;
+                    Services.Add(ServiceViewContainer.GetService(poa));
+                }
+                else if (part is PartOfManifest pom2)
+                {
+                    DataParts.Add(part);
+                    Services.Add(ServiceViewContainer.GetService(pom2));
                 }
             }
         }
 
-        private void IsDataPartExistence()
-        {
-            //
-            // 检查当前打开的文档是否缺失指定的DataPart
-            if (Markdown is null)
-            {
-                Markdown = new PartOfMarkdown();
-                Compose.Parts.Add(Markdown);
-                DataPartTrackerOfId.TryAdd(Markdown.Id, Markdown);
-                DataPartTrackerOfType.TryAdd(Markdown.GetType(), Markdown);
-            }
-
-            if (Album is null)
-            {
-                Album = new PartOfAlbum();
-                Compose.Parts.Add(Album);
-                DataPartTrackerOfId.TryAdd(Album.Id, Album);
-                DataPartTrackerOfType.TryAdd(Album.GetType(), Album);
-            }
-
-            //
-            // 检查部件的缺失
-            IsDataPartExistence(Compose);
-        }
-
-        protected abstract void IsDataPartExistence(Compose document);
-
         #endregion
 
-        #region OnCreate
-
-        private void CreateComposeImpl()
-        {
-            var document = new Compose
-            {
-                Id    = Cache.Id,
-                Name  = Cache.Name,
-                Parts = new DataPartCollection(),
-                Metas = new MetadataCollection(),
-            };
-
-            //
-            //
-            Compose = document;
-            CreateComposeFromManifest(document);
-            OnCreateCompose(document);
-
-            ComposeEngine.AddCompose(document);
-        }
-
-        private static void CreateComposeFromManifest(Compose document)
-        {
-            document.Parts.Add(new PartOfMarkdown());
-            document.Parts.Add(new PartOfAlbum());
-        }
-
-        protected abstract void OnCreateCompose(Compose document);
-
-        #endregion
-
-        private async Task AddKeywordImpl()
-        {
-            await DocumentUtilities.AddKeyword(
-                Cache.Id,
-                Keywords,
-                KeywordEngine,
-                SetDirtyState,
-                this.WarningNotification);
-        }
-
-        private async Task RemoveKeywordImpl(Keyword item)
-        {
-            await DocumentUtilities.RemoveKeyword(
-                item,
-                Keywords,
-                KeywordEngine,
-                SetDirtyState,
-                 this.Error);
-        }
 
         public string Content
         {
@@ -257,21 +134,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             set
             {
                 Cache.Name   = value;
-                Compose.Name = value;
+                Document.Name = value;
                 SetDirtyState();
                 RaiseUpdated();
             }
         }
-
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand AddKeywordCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<Keyword> RemoveKeywordCommand { get; }
-
-        [NullCheck(UniTestLifetime.Startup)]
-        public ObservableCollection<Keyword> Keywords { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<DataPart> DataParts { get; }
@@ -289,12 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         [NullCheck(UniTestLifetime.Constructor)]
         public ComposeEngine ComposeEngine { get; }
 
-        [NullCheck(UniTestLifetime.Constructor)]
-        public KeywordEngine KeywordEngine { get; }
-
         public PartOfMarkdown Markdown { get; private set; }
         public PartOfAlbum Album { get; private set; }
-        public Compose Compose { get; protected set; }
-        public ComposeCache Cache { get; protected set; }
     }
 }
