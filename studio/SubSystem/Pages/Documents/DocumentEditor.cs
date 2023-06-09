@@ -59,15 +59,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected sealed override void OnSubViewChanged(HeaderedSubView oldValue, HeaderedSubView newValue)
         {
-            if (newValue is not HeaderedSubView subView)
+            if (newValue is null )
             {
                 return;
             }
 
-            subView.Create(this);
-            SubView = subView.SubView;
+            newValue.Create(this);
+            SubView = newValue.SubView;
 
-            if (subView.Type == typeof(ShareView))
+            if (newValue.Type == typeof(ShareView))
             {
                 Preshapes.ForEach(x => (x.DataContext as PreshapeViewModelBase)?.Resume());
                 RefreshPresentation();

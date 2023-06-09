@@ -258,14 +258,14 @@
                                FontSize="16"
                                Padding="16 16 16 0"
                                SyntaxHighlighting="MarkDown"
-                               WordWrap="True">
+                               WordWrap="True"
+                         Visibility="Collapsed">
                 <editor:TextEditor.Options>
                     <editor:TextEditorOptions InheritWordWrapIndentation="True" />
                 </editor:TextEditor.Options>
             </editor:TextEditor>
 
-            <RichTextBox x:Name="RtfEditor"
-                         Visibility="Collapsed" />
+            <RichTextBox x:Name="RtfEditor" />
         </Grid>
 
         <!-- 状态栏 -->

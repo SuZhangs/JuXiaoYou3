@@ -127,10 +127,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             document.Parts.Add(new PartOfPlaylist { Items = new List<Music>() });
         }
 
-        protected override void IsDataPartExistence(Document document)
-        {
-            
-        }
         public AsyncRelayCommand SetAsMainPictureCommand { get; }
         public RelayCommand ResetAsMainPictureCommand { get; }
     }

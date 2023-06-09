@@ -15,9 +15,5 @@
             document.Parts.Add(new PartOfAlbum{Items = new List<Album>()});
         }
 
-        protected override void IsDataPartExistence(Document document)
-        {
-            
-        }
     }
 }

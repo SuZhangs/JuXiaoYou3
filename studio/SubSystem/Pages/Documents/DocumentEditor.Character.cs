@@ -56,10 +56,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             document.Parts.Add(new PartOfRel());
         }
 
-        protected override void IsDataPartExistence(Document document)
-        {
-        }
-
 
         private void ResumeDetailPart()
         {

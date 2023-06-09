@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
         
-        protected override void IsDataPartExistence(Document document)
+        protected sealed override void IsDataPartExistence(Document document)
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
@@ -98,7 +98,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
             
             DocumentUtilities.SynchronizeDocument(Cache, Document);
+            IsDataPartExistenceOverride(Document);
         }
+
+        protected abstract void IsDataPartExistenceOverride(Document document);
 
         private void GetPartOfPresentation()
         {
