@@ -35,6 +35,7 @@
         internal const string IdOfSentence                   = "__Sentence";
         internal const string IdOfAppraise                   = "__Appraise";
         internal const string IdOfMarkdownPart               = "__Markdown";
+        internal const string IdOfRtfPart                    = "__Rtf";
 
 
         /*

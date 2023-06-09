@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Controls.Editors;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
@@ -17,18 +18,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _disposable = Observable.FromEventPattern<EventHandler, EventArgs>(
-                                        added => Editor.TextChanged   += added,
-                                        removed => Editor.TextChanged -= removed)
-                                    .Throttle(TimeSpan.FromMilliseconds(200))
-                                    .ObserveOn(Xaml.Get<IScheduler>())
-                                    .Subscribe(_ => { ViewModel<ComposeEditorViewModel>().Content = Editor.Text; });
+            //
+            // 
+            ViewModel.Register(Editor)
+                     .Register(RtfEditor)
+                     .Initialize();
+            
             
             //
             // 初始化
             Editor.Text = ViewModel<ComposeEditorViewModel>().Content;
             base.OnLoaded(sender, e);
         }
+
+        protected ComposeEditorViewModel ViewModel => ViewModel<ComposeEditorViewModel>();
 
         protected override void OnUnloaded(object sender, RoutedEventArgs e)
         {

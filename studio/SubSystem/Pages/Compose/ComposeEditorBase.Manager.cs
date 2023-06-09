@@ -93,6 +93,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         private static void CreateComposeFromManifest(Compose document)
         {
+            document.Parts.Add(new PartOfRtf());
             document.Parts.Add(new PartOfMarkdown());
             document.Parts.Add(new PartOfAlbum());
         }

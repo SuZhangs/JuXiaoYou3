@@ -2,10 +2,6 @@
 {
     public class PartOfMarkdown : PartOfManifest
     {
-        private string _content;
-        private string _intro;
-        
-        
         public PartOfMarkdown()
         {
             Id = Constants.IdOfMarkdownPart;
@@ -15,19 +11,31 @@
         /// <summary>
         /// 获取或设置 <see cref="Intro"/> 属性。
         /// </summary>
-        public string Intro
-        {
-            get => _intro;
-            set => SetValue(ref _intro, value);
-        }
+        public string Intro { get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Content"/> 属性。
         /// </summary>
-        public string Content
+        public string Content { get; set; }
+    }
+
+    public class PartOfRtf : PartOfManifest
+    {
+        
+        public PartOfRtf()
         {
-            get => _content;
-            set => SetValue(ref _content, value);
+            Id = Constants.IdOfRtfPart;
         }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="Intro"/> 属性。
+        /// </summary>
+        public string Intro { get; set; }
+        
+        /// <summary>
+        /// 获取或设置 <see cref="Content"/> 属性。
+        /// </summary>
+        public string Content { get; set; }
     }
 }

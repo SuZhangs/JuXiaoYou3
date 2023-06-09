@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
+using Acorisoft.FutureGL.MigaStudio.Controls.Editors;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
@@ -12,7 +13,7 @@ using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
-    public abstract partial class ComposeEditorBase : DataPartEditable<ComposeCache, Compose>
+    public abstract partial class ComposeEditorBase : DataPartEditable<ComposeCache, Compose>, IComposeEditor
     {
         protected ComposeEditorBase()
         {
@@ -102,7 +103,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             {
                 if (part is PartOfMarkdown pom)
                 {
-                    Markdown = pom;
+                    CreateWorkspace(pom);
+                }
+
+                if (part is PartOfRtf por)
+                {
+                    CreateWorkspace(por);
                 }
                 else if (part is PartOfAlbum poa)
                 {
