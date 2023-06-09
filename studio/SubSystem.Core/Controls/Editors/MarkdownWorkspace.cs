@@ -11,7 +11,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
     {
         private ConceptCompletionWindow _window;
         private bool                    _isShow;
-        
+        private TextEditor              _ctrl;
+
+        public TextEditor Control
+        {
+            get => _ctrl;
+            set
+            {
+                if (value is null)
+                {
+                    return;
+                }
+
+                if (_ctrl is not null &&
+                    ReferenceEquals(_ctrl, value))
+                {
+                    return;
+                }
+
+                _ctrl     = value;
+                IsWorking = false;
+                Disposable.Dispose();
+                Disposable = new DisposableCollector();
+            }
+        }
+
         public override void Immutable()
         {
             if (!string.IsNullOrEmpty(Part.Content))
@@ -19,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
                 Control.Text = Part.Content;
             }
 
-            
+
             if (IsWorking)
             {
                 return;
@@ -68,30 +92,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
             _window.Closed -= OnWindowClose;
             _window        =  null;
         }
-        
+
         private void OnTextChanged(object sender, EventArgs e)
         {
             if (_window is null)
             {
                 _isShow        =  false;
                 _window        =  new ConceptCompletionWindow(Control.TextArea);
-                _window.Closed += OnWindowClose; 
+                _window.Closed += OnWindowClose;
             }
-            
-            var data   = _window.CompletionList
-                                .CompletionData;
-            var engine   = Studio.Engine<DocumentEngine>();
+
+            var data = _window.CompletionList
+                              .CompletionData;
+            var engine = Studio.Engine<DocumentEngine>();
             var concepts = engine.GetConcepts()
                                  .Select(x => new ConceptCompletionData
                                  {
-                                     Text = x.Name,
+                                     Text    = x.Name,
                                      Content = x.Name
                                  });
             data.AddMany(concepts, true);
-            
+
             Part.Content = Control.Text;
             WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
-            
+
             //
             //
             if (_isShow)
@@ -104,13 +128,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
                 _isShow = false;
                 return;
             }
-            
+
             _isShow = true;
             _window.Show();
         }
 
         public override string Content => Part is null ? string.Empty : Part.Content;
         public PartOfMarkdown Part { get; init; }
-        public TextEditor Control { get; set; }
     }
 }
