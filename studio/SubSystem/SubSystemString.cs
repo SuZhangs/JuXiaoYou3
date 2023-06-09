@@ -25,50 +25,50 @@
 
         #region ModuleBlock Translate
 
-        public static string GetAudioName() => ModuleBlock.IdOfAudio;
+        public static string GetAudioName()=> Language.GetText(ModuleBlock.IdOfAudio);
 
         public static string GetUnknownName() => "__Unknown";
 
-        public static string GetGroupName() => ModuleBlock.IdOfGroup;
+        public static string GetGroupName()=> Language.GetText(ModuleBlock.IdOfGroup);
 
-        public static string GetSequenceName() => ModuleBlock.IdOfSequence;
+        public static string GetSequenceName()=> Language.GetText(ModuleBlock.IdOfSequence);
 
-        public static string GetColorName() => ModuleBlock.IdOfColor;
+        public static string GetColorName()=> Language.GetText(ModuleBlock.IdOfColor);
 
-        public static string GetNumberName() => ModuleBlock.IdOfNumber;
+        public static string GetNumberName()=> Language.GetText(ModuleBlock.IdOfNumber);
 
-        public static string GetHistogramName() => ModuleBlock.IdOfHistogram;
+        public static string GetHistogramName()=> Language.GetText(ModuleBlock.IdOfHistogram);
 
-        public static string GetRadarName() => ModuleBlock.IdOfRadar;
+        public static string GetRadarName()=> Language.GetText(ModuleBlock.IdOfRadar);
 
-        public static string GetLikabilityName() => ModuleBlock.IdOfLikability;
+        public static string GetLikabilityName()=> Language.GetText(ModuleBlock.IdOfLikability);
 
-        public static string GetDegreeName() => ModuleBlock.IdOfDegree;
+        public static string GetDegreeName()=> Language.GetText(ModuleBlock.IdOfDegree);
 
-        public static string GetRateName() => ModuleBlock.IdOfRate;
+        public static string GetRateName()=> Language.GetText(ModuleBlock.IdOfRate);
 
-        public static string GetSliderName() => ModuleBlock.IdOfSlider;
+        public static string GetSliderName()=> Language.GetText(ModuleBlock.IdOfSlider);
 
-        public static string GetMultiLineName() => ModuleBlock.IdOfMultiLine;
+        public static string GetMultiLineName()=> Language.GetText(ModuleBlock.IdOfMultiLine);
 
-        public static string GetSingleLineName() => ModuleBlock.IdOfSingleLine;
+        public static string GetSingleLineName()=> Language.GetText(ModuleBlock.IdOfSingleLine);
 
-        public static string GetReferenceName() => ModuleBlock.IdOfReference;
+        public static string GetReferenceName()=> Language.GetText(ModuleBlock.IdOfReference);
 
-        public static string GetVideoName() => ModuleBlock.IdOfVideo;
-        public static string GetMusicName() => ModuleBlock.IdOfMusic;
+        public static string GetVideoName()=> Language.GetText(ModuleBlock.IdOfVideo);
+        public static string GetMusicName()=> Language.GetText(ModuleBlock.IdOfMusic);
 
-        public static string GetImageName() => ModuleBlock.IdOfImage;
+        public static string GetImageName()=> Language.GetText(ModuleBlock.IdOfImage);
 
-        public static string GetFileName() => ModuleBlock.IdOfFile;
+        public static string GetFileName()=> Language.GetText(ModuleBlock.IdOfFile);
 
-        public static string GetBinaryName() => ModuleBlock.IdOfBinary;
+        public static string GetBinaryName()=> Language.GetText(ModuleBlock.IdOfBinary);
 
-        public static string GetSwitchName() => ModuleBlock.IdOfSwitch;
+        public static string GetSwitchName()=> Language.GetText(ModuleBlock.IdOfSwitch);
 
-        public static string GetHeartName() => ModuleBlock.IdOfHeart;
+        public static string GetHeartName()=> Language.GetText(ModuleBlock.IdOfHeart);
 
-        public static string GetStarName() => ModuleBlock.IdOfStar;
+        public static string GetStarName()=> Language.GetText(ModuleBlock.IdOfStar);
 
 
         public static string GetModuleBlockNameByType(object type)

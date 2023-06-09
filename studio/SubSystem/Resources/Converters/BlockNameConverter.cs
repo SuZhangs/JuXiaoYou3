@@ -32,7 +32,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is BlockType bt)
-                return SubSystemString.GetModuleBlockNameByKind(bt);
+            {
+                var raw = SubSystemString.GetModuleBlockNameByKind(bt);
+                return Language.GetText(raw);
+            }
+                
             
 
             if (value is BinaryBlockEditUI d)

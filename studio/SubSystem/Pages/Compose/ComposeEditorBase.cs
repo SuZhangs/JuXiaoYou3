@@ -18,6 +18,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         protected ComposeEditorBase()
         {
             var dbMgr = Studio.DatabaseManager();
+            WorkspaceMapping            = new Dictionary<Type, IWorkspace>();
+            InternalWorkspaceCollection = new ObservableCollection<IWorkspace>();
+            WorkspaceCollection         = new ReadOnlyObservableCollection<IWorkspace>(InternalWorkspaceCollection);
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)

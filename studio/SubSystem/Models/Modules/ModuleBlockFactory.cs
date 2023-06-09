@@ -16,7 +16,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             b.ForEach(x =>
             {
                 x.ClearValue();
-                x.InternalSetName(Language.GetText(x.Name));
             });
             return b;
         }
