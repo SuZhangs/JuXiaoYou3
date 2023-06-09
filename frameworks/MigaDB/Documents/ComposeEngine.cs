@@ -172,6 +172,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
+            cache.TimeOfModified = DateTime.Now;
             ComposeCacheDB.Update(cache);
             ComposeDB.Update(document);
         }

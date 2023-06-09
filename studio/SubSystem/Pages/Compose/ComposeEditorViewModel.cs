@@ -26,8 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             var db = Studio.Database();
 
 #if DEBUG
-
-            this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 10);
+           // this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 10);
 #else
             if (!db.Boolean(Feature.TextEditorFeatureMissing))
             {

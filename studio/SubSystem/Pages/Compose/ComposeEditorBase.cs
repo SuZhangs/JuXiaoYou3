@@ -126,6 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             set
             {
                 Markdown.Content = value;
+                Cache.Length     = value?.Length ?? 0;
                 RaiseUpdated();
             }
         }

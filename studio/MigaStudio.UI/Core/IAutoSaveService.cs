@@ -37,7 +37,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             if (_secondCount >= _triggerCount)
             {
                 _secondCount = 0;
+                #if DEBUG
+                #else
                 _subject.OnNext(Unit.Default);
+                #endif
             }
         }
 
