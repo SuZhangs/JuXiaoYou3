@@ -44,6 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             if (source == StateChangedEventSource.TextSource)
             {
                 Statistic(workspace.Content);
+                Cache.Length = TotalCharacterCount;
                 RaiseUpdated(nameof(TotalCharacterCount));
                 SetDirtyState();
             }
