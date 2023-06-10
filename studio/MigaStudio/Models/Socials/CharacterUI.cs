@@ -8,12 +8,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Socials
         private string _name;
         private string _title;
 
-        public CharacterUI(string title, string name, SocialCharacter character)
+        public CharacterUI(string title, string name,MemberRole role, SocialCharacter character)
         {
+            Role      = role;
             Character = character ?? throw new ArgumentNullException(nameof(character));
             Name      = name;
             Title     = title;
         }
+        
+        public MemberRole Role { get; }
 
         public SocialCharacter Character { get; }
 

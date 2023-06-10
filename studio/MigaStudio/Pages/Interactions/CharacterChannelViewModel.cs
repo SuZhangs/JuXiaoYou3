@@ -15,18 +15,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         private          string                          _pendingContent;
         private readonly Dictionary<string, CharacterUI> _characterUIMapper;
         private          string                          _messageContent;
+        
         public CharacterChannelViewModel()
         {
             _characterUIMapper         = new Dictionary<string, CharacterUI>();
             LatestSpeakers             = new ObservableCollection<CharacterUI>();
             Characters                 = new ObservableCollection<CharacterUI>();
+            SwitchCommand              = Command<CharacterUI>(SwitchImpl);
             MemberJoinCommand          = AsyncCommand(MemberJoinImpl);
+            MemberLeaveCommand         = AsyncCommand(MemberLeaveImpl);
             AddPlainTextMessageCommand = Command<CharacterUI>(AddPlainTextMessageImpl);
         }
 
         private void Initialize()
         {
             _characterUIMapper.Clear();
+            OwnerID = Characters.First(x => GetCharacterRole(x.Id, Channel.RoleMapping) == MemberRole.Owner)
+                                .Id;
             Characters.Clear();
             
             foreach (var member in Channel.Members)
@@ -133,6 +138,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Channel.Name = value;
             }
         }
+        
+        public string OwnerID { get; private set; }
         
         public ObservableCollection<CharacterUI> LatestSpeakers { get; }
         public ObservableCollection<CharacterUI> Characters { get; }

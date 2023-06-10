@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 using Acorisoft.FutureGL.MigaUtils;
@@ -22,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private void AddMessageFromInitialize(SocialMessage message)
         {
-            var character = _characterUIMapper[message.MemberID];
+            // var character = _characterUIMapper[message.MemberID];
             
             //
             //
@@ -48,16 +49,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             Channel.Members
                    .Add(character);
         }
+        
+        private void RemoveCharacter(CharacterUI character)
+        {
+            if (Characters.Count <= 1)
+            {
+                return;
+            }
+
+            _characterUIMapper.Remove(character.Id);
+            Characters.Remove(character);
+            Channel.Members
+                   .Remove(character);
+        }
 
         private ChatMessageUI GetMessage(SocialMessage message)
         {
+            //
+            // 判断是否为已经退群的用户
             var wasDeleted = !_characterUIMapper.TryGetValue(message.MemberID, out var character);
             var id         = message.MemberID;
 
+            // 如果没有退群，且为空则返回null
             if (!wasDeleted && character is null)
             {
                 return null;
             }
+            
+            
             var avatar = wasDeleted ? Channel.AvatarMapping[id] : character.Avatar;
             var name   = wasDeleted ? Channel.AliasMapping[id] : character.Name;
             var role   = GetCharacterRole(id, Channel.RoleMapping);

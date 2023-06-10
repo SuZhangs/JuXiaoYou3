@@ -34,9 +34,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
         public static string GetCharacterTitle(string id, 
             IReadOnlyDictionary<string, MemberRole> roleMapping,
-            IReadOnlyDictionary<string, string> titleMapping)
+            IReadOnlyDictionary<string, string> titleMapping,
+            out MemberRole role)
         {
-            if (roleMapping.TryGetValue(id, out var role))
+            if (roleMapping.TryGetValue(id, out role))
             {
                 if (role == MemberRole.Manager)
                 {
