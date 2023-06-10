@@ -24,6 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var first  = dictionary.FirstOrDefault(x => string.IsNullOrEmpty(x.Value
                                                                               .LastItem))
                                    .Value;
+            var breakdownCounter = 0;
 
             if(first is null)
             {
@@ -34,11 +35,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             while (!string.IsNullOrEmpty(first.NextItem))
             {
+                breakdownCounter++;
+                
                 if (dictionary.TryGetValue(first.NextItem, out var c))
                 {
                     Timelines.Add(c);
                     dictionary.Remove(first.NextItem);
                     first = c;
+                }
+
+                if (breakdownCounter > dictionary.Count ||
+                    breakdownCounter > 100000)
+                {
+                    break;
                 }
             }
             

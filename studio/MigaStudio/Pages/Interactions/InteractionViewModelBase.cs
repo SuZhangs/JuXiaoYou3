@@ -76,9 +76,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                                     .Select(x =>
                                     {
                                         var ch        = CharacterMapper[x];
-                                        var title     = GetCharacterTitle(x, channel.RoleMapping, channel.TitleMapping);
+                                        var title     = GetCharacterTitle(x, channel.RoleMapping, channel.TitleMapping, out var role);
                                         var name      = GetCharacterName(ch, channel.AliasMapping);
-                                        var character = new CharacterUI(title, name, ch);
+                                        var character = new CharacterUI(title, name, role, ch);
                                         return character;
                                     });
 

@@ -145,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return new Metadata
             {
                 Name       = Metadata,
-                Value      = Value.ToString(),
+                Value      = Value?.ToString(),
                 Type       = MetadataKind.RadarChart,
                 Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
@@ -166,7 +166,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
             return new Metadata
             {
                 Name       = Metadata,
-                Value      = Value.ToString(),
+                Value      = Value?.ToString(),
                 Type       = MetadataKind.HistogramChart,
                 Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };
