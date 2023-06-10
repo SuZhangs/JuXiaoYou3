@@ -121,6 +121,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void OpeningDocument(DocumentCache cache, Document document)
         {
             SynchronizeKeywords();
+            Type = cache.Type;
         }
 
         protected override void OnStart()
