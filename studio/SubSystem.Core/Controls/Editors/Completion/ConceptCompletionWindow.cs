@@ -25,7 +25,7 @@ using System.Windows.Input;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// The code completion window.

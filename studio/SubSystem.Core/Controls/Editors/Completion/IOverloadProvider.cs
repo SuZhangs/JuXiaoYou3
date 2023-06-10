@@ -18,7 +18,7 @@
 
 using System.ComponentModel;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// Provides the items for the OverloadViewer.

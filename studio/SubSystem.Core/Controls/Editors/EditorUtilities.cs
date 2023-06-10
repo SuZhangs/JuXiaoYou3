@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ICSharpCode.AvalonEdit;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public static class EditorUtilities
     {

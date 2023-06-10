@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using Acorisoft.FutureGL.MigaStudio.Controls.Editors.Models;
+using Acorisoft.FutureGL.MigaStudio.Editors.Completion;
+using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public class MarkdownWorkspace : Workspace
     {

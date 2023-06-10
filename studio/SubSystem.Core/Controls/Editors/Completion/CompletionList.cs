@@ -24,10 +24,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-
+using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Utils;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// The listbox used inside the CompletionWindow, contains CompletionListBox.

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Editing;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public static class MarkdownUtilities
     {

@@ -23,7 +23,7 @@ using System.Windows.Controls;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Utils;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// A popup-like window that is attached to a text segment.

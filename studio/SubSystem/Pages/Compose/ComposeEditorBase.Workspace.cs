@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Acorisoft.FutureGL.MigaStudio.Controls.Editors;
+using Acorisoft.FutureGL.MigaStudio.Editors;
 using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes

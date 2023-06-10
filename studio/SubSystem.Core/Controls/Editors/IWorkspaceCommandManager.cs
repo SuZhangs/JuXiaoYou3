@@ -1,4 +1,4 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+﻿namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public interface IWorkspaceCommandManager
     {

@@ -21,7 +21,7 @@ using System.Windows.Input;
 
 using ICSharpCode.AvalonEdit.Editing;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// Insight window that shows an OverloadViewer.

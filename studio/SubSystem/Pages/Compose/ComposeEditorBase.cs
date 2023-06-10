@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
-using Acorisoft.FutureGL.MigaStudio.Controls.Editors;
+using Acorisoft.FutureGL.MigaStudio.Editors;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 using Acorisoft.FutureGL.MigaStudio.Utilities;

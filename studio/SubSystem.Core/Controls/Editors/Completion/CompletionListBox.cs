@@ -21,7 +21,7 @@ using System.Windows.Controls;
 
 using ICSharpCode.AvalonEdit.Utils;
 
-namespace ICSharpCode.AvalonEdit.CodeCompletion
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Completion
 {
 	/// <summary>
 	/// The list box used inside the CompletionList.

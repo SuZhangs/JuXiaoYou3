@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public class RichTextFileWorkspace : Workspace
     {

@@ -3,7 +3,7 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors.Models
+namespace Acorisoft.FutureGL.MigaStudio.Editors.Models
 {
     public class ConceptCompletionData : ICompletionData
     {

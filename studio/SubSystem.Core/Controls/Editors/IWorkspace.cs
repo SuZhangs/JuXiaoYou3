@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Concurrency;
 using System.Windows;
 
-namespace Acorisoft.FutureGL.MigaStudio.Controls.Editors
+namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public enum StateChangedEventSource
     {
