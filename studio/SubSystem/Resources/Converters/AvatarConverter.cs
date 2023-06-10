@@ -176,14 +176,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     {
         private ImageEngine _engine;
 
-        public ScaledImageConverter()
-        {
-        }
-
         private ImageSource Caching(string avatar, int w, int h)
         {
-            w = Math.Clamp(w, 640, 2560);
-            h = Math.Clamp(h, 320, 1440);
+            w = Math.Clamp(w, 100, 2560);
+            h = Math.Clamp(h, 100, 1440);
             var ms  = _engine.Get(avatar);
             var img = Xaml.FromStream(ms, w, h);
             return img;

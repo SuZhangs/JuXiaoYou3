@@ -165,6 +165,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             Vertical
         }
 
+        private static double GetScaleRate(ImageScale scale, int w, int h)
+        {
+            if (scale == ImageScale.Square)
+            {
+                return w > 640 ? 640d / w : 1d;
+            }
+
+            if (scale == ImageScale.Horizontal)
+            {
+                return w > 1920 ? 1920d / w : 1d;
+            }
+            
+            return h > 1080 ? 1080d / h : 1d;
+        }
+
         public static async Task<Op<string>> Raw(ImageEngine engine, string fileName, ImageScale scale, Action<Album> callback)
         {
             var    buffer = await File.ReadAllBytesAsync(fileName);
@@ -183,10 +198,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return Op<string>.Failed("比例不对");
             }
 
+            var scale1 = GetScaleRate(scale, w, h);
 
-            var scale1 = scale == ImageScale.Horizontal ? 1920d / image.Width : 1920d / image.Height;
-            var h1     = (int)(image.Height * scale1);
-            var w1     = (int)(image.Width * scale1);
+            var h1     = (int)(h * scale1);
+            var w1     = (int)(w * scale1);
 
             if (engine.HasFile(md5))
             {
