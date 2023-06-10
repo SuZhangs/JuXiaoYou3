@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                 try
                 {
                     var rawJsonContent = File.ReadAllText(fileName, Encoding.UTF8);
-                    var instance       = JsonConvert.DeserializeObject<T>(rawJsonContent, _settings);
+                    var instance       = JsonConvert.DeserializeObject<T>(rawJsonContent);
                     return instance;
                 }
                 catch

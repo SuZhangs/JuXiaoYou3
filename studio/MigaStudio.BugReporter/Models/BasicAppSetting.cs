@@ -1,6 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaStudio.Models
+﻿namespace Acorisoft.FutureGL.Forest.Models
 {
-    public class Setting
+    public class BasicAppSetting
     {
         /// <summary>
         /// 主题色

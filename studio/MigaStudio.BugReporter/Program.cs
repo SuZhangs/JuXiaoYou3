@@ -3,6 +3,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
+using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -126,7 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             var outputLogZipFile = Path.Combine(feedback, "日志.zip");
             var outputDbZipFile  = Path.Combine(feedback, "世界观.zip");
             var outputReadmeFile = Path.Combine(feedback, "[readme]看这里.txt");
-            var setting          = JSON.OpenSetting<Setting>(settingFile, () => new Setting { Language = CultureArea.Chinese });
+            var setting          = JSON.OpenSetting<BasicAppSetting>(settingFile, () => new BasicAppSetting { Language = CultureArea.Chinese });
 
             if (!Directory.Exists(feedback))
             {
@@ -142,7 +143,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
                 new Formatter(outputLogZipFile, Color.Peru),
                 new Formatter(outputDbZipFile, Color.Peru),
                 new Formatter(settingFile, Color.Peru),
-                new Formatter(Setting.GetName(setting.Language), Color.Teal),
+                new Formatter(BasicAppSetting.GetName(setting.Language), Color.Teal),
             };
 
             Console.WriteLineFormatted("BUG等级：{0}\n\n数据位置：{1}\n日志位置：{2}", Color.LightGray, formatter);
@@ -183,10 +184,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
             }
         }
 
-        private static void Focus(string crashes, string feedback, string outputReadmeFile, Setting setting)
+        private static void Focus(string crashes, string feedback, string outputReadmeFile, BasicAppSetting basicAppSetting)
         {
             
-            File.Copy(Setting.GetFileName(crashes, setting.Language), outputReadmeFile, true);
+            File.Copy(BasicAppSetting.GetFileName(crashes, basicAppSetting.Language), outputReadmeFile, true);
 
             Process.Start(new ProcessStartInfo
             {
