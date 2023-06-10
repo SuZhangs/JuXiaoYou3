@@ -167,5 +167,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public const string IdOfInteractionController = "__Interaction";
         public const string IdOfVisitorController     = "__Visitor";
         public const string IdOfTabShellController    = "__Main";
+        public GlobalStudioContext Context => _context;
     }
 }

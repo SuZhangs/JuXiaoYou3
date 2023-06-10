@@ -51,6 +51,41 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Context.SwitchController(controller);
         }
 
+        public static void SwitchTo(GlobalStudioContext context, ControllerManifest manifest)
+        {
+            if (context is null ||
+                string.IsNullOrEmpty(manifest?.Value))
+            {
+                return;
+            }
+
+            if (!context.ControllerMaps
+                        .TryGetValue(manifest.Value, out var controller))
+            {
+                return;
+            }
+            
+            context.SwitchController(controller);
+        }
+        
+        public static void SwitchTo(GlobalStudioContext context, string value)
+        {
+            
+            if (context is null ||
+                string.IsNullOrEmpty(value))
+            {
+                return;
+            }
+
+            if (!context.ControllerMaps
+                        .TryGetValue(value, out var controller))
+            {
+                return;
+            }
+            
+            context.SwitchController(controller);
+        }
+
         protected override string Failed() => SubSystemString.Unknown;
 
         public GlobalStudioContext Context { get; private set; }

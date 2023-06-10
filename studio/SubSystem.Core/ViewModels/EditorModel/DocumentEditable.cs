@@ -51,13 +51,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void FinishOpeningDocument()
         {
-            //
-            // 创建文档
-            Document ??= CreateDocument();
+            if (Document is null)
+            {
+                //
+                // 创建文档
+                Document = CreateDocument();
             
-            //
-            // 传递到派生类
-            OnCreateDocument(Document);
+                //
+                // 传递到派生类
+                OnCreateDocument(Document);
+            }
 
             // 加载文档
             LoadDocument(Cache, Document);

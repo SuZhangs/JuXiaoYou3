@@ -32,8 +32,8 @@
                             Header="{Binding Title,Mode=OneWay}">
 
                 <f:ShadowListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             ItemsSource="{Binding Controllers,Mode=OneWay}"
-                             SelectedItem="{Binding Selected,Mode=TwoWay}">
+                                 ItemsSource="{Binding Controllers,Mode=OneWay}"
+                                 SelectedItem="{Binding Selected,Mode=TwoWay}">
                     <f:ShadowListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />

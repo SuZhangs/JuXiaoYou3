@@ -18,7 +18,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void FinishOpeningDocument(DocumentCache cache, Document document)
         {
             AddMetadataWhenDocumentOpening();
-            GetPartOfPresentation();
         }
 
         protected override bool OnDataPartAddingBefore(DataPart part)
@@ -97,8 +96,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 Gender = Language.GetText("global.DefaultGender");
             }
             
-            DocumentUtilities.SynchronizeDocument(Cache, Document);
+            GetPartOfPresentation();
             IsDataPartExistenceOverride(Document);
+            
+            //
+            //
+            DocumentUtilities.SynchronizeDocument(Cache, Document);
         }
 
         protected virtual void IsDataPartExistenceOverride(Document document){}

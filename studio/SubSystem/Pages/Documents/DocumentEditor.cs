@@ -52,6 +52,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             };
         }
 
+        protected override void IsDataPartExistenceOverride(Document document)
+        {
+            
+        }
+
         protected override void OnResume()
         {
             base.OnResume();

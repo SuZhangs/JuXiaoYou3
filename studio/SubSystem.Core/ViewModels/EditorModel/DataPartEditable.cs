@@ -37,11 +37,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         protected void AddDataPart(TDocument document)
         {
             var logger = Xaml.Get<ILogger>();
-            foreach (var part in document.Parts)
+            for (var i = 0; i < document.Parts.Count; i ++)
             {
+                var part = document.Parts[i];
                 if (!string.IsNullOrEmpty(part.Id) &&
                     !DataPartTrackerOfId.TryAdd(part.Id, part))
                 {
+                    document.Parts.RemoveAt(i);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
                     continue;
                 }
@@ -53,7 +55,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
                 OnDataPartAddingAfter(part);
             }
-            
         }
         
         
