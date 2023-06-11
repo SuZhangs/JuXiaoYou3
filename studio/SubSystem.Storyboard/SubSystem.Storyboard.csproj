@@ -20,7 +20,7 @@
         <ProjectReference Include="..\..\ui\Forest\Forest\Forest.csproj" />
         <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
         <ProjectReference Include="..\SubSystem.Core\SubSystem.Core.csproj" />
-        <ProjectReference Include="..\..\generators\MigaStudio.TestGen\MigaStudio.TestGen.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
+        <ProjectReference Condition="'$(Configuration)'=='DEBUG'" Include="..\..\generators\MigaStudio.TestGen\MigaStudio.TestGen.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 

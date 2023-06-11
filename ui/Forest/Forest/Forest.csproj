@@ -35,7 +35,6 @@
       <Resource Include="Effects\Bitmaps\GrayBitmapEffect.ps" />
       <None Update="ico.png">
         <Pack>True</Pack>
-        <PackagePath></PackagePath>
       </None>
       <None Remove="Effects\Bitmaps\TintEffect.ps" />
       <Resource Include="Effects\Bitmaps\TintEffect.ps" />
