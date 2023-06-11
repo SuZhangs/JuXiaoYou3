@@ -19,6 +19,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             });
         }
 
+        #region CreateWorkspace
+
         protected void CreateWorkspace(PartOfRtf rtf)
         {
             if (rtf is null)
@@ -37,26 +39,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             }
 
             InternalWorkspaceCollection.Add(workspace);
-        }
-
-        private void OnWorkspaceChanged(StateChangedEventSource source, IWorkspace workspace)
-        {
-            if (source == StateChangedEventSource.TextSource)
-            {
-                //
-                // 更新按钮状态
-                UpdateUndoRedoCommandState();
-                
-                //
-                // 统计
-                Statistic(workspace.Content);
-                Cache.Length = TotalCharacterCount;
-                RaiseUpdated(nameof(TotalCharacterCount));
-                
-                //
-                // 设置更改状态
-                SetDirtyState();
-            }
         }
 
         protected void CreateWorkspace(PartOfMarkdown md)
@@ -79,6 +61,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             InternalWorkspaceCollection.Add(workspace);
         }
 
+        #endregion
+
+        private void OnWorkspaceChanged(StateChangedEventSource source, IWorkspace workspace)
+        {
+            if (source == StateChangedEventSource.TextSource)
+            {
+                //
+                // 更新按钮状态
+                UpdateUndoRedoCommandState();
+
+                //
+                // 统计
+                Statistic(workspace.Content);
+                Cache.Length = TotalCharacterCount;
+                RaiseUpdated(nameof(TotalCharacterCount));
+
+                //
+                // 设置更改状态
+                SetDirtyState();
+            }
+        }
+
+        #region IComposeEditor
+
         ObservableCollection<IWorkspace> IComposeEditor.InternalWorkspaceCollection => InternalWorkspaceCollection;
 
         void IComposeEditor.Initialize()
@@ -93,6 +99,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
             Workspace = WorkspaceCollection.FirstOrDefault();
         }
+
+        #endregion
 
         /// <summary>
         /// 获取或设置 <see cref="Workspace"/> 属性。
