@@ -6,11 +6,10 @@ using Acorisoft.FutureGL.MigaStudio.ViewModels;
 namespace Acorisoft.FutureGL.MigaStudio
 {
     [TestClass, TestCategory("ViewModel")]
-    public class EntityTabViewModelFixture
+    public class IsolatedViewModelFixture
     {
         public void InitializeThisUnitTest()
         {
-            var vm = new EntityTabViewModel<>();
         }
     }
 }

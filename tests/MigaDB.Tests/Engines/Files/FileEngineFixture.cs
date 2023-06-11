@@ -10,7 +10,6 @@ namespace Acorisoft.FutureGL.MigaDB.Tests.Engines.Data
     {
         public void InitializeThisUnitTest()
         {
-            var vm = new FileEngine();
         }
     }
 }
