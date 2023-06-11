@@ -12,7 +12,7 @@ namespace MigaStudio.Tests.ViewModels
     [TestCategory("ViewModels")]
     public class ViewModelUnitTest
     {
-        
+        [ClassInitialize]
         [AssemblyInitialize]
         public static void AssemblyInitialize(TestContext context)
         {

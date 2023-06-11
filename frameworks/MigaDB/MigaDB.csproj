@@ -26,6 +26,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MigaDB.Share\MigaDB.Share.csproj" />
       <ProjectReference Include="..\MigaUtils\MigaUtils.csproj" />
+        <ProjectReference Include="..\..\generators\MigaStudio.TestGen\MigaStudio.TestGen.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

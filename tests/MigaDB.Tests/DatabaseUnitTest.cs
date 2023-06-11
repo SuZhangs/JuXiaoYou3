@@ -1,7 +1,7 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.UnitTests;
 
-namespace MigaDB.Tests
+namespace Acorisoft.FutureGL.MigaDB.Tests
 {
     class DatabaseProperty
     {

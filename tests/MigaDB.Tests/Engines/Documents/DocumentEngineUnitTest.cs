@@ -5,7 +5,7 @@ using Acorisoft.FutureGL.MigaDB.UnitTests;
 using Acorisoft.FutureGL.MigaDB.Utils;
 // ReSharper disable JoinDeclarationAndInitializer
 
-namespace MigaDB.Tests.Engines.Documents
+namespace Acorisoft.FutureGL.MigaDB.Tests.Engines.Documents
 {
     [TestClass, TestCategory("Engines")]
     public class DocumentEngineUnitTest

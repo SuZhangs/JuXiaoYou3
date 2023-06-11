@@ -1,6 +1,6 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Utils;
 
-namespace MigaDB.Tests.Utils
+namespace Acorisoft.FutureGL.MigaDB.Tests.Utils
 {
     [TestClass]
     public class IncludeSetUnitTest

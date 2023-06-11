@@ -1,8 +1,7 @@
-﻿namespace MigaDB.Tests.Engines.Data
+﻿namespace Acorisoft.FutureGL.MigaDB.Tests.Engines.Data
 {
     [TestClass, TestCategory("Keywords")]
     public class KeywordEngineUnitTest
     {
-        public void 
     }
 }

@@ -18,6 +18,7 @@
       <ProjectReference Include="..\..\frameworks\MigaDB\MigaDB.csproj" />
       <ProjectReference Include="..\..\frameworks\MigaUtils\MigaUtils.csproj" />
       <ProjectReference Include="..\MigaStudio.UI\MigaStudio.UI.csproj" />
+        <ProjectReference Include="..\..\generators\MigaStudio.TestGen\MigaStudio.TestGen.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 
