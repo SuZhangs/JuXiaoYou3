@@ -79,7 +79,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             WorkspaceCollection.ForEach(x =>
             {
                 x.Scheduler = Scheduler;
-                x.Immutable();
+                x.Initialize();
             });
 
             Workspace = WorkspaceCollection.FirstOrDefault();

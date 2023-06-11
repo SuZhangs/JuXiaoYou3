@@ -276,7 +276,7 @@
                    Foreground="{f:ForegroundBrush}"
                    FontSize="13">
             <StatusBarItem Margin="4 0">
-                <TextBlock Text="{Binding Content.Length,Mode=OneWay,FallbackValue=0,StringFormat={}字数：99999，符号：1000，文字：1000 }" />
+                <TextBlock Text="{Binding TotalCharacterCount,Mode=OneWay,FallbackValue=0,StringFormat={}字数：{0}}" />
             </StatusBarItem>
             <StatusBarItem Margin="4 0">
                 <TextBlock Text="行号：10，列号：13，选择：1300" />

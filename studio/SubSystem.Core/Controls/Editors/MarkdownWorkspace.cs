@@ -8,36 +8,47 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
-    public class MarkdownWorkspace : Workspace
+    public class MarkdownWorkspace : Workspace<TextEditor>
     {
         private ConceptCompletionWindow _window;
         private bool                    _isShow;
-        private TextEditor              _ctrl;
+        
+        
+        public override bool CanUndo() => Control.CanUndo;
 
-        public TextEditor Control
+        public override bool CanRedo()=> Control.CanRedo;
+
+        public override void Undo()
         {
-            get => _ctrl;
-            set
+            if (Control is null)
             {
-                if (value is null)
-                {
-                    return;
-                }
-
-                if (_ctrl is not null &&
-                    ReferenceEquals(_ctrl, value))
-                {
-                    return;
-                }
-
-                _ctrl     = value;
-                IsWorking = false;
-                Disposable.Dispose();
-                Disposable = new DisposableCollector();
+                return;
             }
+
+            if (!CanUndo())
+            {
+                return;
+            }
+
+            Control.Undo();
         }
 
-        public override void Immutable()
+        public override void Redo()
+        {
+            if (Control is null)
+            {
+                return;
+            }
+
+            if (!CanRedo())
+            {
+                return;
+            }
+
+            Control.Redo();
+        }
+
+        public override void Initialize()
         {
             if (!string.IsNullOrEmpty(Part.Content))
             {

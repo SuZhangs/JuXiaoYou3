@@ -12,47 +12,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
     public delegate void WorkspaceChangedEventHandler(StateChangedEventSource source, IWorkspace workspace);
     
-    public interface IWorkspace : IDisposable
+    public interface IWorkspace : IDisposable, IUndoRedoManager
     {
         /// <summary>
         /// 获取当前的文本
         /// </summary>
         string Content { get; }
+        
+        /// <summary>
+        /// 获取当前的调度器
+        /// </summary>
         IScheduler Scheduler { get; set; }
+        
+        /// <summary>
+        /// 变化的事件
+        /// </summary>
         WorkspaceChangedEventHandler WorkspaceChanged { get; set; }
         
-        void Immutable();
-    }
-
-    public abstract class Workspace : ObservableObject, IWorkspace
-    {
-        private   IScheduler          _scheduler;
-        protected DisposableCollector Disposable = new DisposableCollector();
-
-        protected override void ReleaseManagedResources()
-        {
-            _scheduler = null;
-            Disposable.Dispose();
-        }
-
-        public abstract void Immutable();
-
-        public IScheduler Scheduler
-        {
-            get => _scheduler;
-            set
-            {
-                if (value is null)
-                {
-                    return;
-                }
-
-                _scheduler = value;
-            }
-        }
-
-        public bool IsWorking { get; protected set; }
-        public abstract string Content { get; }
-        public WorkspaceChangedEventHandler WorkspaceChanged { get; set; }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        void Initialize();
     }
 }

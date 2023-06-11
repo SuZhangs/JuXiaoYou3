@@ -5,35 +5,46 @@ using System.Windows.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
-    public class RichTextFileWorkspace : Workspace
+    public class RichTextFileWorkspace : Workspace<RichTextBox>
     {
-        private RichTextBox _ctrl;
         
         public PartOfRtf Part { get; init; }
 
-        public RichTextBox Control
+        public override bool CanUndo() => Control.CanUndo;
+
+        public override bool CanRedo()=> Control.CanRedo;
+
+        public override void Undo()
         {
-            get => _ctrl;
-            set
+            if (Control is null)
             {
-                if (value is null)
-                {
-                    return;
-                }
-
-                if (_ctrl is not null &&
-                    ReferenceEquals(_ctrl, value))
-                {
-                    return;
-                }
-
-                _ctrl     = value;
-                IsWorking = false;
-                Disposable.Dispose();
-                Disposable = new DisposableCollector();
+                return;
             }
+
+            if (!CanUndo())
+            {
+                return;
+            }
+
+            Control.Undo();
         }
-        public override void Immutable()
+
+        public override void Redo()
+        {
+            if (Control is null)
+            {
+                return;
+            }
+
+            if (!CanRedo())
+            {
+                return;
+            }
+
+            Control.Redo();
+        }
+
+        public override void Initialize()
         {
             if (IsWorking)
             {

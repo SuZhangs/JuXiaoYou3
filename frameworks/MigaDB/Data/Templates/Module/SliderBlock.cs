@@ -41,7 +41,7 @@
             return new Metadata
             {
                 Name       = Metadata,
-                Value      = Value?.ToString(),
+                Value      = Value.ToString(),
                 Type       = MetadataKind.Progress,
                 Parameters = MetadataProcessor.NumberBaseFormatted(Maximum, Minimum, value)
             };
