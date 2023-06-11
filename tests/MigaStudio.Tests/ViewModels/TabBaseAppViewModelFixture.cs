@@ -6,11 +6,11 @@ using Acorisoft.FutureGL.MigaStudio.ViewModels;
 namespace Acorisoft.FutureGL.MigaStudio
 {
     [TestClass, TestCategory("ViewModel")]
-    public class GalleryViewModelFixture
+    public class TabBaseAppViewModelFixture
     {
         public void InitializeThisUnitTest()
         {
-            var vm = new GalleryViewModel<>();
+            var vm = new TabBaseAppViewModel();
         }
     }
 }
