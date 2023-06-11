@@ -16,7 +16,7 @@
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <thisVM:UniverseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
-        <thisConverters:ImageConverter x:Key="ImageConverter"/>
+        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter"/>
 
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8 6" />

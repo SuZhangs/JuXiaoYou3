@@ -17,7 +17,7 @@
     <!-- ReSharper disable  Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
         <thisConverters:AppraiseNameConverter x:Key="NameConverter"/>
-        <thisConverters:ImageConverter x:Key="ImageConverter" />
+        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter" />
 
         <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
 

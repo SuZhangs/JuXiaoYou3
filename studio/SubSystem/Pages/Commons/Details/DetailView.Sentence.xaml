@@ -16,7 +16,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type local:SentencePartViewModel}, IsDesignTimeCreatable=True}">
     <!-- ReSharper disable  Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
-        <thisConverters:ImageConverter x:Key="ImageConverter" />
+        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter" />
 
         <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
 

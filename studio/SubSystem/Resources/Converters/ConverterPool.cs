@@ -3,8 +3,9 @@
     public static class ConverterPool
     {
         public static AvatarConverter Avatar { get; } = new AvatarConverter();
-        public static AlbumConverter Album { get; } = new AlbumConverter();
-        public static ImageConverter Image { get; } = new ImageConverter();
-        public static ScaledImageConverter ScaledImage { get; } = new ScaledImageConverter();
+        public static ImageFromMusicConverter Music { get; } = new ImageFromMusicConverter();
+        public static ImageFromAlbumConverter Image { get; } = new ImageFromAlbumConverter();
+        public static ScopedImageConverter ScopedImage { get; } = new ScopedImageConverter();
+        public static ImageFromScaledStringConverter ScaledImage { get; } = new ImageFromScaledStringConverter();
     }
 }

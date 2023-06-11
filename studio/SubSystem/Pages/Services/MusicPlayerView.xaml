@@ -54,7 +54,7 @@
                 </converters:PlayModeIconConverter.Sequence>
             </converters:PlayModeIconConverter>
             <converters:TimeSpanConverter x:Key="TimeSpanConverter" />
-            <converters:AlbumConverter x:Key="AlbumConverter" />
+            <converters:ImageFromMusicConverter x:Key="AlbumConverter" />
 
 
             <ImageBrush x:Key="BackgroundImage"
