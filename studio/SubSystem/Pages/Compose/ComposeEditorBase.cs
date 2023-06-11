@@ -35,6 +35,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             
             SaveComposeCommand = Command(Save);
             NewComposeCommand  = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
+            UndoCommand        = Command(UndoImpl, CanUndoImpl);
+            RedoCommand        = Command(RedoImpl, CanRedoImpl);
+
 
             Initialize();
         }

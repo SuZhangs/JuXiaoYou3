@@ -63,8 +63,12 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            ReleaseMouseCapture();
-            StateMachine.ResetState();
+            if (IsEnabled)
+            {
+                ReleaseMouseCapture();
+                StateMachine.ResetState();
+            }
+            
             base.OnMouseLeave(e);
         }
 
@@ -161,7 +165,6 @@
         {
             if (StateMachine.CurrentState == VisualState.Highlight1)
             {
-                
                 ReleaseMouseCapture();
                 StateMachine.ResetState();
             }
@@ -261,7 +264,6 @@
         {
             if (StateMachine.CurrentState == VisualState.Highlight1)
             {
-                
                 ReleaseMouseCapture();
                 StateMachine.ResetState();
             }
@@ -345,8 +347,11 @@
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            ReleaseMouseCapture();
-            StateMachine.ResetState();
+            if (IsEnabled)
+            {
+                ReleaseMouseCapture();
+                StateMachine.ResetState();
+            }
             base.OnMouseLeave(e);
         }
 

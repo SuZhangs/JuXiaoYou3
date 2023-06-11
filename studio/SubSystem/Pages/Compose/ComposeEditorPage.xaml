@@ -223,7 +223,6 @@
                     Orientation="Horizontal"
                     Margin="0 8">
             <StackPanel.Resources>
-
                 <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
                     <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
                     <Setter Property="IconSize" Value="23" />
@@ -232,8 +231,10 @@
                     <Setter Property="Width" Value="40" />
                 </Style>
             </StackPanel.Resources>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Undo}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Redo}" />
+            <ftk:ToolButton Command="{Binding UndoCommand}"
+                            Icon="{StaticResource MaterialSymbols.Undo}" />
+            <ftk:ToolButton Command="{Binding RedoCommand}"
+                            Icon="{StaticResource MaterialSymbols.Redo}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}" />

@@ -43,9 +43,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             if (source == StateChangedEventSource.TextSource)
             {
+                //
+                // 更新按钮状态
+                UpdateUndoRedoCommandState();
+                
+                //
+                // 统计
                 Statistic(workspace.Content);
                 Cache.Length = TotalCharacterCount;
                 RaiseUpdated(nameof(TotalCharacterCount));
+                
+                //
+                // 设置更改状态
                 SetDirtyState();
             }
         }
