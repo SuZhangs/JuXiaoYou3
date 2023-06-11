@@ -45,6 +45,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 {
                     document.Parts.RemoveAt(i);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
+                    SetDirtyState();
                     continue;
                 }
 

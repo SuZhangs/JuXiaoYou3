@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public QuickStartController()
         {
-            CreateCommand  = AsyncCommand(CreateImpl, CanCreate, true);
+            CreateCommand  = AsyncCommand(CreateImpl);
             OpenCommand    = AsyncCommand(OpenImpl);
             UpgradeCommand = AsyncCommand(UpgradeImpl);
             RepairCommand  = AsyncCommand(RepairImpl);
@@ -30,13 +30,22 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             await DialogService().Dialog(new RepairToolViewModel());
         }
 
-        private bool CanCreate() => !string.IsNullOrEmpty(Author) &&
-                                    !string.IsNullOrEmpty(Name) &&
-                                    !string.IsNullOrEmpty(ForeignName);
-
         private async Task CreateImpl()
         {
             var opendlg = new VistaFolderBrowserDialog();
+
+            if (string.IsNullOrEmpty(Author))
+            {
+                 await this.Error(SubSystemString.EmptyAuthor);
+                 return;
+            }
+            
+            
+            if (string.IsNullOrEmpty(Name))
+            {
+                await this.Error(SubSystemString.EmptyName);
+                return;
+            }
 
             if (opendlg.ShowDialog() != true)
             {
@@ -165,7 +174,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public string Author
         {
             get => _author;
-            set => SetValue(ref _author, value);
+            set
+            {
+                SetValue(ref _author, value);
+                CreateCommand.NotifyCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -174,7 +187,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public string ForeignName
         {
             get => _foreignName;
-            set => SetValue(ref _foreignName, value);
+            set
+            {
+                SetValue(ref _foreignName, value);
+                CreateCommand.NotifyCanExecuteChanged();
+            }
         }
 
         /// <summary>
@@ -183,7 +200,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         public string Name
         {
             get => _name;
-            set => SetValue(ref _name, value);
+            set
+            {
+                SetValue(ref _name, value);
+                CreateCommand.NotifyCanExecuteChanged();
+            }
         }
 
 
