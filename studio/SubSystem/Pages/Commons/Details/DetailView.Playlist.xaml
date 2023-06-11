@@ -15,7 +15,6 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:PlaylistPartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageFromMusicConverter x:Key="AlbumConverter" />
     </UserControl.Resources>
     <f:EmptyContentControl NotEmpty="{Binding HasElement,Mode=OneWay}">
         <f:EmptyContentControl.EmptyState>
@@ -32,7 +31,7 @@
                         <PriorityBinding>
                             <Binding Path="Selected.Cover"
                                  Mode="OneWay"
-                                 Converter="{StaticResource AlbumConverter}"/>
+                                 Converter="{x:Static thisConverters:ConverterPool.Music}"/>
                             <Binding Path="DefaultAlbum"/>
                         </PriorityBinding>
                     </Image.Source>

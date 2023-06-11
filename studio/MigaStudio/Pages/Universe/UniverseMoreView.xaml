@@ -18,8 +18,6 @@
                 d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
     <f:ForestIsland.Resources>
         <thisVM:UniverseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}"/>
-        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter"/>
-
         <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
             <Setter Property="Padding" Value="8 6" />
         </Style>

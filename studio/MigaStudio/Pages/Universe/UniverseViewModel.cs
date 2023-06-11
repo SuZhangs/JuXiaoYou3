@@ -17,6 +17,7 @@ using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaStudio.Controls;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
 using Acorisoft.FutureGL.MigaStudio.Resources.Converters;
@@ -153,8 +154,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             controller.Reset();
             controller = (TabController)Controller.Context
                                                   .ControllerMaps[AppViewModel.IdOfQuickStartController];
-            ConverterPool.Avatar
-                         .Reset();
+            AvatarConverter.Reset();
             ss.RepositorySetting
               .LastRepository = null;
             App.SynchronizeSetting();
@@ -177,8 +177,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             controller.Reset();
             controller = (TabController)Controller.Context
                                                   .ControllerMaps[AppViewModel.IdOfTabShellController];
-            ConverterPool.Avatar
-                         .Reset();
+            AvatarConverter.Reset();
             App.SynchronizeSetting();
             await DatabaseManager.CloseAsync();
             var r = await DatabaseManager.LoadAsync(cache.Path);

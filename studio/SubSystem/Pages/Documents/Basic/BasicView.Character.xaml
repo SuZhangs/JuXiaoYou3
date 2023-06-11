@@ -15,7 +15,6 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterDocumentViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter" />
         <thisVM:DocumentEditorViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
     </UserControl.Resources>
     <ftk:TabControl Padding="0 16 0 0">

@@ -54,11 +54,10 @@
                 </converters:PlayModeIconConverter.Sequence>
             </converters:PlayModeIconConverter>
             <converters:TimeSpanConverter x:Key="TimeSpanConverter" />
-            <converters:ImageFromMusicConverter x:Key="AlbumConverter" />
 
 
             <ImageBrush x:Key="BackgroundImage"
-                        ImageSource="{Binding Background,Mode=OneWay, Converter={StaticResource AlbumConverter}}"
+                        ImageSource="{Binding Background,Mode=OneWay, Converter={x:Static converters:ConverterPool.Music}}"
                         Stretch="UniformToFill" />
 
             <BlurEffect x:Key="BlurEffect" Radius="100" RenderingBias="Performance" />

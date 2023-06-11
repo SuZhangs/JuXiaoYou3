@@ -20,7 +20,6 @@
              SnapsToDevicePixels="True">
     <UserControl.Resources>
         <thisVM:UniverseViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
-        <ImageBrush x:Key="Avatar" ImageSource="{x:Static thisConverters:AvatarConverter.Character}" />
 
         <SolidColorBrush x:Key="Stroke" Color="Gray"/>
         <SolidColorBrush x:Key="Fill" Color="{f:Color BackgroundLevel2}" Opacity="0.5"/>

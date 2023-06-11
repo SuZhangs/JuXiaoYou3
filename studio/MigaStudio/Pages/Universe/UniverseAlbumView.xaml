@@ -13,9 +13,6 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type thisVM:UniverseViewModel}, IsDesignTimeCreatable=True}">
-    <UserControl.Resources>
-        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter"/>
-    </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal">
@@ -69,7 +66,7 @@
                         <ContentControl.ContentTemplate>
                             <DataTemplate DataType="{x:Type m:Album}">
                                 <Image Stretch="None"
-                                       Source="{Binding Mode=OneWay, Converter={StaticResource ImageConverter}}" />
+                                       Source="{Binding Mode=OneWay, Converter={x:Static thisConverters:ConverterPool.Music}}" />
                             </DataTemplate>
                         </ContentControl.ContentTemplate>
                     </ContentControl>

@@ -15,7 +15,6 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:AlbumPartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter" />
     </UserControl.Resources>
 
     <f:EmptyContentControl NotEmpty="{Binding HasElement,Mode=OneWay}">

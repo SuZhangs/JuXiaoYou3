@@ -15,7 +15,6 @@
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type={x:Type local:StickyNotePartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <thisConverters:ImageFromAlbumConverter x:Key="ImageConverter" />
         <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type m:StickyNote}">
