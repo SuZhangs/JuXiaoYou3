@@ -20,6 +20,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly ObservableProperty<IDatabase>        _database;
         private readonly ObservableProperty<DatabaseProperty> _property;
         private readonly ObservableState                      _isOpen;
+        private readonly ObservableState                      _needUpdate;
 
         private readonly IReadOnlyList<IDatabaseMaintainer> _maintainers;
         private readonly IReadOnlyList<IDatabaseUpdater>    _updaters;
@@ -48,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _database             = new ObservableProperty<IDatabase>();
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
+            _needUpdate           = new ObservableState();
             _synchronizer         = new GlobalSynchronizer(() => { }, () => _isOpen.SetValue(true));
             Mediator              = new Mediator(Container.Resolve);
         }
@@ -74,36 +76,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 if (requireMinimumVersion > version)
                 {
                     _logger.Warn($"正在升级数据库，当前版本为:{version}");
-
-                    foreach (var updater in _updaters)
-                    {
-                        try
-                        {
-                            if (updater.TargetVersion >= database.Version)
-                            {
-                                if (!updater.Update(database))
-                                {
-                                    _logger.Warn($"数据库升级失败，升级器:{updater.GetType().FullName}");
-                                    continue;
-                                }
-
-                                if (updater.ResultVersion > database.Version)
-                                {
-                                    database.UpdateVersion(updater.ResultVersion);
-                                    _logger.Warn($"数据库升级完成，当前版本为:{updater.ResultVersion}");
-                                }
-                                else
-                                {
-                                    _logger.Error($"升级数据库异常，疑似升级器未手动提升数据库版本，内存版本:{version}，本地版本:{database.Version}");
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.Error($"升级数据库失败，当前版本为:{version}");
-                            throw new UpdaterException(ex.Message, ex);
-                        }
-                    }
+                    _needUpdate.SetValue(true);
                 }
             });
         }
@@ -459,6 +432,16 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         public IEnumerable<IDataEngine> GetEngines() => _engines;
 
         /// <summary>
+        /// 数据库升级工具
+        /// </summary>
+        public IEnumerable<IDatabaseUpdater> Updaters => _updaters;
+
+        /// <summary>
+        /// 数据库维护工具
+        /// </summary>
+        public IEnumerable<IDatabaseMaintainer> Maintainers => _maintainers;
+
+        /// <summary>
         /// 当前打开的引擎。
         /// </summary>
         /// <remarks>
@@ -478,6 +461,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// 是否加载数据库。
         /// </summary>
         public IObservableState IsOpen => _isOpen;
+        
+        /// <summary>
+        /// 是否需要升级数据库。
+        /// </summary>
+        public IObservableState NeedUpdate => _needUpdate;
 
         /// <summary>
         /// Ioc容器，请勿在第三方框架中使用。
