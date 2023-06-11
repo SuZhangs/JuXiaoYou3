@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <ImplicitUsings>disable</ImplicitUsings>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <RootNamespace>Acorisoft.MigaGen.App</RootNamespace>
+        <RootNamespace>Acorisoft.FutureGL.MigaTest</RootNamespace>
         <OutDir>../../Builds/Base</OutDir>
         <LangVersion>latest</LangVersion>
         <IsRoslynComponent>True</IsRoslynComponent>
