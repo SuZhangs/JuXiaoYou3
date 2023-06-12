@@ -12,6 +12,7 @@ global using CommunityToolkit.Mvvm.Input;
 
 using System.Reflection;
 using System.Windows;
+using Acorisoft.FutureGL.MigaTest.Attributes;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
@@ -24,3 +25,4 @@ using System.Windows;
 [assembly: System.Resources.NeutralResourcesLanguageAttribute("zh")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
+[assembly: UnitTestTarget]

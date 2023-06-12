@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
         public override void Initialize()
         {
-            if (!string.IsNullOrEmpty(Part.Content))
+            if (!string.IsNullOrEmpty(Part?.Content))
             {
                 Control.Text = Part.Content;
             }

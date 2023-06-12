@@ -19,6 +19,29 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\studio\MigaStudio\MigaStudio.csproj" />
+      <ProjectReference Include="..\..\studio\SubSystem.Composer\SubSystem.Composer.csproj" />
+      <ProjectReference Include="..\..\studio\SubSystem.Inspiration\SubSystem.Inspiration.csproj" />
+      <ProjectReference Include="..\..\studio\SubSystem.Storyboard\SubSystem.Storyboard.csproj" />
+      <ProjectReference Include="..\MigaTest.Tests\MigaTest.Tests.csproj" />
+      <ProjectReference Include="..\MigaTest\MigaTest.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Core\**" />
+      <Compile Remove="Models\**" />
+      <Compile Remove="ViewModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Core\**" />
+      <EmbeddedResource Remove="Models\**" />
+      <EmbeddedResource Remove="ViewModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Core\**" />
+      <None Remove="Models\**" />
+      <None Remove="ViewModels\**" />
     </ItemGroup>
 
 </Project>
