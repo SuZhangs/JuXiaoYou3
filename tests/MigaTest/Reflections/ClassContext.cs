@@ -26,7 +26,18 @@
             Fields     = f.AsReadOnly();
             Methods    = m.AsReadOnly();
         }
+
+        public void Initialize()
+        {
+            if (!Initialized)
+            {
+                Initialized = true;
+                Instance    = Activator.CreateInstance(ClassType);
+            }
+        }
         
+        public bool Initialized { get; private set; }
+        public object Instance { get; private set; }
         public Type ClassType { get; }
         public IReadOnlyList<PropertyContext> Properties { get; }
         public IReadOnlyList<FieldContext> Fields { get; }

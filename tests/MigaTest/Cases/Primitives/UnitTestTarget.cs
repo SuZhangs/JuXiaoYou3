@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaTest.Cases.Primitives
             Case_Control   = new List<ClassContext>(32);
             Case_Other     = new List<ClassContext>(32);
         }
-        
+
         public string AssemblyName { get; }
         public IList<ClassContext> Case_ViewModel { get; }
         public IList<ClassContext> Case_Model { get; }

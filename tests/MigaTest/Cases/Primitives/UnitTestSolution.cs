@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Acorisoft.FutureGL.MigaTest.Attributes;
+using Acorisoft.FutureGL.MigaTest.Reflections;
 using Acorisoft.FutureGL.MigaTest.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Acorisoft.FutureGL.MigaTest.Cases.Primitives
 {
@@ -10,11 +12,11 @@ namespace Acorisoft.FutureGL.MigaTest.Cases.Primitives
         
         public void Run()
         {
-            Trace.WriteLine($"构建完闭，开始测试...");
+            Trace.WriteLine("构建完闭，开始测试...");
+            
             foreach (var unitTestTarget in Targets)
             {
-                var target = unitTestTarget as UnitTestTarget;
-                if (target is null)
+                if (unitTestTarget is not UnitTestTarget target)
                 {
                     continue;
                 }
@@ -31,10 +33,38 @@ namespace Acorisoft.FutureGL.MigaTest.Cases.Primitives
             
             foreach (var vm in target.Case_ViewModel)
             {
-                
+                PrepareLifetimeProcedure<ConstructorCaseAttribute>(vm);
+                PrepareLifetimeProcedure<StartupCaseAttribute>(vm);
+                PrepareLifetimeProcedure<StartCaseAttribute>(vm);
+                PrepareLifetimeProcedure<RunningCaseAttribute>(vm);
+                PrepareLifetimeProcedure<StopCaseAttribute>(vm);
             }
         }
-        
+
+        private void PrepareLifetimeProcedure<T>(ClassContext target)
+        {
+            target.Initialize();
+            
+            foreach (var field in target.Fields)
+            {
+                if (!field.Information
+                         .IsDefined(typeof(T), true))
+                {
+                    continue;
+                }
+                
+                
+                var b = FieldUtil.CheckThisField(field, target.Instance);
+                Assert_True(b, target);
+            }
+            
+        }
+
+        private void Assert_True(bool r, ClassContext target)
+        {
+            
+        }
+
         public IReadOnlyList<IUnitTestTarget> Targets { get; }
     }
 }
