@@ -58,5 +58,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
         {
             Collection.Clear();
         }
+        
+        
+        public sealed override bool Uniqueness => true;
     }
 }

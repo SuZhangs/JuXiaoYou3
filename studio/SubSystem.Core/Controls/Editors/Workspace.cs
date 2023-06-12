@@ -24,6 +24,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public abstract void Redo();
 
         public abstract void Initialize();
+        public abstract void Inactive();
+        public abstract void Active();
 
         public IScheduler Scheduler
         {

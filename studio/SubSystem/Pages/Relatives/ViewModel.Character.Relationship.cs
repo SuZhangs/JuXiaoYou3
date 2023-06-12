@@ -219,5 +219,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<FrameworkElement> CaptureCommand { get; }
+
+        public sealed override bool Uniqueness => true;
     }
 }

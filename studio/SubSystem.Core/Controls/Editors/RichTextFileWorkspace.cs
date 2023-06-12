@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Acorisoft.FutureGL.MigaStudio.Controls.Editors.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
@@ -44,8 +45,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             Control.Redo();
         }
 
+        public override void Inactive()
+        {
+            Control.Visibility = Visibility.Collapsed;
+        }
+
+        public override void Active()
+        {
+            Control.Visibility = Visibility.Visible;
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
+        }
+
         public override void Initialize()
         {
+            if (!string.IsNullOrEmpty(Part?.Content))
+            {
+                Control.SetText(Part.Content);
+            }
+            
             if (IsWorking)
             {
                 return;
@@ -84,6 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            Part.Content = Control.GetText();
             WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
         }
 

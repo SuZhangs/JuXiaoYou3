@@ -51,7 +51,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             var workspace = EditorUtilities.CreateFromMarkdownPart(md);
             workspace.WorkspaceChanged = OnWorkspaceChanged;
 
-            if (!WorkspaceMapping.TryAdd(typeof(PartOfRtf), workspace))
+            if (!WorkspaceMapping.TryAdd(typeof(PartOfMarkdown), workspace))
             {
                 Xaml.Get<ILogger>()
                     .Warn("创建了重复的RTF模组");
@@ -98,6 +98,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             });
 
             Workspace = WorkspaceCollection.FirstOrDefault();
+            
+            // 统计当前的字数
+            Statistic(Workspace?.Content);
         }
 
         #endregion
@@ -108,7 +111,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         public IWorkspace Workspace
         {
             get => _workspace;
-            set => SetValue(ref _workspace, value);
+            set
+            {
+                _workspace?.Inactive();
+                SetValue(ref _workspace, value);
+                _workspace?.Active();
+            }
         }
 
         public ReadOnlyObservableCollection<IWorkspace> WorkspaceCollection { get; }

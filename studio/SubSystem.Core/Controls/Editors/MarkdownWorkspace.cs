@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.Windows;
 using Acorisoft.FutureGL.MigaStudio.Editors.Completion;
 using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 using ICSharpCode.AvalonEdit;
@@ -87,6 +88,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                       .ObserveOn(Xaml.Get<IScheduler>())
                       .Subscribe(x => { OnPositionChanged(x.Sender, x.EventArgs); })
                       .DisposeWith(Disposable);
+        }
+
+        public override void Inactive()
+        {
+            Control.Visibility = Visibility.Collapsed;
+        }
+
+        public override void Active()
+        {
+            Control.Visibility = Visibility.Visible;
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
         }
 
         private void OnPositionChanged(object sender, EventArgs e)

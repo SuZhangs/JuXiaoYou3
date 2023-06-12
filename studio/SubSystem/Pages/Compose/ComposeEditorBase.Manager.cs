@@ -84,7 +84,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             //
             Document = document;
             CreateComposeFromManifest(document);
-            OnCreateDocument(document);
 
             ComposeEngine.AddCompose(document);
             return document;

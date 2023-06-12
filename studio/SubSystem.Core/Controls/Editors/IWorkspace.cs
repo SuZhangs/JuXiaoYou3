@@ -33,5 +33,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         /// 初始化
         /// </summary>
         void Initialize();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void Active();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void Inactive();
     }
 }

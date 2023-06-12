@@ -8,6 +8,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Composes"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Composes"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
+                     xmlns:workspace="clr-namespace:Acorisoft.FutureGL.MigaStudio.Editors;assembly=SubSystem.Core"
                      xmlns:editor="http://icsharpcode.net/sharpdevelop/avalonedit"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
@@ -17,6 +18,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialSymbols.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <Style TargetType="{x:Type f:HeaderedSingleLine}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource ClearStyle.FocusVisual}" />
                 <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
@@ -74,6 +76,37 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            
+            <DataTemplate DataType="{x:Type workspace:RichTextFileWorkspace}">
+                <DockPanel Margin="4">
+                    <Path DockPanel.Dock="Left"
+                          Data="{StaticResource MaterialSymbols.Rtf}"
+                          Stretch="Uniform"
+                          Stroke="Black"
+                          StrokeThickness="1"
+                          Margin="0 0 8 0"
+                          Width="17"
+                          Height="17" />
+                    
+                    <TextBlock Text="Rtf"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type workspace:MarkdownWorkspace}">
+                <DockPanel Margin="4">
+                    <Path DockPanel.Dock="Left"
+                          Data="{StaticResource MaterialSymbols.Markdown}"
+                          Stretch="Uniform"
+                          Margin="0 0 8 0"
+                          Fill="Black"
+                          Width="17"
+                          Height="17" />
+                    
+                    <TextBlock Text="Markdown"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+            </DataTemplate>
 
             <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
                 <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
@@ -309,15 +342,14 @@
 
             <StatusBarItem Margin="4 0" 
                            HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal">
-                    <ftk:StateButton Icon="{StaticResource MaterialSymbols.Rtf}"
-                                     Content="Rtf" />
-                    <ftk:StateButton Icon="{StaticResource MaterialSymbols.Markdown}"
-                                     IsFilled="True"
-                                     Content="Markdown" />
-                    <ftk:StateButton Icon="{StaticResource MaterialSymbols.Projector}"
-                                     Content="Preview" />
-                </StackPanel>
+                <f:ListBox ItemsSource="{Binding WorkspaceCollection,Mode=OneWay}"
+                           SelectedItem="{Binding Workspace,Mode=TwoWay}">
+                    <f:ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </f:ListBox.ItemsPanel>
+                </f:ListBox>
             </StatusBarItem>
         </StatusBar>
     </Grid>
