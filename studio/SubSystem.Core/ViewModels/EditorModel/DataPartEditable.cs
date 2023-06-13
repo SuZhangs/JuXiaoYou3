@@ -20,6 +20,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DataPartTrackerOfType = new Dictionary<Type, DataPart>();
         }
 
+        protected void HasDataPart<T>(Func<T> expression, Action<T> callback) where T : DataPart
+        {
+            if (!DataPartTrackerOfType.ContainsKey(typeof(T)))
+            {
+                var part = expression?.Invoke();
+
+                if (part is null)
+                {
+                    return;
+                }
+                
+                callback?.Invoke(part);
+                AddDataPart(part);
+            }
+        }
+
+        protected void AddDataPartToDocument<T>(T part) where T : DataPart
+        {
+            Document.Parts.Add(part);
+        }
+
         protected void AddDataPart(DataPart dataPart)
         {
             if (DataPartTrackerOfId.TryAdd(dataPart.Id, dataPart))
@@ -27,14 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 DataPartTrackerOfType.TryAdd(dataPart.GetType(), dataPart);
             }
         }
-
-        protected void ClearDataPart()
-        {
-            DataPartTrackerOfId.Clear();
-            DataPartTrackerOfId.Clear();
-        }
-
-        protected void AddDataPart(TDocument document)
+        protected void AddDataPartFromDocument(TDocument document)
         {
             var logger = Xaml.Get<ILogger>();
             for (var i = 0; i < document.Parts.Count; i ++)
@@ -57,16 +71,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 OnDataPartAddingAfter(part);
             }
         }
+
+        protected void ClearDataPart()
+        {
+            DataPartTrackerOfId.Clear();
+            DataPartTrackerOfId.Clear();
+        }
+
         
         
         protected sealed override void LoadDocument(TCache cache, TDocument document)
         {
-            AddDataPart(document);
+            AddDataPartFromDocument(document);
             IsDataPartExistence(document);
         }
 
         protected abstract bool OnDataPartAddingBefore(DataPart part);
         protected abstract void OnDataPartAddingAfter(DataPart part);
+        
+        /// <summary>
+        /// 判断部件是否存在，如果不存在，使用HasDataPart，添加到文档的同时也添加到容器当中
+        /// </summary>
+        /// <param name="document">要检查的文档</param>
         protected abstract void IsDataPartExistence(TDocument document);
     }
 }

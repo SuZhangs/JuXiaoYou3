@@ -12,7 +12,7 @@
 
         protected override void OnCreateDocument(Document document)
         {
-            document.Parts.Add(new PartOfAlbum{ Items     = new List<Album>()});
+            AddDataPartToDocument(CreateAlbum());
         }
     }
 }

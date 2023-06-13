@@ -130,7 +130,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         }
 
         #endregion
-
+        
         protected override void ReleaseManagedResourcesOverride()
         {
             ReleaseWorkspace();

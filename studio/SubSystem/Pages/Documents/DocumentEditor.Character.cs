@@ -38,22 +38,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             return new object[]
             {
-                new PartOfAlbum { Items    = new List<Album>() },
-                new PartOfPlaylist { Items = new List<Music>() },
-                new PartOfAppraise(),
-                new PartOfStickyNote { Items = new List<StickyNote>() },
-                new PartOfPrototype(),
-                new PartOfSentence(),
-                new PartOfSurvey { Items   = new List<SurveySet>() },
-                new PartOfRel(),
+                CreateAlbum(),
+                CreatePlaylist(),
+                CreateAppraise(),
+                CreateSentence(),
+                CreateStickyNote(),
+                CreatePrototype(),
+                CreateCharacterRelatives(),
+                CreateSurvey(),
             };
         }
 
         protected override void OnCreateDocument(Document document)
         {
-            document.Parts.Add(new PartOfAlbum { Items    = new List<Album>() });
-            document.Parts.Add(new PartOfPlaylist { Items = new List<Music>() });
-            document.Parts.Add(new PartOfRel());
+            AddDataPartToDocument(CreateAlbum());
+            AddDataPartToDocument(CreatePlaylist());
+            AddDataPartToDocument(CreateCharacterRelatives());
         }
 
 
@@ -69,7 +69,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 vm.Resume();
             }
         }
-
 
         private void AddAlbumToDetailPart(Album album)
         {
@@ -122,6 +121,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             ResumeDetailPart();
         }
 
+        #region MainPicture
+
+        
+        
         private async Task SetAsMainPictureOfVerticalImpl()
         {
             var opendlg = Studio.Open(SubSystemString.ImageFilter);
@@ -228,6 +231,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 MainPictureOfSquare = r.Value;
             }
         }
+
+        #endregion
 
         public AsyncRelayCommand SetAsMainPictureOfVerticalCommand { get; }
         public AsyncRelayCommand SetAsMainPictureOfHorizontalCommand { get; }

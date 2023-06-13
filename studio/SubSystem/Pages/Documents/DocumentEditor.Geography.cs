@@ -123,8 +123,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         
         protected override void OnCreateDocument(Document document)
         {
-            document.Parts.Add(new PartOfAlbum { Items    = new List<Album>() });
-            document.Parts.Add(new PartOfPlaylist { Items = new List<Music>() });
+            AddDataPartToDocument(CreateAlbum());
+            AddDataPartToDocument(CreatePlaylist());
         }
 
         public AsyncRelayCommand SetAsMainPictureCommand { get; }

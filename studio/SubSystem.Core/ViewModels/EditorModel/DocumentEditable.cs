@@ -71,6 +71,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         protected abstract TDocument CreateDocument();
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="document">要检查的文档</param>
+        /// <remarks>
+        /// <para>创建部件时，仅添加到文档！</para>
+        /// </remarks>
         protected abstract void OnCreateDocument(TDocument document);
 
         protected abstract void LoadDocument(TCache cache, TDocument document);
