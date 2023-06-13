@@ -2,7 +2,6 @@
 using Acorisoft.FutureGL.MigaTest.Attributes;
 using Acorisoft.FutureGL.MigaTest.Reflections;
 using Acorisoft.FutureGL.MigaTest.Utils;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Acorisoft.FutureGL.MigaTest.Cases.Primitives
 {
