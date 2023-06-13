@@ -54,7 +54,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public override void Active()
         {
             Control.Visibility = Visibility.Visible;
-            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
+            UpdateDocumentState();
+        }
+        
+        private void UpdateDocumentState()
+        {
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Selection, this);
+            WorkspaceChanged?.Invoke(StateChangedEventSource.Caret, this);
         }
 
         public override void Initialize()
