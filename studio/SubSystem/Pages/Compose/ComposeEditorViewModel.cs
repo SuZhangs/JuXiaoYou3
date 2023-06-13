@@ -23,17 +23,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         protected override void OnStart()
         {
-            var db = Studio.Database();
-
 #if DEBUG
            // this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 10);
 #else
-            if (!db.Boolean(Feature.TextEditorFeatureMissing))
+            Studio.CheckFlag(Feature.TextEditorFeatureMissing,  async () =>
             {
-                this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 10);
-
-                db.Boolean(Feature.TextEditorFeatureMissing, true);
-            }
+                await this.Obsoleted(Language.GetText(Feature.TextEditorFeatureMissing), 10);
+            });
 #endif
             base.OnStart();
         }

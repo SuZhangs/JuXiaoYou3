@@ -274,18 +274,20 @@
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Image}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Code}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Quote}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Grid_on}" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Image}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Code}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Quote}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Table}" Visibility="Collapsed"/>
         </StackPanel>
 
         <!-- 编辑器 -->
         <Grid Grid.Column="1"
               Grid.Row="2">
+            
+            <!-- MD编辑器 -->
             <editor:TextEditor x:Name="Editor"
                                Background="{f:Brush BackgroundLevel2}"
                                Foreground="{f:ForegroundBrush}"
@@ -298,7 +300,13 @@
                 </editor:TextEditor.Options>
             </editor:TextEditor>
 
-            <RichTextBox x:Name="RtfEditor" 
+            <!-- RTF编辑器 -->
+            <RichTextBox x:Name="RtfEditor"
+                         Background="{f:Brush BackgroundLevel2}" 
+                         Foreground="{f:ForegroundBrush}"
+                         FontSize="16"
+                         Padding="16 16 16 0"
+                         BorderThickness="0"
                          Visibility="Collapsed"/>
         </Grid>
 
@@ -310,10 +318,15 @@
                    Foreground="{f:ForegroundBrush}"
                    FontSize="13">
             <StatusBarItem Margin="4 0">
-                <TextBlock Text="{Binding TotalCharacterCount,Mode=OneWay,FallbackValue=0,StringFormat={}字数：{0}}" />
-            </StatusBarItem>
-            <StatusBarItem Margin="4 0">
-                <TextBlock Text="行号：10，列号：13，选择：1300" />
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}字数：{0}，行号：{1}，列数：{2}">
+                            <Binding Path="TotalCharacterCount" Mode="OneWay"/>
+                            <Binding Path="LineNumber" Mode="OneWay"/>
+                            <Binding Path="ColumnNumber" Mode="OneWay"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
             </StatusBarItem>
             <StatusBarItem Margin="8 0">
                 <StackPanel Orientation="Horizontal">
@@ -326,17 +339,17 @@
                             <Setter Property="Width" Value="32" />
                         </Style>
                     </StackPanel.Resources>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Format}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Italic}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_bold}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Strikethrough}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.text_Increase}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Decrease}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_Left}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_right}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_align_Center}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Increase}" />
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Decrease}" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Format}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Italic}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_bold}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Strikethrough}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.text_Increase}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Decrease}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_Left}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_right}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_align_Center}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Increase}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Decrease}" Visibility="Collapsed"/>
                 </StackPanel>
             </StatusBarItem>
 

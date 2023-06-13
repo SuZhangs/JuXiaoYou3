@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using Acorisoft.FutureGL.MigaStudio.Controls.Editors.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
@@ -90,6 +91,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                       })
                       .DisposeWith(Disposable);
             
+        }
+        
+        public sealed override void UpdateCaretState()
+        {
+            if (Control is null)
+            {
+                LineNumber = -1;
+                LineColumn = -1;
+                return;
+            }
+
         }
 
         private void OnSelectionChanged(object sender, RoutedEventArgs e)

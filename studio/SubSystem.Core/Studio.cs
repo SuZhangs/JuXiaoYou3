@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using Acorisoft.FutureGL.Forest.ViewModels;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Services;
 using CommunityToolkit.Mvvm.Input;
@@ -11,6 +12,27 @@ namespace Acorisoft.FutureGL.MigaStudio
     public static class Studio
     {
         private static readonly Lazy<IDatabaseManager> _databaseField = new Lazy<IDatabaseManager>(Xaml.Get<IDatabaseManager>);
+
+        public static void CheckFlag(string id, Action callback)
+        {
+            var db = Database();
+            if (!db.Boolean(id))
+            {
+                callback?.Invoke();
+                db.Boolean(id, true);
+            }
+        }
+        
+        //
+        // public static async Task CheckFlag(string id, Action callback)
+        // {
+        //     var db = Database();
+        //     if (!db.Boolean(id))
+        //     {
+        //         await callback?.Invoke();
+        //         db.Boolean(id, true);
+        //     }
+        // }
 
 
         public static IDatabaseManager DatabaseManager() => _databaseField.Value;

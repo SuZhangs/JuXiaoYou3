@@ -157,7 +157,30 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             _window.Show();
         }
 
+        public sealed override void UpdateCaretState()
+        {
+            if (Control is null)
+            {
+                LineNumber = -1;
+                LineColumn = -1;
+               return;
+            }
+
+            var caret = Control.TextArea
+                               .Caret;
+
+            LineNumber = caret.Line;
+            LineColumn = caret.Column;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Content => Part is null ? string.Empty : Part.Content;
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public PartOfMarkdown Part { get; init; }
     }
 }

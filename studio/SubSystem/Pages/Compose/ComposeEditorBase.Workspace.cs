@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Drawing.Drawing2D;
+using System.Linq;
 using Acorisoft.FutureGL.MigaStudio.Editors;
 using NLog;
 
@@ -80,6 +81,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 //
                 // 设置更改状态
                 SetDirtyState();
+            }
+            else if (source == StateChangedEventSource.Caret)
+            {
+                //
+                //
+                workspace.UpdateCaretState();
+                LineNumber = workspace.LineNumber;
+                ColumnNumber = workspace.LineColumn;
+            }
+            else
+            {
+                //
+                //
             }
         }
 

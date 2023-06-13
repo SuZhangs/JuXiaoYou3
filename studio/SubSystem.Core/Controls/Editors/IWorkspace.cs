@@ -11,14 +11,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
     }
 
     public delegate void WorkspaceChangedEventHandler(StateChangedEventSource source, IWorkspace workspace);
-    
+
     public interface IWorkspace : IDisposable, IUndoRedoManager
     {
         /// <summary>
         /// 获取当前的文本
         /// </summary>
         string Content { get; }
-        
+
+        int LineNumber { get; }
+        int LineColumn { get; }
+
         /// <summary>
         /// 获取当前的调度器
         /// </summary>
@@ -43,5 +46,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         /// 
         /// </summary>
         void Inactive();
+
+        void UpdateCaretState();
     }
 }

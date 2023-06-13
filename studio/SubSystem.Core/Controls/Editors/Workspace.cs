@@ -26,6 +26,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public abstract void Initialize();
         public abstract void Inactive();
         public abstract void Active();
+        public abstract void UpdateCaretState();
+        
+
+        public int LineNumber { get; protected set; }
+        public int LineColumn { get; protected set; }
 
         public IScheduler Scheduler
         {
