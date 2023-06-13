@@ -1,19 +1,37 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.MigaStudio.Editors.Completion;
 using Acorisoft.FutureGL.MigaStudio.Editors.Models;
+using DynamicData;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
+using Markdig;
+using Markdig.Syntax;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
+    public class MarkdownOutlineModel : IOutlineModel
+    {
+        public string Name { get; init; }
+        public int Level { get; init; }
+        public int CharacterOffset { get; init; }
+        public int CharacterLength { get; init; }
+        public List<IOutlineModel> Children { get; init; }
+    }
+    
     public class MarkdownWorkspace : Workspace<TextEditor>
     {
         private ConceptCompletionWindow _window;
         private bool                    _isShow;
         
+        private record struct ParsingNode
+        {
+            public HeadingBlock Block { get; init; }
+            public int ParentLevel { get; init; }
+        }
         
         public override bool CanUndo() => Control.CanUndo;
 
@@ -100,6 +118,179 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             Control.Visibility = Visibility.Visible;
             UpdateDocumentState();
         }
+
+        #region GetOutlineModels
+
+        
+        private static MarkdownOutlineModel FromBlock(HeadingBlock block)
+        {
+            return new MarkdownOutlineModel
+            {
+                Name            = block.GetString(),
+                Level           = block.Level,
+                CharacterLength = block.Span.Length,
+                CharacterOffset = block.Span.Start,
+                Children        = new List<IOutlineModel>(8)
+            };
+        }
+        
+        
+        public override IEnumerable<IOutlineModel> GetOutlineModels()
+        {
+            var markdown = Markdown.Parse(Content);
+
+            if (markdown is null)
+            {
+                return null;
+            }
+
+            var headingBlocks = markdown.OfType<HeadingBlock>();
+            var root          = new List<MarkdownOutlineModel>(8);
+            var stack         = new Stack<MarkdownOutlineModel>();
+            var rootBlock     = (MarkdownOutlineModel)null;
+            var parentBlock   = (MarkdownOutlineModel)null;
+            var currentBlock  = (MarkdownOutlineModel)null;
+            
+            /*
+             * --- L3
+             * --- L3
+             * ---- L4
+             * ---- L4
+             * - L1
+             * -- L2
+             * --- L3
+             * - L1
+             * -- L2
+             * - L1
+             */
+            foreach (var block in headingBlocks)
+            {
+                //
+                // 当前的块
+                var current = FromBlock(block);
+                
+                //
+                // 第一次添加，做初始化
+                if (rootBlock is null)
+                {
+                    currentBlock = current;
+                    rootBlock    = currentBlock;
+                    root.Add(rootBlock);
+                    continue;
+                }
+
+                if (currentBlock.Level == current.Level)
+                {
+                    if (parentBlock is null)
+                    {
+                        currentBlock = current;
+                        rootBlock    = currentBlock;
+                        root.Add(rootBlock);
+                    }
+                    else
+                    {
+                        parentBlock.Children.Add(current);
+                        currentBlock = current;
+                    }
+                }
+                else if (currentBlock.Level > current.Level)
+                {
+                    //
+                    // 遇到上级
+                    if (stack.Count == 0)
+                    {
+                        
+                    }
+                    else
+                    {
+                        var grandBlock = stack.Peek();
+                        
+                        if (grandBlock.Level < current.Level)
+                        {
+                            //
+                            // 虽然目前的块是上一个块的父级，但是祖父块依然是当前块的父级
+                            grandBlock.Children
+                                      .Add(current);
+                            
+                            currentBlock = current;
+                            parentBlock  = currentBlock;
+                        }
+                        else
+                        {
+                            /*
+                             * 1
+                             * 2
+                             * 3
+                             * 4                        
+                             * 5
+                             * 2            stack: 1 2 3 
+                             */
+                            //
+                            // 找到祖父块
+                            while (stack.Count > 0)
+                            {
+                                grandBlock = stack.Pop();
+
+                                if (grandBlock.Level < current.Level)
+                                {
+                                    break;
+                                }
+                            }
+
+                            //
+                            //
+                            if (grandBlock.Level < current.Level)
+                            {
+                                grandBlock.Children
+                                          .Add(current);
+                            
+                                parentBlock  = grandBlock;
+                                currentBlock = current;
+                            }
+                            else
+                            {
+                                
+                                /*
+                                 * 3
+                                 * 4                        
+                                 * 5
+                                 * 2            stack: 3 
+                                 */
+                                rootBlock    = current;
+                                parentBlock  = null;
+                                currentBlock = current;
+                                root.Add(currentBlock);
+
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    /*
+                     * --- L3
+                     * ----- L5
+                     * ---- L4 
+                     */
+                    //
+                    // 遇到子级，就先压栈
+                    if(parentBlock is not null) stack.Push(parentBlock);
+                    parentBlock  = currentBlock;
+                    currentBlock = current;
+                    parentBlock.Children
+                               .Add(current);
+                    
+                }
+            }
+
+            //
+            // 返回
+            return root;
+        }
+
+        #endregion
 
         private void UpdateDocumentState()
         {

@@ -77,6 +77,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 Statistic(workspace.Content);
                 Cache.Length = TotalCharacterCount;
                 RaiseUpdated(nameof(TotalCharacterCount));
+                Outlines.AddMany(workspace.GetOutlineModels(), true);
 
                 //
                 // 设置更改状态

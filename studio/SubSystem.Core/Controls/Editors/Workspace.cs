@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
@@ -27,6 +28,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public abstract void Inactive();
         public abstract void Active();
         public abstract void UpdateCaretState();
+
+        public abstract IEnumerable<IOutlineModel> GetOutlineModels();
         
 
         public int LineNumber { get; protected set; }

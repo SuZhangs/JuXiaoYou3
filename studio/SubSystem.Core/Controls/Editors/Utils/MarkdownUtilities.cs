@@ -1,28 +1,25 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Editing;
+using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public static class MarkdownUtilities
     {
-        
-        static void Test()
+        public static string GetString(this HeadingBlock block)
         {
-
-            var rtf = new RichTextBox();
-            rtf.SelectionChanged += OnSelectionChanged;
-        }
-
-        private static void OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void OnSelectionChanged(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            var sb = Pool.GetStringBuilder();
+            
+            block.Inline
+                 .OfType<LiteralInline>()
+                 .ForEach(x => sb.Append(x.ToString()));
+            var s = sb.ToString();
+            Pool.ReturnStringBuilder(sb);
+            return s;
         }
 
     }

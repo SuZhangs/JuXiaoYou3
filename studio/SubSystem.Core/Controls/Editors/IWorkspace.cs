@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
     public delegate void WorkspaceChangedEventHandler(StateChangedEventSource source, IWorkspace workspace);
 
-    public interface IWorkspace : IDisposable, IUndoRedoManager
+    public interface IWorkspace : IDisposable, IUndoRedoManager, IOutlineProvider
     {
         /// <summary>
         /// 获取当前的文本

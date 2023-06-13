@@ -6,6 +6,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaStudio.Editors;
 using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 using Acorisoft.FutureGL.MigaStudio.Models.Presentations;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using CommunityToolkit.Mvvm.Input;
@@ -20,6 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             var dbMgr = Studio.DatabaseManager();
             WorkspaceMapping            = new Dictionary<Type, IWorkspace>();
             InternalWorkspaceCollection = new ObservableCollection<IWorkspace>();
+            Outlines                    = new ObservableCollection<IOutlineModel>();
             WorkspaceCollection         = new ReadOnlyObservableCollection<IWorkspace>(InternalWorkspaceCollection);
             Xaml.Get<IAutoSaveService>()
                 .Observable
@@ -152,6 +154,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<DataPart> DataParts { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public ObservableCollection<IOutlineModel> Outlines { get; }
 
 
         [NullCheck(UniTestLifetime.Startup)]
@@ -166,7 +171,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         [NullCheck(UniTestLifetime.Constructor)]
         public ComposeEngine ComposeEngine { get; }
 
-        public PartOfMarkdown Markdown { get; private set; }
         public PartOfAlbum Album { get; private set; }
     }
 }

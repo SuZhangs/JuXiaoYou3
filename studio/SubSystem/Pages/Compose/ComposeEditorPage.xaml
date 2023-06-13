@@ -9,6 +9,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Composes"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:workspace="clr-namespace:Acorisoft.FutureGL.MigaStudio.Editors;assembly=SubSystem.Core"
+                     xmlns:workspaceModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Editors.Models;assembly=SubSystem.Core"
                      xmlns:editor="http://icsharpcode.net/sharpdevelop/avalonedit"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
@@ -224,12 +225,15 @@
                         Margin="16"
                         Padding="0 8" 
                         Header="大纲">
-            <StackPanel>
-                <UniformGrid Columns="2">
-
-
-                </UniformGrid>
-            </StackPanel>
+            <f:TreeView ItemsSource="{Binding Outlines,Mode=OneWay}">
+                <f:TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type workspace:MarkdownOutlineModel}"
+                                              ItemsSource="{Binding Children}">
+                        <TextBlock Margin="4"
+                                   Text="{Binding Name}"/>
+                    </HierarchicalDataTemplate>
+                </f:TreeView.ItemTemplate>
+            </f:TreeView>
         </f:ForestIsland>
 
 

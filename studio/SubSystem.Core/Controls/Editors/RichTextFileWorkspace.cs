@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using Acorisoft.FutureGL.MigaStudio.Controls.Editors.Utils;
+using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
@@ -108,6 +109,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                 return;
             }
 
+        }
+
+        public override IEnumerable<IOutlineModel> GetOutlineModels()
+        {
+            // TODO:
+            return null;
         }
 
         private void OnSelectionChanged(object sender, RoutedEventArgs e)
