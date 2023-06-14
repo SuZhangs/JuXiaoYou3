@@ -4,6 +4,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:ftk="urn:acorisoft/forest/toolkits"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
@@ -53,6 +54,6 @@
             </f:TreeView>
         </f:ForestIsland>
         
-        <ContentControl Content="{Binding SelectedViewModel,Mode=OneWay}"/>
+        <fs:ViewHost ViewModel="{Binding SelectedViewModel,Mode=OneWay}"/>
     </DockPanel>
 </f:ForestUserControl>
