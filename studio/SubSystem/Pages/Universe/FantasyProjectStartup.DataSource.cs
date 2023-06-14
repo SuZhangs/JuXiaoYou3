@@ -38,7 +38,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         {
             // 人物
             collection.Add(CreateCharacters());
-            collection.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character"));
 
             // 地理
             collection.Add(Create<FantasyProjectGeographyViewModel>("text.Project.Geography"));

@@ -27,14 +27,10 @@
                        VerticalAlignment="Center"/>
         </HierarchicalDataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="384" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-
+    <DockPanel>
         <f:ForestIsland Header="世界观"
-                        Margin="16">
+                        Margin="16"
+                        Width="384">
             <f:ForestIsland.ToolBar>
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">
@@ -48,13 +44,15 @@
                 <f:TreeView.ItemsSource>
                     <CompositeCollection>
                         <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.ProjectElements,Mode=OneWay}"/>
-                        <Separator/>
+                        <Separator Margin="0 12"/>
                         <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.DocumentElements,Mode=OneWay}"/>
-                        <Separator/>
+                        <Separator Margin="0 12"/>
                         <CollectionContainer Collection="{Binding Source={StaticResource ViewModel},Path=ViewModel.OtherElements,Mode=OneWay}"/>
                     </CompositeCollection>
                 </f:TreeView.ItemsSource>
             </f:TreeView>
         </f:ForestIsland>
-    </Grid>
+        
+        <ContentControl Content="{Binding SelectedViewModel,Mode=OneWay}"/>
+    </DockPanel>
 </f:ForestUserControl>

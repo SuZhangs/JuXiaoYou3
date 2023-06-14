@@ -146,7 +146,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public ViewModelBase SelectedViewModel
         {
             get => _selectedViewModel;
-            set => SetValue(ref _selectedViewModel, value);
+            set
+            {
+                _selectedViewModel?.Suspend();
+                SetValue(ref _selectedViewModel, value);
+            }
         }
 
         /// <summary>

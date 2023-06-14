@@ -77,27 +77,9 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         }
         #endregion
 
-        #region Start / OnStart
+        #region OnStartup
 
-        public sealed override void Start()
-        {
-            try
-            {
-                if (!IsInitialized)
-                {
-                    OnStart();
-                    IsInitialized = true;
-                }
-            }
-            catch
-            {
-                IsInitialized = false;
-            }
-        }
-
-        protected virtual void OnStart()
-        {
-        }
+        
 
         /// <summary>
         /// 传递参数。
@@ -113,10 +95,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         private string GetUniquenessKey()
         {
             return $"{GetHashCode()}-{GetType().FullName}";  
-        }
-
-        protected virtual void OnStart(Parameter parameter)
-        {
         }
 
         #endregion
