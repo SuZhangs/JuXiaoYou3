@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    partial class FantasyProjectStartupViewModel
+    partial class FantasyProjectStartupViewModel : TabViewModel
     {
         private static void CreateProjectItems(ICollection<ProjectItemBase> collection)
         {
@@ -37,7 +37,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         private static void CreateDocumentItems(ICollection<ProjectItemBase> collection)
         {
             // 世界划分
-            collection.Add(Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept"));
+            collection.Add(Create<FantasyProjectCharacterViewModel>("text.Project.SpaceConcept"));
             
             // 世界机制
             collection.Add(Create<FantasyProjectMechanismViewModel>("text.Project.Mechanism"));

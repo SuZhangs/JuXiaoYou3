@@ -267,6 +267,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             //
             // FantasyProject
             Xaml.InstallView<FantasyProjectStartupPage, FantasyProjectStartupViewModel>();
+            Xaml.InstallView<FantasyProjectCharacterPage, FantasyProjectCharacterViewModel>();
+            Xaml.InstallView<FantasyProjectItemPage, FantasyProjectItemViewModel>();
+            Xaml.InstallView<FantasyProjectGeographyPage, FantasyProjectGeographyViewModel>();
+            Xaml.InstallView<FantasyProjectSpacePage, FantasyProjectSpaceConceptViewModel>();
+            Xaml.InstallView<FantasyProjectSettingPage, FantasyProjectSettingViewModel>();
+            Xaml.InstallView<FantasyProjectRulePage, FantasyProjectRuleViewModel>();
+            Xaml.InstallView<FantasyProjectMechanismPage, FantasyProjectMechanismViewModel>();
+            Xaml.InstallView<FantasyProjectSkillPage, FantasyProjectSkillViewModel>();
+            Xaml.InstallView<FantasyProjectKnowledgePage, FantasyProjectKnowledgeViewModel>();
+            Xaml.InstallView<FantasyProjectTimelinePage, FantasyProjectTimelineViewModel>();
+            
 
             ServiceViewContainer.Initialize();
         }

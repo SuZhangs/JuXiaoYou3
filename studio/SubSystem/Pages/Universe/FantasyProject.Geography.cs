@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    public class FantasyProjectGeographyViewModel
+    public class FantasyProjectGeographyViewModel : TabViewModel
     {
         
     }
