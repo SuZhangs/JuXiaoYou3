@@ -2,16 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 {
-    public abstract class ProjectItemBase : ObservableObject{
-    
-    }
-
-    public sealed class ProjectSeparator : ProjectItemBase
-    {
-        
-    }
-
-    public class ProjectItem : ProjectItemBase
+    public class ProjectItem : ObservableObject
     {
         private string _name;
         private string _toolTips;

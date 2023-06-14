@@ -4,23 +4,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     public partial class FantasyProjectStartupViewModel : TabViewModel
     {
-        private ProjectItemBase _selectedItem;
+        private ProjectItem _selectedItem;
 
         public FantasyProjectStartupViewModel()
         {
-            ProjectItems = new ObservableCollection<ProjectItemBase>();
-            CreateProjectItems(ProjectItems);
+            ProjectElements  = new ObservableCollection<ProjectItem>();
+            DocumentElements = new ObservableCollection<ProjectItem>();
+            OtherElements    = new ObservableCollection<ProjectItem>();
+            CreateProjectItems();
         }
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedItem"/> 属性。
         /// </summary>
-        public ProjectItemBase SelectedItem
+        public ProjectItem SelectedItem
         {
             get => _selectedItem;
             set => SetValue(ref _selectedItem, value);
         }
         
-        public ObservableCollection<ProjectItemBase> ProjectItems { get; }
+        public ObservableCollection<ProjectItem> ProjectElements { get; }
+        public ObservableCollection<ProjectItem> DocumentElements { get; }
+        public ObservableCollection<ProjectItem> OtherElements { get; }
     }
 }

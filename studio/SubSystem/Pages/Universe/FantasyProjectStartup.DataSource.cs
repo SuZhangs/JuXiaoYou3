@@ -5,20 +5,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     partial class FantasyProjectStartupViewModel : TabViewModel
     {
-        private static void CreateProjectItems(ICollection<ProjectItemBase> collection)
+        private void CreateProjectItems()
         {
-            collection.Clear();
+              ProjectElements.Clear();
+              DocumentElements.Clear();
+              OtherElements.Clear();
 
             //
             //
-            CreateWorldViewItems(collection);
-            collection.Add(new ProjectSeparator());
-            CreateDocumentItems(collection);
-            collection.Add(new ProjectSeparator());
-            CreateOtherItems(collection);
+            CreateWorldViewItems(ProjectElements);
+            CreateDocumentItems(DocumentElements);
+            CreateOtherItems(OtherElements);
         }
 
-        private static void CreateWorldViewItems(ICollection<ProjectItemBase> collection)
+        private static void CreateWorldViewItems(ICollection<ProjectItem> collection)
         {
             // 世界划分
             collection.Add(Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept"));
@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         }
 
 
-        private static void CreateDocumentItems(ICollection<ProjectItemBase> collection)
+        private static void CreateDocumentItems(ICollection<ProjectItem> collection)
         {
             // 人物
             collection.Add(CreateCharacters());
@@ -48,18 +48,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
             // 物品
             collection.Add(CreateItems());
-            collection.Add(Create<FantasyProjectItemViewModel>("text.Project.Item"));
 
             // 政治团体
             collection.Add(CreatePoliticalBlocs());
 
             // 知识
             collection.Add(CreateKnowledge());
-            collection.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Item"));
         }
 
 
-        private static void CreateOtherItems(ICollection<ProjectItemBase> collection)
+        private static void CreateOtherItems(ICollection<ProjectItem> collection)
         {
             // 世界划分
             collection.Add(Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept"));
