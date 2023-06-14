@@ -9,6 +9,12 @@ namespace Acorisoft.FutureGL.Forest.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeView), new FrameworkPropertyMetadata(typeof(TreeView)));
         }
 
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is Separator ||
+                   item is TreeViewItem ||
+                   base.IsItemItsOwnContainerOverride(item);
+        }
 
         protected override DependencyObject GetContainerForItemOverride()
         {

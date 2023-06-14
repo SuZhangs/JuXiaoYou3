@@ -1,0 +1,87 @@
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Universe.FantasyProjectStartupPage"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
+                     mc:Ignorable="d"
+                     d:DesignHeight="300" d:DesignWidth="300"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:FantasyProjectStartupViewModel}, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type f:TreeViewItem}" BasedOn="{StaticResource ClearType.TreeViewItem}">
+            <Setter Property="Padding" Value="8" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="384" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <f:ForestIsland Header="世界观"
+                        Margin="16">
+            <f:TreeView>
+                <f:TreeViewItem Header="世界划分">
+                    <f:TreeViewItem Header="现实世界"/>
+                    <f:TreeViewItem Header="厄瑞克斯（异世界）"/>
+                    <f:TreeViewItem Header="特瓦兰（异世界）"/>
+                    <f:TreeViewItem Header="其他空间"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="系统">
+                    <f:TreeViewItem Header="物价&amp;市场"/>
+                    <f:TreeViewItem Header="装备"/>
+                    <f:TreeViewItem Header="科技树"/>
+                    <f:TreeViewItem Header="元素系统"/>
+                    <f:TreeViewItem Header="魔法系统"/>
+                    <f:TreeViewItem Header="天赋系统"/>
+                    <f:TreeViewItem Header="物理系统"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="世界机制">
+                    <f:TreeViewItem Header="穿越机制"/>
+                    <f:TreeViewItem Header="稀有度"/>
+                    <f:TreeViewItem Header="战力机制"/>
+                </f:TreeViewItem>
+                <Separator/>
+                <f:TreeViewItem Header="人物"/>
+                <f:TreeViewItem Header="地理"/>
+                <f:TreeViewItem Header="能力"/>
+                <f:TreeViewItem Header="科技"/>
+                <f:TreeViewItem Header="矿物"/>
+                <f:TreeViewItem Header="国家"/>
+                <f:TreeViewItem Header="政治团体">
+                    <f:TreeViewItem Header="国家"/>
+                    <f:TreeViewItem Header="势力"/>
+                    <f:TreeViewItem Header="组织"/>
+                    <f:TreeViewItem Header="部落"/>
+                    <f:TreeViewItem Header="氏族"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="物品">
+                    <f:TreeViewItem Header="产品"/>
+                    <f:TreeViewItem Header="成品"/>
+                    <f:TreeViewItem Header="材料"/>
+                    <f:TreeViewItem Header="原料"/>
+                    <f:TreeViewItem Header="装备"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="知识">
+                    <f:TreeViewItem Header="生物"/>
+                    <f:TreeViewItem Header="植物"/>
+                    <f:TreeViewItem Header="神祇"/>
+                    <f:TreeViewItem Header="恶魔"/>
+                    <f:TreeViewItem Header="毒物"/>
+                    <f:TreeViewItem Header="灾厄"/>
+                    <f:TreeViewItem Header="宗教"/>
+                    <f:TreeViewItem Header="线索/情报"/>
+                    <f:TreeViewItem Header="时间轴"/>
+                    <f:TreeViewItem Header="职业"/>
+                    <f:TreeViewItem Header="神鬼志怪"/>
+                </f:TreeViewItem>
+                <f:TreeViewItem Header="其它"/>
+                <f:TreeViewItem Header="作品"/>
+                <Separator/>
+                <f:TreeViewItem Header="设置"/>
+            </f:TreeView>
+        </f:ForestIsland>
+    </Grid>
+</f:ForestUserControl>

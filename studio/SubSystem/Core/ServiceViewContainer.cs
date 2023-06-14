@@ -22,14 +22,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             MappingDataPart<PartOfStickyNote, StickyNotePartViewModel, StickyNotePartView>();
             UseDetailSetting();
 
-            MappingSubViewModel<UniversalIntroduction, UniversalIntroductionViewModel, UniversalIntroductionView>();
-            MappingSubViewModel<SpaceConceptOverview, SpaceConceptOverviewViewModel, SpaceConceptOverviewView>();
-            MappingSubViewModel<PropertyOverview, PropertyOverviewViewModel, PropertyOverviewView>();
-            MappingSubViewModel<OtherIntroduction, OtherIntroductionViewModel, OtherIntroductionView>();
-            MappingSubViewModel<SpaceConcept, SpaceConceptViewModel, SpaceConceptView>();
-            MappingSubViewModel<BrowsableProperty, BrowsablePropertyViewModel, BrowsablePropertyView>();
-            MappingSubViewModel<DeclarationConcept, DeclarationConceptViewModel, DeclarationConceptView>();
-            MappingSubViewModel<RarityConcept, RarityConceptViewModel, RarityConceptView>();
+            // MappingSubViewModel<UniversalIntroduction, UniversalIntroductionViewModel, UniversalIntroductionView>();
+            // MappingSubViewModel<SpaceConceptOverview, SpaceConceptOverviewViewModel, SpaceConceptOverviewView>();
+            // MappingSubViewModel<PropertyOverview, PropertyOverviewViewModel, PropertyOverviewView>();
+            // MappingSubViewModel<OtherIntroduction, OtherIntroductionViewModel, OtherIntroductionView>();
+            // MappingSubViewModel<SpaceConcept, SpaceConceptViewModel, SpaceConceptView>();
+            // MappingSubViewModel<BrowsableProperty, BrowsablePropertyViewModel, BrowsablePropertyView>();
+            // MappingSubViewModel<DeclarationConcept, DeclarationConceptViewModel, DeclarationConceptView>();
+            // MappingSubViewModel<RarityConcept, RarityConceptViewModel, RarityConceptView>();
 
             Prepare<PartOfAlbum>();
             Prepare<PartOfAppraise>();
@@ -75,13 +75,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             _service.Isolate<DocumentEditorBase, TPart, TView, TViewModel>();
         }
 
-        private static void MappingSubViewModel<TPart, TViewModel, TView>()
-            where TPart : class
-            where TViewModel : IsolatedViewModel<UniverseEditorViewModel, TPart>, new()
-            where TView : FrameworkElement, new()
-        {
-            _service.Isolate<UniverseEditorViewModel, TPart, TView, TViewModel>();
-        }
+        // private static void MappingSubViewModel<TPart, TViewModel, TView>()
+        //     where TPart : class
+        //     where TViewModel : IsolatedViewModel<UniverseEditorViewModel, TPart>, new()
+        //     where TView : FrameworkElement, new()
+        // {
+        //     _service.Isolate<UniverseEditorViewModel, TPart, TView, TViewModel>();
+        // }
 
         private static void UseDetailSetting()
         {

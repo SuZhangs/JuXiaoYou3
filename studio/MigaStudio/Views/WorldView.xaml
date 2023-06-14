@@ -9,7 +9,4 @@
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:WorldViewController}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
 </f:ForestUserControl>

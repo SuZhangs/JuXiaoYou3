@@ -265,11 +265,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<ModuleManifestView, ModuleManifestViewModel>();
 
             //
-            // Universe
-            Xaml.InstallView<UniverseDocumentEditorPage, WeaponEditorViewModel>();
-            Xaml.InstallView<UniverseDocumentEditorPage, PlanetEditorViewModel>();
-            Xaml.InstallView<UniverseDocumentEditorPage, MaterialEditorViewModel>();
-            Xaml.InstallView<UniverseEditorPage, UniverseEditorViewModel>();
+            // FantasyProject
+            Xaml.InstallView<FantasyProjectStartupPage, FantasyProjectStartupViewModel>();
 
             ServiceViewContainer.Initialize();
         }
