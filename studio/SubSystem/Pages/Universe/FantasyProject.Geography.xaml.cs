@@ -3,10 +3,10 @@
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
 
-    [Connected(View = typeof(MechanismPage), ViewModel = typeof(MechanismViewModel))]
-    public partial class MechanismPage
+    
+    public partial class FantasyProjectGeographyPage
     {
-        public MechanismPage()
+        public FantasyProjectGeographyPage()
         {
             InitializeComponent();
         }

@@ -4,9 +4,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
 
     
-    public partial class FantasyProjectCharacterPage
+    public partial class FantasyProjectKnowledgePage
     {
-        public FantasyProjectCharacterPage()
+        public FantasyProjectKnowledgePage()
         {
             InitializeComponent();
         }

@@ -3,10 +3,10 @@
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
 
-    [Connected(View = typeof(KnowledgePage), ViewModel = typeof(KnowledgeViewModel))]
-    public partial class KnowledgePage
+    
+    public partial class FantasyProjectTimelinePage
     {
-        public KnowledgePage()
+        public FantasyProjectTimelinePage()
         {
             InitializeComponent();
         }

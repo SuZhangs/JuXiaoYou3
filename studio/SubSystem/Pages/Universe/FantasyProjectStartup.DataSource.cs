@@ -40,13 +40,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             collection.Add(Create<FantasyProjectCharacterViewModel>("text.Project.SpaceConcept"));
             
             // 世界机制
-            collection.Add(Create<FantasyProjectMechanismViewModel>("text.Project.Mechanism"));
+            collection.Add(Create<FantasyProjectGeographyViewModel>("text.Project.Mechanism"));
             
             // 世界法则
-            collection.Add(Create<FantasyProjectRuleViewModel>("text.Project.Rule"));
+            collection.Add(Create<FantasyProjectSkillViewModel>("text.Project.Rule"));
             
             // 时间轴
-            collection.Add(Create<FantasyProjectTimelineViewModel>("text.Project.Timeline"));
+            collection.Add(Create<FantasyProjectItemViewModel>("text.Project.Timeline"));
         }
         
         

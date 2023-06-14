@@ -266,6 +266,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             //
             // FantasyProject
+            Xaml.InstallView<FantasyProjectPoliticalBlocsPage, FantasyProjectPoliticalBlocsViewModel>();
             Xaml.InstallView<FantasyProjectStartupPage, FantasyProjectStartupViewModel>();
             Xaml.InstallView<FantasyProjectCharacterPage, FantasyProjectCharacterViewModel>();
             Xaml.InstallView<FantasyProjectItemPage, FantasyProjectItemViewModel>();

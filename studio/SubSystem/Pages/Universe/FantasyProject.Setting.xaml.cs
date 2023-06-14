@@ -3,10 +3,10 @@
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
 
-    [Connected(View = typeof(RulePage), ViewModel = typeof(RuleViewModel))]
-    public partial class RulePage
+    
+    public partial class FantasyProjectSettingPage
     {
-        public RulePage()
+        public FantasyProjectSettingPage()
         {
             InitializeComponent();
         }
