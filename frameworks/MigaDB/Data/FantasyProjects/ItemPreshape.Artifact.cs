@@ -1,7 +1,7 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
     /// <summary>
-    /// Artifact
+    /// 成品、工件
     /// </summary>
     public class ArtifactPreshape : ItemPreshape
     {
