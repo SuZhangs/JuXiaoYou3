@@ -10,6 +10,7 @@ using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
 using Acorisoft.FutureGL.MigaStudio.Pages.Services;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe.Dialogs;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -277,7 +278,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Xaml.InstallView<FantasyProjectMechanismPage, FantasyProjectMechanismViewModel>();
             Xaml.InstallView<FantasyProjectSkillPage, FantasyProjectSkillViewModel>();
             Xaml.InstallView<FantasyProjectKnowledgePage, FantasyProjectKnowledgeViewModel>();
+            
+            //
+            // Timeline
             Xaml.InstallView<FantasyProjectTimelinePage, FantasyProjectTimelineViewModel>();
+            Xaml.InstallView<NewTimelineView, NewTimelineViewModel>();
+            
             Xaml.InstallView<FantasyProjectOtherPage, FantasyProjectOtherViewModel>();
             Xaml.InstallView<FantasyProjectRelativesPage, FantasyProjectRelativesViewModel>();
 
