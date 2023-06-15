@@ -1,4 +1,5 @@
-﻿using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
+﻿using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 using Microsoft.CodeAnalysis;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
@@ -37,11 +38,75 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         private void CreateSpaceConcept(ICollection<ProjectItem> collection)
         {
-            _spaceRoot = Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept");
+            _spaceRoot = new ProjectItem
+            {
+                Name          = Language.GetText("text.Project.SpaceConcept"),
+                ViewModelType = typeof(FantasyProjectSpaceConceptViewModel),
+                Children      = new ObservableCollection<ProjectItem>(),
+                Property      = new ObservableCollection<ProjectItem>(), 
+                Expression = CreateSpaceConceptExpr
+            };
 
-            
 
             collection.Add(_spaceRoot);
+        }
+
+        private FrameworkElement DefaultCreateViewExpr(ProjectItem item)
+        {
+            //
+            //
+            item.ViewModel ??= Xaml.GetViewModel<TabViewModel>(item.ViewModelType);
+            
+            //
+            //
+            var page = (FrameworkElement)Xaml.Connect(item.ViewModel);
+
+            //
+            //
+            if (page is null)
+            {
+                return null;
+            }
+
+            page.DataContext = item.ViewModel;
+
+            return page;
+        }
+
+        private FrameworkElement CreateSpaceConceptExpr(ProjectItem item)
+        {
+            //
+            //
+            item.ViewModel ??= Xaml.GetViewModel<TabViewModel>(item.ViewModelType);
+            
+            item.ViewModel
+                .Startup(new RoutingEventArgs
+                {
+                    Parameter = new Parameter
+                    {
+                        Args = new object[]
+                        {
+                            // 
+                            item,
+                            
+                        }
+                    }
+                });
+            
+            //
+            //
+            var page = (FrameworkElement)Xaml.Connect(item.ViewModel);
+
+            //
+            //
+            if (page is null)
+            {
+                return null;
+            }
+
+            page.DataContext = item.ViewModel;
+
+            return page;
         }
 
 
@@ -153,10 +218,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         {
             return new ProjectItem
             {
-                Name      = Language.GetText(id),
-                ViewModel = Xaml.GetViewModel<TViewModel>(),
-                Children  = new ObservableCollection<ProjectItem>(),
-                Property  = new ObservableCollection<ProjectItem>(),
+                Name          = Language.GetText(id),
+                ViewModelType = typeof(TViewModel),
+                Children      = new ObservableCollection<ProjectItem>(),
+                Property      = new ObservableCollection<ProjectItem>(),
             };
         }
 
@@ -164,11 +229,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         {
             return new ProjectItem
             {
-                Name       = Language.GetText(id),
-                ViewModel  = Xaml.GetViewModel<TViewModel>(),
-                Parameter1 = type,
-                Children   = new ObservableCollection<ProjectItem>(),
-                Property   = new ObservableCollection<ProjectItem>(),
+                Name          = Language.GetText(id),
+                ViewModelType = typeof(TViewModel),
+                Parameter1    = type,
+                Children      = new ObservableCollection<ProjectItem>(),
+                Property      = new ObservableCollection<ProjectItem>(),
             };
         }
     }

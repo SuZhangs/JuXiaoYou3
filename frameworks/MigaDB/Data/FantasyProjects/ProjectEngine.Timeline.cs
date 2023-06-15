@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             Debug.WriteLine($"last:{item.LastItem}\ncurrent:{item.Id}\nnext:{item.NextItem}\n");
 #endif
 
-            Timelines.Upsert(item);
+            TimelineDB.Upsert(item);
         }
 
         public void RemoveTimeline(TimelineConcept item)
@@ -29,10 +29,10 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return;
             }
 
-            Timelines.Delete(item.Id);
+            TimelineDB.Delete(item.Id);
         }
 
-        public IEnumerable<TimelineConcept> GetTimelines() => Timelines.FindAll();
+        public IEnumerable<TimelineConcept> GetTimelines() => TimelineDB.FindAll();
 
         #endregion
         
@@ -41,6 +41,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         /// <summary>
         /// 时间线
         /// </summary>
-        public ILiteCollection<TimelineConcept> Timelines { get; private set; }
+        public ILiteCollection<TimelineConcept> TimelineDB { get; private set; }
     }
 }

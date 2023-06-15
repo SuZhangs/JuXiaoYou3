@@ -25,6 +25,13 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
             set => SetValue(ref _name, value);
         }
         
+        public object Owner { get; set; }
+        
+        /// <summary>
+        /// 视图模型
+        /// </summary>
+        public Type ViewModelType { get; init; }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -33,7 +40,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
         /// <summary>
         /// 
         /// </summary>
-        public Func<ITabViewModel> Expression { get; init; }
+        public FrameworkElement View { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public Func<ProjectItem, FrameworkElement> Expression { get; init; }
 
         /// <summary>
         /// 

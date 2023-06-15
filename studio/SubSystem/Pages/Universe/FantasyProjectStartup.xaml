@@ -54,7 +54,7 @@
             </f:TreeView>
         </f:ForestIsland>
 
-        <fs:ViewHost Margin="0 16" 
-                     ViewModel="{Binding SelectedViewModel,Mode=OneWay}"/>
+        <ContentControl Margin="0 16"
+                        Content="{Binding SelectedView,Mode=OneWay}"/>
     </DockPanel>
 </f:ForestUserControl>

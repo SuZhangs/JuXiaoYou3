@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 
@@ -6,8 +7,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     public partial class FantasyProjectStartupViewModel : TabViewModel
     {
-        private ProjectItem   _selectedItem;
-        private ITabViewModel _selectedViewModel;
+        private ProjectItem      _selectedItem;
+        private FrameworkElement _selectedView;
+        
         
         public FantasyProjectStartupViewModel()
         {
@@ -37,6 +39,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         private void Aggregate()
         {
+            
         }
 
         /// <summary>
@@ -48,25 +51,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             set
             {
                 SetValue(ref _selectedItem, value);
-                SelectedViewModel = _selectedItem?.ViewModel;
-                
+
+                if (value is not null)
+                {
+                    var expr = _selectedItem.Expression ?? DefaultCreateViewExpr;
+                    SelectedView = _selectedItem.View ?? expr(_selectedItem);
+                }
             }
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="SelectedViewModel"/> 属性。
+        /// 获取或设置 <see cref="SelectedView"/> 属性。
         /// </summary>
-        public ITabViewModel SelectedViewModel
+        public FrameworkElement SelectedView
         {
-            get => _selectedViewModel;
-            private set
-            {
-                _selectedViewModel?.Suspend();
-                SetValue(ref _selectedViewModel, value);
-                _selectedViewModel?.Start();
-            }
+            get => _selectedView;
+            private set => SetValue(ref _selectedView, value);
         }
-
+        
         public ObservableCollection<ProjectItem> ProjectElements { get; }
         public ObservableCollection<ProjectItem> DocumentElements { get; }
         public ObservableCollection<ProjectItem> OtherElements { get; }

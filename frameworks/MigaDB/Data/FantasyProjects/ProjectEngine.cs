@@ -16,20 +16,24 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         {
             var database = session.Database;
             Preshapes     = database.GetCollection<Preshape>(Constants.Name_Preshape);
-            Appraises     = database.GetCollection<Appraise>(Constants.Name_Appraise);
-            Sentences     = database.GetCollection<Sentence>(Constants.Name_Sentence);
-            Timelines     = database.GetCollection<TimelineConcept>(Constants.Name_Timeline);
-            Terminologies = database.GetCollection<Terminology>(Constants.Name_Terminology);
-            Prototypes    = database.GetCollection<Prototype>(Constants.Name_Prototype);
+            AppraiseDB    = database.GetCollection<Appraise>(Constants.Name_Appraise);
+            SentenceDB    = database.GetCollection<Sentence>(Constants.Name_Sentence);
+            TimelineDB    = database.GetCollection<TimelineConcept>(Constants.Name_Timeline);
+            TerminologyDB = database.GetCollection<Terminology>(Constants.Name_Terminology);
+            SpaceDB       = database.GetCollection<SpaceConcept>(Constants.Name_SpaceConcept);
+            SpaceRelDB    = database.GetCollection<SpaceConceptRelationship>(Constants.Name_Relationship_SpaceConcept);
+            PrototypeDB   = database.GetCollection<Prototype>(Constants.Name_Prototype);
         }
 
         protected override void OnDatabaseClosingOverride()
         {
-            Prototypes    = null;
+            PrototypeDB   = null;
             Preshapes     = null;
-            Appraises     = null;
-            Timelines     = null;
-            Terminologies = null;
+            AppraiseDB    = null;
+            TimelineDB    = null;
+            TerminologyDB = null;
+            SpaceDB       = null;
+            SpaceRelDB    = null;
         }
 
         /// <summary>
@@ -40,6 +44,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         /// <summary>
         /// 术语
         /// </summary>
-        public ILiteCollection<Terminology> Terminologies { get; private set; }
+        public ILiteCollection<Terminology> TerminologyDB { get; private set; }
     }
 }

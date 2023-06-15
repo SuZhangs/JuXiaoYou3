@@ -85,7 +85,6 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             if (sender is FrameworkElement { DataContext: ViewModelBase vm } fe)
             {
-                fe.Loaded -= ViewModelStarting;
                 fe.Unloaded -= ViewModelStopping;
                 vm.Stop();
             }
@@ -95,6 +94,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
         {
             if (sender is FrameworkElement { DataContext: ViewModelBase vm } fe)
             {
+                //
+                // 注意：在第一次执行Loaded之后就要取消事件订阅
                 fe.Loaded -= ViewModelStarting;
                 vm.Start();
             }

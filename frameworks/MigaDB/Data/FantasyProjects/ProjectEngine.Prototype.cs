@@ -6,6 +6,6 @@
         /// <summary>
         /// 时间线
         /// </summary>
-        public ILiteCollection<Prototype> Prototypes { get; private set; }
+        public ILiteCollection<Prototype> PrototypeDB { get; private set; }
     }
 }

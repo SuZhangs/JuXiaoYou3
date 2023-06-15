@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return;
             }
 
-            Appraises.Upsert(item);
+            AppraiseDB.Upsert(item);
         }
 
         public void RemoveAppraise(Appraise item)
@@ -26,7 +26,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return;
             }
 
-            Appraises.Delete(item.Id);
+            AppraiseDB.Delete(item.Id);
         }
 
         public IEnumerable<Appraise> GetAppraises(DocumentCache source)
@@ -36,19 +36,19 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return GetAppraises();
             }
 
-            return Appraises
+            return AppraiseDB
                    .Include(y => y.Source)
                    .Include(a => a.Target)
                    .Find(x => x.Target.Id == source.Id);
         }
 
-        public IEnumerable<Appraise> GetAppraises() => Appraises.FindAll();
+        public IEnumerable<Appraise> GetAppraises() => AppraiseDB.FindAll();
 
         #endregion
 
         /// <summary>
         /// 时间线
         /// </summary>
-        public ILiteCollection<Appraise> Appraises { get; private set; }
+        public ILiteCollection<Appraise> AppraiseDB { get; private set; }
     }
 }

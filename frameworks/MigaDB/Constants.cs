@@ -54,14 +54,15 @@
 
         //
         // Universe
-        internal const string Name_Elemental   = "elemental";
-        internal const string Name_Technology  = "tech";
-        internal const string Name_Terminology = "terminology";
-        internal const string Name_Timeline    = "timeline";
-        internal const string Name_Appraise    = "appraise";
-        internal const string Name_Prototype   = "prototype";
-        internal const string Name_Preshape    = "preshape";
-        internal const string Name_Sentence    = "sentence";
+        internal const string Name_Elemental    = "elemental";
+        internal const string Name_Technology   = "tech";
+        internal const string Name_Terminology  = "terminology";
+        internal const string Name_Timeline     = "timeline";
+        internal const string Name_Appraise     = "appraise";
+        internal const string Name_Prototype    = "prototype";
+        internal const string Name_Preshape     = "preshape";
+        internal const string Name_Sentence     = "sentence";
+        internal const string Name_SpaceConcept = "space";
         
         internal const string Name_MeasuringUnit  = "unit";
         internal const string Name_Faith          = "faith";
@@ -73,9 +74,10 @@
 
         //
         // Rel
-        internal const string Name_Relationship_Character  = "rel_ch";
-        internal const string Name_Relationship_Technology = "rel_tech";
-        internal const string Name_Relationship_Elemental  = "rel_elemental";
+        internal const string Name_Relationship_SpaceConcept = "rel_space";
+        internal const string Name_Relationship_Character    = "rel_ch";
+        internal const string Name_Relationship_Technology   = "rel_tech";
+        internal const string Name_Relationship_Elemental    = "rel_elemental";
 
         internal const string Name_Directory      = "dir";
         internal const string Name_Concept        = "concept";

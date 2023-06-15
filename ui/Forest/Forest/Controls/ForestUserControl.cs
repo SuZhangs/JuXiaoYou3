@@ -34,6 +34,10 @@
         {
             Loaded   -= OnLoadedIntern;
             Unloaded -= OnUnloadedIntern;
+            
+            //
+            // 不要加Stop命令，因为View的退出并不意味着ViewModel结束了生命周期
+            // ViewModel<IViewModel>()?.Stop();
             OnUnloaded(sender, e);
         }
 

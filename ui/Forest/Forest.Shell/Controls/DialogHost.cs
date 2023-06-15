@@ -123,11 +123,13 @@ namespace Acorisoft.FutureGL.Forest.Controls
                 return;
             }
 
-            fe.Loaded -= OnDialogContentLoaded;
-
-            if (fe.DataContext is IViewModel vm)
+            if (fe is not ForestUserControl && fe.DataContext is IViewModel vm)
             {
                 vm.Start();
+                
+                //
+                // 注意：在第一次执行Loaded之后就要取消事件订阅
+                fe.Loaded -= OnDialogContentLoaded;
             }
         }
 

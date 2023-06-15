@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return;
             }
 
-            Sentences.Upsert(item);
+            SentenceDB.Upsert(item);
         }
 
         public void RemoveSentence(Sentence item)
@@ -23,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return;
             }
 
-            Sentences.Delete(item.Id);
+            SentenceDB.Delete(item.Id);
         }
 
         public IEnumerable<Sentence> GetSentences(DocumentCache source)
@@ -33,12 +33,12 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                 return GetSentences();
             }
 
-            return Sentences
+            return SentenceDB
                    .Include(y => y.Source)
                    .Find(x => x.Source.Id == source.Id);
         }
 
-        public IEnumerable<Sentence> GetSentences() => Sentences.FindAll();
+        public IEnumerable<Sentence> GetSentences() => SentenceDB.FindAll();
 
         #endregion
 
@@ -46,6 +46,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         /// <summary>
         /// 时间线
         /// </summary>
-        public ILiteCollection<Sentence> Sentences { get; private set; }
+        public ILiteCollection<Sentence> SentenceDB { get; private set; }
     }
 }
