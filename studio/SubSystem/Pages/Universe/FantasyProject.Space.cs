@@ -69,7 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 #if DEBUG
                 Debug.WriteLine($"handle: {CurrentItem.Name}, parent: {ParentItem.Name}");
 #endif
-                if (parent.Source.Height > 16)
+                if (CurrentItem.Source.Height > 16)
                 {
                     // 宇宙 星系 星球 大陆 国家 省份 城市 区县 乡镇 村 屯
                     await this.WarningNotification("不支持超过16级的空间");
@@ -80,8 +80,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                 {
                     Id     = ID.Get(),
                     Name   = r.Value,
-                    Height = parent.Source.Height + 1,
-                    Owner = parent.Source.Id,
+                    Height = CurrentItem.Source.Height + 1,
+                    Owner = CurrentItem.Source.Id,
                 };
 
                 ui = new SpaceConceptUI
@@ -93,7 +93,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
                 Children.Add(ui);
                 CurrentItem.Add(ui);
-                parent.Add(ui);
             }
         }
         

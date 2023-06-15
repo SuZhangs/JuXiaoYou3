@@ -5,7 +5,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 {
     public abstract class ProjectItem : StorageUIObject, ICollection<ProjectItem>
     {
-        private readonly ObservableCollection<ProjectItem> _children = new ObservableCollection<ProjectItem>();
+        private readonly ObservableCollection<ProjectItem> _children;
+
+        protected ProjectItem()
+        {
+            _children = new ObservableCollection<ProjectItem>();
+            Children  = new ReadOnlyObservableCollection<ProjectItem>(_children);
+        }
+        
         #region ICollection<ProjectItem>
         
         
@@ -16,7 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)Children).GetEnumerator();
+            return ((IEnumerable)_children).GetEnumerator();
         }
 
         public void Add(ProjectItem item)

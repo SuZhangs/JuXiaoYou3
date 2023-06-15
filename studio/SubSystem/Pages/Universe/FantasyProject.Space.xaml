@@ -78,7 +78,7 @@
             <ColumnDefinition Width="320" />
         </Grid.ColumnDefinitions>
 
-        <f:ForestSection Header="空间概念">
+        <f:ForestSection Header="{Binding CurrentItem.Name,Mode=OneWay}">
             <f:ForestSection.ToolBar>
                 <StackPanel DockPanel.Dock="Top"
                             HorizontalAlignment="Right"
