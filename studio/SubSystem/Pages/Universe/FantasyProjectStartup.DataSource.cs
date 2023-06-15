@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models;
 using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 using Microsoft.CodeAnalysis;
 
@@ -38,14 +39,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         private void CreateSpaceConcept(ICollection<ProjectItem> collection)
         {
-            _spaceRoot = new ProjectItem
+            _spaceRoot = new SpaceConceptUI
             {
+                Source        = null,
                 Name          = Language.GetText("text.Project.SpaceConcept"),
                 ViewModelType = typeof(FantasyProjectSpaceConceptViewModel),
-                Children      = new ObservableCollection<ProjectItem>(),
-                Property      = new ObservableCollection<ProjectItem>(), 
-                Expression = CreateSpaceConceptExpr
+                Property      = new ObservableCollection<ProjectItem>(),
+                Expression    = CreateSpaceConceptExpr
             };
+
+            _spaceRoot.Parameter1 = _spaceRoot;
 
 
             collection.Add(_spaceRoot);
@@ -56,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             //
             //
             item.ViewModel ??= Xaml.GetViewModel<TabViewModel>(item.ViewModelType);
-            
+
             //
             //
             var page = (FrameworkElement)Xaml.Connect(item.ViewModel);
@@ -78,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             //
             //
             item.ViewModel ??= Xaml.GetViewModel<TabViewModel>(item.ViewModelType);
-            
+
             item.ViewModel
                 .Startup(new RoutingEventArgs
                 {
@@ -86,15 +89,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                     {
                         Args = new object[]
                         {
-                            // 
                             item,
-                            item.Parameter1,
-                            item.Parameter2,
-                            item.Parameter3
                         }
                     }
                 });
-            
+
             //
             //
             var page = (FrameworkElement)Xaml.Connect(item.ViewModel);
@@ -193,23 +192,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
         private static ProjectItem Create<TViewModel>(string id) where TViewModel : TabViewModel
         {
-            return new ProjectItem
+            return new ProjectEntryItem
             {
                 Name          = Language.GetText(id),
                 ViewModelType = typeof(TViewModel),
-                Children      = new ObservableCollection<ProjectItem>(),
                 Property      = new ObservableCollection<ProjectItem>(),
             };
         }
 
         private static ProjectItem Create<TViewModel>(string id, object type) where TViewModel : TabViewModel
         {
-            return new ProjectItem
+            return new ProjectEntryItem
             {
                 Name          = Language.GetText(id),
                 ViewModelType = typeof(TViewModel),
                 Parameter1    = type,
-                Children      = new ObservableCollection<ProjectItem>(),
                 Property      = new ObservableCollection<ProjectItem>(),
             };
         }

@@ -3,18 +3,15 @@ using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 {
-    public class ProjectItem : ObservableObject, ICollection<ProjectItem>
+    public abstract class ProjectItem : StorageUIObject, ICollection<ProjectItem>
     {
-        private string _name;
-        private string _toolTips;
-        
-
+        private readonly ObservableCollection<ProjectItem> _children = new ObservableCollection<ProjectItem>();
         #region ICollection<ProjectItem>
         
         
         public IEnumerator<ProjectItem> GetEnumerator()
         {
-            return Children.GetEnumerator();
+            return _children.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -24,52 +21,52 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 
         public void Add(ProjectItem item)
         {
-            Children.Add(item);
+            if (item is null)
+            {
+                return;
+            }
+            
+            item.Parent = this;
+            _children.Add(item);
         }
 
         public void Clear()
         {
-            Children.Clear();
+            _children.ForEach(x => x.Parent = null);
+            _children.Clear();
         }
 
         public bool Contains(ProjectItem item)
         {
-            return Children.Contains(item);
+            return _children.Contains(item);
         }
 
         public void CopyTo(ProjectItem[] array, int arrayIndex)
         {
-            Children.CopyTo(array, arrayIndex);
+            _children.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(ProjectItem item)
-        {
-            return Children.Remove(item);
+        { 
+            if (item is null)
+            {
+                return false;
+            }
+            
+            item.Parent = null;
+            return _children.Remove(item);
         }
 
-        public int Count => Children.Count;
+        public int Count => _children.Count;
 
-        public bool IsReadOnly => ((ICollection<ProjectItem>)Children).IsReadOnly;
+        public bool IsReadOnly => ((ICollection<ProjectItem>)_children).IsReadOnly;
         
         #endregion
-
-        /// <summary>
-        /// 获取或设置 <see cref="ToolTips"/> 属性。
-        /// </summary>
-        public string ToolTips
-        {
-            get => _toolTips;
-            set => SetValue(ref _toolTips, value);
-        }
         
-        /// <summary>
-        /// 获取或设置 <see cref="Name"/> 属性。
-        /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public ProjectItem Parent { get; private set; }
+
+        public abstract string ToolTips { get; set; }
+        public abstract string Name { get; set; }
 
         /// <summary>
         /// 视图模型
@@ -99,7 +96,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
         /// <summary>
         /// 参数1
         /// </summary>
-        public object Parameter1 { get; init; }
+        public object Parameter1 { get; set; }
         
         /// <summary>
         /// 参数2
@@ -119,6 +116,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
         /// <summary>
         /// 子级菜单
         /// </summary>
-        public ObservableCollection<ProjectItem> Children { get; init; }
+        public ReadOnlyObservableCollection<ProjectItem> Children { get; init; }
     }
 }

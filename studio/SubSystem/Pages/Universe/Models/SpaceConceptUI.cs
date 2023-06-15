@@ -3,26 +3,28 @@ using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models
 {
-    public class SpaceConceptUI : ObservableObject
+    public class SpaceConceptUI : ProjectItem
     {
-        private SpaceConceptUI _parent;
+        private string _name;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ProjectItem Item { get; set; }
-        
         public SpaceConcept Source { get; init; }
 
         /// <summary>
         /// 名字
         /// </summary>
-        public string Name
+        public override string Name
         {
-            get => Source.Name;
+            get => Source?.Name ?? _name;
             set
             {
-                Source.Name = value;
+                if (Source is null)
+                {
+                    _name = value;
+                }
+                else
+                {
+                    Source.Name = value;
+                }
                 RaiseUpdated();
             }
         }
@@ -30,7 +32,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models
         /// <summary>
         /// 名字
         /// </summary>
-        public string Intro
+        public override string ToolTips
         {
             get => Source.Intro;
             set
@@ -39,19 +41,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models
                 RaiseUpdated();
             }
         }
-
-        /// <summary>
-        /// 父级
-        /// </summary>
-        public SpaceConceptUI Parent
-        {
-            get => _parent;
-            set => SetValue(ref _parent, value);
-        }
-
-        /// <summary>
-        /// 子级
-        /// </summary>
-        public ObservableCollection<SpaceConceptUI> Children { get; init; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models;
@@ -19,13 +20,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         protected override void OnStart(Parameter parameter)
         {
             var a    = parameter.Args;
-            Root   =   a[0] as ProjectItem;
-            Handle =   a[2] as SpaceConceptUI;
-            Parent =   a[3] as SpaceConceptUI;
-            Root   ??= new ProjectItem();
+            CurrentItem = (SpaceConceptUI)a[0];
+            ParentItem  = CurrentItem?.Parent as SpaceConceptUI;
+            Children.AddMany(CurrentItem.Children
+                                        .Cast<SpaceConceptUI>(), true);
             base.OnStart(parameter);
         }
 
+        /*
+         * - root
+         * -- space  
+         */
 
         private async Task AddImpl(SpaceConceptUI parent)
         {
@@ -35,10 +40,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             {
                 return;
             }
-            
-            #if DEBUG
-            Debug.WriteLine($"handle: {Handle.Name}, parent: {Parent.Name}");
-            #endif
+
+            SpaceConceptUI ui;
+            parent ??= ParentItem;
             
             if (parent is null)
             {
@@ -49,28 +53,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                     Height = 0
                 };
 
-                var ui = new SpaceConceptUI
+                ui = new SpaceConceptUI
                 {
+                    Id = ID.Get(),
                     Source   = spaceConcept,
-                    Children = new ObservableCollection<SpaceConceptUI>(),
-                };
-
-                ui.Item = new ProjectItem
-                {
-                    Name          = spaceConcept.Name,
-                    Children      = new ObservableCollection<ProjectItem>(),
-                    Parameter1    = ui,
-                    Parameter2    = Root,
                     Expression    = FantasyProjectStartupViewModel.CreateSpaceConceptExpr,
                     ViewModelType = typeof(FantasyProjectSpaceConceptViewModel),
-
                 };
-                
+
                 Children.Add(ui);
-                Root.Add(ui.Item);
+                CurrentItem.Add(ui);
             }
             else
             {
+#if DEBUG
+                Debug.WriteLine($"handle: {CurrentItem.Name}, parent: {ParentItem.Name}");
+#endif
                 if (parent.Source.Height > 16)
                 {
                     // 宇宙 星系 星球 大陆 国家 省份 城市 区县 乡镇 村 屯
@@ -86,28 +84,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                     Owner = parent.Source.Id,
                 };
 
-                var ui = new SpaceConceptUI
+                ui = new SpaceConceptUI
                 {
-                    Parent = parent,
-                    Source   = spaceConcept,
-                    Children = new ObservableCollection<SpaceConceptUI>(),
-                };
-
-                ui.Item = new ProjectItem
-                {
-                    Name          = spaceConcept.Name,
-                    Children      = new ObservableCollection<ProjectItem>(),
-                    Parameter1    = ui,
-                    Parameter2    = Root,
-                    Parameter3    = parent,
+                    Source        = spaceConcept,
                     Expression    = FantasyProjectStartupViewModel.CreateSpaceConceptExpr,
                     ViewModelType = typeof(FantasyProjectSpaceConceptViewModel),
                 };
-                
-                parent.Children
-                      .Add(ui);
+
                 Children.Add(ui);
-                Root.Add(ui.Item);
+                CurrentItem.Add(ui);
+                parent.Add(ui);
             }
         }
         
@@ -115,13 +101,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         public AsyncRelayCommand<SpaceConceptUI> EditCommand { get; }
         public AsyncRelayCommand<SpaceConceptUI> RemoveCommand { get; }
         
-        public ProjectItem Root { get; private set; }
+        public SpaceConceptUI CurrentItem { get; private set; }
+        public SpaceConceptUI ParentItem { get; private set; }
         
-        /// <summary>
-        /// 当前的UI 对象
-        /// </summary>
-        public SpaceConceptUI Handle { get; private set; }
-        public SpaceConceptUI Parent { get; private set; }
         public ObservableCollection<SpaceConceptUI> Children { get; }
     }
 }
