@@ -31,7 +31,7 @@
     <DockPanel>
         <f:ForestIsland Header="世界观"
                         Margin="16"
-                        Width="384">
+                        Width="320">
             <f:ForestIsland.ToolBar>
                 <StackPanel HorizontalAlignment="Right"
                             Orientation="Horizontal">

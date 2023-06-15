@@ -77,11 +77,12 @@
                         <TextBlock DockPanel.Dock="Top"
                                    FontSize="18"
                                    FontWeight="Bold"
+                                   Foreground="White"
                                    Height="24"
                                    Margin="0 0 0 16"
                                    Text="{Binding Name,Mode=OneWay}"
                                    TextTrimming="CharacterEllipsis" />
-                        <TextBlock Foreground="{f:Brush Theme=ForegroundLevel1}"
+                        <TextBlock Foreground="White"
                                    Text="{Binding Intro,Mode=OneWay}"
                                    TextWrapping="Wrap"
                                    TextTrimming="CharacterEllipsis" />
@@ -169,7 +170,8 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <f:ForestIsland Header="时间轴">
+    <f:ForestIsland Header="时间轴"
+                    Margin="32 0">
         <f:ForestIsland.ToolBar>
             <StackPanel HorizontalAlignment="Right"
                         Margin="0 0 0 8"
@@ -193,10 +195,20 @@
                                 Icon="{StaticResource FeatherIcon.Plus}" />
             </StackPanel>
         </f:ForestIsland.ToolBar>
-        <ScrollViewer>
-            <ItemsControl Margin="16 0 0 0"
+        <DockPanel>
+            <Border DockPanel.Dock="Top"
+                    BorderBrush="{f:Brush Theme=BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Margin="0 0 0 16"
+                    Padding="16">
+                <TextBlock Text="时间轴功能仍然在开发当中，当前版本并不是最终版本！仅作为过渡使用！"/>
+            </Border>
+            <ScrollViewer>
+                <ItemsControl Margin="16 0 0 0"
                           ItemsSource="{Binding Timelines,Mode=OneWay}">
-            </ItemsControl>
-        </ScrollViewer>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </f:ForestIsland>
 </f:ForestUserControl>
