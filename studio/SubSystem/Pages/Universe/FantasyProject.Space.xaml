@@ -86,104 +86,14 @@
                             Orientation="Horizontal">
                     <ftk:ToolButton DockPanel.Dock="Top"
                                     Content="添加"
-                                    Command="{Binding AddTimelineEventCommand}"
-                                    CornerRadius="16"
-                                    HorizontalAlignment="Right"
-                                    Icon="{StaticResource FeatherIcon.Plus}" />
-                    
-                    <ftk:ToolButton DockPanel.Dock="Top"
-                                    Content="帮助"
-                                    Command="{Binding AddTimelineEventCommand}"
+                                    Command="{Binding AddCommand}"
                                     CornerRadius="16"
                                     HorizontalAlignment="Right"
                                     Icon="{StaticResource FeatherIcon.Plus}" />
                 </StackPanel>
             </f:ForestSection.ToolBar>
             <ScrollViewer>
-                <ItemsControl>
-                    <f:ForestIsland Header="厄瑞克斯"
-                                    Margin="0 0 0 16"
-                                    Padding="0 16">
-                        <f:ForestIsland.ToolBar>
-                            <StackPanel DockPanel.Dock="Top"
-                                        HorizontalAlignment="Right"
-                                        Margin="0 0 0 4"
-                                        Orientation="Horizontal">
-                                <ftk:ToolButton DockPanel.Dock="Top"
-                                                Content="添加空间"
-                                                HorizontalAlignment="Right"
-                                                Icon="{StaticResource FeatherIcon.Plus}"
-                                                ShowText="True"/>
-                                <ftk:ToolButton DockPanel.Dock="Top"
-                                                Content="编辑空间"
-                                                HorizontalAlignment="Right"
-                                                Icon="{StaticResource FeatherIcon.Edit}"
-                                                ShowText="True"/>
-                                <ftk:ToolButton DockPanel.Dock="Top"
-                                                Content="删除空间"
-                                                HorizontalAlignment="Right"
-                                                Icon="{StaticResource FeatherIcon.Trash}"
-                                                ShowText="True"/>
-                            </StackPanel>
-                        </f:ForestIsland.ToolBar>
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top"
-                                       Foreground="{f:Brush Theme=ForegroundLevel3}"
-                                       Text="厄瑞克斯是一个地区"
-                                       TextWrapping="Wrap"/>
-
-                            <ScrollViewer Margin="0 32 0 0">
-                                <ItemsControl>
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel ItemWidth="256"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-
-                                    <ftk:ToolButton Background="{f:Brush BackgroundLevel1}"
-                                                    Content="巴瑞斯尔德"
-                                                    CornerRadius="8"
-                                                    Icon="{StaticResource FeatherIcon.MapPin}"
-                                                    IconSize="31"
-                                                    HorizontalContentAlignment="Left"
-                                                    Height="64"
-                                                    Margin="4"
-                                                    Padding="16"
-                                                    ShowText="True"/>
-
-                                    <ftk:ToolButton Background="{f:Brush BackgroundLevel1}"
-                                                    Content="巴瑞斯尔德"
-                                                    CornerRadius="8"
-                                                    Icon="{StaticResource FeatherIcon.MapPin}"
-                                                    IconSize="31"
-                                                    HorizontalContentAlignment="Left"
-                                                    Height="64"
-                                                    Margin="4"
-                                                    Padding="16"
-                                                    ShowText="True"/>
-
-                                    <ftk:ToolButton Background="{f:Brush BackgroundLevel1}"
-                                                    Content="巴瑞斯尔德"
-                                                    CornerRadius="8"
-                                                    Icon="{StaticResource FeatherIcon.MapPin}"
-                                                    IconSize="31"
-                                                    HorizontalContentAlignment="Left"
-                                                    Height="64"
-                                                    Margin="4"
-                                                    Padding="16"
-                                                    ShowText="True"/>
-                                </ItemsControl>
-                            </ScrollViewer>
-                        </DockPanel>
-                    </f:ForestIsland>
-                    <f:ForestIsland Header="特瓦兰"
-                              Margin="0 8">
-
-                    </f:ForestIsland>
-                    <f:ForestIsland Header="异世界"
-                              Margin="0 8">
-
-                    </f:ForestIsland>
+                <ItemsControl ItemsSource="{Binding Children,Mode=OneWay}">
                 </ItemsControl>
             </ScrollViewer>
         </f:ForestSection>

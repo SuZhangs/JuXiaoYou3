@@ -73,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             return page;
         }
 
-        private FrameworkElement CreateSpaceConceptExpr(ProjectItem item)
+        internal static FrameworkElement CreateSpaceConceptExpr(ProjectItem item)
         {
             //
             //
@@ -88,7 +88,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
                         {
                             // 
                             item,
-                            
+                            item.Parameter1,
+                            item.Parameter2,
+                            item.Parameter3
                         }
                     }
                 });
@@ -143,74 +145,49 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         private static ProjectItem CreatePoliticalBlocs()
         {
             var parent = Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs");
-            parent.Children
-                  .Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Country", PoliticalBlocs.Country));
-            parent.Children
-                  .Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Force", PoliticalBlocs.Force));
-            parent.Children
-                  .Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Organization", PoliticalBlocs.Organization));
-            parent.Children
-                  .Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Tribe", PoliticalBlocs.Tribe));
-            parent.Children
-                  .Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Clan", PoliticalBlocs.Clan));
+            parent.Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Country", PoliticalBlocs.Country));
+            parent.Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Force", PoliticalBlocs.Force));
+            parent.Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Organization", PoliticalBlocs.Organization));
+            parent.Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Tribe", PoliticalBlocs.Tribe));
+            parent.Add(Create<FantasyProjectPoliticalBlocsViewModel>("text.Project.PoliticalBlocs.Clan", PoliticalBlocs.Clan));
             return parent;
         }
 
         private static ProjectItem CreateCharacters()
         {
             var parent = Create<FantasyProjectCharacterViewModel>("text.Project.Character");
-            parent.Children
-                  .Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.All", Character.All));
-            parent.Children
-                  .Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Primary", Character.Primary));
-            parent.Children
-                  .Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Secondary", Character.Secondary));
-            parent.Children
-                  .Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.NPC", Character.NPC));
-            parent.Children
-                  .Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Binding", Character.Binding));
+            parent.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.All", Character.All));
+            parent.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Primary", Character.Primary));
+            parent.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Secondary", Character.Secondary));
+            parent.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.NPC", Character.NPC));
+            parent.Add(Create<FantasyProjectCharacterViewModel>("text.Project.Character.Binding", Character.Binding));
             return parent;
         }
 
         private static ProjectItem CreateItems()
         {
             var parent = Create<FantasyProjectItemViewModel>("text.Project.Item");
-            parent.Children
-                  .Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Product", ItemType.Product));
-            parent.Children
-                  .Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Artifact", ItemType.Artifact));
-            parent.Children
-                  .Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Material", ItemType.Material));
-            parent.Children
-                  .Add(Create<FantasyProjectItemViewModel>("text.Project.Item.UnprocessedMaterial", ItemType.UnprocessedMaterial));
-            parent.Children
-                  .Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Equipment", ItemType.Equipment));
+            parent.Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Product", ItemType.Product));
+            parent.Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Artifact", ItemType.Artifact));
+            parent.Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Material", ItemType.Material));
+            parent.Add(Create<FantasyProjectItemViewModel>("text.Project.Item.UnprocessedMaterial", ItemType.UnprocessedMaterial));
+            parent.Add(Create<FantasyProjectItemViewModel>("text.Project.Item.Equipment", ItemType.Equipment));
             return parent;
         }
 
         private static ProjectItem CreateKnowledge()
         {
             var parent = Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge");
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Planets", KnowledgeType.Planets));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Creatures", KnowledgeType.Creatures));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Gods", KnowledgeType.Gods));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Devils", KnowledgeType.Devils));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Poison", KnowledgeType.Poison));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Calamity", KnowledgeType.Calamity));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Religion", KnowledgeType.Religion));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Thread", KnowledgeType.Thread));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Class", KnowledgeType.Class));
-            parent.Children
-                  .Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Tale", KnowledgeType.Tale));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Planets", KnowledgeType.Planets));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Creatures", KnowledgeType.Creatures));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Gods", KnowledgeType.Gods));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Devils", KnowledgeType.Devils));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Poison", KnowledgeType.Poison));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Calamity", KnowledgeType.Calamity));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Religion", KnowledgeType.Religion));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Thread", KnowledgeType.Thread));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Class", KnowledgeType.Class));
+            parent.Add(Create<FantasyProjectKnowledgeViewModel>("text.Project.Knowledge.Tale", KnowledgeType.Tale));
             return parent;
         }
 

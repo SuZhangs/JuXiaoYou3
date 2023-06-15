@@ -1,11 +1,57 @@
-﻿using System.Windows;
+﻿using System.Collections;
+using System.Windows;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
 {
-    public class ProjectItem : ObservableObject
+    public class ProjectItem : ObservableObject, ICollection<ProjectItem>
     {
         private string _name;
         private string _toolTips;
+        
+
+        #region ICollection<ProjectItem>
+        
+        
+        public IEnumerator<ProjectItem> GetEnumerator()
+        {
+            return Children.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)Children).GetEnumerator();
+        }
+
+        public void Add(ProjectItem item)
+        {
+            Children.Add(item);
+        }
+
+        public void Clear()
+        {
+            Children.Clear();
+        }
+
+        public bool Contains(ProjectItem item)
+        {
+            return Children.Contains(item);
+        }
+
+        public void CopyTo(ProjectItem[] array, int arrayIndex)
+        {
+            Children.CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(ProjectItem item)
+        {
+            return Children.Remove(item);
+        }
+
+        public int Count => Children.Count;
+
+        public bool IsReadOnly => ((ICollection<ProjectItem>)Children).IsReadOnly;
+        
+        #endregion
 
         /// <summary>
         /// 获取或设置 <see cref="ToolTips"/> 属性。
@@ -24,9 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
             get => _name;
             set => SetValue(ref _name, value);
         }
-        
-        public object Owner { get; set; }
-        
+
         /// <summary>
         /// 视图模型
         /// </summary>

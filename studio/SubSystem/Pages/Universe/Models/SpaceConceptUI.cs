@@ -1,4 +1,5 @@
 ﻿using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
+using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models
 {
@@ -6,6 +7,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe.Models
     {
         private SpaceConceptUI _parent;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ProjectItem Item { get; set; }
+        
         public SpaceConcept Source { get; init; }
 
         /// <summary>
