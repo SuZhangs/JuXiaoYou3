@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Acorisoft.FutureGL.MigaDB.Data.FantasyProjects;
 using Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
@@ -13,6 +14,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             ProjectElements  = new ObservableCollection<ProjectItem>();
             DocumentElements = new ObservableCollection<ProjectItem>();
             OtherElements    = new ObservableCollection<ProjectItem>();
+
+            ProjectEngine = Studio.Engine<ProjectEngine>();
+            
             CreateProjectItems();
         }
 
@@ -21,7 +25,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             //
             // 默认
             SelectedItem = ProjectElements.First();
+            
+            //
+            // 
+            Aggregate();
+            
+            //
+            //
             base.OnStart();
+        }
+
+        private void Aggregate()
+        {
         }
 
         /// <summary>
@@ -55,5 +70,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
         public ObservableCollection<ProjectItem> ProjectElements { get; }
         public ObservableCollection<ProjectItem> DocumentElements { get; }
         public ObservableCollection<ProjectItem> OtherElements { get; }
+        public ProjectEngine ProjectEngine { get; }
     }
 }

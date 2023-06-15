@@ -66,7 +66,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             collection.Add(CreateKnowledge());
         }
 
-
         private static void CreateOtherItems(ICollection<ProjectItem> collection)
         {
             // 其他

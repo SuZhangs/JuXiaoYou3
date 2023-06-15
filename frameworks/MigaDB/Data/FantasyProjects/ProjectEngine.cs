@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 
 namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 {
-    public class ProjectEngine : KnowledgeEngine
+    public partial class ProjectEngine : KnowledgeEngine
     {
         public override Knowledge GetKnowledge(string id)
         {
@@ -32,138 +32,10 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             Terminologies = null;
         }
 
-        #region Appraise
-
-        public void AddAppraise(Appraise item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Appraises.Upsert(item);
-        }
-
-        public void RemoveAppraise(Appraise item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Appraises.Delete(item.Id);
-        }
-
-        public IEnumerable<Appraise> GetAppraises(DocumentCache source)
-        {
-            if (source is null)
-            {
-                return GetAppraises();
-            }
-
-            return Appraises
-                   .Include(y => y.Source)
-                   .Include(a => a.Target)
-                   .Find(x => x.Target.Id == source.Id);
-        }
-
-        public IEnumerable<Appraise> GetAppraises() => Appraises.FindAll();
-
-        #endregion
-
-        #region Sentence
-
-        public void AddSentence(Sentence item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Sentences.Upsert(item);
-        }
-
-        public void RemoveSentence(Sentence item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Sentences.Delete(item.Id);
-        }
-
-        public IEnumerable<Sentence> GetSentences(DocumentCache source)
-        {
-            if (source is null)
-            {
-                return GetSentences();
-            }
-
-            return Sentences
-                   .Include(y => y.Source)
-                   .Find(x => x.Source.Id == source.Id);
-        }
-
-        public IEnumerable<Sentence> GetSentences() => Sentences.FindAll();
-
-        #endregion
-
-        #region Timelines
-
-        public void AddTimeline(TimelineConcept item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-#if DEBUG
-            Debug.WriteLine($"last:{item.LastItem}\ncurrent:{item.Id}\nnext:{item.NextItem}\n");
-#endif
-
-            Timelines.Upsert(item);
-        }
-
-        public void RemoveTimeline(TimelineConcept item)
-        {
-            if (item is null)
-            {
-                return;
-            }
-
-            Timelines.Delete(item.Id);
-        }
-
-        public IEnumerable<TimelineConcept> GetTimelines() => Timelines.FindAll();
-
-        #endregion
-
-        /// <summary>
-        /// 时间线
-        /// </summary>
-        public ILiteCollection<Prototype> Prototypes { get; private set; }
-
         /// <summary>
         /// 时间线
         /// </summary>
         public ILiteCollection<Preshape> Preshapes { get; private set; }
-
-        /// <summary>
-        /// 时间线
-        /// </summary>
-        public ILiteCollection<Appraise> Appraises { get; private set; }
-
-
-        /// <summary>
-        /// 时间线
-        /// </summary>
-        public ILiteCollection<Sentence> Sentences { get; private set; }
-
-        /// <summary>
-        /// 时间线
-        /// </summary>
-        public ILiteCollection<TimelineConcept> Timelines { get; private set; }
 
         /// <summary>
         /// 术语
