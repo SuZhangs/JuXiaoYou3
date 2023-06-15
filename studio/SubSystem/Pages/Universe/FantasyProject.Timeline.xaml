@@ -4,12 +4,14 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:FantasyProjectTimelineViewModel}, IsDesignTimeCreatable=True}">
     <Grid>
-        
+        <studio:FeatureEmptyStateView Title="功能开发中！请耐心等待！"
+                                      SubTitle="时间轴功能会有新的设计，功能比较复杂暂时未开放！"/>
     </Grid>
 </f:ForestUserControl>

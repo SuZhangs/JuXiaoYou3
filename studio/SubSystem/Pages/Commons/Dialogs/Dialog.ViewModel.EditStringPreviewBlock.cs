@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class EditStringPresentationViewModel : ExplicitDialogVM
+    public class EditStringPresentationViewModel : ImplicitDialogVM
     {
         public class FakeModuleBlock : ModuleBlock, IMetadataTextSource
         {

@@ -1,7 +1,7 @@
 ﻿
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
 {
-    public class NewBlockViewModel : ExplicitDialogVM
+    public class NewBlockViewModel : ImplicitDialogVM
     {
         private IModuleBlockDataUI _previewItem;
         private object             _maybeMetadataKind;

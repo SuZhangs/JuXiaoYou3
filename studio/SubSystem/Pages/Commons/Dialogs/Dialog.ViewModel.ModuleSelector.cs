@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class ModuleSelectorViewModel : ExplicitDialogVM
+    public class ModuleSelectorViewModel : ImplicitDialogVM
     {
         protected override bool IsCompleted() => true;
 

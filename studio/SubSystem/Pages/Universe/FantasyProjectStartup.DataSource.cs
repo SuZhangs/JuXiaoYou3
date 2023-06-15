@@ -5,11 +5,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
     partial class FantasyProjectStartupViewModel : TabViewModel
     {
+        private ProjectItem _spaceRoot;
+
         private void CreateProjectItems()
         {
-              ProjectElements.Clear();
-              DocumentElements.Clear();
-              OtherElements.Clear();
+            ProjectElements.Clear();
+            DocumentElements.Clear();
+            OtherElements.Clear();
 
             //
             //
@@ -18,10 +20,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
             CreateOtherItems(OtherElements);
         }
 
-        private static void CreateWorldViewItems(ICollection<ProjectItem> collection)
+        private void CreateWorldViewItems(ICollection<ProjectItem> collection)
         {
             // 世界划分
-            collection.Add(Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept"));
+            CreateSpaceConcept(collection);
 
             // 世界机制
             collection.Add(Create<FantasyProjectMechanismViewModel>("text.Project.Mechanism"));
@@ -31,6 +33,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 
             // 时间轴
             collection.Add(Create<FantasyProjectTimelineViewModel>("text.Project.Timeline"));
+        }
+
+        private void CreateSpaceConcept(ICollection<ProjectItem> collection)
+        {
+            _spaceRoot = Create<FantasyProjectSpaceConceptViewModel>("text.Project.SpaceConcept");
+
+            
+
+            collection.Add(_spaceRoot);
         }
 
 

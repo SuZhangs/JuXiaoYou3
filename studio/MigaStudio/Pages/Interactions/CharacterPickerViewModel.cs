@@ -11,7 +11,7 @@ using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
-    public class CharacterPickerViewModel : ExplicitDialogVM
+    public class CharacterPickerViewModel : ImplicitDialogVM
     {
         private SocialCharacter _selected;
         private bool            _uiMode;

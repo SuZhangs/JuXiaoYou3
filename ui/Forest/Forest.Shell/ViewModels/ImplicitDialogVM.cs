@@ -40,7 +40,9 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
 
             Xaml.Get<IBuiltinDialogService>()
-                .Notify(CriticalLevel.Warning, Language.NotifyText, Failed());
+                .Notify(CriticalLevel.Warning, 
+                    Language.NotifyText,
+                    Failed());
         }
 
         protected abstract bool IsCompleted();
@@ -108,7 +110,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
         #endregion
     }
 
-    public abstract class CountableDialogVM : ExplicitDialogVM
+    public abstract class CountableDialogVM : ImplicitDialogVM
     {
         private int             _tick;
         private DispatcherTimer _timer;
@@ -200,68 +202,5 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
             get => _completeButtonText;
             set => SetValue(ref _completeButtonText, value);
         }
-    }
-
-    public abstract class ExplicitDialogVM : DialogViewModel, IInputViewModel
-    {
-        protected ExplicitDialogVM()
-        {
-            CompletedCommand = Command(Complete, IsCompleted, true);
-        }
-
-        protected void Complete()
-        {
-            if (CloseAction is null)
-            {
-                return;
-            }
-
-            if (IsCompleted())
-            {
-                //
-                //
-                Finish();
-
-                //
-                //
-                if (Wait.TrySetResult(Op<object>.Success(Result)))
-                {
-                    //
-                    // 清理现场
-                    CloseAction();
-                    CloseAction = null;
-                }
-            }
-        }
-
-        protected abstract bool IsCompleted();
-        protected abstract void Finish();
-        protected abstract string Failed();
-
-        public sealed override void Cancel()
-        {
-            if (CloseAction is null)
-            {
-                return;
-            }
-
-            if (Wait.TrySetResult(Op<object>.Failed(Failed())))
-            {
-                //
-                // 清理现场
-                CloseAction();
-                CloseAction = null;
-            }
-        }
-
-        /// <summary>
-        /// 结果
-        /// </summary>
-        public object Result { get; protected set; }
-
-        /// <summary>
-        /// 取消命令。
-        /// </summary>
-        public RelayCommand CompletedCommand { get; }
     }
 }

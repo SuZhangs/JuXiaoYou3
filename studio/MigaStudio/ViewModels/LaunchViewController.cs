@@ -103,7 +103,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     if (map.TryAdd(ssm.ModuleId, ssm.GetController()))
                     {
                         Xaml.Get<ILogger>()
-                            .Warn($"已加载插件，插件ID:{ssm.ModuleId}, 插件名:{ssm.FriendlyName}, 路径:{maybePluginFile}！");
+                            .Info($"已加载插件，插件ID:{ssm.ModuleId}, 插件名:{ssm.FriendlyName}, 路径:{maybePluginFile}！");
                     }
                     else
                     {
@@ -180,7 +180,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 #if DEBUG
 
             var controller = opening ? 
-                Context.Controllers.First(x => x is TabShell) :
+                Context.Controllers.First(x => x is WorldViewController) :
                 Context.Controllers.First(x => x is QuickStartController);
 #else
             var controller = opening ? 

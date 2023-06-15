@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class EditChartPresentationViewModel : ExplicitDialogVM
+    public class EditChartPresentationViewModel : ImplicitDialogVM
     {
         public static Task<Op<object>> Edit(ChartPresentation cb, DataPartCollection dataPartCollection)
         {

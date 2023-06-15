@@ -2,7 +2,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Proxy
 {
-    public class TabShellBindingProxy : BindingProxy<TabShell>
+    public class TabShellBindingProxy : BindingProxy<ShellCore>
     {
         
     }

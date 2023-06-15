@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class NewSurveyViewModel : ExplicitDialogVM
+    public class NewSurveyViewModel : ImplicitDialogVM
     {
         private string _name;
         private string _intro;

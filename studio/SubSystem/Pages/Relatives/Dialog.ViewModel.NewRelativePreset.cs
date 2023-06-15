@@ -4,7 +4,7 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
-    public class NewRelativePresetViewModel : ExplicitDialogVM
+    public class NewRelativePresetViewModel : ImplicitDialogVM
     {
         public static Task<Op<RelativePreset>> New()
         {

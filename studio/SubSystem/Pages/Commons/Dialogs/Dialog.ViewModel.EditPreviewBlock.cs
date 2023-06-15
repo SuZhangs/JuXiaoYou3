@@ -5,7 +5,7 @@ using ListBox = Acorisoft.FutureGL.Forest.Controls.ListBox;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class EditPresentationViewModel : ExplicitDialogVM
+    public class EditPresentationViewModel : ImplicitDialogVM
     {
         
         public static Task<Op<object>> Edit(GroupingPresentation hb, DataPartCollection dataPartCollection)

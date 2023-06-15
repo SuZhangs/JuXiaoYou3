@@ -4,7 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Universe
 {
-    public class NewTimelineViewModel : ExplicitDialogVM
+    public class NewTimelineViewModel : ImplicitDialogVM
     {
         private string _name;
         private string _intro;

@@ -33,8 +33,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
         /// <summary>
         /// 
         /// </summary>
-        public FrameworkElement View { get; set; }
-        
+        public Func<ITabViewModel> Expression { get; init; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -43,17 +43,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels.FantasyProject
         /// <summary>
         /// 参数1
         /// </summary>
-        public object Parameter1 { get; set; }
+        public object Parameter1 { get; init; }
         
         /// <summary>
         /// 参数2
         /// </summary>
-        public object Parameter2 { get; set; }
+        public object Parameter2 { get; init; }
         
         /// <summary>
         /// 参数3
         /// </summary>
-        public object Parameter3 { get; set; }
+        public object Parameter3 { get; init; }
         
         /// <summary>
         /// 子级菜单

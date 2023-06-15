@@ -8,7 +8,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     // 1) 部分ModuleBlockDataUI需要最小宽度和高度
     // 2) 实现CardAction的替代
     // 3) 实现其他控件的替代
-    public class NewPresentationViewModel : ExplicitDialogVM
+    public class NewPresentationViewModel : ImplicitDialogVM
     {
         private PresentationUI _previewItem;
         private object       _maybeMetadataKind;

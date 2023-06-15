@@ -7,7 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 {
-    public class NewRelativeViewModel : ExplicitDialogVM
+    public class NewRelativeViewModel : ImplicitDialogVM
     {
         public static Task<Op<CharacterRelationship>> New(DocumentCache source, DocumentCache target, DocumentType type)
         {

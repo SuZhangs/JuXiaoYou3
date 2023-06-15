@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.Forest.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
-    public class DocumentPickerViewModel : ExplicitDialogVM
+    public class DocumentPickerViewModel : ImplicitDialogVM
     {
         private DocumentCache _selected;
 
@@ -44,7 +44,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public ObservableCollection<DocumentCache> Documents { get; }
     }
 
-    public class MultiDocumentPickerViewModel : ExplicitDialogVM
+    public class MultiDocumentPickerViewModel : ImplicitDialogVM
     {
         private DocumentCache _selected;
 
