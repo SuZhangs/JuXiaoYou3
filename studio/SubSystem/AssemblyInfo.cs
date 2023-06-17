@@ -30,7 +30,6 @@ global using Acorisoft.FutureGL.MigaDB.Services;
 global using Acorisoft.FutureGL.MigaDB.Utils;
 
 using System.Windows;
-using Acorisoft.FutureGL.MigaTest.Attributes;
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
@@ -40,4 +39,3 @@ using Acorisoft.FutureGL.MigaTest.Attributes;
     //(used if a resource is not found in the page,
     // app, or any theme specific resource dictionaries)
 )]
-[assembly: UnitTestTarget]
