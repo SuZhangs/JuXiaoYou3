@@ -335,15 +335,19 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             return RelDB.Include(x => x.Source)
                         .Include(x => x.Target)
-                        .Find(x => x.Type == type);
+                        .Find(x => x.Type == type &&
+                                   !x.Source.IsDeleted &&
+                                   !x.Target.IsDeleted);
         }
         
         public IEnumerable<CharacterRelationship> GetRelatives(DocumentType type, string id)
         {
             return RelDB.Include(x => x.Source)
                         .Include(x => x.Target)
-                        .Find(x => x.Type == type && (x.Source.Id == id || 
-                                                      x.Target.Id == id));
+                        .Find(x => x.Type == type &&
+                                   (x.Source.Id == id || x.Target.Id == id) &&
+                                   !x.Source.IsDeleted &&
+                                   !x.Target.IsDeleted);
         }
 
         #endregion

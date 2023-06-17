@@ -57,9 +57,4 @@
       </Page>
     </ItemGroup>
 
-
-    <ItemGroup>
-      <Folder Include="ViewModels\FantasyProject\" />
-    </ItemGroup>
-
 </Project>
