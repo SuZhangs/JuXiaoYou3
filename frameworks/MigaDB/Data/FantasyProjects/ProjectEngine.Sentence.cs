@@ -35,7 +35,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             return SentenceDB
                    .Include(y => y.Source)
-                   .Find(x => x.Source.Id == source.Id);
+                   .Find(x => x.Source.Id == source.Id)
+                   .Where(x => x.Source is not null &&
+                               !x.Source.IsDeleted);
         }
 
         public IEnumerable<Sentence> GetSentences() => SentenceDB.FindAll();

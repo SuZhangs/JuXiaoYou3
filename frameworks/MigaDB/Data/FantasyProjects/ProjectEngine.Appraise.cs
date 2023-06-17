@@ -39,7 +39,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
             return AppraiseDB
                    .Include(y => y.Source)
                    .Include(a => a.Target)
-                   .Find(x => x.Target.Id == source.Id);
+                   .Find(x => x.Target.Id == source.Id)
+                   .Where(x => x.Target is not null &&
+                               x.Source is not null &&
+                               !x.Target.IsDeleted &&
+                               !x.Source.IsDeleted);
         }
 
         public IEnumerable<Appraise> GetAppraises() => AppraiseDB.FindAll();
