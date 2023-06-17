@@ -299,16 +299,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return;
             }
 
-            if (basic.Buckets.ContainsKey(name))
-            {
-                
-                basic.Buckets[name] = value;
-            }
-            else
-            {
-                
-                basic.Buckets.Add(name, value);
-            }
+            basic.Buckets[name] = value;
         }
 
         public static void RemoveDocument(KeywordEngine ke, DocumentEngine engine, DocumentCache cache, Action<DocumentCache> callback)

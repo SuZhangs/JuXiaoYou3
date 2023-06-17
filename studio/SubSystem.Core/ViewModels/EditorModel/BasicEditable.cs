@@ -58,14 +58,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public void UpsertMetadataWithoutSave(string name, string value, [CallerMemberName] string propName = "")
         {
             var dict = BasicPart.Buckets;
-            if (dict.ContainsKey(name))
-            {
-                dict[name] = value;
-            }
-            else
-            {
-                dict.Add(name, value);
-            }
+            dict[name] = value;
 
             AddMetadata(new Metadata
             {

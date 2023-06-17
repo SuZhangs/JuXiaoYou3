@@ -292,6 +292,16 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             return DocumentCacheDB.Find(x => !x.IsDeleted && x.Type == type);
         }
+        
+        
+        /// <summary>
+        /// 获得指定的文档
+        /// </summary>
+        /// <param name="type">指定的文档id</param>
+        public IEnumerable<DocumentCache> GetRecycledDocuments(DocumentType type)
+        {
+            return DocumentCacheDB.Find(x => x.IsDeleted && x.Type == type);
+        }
 
         /// <summary>
         /// 获得指定的文档

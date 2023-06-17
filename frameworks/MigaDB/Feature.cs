@@ -37,14 +37,7 @@ namespace Acorisoft.FutureGL.MigaDB
         {
             var b = database.Get<BooleanProperty>();
             var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
+            d[key] = value;
 
             database.Update(b);
             return value;
@@ -75,14 +68,7 @@ namespace Acorisoft.FutureGL.MigaDB
         {
             var b = database.Get<Int32Property>();
             var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
+            d[key] = value;
 
             database.Update(b);
             return value;
@@ -113,14 +99,7 @@ namespace Acorisoft.FutureGL.MigaDB
         {
             var b = database.Get<StringProperty>();
             var d = b.Value;
-            if (d.ContainsKey(key))
-            {
-                d[key] = value;
-            }
-            else
-            {
-                d.Add(key, value);
-            }
+            d[key] = value;
 
             database.Update(b);
             return value;

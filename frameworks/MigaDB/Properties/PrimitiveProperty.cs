@@ -10,17 +10,7 @@
         public T this[string key]
         {
             get => Value.TryGetValue(key, out var v) ? v : default(T);
-            set
-            {
-                if (Value.ContainsKey(key))
-                {
-                    Value[key] = value;
-                }
-                else
-                {
-                    Value.Add(key, value);
-                }
-            }
+            set { Value[key] = value; }
         }
     }
 

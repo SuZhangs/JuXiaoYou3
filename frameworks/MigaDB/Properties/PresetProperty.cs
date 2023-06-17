@@ -25,15 +25,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data
                 return;
             }
 
-            preset.Type = type;
-            if (DefaultModulePreset.ContainsKey(type))
-            {
-                DefaultModulePreset[type] = preset.Id;
-            }
-            else
-            {
-                DefaultModulePreset.Add(type, preset.Id);
-            }
+            preset.Type               = type;
+            DefaultModulePreset[type] = preset.Id;
         }
         
         #endregion
@@ -48,14 +41,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data
                 return;
             }
 
-            if (DefaultPresentationPreset.ContainsKey(type))
-            {
-                DefaultPresentationPreset[type] = manifest;
-            }
-            else
-            {
-                DefaultPresentationPreset.Add(type, manifest);
-            }
+            DefaultPresentationPreset[type] = manifest;
         }
 
         /// <summary>

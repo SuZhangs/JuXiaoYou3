@@ -50,14 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
         public void AddOrUpdate(string name, string color)
         {
-            if (_Color.ContainsKey(name))
-            {
-                _Color[name] = color;
-            }
-            else
-            {
-                _Color.Add(name, color);
-            }
+            _Color[name] = color;
         }
 
         public void Remove(string name)
