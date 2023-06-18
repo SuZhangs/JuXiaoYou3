@@ -135,7 +135,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             base.OnStart();
         }
 
-        protected override void OnResume()
+        protected override void OnInvalidateDataSource()
         {
             if (NeedDataSourceSynchronize())
             {
