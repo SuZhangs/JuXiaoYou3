@@ -56,7 +56,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
             Features.Add(f);
         }
-        
+
+
         protected void CreateDialogFeature<T>(string name, params object[] e)
         {
             var f = new MainFeature
@@ -150,6 +151,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 _selectedViewModel?.Suspend();
                 SetValue(ref _selectedViewModel, value);
+                _selectedViewModel.Resume();
             }
         }
 
