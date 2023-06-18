@@ -173,9 +173,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
                     return;
                 }
 
-                Graph.TryGetInEdges(value, out var edgeA);
                 Graph.TryGetOutEdges(value, out var edgeB);
-                Relatives.AddMany(edgeA);
                 Relatives.AddMany(edgeB);
             }
         }
