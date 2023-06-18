@@ -12,7 +12,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             SavePresentationPart();
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
-            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
 

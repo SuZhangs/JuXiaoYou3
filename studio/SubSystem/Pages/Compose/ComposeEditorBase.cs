@@ -48,7 +48,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             ComposeEngine.UpdateCompose(Document, Cache);
             SetDirtyState(false);
-            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         public sealed override void Stop()

@@ -1,6 +1,7 @@
 ﻿using System.Reactive;
 using System.Reactive.Subjects;
 using System.Threading;
+using Acorisoft.FutureGL.Forest.Interfaces;
 
 namespace Acorisoft.FutureGL.MigaStudio.Core
 {
@@ -37,6 +38,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             if (_secondCount >= _triggerCount)
             {
                 _secondCount = 0;
+                UIHelper.SuccessfulNotification(null, Language.GetText("text.OperationOfAutoSaveIsSuccessful"));
                 #if DEBUG
                 #else
                 _subject.OnNext(Unit.Default);
