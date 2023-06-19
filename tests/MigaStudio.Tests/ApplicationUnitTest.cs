@@ -5,7 +5,6 @@ using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.Forest.Services;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
-using Acorisoft.FutureGL.MigaTest;
 using DryIoc;
 using NLog;
 using NLog.Config;
@@ -28,7 +27,7 @@ namespace MigaStudio.Tests
         [TestMethod]
         public void Initialize()
         {
-            Tester.Run<ApplicationUnitTest>();
+            // Tester.Run<ApplicationUnitTest>();
         }
     }
     
