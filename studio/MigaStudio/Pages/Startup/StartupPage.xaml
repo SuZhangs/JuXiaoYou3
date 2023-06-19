@@ -11,6 +11,7 @@
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:rel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Relatives;assembly=SubSystem"
                      xmlns:srv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Services;assembly=SubSystem"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:wv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe;assembly=SubSystem"
                      mc:Ignorable="d"
                      Padding="16"
@@ -92,28 +93,73 @@
     </UserControl.Resources>
     <ScrollViewer>
         <StackPanel>
+            <f:EmptyContentControl NotEmpty="{Binding HasBackgroundCover,Mode=OneWay}"
+                                   Height="360">
+                <f:EmptyContentControl.EmptyState>
+                    <Border CornerRadius="12"
+                            Height="256"
+                            Padding="32">
+                        <Border.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#bec936" Offset="0" />
+                                <GradientStop Color="#ffab12" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <TextBlock Foreground="{f:Brush ForegroundInAdaptive}"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Text="橘小柚（JuXiaoYou）" />
+                        </Grid>
+                    </Border>
+                </f:EmptyContentControl.EmptyState>
 
-            <!-- 巨幕 -->
-            <Border CornerRadius="12"
-                    Height="256"
-                    Padding="32">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bec936" Offset="0" />
-                        <GradientStop Color="#ffab12" Offset="1" />
-                    </LinearGradientBrush>
-                </Border.Background>
-                <Grid>
-                    <TextBlock Foreground="{f:Brush ForegroundInAdaptive}"
-                               FontSize="32"
-                               FontWeight="Bold"
-                               Text="橘小柚（JuXiaoYou）" />
-                </Grid>
-            </Border>
+                <!-- 巨幕 -->
+                <Border CornerRadius="12">
+                    <Border.Background>
+                        <ImageBrush Stretch="UniformToFill"
+                                    ImageSource="{Binding BackgroundCover,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Image}}"/>
+                    </Border.Background>
+                    <Grid>
+                        <Rectangle RadiusX="12"
+                                   RadiusY="12">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush Opacity="0.7"
+                                                     StartPoint="0 0"
+                                                     EndPoint="1 1">
+                                    <GradientStop Color="Black" Offset="0" />
+                                    <GradientStop Color="#404040" Offset="0.3" />
+                                    <GradientStop Color="#606060" Offset="0.6" />
+                                    <GradientStop Color="Transparent" Offset="1" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <DockPanel Margin="48 48 32 32">
+                            <TextBlock DockPanel.Dock="Top"
+                                       Foreground="White"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Text="{Binding ProjectName,Mode=OneWay}" />
+
+
+                            <TextBlock DockPanel.Dock="Bottom"
+                                       Foreground="White"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       FontFamily="{f:SongTi}"
+                                       MaxHeight="192"
+                                       Text="{Binding ProjectIntro,Mode=OneWay}" 
+                                       TextWrapping="Wrap"
+                                       TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Bottom"/>
+                        </DockPanel>
+                    </Grid>
+                </Border>
+            </f:EmptyContentControl>
 
             <!-- 快速功能 -->
             <DockPanel Grid.Row="1"
-                       Margin="0 16 0 0">
+                       Margin="0 32 0 0">
                 <f:ForestIsland DockPanel.Dock="Right"
                                 Header="反馈">
                     <f:SpacingStackPanel Gap="8"

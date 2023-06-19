@@ -78,7 +78,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                              .DisposeWith(Collector);
 
 
-            if (Property.Mappings.Count > 0)
+            if (Property.Mappings
+                        .Count > 0)
             {
                 Mappings.AddMany(Property.Mappings, true);
             }
@@ -154,12 +155,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             controller.Reset();
             controller = (TabController)Controller.Context
                                                   .ControllerMaps[AppViewModel.IdOfQuickStartController];
+            // 重置头像缓存
             AvatarConverter.Reset();
+            
+            // 清空最后一次打开的世界观
             ss.RepositorySetting
               .LastRepository = null;
+            
+            // 同步设置
             App.SynchronizeSetting();
+            // 保存设置更改
             await ss.SaveAsync();
+            
+            
+            //
+            // 先关闭引擎
             await DatabaseManager.CloseAsync();
+            
+            // 切换控制器
             context.SwitchController(controller);
         }
         
@@ -171,22 +184,44 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             
             _exitOperation = true;
+            
+            //
+            // 先关闭引擎
+            await DatabaseManager.CloseAsync();
+            
             var ss         = Xaml.Get<SystemSetting>();
             var context    = Controller.Context;
             var controller = (TabController)context.MainController;
-            controller.Reset();
-            controller = (TabController)Controller.Context
-                                                  .ControllerMaps[AppViewModel.IdOfTabShellController];
-            AvatarConverter.Reset();
-            App.SynchronizeSetting();
-            await DatabaseManager.CloseAsync();
-            var r = await DatabaseManager.LoadAsync(cache.Path);
+            
+            // 再打开引擎
+            var r  = await DatabaseManager.LoadAsync(cache.Path);
+            
             if (r.IsFinished)
             {
+                // 重置所有内容
+                controller.Reset();
+                controller = (TabController)Controller.Context
+                                                      .ControllerMaps[AppViewModel.IdOfTabShellController];
+                
+                // 重置头像缓存
+                AvatarConverter.Reset();
+                
+                // 同步设置
+                App.SynchronizeSetting();
+                
+                //
+                // 打开次数 +1
                 cache.OpenCount++;
+                
+                //
+                // 设置最后一次打开的世界观
                 ss.RepositorySetting
                   .LastRepository = cache.Path;
+                
+                // 保存设置更改
                 await ss.SaveAsync();
+                
+                // 切换控制器
                 context.SwitchController(controller);
             }
             else

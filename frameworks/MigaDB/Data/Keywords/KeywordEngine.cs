@@ -49,17 +49,31 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             KeywordDB.Delete(keyword.Id);
         }
 
+        /// <summary>
+        /// 删除文档的时候，调用该方法删除所有的关键字引用
+        /// </summary>
+        /// <param name="documentId"></param>
         public void RemoveMappings(string documentId)
         {
             KeywordDB.DeleteMany(x => x.DocumentId == documentId);
         }
-
-
+        
+        /// <summary>
+        /// 是否有关键字
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool HasKeyword(string documentId, string name)
         {
             return KeywordDB.Exists(x => x.DocumentId == documentId && x.Name == name);
         }
 
+        /// <summary>
+        /// 获得某个文档的所有关键字
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
         public IEnumerable<Keyword> GetKeywords(string documentId) => KeywordDB.Find(x => x.DocumentId == documentId);
 
         public int GetKeywordCount(string documentId) => KeywordDB.Count(x => x.DocumentId == documentId);

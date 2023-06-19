@@ -530,15 +530,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             set
             {
                 _currentViewModel?.Suspend();
+                OnCurrentViewModelChanged(_currentViewModel, value);
+                SetValue(ref _currentViewModel, value);
+
 
                 if (value is null)
                 {
                     return;
                 }
-
-                OnCurrentViewModelChanged(_currentViewModel, value);
-                SetValue(ref _currentViewModel, value);
-
 
                 if (value.IsInitialized)
                 {

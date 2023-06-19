@@ -8,25 +8,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
     public interface IAutoSaveService
     {
         IObservable<Unit> Observable { get; }
+        IObservable<Unit> MinutesCounter { get; }
     }
 
     public class AutoSaveService : Disposable, IAutoSaveService
     {
         public const     int           MinutesToTick = 30;
         private readonly Subject<Unit> _subject;
+        private readonly Subject<Unit> _perMinuteSubject;
         private readonly Timer         _timer;
         private          int           _secondCount;
         private          int           _triggerCount;
         
         public AutoSaveService()
         {
-            _subject      = new Subject<Unit>();
-            _triggerCount = 100;
-            _timer        = new Timer(DurationPushHandler, null, 0, 2000);
+            _subject          = new Subject<Unit>();
+            _perMinuteSubject = new Subject<Unit>();
+            _triggerCount     = 100;
+            _timer            = new Timer(DurationPushHandler, null, 0, 2000);
         }
 
         protected override void ReleaseManagedResources()
         {
+            _perMinuteSubject.Dispose();
             _subject.Dispose();
             _timer.Dispose();
         }
@@ -44,6 +48,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
                 _subject.OnNext(Unit.Default);
                 #endif
             }
+            else if (_secondCount % 30 == 0)
+            {
+                _perMinuteSubject.OnNext(Unit.Default);
+            }
         }
 
         public int Elapsed
@@ -57,5 +65,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         }
 
         public IObservable<Unit> Observable => _subject;
+        public IObservable<Unit> MinutesCounter => _perMinuteSubject;
     }
 }
