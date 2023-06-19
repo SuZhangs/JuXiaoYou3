@@ -4,56 +4,73 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
+                     xmlns:ftk="urn:acorisoft/forest/toolkits"
+                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Keywords;assembly=MigaDB"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:studio="urn:acorisoft/studio"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:KeywordViewModel}, IsDesignTimeCreatable=True}">
-    <f:Drawer IsRightOpen="True">
-        <f:Drawer.RightContent>
-            <Border Width="960">
-                <studio:ZoomControl>
-
-                </studio:ZoomControl>
-            </Border>
-        </f:Drawer.RightContent>
-
-
-
-        <DockPanel>
-            <!-- 未分类标签 -->
-            <f:ForestSection DockPanel.Dock="Right"
-                                 HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
-                                 Header="未分类"
-                                 Margin="16"
-                             Width="384">
-
+    <UserControl.Resources>
+        <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+        
+        <HierarchicalDataTemplate DataType="{x:Type thisModel:DirectoryRootUI}"
+                                  ItemsSource="{Binding Children}">
+            <TextBlock Margin="8"
+                       Text="{Binding Name,Mode=OneWay}"
+                       VerticalAlignment="Center"/>
+        </HierarchicalDataTemplate>
+        
+        
+        <HierarchicalDataTemplate DataType="{x:Type thisModel:DirectoryNodeUI}"
+                                  ItemsSource="{Binding Children}">
+            <TextBlock Margin="8"
+                       Text="{Binding Name,Mode=OneWay}"
+                       VerticalAlignment="Center"/>
+        </HierarchicalDataTemplate>
+        
+    </UserControl.Resources>
+        <f:EmptyContentControl DockPanel.Dock="Left"
+                               NotEmpty="True"
+                               HorizontalAlignment="Left"
+                               Width="768">
+            <f:ForestSection Header="目录"
+                             Margin="16 16 32 16">
+                <f:ForestSection.ToolBar>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 0 4">
+                        <ftk:ToolButton Content="{f:Language global.Add}"
+                                        Command="{Binding AddCommand}"
+                                        CommandParameter="{Binding Selected,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="{f:Language global.Edit}"
+                                        Command="{Binding EditCommand}"
+                                        CommandParameter="{Binding Selected,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Edit}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="{f:Language global.Remove}"
+                                        Command="{Binding RemoveCommand}"
+                                        CommandParameter="{Binding Selected,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="{f:Language global.ShiftUp}"
+                                        Command="{Binding ShiftUpCommand}"
+                                        CommandParameter="{Binding Selected,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True"/>
+                        <ftk:ToolButton Content="{f:Language global.ShiftDown}"
+                                        Command="{Binding ShiftDownCommand}"
+                                        CommandParameter="{Binding Selected,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True"/>
+                    </StackPanel>
+                </f:ForestSection.ToolBar>
+                <f:TreeView BindableSelectedItem="{Binding Selected,Mode=TwoWay}"
+                            ItemsSource="{Binding Root,Mode=OneWay}"/>
+                    
             </f:ForestSection>
-
-            <!-- 目录 -->
-            <f:EmptyContentControl NotEmpty="False">
-                <f:EmptyContentControl.EmptyState>
-                    <studio:CollectionEmptyStateView/>
-                </f:EmptyContentControl.EmptyState>
-                <DockPanel>
-                    <!-- 标签 -->
-                    <f:ForestSection Grid.Column="1"
-                                     HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
-                                     Header="子目录"
-                                     Margin="16"
-                                     Width="384">
-                    </f:ForestSection>
-
-                    <!-- 标签 -->
-                    <f:ForestSection Grid.Column="1"
-                                     HeaderBrush="{f:Brush Theme=BackgroundLevel1}"
-                                     Header="子目录"
-                                     Margin="16">
-                    </f:ForestSection>
-
-                </DockPanel>
-            </f:EmptyContentControl>
-        </DockPanel>
-    </f:Drawer>
+        </f:EmptyContentControl>
 </f:ForestUserControl>

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
@@ -8,6 +9,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class KeywordEngine : DataEngine
     {
+        #region AddKeyword / RemoveKeyword
+
+        
         public void AddKeyword(Keyword keyword)
         {
             if (keyword is null ||
@@ -49,6 +53,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             KeywordDB.Delete(keyword.Id);
         }
 
+        #endregion
+
         /// <summary>
         /// 删除文档的时候，调用该方法删除所有的关键字引用
         /// </summary>
@@ -57,6 +63,79 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         {
             KeywordDB.DeleteMany(x => x.DocumentId == documentId);
         }
+        
+        
+        public void AddDirectory(DirectorySupport dir)
+        {
+            if (dir is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(dir.Name))
+            {
+                return;
+            }
+
+            DirectoryDB.Insert(dir);
+            Modified();
+        }
+        
+
+        public void UpdateDirectory(DirectorySupport dir)
+        {
+            if (dir is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(dir.Name))
+            {
+                return;
+            }
+
+            DirectoryDB.Update(dir);
+            Modified();
+        }
+        
+        public void RemoveDirectory(DirectorySupport dir)
+        {
+            if (dir is null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(dir.Name))
+            {
+                return;
+            }
+
+            DirectoryDB.Delete(dir.Id);
+            Modified();
+        }
+
+        public DirectoryRootUI GetDirectory(string root)
+        {
+            var dir = DirectoryDB.FindOne(x => x.Name == root);
+            return new DirectoryRootUI
+            {
+                Source   = (DirectoryRoot)dir,
+                Children = new ObservableCollection<DirectorySupportUI>()
+            };
+        }
+        public IEnumerable<DirectorySupport> GetDirectories() => DirectoryDB.FindAll();
+        public IEnumerable<DirectorySupport> GetDirectoryRoot() => DirectoryDB.Find(x => x is DirectoryRoot);
+        
+        /// <summary>
+        /// 是否有关键字
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool HasDirectory(string name)
+        {
+            return DirectoryDB.Exists(x => x.Name == name);
+        }
+        
         
         /// <summary>
         /// 是否有关键字
@@ -80,7 +159,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
 
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
-            DirectoryDB = session.Database.GetCollection<Directory>(Constants.Name_Directory);
+            DirectoryDB = session.Database.GetCollection<DirectorySupport>(Constants.Name_Directory);
             KeywordDB   = session.Database.GetCollection<Keyword>(Constants.Name_Keyword);
         }
 
@@ -93,7 +172,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// <summary>
         /// 模板
         /// </summary>
-        public ILiteCollection<Directory> DirectoryDB { get; private set; }
+        public ILiteCollection<DirectorySupport> DirectoryDB { get; private set; }
 
         /// <summary>
         /// 模板缓存
