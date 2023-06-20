@@ -151,12 +151,23 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 是否有关键字
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="owner">父级菜单</param>
+        /// <returns></returns>
+        public bool HasDirectory(string name, string owner)
+        {
+            return DirectoryDB.Exists(Query.And(Query.EQ("name", name), Query.EQ("owner", owner)));
+        }
+        
+        /// <summary>
+        /// 是否有关键字
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="owner">父级菜单</param>
         /// <returns></returns>
         public bool HasDirectory(string name)
         {
-            return DirectoryDB.Exists(x => x.Name == name);
+            return DirectoryDB.Exists(Query.And(Query.EQ("name", name), Query.EQ("_type", "Acorisoft.FutureGL.MigaDB.Data.Keywords.DirectoryRoot, MigaDB")));
         }
-        
         
         /// <summary>
         /// 是否有关键字

@@ -19,7 +19,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             _selectedDirectory     = null;
             _selectedRootDirectory = null;
+            _isDirectoryPaneOpen   = false;
+            _isPropertyPaneOpen   = false;
             Directories.Clear();
+            RaiseUpdated(nameof(IsPropertyPaneOpen));
+            RaiseUpdated(nameof(IsDirectoryPaneOpen));
             RaiseUpdated(nameof(SelectedDirectory));
             RaiseUpdated(nameof(SelectedRootDirectory));
             ForceInvalidateDataSource();
@@ -125,7 +129,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 SetValue(ref _isDirectoryPaneOpen, value);
-                IsPropertyPaneOpen = false;
             }
         }
         

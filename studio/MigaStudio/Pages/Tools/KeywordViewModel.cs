@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Acorisoft.FutureGL.Forest;
+using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Utils;
@@ -135,14 +136,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (KeywordEngine.HasDirectory(r.Value))
-            {
-                await this.WarningNotification(Language.GetText("text.duplicated.keyword"));
-                return;
-            }
-
             if (parent is null)
             {
+                if (KeywordEngine.HasDirectory(r.Value))
+                {
+                    await this.WarningNotification(Language.GetText("text.duplicated.keyword"));
+                    return;
+                }
+                
                 var dir = new DirectoryRoot
                 {
                     Id   = ID.Get(),
@@ -160,6 +161,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             else
             {
+                if (KeywordEngine.HasDirectory(r.Value, parent.Id))
+                {
+                    await this.WarningNotification(Language.GetText("text.duplicated.keyword"));
+                    return;
+                }
                 
                 var dir = new DirectoryNode
                 {
@@ -216,7 +222,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 return;
             }
-
+            
             if (parent is DirectoryRootUI dru)
             {
                 Root.Remove(dru);
@@ -232,6 +238,57 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 KeywordEngine.RemoveDirectory(dnu.Source);
             }
             
+            if (parent.Count <=  0)
+            {
+                return;
+            }
+            
+            if (!await this.Warning(Language.GetText("text.AreYouSureRemoveSubDirectories")))
+            {
+                using (var session = Xaml.Get<IBusyService>()
+                                         .CreateSession())
+                {
+                    session.Update(SubSystemString.Processing);
+                    await session.Await();
+
+                    var queue = new Queue<DirectorySupportUI>();
+                    queue.Enqueue(parent);
+                
+                    while (queue.Count > 0)
+                    {
+                        var current = queue.Dequeue();
+                        foreach (var child in current)
+                        {
+                            queue.Enqueue(child);
+                        
+                            if (child is DirectoryRootUI dru1)
+                            {
+                                Root.Remove(dru1);
+                                KeywordEngine.RemoveDirectory(dru1.Source);
+                                return;
+                            }
+            
+            
+                            if(child is DirectoryNodeUI dnu1)
+                            {
+                                dnu1.Parent
+                                    ?.Remove(dnu1);
+                                KeywordEngine.RemoveDirectory(dnu1.Source);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                parent.ForEach(x =>
+                {
+                    var node = (DirectoryNodeUI)x;
+                    node.Owner = parent is DirectoryNodeUI pnu? pnu.Owner : null;
+                    KeywordEngine.UpdateDirectory(node.Source);
+                });
+                
+            }
         }
 
         private void ShiftUpImpl(DirectorySupportUI parent)

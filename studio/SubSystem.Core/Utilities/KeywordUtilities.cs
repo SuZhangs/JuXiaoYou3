@@ -23,6 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             if (KeywordEngine.GetKeywordCount(documentID) >= 32)
             {
                 await Warning(KeywordTooMany);
+                return;
             }
 
             var r    = await SingleLineViewModel.String(AddKeywordTitle);
@@ -45,6 +46,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Name       = r.Value
             };
             keywords.Add(key);
+            KeywordEngine.AddKeyword(key);
+            SetDirtyState(true);
+        }
+        
+        
+        public static async Task ForceAddKeyword(
+            string documentID,
+            Keyword key,
+            KeywordEngine KeywordEngine,
+            Action<bool> SetDirtyState,
+            Func<string, Task> Warning)
+        {
+            if (KeywordEngine.GetKeywordCount(documentID) >= 32)
+            {
+                await Warning(KeywordTooMany);
+                return;
+            }
+
+            if (KeywordEngine.HasKeyword(documentID, key.Name))
+            {
+                return;
+            }
+
             KeywordEngine.AddKeyword(key);
             SetDirtyState(true);
         }

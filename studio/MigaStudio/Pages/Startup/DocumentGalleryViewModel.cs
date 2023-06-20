@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.IO;
 using Acorisoft.FutureGL.MigaDB.Services;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using DynamicData;
@@ -21,8 +22,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
     public partial class DocumentGalleryViewModel : GalleryViewModel<DocumentCache>
     {
-        private int                _version;
-        private bool               _isPropertyPaneOpen;
+        private int  _version;
+        private bool _isPropertyPaneOpen;
 
         public DocumentGalleryViewModel()
         {
@@ -42,7 +43,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SelectedItem       = x;
                 IsPropertyPaneOpen = true;
             });
-            
+
             NewDocumentCommand          = AsyncCommand(NewDocumentImpl);
             LockOrUnlockDocumentCommand = Command<DocumentCache>(LockOrUnlockDocumentImpl);
             OpenDirectoryPaneCommand    = Command(OpenDirectoryPaneImpl);
@@ -52,6 +53,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             OpenDocumentCommand         = Command<DocumentCache>(OpenDocumentImpl);
             AddKeywordCommand           = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand        = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
+        }
+
+        #region GalleryViewModel Override
+
+        protected sealed override bool NeedDataSourceSynchronize()
+        {
+            if (_version != DocumentEngine.Version)
+            {
+                _version = DocumentEngine.Version;
+                return true;
+            }
+
+            return false;
         }
 
         protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
@@ -120,6 +134,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             dataSource.AddMany(DocumentEngine.GetDocuments(Type));
         }
 
+        #endregion
+
+        #region OnStart / OnResume
+
         protected sealed override void OnStart(Parameter parameter)
         {
             Type = (DocumentType)parameter.Args[0];
@@ -136,28 +154,34 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     SelectedItem.Id,
                     DataSource,
                     Collection);
-                
+
                 Keywords.AddMany(KeywordEngine.GetKeywords(SelectedItem.Id), true);
             }
 
             InitializeWhenResume();
         }
 
-        protected sealed override bool NeedDataSourceSynchronize()
-        {
-            if (_version != DocumentEngine.Version)
-            {
-                _version = DocumentEngine.Version;
-                return true;
-            }
-
-            return false;
-        }
+        #endregion
 
         private async Task NewDocumentImpl()
         {
-            await DocumentUtilities.AddDocument(DocumentEngine, Type, x =>
+            await DocumentUtilities.AddDocument(DocumentEngine, Type, async x =>
             {
+                if (SelectedDirectory is not null)
+                {
+                    await KeywordUtilities.ForceAddKeyword(
+                        x.Id, 
+                        new Keyword
+                        {
+                            Id         = ID.Get(),
+                            Name       = SelectedDirectory.Name,
+                            DocumentId = x.Id
+                        },
+                        KeywordEngine,
+                        SetDirtyState,
+                        this.WarningNotification);
+                }
+
                 DataSource.Add(x);
                 Collection.Add(x);
             });
@@ -166,10 +190,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task ChangeDocumentImpl(DocumentCache cache)
         {
-            await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ =>
-            {
-                this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
-            });
+            await DocumentUtilities.ChangeDocument(DocumentEngine, ImageEngine, cache, _ => { this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful); });
         }
 
         private void LockOrUnlockDocumentImpl(DocumentCache cache)
@@ -272,14 +293,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public AsyncRelayCommand<DocumentCache> RemoveDocumentCommand { get; }
 
         public DocumentType Type { get; private set; }
-        
+
         /// <summary>
         /// 获取或设置 <see cref="IsPropertyPaneOpen"/> 属性。
         /// </summary>
         public bool IsPropertyPaneOpen
         {
             get => _isPropertyPaneOpen;
-            set => SetValue(ref _isPropertyPaneOpen, value);
+            set
+            {
+                SetValue(ref _isPropertyPaneOpen, value);
+            }
         }
     }
 }
