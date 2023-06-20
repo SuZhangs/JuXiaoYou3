@@ -10,6 +10,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name { get; set; }
+        
+        /// <summary>
+        /// 深度
+        /// </summary>
+        public int Height { get; init; }
     }
 
     public class DirectoryNode : DirectorySupport
@@ -77,6 +82,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         
         #endregion
         
+        
+        public abstract int Height { get; }
         public abstract string Id { get; }
         public abstract string Name { get; set; }
     }
@@ -93,7 +100,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 
         /// </summary>
         public DirectorySupportUI Parent { get; set; }
-        
+
+        public override int Height => Source.Height;
+
         /// <summary>
         /// 获取或设置名字
         /// </summary>
@@ -127,6 +136,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// 
         /// </summary>
         public DirectoryRoot Source { get; init; }
+        
+        public override int Height => Source.Height;
 
         /// <summary>
         /// 获取或设置名字

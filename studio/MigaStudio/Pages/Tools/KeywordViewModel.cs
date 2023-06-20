@@ -113,6 +113,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task AddImpl(DirectorySupportUI parent)
         {
+            if (parent is not null)
+            {
+                if (parent.Count > 64)
+                {
+                    this.ErrorNotification(Language.GetText("text.tooManyDirectory"));
+                    return;
+                }
+                
+                if (parent.Height >= 12)
+                {
+                    this.ErrorNotification(Language.GetText("text.tooDeepDirectory"));
+                    return;
+                }
+            }
+            
             var r = await SingleLineViewModel.String(Language.GetText("text.AddKeyword"));
 
             if (!r.IsFinished)
@@ -131,6 +146,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 var dir = new DirectoryRoot
                 {
                     Id   = ID.Get(),
+                    Height = 1,
                     Name = r.Value,
                 };
 
@@ -144,11 +160,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             else
             {
+                
                 var dir = new DirectoryNode
                 {
-                    Id    = ID.Get(),
-                    Name  = r.Value,
-                    Owner = parent.Id
+                    Id     = ID.Get(),
+                    Name   = r.Value,
+                    Height = parent.Height + 1,
+                    Owner  = parent.Id
                 };
 
                 var ui = new DirectoryNodeUI
