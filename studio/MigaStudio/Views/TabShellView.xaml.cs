@@ -11,6 +11,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Views
             InitializeComponent();
         }
 
-        public TabShell ViewModel => (TabShell)DataContext;
+        public ShellCore ViewModel => (ShellCore)DataContext;
     }
 }

@@ -180,7 +180,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 #if DEBUG
 
             var controller = opening ? 
-                Context.Controllers.First(x => x is WorldViewController) :
+                Context.Controllers.First(x => x is TabShell) :
                 Context.Controllers.First(x => x is QuickStartController);
 #else
             var controller = opening ? 

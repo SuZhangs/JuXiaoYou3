@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Acorisoft.FutureGL.Forest.Controls
@@ -13,7 +14,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             nameof(IsLeftOpen),
             typeof(bool),
             typeof(Drawer),
-            new PropertyMetadata(Boxing.False));
+            new PropertyMetadata(Boxing.False, OnDrawerOpenStateChanged));
 
         public static readonly DependencyProperty LeftContentProperty = DependencyProperty.Register(
             nameof(LeftContent),
@@ -44,7 +45,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             nameof(IsRightOpen),
             typeof(bool),
             typeof(Drawer),
-            new PropertyMetadata(Boxing.False));
+            new PropertyMetadata(Boxing.False, OnDrawerOpenStateChanged));
 
         public static readonly DependencyProperty RightContentProperty = DependencyProperty.Register(
             nameof(RightContent),
@@ -75,7 +76,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             nameof(IsTopOpen),
             typeof(bool),
             typeof(Drawer),
-            new PropertyMetadata(Boxing.False));
+            new PropertyMetadata(Boxing.False, OnDrawerOpenStateChanged));
 
         public static readonly DependencyProperty TopContentProperty = DependencyProperty.Register(
             nameof(TopContent),
@@ -106,7 +107,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             nameof(IsBottomOpen),
             typeof(bool),
             typeof(Drawer),
-            new PropertyMetadata(Boxing.False));
+            new PropertyMetadata(Boxing.False, OnDrawerOpenStateChanged));
 
         public static readonly DependencyProperty BottomContentProperty = DependencyProperty.Register(
             nameof(BottomContent),
@@ -144,6 +145,79 @@ namespace Acorisoft.FutureGL.Forest.Controls
         //     drawer.Focus();
         //     drawer.Part_mask.Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
         // }
+
+        private Storyboard _storyboard;
+
+        private void CreateMaskAnimation(bool close)
+        {
+            _storyboard?.Stop(_partMask);
+            
+            if (close)
+            {
+                var opacityAnimation = new DoubleAnimation
+                {
+                    Duration = new Duration(TimeSpan.FromMilliseconds(350)),
+                    From     = 1d,
+                    To       = 0d,
+                };
+
+                Storyboard.SetTarget(opacityAnimation, _partMask);
+                Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("(UIElement.Opacity)"));
+
+                _storyboard = new Storyboard
+                {
+                    Children = new TimelineCollection { opacityAnimation }
+                };
+                
+                //
+                // 开始动画
+                _partMask.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+                
+                Task.Run(async () =>
+                {
+                    await Task.Delay(350);
+                    Dispatcher.Invoke(() =>
+                    {
+                        _partMask.Visibility = Visibility.Collapsed;
+                    });
+                });
+            }
+            else
+            {
+                
+                _partMask.Visibility = Visibility.Visible;
+                var opacityAnimation = new DoubleAnimation
+                {
+                    Duration = new Duration(TimeSpan.FromMilliseconds(500)),
+                    From     = 0d,
+                    To       = 1d,
+                };
+
+                Storyboard.SetTarget(opacityAnimation, _partMask);
+                Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("(UIElement.Opacity)"));
+
+                _storyboard = new Storyboard
+                {
+                    Children = new TimelineCollection { opacityAnimation }
+                };
+                
+                //
+                // 开始动画
+                _partMask.BeginStoryboard(_storyboard, HandoffBehavior.SnapshotAndReplace, true);
+            }
+        }
+
+        private static void OnDrawerOpenStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is bool b && b)
+            {
+                ((Drawer)d).CreateMaskAnimation(false);
+            }
+            else
+            {
+                ((Drawer)d).CreateMaskAnimation(true);
+            }
+        }
 
         private Border _partMask;
 
