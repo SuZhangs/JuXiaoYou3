@@ -54,6 +54,26 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         }
 
         #endregion
+        
+        
+
+        public IEnumerable<DocumentCache> GetDirectoryMapping(DocumentEngine engine, DocumentType type, string name)
+        {
+            var hash = KeywordDB.Find(x => x.Name == name)
+                                .Select(x => x.DocumentId)
+                                .ToHashSet();
+
+            return engine.GetDocuments(type, hash);
+        }
+        
+        public IEnumerable<DocumentCache> GetDirectoryMapping(DocumentEngine engine, string name)
+        {
+            var hash = KeywordDB.Find(x => x.Name == name)
+                                .Select(x => x.DocumentId)
+                                .ToHashSet();
+
+            return engine.GetDocuments(hash);
+        }
 
         /// <summary>
         /// 删除文档的时候，调用该方法删除所有的关键字引用
@@ -116,7 +136,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
 
         public DirectoryRootUI GetDirectory(string root)
         {
-            var dir = DirectoryDB.FindOne(x => x.Name == root);
+            var dir = DirectoryDB.FindOne(x => x.Id == root);
             return new DirectoryRootUI
             {
                 Source   = (DirectoryRoot)dir,
@@ -124,7 +144,8 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
             };
         }
         public IEnumerable<DirectorySupport> GetDirectories() => DirectoryDB.FindAll();
-        public IEnumerable<DirectorySupport> GetDirectoryRoot() => DirectoryDB.Find(x => x is DirectoryRoot);
+        public IEnumerable<DirectorySupport> GetDirectoryRoot() => DirectoryDB.FindAll()
+                                                                              .OfType<DirectoryRoot>();
         
         /// <summary>
         /// 是否有关键字

@@ -78,6 +78,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         #endregion
         
         public abstract string Id { get; }
+        public abstract string Name { get; set; }
     }
 
     public class DirectoryNodeUI : DirectorySupportUI
@@ -96,7 +97,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// <summary>
         /// 获取或设置名字
         /// </summary>
-        public string Name
+        public sealed override string Name
         {
             get => Source.Name;
             set
@@ -130,7 +131,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Keywords
         /// <summary>
         /// 获取或设置名字
         /// </summary>
-        public string Name
+        public sealed override  string Name
         {
             get => Source.Name;
             set

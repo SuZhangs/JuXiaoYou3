@@ -126,34 +126,42 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #region OnStart / OnResume
 
-        protected override void OnStart()
+        protected sealed override void OnStart()
         {
-            OnRequestDataSourceSynchronize(DataSource);
-            OnRequestComputePageCount(DataSource);
-            JumpPage(PageIndex);
-
+            ForceInvalidateDataSource();
+            StartOverride();
             base.OnStart();
+        }
+
+        protected virtual void StartOverride()
+        {
+            
         }
 
         protected override void OnInvalidateDataSource()
         {
             if (NeedDataSourceSynchronize())
             {
-                DataSource.Clear();
-                OnRequestDataSourceSynchronize(DataSource);
-                OnRequestComputePageCount(DataSource);
-
-                //
-                // 重新计算
-                if (PageIndex > TotalPageCount)
-                {
-                    PageIndex = 1;
-                }
-
-                //
-                //
-                JumpPage(PageIndex);
+                ForceInvalidateDataSource();
             }
+        }
+
+        protected void ForceInvalidateDataSource()
+        {
+            DataSource.Clear();
+            OnRequestDataSourceSynchronize(DataSource);
+            OnRequestComputePageCount(DataSource);
+
+            //
+            // 重新计算
+            if (PageIndex > TotalPageCount)
+            {
+                PageIndex = 1;
+            }
+
+            //
+            //
+            JumpPage(PageIndex);
         }
 
         #endregion
@@ -184,6 +192,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             if (unsortedDataSource.Count == 0)
             {
+                Collection.Clear();
                 return;
             }
             

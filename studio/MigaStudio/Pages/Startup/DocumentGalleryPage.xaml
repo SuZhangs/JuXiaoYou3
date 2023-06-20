@@ -9,6 +9,7 @@
                      xmlns:fs="urn:acorisoft/forest/shell"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models;assembly=MigaStudio.UI"
+                     xmlns:thisModel2="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Keywords;assembly=MigaDB"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:thisProxy="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Proxy"
@@ -27,7 +28,7 @@
                                                Lock="{f:Language global.unlock}"
                                                Unlock="{f:Language global.lock}" />
         <thisConverters:PageIndexConverter x:Key="PageIndex"/>
-        
+
         <DataTemplate DataType="{x:Type doc:DocumentCache}">
             <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectedDocumentCommand}"
                             CommandParameter="{Binding}"
@@ -60,6 +61,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <f:Drawer IsRightOpen="{Binding IsPropertyPaneOpen,Mode=TwoWay}"
+              IsLeftOpen="{Binding IsDirectoryPaneOpen,Mode=TwoWay}"
               Padding="16">
         <DockPanel>
             <StackPanel DockPanel.Dock="Bottom"
@@ -90,7 +92,7 @@
                                 Command="{Binding LastPageCommand}"
                                 Icon="{StaticResource FeatherIcon.ChevronsRight}" />
             </StackPanel>
-            
+
             <f:ForestSection Header="{Binding Type,Mode=OneWay,Converter={StaticResource Translation}}">
                 <f:ForestSection.ToolBar>
                     <StackPanel HorizontalAlignment="Right"
@@ -99,6 +101,11 @@
                         <ftk:ToolButton Content="{f:Language global.add}"
                                         Command="{Binding NewDocumentCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
+                                        ShowText="True" />
+                        
+                        <ftk:ToolButton Content="目录显示"
+                                        Command="{Binding OpenDirectoryPaneCommand}"
+                                        Icon="{StaticResource FeatherIcon.Folder}"
                                         ShowText="True" />
 
                         <ftk:DropDownButton Content="{f:Language global.orderBy}"
@@ -174,6 +181,50 @@
             </f:ForestSection>
         </DockPanel>
 
+        <f:Drawer.LeftContent>
+            <Border Background="{f:BackgroundBrush}"
+                    Padding="16"
+                    Width="320">
+                <f:ForestIsland Header="虚拟目录">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top"
+                                   Margin="0 8">
+                            <ftk:ToolButton DockPanel.Dock="Right"
+                                            Command="{Binding ClearDirectoryModeCommand}"
+                                            Margin="8 0 0 0"
+                                            Icon="{StaticResource FeatherIcon.Close}"
+                                            IconSize="13"/>
+                            <ComboBox DockPanel.Dock="Left"
+                                      DisplayMemberPath="Name"
+                                      ItemsSource="{Binding Root,Mode=OneWay}"
+                                      SelectedItem="{Binding SelectedRootDirectory,Mode=TwoWay}"/>
+                        </DockPanel>
+
+                        <f:TreeView Margin="0 8" 
+                                    ItemsSource="{Binding Directories,Mode=OneWay}"
+                                    BindableSelectedItem="{Binding SelectedDirectory,Mode=TwoWay}">
+                            <f:TreeView.Resources>
+                                <HierarchicalDataTemplate DataType="{x:Type thisModel2:DirectoryRootUI}"
+                                                  ItemsSource="{Binding Children}">
+                                    <TextBlock Margin="8"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center"/>
+                                </HierarchicalDataTemplate>
+
+
+                                <HierarchicalDataTemplate DataType="{x:Type thisModel2:DirectoryNodeUI}"
+                                                  ItemsSource="{Binding Children}">
+                                    <TextBlock Margin="8"
+                                       Text="{Binding Name,Mode=OneWay}"
+                                       VerticalAlignment="Center"/>
+                                </HierarchicalDataTemplate>
+                            </f:TreeView.Resources>
+                        </f:TreeView>
+                    </DockPanel>
+                </f:ForestIsland>
+            </Border>
+
+        </f:Drawer.LeftContent>
         <f:Drawer.RightContent>
             <Border Background="{f:BackgroundBrush}"
                     Padding="16"

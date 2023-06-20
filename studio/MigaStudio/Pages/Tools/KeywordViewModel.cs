@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             collection.AddMany(dirs.OfType<DirectoryRootUI>(), true);
         }
 
-        public static void Expand(KeywordEngine keywordEngine, ICollection<DirectoryRootUI> collection, string root)
+        public static void CreateSubTree(KeywordEngine keywordEngine, ICollection<DirectorySupportUI> collection, string root)
         {
             if (string.IsNullOrEmpty(root))
             {
@@ -51,17 +51,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             foreach (var dir in dirs.Where(x => x is DirectoryNodeUI dnu && dnu.Owner == root))
             {
-                Expand(dirs, dir, dir.Children, dir.Id);
+                CreateSubTree(dirs, dir, dir.Children, dir.Id);
                 node.Add(dir);
             }
             
         }
 
-        private static void Expand(DirectorySupportUI[] dirs, DirectorySupportUI node, ICollection<DirectorySupportUI> collection, string root)
+        private static void CreateSubTree(DirectorySupportUI[] dirs, DirectorySupportUI node, ICollection<DirectorySupportUI> collection, string root)
         {
             foreach (var dir in dirs.Where(x => x is DirectoryNodeUI dnu && dnu.Owner == root))
             {
-                Expand(dirs, dir, dir.Children, dir.Id);
+                CreateSubTree(dirs, dir, dir.Children, dir.Id);
                 node.Add(dir);
             }
         }
