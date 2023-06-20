@@ -102,9 +102,13 @@
                                         Command="{Binding NewDocumentCommand}"
                                         Icon="{StaticResource FeatherIcon.Plus}"
                                         ShowText="True" />
-                        
+
                         <ftk:ToolButton Content="目录显示"
                                         Command="{Binding OpenDirectoryPaneCommand}"
+                                        Icon="{StaticResource FeatherIcon.Folder}"
+                                        ShowText="True" />
+                        <ftk:ToolButton Content="在新标签页中显示"
+                                        Command="{Binding OpenInNewTabCommand}"
                                         Icon="{StaticResource FeatherIcon.Folder}"
                                         ShowText="True" />
 

@@ -43,16 +43,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 SelectedItem       = x;
                 IsPropertyPaneOpen = true;
             });
+            
+            //
+            // Dir
+            OpenDirectoryPaneCommand  = Command(OpenDirectoryPaneImpl);
+            ClearDirectoryModeCommand = Command(ClearDirectoryModeImpl);
 
+            OpenInNewTabCommand = Command(OpenInNewTabImpl);
+            
             NewDocumentCommand          = AsyncCommand(NewDocumentImpl);
             LockOrUnlockDocumentCommand = Command<DocumentCache>(LockOrUnlockDocumentImpl);
-            OpenDirectoryPaneCommand    = Command(OpenDirectoryPaneImpl);
-            ClearDirectoryModeCommand   = Command(ClearDirectoryModeImpl);
             ChangeDocumentCommand       = AsyncCommand<DocumentCache>(ChangeDocumentImpl);
             RemoveDocumentCommand       = AsyncCommand<DocumentCache>(RemoveDocumentImpl);
             OpenDocumentCommand         = Command<DocumentCache>(OpenDocumentImpl);
             AddKeywordCommand           = AsyncCommand(AddKeywordImpl);
             RemoveKeywordCommand        = AsyncCommand<Keyword>(RemoveKeywordImpl, x => x is not null);
+        }
+
+        private void OpenInNewTabImpl()
+        {
+            Controller.Start(this);
         }
 
         #region GalleryViewModel Override
@@ -142,6 +152,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             Type = (DocumentType)parameter.Args[0];
             Initialize();
+            Title = Language.GetEnum(Type);
             base.OnStart(parameter);
         }
 
@@ -279,6 +290,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> SelectedDocumentCommand { get; }
+        public RelayCommand OpenInNewTabCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<DocumentCache> ChangeDocumentCommand { get; }
