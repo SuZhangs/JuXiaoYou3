@@ -263,7 +263,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
         
-        protected int Version { get; set; }
+        public int Version { get; protected set; }
 
         /// <summary>
         /// 是否可被关闭

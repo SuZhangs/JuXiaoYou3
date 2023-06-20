@@ -142,8 +142,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             //
             Document = document;
             CreateDocumentFromManifest(document);
-            OnCreateDocument(document);
-
             DocumentEngine.AddDocument(document);
             return document;
         }

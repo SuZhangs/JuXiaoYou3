@@ -107,10 +107,6 @@
                                         Command="{Binding OpenDirectoryPaneCommand}"
                                         Icon="{StaticResource FeatherIcon.Folder}"
                                         ShowText="True" />
-                        <ftk:ToolButton Content="在新标签页中显示"
-                                        Command="{Binding OpenInNewTabCommand}"
-                                        Icon="{StaticResource FeatherIcon.Folder}"
-                                        ShowText="True" />
 
                         <ftk:DropDownButton Content="{f:Language global.orderBy}"
                                             Icon="{StaticResource FeatherIcon.Filter}"
@@ -168,6 +164,9 @@
                                         Command="{Binding SearchPageCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
                                         ShowText="True" />
+
+                        <ftk:ToolButton Command="{Binding OpenInNewTabCommand}"
+                                        Icon="{StaticResource FeatherIcon.Folder}"/>
                     </StackPanel>
                 </f:ForestSection.ToolBar>
                 <ScrollViewer DockPanel.Dock="Top"

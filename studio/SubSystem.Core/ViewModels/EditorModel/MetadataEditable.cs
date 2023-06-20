@@ -12,11 +12,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         protected MetadataEditable()
         {
-            MetadataTrackerByName = new Dictionary<string, MetadataIndexCache>(StringComparer.OrdinalIgnoreCase);
+            MetadataTrackerByName = new Dictionary<string, Metadata>(StringComparer.OrdinalIgnoreCase);
         }
         
+        /*
+         * MetadataIndexCache would tracking the metadata in document metadata collection
+         * so,
+         */
+        
         [NullCheck(UniTestLifetime.Constructor)]
-        protected readonly Dictionary<string, MetadataIndexCache> MetadataTrackerByName;
+        protected readonly Dictionary<string, Metadata> MetadataTrackerByName;
         
         
         protected class MetadataIndexCache
@@ -67,7 +72,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected Metadata GetMetadataById(string metadata)
         {
-            return MetadataTrackerByName.TryGetValue(metadata, out var v) ? v.Source : null;
+            return MetadataTrackerByName.TryGetValue(metadata, out var meta) ? meta : null;
         }
         
         protected void AddMetadata(Metadata metadata)
@@ -77,24 +82,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            if (MetadataTrackerByName.TryGetValue(metadata.Name, out var metadataIndex))
+            if (MetadataTrackerByName.TryGetValue(metadata.Name, out var insideMetadata))
             {
-                metadataIndex[Document.Metas] = metadata.Value;
+                insideMetadata.Value = metadata.Value;
             }
             else
             {
-
-                var checkedIndex = Document.Metas.Count;
+                Document.Metas
+                        .Add(metadata);
                 
-                Document.Metas.Add(metadata);
-                
-                var index = new MetadataIndexCache
-                {
-                    Source = metadata,
-                    Index  = checkedIndex
-                };
-                
-                MetadataTrackerByName.Add(metadata.Name, index);
+                MetadataTrackerByName.Add(metadata.Name, metadata);
             }
         }
         
@@ -102,7 +99,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (MetadataTrackerByName.TryGetValue(metadata, out var cache))
             {
-                Document.Metas.RemoveAt(cache.Index);
+                //
+                // the problem is that when we remove a cache from document
+                // the cache position will be changed
+                // 
+                Document.Metas
+                        .Remove(cache);
                 MetadataTrackerByName.Remove(metadata);
             }
         }

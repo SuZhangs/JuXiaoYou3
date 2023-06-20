@@ -150,6 +150,11 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
         private void CreateMaskAnimation(bool close)
         {
+            if (_partMask is null)
+            {
+                return;
+            }
+            
             _storyboard?.Stop(_partMask);
             
             if (close)
@@ -228,6 +233,14 @@ namespace Acorisoft.FutureGL.Forest.Controls
             if (_partMask is not null)
             {
                 _partMask.MouseLeftButtonDown += ResetDrawerOpenState;
+            }
+
+            if (IsLeftOpen ||
+                IsRightOpen ||
+                IsTopOpen ||
+                IsBottomOpen)
+            {
+                CreateMaskAnimation(false);
             }
         }
         

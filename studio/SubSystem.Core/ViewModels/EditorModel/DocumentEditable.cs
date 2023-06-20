@@ -82,6 +82,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected abstract void OnCreateDocument(TDocument document);
 
         protected abstract void LoadDocument(TCache cache, TDocument document);
+        
         #endregion
 
         protected abstract TDocument GetDocumentById(string id);

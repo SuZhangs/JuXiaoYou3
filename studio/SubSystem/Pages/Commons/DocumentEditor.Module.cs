@@ -153,14 +153,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     {
                         _BlockTrackerOfId.Remove(b.Id);
                         if(!string.IsNullOrEmpty(block.Metadata))
-                            RemoveMetadata(b.ExtractMetadata());
+                            RemoveMetadata(block.Metadata);
                     }
                 }
                 else
                 {
                     _BlockTrackerOfId.Remove(block.Id);
                     if(!string.IsNullOrEmpty(block.Metadata))
-                        RemoveMetadata(block.ExtractMetadata());
+                        RemoveMetadata(block.Metadata);
                 }
             }
 
@@ -413,10 +413,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     var selector = _selectedModulePart.Blocks
                                                       .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
                     ContentBlocks.AddMany(selector, true);
-                    RemoveModulePartCommand.NotifyCanExecuteChanged();
-                    ShiftDownModulePartCommand.NotifyCanExecuteChanged();
-                    ShiftUpModulePartCommand.NotifyCanExecuteChanged();
                 }
+                
+                RemoveModulePartCommand.NotifyCanExecuteChanged();
+                ShiftDownModulePartCommand.NotifyCanExecuteChanged();
+                ShiftUpModulePartCommand.NotifyCanExecuteChanged();
             }
         }
         

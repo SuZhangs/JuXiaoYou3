@@ -9,8 +9,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
     [Connected(View = typeof(ComposeEditorPage), ViewModel = typeof(ComposeEditorViewModel))]
     public partial class ComposeEditorPage
     {
-        private IDisposable _disposable;
-
         public ComposeEditorPage()
         {
             InitializeComponent();
@@ -28,11 +26,5 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         }
 
         protected ComposeEditorViewModel ViewModel => ViewModel<ComposeEditorViewModel>();
-
-        protected override void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _disposable?.Dispose();
-            base.OnUnloaded(sender, e);
-        }
     }
 }

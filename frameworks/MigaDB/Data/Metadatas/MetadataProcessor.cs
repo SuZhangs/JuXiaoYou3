@@ -53,6 +53,8 @@
             int minimum,
             string color)
         {
+            value ??= Enumerable.Repeat(0, axis.Count());
+            
             var a = Combine(axis);
             var b = Combine(value.Select(x => x.ToString()));
             var c = Combine(fallback.Select(x => x.ToString()));

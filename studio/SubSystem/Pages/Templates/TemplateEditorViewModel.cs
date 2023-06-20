@@ -14,16 +14,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         [NullCheck(UniTestLifetime.Constructor)]
         private readonly HashSet<string> _metaHashSet;
 
-        private          string       _name;
-        private          string       _authorList;
-        private          string       _contractList;
-        private          int          _version;
-        private          string       _organizations;
-        private          string       _intro;
-        private          DocumentType _forType;
-        private          string       _for;
-        private          string       _id;
-        private  bool         _dirty;
+        private string            _name;
+        private string            _authorList;
+        private string            _contractList;
+        private string            _organizations;
+        private string            _intro;
+        private DocumentType      _forType;
+        private string            _for;
+        private string            _id;
+        private ModuleBlockEditUI _selectedBlock;
+        private bool              _isPresentationPaneOpen;
+        private bool              _dirty;
 
 
         public TemplateEditorViewModel()
@@ -442,15 +443,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         public ObservableCollection<MetadataCache> MetadataList { get; init; }
 
         /// <summary>
-        /// 版本
-        /// </summary>
-        public int Version
-        {
-            get => _version;
-            set => SetValue(ref _version, value);
-        }
-
-        /// <summary>
         /// 联系方式
         /// </summary>
         public string ContractList
@@ -490,7 +482,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
-        private ModuleBlockEditUI _selectedBlock;
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedBlock"/> 属性。
@@ -502,11 +493,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             {
                 SetValue(ref _selectedBlock, value);
                 EditBlockCommand.NotifyCanExecuteChanged();
+                ShiftUpBlockCommand.NotifyCanExecuteChanged();
+                ShiftDownBlockCommand.NotifyCanExecuteChanged();
                 RemoveBlockCommand.NotifyCanExecuteChanged();
             }
         }
 
-        private bool _isPresentationPaneOpen;
 
         /// <summary>
         /// 获取或设置 <see cref="IsPresentationPaneOpen"/> 属性。

@@ -194,16 +194,30 @@
                                         CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.Edit}"
                                         ShowText="True" />
+                        
+                        
+                        <ftk:ToolButton Content="{f:Language global.shiftUp}"
+                                        Command="{Binding ShiftUpBlockCommand}"
+                                        CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Up}"
+                                        ShowText="True" />
+                        
+                        
+                        <ftk:ToolButton Content="{f:Language global.shiftDown}"
+                                        Command="{Binding ShiftDownBlockCommand}"
+                                        CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
+                                        Icon="{StaticResource FeatherIcon.Down}"
+                                        ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveBlockCommand}"
                                         CommandParameter="{Binding SelectedBlock,Mode=OneWay}"
-                                        Icon="{StaticResource FeatherIcon.Clear}"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
                                         ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.clear}"
                                         Command="{Binding RemoveAllBlockCommand}"
-                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        Icon="{StaticResource FeatherIcon.Clear}"
                                         ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.preview}"
