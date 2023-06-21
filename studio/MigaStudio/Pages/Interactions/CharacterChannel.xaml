@@ -8,7 +8,6 @@
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
-                     xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models.Socials"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:thisConverters2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      mc:Ignorable="d"
@@ -23,69 +22,8 @@
             <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility" />
             <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
 
-            <DataTemplate DataType="{x:Type thisModel:PlainTextMessageUI}">
-                <studio:PlainChatMessage CharacterName="{Binding Name,Mode=OneWay}"
-                                         IsSelf="{Binding IsSelf,Mode=OneWay}"
-                                         CharacterAvatar="{StaticResource Avatar}"
-                                         CharacterTitle="{Binding Title,Mode=OneWay}"
-                                         CharacterTitleBrush="{Binding Role,Mode=OneWay,Converter={StaticResource Role2Brush}}"
-                                         ShowTitle="{Binding Role,Mode=OneWay, Converter={StaticResource Role2Visibility}}"
-                                         Content="{Binding Content,Mode=OneWay}"
-                                         Layout="{Binding Style,Mode=OneWay}" />
-            </DataTemplate>
-            
-            
-            <DataTemplate DataType="{x:Type thisModel:MemberJoinMessageUI}">
-                <studio:MemberJoinMessageControl CharacterName="{Binding Name,Mode=OneWay}"
-                                                 Content="{Binding WelcomeContent,Mode=OneWay}"/>
-            </DataTemplate>
 
-            <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
-                <Grid Background="{f:BackgroundBrush}"
-                      Margin="0 4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.ContextMenu>
-                        <f:ContextMenu>
-                            <f:MenuItem Header="加群"
-                                            Icon="{StaticResource FeatherIcon.Login}"
-                                            IconSize="19" />
-                            <f:MenuItem Header="禁言"
-                                            IsFilled="True"
-                                            Icon="{StaticResource Mute}"
-                                            IconSize="19" />
-                            <f:MenuItem Header="退群"
-                                            Icon="{StaticResource FeatherIcon.LogOut}"
-                                            IconSize="19" />
-                        </f:ContextMenu>
-                    </Grid.ContextMenu>
-                    <Ellipse Height="48"
-                             Width="48">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <f:CallToAction Grid.Column="2"
-                                    Content="发言"
-                                    Margin="4 0"
-                                    Palette="Info" />
-                    <DockPanel Grid.Column="1"
-                               Margin="16 0 0 0 "
-                               VerticalAlignment="Center">
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontSize="18"
-                                   FontWeight="Heavy"
-                                   Text="{Binding Name,Mode=OneWay}" />
-                        <TextBlock Foreground="{f:Brush ForegroundLevel2}"
-                                   Margin="0 4"
-                                   Text="{Binding Title,Mode=OneWay}" />
-                    </DockPanel>
-                </Grid>
-            </DataTemplate>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -134,13 +72,6 @@
                             <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type thisModel:CharacterUI}">
-                            <studio:Avatar Margin="0 4"
-                                           Image="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}"
-                                           AvatarName="{Binding Name,Mode=OneWay}"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </HeaderedContentControl>
 
@@ -295,7 +226,30 @@
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
-                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}" />
+                        <ItemsControl>
+                            <studio:UserEventMessageControl CharacterName="Test"
+                                                            Content="退群"
+                                                            HorizontalAlignment="Center"/>
+
+                            <studio:MemberJoinMessageControl CharacterName="Test"
+                                                             Content="加入了本群"
+                                                             WelcomeContent="点击欢迎！"
+                                                             HorizontalAlignment="Center"/>
+
+
+                            <studio:PlainTextMessage CharacterName="Test"
+                                                     Content="加入了本群"/>
+                            
+                            <studio:ImageChatMessage CharacterName="Test"
+                                                 Image="E:\1.jpg"/>
+
+                            <studio:PlainTextMessage CharacterName="Test"
+                                                     Content="聊天内容"
+                                                     IsSelf="True"/>
+                            <studio:TimestampMessage HorizontalAlignment="Center"
+                                                     RelativeString="晚上"
+                                                     CurrentTime="19:32"/>
+                        </ItemsControl>
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>
             </Border>

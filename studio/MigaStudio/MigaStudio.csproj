@@ -192,4 +192,8 @@
         </Page>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\Socials\" />
+    </ItemGroup>
+
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
-using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -15,7 +14,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void RequireStartupTabViewModel()
         {
-            New<InteractionStartupViewModel>();
+            // New<InteractionStartupViewModel>();
+            New<CharacterChannelViewModel>();
         }
 
         protected override void OnCurrentViewModelChanged(ITabViewModel oldViewModel, ITabViewModel newViewModel)
@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 ivmb.CharacterMapper = CharacterMapper;
             }
+            
             base.OnCurrentViewModelChanged(oldViewModel, newViewModel);
         }
         

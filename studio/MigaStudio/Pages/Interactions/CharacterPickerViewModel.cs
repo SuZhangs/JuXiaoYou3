@@ -6,7 +6,6 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
-using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
@@ -29,17 +28,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                        });
         }
         
-        public static Task<Op<IEnumerable<CharacterUI>>> MultiSelect(IEnumerable<CharacterUI> characters)
-        {
-            return DialogService()
-                .Dialog<IEnumerable<CharacterUI>, CharacterPickerViewModel>(new Parameter
-                {
-                    Args = new object[]
-                    {
-                        characters
-                    }
-                });
-        }
 
         public CharacterPickerViewModel()
         {
@@ -54,12 +42,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             if (a[0] is IEnumerable<SocialCharacter> enumerable)
             {
                 Documents.AddMany(enumerable, true);
-            }
-
-            if (a[0] is IEnumerable<CharacterUI> enumerable2)
-            {
-                Documents.AddMany(enumerable2, true);
-                _uiMode = true;
             }
         }
 
@@ -76,8 +58,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             if (_uiMode)
             {
-                Result = i.Cast<CharacterUI>()
-                          .ToArray();
             }
             else{
             

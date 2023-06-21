@@ -1,16 +1,16 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 {
-    public class PlainChatMessage : UserMessageBase
+    public class PlainTextMessage : UserMessageBase
     {
-        static PlainChatMessage()
+        static PlainTextMessage()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(PlainChatMessage), new FrameworkPropertyMetadata(typeof(PlainChatMessage)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(PlainTextMessage), new FrameworkPropertyMetadata(typeof(PlainTextMessage)));
         }
 
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
             nameof(Content),
             typeof(string),
-            typeof(PlainChatMessage),
+            typeof(PlainTextMessage),
             new PropertyMetadata(default(string)));
 
         public string Content

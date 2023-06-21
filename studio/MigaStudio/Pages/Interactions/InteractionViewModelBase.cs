@@ -2,7 +2,6 @@
 using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
-using Acorisoft.FutureGL.MigaStudio.Models.Socials;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
@@ -70,23 +69,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             return aliasMapping.TryGetValue(ch.Id, out var alias) ? alias : ch.Name;
         }
 
-        public ChannelUI GetChannel(SocialChannel channel)
-        {
-            var characters = channel.Members
-                                    .Select(x =>
-                                    {
-                                        var ch        = CharacterMapper[x];
-                                        var title     = GetCharacterTitle(x, channel.RoleMapping, channel.TitleMapping, out var role);
-                                        var name      = GetCharacterName(ch, channel.AliasMapping);
-                                        var character = new CharacterUI(title, name, role, ch);
-                                        return character;
-                                    });
-
-            //
-            // 添加
-            return new ChannelUI(channel, characters);
-        }
-        
         public Dictionary<string, SocialCharacter> CharacterMapper { get; internal set; }
     }
 }
