@@ -232,8 +232,7 @@
                                             Command="{x:Static fs:Studio.GotoPageCommand}"
                                             CommandParameter="{x:Type this:MessageBoardViewModel}"
                                             ShowText="True"
-                                            Icon="{StaticResource Playlist}" 
-                                            IsFilled="True"/>
+                                            Icon="{StaticResource FeatherIcon.Chat}"/>
                             <!-- -->
                             <!-- <ftk:ToolButton Content="{f:Language __ColorService}" -->
                             <!--                 Command="{x:Static fs:Studio.GotoPageCommand}" -->

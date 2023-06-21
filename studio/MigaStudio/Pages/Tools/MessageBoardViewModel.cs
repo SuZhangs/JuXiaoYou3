@@ -103,5 +103,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
         
         public ProjectEngine ProjectEngine { get; }
+        public override bool Uniqueness => true;
     }
 }
