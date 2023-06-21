@@ -9,13 +9,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
     public class ImageFromAlbumConverter : ImageConverterBase<ImageEngine>, IValueConverter
     {
 
-        private static ImageSource Caching(string avatar) => Caching(avatar, 1920, 1080);
+        private ImageSource Caching(string avatar) => Caching(avatar, 1920, 1080);
         
-        private static ImageSource Caching(string avatar, int w, int h)
+        private ImageSource Caching(string avatar, int w, int h)
         {
             var ms  = Engine.Get(avatar);
-            var img = Xaml.FromStream(ms, w, h);
-            return img;
+            return Caching(avatar, ms, w, h);
         }
         
 

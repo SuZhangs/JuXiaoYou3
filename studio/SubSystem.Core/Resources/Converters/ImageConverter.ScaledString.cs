@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             w = Math.Clamp(w, 100, 2560);
             h = Math.Clamp(h, 100, 1440);
             var ms  = Engine.Get(avatar);
-            var img = Xaml.FromStream(ms, w, h);
+            var img = Caching(avatar, ms, w, h);
             return img;
         }
 

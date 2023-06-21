@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             if (!Pool.TryGetValue(avatar, out var img))
             {
                 var ms = Engine.Get(avatar);
-                img = Xaml.FromStream(ms, 256, 256);
+                img = Caching(avatar, ms, 256, 256);
                 Pool.TryAdd(avatar, img);
             }
 

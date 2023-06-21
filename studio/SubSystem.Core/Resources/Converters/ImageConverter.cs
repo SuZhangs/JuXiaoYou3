@@ -1,11 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using System.Globalization;
+using System.IO;
 using System.Reactive.Concurrency;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.MigaDB.Core;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 {
@@ -21,6 +23,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
         private static TEngine _engine;
 
         protected static TEngine Engine => _engine ??= Studio.Engine<TEngine>();
+
+        protected virtual ImageSource Caching(string avatar, MemoryStream ms,int w,int h)
+        {
+            if (ms is null)
+            {
+                Xaml.Get<ILogger>()
+                    .Warn($"图片:{avatar}为空！");
+            }
+            return Xaml.FromStream(ms, w, h);
+        }
     }
 
     // public class DirectiveAvatarConverter : IMultiValueConverter

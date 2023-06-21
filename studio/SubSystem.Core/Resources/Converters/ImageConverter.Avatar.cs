@@ -20,12 +20,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             return Character;
         }
 
-        private static ImageSource Caching(string avatar)
+        private ImageSource Caching(string avatar)
         {
             if (!Pool.TryGetValue(avatar, out var img))
             {
                 var ms = Engine.Get(avatar);
-                img = Xaml.FromStream(ms, 256, 256);
+                img = Caching(avatar, ms, 256, 256) ?? Character;
                 Pool.TryAdd(avatar, img);
             }
 
