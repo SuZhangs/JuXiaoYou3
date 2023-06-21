@@ -5,6 +5,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     partial class CharacterChannelViewModel
     {
+        private string _content;
+        
         /// <summary>
         /// 
         /// </summary>
@@ -34,6 +36,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Channel.PendingContent = value;
                 RaiseUpdated();
             }
+        }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Content"/> 属性。
+        /// </summary>
+        public string Content
+        {
+            get => _content;
+            set => SetValue(ref _content, value);
         }
 
         /// <summary>

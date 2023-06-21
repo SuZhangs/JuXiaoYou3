@@ -5,7 +5,7 @@
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             var db = session.Database;
-            CharacterDB = db.GetCollection<SocialCharacter>(Constants.Name_Chat_Character);
+            CharacterDB = db.GetCollection<DocumentCache>(Constants.Name_Chat_Character);
             UpvoteDB    = db.GetCollection<Upvote>(Constants.Name_Chat_Upvote);
             ThreadDB    = db.GetCollection<SocialThread>(Constants.Name_Chat_Thread);
             ChannelDB   = db.GetCollection<SocialChannel>(Constants.Name_Chat_Channel);
@@ -19,7 +19,7 @@
             ChannelDB   = null;
         }
 
-        public void AddCharacter(SocialCharacter character)
+        public void AddCharacter(DocumentCache character)
         {
             if (character is null)
             {
@@ -29,7 +29,7 @@
             CharacterDB.Upsert(character);
         }
         
-        public void RemoveCharacter(SocialCharacter character)
+        public void RemoveCharacter(DocumentCache character)
         {
             if (character is null)
             {
@@ -55,7 +55,6 @@
             {
                 return;
             }
-
             ChannelDB.Delete(channel.Id);
         }
         
@@ -67,7 +66,7 @@
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }
-        public ILiteCollection<SocialCharacter> CharacterDB { get; private set; }
+        public ILiteCollection<DocumentCache> CharacterDB { get; private set; }
         public ILiteCollection<Upvote> UpvoteDB { get; private set; }
     }
 }
