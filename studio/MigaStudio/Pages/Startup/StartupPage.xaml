@@ -158,8 +158,7 @@
             </f:EmptyContentControl>
 
             <!-- 快速功能 -->
-            <DockPanel Grid.Row="1"
-                       Margin="0 32 0 0">
+            <DockPanel Margin="0 32 0 0">
                 <f:ForestIsland DockPanel.Dock="Right"
                                 Header="反馈">
                     <f:SpacingStackPanel Gap="8"
@@ -216,17 +215,25 @@
                             <!--                 Icon="{StaticResource FeatherIcon.Inbox}" /> -->
 
                             <ftk:ToolButton Content="{f:Language global.CharacterRelationship}"
-                                        Command="{x:Static fs:Studio.GotoPageCommand}"
-                                        CommandParameter="{x:Type rel:CharacterRelationshipViewModel}"
-                                        ShowText="True"
-                                        Icon="{StaticResource FeatherIcon.People}" />
+                                            Command="{x:Static fs:Studio.GotoPageCommand}"
+                                            CommandParameter="{x:Type rel:CharacterRelationshipViewModel}"
+                                            ShowText="True"
+                                            Icon="{StaticResource FeatherIcon.People}" />
 
                             <ftk:ToolButton Content="{f:Language __MusicPlayer}"
-                                        Command="{x:Static fs:Studio.GotoPageCommand}"
-                                        CommandParameter="{x:Type srv:MusicViewModel}"
-                                        ShowText="True"
-                                        Icon="{StaticResource Playlist}" 
-                                        IsFilled="True"/>
+                                            Command="{x:Static fs:Studio.GotoPageCommand}"
+                                            CommandParameter="{x:Type srv:MusicViewModel}"
+                                            ShowText="True"
+                                            Icon="{StaticResource Playlist}" 
+                                            IsFilled="True"/>
+                            
+                            
+                            <ftk:ToolButton Content="{f:Language __MessageBoard}"
+                                            Command="{x:Static fs:Studio.GotoPageCommand}"
+                                            CommandParameter="{x:Type this:MessageBoardViewModel}"
+                                            ShowText="True"
+                                            Icon="{StaticResource Playlist}" 
+                                            IsFilled="True"/>
                             <!-- -->
                             <!-- <ftk:ToolButton Content="{f:Language __ColorService}" -->
                             <!--                 Command="{x:Static fs:Studio.GotoPageCommand}" -->

@@ -12,7 +12,6 @@
                 xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                 xmlns:sss="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                 Header="其他世界观"
-                Margin="16 8"
                 mc:Ignorable="d"
                 d:DesignHeight="300"
                 d:DesignWidth="300"
@@ -26,7 +25,7 @@
     <f:ForestIsland.ToolBar>
         <StackPanel Orientation="Horizontal">
 
-            <ftk:ToolButton Content="切换世界观"
+            <ftk:ToolButton Content="关闭当前世界观"
                             Command="{Binding CloseDatabaseCommand}"
                             HorizontalAlignment="Left"
                             Margin="32 0 0 0"

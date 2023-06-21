@@ -69,9 +69,8 @@
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <f:ForestIsland Background="{f:Brush BackgroundLevel2}"
-                    Header="所有评价"
-                    Margin="16 8"
+    <f:ForestIsland Header="所有评价"
+                    Margin="16"
                     Padding="0 16 0 0">
         <f:ForestIsland.ToolBar>
             <f:CallToAction DockPanel.Dock="Top"
