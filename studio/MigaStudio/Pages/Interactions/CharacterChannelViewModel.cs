@@ -9,6 +9,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public partial class CharacterChannelViewModel : TabViewModel
     {
-
+        private void Save()
+        {
+            //
+            // 
+            SetDirtyState(false);
+            
+            //
+            // 保存信息
+        }
     }
 }

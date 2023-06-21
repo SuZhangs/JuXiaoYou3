@@ -2,68 +2,66 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Data.Socials
 {
-    public class SocialChannel : StorageUIObject
+    public class SocialChannel : StorageObject
     {
-        private string _name;
-        private string _avatar;
-        private string _intro;
-        
-        
         /// <summary>
-        /// 别名映射
+        /// 聊天室的名字
         /// </summary>
-        public Dictionary<string, string> AvatarMapping { get; init; }
+        public string Name { get; set; }
         
         /// <summary>
-        /// 别名映射
+        /// 聊天室的头像
         /// </summary>
-        public Dictionary<string, string> AliasMapping { get; init; }
+        public string Avatar { get; set; }
         
         /// <summary>
-        /// 头衔映射
+        /// 聊天室的简介
+        /// </summary>
+        public string Intro { get; set; }
+        
+        /// <summary>
+        /// 聊天室未发出去的消息
+        /// </summary>
+        public string PendingContent { get; set; }
+        
+        /// <summary>
+        /// 所有成员列表，包括已经在群的、退群的
+        /// </summary>
+        public List<string> MemberList { get; init; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> AvailableMemberList { get; init; }
+
+        /// <summary>
+        /// 头衔的映射
         /// </summary>
         public Dictionary<string, string> TitleMapping { get; init; }
         
         /// <summary>
-        /// 身份映射
+        /// 角色映射
         /// </summary>
         public Dictionary<string, MemberRole> RoleMapping { get; init; }
+        
+        /// <summary>
+        /// 别名映射
+        /// </summary>
+        public Dictionary<string, Dictionary<string, string>> AliasMapping { get; init; }
 
         /// <summary>
-        /// 获取或设置 <see cref="Intro"/> 属性。
+        /// 最近发言的成员列表。
         /// </summary>
-        public string Intro
-        {
-            get => _intro;
-            set => SetValue(ref _intro, value);
-        }
+        public List<string> LatestSpeakers { get; init; }
         
         /// <summary>
-        /// 获取或设置 <see cref="Avatar"/> 属性。
+        /// 当前发言的人
         /// </summary>
-        public string Avatar
-        {
-            get => _avatar;
-            set => SetValue(ref _avatar, value);
-        }
-        
+        public string Speaker { get; set; }
+
         /// <summary>
-        /// 获取或设置 <see cref="Name"/> 属性。
+        /// 所有的消息
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
-        
-        /// <summary>
-        /// 所有成员
-        /// </summary>
-        public ObservableCollection<string> Members { get; init; }
-        
-        /// <summary>
-        /// 所有消息
-        /// </summary>
-        public ObservableCollection<SocialMessage> Messages { get; init; }
+        public List<SocialMessage> Messages { get; init; }
     }
 }

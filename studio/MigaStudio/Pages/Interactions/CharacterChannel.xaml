@@ -94,30 +94,9 @@
                     <RowDefinition Height="48" />
                     <RowDefinition Height="128" />
                 </Grid.RowDefinitions>
-                <DockPanel>
-                    <ftk:DropDownButton DockPanel.Dock="Right"
-                                        Margin="8 0 0 0"
-                                        Icon="{StaticResource FeatherIcon.More.Horizontal}"
-                                        IsFilled="True">
-                        <ftk:DropDownButton.ContextMenu>
-                            <f:ContextMenu>
-                                <f:MenuItem Header="加群"
-                                            Command="{Binding MemberJoinCommand}"
-                                            Icon="{StaticResource FeatherIcon.Login}"
-                                            IconSize="19" />
-                                <f:MenuItem Header="禁言"
-                                            IsFilled="True"
-                                            Icon="{StaticResource Mute}"
-                                            IconSize="19" />
-                                <f:MenuItem Header="退群"
-                                            Icon="{StaticResource FeatherIcon.LogOut}"
-                                            IconSize="19" />
-                            </f:ContextMenu>
-                        </ftk:DropDownButton.ContextMenu>
-                    </ftk:DropDownButton>
-                    <f:SingleLine Watermark="群聊名称"
-                                  Text="{Binding ChannelName,Mode=TwoWay}" />
-                </DockPanel>
+
+                <f:SingleLine Watermark="群聊名称"
+                              Text="{Binding ChannelName,Mode=TwoWay}" />
 
                 <ScrollViewer Grid.Row="1"
                               Margin="0 8 0 0">
@@ -178,15 +157,16 @@
                             <Setter Property="Width" Value="40" />
                         </Style>
                     </WrapPanel.Resources>
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.File}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Message.Circle}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Clock}" />
+                    <ftk:ToolButton Command="{Binding AddEmojiCommand}" Icon="{StaticResource FeatherIcon.Emoji}" />
+                    <ftk:ToolButton Command="{Binding AddMemberMutedCommand}" IsFilled="True" Icon="{StaticResource Mute}"/>
+                    <ftk:ToolButton Command="{Binding AddMemberUnMutedCommand}" IsFilled="True" Icon="{StaticResource UnMuted}"/>
+                    <ftk:ToolButton Command="{Binding AddImageCommand}" Icon="{StaticResource FeatherIcon.Image}" />
+                    <ftk:ToolButton Command="{Binding SetPendingContentCommand}" Icon="{StaticResource FeatherIcon.Message.Circle}" />
+                    <ftk:ToolButton Command="{Binding AddTimestampCommand}" Icon="{StaticResource FeatherIcon.Clock}" />
+                    <ftk:ToolButton Command="{Binding AddMemberJoinCommand}" Icon="{StaticResource FeatherIcon.Login}"/>
+                    <ftk:ToolButton Command="{Binding AddMemberLeaveCommand}" Icon="{StaticResource FeatherIcon.LogOut}"/>
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}"  Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}"  Visibility="Collapsed" />
                 </WrapPanel>
 
                 <DockPanel Grid.Row="3">
