@@ -175,28 +175,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void OnJobCompleted()
         {
-            var           opening = Context.IsDatabaseOpen;
-            ITabViewController controller;
-            
-            if (opening)
-            {
-                
-#if DEBUG
-
-                controller = Context.Controllers.First(x => x is InteractionController);
-#else
-                controller = Context.Controllers.First(x => x is TabShell);
-#endif
-            }
-            else
-            {
-
-                controller = Context.Controllers.First(x => x is QuickStartController);
-            }
+            var opening = Context.IsDatabaseOpen;
 
             //
             //
-            Context.SwitchController(controller);
+            Context.SwitchController(AppViewModel.Route(Context, opening));
         }
 
         public GlobalStudioContext Context { get; private set; }

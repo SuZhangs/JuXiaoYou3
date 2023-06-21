@@ -1,4 +1,6 @@
-﻿using Acorisoft.FutureGL.MigaStudio.Core;
+﻿using System.Linq;
+using Acorisoft.FutureGL.Forest.AppModels;
+using Acorisoft.FutureGL.MigaStudio.Core;
 
 namespace Acorisoft.FutureGL.MigaStudio
 {
@@ -8,5 +10,32 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             attachable.Add(new ColorService());
         } 
+    }
+}
+
+namespace Acorisoft.FutureGL.MigaStudio.ViewModels
+{
+
+    partial class AppViewModel
+    {
+        public static ITabViewController Route(GlobalStudioContext context, bool opening)
+        {
+            if (opening)
+            {
+                
+#if DEBUG
+
+                return context.Controllers.First(x => x is TabShell);
+                // return context.Controllers.First(x => x is InteractionController);
+#else
+                return context.Controllers.First(x => x is TabShell);
+#endif
+            }
+            else
+            {
+
+                return context.Controllers.First(x => x is QuickStartController);
+            }
+        }
     }
 }

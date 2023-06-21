@@ -51,7 +51,9 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
                                !x.Source.IsDeleted);
         }
 
-        public IEnumerable<Appraise> GetAppraises() => AppraiseDB.FindAll();
+        public IEnumerable<Appraise> GetAppraises() => AppraiseDB.Include(y => y.Source)
+                                                                 .Include(a => a.Target)
+                                                                 .FindAll();
 
         #endregion
 

@@ -16,7 +16,7 @@ using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
-    public class AppViewModel : TabBaseAppViewModel
+    public partial class AppViewModel : TabBaseAppViewModel
     {
         private readonly GlobalStudioContext _context;
         private readonly RoutingEventArgs    _parameter;

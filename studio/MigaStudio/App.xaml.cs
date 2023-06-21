@@ -96,58 +96,8 @@ namespace Acorisoft.FutureGL.MigaStudio
             // TemplateSystem.InstallViews();
         }
 
-        public static void SynchronizeSetting()
-        {
-            var db = Studio.DatabaseManager();
-            
-            if (db.IsOpen
-                  .CurrentValue)
-            {
-                var p = db.Property
-                          .CurrentValue;
-
-                if (p is null)
-                {
-                    return;
-                }
-                var id = Studio.Database()
-                               .DatabaseDirectory;
-                var ss = Xaml.Get<SystemSetting>();
-                var rs = ss.RepositorySetting;
-                var r = rs.Repositories
-                          .FirstOrDefault(x => x.Path == id);
-
-                if (r is null)
-                {
-                    return;
-                }
-
-                r.Author = p.Author;
-                r.Name   = p.Name;
-                r.Intro  = p.Intro;
-
-                for (var i = 0; i < rs.Repositories.Count; i++)
-                {
-                    if (Directory.Exists(rs.Repositories[i].Path))
-                    {
-                        continue;
-                    }
-                    
-                    rs.Repositories.RemoveAt(i);
-                }
-                
-                //
-                // 移除所有对象
-                Task.Run(async () => await ss.SaveAsync())
-                    .GetAwaiter()
-                    .GetResult();
-            }
-
-        }
-
         protected override void OnExitOverride(ExitEventArgs e)
         {
-            SynchronizeSetting();
             Xaml.Get<AppViewModel>()
                 .Stop();
             //

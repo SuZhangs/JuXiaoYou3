@@ -27,7 +27,6 @@ using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
 using NLog;
 
-// ReSharper disable All
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -57,6 +56,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             ProjectEngine        = Studio.Engine<ProjectEngine>();
             _databaseProperty    = Studio.Database()
                                          .Get<DatabaseProperty>();
+            SystemSetting = Xaml.Get<SystemSetting>();
             Property = Studio.Database()
                              .Get<ColorServiceProperty>();
             
@@ -94,15 +94,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             EditKeywordCommand   = AsyncCommand<string>(EditKeywordImpl, x => Selected is not null && HasItem(x));
 
 
-            CloseDatabaseCommand        = AsyncCommand(CloseDatabaseImpl);
-            SwitchDatabaseCommand       = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
-            ChangeAvatarCommand         = AsyncCommand(ChangeAvatarImpl);
-            EditCommand                 = Command(EditImpl);
-            AddAlbumCommand             = AsyncCommand(AddAlbumImpl);
-            RemoveAlbumCommand          = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
-            ShiftUpAlbumCommand         = Command<Album>(ShiftUpAlbumImpl, HasItem);
-            ShiftDownAlbumCommand       = Command<Album>(ShiftDownAlbumImpl, HasItem);
-            OpenAlbumCommand            = Command<Album>(OpenAlbumImpl, HasItem);
+            CloseDatabaseCommand  = AsyncCommand(CloseDatabaseImpl);
+            RemoveDatabaseCommand = AsyncCommand<RepositoryCache>(RemoveDatabaseImpl);
+            SwitchDatabaseCommand = AsyncCommand<RepositoryCache>(SwitchDatabaseImpl);
+            ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
+            EditCommand           = Command(EditImpl);
+            AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
+            RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
+            ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
+            ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
+            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
             
             AddTimelineAgeCommand         = AsyncCommand(AddTimelineAgeImpl);
             AddTimelineAgeBeforeCommand   = AsyncCommand<TimelineConcept>(AddTimelineAgeBeforeImpl);
@@ -149,7 +150,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private async Task CloseDatabaseImpl()
         {
             _exitOperation = true;
-            var ss         = Xaml.Get<SystemSetting>();
+            
             var context    = Controller.Context;
             var controller = (TabController)context.MainController;
             controller.Reset();
@@ -159,13 +160,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             AvatarConverter.Reset();
             
             // 清空最后一次打开的世界观
-            ss.RepositorySetting
-              .LastRepository = null;
+            SystemSetting.RepositorySetting
+                         .LastRepository = null;
             
-            // 同步设置
-            App.SynchronizeSetting();
             // 保存设置更改
-            await ss.SaveAsync();
+            await SystemSetting.SaveAsync();
             
             
             //
@@ -189,7 +188,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             // 先关闭引擎
             await DatabaseManager.CloseAsync();
             
-            var ss         = Xaml.Get<SystemSetting>();
+            
             var context    = Controller.Context;
             var controller = (TabController)context.MainController;
             
@@ -206,20 +205,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 // 重置头像缓存
                 AvatarConverter.Reset();
                 
-                // 同步设置
-                App.SynchronizeSetting();
-                
                 //
                 // 打开次数 +1
                 cache.OpenCount++;
                 
                 //
                 // 设置最后一次打开的世界观
-                ss.RepositorySetting
+                SystemSetting.RepositorySetting
                   .LastRepository = cache.Path;
                 
                 // 保存设置更改
-                await ss.SaveAsync();
+                await SystemSetting.SaveAsync();
                 
                 // 切换控制器
                 context.SwitchController(controller);
@@ -229,8 +225,32 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 await this.WarningNotification("打开失败");
             }
         }
-        
-        
+
+        private async Task RemoveDatabaseImpl(RepositoryCache cache)
+        {
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            if (cache.Path == Database.DatabaseDirectory)
+            {
+                this.ErrorNotification(Language.GetText("text.cannotRemoveOpeningDatabase"));
+                return;
+            }
+
+            //
+            // 删除
+            SystemSetting.RepositorySetting
+              .Repositories
+              .Remove(cache);
+
+            Repositories.Remove(cache);
+
+            //
+            // 保存
+            await SystemSetting.SaveAsync();
+        }
 
         /// <summary>
         /// 
@@ -245,6 +265,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Database.Upsert(Property);
             SetDirtyState(false);
             Database.Upsert(_databaseProperty);
+            SystemSetting.Save();
         }
 
         /// <summary>
@@ -256,6 +277,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 _databaseProperty.Intro = value;
+                var cache = SystemSetting.RepositorySetting
+                                         .Repositories
+                                         .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+
+                if (cache is not null)
+                {
+                    cache.Intro = value;
+                }
                 RaiseUpdated();
                 SetDirtyState();
             }
@@ -281,6 +310,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 _databaseProperty.Author = value;
+                var cache = SystemSetting.RepositorySetting
+                                         .Repositories
+                                         .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+
+                if (cache is not null)
+                {
+                    cache.Author = value;
+                }
                 SetDirtyState();
                 RaiseUpdated();
             }
@@ -292,6 +329,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 _databaseProperty.Name = value;
+                var cache = SystemSetting.RepositorySetting
+                                         .Repositories
+                                         .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+
+                if (cache is not null)
+                {
+                    cache.Name = value;
+                }
                 RaiseUpdated();
                 SetDirtyState();
             }
@@ -330,6 +375,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         public DocumentType Type => DocumentType.None;
         
         public AsyncRelayCommand CloseDatabaseCommand { get; }
+        public AsyncRelayCommand<RepositoryCache> RemoveDatabaseCommand { get; }
         public AsyncRelayCommand<RepositoryCache> SwitchDatabaseCommand { get; }
 
         public ObservableCollection<RepositoryCache> Repositories => Xaml.Get<SystemSetting>()
@@ -347,6 +393,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// </summary>
         public ObservableCollection<Album> PictureCollection { get; init; }
 
+        public SystemSetting SystemSetting { get; }
         public ProjectEngine ProjectEngine { get; }
         public IDatabase Database => DatabaseUtilities.Database;
         public IDatabaseManager DatabaseManager { get; }
