@@ -76,7 +76,7 @@
                                                 Command="{x:Static sss:FileIO.OpenLinkCommand}"
                                                 CommandParameter="{Binding Path}"/>
                                     <f:MenuItem Header="删除"
-                                                Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchDatabaseCommand}"
+                                                Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveDatabaseCommand}"
                                                 CommandParameter="{Binding}"/>
                                 </f:ContextMenu>
                             </ftk:DropDownButton.ContextMenu>

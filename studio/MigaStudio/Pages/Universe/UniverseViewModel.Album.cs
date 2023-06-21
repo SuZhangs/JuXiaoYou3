@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
@@ -40,7 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                         }
                     }
                     
-                    Save();
+                    Database.Upsert(_databaseProperty);
                     this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
@@ -60,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             PictureCollection.Remove(part);
             _databaseProperty.Album.Remove(part);
-            Save();
+            Database.Upsert(_databaseProperty);
         }
 
         private void OpenAlbumImpl(Album part)
@@ -78,13 +79,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         private void ShiftDownAlbumImpl(Album album)
         {
             PictureCollection.ShiftDown(album);
-            Save();
+            Database.Upsert(_databaseProperty);
         }
 
         private void ShiftUpAlbumImpl(Album album)
         {
             PictureCollection.ShiftUp(album);
-            Save();
+            Database.Upsert(_databaseProperty);
         }
 
         #region Album

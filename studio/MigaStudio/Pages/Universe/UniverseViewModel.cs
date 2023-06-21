@@ -57,7 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             _databaseProperty    = Studio.Database()
                                          .Get<DatabaseProperty>();
             SystemSetting = Xaml.Get<SystemSetting>();
-            Property = Studio.Database()
+            RarityProperty = Studio.Database()
                              .Get<ColorServiceProperty>();
             
             _threadSafeAdding    = new Subject<Album>().DisposeWith(Collector);
@@ -78,10 +78,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                              .DisposeWith(Collector);
 
 
-            if (Property.Mappings
+            if (RarityProperty.Mappings
                         .Count > 0)
             {
-                Mappings.AddMany(Property.Mappings, true);
+                Mappings.AddMany(RarityProperty.Mappings, true);
             }
 
 
@@ -134,7 +134,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (_exitOperation)
             {
-                _exitOperation = false;
                 return;
             }
             
@@ -164,12 +163,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                          .LastRepository = null;
             
             // 保存设置更改
-            await SystemSetting.SaveAsync();
+            await SystemSetting.SaveAsync()
+                               .ConfigureAwait(true);
             
             
             //
             // 先关闭引擎
-            await DatabaseManager.CloseAsync();
+            await DatabaseManager.CloseAsync()
+                                 .ConfigureAwait(true);
             
             // 切换控制器
             context.SwitchController(controller);
@@ -193,7 +194,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var controller = (TabController)context.MainController;
             
             // 再打开引擎
-            var r  = await DatabaseManager.LoadAsync(cache.Path);
+            var r  = await DatabaseManager.LoadAsync(cache.Path)
+                                          .ConfigureAwait(true);
             
             if (r.IsFinished)
             {
@@ -212,7 +214,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 //
                 // 设置最后一次打开的世界观
                 SystemSetting.RepositorySetting
-                  .LastRepository = cache.Path;
+                             .LastRepository = cache.Path;
                 
                 // 保存设置更改
                 await SystemSetting.SaveAsync();
@@ -242,8 +244,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             //
             // 删除
             SystemSetting.RepositorySetting
-              .Repositories
-              .Remove(cache);
+                         .Repositories
+                         .Remove(cache);
 
             Repositories.Remove(cache);
 
@@ -262,7 +264,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void Save()
         {
-            Database.Upsert(Property);
+            var cache = SystemSetting.RepositorySetting
+                                     .Repositories
+                                     .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+
+            if (cache is not null)
+            {
+                cache.Name   = Name;
+                cache.Author = Author;
+                cache.Intro  = Intro;
+            }
+            
+            Database.Upsert(RarityProperty);
             SetDirtyState(false);
             Database.Upsert(_databaseProperty);
             SystemSetting.Save();
@@ -275,16 +288,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             get => _databaseProperty.Intro;
             set
-            {
-                _databaseProperty.Intro = value;
+            { 
                 var cache = SystemSetting.RepositorySetting
-                                         .Repositories
-                                         .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+                                       .Repositories
+                                       .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
 
                 if (cache is not null)
                 {
-                    cache.Intro = value;
+                    cache.Intro  = Intro;
                 }
+                _databaseProperty.Intro = value;
                 RaiseUpdated();
                 SetDirtyState();
             }
@@ -309,15 +322,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             get => _databaseProperty.Author;
             set
             {
-                _databaseProperty.Author = value;
                 var cache = SystemSetting.RepositorySetting
                                          .Repositories
                                          .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
 
                 if (cache is not null)
                 {
-                    cache.Author = value;
+                    cache.Author = Author;
                 }
+                _databaseProperty.Author = value;
                 SetDirtyState();
                 RaiseUpdated();
             }
@@ -327,16 +340,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             get => _databaseProperty.Name;
             set
-            {
-                _databaseProperty.Name = value;
+            { 
                 var cache = SystemSetting.RepositorySetting
-                                         .Repositories
-                                         .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+                                       .Repositories
+                                       .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
 
                 if (cache is not null)
                 {
-                    cache.Name = value;
+                    cache.Name   = Name;
                 }
+                _databaseProperty.Name = value;
                 RaiseUpdated();
                 SetDirtyState();
             }

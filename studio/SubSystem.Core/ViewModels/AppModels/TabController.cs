@@ -32,7 +32,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         public void Reset()
         {
-            CurrentViewModel = null;
+            _currentViewModel = null;
+            RaiseUpdated(nameof(CurrentViewModel));
             Workspace.ForEach(x => x.Stop());
             InactiveWorkspace.ForEach(x => x.Stop());
             Workspace.Clear();

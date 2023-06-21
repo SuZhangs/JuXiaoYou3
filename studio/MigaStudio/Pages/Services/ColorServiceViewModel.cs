@@ -35,7 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
 
             Mappings.Add(m);
-            Property.Mappings
+            RarityProperty.Mappings
                     .Add(m);
             ColorService.AddOrUpdate(r.Value, m.Color);
             SetDirtyState();
@@ -54,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             Mappings.Remove(mapping);
-            Property.Mappings
+            RarityProperty.Mappings
                     .Remove(mapping);
             SetDirtyState();
 
@@ -170,7 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
         public ColorService ColorService { get; }
-        public ColorServiceProperty Property { get; }
+        public ColorServiceProperty RarityProperty { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="SelectedKeyword"/> 属性。

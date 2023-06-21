@@ -91,8 +91,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         /// <summary>
         /// 获取或设置 <see cref="HasBackgroundCover"/> 属性。
         /// </summary>
-        public bool HasBackgroundCover => _databaseProperty.Album is not null &&
-                                          _databaseProperty.Album.Count > 0;
+        public bool HasBackgroundCover
+        {
+            get
+            {
+                var r = _databaseProperty.Album is not null &&
+                        _databaseProperty.Album.Count > 0;
+
+                if (r && BackgroundCover is null)
+                {
+                    BackgroundCover = _databaseProperty.Album
+                                                       .FirstOrDefault();
+                }
+
+                return r;
+            }
+        }
 
         public string ProjectName => _databaseProperty.Name;
         public string ProjectIntro => _databaseProperty.Intro;

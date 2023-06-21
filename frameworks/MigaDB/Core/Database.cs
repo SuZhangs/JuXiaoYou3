@@ -1,9 +1,11 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Utils;
 
 namespace Acorisoft.FutureGL.MigaDB.Core
 {
+    [DebuggerDisplay("{GetHashCode()}")]
     public class Database : Disposable, IDatabase, IObjectCollection, IDisposableCollector
     {
         private readonly string                   _databaseDirectory;
