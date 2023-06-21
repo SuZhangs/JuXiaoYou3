@@ -68,6 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             ClearEntity(Collection.ToArray());
+            Collection.Clear();
             SetDirtyState();
         }
         

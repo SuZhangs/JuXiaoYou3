@@ -56,7 +56,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
 
         protected override void ClearEntity(RelativePreset[] entities)
         {
-            Collection.Clear();
         }
         
         

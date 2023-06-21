@@ -1,12 +1,26 @@
 ﻿using System.Threading.Channels;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
+using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     partial class CharacterChannelViewModel
     {
-        private string _content;
-        
+        private string _message;
+        private DocumentCache _speaker;
+
+        public ObservableCollection<DocumentCache> LatestSpeakers { get; }
+        public ObservableCollection<SocialMessageUI> Messages { get; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Speaker"/> 属性。
+        /// </summary>
+        public DocumentCache Speaker
+        {
+            get => _speaker;
+            set => SetValue(ref _speaker, value);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -39,12 +53,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
 
         /// <summary>
-        /// 获取或设置 <see cref="Content"/> 属性。
+        /// 获取或设置 <see cref="Message"/> 属性。
         /// </summary>
-        public string Content
+        public string Message
         {
-            get => _content;
-            set => SetValue(ref _content, value);
+            get => _message;
+            set => SetValue(ref _message, value);
         }
 
         /// <summary>

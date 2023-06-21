@@ -28,6 +28,11 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
 
             AppraiseDB.Delete(item.Id);
         }
+        
+        public void RemoveAppraise()
+        {
+            AppraiseDB.DeleteAll();
+        }
 
         public IEnumerable<Appraise> GetAppraises(DocumentCache source)
         {

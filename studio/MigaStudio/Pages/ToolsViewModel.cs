@@ -16,6 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateDialogFeature<RepairToolViewModel>(ToolsGroup, "global.repair", null);
             CreatePageFeature<KeywordViewModel>(FeatureGroup, "__Keywords", null);
             CreatePageFeature<BookmarkViewModel>(FeatureGroup, "__Bookmark", null);
+            CreatePageFeature<MessageBoardViewModel>(FeatureGroup, "__MessageBoard", null);
         }
     }
 }
