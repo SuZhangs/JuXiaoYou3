@@ -20,15 +20,15 @@ namespace Acorisoft.FutureGL.MigaStudio
     {
         protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
-            var setting    = InstallSetting(logger, appModel, container);
+            var setting = InstallSetting(logger, appModel, container);
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
             var attachable = new InMemoryServiceHost(container, _databaseManager);
-            
+
             //
             // 注册数据库附加服务
             InstallInMemoryService(attachable);
             InstallAutoSaveService(logger, setting, container);
-            
+
             container.RegisterInstance<MusicService>(new MusicService());
         }
 
@@ -38,17 +38,17 @@ namespace Acorisoft.FutureGL.MigaStudio
             var period   = Math.Clamp(setting.AutoSavePeriod, 1, 10);
             autoSave.Elapsed = period;
             logger.Info($"设置自动保存服务，自动保存时间为：{period}");
-            
+
 
             //
             // 注册服务
             container.Use<AutoSaveService, IAutoSaveService>(autoSave);
         }
-        
+
         private static AdvancedSettingModel InstallSetting(ILogger logger, ApplicationModel appModel, IContainer container)
         {
             logger.Info("正在读取设置...");
-            
+
             //
             // Repository Setting
             var repositorySettingFileName = Path.Combine(appModel.Settings, RepositorySettingFileName);
@@ -77,10 +77,9 @@ namespace Acorisoft.FutureGL.MigaStudio
                 RepositorySetting         = repositorySetting,
                 RepositorySettingFileName = repositorySettingFileName
             });
-            
+
             return advancedSetting;
         }
-
 
 
         public static string ApplicationAssemblyVersion
@@ -89,12 +88,12 @@ namespace Acorisoft.FutureGL.MigaStudio
             {
                 var prefix = Language.Culture switch
                 {
-                    CultureArea.English => "Assembly Version",
-                    CultureArea.Russian => "Версия сборки",
-                    CultureArea.French => "Version de l’assemblage",
-                    CultureArea.Korean => "어셈블리 버전",
+                    CultureArea.English  => "Assembly Version",
+                    CultureArea.Russian  => "Версия сборки",
+                    CultureArea.French   => "Version de l’assemblage",
+                    CultureArea.Korean   => "어셈블리 버전",
                     CultureArea.Japanese => "アセンブリ バージョン",
-                    _                   => "程序集版本"
+                    _                    => "程序集版本"
                 };
 
                 var version = Assembly.GetAssembly(typeof(App))
@@ -104,7 +103,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 return $"{prefix}:\t{version}";
             }
         }
-        
+
         public static string ApplicationAssemblyFileVersion
         {
             get
@@ -119,14 +118,15 @@ namespace Acorisoft.FutureGL.MigaStudio
                     _                    => "内部开发版本号"
                 };
 
-                var version = Assembly.GetAssembly(typeof(App))
-                                      .GetCustomAttribute<AssemblyFileVersionAttribute>()
-                                      ?.Version ?? "3.0.0";
+                var version = Assembly.GetAssembly(typeof(App))!
+                                      .GetName()
+                                      .Version!
+                                      .ToString();
 
                 return $"{prefix}:\t{version}";
             }
         }
-        
+
         public static string ApplicationVersion
         {
             get

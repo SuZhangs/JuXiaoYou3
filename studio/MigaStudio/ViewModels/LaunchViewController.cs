@@ -67,6 +67,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 //
                 //
                 setting.ApplicationVersion = version;
+                gc.IsUpdated               = true;
                 ss.Save();
                 return;
             }
@@ -74,8 +75,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             if (setting.ApplicationVersion != version)
             {
                 setting.DebugMode = DatabaseMode.Attached;
+                gc.IsUpdated      = true;
                 ss.Save();
-                gc.IsUpdated = true;
             }
         }
 
