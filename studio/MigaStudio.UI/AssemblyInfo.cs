@@ -8,6 +8,7 @@ global using Acorisoft.FutureGL.Forest;
 global using Acorisoft.FutureGL.Forest.Services;
 global using Acorisoft.FutureGL.Forest.Styles;
 global using Acorisoft.FutureGL.MigaUtils;
+using System.Reflection;
 using System.Windows.Markup;
 
 [assembly: ThemeInfo(

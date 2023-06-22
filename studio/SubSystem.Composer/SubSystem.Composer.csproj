@@ -11,6 +11,8 @@
         <FileVersion>3.0.0.0</FileVersion>
         <NeutralLanguage>zh</NeutralLanguage>
         <LangVersion>latest</LangVersion>
+        <Deterministic>False</Deterministic>
+        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\frameworks\MigaDB\MigaDB.csproj" />
@@ -47,4 +49,5 @@
       </EmbeddedResource>
     </ItemGroup>
 
+    <Import Project="..\..\frameworks\MigaStudio.Version\MigaStudio.Version.projitems" Label="Shared" />
 </Project>

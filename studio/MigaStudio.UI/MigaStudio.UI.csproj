@@ -8,6 +8,8 @@
         <OutDir>../../Builds/Studio</OutDir>
         <Platforms>AnyCPU;x86;x64</Platforms>
         <LangVersion>latest</LangVersion>
+        <Deterministic>False</Deterministic>
+        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -63,4 +65,5 @@
       <Folder Include="ViewModels\Editors" />
     </ItemGroup>
 
+    <Import Project="..\..\frameworks\MigaStudio.Version\MigaStudio.Version.projitems" Label="Shared" />
 </Project>

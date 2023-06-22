@@ -3,6 +3,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaStudio.Models;
 using Acorisoft.FutureGL.MigaUtils;
@@ -11,6 +12,14 @@ using Colorful;
 using ICSharpCode.SharpZipLib.Checksum;
 using ICSharpCode.SharpZipLib.Zip;
 using Console = Colorful.Console;
+
+
+[assembly: AssemblyCompany("罗易斯（Luoyisi）")]
+[assembly: AssemblyFileVersion("3.0.0.*")]
+[assembly: AssemblyProduct("橘小柚")]
+[assembly: AssemblyTitle("橘小柚")]
+[assembly: AssemblyVersion("3.0.0.*")]
+[assembly: AssemblyInformationalVersion("3.0.0-Preview7")]
 
 namespace Acorisoft.FutureGL.MigaStudio.Tools.BugReporter
 {

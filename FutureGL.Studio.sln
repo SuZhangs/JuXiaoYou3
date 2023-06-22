@@ -51,6 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0AE5
 		JuXiaoYou-Stable-x64.cake = JuXiaoYou-Stable-x64.cake
 		JuXiaoYou-Stable.cake = JuXiaoYou-Stable.cake
 		ProjectVersion.cake = ProjectVersion.cake
+		Test.Cake = Test.Cake
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubSystem.Storyboard", "studio\SubSystem.Storyboard\SubSystem.Storyboard.csproj", "{7918CB45-0E47-4821-BDC1-130E7B561062}"
@@ -78,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FC17
 		Framework-Version.props = Framework-Version.props
 		JuXiaoYou-Version.props = JuXiaoYou-Version.props
 	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MigaStudio.Version", "frameworks\MigaStudio.Version\MigaStudio.Version.shproj", "{02EBE6C5-D35B-4146-B921-7072D6C54A03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
