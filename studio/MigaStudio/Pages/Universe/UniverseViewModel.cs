@@ -194,7 +194,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             var controller = (TabController)context.MainController;
             
             // 再打开引擎
-            var r  = await DatabaseManager.LoadAsync(cache.Path, Xaml.Get<AdvancedSettingModel>()
+            var r  = await DatabaseManager.LoadAsync(cache.Path, Xaml.Get<SystemSetting>()
+                                                                     .AdvancedSetting
                                                                      .DebugMode);
             
             if (r.IsFinished)

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Acorisoft.FutureGL.Forest;
@@ -78,6 +79,71 @@ namespace Acorisoft.FutureGL.MigaStudio
             });
             
             return advancedSetting;
+        }
+
+
+
+        public static string ApplicationAssemblyVersion
+        {
+            get
+            {
+                var prefix = Language.Culture switch
+                {
+                    CultureArea.English => "Assembly Version",
+                    CultureArea.Russian => "Версия сборки",
+                    CultureArea.French => "Version de l’assemblage",
+                    CultureArea.Korean => "어셈블리 버전",
+                    CultureArea.Japanese => "アセンブリ バージョン",
+                    _                   => "程序集版本"
+                };
+
+                var version = Assembly.GetAssembly(typeof(App))
+                                      .GetCustomAttribute<AssemblyVersionAttribute>();
+
+                return $"{prefix}:\t{version}";
+            }
+        }
+        
+        public static string ApplicationAssemblyFileVersion
+        {
+            get
+            {
+                var prefix = Language.Culture switch
+                {
+                    CultureArea.English  => "Insider Version",
+                    CultureArea.Russian  => "Инсайдерская версия",
+                    CultureArea.French   => "Insider Version",
+                    CultureArea.Korean   => "참가자 버전",
+                    CultureArea.Japanese => "インサイダーバージョン",
+                    _                    => "内部开发版本号"
+                };
+
+                var version = Assembly.GetAssembly(typeof(App))
+                                      .GetCustomAttribute<AssemblyFileVersionAttribute>();
+
+                return $"{prefix}:\t{version}";
+            }
+        }
+        
+        public static string ApplicationVersion
+        {
+            get
+            {
+                var prefix = Language.Culture switch
+                {
+                    CultureArea.English  => "Application Version",
+                    CultureArea.Russian  => "Версия приложения",
+                    CultureArea.French   => "Version de l’application",
+                    CultureArea.Korean   => "응용 프로그램 버전",
+                    CultureArea.Japanese => "アプリケーションのバージョン",
+                    _                    => "应用程序版本"
+                };
+
+                var version = Assembly.GetAssembly(typeof(App))
+                                      .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+
+                return $"{prefix}:\t{version}";
+            }
         }
     }
 }

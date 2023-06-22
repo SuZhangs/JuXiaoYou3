@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
+using Acorisoft.FutureGL.MigaStudio.Pages.Dialogs;
 using Acorisoft.FutureGL.MigaStudio.Pages.Templates;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -50,13 +51,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Geography", DocumentType.Geography);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Item", DocumentType.Item);
             CreateGalleryFeature<DocumentGalleryViewModel>(Documents, "__Other", DocumentType.Other);
-            
+
             //
             //
             CreateGalleryFeature<TemplateGalleryViewModel>(Tools, "text.TemplateGalleryViewModel");
             CreateGalleryFeature<TemplateEditorViewModel>(Tools, "text.TemplateEditorViewModel");
             CreateGalleryFeature<ToolsViewModel>(Tools, Tools);
         }
+
 
         protected override void OnStart()
         {
@@ -66,6 +68,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             SelectedFeature = Features.FirstOrDefault(x => x.NameId == Home);
+
+
+            //
+            // 弹出自动保护
+            if (Controller.Context
+                          .IsUpdated)
+            {
+                DialogService()
+                    .Dialog(new AutomaticDataProtectionViewModel
+                    {
+                        CountDown = true, 
+                        CountSeconds = 10
+                    });
+            }
         }
 
         public override void Stop()
@@ -92,8 +108,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 feature.Cache?.Resume();
             }
-
-            
         }
 
 

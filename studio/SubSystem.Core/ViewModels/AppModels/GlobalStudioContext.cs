@@ -69,5 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// 
         /// </summary>
         public IReadOnlyDictionary<string, ITabViewController> ControllerMaps { get; init; }
+        
+        public bool IsUpdated { get; set; }
     }
 }

@@ -5,6 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:local="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:res="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources"
+                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio"
                      xmlns:thisModels="clr-namespace:Acorisoft.FutureGL.MigaStudio.Models"
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:f="urn:acorisoft/forest/ui"
@@ -205,6 +206,22 @@
                                     <RadioButton x:Name="CrashBug" Content="无法继续使用！"/>
                                 </f:SpacingStackPanel>
                             </DockPanel>
+                        </StackPanel>
+                    </f:ForestIsland>
+
+                    <f:ForestIsland Header="版本"
+                                    Margin="0 0 0 48"
+                                    Padding="0 8">
+                        <StackPanel>
+                            <TextBlock Margin="0 8"
+                                       Text="{x:Static this:App.ApplicationAssemblyVersion}"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Margin="0 8"
+                                       Text="{x:Static this:App.ApplicationAssemblyFileVersion}"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Margin="0 8"
+                                       Text="{x:Static this:App.ApplicationVersion}"
+                                       VerticalAlignment="Center"/>
                         </StackPanel>
                     </f:ForestIsland>
                 </StackPanel>

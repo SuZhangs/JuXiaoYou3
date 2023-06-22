@@ -484,7 +484,7 @@
                                                     IconSize="29"
                                                     Content="{TemplateBinding CancelButtonText}"
                                                     Command="{TemplateBinding CancelCommand}"
-                                                    Purpose="CallToAction" 
+                                                    Purpose="Info" 
                                                     Width="256"/>
                                 </Grid>
                             </Border>

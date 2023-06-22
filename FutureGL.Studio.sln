@@ -74,8 +74,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9B4B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FC17CEF6-FE04-41B6-8F41-6F09A3A14B41}"
 	ProjectSection(SolutionItems) = preProject
-		Forest.props = Forest.props
 		Forest-Version.props = Forest-Version.props
+		Forest.props = Forest.props
 		Framework-Version.props = Framework-Version.props
 		JuXiaoYou-Version.props = JuXiaoYou-Version.props
 	EndProjectSection
@@ -352,5 +352,15 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADC66617-EF09-469B-8799-FB3A75277D8D}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{02ebe6c5-d35b-4146-b921-7072d6c54a03}*SharedItemsImports = 13
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{091bed3e-4ead-4002-8e65-26683a9a1b64}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{12e93d17-55b2-477f-be70-2c5da43d77a6}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{239204f4-f934-4822-a249-ef6cb7cf0bf4}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{6468a5c4-23e6-4f28-a313-49fdbd8afddd}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{7918cb45-0e47-4821-bdc1-130e7b561062}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{8dff5af2-54a6-4fdb-bd68-b8f40101c600}*SharedItemsImports = 5
+		frameworks\MigaStudio.Version\MigaStudio.Version.projitems*{e9405458-5bf6-4755-bbb9-2446d58314dc}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

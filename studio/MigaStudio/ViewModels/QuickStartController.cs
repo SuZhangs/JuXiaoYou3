@@ -102,7 +102,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             var folder = opendlg.SelectedPath;
             var dbMgr  = Studio.DatabaseManager();
             
-            var result = await dbMgr.LoadAsync(folder, Xaml.Get<AdvancedSettingModel>()
+            var result = await dbMgr.LoadAsync(folder, Xaml.Get<SystemSetting>()
+                                                           .AdvancedSetting
                                                            .DebugMode);
 
             if (result.IsFinished)

@@ -12,6 +12,7 @@
         <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
         <LangVersion>latest</LangVersion>
         <Deterministic>False</Deterministic>
+        <NoWarn>CS7035</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

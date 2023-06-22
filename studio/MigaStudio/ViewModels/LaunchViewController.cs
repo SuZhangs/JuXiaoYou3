@@ -22,11 +22,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             _alc = AssemblyLoadContext.Default;
 
             // 加载设置
-            Job("text.launch.loadSetting", _ => { });
+            Job("text.launch.loadSetting", LaunchSettingImpl);
 
             // 检查更新
             Job("text.launch.checkVersion", x => { });
-            
             
             // 检查世界观存在性
             Job("text.launch.databaseExistence", x =>  CheckDatabaseExistenceImpl((GlobalStudioContext)x));
@@ -53,20 +52,30 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             return pluginDir;
         }
 
-        private void LaunchSettingImpl(GlobalStudioContext context)
+        private static void LaunchSettingImpl(object p)
         {
-            var setting = Xaml.Get<AdvancedSettingModel>();
+            var gc      = (GlobalStudioContext)p;
+            var ss      = Xaml.Get<SystemSetting>();
+            var setting = ss.AdvancedSetting;
             var assemblyVersion = Assembly.GetAssembly(typeof(MainWindow))
-                                          .GetCustomAttribute<AssemblyVersionAttribute>();
+                                          .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+
+            var version = assemblyVersion?.InformationalVersion ?? "3.0.0";
 
             if (string.IsNullOrEmpty(setting.ApplicationVersion))
             {
                 //
                 //
+                setting.ApplicationVersion = version;
+                ss.Save();
+                return;
             }
-            else
+
+            if (setting.ApplicationVersion != version)
             {
-                
+                setting.DebugMode = DatabaseMode.Attached;
+                ss.Save();
+                gc.IsUpdated = true;
             }
         }
 
@@ -147,7 +156,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var dr = Studio.DatabaseManager()
-                           .LoadAsync(setting.LastRepository, Xaml.Get<AdvancedSettingModel>()
+                           .LoadAsync(setting.LastRepository, Xaml.Get<SystemSetting>()
+                                                                  .AdvancedSetting
                                                                   .DebugMode)
                            .GetAwaiter()
                            .GetResult();
@@ -166,7 +176,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
         }
 
-        private static void CheckDatabaseExistenceImpl(GlobalStudioContext context)
+        private static void CheckDatabaseExistenceImpl(GlobalStudioContext _)
         {
             var ss = Xaml.Get<SystemSetting>();
             var rs = ss.RepositorySetting;
