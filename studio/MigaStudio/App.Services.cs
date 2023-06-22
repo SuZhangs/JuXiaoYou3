@@ -98,7 +98,8 @@ namespace Acorisoft.FutureGL.MigaStudio
                 };
 
                 var version = Assembly.GetAssembly(typeof(App))
-                                      .GetCustomAttribute<AssemblyVersionAttribute>();
+                                      .GetCustomAttribute<AssemblyVersionAttribute>()
+                                      ?.Version ?? "3.0.0";
 
                 return $"{prefix}:\t{version}";
             }
@@ -119,7 +120,8 @@ namespace Acorisoft.FutureGL.MigaStudio
                 };
 
                 var version = Assembly.GetAssembly(typeof(App))
-                                      .GetCustomAttribute<AssemblyFileVersionAttribute>();
+                                      .GetCustomAttribute<AssemblyFileVersionAttribute>()
+                                      ?.Version ?? "3.0.0";
 
                 return $"{prefix}:\t{version}";
             }
@@ -140,7 +142,8 @@ namespace Acorisoft.FutureGL.MigaStudio
                 };
 
                 var version = Assembly.GetAssembly(typeof(App))
-                                      .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                                      .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                                      ?.InformationalVersion ?? "3.0.0";
 
                 return $"{prefix}:\t{version}";
             }
