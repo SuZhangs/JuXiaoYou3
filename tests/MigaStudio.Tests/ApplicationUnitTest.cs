@@ -74,9 +74,7 @@ namespace MigaStudio.Tests
             container.RegisterInstance<IScheduler>(CurrentThreadScheduler.Instance);
             container.RegisterInstance<ILogger>(logger);
             var dbMgr = container.Use<DatabaseManager, IDatabaseManager>(
-                DatabaseManager.GetDefaultDatabaseManager(
-                    logger,
-                    DatabaseMode.Debug));
+                DatabaseManager.GetDefaultDatabaseManager(logger));
 
             dbMgr.LoadAsync("C:\\")
                  .GetAwaiter()

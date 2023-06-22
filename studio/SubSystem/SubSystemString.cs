@@ -435,5 +435,6 @@
         }
 
         public static string NoMoreData => GetText("text.noMoreData");
+        public static string LoadingImage => GetText("text.loadingImage");
     }
 }

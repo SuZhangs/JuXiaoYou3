@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
             var setting    = InstallSetting(logger, appModel, container);
-            _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger, setting.DebugMode));
+            _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(DatabaseManager.GetDefaultDatabaseManager(logger));
             var attachable = new InMemoryServiceHost(container, _databaseManager);
             
             //
@@ -59,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 });
 
             //
-            // Repository Setting
+            // Advanced Setting
             var advancedSettingFileName = Path.Combine(appModel.Settings, AdvancedSettingFileName);
             var advancedSetting = JSON.OpenSetting<AdvancedSettingModel>(advancedSettingFileName,
                 () => new AdvancedSettingModel

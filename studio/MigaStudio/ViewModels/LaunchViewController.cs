@@ -53,6 +53,23 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             return pluginDir;
         }
 
+        private void LaunchSettingImpl(GlobalStudioContext context)
+        {
+            var setting = Xaml.Get<AdvancedSettingModel>();
+            var assemblyVersion = Assembly.GetAssembly(typeof(MainWindow))
+                                          .GetCustomAttribute<AssemblyVersionAttribute>();
+
+            if (string.IsNullOrEmpty(setting.ApplicationVersion))
+            {
+                //
+                //
+            }
+            else
+            {
+                
+            }
+        }
+
         private void LoadModuleImpl(GlobalStudioContext context)
         {
             var pluginDir = GetPluginDirectory();
@@ -130,7 +147,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             var dr = Studio.DatabaseManager()
-                           .LoadAsync(setting.LastRepository)
+                           .LoadAsync(setting.LastRepository, Xaml.Get<AdvancedSettingModel>()
+                                                                  .DebugMode)
                            .GetAwaiter()
                            .GetResult();
 

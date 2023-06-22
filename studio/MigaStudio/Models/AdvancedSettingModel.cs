@@ -7,6 +7,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
     {
         private DatabaseMode _debugMode;
         private int          _autoSavePeriod;
+        private string       _applicationVersion;
+
+        /// <summary>
+        /// 获取或设置 <see cref="ApplicationVersion"/> 属性。
+        /// </summary>
+        public string ApplicationVersion
+        {
+            get => _applicationVersion;
+            set => SetValue(ref _applicationVersion, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="AutoSavePeriod"/> 属性。

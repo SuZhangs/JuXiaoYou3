@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// </summary>
         /// <returns>返回一个新的数据库管理器实例。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static DatabaseManager GetDefaultDatabaseManager(ILogger logger, DatabaseMode mode)
+        public static DatabaseManager GetDefaultDatabaseManager(ILogger logger)
         {
             return CreateBuilder(logger)
                    .Setup<TemplateEngine>()
@@ -48,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                    .Maintain<DatabasePropertiesMaintainer>()
                    .Maintain<ServicePropertyMaintainer>()
                    .Update<UpdaterOfVer001>()
-                   .Build(Constants.DatabaseCurrentVersion, mode);
+                   .Build(Constants.DatabaseCurrentVersion);
         }
         
     }

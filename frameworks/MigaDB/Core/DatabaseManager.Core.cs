@@ -27,8 +27,8 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         private readonly IDatabaseSynchronizer              _synchronizer;
         private readonly IReadOnlyList<IDataEngine>         _engines;
         private readonly int                                _minimumTargetVersion;
-        private readonly DatabaseMode                       _databaseMode;
         private readonly ILogger                            _logger;
+        private          DatabaseMode                       _databaseMode;
 
 
         public DatabaseManager(ILogger logger,
@@ -36,8 +36,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                                IReadOnlyList<IDatabaseMaintainer> maintainers,
                                IReadOnlyList<IDatabaseUpdater> updaters,
                                IReadOnlyList<IDataEngine> engines, 
-                               int minimumTargetVersion,
-                               DatabaseMode mode)
+                               int minimumTargetVersion)
         {
             _logger               = logger;
             _maintainers          = maintainers;
@@ -45,7 +44,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _updaters             = updaters;
             _minimumTargetVersion = minimumTargetVersion;
             Container             = container;
-            _databaseMode         = mode;
             _database             = new ObservableProperty<IDatabase>();
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
@@ -259,8 +257,9 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// 加载指定的世界观
         /// </summary>
         /// <param name="directory">世界观目录</param>
+        /// <param name="mode">数据模式</param>
         /// <returns>返回一个操作结果</returns>
-        public async Task<DatabaseResult> LoadAsync(string directory)
+        public async Task<DatabaseResult> LoadAsync(string directory, DatabaseMode mode= DatabaseMode.Release)
         {
             if (string.IsNullOrEmpty(directory))
             {
@@ -295,6 +294,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
             try
             {
+                _databaseMode = mode;
                 return await LoadImplAsync(directory, databaseFileName, databaseCacheFileName);
             }
             catch
@@ -643,7 +643,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             /// 构建引擎。
             /// </summary>
             /// <returns>返回一个<see cref="IDatabaseManager"/></returns>
-            public DatabaseManager Build(int databaseVersion, DatabaseMode mode)
+            public DatabaseManager Build(int databaseVersion)
             {
                 lock (_sync)
                 {
@@ -653,8 +653,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                         _maintainers, 
                         _updaters,
                         _engines,
-                        databaseVersion,
-                        mode);
+                        databaseVersion);
                 }
             }
         }

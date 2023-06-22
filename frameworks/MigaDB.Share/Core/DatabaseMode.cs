@@ -15,6 +15,11 @@
         /// <summary>
         /// 附加模式，打开实际文件，只读不写
         /// </summary>
-        Attached
+        Attached,
+        
+        /// <summary>
+        /// 影子模式，打开实际文件的副本
+        /// </summary>
+        Shadow
     }
 }

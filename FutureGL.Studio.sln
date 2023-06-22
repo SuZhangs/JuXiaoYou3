@@ -71,6 +71,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9B4B8433-B96D-4ED3-ACB7-06259DF3BAF9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{FC17CEF6-FE04-41B6-8F41-6F09A3A14B41}"
+	ProjectSection(SolutionItems) = preProject
+		Forest.props = Forest.props
+		Forest-Version.props = Forest-Version.props
+		Framework-Version.props = Framework-Version.props
+		JuXiaoYou-Version.props = JuXiaoYou-Version.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -271,8 +279,8 @@ Global
 		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|Any CPU.Build.0 = Release|x86
 		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x64.ActiveCfg = Release|x64
 		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x64.Build.0 = Release|x64
-		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x86.ActiveCfg = Release|Any CPU
-		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x86.Build.0 = Release|Any CPU
+		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x86.ActiveCfg = Release|x86
+		{D9E69ED5-B0B4-4112-B584-E2F1DB434E0A}.Release|x86.Build.0 = Release|x86
 		{0B2F4823-2D37-40D9-8BE9-BF03AFEABCA8}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{0B2F4823-2D37-40D9-8BE9-BF03AFEABCA8}.Debug|Any CPU.Build.0 = Debug|x86
 		{0B2F4823-2D37-40D9-8BE9-BF03AFEABCA8}.Debug|x64.ActiveCfg = Debug|x64

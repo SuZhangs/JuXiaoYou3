@@ -37,8 +37,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// 构建引擎。
         /// </summary>
         /// <param name="databaseVersion">数据库当前版本。</param>
-        /// <param name="mode">数据库加载模式。</param>
         /// <returns>返回一个<see cref="IDatabaseManager"/></returns>
-        DatabaseManager Build(int databaseVersion, DatabaseMode mode);
+        DatabaseManager Build(int databaseVersion);
     }
 }

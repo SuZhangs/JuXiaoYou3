@@ -18,6 +18,20 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(buildDir);
+    
+    //
+    // Versioning
+    var propsFile = "./JuXiaoYou-Version.props";
+    var readedVersion = XmlPeek(propsFile, "//AssemblyVersion");
+    var currentVersion = new Version(readedVersion);
+    
+    var semVersion = new Version(currentVersion.Major, currentVersion.Minor, currentVersion.Build + 1);
+    var version = semVersion.ToString();
+    
+    XmlPoke(propsFile, "//AssemblyVersion", version);
+    XmlPoke(propsFile, "//FileVersion", version);
+    XmlPoke(propsFile, "//InformationalVersion", version);
+    
 });
 
 Task("Build")

@@ -13,8 +13,9 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// 加载指定的世界观
         /// </summary>
         /// <param name="directory">世界观目录</param>
+        /// <param name="mode">数据模式</param>
         /// <returns>返回一个操作结果</returns>
-        Task<DatabaseResult> LoadAsync(string directory);
+        Task<DatabaseResult> LoadAsync(string directory, DatabaseMode mode = DatabaseMode.Release);
 
         /// <summary>
         /// 在指定目录创建世界观
