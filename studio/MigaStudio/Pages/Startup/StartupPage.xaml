@@ -14,7 +14,7 @@
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:wv="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Universe;assembly=SubSystem"
                      mc:Ignorable="d"
-                     Padding="16"
+                     Padding="8 0"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:StartupViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
@@ -91,7 +91,7 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ScrollViewer>
+    <ScrollViewer Padding="0 0 16 0">
         <StackPanel>
             <f:EmptyContentControl NotEmpty="{Binding HasBackgroundCover,Mode=OneWay}"
                                    Height="360">
