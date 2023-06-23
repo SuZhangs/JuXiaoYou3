@@ -36,10 +36,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
 
             
-            SaveComposeCommand = Command(Save);
-            NewComposeCommand  = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
-            UndoCommand        = Command(UndoImpl, CanUndoImpl);
-            RedoCommand        = Command(RedoImpl, CanRedoImpl);
+            OpenDocumentCommand = Command<DocumentCache>(OpenDocumentImpl);
+            SaveComposeCommand  = Command(Save);
+            NewComposeCommand   = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
+            UndoCommand         = Command(UndoImpl, CanUndoImpl);
+            RedoCommand         = Command(RedoImpl, CanRedoImpl);
 
 
             Initialize();
@@ -48,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private void Save()
         {
             ComposeEngine.UpdateCompose(Document, Cache);
+            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
             SetDirtyState(false);
         }
 
@@ -87,10 +89,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         protected override void OnDirtyStateChanged(bool state)
         {
-            if (state)
-            {
-                SetTitle(Document.Name, true);
-            }
+            SetTitle(Document.Name, state);
         }
         
         protected override void OpeningDocument(ComposeCache cache, Compose document)

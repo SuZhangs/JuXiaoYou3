@@ -185,13 +185,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             _exitOperation = true;
             
-            //
-            // 先关闭引擎
-            await DatabaseManager.CloseAsync();
-            
             
             var context    = Controller.Context;
             var controller = (TabController)context.MainController;
+            
+            // 重置所有内容
+            controller.Reset();
+                
+            // 重置头像缓存
+            AvatarConverter.Reset();
+                
+            //
+            // 打开次数 +1
+            cache.OpenCount++;
+                
+            //
+            // 设置最后一次打开的世界观
+            SystemSetting.RepositorySetting
+                         .LastRepository = cache.Path;
+                
+            // 保存设置更改
+            await SystemSetting.SaveAsync();
+            
+            //
+            // 先关闭引擎
+            await DatabaseManager.CloseAsync();
             
             // 再打开引擎
             var r  = await DatabaseManager.LoadAsync(cache.Path, Xaml.Get<SystemSetting>()
@@ -200,33 +218,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             if (r.IsFinished)
             {
-                // 重置所有内容
-                controller.Reset();
                 controller = (TabController)Controller.Context
                                                       .ControllerMaps[AppViewModel.IdOfTabShellController];
-                
-                // 重置头像缓存
-                AvatarConverter.Reset();
-                
-                //
-                // 打开次数 +1
-                cache.OpenCount++;
-                
-                //
-                // 设置最后一次打开的世界观
-                SystemSetting.RepositorySetting
-                             .LastRepository = cache.Path;
-                
-                // 保存设置更改
-                await SystemSetting.SaveAsync();
-                
-                // 切换控制器
-                context.SwitchController(controller);
             }
             else
             {
-                await this.WarningNotification("打开失败");
+                controller = (TabController)Controller.Context
+                                                      .ControllerMaps[AppViewModel.IdOfQuickStartController];
             }
+            
+            // 切换控制器
+            context.SwitchController(controller);
         }
 
         private async Task RemoveDatabaseImpl(RepositoryCache cache)

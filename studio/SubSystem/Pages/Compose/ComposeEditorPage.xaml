@@ -10,6 +10,8 @@
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:workspace="clr-namespace:Acorisoft.FutureGL.MigaStudio.Editors;assembly=SubSystem.Core"
                      xmlns:workspaceModel="clr-namespace:Acorisoft.FutureGL.MigaStudio.Editors.Models;assembly=SubSystem.Core"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
+                     xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:editor="http://icsharpcode.net/sharpdevelop/avalonedit"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
@@ -19,7 +21,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Forest.Shell;component/Themes/MaterialSymbols.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <Style TargetType="{x:Type f:HeaderedSingleLine}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource ClearStyle.FocusVisual}" />
                 <Setter Property="CaretBrush" Value="{f:Brush ForegroundLevel1}" />
@@ -77,7 +79,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <DataTemplate DataType="{x:Type workspace:RichTextFileWorkspace}">
                 <DockPanel Margin="4">
                     <Path DockPanel.Dock="Left"
@@ -88,7 +90,7 @@
                           Margin="0 0 8 0"
                           Width="17"
                           Height="17" />
-                    
+
                     <TextBlock Text="Rtf"
                                VerticalAlignment="Center"/>
                 </DockPanel>
@@ -103,10 +105,43 @@
                           Fill="Black"
                           Width="17"
                           Height="17" />
-                    
+
                     <TextBlock Text="Markdown"
                                VerticalAlignment="Center"/>
                 </DockPanel>
+            </DataTemplate>
+
+            <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+
+            <DataTemplate DataType="{x:Type doc:DocumentCache}">
+                <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenDocumentCommand}"
+                                CommandParameter="{Binding}"
+                            Margin="4"
+                            Height="96"
+                            Width="96">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top"
+                                CornerRadius="64"
+                                Height="54"
+                                Width="54">
+                            <Border.Background>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                                            <Binding Path="Avatar" Mode="OneWay" />
+                                            <Binding Path="Type" />
+                                        </MultiBinding>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock FontSize="14"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}" />
+                    </DockPanel>
+                </f:SimpleButton>
             </DataTemplate>
 
             <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
@@ -184,13 +219,15 @@
 
             <ftk:ToolButton Command="{Binding SaveComposeCommand}"
                             Icon="{StaticResource FeatherIcon.Save}" />
-            
+
             <ftk:ToolButton Command="{Binding SaveComposeCommand}"
-                            Icon="{StaticResource FeatherIcon.Folder}" />
+                            Icon="{StaticResource FeatherIcon.Folder}" 
+                            Visibility="Collapsed"/>
 
             <ftk:ToolButton Command="{Binding SaveComposeCommand}"
                             Icon="{StaticResource FeatherIcon.Share2}"
-                            IconSize="17" />
+                            IconSize="17"
+                            Visibility="Collapsed" />
         </StackPanel>
 
         <!-- 标题栏 -->
@@ -205,7 +242,8 @@
                     Grid.Row="0"
                     HorizontalAlignment="Right"
                     Margin="16 16 16 0"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    Visibility="Collapsed">
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Archive}" />
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Archive}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Path}"
@@ -225,7 +263,7 @@
                         Margin="16"
                         Padding="0 8" 
                         Header="大纲">
-            <f:TreeView ItemsSource="{Binding ReferenceDocuments,Mode=OneWay}">
+            <f:TreeView ItemsSource="{Binding Outlines,Mode=OneWay}">
                 <f:TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type workspace:MarkdownOutlineModel}"
                                               ItemsSource="{Binding Children}">
@@ -244,12 +282,16 @@
                         Margin="16"
                         Padding="0 8" 
                         Header="关联的设定">
-            <StackPanel>
-                <UniformGrid Columns="2">
-
-
-                </UniformGrid>
-            </StackPanel>
+            <ScrollViewer>
+                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                              ItemsSource="{Binding ReferenceDocuments}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
         </f:ForestIsland>
 
 
@@ -290,7 +332,7 @@
         <!-- 编辑器 -->
         <Grid Grid.Column="1"
               Grid.Row="2">
-            
+
             <!-- MD编辑器 -->
             <editor:TextEditor x:Name="Editor"
                                Background="{f:Brush BackgroundLevel2}"

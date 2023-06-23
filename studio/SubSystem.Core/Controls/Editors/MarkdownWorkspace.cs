@@ -164,7 +164,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
              * - L1
              */
             foreach (var block in headingBlocks)
-            {
+           {
                 //
                 // 当前的块
                 var current = FromBlock(block);

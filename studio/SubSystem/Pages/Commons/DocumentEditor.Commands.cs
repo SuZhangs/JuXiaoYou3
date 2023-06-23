@@ -9,7 +9,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public void Save()
         {
-            
             if (DocumentEngine.HasDocumentName(Cache.Id, Cache.Name))
             {
                 this.ErrorNotification(Language.GetText("text.duplicated.name"));

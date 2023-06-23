@@ -65,7 +65,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         public IEnumerable<DocumentCache> Tokenize(string document)
         {
             return _parser.ParseText(document)
-                          .Select(x => x.Value);
+                          .Select(x => x.Value)
+                          .Distinct();
         }
         public int TrackingVersion { get;private set; }
         public DocumentEngine Engine { get; private set; }

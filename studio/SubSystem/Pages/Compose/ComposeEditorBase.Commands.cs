@@ -1,9 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Acorisoft.FutureGL.MigaStudio.Utilities;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
     public partial class ComposeEditorBase
     {
+        
+        private void OpenDocumentImpl(DocumentCache cache)
+        {
+            DocumentUtilities.OpenDocument(Controller, cache);
+        }
+        
         private void UndoImpl()
         {
             if (Workspace is null)
@@ -50,5 +57,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand UndoCommand { get; }
+        public RelayCommand<DocumentCache> OpenDocumentCommand { get; }
     }
 }

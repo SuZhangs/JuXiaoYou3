@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id && Type == other.Type;
+            return Id == other.Id && Type == other.Type && Name == other.Name;
         }
 
         public override bool Equals(object obj)
