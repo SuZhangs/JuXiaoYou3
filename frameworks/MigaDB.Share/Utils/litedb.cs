@@ -2,11 +2,13 @@
 
 namespace Acorisoft.FutureGL.MigaDB.Utils
 {
-    public static class LiteDB
+    public static class litedb
     {
+        public const string ID = "_id";
+        
         public static bool HasID<T>(this ILiteCollection<T> db, string id)
         {
-            return db.Exists(Query.EQ("_id", id));
+            return db.Exists(Query.EQ(ID, id));
         }
         
         

@@ -63,8 +63,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return EngineResult.Failed(EngineFailedReason.MissingId);
             }
 
-            if (DocumentDB.HasID(document.Id) ||
-                DocumentCacheDB.HasID(document.Id))
+            if (HasDocumentID(document.Id) ||
+                HasDocumentCacheID(document.Id)||
+                HasDocumentName(document.Id, document.Name))
             {
                 return EngineResult.Failed(EngineFailedReason.Duplicated);
             }
@@ -75,8 +76,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             //
             // 一致性检查
-            //if (!DocumentDB.HasID(document.Id) ||
-            //    !DocumentCacheDB.HasID(document.Id))
+            //if (!HasDocumentID(document.Id) ||
+            //    !HasDocumentCacheID(document.Id))
             //{
             //    return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
             //}
@@ -109,7 +110,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return EngineResult.Failed(EngineFailedReason.InputDataError);
             }
 
-            if (!DocumentCacheDB.HasID(document.Id))
+            if (!HasDocumentCacheID(document.Id))
             {
                 return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
             }
@@ -118,10 +119,15 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
             //
             // 一致性检查
-            if (!DocumentDB.HasID(document.Id) ||
-                !DocumentCacheDB.HasID(document.Id))
+            if (!HasDocumentID(document.Id) ||
+                !HasDocumentCacheID(document.Id))
             {
                 return EngineResult.Failed(EngineFailedReason.ConsistencyBroken);
+            }
+
+            if (HasDocumentName(document.Id, document.Name))
+            {
+                return EngineResult.Failed(EngineFailedReason.Duplicated);
             }
 
             //
@@ -209,8 +215,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
 
-            if (!DocumentDB.HasID(document.Id) ||
-                !DocumentCacheDB.HasID(cache.Id))
+            if (!HasDocumentID(document.Id) ||
+                !HasDocumentCacheID(cache.Id) ||
+                HasDocumentName(document.Id, document.Name))
             {
                 return;
             }
@@ -237,7 +244,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
         
-            if (!DocumentCacheDB.HasID(cache.Id))
+            if (!HasDocumentCacheID(cache.Id) ||
+                HasDocumentName(cache.Id, cache.Name))
             {
                 return;
             }
@@ -263,7 +271,8 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
                 return;
             }
         
-            if (!DocumentDB.HasID(document.Id))
+            if (!HasDocumentID(document.Id) ||
+                HasDocumentName(document.Id, document.Name))
             {
                 return;
             }
@@ -411,8 +420,31 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         public int GetCacheCount() => DocumentCacheDB.Count();
         
         #endregion
-        
 
+        #region Has
+
+        public bool HasDocumentName(string id, string name) => DocumentCacheDB.Exists(
+            Query.And(
+                Query.EQ("name", name),
+                Query.Not("_id", id)));
+        
+        
+        public bool HasDocumentID(string id)
+        {
+            return DocumentDB.Exists(Query.EQ(litedb.ID, id));
+        }
+        
+        
+        public bool HasDocumentCacheID(string id)
+        {
+            return DocumentCacheDB.Exists(Query.EQ(litedb.ID, id));
+        }
+
+        #endregion
+
+        #region Relationship : Add / Remove
+
+        
         public void AddRelationship(CharacterRelationship rel)
         {
             // ReSharper disable once MergeSequentialChecks
@@ -449,6 +481,9 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             
             RelDB.Delete(id);
         }
+
+        #endregion
+
 
         /// <summary>
         /// 清空所有文档
