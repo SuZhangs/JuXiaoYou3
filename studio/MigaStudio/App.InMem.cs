@@ -9,6 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio
         private static void InstallInMemoryService(IInMemoryServiceHost attachable)
         {
             attachable.Add(new ColorService());
+            attachable.Add(new TokenizerService());
         } 
     }
 }
