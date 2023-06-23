@@ -131,6 +131,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             {
                 ProjectEngine.RemoveSentence(entity);
             }
+
+            Collection.Remove(entity);
         }
 
         protected override void ShiftUp(Sentence entity, int oldIndex, int newIndex)
