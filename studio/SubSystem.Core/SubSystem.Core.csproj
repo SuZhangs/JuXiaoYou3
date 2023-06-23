@@ -28,6 +28,7 @@
     <ItemGroup>
       <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
       <PackageReference Include="Markdig" Version="0.31.0" />
+      <PackageReference Include="NReco.Text.AhoCorasickDoubleArrayTrie" Version="1.1.1" />
       <PackageReference Include="TagLibSharp" Version="2.3.0" />
     </ItemGroup>
 
