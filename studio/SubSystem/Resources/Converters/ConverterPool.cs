@@ -7,5 +7,6 @@
         public static ImageFromAlbumConverter Image { get; } = new ImageFromAlbumConverter();
         public static ScopedImageConverter ScopedImage { get; } = new ScopedImageConverter();
         public static ImageFromScaledStringConverter ScaledImage { get; } = new ImageFromScaledStringConverter();
+        public static NullSwitchStringConverter NullSwitchString { get; } = new NullSwitchStringConverter();
     }
 }

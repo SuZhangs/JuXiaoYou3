@@ -38,23 +38,39 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         {
             if (source is null)
             {
-                return GetAppraises();
+                return AppraiseDB.Include(y => y.Source)
+                                 .Include(a => a.Target)
+                                 .Find(x => !x.Source.IsDeleted &&
+                                            !x.Target.IsDeleted);
             }
 
             return AppraiseDB
                    .Include(y => y.Source)
                    .Include(a => a.Target)
-                   .Find(x => x.Target.Id == source.Id)
-                   .Where(x => x.Target is not null &&
-                               x.Source is not null &&
-                               !x.Target.IsDeleted &&
-                               !x.Source.IsDeleted);
+                   .Find(x => x.Target.Id == source.Id &&
+                              !x.Source.IsDeleted &&
+                              !x.Target.IsDeleted);
         }
 
-        public IEnumerable<Appraise> GetAppraises() => AppraiseDB.Include(y => y.Source)
-                                                                 .Include(a => a.Target)
-                                                                 .FindAll();
+        #endregion
 
+        #region MessageBoard
+
+        
+
+        public IEnumerable<Sentence> GetMessages()
+        {
+            var a = AppraiseDB.Include(y => y.Source)
+                              .Include(a => a.Target)
+                              .Find(x => !x.Source.IsDeleted &&
+                                         !x.Target.IsDeleted);
+            
+            var b = SentenceDB.Include(y => y.Source)
+                              .Find(x => !x.Source.IsDeleted);
+            
+            // ReSharper disable once InvokeAsExtensionMethod
+            return Enumerable.Concat(a, b);
+        } 
         #endregion
 
         /// <summary>

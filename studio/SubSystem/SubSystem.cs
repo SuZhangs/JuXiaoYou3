@@ -102,6 +102,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             });
         }
         
+        public static Task<Op<DocumentCache>> SelectExclude(DocumentType type, string target)
+        {
+            var documents = Studio.Engine<DocumentEngine>()
+                                  .GetCachesExclude(type, target);
+            return Xaml.Get<IDialogService>()
+                       .Dialog<DocumentCache, DocumentPickerViewModel>(new Parameter
+                       {
+                           Args = new object[]
+                           {
+                               documents
+                           }
+                       });
+        }
+        
         public static Task<Op<IEnumerable<DocumentCache>>> MultiSelectExclude(DocumentType type, ISet<string> pool)
         {
             var documents = Studio.Engine<DocumentEngine>()

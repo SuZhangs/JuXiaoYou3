@@ -386,6 +386,12 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
         {
             return DocumentCacheDB.Find(x => x.Type == type && !idPool.Contains(x.Id));
         }
+        
+        public IEnumerable<DocumentCache> GetCachesExclude(DocumentType type, string target)
+        {
+            return DocumentCacheDB.Find(x => x.Type == type && target != x.Id);
+        }
+
 
         public IEnumerable<DocumentCache> GetCaches(HashSet<string> idPool)
         {
@@ -423,12 +429,10 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
         #region Has
 
-        public bool HasDocumentName(string id, string name) => DocumentCacheDB.Exists(
-            Query.And(
-                Query.EQ("name", name),
-                Query.Not("_id", id)));
-        
-        
+        public bool HasDocumentName(string id, string name) => DocumentCacheDB.Exists(x => !x.IsDeleted &&
+                                                                                           x.Name == name &&
+                                                                                           x.Id != id);
+
         public bool HasDocumentID(string id)
         {
             return DocumentDB.Exists(Query.EQ(litedb.ID, id));
