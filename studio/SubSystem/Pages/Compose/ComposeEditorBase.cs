@@ -22,14 +22,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             WorkspaceMapping            = new Dictionary<Type, IWorkspace>();
             InternalWorkspaceCollection = new ObservableCollection<IWorkspace>();
             Outlines                    = new ObservableCollection<IOutlineModel>();
+            ReferenceDocuments          = new ObservableCollection<DocumentCache>();
             WorkspaceCollection         = new ReadOnlyObservableCollection<IWorkspace>(InternalWorkspaceCollection);
+            DataParts                   = new ObservableCollection<DataPart>();
+            Services                    = new ObservableCollection<ComposeService>();
             Xaml.Get<IAutoSaveService>()
                 .Observable
                 .ObserveOn(Scheduler)
                 .Subscribe(_ => { Save(); })
                 .DisposeWith(Collector);
-            DataParts       = new ObservableCollection<DataPart>();
-            Services        = new ObservableCollection<ComposeService>();
             DatabaseManager = dbMgr;
             ComposeEngine   = dbMgr.GetEngine<ComposeEngine>();
             ImageEngine     = dbMgr.GetEngine<ImageEngine>();
@@ -156,6 +157,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<IOutlineModel> Outlines { get; }
+        public ObservableCollection<DocumentCache> ReferenceDocuments { get; }
 
 
         [NullCheck(UniTestLifetime.Startup)]

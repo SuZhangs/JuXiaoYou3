@@ -225,7 +225,7 @@
                         Margin="16"
                         Padding="0 8" 
                         Header="大纲">
-            <f:TreeView ItemsSource="{Binding Outlines,Mode=OneWay}">
+            <f:TreeView ItemsSource="{Binding ReferenceDocuments,Mode=OneWay}">
                 <f:TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type workspace:MarkdownOutlineModel}"
                                               ItemsSource="{Binding Children}">

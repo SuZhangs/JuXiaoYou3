@@ -1,4 +1,6 @@
 ﻿using System.Reactive.Concurrency;
+using Acorisoft.FutureGL.MigaStudio.Core;
+using Acorisoft.FutureGL.MigaStudio.Editors;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 {
@@ -14,15 +16,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private int _digitCount;
         private int _controlCount;
 
-        protected void Statistic(string textSnapshot)
+        protected void Statistic(IWorkspace workspace)
         {
-            if (textSnapshot is null)
+            if (workspace is null)
             {
                 return;
             }
 
-            TotalCharacterCount = textSnapshot.Length;
-            
+            var textSnapshot = workspace.Content;
+
+            if (textSnapshot is not null)
+            {
+                TotalCharacterCount = textSnapshot.Length;
+                Cache.Length        = TotalCharacterCount;
+                RaiseUpdated(nameof(TotalCharacterCount));
+            }
+
+
+            Task.Run(() =>
+            {
+                var asyncOutlineModel = workspace.GetOutlineModels();
+                var asyncDocumentModel = Xaml.Get<ITokenizerService>()
+                                             .Tokenize(textSnapshot);
+                
+                Scheduler.Schedule(() =>
+                {
+                    Outlines.AddMany(asyncOutlineModel, true);
+                    ReferenceDocuments.AddMany(asyncDocumentModel, true);
+                });
+            });
+
             // Task.Run(() =>
             // {
             //     return;

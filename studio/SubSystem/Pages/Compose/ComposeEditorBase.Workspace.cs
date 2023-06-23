@@ -74,10 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
                 //
                 // 统计
-                Statistic(workspace.Content);
-                Cache.Length = TotalCharacterCount;
-                RaiseUpdated(nameof(TotalCharacterCount));
-                Outlines.AddMany(workspace.GetOutlineModels(), true);
+                Statistic(workspace);
 
                 //
                 // 设置更改状态
@@ -115,7 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             Workspace = WorkspaceCollection.FirstOrDefault();
             
             // 统计当前的字数
-            Statistic(Workspace?.Content);
+            Statistic(Workspace);
         }
 
         #endregion
