@@ -122,6 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SynchronizeKeywords();
             Type = cache.Type;
+            SetDirtyState(false);
         }
 
         protected override void OnStart()
