@@ -108,8 +108,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                     ((TabController)Controller).New<SettingViewModel>();
                     return true;
                 case Key.F5:
-                    Xaml.Get<IDialogService>()
-                        .Dialog(new MusicPlayerViewModel());
+                    OpenMusicImpl();
                     return true;
                 case Key.F6:
                     return true;
@@ -125,6 +124,16 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             return base.OnKeyDown(e);
         }
 
+        private static void OpenMusicImpl()
+        {
+            var ds = Xaml.Get<IDialogService>();
+
+            if (!ds.IsOpened<MusicPlayerViewModel>())
+            {
+                ds.Dialog(new MusicPlayerViewModel());
+            }
+        }
+
         private void SwitchModeImpl()
         {
             var ccl    = _context.ControllerList;
@@ -134,7 +143,11 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                  ccl_fv is not null &&
                  ccl_fv.Value != IdOfTabShellController))
             {
-                ModeSwitchViewModel.Switch(_context);
+                var ds = Xaml.Get<IDialogService>();
+                if (!ds.IsOpened<ModeSwitchViewModel>())
+                {
+                    ModeSwitchViewModel.Switch(_context);
+                } 
             }
         }
 

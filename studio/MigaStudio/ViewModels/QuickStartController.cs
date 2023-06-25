@@ -4,6 +4,7 @@ using Acorisoft.FutureGL.MigaDB.Core.Migrations;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Pages;
+using Acorisoft.FutureGL.MigaStudio.Resources.Updaters;
 using Ookii.Dialogs.Wpf;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
@@ -157,7 +158,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             
             var targetFilePath = opendlg.SelectedPath;
             var r              = await V209DatabaseUpdater.Update(Studio.DatabaseManager(), databaseFilePath, targetFilePath);
-            var dbMgr          = Studio.DatabaseManager();
+
+            if (r.IsFinished)
+            {
+                Context.SwitchController(Context.MainController);
+            }
+            else
+            {
+                this.ErrorNotification(Language.GetText("text.Updating.Failed"));
+            }
         }
 
 

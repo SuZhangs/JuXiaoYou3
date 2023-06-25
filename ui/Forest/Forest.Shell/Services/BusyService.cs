@@ -19,6 +19,13 @@ namespace Acorisoft.FutureGL.Forest.Services
             
             
             public Task Await() => Task.Delay(100);
+
+
+            public Task Await(string text)
+            {
+                Update(text);
+                return Task.Delay(100);  
+            } 
             
             public void Dispose()
             {

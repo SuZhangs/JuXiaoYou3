@@ -240,6 +240,8 @@ namespace Acorisoft.FutureGL.Forest.Controls
         }
         
         public bool IsDialogOpened() => _stack.CanCompleteDialog();
+
+        public bool IsDialogOpened<TViewModel>() where TViewModel : IDialogViewModel => _stack.Contains<TViewModel>();
         
         public bool IsDialogOpened(IDialogViewModel viewModel) => viewModel is not null && _stack.Contains(viewModel);
 
@@ -519,6 +521,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             public bool Contains(IDialogViewModel viewModel) => ReferenceEquals(_current, viewModel) ||
                                                                 _waitingStack.Any(x => ReferenceEquals(x, viewModel));
+            public bool Contains<TViewModel>() where TViewModel : IDialogViewModel => _waitingStack.Any(x => x is TViewModel);
         }
     }
 }

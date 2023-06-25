@@ -72,6 +72,11 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         IObservableState IsOpen { get; }
         
         /// <summary>
+        /// 是否加载数据库。
+        /// </summary>
+        IObservableState NeedUpdate { get; }
+        
+        /// <summary>
         /// Ioc容器，请勿在第三方框架中使用。
         /// </summary>
         IContainer Container { get; }
@@ -80,5 +85,16 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// 中介器
         /// </summary>
         IMediator Mediator { get; }
+        
+        
+        /// <summary>
+        /// 数据库升级工具
+        /// </summary>
+        IEnumerable<IDatabaseUpdater> Updaters { get; }
+
+        /// <summary>
+        /// 数据库维护工具
+        /// </summary>
+        IEnumerable<IDatabaseMaintainer> Maintainers { get; }
     }
 }

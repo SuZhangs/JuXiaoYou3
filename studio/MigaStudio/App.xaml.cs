@@ -16,6 +16,7 @@ using Acorisoft.FutureGL.MigaStudio.Views;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 using DryIoc;
 using NLog;
+
 // ReSharper disable UnusedParameter.Local
 
 namespace Acorisoft.FutureGL.MigaStudio
@@ -27,6 +28,7 @@ namespace Acorisoft.FutureGL.MigaStudio
     {
         private const string SettingDir                = "JuXiaoYou";
         private const string UserDataDir               = "UserData";
+        public const  string FeedbackDir               = "Feedbacks";
         private const string LogDir                    = "Logs";
         private const string BasicSettingFileName      = "juxiaoyou-main.json";
         private const string RepositorySettingFileName = "repo.json";
@@ -48,13 +50,12 @@ namespace Acorisoft.FutureGL.MigaStudio
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            
             var thisAppDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var crashReporter    = Path.Combine(thisAppDirectory, "MigaStudio.BugReporter.exe");
             Process.Start(new ProcessStartInfo
             {
                 Arguments = "dump 2 1",
-                FileName = crashReporter
+                FileName  = crashReporter
             });
             //
             // 写入错误次数
@@ -70,8 +71,9 @@ namespace Acorisoft.FutureGL.MigaStudio
 
             return new ApplicationModel
             {
-                Logs     = Path.Combine(domain, LogDir),
-                Settings = Path.Combine(domain, UserDataDir)
+                Logs      = Path.Combine(domain, LogDir),
+                Settings  = Path.Combine(domain, UserDataDir),
+                Feedbacks = Path.Combine(domain, FeedbackDir)
             }.Initialize();
         }
 
@@ -79,7 +81,6 @@ namespace Acorisoft.FutureGL.MigaStudio
         {
             return new AppViewModel();
         }
-
 
 
         protected override void RegisterResourceDictionary(ResourceDictionary appResDict)
@@ -106,7 +107,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 {
                     Xaml.Get<IPendingQueue>()
                         .ForEach(x => x.Run());
-                    
+
                     var dir        = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Crashes", "bug.txt");
                     var crashCount = GetCrashCount(dir);
                     if (crashCount > 0)
@@ -119,7 +120,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 .GetAwaiter()
                 .GetResult();
         }
-        
+
         private static int GetCrashCount(string fileName)
         {
             try
@@ -138,7 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio
                 return 0;
             }
         }
-        
+
         private static void SetCrashCount(int count, string fileName)
         {
             File.WriteAllText(fileName, count.ToString());

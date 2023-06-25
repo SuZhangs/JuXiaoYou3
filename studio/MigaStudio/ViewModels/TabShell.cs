@@ -3,9 +3,12 @@ using System.Linq;
 using System.Windows;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Exceptions;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions;
 using Acorisoft.FutureGL.MigaStudio.Pages;
 using Acorisoft.FutureGL.MigaStudio.Pages.Universe;
+using NLog;
 
 namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 {
@@ -66,7 +69,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             CurrentViewModel         = selectInactiveWorkspace;
         }
 
-        protected override void StartOverride()
+        protected override async void StartOverride()
         {
             base.StartOverride();
             
@@ -77,6 +80,60 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             // New<UniverseEditorViewModel>();
             // New<KeywordViewModel>();
 #endif
+
+            var dbMgr = Xaml.Get<IDatabaseManager>();
+            
+            if (dbMgr.NeedUpdate
+                     .CurrentValue)
+            {
+                await PerformanceUpgrade(dbMgr);
+            }
+        }
+        
+        private async Task PerformanceUpgrade(IDatabaseManager dbMgr)
+        {
+            var bs       = Xaml.Get<IBusyService>();
+            var logger   = Xaml.Get<ILogger>();
+            var database = dbMgr.Database
+                                .CurrentValue;
+            var version = database.Version;
+                    
+            using (var session = bs.CreateSession())
+            {
+                session.Update(SubSystemString.Updating);
+                await session.Await();
+                logger.Warn($"正在升级数据库，当前版本为:{version}");
+
+                foreach (var updater in dbMgr.Updaters)
+                {
+                    try
+                    {
+                        if (updater.TargetVersion >= database.Version)
+                        {
+                            if (!updater.Update(database))
+                            {
+                                logger.Warn($"数据库升级失败，升级器:{updater.GetType().FullName}");
+                                continue;
+                            }
+
+                            if (updater.ResultVersion > database.Version)
+                            {
+                                database.UpdateVersion(updater.ResultVersion);
+                                logger.Warn($"数据库升级完成，当前版本为:{updater.ResultVersion}");
+                            }
+                            else
+                            {
+                                logger.Error($"升级数据库异常，疑似升级器未手动提升数据库版本，内存版本:{version}，本地版本:{database.Version}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error($"升级数据库失败，当前版本为:{version}");
+                        throw new UpdaterException(ex.Message, ex);
+                    }
+                }
+            }
         }
 
         protected override void RequireStartupTabViewModel()

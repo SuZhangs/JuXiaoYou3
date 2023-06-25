@@ -21,6 +21,12 @@ namespace Acorisoft.FutureGL.Forest.Services
 
             public Task Await() => Task.Delay(100);
             
+            public Task Await(string text)
+            {
+                Update(text);
+                return Task.Delay(100);  
+            } 
+            
             public void Dispose()
             {
                 if (Host is null)
@@ -650,6 +656,8 @@ namespace Acorisoft.FutureGL.Forest.Services
         public void CloseAll() => _host.CloseDialog();
         public bool IsOpened() => _host.IsDialogOpened();
         public bool IsOpened(IDialogViewModel viewModel) => _host.IsDialogOpened(viewModel);
+
+        public bool IsOpened<TViewModel>() where TViewModel : IDialogViewModel => _host.IsDialogOpened<TViewModel>();
 
         #endregion
     }

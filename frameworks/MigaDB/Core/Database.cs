@@ -260,7 +260,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         {
             if (version == Version)
             {
-                throw new InvalidOperationException(nameof(version));
+                return;
             }
 
             //

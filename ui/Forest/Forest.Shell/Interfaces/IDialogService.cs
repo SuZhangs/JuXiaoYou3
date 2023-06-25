@@ -96,6 +96,8 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// <returns>如果打开返回true，否则返回false。</returns>
         bool IsOpened();
 
+        bool IsOpened<TViewModel>() where TViewModel : IDialogViewModel;
+
         /// <summary>
         /// 判断是否已经打开对话框
         /// </summary>

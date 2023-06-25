@@ -31,11 +31,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             using (var session = Xaml.Get<IBusyService>()
                                      .CreateSession())
             {
-                session.Update(SubSystemString.Processing);
-
                 await Task.Run(async () =>
                 {
-                    await session.Await();
+                    await session.Await(SubSystemString.Processing);
 
                     foreach (var fileName in opendlg.FileNames)
                     {

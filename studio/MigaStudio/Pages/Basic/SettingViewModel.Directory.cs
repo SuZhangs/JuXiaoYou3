@@ -31,7 +31,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             };
         }
         
-        private static DatabaseCounter CreateSelfCounter(FolderCounter app, FolderCounter logs)
+        
+        private static FolderCounter CreateFeedbackCounter()
+        {
+            return new FolderCounter
+            {
+                Directory = Xaml.Get<ApplicationModel>()
+                                .Feedbacks,
+                Name = Language.GetText("global.feedback")
+            };
+        }
+        
+        private static DatabaseCounter CreateSelfCounter(FolderCounter app, FolderCounter logs, FolderCounter feedback)
         {
             return new DatabaseCounter
             {
@@ -39,7 +50,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 Counters = new ObservableCollection<FolderCounter>
                 {
                     app,
-                    logs
+                    logs,
+                    feedback
                 },
                 Directory = app.Directory
             };
@@ -145,6 +157,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public FolderCounter Logs { get; }
+        
+        [NullCheck(UniTestLifetime.Constructor)]
+        public FolderCounter FeedBacks { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RefreshCommand { get; }

@@ -30,7 +30,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DatabaseCounter = CreateDatabaseCounter();
             Application     = CreateApplicationCounter();
             Logs            = CreateLogCounter();
-            Self            = CreateSelfCounter(Application, Logs);
+            FeedBacks       = CreateFeedbackCounter();
+            Self            = CreateSelfCounter(Application, Logs, FeedBacks);
 
             _subject = new Subject<(long, long,long, EngineCounter[])>();
             _subject.ObserveOn(Scheduler)

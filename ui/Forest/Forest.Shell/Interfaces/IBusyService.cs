@@ -36,5 +36,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
         /// </summary>
         /// <returns></returns>
         Task Await();
+
+        Task Await(string text);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaStudio
 {
-    public static partial class SubSystemString
+    public static class SR
     {
         public static readonly DocumentType[] DocumentTypes = new[]
         {
@@ -22,116 +22,6 @@
         };
 
         public static string GetText(string id) => Language.GetText(id);
-
-        #region ModuleBlock Translate
-
-        public static string GetAudioName()=> Language.GetText(ModuleBlock.IdOfAudio);
-
-        public static string GetUnknownName() => "__Unknown";
-
-        public static string GetGroupName()=> Language.GetText(ModuleBlock.IdOfGroup);
-
-        public static string GetSequenceName()=> Language.GetText(ModuleBlock.IdOfSequence);
-
-        public static string GetColorName()=> Language.GetText(ModuleBlock.IdOfColor);
-
-        public static string GetNumberName()=> Language.GetText(ModuleBlock.IdOfNumber);
-
-        public static string GetHistogramName()=> Language.GetText(ModuleBlock.IdOfHistogram);
-
-        public static string GetRadarName()=> Language.GetText(ModuleBlock.IdOfRadar);
-
-        public static string GetLikabilityName()=> Language.GetText(ModuleBlock.IdOfLikability);
-
-        public static string GetDegreeName()=> Language.GetText(ModuleBlock.IdOfDegree);
-
-        public static string GetRateName()=> Language.GetText(ModuleBlock.IdOfRate);
-
-        public static string GetSliderName()=> Language.GetText(ModuleBlock.IdOfSlider);
-
-        public static string GetMultiLineName()=> Language.GetText(ModuleBlock.IdOfMultiLine);
-
-        public static string GetSingleLineName()=> Language.GetText(ModuleBlock.IdOfSingleLine);
-
-        public static string GetReferenceName()=> Language.GetText(ModuleBlock.IdOfReference);
-
-        public static string GetVideoName()=> Language.GetText(ModuleBlock.IdOfVideo);
-        public static string GetMusicName()=> Language.GetText(ModuleBlock.IdOfMusic);
-
-        public static string GetImageName()=> Language.GetText(ModuleBlock.IdOfImage);
-
-        public static string GetFileName()=> Language.GetText(ModuleBlock.IdOfFile);
-
-        public static string GetBinaryName()=> Language.GetText(ModuleBlock.IdOfBinary);
-
-        public static string GetSwitchName()=> Language.GetText(ModuleBlock.IdOfSwitch);
-
-        public static string GetHeartName()=> Language.GetText(ModuleBlock.IdOfHeart);
-
-        public static string GetStarName()=> Language.GetText(ModuleBlock.IdOfStar);
-
-
-        public static string GetModuleBlockNameByType(object type)
-        {
-            return type switch
-            {
-                AudioBlockEditUI      => GetAudioName(),
-                FileBlockEditUI       => GetFileName(),
-                ImageBlockEditUI      => GetImageName(),
-                MusicBlockEditUI      => GetMusicName(),
-                VideoBlockEditUI      => GetVideoName(),
-                ReferenceBlockEditUI  => GetReferenceName(),
-                MultiLineBlockEditUI  => GetMultiLineName(),
-                SingleLineBlockEditUI => GetSingleLineName(),
-                SliderBlockEditUI     => GetSliderName(),
-                NumberBlockEditUI     => GetNumberName(),
-                ColorBlockEditUI      => GetColorName(),
-                DegreeBlockEditUI     => GetDegreeName(),
-                RateBlockEditUI       => GetRateName(),
-                LikabilityBlockEditUI => GetLikabilityName(),
-                StarBlockEditUI       => GetStarName(),
-                HeartBlockEditUI      => GetHeartName(),
-                SwitchBlockEditUI     => GetSwitchName(),
-                BinaryBlockEditUI     => GetBinaryName(),
-                SequenceBlockEditUI   => GetSequenceName(),
-                GroupBlockEditUI      => GetGroupName(),
-                RadarBlockEditUI      => GetRadarName(),
-                HistogramBlockEditUI  => GetHistogramName(),
-                _                     => GetUnknownName(),
-            };
-        }
-
-        public static string GetModuleBlockNameByKind(BlockType type)
-        {
-            return type switch
-            {
-                BlockType.Audio      => GetAudioName(),
-                BlockType.File       => GetFileName(),
-                BlockType.Image      => GetImageName(),
-                BlockType.Music      => GetMusicName(),
-                BlockType.Video      => GetVideoName(),
-                BlockType.Reference  => GetReferenceName(),
-                BlockType.MultiLine  => GetMultiLineName(),
-                BlockType.SingleLine => GetSingleLineName(),
-                BlockType.Slider     => GetSliderName(),
-                BlockType.Number     => GetNumberName(),
-                BlockType.Color      => GetColorName(),
-                BlockType.Degree     => GetDegreeName(),
-                BlockType.Rate       => GetRateName(),
-                BlockType.Likability => GetLikabilityName(),
-                BlockType.Star       => GetStarName(),
-                BlockType.Heart      => GetHeartName(),
-                BlockType.Switch     => GetSwitchName(),
-                BlockType.Binary     => GetBinaryName(),
-                BlockType.Sequence   => GetSequenceName(),
-                BlockType.Group      => GetGroupName(),
-                BlockType.Radar      => GetRadarName(),
-                BlockType.Histogram  => GetHistogramName(),
-                _                    => GetUnknownName(),
-            };
-        }
-
-        #endregion
 
         #region Property Translate
 
