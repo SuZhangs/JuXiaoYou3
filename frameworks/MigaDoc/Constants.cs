@@ -46,36 +46,36 @@
         
         //
         // fileName
-        internal const string main_database = "main.mgdb";
-        internal const string index_file    = "index.migaidx";
+        public const string main_database = "main.mgdb";
+        public const string index_file    = "index.migaidx";
 
         //
         // collection name
-        internal const string cn_modules          = "mods";
-        internal const string cn_meow             = "meow";
-        internal const string cn_prop             = "props";
-        internal const string cn_index            = "idx";
-        internal const string cn_index_compose    = "idx_compose";
-        internal const string cn_index_channel    = "idx_ch";
-        internal const string cn_document         = "doc";
-        internal const string cn_channel          = "ch";
-        internal const string cn_message          = "msgs";
-        internal const string cn_inspiration      = "ins";
-        internal const string cn_compose          = "compose";
-        internal const string cn_keyword          = "tags";
-        internal const string cn_sight            = "sights";
-        internal const string cn_keywordMapping   = "rel_tags";
-        internal const string cn_characterMapping = "rel_ch";
-        internal const string cn_org              = "org";
-        internal const string cn_group            = "group";
-        internal const string cn_moniker          = "monikers";
+        public const string cn_modules          = "mods";
+        public const string cn_meow             = "meow";
+        public const string cn_prop             = "props";
+        public const string cn_index            = "idx";
+        public const string cn_index_compose    = "idx_compose";
+        public const string cn_index_channel    = "idx_ch";
+        public const string cn_document         = "doc";
+        public const string cn_channel          = "ch";
+        public const string cn_message          = "msgs";
+        public const string cn_inspiration      = "ins";
+        public const string cn_compose          = "compose";
+        public const string cn_keyword          = "tags";
+        public const string cn_sight            = "sights";
+        public const string cn_keywordMapping   = "rel_tags";
+        public const string cn_characterMapping = "rel_ch";
+        public const string cn_org              = "org";
+        public const string cn_group            = "group";
+        public const string cn_moniker          = "monikers";
 
         //
         // folder name
-        internal const string folder_modules = "Modules";
+        public const string folder_modules = "Modules";
 
         //
         // field
-        internal const string fieldName_id = "_id";
+        public const string fieldName_id = "_id";
     }
 }

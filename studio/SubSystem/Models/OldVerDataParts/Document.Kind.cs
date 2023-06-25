@@ -10,33 +10,4 @@
         Custom,
         None
     }
-
-    public enum SkillType
-    {
-        None,
-        Passive,
-        Cost,
-        Faith,
-        Regular
-    }
-
-    public enum EntityType
-    {
-        Document,
-        Compose,
-        Inspiration,
-        Grouping,
-        Entity,
-        Author,
-    }
-
-    public enum ComposeType
-    {
-        None,
-        Story,
-        Tales,
-        Ova,
-        IF,
-        Ex
-    }
 }

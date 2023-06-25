@@ -9,6 +9,14 @@ namespace Acorisoft.Miga.Doc.Core
     /// </summary>
     public abstract class StorageObject
     {
+        /// <summary>
+        /// 唯一标识符。
+        /// </summary>
+        public string Id { get; set; }
         
+        /// <summary>
+        /// 当前对象名。
+        /// </summary>
+        public string Name { get; set; }
     }
 }

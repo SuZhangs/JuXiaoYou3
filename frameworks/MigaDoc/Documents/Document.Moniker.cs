@@ -18,7 +18,7 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
         /// </summary>
-        public DocumentKind Type{ get; set; }
+        public OldDocumentKind Type{ get; set; }
         
         public DocumentIndex Create()
         {

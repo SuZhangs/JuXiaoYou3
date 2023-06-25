@@ -33,7 +33,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         public double Percent
         {
             get => _percent;
-            set => SetValue(ref _percent, value);
+            set
+            {
+                SetValue(ref _percent, value);
+                RaiseUpdated(nameof(Size));
+            }
         }
 
         /// <summary>
@@ -44,7 +48,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
             get => _size;
             set
             {
-                SetValue(ref _size, value);
+                _size = value;
                 SizeString = IOSystemUtilities.GetFileSizeString(value);
             }
         }

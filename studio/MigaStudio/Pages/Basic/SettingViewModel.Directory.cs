@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Concurrency;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.AppModels;
 using Acorisoft.FutureGL.MigaDB.Services;
@@ -71,24 +72,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
         
         
-        private void OnDataSourceChanged(ValueTuple<long, long, long, EngineCounter[]> x)
+        private void OnDataSourceChanged(ValueTuple<long, EngineCounter[]> x)
         {
-            var (app, log, db, engines) = x;
-            Application.Size            = app;
-            Logs.Size                   = log;
-            Self.Size                   = Logs.Size + Application.Size;
-            Application.Percent         = Application.Size / (double)Self.Size * 100;
-            Logs.Percent                = Logs.Size / (double)Self.Size * 100;
+            var (dbRootSize, engines) = x;
+            Self.Size                 = Self.Counters
+                                            .Sum(a => a.Size);
+            
+            Self.Counters
+                .ForEach(e => e.Percent = e.Size / (double)Self.Size * 100);
 
             //
             //
             DatabaseCounter.Counters
                            .AddMany(engines, true);
-            DatabaseCounter.Size = engines.Sum(e => e.Size) + db;
-            foreach (var engine in engines)
-            {
-                engine.Percent = engine.Size / (double)DatabaseCounter.Size * 100;
-            }
+            DatabaseCounter.Size = engines.Sum(e => e.Size) + dbRootSize;
+            DatabaseCounter.Counters
+                           .ForEach(c => c.Percent = c.Size / (double)DatabaseCounter.Size * 100);
         }
 
         private void OpenCounter(FolderCounter x)
@@ -105,8 +104,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             Task.Run(async () =>
             {
-                var appSize = await IOSystemUtilities.GetFolderSize(Application.Directory, true);
-                var logSize = await IOSystemUtilities.GetFolderSize(Logs.Directory, false);
+                foreach (var counter in Self.Counters)
+                {
+                    counter.Size = await IOSystemUtilities.GetFolderSize(counter.Directory, true);
+                }
+                
                 var engines = Studio.DatabaseManager()
                                     .GetEngines()
                                     .OfType<FileEngine>()
@@ -122,7 +124,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     engine.Size = await IOSystemUtilities.GetFolderSize(engine.Directory, false);
                 }
 
-                _subject.OnNext(new ValueTuple<long, long,long, EngineCounter[]>(appSize, logSize,databaseDirSize, engines));
+                _subject.OnNext(new ValueTuple<long, EngineCounter[]>(databaseDirSize, engines));
             });
             
         }

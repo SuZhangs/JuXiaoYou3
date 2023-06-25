@@ -14,7 +14,7 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置当前的文档类型
         /// </summary>
-        public DocumentKind Type { get; init; }
+        public OldDocumentKind Type { get; init; }
 
         /// <summary>
         /// 获取或设置当前的部件

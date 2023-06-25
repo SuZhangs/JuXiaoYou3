@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
     public partial class SettingViewModel : SettingViewModelBase
     {
-        private readonly Subject<ValueTuple<long, long, long, EngineCounter[]>> _subject;
+        private readonly Subject<ValueTuple<long, EngineCounter[]>> _subject;
 
         private int _count;
 
@@ -33,7 +33,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             FeedBacks       = CreateFeedbackCounter();
             Self            = CreateSelfCounter(Application, Logs, FeedBacks);
 
-            _subject = new Subject<(long, long,long, EngineCounter[])>();
+            _subject = new Subject<(long, EngineCounter[])>();
             _subject.ObserveOn(Scheduler)
                     .Subscribe(OnDataSourceChanged);
 

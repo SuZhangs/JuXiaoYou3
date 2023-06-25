@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public enum DocumentKind
+    public enum OldDocumentKind
     {
         Character,
         Skills,
