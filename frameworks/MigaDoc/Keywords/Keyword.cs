@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace Acorisoft.Miga.Doc.Keywords
 {
-    public class Keyword : ObservableObject
+    public class Keyword 
     {
-        private string _name;
+        
         private string _summary;
         
         public string Id { get; init; }
@@ -14,19 +14,12 @@ namespace Acorisoft.Miga.Doc.Keywords
         /// <summary>
         /// 获取或设置 <see cref="Summary"/> 属性。
         /// </summary>
-        public string Summary
-        {
-            get => _summary;
-            set => SetValue(ref _summary, value);
-        }
+        public string Summary{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
     }
 }

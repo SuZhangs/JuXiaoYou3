@@ -1,19 +1,14 @@
 ﻿namespace Acorisoft.Miga.Doc.Entities.Timelines
 {
-    public class TimelineSet : ObservableObject
+    public class TimelineSet
     {
-        private string _name;
         
         public string Id { get; init; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
         
         /// <summary>
         /// 

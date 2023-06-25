@@ -1,8 +1,8 @@
 ﻿namespace Acorisoft.Miga.Doc.Parts
 {
-    public class ModuleIndex : ObservableObject
+    public class ModuleIndex
     {
-        private string _name;
+        
         private string _fileName;
         private string _author;
         private string _organization;
@@ -25,37 +25,22 @@
         /// <summary>
         /// 获取或设置 <see cref="Organization"/> 属性。
         /// </summary>
-        public string Organization
-        {
-            get => _organization;
-            set => SetValue(ref _organization, value);
-        }
+        public string Organization{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Author"/> 属性。
         /// </summary>
-        public string Author
-        {
-            get => _author;
-            set => SetValue(ref _author, value);
-        }
+        public string Author{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="FileName"/> 属性。
         /// </summary>
-        public string FileName
-        {
-            get => _fileName;
-            set => SetValue(ref _fileName, value);
-        }
+        public string FileName{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
     }
 }

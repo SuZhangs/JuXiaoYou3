@@ -37,10 +37,6 @@
         /// <summary>
         /// 获取或设置 <see cref="Fallback"/> 属性。
         /// </summary>
-        public string Fallback
-        {
-            get => _fallback;
-            set => SetValue(ref _fallback, value);
-        }
+        public string Fallback{ get; set; }
     }
 }

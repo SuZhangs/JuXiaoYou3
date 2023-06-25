@@ -5,25 +5,14 @@
     /// </summary>
     public sealed class Impression : Glimpse
     {
-        private string _color;
-        private string _content;
-
         /// <summary>
         /// 获取或设置 <see cref="Content"/> 属性。
         /// </summary>
-        public string Content
-        {
-            get => _content;
-            set => SetValue(ref _content, value);
-        }
+        public string Content{ get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Color"/> 属性。
         /// </summary>
-        public string Color
-        {
-            get => _color;
-            set => SetValue(ref _color, value);
-        }
+        public string Color{ get; set; }
     }
 }

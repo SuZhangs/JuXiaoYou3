@@ -3,12 +3,8 @@ using Acorisoft.Miga.Doc.Groups;
 
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public class Moniker : ObservableObject
+    public class Moniker
     {
-
-        private string _name;
-
-        private DocumentKind _type;
         /// <summary>
         /// 
         /// </summary>
@@ -17,28 +13,20 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Type"/> 属性。
         /// </summary>
-        public DocumentKind Type
-        {
-            get => _type;
-            set => SetValue(ref _type, value);
-        }
+        public DocumentKind Type{ get; set; }
         
         public DocumentIndex Create()
         {
             return new DocumentIndex
             {
                 Id               = Id,
-                Name             = _name,
-                DocumentType     = _type,
+                Name             = Name,
+                DocumentType     = Type,
                 CreatedDateTime  = DateTime.Now,
                 ModifiedDateTime = DateTime.Now,
                 Keywords         = new ObservableCollection<string>(),

@@ -16,55 +16,34 @@ namespace Acorisoft.Miga.Doc.Core
     
     public class RepositoryProperty : Document
     {
-        private string _englishName;
-        private string _summary;
-        private string _avatar;
-
         public string IndexId { get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Avatar"/> 属性。
         /// </summary>
-        public string Avatar
-        {
-            get => _avatar;
-            set => SetValue(ref _avatar, value);
-        }
+        public string Avatar{ get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Summary"/> 属性。
         /// </summary>
-        public string Summary
-        {
-            get => _summary;
-            set => SetValue(ref _summary, value);
-        }
+        public string Summary{ get; set; }
         /// <summary>
         /// 获取或设置 <see cref="EnglishName"/> 属性。
         /// </summary>
-        public string EnglishName
-        {
-            get => _englishName;
-            set => SetValue(ref _englishName, value);
-        }
+        public string EnglishName{ get; set; }
         
         public string Author { get; set; }
         public string Email { get; set; }
         public ObservableCollection<string> Backgrounds { get; set; }
     }
 
-    public class RepositoryConfiguration : ObservableObject
+    public class RepositoryConfiguration 
     {
-        private bool _enableCustomMetadataView;
         
         /// <summary>
         /// 获取或设置 <see cref="EnableCustomMetadataView"/> 属性。
         /// </summary>
-        public bool EnableCustomMetadataView
-        {
-            get => _enableCustomMetadataView;
-            set => SetValue(ref _enableCustomMetadataView, value);
-        }
+        public bool EnableCustomMetadataView{ get; set; }
 
         public ObservableCollection<CustomMetadataView> Character { get; set; }
         public ObservableCollection<CustomMetadataView> Skills { get; set; }
@@ -74,29 +53,21 @@ namespace Acorisoft.Miga.Doc.Core
         public ObservableCollection<CustomMetadataView> Custom { get; set; }
     }
 
-    public class RepositoryAuthor : ObservableObject
+    public class RepositoryAuthor 
     {
 
-        private string _name;
+        
         private string _avatar;
 
         /// <summary>
         /// 获取或设置 <see cref="Avatar"/> 属性。
         /// </summary>
-        public string Avatar
-        {
-            get => _avatar;
-            set => SetValue(ref _avatar, value);
-        }
+        public string Avatar{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
     }
     
     

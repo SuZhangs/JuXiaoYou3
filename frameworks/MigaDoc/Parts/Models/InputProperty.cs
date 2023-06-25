@@ -6,7 +6,7 @@
     }
     
     
-    public abstract class InputProperty : ObservableObject, ICloneable
+    public abstract class InputProperty : ICloneable
     {
         #region ICloneable Interface
 
@@ -75,7 +75,7 @@
         #endregion
 
         private string _value;
-        private string _name;
+        
 
         public void SetValue(string value) => _value = value;
 
@@ -83,11 +83,7 @@
         /// 获取或设置 <see cref="Value"/> 属性。
         /// </summary>
         [Ignore]
-        public string Value
-        {
-            get => _value;
-            set => SetValue(ref _value, value);
-        }
+        public string Value{ get; set; }
 
         public virtual bool IsCompleted() => !string.IsNullOrEmpty(Name);
 
@@ -101,10 +97,7 @@
         /// 获取或设置当前属性的名称。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
 
         /// <summary>
         /// 获取或设置当前属性的提示。

@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public class Compose : ObservableObject
+    public class Compose 
     {
         public string Id { get; init; }
         public ObservableCollection<ComposeVersion> Drafts { get; init; }
@@ -13,23 +13,15 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Current"/> 属性。
         /// </summary>
-        public ComposeVersion Current
-        {
-            get => _current;
-            set => SetValue(ref _current, value);
-        }
+        public ComposeVersion Current{ get; set; }
     }
 
-    public class ComposeVersion : ObservableObject
+    public class ComposeVersion 
     {
         private string   _name;
         private DateTime _modifiedDateTime;
@@ -38,30 +30,19 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Hash"/> 属性。
         /// </summary>
-        public string Hash
-        {
-            get => _hash;
-            set => SetValue(ref _hash, value);
-        }
+        public string Hash{ get; set; }
+        
         public string Id { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="ModifiedDateTime"/> 属性。
         /// </summary>
-        public DateTime ModifiedDateTime
-        {
-            get => _modifiedDateTime;
-            set => SetValue(ref _modifiedDateTime, value);
-        }
+        public DateTime ModifiedDateTime{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
         
         public DateTime CreatedDateTime { get; init; }
         public string Content { get; set; }

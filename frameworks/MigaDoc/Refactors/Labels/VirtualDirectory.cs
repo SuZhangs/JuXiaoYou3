@@ -1,8 +1,8 @@
 ﻿namespace Acorisoft.Miga.Doc.Labels
 {
-    public class VirtualDirectory : ObservableObject, IVirtualDirectory
+    public class VirtualDirectory :  IVirtualDirectory
     {
-        private string _name;
+        
 
         public string Id { get; init; }
         public string BaseOn { get; init; }
@@ -11,9 +11,6 @@
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
     }
 }

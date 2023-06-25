@@ -3,7 +3,7 @@
     /// <summary>
     /// <see cref="DataPart"/> 类型表示一个部件。
     /// </summary>
-    public abstract class DataPart : ObservableObject
+    public abstract class DataPart 
     {
 
         public virtual void Initialized(IMetadataManager metadataManager)

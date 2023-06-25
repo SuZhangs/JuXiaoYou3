@@ -2,64 +2,43 @@
 
 namespace Acorisoft.Miga.Doc.Inspirations
 {
-
-
-    public class SurveySet : ObservableObject
+    public class SurveySet
     {
-        private string _name;
+        
         private string _summary;
 
         /// <summary>
         /// 获取或设置 <see cref="Summary"/> 属性。
         /// </summary>
-        public string Summary
-        {
-            get => _summary;
-            set => SetValue(ref _summary, value);
-        }
-        
+        public string Summary { get; set; }
+
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
-        
+        public string Name { get; set; }
+
         public ObservableCollection<Survey> Surveys { get; init; }
     }
 
-    public class Survey : ObservableObject
+    public class Survey
     {
         private string _value;
-        private string _name;
+        
         private string _summary;
 
         /// <summary>
         /// 获取或设置 <see cref="Summary"/> 属性。
         /// </summary>
-        public string Summary
-        {
-            get => _summary;
-            set => SetValue(ref _summary, value);
-        }
-        
+        public string Summary { get; set; }
+
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name { get; set; }
+
         /// <summary>
         /// 获取或设置 <see cref="Value"/> 属性。
         /// </summary>
-        public string Value
-        {
-            get => _value;
-            set => SetValue(ref _value, value);
-        }
+        public string Value { get; set; }
     }
 }

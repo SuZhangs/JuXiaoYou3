@@ -62,7 +62,8 @@ namespace Acorisoft.FutureGL.MigaDB.Services
 
         protected sealed override void OnDatabaseOpening(DatabaseSession session)
         {
-            ConceptDB = session.Database.GetCollection<Concept>(Constants.Name_Concept);
+            ConceptDB = session.Database
+                               .GetCollection<Concept>(Constants.Name_Concept);
             OnDatabaseOpeningOverride(session);
         }
 

@@ -2,7 +2,7 @@
 
 namespace Acorisoft.Miga.Doc.Parts
 {
-    public class Module : ObservableObject, IAddChild
+    public class Module : IAddChild
     {
         private string       _name;
         private string       _id;
@@ -22,66 +22,38 @@ namespace Acorisoft.Miga.Doc.Parts
         /// <summary>
         /// 获取或设置唯一标识符
         /// </summary>
-        public string Id
-        {
-            get => _id;
-            set => SetValue(ref _id, value);
-        }
+        public string Id{ get; set; }
 
         /// <summary>
         /// 获取或设置作者
         /// </summary>
-        public string Author
-        {
-            get => _author;
-            set => SetValue(ref _author, value);
-        }
+        public string Author{ get; set; }
 
         /// <summary>
         /// 获取或设置组织
         /// </summary>
         [Alias("org")]
-        public string Organization
-        {
-            get => _organization;
-            set => SetValue(ref _organization, value);
-        }
+        public string Organization{ get; set; }
 
         /// <summary>
         /// 获取或设置联系方式
         /// </summary>
-        public string Contract
-        {
-            get => _contract;
-            set => SetValue(ref _contract, value);
-        }
+        public string Contract{ get; set; }
 
         /// <summary>
         /// 获取或设置模组名称
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Version"/> 属性。
         /// </summary>
         [Alias("ver")]
-        public int Version
-        {
-            get => _version;
-            set => SetValue(ref _version, value);
-        }
+        public int Version{ get; set; }
 
         [Alias("type")]
-        public DocumentKind Type
-        {
-            get => _type;
-            set => SetValue(ref _type, value);
-        }
-
+        public DocumentKind Type{ get; set; }
         public CustomDataPart Active()
         {
             var part = new CustomDataPart

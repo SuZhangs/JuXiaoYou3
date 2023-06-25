@@ -3,10 +3,8 @@
 
 namespace Acorisoft.Miga.Doc.Relationships
 {
-    public class Relationship : ObservableObject
+    public class Relationship
     {
-        private string _name;
-        
         public string Id { get; init; }
         
         public DocumentIndex Source { get; set; }
@@ -18,16 +16,11 @@ namespace Acorisoft.Miga.Doc.Relationships
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name{ get; set; }
     }
 
-    public class RelCopy : ObservableObject
+    public class RelCopy
     {
-        private string _relationName;
         
         public string Id { get; init; }
         public string Target { get; init; }
@@ -37,11 +30,7 @@ namespace Acorisoft.Miga.Doc.Relationships
         /// <summary>
         /// 获取或设置 <see cref="RelationName"/> 属性。
         /// </summary>
-        public string RelationName
-        {
-            get => _relationName;
-            set => SetValue(ref _relationName, value);
-        }
+        public string RelationName{ get; set; }
 
     }
 }

@@ -160,13 +160,15 @@
                                               Watermark="{f:Language global.search}"
                                               Width="192" />
 
+                        <!-- Open View In New Tab -->
+                        <ftk:ToolButton Command="{Binding OpenInNewTabCommand}"
+                                        Icon="{StaticResource FeatherIcon.Folder}"
+                                        Visibility="Collapsed"/>
+
                         <ftk:ToolButton Content="{f:Language global.search}"
                                         Command="{Binding SearchPageCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
                                         ShowText="True" />
-
-                        <ftk:ToolButton Command="{Binding OpenInNewTabCommand}"
-                                        Icon="{StaticResource FeatherIcon.Folder}"/>
                     </StackPanel>
                 </f:ForestSection.ToolBar>
                 <ScrollViewer DockPanel.Dock="Top"

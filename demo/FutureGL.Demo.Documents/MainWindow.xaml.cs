@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FutureGL.Demo.Weapon
+namespace Acorisoft.FutureGL.Demo.Documents
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

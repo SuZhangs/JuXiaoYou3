@@ -50,27 +50,15 @@
         /// <summary>
         /// 获取或设置当前文本属性的回滚属性
         /// </summary>
-        public string Fallback
-        {
-            get => _fallback;
-            set => SetValue(ref _fallback, value);
-        }
+        public string Fallback{ get; set; }
 
         /// <summary>
         /// 获取或设置当前文本属性的后缀
         /// </summary>
         [Alias("p")]
-        public string Positive
-        {
-            get => _positive;
-            set => SetValue(ref _positive, value);
-        }
+        public string Positive{ get; set; }
 
         [Alias("n")]
-        public string Negative
-        {
-            get => _negative;
-            set => SetValue(ref _negative, value);
-        }
+        public string Negative{ get; set; }
     }
 }

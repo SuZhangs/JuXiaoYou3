@@ -49,21 +49,13 @@
         /// <summary>
         /// 获取或设置当前文本属性的回滚属性
         /// </summary>
-        public string Fallback
-        {
-            get => _fallback;
-            set => SetValue(ref _fallback, value);
-        }
+        public string Fallback{ get; set; }
 
         /// <summary>
         /// 获取或设置当前引用属性的数据源
         /// </summary>
         [Alias("src")]
-        public string Source
-        {
-            get => _source;
-            set => SetValue(ref _source, value);
-        }
+        public string Source{ get; set; }
 
 
         /// <summary>
@@ -71,10 +63,6 @@
         /// </summary>
         [Alias("multiSelect")]
         [Ignore]
-        public bool MultiSelect
-        {
-            get => _multiSelect;
-            set => SetValue(ref _multiSelect, value);
-        }
+        public bool MultiSelect{ get; set; }
     }
 }

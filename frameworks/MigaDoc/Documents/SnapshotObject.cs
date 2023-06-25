@@ -1,9 +1,7 @@
 namespace Acorisoft.Miga.Doc.Documents
 {
-    public abstract class SnapshotObject : ObservableObject
+    public abstract class SnapshotObject 
     {
-        private string _name;
-        
         /// <summary>
         /// 获取或设置 <see cref="Id"/> 属性。
         /// </summary>
@@ -12,10 +10,6 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+        public string Name { get; set; }
     }
 }

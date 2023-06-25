@@ -15,27 +15,20 @@ namespace Acorisoft.Miga.Doc.Parts
 
     }
 
-    public class SimpleTextNode : ObservableObject
+    public class SimpleTextNode
     {
-        private string _name;
+        
         private string _content;
 
         /// <summary>
         /// 获取或设置 <see cref="Content"/> 属性。
         /// </summary>
-        public string Content
-        {
-            get => _content;
-            set => SetValue(ref _content, value);
-        }
+        public string Content{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
     }
 }

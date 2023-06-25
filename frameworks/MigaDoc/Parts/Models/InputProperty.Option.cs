@@ -51,11 +51,7 @@
         /// <summary>
         /// 获取或设置当前文本属性的回滚属性
         /// </summary>
-        public string Fallback
-        {
-            get => _fallback;
-            set => SetValue(ref _fallback, value);
-        }
+        public string Fallback{ get; set; }
 
         /// <summary>
         /// 数据。

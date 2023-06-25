@@ -12,67 +12,34 @@ namespace Acorisoft.Miga.Doc.Parts
         public ObservableCollection<string> Lines { get; set; }
     }
 
-    public class SkillData : ObservableObject
+    public class SkillData
     {
-        private DocumentIndex _passive;
-        private DocumentIndex _cost;
-        private DocumentIndex _skill1;
-        private DocumentIndex _skill2;
-        private DocumentIndex _skill3;
-        private DocumentIndex _skill4;
 
         /// <summary>
         /// 获取或设置 <see cref="Skill4"/> 属性。
         /// </summary>
-        public DocumentIndex Skill4
-        {
-            get => _skill4;
-            set => SetValue(ref _skill4, value);
-        }
+        public DocumentIndex Skill4{ get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Skill3"/> 属性。
         /// </summary>
-        public DocumentIndex Skill3
-        {
-            get => _skill3;
-            set => SetValue(ref _skill3, value);
-        }
-
+        public DocumentIndex Skill3{ get; set; }
         /// <summary>
         /// 获取或设置 <see cref="Skill2"/> 属性。
         /// </summary>
-        public DocumentIndex Skill2
-        {
-            get => _skill2;
-            set => SetValue(ref _skill2, value);
-        }
-
+        public DocumentIndex Skill2{ get; set; }
         /// <summary>
         /// 获取或设置 <see cref="Skill1"/> 属性。
         /// </summary>
-        public DocumentIndex Skill1
-        {
-            get => _skill1;
-            set => SetValue(ref _skill1, value);
-        }
-
+        public DocumentIndex Skill1{ get; set; }
         /// <summary>
         /// 获取或设置 <see cref="Cost"/> 属性。
         /// </summary>
-        public DocumentIndex Cost
-        {
-            get => _cost;
-            set => SetValue(ref _cost, value);
-        }
+        public DocumentIndex Cost{ get; set; }
 
         /// <summary>
         /// 获取或设置 <see cref="Passive"/> 属性。
         /// </summary>
-        public DocumentIndex Passive
-        {
-            get => _passive;
-            set => SetValue(ref _passive, value);
-        }
+        public DocumentIndex Passive{ get; set; }
     }
 }

@@ -31,11 +31,7 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="Summary"/> 属性。
         /// </summary>
-        public string Summary
-        {
-            get => _summary;
-            set => SetValue(ref _summary, value);
-        }
+        public string Summary{ get; set; }
         
         /// <summary>
         /// 
@@ -50,11 +46,7 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置 <see cref="IsLocking"/> 属性。
         /// </summary>
-        public bool IsLocking
-        {
-            get => _isLocking;
-            set => SetValue(ref _isLocking, value);
-        }
+        public bool IsLocking{ get; set; }
         
         /// <summary>
         /// 
@@ -69,20 +61,12 @@ namespace Acorisoft.Miga.Doc.Documents
         /// <summary>
         /// 获取或设置当前文档索引的头像。
         /// </summary>
-        public string Avatar
-        {
-            get => _avatar;
-            set => SetValue(ref _avatar, value);
-        }
+        public string Avatar{ get; set; }
         
         /// <summary>
         /// 获取或设置 <see cref="IsAssociated"/> 属性。
         /// </summary>
-        public bool IsAssociated
-        {
-            get => _isAssociated;
-            set => SetValue(ref _isAssociated, value);
-        }
+        public bool IsAssociated{ get; set; }
         
         /// <summary>
         /// 标签
@@ -104,7 +88,7 @@ namespace Acorisoft.Miga.Doc.Documents
         public GroupType GroupType { get; init; }
     }
 
-    public class DocumentIndexCopy : ObservableObject
+    public class DocumentIndexCopy 
     {
         public string Id { get; init; }
         public string Avatar { get; init; }

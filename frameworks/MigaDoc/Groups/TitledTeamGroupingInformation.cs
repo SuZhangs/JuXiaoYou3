@@ -2,18 +2,15 @@
 
 namespace Acorisoft.Miga.Doc.Groups
 {
-    public class TitledMember : ObservableObject
+    public class TitledMember
     {
-        private string _name;
+        
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。
         /// </summary>
         public string Name
-        {
-            get => _name;
-            set => SetValue(ref _name, value);
-        }
+       { get; set; }
         
         public ObservableCollection<DocumentIndexCopy> Members { get; init; }
     }
