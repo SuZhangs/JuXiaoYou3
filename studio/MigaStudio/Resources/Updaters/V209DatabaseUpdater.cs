@@ -4,6 +4,8 @@ using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.Forest.Models;
 using Acorisoft.FutureGL.MigaDB.Core;
+using Acorisoft.FutureGL.MigaDB.Data.DataParts;
+using Acorisoft.FutureGL.MigaDB.Data.Keywords;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.IO;
@@ -15,10 +17,15 @@ using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.Miga.Doc.Documents;
 using Acorisoft.Miga.Doc.Parts;
 using LiteDB;
+using DataPartCollection = Acorisoft.FutureGL.MigaDB.Data.DataParts.DataPartCollection;
+using MetadataCollection = Acorisoft.FutureGL.MigaDB.Data.Metadatas.MetadataCollection;
+using OldCompose = Acorisoft.Miga.Doc.Documents.Compose;
+using NewCompose = Acorisoft.FutureGL.MigaDB.Documents.Compose;
 using OldDocument = Acorisoft.Miga.Doc.Documents.Document;
 using NewDocument = Acorisoft.FutureGL.MigaDB.Documents.Document;
 using OldRepositoryProperty = Acorisoft.FutureGL.MigaStudio.Resources.Updaters.RepositoryProperty;
 using NewRepositoryProperty = Acorisoft.FutureGL.MigaDB.Models.DatabaseProperty;
+// ReSharper disable ConvertIfStatementToReturnStatement
 
 
 namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
@@ -109,16 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 await MigratingDocuments(session, databaseManager, oldDB, databaseFilePath);
                 
                 // 迁移文章
-                await MigratingComposes();
-                
-                // 迁移标签
-                await MigratingKeywords();
-                
-                // 迁移人物关系
-                await MigratingRelatives();
-                
-                // 迁移
-                await MigratingKeywords();
+                await MigratingComposes(session, databaseManager, oldDB);
                    
             }
             catch (IOException)
@@ -132,16 +130,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
             
             return EngineResult.Successful;
         }
-
-        private static async Task MigratingKeywords()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static async Task MigratingRelatives()
-        {
-            throw new NotImplementedException();
-        }
         
         private static async Task MigratingDocuments(IBusySession session, IDatabaseManager databaseManager, LiteDatabase oldDB, string databaseFilePath)
         {
@@ -150,18 +138,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
             //
             // 
             var imageEngine          = databaseManager.GetEngine<ImageEngine>();
+            var KeywordEngine        = databaseManager.GetEngine<KeywordEngine>();
             var documentEngine       = databaseManager.GetEngine<DocumentEngine>();
             var documentService      = oldDB.GetCollection<OldDocument>(Miga.Doc.Constants.cn_index);
             var documentIndexService = oldDB.GetCollection<DocumentIndex>(Miga.Doc.Constants.cn_document);
             var srcImageDir          = Path.Combine(databaseFilePath, "Images");
-            var dstImageDir          = imageEngine.FullDirectory;
 
-            foreach (var cache in documentIndexService.FindAll()
-                                                         .Select(x => Transform(MigratingImage(x.Avatar),x )))
+            foreach (var oldCache in documentIndexService.FindAll())
             {
+                var newCache = Transform(MigratingImage(oldCache.Avatar), oldCache);
+                
                 //
                 // porting avatar to new 
-                var avatarFileName = Path.Combine(cache.Avatar, srcImageDir);
+                var avatarFileName = Path.Combine(newCache.Avatar, srcImageDir);
                 var buffer         = await File.ReadAllBytesAsync(avatarFileName);
                 var raw            = Pool.MD5.ComputeHash(buffer);
                 var md5            = Convert.ToBase64String(raw);
@@ -169,20 +158,45 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 imageEngine.AddFile(new FileRecord
                 {
                     Id     = md5,
-                    Uri    = cache.Avatar,
+                    Uri    = newCache.Avatar,
                     Width  = 256,
                     Height = 256,
                     Type   = ResourceType.Image
                 });
-                imageEngine.WriteAvatar(ms, cache.Avatar);
+                
+                imageEngine.WriteAvatar(ms, newCache.Avatar);
                 await ms.DisposeAsync();
-                documentEngine.AddDocumentCache(cache);
+                documentEngine.AddDocumentCache(newCache);
+
+                
+                foreach (var keyword in oldCache.Keywords)
+                {
+                    if (KeywordEngine.GetKeywordCount(oldCache.Id) >= 32)
+                    {
+                        return;
+                    }
+
+                    if (KeywordEngine.HasKeyword(oldCache.Id, keyword))
+                    {
+                        return;
+                    }
+
+                    KeywordEngine.AddKeyword(new Keyword
+                    {
+                        Name = keyword,
+                        DocumentId = oldCache.Id,
+                        Id = ID.Get()
+                    });
+                }
             }
 
-            foreach (var document in documentService.FindAll()
-                                                    .Select(Transform))
+            foreach (var oldDocument in documentService.FindAll())
             {
-                documentEngine.AddDocument(document);
+                var newDocument = Transform(oldDocument);
+                
+                //
+                //
+                documentEngine.AddDocument(newDocument);
             }
         }
         
@@ -234,9 +248,49 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
 
         }
         
-        private static async Task MigratingComposes()
+        private static async Task MigratingComposes(IBusySession session, IDatabaseManager databaseManager, LiteDatabase oldDB)
         {
+            await session.Await(Language.GetText("text.Updating.ComposeUpdating"));
             
+            var documentEngine       = databaseManager.GetEngine<ComposeEngine>();
+            var documentService      = oldDB.GetCollection<OldCompose>(Miga.Doc.Constants.cn_index_compose);
+            var documentIndexService = oldDB.GetCollection<ComposeIndex>(Miga.Doc.Constants.cn_compose);
+
+            foreach (var oldCompose in documentService.FindAll())
+            {
+                var newCompose = new NewCompose
+                {
+                    Id    = oldCompose.Id,
+                    Name  = oldCompose.Name,
+                    Parts = new DataPartCollection(),
+                    Metas = new MetadataCollection(),
+                };
+                
+                newCompose.Parts.Add(new PartOfMarkdown
+                {
+                    Content = oldCompose.Current
+                                        ?.Content,
+                });
+                newCompose.Parts.Add(new PartOfRtf());
+                documentEngine.AddCompose(newCompose);
+            }
+
+            foreach (var oldCompose in documentIndexService.FindAll())
+            {
+                var newCompose = new ComposeCache
+                {
+                    Id             = oldCompose.Id,
+                    Name           = oldCompose.Name,
+                    IsDeleted      = false,
+                    IsLocked       = false,
+                    Version        = 1,
+                    TimeOfCreated  = oldCompose.CreatedDateTime,
+                    TimeOfModified = oldCompose.ModifiedDateTime,
+                    Intro          = oldCompose.Summary,
+
+                };
+                documentEngine.AddComposeCache(newCompose);
+            }
         }
         
         public const string NameField             = "Name";

@@ -7,8 +7,6 @@ namespace Acorisoft.Miga.Doc.Documents
         public string Id { get; init; }
         public ObservableCollection<ComposeVersion> Drafts { get; init; }
         public ObservableCollection<ComposeVersion> RecycleBin { get; init; }
-        private ComposeVersion _current;
-        private string         _name;
 
         /// <summary>
         /// 获取或设置 <see cref="Name"/> 属性。

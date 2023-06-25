@@ -2,11 +2,6 @@
 {
     public class ModuleIndex
     {
-        
-        private string _fileName;
-        private string _author;
-        private string _organization;
-
         /// <summary>
         /// 获取或设置 <see cref="Id"/> 属性。
         /// </summary>
@@ -20,7 +15,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public DocumentKind Type { get; init; }
+        public OldDocumentKind Type { get; init; }
 
         /// <summary>
         /// 获取或设置 <see cref="Organization"/> 属性。
