@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaStudio.Pages.Relatives;
+using Acorisoft.FutureGL.MigaStudio.Pages.Tools;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -17,6 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CreatePageFeature<KeywordViewModel>(FeatureGroup, "__Keywords", null);
             CreatePageFeature<BookmarkViewModel>(FeatureGroup, "__Bookmark", null);
             CreatePageFeature<MessageBoardViewModel>(FeatureGroup, "__MessageBoard", null);
+            CreatePageFeature<DocumentRecycleBinViewModel>(FeatureGroup, "__RecycleBin", null);
         }
     }
 }

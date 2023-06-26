@@ -302,6 +302,12 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             return DocumentCacheDB.Find(x => !x.IsDeleted && x.Type == type);
         }
         
+        
+        public IEnumerable<DocumentCache> GetRemovedDocuments()
+        {
+            return DocumentCacheDB.Find(x => x.IsDeleted );
+        }
+        
         public IEnumerable<DocumentCache> GetDocuments(DocumentType type, HashSet<string> hash)
         {
             return DocumentCacheDB.Find(x => !x.IsDeleted && x.Type == type && hash.Contains(x.Id));

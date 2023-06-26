@@ -300,6 +300,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand SearchPageCommand { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         public RelayCommand<OrderByMethods> SetOrderByMethodCommand { get; }
     }
 }
