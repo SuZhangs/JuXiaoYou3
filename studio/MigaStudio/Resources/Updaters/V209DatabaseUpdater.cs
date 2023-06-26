@@ -279,9 +279,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
             await session.Await(Language.GetText("text.Updating.ComposeUpdating"));
 
             var documentEngine       = databaseManager.GetEngine<ComposeEngine>();
-            var documentService      = oldDB.GetCollection<OldCompose>(Miga.Doc.Constants.cn_index_compose);
-            var documentIndexService = oldDB.GetCollection<ComposeIndex>(Miga.Doc.Constants.cn_compose);
+            var documentService      = oldDB.GetCollection<OldCompose>(Miga.Doc.Constants.cn_compose);
+            var documentIndexService = oldDB.GetCollection<ComposeIndex>(Miga.Doc.Constants.cn_index_compose);
 
+            foreach (var oldCompose in documentIndexService.FindAll())
+            {
+                var newCompose = new ComposeCache
+                {
+                    Id             = oldCompose.Id,
+                    Name           = oldCompose.Name,
+                    IsDeleted      = false,
+                    IsLocked       = false,
+                    Version        = 1,
+                    TimeOfCreated  = oldCompose.CreatedDateTime,
+                    TimeOfModified = oldCompose.ModifiedDateTime,
+                    Intro          = oldCompose.Summary,
+                };
+                documentEngine.AddComposeCache(newCompose);
+            }
+            
             foreach (var oldCompose in documentService.FindAll())
             {
                 var newCompose = new NewCompose
@@ -299,22 +315,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 });
                 newCompose.Parts.Add(new PartOfRtf());
                 documentEngine.AddCompose(newCompose);
-            }
-
-            foreach (var oldCompose in documentIndexService.FindAll())
-            {
-                var newCompose = new ComposeCache
-                {
-                    Id             = oldCompose.Id,
-                    Name           = oldCompose.Name,
-                    IsDeleted      = false,
-                    IsLocked       = false,
-                    Version        = 1,
-                    TimeOfCreated  = oldCompose.CreatedDateTime,
-                    TimeOfModified = oldCompose.ModifiedDateTime,
-                    Intro          = oldCompose.Summary,
-                };
-                documentEngine.AddComposeCache(newCompose);
             }
         }
 

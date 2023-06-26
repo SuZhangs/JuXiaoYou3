@@ -64,6 +64,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
 
         public IEnumerable<DocumentCache> Tokenize(string document)
         {
+            if (string.IsNullOrEmpty(document))
+            {
+                return null;
+            }
             return _parser.ParseText(document)
                           .Select(x => x.Value)
                           .Distinct();
