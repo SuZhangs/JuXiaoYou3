@@ -3,7 +3,7 @@ using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts
 {
-    public enum OptionKind
+    public enum OptionKind2
     {
         Radio,
         Toggle,
@@ -12,16 +12,16 @@ namespace Acorisoft.Miga.Doc.Parts
     }
     
     [Alias("option")]
-    public class OptionProperty2 : InputProperty2, IFallbackSupport
+    public class OptionProperty : InputProperty, IFallbackSupport
     {
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new OptionProperty2();
+            return new OptionProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (OptionProperty2)target;
+            var tp = (OptionProperty)target;
             
             tp._fallback     = _fallback;
             tp.PositiveValue = PositiveValue;
@@ -76,6 +76,6 @@ namespace Acorisoft.Miga.Doc.Parts
         /// 选项
         /// </summary>
         [Alias("kind")]
-        public OptionKind Kind { get; set; }
+        public OptionKind2 Kind { get; set; }
     }
 }

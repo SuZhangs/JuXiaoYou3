@@ -17,17 +17,17 @@ namespace Acorisoft.Miga.Doc.Parts
             _parser = XmlParser.GetParser(new []
             {
                 typeof(Module),
-                typeof(ColorProperty),
-                typeof(GroupProperty),
-                typeof(ImageProperty),
-                typeof(NumberProperty),
-                typeof(OptionProperty),
-                typeof(ReferenceProperty),
-                typeof(SequenceProperty),
-                typeof(TextProperty),
-                typeof(PageProperty),
+                typeof(ColorProperty2),
+                typeof(GroupProperty2),
+                typeof(ImageProperty2),
+                typeof(NumberProperty2),
+                typeof(OptionProperty2),
+                typeof(ReferenceProperty2),
+                typeof(SequenceProperty2),
+                typeof(TextProperty2),
+                typeof(PageProperty2),
                 typeof(Value),
-                typeof(DegreeProperty)
+                typeof(DegreeProperty2)
             });
         }
 

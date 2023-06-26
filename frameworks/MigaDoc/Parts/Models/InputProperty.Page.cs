@@ -3,31 +3,33 @@ using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts
 {
-    [Alias("number")]
-    public class NumberProperty2 : InputProperty2, IFallbackSupport
+    [Alias("page")]
+    public class PageProperty : InputProperty, IFallbackSupport
     {
         private string _fallback;
         private string _unit;
 
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected override void ShadowCopy(InputProperty target)
         {
-            return new NumberProperty2();
-        }
+            var tp = (PageProperty)target;
 
-        protected override void ShadowCopy(InputProperty2 target)
-        {
-            var tp = (NumberProperty2)target;
-
-            tp._fallback = _fallback;
-            tp._unit     = _unit;
+            tp.Fallback = Fallback;
+            tp.Unit     = Unit;
 
             base.ShadowCopy(target);
         }
 
+
+        
+        protected override InputProperty CreateInstanceOverride()
+        {
+            return new PageProperty();
+        }
+        
         protected internal override XElement GetElementOverride()
         {
-            var element = new XElement("number");
-
+            var element = new XElement("page");
+            
             //
             //
             Write(element);

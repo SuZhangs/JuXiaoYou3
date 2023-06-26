@@ -647,7 +647,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        private static ModuleBlock Upgrade(GroupProperty property)
+        private static ModuleBlock Upgrade(GroupProperty2 property)
         {
             var group = new GroupBlock
             {
@@ -660,7 +660,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             return group;
         }
         
-        private static ModuleBlock Upgrade(OptionProperty property)
+        private static ModuleBlock Upgrade(OptionProperty2 property)
         {
             if (property.Kind == OptionKind.Opposite)
             {
@@ -698,11 +698,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
             };
         }
 
-        public static ModuleBlock Upgrade(InputProperty property)
+        public static ModuleBlock Upgrade(InputProperty2 property)
         {
             return property switch
             {
-                TextProperty t => new SingleLineBlock
+                TextProperty2 t => new SingleLineBlock
                 {
                     Id       = ID.Get(),
                     Name     = t.Name,
@@ -711,7 +711,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     Fallback = t.Fallback,
                     ToolTips = t.ToolTips
                 },
-                PageProperty p => new MultiLineBlock
+                PageProperty2 p => new MultiLineBlock
                 {
                     Id       = ID.Get(),
                     Name     = p.Name,
@@ -721,7 +721,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     CharacterLimited = 800,
                     EnableExpression = false,
                 },
-                NumberProperty n => new NumberBlock
+                NumberProperty2 n => new NumberBlock
                 {
                     Id       = ID.Get(),
                     Name     = n.Name,
@@ -732,7 +732,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     Minimum = 0,
                     Suffix = n.Unit,
                 },
-                SequenceProperty s => new SequenceBlock
+                SequenceProperty2 s => new SequenceBlock
                 {
                     Id       = ID.Get(),
                     Name     = s.Name,
@@ -745,7 +745,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                         Value = x.Text
                     }).ToList(),
                 },
-                ColorProperty c => new ColorBlock
+                ColorProperty2 c => new ColorBlock
                 {
                     Id       = ID.Get(),
                     Name     = c.Name,
@@ -753,8 +753,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels
                     Fallback = c.Fallback,
                     ToolTips = c.ToolTips,
                 },
-                GroupProperty g => Upgrade(g),
-                OptionProperty o => Upgrade(o),
+                GroupProperty2 g => Upgrade(g),
+                OptionProperty2 o => Upgrade(o),
                 _ => null,
             };
         }

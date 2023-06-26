@@ -4,16 +4,16 @@ using Acorisoft.Miga.Xml;
 namespace Acorisoft.Miga.Doc.Parts
 {
     [Alias("ref")]
-    public class ReferenceProperty2 : InputProperty2
+    public class ReferenceProperty : InputProperty
     {
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new ReferenceProperty2();
+            return new ReferenceProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (ReferenceProperty2)target;
+            var tp = (ReferenceProperty)target;
 
             tp.Fallback    = Fallback;
             tp.Source      = Source;

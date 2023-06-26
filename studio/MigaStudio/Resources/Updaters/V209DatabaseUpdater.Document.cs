@@ -11,7 +11,7 @@ using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Models.Modules.ViewModels;
-using Acorisoft.FutureGL.MigaUtils.Collections;
+using Acorisoft.Miga.Doc;
 using Acorisoft.Miga.Doc.Documents;
 using Acorisoft.Miga.Doc.Parts;
 using DataPartCollection = Acorisoft.FutureGL.MigaDB.Data.DataParts.DataPartCollection;
@@ -25,7 +25,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
 {
     partial class V209DatabaseUpdater
     {
-
         public static DocumentCache Transform(string avatar, DocumentIndex oldCache)
         {
             //
@@ -34,12 +33,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 Id             = oldCache.Id,
                 Avatar         = avatar,
                 Name           = oldCache.Name,
+                Type           = Transform(oldCache.DocumentType),
                 Removable      = false,
                 IsDeleted      = oldCache.IsDelete,
                 IsLocked       = oldCache.IsLocking,
                 TimeOfCreated  = oldCache.CreatedDateTime,
                 TimeOfModified = oldCache.ModifiedDateTime,
-
             };
 
             return newCache;
@@ -47,6 +46,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
 
         public static NewDocument Transform(OldDocument oldDocument)
         {
+            if (oldDocument is null)
+            {
+                return null;
+            }
+
             var newDocument = new NewDocument
             {
                 Id    = oldDocument.Id,
@@ -56,14 +60,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 Type  = Transform(oldDocument.Type),
             };
 
-            newDocument.Parts
-                       .AddMany(oldDocument.Parts
-                                           .Select(Transform)
-                                           .Where(newPart => newPart is not null));
+            if (oldDocument.Parts is not null)
+            {
+                newDocument.Parts
+                           .AddMany(oldDocument.Parts
+                                               .Select(Transform)
+                                               .Where(newPart => newPart is not null));
+            }
 
             return newDocument;
         }
-
+        
         private static NewDataPart Transform(OldDataPart part)
         {
             if (part is WritingPart wp)
@@ -72,43 +79,37 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 {
                     Items = new List<StickyNote>()
                 };
-
                 foreach (var oldSN in wp.Composes)
                 {
                     sn.Items
                       .Add(new StickyNote
                       {
-                          TimeOfCreated = DateTime.Now,
+                          TimeOfCreated  = DateTime.Now,
                           TimeOfModified = DateTime.Now,
-                          Id = ID.Get(),
-                          Content = oldSN.Content,
-                          Title = oldSN.Name,
-                          Intro = oldSN.Summary,
+                          Id             = ID.Get(),
+                          Content        = oldSN.Content,
+                          Title          = oldSN.Name,
+                          Intro          = oldSN.Summary,
                           
                       });
                 }
-
                 return sn;
             }
-
             if (part is CustomDataPart cp)
             {
                 var mp = new PartOfModule
                 {
-                    Id      = cp.Id.ToString("N"),
-                    Name    = cp.Name,
-                    Blocks  = new List<ModuleBlock>(cp.Properties
-                                                      .Select(ModuleBlockFactory.Upgrade)),
+                    Id   = cp.Id.ToString("N"),
+                    Name = cp.Name,
+                    Blocks = new List<ModuleBlock>(cp.Properties
+                                                     .Select(Transform)),
                     Version = 1
                 };
-
                 return mp;
             }
-
             return null;
         }
-        
-        
+
         public static ModuleBlock Transform(InputProperty property)
         {
             return property switch
@@ -124,11 +125,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 },
                 PageProperty p => new MultiLineBlock
                 {
-                    Id       = ID.Get(),
-                    Name     = p.Name,
-                    Metadata = p.Metadata,
-                    Fallback = p.Fallback,
-                    ToolTips = p.ToolTips,
+                    Id               = ID.Get(),
+                    Name             = p.Name,
+                    Metadata         = p.Metadata,
+                    Fallback         = p.Fallback,
+                    ToolTips         = p.ToolTips,
                     CharacterLimited = 800,
                     EnableExpression = false,
                 },
@@ -139,9 +140,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                     Metadata = n.Metadata,
                     Fallback = int.TryParse(n.Fallback, out var n_f) ? n_f : 10,
                     ToolTips = n.ToolTips,
-                    Maximum = 10,
-                    Minimum = 0,
-                    Suffix = n.Unit,
+                    Maximum  = 10,
+                    Minimum  = 0,
+                    Suffix   = n.Unit,
                 },
                 SequenceProperty s => new SequenceBlock
                 {
@@ -152,7 +153,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                     ToolTips = s.ToolTips,
                     Items = s.Values.Select(x => new OptionItem
                     {
-                        Name = x.Text,
+                        Name  = x.Text,
                         Value = x.Text
                     }).ToList(),
                 },
@@ -164,9 +165,59 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                     Fallback = c.Fallback,
                     ToolTips = c.ToolTips,
                 },
-                GroupProperty g  => ModuleBlockFactory.Upgrade(g),
-                OptionProperty o => ModuleBlockFactory.Upgrade(o),
+                GroupProperty g  => Transform(g),
+                OptionProperty o => Transform(o),
                 _                => null,
+            };
+        }
+        private static ModuleBlock Transform(GroupProperty property)
+        {
+            var group = new GroupBlock
+            {
+                Id       = ID.Get(),
+                Name     = property.Name,
+                Metadata = property.Metadata,
+                ToolTips = property.ToolTips,
+                Items    = property.Values.Select(Transform).ToList()
+            };
+            return group;
+        }
+        
+        private static ModuleBlock Transform(OptionProperty property)
+        {
+            if (property.Kind == OptionKind2.Opposite)
+            {
+                return new BinaryBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = property.Name,
+                    Metadata = property.Metadata,
+                    ToolTips = property.ToolTips,
+                    Negative = property.NegativeValue,
+                    Positive = property.PositiveValue,
+                    Fallback = false
+                };
+            }
+            
+            if (property.Kind == OptionKind2.Favorite)
+            {
+                return new HeartBlock
+                {
+                    Id       = ID.Get(),
+                    Name     = property.Name,
+                    Metadata = property.Metadata,
+                    ToolTips = property.ToolTips,
+                    Fallback = false
+                };
+            }
+            
+            return new SwitchBlock
+            {
+                Id       = ID.Get(),
+                Name     = property.Name,
+                Metadata = property.Metadata,
+                ToolTips = property.ToolTips,
+                Fallback = false
             };
         }
 
@@ -181,29 +232,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                 OldDocumentKind.Map       => DocumentType.Geography,
                 _                         => DocumentType.Other,
             };
-        } 
+        }
     }
-    
-    
-    /// <summary>
-    /// <see cref="CustomDataPart"/> 类型表示一个自定义部件集合。
-    /// </summary>
-    public class CustomDataPart : OldDataPart
-    {
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<InputProperty> Properties { get; init; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public Guid Id { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name { get; init; }
-    }
+
+    
+    
 }

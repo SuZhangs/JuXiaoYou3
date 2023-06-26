@@ -5,16 +5,16 @@ namespace Acorisoft.Miga.Doc.Parts
 {
     
     [Alias("color")]
-    public class ColorProperty2 : InputProperty2, IFallbackSupport
+    public class ColorProperty : InputProperty, IFallbackSupport
     {
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new ColorProperty2();
+            return new ColorProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (ColorProperty2)target;
+            var tp = (ColorProperty)target;
             
             tp._fallback = _fallback;
             

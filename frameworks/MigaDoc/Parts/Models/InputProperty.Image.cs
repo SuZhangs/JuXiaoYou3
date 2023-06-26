@@ -4,11 +4,11 @@ using Acorisoft.Miga.Xml;
 namespace Acorisoft.Miga.Doc.Parts
 {
     [Alias("image")]
-    public class ImageProperty2 : InputProperty2
+    public class ImageProperty : InputProperty
     {
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new ImageProperty2();
+            return new ImageProperty();
         }
 
         protected internal override XElement GetElementOverride()

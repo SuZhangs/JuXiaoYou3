@@ -4,14 +4,14 @@ using Acorisoft.Miga.Xml;
 namespace Acorisoft.Miga.Doc.Parts
 {
     [Alias("page")]
-    public class PageProperty : InputProperty, IFallbackSupport
+    public class PageProperty2 : InputProperty2, IFallbackSupport
     {
         private string _fallback;
         private string _unit;
 
-        protected override void ShadowCopy(InputProperty target)
+        protected override void ShadowCopy(InputProperty2 target)
         {
-            var tp = (PageProperty)target;
+            var tp = (PageProperty2)target;
 
             tp.Fallback = Fallback;
             tp.Unit     = Unit;
@@ -21,9 +21,9 @@ namespace Acorisoft.Miga.Doc.Parts
 
 
         
-        protected override InputProperty CreateInstanceOverride()
+        protected override InputProperty2 CreateInstanceOverride()
         {
-            return new PageProperty();
+            return new PageProperty2();
         }
         
         protected internal override XElement GetElementOverride()

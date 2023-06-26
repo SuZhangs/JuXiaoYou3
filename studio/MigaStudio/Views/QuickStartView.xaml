@@ -81,6 +81,7 @@
                                             ShowText="True" />
 
                             <ftk:ToolButton Content="{f:Language global.import}"
+                                            Command="{Binding UpgradeCommand}"
                                             Icon="{StaticResource FeatherIcon.Upload}"
                                             Margin="0 4"
                                             ShowText="True" />

@@ -15,10 +15,10 @@ namespace Acorisoft.Miga.Doc.Parts
 
         public void Accept(object instance)
         {
-            Items.Add(instance as InputProperty);
+            Items.Add(instance as InputProperty2);
         }
 
-        public ObservableCollection<InputProperty> Items { get; } = new ObservableCollection<InputProperty>();
+        public ObservableCollection<InputProperty2> Items { get; } = new ObservableCollection<InputProperty2>();
 
         /// <summary>
         /// 获取或设置唯一标识符

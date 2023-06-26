@@ -7,23 +7,23 @@ namespace Acorisoft.Miga.Doc.Parts
     /// 
     /// </summary>
     /// <remarks>
-    /// <para><see cref="DegreeProperty2"/>类型主要是为了避免频繁重复的设计ViewModel创建的大类型</para>
+    /// <para><see cref="DegreeProperty"/>类型主要是为了避免频繁重复的设计ViewModel创建的大类型</para>
     /// </remarks>
     [Alias("degree")]
-    public class DegreeProperty2 : InputProperty2, IHeaderlessBlock
+    public class DegreeProperty : InputProperty
     {
         private string _fallback;
         private string _positive;
         private string _negative;
 
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new DegreeProperty2();
+            return new DegreeProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (DegreeProperty2)target;
+            var tp = (DegreeProperty)target;
             
             tp._fallback  = _fallback;
             tp._negative = _negative;

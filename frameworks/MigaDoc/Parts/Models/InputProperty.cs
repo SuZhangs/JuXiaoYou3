@@ -9,7 +9,8 @@ namespace Acorisoft.Miga.Doc.Parts
     }
     
     
-    public abstract class InputProperty : ObservableObject, ICloneable
+    
+    public abstract class InputProperty : ICloneable
     {
         #region ICloneable Interface
 
@@ -88,8 +89,8 @@ namespace Acorisoft.Miga.Doc.Parts
         [Ignore]
         public string Value
         {
-            get => _value;
-            set => SetValue(ref _value, value);
+            get;
+            set;
         }
 
         public virtual bool IsCompleted() => !string.IsNullOrEmpty(Name);
@@ -105,9 +106,11 @@ namespace Acorisoft.Miga.Doc.Parts
         /// </summary>
         public string Name
         {
-            get => _name;
-            set => SetValue(ref _name, value);
+            get;
+            set;
         }
+        
+        protected void SetValue<T>(ref T value, T source){}
 
         /// <summary>
         /// 获取或设置当前属性的提示。

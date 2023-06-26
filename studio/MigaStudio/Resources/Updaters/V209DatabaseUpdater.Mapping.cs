@@ -14,9 +14,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
         {
             return new DatabaseProperty
             {
-                Name        = property.Name,
-                ForeignName = property.EnglishName,
-                Author      = property.Author,
+                Name        = string.IsNullOrEmpty(property.Name)  ? UntitledField: property.Name,
+                ForeignName = string.IsNullOrEmpty(property.EnglishName)  ? UntitledField: property.EnglishName,
+                Author      = string.IsNullOrEmpty(property.Author)  ? UntitledField: property.Author,
                 Album       = new ObservableCollection<Album>(),
             };
         }

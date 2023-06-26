@@ -9,20 +9,20 @@ namespace Acorisoft.Miga.Doc.Parts
     /// 
     /// </summary>
     [Alias("text")]
-    public class TextProperty : InputProperty, IFallbackSupport
+    public class TextProperty2 : InputProperty2, IFallbackSupport
     {
 
         private string _fallback;
         private string _unit;
         
-        protected override InputProperty CreateInstanceOverride()
+        protected override InputProperty2 CreateInstanceOverride()
         {
-            return new TextProperty();
+            return new TextProperty2();
         }
 
-        protected override void ShadowCopy(InputProperty target)
+        protected override void ShadowCopy(InputProperty2 target)
         {
-            var tp = (TextProperty)target;
+            var tp = (TextProperty2)target;
             
             tp.Fallback        = Fallback;
             tp.Unit            = Unit;

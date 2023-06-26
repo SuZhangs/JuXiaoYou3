@@ -4,19 +4,19 @@ using Acorisoft.Miga.Xml;
 namespace Acorisoft.Miga.Doc.Parts
 {
     [Alias("number")]
-    public class NumberProperty2 : InputProperty2, IFallbackSupport
+    public class NumberProperty : InputProperty, IFallbackSupport
     {
         private string _fallback;
         private string _unit;
 
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new NumberProperty2();
+            return new NumberProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (NumberProperty2)target;
+            var tp = (NumberProperty)target;
 
             tp._fallback = _fallback;
             tp._unit     = _unit;

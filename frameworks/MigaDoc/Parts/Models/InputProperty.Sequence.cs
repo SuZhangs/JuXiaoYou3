@@ -1,22 +1,23 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Xml.Linq;
 using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts
 {
     [Alias("sequence")]
-    public class SequenceProperty2 : InputProperty2, IAddChild, IFallbackSupport
+    public class SequenceProperty : InputProperty, IAddChild, IFallbackSupport
     {
         private string _fallback;
         
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        protected sealed override InputProperty CreateInstanceOverride()
         {
-            return new SequenceProperty2();
+            return new SequenceProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (SequenceProperty2)target;
+            var tp = (SequenceProperty)target;
 
             tp.Fallback = Fallback;
             tp.Values.AddMany(Values);

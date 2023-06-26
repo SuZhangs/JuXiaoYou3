@@ -1,33 +1,39 @@
-﻿using System.Xml.Linq;
+﻿
+
+using System.Xml.Linq;
 using Acorisoft.Miga.Xml;
 
 namespace Acorisoft.Miga.Doc.Parts
 {
-    [Alias("number")]
-    public class NumberProperty2 : InputProperty2, IFallbackSupport
+    /// <summary>
+    /// 
+    /// </summary>
+    [Alias("text")]
+    public class TextProperty : InputProperty, IFallbackSupport
     {
+
         private string _fallback;
         private string _unit;
-
-        protected sealed override InputProperty2 CreateInstanceOverride()
+        
+        protected override InputProperty CreateInstanceOverride()
         {
-            return new NumberProperty2();
+            return new TextProperty();
         }
 
-        protected override void ShadowCopy(InputProperty2 target)
+        protected override void ShadowCopy(InputProperty target)
         {
-            var tp = (NumberProperty2)target;
-
-            tp._fallback = _fallback;
-            tp._unit     = _unit;
-
+            var tp = (TextProperty)target;
+            
+            tp.Fallback        = Fallback;
+            tp.Unit            = Unit;
+            
             base.ShadowCopy(target);
         }
 
         protected internal override XElement GetElementOverride()
         {
-            var element = new XElement("number");
-
+            var element = new XElement("text");
+            
             //
             //
             Write(element);
