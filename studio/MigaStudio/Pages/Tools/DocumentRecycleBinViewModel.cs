@@ -34,13 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
         protected sealed override bool NeedDataSourceSynchronize()
         {
-            if (Version != DocumentEngine.Version)
-            {
-                Version = DocumentEngine.Version;
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         protected override void OnRequestComputePageCount(IList<DocumentCache> dataSource)
@@ -106,7 +100,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
         protected sealed override void OnRequestDataSourceSynchronize(IList<DocumentCache> dataSource)
         {
-            dataSource.AddMany(DocumentEngine.GetRemovedDocuments());
+            dataSource.AddMany(DocumentEngine.GetRemovedDocuments(), true);
         }
 
         #endregion
@@ -145,5 +139,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
             get => _isPropertyPaneOpen;
             set { SetValue(ref _isPropertyPaneOpen, value); }
         }
+
+        public override bool Uniqueness => true;
     }
 }

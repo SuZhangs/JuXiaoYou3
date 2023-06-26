@@ -30,7 +30,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
             {
                 Xaml.Get<ILogger>()
                     .Warn($"图片:{avatar}为空！");
+                return null;
             }
+            
             return Xaml.FromStream(ms, w, h);
         }
     }
