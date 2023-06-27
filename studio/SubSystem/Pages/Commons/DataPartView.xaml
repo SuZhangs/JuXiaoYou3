@@ -65,7 +65,8 @@
                                 ShowText="True" />
             </UniformGrid>
 
-            <f:ListBox ItemsSource="{Binding ModuleParts,Mode=OneWay,IsAsync=True}"
+            <f:ListBox Margin="0 16 0 0"
+                       ItemsSource="{Binding ModuleParts,Mode=OneWay,IsAsync=True}"
                        SelectedItem="{Binding SelectedModulePart,Mode=TwoWay}" />
         </DockPanel>
 
