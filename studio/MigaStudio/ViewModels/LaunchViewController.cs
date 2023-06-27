@@ -67,7 +67,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 //
                 //
                 setting.ApplicationVersion = version;
-                gc.IsUpdated               = true;
                 ss.Save();
                 return;
             }
