@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -39,6 +41,8 @@ namespace Acorisoft.FutureGL.MigaDB.Tests.Engines.Data
 }}
 ";
 
+        private const string TranslatorFileContent = "text.{0} = ";
+
         private readonly List<string> ViewModels = new List<string>(32);
         private readonly List<string> Engines    = new List<string>(32);
 
@@ -64,20 +68,27 @@ namespace Acorisoft.FutureGL.MigaDB.Tests.Engines.Data
 
         public void Dump(string outputDir)
         {
-            foreach (var className in ViewModels)
-            {
-                var fileNamePrefix = $"{className}Fixture.cs";
-                var fileName       = Path.Combine(outputDir, "ViewModel", fileNamePrefix);
-                File.WriteAllText(fileName, string.Format(UnitTestClassFileContent, className));
-            }
+            // foreach (var className in ViewModels)
+            // {
+            //     var fileNamePrefix = $"{className}Fixture.cs";
+            //     var fileName       = Path.Combine(outputDir, "ViewModel", fileNamePrefix);
+            //     File.WriteAllText(fileName, string.Format(UnitTestClassFileContent, className));
+            // }
+            //
+            //
+            // foreach (var className in Engines)
+            // {
+            //     var fileNamePrefix = $"{className}Fixture.cs";
+            //     var fileName       = Path.Combine(outputDir, "Engine", fileNamePrefix);
+            //     File.WriteAllText(fileName, string.Format(UnitTestEngineFileContent, className));
+            // }
 
 
-            foreach (var className in Engines)
-            {
-                var fileNamePrefix = $"{className}Fixture.cs";
-                var fileName       = Path.Combine(outputDir, "Engine", fileNamePrefix);
-                File.WriteAllText(fileName, string.Format(UnitTestEngineFileContent, className));
-            }
+            var list     = new List<string>();
+            var fileName = Path.Combine(outputDir, "ViewModel", $"{Guid.NewGuid():N}.ini");
+            list.AddRange(ViewModels.Distinct()
+                                    .Select(x => string.Format(TranslatorFileContent, x)));
+            File.WriteAllLines(fileName, list);
         }
     }
 }
