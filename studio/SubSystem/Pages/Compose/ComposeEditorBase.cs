@@ -39,8 +39,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             OpenDocumentCommand = Command<DocumentCache>(OpenDocumentImpl);
             SaveComposeCommand  = Command(Save);
             NewComposeCommand   = AsyncCommand(async () => await ComposeUtilities.AddComposeAsync(ComposeEngine));
-            UndoCommand         = Command(UndoImpl, CanUndoImpl);
-            RedoCommand         = Command(RedoImpl, CanRedoImpl);
+            UndoCommand         = Command(UndoImpl);
+            RedoCommand         = Command(RedoImpl);
 
 
             Initialize();
@@ -101,7 +101,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         protected override bool OnDataPartAddingBefore(DataPart part)
         {
-            return false;
+            return part is PartOfRtf;
         }
 
         protected override void OnDataPartAddingAfter(DataPart part)
@@ -115,7 +115,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
                 if (part is PartOfRtf por)
                 {
-                    CreateWorkspace(por);
+                    //
+                    
                 }
                 else if (part is PartOfAlbum poa)
                 {
@@ -125,13 +126,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 else if (part is PartOfManifest pom2)
                 {
                     DataParts.Add(part);
-                    Services.Add(ServiceViewContainer.GetService(pom2));
                 }
             }
         }
 
         #endregion
-        
+
+        protected override void OnResume()
+        {
+            Xaml.Get<ITokenizerService>()
+                .Invalidate();
+            base.OnResume();
+        }
+
         protected override void ReleaseManagedResourcesOverride()
         {
             ReleaseWorkspace();

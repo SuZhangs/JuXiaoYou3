@@ -221,7 +221,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                     documentEngine.AddDocument(newDocument);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 await databaseManager.CloseAsync();
                 oldDB.Dispose();
@@ -313,7 +313,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Updaters
                     Content = oldCompose.Current
                                         ?.Content,
                 });
-                newCompose.Parts.Add(new PartOfRtf());
                 documentEngine.AddCompose(newCompose);
             }
         }

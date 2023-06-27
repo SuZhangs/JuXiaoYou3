@@ -50,14 +50,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             return editor;
         }
 
-        public static IWorkspace CreateFromRtfPart(PartOfRtf rtf)
-        {
-            return new RichTextFileWorkspace
-            {
-                Part = rtf
-            };
-        }
-        
         public static IWorkspace CreateFromMarkdownPart(PartOfMarkdown md)
         {
             return new MarkdownWorkspace()

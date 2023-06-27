@@ -22,26 +22,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         #region CreateWorkspace
 
-        protected void CreateWorkspace(PartOfRtf rtf)
-        {
-            if (rtf is null)
-            {
-                return;
-            }
-
-            var workspace = EditorUtilities.CreateFromRtfPart(rtf);
-            workspace.WorkspaceChanged = OnWorkspaceChanged;
-
-            if (!WorkspaceMapping.TryAdd(typeof(PartOfRtf), workspace))
-            {
-                Xaml.Get<ILogger>()
-                    .Warn("创建了重复的RTF模组");
-                return;
-            }
-
-            InternalWorkspaceCollection.Add(workspace);
-        }
-
         protected void CreateWorkspace(PartOfMarkdown md)
         {
             if (md is null)
@@ -88,11 +68,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 LineNumber = workspace.LineNumber;
                 ColumnNumber = workspace.LineColumn;
             }
-            else
-            {
-                //
-                //
-            }
         }
 
         #region IComposeEditor
@@ -128,6 +103,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 _workspace?.Inactive();
                 SetValue(ref _workspace, value);
                 _workspace?.Active();
+                
+                // re
+                OnWorkspaceChanged(StateChangedEventSource.TextSource, value);
             }
         }
 

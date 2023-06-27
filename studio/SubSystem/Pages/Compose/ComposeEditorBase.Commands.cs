@@ -33,20 +33,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             UpdateUndoRedoCommandState();
         }
 
-        private bool CanUndoImpl() => Workspace?.CanUndo() ?? false;
-        private bool CanRedoImpl() => Workspace?.CanRedo() ?? false;
+        public bool CanUndo() => Workspace?.CanUndo() ?? false;
+        public bool CanRedo() => Workspace?.CanRedo() ?? false;
         
         private void UpdateUndoRedoCommandState()
         {
-            RedoCommand.NotifyCanExecuteChanged();
-            UndoCommand.NotifyCanExecuteChanged();
+            UpdateUndoRedoCommandStateHandler?.Invoke();
         }
+        
+        public Action UpdateUndoRedoCommandStateHandler { get; set; }
         
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand SaveComposeCommand { get; }
-        
-        
+
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand NewComposeCommand { get; }
@@ -57,6 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand UndoCommand { get; }
+        
         public RelayCommand<DocumentCache> OpenDocumentCommand { get; }
     }
 }

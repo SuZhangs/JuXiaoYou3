@@ -137,9 +137,10 @@
                         </Border>
 
                         <TextBlock FontSize="14"
-                               Margin="0 8 0 0"
-                               HorizontalAlignment="Center"
-                               Text="{Binding Name,Mode=OneWay}" />
+                                   Margin="0 8 0 0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   TextTrimming="CharacterEllipsis"/>
                     </DockPanel>
                 </f:SimpleButton>
             </DataTemplate>
@@ -309,9 +310,11 @@
                     <Setter Property="Width" Value="40" />
                 </Style>
             </StackPanel.Resources>
-            <ftk:ToolButton Command="{Binding UndoCommand}"
+            <ftk:ToolButton x:Name="UndoButton"
+                            Command="{Binding UndoCommand}"
                             Icon="{StaticResource MaterialSymbols.Undo}" />
-            <ftk:ToolButton Command="{Binding RedoCommand}"
+            <ftk:ToolButton x:Name="RedoButton"
+                            Command="{Binding RedoCommand}"
                             Icon="{StaticResource MaterialSymbols.Redo}" />
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" Visibility="Collapsed"/>
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" Visibility="Collapsed"/>
@@ -346,13 +349,13 @@
             </editor:TextEditor>
 
             <!-- RTF编辑器 -->
-            <RichTextBox x:Name="RtfEditor"
-                         Background="{f:Brush BackgroundLevel2}" 
-                         Foreground="{f:ForegroundBrush}"
-                         FontSize="16"
-                         Padding="16 16 16 0"
-                         BorderThickness="0"
-                         Visibility="Collapsed"/>
+            <!-- <RichTextBox x:Name="RtfEditor" -->
+            <!--              Background="{f:Brush BackgroundLevel2}"  -->
+            <!--              Foreground="{f:ForegroundBrush}" -->
+            <!--              FontSize="16" -->
+            <!--              Padding="16 16 16 0" -->
+            <!--              BorderThickness="0" -->
+            <!--              Visibility="Collapsed"/> -->
         </Grid>
 
         <!-- 状态栏 -->

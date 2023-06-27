@@ -19,10 +19,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             //
             // 
             ViewModel.Register(Editor)
-                     .Register(RtfEditor)
                      .Initialize();
+
+            ViewModel.UpdateUndoRedoCommandStateHandler = UpdateUndoRedoCommandStateImpl;
             
             base.OnLoaded(sender, e);
+        }
+
+        private void UpdateUndoRedoCommandStateImpl()
+        {
+            UndoButton.IsEnabled = ViewModel.CanUndo();
+            RedoButton.IsEnabled = ViewModel.CanRedo();
         }
 
         protected ComposeEditorViewModel ViewModel => ViewModel<ComposeEditorViewModel>();

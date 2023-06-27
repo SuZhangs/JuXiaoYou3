@@ -13,7 +13,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     public class CharacterPickerViewModel : ImplicitDialogVM
     {
         private SocialCharacter _selected;
-        private bool            _uiMode;
         
         public static Task<Op<IEnumerable<SocialCharacter>>> MultiSelectExclude(IEnumerable<SocialCharacter> characters, ISet<string> pool)
         {
@@ -56,14 +55,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             var i = TargetElement.SelectedItems;
 
-            if (_uiMode)
-            {
-            }
-            else{
             
-                Result = i.Cast<SocialCharacter>()
-                          .ToArray();
-            }
+            Result = i.Cast<SocialCharacter>()
+                      .ToArray();
         }
 
         protected override string Failed() => SubSystemString.Unknown;

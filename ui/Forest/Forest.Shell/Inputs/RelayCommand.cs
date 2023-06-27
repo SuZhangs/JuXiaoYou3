@@ -6,6 +6,7 @@
 // more info in ThirdPartyNotices.txt in the root of the project.
 
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace CommunityToolkit.Mvvm.Input
 {
@@ -28,7 +29,11 @@ namespace CommunityToolkit.Mvvm.Input
         private readonly Func<bool> canExecute;
 
         /// <inheritdoc/>
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class that can always execute.
@@ -60,7 +65,6 @@ namespace CommunityToolkit.Mvvm.Input
         /// <inheritdoc/>
         public void NotifyCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <inheritdoc/>

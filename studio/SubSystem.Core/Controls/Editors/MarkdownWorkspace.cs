@@ -316,6 +316,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
         private void OnTextChanged(object sender, EventArgs e)
         {
+            #if NEXT_VER
             if (_window is null)
             {
                 _isShow        =  false;
@@ -333,10 +334,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                                      Content = x.Name
                                  });
             data.AddMany(concepts, true);
-
-            Part.Content = Control.Text;
-            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
-
+            
             //
             //
             if (_isShow)
@@ -352,6 +350,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
             _isShow = true;
             _window.Show();
+#endif
+            Part.Content = Control.Text;
+            WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
+
         }
 
         public sealed override void UpdateCaretState()

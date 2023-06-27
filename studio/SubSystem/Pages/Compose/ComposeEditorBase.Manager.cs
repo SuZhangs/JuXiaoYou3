@@ -52,7 +52,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             //
             // 检查当前打开的文档是否缺失指定的DataPart
             HasDataPart<PartOfMarkdown>(() => new PartOfMarkdown(), AddDataPartToDocument);
-            HasDataPart<PartOfRtf>(() => new PartOfRtf(), AddDataPartToDocument);
             HasDataPart<PartOfAlbum>(() => new PartOfAlbum(), AddDataPartToDocument);
         }
 
@@ -81,7 +80,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         private static void CreateComposeImpl(Compose document)
         {
-            document.Parts.Add(new PartOfRtf());
             document.Parts.Add(new PartOfMarkdown());
             document.Parts.Add(new PartOfAlbum());
         }
