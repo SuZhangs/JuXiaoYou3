@@ -100,7 +100,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         protected override bool OnDataPartAddingBefore(DataPart part)
         {
-            return part is PartOfRtf;
+            if (part is PartOfRtf rtf)
+            {
+                DataPartTrackerOfType.Remove(part.GetType());
+                Document.Parts.Remove(rtf);
+                return true;
+            }
+            
+            return false;
         }
 
         protected override void OnDataPartAddingAfter(DataPart part)
