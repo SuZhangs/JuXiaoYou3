@@ -58,12 +58,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
-        public sealed override void Stop()
-        { 
-            Save();
-            base.Stop();
-        }
-
         private void Initialize()
         {
             // CreateSubViews(InternalSubViews);
