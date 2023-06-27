@@ -28,10 +28,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddPartView(collection);
             AddShareView(collection);
             Preshapes.Clear();
-            Preshapes.Add(new CharacterPergamynStyleView
-            {
-                Tag = Language.GetText("preshape.character.Pergamyn")
-            });
+            // Preshapes.Add(new CharacterPergamynStyleView
+            // {
+            //     Tag = Language.GetText("preshape.character.Pergamyn")
+            // });
         }
 
         protected override IEnumerable<object> CreateDetailPartList()

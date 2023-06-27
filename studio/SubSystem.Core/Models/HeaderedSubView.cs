@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models
 {
@@ -24,7 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models
         public string Name { get; init; }
         public FrameworkElement SubView { get; set; }
         
-        public string DefaultColor { get; init; }
-        public string HighlightColor { get; init; }
+        public SolidColorBrush DefaultColor { get; init; }
+        public SolidColorBrush HighlightColor { get; init; }
     }
 }

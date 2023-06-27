@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using Acorisoft.FutureGL.MigaStudio.Pages.Documents.Share;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
@@ -15,29 +16,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             {
                 Name           = Language.GetText(id),
                 Type           = typeof(TView),
-                DefaultColor   = nc,
-                HighlightColor = hc
+                DefaultColor   = new SolidColorBrush(Xaml.FromHex(nc)),
+                HighlightColor = new SolidColorBrush(Xaml.FromHex(hc))
             });
         }
 
         protected static void AddBasicView<TView>(ICollection<HeaderedSubView> collection) where TView : FrameworkElement
         {
-            AddSubView<TView>(collection, "text.DocumentEditor.Basic", "#0091A4", "#00AFC6");
+            AddSubView<TView>(collection, "text.DocumentEditor.Basic", "#89a12b", "#89a12b");
         }
 
         protected static void AddPartView(ICollection<HeaderedSubView> collection)
         {
-            AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart", "#92A400", "#A1B500");
+            AddSubView<DataPartView>(collection, "text.DocumentEditor.DataPart", "#89a12b", "#89a12b");
         }
 
         protected static void AddDetailView(ICollection<HeaderedSubView> collection)
         {
-            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail", "#A42300", "#CC2C00");
+            AddSubView<DetailPartView>(collection, "text.DocumentEditor.Detail", "#89a12b", "#89a12b");
         }
 
         protected static void AddShareView(ICollection<HeaderedSubView> collection)
         {
-            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation", "#5700A4", "#6500BF");
+            AddSubView<ShareView>(collection, "text.DocumentEditor.Presentation", "#89a12b", "#89a12b");
         }
 
         protected override IEnumerable<object> CreateDetailPartList()

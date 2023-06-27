@@ -16,7 +16,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             // CreateDialogFeature<DirectoryManagerViewModel>(string.Empty, "__DirectoryStatistic", null);
             CreateDialogFeature<RepairToolViewModel>(ToolsGroup, "global.repair", null);
             CreatePageFeature<KeywordViewModel>(FeatureGroup, "__Keywords", null);
-            CreatePageFeature<BookmarkViewModel>(FeatureGroup, "__Bookmark", null);
+            // CreatePageFeature<BookmarkViewModel>(FeatureGroup, "__Bookmark", null);
             CreatePageFeature<MessageBoardViewModel>(FeatureGroup, "__MessageBoard", null);
             CreatePageFeature<DocumentRecycleBinViewModel>(FeatureGroup, "__RecycleBin", null);
         }

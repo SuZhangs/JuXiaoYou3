@@ -92,7 +92,8 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <f:DialogPage Accent="{f:Brush Theme=Info200}"
+    <f:DialogPage Title="{Binding Title}"
+                  Accent="{f:Brush Theme=Info200}"
                   CancelCommand="{Binding CancelCommand}"
                   Purpose="Notification">
         <ScrollViewer>

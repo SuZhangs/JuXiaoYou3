@@ -47,6 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             PrepareOpeningDocument(parameter);
             OpeningDocument(Cache, Document);
             FinishOpeningDocument();
+            SetDirtyState(false);
         }
 
         private void FinishOpeningDocument()

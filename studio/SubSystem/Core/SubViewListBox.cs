@@ -57,7 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
         {
             if (DataContext is HeaderedSubView hsv)
             {
-                _highlight2 ??= new SolidColorBrush(Xaml.FromHex(hsv.HighlightColor));
+                _highlight2 ??= hsv.HighlightColor;
             }
             else
             {
@@ -110,7 +110,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Core
             _highlight ??= new SolidColorBrush(theme.Colors[(int)ForestTheme.Overlay100]);
             if (DataContext is HeaderedSubView hsv)
             {
-                _highlight2 ??= new SolidColorBrush(Xaml.FromHex(hsv.HighlightColor));
+                _highlight2 ??= hsv.HighlightColor;
             }
             else
             {

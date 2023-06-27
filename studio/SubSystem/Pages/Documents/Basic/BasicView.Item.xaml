@@ -38,29 +38,11 @@
                         <f:HeaderedSingleLine Header="价格"
                                               Margin="4"
                                               Text="{Binding Price,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        
+
                         <f:HeaderedSingleLine Header="产地"
                                               Margin="4"
                                               Text="{Binding ProduceArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </UniformGrid>
-
-                    <HeaderedContentControl Header="可选"
-                                            Margin="0 16">
-                        <UniformGrid Columns="3">
-                            <f:HeaderedSingleLine Header="昵称"
-                                                  Margin="4"
-                                                  Text="{Binding NickName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-                            <f:HeaderedSingleLine Header="种族"
-                                                  Margin="4"
-                                                  Text="{Binding Race,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-                            <f:HeaderedSingleLine Header="国家"
-                                                  Margin="4"
-                                                  Text="{Binding Country,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-
-                        </UniformGrid>
-                    </HeaderedContentControl>
                 </StackPanel>
 
                 <f:HeaderedMultiLine DockPanel.Dock="Bottom"

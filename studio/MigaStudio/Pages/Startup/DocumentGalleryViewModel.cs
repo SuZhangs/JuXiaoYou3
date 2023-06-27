@@ -239,6 +239,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             DocumentUtilities.RemoveDocument(KeywordEngine, DocumentEngine, cache, x =>
             {
+                if (ReferenceEquals(cache, SelectedItem))
+                {
+                    SelectedItem       = null;
+                    IsPropertyPaneOpen = false;
+                }
+                
                 DataSource.Remove(x);
                 Collection.Remove(x);
                 this.SuccessfulNotification(SubSystemString.OperationOfRemoveIsSuccessful);

@@ -93,7 +93,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 //
                 // Initialize
                 Name   = Cache.Name;
-                Gender = Language.GetText("global.DefaultGender");
             }
             
             GetPartOfPresentation();
