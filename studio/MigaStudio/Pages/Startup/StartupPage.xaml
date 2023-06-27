@@ -91,13 +91,12 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ScrollViewer Padding="0 0 16 0">
+    <ScrollViewer Padding="0 24 16 0">
         <StackPanel>
             <f:EmptyContentControl NotEmpty="{Binding HasBackgroundCover,Mode=OneWay}"
-                                   Height="360">
+                                   Height="300">
                 <f:EmptyContentControl.EmptyState>
                     <Border CornerRadius="12"
-                            Height="256"
                             Padding="32">
                         <Border.Background>
                             <LinearGradientBrush>
@@ -158,7 +157,7 @@
             </f:EmptyContentControl>
 
             <!-- 快速功能 -->
-            <DockPanel Margin="0 32 0 0">
+            <DockPanel Margin="0 32">
                 <f:ForestIsland DockPanel.Dock="Right"
                                 Header="反馈">
                     <f:SpacingStackPanel Gap="8"
@@ -241,10 +240,11 @@
                             <!--                 Icon="{StaticResource FeatherIcon.People}" /> -->
                         </WrapPanel>
                     </f:ForestIsland>
+                    
                     <f:ForestIsland Header="其他模式"
                                     Margin="0 8">
                         <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                 ItemsSource="{Binding Controllers,Mode=OneWay}">
+                                      ItemsSource="{Binding Controllers,Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel />
@@ -253,10 +253,10 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <ftk:ToolButton Content="{Binding Name}"
-                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchControllerCommand}"
-                                            CommandParameter="{Binding}"
-                                            ShowText="True"
-                                            Icon="{StaticResource FeatherIcon.Tools}" />
+                                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchControllerCommand}"
+                                                    CommandParameter="{Binding}"
+                                                    ShowText="True"
+                                                    Icon="{StaticResource FeatherIcon.Tools}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

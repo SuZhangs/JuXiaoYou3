@@ -298,7 +298,6 @@
         <!-- 菜单栏 -->
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
-                    HorizontalAlignment="Center"
                     Orientation="Horizontal"
                     Margin="0 8">
             <StackPanel.Resources>
@@ -314,12 +313,12 @@
                             Icon="{StaticResource MaterialSymbols.Undo}" />
             <ftk:ToolButton Command="{Binding RedoCommand}"
                             Icon="{StaticResource MaterialSymbols.Redo}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}" Visibility="Collapsed"/>
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}" Visibility="Collapsed"/>
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}" Visibility="Collapsed"/>
             <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}" Visibility="Collapsed"/>
