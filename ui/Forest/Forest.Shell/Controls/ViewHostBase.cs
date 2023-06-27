@@ -34,7 +34,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
 
             if (e.OldValue is ViewModelBase oldPage)
             {
-                oldPage.Stop();
+                oldPage.Suspend();
             }
 
             if (e.NewValue is ViewModelBase newViewModel)
@@ -86,7 +86,7 @@ namespace Acorisoft.FutureGL.Forest.Controls
             if (sender is FrameworkElement { DataContext: ViewModelBase vm } fe)
             {
                 fe.Unloaded -= ViewModelStopping;
-                vm.Stop();
+                vm.Suspend();
             }
         }
 

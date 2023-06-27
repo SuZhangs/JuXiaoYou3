@@ -46,7 +46,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         private void OnWorkspaceChanged(StateChangedEventSource source, IWorkspace workspace)
         {
-            if (source == StateChangedEventSource.TextSource)
+            if (source == StateChangedEventSource.Initialize)
+            {
+                
+                //
+                // 更新按钮状态
+                UpdateUndoRedoCommandState();
+
+                //
+                // 统计
+                Statistic(workspace);
+            }
+            else if (source == StateChangedEventSource.TextSource)
             {
                 //
                 // 更新按钮状态
@@ -105,7 +116,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
                 _workspace?.Active();
                 
                 // re
-                OnWorkspaceChanged(StateChangedEventSource.TextSource, value);
+                OnWorkspaceChanged(StateChangedEventSource.Initialize, value);
             }
         }
 

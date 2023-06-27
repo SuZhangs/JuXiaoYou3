@@ -49,8 +49,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         private void Save()
         {
             ComposeEngine.UpdateCompose(Document, Cache);
-            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
             SetDirtyState(false);
+        }
+
+        private void SaveWithNotification()
+        {
+            Save();
+            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
         }
 
         public sealed override void Stop()
@@ -66,7 +71,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
             //
             // 添加绑定
-            AddKeyBinding(ModifierKeys.Control, Key.S, Save);
+            AddKeyBinding(ModifierKeys.Control, Key.S, SaveWithNotification);
         }
 
         private void ActivateAllEngines()

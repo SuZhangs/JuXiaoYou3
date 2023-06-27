@@ -118,6 +118,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             if (index > -1)
             {
+                viewModel.Stop();
                 Workspace.RemoveAt(index);
 
                 //

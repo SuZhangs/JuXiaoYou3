@@ -5,6 +5,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
     public enum StateChangedEventSource
     {
+        Initialize,
         Caret,
         TextSource,
         Selection
