@@ -49,35 +49,22 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
             {
                 _eventSource.KeyUp     -= OnKeyDown;
                 _eventSource.KeyUp     -= OnKeyUp;
-                _eventSource.DragEnter -= OnDragEnter;
-                _eventSource.DragOver  -= OnDragOver;
-                _eventSource.DragLeave -= OnDragLeave;
             }
 
             _eventSource       =  window;
             _eventSource.KeyUp += OnKeyDown;
             _eventSource.KeyUp += OnKeyUp;
-            _eventSource.DragEnter += OnDragEnter;
-            _eventSource.DragOver += OnDragOver;
-            _eventSource.DragLeave += OnDragLeave;
         }
 
-        private void OnDragLeave(object sender, DragEventArgs e)
-        {
-            _drags.OnNext(new WindowDragDropArgs
-            {
-                State = DragDropState.Dropped,
-                Args = e
-            });
-        }
 
         private void OnDragOver(object sender, DragEventArgs e)
         {
             _drags.OnNext(new WindowDragDropArgs
             {
-                State = DragDropState.Dragging,
+                State = DragDropState.Dropped,
                 Args  = e
             });
+            e.Handled = true;
         }
 
         private void OnDragEnter(object sender, DragEventArgs e)
@@ -87,6 +74,7 @@ namespace Acorisoft.FutureGL.Forest.Interfaces
                 State = DragDropState.DragStart,
                 Args  = e
             });
+            e.Handled = true;
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)

@@ -3,7 +3,6 @@
     public enum DragDropState
     {
         DragStart,
-        Dragging,
         Dropped,
     }
     

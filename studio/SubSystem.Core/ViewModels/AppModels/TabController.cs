@@ -23,10 +23,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected TabController()
         {
-            Workspace        = new ObservableCollection<ITabViewModel>();
-            InactiveWorkspace        = new ObservableCollection<ITabViewModel>();
-            AddTabCommand    = new RelayCommand<object>(AddTabImpl);
-            RemoveTabCommand = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
+            Workspace         = new ObservableCollection<ITabViewModel>();
+            InactiveWorkspace = new ObservableCollection<ITabViewModel>();
+            AddTabCommand     = new RelayCommand<object>(AddTabImpl);
+            RemoveTabCommand  = new AsyncRelayCommand<ITabViewModel>(RemoveTabImpl);
             
         }
 

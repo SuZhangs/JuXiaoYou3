@@ -46,6 +46,7 @@
         //
         // Base
         internal const string PropertyCollectionName = "_props";
+        internal const string BookmarkName           = "_bookmark";
 
         //
         // File

@@ -162,10 +162,15 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         /// <param name="e">拖拽参数</param>
         public void SetWindowEvent(WindowDragDropArgs e)
         {
-            // TODO:
+            OnDragDrop(e);
         }
 
         #endregion
+
+        protected virtual void OnDragDrop(WindowDragDropArgs e)
+        {
+            
+        }
 
         #region KeyboardBinding
 

@@ -11,6 +11,7 @@
                  xmlns:s="urn:acorisoft/studio"
                  xmlns:p="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                  mc:Ignorable="d"
+                 AllowDrop="True"
                  Title="{f:Language global.appName}"
                  MinWidth="1280"
                  MinHeight="720"

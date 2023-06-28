@@ -6,10 +6,90 @@
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
+                     xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Others;assembly=MigaDB"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:BookmarkViewModel}, IsDesignTimeCreatable=True}">
-    <Grid>
-        
-    </Grid>
+    <UserControl.Resources>
+        <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
+
+        <DataTemplate DataType="{x:Type m:Bookmark}">
+            <Border Background="{f:Brush BackgroundLevel4}"
+                    CornerRadius="8"
+                    Margin="8"
+                    Padding="20"
+                    Width="384">
+                <Border.ContextMenu>
+                    <f:ContextMenu>
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+
+                        <f:MenuItem Header="{f:Language global.Up}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
+
+                        <f:MenuItem Header="{f:Language global.Down}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+
+                        <f:MenuItem Header="{f:Language global.edit}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Upload}" />
+                    </f:ContextMenu>
+                </Border.ContextMenu>
+
+                <DockPanel>
+                    <Border ClipToBounds="True"
+                            CornerRadius="32"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Height="64"
+                            Width="64">
+                        <Border.Background>
+                            <SolidColorBrush  Color="Gray"/>
+                        </Border.Background>
+                    </Border>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Left"
+                                   Margin="32 8 0 0"
+                                   Text="{Binding Title,Mode=OneWay}"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock FontFamily="{f:SongTi}"
+                                   FontSize="14"
+                                   Margin="32 8 0 0"
+                                   HorizontalAlignment="Left"
+                                   Text="{Binding Link,Mode=OneWay}"
+                                   TextTrimming="CharacterEllipsis">
+                        </TextBlock>
+                    </DockPanel>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <f:ForestIsland Header="所有评价"
+                    Margin="16"
+                    Padding="0 16 0 0">
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl DockPanel.Dock="Right"
+                          ItemsSource="{Binding Collection,Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </f:ForestIsland>
 </f:ForestUserControl>
