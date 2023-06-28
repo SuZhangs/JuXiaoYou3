@@ -293,6 +293,7 @@
         public static string AreYouSureClearIt => GetText("text.AreYouSureClearIt");
         public static string Notify => GetText("text.notify");
         public static string NoDataToSave => GetText("text.NoDataToSave");
+        public static string NotSelected => GetText("text.NotSelected");
         public static string NoChange => GetText("text.noChange");
         public static string BadImage => GetText("text.notimage");
         public static string BadFormat => GetText("text.BadFormat");

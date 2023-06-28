@@ -60,7 +60,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                       .ToArray();
         }
 
-        protected override string Failed() => SubSystemString.Unknown;
+        protected override string Failed() => SR.NotSelected;
         
 
         /// <summary>
