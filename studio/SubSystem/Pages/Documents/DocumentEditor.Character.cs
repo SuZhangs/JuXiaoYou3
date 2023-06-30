@@ -51,11 +51,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
 
         protected override void OnCreateDocument(Document document)
         {
+            AddDataPartToDocument(CreateStickyNote());
             AddDataPartToDocument(CreateAlbum());
             AddDataPartToDocument(CreatePlaylist());
             AddDataPartToDocument(CreateCharacterRelatives());
         }
 
+
+        protected override void IsDataPartExistenceOverride(Document document)
+        {
+            base.IsDataPartExistenceOverride(document);
+            
+        }
 
         private void ResumeDetailPart()
         {

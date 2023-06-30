@@ -16,67 +16,57 @@
              d:DataContext="{d:DesignInstance Type={x:Type local:StickyNotePartViewModel}, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <local:StickyNotePartViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
-
-        <DataTemplate DataType="{x:Type m:StickyNote}">
-            <studio:DocumentCard Background="{f:Brush BackgroundLevel3}"
-                                 Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
-                                 CommandParameter="{Binding}"
-                                 Id="{Binding Id,Mode=OneWay}"
-                                 Title="{Binding Title,Mode=OneWay}"
-                                 TimeOfCreated="{Binding TimeOfCreated,Mode=OneWay}"
-                                 TimeOfModified="{Binding TimeOfModified,Mode=OneWay}"
-                                 ContentLength="{Binding Content.Length, Mode=OneWay,FallbackValue=0,TargetNullValue=0}"
-                                 Height="160"
-                                 Width="500">
-                <studio:DocumentCard.ContextMenu>
-                    <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Edit}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.OpenCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Edit}" />
-
-                        <f:MenuItem Header="{f:Language global.Up}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftUpCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
-
-                        <f:MenuItem Header="{f:Language global.Down}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.ShiftDownCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
-                        <Separator />
-
-                        <f:MenuItem Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel}, Path=ViewModel.RemoveCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
-                    </f:ContextMenu>
-                </studio:DocumentCard.ContextMenu>
-            </studio:DocumentCard>
-        </DataTemplate>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top"
-                    Orientation="Horizontal">
-            <ftk:ToolButton Content="{f:Language global.Add}"
-                            Command="{Binding AddCommand}"
-                            Icon="{StaticResource FeatherIcon.PlusCircle}"
-                            ShowText="True" />
+    <f:EmptyContentControl NotEmpty="{Binding NotEmpty,Mode=OneWay}">
+        <f:EmptyContentControl.EmptyState>
+            <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
+        </f:EmptyContentControl.EmptyState>
+        <DockPanel>
+            <DockPanel Background="{f:Brush Theme=BackgroundLevel2}"
+                       Margin="0 8 0 0">
+                <StackPanel DockPanel.Dock="Top"
+                            Orientation="Horizontal"
+                            Margin="0 4">
+                    <ftk:ToolButton Content="{f:Language global.Add}"
+                                    Command="{Binding AddCommand}"
+                                    Icon="{StaticResource FeatherIcon.PlusCircle}"
+                                    ShowText="True" />
+                    <ftk:ToolButton Content="{f:Language global.remove}"
+                                    Command="{Binding RemoveCommand}"
+                                    CommandParameter="{Binding Selected,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.Trash}"
+                                    ShowText="True" />
+                </StackPanel>
+                <f:ListBox ItemsSource="{Binding Collection,Mode=OneWay}"
+                           SelectedItem="{Binding Selected,Mode=TwoWay}"
+                           Width="320">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:StickyNote}">
+                            <TextBlock Margin="8"
+                                       Text="{Binding Title,Mode=OneWay}" />
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
+                </f:ListBox>
+            </DockPanel>
 
-        </StackPanel>
+            <f:EmptyContentControl NotEmpty="{Binding HasSelected,Mode=OneWay}"
+                                   Content="{Binding Selected,Mode=OneWay}"
+                                   Margin="32 8 8 0">
+                <f:EmptyContentControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type m:StickyNote}">
+                        <DockPanel>
+                            <f:SingleLine DockPanel.Dock="Top"
+                                          Margin="0 0 0 8"
+                                          Text="{Binding Title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
 
-        <ScrollViewer Margin="0 16 0 0">
-            <f:EmptyStateItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                      ItemsSource="{Binding Collection,Mode=OneWay}">
-                <f:EmptyStateItemsControl.EmptyState>
-                    <studio:CollectionEmptyStateView Command="{Binding AddCommand}" />
-                </f:EmptyStateItemsControl.EmptyState>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </f:EmptyStateItemsControl>
-        </ScrollViewer>
-    </DockPanel>
+                            </f:SingleLine>
+                            <f:MultiLine Text="{Binding Content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+
+                            </f:MultiLine>
+                        </DockPanel>
+                    </DataTemplate>
+                </f:EmptyContentControl.ContentTemplate>
+            </f:EmptyContentControl>
+        </DockPanel>
+    </f:EmptyContentControl>
 </UserControl>

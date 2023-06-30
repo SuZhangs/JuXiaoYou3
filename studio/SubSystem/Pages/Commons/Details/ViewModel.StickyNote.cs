@@ -11,6 +11,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
     public class StickyNotePartViewModel : IsolatedViewModel<DocumentEditorBase,PartOfStickyNote>
     {
+        private StickyNote _selected;
+        
         public StickyNotePartViewModel()
         {
             Collection       = new ObservableCollection<StickyNote>();
@@ -18,7 +20,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             RemoveCommand    = AsyncCommand<StickyNote>(RemoveImpl);
             ShiftUpCommand   = Command<StickyNote>(ShiftUpImpl);
             ShiftDownCommand = Command<StickyNote>(ShiftDownImpl);
-            OpenCommand      = AsyncCommand<StickyNote>(OpenImpl);
         }
 
         public override void Start()
@@ -33,6 +34,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             Collection.AddMany(Detail.Items);
+            RaiseUpdated(nameof(NotEmpty));
+            RaiseUpdated(nameof(HasSelected));
         }
 
         private async Task AddImpl()
@@ -54,6 +57,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             };
             Collection.Add(item);
             Detail.Items.Add(item);
+            Selected = item;
+            RaiseUpdated(nameof(NotEmpty));
         }
 
         private async Task RemoveImpl(StickyNote stickyNote)
@@ -68,19 +73,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            Collection.Remove(stickyNote);
-            Detail.Items.Remove(stickyNote);
-            Save();
-        }
-
-        private async Task OpenImpl(StickyNote stickyNote)
-        {
-            if (stickyNote is null)
+            if (ReferenceEquals(Selected, stickyNote))
             {
-                return;
+                Selected = null;
             }
 
-            await EditPlainTextViewModel.Edit(stickyNote);
+            Collection.Remove(stickyNote);
+            Detail.Items.Remove(stickyNote);
+            RaiseUpdated(nameof(NotEmpty));
             Save();
         }
 
@@ -114,9 +114,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         /// <summary>
+        /// 获取或设置 <see cref="NotEmpty"/> 属性。
+        /// </summary>
+        public bool NotEmpty => Collection.Count > 0;
+
+        /// <summary>
         /// 
         /// </summary>
         public ObservableCollection<StickyNote> Collection { get; init; }
+
+        /// <summary>
+        /// 获取或设置 <see cref="Selected"/> 属性。
+        /// </summary>
+        public StickyNote Selected
+        {
+            get => _selected;
+            set
+            {
+                SetValue(ref _selected, value);
+                RaiseUpdated(nameof(HasSelected));
+            }
+        }
+
+        public bool HasSelected => Selected is not null;
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddCommand { get; }
@@ -126,9 +146,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<StickyNote> ShiftDownCommand { get; }
-
-        [NullCheck(UniTestLifetime.Constructor)]
-        public AsyncRelayCommand<StickyNote> OpenCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<StickyNote> RemoveCommand { get; }

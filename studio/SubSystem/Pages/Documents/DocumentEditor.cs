@@ -57,6 +57,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         {
             HasDataPart<PartOfAlbum>(CreateAlbum, AddDataPartToDocument);
             HasDataPart<PartOfPlaylist>(CreatePlaylist, AddDataPartToDocument);
+            HasDataPart<PartOfStickyNote>(CreateStickyNote, AddDataPartToDocument);
         }
 
         protected sealed override void OnSubViewChanged(HeaderedSubView oldValue, HeaderedSubView newValue)

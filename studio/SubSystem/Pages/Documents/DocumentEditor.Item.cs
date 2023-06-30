@@ -15,6 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         protected override void OnCreateDocument(Document document)
         {
             AddDataPartToDocument(CreateAlbum());
+            AddDataPartToDocument(CreateStickyNote());
         }
 
     }
