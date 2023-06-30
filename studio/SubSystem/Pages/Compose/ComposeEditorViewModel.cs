@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
     {
         protected override void IsDataPartExistence(Compose document)
         {
-            
+            base.IsDataPartExistence(document);
         }
 
 

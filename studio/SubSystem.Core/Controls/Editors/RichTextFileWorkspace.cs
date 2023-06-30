@@ -13,6 +13,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         
         public PartOfRtf Part { get; init; }
 
+        public override void ScrollTo(IOutlineModel outlineModel)
+        {
+            
+        }
+
         public override bool CanUndo() => Control.CanUndo;
 
         public override bool CanRedo()=> Control.CanRedo;

@@ -92,7 +92,7 @@
                           Height="17" />
 
                     <TextBlock Text="Rtf"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </DockPanel>
             </DataTemplate>
 
@@ -107,18 +107,18 @@
                           Height="17" />
 
                     <TextBlock Text="Markdown"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" />
                 </DockPanel>
             </DataTemplate>
 
-            <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+            <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
             <DataTemplate DataType="{x:Type doc:DocumentCache}">
                 <f:SimpleButton Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenDocumentCommand}"
                                 CommandParameter="{Binding}"
-                            Margin="4"
-                            Height="96"
-                            Width="96">
+                                Margin="4"
+                                Height="96"
+                                Width="96">
                     <DockPanel>
                         <Border DockPanel.Dock="Top"
                                 CornerRadius="64"
@@ -140,7 +140,7 @@
                                    Margin="0 8 0 0"
                                    HorizontalAlignment="Center"
                                    Text="{Binding Name,Mode=OneWay}"
-                                   TextTrimming="CharacterEllipsis"/>
+                                   TextTrimming="CharacterEllipsis" />
                     </DockPanel>
                 </f:SimpleButton>
             </DataTemplate>
@@ -197,7 +197,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="320" />
             <ColumnDefinition Width="3*" />
             <ColumnDefinition MaxWidth="384"
                               MinWidth="320"
@@ -222,8 +222,8 @@
                             Icon="{StaticResource FeatherIcon.Save}" />
 
             <ftk:ToolButton Command="{Binding SaveComposeCommand}"
-                            Icon="{StaticResource FeatherIcon.Folder}" 
-                            Visibility="Collapsed"/>
+                            Icon="{StaticResource FeatherIcon.Folder}"
+                            Visibility="Collapsed" />
 
             <ftk:ToolButton Command="{Binding SaveComposeCommand}"
                             Icon="{StaticResource FeatherIcon.Share2}"
@@ -234,8 +234,8 @@
         <!-- 标题栏 -->
         <f:SingleLine Grid.Column="1"
                       Grid.Row="0"
-                    Margin="0 16 0 0"
-                      Text="{Binding Name,Mode=OneWay}" />
+                      Margin="0 16 0 0"
+                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
 
         <!-- 右侧菜单栏 -->
@@ -262,14 +262,15 @@
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Margin="16"
-                        Padding="0 8" 
+                        Padding="0 8"
                         Header="大纲">
-            <f:TreeView ItemsSource="{Binding Outlines,Mode=OneWay}">
+            <f:TreeView ItemsSource="{Binding Outlines,Mode=OneWay}"
+                        BindableSelectedItem="{Binding SelectedOutline,Mode=TwoWay}">
                 <f:TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type workspace:MarkdownOutlineModel}"
                                               ItemsSource="{Binding Children}">
                         <TextBlock Margin="4"
-                                   Text="{Binding Name}"/>
+                                   Text="{Binding Name}" />
                     </HierarchicalDataTemplate>
                 </f:TreeView.ItemTemplate>
             </f:TreeView>
@@ -281,14 +282,14 @@
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Margin="16"
-                        Padding="0 8" 
+                        Padding="0 8"
                         Header="关联的设定">
             <ScrollViewer>
-                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                <ItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ItemsSource="{Binding ReferenceDocuments}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel/>
+                            <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
@@ -316,19 +317,19 @@
             <ftk:ToolButton x:Name="RedoButton"
                             Command="{Binding RedoCommand}"
                             Icon="{StaticResource MaterialSymbols.Redo}" />
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Image}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Code}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Quote}" Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Table}" Visibility="Collapsed"/>
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H1}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H2}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H3}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H4}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H5}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_H6}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_bulleted}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_List_numbered}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Link}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Image}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Code}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Quote}" Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Table}" Visibility="Collapsed" />
         </StackPanel>
 
         <!-- 编辑器 -->
@@ -369,9 +370,9 @@
                 <TextBlock>
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}字数：{0}，行号：{1}，列数：{2}">
-                            <Binding Path="TotalCharacterCount" Mode="OneWay"/>
-                            <Binding Path="LineNumber" Mode="OneWay"/>
-                            <Binding Path="ColumnNumber" Mode="OneWay"/>
+                            <Binding Path="TotalCharacterCount" Mode="OneWay" />
+                            <Binding Path="LineNumber" Mode="OneWay" />
+                            <Binding Path="ColumnNumber" Mode="OneWay" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
@@ -387,27 +388,27 @@
                             <Setter Property="Width" Value="32" />
                         </Style>
                     </StackPanel.Resources>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Format}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Italic}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_bold}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Strikethrough}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.text_Increase}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Decrease}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_Left}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_right}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_align_Center}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Increase}" Visibility="Collapsed"/>
-                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Decrease}" Visibility="Collapsed"/>
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Format}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Italic}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_bold}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Strikethrough}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.text_Increase}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Text_Decrease}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_Left}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Align_right}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_align_Center}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Increase}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource MaterialSymbols.Format_Indent_Decrease}" Visibility="Collapsed" />
                 </StackPanel>
             </StatusBarItem>
 
-            <StatusBarItem Margin="4 0" 
+            <StatusBarItem Margin="4 0"
                            HorizontalAlignment="Right">
                 <f:ListBox ItemsSource="{Binding WorkspaceCollection,Mode=OneWay}"
                            SelectedItem="{Binding Workspace,Mode=TwoWay}">
                     <f:ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
+                            <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </f:ListBox.ItemsPanel>
                 </f:ListBox>

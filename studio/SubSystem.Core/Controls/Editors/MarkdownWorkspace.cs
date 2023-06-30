@@ -8,6 +8,7 @@ using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 using DynamicData;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
+using ICSharpCode.AvalonEdit.Editing;
 using Markdig;
 using Markdig.Syntax;
 
@@ -21,21 +22,21 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public int CharacterLength { get; init; }
         public List<IOutlineModel> Children { get; init; }
     }
-    
+
     public class MarkdownWorkspace : Workspace<TextEditor>
     {
         private ConceptCompletionWindow _window;
         private bool                    _isShow;
-        
+
         private record struct ParsingNode
         {
             public HeadingBlock Block { get; init; }
             public int ParentLevel { get; init; }
         }
-        
+
         public override bool CanUndo() => Control.CanUndo;
 
-        public override bool CanRedo()=> Control.CanRedo;
+        public override bool CanRedo() => Control.CanRedo;
 
         public override void Undo()
         {
@@ -121,7 +122,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
         #region GetOutlineModels
 
-        
         private static MarkdownOutlineModel FromBlock(HeadingBlock block)
         {
             return new MarkdownOutlineModel
@@ -133,10 +133,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                 Children        = new List<IOutlineModel>(8)
             };
         }
-        
-        
+
+
         public override IEnumerable<IOutlineModel> GetOutlineModels()
         {
+            if (string.IsNullOrEmpty(Content))
+            {
+                return Array.Empty<IOutlineModel>();
+            }
+
             var markdown = Markdown.Parse(Content);
 
             if (markdown is null)
@@ -150,7 +155,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             var rootBlock     = (MarkdownOutlineModel)null;
             var parentBlock   = (MarkdownOutlineModel)null;
             var currentBlock  = (MarkdownOutlineModel)null;
-            
+
             /*
              * --- L3
              * --- L3
@@ -164,11 +169,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
              * - L1
              */
             foreach (var block in headingBlocks)
-           {
+            {
                 //
                 // 当前的块
                 var current = FromBlock(block);
-                
+
                 //
                 // 第一次添加，做初始化
                 if (rootBlock is null)
@@ -199,19 +204,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                     // 遇到上级
                     if (stack.Count == 0)
                     {
-                        
                     }
                     else
                     {
                         var grandBlock = stack.Peek();
-                        
+
                         if (grandBlock.Level < current.Level)
                         {
                             //
                             // 虽然目前的块是上一个块的父级，但是祖父块依然是当前块的父级
                             grandBlock.Children
                                       .Add(current);
-                            
+
                             currentBlock = current;
                             parentBlock  = currentBlock;
                         }
@@ -243,13 +247,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                             {
                                 grandBlock.Children
                                           .Add(current);
-                            
+
                                 parentBlock  = grandBlock;
                                 currentBlock = current;
                             }
                             else
                             {
-                                
                                 /*
                                  * 3
                                  * 4                        
@@ -260,12 +263,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                                 parentBlock  = null;
                                 currentBlock = current;
                                 root.Add(currentBlock);
-
                             }
-                            
                         }
                     }
-                    
                 }
                 else
                 {
@@ -276,12 +276,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
                      */
                     //
                     // 遇到子级，就先压栈
-                    if(parentBlock is not null) stack.Push(parentBlock);
+                    if (parentBlock is not null) stack.Push(parentBlock);
                     parentBlock  = currentBlock;
                     currentBlock = current;
                     parentBlock.Children
                                .Add(current);
-                    
                 }
             }
 
@@ -291,6 +290,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         }
 
         #endregion
+        
+        
+        public override void ScrollTo(IOutlineModel outlineModel)
+        {
+            if (outlineModel is not MarkdownOutlineModel mom)
+            {
+                return;
+            }
+
+            var document = Control.TextArea
+                                  .Document;
+            var location = document.GetLocation(mom.CharacterOffset);
+            var location2 = document.GetLocation(mom.CharacterOffset+ mom.CharacterLength);
+            Control.TextArea
+                   .Selection = new RectangleSelection(
+                Control.TextArea,
+                new TextViewPosition(location),
+                new TextViewPosition(location2));
+            Control.ScrollTo(location.Line, location.Column);
+        }
 
         private void UpdateDocumentState()
         {
@@ -316,11 +335,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 
         private void OnTextChanged(object sender, EventArgs e)
         {
-            #if NEXT_VER
+#if NEXT_VER
             if (_window is null)
             {
-                _isShow        =  false;
-                _window        =  new ConceptCompletionWindow(Control.TextArea);
+                _isShow = false;
+                _window = new ConceptCompletionWindow(Control.TextArea);
                 _window.Closed += OnWindowClose;
             }
 
@@ -330,7 +349,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             var concepts = engine.GetConcepts()
                                  .Select(x => new ConceptCompletionData
                                  {
-                                     Text    = x.Name,
+                                     Text = x.Name,
                                      Content = x.Name
                                  });
             data.AddMany(concepts, true);
@@ -353,7 +372,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
 #endif
             Part.Content = Control.Text;
             WorkspaceChanged?.Invoke(StateChangedEventSource.TextSource, this);
-
         }
 
         public sealed override void UpdateCaretState()
@@ -362,7 +380,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
             {
                 LineNumber = -1;
                 LineColumn = -1;
-               return;
+                return;
             }
 
             var caret = Control.TextArea
@@ -376,7 +394,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         /// 
         /// </summary>
         public override string Content => Part is null ? string.Empty : Part.Content;
-        
+
         /// <summary>
         /// 
         /// </summary>

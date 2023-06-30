@@ -5,7 +5,7 @@
 [assembly: AssemblyTitle("橘小柚")]
 [assembly: AssemblyVersion("3.0.0.*")]
 [assembly: AssemblyFileVersion("3.0.0.*")]
-[assembly: AssemblyInformationalVersion("3.0.0-GA2")]
+[assembly: AssemblyInformationalVersion("3.0.0-GA3")]
 [assembly: System.Resources.NeutralResourcesLanguageAttribute("zh")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]

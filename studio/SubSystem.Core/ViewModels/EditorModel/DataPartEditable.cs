@@ -20,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DataPartTrackerOfType = new Dictionary<Type, DataPart>();
         }
 
-        protected void HasDataPart<T>(Func<T> expression, Action<T> callback) where T : DataPart
+        protected void HasDataPart<T>(Func<T> expression) where T : DataPart
         {
             if (!DataPartTrackerOfType.ContainsKey(typeof(T)))
             {
@@ -31,8 +31,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     return;
                 }
                 
-                callback?.Invoke(part);
-                AddDataPart(part);
+                Document.Parts
+                        .Add(part);
             }
         }
 
@@ -82,8 +82,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         
         protected sealed override void LoadDocument(TCache cache, TDocument document)
         {
-            AddDataPartFromDocument(document);
             IsDataPartExistence(document);
+            AddDataPartFromDocument(document);
         }
 
         protected abstract bool OnDataPartAddingBefore(DataPart part);

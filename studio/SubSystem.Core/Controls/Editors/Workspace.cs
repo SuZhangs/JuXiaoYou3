@@ -29,6 +29,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         public abstract void Active();
         public abstract void UpdateCaretState();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outlineModel"></param>
+        public abstract void ScrollTo(IOutlineModel outlineModel);
+
         public abstract IEnumerable<IOutlineModel> GetOutlineModels();
         
 

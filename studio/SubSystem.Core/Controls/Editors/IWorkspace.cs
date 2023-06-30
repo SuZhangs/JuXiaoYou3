@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 using System.Windows;
+using Acorisoft.FutureGL.MigaStudio.Editors.Models;
 
 namespace Acorisoft.FutureGL.MigaStudio.Editors
 {
@@ -49,5 +50,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Editors
         void Inactive();
 
         void UpdateCaretState();
+        
+        /// <summary>
+        /// 滚动到
+        /// </summary>
+        /// <param name="value"></param>
+        void ScrollTo(IOutlineModel value);
     }
 }

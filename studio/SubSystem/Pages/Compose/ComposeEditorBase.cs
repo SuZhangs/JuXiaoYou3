@@ -157,10 +157,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
             get => Cache.Name;
             set
             {
-                Cache.Name   = value;
-                Document.Name = value;
-                SetDirtyState();
+                Cache.Name       = value;
+                Document.Name    = value;
+                ApprovalRequired = true;
                 RaiseUpdated();
+            }
+        }
+
+        private IOutlineModel _selectedOutline;
+
+        /// <summary>
+        /// 获取或设置 <see cref="SelectedOutline"/> 属性。
+        /// </summary>
+        public IOutlineModel SelectedOutline
+        {
+            get => _selectedOutline;
+            set
+            {
+                SetValue(ref _selectedOutline, value);
+                Workspace.ScrollTo(value);
             }
         }
 
@@ -169,6 +184,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         [NullCheck(UniTestLifetime.Constructor)]
         public ObservableCollection<IOutlineModel> Outlines { get; }
+        
         public ObservableCollection<DocumentCache> ReferenceDocuments { get; }
 
 

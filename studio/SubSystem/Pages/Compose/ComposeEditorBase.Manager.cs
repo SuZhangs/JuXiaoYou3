@@ -51,8 +51,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
-            HasDataPart<PartOfMarkdown>(() => new PartOfMarkdown(), AddDataPartToDocument);
-            HasDataPart<PartOfAlbum>(() => new PartOfAlbum(), AddDataPartToDocument);
+            HasDataPart<PartOfMarkdown>(() => new PartOfMarkdown());
+            HasDataPart<PartOfAlbum>(() => new PartOfAlbum());
         }
 
         #endregion
