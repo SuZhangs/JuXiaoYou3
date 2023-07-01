@@ -13,10 +13,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         #region OnLoad
 
-        protected override void FinishOpeningDocument(DocumentCache cache, Document document)
+        protected override void LoadDocumentAfter(DocumentCache cache, Document document)
         {
-            FinishOpenDocumentImpl();
-            AddMetadataWhenDocumentOpening();
+            //
+            // 升级文档与缓存
+            UpgradeDocument(cache, document);
+            
+            //
+            // 用于检测BasicPart是否不存在，这个检测是运行时检查，不仅仅需要
+            IsDataPartCoerceExistence();
+            
+            // 从文档中复制元数据，但不会再次添加元数据到文档。
+            CopyMetadataFromDocument();
         }
 
         protected override bool OnDataPartAddingBefore(DataPart part)
@@ -57,24 +65,39 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
         }
 
-        private void AddMetadataWhenDocumentOpening()
+        private void CopyMetadataFromDocument()
         {
+            foreach (var meta in Document.Metas)
+            {
+                AddMetadata(meta, false);
+            }
+            
             foreach (var metadata in BasicPart.Buckets)
             {
-                UpsertMetadataWithoutSave(metadata.Key, metadata.Value);
+                AddMetadata(new Metadata
+                {
+                    Name  = metadata.Key,
+                    Value = metadata.Value,
+                    Type  = MetadataKind.Text,
+                });
             }
 
-            foreach (var module in ModuleParts)
-            {
-                foreach (var block in module.Blocks
-                                            .Where(x => !string.IsNullOrEmpty(x.Metadata)))
-                {
-                    AddMetadata(block.ExtractMetadata());
-                }
-            }
+            // 这一步是一个耗时的操作
+            // Task.Run(() =>
+            // {
+            //     foreach (var module in ModuleParts)
+            //     {
+            //         foreach (var block in module.Blocks
+            //                                     .Where(x => !string.IsNullOrEmpty(x.Metadata)))
+            //         {
+            //             AddMetadata(block.ExtractMetadata());
+            //         }
+            //     }
+            // });
         }
 
-        private void FinishOpenDocumentImpl()
+        
+        private void IsDataPartCoerceExistence()
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
@@ -162,20 +185,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         #endregion
 
-        protected override void LoadDocumentOverride(DocumentCache cache, Document document)
+        protected void UpgradeDocument(DocumentCache cache, Document document)
         {
             if (document.Version < 0x10)
             {
-                var dict = new Dictionary<Type, DataPart>();
-                foreach (var part in document.Parts)
-                {
-                    dict.TryAdd(part.GetType(), part);
-                }
-
                 document.Metas
                         .Clear();
-                document.Parts.AddMany(dict.Values, true);
                 document.Version = 0x10;
+                cache.Version    = document.Version;
                 SetDirtyState();
             }
         }

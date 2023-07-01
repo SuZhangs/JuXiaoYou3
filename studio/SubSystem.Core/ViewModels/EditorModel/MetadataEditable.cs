@@ -24,48 +24,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         [NullCheck(UniTestLifetime.Constructor)]
         protected readonly Dictionary<string, Metadata> MetadataTrackerByName;
         
-        
-        protected class MetadataIndexCache
-        {
-            private int _index;
-
-            public Metadata Source { get; init; }
-
-            public int Index
-            {
-                get => _index;
-                init => _index = value;
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            public string Value => Source.Value;
-
-            public string this[MetadataCollection metadataCollection]
-            {
-                set
-                {
-                    if (Index < 0 || Index > metadataCollection.Count - 1)
-                    {
-                        _index = metadataCollection.Count;
-                        metadataCollection.Add(Source);
-                        Source.Value = value;
-                    }
-                    else
-                    {
-                        var outside = metadataCollection[Index];
-
-                        if (outside.Value != Source.Value)
-                        {
-                            metadataCollection[Index].Value = value;
-                        }
-
-                        Source.Value = value;
-                    }
-                }
-            }
-        }
 
         #region Metadata
 
@@ -76,7 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return MetadataTrackerByName.TryGetValue(metadata, out var meta) ? meta : null;
         }
         
-        protected void AddMetadata(Metadata metadata)
+        protected void AddMetadata(Metadata metadata, bool sync = true)
         {
             if(metadata is null || string.IsNullOrEmpty(metadata.Name))
             {
@@ -89,19 +47,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             else
             {
-                insideMetadata = Document.Metas
-                                         .Find(x => x.Name == metadata.Name);
-                if (insideMetadata is null)
+                insideMetadata = metadata;
+                MetadataTrackerByName.Add(metadata.Name, insideMetadata);
+
+                if (sync)
                 {
-                    insideMetadata = metadata;
-                    Document.Metas.Add(insideMetadata);
+                    //
+                    // 更新在文档中的
+                    var insideMetadata2 = Document.Metas
+                                                  .Find(x => x.Name == metadata.Name);
+
+                    if (insideMetadata2 is null)
+                    {
+                        Document.Metas.Add(insideMetadata);
+                        return;
+                    }
+                    
+                    if (ReferenceEquals(insideMetadata, insideMetadata2))
+                    {
+                        return;
+                    }
+                    
+                    insideMetadata2.Value = insideMetadata.Value;
                 }
-                else
-                {
-                    insideMetadata.Value = metadata.Value;
-                }
-                
-                MetadataTrackerByName.Add(metadata.Name, metadata);
             }
         }
         

@@ -40,17 +40,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// </summary>
         /// <param name="cache">文档索引</param>
         /// <param name="document">文档本体</param>
-        protected abstract void FinishOpeningDocument(TCache cache, TDocument document);
+        protected abstract void LoadDocumentAfter(TCache cache, TDocument document);
         
         protected sealed override void OnStart(Parameter parameter)
         {
             PrepareOpeningDocument(parameter);
             OpeningDocument(Cache, Document);
-            FinishOpeningDocument();
-            SetDirtyState(false);
+            OpeningDocumentAfter();
         }
 
-        private void FinishOpeningDocument()
+        private void OpeningDocumentAfter()
         {
             if (Document is null)
             {
@@ -64,11 +63,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             }
 
             // 加载文档
-            LoadDocument(Cache, Document);
+            LoadDocumentBefore(Cache, Document);
             
             //
             // 完成打开
-            FinishOpeningDocument(Cache, Document);
+            LoadDocumentAfter(Cache, Document);
         }
 
         protected abstract TDocument CreateDocument();
@@ -82,7 +81,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         /// </remarks>
         protected abstract void OnCreateDocument(TDocument document);
 
-        protected abstract void LoadDocument(TCache cache, TDocument document);
+        protected abstract void LoadDocumentBefore(TCache cache, TDocument document);
         
         #endregion
 

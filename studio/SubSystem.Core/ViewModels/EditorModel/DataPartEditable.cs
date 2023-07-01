@@ -51,16 +51,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
         protected void AddDataPartFromDocument(TDocument document)
         {
-            var logger = Xaml.Get<ILogger>();
+            var logger     = Xaml.Get<ILogger>();
+            var hasChanged = false;
+            
             for (var i = 0; i < document.Parts.Count; i ++)
             {
                 var part = document.Parts[i];
-                if (!string.IsNullOrEmpty(part.Id) &&
-                    !DataPartTrackerOfId.TryAdd(part.Id, part))
+
+                if (part is PartOfModule &&
+                    (!string.IsNullOrEmpty(part.Id) || DataPartTrackerOfId.ContainsKey(part.Id)))
                 {
                     document.Parts.RemoveAt(i);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
-                    SetDirtyState();
+                    hasChanged = true;
+                    continue;
+                }
+                
+                if(DataPartTrackerOfType.ContainsKey(part.GetType()))
+                {
+                    document.Parts.RemoveAt(i);
+                    logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
+                    hasChanged = true;
                     continue;
                 }
 
@@ -71,6 +82,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
                 OnDataPartAddingAfter(part);
             }
+
+            if (hasChanged)
+            {
+                SetDirtyState();
+            }
         }
 
         protected void ClearDataPart()
@@ -80,14 +96,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected sealed override void LoadDocument(TCache cache, TDocument document)
+        protected sealed override void LoadDocumentBefore(TCache cache, TDocument document)
         {
             IsDataPartExistence(document);
             AddDataPartFromDocument(document);
-            LoadDocumentOverride(cache, document);
         }
 
-        protected virtual void LoadDocumentOverride(TCache cache, TDocument document){}
         protected abstract bool OnDataPartAddingBefore(DataPart part);
         protected abstract void OnDataPartAddingAfter(DataPart part);
         

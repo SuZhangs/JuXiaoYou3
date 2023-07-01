@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
         
         #region OnLoad
 
-        protected override void FinishOpeningDocument(ComposeCache cache, Compose document)
+        protected override void LoadDocumentAfter(ComposeCache cache, Compose document)
         {
             AddMetadataWhenDocumentOpening();
         }
