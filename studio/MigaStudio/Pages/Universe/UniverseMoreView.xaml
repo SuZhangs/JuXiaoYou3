@@ -24,7 +24,6 @@
     </f:ForestIsland.Resources>
     <f:ForestIsland.ToolBar>
         <StackPanel Orientation="Horizontal">
-
             <ftk:ToolButton Content="关闭当前世界观"
                             Command="{Binding CloseDatabaseCommand}"
                             HorizontalAlignment="Left"
@@ -42,62 +41,71 @@
                             ShowText="True" />
         </StackPanel>
     </f:ForestIsland.ToolBar>
-    <f:EmptyStateItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"
+                   Foreground="{f:Brush Theme=ForegroundLevel2}"
+                   Margin="0 8"
+                   Text="{Binding Database.DatabaseDirectory,Mode=OneWay,StringFormat={}当前世界观路径：{0}}"
+                   TextWrapping="Wrap"
+                   TextTrimming="CharacterEllipsis"
+                   VerticalAlignment="Center">
+        </TextBlock>
+        <f:EmptyStateItemsControl ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               NotEmpty="{Binding HasRepositories,Mode=OneWay}"
                               ItemsSource="{Binding Repositories,Mode=OneWay}">
-        <f:EmptyStateItemsControl.EmptyState>
-            <studio:FeatureEmptyStateView />
-        </f:EmptyStateItemsControl.EmptyState>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Border Background="{f:Brush BackgroundLevel2}"
+            <f:EmptyStateItemsControl.EmptyState>
+                <studio:FeatureEmptyStateView />
+            </f:EmptyStateItemsControl.EmptyState>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{f:Brush BackgroundLevel2}"
                         CornerRadius="3"
                         Height="256"
                         Margin="8"
                         Padding="16">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="48" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="54" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="48" />
-                        </Grid.ColumnDefinitions>
-                        <ftk:DropDownButton Grid.Column="1"
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="48" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="54" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="48" />
+                            </Grid.ColumnDefinitions>
+                            <ftk:DropDownButton Grid.Column="1"
                                             HorizontalAlignment="Right"
                                             Icon="{StaticResource FeatherIcon.More.Horizontal}"
                                             IconSize="13">
-                            <ftk:DropDownButton.ContextMenu>
-                                <f:ContextMenu>
-                                    <f:MenuItem Header="打开文件夹"
+                                <ftk:DropDownButton.ContextMenu>
+                                    <f:ContextMenu>
+                                        <f:MenuItem Header="打开文件夹"
                                                 Command="{x:Static sss:FileIO.OpenLinkCommand}"
                                                 CommandParameter="{Binding Path}"/>
-                                    <f:MenuItem Header="删除"
+                                        <f:MenuItem Header="删除"
                                                 Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveDatabaseCommand}"
                                                 CommandParameter="{Binding}"/>
-                                </f:ContextMenu>
-                            </ftk:DropDownButton.ContextMenu>
-                        </ftk:DropDownButton>
+                                    </f:ContextMenu>
+                                </ftk:DropDownButton.ContextMenu>
+                            </ftk:DropDownButton>
 
-                        <TextBlock Grid.Column="0"
+                            <TextBlock Grid.Column="0"
                                    Grid.Row="0"
                                    FontSize="18"
                                    FontWeight="Bold"
                                    TextWrapping="Wrap"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0}（{1}）">
-                                    <Binding Path="Name" Mode="OneWay"/>
-                                    <Binding Path="Author" Mode="OneWay"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}（{1}）">
+                                        <Binding Path="Name" Mode="OneWay"/>
+                                        <Binding Path="Author" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
 
-                        <TextBlock Grid.Column="0"
+                            <TextBlock Grid.Column="0"
                                           Grid.ColumnSpan="3"
                                           Grid.Row="1"
                                           Foreground="{f:Brush Theme=ForegroundLevel3}"
@@ -107,7 +115,7 @@
                                        TextTrimming="CharacterEllipsis"
                                        VerticalAlignment="Top"/>
 
-                        <TextBlock Grid.Column="0"
+                            <TextBlock Grid.Column="0"
                                    Grid.ColumnSpan="3"
                                    Grid.Row="2"
                                    Foreground="{f:Brush Theme=ForegroundLevel2}"
@@ -119,7 +127,7 @@
 
 
 
-                        <f:CallToAction Grid.Column="0"
+                            <f:CallToAction Grid.Column="0"
                                         Grid.ColumnSpan="3"
                                         Grid.Row="3"
                                         Content="{f:Language global.Switch}"
@@ -130,14 +138,15 @@
                                         Margin="8"
                                         Palette="SlateGray"
                                         Width="128"/>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel ItemWidth="424" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-    </f:EmptyStateItemsControl>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="424" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </f:EmptyStateItemsControl>
+    </DockPanel>
 </f:ForestIsland>

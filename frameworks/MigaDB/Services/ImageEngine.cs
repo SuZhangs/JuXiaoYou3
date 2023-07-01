@@ -100,6 +100,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             fs.Dispose();
         }
 
+        public string GetSourceFileName(string id) => Path.Combine(SourceDirectory, id);
         public ILiteCollection<FileRecord> Records { get; private set; }
 
         public static string GetAvatarUri() => $"avatar_{ID.Get()}.png";

@@ -16,7 +16,8 @@
     <shell:ForestWindow.TitleBar>
         <shell:TitleBar HorizontalAlignment="Right"/>
     </shell:ForestWindow.TitleBar>
-    <ScrollViewer>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto">
         <Image Source="{Binding Source,Mode=OneWay}"
                Stretch="None"/>
     </ScrollViewer>

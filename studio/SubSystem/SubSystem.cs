@@ -24,11 +24,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         public static void ImageView(string fileName)
         {
-            var vm = new ImageViewModel
+            var vm = new ImageViewModel();
+            vm.Startup(new RoutingEventArgs
             {
-                Source = new BitmapImage(new Uri(fileName, UriKind.Absolute))
-            };
-
+                Parameter = new Parameter
+                {
+                    Args = new object[] { fileName }
+                }
+            });
             new ImageView
             {
                 DataContext = vm

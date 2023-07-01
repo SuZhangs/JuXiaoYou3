@@ -21,10 +21,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
         public const string ThumbnailPrefixPattern   = "Images\\thumb+";
         public const string RawPattern               = "{0}.png";
 
-        public static string GetSourceFileName(string fileName)
-        {
-            return fileName.Replace(ThumbnailPrefixPattern, "\\Sources\\");
-        }
 
         public static string GetAvatarName() => string.Format(AvatarPattern, ID.Get());
 
@@ -93,12 +89,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var    raw   = Pool.MD5.ComputeHash(buffer);
             var    md5   = Convert.ToBase64String(raw);
             var    image = Image.Load<Rgba32>(buffer);
+            var    id    = ID.Get();
 
             if (engine.HasFile(md5))
             {
                 var fr = engine.Records
                                .FindById(md5);
-
+                var target = Path.Combine(engine.SourceDirectory, string.Format(RawPattern, id));
+                if (!File.Exists(target))
+                {
+                    File.Copy(fileName, target, true);
+                }
 
                 return Op<Album>.Success(new Album
                 {
@@ -130,7 +131,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Array.Copy(buffer, thumbnailBuffer, buffer.Length);
             }
 
-            var id        = ID.Get();
             var thumbnail = string.Format(ThumbnailPattern, id);
             engine.AddFile(new FileRecord
             {
@@ -143,8 +143,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             //
             // 复制源文件到
-            var dst = Path.Combine(engine.SourceDirectory, string.Format(RawPattern, id));
-            File.Copy(fileName, dst, true);
+            var dst = Path.Combine(engine.SourceDirectory, thumbnail);
+            if (!File.Exists(dst))
+            {
+                File.Copy(fileName, dst, true);
+            }
 
             //
             //
