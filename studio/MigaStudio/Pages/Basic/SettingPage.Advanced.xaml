@@ -25,5 +25,20 @@
                                 Margin="16 4" />
             </UniformGrid>
         </HeaderedContentControl>
+        
+        
+                    
+        <HeaderedContentControl Header="内存占用"
+                                Margin="0 0 0 48"
+                                Padding="0 8">
+            <StackPanel>
+                <TextBlock Margin="0 8"
+                           Text="{Binding MemoryUsage,StringFormat={}内存占用：{0}}"
+                           VerticalAlignment="Center"/>
+                <f:CallToAction Content="释放"
+                                Command="{Binding ReleaseMemoryCommand}"
+                                Icon="{StaticResource FeatherIcon.Trash}"/>
+            </StackPanel>
+        </HeaderedContentControl>
     </StackPanel>
 </ScrollViewer>

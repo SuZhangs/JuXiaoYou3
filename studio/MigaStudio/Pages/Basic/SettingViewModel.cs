@@ -9,6 +9,7 @@ using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaStudio.Resources;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
+using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
@@ -45,10 +46,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Repositories         = new ObservableCollection<RepositoryCache>();
 
             
-            RefreshCommand          = Command(ComputeDirectorySize);
-            OpenCommand             = Command<FolderCounter>(OpenCounter);
-            CompressLogsCommand = AsyncCommand(CompressLogsImpl);
-            CloseDatabaseCommand    = AsyncCommand(CloseDatabaseImpl);
+            RefreshCommand       = Command(ComputeDirectorySize);
+            ReleaseMemoryCommand = Command(() =>
+            {
+                GC.Collect();
+                OnRefresh();
+            });
+            OpenCommand          = Command<FolderCounter>(OpenCounter);
+            CompressLogsCommand  = AsyncCommand(CompressLogsImpl);
+            CloseDatabaseCommand = AsyncCommand(CloseDatabaseImpl);
             
             ConfigureRegularSetting();
             ApprovalRequired = false;
@@ -62,6 +68,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             CurrentRepository = ss.LastRepository;
             Repositories.AddMany(ss.Repositories, true);
             ComputeDirectorySize();
+            RaiseUpdated(nameof(MemoryUsage));
         }
 
         protected override void OnStart()
@@ -178,6 +185,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             private set => SetValue(ref _databaseProperty, value);
         }
 
+        public string MemoryUsage
+        {
+            get
+            {
+                var mem = Process.GetCurrentProcess()
+                                 .WorkingSet64;
+                var size = IOSystemUtilities.GetFileSizeString(mem);
+                return size;
+            }
+        }
+        
+        public RelayCommand ReleaseMemoryCommand { get; }
+        
         public AsyncRelayCommand CloseDatabaseCommand { get; }
         public ObservableCollection<RepositoryCache> Repositories { get; }
         public IDatabaseManager DatabaseManager { get; }
