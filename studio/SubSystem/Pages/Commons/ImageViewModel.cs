@@ -19,7 +19,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             bi.BeginInit();
             bi.CacheOption  = BitmapCacheOption.OnLoad;
             bi.StreamSource = _ms;
-            bi.Freeze();
             bi.EndInit();
             Source = bi;
             base.OnStart(parameter);
@@ -27,6 +26,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected override void ReleaseManagedResourcesOverride()
         {
+            _ms.Close();
             _ms.Dispose();
             _ms = null;
             base.ReleaseManagedResourcesOverride();

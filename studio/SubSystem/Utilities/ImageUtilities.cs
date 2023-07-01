@@ -65,6 +65,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 return new ImageOpResult { IsFinished = false };
             }
 
+            Configuration.Default
+                         .MemoryAllocator
+                         .ReleaseRetainedResources();
             MemoryStream result;
             var          fileName = opendlg.FileName;
             var          session  = Xaml.Get<IBusyService>().CreateSession();
@@ -80,7 +83,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 image.Dispose();
                 origin.Dispose();
                 await Xaml.Get<IBuiltinDialogService>()
-                          .Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooSmall);
+                          .Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooSmall);;
                 return new ImageOpResult { IsFinished = false };
             }
 
@@ -89,6 +92,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 await Xaml.Get<IBuiltinDialogService>()
                           .Notify(CriticalLevel.Danger, SubSystemString.Notify, SubSystemString.ImageTooBig);
+
+                image.Dispose();
+                origin.Dispose();
                 return new ImageOpResult { IsFinished = false };
             }
 

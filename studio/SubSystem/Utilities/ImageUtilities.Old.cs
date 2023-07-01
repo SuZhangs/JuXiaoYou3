@@ -48,6 +48,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task CropAllAvatar()
         {
+            Configuration.Default
+                         .MemoryAllocator
+                         .ReleaseRetainedResources();
             var dir = Studio.DatabaseManager()
                             .GetEngine<ImageEngine>()
                             .FullDirectory;
@@ -84,6 +87,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task<Op<Album>> Thumbnail(ImageEngine engine, string fileName)
         {
+            Configuration.Default
+                         .MemoryAllocator
+                         .ReleaseRetainedResources();
             var    buffer = await File.ReadAllBytesAsync(fileName);
             byte[] thumbnailBuffer;
             var    raw   = Pool.MD5.ComputeHash(buffer);
@@ -95,12 +101,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 var fr = engine.Records
                                .FindById(md5);
-                var target = Path.Combine(engine.SourceDirectory, string.Format(RawPattern, id));
+                var target = Path.Combine(engine.SourceDirectory, string.Format(ThumbnailPattern, id));
                 if (!File.Exists(target))
                 {
                     File.Copy(fileName, target, true);
                 }
 
+                image.Dispose();
                 return Op<Album>.Success(new Album
                 {
                     Id     = fr.Uri,
@@ -152,6 +159,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             //
             //
             engine.Write(thumbnail, thumbnailBuffer);
+            image.Dispose();
             return Op<Album>.Success(new Album
             {
                 Id     = thumbnail,
@@ -185,6 +193,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
         public static async Task<Op<string>> Raw(ImageEngine engine, string fileName, ImageScale scale, Action<Album> callback)
         {
+            Configuration.Default
+                         .MemoryAllocator
+                         .ReleaseRetainedResources();
             var    buffer = await File.ReadAllBytesAsync(fileName);
             var    raw    = Pool.MD5.ComputeHash(buffer);
             var    md5    = Convert.ToBase64String(raw);
@@ -218,6 +229,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                     Width  = Math.Clamp(fr.Width, 0, 1920),
                     Height = Math.Clamp(fr.Height, 0, 1080),
                 });
+                image.Dispose();
                 return Op<string>.Success(string.Format(ThumbnailWithSizePattern, fr.Uri, fr.Width, fr.Height));
             }
 
@@ -246,6 +258,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 Width  = w1,
                 Height = h1
             });
+            image.Dispose();
             return Op<string>.Success(withSize);
         }
     }
