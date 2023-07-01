@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Dialogs
             var version = assemblyVersion?.InformationalVersion ?? "3.0.0";
             ss.AdvancedSetting
               .ApplicationVersion = version;
-
+            Context.IsUpdated = false;
             ss.Save();
         }
 
@@ -23,5 +23,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Dialogs
         {
             return SubSystemString.Unknown;
         }
+
+        public GlobalStudioContext Context { get; init; }
     }
 }

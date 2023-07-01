@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Windows.Forms;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using Acorisoft.FutureGL.MigaStudio.Pages.Dialogs;
@@ -79,7 +80,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     .Dialog(new AutomaticDataProtectionViewModel
                     {
                         CountDown = true, 
-                        CountSeconds = 10
+                        CountSeconds = 10,
+                        Context = Controller.Context
                     });
             }
         }
