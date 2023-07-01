@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             SurveySets = new ObservableCollection<SurveySet>();
             AddSurveySetCommand = AsyncCommand(AddSurveySetImpl);
-            AddSurveyCommand = AsyncCommand<SurveySet>(AddSurveyImpl, HasItem, true);
+            AddSurveyCommand = AsyncCommand<SurveySet>(AddSurveyImpl);
             ShiftUpSurveySetCommand = Command<SurveySet>(ShiftUpSurveySetImpl, HasItem, true);
             ShiftUpSurveyCommand = Command<Survey>(ShiftUpSurveyImpl, HasItem, true);
             ShiftDownSurveySetCommand = Command<SurveySet>(ShiftDownSurveySetImpl, HasItem, true);
@@ -160,7 +160,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            item.Items.Add(r.Value);
+            item.Items
+                .Add(r.Value);
         }
 
         private async Task AddSurveySetImpl()
