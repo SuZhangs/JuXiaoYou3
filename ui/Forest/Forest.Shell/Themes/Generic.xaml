@@ -54,14 +54,14 @@
                         <Grid.Resources>
                             <DataTemplate DataType="{x:Type m:IconNotification}">
                                 <c:GeometryMessageBar Header="{Binding Title,Mode=OneWay}"
-                                                      Highlight="{Binding Color,Mode=OneWay}"
+                                                      Highlight="{Binding Brush,Mode=OneWay}"
                                                       IsFilled="{Binding IsFilled,Mode=OneWay}"
                                                       Geometry="{Binding Geometry,Mode=OneWay}" />
                             </DataTemplate>
 
                             <DataTemplate DataType="{x:Type m:ImageNotification}">
                                 <c:ImageMessageBar Header="{Binding Title,Mode=OneWay}"
-                                                   Highlight="{Binding Color,Mode=OneWay}"
+                                                   Highlight="{Binding Brush,Mode=OneWay}"
                                                    Image="{Binding ImageSource,Mode=OneWay}" />
                             </DataTemplate>
                         </Grid.Resources>
@@ -362,13 +362,14 @@
                             Width="384"
                             MinHeight="64">
                         <DockPanel>
-                            <Path x:Name="Icon"
+                            <Viewbox Height="31"
+                                     Width="31" >
+                                <Path x:Name="Icon"
                                       Data="{TemplateBinding Geometry}"
                                       Stroke="{TemplateBinding Highlight}"
                                       StrokeThickness="2"
-                                      Stretch="Uniform"
-                                      Height="31"
-                                      Width="31" />
+                                      Stretch="Uniform"/>
+                            </Viewbox>
                             <TextBlock DockPanel.Dock="Top"
                                            FontSize="16"
                                            Foreground="{TemplateBinding Highlight}"

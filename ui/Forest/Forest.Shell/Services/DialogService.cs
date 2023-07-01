@@ -94,7 +94,8 @@ namespace Acorisoft.FutureGL.Forest.Services
                 return;
             }
 
-            if (notification.Delay.TotalMilliseconds < 1000)
+            if (notification.Delay
+                            .TotalMilliseconds < 1000)
             {
                 //
                 //

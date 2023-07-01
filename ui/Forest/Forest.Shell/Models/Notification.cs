@@ -21,6 +21,8 @@
             get => _color;
             set => SetValue(ref _color, value);
         }
+
+        public SolidColorBrush Brush => new SolidColorBrush(Color);
         
         /// <summary>
         /// 获取或设置 <see cref="Title"/> 属性。
