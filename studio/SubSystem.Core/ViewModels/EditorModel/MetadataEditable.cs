@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;
@@ -88,8 +89,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             else
             {
-                Document.Metas
-                        .Add(metadata);
+                insideMetadata = Document.Metas
+                                         .Find(x => x.Name == metadata.Name);
+                if (insideMetadata is null)
+                {
+                    insideMetadata = metadata;
+                    Document.Metas.Add(insideMetadata);
+                }
+                else
+                {
+                    insideMetadata.Value = metadata.Value;
+                }
                 
                 MetadataTrackerByName.Add(metadata.Name, metadata);
             }

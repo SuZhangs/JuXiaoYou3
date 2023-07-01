@@ -11,12 +11,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
     partial class DocumentEditorBase
     {
-
         #region OnLoad
-
 
         protected override void FinishOpeningDocument(DocumentCache cache, Document document)
         {
+            FinishOpenDocumentImpl();
             AddMetadataWhenDocumentOpening();
         }
 
@@ -74,8 +73,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
             }
         }
-        
-        protected sealed override void IsDataPartExistence(Document document)
+
+        private void FinishOpenDocumentImpl()
         {
             //
             // 检查当前打开的文档是否缺失指定的DataPart
@@ -83,27 +82,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             if (BasicPart is null)
             {
                 BasicPart = new PartOfBasic { Buckets = new Dictionary<string, string>() };
-                
+
                 //
                 // Tracking
                 Document.Parts.Add(BasicPart);
                 DataPartTrackerOfId.TryAdd(BasicPart.Id, BasicPart);
                 DataPartTrackerOfType.TryAdd(BasicPart.GetType(), BasicPart);
-                
+
                 //
                 // Initialize
-                Name   = Cache.Name;
+                Name = Cache.Name;
             }
-            
+
             GetPartOfPresentation();
-            IsDataPartExistenceOverride(Document);
-            
+
             //
             //
             DocumentUtilities.SynchronizeDocument(Cache, Document);
         }
-
-        protected virtual void IsDataPartExistenceOverride(Document document){}
 
         private void GetPartOfPresentation()
         {
@@ -112,8 +108,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 //
                 // 打开 PresentationPart
                 var db = Studio.DatabaseManager()
-                             .Database
-                             .CurrentValue;
+                               .Database
+                               .CurrentValue;
 
                 PresentationPart           = GetPresentationPreset(db, Type);
                 IsOverridePresentationPart = false;
@@ -165,6 +161,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         #endregion
+
+        protected override void LoadDocumentOverride(DocumentCache cache, Document document)
+        {
+            if (document.Version < 0x10)
+            {
+                var dict = new Dictionary<Type, DataPart>();
+                foreach (var part in document.Parts)
+                {
+                    dict.TryAdd(part.GetType(), part);
+                }
+
+                document.Metas
+                        .Clear();
+                document.Parts.AddMany(dict.Values, true);
+                document.Version = 0x10;
+                SetDirtyState();
+            }
+        }
 
         protected override Document GetDocumentById(string id)
         {

@@ -53,7 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             };
         }
 
-        protected override void IsDataPartExistenceOverride(Document document)
+        protected override void IsDataPartExistence(Document document)
         {
             HasDataPart<PartOfAlbum>(CreateAlbum);
             HasDataPart<PartOfPlaylist>(CreatePlaylist);

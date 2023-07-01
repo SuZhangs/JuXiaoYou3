@@ -57,13 +57,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             AddDataPartToDocument(CreateCharacterRelatives());
         }
 
-
-        protected override void IsDataPartExistenceOverride(Document document)
-        {
-            base.IsDataPartExistenceOverride(document);
-            
-        }
-
         private void ResumeDetailPart()
         {
             if (DetailPart is null)

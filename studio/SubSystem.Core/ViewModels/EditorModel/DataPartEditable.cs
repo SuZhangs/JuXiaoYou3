@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing.Imaging;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
@@ -78,14 +79,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             DataPartTrackerOfId.Clear();
         }
 
-        
-        
+        [EditorBrowsable(EditorBrowsableState.Never)]
         protected sealed override void LoadDocument(TCache cache, TDocument document)
         {
             IsDataPartExistence(document);
             AddDataPartFromDocument(document);
+            LoadDocumentOverride(cache, document);
         }
 
+        protected virtual void LoadDocumentOverride(TCache cache, TDocument document){}
         protected abstract bool OnDataPartAddingBefore(DataPart part);
         protected abstract void OnDataPartAddingAfter(DataPart part);
         

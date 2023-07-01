@@ -145,7 +145,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
                 Type           = _type,
                 TimeOfCreated  = DateTime.Now,
                 TimeOfModified = DateTime.Now,
-                Version        = 1,
+                Version        = 0x10,
                 IsDeleted      = false,
             };
 
