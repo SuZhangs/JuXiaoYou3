@@ -12,6 +12,11 @@ namespace Acorisoft.FutureGL.Forest.Behaviors
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                return;
+            }
+            
             if (e.ClickCount < 2)
             {
                 return;

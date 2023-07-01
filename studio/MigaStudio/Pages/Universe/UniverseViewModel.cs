@@ -127,6 +127,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
 
             PictureCollection.AddMany(_databaseProperty.Album, true);
+            SelectedAlbum = PictureCollection.FirstOrDefault();
             InitializeTimelines();
         }
 

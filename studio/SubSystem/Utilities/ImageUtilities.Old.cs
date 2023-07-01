@@ -102,9 +102,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                 return Op<Album>.Success(new Album
                 {
-                    Id = fr.Uri,
-                    Width = fr.Width,
-                    Height = fr.Height,
+                    Id     = fr.Uri,
+                    Width  = Math.Clamp(fr.Width, 0, 1920),
+                    Height = Math.Clamp(fr.Height, 0, 1080),
                     Source = fr.Uri
                 });
             }
@@ -153,8 +153,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 Id     = thumbnail,
                 Source = thumbnail,
-                Width  = w,
-                Height = h
+                Width  = Math.Clamp(w, 0, 1920),
+                Height = Math.Clamp(h, 0, 1080),
             });
         }
 
@@ -210,10 +210,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
                 callback?.Invoke(new Album
                 {
-                    Id = fr.Id,
+                    Id     = fr.Id,
                     Source = fr.Uri,
-                    Width = fr.Width,
-                    Height = fr.Height,
+                    Width  = Math.Clamp(fr.Width, 0, 1920),
+                    Height = Math.Clamp(fr.Height, 0, 1080),
                 });
                 return Op<string>.Success(string.Format(ThumbnailWithSizePattern, fr.Uri, fr.Width, fr.Height));
             }

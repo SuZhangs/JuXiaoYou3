@@ -188,7 +188,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 {
                     Id   = md5,
                     Uri  = avatar,
-                    Type = ResourceType.Image
+                    Type = ResourceType.Image,
+                    Width = 256,
+                    Height = 256
                 };
 
                 imageEngine.AddFile(record);

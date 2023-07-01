@@ -127,7 +127,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Gallery
             {
                 Id   = md5,
                 Uri  = avatar,
-                Type = ResourceType.Image
+                Type = ResourceType.Image,
+                Width = 256,
+                Height = 256,
             };
 
             ie.AddFile(record);
