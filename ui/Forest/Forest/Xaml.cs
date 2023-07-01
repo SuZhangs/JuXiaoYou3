@@ -45,7 +45,6 @@ namespace Acorisoft.FutureGL.Forest
                 {
                     new LineGeometry { StartPoint = new Point(18, 6), EndPoint = new Point(6, 18) },
                     new LineGeometry { StartPoint = new Point(6, 6), EndPoint  = new Point(18, 18) },
-                    new EllipseGeometry { Center  = new Point(9, 9), RadiusX   = 9, RadiusY = 9 },
                 }
             };
             Checked = new GeometryGroup

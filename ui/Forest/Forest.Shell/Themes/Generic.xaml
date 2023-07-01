@@ -362,14 +362,13 @@
                             Width="384"
                             MinHeight="64">
                         <DockPanel>
-                            <Viewbox Height="31"
-                                     Width="31" >
-                                <Path x:Name="Icon"
+                            <Path x:Name="Icon"
                                       Data="{TemplateBinding Geometry}"
                                       Stroke="{TemplateBinding Highlight}"
                                       StrokeThickness="2"
-                                      Stretch="Uniform"/>
-                            </Viewbox>
+                                      Stretch="Uniform"
+                                      Height="23"
+                                     Width="23" />
                             <TextBlock DockPanel.Dock="Top"
                                            FontSize="16"
                                            Foreground="{TemplateBinding Highlight}"

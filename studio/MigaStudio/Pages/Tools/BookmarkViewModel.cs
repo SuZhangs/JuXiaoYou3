@@ -23,6 +23,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             AutomaticDecompression = DecompressionMethods.All
         });
+
+        public BookmarkViewModel()
+        {
+            Engine = Studio.Engine<EntityEngine>();
+        }
         
         
         protected override async void OnDragDrop(WindowDragDropArgs e)
@@ -54,7 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     Link = link
                 };
 
-                // Engine.AddBookmark(bookmark);
+                Engine.AddBookmark(bookmark);
                 Collection.Add(bookmark);
 
                 if (!await UpdatingBookmark(bookmark))
@@ -91,36 +96,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 bookmark.Title = title;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception _)
             {
                 Debug.WriteLine(bookmark.Link);
                 return false;
             }
         }
 
-        private async Task AddBookmark()
-        {
-            var r = await SingleLineViewModel.String(SR.EmptyValue);
-
-            if (!r.IsFinished)
-            {
-                return;
-            }
-
-            var bookmark = new Bookmark
-            {
-                Id   = ID.Get(),
-                Link = r.Value
-            };
-
-            if (!await UpdatingBookmark(bookmark))
-            {
-                bookmark.Title = bookmark.Link?[20..];
-            }
-            
-            
-        }
-        
         protected override bool NeedDataSourceSynchronize()
         {
             if (Version != Engine.Version)
@@ -143,7 +125,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected override async Task<Op<Bookmark>> Add()
         {
-            var r = await SingleLineViewModel.String(SR.EmptyValue);
+            var r = await SingleLineViewModel.String(SR.EditNameTitle);
 
             if (!r.IsFinished)
             {
@@ -170,12 +152,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             return Op<Bookmark>.Success(bookmark);
         }
 
-        protected override async Task Edit(Bookmark entity)
+        protected override Task Edit(Bookmark entity)
         {
+            return Task.Run(() => Engine.UpdateBookmark(entity));
         }
 
         protected override void Remove(Bookmark entity)
         {
+            Engine.RemoveBookmark(entity);
         }
 
         protected override void ShiftUp(Bookmark entity, int oldIndex, int newIndex)

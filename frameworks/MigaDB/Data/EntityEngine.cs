@@ -14,6 +14,26 @@ namespace Acorisoft.FutureGL.MigaDB.Data
 
             BookmarkDB.Insert(bookmark);
         }
+        
+        public void UpdateBookmark(Bookmark bookmark)
+        {
+            if (bookmark is null)
+            {
+                return;
+            }
+
+            BookmarkDB.Update(bookmark);
+        }
+
+        public void RemoveBookmark(Bookmark bookmark)
+        {
+            if (bookmark is null)
+            {
+                return;
+            }
+
+            BookmarkDB.Delete(bookmark.Id);
+        }
 
         public IEnumerable<Bookmark> GetBookmarks() => BookmarkDB.FindAll();
 

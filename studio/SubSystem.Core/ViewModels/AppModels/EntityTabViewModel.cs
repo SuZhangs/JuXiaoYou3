@@ -39,12 +39,21 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private async Task EditEntityImpl(TEntity entity)
         {
+            if (entity is null)
+            {
+                return;
+            }
             await Edit(entity);
             SetDirtyState();
         }
 
         private async Task RemoveEntityImpl(TEntity entity)
         {
+            if (entity is null)
+            {
+                return;
+            }
+            
             if (!await this.Error(Language.GetText("text.AreYouSureRemoveIt")))
             {
                 return;
@@ -75,6 +84,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void ShiftUpEntityImpl(TEntity entity)
         {
+            if (entity is null)
+            {
+                return;
+            }
             Collection.ShiftUp(entity, ShiftUp);
             SetDirtyState();
         }
@@ -82,6 +95,10 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private void ShiftDownEntityImpl(TEntity entity)
         {
+            if (entity is null)
+            {
+                return;
+            }
             Collection.ShiftDown(entity, ShiftDown);
             SetDirtyState();
         }

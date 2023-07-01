@@ -4,83 +4,74 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
-                     xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages"
                      xmlns:m="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Others;assembly=MigaDB"
+                     xmlns:sub="clr-namespace:Acorisoft.FutureGL.MigaStudio.Utilities;assembly=SubSystem"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:BookmarkViewModel}, IsDesignTimeCreatable=True}">
+    <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
     <UserControl.Resources>
         <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
 
         <DataTemplate DataType="{x:Type m:Bookmark}">
-            <Border Background="{f:Brush BackgroundLevel4}"
-                    CornerRadius="8"
-                    Margin="8"
-                    Padding="20"
-                    Width="384">
-                <Border.ContextMenu>
+            <f:LooklessButton Command="{x:Static sub:FileIO.OpenLinkCommand}"
+                              CommandParameter="{Binding Link,Mode=OneWay}">
+
+                <f:LooklessButton.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
-
-                        <f:MenuItem Header="{f:Language global.Up}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
-
-                        <f:MenuItem Header="{f:Language global.Down}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
-                                    CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
-
                         <f:MenuItem Header="{f:Language global.edit}"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Upload}" />
-                    </f:ContextMenu>
-                </Border.ContextMenu>
+                                    Icon="{StaticResource FeatherIcon.Edit}"
+                                    IconSize="17" />
 
-                <DockPanel>
-                    <Border ClipToBounds="True"
-                            CornerRadius="32"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Height="64"
-                            Width="64">
-                        <Border.Background>
-                            <SolidColorBrush  Color="Gray"/>
-                        </Border.Background>
-                    </Border>
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
+                                    CommandParameter="{Binding}"
+                                    Icon="{StaticResource FeatherIcon.Trash}"
+                                    IconSize="17" />
+                    </f:ContextMenu>
+                </f:LooklessButton.ContextMenu>
+                <Border Background="{f:Brush BackgroundLevel4}"
+                        CornerRadius="8"
+                        Height="128"
+                        Margin="8"
+                        Padding="20"
+                        Width="384">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Top"
                                    FontSize="18"
                                    FontWeight="Bold"
+                                   Height="48"
                                    HorizontalAlignment="Left"
-                                   Margin="32 8 0 0"
                                    Text="{Binding Title,Mode=OneWay}"
-                                   TextWrapping="Wrap"
-                                   TextTrimming="CharacterEllipsis" />
+                                       TextWrapping="Wrap"
+                                       TextTrimming="CharacterEllipsis" />
                         <TextBlock FontFamily="{f:SongTi}"
                                    FontSize="14"
-                                   Margin="32 8 0 0"
                                    HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
                                    Text="{Binding Link,Mode=OneWay}"
                                    TextTrimming="CharacterEllipsis">
                         </TextBlock>
                     </DockPanel>
-                </DockPanel>
-            </Border>
+                </Border>
+            </f:LooklessButton>
         </DataTemplate>
-
     </UserControl.Resources>
-    <f:ForestIsland Header="所有评价"
-                    Margin="16"
-                    Padding="0 16 0 0">
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <DockPanel Margin="16 32 16 16">
+        <f:CallToAction DockPanel.Dock="Top"
+                        CornerRadius="24"
+                        Content="{f:Language global.add}"
+                        Command="{Binding AddCommand}"
+                        Height="48"
+                        Icon="{StaticResource FeatherIcon.Plus}"
+                        Width="320" />
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      Margin="0 16 0 0">
             <ItemsControl DockPanel.Dock="Right"
                           ItemsSource="{Binding Collection,Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
@@ -90,6 +81,5 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </ScrollViewer>
-
-    </f:ForestIsland>
+    </DockPanel>
 </f:ForestUserControl>
