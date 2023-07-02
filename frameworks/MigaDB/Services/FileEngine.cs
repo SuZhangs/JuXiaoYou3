@@ -1,4 +1,6 @@
-﻿namespace Acorisoft.FutureGL.MigaDB.Services
+﻿using System.Diagnostics;
+
+namespace Acorisoft.FutureGL.MigaDB.Services
 {
     public abstract class FileEngine : DataEngine, IFileEngine, ITextService
     {
@@ -11,7 +13,15 @@
 
         public string GetTextSource() => $"__{GetType().Name}";
 
-        public string GetFileName(string id) => Path.Combine(FullDirectory, id);
+        public string GetFileName(string id)
+        {
+            if (Activated)
+            {
+                return  Path.Combine(FullDirectory, id);
+            }
+
+            return string.Empty;
+        }
 
 
         public MemoryStream Get(string id)

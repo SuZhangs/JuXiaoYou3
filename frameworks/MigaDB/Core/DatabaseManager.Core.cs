@@ -48,7 +48,10 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             _property             = new ObservableProperty<DatabaseProperty>();
             _isOpen               = new ObservableState();
             _needUpdate           = new ObservableState();
-            _synchronizer         = new GlobalSynchronizer(() => { }, () => _isOpen.SetValue(true));
+            _synchronizer         = new GlobalSynchronizer(
+                () => { }, 
+                () => _isOpen.SetValue(true), 
+                _engines.Count(e => !e.IsLazyMode));
             Mediator              = new Mediator(Container.Resolve);
         }
 
@@ -81,12 +84,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
         private async Task NotifyEngines(IDatabase database, string directory)
         {
-            _isOpen.SetValue(false);
             _synchronizer.Reset();
-
-            //
-            // 提示关闭
-            await Mediator.Publish(DatabaseCloseNotification.Instance);
 
             //
             // 提示打开
@@ -108,8 +106,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                 // manual call
                 _synchronizer.Manual();
             }
-
-            _isOpen.SetValue(true);
         }
 
         private async Task<DatabaseResult> LoadImplAsync(string root, string fileName, string indexFileName)
@@ -150,10 +146,6 @@ namespace Acorisoft.FutureGL.MigaDB.Core
 
                 //
                 var property = database.Get<DatabaseProperty>();
-
-                //
-                // 关闭之前的数据库
-                await CloseAsync();
 
                 //
                 // 设置属性
@@ -486,16 +478,21 @@ namespace Acorisoft.FutureGL.MigaDB.Core
             private readonly Action _databaseLoadStarting;
             private readonly Action _databaseLoadCompleted;
             private          int    _pendingCount;
+            private          int    _dependingCount;
+            private readonly int    _immediateEngineCount;
 
-            public GlobalSynchronizer(Action startHandler, Action completedHandler)
+            public GlobalSynchronizer(Action startHandler, Action completedHandler, int immediateEngineCount)
             {
                 _databaseLoadStarting  = startHandler;
                 _databaseLoadCompleted = completedHandler;
                 _pendingCount          = 0;
+                _immediateEngineCount  = immediateEngineCount;
             }
 
             public void Manual()
             {
+                _pendingCount   = 0;
+                _dependingCount = 0;
                 _databaseLoadStarting?.Invoke();
                 _databaseLoadCompleted?.Invoke();
             }
@@ -512,15 +509,22 @@ namespace Acorisoft.FutureGL.MigaDB.Core
                     _databaseLoadStarting?.Invoke();
                 }
 
+                if (_pendingCount == _immediateEngineCount)
+                {
+                    return;
+                }
+
                 Interlocked.Increment(ref _pendingCount);
             }
 
             public void Unset()
             {
-                Interlocked.Decrement(ref _pendingCount);
+                Interlocked.Increment(ref _dependingCount);
 
-                if (_pendingCount == 0)
+                if (_dependingCount == _immediateEngineCount)
                 {
+                    _pendingCount   = 0;
+                    _dependingCount = 0;
                     _databaseLoadCompleted?.Invoke();
                 }
             }

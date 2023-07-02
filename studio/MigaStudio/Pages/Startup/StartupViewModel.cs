@@ -10,23 +10,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
     public class StartupViewModel : TabViewModel
     {
-        private readonly DatabaseProperty _databaseProperty;
-        private          int              _index;
-        private          Album            _backgroundCover;
+        private DatabaseProperty _databaseProperty;
+        private int              _index;
+        private Album            _backgroundCover;
 
         public StartupViewModel()
         {
-            _databaseProperty = Studio.Database()
-                                      .Get<DatabaseProperty>();
             Xaml.Get<IAutoSaveService>()
                 .MinutesCounter
                 .Subscribe(SwitchFantasyProjectBackgroundCover)
                 .DisposeWith(Collector);
+            
+            
+            
             SwitchControllerCommand = Command<ControllerManifest>(SwitchControllerImpl);
         }
 
         protected override void OnStart()
         {
+            _databaseProperty = Studio.Database()
+                                      .Get<DatabaseProperty>();
             BackgroundCover = _databaseProperty?.Album?.FirstOrDefault();
             RaiseUpdated(nameof(ProjectName));
             RaiseUpdated(nameof(ProjectIntro));
@@ -47,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private void SwitchFantasyProjectBackgroundCover(Unit _)
         {
-            if (_databaseProperty.Album is not null &&
+            if (_databaseProperty?.Album is not null &&
                 _databaseProperty.Album.Count > 0)
             {
                 var count = _databaseProperty.Album.Count;
@@ -95,7 +98,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             get
             {
-                var r = _databaseProperty.Album is not null &&
+                var r = _databaseProperty?.Album is not null &&
                         _databaseProperty.Album.Count > 0;
 
                 if (r && BackgroundCover is null)
@@ -108,9 +111,29 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
         }
 
-        public string ProjectName => _databaseProperty.Name;
-        public string ProjectIntro => _databaseProperty.Intro;
-        public string ProjectAuthor => _databaseProperty.Author;
+        public string ProjectName
+        {
+            get
+            {
+                return _databaseProperty?.Name;
+            }
+        }
+
+        public string ProjectIntro
+        {
+            get
+            {
+                return _databaseProperty?.Intro;
+            }
+        }
+
+        public string ProjectAuthor
+        {
+            get
+            {
+                return _databaseProperty?.Author;
+            }
+        }
 
         public RelayCommand<ControllerManifest> SwitchControllerCommand { get; }
     }

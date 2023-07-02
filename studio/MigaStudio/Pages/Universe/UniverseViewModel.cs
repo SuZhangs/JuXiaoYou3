@@ -189,9 +189,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             var context    = Controller.Context;
             var controller = (TabController)context.MainController;
-            
-            // 重置所有内容
-            controller.Reset();
                 
             // 重置头像缓存
             AvatarConverter.Reset();
@@ -207,9 +204,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
             // 保存设置更改
             await SystemSetting.SaveAsync();
-            
-            //
-            // 先关闭引擎
+
+            // 先关闭
             await DatabaseManager.CloseAsync();
             
             // 再打开引擎
@@ -219,6 +215,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             if (r.IsFinished)
             {
+                // 重置所有内容
+                controller.Reset();
                 controller = (TabController)Controller.Context
                                                       .ControllerMaps[AppViewModel.IdOfTabShellController];
             }
@@ -283,6 +281,22 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             SetDirtyState(false);
             Database.Upsert(_databaseProperty);
             SystemSetting.Save();
+        }
+
+        public override void Suspend()
+        {
+            var cache = SystemSetting.RepositorySetting
+                                     .Repositories
+                                     .FirstOrDefault(x => x.Path == Database.DatabaseDirectory);
+
+            if (cache is not null)
+            {
+                cache.Name   = Name;
+                cache.Author = Author;
+                cache.Intro  = Intro;
+            }
+            SystemSetting.Save();
+            base.Suspend();
         }
 
         /// <summary>

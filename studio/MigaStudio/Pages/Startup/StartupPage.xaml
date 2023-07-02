@@ -108,7 +108,7 @@
                             <TextBlock Foreground="{f:Brush ForegroundInAdaptive}"
                                        FontSize="32"
                                        FontWeight="Bold"
-                                       Text="橘小柚（JuXiaoYou）" />
+                                       Text="{Binding ProjectName,Mode=OneWay}" />
                         </Grid>
                     </Border>
                 </f:EmptyContentControl.EmptyState>
