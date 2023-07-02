@@ -188,6 +188,21 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
             Modified();
         }
 
+        /// <summary>
+        /// 移除文档
+        /// </summary>
+        /// <param name="cache">指定要移除的文档</param>
+        public void HardRemoveDocumentCache(DocumentCache cache)
+        {
+            if (cache is null)
+            {
+                return;
+            }
+            DocumentCacheDB.Delete(cache.Id);
+            RemoveConcept(cache.Id);
+            Modified();
+        }
+
         #endregion
 
         #region Update

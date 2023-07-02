@@ -22,6 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
             DatabaseManager = dbMgr;
             DocumentEngine  = dbMgr.GetEngine<DocumentEngine>();
 
+            DeleteDocumentCommand  = AsyncCommand(DeleteDocumentImpl);
             RecoverDocumentCommand = Command(RecoverDocumentImpl);
             SelectedDocumentCommand = CommandUtilities.CreateSelectedCommand<DocumentCache>(x =>
             {
@@ -114,7 +115,35 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
             }
 
             SelectedItem.IsDeleted = false;
+            SelectedItem.TimeOfModified = DateTime.Now;
+
+            if (DocumentEngine.HasDocumentName(SelectedItem.Id, SelectedItem.Name))
+            {
+                this.Danger(Language.ContentDuplicatedText);
+                return;
+            }
+
             DocumentEngine.UpdateDocument(SelectedItem);
+            Collection.Remove(SelectedItem);
+            SelectedItem = null;
+            IsPropertyPaneOpen = false;
+        }
+
+        private async Task DeleteDocumentImpl()
+        {
+            if (SelectedItem is null)
+            {
+                return;
+            }
+
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            SelectedItem.IsDeleted = false;
+            IsPropertyPaneOpen = false;
+            DocumentEngine.HardRemoveDocumentCache(SelectedItem);
             Collection.Remove(SelectedItem);
             SelectedItem = null;
         }
@@ -127,6 +156,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Tools
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand RecoverDocumentCommand { get; }
+        public AsyncRelayCommand DeleteDocumentCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<DocumentCache> SelectedDocumentCommand { get; }

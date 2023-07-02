@@ -201,7 +201,14 @@
                                     CommandParameter="{Binding SelectedItem,Mode=OneWay}"
                                     Margin="0 8"
                                     Palette="HighlightPalette1" />
-                    
+
+                    <f:CallToAction Content="删除"
+                                    Icon="{StaticResource FeatherIcon.Edit}"
+                                    Command="{Binding DeleteDocumentCommand}"
+                                    CommandParameter="{Binding SelectedItem,Mode=OneWay}"
+                                    Margin="0 8"
+                                    Palette="Danger" />
+
                 </StackPanel>
             </Border>
         </f:Drawer.RightContent>

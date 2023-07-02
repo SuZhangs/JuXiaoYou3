@@ -400,6 +400,7 @@
         public static string AreYouSureUnOverrideIt => GetText("text.AreYouSureUnOverrideIt");
         public static string AreYouSureCreateNew => GetText("text.AreYouSureCreateNew");
         public static string AreYouSureRemoveIt => GetText("text.AreYouSureRemoveIt");
+        public static string AreYouSureHardRemoveIt => GetText("text.AreYouSureHardRemoveIt");
         public static string AreYouSureClearIt => GetText("text.AreYouSureClearIt");
         public static string Notify => GetText("text.notify");
         public static string NoDataToSave => GetText("text.NoDataToSave");
