@@ -109,7 +109,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 //
                 // Tracking
                 Document.Parts.Add(BasicPart);
-                DataPartTrackerOfId.TryAdd(BasicPart.Id, BasicPart);
                 DataPartTrackerOfType.TryAdd(BasicPart.GetType(), BasicPart);
 
                 //

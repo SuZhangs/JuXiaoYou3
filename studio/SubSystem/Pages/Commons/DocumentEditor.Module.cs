@@ -1,17 +1,18 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 {
     partial class DocumentEditorBase
     {
-        private readonly Dictionary<string, ModuleBlock>          _BlockTrackerOfId;
+        private readonly Dictionary<string, ModuleBlock> _BlockTrackerOfId;
 
         private ModuleBlock GetBlockById(string id)
         {
             return _BlockTrackerOfId.TryGetValue(id, out var b) ? b : null;
         }
-        
+
         private async Task AddModulePartImpl()
         {
             //
@@ -19,7 +20,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var availableModules = TemplateEngine.TemplateCacheDB
                                                  .FindAll()
                                                  .Where(x => !DataPartTrackerOfId.ContainsKey(x.Id) && x.ForType == Type);
-            if(!availableModules.Any() )
+            if (!availableModules.Any())
             {
                 await this.WarningNotification("你已经添加了所有模组！");
                 return;
@@ -46,7 +47,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             AddModules(module);
         }
-        
+
 
         private void AddModules(IEnumerable<PartOfModule> modules)
         {
@@ -101,25 +102,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 {
                     if (!_BlockTrackerOfId.TryAdd(block.Id, block))
                     {
-                        this.Warning($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级")
-                            .GetAwaiter()
-                            .GetResult();
+                        this.Warning($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级");
                         continue;
                     }
-                
+
                     if (string.IsNullOrEmpty(metadata))
                     {
                         continue;
                     }
-
-                    if (MetadataTrackerByName.ContainsKey(metadata))
-                    {
-                        blocks.RemoveAt(i);
-                    }
-                    else
-                    {
-                        AddMetadata(block.ExtractMetadata());
-                    }
+                    
+                    AddMetadata(block.ExtractMetadata());
                 }
             }
         }
@@ -131,7 +123,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 return;
             }
 
-            if (!await  this.Error(SubSystemString.AreYouSureRemoveIt))
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
             {
                 return;
             }
@@ -152,18 +144,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     foreach (var b in g.Items)
                     {
                         _BlockTrackerOfId.Remove(b.Id);
-                        if(!string.IsNullOrEmpty(block.Metadata))
-                            RemoveMetadata(block.Metadata);
+                        if (!string.IsNullOrEmpty(b.Metadata))
+                            RemoveMetadata(b.Metadata);
                     }
                 }
                 else
                 {
                     _BlockTrackerOfId.Remove(block.Id);
-                    if(!string.IsNullOrEmpty(block.Metadata))
+                    if (!string.IsNullOrEmpty(block.Metadata))
                         RemoveMetadata(block.Metadata);
                 }
             }
-
             RemoveModulePart(module);
             ResortModuleParts();
         }
@@ -348,8 +339,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         #region GetBlocks
 
-        
-
         public IEnumerable<TBlock> GetBlocks<TBlock>() where TBlock : ModuleBlock
         {
             return _BlockTrackerOfId.Values
@@ -361,31 +350,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             return _BlockTrackerOfId.Values
                                     .OfType<ReferenceBlock>();
         }
-        
+
         public IEnumerable<VideoBlock> GetVideoBlocks()
         {
             return _BlockTrackerOfId.Values
                                     .OfType<VideoBlock>();
         }
-        
+
         public IEnumerable<AudioBlock> GetAudioBlocks()
         {
             return _BlockTrackerOfId.Values
                                     .OfType<AudioBlock>();
         }
-        
+
         public IEnumerable<MusicBlock> GetMusicBlocks()
         {
             return _BlockTrackerOfId.Values
                                     .OfType<MusicBlock>();
         }
-        
+
         public IEnumerable<FileBlock> GetFileBlocks()
         {
             return _BlockTrackerOfId.Values
                                     .OfType<FileBlock>();
         }
-        
+
         public IEnumerable<ImageBlock> GetImageBlocks()
         {
             return _BlockTrackerOfId.Values
@@ -393,7 +382,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         }
 
         #endregion
-        
+
         /// <summary>
         /// 获取或设置 <see cref="SelectedModulePart"/> 属性。
         /// </summary>
@@ -414,18 +403,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                                       .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
                     ContentBlocks.AddMany(selector, true);
                 }
-                
+
                 RemoveModulePartCommand.NotifyCanExecuteChanged();
                 ShiftDownModulePartCommand.NotifyCanExecuteChanged();
                 ShiftUpModulePartCommand.NotifyCanExecuteChanged();
             }
         }
-        
-        
+
+
         protected void OnModuleBlockValueChanged(ModuleBlockDataUI dataUI, ModuleBlock block)
         {
             var metadataString = block.Metadata;
-            
+
             //
             // ModuleBlockDataUI 已经实现了Value的Clamp和Fallback，不需要重新设置了
             // 这里只做Metadata的Add or Update
@@ -433,18 +422,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 return;
             }
-            
+
             if (string.IsNullOrEmpty(metadataString))
             {
                 return;
             }
-            
+
             //
             //
             var metadata = block.ExtractMetadata();
-            
+
             AddMetadata(metadata);
-            
         }
 
 
