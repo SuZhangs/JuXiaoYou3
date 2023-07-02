@@ -98,8 +98,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         public override void Start()
         {
-            base.Start();
-
             if (Detail.Items is null)
             {
                 Xaml.Get<ILogger>()
@@ -109,6 +107,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             Sets.AddMany(Detail.Items, true);
             SelectedSurveySet = Sets.FirstOrDefault();
+            base.Start();
+
         }
 
         private void Save()

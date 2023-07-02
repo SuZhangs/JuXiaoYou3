@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Attributes;
 using Acorisoft.FutureGL.Forest.Interfaces;
 using Acorisoft.FutureGL.MigaUtils;
+using Acorisoft.FutureGL.MigaUtils.Collections;
 using CommunityToolkit.Mvvm.Input;
 
 // ReSharper disable StringLiteralTypo
@@ -16,16 +17,19 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
     /// </summary>
     public abstract class ViewModelBase : ForestObject, IViewModel, IViewModelLanguageService
     {
-        private readonly        List<IRelayCommand> _commandMapping;
-        private                 string              _rootName;
-        private                 bool                _initialized;
+        private readonly List<IRelayCommand> _commandMapping;
+        private readonly List<IRelayCommand> _commands;
+        private          string              _rootName;
+        private          bool                _initialized;
 
         protected ViewModelBase()
         {
             _commandMapping = new List<IRelayCommand>(8);
+            _commands       = new List<IRelayCommand>(8);
             Collector       = new DisposableCollector(8);
         }
 
+        protected IReadOnlyCollection<IRelayCommand> InternalCommands => _commands;
 
         public static bool HasItem<T>(T item) where T : class
             => item is not null;
@@ -36,38 +40,48 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         #region Commands
 
-        protected AsyncRelayCommand AsyncCommand(Func<Task> execute) => new AsyncRelayCommand(execute);
+        private T Capture<T>(T cmd) where T : IRelayCommand
+        {
+            _commands.Add(cmd);
+            return cmd;
+        }
+
+        protected AsyncRelayCommand AsyncCommand(Func<Task> execute) => Capture(new AsyncRelayCommand(execute));
 
         protected AsyncRelayCommand AsyncCommand(Func<Task> execute, Func<bool> canExecute, bool updateWhenViewModelChanged = false)
         {
-            return updateWhenViewModelChanged ? Associate(new AsyncRelayCommand(execute, canExecute)) : new AsyncRelayCommand(execute, canExecute);
+            var cmd = updateWhenViewModelChanged ? Associate(new AsyncRelayCommand(execute, canExecute)) : new AsyncRelayCommand(execute, canExecute);
+            return Capture(cmd);
         }
 
-        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute) => new AsyncRelayCommand<T>(execute);
+        protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute) => Capture(new AsyncRelayCommand<T>(execute));
 
         protected AsyncRelayCommand<T> AsyncCommand<T>(Func<T, Task> execute, Predicate<T> canExecute, bool updateWhenViewModelChanged = false)
         {
-            return updateWhenViewModelChanged ? Associate(new AsyncRelayCommand<T>(execute, canExecute)) : new AsyncRelayCommand<T>(execute, canExecute);
+            var cmd = updateWhenViewModelChanged ? Associate(new AsyncRelayCommand<T>(execute, canExecute)) : new AsyncRelayCommand<T>(execute, canExecute);
+            return Capture(cmd);
         }
 
-        protected RelayCommand Command(Action execute) => new RelayCommand(execute);
+        protected RelayCommand Command(Action execute) => Capture(new RelayCommand(execute));
         
-        protected RelayCommand<T> Command<T>(Action<T> execute) => new RelayCommand<T>(execute);
+        protected RelayCommand<T> Command<T>(Action<T> execute) => Capture(new RelayCommand<T>(execute));
 
         protected RelayCommand Command(Action execute, Func<bool> canExecute, bool updateWhenViewModelChanged = false)
         {
-            return updateWhenViewModelChanged ? Associate(new RelayCommand(execute, canExecute)) : new RelayCommand(execute, canExecute);
+            var cmd = updateWhenViewModelChanged ? Associate(new RelayCommand(execute, canExecute)) : new RelayCommand(execute, canExecute);
+            return Capture(cmd);
         }
         
         protected RelayCommand<T> Command<T>(Action<T> execute, Predicate<T> canExecute, bool updateWhenViewModelChanged = false)
         {
-            return updateWhenViewModelChanged ? Associate(new RelayCommand<T>(execute, canExecute)) : new RelayCommand<T>(execute, canExecute);
+            var cmd = updateWhenViewModelChanged ? Associate(new RelayCommand<T>(execute, canExecute)) : new RelayCommand<T>(execute, canExecute);
+            return Capture(cmd);
         }
 
         private TCommand Associate<TCommand>(TCommand command) where TCommand : IRelayCommand
         {
             _commandMapping.Add(command);
-            return command;
+            return Capture(command);
         }
 
         #endregion
