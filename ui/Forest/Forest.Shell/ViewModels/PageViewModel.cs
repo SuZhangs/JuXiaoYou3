@@ -1,6 +1,4 @@
-﻿using Acorisoft.FutureGL.MigaUtils.Collections;
-
-namespace Acorisoft.FutureGL.Forest.ViewModels
+﻿namespace Acorisoft.FutureGL.Forest.ViewModels
 {
     public abstract class PageViewModel : ViewModelBase
     {
@@ -14,7 +12,6 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
                 if (!IsInitialized)
                 {
                     OnStart();
-                    InternalCommands.ForEach(x => x.NotifyCanExecuteChanged());
                     IsInitialized = true;
                 }
             }

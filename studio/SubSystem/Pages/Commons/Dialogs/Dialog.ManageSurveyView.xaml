@@ -50,7 +50,8 @@
                                         Icon="{StaticResource FeatherIcon.Trash}"/>
                     </StackPanel>
                 </f:ForestSection.ToolBar>
-                <f:ListBox ItemsSource="{Binding SurveySets,Mode=OneWay}"
+                <f:ListBox DisplayMemberPath="Name"
+                           ItemsSource="{Binding SurveySets,Mode=OneWay}"
                            SelectedItem="{Binding SelectedSurveySet,Mode=TwoWay}">
                     <f:ListBox.ItemTemplate>
                         <DataTemplate>

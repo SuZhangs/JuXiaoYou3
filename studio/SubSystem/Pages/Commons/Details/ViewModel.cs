@@ -30,14 +30,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         public override void Resume()
         {
             OnInitialize(Collection);
-            InternalCommands.ForEach(x => x.NotifyCanExecuteChanged());
             base.Resume();
         }
 
         public override void Start()
         {
+            base.Start();
             OnInitialize(Collection);
-            InternalCommands.ForEach(x => x.NotifyCanExecuteChanged());
         }
 
         protected void UpdateCollectionState()

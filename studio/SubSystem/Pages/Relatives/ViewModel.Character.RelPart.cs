@@ -51,7 +51,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
         public sealed override void Start()
         {
             Initialize();
-            InternalCommands.ForEach(x => x.NotifyCanExecuteChanged());
         }
 
         public override void Resume()

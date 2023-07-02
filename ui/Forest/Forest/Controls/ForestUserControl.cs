@@ -18,8 +18,7 @@
 
         private void OnLoadedIntern(object sender, RoutedEventArgs e)
         {
-            var vm = ViewModel<IViewModel>();
-            vm?.Start();
+            ViewModel<IViewModel>()?.Start();
             OnLoaded(sender, e);
         }
 
