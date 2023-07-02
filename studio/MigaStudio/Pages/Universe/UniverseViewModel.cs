@@ -213,10 +213,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                                                      .AdvancedSetting
                                                                      .DebugMode);
             
+            // 重置所有内容
+            controller.Reset();
             if (r.IsFinished)
             {
-                // 重置所有内容
-                controller.Reset();
                 controller = (TabController)Controller.Context
                                                       .ControllerMaps[AppViewModel.IdOfTabShellController];
             }
