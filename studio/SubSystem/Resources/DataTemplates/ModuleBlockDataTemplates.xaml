@@ -556,7 +556,8 @@
                                    Width="240"
                                    ShowAxisName="True" />
 
-                <ItemsControl Margin="0 16 0 0" ItemsSource="{Binding Value}">
+                <ItemsControl Margin="0 32 0 0" 
+                              ItemsSource="{Binding Value}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
@@ -599,21 +600,22 @@
                                        Height="160"
                                        Width="160" />
 
-                <ItemsControl ItemsSource="{Binding Value}"
-                              Margin="16 0 0 0"
-                              VerticalAlignment="Center">
+
+                <ItemsControl Margin="0 32 0 0" 
+                              ItemsSource="{Binding Value}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
                                 <f:Slider Foreground="{f:ForegroundBrush}" 
-                                        Interval="1"
-                                        IsSnapToTickEnabled="True"
-                                        Value="{Binding Value,Mode=TwoWay}"
-                                        Maximum="{Binding Maximum}"
-                                        Minimum="0" />
+                                          Interval="1"
+                                          IsSnapToTickEnabled="True"
+                                          Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                          Maximum="{Binding Maximum}"
+                                          Minimum="0" 
+                                          Width="320"/>
 
-                                <TextBlock Margin="16 0 0 0"
-                                           Foreground="{f:ForegroundBrush}"
+                                <TextBlock Foreground="{f:ForegroundBrush}" 
+                                           Margin="16 0 0 0"
                                            Text="{Binding Name}"
                                            VerticalAlignment="Center" />
                             </DockPanel>

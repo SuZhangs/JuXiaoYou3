@@ -114,6 +114,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             return inside;
         }
 
+        public static void OpenDocument(string id)
+        {
+            var controller = Xaml.Get<TabBaseAppViewModel>()
+                                 .CurrentController as TabController;
+            var engine = Studio.Engine<DocumentEngine>();
+            var cache  = engine.GetCache(id);
+            OpenDocument(controller, cache);
+        }
+
         public static void OpenDocument(TabController controller, DocumentCache cache)
         {
             if (cache is null || controller is null)

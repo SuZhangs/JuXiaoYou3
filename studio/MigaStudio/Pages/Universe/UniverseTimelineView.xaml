@@ -102,7 +102,7 @@
                   MinHeight="96"
                   MaxHeight="192"
                   MinWidth="320"
-                  MaxWidth="640">
+                  MaxWidth="960">
                 <Grid.ContextMenu>
                     <f:ContextMenu>
                         <f:MenuItem Header="在前面添加大事记"
@@ -158,7 +158,7 @@
 
                 <Border Grid.Column="1"
                         CornerRadius="8"
-                        Margin="16 0 0 16">
+                        Margin="24 8 48 16">
                     <DockPanel Margin="16">
                         <TextBlock DockPanel.Dock="Top"
                                        FontSize="18"
@@ -167,9 +167,10 @@
                                        Margin="0 0 0 16"
                                        Text="{Binding Name,Mode=OneWay}"
                                        TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding Intro,Mode=OneWay}"
-                                       TextWrapping="Wrap"
-                                       TextTrimming="CharacterEllipsis" />
+                        <TextBlock LineHeight="24"
+                                   Text="{Binding Intro,Mode=OneWay}"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="CharacterEllipsis" />
                     </DockPanel>
                 </Border>
             </Grid>

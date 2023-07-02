@@ -28,25 +28,31 @@
                     Width="384">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
+                        <f:MenuItem Header="{f:Language global.edit}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
+                                    Icon="{StaticResource FeatherIcon.Edit}" 
+                                    IconSize="17"/>
 
                         <f:MenuItem Header="{f:Language global.Up}"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}"
+                                    IconSize="17" />
 
                         <f:MenuItem Header="{f:Language global.Down}"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}"
+                                    IconSize="17" />
 
-                        <f:MenuItem Header="{f:Language global.edit}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
+                        <Separator/>
+
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Upload}" />
+                                    Icon="{StaticResource FeatherIcon.Trash}" 
+                                    IconSize="17"/>
                     </f:ContextMenu>
                 </Border.ContextMenu>
 
@@ -102,25 +108,31 @@
                     Width="420">
                 <Border.ContextMenu>
                     <f:ContextMenu>
-                        <f:MenuItem Header="{f:Language global.Remove}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
+                        <f:MenuItem Header="{f:Language global.edit}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.MinusCircle}" />
-
+                                    Icon="{StaticResource FeatherIcon.Edit}"
+                                    IconSize="17"/>
+                       
                         <f:MenuItem Header="{f:Language global.Up}"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftUpCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowUp}" />
+                                    Icon="{StaticResource FeatherIcon.ArrowUp}" 
+                                    IconSize="17"/>
 
                         <f:MenuItem Header="{f:Language global.Down}"
                                     Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.ShiftDownCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.ArrowDown}" />
+                                    Icon="{StaticResource FeatherIcon.ArrowDown}"
+                                    IconSize="17" />
 
-                        <f:MenuItem Header="{f:Language global.edit}"
-                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.EditCommand}"
+                        <Separator/>
+
+                        <f:MenuItem Header="{f:Language global.Remove}"
+                                    Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCommand}"
                                     CommandParameter="{Binding}"
-                                    Icon="{StaticResource FeatherIcon.Upload}" />
+                                    Icon="{StaticResource FeatherIcon.Trash}" 
+                                    IconSize="17"/>
                     </f:ContextMenu>
                 </Border.ContextMenu>
                 <DockPanel>

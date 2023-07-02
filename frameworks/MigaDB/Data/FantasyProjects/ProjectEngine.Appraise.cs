@@ -62,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.FantasyProjects
         {
             var a = AppraiseDB.Include(y => y.Source)
                               .Include(a => a.Target)
-                              .Find(x => !x.Source.IsDeleted &&
+                              .Find(x => !x.Source.IsDeleted ||
                                          !x.Target.IsDeleted);
             
             var b = SentenceDB.Include(y => y.Source)

@@ -274,12 +274,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            Process.Start(new ProcessStartInfo
-            {
-                UseShellExecute = true,
-                FileName        = "explorer.exe",
-                Arguments       = TargetSource
-            });
+            DocumentUtilities.OpenDocument(TargetSource);
         }
 
         private async Task SelectImpl()

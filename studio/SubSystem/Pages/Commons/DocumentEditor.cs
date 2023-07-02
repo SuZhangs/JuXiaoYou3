@@ -129,7 +129,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             SelectedDetailPart = DetailParts.FirstOrDefault();
             SelectedModulePart = ModuleParts.FirstOrDefault();
             ResetPresentation();
-            SetTitle(Name);
+            if (!DirtyState)
+            {
+                SetTitle(Name);
+            }
             base.OnStart();
         }
         protected override void OnResume()

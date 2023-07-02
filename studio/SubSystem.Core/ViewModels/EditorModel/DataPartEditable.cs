@@ -60,7 +60,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 var part = document.Parts[i];
 
                 if (part is PartOfModule &&
-                    (!string.IsNullOrEmpty(part.Id) || DataPartTrackerOfId.ContainsKey(part.Id)))
+                    !string.IsNullOrEmpty(part.Id) && 
+                    DataPartTrackerOfId.ContainsKey(part.Id))
                 {
                     indexList.Add(part);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");

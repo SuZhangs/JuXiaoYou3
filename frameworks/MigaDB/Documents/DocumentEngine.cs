@@ -406,7 +406,7 @@ namespace Acorisoft.FutureGL.MigaDB.Documents
 
         public IEnumerable<DocumentCache> GetCaches()
         {
-            return DocumentCacheDB.FindAll();
+            return DocumentCacheDB.Find(x => !x.IsDeleted);
         }
 
         public IEnumerable<DocumentCache> GetCharacterCaches()
