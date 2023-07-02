@@ -53,6 +53,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             var logger     = Xaml.Get<ILogger>();
             var hasChanged = false;
+            var indexList  = new List<DataPart>();
             
             for (var i = 0; i < document.Parts.Count; i ++)
             {
@@ -61,7 +62,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 if (part is PartOfModule &&
                     (!string.IsNullOrEmpty(part.Id) || DataPartTrackerOfId.ContainsKey(part.Id)))
                 {
-                    document.Parts.RemoveAt(i);
+                    indexList.Add(part);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
                     hasChanged = true;
                     continue;
@@ -69,7 +70,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 
                 if(DataPartTrackerOfType.ContainsKey(part.GetType()))
                 {
-                    document.Parts.RemoveAt(i);
+                    indexList.Add(part);
                     logger.Warn($"部件没有ID或者部件重复不予添加，部件ID：{part.Id}");
                     hasChanged = true;
                     continue;
@@ -85,6 +86,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             if (hasChanged)
             {
+                indexList.ForEach(x => document.Parts.Remove(x));
                 SetDirtyState();
             }
         }
@@ -98,8 +100,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected sealed override void LoadDocumentBefore(TCache cache, TDocument document)
         {
-            IsDataPartExistence(document);
             AddDataPartFromDocument(document);
+            IsDataPartExistence(document);
         }
 
         protected abstract bool OnDataPartAddingBefore(DataPart part);

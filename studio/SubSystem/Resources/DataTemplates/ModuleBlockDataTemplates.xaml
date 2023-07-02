@@ -556,9 +556,7 @@
                                    Width="240"
                                    ShowAxisName="True" />
 
-                <ItemsControl ItemsSource="{Binding Value}"
-                              HorizontalAlignment="Right"
-                              VerticalAlignment="Center">
+                <ItemsControl Margin="0 16 0 0" ItemsSource="{Binding Value}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type subTemp:BindableAxis}">
                             <DockPanel>
@@ -567,7 +565,8 @@
                                         IsSnapToTickEnabled="True"
                                         Value="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         Maximum="{Binding Maximum}"
-                                        Minimum="0" />
+                                        Minimum="0" 
+		        Width="320"/>
 
                                 <TextBlock Foreground="{f:ForegroundBrush}" 
                                            Margin="16 0 0 0"
