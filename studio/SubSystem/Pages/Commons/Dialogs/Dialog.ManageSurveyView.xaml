@@ -53,7 +53,12 @@
                 <f:ListBox DisplayMemberPath="Name"
                            ItemsSource="{Binding SurveySets,Mode=OneWay}"
                            SelectedItem="{Binding SelectedSurveySet,Mode=TwoWay}">
-
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding Name,Mode=OneWay}"/>
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
                 </f:ListBox>
             </f:ForestSection>
 
@@ -67,6 +72,7 @@
                                 Orientation="Horizontal">
 
                         <ftk:ToolButton Command="{Binding AddSurveyCommand}"
+                                        CommandParameter="{Binding SelectedSurveySet,Mode=OneWay}"
                                         Icon="{StaticResource FeatherIcon.PlusCircle}"/>
                         
                         <ftk:ToolButton Command="{Binding EditSurveyCommand}"
@@ -89,9 +95,14 @@
                 </f:ForestSection.ToolBar>
 
                 <f:ListBox x:Name="Items"
-                           DisplayMemberPath="Name"
                            ItemsSource="{Binding Surveys,Mode=OneWay}"
                            SelectedItem="{Binding SelectedSurvey,Mode=TwoWay}">
+                    <f:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8"
+                                       Text="{Binding Name,Mode=OneWay}"/>
+                        </DataTemplate>
+                    </f:ListBox.ItemTemplate>
                 </f:ListBox>
             </f:ForestSection>
         </Grid>
