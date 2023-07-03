@@ -172,9 +172,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
                 {
                     return;
                 }
-
+                Graph.TryGetInEdges(value, out var edgeA);
                 Graph.TryGetOutEdges(value, out var edgeB);
-                Relatives.AddMany(edgeB);
+
+                var total = edgeA.Concat(edgeB);
+                Relatives.AddMany(total.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()), true);
             }
         }
 

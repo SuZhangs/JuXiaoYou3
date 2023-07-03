@@ -227,10 +227,8 @@
                     </StackPanel>
                 </f:ForestSection.ToolBar>
 
-                <ScrollViewer>
-                    <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}"
-                               SelectedItem="{Binding SelectedBlock,Mode=TwoWay}" />
-                </ScrollViewer>
+                <f:ListBox ItemsSource="{Binding Blocks,Mode=OneWay}"
+                           SelectedItem="{Binding SelectedBlock,Mode=TwoWay}" />
             </f:ForestSection>
         </Grid>
     </f:Drawer>

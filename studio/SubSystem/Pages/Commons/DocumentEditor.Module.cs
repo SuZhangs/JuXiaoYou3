@@ -100,18 +100,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                 }
                 else
                 {
+                    //
+                    // 喵喵咒语重名的话，需要删除重名的块
+                    // 
+                    if (!string.IsNullOrEmpty(metadata))
+                    {
+                        if (MetadataTrackerByName.ContainsKey(metadata))
+                        {
+                            this.Warning($"模组:{name}, 内容块：{block.Name}的喵喵咒语与现存的内容块冲突，为了避免错误，已删除该内容块！");
+                            blocks.RemoveAt(i);
+                            continue;
+                        }
+                        
+                        AddMetadata(block.ExtractMetadata());
+                    }
+                    
+                    
                     if (!_BlockTrackerOfId.TryAdd(block.Id, block))
                     {
                         this.Warning($"模组:{name}, 内容块：{block.Name}的ID与现存的内容块冲突，请升级");
-                        continue;
                     }
-
-                    if (string.IsNullOrEmpty(metadata))
-                    {
-                        continue;
-                    }
-                    
-                    AddMetadata(block.ExtractMetadata());
                 }
             }
         }

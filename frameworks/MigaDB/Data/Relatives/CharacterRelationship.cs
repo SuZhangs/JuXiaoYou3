@@ -15,6 +15,23 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
         private bool   _collateralRelative;
         private bool   _conjugalRelative;
 
+        public CharacterRelationship Switch()
+        {
+            return new CharacterRelationship
+            {
+                Id                 = Id,
+                Source             = Target,
+                Type               = Type,
+                CallOfSource       = CallOfTarget,
+                Target             = Source,
+                CallOfTarget       = CallOfSource,
+                Friendliness       = Friendliness,
+                DirectRelative     = DirectRelative,
+                CollateralRelative = CollateralRelative,
+                ConjugalRelative   = ConjugalRelative
+            };
+        }
+
         /// <summary>
         /// 旁系亲属
         /// </summary>
