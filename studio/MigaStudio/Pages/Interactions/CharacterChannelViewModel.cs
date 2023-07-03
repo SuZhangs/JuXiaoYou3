@@ -17,6 +17,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             
             //
             // 保存信息
+            SaveToChannel();
+        }
+
+        protected override void OnStart(Parameter parameter)
+        {
+            Channel = new Channel();
+            
+            //
+            // 加载
+            LoadFromChannel();
+
+            //
+            // 默认发言人
+            if (Speaker is null)
+            {
+            }
+            
+            base.OnStart(parameter);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Acorisoft.FutureGL.MigaDB.Data.Socials
 {
-    public class SocialMessage : StorageObject
+    public class ChannelMessage : MessageBase
     {
         /// <summary>
         /// 发送者的ID

@@ -161,7 +161,7 @@
                     <ftk:ToolButton Command="{Binding AddMemberMutedCommand}" IsFilled="True" Icon="{StaticResource Mute}"/>
                     <ftk:ToolButton Command="{Binding AddMemberUnMutedCommand}" IsFilled="True" Icon="{StaticResource UnMuted}"/>
                     <ftk:ToolButton Command="{Binding AddImageCommand}" Icon="{StaticResource FeatherIcon.Image}" />
-                    <ftk:ToolButton Command="{Binding SetPendingContentCommand}" Icon="{StaticResource FeatherIcon.Message.Circle}" />
+                    <ftk:ToolButton Command="{Binding SetCompositionMessageCommand}" Icon="{StaticResource FeatherIcon.Message.Circle}" />
                     <ftk:ToolButton Command="{Binding AddTimestampCommand}" Icon="{StaticResource FeatherIcon.Clock}" />
                     <ftk:ToolButton Command="{Binding AddMemberJoinCommand}" Icon="{StaticResource FeatherIcon.Login}"/>
                     <ftk:ToolButton Command="{Binding AddMemberLeaveCommand}" Icon="{StaticResource FeatherIcon.LogOut}"/>
@@ -192,7 +192,7 @@
                  Stretch="Uniform"
                  StretchDirection="Both">
             <Border x:Name="Canvas">
-                <studio:SocialSoftwareLayout PendingContent="{Binding PendingContent,Mode=OneWay}"
+                <studio:SocialSoftwareLayout PendingContent="{Binding CompositionMessage,Mode=OneWay}"
                                              Layout="QQGroup">
                     <studio:SocialSoftwareLayout.ChannelName>
                         <MultiBinding StringFormat="{}{0} ({1})">

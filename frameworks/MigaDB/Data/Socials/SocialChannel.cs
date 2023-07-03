@@ -62,6 +62,6 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Socials
         /// <summary>
         /// 所有的消息
         /// </summary>
-        public List<SocialMessage> Messages { get; init; }
+        public List<ChannelMessage> Messages { get; init; }
     }
 }

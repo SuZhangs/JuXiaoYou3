@@ -76,7 +76,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             //
             // 
-            PendingContent = r.Value;
+            CompositionMessage = r.Value;
             
             //
             // 
@@ -95,6 +95,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public RelayCommand RemoveMessageCommand { get; }
         public RelayCommand AddAliasCommand { get; }
         public RelayCommand RemoveAliasCommand { get; }
-        public AsyncRelayCommand SetPendingContentCommand { get; }
+        public AsyncRelayCommand SetCompositionMessageCommand { get; }
     }
 }
