@@ -22,4 +22,11 @@
         /// </summary>
         Member,
     }
+
+    public class MemberCache : StorageObject
+    {
+        public string Avatar { get; init; }
+        public bool IsDeleted { get; init; }
+        public string Name { get; init; }
+    }
 }

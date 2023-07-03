@@ -20,13 +20,13 @@
         /// <summary>
         /// 所有成员
         /// </summary>
-        public List<string> Members { get; init; }
+        public List<MemberCache> Members { get; init; }
 
         /// <summary>
         /// 所有消息
         /// </summary>
-        public List<object> Messages { get; init; }
-        
+        public List<MessageBase> Messages { get; init; }
+
         /// <summary>
         /// 正在发送的消息
         /// </summary>

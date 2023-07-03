@@ -13,6 +13,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     {
         private void AddMemberJoinCommandImpl()
         {
+            
         }
 
 
