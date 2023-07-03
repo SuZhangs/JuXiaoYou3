@@ -9,6 +9,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public partial class CharacterChannelViewModel : TabViewModel
     {
+        public CharacterChannelViewModel()
+        {
+            SetCompositionMessageCommand = AsyncCommand(SetCompositionMessageImpl);
+            
+        }
+        
         private void Save()
         {
             //

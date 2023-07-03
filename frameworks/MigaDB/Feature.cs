@@ -139,5 +139,6 @@ namespace Acorisoft.FutureGL.MigaDB
         }
 
         public const string TextEditorFeatureMissing = "feature.TextEditor";
+        public const int    CurrentDocumentVersion   = 0x10;
     }
 }

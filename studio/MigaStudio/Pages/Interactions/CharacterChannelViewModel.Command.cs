@@ -65,7 +65,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         {
         }
 
-        private async Task SetPendingContentImpl()
+        private async Task SetCompositionMessageImpl()
         {
             var r = await MultiLineViewModel.String(Language.GetText("text.AddPendingContent"));
 

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaDB.Data;
 using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
@@ -148,7 +149,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 Id        = Cache.Id,
                 Name      = Cache.Name,
-                Version   = 1,
+                Version   = Feature.CurrentDocumentVersion,
                 Removable = true,
                 Type      = Type,
                 Parts     = new DataPartCollection(),
@@ -186,11 +187,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         protected void UpgradeDocument(DocumentCache cache, Document document)
         {
-            if (document.Version < 0x10)
+            if (document.Version < Feature.CurrentDocumentVersion)
             {
                 document.Metas
                         .Clear();
-                document.Version = 0x10;
+                document.Version = Feature.CurrentDocumentVersion;
                 cache.Version    = document.Version;
                 SetDirtyState();
             }

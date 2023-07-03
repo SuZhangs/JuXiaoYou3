@@ -36,13 +36,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             return origin;
         }
 
-        private static MemoryStream ResizeTo1080P(int w, int h, bool horizontal, Image<Rgba32> image, int length)
+        private static MemoryStream ResizeTo1080P(int w, int h,out int w1, out int h1, bool horizontal, Image<Rgba32> image, int length)
         {
             //
             // save image to png
             var scale = horizontal ? 1920d / w : 1080d / h;
-            h = (int)(h * scale);
-            w = (int)(w * scale);
+            h  = (int)(h * scale);
+            w  = (int)(w * scale);
+            h1 = h;
+            w1 = w;
             image.Mutate(x => { x.Resize(new Size(w, h)); });
             
             return SaveToPNG(image, length);
@@ -76,6 +78,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             var          image    = Image.Load<Rgba32>(buffer);
             var          h        = image.Height;
             var          w        = image.Width;
+            var          h1       = 0;
+            var          w1       = 0;
 
 
             if (w < 32 || h < 32)
@@ -112,7 +116,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                         
                         //
                         // resize
-                        origin = ResizeTo1080P(w, h, horizontal, image, buffer.Length);
+                        origin = ResizeTo1080P(
+                            w, 
+                            h,
+                            out w1,
+                            out h1,
+                            horizontal, 
+                            image, 
+                            buffer.Length);
                         session.Dispose();
                     });
                 }

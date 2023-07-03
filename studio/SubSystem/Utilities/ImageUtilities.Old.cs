@@ -112,7 +112,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
                 {
                     Id     = fr.Uri,
                     Width  = Math.Clamp(fr.Width, 0, 1920),
-                    Height = Math.Clamp(fr.Height, 0, 1080),
+                    Height = Math.Clamp(fr.Height, 0, 1920),
                     Source = fr.Uri
                 });
             }
@@ -125,11 +125,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             var w          = image.Width;
             var h          = image.Height;
+            var h1         = w;
+            var w1         = h;
             var horizontal = w > 1920;
 
             if (horizontal || h > 1080)
             {
-                var ms = ResizeTo1080P(w, h, horizontal, image, buffer.Length);
+                var ms = ResizeTo1080P(
+                    w, 
+                    h,
+                    out w1,
+                    out h1,
+                    horizontal, 
+                    image, 
+                    buffer.Length);
                 thumbnailBuffer = ms.GetBuffer();
             }
             else
@@ -143,8 +152,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 Id   = md5,
                 Uri  = string.Format(ThumbnailPattern, id),
-                Width = w,
-                Height = h,
+                Width = w1,
+                Height = h1,
                 Type = ResourceType.Image
             });
 
@@ -164,8 +173,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
             {
                 Id     = thumbnail,
                 Source = thumbnail,
-                Width  = Math.Clamp(w, 0, 1920),
-                Height = Math.Clamp(h, 0, 1080),
+                Width  = w1,
+                Height = h1,
             });
         }
 
