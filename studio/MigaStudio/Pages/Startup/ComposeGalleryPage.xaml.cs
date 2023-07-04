@@ -10,20 +10,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             InitializeComponent();
         }
-        
-        
+
+
         private void SearchPage_OnKeyUp(object sender, KeyEventArgs e)
         {
-            var vm = ViewModel<DocumentGalleryViewModel>();
-            
+            var vm = ViewModel<ComposeGalleryViewModel>();
+
+            if (string.IsNullOrEmpty(vm.FilterString))
+            {
+                return;
+            }
+
             if (e.Key == Key.Enter)
             {
                 vm.SearchPage();
             }
             else if (e.Key == Key.Escape)
             {
+                (sender as ClosableSingleLine).Text = string.Empty;
                 vm.FilterString = string.Empty;
-                vm.IsFiltering  = false;
+                vm.IsFiltering = false;
                 vm.SearchPage();
             }
         }

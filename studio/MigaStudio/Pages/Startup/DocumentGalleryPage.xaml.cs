@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using Acorisoft.FutureGL.Forest.Controls;
+using System.Windows.Input;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages
 {
@@ -11,9 +12,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
 
-        private void SearchPage_OnKeyUp(object sender, KeyEventArgs e)
+        private void SearchPage_OnKeyUp(object sender, KeyEventArgs e)       
         {
             var vm = ViewModel<DocumentGalleryViewModel>();
+
+            if(string.IsNullOrEmpty(vm.FilterString))
+            {
+                return;
+            }
             
             if (e.Key == Key.Enter)
             {
@@ -21,6 +27,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
             else if (e.Key == Key.Escape)
             {
+                (sender as ClosableSingleLine).Text = string.Empty;
                 vm.FilterString = string.Empty;
                 vm.IsFiltering  = false;
                 vm.SearchPage();
