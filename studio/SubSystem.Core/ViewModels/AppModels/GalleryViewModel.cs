@@ -181,12 +181,14 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             {
                 unsortedDataSource = BuildFilteringExpression(DataSource, FilterString, OrderOption);
                 OnRequestComputePageCount(unsortedDataSource);
-                index = PageIndex;
+                index = Math.Clamp(PageIndex, 1, TotalPageCount);
 
             }
             else
             {
                 unsortedDataSource = BuildDefaultExpression(DataSource, OrderOption);
+                OnRequestComputePageCount(unsortedDataSource);
+                index = Math.Clamp(index, 1, TotalPageCount);
             }
             
 

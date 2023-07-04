@@ -105,9 +105,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             if (w != h)
             {
-                var horizontal = w > 1920;
+                var horizontal = w > 640;
 
-                if (horizontal || h > 1080)
+                if (horizontal || h > 480)
                 {
                     await Task.Run(async () =>
                     {

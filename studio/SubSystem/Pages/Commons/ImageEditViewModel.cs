@@ -42,7 +42,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void Finish()
         {
             var ms = new MemoryStream();
-            BackendImage.Mutate(x => { x.Crop(new Rectangle((int)PosX, (int)PosY, (int)ThumbSize, (int)ThumbSize)); });
+            BackendImage.Mutate(x => { 
+                x.Crop(new Rectangle((int)PosX, (int)PosY, (int)ThumbSize, (int)ThumbSize));
+                x.Resize(256, 256);
+            });
             BackendImage.SaveAsPng(ms);
             ms.Seek(0, SeekOrigin.Begin);
             Result = ms;
