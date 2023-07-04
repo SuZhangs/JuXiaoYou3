@@ -16,7 +16,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         {
             var r = await SubSystem.SelectExclude(DocumentType.Character, new HashSet<string>
             {
-                Owner.Cache.Id
+                Owner.Cache
+                     .Id
             });
 
             if (!r.IsFinished)
@@ -34,8 +35,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var appraise = new Appraise
             {
                 Id      = ID.Get(),
-                Target  = Owner.Cache,
-                Source  = r.Value,
+                Target  = r.Value,
+                Source  = Owner.Cache,
                 Content = r1.Value 
             };
             

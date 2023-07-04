@@ -19,6 +19,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             DocumentEngine.UpdateDocument(Document, Cache);
             SetDirtyState(false);
         }
+        
+        private void SaveWithNotification()
+        {
+            Save();
+            this.SuccessfulNotification(SubSystemString.OperationOfSaveIsSuccessful);
+        }
 
 
         /// <summary>

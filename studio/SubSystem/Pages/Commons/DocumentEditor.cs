@@ -50,7 +50,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             TemplateEngine  = Studio.Engine<TemplateEngine>();
 
             ChangeAvatarCommand = AsyncCommand(ChangeAvatarImpl);
-            SaveDocumentCommand = Command(Save);
+            SaveDocumentCommand = Command(SaveWithNotification);
             NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
 
             AddModulePartCommand       = AsyncCommand(AddModulePartImpl);

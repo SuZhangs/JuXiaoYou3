@@ -59,6 +59,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             Detail.Items.Add(item);
             Selected = item;
             RaiseUpdated(nameof(NotEmpty));
+            Save();
         }
 
         private async Task RemoveImpl(StickyNote stickyNote)
