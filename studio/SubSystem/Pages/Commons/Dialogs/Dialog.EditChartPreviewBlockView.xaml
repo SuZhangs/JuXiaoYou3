@@ -8,6 +8,7 @@
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Documents"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Templates.Modules;assembly=MigaDB"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Commons"
+                     xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem.Core"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:EditChartPresentationViewModel}, IsDesignTimeCreatable=True}"
@@ -16,9 +17,17 @@
                      Height="480"
                      Padding="16">
     <UserControl.Resources>
+        <thisConverters:NullSwitchStringConverter x:Key="StringConverter"/>
         <DataTemplate DataType="{x:Type thisModel:ModuleBlock}">
             <DockPanel Margin="8">
-                <TextBlock Text="{Binding Name,Mode=OneWay}" />
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource StringConverter}">
+                            <Binding Path="Name"/>
+                            <Binding Path="Metadata"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>

@@ -189,7 +189,7 @@
                                         CommandParameter="{Binding}" />
                         </f:ContextMenu>
                     </Border.ContextMenu>
-                    <DockPanel>
+                    <DockPanel ClipToBounds="True">
                         <Border DockPanel.Dock="Top"
                                 Background="{f:Brush BackgroundLevel3}"
                                 CornerRadius="6 6 0 0"
