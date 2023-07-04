@@ -24,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Metadatas
         /// <remarks>
         /// 用于记录恢复元数据所需的额外内容（例如雷达图的图例。）
         /// </remarks>
-        public string Parameters { get; init; }
+        public string Parameters { get; set; }
         
         /// <summary>
         /// 元数据的类型。

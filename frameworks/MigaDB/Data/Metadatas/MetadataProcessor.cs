@@ -72,13 +72,13 @@
             out string color)
         {
             var values = raw.Split(',');
-            axis     = values[0].Split(',').
+            maximum = int.TryParse(values[0], out var n) ? n : 10;
+            minimum = int.TryParse(values[1], out  n) ? n : 0;
+            color   = values[2];
+            axis     = values[3].Split(ListSeparator).
                                  ToArray();
-            value    = Parse(values[1]);
-            fallback = Parse(values[2]);
-            maximum  = int.TryParse(values[3], out var n) ? n : 10;
-            minimum  = int.TryParse(values[4], out  n) ? n : 0;
-            color    = values[5];
+            value    = Parse(values[4]);
+            fallback = Parse(values[5]);
         }
 
         public static string NumberBaseFormatted(int max, int min, int value)

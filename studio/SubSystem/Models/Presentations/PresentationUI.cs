@@ -238,16 +238,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
     {
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
-            var block = (ChartBlock)blockTracker(ValueSource);
-
-            if (block is null)
-            {
-                return;
-            }
 
             if (Source.IsMetadata)
             {
-                var unparsedValue = metadataTracker(ValueSource)?.Value;
+                var unparsedValue = metadataTracker(ValueSource)?.Parameters;
                 MetadataProcessor.ExtractChartBaseFormatted(unparsedValue,
                     out var axis,
                     out var value,
@@ -260,8 +254,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                 Value = new List<int>(value);
                 RaiseUpdated(nameof(Value));
             }
-            else if (block.Value is not null)
+            else
             {
+                var block = (ChartBlock)blockTracker(ValueSource);
+
+                if (block?.Value is null)
+                {
+                    return;
+                }
+                
                 Color = block.Color;
                 Axis.AddMany(block.Axis, true);
                 Value = new List<int>(block.Value);

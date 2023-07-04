@@ -43,7 +43,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             if (MetadataTrackerByName.TryGetValue(metadata.Name, out var insideMetadata))
             {
-                insideMetadata.Value = metadata.Value;
+                insideMetadata.Value      = metadata.Value;
+                insideMetadata.Parameters = metadata.Parameters;
             }
             else
             {
@@ -68,7 +69,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                         return;
                     }
                     
-                    insideMetadata2.Value = insideMetadata.Value;
+                    insideMetadata2.Value     = insideMetadata.Value;
+                    insideMetadata.Parameters = metadata.Parameters;
                 }
             }
         }

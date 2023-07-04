@@ -49,6 +49,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
         {
             TargetBlock.Value[index] = value;
             Data = new List<int>(TargetBlock.Value);
+            Handler?.Invoke(this, TargetBlock);
         }
         
 

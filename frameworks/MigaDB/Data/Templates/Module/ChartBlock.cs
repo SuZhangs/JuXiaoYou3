@@ -142,10 +142,13 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Templates.Modules
         public override string GetLanguageId() => IdOfRadar;
         public override Metadata ExtractMetadata()
         {
+            var sb = Pool.GetStringBuilder();
+            
+            
             return new Metadata
             {
                 Name       = Metadata,
-                Value      = Value?.ToString(),
+                Value      = string.Empty,
                 Type       = MetadataKind.RadarChart,
                 Parameters = MetadataProcessor.ChartBaseFormatted(Axis, Value, Fallback, Maximum, Minimum, Color)
             };

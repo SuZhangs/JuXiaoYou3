@@ -54,8 +54,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private static void LaunchSettingImpl(object p)
         {
-#if RELEASE
-            
             var gc      = (GlobalStudioContext)p;
             var ss      = Xaml.Get<SystemSetting>();
             var setting = ss.AdvancedSetting;
@@ -79,7 +77,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 gc.IsUpdated      = true;
                 ss.Save();
             }
-#endif
         }
 
         private void LoadModuleImpl(GlobalStudioContext context)
