@@ -8,29 +8,31 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
     /// </summary>
     public class CharacterRelationship : StorageUIObject, IEdge<DocumentCache>
     {
-        private string _callOfSource;
-        private string _callOfTarget;
-        private int    _friendliness;
-        private bool   _directRelative;
-        private bool   _collateralRelative;
-        private bool   _conjugalRelative;
+        private string        _callOfSource;
+        private string        _callOfTarget;
+        private int           _friendliness;
+        private bool          _directRelative;
+        private bool          _collateralRelative;
+        private bool          _conjugalRelative;
+        private DocumentCache _target;
+        private DocumentCache _source;
 
         public CharacterRelationship Switch()
         {
-            return new CharacterRelationship
-            {
-                Id                 = Id,
-                Source             = Target,
-                Type               = Type,
-                CallOfSource       = CallOfTarget,
-                Target             = Source,
-                CallOfTarget       = CallOfSource,
-                Friendliness       = Friendliness,
-                DirectRelative     = DirectRelative,
-                CollateralRelative = CollateralRelative,
-                ConjugalRelative   = ConjugalRelative
-            };
+            IsSwitch                     = true;
+            (CallOfTarget, CallOfSource) = (CallOfSource, CallOfTarget);
+            (_target, _source)           = (_source, _target);
+            return this;
         }
+
+        public void Reset()
+        {
+            IsSwitch                     = false;
+            (CallOfTarget, CallOfSource) = (CallOfSource, CallOfTarget);
+            (_target, _source)           = (_source, _target);
+        }
+
+        public bool IsSwitch { get; private set; }
 
         /// <summary>
         /// 旁系亲属
@@ -95,12 +97,20 @@ namespace Acorisoft.FutureGL.MigaDB.Data.Relatives
         /// 源
         /// </summary>
         [BsonRef(Constants.Name_Cache_Document)]
-        public DocumentCache Source { get; init; }
+        public DocumentCache Source
+        {
+            get => _source;
+            init => _source = value;
+        }
 
         /// <summary>
         /// 目标
         /// </summary>
         [BsonRef(Constants.Name_Cache_Document)]
-        public DocumentCache Target { get; init; }
+        public DocumentCache Target
+        {
+            get => _target;
+            init => _target = value;
+        }
     }
 }

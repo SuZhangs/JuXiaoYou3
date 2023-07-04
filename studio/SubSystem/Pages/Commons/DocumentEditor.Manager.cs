@@ -143,7 +143,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         #region OnCreate
 
-        protected override Document CreateDocument()
+        protected override Document CreateDocument(Action<Document> callback)
         {
             var document = new Document
             {
@@ -158,8 +158,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
             //
             //
-            Document = document;
             CreateDocumentFromManifest(document);
+            Document = document;
+            callback?.Invoke(document);
             DocumentEngine.AddDocument(document);
             return document;
         }

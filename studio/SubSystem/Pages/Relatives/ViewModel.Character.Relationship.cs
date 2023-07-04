@@ -124,7 +124,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Relatives
                 return;
             }
 
-            DocumentEngine.EditRelationship(r1.Value);
+            if (source.IsSwitch)
+            {
+                source.Reset();
+                DocumentEngine.EditRelationship(r1.Value);
+                source.Switch();
+            }
+            else
+            {
+                DocumentEngine.EditRelationship(r1.Value);
+            }
         }
 
         private async Task RemoveRelationshipImpl(CharacterRelationship rel)

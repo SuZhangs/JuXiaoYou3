@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Acorisoft.FutureGL.MigaDB.Documents
 {
     /// <summary>
     /// 文档缓存
     /// </summary>
+    [DebuggerDisplay("{Name}-{Id}")]
     public class DocumentCache : ObservableObject, IDataCache, IEquatable<DocumentCache>
     {
         private bool   _isLocked;

@@ -51,16 +51,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
 
         private void OpeningDocumentAfter()
         {
-            if (Document is null)
-            {
-                //
-                // 创建文档
-                Document = CreateDocument();
-            
-                //
-                // 传递到派生类
-                OnCreateDocument(Document);
-            }
+            //
+            // 创建文档
+            Document ??= CreateDocument(OnCreateDocument);
 
             // 加载文档
             LoadDocumentBefore(Cache, Document);
@@ -70,7 +63,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             LoadDocumentAfter(Cache, Document);
         }
 
-        protected abstract TDocument CreateDocument();
+        protected abstract TDocument CreateDocument(Action<TDocument> callback);
         
         /// <summary>
         /// 

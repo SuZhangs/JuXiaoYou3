@@ -59,19 +59,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Composes
 
         #region OnCreate
 
-        protected override Compose CreateDocument()
+        protected override Compose CreateDocument(Action<Compose> callback)
         {
             var document = new Compose
             {
-                Id        = Cache.Id,
-                Name      = Cache.Name,
-                Parts     = new DataPartCollection(),
-                Metas     = new MetadataCollection(),
+                Id    = Cache.Id,
+                Name  = Cache.Name,
+                Parts = new DataPartCollection(),
+                Metas = new MetadataCollection(),
             };
 
             //
             //
             Document = document;
+            callback?.Invoke(document);
             CreateComposeImpl(document);
             ComposeEngine.AddCompose(document);
             return document;

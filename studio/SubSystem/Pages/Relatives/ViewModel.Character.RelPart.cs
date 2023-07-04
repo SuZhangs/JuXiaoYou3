@@ -108,7 +108,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 return;
             }
 
-            DocumentEngine.EditRelationship(r1.Value);
+            if (source.IsSwitch)
+            {
+                source.Reset();
+                DocumentEngine.EditRelationship(r1.Value);
+                source.Switch();
+            }
+            else
+            {
+                DocumentEngine.EditRelationship(r1.Value);
+            }
         }
 
         private async Task RemoveRelationshipImpl(CharacterRelationship rel)
@@ -159,8 +168,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 IsHidden = false;
                 Graph.TryGetInEdges(value, out var edgeA);
                 Graph.TryGetOutEdges(value, out var edgeB);
-                Relatives.AddMany(edgeA);
-                Relatives.AddMany(edgeB);
+                Relatives.AddMany(edgeA.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()), true);
+                Relatives.AddMany(edgeB.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()), true);
             }
         }
 

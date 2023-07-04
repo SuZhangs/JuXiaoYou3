@@ -34,6 +34,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
             // });
         }
 
+        protected override void IsDataPartExistence(Document document)
+        {
+            HasDataPart<PartOfRel>(CreateCharacterRelatives);
+            HasDataPart<PartOfSentence>(CreateSentence);
+            HasDataPart<PartOfAppraise>(CreateAppraise);
+            base.IsDataPartExistence(document);
+        }
+
         protected override IEnumerable<object> CreateDetailPartList()
         {
             return new object[]

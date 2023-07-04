@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Imaging;
+using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.DataParts;
 using Acorisoft.FutureGL.MigaDB.Interfaces;
 using NLog;
@@ -23,7 +24,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected void HasDataPart<T>(Func<T> expression) where T : DataPart
         {
-            if (!DataPartTrackerOfType.ContainsKey(typeof(T)))
+            if (Document.Parts.FirstOrDefault(x => x is T) is null)
             {
                 var part = expression?.Invoke();
 
@@ -103,6 +104,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             AddDataPartFromDocument(document);
             IsDataPartExistence(document);
+
+            if (DataPartTrackerOfType.Count <= 0)
+            {
+                AddDataPartFromDocument(document);
+            }
         }
 
         protected abstract bool OnDataPartAddingBefore(DataPart part);
