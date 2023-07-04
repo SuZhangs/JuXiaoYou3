@@ -20,8 +20,7 @@
     <ftk:TabControl Padding="0 16 0 0">
         <ftk:TabItem Header="基本信息"
                      Padding="16 8">
-            <DockPanel Height="540"
-                       VerticalAlignment="Top">
+            <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <UniformGrid Columns="3">
                         <f:HeaderedSingleLine Header="名字"
