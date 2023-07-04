@@ -166,10 +166,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Documents
                 }
 
                 IsHidden = false;
+                
+                // 别人和自己的关系
                 Graph.TryGetInEdges(value, out var edgeA);
+                
+                // 自己和别人的关系
                 Graph.TryGetOutEdges(value, out var edgeB);
-                Relatives.AddMany(edgeA.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()), true);
-                Relatives.AddMany(edgeB.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()), true);
+                Relatives.AddMany(edgeA.Select(x => x.Source.Id == SelectedDocument.Id ? x : x.Switch()));
+                Relatives.AddMany(edgeB.Select(x => x.Target.Id == SelectedDocument.Id ? x : x.Switch()));
             }
         }
 
