@@ -179,50 +179,7 @@
 
                 <ScrollViewer Grid.Row="1"
                               Margin="0 8 0 0">
-                    <ItemsControl>
-                        <DockPanel Margin="0 4">
-                            <Ellipse Height="48"
-                                     Width="48"
-                                     Fill="{StaticResource Avatar}" />
-                            <DockPanel Margin="12 0 0 0">
-                                <TextBlock DockPanel.Dock="Top"
-                                           Foreground="Gray"
-                                           FontSize="13"
-                                           FontWeight="Heavy"
-                                           Margin="0 0 0 4"
-                                           Text="测试群" />
-                                <Border Background="{StaticResource Brush.QQ.Bar}"
-                                        CornerRadius="8"
-                                        HorizontalAlignment="Left"
-                                        Padding="12">
-                                    <TextBlock Text="这是一则消息" />
-                                </Border>
-                            </DockPanel>
-                        </DockPanel>
-
-                        <DockPanel Margin="0 4">
-                            <Ellipse DockPanel.Dock="Right"
-                                     Height="48"
-                                     Width="48"
-                                     Fill="{StaticResource Avatar}" />
-
-                            <DockPanel HorizontalAlignment="Right"
-                                       Margin="0 0 12 0">
-                                <TextBlock DockPanel.Dock="Top"
-                                           Foreground="Gray"
-                                           FontSize="13"
-                                           FontWeight="Heavy"
-                                           HorizontalAlignment="Right"
-                                           Margin="0 0 0 4"
-                                           Text="测试群" />
-                                <Border Background="{StaticResource Brush.QQ.Bar}"
-                                        CornerRadius="8"
-                                        HorizontalAlignment="Left"
-                                        Padding="12">
-                                    <TextBlock Text="这是一则消息" />
-                                </Border>
-                            </DockPanel>
-                        </DockPanel>
+                    <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
                     </ItemsControl>
                 </ScrollViewer>
 
@@ -287,7 +244,8 @@
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
-                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
+                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}"
+                                      Margin="16 0">
 
                         </ItemsControl>
                     </ScrollViewer>
