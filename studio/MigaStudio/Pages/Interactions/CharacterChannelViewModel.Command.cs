@@ -228,13 +228,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 MessageUI ui = msg.Type switch
                 {
-                    MessageType.PlainText   => new PlainTextUI(msg),
-                    MessageType.Emoji       => null,
-                    MessageType.Image       => new ImageUI(msg),
+                    MessageType.PlainText   => new PlainTextUI(msg, FindMemberNameById),
+                    MessageType.Emoji       => new EmojiUI(msg, FindMemberNameById),
+                    MessageType.Image       => new ImageUI(msg, FindMemberNameById),
                     MessageType.Timestamp   => new TimestampUI(msg),
                     MessageType.Muted       => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
-                    MessageType.MemberJoin  => new MemberJoinEventUI(msg),
-                    MessageType.MemberLeave => new MemberLeaveEventUI(msg),
+                    MessageType.MemberJoin  => new MemberJoinEventUI(msg, FindMemberNameById),
+                    MessageType.MemberLeave => new MemberLeaveEventUI(msg, FindMemberNameById),
                     MessageType.UnMuted     => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
                     _                       => throw new ArgumentOutOfRangeException()
                 };

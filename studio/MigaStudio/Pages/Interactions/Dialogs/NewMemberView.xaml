@@ -5,6 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:f="urn:acorisoft/forest/ui"
                      xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
+                     xmlns:doc1="clr-namespace:Acorisoft.FutureGL.MigaDB.Documents;assembly=MigaDB"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
@@ -16,8 +17,8 @@
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type thisModel:MemberCache}">
             <DockPanel Margin="4"
-                       Height="144"
-                       Width="120">
+                       Height="100"
+                       Width="84">
                 <Border DockPanel.Dock="Top"
                         CornerRadius="64"
                         Height="84"
@@ -30,7 +31,37 @@
                 <TextBlock FontSize="14"
                            Margin="0 8 0 0"
                            HorizontalAlignment="Center"
-                           Text="{Binding Name,Mode=OneWay}" />
+                           Text="{Binding Name,Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           TextTrimming="CharacterEllipsis" />
+            </DockPanel>
+        </DataTemplate>
+
+
+        <DataTemplate DataType="{x:Type doc1:DocumentCache}">
+            <DockPanel Margin="4"
+                            Height="144"
+                            Width="120">
+                <Border DockPanel.Dock="Top"
+                            CornerRadius="64"
+                            Height="84"
+                            Width="84">
+                    <Border.Background>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <MultiBinding Converter="{x:Static thisConverters:ConverterPool.Avatar}">
+                                    <Binding Path="Avatar" Mode="OneWay" />
+                                    <Binding Path="Type" />
+                                </MultiBinding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Border.Background>
+                </Border>
+
+                <TextBlock FontSize="14"
+                               Margin="0 8 0 0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Name,Mode=OneWay}" />
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>

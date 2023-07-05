@@ -2,11 +2,21 @@
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
 {
-    public class MemberJoinEventUI : MessageUI
+    public class MemberJoinEventUI : MessageUI, IMessageUpdateSupport
     {
-        public MemberJoinEventUI(ChannelMessage msg)
+        private readonly Func<string, string> _memberNameFinder;
+
+        public MemberJoinEventUI(ChannelMessage msg, Func<string, string> memberNameFinder)
         {
-            MessageSource = msg ?? throw new ArgumentException(nameof(msg));
+            MessageSource     = msg ?? throw new ArgumentException(nameof(msg));
+            _memberNameFinder = memberNameFinder ?? throw new ArgumentException(nameof(memberNameFinder));
+            Update();
+        }
+
+        public void Update()
+        {
+            MemberName = _memberNameFinder(MessageSource.MemberID);
+            RaiseUpdated(nameof(MemberName));
         }
 
 
@@ -33,14 +43,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
 
         public override MessageBase Source => MessageSource;
     }
-    
-    public class MemberLeaveEventUI : MessageUI
+
+    public class MemberLeaveEventUI : MessageUI, IMessageUpdateSupport
     {
-        public MemberLeaveEventUI(ChannelMessage msg)
+        private readonly Func<string, string> _memberNameFinder;
+
+        public MemberLeaveEventUI(ChannelMessage msg, Func<string, string> memberNameFinder)
         {
-            MessageSource = msg ?? throw new ArgumentException(nameof(msg));
+            MessageSource     = msg ?? throw new ArgumentException(nameof(msg));
+            _memberNameFinder = memberNameFinder ?? throw new ArgumentException(nameof(memberNameFinder));
+            Update();
         }
 
+        public void Update()
+        {
+            MemberName = _memberNameFinder(MessageSource.MemberID);
+            RaiseUpdated(nameof(MemberName));
+        }
 
         public ChannelMessage MessageSource { get; }
 

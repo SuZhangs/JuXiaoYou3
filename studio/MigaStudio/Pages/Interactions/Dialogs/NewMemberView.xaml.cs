@@ -15,7 +15,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             
-            ViewModel<CharacterPickerViewModel>().TargetElement = ListBox;
+            ViewModel<NewMemberViewModel>().TargetElement = ListBox;
             base.OnLoaded(sender, e);
         }
     }

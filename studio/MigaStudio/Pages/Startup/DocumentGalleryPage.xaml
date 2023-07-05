@@ -55,7 +55,9 @@
                     <TextBlock FontSize="14"
                                Margin="0 8 0 0"
                                HorizontalAlignment="Center"
-                               Text="{Binding Name,Mode=OneWay}" />
+                               Text="{Binding Name,Mode=OneWay}"
+                               TextWrapping="Wrap"
+                               TextTrimming="CharacterEllipsis"/>
                 </DockPanel>
             </f:SimpleButton>
         </DataTemplate>

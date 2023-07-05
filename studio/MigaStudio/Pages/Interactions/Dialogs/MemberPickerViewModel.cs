@@ -61,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs
         public static Task<Op<IEnumerable<MemberCache>>> Pick(IEnumerable<MemberCache> documents)
         {
             return DialogService()
-                .Dialog<IEnumerable<MemberCache>, NewMemberViewModel>(new Parameter
+                .Dialog<IEnumerable<MemberCache>, MemberPickerViewModel>(new Parameter
                 {
                     Args = new object[]
                     {

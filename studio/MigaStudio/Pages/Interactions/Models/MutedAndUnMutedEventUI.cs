@@ -3,7 +3,7 @@ using Acorisoft.FutureGL.MigaUtils;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
 {
-    public class MutedAndUnMutedEventUI : MessageUI
+    public class MutedAndUnMutedEventUI : MessageUI, IMessageUpdateSupport
     {
         private readonly Func<string, string>              _memberNameFinder;
         private readonly Func<MessageType, object, string> _contentFinder;
@@ -21,6 +21,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
         {
             MemberName = _memberNameFinder(MessageSource.MemberID);
             Content    = _contentFinder(MessageSource.Type, MessageSource.Timestamp);
+            RaiseUpdated(nameof(MemberName));
         }
 
         public ChannelMessage MessageSource { get; }

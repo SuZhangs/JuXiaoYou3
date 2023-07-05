@@ -26,4 +26,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
             set => SetValue(ref _isSelf, value);
         }
     }
+
+    public interface IMessageUpdateSupport
+    {
+        void Update();
+    }
 }

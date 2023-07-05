@@ -56,7 +56,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         protected override void OnStart(Parameter parameter)
         {
-            Channel = new Channel();
+            Channel = new Channel
+            {
+                Members = new List<MemberCache>(),
+                Messages = new List<MessageBase>(),
+                AvailableMembers = new List<string>(),
+                Alias = new List<string>(),
+                Roles = new Dictionary<string, MemberRole>(),
+                Titles = new Dictionary<string, string>(),
+            };
 
             //
             // 加载

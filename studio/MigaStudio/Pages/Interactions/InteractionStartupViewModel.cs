@@ -62,7 +62,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 SocialEngine.AddCharacter(member);
                 Characters.Add(member);
             }
+            
+            RaiseUpdated(nameof(HasSelectedCharacterAndHasCharacter));
         }
+
+
+        /// <summary>
+        /// 获取或设置 <see cref="HasSelectedCharacterAndHasCharacter"/> 属性。
+        /// </summary>
+        public bool HasSelectedCharacterAndHasCharacter=> Characters.Count > 0;
 
         public AsyncRelayCommand AddCharacterCommand { get; }
         public AsyncRelayCommand<MemberCache> RemoveCharacterCommand { get; }

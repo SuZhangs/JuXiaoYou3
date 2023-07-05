@@ -17,7 +17,30 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <thisProxy:InteractionStartupViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
-            <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
+            <ImageBrush x:Key="Avatar" ImageSource="E:\1.png" />
+
+
+            <DataTemplate DataType="{x:Type Model:MemberCache}">
+                <DockPanel Margin="4"
+                       Height="100"
+                       Width="84">
+                    <Border DockPanel.Dock="Top"
+                        CornerRadius="64"
+                        Height="64"
+                        Width="64">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}"/>
+                        </Border.Background>
+                    </Border>
+
+                    <TextBlock FontSize="14"
+                           Margin="0 8 0 0"
+                           HorizontalAlignment="Center"
+                           Text="{Binding Name,Mode=OneWay}"
+                           TextWrapping="Wrap"
+                           TextTrimming="CharacterEllipsis" />
+                </DockPanel>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type Model:SocialCharacter}">
                 <Border Background="{f:Brush BackgroundLevel2}"
@@ -114,7 +137,7 @@
                 </f:EmptyContentControl>
 
 
-                <f:ForestIsland Header="所有角色"
+                <f:ForestIsland Header="其他功能"
                                 Padding="0 16 0 0">
                     <f:ForestIsland.ToolBar>
                         <f:CallToAction Content="{f:Language global.add}"
@@ -127,8 +150,7 @@
                                         Padding="48 8" />
                     </f:ForestIsland.ToolBar>
                     <ScrollViewer Padding="0 0 8 0">
-                        <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}"
-                                      VirtualizingPanel.IsVirtualizing="True">
+                        <ItemsControl VirtualizingPanel.IsVirtualizing="True">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <VirtualizingStackPanel />
@@ -140,94 +162,20 @@
             </DockPanel>
 
             <f:ForestIsland Grid.Column="1"
-                    Margin="32 0"
-                    Header="其他功能">
-                
+                            Margin="32 0"
+                            Header="所有角色">
+                <ScrollViewer Padding="0 0 8 0">
+                    <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}"
+                                  VirtualizingPanel.IsVirtualizing="True">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
             </f:ForestIsland>
             
-            <Border Grid.Column="1"
-                    Margin="32 0"
-                    Visibility="Collapsed">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="128" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <ScrollViewer Grid.Row="3"
-                                  Margin="0 8 0 0">
-                        <ItemsControl>
-                            <DockPanel Margin="0 4">
-                                <Ellipse Height="48"
-                                         Width="48"
-                                         Fill="{StaticResource Avatar}" />
-                                <DockPanel Margin="12 0 0 0">
-                                    <TextBlock DockPanel.Dock="Top"
-                                               Foreground="Gray"
-                                               FontSize="13"
-                                               FontWeight="Heavy"
-                                               Margin="0 0 0 4"
-                                               Text="测试群" />
-                                    <Border Background="{StaticResource Brush.QQ.Bar}"
-                                            CornerRadius="8"
-                                            HorizontalAlignment="Left"
-                                            Padding="12">
-                                        <TextBlock Text="这是一条说说" />
-                                    </Border>
-                                </DockPanel>
-                            </DockPanel>
-
-                            <DockPanel Margin="0 4">
-                                <Ellipse Height="48"
-                                         Width="48"
-                                         Fill="{StaticResource Avatar}" />
-                                <DockPanel Margin="12 0 0 0">
-                                    <TextBlock DockPanel.Dock="Top"
-                                               Foreground="Gray"
-                                               FontSize="13"
-                                               FontWeight="Heavy"
-                                               Margin="0 0 0 4"
-                                               Text="测试群" />
-                                    <Border Background="{StaticResource Brush.QQ.Bar}"
-                                            CornerRadius="8"
-                                            HorizontalAlignment="Left"
-                                            Padding="12">
-                                        <TextBlock Text="这是一条说说" />
-                                    </Border>
-                                </DockPanel>
-                            </DockPanel>
-                        </ItemsControl>
-                    </ScrollViewer>
-
-                    <WrapPanel Grid.Row="1">
-                        <WrapPanel.Resources>
-                            <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
-                                <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
-                                <Setter Property="Margin" Value="0 0 0 4" />
-                                <Setter Property="IconSize" Value="23" />
-                                <Setter Property="Height" Value="40" />
-                                <Setter Property="Width" Value="40" />
-                            </Style>
-                        </WrapPanel.Resources>
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Mic}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Image}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Video}" />
-                        <ftk:ToolButton Icon="{StaticResource FeatherIcon.Emoji}" />
-                    </WrapPanel>
-
-                    <DockPanel Grid.Row="0">
-                        <f:CallToAction DockPanel.Dock="Right"
-                                        Content="发送"
-                                        CornerRadius="8"
-                                        Margin="8 0 0 0"
-                                        Padding="20 10"
-                                        VerticalAlignment="Bottom" />
-                        <f:MultiLine Height="128" />
-                    </DockPanel>
-                </Grid>
-            </Border>
-
             <f:ForestIsland Grid.Column="2"
                                 Header="所有群聊">
                 <f:ForestIsland.ToolBar>

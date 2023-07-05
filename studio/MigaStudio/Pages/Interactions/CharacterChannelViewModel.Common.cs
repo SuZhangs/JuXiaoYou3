@@ -2,6 +2,7 @@
 using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
@@ -16,6 +17,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             foreach (var message in Messages)
             {
                 message.IsSelf = message.MemberID == memberID;
+                if (message is IMessageUpdateSupport mus)
+                {
+                    mus.Update();
+                }
             }
         }
 

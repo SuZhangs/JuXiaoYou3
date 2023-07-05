@@ -21,7 +21,7 @@
             </ResourceDictionary.MergedDictionaries>
             <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush" />
             <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility" />
-            <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
+            <ImageBrush x:Key="Avatar" ImageSource="E:\1.png" />
             
             <DataTemplate DataType="{x:Type thisUI:TimestampUI}">
                 <studio:TimestampMessage HorizontalAlignment="Center"
@@ -231,24 +231,7 @@
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
                         <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
-                            <studio:UserEventMessageControl CharacterName="Test"
-                                                            Content="退群"
-                                                            HorizontalAlignment="Center"/>
-
-
-                            <studio:PlainTextMessage CharacterName="Test"
-                                                     Content="加入了本群"/>
                             
-                            <studio:ImageChatMessage CharacterName="Test"
-                                                     Image="E:\1.jpg"/>
-
-                            <studio:PlainTextMessage CharacterName="Test"
-                                                     Content="聊天内容"
-                                                     IsSelf="True"/>
-                            
-                            <studio:TimestampMessage HorizontalAlignment="Center"
-                                                     Prefix="晚上"
-                                                     CurrentTime="19:32"/>
                         </ItemsControl>
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>
