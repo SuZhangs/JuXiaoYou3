@@ -138,7 +138,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             base.OnResume();
         }
 
-        public override void Stop()
+        protected override void OnStop()
         {
             if (_exitOperation)
             {
@@ -221,7 +221,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                                                      .DebugMode);
             
             // 重置所有内容
-            controller.Reset();
+            foreach (var controllerMap in context.ControllerMaps)
+            {
+                if (controllerMap.Value is TabShell shell)
+                {
+                    shell.Reset();
+                }
+                else
+                {
+                    controllerMap.Value
+                                 .Stop();
+                }
+            }
+            
             if (r.IsFinished)
             {
                 controller = (TabController)Controller.Context

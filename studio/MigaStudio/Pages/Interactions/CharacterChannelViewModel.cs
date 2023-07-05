@@ -34,13 +34,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             AvailableMemberCollection = new ObservableCollection<MemberCache>();
             AvailableMembers          = new ReadOnlyObservableCollection<MemberCache>(AvailableMemberCollection);
 
+            AddImageCommand              = Command(AddImageCommandImpl);
             AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);
-            AddMemberLeaveCommand         = AsyncCommand(AddMemberLeaveCommandImpl);
+            AddMemberLeaveCommand        = AsyncCommand(AddMemberLeaveCommandImpl);
             AddMemberMutedCommand        = AsyncCommand(AddMemberMutedCommandImpl);
             AddMemberUnMutedCommand      = AsyncCommand(AddMemberUnMutedCommandImpl);
             AddTimestampCommand          = AsyncCommand(AddTimestampCommandImpl);
             AddPlainTextCommand          = Command(AddPlainTextCommandImpl);
             SetCompositionMessageCommand = AsyncCommand(SetCompositionMessageImpl);
+            SwitchSpeakerCommand         = Command<MemberCache>(SwitchSpeakerCommandImpl);
         }
 
         private void Save()

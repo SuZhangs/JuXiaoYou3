@@ -9,6 +9,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
         public MemberJoinEventUI(ChannelMessage msg, Func<string, string> memberNameFinder)
         {
             MessageSource     = msg ?? throw new ArgumentException(nameof(msg));
+            MemberID          = msg.MemberID;
             _memberNameFinder = memberNameFinder ?? throw new ArgumentException(nameof(memberNameFinder));
             Update();
         }

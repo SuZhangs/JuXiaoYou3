@@ -29,6 +29,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
                     notification.Synchronizer.Set();
                     Reset();
                     Activated = true;
+                    Version   = 0;
                     OnDatabaseOpening(notification.Session);
                     notification.Synchronizer.Unset();
                 }
@@ -45,6 +46,7 @@ namespace Acorisoft.FutureGL.MigaDB.Services
             {
                 try
                 {
+                    Modified();
                     OnDatabaseClosing();
                 }
                 catch

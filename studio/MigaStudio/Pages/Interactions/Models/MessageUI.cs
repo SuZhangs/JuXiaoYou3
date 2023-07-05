@@ -42,6 +42,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
         protected UserBasedMessageUI(ChannelMessage msg, MemberInformationFinder memberFinder)
         {
             _memberFinder = memberFinder;
+            MemberID      = msg.MemberID;
             MessageSource = msg;
             Update();
         }

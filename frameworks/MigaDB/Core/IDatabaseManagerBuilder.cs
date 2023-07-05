@@ -13,7 +13,7 @@ namespace Acorisoft.FutureGL.MigaDB.Core
         /// <typeparam name="TEngine">指定的引擎类型。</typeparam>
         /// <param name="lazyMode">是否为懒加载模式</param>
         /// <returns>返回一个<see cref="IDatabaseManagerBuilder"/></returns>
-        IDatabaseManagerBuilder Setup<TEngine>(bool lazyMode = true) where TEngine :
+        IDatabaseManagerBuilder Setup<TEngine>(bool lazyMode = false) where TEngine :
             class,
             IDataEngine,
             INotificationHandler<DatabaseOpenNotification>,

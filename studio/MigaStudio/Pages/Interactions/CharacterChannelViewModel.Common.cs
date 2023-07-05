@@ -169,5 +169,88 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             //
             SocialEngine.AddChannel(Channel);
         }
+        
+        
+
+        private void AddMessageTo(MessageBase mb, bool addToChannel = true)
+        {
+            if (mb is ChannelMessage msg)
+            {
+                MessageUI ui = msg.Type switch
+                {
+                    MessageType.PlainText   => new PlainTextUI(msg, FindMemberById),
+                    MessageType.Emoji       => new EmojiUI(msg, FindMemberById),
+                    MessageType.Image       => new ImageUI(msg, FindMemberById),
+                    MessageType.Timestamp   => new TimestampUI(msg),
+                    MessageType.Muted       => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
+                    MessageType.MemberJoin  => new MemberJoinEventUI(msg, FindMemberNameById),
+                    MessageType.MemberLeave => new MemberLeaveEventUI(msg, FindMemberNameById),
+                    MessageType.UnMuted     => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
+                    _                       => throw new ArgumentOutOfRangeException()
+                };
+
+                ui.IsSelf = Speaker is not null && Speaker.Id == ui.MemberID;
+                Messages.Add(ui);
+                if (addToChannel) Channel.Messages.Add(msg);
+            }
+        }
+        
+        private Tuple<string, string,MemberRole, string> FindMemberById(string id)
+        {
+            string name;
+            string avatar;
+
+            if (MemberMapper.TryGetValue(id, out var mem))
+            {
+                name   = mem.Name;
+                avatar = mem.Avatar;
+            }
+            else
+            {
+                name   = string.Empty;
+                avatar = string.Empty;
+            }
+            
+            //
+            // get name
+            if (Speaker is not null &&
+                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict) &&
+                dict.TryGetValue(id, out var alias))
+            {
+                name = alias;
+            }
+            
+
+            if(!MemberTitleMapper.TryGetValue(id, out var title)) title         = string.Empty;
+            if(!MemberRoleMapper.TryGetValue(id, out var role)) role = MemberRole.Member;
+
+            return new Tuple<string, string, MemberRole, string>(name, avatar, role, title);
+        }
+
+        private string FindMemberNameById(string id)
+        {
+            if (Speaker is not null &&
+                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
+            {
+                if (dict.TryGetValue(id, out var name))
+                {
+                    return name;
+                }
+            }
+
+            return MemberMapper.TryGetValue(id, out var mem) ?
+                mem.Name : 
+                Language.GetText("text.Untitled");
+        }
+        
+        private string FindEventContentByType(MessageType type,object parameter)
+        {
+            return type switch
+            {
+                MessageType.Muted   => string.Format(Language.GetText("text.Interaction.MemberMuted"), parameter),
+                MessageType.UnMuted => Language.GetText("text.Interaction.MemberUnMuted"),
+                _                   => string.Empty
+            };
+        }
     }
 }

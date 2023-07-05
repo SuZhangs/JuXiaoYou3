@@ -40,15 +40,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Type     = MessageType.MemberJoin
                 };
                 
+                // role
                 MemberMapper.TryAdd(member.Id, member);
+                MemberRoleMapper.TryAdd(member.Id, MemberRole.Member);
+                Channel.Roles.Add(member.Id, MemberRole.Member);
+                
+                // member
                 AvailableMemberCollection.Add(member);
                 TotalMemberCollection.Add(member);
-                Channel.Members
-                       .Add(member);
-                Channel.AvailableMembers
-                       .Add(member.Id);
-                Cache.AvailableMembers
-                     .Add(member.Id);
+                Channel.Members.Add(member);
+                Channel.AvailableMembers.Add(member.Id);
+                Cache.AvailableMembers.Add(member.Id);
+                
                 AddMessageTo(msg);
 
                 Speaker ??= member;
@@ -82,6 +85,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                      .Remove(member.Id);
                 AddMessageTo(msg);
             }
+        }
+        
+        private void SwitchSpeakerCommandImpl(MemberCache cache)
+        {
+            if (cache is null)
+            {
+                return;
+            }
+
+            Speaker = cache;
         }
 
 
@@ -229,79 +242,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             SetDirtyState();
         }
 
-        private void AddMessageTo(MessageBase mb, bool addToChannel = true)
-        {
-            if (mb is ChannelMessage msg)
-            {
-                MessageUI ui = msg.Type switch
-                {
-                    MessageType.PlainText   => new PlainTextUI(msg, FindMemberById),
-                    MessageType.Emoji       => new EmojiUI(msg, FindMemberById),
-                    MessageType.Image       => new ImageUI(msg, FindMemberById),
-                    MessageType.Timestamp   => new TimestampUI(msg),
-                    MessageType.Muted       => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
-                    MessageType.MemberJoin  => new MemberJoinEventUI(msg, FindMemberNameById),
-                    MessageType.MemberLeave => new MemberLeaveEventUI(msg, FindMemberNameById),
-                    MessageType.UnMuted     => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
-                    _                       => throw new ArgumentOutOfRangeException()
-                };
-
-                Messages.Add(ui);
-                if (addToChannel) Channel.Messages.Add(msg);
-            }
-        }
-        
-        private Tuple<string, string,MemberRole, string> FindMemberById(string id)
-        {
-            string     name;
-            string     avatar;
-            MemberRole role;
-            string     title;
-            
-            string     alias;
-            if (Speaker is not null &&
-                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
-            {
-                if (dict.TryGetValue(id, out alias))
-                {
-                }
-            }
-            
-            
-            if (MemberMapper.TryGetValue(id, out var mem))
-            {
-                
-            }
-
-            return new Tuple<string, string, MemberRole, string>(string.Empty, string.Empty, MemberRole.Member, string.Empty);
-        }
-
-        private string FindMemberNameById(string id)
-        {
-            if (Speaker is not null &&
-                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
-            {
-                if (dict.TryGetValue(id, out var name))
-                {
-                    return name;
-                }
-            }
-
-            return MemberMapper.TryGetValue(id, out var mem) ?
-                mem.Name : 
-                Language.GetText("text.Untitled");
-        }
-        
-        private string FindEventContentByType(MessageType type,object parameter)
-        {
-            return type switch
-            {
-                MessageType.Muted   => string.Format(Language.GetText("text.Interaction.MemberMuted"), parameter),
-                MessageType.UnMuted => Language.GetText("text.Interaction.MemberUnMuted"),
-                _                   => string.Empty
-            };
-        }
-
         public AsyncRelayCommand AddMemberMutedCommand { get; }
         public AsyncRelayCommand AddMemberUnMutedCommand { get; }
         public AsyncRelayCommand AddTimestampCommand { get; }
@@ -309,8 +249,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public RelayCommand AddEmojiCommand { get; }
         public AsyncRelayCommand AddMemberLeaveCommand { get; }
         public AsyncRelayCommand AddMemberJoinCommand { get; }
-        public AsyncRelayCommand AddImageCommand { get; }
-        public RelayCommand SwitchSpeakerCommand { get; }
+        public RelayCommand AddImageCommand { get; }
+        public RelayCommand<MemberCache> SwitchSpeakerCommand { get; }
         public RelayCommand RemoveMessageCommand { get; }
         public RelayCommand AddAliasCommand { get; }
         public RelayCommand RemoveAliasCommand { get; }

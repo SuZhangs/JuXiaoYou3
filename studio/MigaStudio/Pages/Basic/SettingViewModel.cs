@@ -157,7 +157,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         }
 
 
-        public sealed override void Stop()
+        protected override void OnStop()
         {
             ForestApp.SaveBasicSetting(BasicAppSetting);
             SystemSetting.Save();

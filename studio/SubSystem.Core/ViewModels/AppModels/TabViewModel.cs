@@ -167,6 +167,18 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         #endregion
 
+        public sealed override void Stop()
+        {
+            IsInitialized = false;
+            OnStop();
+            base.Stop();
+        }
+
+        protected virtual void OnStop()
+        {
+            
+        }
+
         protected virtual void OnDragDrop(WindowDragDropArgs e)
         {
             

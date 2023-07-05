@@ -19,7 +19,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
         
         public static readonly DependencyProperty CharacterAvatarProperty = DependencyProperty.Register(
             nameof(CharacterAvatar),
-            typeof(ImageBrush),
+            typeof(ImageSource),
             typeof(UserMessageBase),
             new PropertyMetadata(default(ImageBrush)));
 
@@ -40,9 +40,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 
         public static readonly DependencyProperty CharacterTitleBrushProperty = DependencyProperty.Register(
             nameof(CharacterTitleBrush),
-            typeof(Brush),
+            typeof(ImageSource),
             typeof(UserMessageBase),
-            new PropertyMetadata(default(Brush)));
+            new PropertyMetadata(default(ImageSource)));
         
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(
             nameof(Layout),
@@ -87,9 +87,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
             set => SetValue(CharacterNameProperty, value);
         }
         
-        public ImageBrush CharacterAvatar
+        public ImageSource CharacterAvatar
         {
-            get => (ImageBrush)GetValue(CharacterAvatarProperty);
+            get => (ImageSource)GetValue(CharacterAvatarProperty);
             set => SetValue(CharacterAvatarProperty, value);
         }
 

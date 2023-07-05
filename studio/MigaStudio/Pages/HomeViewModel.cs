@@ -86,7 +86,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             }
         }
 
-        public override void Stop()
+        protected override void OnStop()
         {
             foreach (var feature in Features)
             {

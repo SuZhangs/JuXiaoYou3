@@ -11,7 +11,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
             {
                 throw new ArgumentException(nameof(msg));
             }
-            
+
+            MemberID      = msg.MemberID;
             MessageSource = msg;
         }
         

@@ -463,15 +463,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:PlainTextMessage}">
                     <DockPanel HorizontalAlignment="Left"
-                               Margin="0 8"
-                               MinWidth="256"
-                               MaxWidth="480">
+                               Margin="0 8">
                         <Rectangle x:Name="PART_Avatar"
                                    DockPanel.Dock="Left"
-                                   Height="48"
-                                   Width="48"
-                                   Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterAvatar,Mode=OneWay}"
-                                   VerticalAlignment="Top" />
+                                   Height="96"
+                                   Width="96"
+                                   VerticalAlignment="Top">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterAvatar,Mode=OneWay}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
 
                         <DockPanel>
                             <DockPanel x:Name="PART_TitleBar"
@@ -486,14 +487,14 @@
                                         Padding="4 2"
                                         Visibility="Collapsed">
                                     <TextBlock Foreground="White"
-                                               FontSize="12"
+                                               FontSize="21"
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}"
                                                TextTrimming="CharacterEllipsis" />
                                 </Border>
 
                                 <TextBlock DockPanel.Dock="Right"
                                            Foreground="Gray"
-                                           FontSize="13"
+                                           FontSize="24"
                                            FontWeight="Heavy"
                                            HorizontalAlignment="Left"
                                            MaxWidth="128"
@@ -509,7 +510,7 @@
                                     Padding="12">
                                 <TextBlock x:Name="PART_Content"
                                            Foreground="Black"
-                                           FontSize="15"
+                                           FontSize="28"
                                            Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}"
                                            TextWrapping="Wrap" />
                             </Border>
@@ -525,7 +526,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar" />
                             <Setter Property="Background" Value="{StaticResource Brush.Wechat.Bubble.Self}" TargetName="PART_ContentPanel" />
                             <Setter Property="Foreground" Value="Black" TargetName="PART_Content" />
-                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar" />
+                            <Setter Property="Margin" Value="24 0 0 0" TargetName="PART_Avatar" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
                         </MultiTrigger>
                         <MultiTrigger>
@@ -549,7 +550,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_ContentPanel" />
                             <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Self}" TargetName="PART_ContentPanel" />
                             <Setter Property="Foreground" Value="White" TargetName="PART_Content" />
-                            <Setter Property="Margin" Value="12 0 0 0" TargetName="PART_Avatar" />
+                            <Setter Property="Margin" Value="24 0 0 0" TargetName="PART_Avatar" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
                         </MultiTrigger>
                         <MultiTrigger>
@@ -564,8 +565,8 @@
                             <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar" />
                         </MultiTrigger>
                         <Trigger Property="Layout" Value="QQ">
-                            <Setter Property="RadiusX" Value="24" TargetName="PART_Avatar" />
-                            <Setter Property="RadiusY" Value="24" TargetName="PART_Avatar" />
+                            <Setter Property="RadiusX" Value="48" TargetName="PART_Avatar" />
+                            <Setter Property="RadiusY" Value="48" TargetName="PART_Avatar" />
                         </Trigger>
                         <Trigger Property="ShowTitle" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="PART_Title"/>
@@ -597,8 +598,11 @@
                                    DockPanel.Dock="Left"
                                    Height="48"
                                    Width="48"
-                                   Fill="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterAvatar,Mode=OneWay}"
-                                   VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" >
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterAvatar,Mode=OneWay}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
 
                         <DockPanel>
                             <DockPanel x:Name="PART_TitleBar"
@@ -841,14 +845,14 @@
                     <Border HorizontalAlignment="Center"
                             Margin="0 8"
                             Padding="8 4">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="#777777"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Prefix,Mode=OneWay}" />
-                            <TextBlock Foreground="#777777"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CurrentTime,Mode=OneWay}" />
-                        </StackPanel>
+                        <TextBlock FontSize="21"
+                                   Margin="3 0"
+                                   TextWrapping="Wrap">
+                                <Run Foreground="#3fa0ff"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Prefix,Mode=OneWay}"/>
+                                <Run Foreground="#777777"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CurrentTime,Mode=OneWay}"/>
+                        </TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -892,14 +896,14 @@
                     <Border HorizontalAlignment="Center"
                             Margin="0 8"
                             Padding="8 4">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="#3fa0ff"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}" />
-                            <TextBlock Foreground="#777777"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}" />
-                        </StackPanel>
+                        <TextBlock FontSize="21"
+                                   Margin="3 0"
+                                   TextWrapping="Wrap">
+                                <Run Foreground="#3fa0ff"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}"/>
+                                <Run Foreground="#777777"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}"/>
+                        </TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

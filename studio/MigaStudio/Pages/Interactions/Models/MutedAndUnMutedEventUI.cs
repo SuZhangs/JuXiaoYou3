@@ -12,6 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models
         public MutedAndUnMutedEventUI(ChannelMessage msg, Func<string, string> memberNameFinder, Func<MessageType, object, string> contentFinder)
         {
             MessageSource     = msg ?? throw new ArgumentException(nameof(msg));
+            MemberID          = msg.MemberID;
             _memberNameFinder = memberNameFinder ?? throw new ArgumentException(nameof(memberNameFinder));
             _contentFinder    = contentFinder ?? throw new ArgumentException(nameof(contentFinder));
             Update();
