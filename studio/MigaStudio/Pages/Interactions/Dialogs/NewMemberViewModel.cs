@@ -64,10 +64,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs
         public ObservableCollection<DocumentCache> Documents { get; }
         public ListBox TargetElement { get; set; }
 
-        public static Task<Op<IEnumerable<MemberCache>>> Add()
+        public static Task<Op<IEnumerable<MemberCache>>> Add(IReadOnlySet<string> pool)
         {
             var documents = Studio.Engine<DocumentEngine>()
-                                  .GetCaches(DocumentType.Character);
+                                  .GetCaches(DocumentType.Character)
+                                  .Where(x => !pool.Contains(x.Id));
             return DialogService()
                 .Dialog<IEnumerable<MemberCache>, NewMemberViewModel>(new Parameter
                 {

@@ -14,7 +14,7 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         protected override void RequireStartupTabViewModel()
         {
-            // New<InteractionStartupViewModel>();
+            New<InteractionStartupViewModel>();
             New<CharacterChannelViewModel>();
         }
 

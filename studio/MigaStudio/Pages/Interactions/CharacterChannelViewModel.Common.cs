@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
+using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaUtils;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
@@ -44,6 +45,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             foreach (var member in Channel.Members
                                           .Where(member => MemberMapper.TryAdd(member.Id, member)))
             {
+                var cache = DocumentEngine.GetCache(member.Id);
+
+                if (cache is not null)
+                {
+                    var hasChanged = false;
+
+                    if (member.Name != cache.Name)
+                    {
+                        member.Name = cache.Name;
+                        hasChanged  = true;
+                    }
+                    
+                    if (member.Avatar != cache.Avatar)
+                    {
+                        member.Avatar = cache.Avatar;
+                        hasChanged    = true;
+                    }
+                    
+                    if(hasChanged) SocialEngine.AddCharacter(member);
+                }
+                
                 TotalMemberCollection.Add(member);
             }
 
@@ -52,7 +74,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                                    .Where(x => x is not null);
 
             AvailableMemberCollection.AddMany(available, true);
-
         }
 
         private void LoadMapper()
@@ -138,6 +159,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             
             Channel.Messages
                    .AddMany(Messages.Select(x => x.Source), true);
+
+            //
+            //
+            SocialEngine.AddChannel(Channel);
         }
     }
 }

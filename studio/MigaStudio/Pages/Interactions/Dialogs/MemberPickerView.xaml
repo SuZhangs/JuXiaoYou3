@@ -1,4 +1,4 @@
-﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs.NewMemberView"
+﻿<f:ForestUserControl x:Class="Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs.MemberPickerView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -34,6 +34,7 @@
             </DockPanel>
         </DataTemplate>
     </UserControl.Resources>
+    
     <f:DialogPage CancelCommand="{Binding CancelCommand}"
                   CompletedCommand="{Binding CompletedCommand}"
                   Title="{Binding Title}">

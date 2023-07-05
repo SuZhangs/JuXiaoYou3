@@ -3,10 +3,10 @@ using System.Windows.Controls;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs
 {
-    [Connected(View = typeof(NewMemberView), ViewModel = typeof(NewMemberViewModel))]
-    public partial class NewMemberView
+    [Connected(View = typeof(MemberPickerView), ViewModel = typeof(MemberPickerViewModel))]
+    public partial class MemberPickerView
     {
-        public NewMemberView()
+        public MemberPickerView()
         {
             InitializeComponent();
         }

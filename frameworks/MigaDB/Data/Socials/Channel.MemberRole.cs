@@ -25,7 +25,7 @@
 
     public class MemberCache : StorageObject
     {
-        public string Avatar { get; init; }
-        public string Name { get; init; }
+        public string Avatar { get; set; }
+        public string Name { get; set; }
     }
 }

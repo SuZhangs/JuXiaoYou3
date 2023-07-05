@@ -5,10 +5,10 @@
         protected override void OnDatabaseOpening(DatabaseSession session)
         {
             var db = session.Database;
-            CharacterDB = db.GetCollection<DocumentCache>(Constants.Name_Chat_Character);
+            CharacterDB = db.GetCollection<MemberCache>(Constants.Name_Chat_Character);
             UpvoteDB    = db.GetCollection<Upvote>(Constants.Name_Chat_Upvote);
             ThreadDB    = db.GetCollection<SocialThread>(Constants.Name_Chat_Thread);
-            ChannelDB   = db.GetCollection<SocialChannel>(Constants.Name_Chat_Channel);
+            ChannelDB   = db.GetCollection<Channel>(Constants.Name_Chat_Channel);
         }
 
         protected override void OnDatabaseClosing()
@@ -19,7 +19,7 @@
             ChannelDB   = null;
         }
 
-        public void AddCharacter(DocumentCache character)
+        public void AddCharacter(MemberCache character)
         {
             if (character is null)
             {
@@ -29,7 +29,7 @@
             CharacterDB.Upsert(character);
         }
         
-        public void RemoveCharacter(DocumentCache character)
+        public void RemoveCharacter(MemberCache character)
         {
             if (character is null)
             {
@@ -39,7 +39,7 @@
             CharacterDB.Delete(character.Id);
         }
 
-        public void AddChannel(SocialChannel channel)
+        public void AddChannel(Channel channel)
         {
             if (channel is null)
             {
@@ -49,7 +49,7 @@
             ChannelDB.Upsert(channel);
         }
         
-        public void RemoveChannel(SocialChannel channel)
+        public void RemoveChannel(Channel channel)
         {
             if (channel is null)
             {
@@ -58,20 +58,17 @@
             ChannelDB.Delete(channel.Id);
         }
         
-        public IEnumerable<SocialChannel> GetChannels(string character)
+        public IEnumerable<Channel> GetChannels(string character)
         {
-            return ChannelDB.Find(x => x.AvailableMemberList
+            return ChannelDB.Find(x => x.AvailableMembers
                                         .Any(y => y == character));
         }
 
-        public IEnumerable<MemberCache> GetMembers()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<MemberCache> GetMembers() => CharacterDB.FindAll();
         
-        public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
+        public ILiteCollection<Channel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }
-        public ILiteCollection<DocumentCache> CharacterDB { get; private set; }
+        public ILiteCollection<MemberCache> CharacterDB { get; private set; }
         public ILiteCollection<Upvote> UpvoteDB { get; private set; }
     }
 }

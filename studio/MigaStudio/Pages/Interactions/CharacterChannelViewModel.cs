@@ -2,6 +2,7 @@
 using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
+using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -19,6 +20,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         public CharacterChannelViewModel()
         {
+            SocialEngine              = Studio.Engine<SocialEngine>();
+            DocumentEngine            = Studio.Engine<DocumentEngine>();
+            
             MemberAliasMapper         = new Dictionary<string, Dictionary<string, string>>();
             MemberRoleMapper          = new Dictionary<string, MemberRole>();
             MemberTitleMapper         = new Dictionary<string, string>();
@@ -64,5 +68,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             base.OnStart(parameter);
         }
+        
+        public SocialEngine SocialEngine { get; }
+        public DocumentEngine DocumentEngine { get; }
     }
 }
