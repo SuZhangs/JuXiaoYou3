@@ -76,6 +76,20 @@ namespace Acorisoft.FutureGL.MigaStudio
             };
         }
         
+        
+        public static string ImageFilter
+        {
+            get => Language.Culture switch
+            {
+                CultureArea.English  => "Image File|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.French   => "Fichier image|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Japanese => "画像ファイル|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Korean   => "Image 파일|*.png;*.jpg;*.bmp;*.jpeg",
+                CultureArea.Russian  => "Файл изображения|*.png;*.jpg;*.bmp;*.jpeg",
+                _                    => "图片文件|*.png;*.jpg;*.bmp;*.jpeg",
+            };
+        }
+        
         public static async Task CaptureAsync(FrameworkElement element)
         {
             if (element is null)

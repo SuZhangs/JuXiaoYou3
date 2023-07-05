@@ -7,8 +7,8 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TimestampMessage), new FrameworkPropertyMetadata(typeof(TimestampMessage)));
         }
         
-        public static readonly DependencyProperty RelativeStringProperty = DependencyProperty.Register(
-            nameof(RelativeString),
+        public static readonly DependencyProperty PrefixProperty = DependencyProperty.Register(
+            nameof(Prefix),
             typeof(string),
             typeof(TimestampMessage),
             new PropertyMetadata(default(string)));
@@ -24,10 +24,10 @@
             get => (string)GetValue(CurrentTimeProperty);
             set => SetValue(CurrentTimeProperty, value);
         }
-        public string RelativeString
+        public string Prefix
         {
-            get => (string)GetValue(RelativeStringProperty);
-            set => SetValue(RelativeStringProperty, value);
+            get => (string)GetValue(PrefixProperty);
+            set => SetValue(PrefixProperty, value);
         }
     }
 }

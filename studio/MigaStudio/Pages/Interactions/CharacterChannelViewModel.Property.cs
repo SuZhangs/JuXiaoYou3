@@ -8,26 +8,26 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     partial class CharacterChannelViewModel
     {
         private          string                                         _message;
-        private          DocumentCache                                  _speaker;
-        private readonly Dictionary<string, Dictionary<string, string>> MemberAliasMapper;
-        private readonly Dictionary<string, MemberRole>                 MemberRoleMapper;
-        private readonly Dictionary<string, string>                     MemberTitleMapper;
+        private          MemberCache                                    _speaker;
         
 
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<DocumentCache> LatestSpeakers { get; }
+        public ObservableCollection<MemberCache> LatestSpeakers { get; }
         
         /// <summary>
         /// 
         /// </summary>
         public ObservableCollection<MessageUI> Messages { get; }
+        
+        public ReadOnlyObservableCollection<MemberCache> AvailableMembers { get; }
+        public ReadOnlyObservableCollection<MemberCache> Members { get; }
 
         /// <summary>
         /// 获取或设置 <see cref="Speaker"/> 属性。
         /// </summary>
-        public DocumentCache Speaker
+        public MemberCache Speaker
         {
             get => _speaker;
             set

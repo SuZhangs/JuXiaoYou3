@@ -63,6 +63,11 @@
             return ChannelDB.Find(x => x.AvailableMemberList
                                         .Any(y => y == character));
         }
+
+        public IEnumerable<MemberCache> GetMembers()
+        {
+            throw new NotImplementedException();
+        }
         
         public ILiteCollection<SocialChannel> ChannelDB { get; private set; }
         public ILiteCollection<SocialThread> ThreadDB { get; private set; }

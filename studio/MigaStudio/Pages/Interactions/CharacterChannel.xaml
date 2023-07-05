@@ -8,6 +8,7 @@
                      xmlns:studio="urn:acorisoft/studio"
                      xmlns:this="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
                      xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
+                     xmlns:thisUI="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters"
                      xmlns:thisConverters2="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      mc:Ignorable="d"
@@ -21,9 +22,32 @@
             <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush" />
             <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility" />
             <ImageBrush x:Key="Avatar" ImageSource="D:\2.png" />
+            
+            <DataTemplate DataType="{x:Type thisUI:TimestampUI}">
+                <studio:TimestampMessage HorizontalAlignment="Center"
+                                         Prefix="{Binding Prefix,Mode=OneWay}"
+                                         CurrentTime="{Binding Suffix,Mode=OneWay}"/>
+            </DataTemplate>
 
+            <DataTemplate DataType="{x:Type thisUI:MutedAndUnMutedEventUI}">
+                <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
+                                                Content="{Binding Content}"
+                                                HorizontalAlignment="Center"/>
+            </DataTemplate>
 
-
+            
+            <DataTemplate DataType="{x:Type thisUI:MemberJoinEventUI}">
+                <studio:MemberJoinMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
+                                                 Content="{Binding Content,Mode=OneWay}"
+                                                 WelcomeContent="点击欢迎！"
+                                                 HorizontalAlignment="Center"/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type thisUI:MemberLeaveEventUI}">
+                <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
+                                                Content="{Binding Content,Mode=OneWay}"
+                                                HorizontalAlignment="Center"/>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -206,28 +230,24 @@
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
-                        <ItemsControl>
+                        <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
                             <studio:UserEventMessageControl CharacterName="Test"
                                                             Content="退群"
                                                             HorizontalAlignment="Center"/>
-
-                            <studio:MemberJoinMessageControl CharacterName="Test"
-                                                             Content="加入了本群"
-                                                             WelcomeContent="点击欢迎！"
-                                                             HorizontalAlignment="Center"/>
 
 
                             <studio:PlainTextMessage CharacterName="Test"
                                                      Content="加入了本群"/>
                             
                             <studio:ImageChatMessage CharacterName="Test"
-                                                 Image="E:\1.jpg"/>
+                                                     Image="E:\1.jpg"/>
 
                             <studio:PlainTextMessage CharacterName="Test"
                                                      Content="聊天内容"
                                                      IsSelf="True"/>
+                            
                             <studio:TimestampMessage HorizontalAlignment="Center"
-                                                     RelativeString="晚上"
+                                                     Prefix="晚上"
                                                      CurrentTime="19:32"/>
                         </ItemsControl>
                     </ScrollViewer>

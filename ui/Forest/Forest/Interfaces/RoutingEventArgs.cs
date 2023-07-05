@@ -35,6 +35,16 @@
         {
             Args = new object[4]
         };
+
+        public Parameter()
+        {
+        }
+
+        public Parameter(object[] args)
+        {
+            Args = args;
+        }
+
         /// <summary>
         /// 参数
         /// </summary>

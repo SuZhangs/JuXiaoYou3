@@ -194,7 +194,6 @@
 
     <ItemGroup>
         <Folder Include="Models\Socials\" />
-        <Folder Include="Pages\Interactions\Dialogs\" />
     </ItemGroup>
 
     <Import Project="..\..\frameworks\MigaStudio.Version\MigaStudio.Version.projitems" Label="Shared" />

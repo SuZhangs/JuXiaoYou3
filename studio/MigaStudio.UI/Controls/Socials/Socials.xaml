@@ -848,7 +848,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Foreground="#777777"
                                        Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=RelativeString,Mode=OneWay}" />
+                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Prefix,Mode=OneWay}" />
                             <TextBlock Foreground="#777777"
                                        Margin="3 0"
                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CurrentTime,Mode=OneWay}" />

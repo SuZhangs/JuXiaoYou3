@@ -18,6 +18,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
         }
 
+        #region Load
+
+        
         private void LoadFromChannel()
         {
             if (Channel is null ||
@@ -25,6 +28,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 return;
             }
+
+            LoadMembers();
+            
+            //
+            // 加载映射
+            LoadMapper();
+            
+            Channel.Messages
+                   .ForEach(x => AddMessageTo(x, false));
+        }
+
+        private void LoadMembers()
+        {
+            foreach (var member in Channel.Members
+                                          .Where(member => MemberMapper.TryAdd(member.Id, member)))
+            {
+                TotalMemberCollection.Add(member);
+            }
+
+            var available = Channel.AvailableMembers
+                                   .Select(x => MemberMapper.TryGetValue(x, out var c) ? c : null)
+                                   .Where(x => x is not null);
+
+            AvailableMemberCollection.AddMany(available, true);
+
+        }
+
+        private void LoadMapper()
+        {
+            
             
             MemberAliasMapper.Clear();
             MemberRoleMapper.Clear();
@@ -70,6 +103,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             MemberTitleMapper.AddMany(Channel.Titles);
             MemberRoleMapper.AddMany(Channel.Roles);
         }
+
+        #endregion
+        
 
         private void SaveToChannel()
         {

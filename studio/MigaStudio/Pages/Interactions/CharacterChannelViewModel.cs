@@ -3,25 +3,48 @@ using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
+using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
 using Acorisoft.FutureGL.MigaUtils.Collections;
 
 namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     public partial class CharacterChannelViewModel : TabViewModel
     {
+        private readonly Dictionary<string, Dictionary<string, string>> MemberAliasMapper;
+        private readonly Dictionary<string, MemberRole>                 MemberRoleMapper;
+        private readonly Dictionary<string, string>                     MemberTitleMapper;
+        private readonly Dictionary<string, MemberCache>                MemberMapper;
+        private readonly ObservableCollection<MemberCache>              TotalMemberCollection;
+        private readonly ObservableCollection<MemberCache>              AvailableMemberCollection;
+
         public CharacterChannelViewModel()
         {
+            MemberAliasMapper         = new Dictionary<string, Dictionary<string, string>>();
+            MemberRoleMapper          = new Dictionary<string, MemberRole>();
+            MemberTitleMapper         = new Dictionary<string, string>();
+            MemberMapper              = new Dictionary<string, MemberCache>();
+            TotalMemberCollection     = new ObservableCollection<MemberCache>();
+            Members                   = new ReadOnlyObservableCollection<MemberCache>(TotalMemberCollection);
+            Messages                  = new ObservableCollection<MessageUI>();
+            LatestSpeakers            = new ObservableCollection<MemberCache>();
+            AvailableMemberCollection = new ObservableCollection<MemberCache>();
+            AvailableMembers          = new ReadOnlyObservableCollection<MemberCache>(AvailableMemberCollection);
+
+            AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);
+            AddMemberLeaveCommand         = AsyncCommand(AddMemberLeaveCommandImpl);
+            AddMemberMutedCommand        = AsyncCommand(AddMemberMutedCommandImpl);
+            AddMemberUnMutedCommand      = AsyncCommand(AddMemberUnMutedCommandImpl);
+            AddTimestampCommand          = AsyncCommand(AddTimestampCommandImpl);
             AddPlainTextCommand          = Command(AddPlainTextCommandImpl);
             SetCompositionMessageCommand = AsyncCommand(SetCompositionMessageImpl);
-            
         }
-        
+
         private void Save()
         {
             //
             // 
             SetDirtyState(false);
-            
+
             //
             // 保存信息
             SaveToChannel();
@@ -30,17 +53,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         protected override void OnStart(Parameter parameter)
         {
             Channel = new Channel();
-            
+
             //
             // 加载
             LoadFromChannel();
 
             //
             // 默认发言人
-            if (Speaker is null)
-            {
-            }
-            
+            Speaker ??= AvailableMembers.FirstOrDefault();
+
             base.OnStart(parameter);
         }
     }

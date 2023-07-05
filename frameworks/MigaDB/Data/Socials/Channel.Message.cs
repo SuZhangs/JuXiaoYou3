@@ -15,7 +15,7 @@
         /// <summary>
         /// 发送的内容。
         /// </summary>
-        public string RelativeString { get; set; }
+        public string TimestampPrefix { get; set; }
 
         /// <summary>
         /// 发送的内容。
@@ -36,6 +36,7 @@
     public enum MessageType
     {
         Audio,
+        Emoji,
         File,
         Image,
         Gif,
@@ -49,5 +50,6 @@
         Muted,
         MemberJoin,
         MemberLeave,
+        UnMuted,
     }
 }
