@@ -189,7 +189,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         private async Task EditImpl(DirectorySupportUI parent)
         {
-            var r = await SingleLineViewModel.String(Language.GetText("text.AddKeyword"));
+            var r = await SingleLineViewModel.String(Language.GetText("text.AddKeyword"), parent.Name);
 
             if (!r.IsFinished)
             {

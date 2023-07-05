@@ -126,7 +126,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 return;
             }
-            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle, block.Name);
 
             if (!r.IsFinished)
             {

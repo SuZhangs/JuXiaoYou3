@@ -47,6 +47,12 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
                 await this.Error(SubSystemString.EmptyName);
                 return;
             }
+            
+            if (string.IsNullOrEmpty(ForeignName))
+            {
+                await this.Error(SubSystemString.EmptyName);
+                return;
+            }
 
             if (opendlg.ShowDialog() != true)
             {

@@ -102,7 +102,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            var r1 = await MultiLineViewModel.String(SubSystemString.EditValueTitle);
+            var r1 = await MultiLineViewModel.String(SubSystemString.EditValueTitle, item.Content);
 
             if (!r1.IsFinished)
             {

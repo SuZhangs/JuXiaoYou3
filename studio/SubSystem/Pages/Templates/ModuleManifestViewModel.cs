@@ -73,7 +73,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 return;
             }
 
-            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle, preset.Name);
 
             if (!r.IsFinished)
             {

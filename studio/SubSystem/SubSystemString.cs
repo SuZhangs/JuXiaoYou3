@@ -411,6 +411,7 @@
         public static string ImageTooSmall => GetText("text.ImageTooSmall");
         public static string ImageTooBig => GetText("text.ImageTooBig");
         public static string EmptyName => GetText("text.EmptyName");
+        public static string EmptyForeignName => GetText("text.EmptyForeignName");
         public static string EmptyIntro => GetText("text.EmptyIntro");
         public static string EmptyAuthor => GetText("text.EmptyAuthor");
         public static string EmptyValue => GetText("text.EmptyValue");

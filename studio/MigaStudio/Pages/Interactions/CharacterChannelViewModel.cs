@@ -11,6 +11,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     {
         public CharacterChannelViewModel()
         {
+            AddPlainTextCommand          = Command(AddPlainTextCommandImpl);
             SetCompositionMessageCommand = AsyncCommand(SetCompositionMessageImpl);
             
         }

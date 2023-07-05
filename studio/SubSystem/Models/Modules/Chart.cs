@@ -192,7 +192,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Modules
                 return;
             }
 
-            var r = await SingleLineViewModel.String(Language.GetText("text.Edit"));
+            var r = await SingleLineViewModel.String(Language.GetText("text.Edit"), item);
 
             if (r.IsFinished && !string.IsNullOrEmpty(r.Value))
             {

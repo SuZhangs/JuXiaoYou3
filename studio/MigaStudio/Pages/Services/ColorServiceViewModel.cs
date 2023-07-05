@@ -74,7 +74,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle, mapping.Name);
             if (!r.IsFinished)
             {
                 return;
@@ -122,7 +122,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 return;
             }
 
-            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle);
+            var r = await SingleLineViewModel.String(SubSystemString.EditNameTitle, keyword);
             if (!r.IsFinished)
             {
                 return;

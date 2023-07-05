@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Acorisoft.FutureGL.Forest.Controls;
+using ImTools;
 
 namespace Acorisoft.FutureGL.Forest.Views
 {
@@ -17,8 +18,15 @@ namespace Acorisoft.FutureGL.Forest.Views
 
         protected override void OnStart(RoutingEventArgs parameter)
         {
-            var param = parameter.Parameter;
-            Title = param.Args[0]?.ToString();
+            var param = parameter.Parameter
+                                 .Args;
+            Title = param[0]?.ToString();
+
+            if (param.Length > 1)
+            {
+                Text = param[1]?.ToString();
+            }
+            
             base.OnStart(parameter);
         }
 
@@ -49,7 +57,13 @@ namespace Acorisoft.FutureGL.Forest.Views
         public static Task<Op<string>> String(string title) => DialogService()
                                                        .Dialog<string>(new SingleLineViewModel(), new Parameter
                                                        {
-                                                           Args = new []{ title }
+                                                           Args = new object[]{ title }
                                                        });
+        
+        public static Task<Op<string>> String(string title, string value) => DialogService()
+            .Dialog<string>(new SingleLineViewModel(), new Parameter
+            {
+                Args = new object[]{ title ,value }
+            });
     }
 }
