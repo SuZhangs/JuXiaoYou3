@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Core;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
@@ -13,9 +14,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
     {
         public AlbumPartViewModel()
         {
-            Collection = new ObservableCollection<Album>();
+            Collection    = new ObservableCollection<Album>();
             ImageEngine = Studio.DatabaseManager()
                                 .GetEngine<ImageEngine>();
+            
+            EditCommand = AsyncCommand<Album>(RemoveItem, HasItem);
             OpenCommand = Command<Album>(OpenAlbumImpl, HasItem);
         }
 
@@ -60,6 +63,24 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                     this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
+        }
+
+        public async Task EditItem(Album album)
+        {
+            if (album is null)
+            {
+                return;
+            }
+
+            var r = await SingleLineViewModel.String(SR.EditNameTitle, album.Name);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            album.Name = r.Value;
+            SaveOperation();
         }
 
         protected override async Task RemoveItem(Album part)
@@ -140,11 +161,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
         protected override void UpdateCommandState()
         {
             OpenCommand.NotifyCanExecuteChanged();
+            EditCommand.NotifyCanExecuteChanged();
         }
 
         public ImageEngine ImageEngine { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Album> OpenCommand { get; }
+        public AsyncRelayCommand<Album> EditCommand { get; }
     }
 }

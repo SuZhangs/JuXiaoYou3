@@ -100,10 +100,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             ChangeAvatarCommand   = AsyncCommand(ChangeAvatarImpl);
             EditCommand           = Command(EditImpl);
             AddAlbumCommand       = AsyncCommand(AddAlbumImpl);
-            RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl, HasItem);
-            ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl, HasItem);
-            ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl, HasItem);
-            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl, HasItem);
+            RemoveAlbumCommand    = AsyncCommand<Album>(RemoveAlbumImpl);
+            EditAlbumCommand    = AsyncCommand<Album>(EditAlbumImpl);
+            ShiftUpAlbumCommand   = Command<Album>(ShiftUpAlbumImpl);
+            ShiftDownAlbumCommand = Command<Album>(ShiftDownAlbumImpl);
+            OpenAlbumCommand      = Command<Album>(OpenAlbumImpl);
             
             AddTimelineAgeCommand         = AsyncCommand(AddTimelineAgeImpl);
             AddTimelineAgeBeforeCommand   = AsyncCommand<TimelineConcept>(AddTimelineAgeBeforeImpl);
@@ -129,6 +130,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             PictureCollection.AddMany(_databaseProperty.Album, true);
             SelectedAlbum = PictureCollection.FirstOrDefault();
             InitializeTimelines();
+        }
+
+        protected override void OnResume()
+        {
+            AlbumButtonUpdateHandler?.Invoke();
+            base.OnResume();
         }
 
         public override void Stop()

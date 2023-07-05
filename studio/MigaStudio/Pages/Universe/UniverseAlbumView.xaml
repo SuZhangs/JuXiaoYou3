@@ -20,26 +20,38 @@
                             Command="{Binding AddAlbumCommand}"
                             Icon="{StaticResource FeatherIcon.PlusCircle}"
                             ShowText="True" />
+            
+            
+            <ftk:ToolButton x:Name="Edit"
+                            Content="{f:Language global.Edit}"
+                            Command="{Binding EditAlbumCommand}"
+                            CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
+                            Icon="{StaticResource FeatherIcon.Edit}"
+                            ShowText="True" />
 
-            <ftk:ToolButton Content="{f:Language global.Remove}"
+            <ftk:ToolButton x:Name="Remove"
+                            Content="{f:Language global.Remove}"
                             Command="{Binding RemoveAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.MinusCircle}"
                             ShowText="True" />
 
-            <ftk:ToolButton Content="{f:Language global.Up}"
+            <ftk:ToolButton x:Name="Up"
+                            Content="{f:Language global.Up}"
                             Command="{Binding ShiftUpAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowUp}"
                             ShowText="True" />
 
-            <ftk:ToolButton Content="{f:Language global.Down}"
+            <ftk:ToolButton x:Name="Down"
+                            Content="{f:Language global.Down}"
                             Command="{Binding ShiftDownAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.ArrowDown}"
                             ShowText="True" />
 
-            <ftk:ToolButton Content="{f:Language global.Presentation}"
+            <ftk:ToolButton x:Name="Open"
+                            Content="{f:Language global.Presentation}"
                             Command="{Binding OpenAlbumCommand}"
                             CommandParameter="{Binding SelectedAlbum,Mode=OneWay}"
                             Icon="{StaticResource FeatherIcon.Upload}"
@@ -49,11 +61,12 @@
         <DockPanel>
             <f:ListBox DockPanel.Dock="Right"
                        ItemsSource="{Binding PictureCollection,Mode=OneWay}"
-                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}">
+                       SelectedItem="{Binding SelectedAlbum,Mode=TwoWay}"
+                       Width="280">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type m:Album}">
                         <TextBlock Margin="8"
-                                   Text="{Binding Source}"
+                                   Text="{Binding Name,Mode=OneWay}"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center" />
                     </DataTemplate>

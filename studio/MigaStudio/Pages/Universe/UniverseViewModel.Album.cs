@@ -1,5 +1,6 @@
 ﻿using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Interfaces;
+using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB;
 using Acorisoft.FutureGL.MigaStudio.Utilities;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -44,6 +45,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     this.SuccessfulNotification(SubSystemString.OperationOfAddIsSuccessful);
                 });
             }
+        }
+        
+        
+        public async Task EditAlbumImpl(Album album)
+        {
+            if (album is null)
+            {
+                return;
+            }
+
+            var r = await SingleLineViewModel.String(SR.EditNameTitle, album.Name);
+
+            if (!r.IsFinished)
+            {
+                return;
+            }
+
+            album.Name = r.Value;
+            Save();
         }
 
         private async Task RemoveAlbumImpl(Album part)
@@ -97,12 +117,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             set
             {
                 SetValue(ref _selectedAlbum, value);
-                RemoveAlbumCommand.NotifyCanExecuteChanged();
-                ShiftDownAlbumCommand.NotifyCanExecuteChanged();
-                ShiftUpAlbumCommand.NotifyCanExecuteChanged();
-                OpenAlbumCommand.NotifyCanExecuteChanged();
+                AlbumButtonUpdateHandler?.Invoke();
             }
         }
+        
+        public Action AlbumButtonUpdateHandler { get; set; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand AddAlbumCommand { get; }
@@ -115,6 +134,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         [NullCheck(UniTestLifetime.Constructor)]
         public RelayCommand<Album> OpenAlbumCommand { get; }
+        [NullCheck(UniTestLifetime.Constructor)]
+        public AsyncRelayCommand<Album> EditAlbumCommand { get; }
 
         [NullCheck(UniTestLifetime.Constructor)]
         public AsyncRelayCommand<Album> RemoveAlbumCommand { get; }

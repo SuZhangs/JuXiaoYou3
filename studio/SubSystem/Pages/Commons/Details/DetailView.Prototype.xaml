@@ -55,7 +55,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type m:Album}">
                         <TextBlock Margin="8"
-                                   Text="{Binding Source}"
+                                   Text="{Binding Name,Mode=OneWay}"
                                    TextTrimming="CharacterEllipsis"
                                    VerticalAlignment="Center"/>
                     </DataTemplate>

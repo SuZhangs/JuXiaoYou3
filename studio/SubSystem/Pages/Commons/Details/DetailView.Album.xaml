@@ -30,6 +30,12 @@
                                 Icon="{StaticResource FeatherIcon.PlusCircle}"
                                 ShowText="True" />
 
+                <ftk:ToolButton Content="{f:Language global.edit}"
+                                Command="{Binding EditCommand}"
+                                CommandParameter="{Binding Selected,Mode=OneWay}"
+                                Icon="{StaticResource FeatherIcon.Edit}"
+                                ShowText="True" />
+
                 <ftk:ToolButton Content="{f:Language global.Remove}"
                                 Command="{Binding RemoveCommand}"
                                 CommandParameter="{Binding Selected,Mode=OneWay}"
@@ -59,11 +65,12 @@
                 <f:ListBox DockPanel.Dock="Right"
                            ItemsSource="{Binding Collection,Mode=OneWay}"
                            SelectedItem="{Binding Selected,Mode=TwoWay}"
-                           Style="{StaticResource ClearStyle.ListBox}">
+                           Style="{StaticResource ClearStyle.ListBox}"
+                           Width="280">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="{x:Type m:Album}">
                             <TextBlock Margin="8"
-                                       Text="{Binding Source}"
+                                       Text="{Binding Name,Mode=OneWay}"
                                        TextTrimming="CharacterEllipsis"
                                        VerticalAlignment="Center" />
                         </DataTemplate>

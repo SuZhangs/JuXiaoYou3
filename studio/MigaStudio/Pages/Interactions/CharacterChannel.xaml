@@ -36,7 +36,8 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:PlainTextUI}">
-                <studio:PlainTextMessage CharacterName="{Binding MemberName,Mode=OneWay}"
+                <studio:PlainTextMessage CharacterName="{Binding Member.Name,Mode=OneWay}"
+                                         CharacterAvatar="{Binding Member.Avatar}"
                                          IsSelf="{Binding IsSelf,Mode=OneWay}"
                                          Content="{Binding Content}"/>
             </DataTemplate>

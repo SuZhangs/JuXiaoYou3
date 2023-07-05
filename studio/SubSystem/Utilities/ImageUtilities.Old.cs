@@ -125,8 +125,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Utilities
 
             var w          = image.Width;
             var h          = image.Height;
-            var h1         = w;
-            var w1         = h;
+            var h1         = h;
+            var w1         = w;
             var horizontal = w > 1920;
 
             if (horizontal || h > 1080)
