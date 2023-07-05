@@ -25,7 +25,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             };
         }
 
-        protected PresentationDataUI(IPresentationData data) => IsMetadata = data.IsMetadata;
+        protected PresentationDataUI(IPresentationData data)
+        {
+            IsMetadata = data.IsMetadata;
+        }
 
         public virtual void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
         {
@@ -274,8 +277,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
         
         public PresentationColorDataUI(IPresentationData value) : base(value)
         {
-            Name     = value.Name;
-            Metadata = value.ValueSourceID;
+            Name       = value.Name;
+            Metadata   = value.ValueSourceID;
         }
 
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)

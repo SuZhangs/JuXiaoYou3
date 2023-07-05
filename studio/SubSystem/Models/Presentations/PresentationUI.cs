@@ -1,9 +1,11 @@
-﻿using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
+﻿using System.Windows.Media;
+using Acorisoft.FutureGL.MigaDB.Data.Metadatas;
 using Acorisoft.FutureGL.MigaDB.Data.Templates;
 using Acorisoft.FutureGL.MigaDB.Data.Templates.Presentations;
 using Acorisoft.FutureGL.MigaDB.Models;
 using Acorisoft.FutureGL.MigaStudio.Core;
 using Acorisoft.FutureGL.MigaUtils.Foundation;
+using Brush = System.Windows.Media.Brush;
 
 namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
 {
@@ -59,7 +61,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
 
     public class RarityPresentationUI : PresentationUI
     {
-        private string _color;
+        private string _hex;
         private string _value;
 
         public override void Update(Func<string, Metadata> metadataTracker, Func<string, ModuleBlock> blockTracker)
@@ -75,7 +77,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
                 Value = v?.GetValue().SubString(200);
             }
 
-            Color = cs.GetColor(Value);
+            Hex = cs.GetColor(Value);
+            Brush = new SolidColorBrush(Xaml.FromHex(Hex));
         }
 
         public string ValueSource { get; init; }
@@ -99,13 +102,25 @@ namespace Acorisoft.FutureGL.MigaStudio.Models.Presentations
             get => _value;
             set => SetValue(ref _value, value);
         }
+        
         /// <summary>
-        /// 获取或设置 <see cref="Color"/> 属性。
+        /// 获取或设置 <see cref="Hex"/> 属性。
         /// </summary>
-        public string Color
+        public string Hex
         {
-            get => _color;
-            set => SetValue(ref _color, value);
+            get => _hex;
+            set => SetValue(ref _hex, value);
+        }
+
+        private Brush _brush;
+
+        /// <summary>
+        /// 获取或设置 <see cref="Brush"/> 属性。
+        /// </summary>
+        public Brush Brush
+        {
+            get => _brush;
+            set => SetValue(ref _brush, value);
         }
     }
 

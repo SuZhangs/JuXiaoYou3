@@ -37,7 +37,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             Mappings.Add(m);
             RarityProperty.Mappings
                     .Add(m);
-            ColorService.AddOrUpdate(r.Value, m.Color);
             SetDirtyState();
         }
 
@@ -57,14 +56,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             RarityProperty.Mappings
                     .Remove(mapping);
             SetDirtyState();
-
-            if (mapping.Keywords.Count > 0)
-            {
-                foreach (var keyword in mapping.Keywords)
-                {
-                    ColorService.Remove(keyword);
-                }
-            }
         }
 
         private async Task EditMappingImpl(ColorMapping mapping)
@@ -108,11 +99,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             mapping.Keywords.Add(k);
             Keywords.Add(k);
             SetDirtyState();
-
-            if (!string.IsNullOrEmpty(mapping.Color))
-            {
-                ColorService.AddOrUpdate(k, mapping.Color);
-            }
         }
         
         private async Task EditKeywordImpl(string keyword)
@@ -138,8 +124,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
             Selected.Keywords.Remove(keyword);
             Selected.Keywords.Add(k);
-            ColorService.Remove(keyword);
-            ColorService.AddOrUpdate(k, Selected.Color);
             Keywords.Remove(keyword);
             Keywords.Add(k);
             SetDirtyState();
@@ -164,7 +148,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             
             
             Selected.Keywords.Remove(keyword);
-            ColorService.Remove(keyword);
             Keywords.Remove(keyword);
             SetDirtyState();
         }
@@ -200,7 +183,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                 {
                     SetDirtyState();
                     Selected.Color = value;
-                    ColorService.Changed(Selected.Keywords, value);
                 }
             }
         }

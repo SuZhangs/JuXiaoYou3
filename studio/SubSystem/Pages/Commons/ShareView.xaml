@@ -87,7 +87,7 @@
 
 
             <DataTemplate DataType="{x:Type thisModel:RarityPresentationUI}">
-                <Border Background="{Binding Color,Mode=OneWay}"
+                <Border Background="{Binding Brush,Mode=OneWay}"
                         CornerRadius="6"
                         Effect="{StaticResource MenuItem.ShadowEffect}"
                         Height="96"

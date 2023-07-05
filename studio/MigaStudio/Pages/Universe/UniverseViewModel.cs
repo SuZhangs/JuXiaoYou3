@@ -288,6 +288,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
             SetDirtyState(false);
             Database.Upsert(_databaseProperty);
             SystemSetting.Save();
+            ColorService.InvalidateDataSource();
         }
 
         public override void Suspend()
