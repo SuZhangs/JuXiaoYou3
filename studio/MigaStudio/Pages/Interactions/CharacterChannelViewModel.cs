@@ -66,6 +66,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Titles = new Dictionary<string, string>(),
             };
 
+            Cache = new ChannelCache { AvailableMembers = new List<string>() };
+
             //
             // 加载
             LoadFromChannel();

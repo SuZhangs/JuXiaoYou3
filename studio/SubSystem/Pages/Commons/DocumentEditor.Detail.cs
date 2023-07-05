@@ -129,15 +129,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 SetValue(ref _selectedDetailPart, value);
 
-                if (_selectedDetailPart is IPartOfDetail detail)
-                {
-                    DetailPart = ServiceViewContainer.Build(this, detail);
-                    (DetailPart.DataContext as ViewModelBase)?.Start();
-                }
-                else
+                if (_selectedDetailPart is not IPartOfDetail detail)
                 {
                     DetailPart = value as FrameworkElement;
+                    return;
                 }
+                
+                if (detail is DetailPartSettingPlaceHolder)
+                {
+                    DetailPart = new DetailPartSettingView
+                    {
+                        DataContext = this
+                    };
+                    return;
+                }
+                
+                DetailPart = ServiceViewContainer.Build(this, detail);
+                (DetailPart.DataContext as ViewModelBase)?.Start();
             }
         }
 

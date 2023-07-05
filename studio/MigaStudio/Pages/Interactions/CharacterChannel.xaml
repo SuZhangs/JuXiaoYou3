@@ -35,7 +35,13 @@
                                                 HorizontalAlignment="Center"/>
             </DataTemplate>
 
-            
+            <DataTemplate DataType="{x:Type thisUI:PlainTextUI}">
+                <studio:PlainTextMessage CharacterName="{Binding MemberName,Mode=OneWay}"
+                                         IsSelf="{Binding IsSelf,Mode=OneWay}"
+                                         Content="{Binding Content}"/>
+            </DataTemplate>
+
+
             <DataTemplate DataType="{x:Type thisUI:MemberJoinEventUI}">
                 <studio:MemberJoinMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                  Content="{Binding Content,Mode=OneWay}"
@@ -197,13 +203,13 @@
                     <f:CallToAction DockPanel.Dock="Right"
                                     Content="发送"
                                     CornerRadius="8"
-                                    Command="{Binding AddPlainTextMessageCommand}"
+                                    Command="{Binding AddPlainTextCommand}"
                                     CommandParameter="{Binding Speaker,Mode=OneWay}"
                                     Margin="8 0 0 0"
                                     Padding="20 10"
                                     VerticalAlignment="Top" />
                     <f:MultiLine Height="128" 
-                                 Text="{Binding MessageContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding Message,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
             </Grid>
         </Border>
@@ -211,17 +217,18 @@
         <!--
             预览：
             用来显示选定的人物的联系人群聊
-        -->
-        <Viewbox Grid.Column="2"
-                 Stretch="Uniform"
-                 StretchDirection="Both">
-            <Border x:Name="Canvas">
+        -->      
+        <Viewbox Grid.Column="2">
+            <Border x:Name="Canvas"
+                Grid.Column="2"
+                Height="1920"
+                Width="1080">
                 <studio:SocialSoftwareLayout PendingContent="{Binding CompositionMessage,Mode=OneWay}"
                                              Layout="QQGroup">
                     <studio:SocialSoftwareLayout.ChannelName>
                         <MultiBinding StringFormat="{}{0} ({1})">
                             <Binding Path="ChannelName" Mode="OneWay" />
-                            <Binding Path="Characters.Count" Mode="OneWay" />
+                            <Binding Path="Members.Count" Mode="OneWay" />
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelName>
                     <studio:SocialSoftwareLayout.ChannelSubtitle>
@@ -231,7 +238,7 @@
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">
                         <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
-                            
+
                         </ItemsControl>
                     </ScrollViewer>
                 </studio:SocialSoftwareLayout>

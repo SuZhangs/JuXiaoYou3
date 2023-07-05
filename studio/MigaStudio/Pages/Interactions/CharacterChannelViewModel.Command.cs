@@ -40,13 +40,18 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Type     = MessageType.MemberJoin
                 };
                 
-                AddMessageTo(msg);
+                MemberMapper.TryAdd(member.Id, member);
                 AvailableMemberCollection.Add(member);
                 TotalMemberCollection.Add(member);
                 Channel.Members
                        .Add(member);
                 Channel.AvailableMembers
                        .Add(member.Id);
+                Cache.AvailableMembers
+                     .Add(member.Id);
+                AddMessageTo(msg);
+
+                Speaker ??= member;
             }
         }
 
@@ -70,10 +75,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Type = MessageType.MemberLeave
                 };
                 
-                AddMessageTo(msg);
                 AvailableMemberCollection.Remove(member);
                 Channel.AvailableMembers
                        .Remove(member.Id);
+                Cache.AvailableMembers
+                     .Remove(member.Id);
+                AddMessageTo(msg);
             }
         }
 
@@ -228,9 +235,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 MessageUI ui = msg.Type switch
                 {
-                    MessageType.PlainText   => new PlainTextUI(msg, FindMemberNameById),
-                    MessageType.Emoji       => new EmojiUI(msg, FindMemberNameById),
-                    MessageType.Image       => new ImageUI(msg, FindMemberNameById),
+                    MessageType.PlainText   => new PlainTextUI(msg, FindMemberById),
+                    MessageType.Emoji       => new EmojiUI(msg, FindMemberById),
+                    MessageType.Image       => new ImageUI(msg, FindMemberById),
                     MessageType.Timestamp   => new TimestampUI(msg),
                     MessageType.Muted       => new MutedAndUnMutedEventUI(msg, FindMemberNameById, FindEventContentByType),
                     MessageType.MemberJoin  => new MemberJoinEventUI(msg, FindMemberNameById),
@@ -243,10 +250,36 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 if (addToChannel) Channel.Messages.Add(msg);
             }
         }
+        
+        private Tuple<string, string,MemberRole, string> FindMemberById(string id)
+        {
+            string     name;
+            string     avatar;
+            MemberRole role;
+            string     title;
+            
+            string     alias;
+            if (Speaker is not null &&
+                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
+            {
+                if (dict.TryGetValue(id, out alias))
+                {
+                }
+            }
+            
+            
+            if (MemberMapper.TryGetValue(id, out var mem))
+            {
+                
+            }
+
+            return new Tuple<string, string, MemberRole, string>(string.Empty, string.Empty, MemberRole.Member, string.Empty);
+        }
 
         private string FindMemberNameById(string id)
         {
-            if (MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
+            if (Speaker is not null &&
+                MemberAliasMapper.TryGetValue(Speaker.Id, out var dict))
             {
                 if (dict.TryGetValue(id, out var name))
                 {

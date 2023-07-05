@@ -209,13 +209,11 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type this:SocialSoftwareLayout}">
                             <Border>
-                                <Grid Background="{StaticResource Brush.QQ.Background}"
-                                      Height="720"
-                                      Width="405">
+                                <Grid Background="{StaticResource Brush.QQ.Background}">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="72" />
+                                        <RowDefinition Height="120" />
                                         <RowDefinition Height="1*" />
-                                        <RowDefinition Height="64" />
+                                        <RowDefinition Height="120" />
                                     </Grid.RowDefinitions>
 
                                     <!--
@@ -236,34 +234,34 @@
                                                   Stretch="Uniform"
                                                   Stroke="Black"
                                                   StrokeThickness="2"
-                                                  Height="42"
-                                                  Width="42" />
+                                                  Height="87"
+                                                  Width="87" />
 
                                             <DockPanel Grid.Column="1"
                                                        Margin="16 0 0 0"
                                                        VerticalAlignment="Center">
                                                 <TextBlock DockPanel.Dock="Top"
                                                            Foreground="Black"
-                                                           FontSize="17"
+                                                           FontSize="31"
                                                            FontWeight="Heavy"
                                                            Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ChannelName,Mode=OneWay}" />
                                                 <TextBlock Foreground="Black"
-                                                           FontSize="11"
+                                                           FontSize="17"
                                                            Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=ChannelSubtitle,Mode=OneWay}" />
 
                                             </DockPanel>
 
                                             <Image Grid.Column="2"
-                                                   Margin="4 0 16 0"
+                                                   Margin="16 0 16 0"
                                                    Source="{StaticResource Phone}"
                                                    Stretch="Uniform"
-                                                   Width="19" />
+                                                   Width="37" />
 
                                             <Image Grid.Column="3"
-                                                   Margin="4 0 16 0"
+                                                   Margin="16 0 16 0"
                                                    Source="{StaticResource Menu}"
                                                    Stretch="Uniform"
-                                                   Width="21" />
+                                                   Width="41" />
                                         </Grid>
                                     </Border>
 
@@ -298,14 +296,14 @@
                                                    Margin="8 0 "
                                                    Source="{StaticResource Mic}"
                                                    Stretch="Uniform"
-                                                   Width="17" />
+                                                   Width="37" />
 
                                             <Border Grid.Column="1"
                                                     Background="{StaticResource Brush.QQ.Background}"
                                                     CornerRadius="3"
-                                                    Margin="16 0"
+                                                    Margin="24 0"
                                                     Padding="12 0"
-                                                    Height="48"
+                                                    Height="72"
                                                     VerticalAlignment="Center">
                                                 <TextBlock FontSize="17"
                                                            Foreground="Black"
@@ -314,17 +312,17 @@
                                             </Border>
 
                                             <Image Grid.Column="2"
-                                                   Margin="4 0"
+                                                   Margin="8 0"
                                                    Source="{StaticResource Emoji}"
                                                    Stretch="Uniform"
-                                                   Width="23" />
+                                                   Width="47" />
 
 
                                             <Image Grid.Column="3"
-                                                   Margin="4 0"
+                                                   Margin="8 0"
                                                    Source="{StaticResource PlusCircle}"
                                                    Stretch="Uniform"
-                                                   Width="23" />
+                                                   Width="47" />
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -339,13 +337,11 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type this:SocialSoftwareLayout}">
                             <Border>
-                                <Grid Background="{StaticResource Brush.Wechat.Background}"
-                                      Height="720"
-                                      Width="405">
+                                <Grid Background="{StaticResource Brush.Wechat.Background}">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="72" />
+                                        <RowDefinition Height="120" />
                                         <RowDefinition Height="1*" />
-                                        <RowDefinition Height="64" />
+                                        <RowDefinition Height="120" />
                                     </Grid.RowDefinitions>
 
                                     <!--
@@ -460,8 +456,8 @@
 
     <Style TargetType="{x:Type this:PlainTextMessage}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
@@ -587,8 +583,8 @@
     
     <Style TargetType="{x:Type this:ImageChatMessage}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
@@ -712,8 +708,8 @@
     
     <Style TargetType="{x:Type this:EmojiImageMessage}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
@@ -836,8 +832,8 @@
 
     <Style TargetType="{x:Type this:TimestampMessage}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
@@ -861,25 +857,24 @@
 
     <Style TargetType="{x:Type this:MemberJoinMessageControl}">
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
-        <Setter Property="Margin" Value="0 2" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
+        <Setter Property="Margin" Value="0 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:MemberJoinMessageControl}">
                     <Border HorizontalAlignment="Center"
-                            Padding="8 4">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="#3fa0ff"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}" />
-                            <TextBlock Foreground="#777777"
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}" />
-                            <TextBlock Foreground="#3fa0ff" 
-                                       Margin="3 0"
-                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=WelcomeContent,Mode=OneWay}" />
-                        </StackPanel>
+                            Padding="8">
+                        <TextBlock FontSize="21"
+                                   Margin="3 0"
+                                   TextWrapping="Wrap">
+                                <Run Foreground="#3fa0ff"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}"/>
+                                <Run Foreground="#777777"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}"/>
+                                <Run Foreground="#3fa0ff"
+                                     Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=WelcomeContent,Mode=OneWay}"/>
+                        </TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -888,8 +883,8 @@
     
     <Style TargetType="{x:Type this:UserEventMessageControl}">
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="MinWidth" Value="256" />
-        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="MinWidth" Value="320" />
+        <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
