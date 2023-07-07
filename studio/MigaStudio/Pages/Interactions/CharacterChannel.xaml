@@ -77,6 +77,9 @@
             <DataTemplate DataType="{x:Type thisUI:PlainTextUI}">
                 <studio:PlainTextMessage CharacterName="{Binding Name,Mode=OneWay}"
                                          CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
+                                         CharacterTitle="{Binding Title,Mode=OneWay}"
+                                         CharacterTitleBrush="{Binding Brush,Mode=OneWay}"
+                                         ShowTitle="{Binding HasTitle,Mode=OneWay}"
                                          IsSelf="{Binding IsSelf,Mode=OneWay}"
                                          Content="{Binding Content}" />
             </DataTemplate>
@@ -156,13 +159,26 @@
             <HeaderedContentControl Grid.Row="1"
                                     Header="常用发言"
                                     Margin="0 8">
-                <ItemsControl ItemsSource="{Binding LatestSpeakers,Mode=OneWay}">
+                <f:ListBox SelectedItem="{Binding Speaker,Mode=TwoWay}"
+                           ItemsSource="{Binding LatestSpeakers,Mode=OneWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type thisModel:MemberCache}">
+                            <Border CornerRadius="64"
+                                    Margin="4"
+                                    Height="48"
+                                    Width="48">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar}}" />
+                                </Border.Background>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </f:ListBox>
             </HeaderedContentControl>
 
             <HeaderedContentControl Grid.Row="2"
@@ -192,10 +208,10 @@
 
                 <f:HeaderedMultiLine Grid.Row="1"
                                      Header="待发送的消息"
-                                     Margin="0 8 0 0"
-                                      Watermark="待发送的消息"
-                                      Text="{Binding CompositionMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      TextWrapping="Wrap" />
+                                     Margin="0 12 0 0"
+                                     Watermark="待发送的消息"
+                                     Text="{Binding CompositionMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     TextWrapping="Wrap" />
 
                 <WrapPanel Grid.Row="2"
                            Margin="0 16"
@@ -250,14 +266,29 @@
                                     Icon="{StaticResource FeatherIcon.LogOut}" 
                                     ShowText="True"/>
                     
-                    <ftk:ToolButton Content="添加表情"
-                                    Icon="{StaticResource FeatherIcon.Phone}"
-                                    Visibility="Collapsed"
+                    <ftk:ToolButton Content="添加管理员资格"
+                                    Command="{Binding AddMemberRoleCommand,Mode=OneWay}"
+                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
                                     ShowText="True" />
                     
-                    <ftk:ToolButton Content="添加表情"
-                                    Icon="{StaticResource FeatherIcon.Gift}"
-                                    Visibility="Collapsed" 
+                    <ftk:ToolButton Content="删除管理员资格"
+                                    Command="{Binding RemoveMemberRoleCommand,Mode=OneWay}"
+                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.Trash}"
+                                    ShowText="True"/>
+                    
+                    
+                    <ftk:ToolButton Content="添加头衔"
+                                    Command="{Binding AddMemberTitleCommand,Mode=OneWay}"
+                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.Plus}"
+                                    ShowText="True" />
+                    
+                    <ftk:ToolButton Content="删除头衔"
+                                    Command="{Binding RemoveMemberTitleCommand,Mode=OneWay}"
+                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
+                                    Icon="{StaticResource FeatherIcon.Trash}"
                                     ShowText="True"/>
                 </WrapPanel>
 
@@ -320,7 +351,7 @@
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Refresh}" 
                             Visibility="Collapsed"/>
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Save}" 
-                            Command=""/>
+                            Command="Save"/>
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}"
                             Command="{x:Static studio:Studio.CaptureCommand}"
                             CommandParameter="{Binding ElementName=Canvas,Mode=OneWay}" />

@@ -3,6 +3,7 @@ using System.Linq;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
+using Acorisoft.FutureGL.MigaDB.Utils;
 using Acorisoft.FutureGL.MigaStudio.Controls.Socials;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
 using Acorisoft.FutureGL.MigaUtils.Collections;
@@ -20,9 +21,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         public CharacterChannelViewModel()
         {
-            SocialEngine              = Studio.Engine<SocialEngine>();
-            DocumentEngine            = Studio.Engine<DocumentEngine>();
-            
+            SocialEngine   = Studio.Engine<SocialEngine>();
+            DocumentEngine = Studio.Engine<DocumentEngine>();
+
             MemberAliasMapper         = new Dictionary<string, Dictionary<string, string>>();
             MemberRoleMapper          = new Dictionary<string, MemberRole>();
             MemberTitleMapper         = new Dictionary<string, string>();
@@ -37,6 +38,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             SaveCommand                  = AsyncCommand(SaveWithNotification);
             AddImageCommand              = Command(AddImageCommandImpl);
             RemoveMessageCommand         = AsyncCommand<MessageUI>(RemoveMessageImpl);
+            AddMemberRoleCommand         = AsyncCommand<MemberCache>(AddMemberRoleImpl);
+            AddMemberTitleCommand        = AsyncCommand<MemberCache>(AddMemberTitleImpl);
+            RemoveMemberTitleCommand     = AsyncCommand<MemberCache>(RemoveMemberTitleImpl);
+            RemoveMemberRoleCommand      = AsyncCommand<MemberCache>(RemoveMemberRoleImpl);
             AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);
             AddMemberLeaveCommand        = AsyncCommand(AddMemberLeaveCommandImpl);
             AddMemberMutedCommand        = AsyncCommand(AddMemberMutedCommandImpl);
@@ -66,17 +71,31 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         protected override void OnStart(Parameter parameter)
         {
-            Channel = new Channel
+            var arg = parameter.Args;
+
+            if (arg is not null &&
+                arg.Length >= 2)
             {
-                Members = new List<MemberCache>(),
-                Messages = new List<MessageBase>(),
+                Channel = arg[0] as Channel;
+                Cache   = arg[1] as ChannelCache;
+            }
+
+            Channel ??= new Channel
+            {
+                Id               = ID.Get(),
+                Members          = new List<MemberCache>(),
+                Messages         = new List<MessageBase>(),
                 AvailableMembers = new List<string>(),
-                Alias = new List<string>(),
-                Roles = new Dictionary<string, MemberRole>(),
-                Titles = new Dictionary<string, string>(),
+                Alias            = new List<string>(),
+                Roles            = new Dictionary<string, MemberRole>(),
+                Titles           = new Dictionary<string, string>(),
             };
 
-            Cache = new ChannelCache { AvailableMembers = new List<string>() };
+            Cache ??= new ChannelCache
+            {
+                Id               = Channel.Id,
+                AvailableMembers = new List<string>()
+            };
 
             //
             // 加载
@@ -85,6 +104,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             //
             // 默认发言人
             Speaker ??= AvailableMembers.FirstOrDefault();
+            Title   =   Channel.Name;
 
             base.OnStart(parameter);
         }

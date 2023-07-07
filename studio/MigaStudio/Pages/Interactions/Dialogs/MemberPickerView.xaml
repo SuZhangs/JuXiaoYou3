@@ -7,10 +7,10 @@
                      xmlns:doc="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
                      xmlns:thisConverters="clr-namespace:Acorisoft.FutureGL.MigaStudio.Resources.Converters;assembly=SubSystem"
                      xmlns:thisModel="clr-namespace:Acorisoft.FutureGL.MigaDB.Data.Socials;assembly=MigaDB"
-                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions"
+                     xmlns:thisVM="clr-namespace:Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Dialogs"
                      mc:Ignorable="d"
                      d:DesignHeight="300" d:DesignWidth="300"
-                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:CharacterPickerViewModel}, IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type={x:Type thisVM:MemberPickerViewModel}, IsDesignTimeCreatable=True}"
                      Height="640"
                      Width="768">
     <UserControl.Resources>
@@ -42,7 +42,7 @@
                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    ItemsSource="{Binding Documents,Mode=OneWay}"
                    SelectedItem="{Binding Selected,Mode=TwoWay}"
-                   SelectionMode="Multiple">
+                   SelectionMode="{Binding Mode}">
             <f:ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>

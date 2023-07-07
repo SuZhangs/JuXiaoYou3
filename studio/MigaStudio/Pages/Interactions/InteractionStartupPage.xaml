@@ -18,12 +18,40 @@
         <ResourceDictionary>
             <thisProxy:InteractionStartupViewModelProxy x:Key="ViewModel" ViewModel="{Binding}" />
             <ImageBrush x:Key="Avatar" ImageSource="E:\1.png" />
-
+            <DataTemplate x:Key="Selected" DataType="{x:Type Model:MemberCache}">
+                <Border Background="{f:Brush BackgroundLevel2}"
+                        CornerRadius="3"
+                        Padding="16">
+                    <DockPanel>
+                        <Ellipse Height="64"
+                                 Width="64">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock FontSize="18"
+                                   FontWeight="Heavy"
+                                   Margin="16 0 0 0"
+                                   Text="{Binding Name,Mode=OneWay}"
+                                   VerticalAlignment="Center" />
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type Model:MemberCache}">
-                <DockPanel Margin="4"
+                <DockPanel Background="{x:Static f:Xaml.Transparent}"
+                           Margin="4"
                        Height="100"
                        Width="84">
+                    <DockPanel.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCharacterCommand}"
+                                        CommandParameter="{Binding}"
+                                        Header="{f:Language global.remove}"
+                                      Icon="{StaticResource FeatherIcon.Trash}"
+                                      IconSize="17"/>
+                        </f:ContextMenu>
+                    </DockPanel.ContextMenu>
                     <Border DockPanel.Dock="Top"
                         CornerRadius="64"
                         Height="64"
@@ -42,73 +70,58 @@
                 </DockPanel>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Model:SocialCharacter}">
-                <Border Background="{f:Brush BackgroundLevel2}"
-                        CornerRadius="8"
-                        Margin="0 4"
-                        Padding="16 8">
-                    <Border.ContextMenu>
+            <DataTemplate DataType="{x:Type Model:ChannelCache}">
+                <DockPanel Background="{x:Static f:Xaml.Transparent}"
+                           Margin="4"
+                           Height="48">
+                    <DockPanel.ContextMenu>
                         <f:ContextMenu>
-                            <f:MenuItem Header="{f:Language global.remove}"
-                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveCharacterCommand}"
-                                        CommandParameter="{Binding }" />
+                            <f:MenuItem Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveChannelCommand}"
+                                        CommandParameter="{Binding}"
+                                        Header="{f:Language global.remove}"
+                                      Icon="{StaticResource FeatherIcon.Trash}"
+                                      IconSize="17"/>
                         </f:ContextMenu>
-                    </Border.ContextMenu>
+                    </DockPanel.ContextMenu>
+                    <Border DockPanel.Dock="Left"
+                            CornerRadius="64"
+                            Height="48"
+                            Width="48">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Avatar,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
+                        </Border.Background>
+                    </Border>
+
                     <DockPanel>
-                        <Ellipse Height="64"
-                                 Width="64">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
-                            </Ellipse.Fill>
-                        </Ellipse>
+                        <f:CallToAction DockPanel.Dock="Right"
+                                        Content="切换"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenChannelCommand}"
+                                        CommandParameter="{Binding}" />
 
-                        <DockPanel>
-                            <f:CallToAction DockPanel.Dock="Right"
-                                            Content="切换"
-                                            CornerRadius="18"
-                                            Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SelectCharacterCommand,Mode=OneWay}"
-                                            CommandParameter="{Binding}"
-                                            Height="36"
-                                            Padding="32 8" />
-
-                            <TextBlock DockPanel.Dock="Left"
-                                       FontSize="18"
-                                       FontWeight="Heavy"
-                                       Margin="16 0 0 0"
-                                       Text="{Binding Name,Mode=OneWay}"
-                                       VerticalAlignment="Center" />
+                        <DockPanel Margin="32 0 16 0"
+                                   VerticalAlignment="Center">
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="16"
+                                       Margin="0 0 0 4"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Name,Mode=OneWay}" />
+                            <TextBlock FontSize="12"
+                                       Foreground="{f:Brush Theme=ForegroundLevel3}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Id,Mode=OneWay}"
+                                       TextTrimming="CharacterEllipsis" />
                         </DockPanel>
                     </DockPanel>
-                </Border>
+                </DockPanel>
             </DataTemplate>
-
-            <DataTemplate x:Key="Selected" DataType="{x:Type Model:SocialCharacter}">
-                <Border Background="{f:Brush BackgroundLevel2}"
-                        CornerRadius="3"
-                        Padding="16">
-                    <DockPanel>
-                        <Ellipse Height="64"
-                                 Width="64">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding Avatar,Mode=OneWay,Converter={x:Static thisConverters:ConverterPool.Avatar}}" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-
-                        <TextBlock FontSize="18"
-                                   FontWeight="Heavy"
-                                   Margin="16 0 0 0"
-                                   Text="{Binding Name,Mode=OneWay}"
-                                   VerticalAlignment="Center" />
-                    </DockPanel>
-                </Border>
-            </DataTemplate>
-
         </ResourceDictionary>
     </UserControl.Resources>
 
     <!-- 根元素 -->
     <f:EmptyContentControl Padding="8"
-                           NotEmpty="{Binding HasSelectedCharacterAndHasCharacter,Mode=OneWay}">
+                           NotEmpty="{Binding HasCharacters,Mode=OneWay}">
         <f:EmptyContentControl.EmptyState>
             <studio:CollectionEmptyStateView Command="{Binding AddCharacterCommand}" />
         </f:EmptyContentControl.EmptyState>
@@ -122,7 +135,7 @@
             <DockPanel>
                 <f:EmptyContentControl DockPanel.Dock="Top"
                                        Height="128"
-                                       NotEmpty="{Binding HasSelectedCharacter,Mode=OneWay}">
+                                       NotEmpty="{Binding IsCharacterSelected,Mode=OneWay}">
                     <f:EmptyContentControl.EmptyState>
                         <Border Background="{f:Brush BackgroundLevel2}"
                                 CornerRadius="3"
@@ -163,17 +176,18 @@
 
             <f:ForestIsland Grid.Column="1"
                             Margin="32 0"
+                            Padding="0 16"
                             Header="所有角色">
-                <ScrollViewer Padding="0 0 8 0">
-                    <ItemsControl ItemsSource="{Binding Characters,Mode=OneWay}"
-                                  VirtualizingPanel.IsVirtualizing="True">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
+                <f:ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                           ItemsSource="{Binding Characters,Mode=OneWay}"
+                           SelectedItem="{Binding SelectedCharacter,Mode=TwoWay}"
+                           VirtualizingPanel.IsVirtualizing="True">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </f:ListBox>
             </f:ForestIsland>
             
             <f:ForestIsland Grid.Column="2"

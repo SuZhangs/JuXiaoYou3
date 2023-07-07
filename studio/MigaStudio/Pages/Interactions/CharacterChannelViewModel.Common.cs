@@ -12,7 +12,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     partial class CharacterChannelViewModel
     {
         private const char Separator = '\x20';
-        
+
         protected void SwitchSpeakerMemberAfter(string memberID)
         {
             foreach (var message in Messages)
@@ -27,7 +27,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         #region Load
 
-        
         private void LoadFromChannel()
         {
             if (Channel is null ||
@@ -37,11 +36,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             LoadMembers();
-            
+
             //
             // 加载映射
             LoadMapper();
-            
+
+            LatestSpeakers.Clear();
+            LatestSpeakers.Add(Speaker);
+
             Channel.Messages
                    .ForEach(x => AddMessageTo(x, false));
         }
@@ -62,16 +64,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                         member.Name = cache.Name;
                         hasChanged  = true;
                     }
-                    
+
                     if (member.Avatar != cache.Avatar)
                     {
                         member.Avatar = cache.Avatar;
                         hasChanged    = true;
                     }
-                    
-                    if(hasChanged) SocialEngine.AddCharacter(member);
+
+                    if (hasChanged) SocialEngine.AddCharacter(member);
                 }
-                
+
                 TotalMemberCollection.Add(member);
             }
 
@@ -84,12 +86,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private void LoadMapper()
         {
-            
-            
             MemberAliasMapper.Clear();
             MemberRoleMapper.Clear();
             MemberTitleMapper.Clear();
-            
+
             //
             // 别名
             foreach (var alias in Channel.Alias)
@@ -132,7 +132,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
 
         #endregion
-        
+
 
         private void SaveToChannel()
         {
@@ -141,28 +141,28 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 return;
             }
-            
+
             Channel.Alias.Clear();
             Channel.Roles.Clear();
             Channel.Titles.Clear();
-            
+
             // ReSharper disable ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var alias in MemberAliasMapper)
             {
                 foreach (var aliasItem in alias.Value)
                 {
                     var v = $"{alias.Key}{Separator}{aliasItem.Key}{Separator}{aliasItem.Value}";
-                    
+
                     Channel.Alias.Add(v);
                 }
             }
-            
+
             Channel.Titles
                    .AddMany(MemberTitleMapper, true);
-            
+
             Channel.Roles
                    .AddMany(MemberRoleMapper, true);
-            
+
             Channel.Messages
                    .AddMany(Messages.Select(x => x.Source), true);
 
@@ -170,8 +170,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             //
             SocialEngine.AddChannel(Channel);
         }
-        
-        
+
 
         private void AddMessageTo(MessageBase mb, bool addToChannel = true)
         {
@@ -194,6 +193,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Messages.Add(ui);
                 if (addToChannel) Channel.Messages.Add(msg);
             }
+
+            SetDirtyState();
         }
 
         private void RemoveMessage(MessageUI msg)
@@ -202,9 +203,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             Messages.Remove(msg);
             Channel.Messages
                    .Remove(src);
+            SetDirtyState();
         }
-        
-        private Tuple<string, string,MemberRole, string> FindMemberById(string id)
+
+        private Tuple<string, string, MemberRole, string> FindMemberById(string id)
         {
             string name;
             string avatar;
@@ -219,7 +221,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 name   = string.Empty;
                 avatar = string.Empty;
             }
-            
+
             //
             // get name
             if (Speaker is not null &&
@@ -228,10 +230,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             {
                 name = alias;
             }
-            
 
-            if(!MemberTitleMapper.TryGetValue(id, out var title)) title         = string.Empty;
-            if(!MemberRoleMapper.TryGetValue(id, out var role)) role = MemberRole.Member;
+
+            if (!MemberTitleMapper.TryGetValue(id, out var title)) title = string.Empty;
+            if (!MemberRoleMapper.TryGetValue(id, out var role)) role    = MemberRole.Member;
+
+            if (role == MemberRole.Owner ||
+                role == MemberRole.Manager)
+            {
+                title = Language.GetEnum(role);
+            }
 
             return new Tuple<string, string, MemberRole, string>(name, avatar, role, title);
         }
@@ -247,12 +255,10 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 }
             }
 
-            return MemberMapper.TryGetValue(id, out var mem) ?
-                mem.Name : 
-                Language.GetText("text.Untitled");
+            return MemberMapper.TryGetValue(id, out var mem) ? mem.Name : Language.GetText("text.Untitled");
         }
-        
-        private string FindEventContentByType(MessageType type,object parameter)
+
+        private string FindEventContentByType(MessageType type, object parameter)
         {
             return type switch
             {

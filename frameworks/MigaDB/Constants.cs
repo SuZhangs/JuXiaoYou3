@@ -65,13 +65,14 @@
         internal const string Name_Sentence     = "sentence";
         internal const string Name_SpaceConcept = "space";
         
-        internal const string Name_MeasuringUnit  = "unit";
-        internal const string Name_Faith          = "faith";
-        internal const string Name_Market         = "market";
-        internal const string Name_Chat_Channel   = "social_channel";
-        internal const string Name_Chat_Character = "social_character";
-        internal const string Name_Chat_Thread    = "social_thread";
-        internal const string Name_Chat_Upvote    = "social_upvote";
+        internal const string Name_MeasuringUnit     = "unit";
+        internal const string Name_Faith             = "faith";
+        internal const string Name_Market            = "market";
+        internal const string Name_Chat_Channel      = "social_channel";
+        internal const string Name_Chat_ChannelCache = "social_ch";
+        internal const string Name_Chat_Character    = "social_character";
+        internal const string Name_Chat_Thread       = "social_thread";
+        internal const string Name_Chat_Upvote       = "social_upvote";
 
         //
         // Rel

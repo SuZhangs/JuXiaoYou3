@@ -487,18 +487,18 @@
                                         Background="{TemplateBinding CharacterTitleBrush}"
                                         CornerRadius="3"
                                         HorizontalAlignment="Left"
-                                        Margin="0 0 6 0"
-                                        Padding="4 2"
+                                        Margin="0 0 8 0"
+                                        Padding="4"
                                         Visibility="Collapsed">
                                     <TextBlock Foreground="White"
-                                               FontSize="21"
+                                               FontSize="25"
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}"
                                                TextTrimming="CharacterEllipsis" />
                                 </Border>
 
                                 <TextBlock DockPanel.Dock="Right"
                                            Foreground="Gray"
-                                           FontSize="24"
+                                           FontSize="28"
                                            FontWeight="Heavy"
                                            HorizontalAlignment="Left"
                                            MaxWidth="128"
@@ -510,8 +510,8 @@
                                     Background="{StaticResource Brush.QQ.Bar}"
                                     CornerRadius="8"
                                     HorizontalAlignment="Left"
-                                    Margin="0 8 0 0"
-                                    Padding="12">
+                                    Margin="0 12 0 0"
+                                    Padding="16">
                                 <TextBlock x:Name="PART_Content"
                                            Foreground="Black"
                                            FontSize="28"
@@ -901,7 +901,7 @@
                     <Border Background="{x:Static f:Xaml.Transparent}"
                             Margin="0 8"
                             Padding="8 4">
-                        <TextBlock FontSize="21"
+                        <TextBlock FontSize="25"
                                    Margin="3 0"
                                    TextWrapping="Wrap">
                                 <Run Foreground="#3fa0ff"

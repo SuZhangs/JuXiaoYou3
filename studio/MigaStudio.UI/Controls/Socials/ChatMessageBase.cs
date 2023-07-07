@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Controls.Socials
 
         public static readonly DependencyProperty CharacterTitleBrushProperty = DependencyProperty.Register(
             nameof(CharacterTitleBrush),
-            typeof(ImageSource),
+            typeof(Brush),
             typeof(UserMessageBase),
             new PropertyMetadata(default(ImageSource)));
         
