@@ -76,8 +76,8 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
         private static void InitializeBuiltinController(GlobalStudioContext context)
         {
-#if DEBUG
             InitializeController(context, new InteractionController(), "__Interaction.Intro");
+#if DEBUG
             InitializeController(context, new WorldViewController(), "__WorldView.Intro");
 #endif
         }

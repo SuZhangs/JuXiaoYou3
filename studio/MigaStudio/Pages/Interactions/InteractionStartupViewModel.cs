@@ -111,6 +111,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private async Task AddChannelImpl(MemberCache cache)
         {
+            cache ??= SelectedCharacter;
+
             if (cache is null)
             {
                 return;
