@@ -65,13 +65,35 @@
             <DataTemplate DataType="{x:Type thisUI:TimestampUI}">
                 <studio:TimestampMessage HorizontalAlignment="Center"
                                          Prefix="{Binding Prefix,Mode=OneWay}"
-                                         CurrentTime="{Binding Suffix,Mode=OneWay}" />
+                                         CurrentTime="{Binding Suffix,Mode=OneWay}" >
+
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:TimestampMessage>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:MutedAndUnMutedEventUI}">
                 <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                 Content="{Binding Content}"
-                                                HorizontalAlignment="Center" />
+                                                HorizontalAlignment="Center">
+
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:UserEventMessageControl>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:PlainTextUI}">
@@ -81,14 +103,36 @@
                                          CharacterTitleBrush="{Binding Brush,Mode=OneWay}"
                                          ShowTitle="{Binding HasTitle,Mode=OneWay}"
                                          IsSelf="{Binding IsSelf,Mode=OneWay}"
-                                         Content="{Binding Content}" />
+                                         Content="{Binding Content}">
+
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:PlainTextMessage>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:ImageUI}">
                 <studio:ImageChatMessage CharacterName="{Binding Name,Mode=OneWay}"
                                          CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
                                          IsSelf="{Binding IsSelf,Mode=OneWay}"
-                                         Image="{Binding ImageSource,Mode=OneWay}" />
+                                         Image="{Binding ImageSource,Mode=OneWay}" >
+
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:ImageChatMessage>
             </DataTemplate>
 
 
@@ -112,7 +156,17 @@
             <DataTemplate DataType="{x:Type thisUI:MemberLeaveEventUI}">
                 <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                 Content="{Binding Content,Mode=OneWay}"
-                                                HorizontalAlignment="Center" />
+                                                HorizontalAlignment="Center">
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}" />
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:UserEventMessageControl>
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>

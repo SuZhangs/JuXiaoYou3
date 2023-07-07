@@ -22,7 +22,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     {
         private async Task AddMemberRoleImpl()
         {
-            var r1 = await MemberPickerViewModel.PickOne(Members.Where(x => Speaker is null || x.Id != Speaker.Id));
+            var r1 = await MemberPickerViewModel.PickOne(Members);
 
             if (!r1.IsFinished)
             {
@@ -117,7 +117,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
         private async Task AddMemberTitleImpl()
         {
-            var r1 = await MemberPickerViewModel.PickOne(Members.Where(x => Speaker is null || x.Id != Speaker.Id));
+            var r1 = await MemberPickerViewModel.PickOne(Members);
 
             if (!r1.IsFinished)
             {
