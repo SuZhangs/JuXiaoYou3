@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.Intrinsics;
+using System.Windows.Media.Animation;
 using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Inspirations;
@@ -19,18 +20,46 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     partial class CharacterChannelViewModel
     {
-        private async Task AddMemberRoleImpl(MemberCache cache)
+        private async Task AddMemberRoleImpl()
         {
-            if (cache is null)
+            var r1 = await MemberPickerViewModel.PickOne(Members.Where(x => Speaker is null || x.Id != Speaker.Id));
+
+            if (!r1.IsFinished)
             {
                 return;
             }
 
-            var r = await SubSystem.Selection<MemberRole>("选择成员权限", MemberRole.Manager, new object[]
+            var cache = r1.Value;
+
+            if (MemberRoleMapper.TryGetValue(cache.Id, out var role) &&
+                (role == MemberRole.Manager || role == MemberRole.Owner))
             {
-                MemberRole.Manager,
-                MemberRole.Member,
-            });
+                this.ErrorNotification("管理员或者群主不能获得管理员身份");
+                return;
+            }
+
+            object[] roles;
+            
+            if (MemberRoleMapper.TryGetValue(r1.Value.Id, out var role1) &&
+                (role1 == MemberRole.Member || role1 == MemberRole.Owner))
+            {
+                roles = new object[]
+                {
+                    MemberRole.Owner,
+                    MemberRole.Manager,
+                    MemberRole.Member,
+                };
+            }
+            else
+            {
+                roles = new object[]
+                {
+                    MemberRole.Owner,
+                    MemberRole.Manager,
+                };
+            }
+
+            var r = await SubSystem.Selection<MemberRole>("选择成员权限", MemberRole.Manager, roles);
             
             
             if (!r.IsFinished)
@@ -38,14 +67,27 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            MemberRoleMapper.Add(cache.Id, r.Value);
-            Channel.Roles
-                   .Add(cache.Id, r.Value);
+            if (r.Value == MemberRole.Owner)
+            {
+                var owner = MemberRoleMapper.First(x => x.Value == MemberRole.Owner);
+                
+                MemberRoleMapper[owner.Key] = MemberRole.Manager;
+                Channel.Roles[owner.Key]    = MemberRole.Manager;
+                MemberRoleMapper[cache.Id]  = MemberRole.Owner;
+                Channel.Roles[cache.Id]     = MemberRole.Owner;
+            }
+            else
+            {
+                MemberRoleMapper[cache.Id] = r.Value;
+                Channel.Roles[cache.Id]    = r.Value;
+            }
+
 
             foreach (var support in Messages.OfType<IMessageUpdateSupport>())
             {
                 support.Update();
             }
+            
             SetDirtyState();
         }
         
@@ -73,12 +115,16 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         }
 
 
-        private async Task AddMemberTitleImpl(MemberCache cache)
+        private async Task AddMemberTitleImpl()
         {
-            if (cache is null)
+            var r1 = await MemberPickerViewModel.PickOne(Members.Where(x => Speaker is null || x.Id != Speaker.Id));
+
+            if (!r1.IsFinished)
             {
                 return;
             }
+
+            var cache = r1.Value;
 
             if (MemberRoleMapper.TryGetValue(cache.Id, out var role) &&
                 (role == MemberRole.Manager || role == MemberRole.Owner))
@@ -94,9 +140,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
-            MemberTitleMapper.Add(cache.Id, r.Value);
-            Channel.Titles
-                   .Add(cache.Id, r.Value);
+            MemberTitleMapper[cache.Id] = r.Value;
+            Channel.Titles[cache.Id] = r.Value;
 
             foreach (var support in Messages.OfType<IMessageUpdateSupport>())
             {
@@ -195,8 +240,17 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 return;
             }
 
+            
+
             foreach (var member in r.Value)
             {
+                if (MemberRoleMapper.TryGetValue(member.Id, out var role) &&
+                    role == MemberRole.Owner)
+                {
+                    this.ErrorNotification("群主不能退群");
+                    continue;
+                }
+                
                 var msg = new ChannelMessage
                 {
                     Id       = ID.Get(),
@@ -223,17 +277,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             Speaker = cache;
-
-            if(LatestSpeakers.Count < 10 &&
-               !LatestSpeakers.Contains(cache))
-            {
-                LatestSpeakers.Add(cache);
-            }
-            else if (!LatestSpeakers.Contains(cache))
-            {
-                LatestSpeakers.Insert(0, cache);
-                LatestSpeakers.RemoveAt(10);
-            }
         }
 
 
@@ -391,9 +434,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public RelayCommand AddImageCommand { get; }
         public RelayCommand<MemberCache> SwitchSpeakerCommand { get; }
         public AsyncRelayCommand<MessageUI> RemoveMessageCommand { get; }
-        public AsyncRelayCommand<MemberCache> AddMemberTitleCommand { get; }
+        public AsyncRelayCommand AddMemberTitleCommand { get; }
         public AsyncRelayCommand<MemberCache> RemoveMemberTitleCommand { get; }
-        public AsyncRelayCommand<MemberCache> AddMemberRoleCommand { get; }
+        public AsyncRelayCommand AddMemberRoleCommand { get; }
         public AsyncRelayCommand<MemberCache> RemoveMemberRoleCommand { get; }
         public AsyncRelayCommand SaveCommand { get; }
         public AsyncRelayCommand SetCompositionMessageCommand { get; }

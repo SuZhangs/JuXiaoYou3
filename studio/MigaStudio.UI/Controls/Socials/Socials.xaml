@@ -485,10 +485,10 @@
                                 <Border x:Name="PART_Title"
                                         DockPanel.Dock="Left"
                                         Background="{TemplateBinding CharacterTitleBrush}"
-                                        CornerRadius="3"
+                                        CornerRadius="6"
                                         HorizontalAlignment="Left"
                                         Margin="0 0 8 0"
-                                        Padding="4"
+                                        Padding="8 4"
                                         Visibility="Collapsed">
                                     <TextBlock Foreground="White"
                                                FontSize="25"

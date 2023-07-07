@@ -41,6 +41,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 
                 //
                 //
+                SwitchSpeakerMemberBefore(_speaker);
                 SwitchSpeakerMemberAfter(_speaker.Id);
             }
         }

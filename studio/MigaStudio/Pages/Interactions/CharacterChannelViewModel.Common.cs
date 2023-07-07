@@ -13,8 +13,23 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
     {
         private const char Separator = '\x20';
 
+        protected void SwitchSpeakerMemberBefore(MemberCache cache)
+        {
+            if(LatestSpeakers.Count < 10 &&
+               !LatestSpeakers.Contains(cache))
+            {
+                LatestSpeakers.Add(cache);
+            }
+            else if (!LatestSpeakers.Contains(cache))
+            {
+                LatestSpeakers.Insert(0, cache);
+                LatestSpeakers.RemoveAt(10);
+            }
+        }
+
         protected void SwitchSpeakerMemberAfter(string memberID)
         {
+            
             foreach (var message in Messages)
             {
                 message.IsSelf = message.MemberID == memberID;
@@ -42,7 +57,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             LoadMapper();
 
             LatestSpeakers.Clear();
-            LatestSpeakers.Add(Speaker);
 
             Channel.Messages
                    .ForEach(x => AddMessageTo(x, false));

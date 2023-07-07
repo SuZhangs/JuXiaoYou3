@@ -38,8 +38,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             SaveCommand                  = AsyncCommand(SaveWithNotification);
             AddImageCommand              = Command(AddImageCommandImpl);
             RemoveMessageCommand         = AsyncCommand<MessageUI>(RemoveMessageImpl);
-            AddMemberRoleCommand         = AsyncCommand<MemberCache>(AddMemberRoleImpl);
-            AddMemberTitleCommand        = AsyncCommand<MemberCache>(AddMemberTitleImpl);
+            AddMemberRoleCommand         = AsyncCommand(AddMemberRoleImpl);
+            AddMemberTitleCommand        = AsyncCommand(AddMemberTitleImpl);
             RemoveMemberTitleCommand     = AsyncCommand<MemberCache>(RemoveMemberTitleImpl);
             RemoveMemberRoleCommand      = AsyncCommand<MemberCache>(RemoveMemberRoleImpl);
             AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);

@@ -94,7 +94,7 @@
 
                     <DockPanel>
                         <f:CallToAction DockPanel.Dock="Right"
-                                        Content="切换"
+                                        Content="打开"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.OpenChannelCommand}"
                                         CommandParameter="{Binding}" />
 

@@ -103,7 +103,7 @@
                                         IconSize="17"
                                         Header="{f:Language global.remove}"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
-                                        CommandParameter="{Binding}"/>
+                                        CommandParameter="{Binding}" />
                         </f:ContextMenu>
                     </Control.ContextMenu>
                 </studio:MemberJoinMessageControl>
@@ -203,8 +203,8 @@
 
                 <f:HeaderedSingleLine Header="群聊名称"
                                       Watermark="群聊名称"
-                                      Text="{Binding ChannelName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                      TextWrapping="Wrap"/>
+                                      Text="{Binding ChannelName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      TextWrapping="Wrap" />
 
                 <f:HeaderedMultiLine Grid.Row="1"
                                      Header="待发送的消息"
@@ -213,84 +213,76 @@
                                      Text="{Binding CompositionMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                      TextWrapping="Wrap" />
 
-                <WrapPanel Grid.Row="2"
+                <DockPanel Grid.Row="2"
                            Margin="0 16"
                            VerticalAlignment="Bottom">
-                    <WrapPanel.Resources>
-                        <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
-                            <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
-                            <Setter Property="Margin" Value="0 0 0 4" />
-                            <Setter Property="IconSize" Value="23" />
-                            <Setter Property="Height" Value="40" />
-                            <Setter Property="Width" Value="40" />
+                    <DockPanel.Resources>
+                        <Style TargetType="{x:Type f:CallToAction}">
+                            <Setter Property="Margin" Value="8 4" />
                         </Style>
-                    </WrapPanel.Resources>
-                    <ftk:ToolButton Content="添加表情"
+                    </DockPanel.Resources>
+                    <UniformGrid DockPanel.Dock="Top"
+                                 Columns="2">
+                        <f:CallToAction Content="加群"
+                                        Command="{Binding AddMemberJoinCommand}"
+                                        Margin="8 0"
+                                        Icon="{StaticResource FeatherIcon.Plus}"
+                                        Palette="Success"/>
+
+                        <f:CallToAction Content="退群"
+                                        Command="{Binding AddMemberLeaveCommand}"
+                                        Margin="8 0"
+                                        Icon="{StaticResource FeatherIcon.Trash}"
+                                        Palette="Danger"/>
+                    </UniformGrid>
+
+                    <UniformGrid Grid.Row="2"
+                                 Columns="3"
+                                 Margin="0 16 0 0 ">
+                        <ftk:ToolButton Content="添加表情"
                                     Command="{Binding AddEmojiCommand}"
                                     Icon="{StaticResource FeatherIcon.Emoji}"
-                                    ShowText="True" 
-                                    Visibility="Collapsed"/>
-                        
-                    <ftk:ToolButton Content="禁言"
-                                    Command="{Binding AddMemberMutedCommand}"
-                                    IsFilled="True"
-                                    Icon="{StaticResource Mute}" 
-                                    ShowText="True"/>
-                    <ftk:ToolButton Content="解除禁言"
-                                    Command="{Binding AddMemberUnMutedCommand}" 
-                                    IsFilled="True" Icon="{StaticResource UnMuted}"
-                                    ShowText="True" />
-                        
-                    <ftk:ToolButton Content="添加图片"
-                                    Command="{Binding AddImageCommand}"
-                                    Icon="{StaticResource FeatherIcon.Image}" 
-                                    ShowText="True"/>
-                    
-                    <ftk:ToolButton Content="添加表情"
-                                    Command="{Binding SetCompositionMessageCommand}"
-                                    Icon="{StaticResource FeatherIcon.Message.Circle}" 
-                                    ShowText="True"/>
-                    
-                    <ftk:ToolButton Content="添加时间戳"
-                                    Command="{Binding AddTimestampCommand}" 
+                                    ShowText="True"
+                                    Visibility="Collapsed" />
+
+                        <f:CallToAction Content="禁言"
+                                        Command="{Binding AddMemberMutedCommand}"
+                                        IsFilled="True"
+                                        Icon="{StaticResource Mute}"
+                                        Palette="Obsolete"/>
+
+                        <f:CallToAction Content="解除禁言"
+                                        Command="{Binding AddMemberUnMutedCommand}"
+                                        IsFilled="True" Icon="{StaticResource UnMuted}"
+                                        Palette="Info" />
+
+                        <f:CallToAction Content="添加图片"
+                                        Command="{Binding AddImageCommand}"
+                                        Icon="{StaticResource FeatherIcon.Image}"
+                                        Palette="HighlightPalette2"/>
+
+                        <f:CallToAction Content="添加表情"
+                                        Command="{Binding SetCompositionMessageCommand}"
+                                        Icon="{StaticResource FeatherIcon.Message.Circle}"
+                                        Palette="HighlightPalette2" />
+
+                        <f:CallToAction Content="添加时间戳"
+                                    Command="{Binding AddTimestampCommand}"
                                     Icon="{StaticResource FeatherIcon.Clock}" 
-                                    ShowText="True"/>
-                    
-                    <ftk:ToolButton Content="加群"
-                                    Command="{Binding AddMemberJoinCommand}" 
-                                    Icon="{StaticResource FeatherIcon.Login}" 
-                                    ShowText="True"/>
-                    
-                    <ftk:ToolButton Content="退群"
-                                    Command="{Binding AddMemberLeaveCommand}" 
-                                    Icon="{StaticResource FeatherIcon.LogOut}" 
-                                    ShowText="True"/>
-                    
-                    <ftk:ToolButton Content="添加管理员资格"
+                                        Palette="HighlightPalette2"/>
+
+                        <f:CallToAction Content="添加管理员资格"
                                     Command="{Binding AddMemberRoleCommand,Mode=OneWay}"
-                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
                                     Icon="{StaticResource FeatherIcon.Plus}"
-                                    ShowText="True" />
-                    
-                    <ftk:ToolButton Content="删除管理员资格"
+                                        Palette="HighlightPalette2"/>
+
+                        <f:CallToAction Content="删除管理员资格"
                                     Command="{Binding RemoveMemberRoleCommand,Mode=OneWay}"
                                     CommandParameter="{Binding Speaker,Mode=OneWay}"
-                                    Icon="{StaticResource FeatherIcon.Trash}"
-                                    ShowText="True"/>
-                    
-                    
-                    <ftk:ToolButton Content="添加头衔"
-                                    Command="{Binding AddMemberTitleCommand,Mode=OneWay}"
-                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
-                                    Icon="{StaticResource FeatherIcon.Plus}"
-                                    ShowText="True" />
-                    
-                    <ftk:ToolButton Content="删除头衔"
-                                    Command="{Binding RemoveMemberTitleCommand,Mode=OneWay}"
-                                    CommandParameter="{Binding Speaker,Mode=OneWay}"
-                                    Icon="{StaticResource FeatherIcon.Trash}"
-                                    ShowText="True"/>
-                </WrapPanel>
+                                    Icon="{StaticResource FeatherIcon.Trash}" 
+                                        Palette="HighlightPalette2"/>
+                    </UniformGrid>
+                </DockPanel>
 
                 <DockPanel Grid.Row="3">
                     <f:CallToAction DockPanel.Dock="Right"
@@ -348,10 +340,10 @@
                     <Setter Property="Width" Value="48" />
                 </Style>
             </StackPanel.Resources>
-            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Refresh}" 
-                            Visibility="Collapsed"/>
-            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Save}" 
-                            Command="Save"/>
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Refresh}"
+                            Visibility="Collapsed" />
+            <ftk:ToolButton Icon="{StaticResource FeatherIcon.Save}"
+                            Command="Save" />
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}"
                             Command="{x:Static studio:Studio.CaptureCommand}"
                             CommandParameter="{Binding ElementName=Canvas,Mode=OneWay}" />
