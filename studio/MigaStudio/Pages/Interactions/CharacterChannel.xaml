@@ -20,7 +20,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MigaStudio;component/Resources/ContentTemplates/SocialChatItems.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}"/>
+            <f:BindingProxy x:Key="ViewModel" ViewModel="{Binding}" />
             <thisConverters:MemberRoleBrushConverter x:Key="Role2Brush" />
             <thisConverters:MemberRoleVisibilityConverter x:Key="Role2Visibility" />
             <ImageBrush x:Key="Avatar" ImageSource="E:\1.png" />
@@ -33,7 +33,7 @@
                             Height="48"
                             Width="48">
                         <Border.Background>
-                            <ImageBrush ImageSource="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar}}"/>
+                            <ImageBrush ImageSource="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar}}" />
                         </Border.Background>
                     </Border>
 
@@ -41,7 +41,7 @@
                         <f:CallToAction DockPanel.Dock="Right"
                                         Content="切换"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchSpeakerCommand}"
-                                        CommandParameter="{Binding}"/>
+                                        CommandParameter="{Binding}" />
 
                         <DockPanel Margin="32 0 16 0"
                                    VerticalAlignment="Center">
@@ -56,35 +56,36 @@
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Text="{Binding Id,Mode=OneWay}"
-                                       TextTrimming="CharacterEllipsis"/>
+                                       TextTrimming="CharacterEllipsis" />
                         </DockPanel>
                     </DockPanel>
                 </DockPanel>
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type thisUI:TimestampUI}">
                 <studio:TimestampMessage HorizontalAlignment="Center"
                                          Prefix="{Binding Prefix,Mode=OneWay}"
-                                         CurrentTime="{Binding Suffix,Mode=OneWay}"/>
+                                         CurrentTime="{Binding Suffix,Mode=OneWay}" />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:MutedAndUnMutedEventUI}">
                 <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                 Content="{Binding Content}"
-                                                HorizontalAlignment="Center"/>
+                                                HorizontalAlignment="Center" />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:PlainTextUI}">
                 <studio:PlainTextMessage CharacterName="{Binding Name,Mode=OneWay}"
-                                             CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
-                                             IsSelf="{Binding IsSelf,Mode=OneWay}"
-                                             Content="{Binding Content}"/>
+                                         CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
+                                         IsSelf="{Binding IsSelf,Mode=OneWay}"
+                                         Content="{Binding Content}" />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type thisUI:ImageUI}">
                 <studio:ImageChatMessage CharacterName="{Binding Name,Mode=OneWay}"
                                          CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
                                          IsSelf="{Binding IsSelf,Mode=OneWay}"
-                                         Image="{Binding ImageSource,Mode=OneWay}"/>
+                                         Image="{Binding ImageSource,Mode=OneWay}" />
             </DataTemplate>
 
 
@@ -92,13 +93,23 @@
                 <studio:MemberJoinMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                  Content="{Binding Content,Mode=OneWay}"
                                                  WelcomeContent="点击欢迎！"
-                                                 HorizontalAlignment="Center"/>
+                                                 HorizontalAlignment="Center">
+                    <Control.ContextMenu>
+                        <f:ContextMenu>
+                            <f:MenuItem Icon="{StaticResource FeatherIcon.Trash}"
+                                        IconSize="17"
+                                        Header="{f:Language global.remove}"
+                                        Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.RemoveMessageCommand}"
+                                        CommandParameter="{Binding}"/>
+                        </f:ContextMenu>
+                    </Control.ContextMenu>
+                </studio:MemberJoinMessageControl>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type thisUI:MemberLeaveEventUI}">
                 <studio:UserEventMessageControl CharacterName="{Binding MemberName,Mode=OneWay}"
                                                 Content="{Binding Content,Mode=OneWay}"
-                                                HorizontalAlignment="Center"/>
+                                                HorizontalAlignment="Center" />
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -126,7 +137,7 @@
                     <Ellipse Height="64"
                              Width="64">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding Speaker.Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}"/>
+                            <ImageBrush ImageSource="{Binding Speaker.Avatar,Mode=OneWay,Converter={x:Static thisConverters2:ConverterPool.Avatar}}" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <DockPanel Margin="16 0 0 0 "
@@ -168,22 +179,144 @@
                 Padding="8">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="64" />
+                    <RowDefinition Height="128" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="48" />
                     <RowDefinition Height="128" />
                 </Grid.RowDefinitions>
 
-                <f:SingleLine Watermark="群聊名称"
-                              Text="{Binding ChannelName,Mode=TwoWay}" />
+                <f:HeaderedSingleLine Header="群聊名称"
+                                      Watermark="群聊名称"
+                                      Text="{Binding ChannelName,Mode=TwoWay}" 
+                                      TextWrapping="Wrap"/>
 
-                <ScrollViewer Grid.Row="1"
+                <f:HeaderedMultiLine Grid.Row="1"
+                                     Header="待发送的消息"
+                                     Margin="0 8 0 0"
+                                      Watermark="待发送的消息"
+                                      Text="{Binding CompositionMessage,Mode=TwoWay}"
+                                      TextWrapping="Wrap" />
+
+                <ScrollViewer Grid.Row="2"
                               Margin="0 8 0 0">
                     <ItemsControl ItemsSource="{Binding Messages,Mode=OneWay}">
+                        <ItemsControl.Resources>
+                            <Style TargetType="{x:Type studio:PlainTextMessage}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="MinWidth" Value="320" />
+                                <Setter Property="MaxWidth" Value="840" />
+                                <Setter Property="Margin" Value="0 8" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type studio:PlainTextMessage}">
+                                            <DockPanel Margin="0 8">
+                                                <Rectangle x:Name="PART_Avatar"
+                                                           DockPanel.Dock="Left"
+                                                           Height="48"
+                                                           Width="48"
+                                                           VerticalAlignment="Top">
+                                                    <Rectangle.Fill>
+                                                        <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterAvatar,Mode=OneWay}" />
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+
+                                                <DockPanel>
+                                                    <DockPanel x:Name="PART_TitleBar"
+                                                               DockPanel.Dock="Top"
+                                                               HorizontalAlignment="Left">
+                                                        <Border x:Name="PART_Title"
+                                                                DockPanel.Dock="Left"
+                                                                Background="{TemplateBinding CharacterTitleBrush}"
+                                                                CornerRadius="3"
+                                                                HorizontalAlignment="Left"
+                                                                Margin="0 0 6 0"
+                                                                Padding="4 2"
+                                                                Visibility="Collapsed">
+                                                            <TextBlock Foreground="White"
+                                                                       FontSize="14"
+                                                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}"
+                                                                       TextTrimming="CharacterEllipsis" />
+                                                        </Border>
+
+                                                        <TextBlock DockPanel.Dock="Right"
+                                                                   Foreground="Gray"
+                                                                   FontSize="14"
+                                                                   FontWeight="Heavy"
+                                                                   HorizontalAlignment="Left"
+                                                                   MaxWidth="128"
+                                                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterName,Mode=OneWay}"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                    </DockPanel>
+
+                                                    <Border x:Name="PART_ContentPanel"
+                                                            Background="{StaticResource Brush.QQ.Bar}"
+                                                            CornerRadius="8"
+                                                            HorizontalAlignment="Left"
+                                                            Margin="0 8 0 0"
+                                                            Padding="8">
+                                                        <TextBlock x:Name="PART_Content"
+                                                                   Foreground="Black"
+                                                                   FontSize="14"
+                                                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Content,Mode=OneWay}"
+                                                                   TextWrapping="Wrap" />
+                                                    </Border>
+                                                </DockPanel>
+                                            </DockPanel>
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelf" Value="True" />
+                                                        <Condition Property="Layout" Value="QQ" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="DockPanel.Dock" Value="Right" TargetName="PART_Avatar" />
+                                                    <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_TitleBar" />
+                                                    <Setter Property="HorizontalAlignment" Value="Right" TargetName="PART_ContentPanel" />
+                                                    <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Self}" TargetName="PART_ContentPanel" />
+                                                    <Setter Property="Foreground" Value="White" TargetName="PART_Content" />
+                                                    <Setter Property="Margin" Value="24 0 0 0" TargetName="PART_Avatar" />
+                                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                                </MultiTrigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsSelf" Value="False" />
+                                                        <Condition Property="Layout" Value="QQ" />
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="DockPanel.Dock" Value="Left" TargetName="PART_Avatar" />
+                                                    <Setter Property="HorizontalAlignment" Value="Left" TargetName="PART_TitleBar" />
+                                                    <Setter Property="Background" Value="{StaticResource Brush.QQ.Bubble.Background}" TargetName="PART_ContentPanel" />
+                                                    <Setter Property="Foreground" Value="Black" TargetName="PART_Content" />
+                                                    <Setter Property="Margin" Value="0 0 12 0" TargetName="PART_Avatar" />
+                                                </MultiTrigger>
+                                                <Trigger Property="Layout" Value="QQ">
+                                                    <Setter Property="RadiusX" Value="48" TargetName="PART_Avatar" />
+                                                    <Setter Property="RadiusY" Value="48" TargetName="PART_Avatar" />
+                                                </Trigger>
+                                                <Trigger Property="ShowTitle" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" TargetName="PART_Title" />
+                                                </Trigger>
+                                                <Trigger Property="Layout" Value="Wechat">
+                                                    <Setter Property="RadiusX" Value="6" TargetName="PART_Avatar" />
+                                                    <Setter Property="RadiusY" Value="6" TargetName="PART_Avatar" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ItemsControl.Resources>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type thisUI:MessageUI}">
+                                <studio:PlainTextMessage CharacterName="{Binding Name,Mode=OneWay}"
+                                                         CharacterAvatar="{Binding Avatar,Converter={x:Static thisConverters2:ConverterPool.Avatar},Mode=OneWay}"
+                                                         IsSelf="{Binding IsSelf,Mode=OneWay}"
+                                                         Content="{Binding Content}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
 
-                <WrapPanel Grid.Row="2">
+                <WrapPanel Grid.Row="3">
                     <WrapPanel.Resources>
                         <Style TargetType="{x:Type ftk:ToolButton}" BasedOn="{StaticResource ClearStyle.ToolButton}">
                             <Setter Property="Foreground" Value="{f:ForegroundBrush}" />
@@ -194,19 +327,19 @@
                         </Style>
                     </WrapPanel.Resources>
                     <ftk:ToolButton Command="{Binding AddEmojiCommand}" Icon="{StaticResource FeatherIcon.Emoji}" />
-                    <ftk:ToolButton Command="{Binding AddMemberMutedCommand}" IsFilled="True" Icon="{StaticResource Mute}"/>
-                    <ftk:ToolButton Command="{Binding AddMemberUnMutedCommand}" IsFilled="True" Icon="{StaticResource UnMuted}"/>
+                    <ftk:ToolButton Command="{Binding AddMemberMutedCommand}" IsFilled="True" Icon="{StaticResource Mute}" />
+                    <ftk:ToolButton Command="{Binding AddMemberUnMutedCommand}" IsFilled="True" Icon="{StaticResource UnMuted}" />
                     <ftk:ToolButton Command="{Binding AddImageCommand}"
                                     Icon="{StaticResource FeatherIcon.Image}" />
                     <ftk:ToolButton Command="{Binding SetCompositionMessageCommand}" Icon="{StaticResource FeatherIcon.Message.Circle}" />
                     <ftk:ToolButton Command="{Binding AddTimestampCommand}" Icon="{StaticResource FeatherIcon.Clock}" />
-                    <ftk:ToolButton Command="{Binding AddMemberJoinCommand}" Icon="{StaticResource FeatherIcon.Login}"/>
-                    <ftk:ToolButton Command="{Binding AddMemberLeaveCommand}" Icon="{StaticResource FeatherIcon.LogOut}"/>
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}"  Visibility="Collapsed" />
-                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}"  Visibility="Collapsed" />
+                    <ftk:ToolButton Command="{Binding AddMemberJoinCommand}" Icon="{StaticResource FeatherIcon.Login}" />
+                    <ftk:ToolButton Command="{Binding AddMemberLeaveCommand}" Icon="{StaticResource FeatherIcon.LogOut}" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Phone}" Visibility="Collapsed" />
+                    <ftk:ToolButton Icon="{StaticResource FeatherIcon.Gift}" Visibility="Collapsed" />
                 </WrapPanel>
 
-                <DockPanel Grid.Row="3">
+                <DockPanel Grid.Row="4">
                     <f:CallToAction DockPanel.Dock="Right"
                                     Content="发送"
                                     CornerRadius="8"
@@ -215,8 +348,8 @@
                                     Margin="8 0 0 0"
                                     Padding="20 10"
                                     VerticalAlignment="Top" />
-                    <f:MultiLine Height="128" 
-                                 Text="{Binding Message,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <f:MultiLine Height="128"
+                                 Text="{Binding Message,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </DockPanel>
             </Grid>
         </Border>
@@ -224,23 +357,17 @@
         <!--
             预览：
             用来显示选定的人物的联系人群聊
-        -->      
+        -->
         <Viewbox Grid.Column="2">
             <Border x:Name="Canvas"
-                Grid.Column="2"
-                Height="1920"
-                Width="1080">
-                <studio:SocialSoftwareLayout PendingContent="{Binding CompositionMessage,Mode=OneWay}"
+                    Grid.Column="2"
+                    Height="1920"
+                    Width="1080">
+                <studio:SocialSoftwareLayout ChannelName="{Binding ChannelName,Mode=OneWay}" PendingContent="{Binding CompositionMessage,Mode=OneWay}"
                                              Layout="QQGroup">
-                    <studio:SocialSoftwareLayout.ChannelName>
-                        <MultiBinding StringFormat="{}{0} ({1})">
-                            <Binding Path="ChannelName" Mode="OneWay" />
-                            <Binding Path="Members.Count" Mode="OneWay" />
-                        </MultiBinding>
-                    </studio:SocialSoftwareLayout.ChannelName>
                     <studio:SocialSoftwareLayout.ChannelSubtitle>
                         <MultiBinding StringFormat="{}{0} 人在线">
-                            <Binding Path="Characters.Count" Mode="OneWay" />
+                            <Binding Path="Members.Count" Mode="OneWay" />
                         </MultiBinding>
                     </studio:SocialSoftwareLayout.ChannelSubtitle>
                     <ScrollViewer Padding="16">

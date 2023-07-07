@@ -70,7 +70,6 @@
             <f:TreeViewItem Header="人物">
 
                 <f:TreeViewItem Header="所有人物">
-
                 </f:TreeViewItem>
                 <f:TreeViewItem Header="主要人物">
 
@@ -158,5 +157,12 @@
                 </f:TreeViewItem>
             </f:TreeViewItem>
         </f:TreeView>
+
+
+        <f:MultiLine Grid.Column="1"
+                     TextBlock.LineStackingStrategy="BlockLineHeight"
+                     TextBlock.LineHeight="28"
+                     FontStretch="UltraExpanded"
+                     Text="所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物所有人物"/>
     </Grid>
 </Window>

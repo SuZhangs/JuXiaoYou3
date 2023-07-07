@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Interop;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
 using Acorisoft.FutureGL.MigaDB.Documents;
 using Acorisoft.FutureGL.MigaStudio.Pages.Interactions.Models;
@@ -193,6 +194,14 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                 Messages.Add(ui);
                 if (addToChannel) Channel.Messages.Add(msg);
             }
+        }
+
+        private void RemoveMessage(MessageUI msg)
+        {
+            var src = msg.Source;
+            Messages.Remove(msg);
+            Channel.Messages
+                   .Remove(src);
         }
         
         private Tuple<string, string,MemberRole, string> FindMemberById(string id)

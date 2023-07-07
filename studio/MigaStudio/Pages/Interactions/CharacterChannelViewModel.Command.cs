@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Acorisoft.FutureGL.Forest;
 using Acorisoft.FutureGL.Forest.Views;
 using Acorisoft.FutureGL.MigaDB.Data.Inspirations;
 using Acorisoft.FutureGL.MigaDB.Data.Socials;
@@ -17,6 +18,20 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 {
     partial class CharacterChannelViewModel
     {
+        private async Task RemoveMessageImpl(MessageUI msg)
+        {
+            if (msg is null)
+            {
+                return;
+            }
+            
+            if (!await this.Error(SubSystemString.AreYouSureRemoveIt))
+            {
+                return;
+            }
+
+            RemoveMessage(msg);
+        }
         private async Task AddMemberJoinCommandImpl()
         {
             var members = Studio.Engine<SocialEngine>()
@@ -251,7 +266,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public AsyncRelayCommand AddMemberJoinCommand { get; }
         public RelayCommand AddImageCommand { get; }
         public RelayCommand<MemberCache> SwitchSpeakerCommand { get; }
-        public RelayCommand RemoveMessageCommand { get; }
+        public AsyncRelayCommand<MessageUI> RemoveMessageCommand { get; }
         public RelayCommand AddAliasCommand { get; }
         public RelayCommand RemoveAliasCommand { get; }
         public AsyncRelayCommand SetCompositionMessageCommand { get; }

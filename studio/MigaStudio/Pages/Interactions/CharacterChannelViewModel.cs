@@ -35,6 +35,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             AvailableMembers          = new ReadOnlyObservableCollection<MemberCache>(AvailableMemberCollection);
 
             AddImageCommand              = Command(AddImageCommandImpl);
+            RemoveMessageCommand         = AsyncCommand<MessageUI>(RemoveMessageImpl);
             AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);
             AddMemberLeaveCommand        = AsyncCommand(AddMemberLeaveCommandImpl);
             AddMemberMutedCommand        = AsyncCommand(AddMemberMutedCommandImpl);
@@ -80,7 +81,19 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             base.OnStart(parameter);
         }
-        
+
+        public override void Suspend()
+        {
+            Save();
+            base.Suspend();
+        }
+
+        protected override void OnStop()
+        {
+            Save();
+            base.OnStop();
+        }
+
         public SocialEngine SocialEngine { get; }
         public DocumentEngine DocumentEngine { get; }
     }
