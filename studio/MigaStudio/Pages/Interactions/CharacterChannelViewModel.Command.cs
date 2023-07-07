@@ -30,14 +30,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             }
 
             var cache = r1.Value;
-
-            if (MemberRoleMapper.TryGetValue(cache.Id, out var role) &&
-                (role == MemberRole.Manager || role == MemberRole.Owner))
-            {
-                this.ErrorNotification("管理员或者群主不能获得管理员身份");
-                return;
-            }
-
             object[] roles;
             
             if (MemberRoleMapper.TryGetValue(r1.Value.Id, out var role1) &&

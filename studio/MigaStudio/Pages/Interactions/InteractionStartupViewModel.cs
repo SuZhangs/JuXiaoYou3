@@ -134,6 +134,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             SocialEngine.AddChannel(it);
             Channels.Add(it);
+            RaiseUpdated(nameof(HasCharacters));
+            RaiseUpdated(nameof(IsCharacterSelected));
+            RaiseUpdated(nameof(HasCharacterAndNotChannel));
         }
 
 

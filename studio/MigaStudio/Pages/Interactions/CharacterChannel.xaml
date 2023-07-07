@@ -39,9 +39,12 @@
 
                     <DockPanel>
                         <f:CallToAction DockPanel.Dock="Right"
+                                        CornerRadius="18"
                                         Content="切换"
                                         Command="{Binding Source={StaticResource ViewModel},Path=ViewModel.SwitchSpeakerCommand}"
-                                        CommandParameter="{Binding}" />
+                                        CommandParameter="{Binding}"
+                                        Height="36"
+                                        Padding="32 8"/>
 
                         <DockPanel Margin="32 0 16 0"
                                    VerticalAlignment="Center">
