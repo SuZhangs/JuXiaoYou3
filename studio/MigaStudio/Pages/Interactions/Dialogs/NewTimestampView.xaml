@@ -10,8 +10,32 @@
                      d:DesignHeight="300" d:DesignWidth="300"
                      d:DataContext="{d:DesignInstance Type={x:Type thisVM:NewTimestampViewModel}, IsDesignTimeCreatable=True}"
                      Height="300"
-                     Width="300">
-    <Grid>
-        
-    </Grid>
+                     Width="384">
+
+    <f:DialogPage CancelCommand="{Binding CancelCommand}"
+                  CompletedCommand="{Binding CompletedCommand}"
+                  Title="{Binding Title}">
+        <DockPanel>
+            <UniformGrid DockPanel.Dock="Top"
+                         Columns="2">
+                <f:SingleLine Margin="4"
+                              Watermark="时间，例如：早上"
+                              Text="{Binding Prefix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                <f:SingleLine Margin="4"
+                              Watermark="时间，例如：19：30"
+                              Text="{Binding Suffix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="0 32 0 0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}{1}">
+                        <Binding Path="Prefix" Mode="OneWay"/>
+                        <Binding Path="Suffix" Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </DockPanel>
+    </f:DialogPage>
 </f:ForestUserControl>

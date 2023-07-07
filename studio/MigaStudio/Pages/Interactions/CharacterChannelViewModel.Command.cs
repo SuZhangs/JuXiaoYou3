@@ -269,6 +269,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
         public AsyncRelayCommand<MessageUI> RemoveMessageCommand { get; }
         public RelayCommand AddAliasCommand { get; }
         public RelayCommand RemoveAliasCommand { get; }
+        public AsyncRelayCommand SaveCommand { get; }
         public AsyncRelayCommand SetCompositionMessageCommand { get; }
     }
 }

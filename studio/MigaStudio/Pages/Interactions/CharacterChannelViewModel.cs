@@ -34,6 +34,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             AvailableMemberCollection = new ObservableCollection<MemberCache>();
             AvailableMembers          = new ReadOnlyObservableCollection<MemberCache>(AvailableMemberCollection);
 
+            SaveCommand                  = AsyncCommand(SaveWithNotification);
             AddImageCommand              = Command(AddImageCommandImpl);
             RemoveMessageCommand         = AsyncCommand<MessageUI>(RemoveMessageImpl);
             AddMemberJoinCommand         = AsyncCommand(AddMemberJoinCommandImpl);
@@ -44,6 +45,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
             AddPlainTextCommand          = Command(AddPlainTextCommandImpl);
             SetCompositionMessageCommand = AsyncCommand(SetCompositionMessageImpl);
             SwitchSpeakerCommand         = Command<MemberCache>(SwitchSpeakerCommandImpl);
+        }
+
+        private async Task SaveWithNotification()
+        {
+            Save();
+            await this.Successful(SR.OperationOfSaveIsSuccessful);
         }
 
         private void Save()

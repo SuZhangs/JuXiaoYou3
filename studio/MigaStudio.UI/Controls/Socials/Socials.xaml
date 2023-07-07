@@ -466,7 +466,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:PlainTextMessage}">
-                    <DockPanel Margin="0 8">
+                    <DockPanel Background="{x:Static f:Xaml.Transparent}"
+                               Margin="0 8">
                         <Rectangle x:Name="PART_Avatar"
                                    DockPanel.Dock="Left"
                                    Height="96"
@@ -593,7 +594,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:ImageChatMessage}">
-                    <DockPanel Margin="0 8"
+                    <DockPanel Background="{x:Static f:Xaml.Transparent}"
+                               Margin="0 8"
                                MinWidth="256"
                                MaxWidth="480">
                         <Rectangle x:Name="PART_Avatar"
@@ -720,7 +722,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:EmojiImageMessage}">
-                    <DockPanel Margin="0 8"
+                    <DockPanel Background="{x:Static f:Xaml.Transparent}"
+                               Margin="0 8"
                                MinWidth="256"
                                MaxWidth="480">
                         <Rectangle x:Name="PART_Avatar"
@@ -836,16 +839,18 @@
     </Style>
 
     <Style TargetType="{x:Type this:TimestampMessage}">
-        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="MinWidth" Value="320" />
         <Setter Property="MaxWidth" Value="840" />
         <Setter Property="Margin" Value="0 8" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:TimestampMessage}">
-                    <Border Margin="0 8"
+                    <Border Background="{x:Static f:Xaml.Transparent}"
+                            Margin="0 8"
                             Padding="8 4">
-                        <TextBlock FontSize="21"
+                        <TextBlock FontSize="25"
+                                   HorizontalAlignment="Center"
                                    Margin="3 0"
                                    TextWrapping="Wrap">
                                 <Run Foreground="#3fa0ff"
@@ -867,7 +872,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:MemberJoinMessageControl}">
-                    <Border Padding="8">
+                    <Border Background="{x:Static f:Xaml.Transparent}"
+                            Padding="8">
                         <TextBlock FontSize="25"
                                    Margin="3 0"
                                    TextWrapping="Wrap">
@@ -892,7 +898,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type this:UserEventMessageControl}">
-                    <Border Margin="0 8"
+                    <Border Background="{x:Static f:Xaml.Transparent}"
+                            Margin="0 8"
                             Padding="8 4">
                         <TextBlock FontSize="21"
                                    Margin="3 0"
