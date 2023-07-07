@@ -621,14 +621,14 @@
                                         Padding="4 2"
                                         Visibility="Collapsed">
                                     <TextBlock Foreground="White"
-                                               FontSize="12"
+                                               FontSize="28"
                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=CharacterTitle,Mode=OneWay}"
                                                TextTrimming="CharacterEllipsis" />
                                 </Border>
 
                                 <TextBlock DockPanel.Dock="Right"
                                            Foreground="Gray"
-                                           FontSize="13"
+                                           FontSize="28"
                                            FontWeight="Heavy"
                                            HorizontalAlignment="Left"
                                            MaxWidth="128"
@@ -644,8 +644,8 @@
                                     Padding="12">
                                 <f:LooklessButton Command="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PreviewCommand,Mode=OneWay}"
                                                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=DataContext,Mode=OneWay}">
-                                    <Image Height="192"
-                                           Width="192"
+                                    <Image Height="320"
+                                           Width="320"
                                            Stretch="UniformToFill"
                                            Source="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=Image,Mode=OneWay}"/>
                                 </f:LooklessButton>

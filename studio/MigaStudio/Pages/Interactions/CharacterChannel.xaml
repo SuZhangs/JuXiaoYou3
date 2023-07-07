@@ -400,7 +400,7 @@
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Refresh}"
                             Visibility="Collapsed" />
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Save}"
-                            Command="Save" />
+                            Command="{Binding SaveCommand}" />
             <ftk:ToolButton Icon="{StaticResource FeatherIcon.Camera}"
                             Command="{x:Static studio:Studio.CaptureCommand}"
                             CommandParameter="{Binding ElementName=Canvas,Mode=OneWay}" />
