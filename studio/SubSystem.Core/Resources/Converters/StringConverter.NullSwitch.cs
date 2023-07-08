@@ -15,7 +15,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Resources.Converters
 
 
             return values.Where(x => x is not null)
-                         .Select(x => x.ToString()?[30..])
+                         .Select(x =>
+                         {
+                             var s = x.ToString() ?? string.Empty;
+                             var len = Math.Clamp(s.Length, 0, 30);
+                             return s.Substring(0, len);
+                         })
                          .First(x => !string.IsNullOrEmpty(x));
         }
 

@@ -28,26 +28,31 @@
 
                         <f:HeaderedSingleLine Header="学名"
                                               Margin="4"
-                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                              TextWrapping="Wrap" />
 
                         <f:HeaderedSingleLine Header="稀有度"
                                               Margin="4"
-                                              Text="{Binding Rarity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding Rarity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              TextWrapping="Wrap"  />
 
                         <f:HeaderedSingleLine Header="价格"
                                               Margin="4"
-                                              Text="{Binding Price,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                              Text="{Binding Price,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                              TextWrapping="Wrap" />
 
                         <f:HeaderedSingleLine Header="产地"
                                               Margin="4"
-                                              Text="{Binding ProduceArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                              Text="{Binding ProduceArea,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                              TextWrapping="Wrap" />
                     </UniformGrid>
                 </StackPanel>
 
                 <f:HeaderedMultiLine DockPanel.Dock="Bottom"
                                      Header="介绍"
                                      Margin="4 12"
-                                     Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                     Text="{Binding Intro,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     TextWrapping="Wrap"  />
 
 
             </DockPanel>
