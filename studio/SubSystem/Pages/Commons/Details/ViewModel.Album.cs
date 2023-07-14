@@ -18,7 +18,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             ImageEngine = Studio.DatabaseManager()
                                 .GetEngine<ImageEngine>();
             
-            EditCommand = AsyncCommand<Album>(RemoveItem, HasItem);
+            EditCommand = AsyncCommand<Album>(EditItem, HasItem);
             OpenCommand = Command<Album>(OpenAlbumImpl, HasItem);
         }
 

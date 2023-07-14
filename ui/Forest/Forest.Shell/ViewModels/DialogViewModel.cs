@@ -17,7 +17,7 @@ namespace Acorisoft.FutureGL.Forest.ViewModels
 
         protected DialogViewModel()
         {
-            WindowEventBroadcastDisposable =Xaml.Get<IWindowEventBroadcast>()
+            WindowEventBroadcastDisposable = Xaml.Get<IWindowEventBroadcast>()
                                               .Keys
                                               .Subscribe(OnKeyboardInput);
 

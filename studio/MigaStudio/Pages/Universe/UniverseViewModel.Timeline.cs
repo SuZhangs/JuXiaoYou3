@@ -25,6 +25,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                                                                               .LastItem))
                                    .Value;
             var breakdownCounter = 0;
+            var breakdownLimited = dictionary.Count * 3;
 
             if(first is null)
             {
@@ -44,8 +45,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
                     first = c;
                 }
 
-                if (breakdownCounter > dictionary.Count ||
-                    breakdownCounter > 100000)
+                if (breakdownCounter > breakdownLimited ||
+                    breakdownCounter > 10000)
                 {
                     break;
                 }

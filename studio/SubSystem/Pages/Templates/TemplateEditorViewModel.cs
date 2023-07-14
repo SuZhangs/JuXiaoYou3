@@ -25,13 +25,13 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
         private ModuleBlockEditUI _selectedBlock;
         private bool              _isPresentationPaneOpen;
         private bool              _dirty;
-
+        private int               _templateVersion;
 
         public TemplateEditorViewModel()
         {
             _metaHashSet                = new HashSet<string>();
             Id                          = ID.Get();
-            Version                     = 1;
+            TemplateVersion                     = 1;
             ForType                     = DocumentType.Character;
             Blocks                      = new ObservableCollection<ModuleBlockEditUI>();
             MetadataList                = new ObservableCollection<MetadataCache>();
@@ -135,15 +135,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                 var templatePayload = await PNG.ReadDataAsync(fileName);
                 var template        = JSON.FromJson<ModuleTemplate>(templatePayload);
 
-                Id            = template.Id;
-                AuthorList = template.AuthorList;
-                Version       = template.Version;
-                Name          = template.Name;
-                Intro         = template.Intro;
-                Organizations = template.Organizations;
-                ContractList  = template.ContractList;
-                For           = template.For;
-                ForType       = template.ForType;
+                Id              = template.Id;
+                AuthorList      = template.AuthorList;
+                TemplateVersion = template.Version;
+                Name            = template.Name;
+                Intro           = template.Intro;
+                Organizations   = template.Organizations;
+                ContractList    = template.ContractList;
+                For             = template.For;
+                ForType         = template.ForType;
 
                 SetDirtyState(false);
                 RaiseUpdated(nameof(Presentations));
@@ -211,7 +211,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
                     AuthorList    = _authorList,
                     ContractList  = _contractList,
                     Organizations = _organizations,
-                    Version       = ++Version,
+                    Version       = ++TemplateVersion,
                     MetadataList  = MetadataList.ToList(),
                     Blocks = Blocks.Select(x => x.CreateInstance())
                                    .ToList(),
@@ -499,6 +499,15 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Templates
             }
         }
 
+
+        /// <summary>
+        /// 获取或设置 <see cref="TemplateVersion"/> 属性。
+        /// </summary>
+        public int TemplateVersion
+        {
+            get => _templateVersion;
+            set => SetValue(ref _templateVersion, value);
+        }
 
         /// <summary>
         /// 获取或设置 <see cref="IsPresentationPaneOpen"/> 属性。
