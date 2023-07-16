@@ -170,6 +170,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Channel.Alias.Add(v);
                 }
             }
+            
+            Cache.AvailableMembers
+                 .AddMany(Channel.AvailableMembers, true);
 
             Channel.Titles
                    .AddMany(MemberTitleMapper, true);
@@ -182,6 +185,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
 
             //
             //
+            SocialEngine.AddChannel(Cache);
             SocialEngine.AddChannel(Channel);
         }
 
