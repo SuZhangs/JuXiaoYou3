@@ -23,7 +23,6 @@
         /// </summary>
         public Action CloseHandler { get; internal set; }
         
-        public string Title { get; init; }
         public object Controller { get; init; }
         public string Id { get; init; }
         public Parameter Parameter { get; init; }
