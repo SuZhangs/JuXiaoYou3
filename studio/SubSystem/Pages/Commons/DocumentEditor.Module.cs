@@ -273,8 +273,9 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             var addedCollection    = new List<ModuleBlock>(32);
             var removedCollection  = new List<ModuleBlock>(32);
 
-            foreach (var module in ModuleParts)
+            for (var i = 0; i < ModuleParts.Count; i++)
             {
+                var module = ModuleParts[i];
                 if (CanUpgrade(module, out var template))
                 {
                     var newModule = MigaDB.Data
