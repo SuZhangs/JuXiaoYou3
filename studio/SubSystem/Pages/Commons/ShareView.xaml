@@ -295,7 +295,8 @@
                     </ftk:DropDownButton>
                     <ftk:DropDownButton Content="导出"
                                         Icon="{StaticResource FeatherIcon.Box}"
-                                        ShowText="True">
+                                        ShowText="True"
+                                        Visibility="Collapsed">
                         <ftk:DropDownButton.ContextMenu>
                             <f:ContextMenu>
                                 <f:MenuItem Header="导出为图片"

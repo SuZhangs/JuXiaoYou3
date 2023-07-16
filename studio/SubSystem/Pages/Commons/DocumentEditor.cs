@@ -54,7 +54,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             NewDocumentCommand  = AsyncCommand(NewDocumentImpl);
 
             AddModulePartCommand       = AsyncCommand(AddModulePartImpl);
-            RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl, HasItem);
+            RemoveModulePartCommand    = AsyncCommand<PartOfModule>(RemoveModulePartImpl);
             UpgradeModulePartCommand   = Command(UpgradeModulePartImpl);
             ShiftUpModulePartCommand   = Command<PartOfModule>(ShiftUpModulePartImpl, x => NotFirstItem(ModuleParts, x));
             ShiftDownModulePartCommand = Command<PartOfModule>(ShiftDownModulePartImpl, x => NotLastItem(ModuleParts, x));

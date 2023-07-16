@@ -31,12 +31,23 @@
                                 Margin="0 0 0 4"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-
-                        <ftk:ToolButton Content="{f:Language global.add}"
-                                        Command="{Binding AddTemplateCommand}"
-                                        Icon="{StaticResource IC.File}"
-                                        IsFilled="True"
-                                        ShowText="True" />
+                        
+                        <ftk:DropDownButton Content="添加"
+                                            Icon="{StaticResource FeatherIcon.Plus}"
+                                            ShowText="True">
+                            <ftk:DropDownButton.ContextMenu>
+                                <f:ContextMenu>
+                                    <f:MenuItem Header="导入3代模板"
+                                                Command="{Binding AddTemplateCommand}"
+                                                Icon="{StaticResource FeatherIcon.Plus}"
+                                                IconSize="17"/>
+                                    <f:MenuItem Header="导入2代模组"
+                                                Command="{Binding ImportTemplateCommand}"
+                                                Icon="{StaticResource FeatherIcon.Upload}"
+                                                IconSize="17"/>
+                                </f:ContextMenu>
+                            </ftk:DropDownButton.ContextMenu>
+                        </ftk:DropDownButton>
 
                         <ftk:ToolButton Content="{f:Language global.remove}"
                                         Command="{Binding RemoveTemplateCommand}"
@@ -47,12 +58,6 @@
                         <ftk:ToolButton Content="{f:Language global.preview}"
                                         Command="{Binding PresentationCommand}"
                                         Icon="{StaticResource FeatherIcon.Search}"
-                                        ShowText="True" />
-
-                        <ftk:ToolButton Content="{f:Language global.import}"
-                                        Command="{Binding ImportTemplateCommand}"
-                                        Icon="{StaticResource IC.Save}"
-                                        IsFilled="True"
                                         ShowText="True" />
 
                         <ftk:ToolButton Content="{f:Language global.export}"

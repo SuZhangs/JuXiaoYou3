@@ -402,6 +402,11 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
             {
                 SetValue(ref _selectedModulePart, value);
 
+                RemoveModulePartCommand.NotifyCanExecuteChanged();
+                ShiftDownModulePartCommand.NotifyCanExecuteChanged();
+                ShiftUpModulePartCommand.NotifyCanExecuteChanged();
+                UpgradeModulePartCommand.NotifyCanExecuteChanged();
+
                 if (_selectedModulePart is null)
                 {
                     ContentBlocks.Clear();
@@ -412,10 +417,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Commons
                                                       .Select(x => ModuleBlockFactory.GetDataUI(x, OnModuleBlockValueChanged));
                     ContentBlocks.AddMany(selector, true);
                 }
-
-                RemoveModulePartCommand.NotifyCanExecuteChanged();
-                ShiftDownModulePartCommand.NotifyCanExecuteChanged();
-                ShiftUpModulePartCommand.NotifyCanExecuteChanged();
             }
         }
 
