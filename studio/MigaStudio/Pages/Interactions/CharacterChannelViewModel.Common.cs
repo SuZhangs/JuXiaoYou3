@@ -170,9 +170,12 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages.Interactions
                     Channel.Alias.Add(v);
                 }
             }
+
+            var members = Channel.AvailableMembers
+                                 .ToArray();
             
             Cache.AvailableMembers
-                 .AddMany(Channel.AvailableMembers, true);
+                 .AddMany(members, true);
 
             Channel.Titles
                    .AddMany(MemberTitleMapper, true);
