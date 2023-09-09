@@ -40,7 +40,7 @@ namespace Acorisoft.FutureGL.Demo.ViewHost
         protected override void RegisterServices(ILogger logger, ApplicationModel appModel, IContainer container)
         {
             _databaseManager = container.Use<DatabaseManager, IDatabaseManager>(
-                DatabaseManager.GetDefaultDatabaseManager(logger, DatabaseMode.Release));
+                DatabaseManager.GetDefaultDatabaseManager(logger));
         }
 
         protected override void RegisterViews(ILogger logger, IContainer container)

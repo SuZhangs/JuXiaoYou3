@@ -197,7 +197,7 @@
                                 Padding="16"
                                 Icon="{StaticResource FeatherIcon.Plus}">
                     <f:CallToAction.CommandParameter>
-                        <thisCore:MultipleEntityOperator>Entity2</thisCore:MultipleEntityOperator>
+                        <thisCore:MultipleEntityOperator>Entity1</thisCore:MultipleEntityOperator>
                     </f:CallToAction.CommandParameter>
                 </f:CallToAction>
 
@@ -210,7 +210,7 @@
                                 Padding="16"
                                 Icon="{StaticResource FeatherIcon.Plus}">
                     <f:CallToAction.CommandParameter>
-                        <thisCore:MultipleEntityOperator>Entity1</thisCore:MultipleEntityOperator>
+                        <thisCore:MultipleEntityOperator>Entity2</thisCore:MultipleEntityOperator>
                     </f:CallToAction.CommandParameter>
                 </f:CallToAction>
             </StackPanel>

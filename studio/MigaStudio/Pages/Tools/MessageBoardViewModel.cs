@@ -12,7 +12,8 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
     {
         public MessageBoardViewModel()
         {
-            ProjectEngine = Studio.Engine<ProjectEngine>();
+            ProjectEngine    = Studio.Engine<ProjectEngine>();
+            ApprovalRequired = false;
         }
 
         protected sealed override bool NeedDataSourceSynchronize()
@@ -28,7 +29,6 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
 
         protected override void Save()
         {
-            
         }
 
         protected override async Task<Op<Sentence>> AddEntity1()
@@ -125,6 +125,7 @@ namespace Acorisoft.FutureGL.MigaStudio.Pages
         {
             if (entity is Appraise a)
             {
+                ProjectEngine.RemoveSentence(a);
                 ProjectEngine.RemoveAppraise(a);
             }
             else

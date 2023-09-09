@@ -9,8 +9,8 @@
         <Configurations>Debug;Release</Configurations>
         <Authors>罗易斯（Luoyisi）</Authors>
         <Platforms>AnyCPU;x86;x64</Platforms>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0.0</FileVersion>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <Version>1.0.3</Version>
         <NeutralLanguage>zh</NeutralLanguage>
         <Title>Forest</Title>
         <Description>Forest是一个UI框架，用于JuXiaoYou</Description>

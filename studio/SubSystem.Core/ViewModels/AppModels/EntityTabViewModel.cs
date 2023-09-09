@@ -238,7 +238,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
         private async Task EditEntityImpl(TEntity entity)
         {
             await Edit(entity);
-            SetDirtyState();
         }
 
         private async Task RemoveEntityImpl(TEntity entity)
@@ -249,7 +248,6 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
             }
 
             Remove(entity);
-            SetDirtyState();
 
             //
             //
@@ -268,20 +266,17 @@ namespace Acorisoft.FutureGL.MigaStudio.ViewModels
 
             ClearEntity(Collection.ToArray());
             Collection.Clear();
-            SetDirtyState();
         }
 
         private void ShiftUpEntityImpl(TEntity entity)
         {
             Collection.ShiftUp(entity, ShiftUp);
-            SetDirtyState();
         }
 
 
         private void ShiftDownEntityImpl(TEntity entity)
         {
             Collection.ShiftDown(entity, ShiftDown);
-            SetDirtyState();
         }
 
         #region OnStart / OnResume

@@ -7,9 +7,17 @@
         <OutDir>../../Builds/Base</OutDir>
         <RootNamespace>Acorisoft.FutureGL.MigaUtils</RootNamespace>
         <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU;x86;x64</Platforms>
         <LangVersion>latest</LangVersion>
+        <PackageIcon>橘小柚_9.png</PackageIcon>
+        <Description>Forest是一个UI框架，用于JuXiaoYou</Description>
+        <Copyright>all copyright reserved by luoyisi</Copyright>
     </PropertyGroup>
+    <ItemGroup>
+        <None Include="F:\Repository\FutureGL\assets\橘小柚_9.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NUGET|AnyCPU'">
       <LangVersion>preview</LangVersion>

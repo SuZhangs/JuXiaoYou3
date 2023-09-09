@@ -1,6 +1,7 @@
 # 关于RenderTargetBitmap
 
 1. Border不能设置Margin，不然会有截图偏移的问题
+2. Border内部不能有Border，不然会有截图偏移的问题
 
 # 关于动画
 

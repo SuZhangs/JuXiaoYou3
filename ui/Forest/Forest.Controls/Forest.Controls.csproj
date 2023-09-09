@@ -7,19 +7,20 @@
         <OutDir>../../../Builds/Forest</OutDir>
         <UseWPF>true</UseWPF>
         <Configurations>Debug;Release</Configurations>
-        <Platforms>AnyCPU;x86;x64</Platforms>
-        <Title>Forest</Title>
         <Description>Forest是一个UI框架，用于JuXiaoYou</Description>
-        <Copyright>All copy reserved by Luoyisi</Copyright>
-        <PackageProjectUrl>https://gitee.com/acorisoft/juxiaoyou</PackageProjectUrl>
-        <PackageLicenseUrl>https://gitee.com/acorisoft/juxiaoyou</PackageLicenseUrl>
-        <PackageIcon>ico.png</PackageIcon>
-        <LangVersion>latest</LangVersion>
+        <Copyright>all copyright reserved by luoyisi</Copyright>
+        <PackageIcon>橘小柚_9.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
       <ProjectReference Include="..\Forest\Forest.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="F:\Repository\FutureGL\assets\橘小柚_9.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
     <ItemGroup>
       <Resource Include="ColorPicker\Images\CircularHueGradient.png" />
       <Resource Include="ColorPicker\Images\transparentbg_mini.png" />
